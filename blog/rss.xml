@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>PixiJS Blog</title>
-        <link>https://v2-pixijs.com/blog</link>
+        <link>https://beta.pixijs.com/blog</link>
         <description>PixiJS Blog</description>
         <lastBuildDate>Tue, 31 Jan 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
@@ -10,17 +10,17 @@
         <language>en</language>
         <item>
             <title><![CDATA[Introducing PixiJS v8]]></title>
-            <link>https://v2-pixijs.com/blog/pixi-v8-introduction</link>
+            <link>https://beta.pixijs.com/blog/pixi-v8-introduction</link>
             <guid>pixi-v8-introduction</guid>
             <pubDate>Tue, 31 Jan 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[PixiJS v8 Brief Description]]></description>
-            <content:encoded><![CDATA[<p>PixiJS v8 has arrived! Please take a look at the docs <a href="https://v2-pixijs.com/guides" target="_blank" rel="noopener noreferrer"><strong>here</strong></a>.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>]]></content:encoded>
+            <content:encoded><![CDATA[<p>PixiJS v8 has arrived! Please take a look at the docs <a href="https://beta.pixijs.com/guides" target="_blank" rel="noopener noreferrer"><strong>here</strong></a>.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>]]></content:encoded>
             <category>pixi-v8</category>
             <category>introduction</category>
         </item>
         <item>
             <title><![CDATA[Welcome to the new PixiJS Website!]]></title>
-            <link>https://v2-pixijs.com/blog/pixi-website-v2</link>
+            <link>https://beta.pixijs.com/blog/pixi-website-v2</link>
             <guid>pixi-website-v2</guid>
             <pubDate>Sat, 28 Jan 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[PixiJS v2 Website Brief Description]]></description>
