@@ -1,0 +1,14 @@
+.separator {
+    margin: 1rem auto;
+    width: 100%;
+    height: 0.1rem;
+    background: var(--ifm-font-color-base);
+    opacity: 0.1;
+}
+
+.socialItems {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}

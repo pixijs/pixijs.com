@@ -1,0 +1,52 @@
+.closing {
+    background: #ecedf1;
+    padding: 89px 20px 94px;
+
+    & > div {
+        margin: 0 auto;
+        max-width: 920px;
+    }
+
+    h3 {
+        font-family: 'Outfit', sans-serif;
+        color: #333;
+        font-weight: 500;
+        font-size: 28px;
+        line-height: 40px;
+    }
+
+    h5 {
+        opacity: 0.8;
+        margin: 21px 0 29px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0;
+    }
+
+    @media only screen and (min-width: 481px) {
+        h3 {
+            font-size: 45px;
+            line-height: 58px;
+        }
+    
+        h5 {
+            font-size: 21px;
+            line-height: 30px;
+        }
+    }
+}
+
+html[data-theme='dark'] {
+    .closing {
+        background: #1f2022;
+    
+        h3 {
+            color: #fff;
+        }
+    
+        h5 {
+            color: #fff;
+        }
+    }
+}

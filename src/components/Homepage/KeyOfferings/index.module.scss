@@ -1,0 +1,48 @@
+.highlights {
+    background: #465162 url('/images/tile.png') 0 0 repeat;
+    background-attachment: fixed;
+    color: #ffffff;
+    font-size: 1.15rem;
+    --ifm-h2-font-size: 2.6rem;
+
+    span {
+        font-family: 'Roboto Mono', monospace;
+        display: block;
+        font-weight: 400;
+        font-size: 0.9rem;
+        line-height: 1.5rem;
+        color: #919bac;
+    }
+
+    h2 {
+        font-family: 'Outfit', sans-serif;
+    }
+
+    p {
+        margin-top: 2.4rem;
+    }
+}
+
+.devices {
+    position: relative;
+    width: 98%;
+    max-width: 941px;
+    height: 353px;
+    margin: 3rem auto 4rem auto;
+}
+
+@media screen and (max-width: 996px) {
+    .devices {
+        display: none;
+    }
+}
+
+html[data-theme='dark'] {
+    .highlights {
+        background: #1a1a1a url('/images/tile.png') 0 0 repeat;
+
+        span {
+            color: #e91e63;
+        }
+    }
+}

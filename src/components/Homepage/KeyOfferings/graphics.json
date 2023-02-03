@@ -1,0 +1,102 @@
+{
+    "canvasImg": "/images/devices/device-background.png",
+    "devices": [
+        {
+            "img": "/images/devices/device-desktop.png",
+            "alt": "Desktop",
+            "styles": {
+                "left": "50%",
+                "width": "386px",
+                "top": 0,
+                "zIndex": 1,
+                "marginLeft": "-193px"
+            },
+            "canvas": {
+                "left": "19px",
+                "top": "28px",
+                "width": "348px",
+                "height": "198px"
+            }
+        },
+        {
+            "img": "/images/devices/device-ipad.png",
+            "alt": "iPad",
+            "styles": {
+                "left": "60.79%",
+                "width": "155px",
+                "top": "138px",
+                "zIndex": 2
+            },
+            "canvas": {
+                "left": "17px",
+                "top": "16px",
+                "width": "124px",
+                "height": "164px"
+            }
+        },
+        {
+            "img": "/images/devices/device-iphone.png",
+            "alt": "iPhone",
+            "styles": {
+                "left": "75.35%",
+                "width": "92px",
+                "top": "177px",
+                "zIndex": 3
+            },
+            "canvas": {
+                "left": "10px",
+                "top": "18px",
+                "width": "72px",
+                "height": "126px"
+            }
+        },
+        {
+            "img": "/images/devices/device-phone.png",
+            "alt": "Phone",
+            "styles": {
+                "width": "170px",
+                "right": 0,
+                "bottom": 0,
+                "zIndex": 4
+            },
+            "canvas": {
+                "left": "20px",
+                "top": "9px",
+                "width": "132px",
+                "height": "80px"
+            }
+        },
+        {
+            "img": "/images/devices/device-laptop.png",
+            "alt": "Laptop",
+            "styles": {
+                "left": "6.16%",
+                "width": "355px",
+                "top": "127px",
+                "zIndex": 2
+            },
+            "canvas": {
+                "left": "46px",
+                "top": "16px",
+                "width": "264px",
+                "height": "166px"
+            }
+        },
+        {
+            "img": "/images/devices/device-tablet.png",
+            "alt": "Tablet",
+            "styles": {
+                "left": 0,
+                "width": "195px",
+                "bottom": 0,
+                "zIndex": 4
+            },
+            "canvas": {
+                "left": "17px",
+                "top": "15px",
+                "width": "160px",
+                "height": "95px"
+            }
+        }
+    ]
+}

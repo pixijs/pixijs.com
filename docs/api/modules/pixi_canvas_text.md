@@ -1,0 +1,8 @@
+---
+id: "pixi_canvas_text"
+title: "Module: @pixi/canvas-text"
+sidebar_label: "@pixi/canvas-text"
+sidebar_position: 0
+custom_edit_url: null
+---
+

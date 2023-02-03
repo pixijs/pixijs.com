@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600&family=Roboto+Mono&family=Roboto:wght@400;500;700&display=swap');
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-font-family-base: 'Roboto';
+  --ifm-color-primary: #e91e63;
+  --ifm-color-primary-dark: #d81557;
+  --ifm-color-primary-darker: #cc1452;
+  --ifm-color-primary-darkest: #a81044;
+  --ifm-color-primary-light: #eb3674;
+  --ifm-color-primary-lighter: #ed427c;
+  --ifm-color-primary-lightest: #f06695;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* [data-theme='dark'] { */
+/*   --ifm-color-primary: #25c2a0; */
+/*   --ifm-color-primary-dark: #21af90; */
+/*   --ifm-color-primary-darker: #1fa588; */
+/*   --ifm-color-primary-darkest: #1a8870; */
+/*   --ifm-color-primary-light: #29d5b0; */
+/*   --ifm-color-primary-lighter: #32d8b4; */
+/*   --ifm-color-primary-lightest: #4fddbf; */
+/*   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3); */
+/* } */
+
+.navbar__inner {
+  margin: 0 auto;
+  max-width: 90%
+}
+
+.navbar__brand {
+  margin-right: 1rem;
+}
+
+.header-twitter-link::before {
+  width: 26px;
+  height: 24px;
+  background: url('/images/social/twitter.svg') no-repeat center;
+}
+
+.header-discord-link::before {
+  width: 30px;
+  height: 24px;
+  background: url('/images/social/discord.svg') no-repeat center;
+}
+
+.header-github-link::before {
+  width: 24px;
+  height: 24px;
+  background: url('/images/social/github.svg') no-repeat center;
+}
+
+.header-link {
+  &::before {
+    content: '';
+    display: flex;
+    background-size: contain;
+  }
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.nav-section-heading {
+  font-size: small;
+  color: var(--ifm-color-primary-lightest);
+  margin-top: 0.2rem;
+  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+}
+
+.underline::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: #919bac;
+  margin: 13px auto 0;
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer__bottom {
+  color: #919bac;
+
+  .footer__copyright {
+    line-height: 35px;
+  }
+
+  a {
+    color: #fff;
+  }
+}
+
+html[data-theme='dark'] {
+  .header-twitter-link::before {
+    background: url('/images/social/twitter-white.svg') no-repeat center;
+  }
+  
+  .header-discord-link::before {
+    background: url('/images/social/discord-white.svg') no-repeat center;
+  }
+
+  .header-github-link::before {
+    background: url('/images/social/github-white.svg') no-repeat center;
+  }
+
+  .header-link::before {
+    background-size: contain;
+  }
+
+  .footer {
+    background: #1a1a1a;
+  }
+
+  .underline::after {
+    background: #e91e63;
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  .navbar__brand {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 1090px) {
+  span.DocSearch-Button-Placeholder {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1180px) {
+  span.DocSearch-Button-Keys {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .navbar__inner {
+    max-width: 100%;
+  }
+}

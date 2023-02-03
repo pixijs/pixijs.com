@@ -1,0 +1,20 @@
+.separator {
+  margin: 0 0.75rem;
+  height: 2rem;
+  width: 0.05rem;
+  background: var(--ifm-font-color-base);
+  opacity: 0.25;
+}
+
+@media (max-width: 996px) {
+  .separator {
+    display: none;
+  }
+
+  /*
+    Hide color mode toggle in small viewports
+  */
+  .colorModeToggle {
+    display: none;
+  }
+}
