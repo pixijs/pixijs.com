@@ -15,7 +15,7 @@ document.body.appendChild(app.view);
 const container = new PIXI.Container();
 app.stage.addChild(container);
 
-app.loader.add('dudes', 'https://v2-pixijs.com/assets/polygon/dudes.json');
+app.loader.add('dudes', 'https://beta.pixijs.com/assets/polygon/dudes.json');
 app.loader.load((loader, resources) => {
     const keys = Object.keys(resources.dudes.textures);
     const textures = keys.map((x) => resources.dudes.textures[x]);

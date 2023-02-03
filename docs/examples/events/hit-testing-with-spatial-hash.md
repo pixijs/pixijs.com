@@ -156,10 +156,10 @@ document.body.appendChild(app.view);
     const container = app.stage.addChild(new HashingContainer());
     // Textures to choose from for each random character
     const textures = [
-        PIXI.Texture.from('https://v2-pixijs.com/assets/skully.png'),
-        PIXI.Texture.from('https://v2-pixijs.com/assets/eggHead.png'),
-        PIXI.Texture.from('https://v2-pixijs.com/assets/flowerTop.png'),
-        PIXI.Texture.from('https://v2-pixijs.com/assets/helmlok.png'),
+        PIXI.Texture.from('https://beta.pixijs.com/assets/skully.png'),
+        PIXI.Texture.from('https://beta.pixijs.com/assets/eggHead.png'),
+        PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png'),
+        PIXI.Texture.from('https://beta.pixijs.com/assets/helmlok.png'),
     ];
     // Rerender scene when each texture loads
     textures.forEach(

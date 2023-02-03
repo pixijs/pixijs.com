@@ -16,7 +16,7 @@ PIXI.heaven.applySpineMixin(PIXI.spine.Spine.prototype);
 
 // load spine data
 app.loader
-    .add('spineboypro', 'https://v2-pixijs.com/assets/pixi-spine/spineboy-pro.json')
+    .add('spineboypro', 'https://beta.pixijs.com/assets/pixi-spine/spineboy-pro.json')
     .load(onAssetsLoaded);
 
 app.stage.interactive = true;

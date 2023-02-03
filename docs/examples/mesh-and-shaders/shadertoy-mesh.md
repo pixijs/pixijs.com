@@ -116,7 +116,7 @@ void main()
 }`;
 
 const uniforms = {
-    noise: PIXI.Texture.from('https://v2-pixijs.com/assets/perlin.jpg'),
+    noise: PIXI.Texture.from('https://beta.pixijs.com/assets/perlin.jpg'),
     time: 0,
 };
 // Make sure repeat wrap is used and no mipmapping.

@@ -12,7 +12,7 @@ document.body.appendChild(app.view);
 
 // load spine data
 app.loader
-    .add('spineboy', 'https://v2-pixijs.com/assets/pixi-spine/spineboy.json')
+    .add('spineboy', 'https://beta.pixijs.com/assets/pixi-spine/spineboy.json')
     .load(onAssetsLoaded);
 
 app.stage.interactive = true;

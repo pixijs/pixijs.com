@@ -19,11 +19,11 @@ const app = new PIXI.Application<HTMLCanvasElement>({ backgroundAlpha: 0, resize
 document.body.appendChild(app.view);
 
 // create a new background sprite
-const background = PIXI.Sprite.from('https://v2-pixijs.com/assets/bg_rotate.jpg');
+const background = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_rotate.jpg');
 background.width = app.screen.width / 2;
 background.height = app.screen.height;
 
-const background2 = PIXI.Sprite.from('https://v2-pixijs.com/assets/bg_rotate.jpg');
+const background2 = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_rotate.jpg');
 background2.width = app.screen.width / 2;
 background2.height = app.screen.height;
 background2.position.set(app.screen.width / 2, 0);
@@ -43,7 +43,7 @@ app.stage.addChild(dudeContainer);
 
 for (let i = 0; i < totaldudes; i++) {
     // create a new Sprite that uses the image name that we just generated as its source
-    const dude = new PIXI.heaven.SpriteH(PIXI.Texture.from('https://v2-pixijs.com/assets/flowerTop.png'));
+    const dude = new PIXI.heaven.SpriteH(PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png'));
 
     dude.anchor.set(0.5);
 

@@ -34,7 +34,7 @@ document.body.appendChild(app.view);
 
 // Load assets
 app.loader
-    .add('bg_plane', 'https://v2-pixijs.com/assets/bg_plane.jpg')
+    .add('bg_plane', 'https://beta.pixijs.com/assets/bg_plane.jpg')
     .load(main);
 
 // Setup scene and then render once

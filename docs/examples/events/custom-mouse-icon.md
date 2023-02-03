@@ -11,24 +11,24 @@ const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', res
 document.body.appendChild(app.view);
 
 // Css style for icons
-const defaultIcon = "url('https://v2-pixijs.com/assets/bunny.png'),auto";
-const hoverIcon = "url('https://v2-pixijs.com/assets/bunny_saturated.png'),auto";
+const defaultIcon = "url('https://beta.pixijs.com/assets/bunny.png'),auto";
+const hoverIcon = "url('https://beta.pixijs.com/assets/bunny_saturated.png'),auto";
 
 // Add custom cursor styles
 app.renderer.events.cursorStyles.default = defaultIcon;
 app.renderer.events.cursorStyles.hover = hoverIcon;
 
 // create a background...
-const background = PIXI.Sprite.from('https://v2-pixijs.com/assets/bg_button.jpg');
+const background = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_button.jpg');
 background.width = app.screen.width;
 background.height = app.screen.height;
 // add background to stage...
 app.stage.addChild(background);
 
 // create some textures from an image path
-const textureButton = PIXI.Texture.from('https://v2-pixijs.com/assets/button.png');
-const textureButtonDown = PIXI.Texture.from('https://v2-pixijs.com/assets/button_down.png');
-const textureButtonOver = PIXI.Texture.from('https://v2-pixijs.com/assets/button_over.png');
+const textureButton = PIXI.Texture.from('https://beta.pixijs.com/assets/button.png');
+const textureButtonDown = PIXI.Texture.from('https://beta.pixijs.com/assets/button_down.png');
+const textureButtonOver = PIXI.Texture.from('https://beta.pixijs.com/assets/button_over.png');
 
 const buttons = [];
 

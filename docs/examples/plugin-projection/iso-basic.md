@@ -13,7 +13,7 @@ document.body.appendChild(app.view);
 // === FIRST PART ===
 // just simple rotation
 
-const sprite = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://v2-pixijs.com/assets/flowerTop.png'));
+const sprite = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png'));
 sprite.anchor.set(0.5, 1.0);
 sprite.proj.affine = PIXI.projection.AFFINE.AXIS_X; // return to affine after rotating
 sprite.position.set(app.screen.width * 1 / 8, app.screen.height / 2);
@@ -34,7 +34,7 @@ scalingContainer.scale.y = 0.3; // adjust scale by Y - that will change "perspec
 scalingContainer.position.set(app.screen.width * 3 / 8, app.screen.height / 2);
 app.stage.addChild(scalingContainer);
 
-const sprite2 = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://v2-pixijs.com/assets/flowerTop.png'));
+const sprite2 = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png'));
 sprite2.anchor.set(0.5, 1.0);
 sprite2.proj.affine = PIXI.projection.AFFINE.AXIS_X;
 scalingContainer.addChild(sprite2);
@@ -66,7 +66,7 @@ for (let i = -100; i <= 100; i += 50) {
 
 isometryPlane.drawCircle(0, 0, 100);
 
-const sprite3 = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://v2-pixijs.com/assets/eggHead.png'));
+const sprite3 = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://beta.pixijs.com/assets/eggHead.png'));
 sprite3.anchor.set(0.5, 1.0);
 sprite3.proj.affine = PIXI.projection.AFFINE.AXIS_X;
 sprite3.scale.set(0.3, 0.5); // make it small but tall!

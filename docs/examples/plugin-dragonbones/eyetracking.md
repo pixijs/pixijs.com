@@ -33,11 +33,11 @@ const animationNames = [
 
 // load spine data
 PIXI.Loader.shared
-    .add('skeleton', 'https://v2-pixijs.com/assets/pixi-dragonbones/eyetracking/shizuku_ske.json')
-    .add('texture_png_0', 'https://v2-pixijs.com/assets/pixi-dragonbones/eyetracking/texture_00.png')
-    .add('texture_png_1', 'https://v2-pixijs.com/assets/pixi-dragonbones/eyetracking/texture_01.png')
-    .add('texture_png_2', 'https://v2-pixijs.com/assets/pixi-dragonbones/eyetracking/texture_02.png')
-    .add('texture_png_3', 'https://v2-pixijs.com/assets/pixi-dragonbones/eyetracking/texture_03.png')
+    .add('skeleton', 'https://beta.pixijs.com/assets/pixi-dragonbones/eyetracking/shizuku_ske.json')
+    .add('texture_png_0', 'https://beta.pixijs.com/assets/pixi-dragonbones/eyetracking/texture_00.png')
+    .add('texture_png_1', 'https://beta.pixijs.com/assets/pixi-dragonbones/eyetracking/texture_01.png')
+    .add('texture_png_2', 'https://beta.pixijs.com/assets/pixi-dragonbones/eyetracking/texture_02.png')
+    .add('texture_png_3', 'https://beta.pixijs.com/assets/pixi-dragonbones/eyetracking/texture_03.png')
     .load(onAssetsLoaded);
 
 function onAssetsLoaded(loader, res) {

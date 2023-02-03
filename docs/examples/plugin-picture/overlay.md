@@ -14,7 +14,7 @@ const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
 document.body.appendChild(app.view);
 
 // create a new background sprite
-const background = PIXI.Sprite.from('https://v2-pixijs.com/assets/bg_rotate.jpg');
+const background = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_rotate.jpg');
 background.width = 800;
 background.height = 600;
 app.stage.addChild(background);
@@ -23,7 +23,7 @@ app.stage.addChild(background);
 const dudeArray = [];
 
 const totaldudes = 20;
-const texture = PIXI.Texture.from('https://v2-pixijs.com/assets/flowerTop.png');
+const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png');
 
 for (let i = 0; i < totaldudes; i++) {
     // create a new Sprite that uses the image name that we just generated as its source

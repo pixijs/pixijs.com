@@ -12,17 +12,17 @@ import * as PIXI from 'pixi.js';
 const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
-const bg = PIXI.Sprite.from('https://v2-pixijs.com/assets/pixi-filters/bg_depth_blur.jpg');
+const bg = PIXI.Sprite.from('https://beta.pixijs.com/assets/pixi-filters/bg_depth_blur.jpg');
 bg.width = app.screen.width;
 bg.height = app.screen.height;
 app.stage.addChild(bg);
 
-const littleDudes = PIXI.Sprite.from('https://v2-pixijs.com/assets/pixi-filters/depth_blur_dudes.jpg');
+const littleDudes = PIXI.Sprite.from('https://beta.pixijs.com/assets/pixi-filters/depth_blur_dudes.jpg');
 littleDudes.x = (app.screen.width / 2) - 315;
 littleDudes.y = 200;
 app.stage.addChild(littleDudes);
 
-const littleRobot = PIXI.Sprite.from('https://v2-pixijs.com/assets/pixi-filters/depth_blur_moby.jpg');
+const littleRobot = PIXI.Sprite.from('https://beta.pixijs.com/assets/pixi-filters/depth_blur_moby.jpg');
 littleRobot.x = (app.screen.width / 2) - 200;
 littleRobot.y = 100;
 app.stage.addChild(littleRobot);

@@ -19,9 +19,9 @@ const { loader } = app;
 
 // load spine data
 loader
-    .add('pixie', 'https://v2-pixijs.com/assets/pixi-spine/pixie.json')
-    .add('bg', 'https://v2-pixijs.com/assets/pixi-spine/iP4_BGtile.jpg')
-    .add('fg', 'https://v2-pixijs.com/assets/pixi-spine/iP4_ground.png')
+    .add('pixie', 'https://beta.pixijs.com/assets/pixi-spine/pixie.json')
+    .add('bg', 'https://beta.pixijs.com/assets/pixi-spine/iP4_BGtile.jpg')
+    .add('fg', 'https://beta.pixijs.com/assets/pixi-spine/iP4_ground.png')
     .load(onAssetsLoaded);
 
 const objs = []; let

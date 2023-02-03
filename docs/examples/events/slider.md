@@ -46,7 +46,7 @@ app.stage.addChild(slider);
 slider.addChild(handle);
 
 // Add bunny whose scale can be changed by user using slider
-const bunny = app.stage.addChild(PIXI.Sprite.from('https://v2-pixijs.com/assets/bunny.png'));
+const bunny = app.stage.addChild(PIXI.Sprite.from('https://beta.pixijs.com/assets/bunny.png'));
 bunny.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 bunny.scale.set(3);
 bunny.anchor.set(0.5);

@@ -24,12 +24,12 @@ squareFar.position.set(app.screen.width / 2, 50);
 const container = new PIXI.projection.Container2d();
 container.position.set(app.screen.width / 2, app.screen.height);
 
-const surface = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://v2-pixijs.com/assets/bg_plane.jpg'));
+const surface = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://beta.pixijs.com/assets/bg_plane.jpg'));
 surface.anchor.set(0.5, 1.0);
 // surface.scale.y = -1; //sorry, have to do that to make a correct projection
 surface.width = app.screen.width;
 surface.height = app.screen.height;
-// var squarePlane = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://v2-pixijs.com/assets/flowerTop.png'));
+// var squarePlane = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png'));
 const squarePlane = new PIXI.projection.Sprite2d(bigWhiteTexture);
 squarePlane.tint = 0xff0000;
 squarePlane.factor = 1;
@@ -37,7 +37,7 @@ squarePlane.proj.affine = PIXI.projection.AFFINE.AXIS_X;
 squarePlane.anchor.set(0.5, 0.0);
 squarePlane.position.set(-app.screen.width / 4, -app.screen.height / 2);
 
-const bunny = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://v2-pixijs.com/assets/flowerTop.png'));
+const bunny = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png'));
 bunny.anchor.set(0.5, 1.0);
 
 app.stage.addChild(container);

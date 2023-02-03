@@ -10,7 +10,7 @@ import * as PIXI from 'pixi.js';
 const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
-PIXI.Assets.load('https://v2-pixijs.com/assets/spritesheet/fighter.json').then(() => {
+PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/fighter.json').then(() => {
     // create an array of textures from an image path
     const frames = [];
 

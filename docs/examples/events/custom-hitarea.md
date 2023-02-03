@@ -10,7 +10,7 @@ import * as PIXI from 'pixi.js';
 const app = new PIXI.Application<HTMLCanvasElement>(800, 600, { background: '#1099bb' });
 document.body.appendChild(app.view);
 
-const yellowStar = PIXI.Texture.from('https://v2-pixijs.com/assets/yellowstar.png');
+const yellowStar = PIXI.Texture.from('https://beta.pixijs.com/assets/yellowstar.png');
 
 // Standard Sprite Button
 const starButton1 = new PIXI.Sprite(yellowStar);

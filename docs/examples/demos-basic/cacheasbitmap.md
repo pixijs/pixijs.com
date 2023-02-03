@@ -13,7 +13,7 @@ document.body.appendChild(app.view);
 app.stop();
 
 // load resources
-PIXI.Assets.load('https://v2-pixijs.com/assets/spritesheet/monsters.json')
+PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/monsters.json')
     .then(onAssetsLoaded);
 
 // holder to store aliens

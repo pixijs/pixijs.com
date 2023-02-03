@@ -12,8 +12,8 @@ import * as PIXI from 'pixi.js';
 const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
-const textureGreen = PIXI.Texture.from('https://v2-pixijs.com/assets/bunny_green.png');
-const textureBlue = PIXI.Texture.from('https://v2-pixijs.com/assets/bunny_blue.png');
+const textureGreen = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny_green.png');
+const textureBlue = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny_blue.png');
 
 const blue = new PIXI.Container();
 const green = new PIXI.Container();

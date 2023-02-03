@@ -11,7 +11,7 @@ const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', res
 document.body.appendChild(app.view);
 
 // Start loading right away and create a promise
-const texturePromise = PIXI.Assets.load('https://v2-pixijs.com/assets/bunny.png');
+const texturePromise = PIXI.Assets.load('https://beta.pixijs.com/assets/bunny.png');
 
 // When the promise resolves, we have the texture!
 texturePromise.then((resolvedTexture) => {

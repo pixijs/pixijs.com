@@ -16,7 +16,7 @@ const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', res
 document.body.appendChild(app.view);
 
 // Create a new texture
-const texture = PIXI.Texture.from('https://v2-pixijs.com/assets/bunny.png');
+const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png');
 
 // time animation in seconds
 const time = 2.0;

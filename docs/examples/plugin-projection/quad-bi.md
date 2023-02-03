@@ -32,7 +32,7 @@ const squares = [
 const quad = squares.map((s) => s.position);
 
 // add sprite itself
-const containerSprite = new PIXI.projection.Sprite2s(PIXI.Texture.from('https://v2-pixijs.com/assets/bg_scene_rotate.jpg'));
+const containerSprite = new PIXI.projection.Sprite2s(PIXI.Texture.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg'));
 containerSprite.anchor.set(0.5);
 
 app.stage.addChild(containerSprite);
@@ -47,7 +47,7 @@ squares.forEach((s) => { addInteraction(s); });
 
 // let us add sprite to make it more funny
 
-const bunny = new PIXI.projection.Sprite2s(PIXI.Texture.from('https://v2-pixijs.com/assets/flowerTop.png'));
+const bunny = new PIXI.projection.Sprite2s(PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png'));
 bunny.anchor.set(0.5);
 containerSprite.addChild(bunny);
 

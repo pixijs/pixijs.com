@@ -16,7 +16,7 @@ document.body.appendChild(app.view);
 app.stage.hitArea = app.screen;
 app.stage.interactive = true;
 
-PIXI.Assets.load('https://v2-pixijs.com/assets/pixi-spine/pixie.json').then(onAssetsLoaded);
+PIXI.Assets.load('https://beta.pixijs.com/assets/pixi-spine/pixie.json').then(onAssetsLoaded);
 
 function onAssetsLoaded(spritesheet) {
     const pixie = new PIXI.spine.Spine(spritesheet.spineData);

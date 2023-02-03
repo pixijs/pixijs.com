@@ -14,9 +14,9 @@ app.stop();
 
 // load spine data
 PIXI.Loader.shared
-    .add('skeleton', 'https://v2-pixijs.com/assets/pixi-dragonbones/robot/mecha_1002_101d_show_ske.json')
-    .add('texture_json', 'https://v2-pixijs.com/assets/pixi-dragonbones/robot/mecha_1002_101d_show_tex.json')
-    .add('texture_png', 'https://v2-pixijs.com/assets/pixi-dragonbones/robot/mecha_1002_101d_show_tex.png')
+    .add('skeleton', 'https://beta.pixijs.com/assets/pixi-dragonbones/robot/mecha_1002_101d_show_ske.json')
+    .add('texture_json', 'https://beta.pixijs.com/assets/pixi-dragonbones/robot/mecha_1002_101d_show_tex.json')
+    .add('texture_png', 'https://beta.pixijs.com/assets/pixi-dragonbones/robot/mecha_1002_101d_show_tex.png')
     .load(onAssetsLoaded);
 
 function onAssetsLoaded(loader, res) {

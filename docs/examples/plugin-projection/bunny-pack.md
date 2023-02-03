@@ -218,7 +218,7 @@ const app = new PIXI.Application<HTMLCanvasElement>({ background: '#2c3e50', res
 document.body.appendChild(app.view);
 
 // Load the bunny texture
-app.loader.add('bunny', 'https://pixijs.io/examples/https://v2-pixijs.com/assets/bunny.png')
+app.loader.add('bunny', 'https://pixijs.io/examples/https://beta.pixijs.com/assets/bunny.png')
     .load(startup);
 
 function startup() {

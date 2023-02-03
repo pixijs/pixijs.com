@@ -22,7 +22,7 @@ document.body.appendChild(app.view);
 const stage = app.stage = new PIXI.layers.Stage();
 
 // bg is first, its not lighted
-const bg = new PIXI.TilingSprite(PIXI.Texture.from('https://v2-pixijs.com/assets/p2.jpeg'), WIDTH, HEIGHT);
+const bg = new PIXI.TilingSprite(PIXI.Texture.from('https://beta.pixijs.com/assets/p2.jpeg'), WIDTH, HEIGHT);
 bg.tint = 0x808080;
 stage.addChild(bg);
 
@@ -66,7 +66,7 @@ app.ticker.add(() => {
 });
 
 const lightLoader = new PIXI.Loader();
-lightLoader.baseUrl = 'https://v2-pixijs.com/assets/lights/';
+lightLoader.baseUrl = 'https://beta.pixijs.com/assets/lights/';
 lightLoader
     .add('block_diffuse', 'block.png')
     .add('block_normal', 'blockNormalMap.png')

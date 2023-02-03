@@ -13,7 +13,7 @@ const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', res
 document.body.appendChild(app.view);
 
 // create a new Sprite from an image path
-const bunny = new PIXI.heaven.SpriteH(PIXI.Texture.from('https://v2-pixijs.com/assets/bunny.png'));
+const bunny = new PIXI.heaven.SpriteH(PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png'));
 
 // Let us invert the colors!
 bunny.color.setLight(0.0, 0.0, 0.0);

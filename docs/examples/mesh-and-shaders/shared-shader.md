@@ -53,7 +53,7 @@ const shader = PIXI.Shader.from(`
 
 `,
 {
-    uSampler2: PIXI.Texture.from('https://v2-pixijs.com/assets/bg_scene_rotate.jpg'),
+    uSampler2: PIXI.Texture.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg'),
 });
 
 const shader2 = PIXI.Shader.from(`
@@ -90,7 +90,7 @@ const shader2 = PIXI.Shader.from(`
 
 `,
 {
-    uSampler2: PIXI.Texture.from('https://v2-pixijs.com/assets/bg_scene_rotate.jpg'),
+    uSampler2: PIXI.Texture.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg'),
 });
 
 const triangle = new PIXI.Mesh(geometry, shader);

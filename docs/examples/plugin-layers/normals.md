@@ -22,7 +22,7 @@ stage.addChild(new PIXI.layers.Layer(PIXI.lights.normalGroup));
 stage.addChild(new PIXI.layers.Layer(PIXI.lights.lightGroup));
 
 const lightLoader = new PIXI.Loader();
-lightLoader.baseUrl = 'https://v2-pixijs.com/assets/lights/';
+lightLoader.baseUrl = 'https://beta.pixijs.com/assets/lights/';
 lightLoader
     .add('bg_diffuse', 'BGTextureTest.jpg')
     .add('bg_normal', 'BGTextureNORM.jpg')

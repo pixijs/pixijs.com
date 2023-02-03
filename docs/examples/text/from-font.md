@@ -12,10 +12,10 @@ document.body.appendChild(app.view);
 
 // Load from any font file!
 PIXI.Assets.addBundle('fonts', {
-    ChaChicle: 'https://v2-pixijs.com/assets/webfont-loader/ChaChicle.ttf',
-    Lineal: 'https://v2-pixijs.com/assets/webfont-loader/Lineal.otf',
-    'Dotrice Regular': 'https://v2-pixijs.com/assets/webfont-loader/Dotrice-Regular.woff',
-    Crosterian: 'https://v2-pixijs.com/assets/webfont-loader/Crosterian.woff2',
+    ChaChicle: 'https://beta.pixijs.com/assets/webfont-loader/ChaChicle.ttf',
+    Lineal: 'https://beta.pixijs.com/assets/webfont-loader/Lineal.otf',
+    'Dotrice Regular': 'https://beta.pixijs.com/assets/webfont-loader/Dotrice-Regular.woff',
+    Crosterian: 'https://beta.pixijs.com/assets/webfont-loader/Crosterian.woff2',
 });
 PIXI.Assets.loadBundle('fonts').then(() => {
     const text1 = new PIXI.Text('ChaChicle.ttf', new PIXI.TextStyle({ fontFamily: 'ChaChicle', fontSize: 50 }));

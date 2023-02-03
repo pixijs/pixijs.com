@@ -8,7 +8,7 @@ Before PixiJS can render an image, it needs to be loaded.  Just like in any web 
 
 ```JavaScript
 // Magically load the PNG asynchronously
-const bunny = PIXI.Sprite.from('https://v2-pixijs.com/assets/bunny.png')
+const bunny = PIXI.Sprite.from('https://beta.pixijs.com/assets/bunny.png')
 ```
 
 Then we need to add our new sprite to the stage.  The stage is simply a [Container](/api/classes/pixi_display.Container) that is the root of the scene graph.  Every child of the stage container will be rendered every frame.  By adding our sprite to the stage, we tell PixiJS's renderer we want to draw it.

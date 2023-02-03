@@ -11,7 +11,7 @@ const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
 document.body.appendChild(app.view);
 
 // create a texture from an image path
-const texture = PIXI.Texture.from('https://v2-pixijs.com/assets/p2.jpeg');
+const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/p2.jpeg');
 
 /* create a tiling sprite ...
  * requires a texture, a width and a height

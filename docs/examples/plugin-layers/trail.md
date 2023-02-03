@@ -27,7 +27,7 @@ app.stage.addChild(layer);
 const showLayer = new PIXI.Sprite(layer.getRenderTexture());
 app.stage.addChild(showLayer);
 
-const bunnyTex = PIXI.Texture.from('https://v2-pixijs.com/assets/bunny.png');
+const bunnyTex = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png');
 const bunnies = [];
 for (let i = 0; i < 5; i++) {
     bunnies[i] = new PIXI.Container();

@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 const config = {
   title: 'PixiJS',
   tagline: 'Homepage still needs to be revamped',
-  url: 'https://v2-pixijs.com',
+  url: 'https://beta.pixijs.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',

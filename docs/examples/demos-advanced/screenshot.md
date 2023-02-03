@@ -10,7 +10,7 @@ import * as PIXI from 'pixi.js';
 const app = new PIXI.Application<HTMLCanvasElement>({ backgroundColor: '#111', resizeTo: window });
 document.body.appendChild(app.view);
 
-const texture = PIXI.Texture.from('https://v2-pixijs.com/assets/bunny.png');
+const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png');
 const bunnyContainer = new PIXI.Container();
 
 async function takeScreenshot() {

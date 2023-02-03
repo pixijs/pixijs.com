@@ -15,7 +15,7 @@ Check the mesh version of example for more performant version if you need only s
 const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
-PIXI.Assets.load('https://v2-pixijs.com/assets/perlin.jpg').then(onAssetsLoaded);
+PIXI.Assets.load('https://beta.pixijs.com/assets/perlin.jpg').then(onAssetsLoaded);
 
 let filter = null;
 

@@ -17,8 +17,8 @@ let tilemap;
 let frame = 0;
 
 
-PIXI.Assets.add('atlas', 'https://v2-pixijs.com/assets/tilemaps/atlas.json');
-PIXI.Assets.add('button', 'https://v2-pixijs.com/assets/tilemaps/button.png');
+PIXI.Assets.add('atlas', 'https://beta.pixijs.com/assets/tilemaps/atlas.json');
+PIXI.Assets.add('button', 'https://beta.pixijs.com/assets/tilemaps/button.png');
 PIXI.Assets.load(['atlas', 'button']).then(() => {
     // Setup tilemap scene
     stage = new PIXI.Container();

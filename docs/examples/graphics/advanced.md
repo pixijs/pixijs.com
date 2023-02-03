@@ -10,7 +10,7 @@ import * as PIXI from 'pixi.js';
 const app = new PIXI.Application<HTMLCanvasElement>({ antialias: true, resizeTo: window });
 document.body.appendChild(app.view);
 
-const sprite = PIXI.Sprite.from('https://v2-pixijs.com/assets/bg_rotate.jpg');
+const sprite = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_rotate.jpg');
 
 // // BEZIER CURVE ////
 // information: https://en.wikipedia.org/wiki/Bézier_curve

@@ -23,7 +23,7 @@ document.body.appendChild(app.view);
         app.stage.addChild(container);
 
         // Create a new texture
-        const textureUrl = new URL('https://v2-pixijs.com/assets/bunny.png', baseUrl).toString();
+        const textureUrl = new URL('https://beta.pixijs.com/assets/bunny.png', baseUrl).toString();
         const texture = PIXI.Texture.from(textureUrl);
 
         // Create a 5x5 grid of bunnies

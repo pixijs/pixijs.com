@@ -26,7 +26,7 @@ const totalSprites = app.renderer instanceof PIXI.Renderer ? 10000 : 100;
 
 for (let i = 0; i < totalSprites; i++) {
     // create a new Sprite
-    const dude = PIXI.Sprite.from('https://v2-pixijs.com/assets/maggot_tiny.png');
+    const dude = PIXI.Sprite.from('https://beta.pixijs.com/assets/maggot_tiny.png');
 
     // set the anchor point so the texture is centerd on the sprite
     dude.anchor.set(0.5);

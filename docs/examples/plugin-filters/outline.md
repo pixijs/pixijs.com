@@ -24,7 +24,7 @@ function filterOff() {
 }
 
 for (let i = 0; i < 20; i++) {
-    const bunny = PIXI.Sprite.from('https://v2-pixijs.com/assets/bunny.png');
+    const bunny = PIXI.Sprite.from('https://beta.pixijs.com/assets/bunny.png');
     bunny.interactive = true;
     bunny.position.set((Math.random() * 2 - 1) * 300 | 0, (Math.random() * 2 - 1) * 200 | 0);
     bunny.scale.x = (Math.random() * 3 | 0 * 0.1) + 1;

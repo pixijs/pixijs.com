@@ -13,7 +13,7 @@ hide_table_of_contents: true
 keywords: ['keyword', 'for', 'search', 'engines']
 ---
 
-PixiJS v8 has arrived! Please take a look at the docs [**here**](https://v2-pixijs.com/guides).
+PixiJS v8 has arrived! Please take a look at the docs [**here**](https://beta.pixijs.com/guides).
 
 <!--truncate-->
 

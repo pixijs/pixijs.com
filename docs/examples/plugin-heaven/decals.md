@@ -12,7 +12,7 @@ import * as PIXI from 'pixi.js';
 const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
-app.loader.add('bunny', 'https://v2-pixijs.com/assets/bunny.png');
+app.loader.add('bunny', 'https://beta.pixijs.com/assets/bunny.png');
 app.loader.load(onComplete);
 
 function onComplete(loader, resources) {

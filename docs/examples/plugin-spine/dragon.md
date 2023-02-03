@@ -14,7 +14,7 @@ app.stop();
 
 // load spine data
 app.loader
-    .add('dragon', 'https://v2-pixijs.com/assets/pixi-spine/dragon.json')
+    .add('dragon', 'https://beta.pixijs.com/assets/pixi-spine/dragon.json')
     .load(onAssetsLoaded);
 
 let dragon = null;

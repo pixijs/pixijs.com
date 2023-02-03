@@ -42,8 +42,8 @@ camera.addChild(new PIXI.display.Layer(cardsGroup));
 // we could also add layers in the stage, but then we'll need extra layer for the text
 
 // load assets
-loader.add('cards', 'https://v2-pixijs.com/assets/pixi-projection/cards.json');
-loader.add('table', 'https://v2-pixijs.com/assets/pixi-projection/table.png');
+loader.add('cards', 'https://beta.pixijs.com/assets/pixi-projection/cards.json');
+loader.add('table', 'https://beta.pixijs.com/assets/pixi-projection/table.png');
 loader.load(onAssetsLoaded);
 
 // blur for shadow. Do not use it in production, bake shadow into the texture!

@@ -148,7 +148,7 @@ export default function PixiPlayground (props: { mode?: PlaygroundMode, code: st
           'sp-layout': styles.spLayout
         },
         externalResources: [
-          'https://v2-pixijs.com/playground.css'
+          'https://beta.pixijs.com/playground.css'
         ]
       }}
     >

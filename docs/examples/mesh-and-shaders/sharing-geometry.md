@@ -56,15 +56,15 @@ const program = PIXI.Program.from(`
 `);
 
 const triangle = new PIXI.Mesh(geometry, new PIXI.Shader(program, {
-    uSamplerTexture: PIXI.Texture.from('https://v2-pixijs.com/assets/bg_scene_rotate.jpg'),
+    uSamplerTexture: PIXI.Texture.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg'),
 }));
 
 const triangle2 = new PIXI.Mesh(geometry, new PIXI.Shader(program, {
-    uSamplerTexture: PIXI.Texture.from('https://v2-pixijs.com/assets/bg_rotate.jpg'),
+    uSamplerTexture: PIXI.Texture.from('https://beta.pixijs.com/assets/bg_rotate.jpg'),
 }));
 
 const triangle3 = new PIXI.Mesh(geometry, new PIXI.Shader(program, {
-    uSamplerTexture: PIXI.Texture.from('https://v2-pixijs.com/assets/bg_displacement.jpg'),
+    uSamplerTexture: PIXI.Texture.from('https://beta.pixijs.com/assets/bg_displacement.jpg'),
 }));
 
 triangle.position.set(400, 300);

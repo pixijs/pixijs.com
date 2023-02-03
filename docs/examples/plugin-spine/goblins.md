@@ -12,7 +12,7 @@ document.body.appendChild(app.view);
 
 // load spine data
 app.loader
-    .add('goblins', 'https://v2-pixijs.com/assets/pixi-spine/goblins.json')
+    .add('goblins', 'https://beta.pixijs.com/assets/pixi-spine/goblins.json')
     .load(onAssetsLoaded);
 
 app.stage.interactive = true;

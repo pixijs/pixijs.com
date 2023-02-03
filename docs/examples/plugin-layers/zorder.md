@@ -47,8 +47,8 @@ const blurFilter = new PIXI.filters.BlurFilter();
 blurFilter.blur = 0.5;
 
 // create a texture from an image path
-const textureGreen = PIXI.Texture.from('https://v2-pixijs.com/assets/bunny_green.png');
-const textureBlue = PIXI.Texture.from('https://v2-pixijs.com/assets/bunny_blue.png');
+const textureGreen = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny_green.png');
+const textureBlue = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny_blue.png');
 
 // make obsolete containers. Why do we need them?
 // Just to show that we can do everything without caring of actual parent container

@@ -11,8 +11,8 @@ const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', res
 document.body.appendChild(app.view);
 
 // Add the assets to load
-PIXI.Assets.add('flowerTop', 'https://v2-pixijs.com/assets/flowerTop.png');
-PIXI.Assets.add('eggHead', 'https://v2-pixijs.com/assets/eggHead.png');
+PIXI.Assets.add('flowerTop', 'https://beta.pixijs.com/assets/flowerTop.png');
+PIXI.Assets.add('eggHead', 'https://beta.pixijs.com/assets/eggHead.png');
 
 // Load the assets and get a resolved promise once both are loaded
 const texturesPromise = PIXI.Assets.load(['flowerTop', 'eggHead']); // => Promise<{flowerTop: Texture, eggHead: Texture}>

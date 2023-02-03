@@ -21,7 +21,7 @@ document.body.appendChild(app.view);
 app.stage = new PIXI.layers.Stage();
 
 const background = new PIXI.TilingSprite(
-    PIXI.Texture.from('https://v2-pixijs.com/assets/p2.jpeg'),
+    PIXI.Texture.from('https://beta.pixijs.com/assets/p2.jpeg'),
     WIDTH,
     HEIGHT,
 );
@@ -44,7 +44,7 @@ lightingSprite.blendMode = PIXI.BLEND_MODES.MULTIPLY;
 
 app.stage.addChild(lightingSprite);
 
-const bunnyTexture = PIXI.Texture.from('https://v2-pixijs.com/assets/bunny.png');
+const bunnyTexture = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png');
 function updateBunny(bunny) {
     bunny.x += bunny.vx;
     bunny.y += bunny.vy;

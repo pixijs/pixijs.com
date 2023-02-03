@@ -10,7 +10,7 @@ import * as PIXI from 'pixi.js';
 const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
-PIXI.Assets.load('https://v2-pixijs.com/assets/bg_grass.jpg').then((texture) => {
+PIXI.Assets.load('https://beta.pixijs.com/assets/bg_grass.jpg').then((texture) => {
     const plane = new PIXI.SimplePlane(texture, 10, 10);
 
     plane.x = 100;

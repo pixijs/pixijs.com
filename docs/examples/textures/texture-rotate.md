@@ -10,7 +10,7 @@ import * as PIXI from 'pixi.js';
 const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
 document.body.appendChild(app.view);
 
-PIXI.Assets.load('https://v2-pixijs.com/assets/flowerTop.png').then((texture) => {
+PIXI.Assets.load('https://beta.pixijs.com/assets/flowerTop.png').then((texture) => {
     // create rotated textures
     const textures = [texture];
     const D8 = PIXI.groupD8;

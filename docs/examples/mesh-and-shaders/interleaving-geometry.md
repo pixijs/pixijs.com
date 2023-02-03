@@ -58,7 +58,7 @@ const shader = PIXI.Shader.from(`
 
 `,
 {
-    uSampler2: PIXI.Texture.from('https://v2-pixijs.com/assets/bg_scene_rotate.jpg'),
+    uSampler2: PIXI.Texture.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg'),
 });
 
 const quad = new PIXI.Mesh(geometry, shader);

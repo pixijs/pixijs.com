@@ -4,7 +4,7 @@ const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', res
 document.body.appendChild(app.view)
 
 // create a new Sprite from an image path
-const bunny = PIXI.Sprite.from('https://v2-pixijs.com/assets/bunny.png')
+const bunny = PIXI.Sprite.from('https://beta.pixijs.com/assets/bunny.png')
 
 // center the sprite's anchor point
 bunny.anchor.set(0.5)

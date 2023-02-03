@@ -22,9 +22,9 @@ PIXI.projection.applySpine3dMixin(PIXI.spine.Spine.prototype);
 const { loader } = app;
 
 // create a new loader
-loader.add('spritesheet', 'https://v2-pixijs.com/assets/pixi-projection/dudes.json');
-loader.add('back', 'https://v2-pixijs.com/assets/pixi-projection/back.png');
-loader.add('pixie', 'https://v2-pixijs.com/assets/pixi-spine/pixie.json');
+loader.add('spritesheet', 'https://beta.pixijs.com/assets/pixi-projection/dudes.json');
+loader.add('back', 'https://beta.pixijs.com/assets/pixi-projection/back.png');
+loader.add('pixie', 'https://beta.pixijs.com/assets/pixi-spine/pixie.json');
 // begin load
 loader.load(onAssetsLoaded);
 

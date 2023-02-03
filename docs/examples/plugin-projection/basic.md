@@ -32,7 +32,7 @@ app.stage.addChild(squareY);
 
 // add sprite itself
 
-const bunny = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://v2-pixijs.com/assets/flowerTop.png'));
+const bunny = new PIXI.projection.Sprite2d(PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png'));
 bunny.anchor.set(0.5);
 bunny.scale.set(0.7);
 container.addChild(bunny);
