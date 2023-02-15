@@ -1,0 +1,344 @@
+---
+id: "PIXI.Filter.pixi_core"
+title: "Class: PIXI.Filter"
+sidebar_label: "PIXI.Filter"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).Filter
+
+
+A filter is a special shader that applies post-processing effects to an input texture and writes into an output render-target.
+
+[Example](http&#58;//pixijs.io/examples/#/filters/blur-filter.js) of the [BlurFilter](../classes/PIXI.BlurFilter.pixi_filter_blur).
+
+### Usage
+
+Filters can be applied to any DisplayObject or Container. PixiJS' `FilterSystem` renders the container into temporary Framebuffer, then filter renders it to the screen. Multiple filters can be added to the `filters` array property and stacked on each other.
+
+```
+import { Container, Filter } from 'pixi.js';
+const filter = new Filter(myShaderVert, myShaderFrag, { myUniform: 0.5 });
+const container = new Container();
+container.filters = [filter];
+
+```
+
+### Previous Version Differences
+
+In PixiJS **v3**, a filter was always applied to _whole screen_.
+
+In PixiJS **v4**, a filter can be applied _only part of the screen_. Developers had to create a set of uniforms to deal with coordinates.
+
+In PixiJS **v5** combines _both approaches_. Developers can use normal coordinates of v3 and then allow filter to use partial Framebuffers, bringing those extra uniforms into account.
+
+Also be aware that we have changed default vertex shader, please consult [Wiki](https&#58;//github.com/pixijs/pixijs/wiki/v5-Creating-filters).
+
+### Frames
+
+The following table summarizes the coordinate spaces used in the filtering pipeline&#58;
+
+&#124; Coordinate Space    &#124; Description                                                                                                                                                    &#124;
+&#124; ------------------- &#124; -------------------------------------------------------------------------------------------------------------------------------------------------------------- &#124;
+&#124; Texture Coordinates &#124; The texture (or UV) coordinates in the input base-texture's space. These are normalized into the (0,1) range along both axes.                                  &#124;
+&#124; World Space         &#124; A point in the same space as the world bounds of any display-object (i.e. in the scene graph's space).                                                         &#124;
+&#124; Physical Pixels     &#124; This is base-texture's space with the origin on the top-left. You can calculate these by multiplying the texture coordinates by the dimensions of the texture. &#124;
+
+### Built-in Uniforms
+
+PixiJS viewport uses screen (CSS) coordinates, `(0, 0, renderer.screen.width, renderer.screen.height)`, and `projectionMatrix` uniform maps it to the gl viewport.
+
+**uSampler**
+
+The most important uniform is the input texture that container was rendered into._Important note&#58; as with all Framebuffers in PixiJS, both input and output are premultiplied by alpha._
+
+By default, input normalized coordinates are passed to fragment shader with `vTextureCoord`. Use it to sample the input.
+
+```
+import { Filter } from 'pixi.js';
+const fragment = `
+varying vec2 vTextureCoord;
+uniform sampler2D uSampler;
+void main(void)
+&#123;
+   gl_FragColor = texture2D(uSampler, vTextureCoord);
+&#125;
+`;
+
+const myFilter = new Filter(null, fragment);
+
+```
+
+This filter is just one uniform less than [AlphaFilter](../classes/PIXI.AlphaFilter.pixi_filter_alpha).
+
+**outputFrame**
+
+The `outputFrame` holds the rectangle where filter is applied in screen (CSS) coordinates. It's the same as `renderer.screen` for a fullscreen filter. Only a part of `outputFrame.zw` size of temporary Framebuffer is used,`(0, 0, outputFrame.width, outputFrame.height)`,
+
+Filters uses this quad to normalized (0-1) space, its passed into `aVertexPosition` attribute. To calculate vertex position in screen space using normalized (0-1) space&#58;
+
+```
+vec4 filterVertexPosition( void )
+{
+    vec2 position = aVertexPosition * max(outputFrame.zw, vec2(0.)) + outputFrame.xy;
+    return vec4((projectionMatrix * vec3(position, 1.0)).xy, 0.0, 1.0);
+}
+
+```
+
+**inputSize**
+
+Temporary framebuffer is different, it can be either the size of screen, either power-of-two. The `inputSize.xy` are size of temporary framebuffer that holds input. The `inputSize.zw` is inverted, it's a shortcut to evade division inside the shader.
+
+Set `inputSize.xy = outputFrame.zw` for a fullscreen filter.
+
+To calculate input normalized coordinate, you have to map it to filter normalized space. Multiply by `outputFrame.zw` to get input coordinate. Divide by `inputSize.xy` to get input normalized coordinate.
+
+```
+vec2 filterTextureCoord( void )
+{
+    return aVertexPosition * (outputFrame.zw * inputSize.zw); // same as /inputSize.xy
+}
+
+```
+
+**resolution**
+
+The `resolution` is the ratio of screen (CSS) pixels to real pixels.
+
+**inputPixel**
+
+`inputPixel.xy` is the size of framebuffer in real pixels, same as `inputSize.xy * resolution` `inputPixel.zw` is inverted `inputPixel.xy`.
+
+It's handy for filters that use neighbour pixels, like [FXAAFilter](../classes/PIXI.FXAAFilter.pixi_filter_fxaa).
+
+**inputClamp**
+
+If you try to get info from outside of used part of Framebuffer - you'll get undefined behaviour. For displacements, coordinates has to be clamped.
+
+The `inputClamp.xy` is left-top pixel center, you may ignore it, because we use left-top part of Framebuffer`inputClamp.zw` is bottom-right pixel center.
+
+```
+vec4 color = texture2D(uSampler, clamp(modifiedTextureCoord, inputClamp.xy, inputClamp.zw));
+
+```
+
+Or&#58;
+
+```
+vec4 color = texture2D(uSampler, min(modifigedTextureCoord, inputClamp.zw));
+
+```
+
+### Additional Information
+
+Complete documentation on Filter usage is located in the [Wiki](https&#58;//github.com/pixijs/pixijs/wiki/v5-Creating-filters).
+
+Since PixiJS only had a handful of built-in filters, additional filters can be downloaded [here](https&#58;//github.com/pixijs/pixi-filters) from the PixiJS Filters repository.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Filter: <span><code>(vertexSrc&#58; string, fragmentSrc&#58; string, uniforms&#58; Dict&#60;any&#62;) </code></span>
+
+#### Parameters:
+| Name        | Type                           | Default       | Description                                          |
+| ----------- | ------------------------------ | ------------- | ---------------------------------------------------- |
+| vertexSrc   | <code>string</code>            | <code></code> | The source of the vertex shader.                     |
+| fragmentSrc | <code>string</code>            | <code></code> | The source of the fragment shader.                   |
+| uniforms    | <code>Dict&#60;any&#62;</code> | <code></code> | Custom uniforms to use to augment the built-in ones. |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.Shader](../classes/PIXI.Shader.pixi_core)
+
+## Members
+<article>
+
+### defaultFragmentSrc: <span><code>string</code></span>
+The default fragment shader source
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultMultisample: <span><code>PIXI.MSAA_QUALITY</code></span>
+- **Default Value**: <code>PIXI.MSAA_QUALITY.NONE</code>
+
+Default filter samples for any filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultResolution: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+Default filter resolution for any filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultVertexSrc: <span><code>string</code></span>
+The default vertex shader source
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### SOURCE_KEY_MAP: <span><code>Dict&#60;string&#62;</code></span>
+Used for caching shader IDs.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### autoFit: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+If enabled, PixiJS will fit the filter area into boundaries for better performance. Switch it off if it does not work for specific shader.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### blendMode: <span><code>BLEND_MODES</code></span>
+- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+
+Sets the blend mode of the filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### enabled: <span><code>boolean</code></span>
+If enabled is true the filter is applied, if false it will not.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### legacy: <span><code>boolean</code></span>
+Legacy filters use position and uvs from attributes (set by filter system)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### multisample: <span><code>MSAA_QUALITY</code></span>
+The samples override of the filter instance.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### padding: <span><code>number</code></span>
+The padding of the filter. Some filters require extra space to breath such as a blur. Increasing this will add extra width and height to the bounds of the object that the filter is applied to.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### program: <span><code>Program</code></span>
+Program that the shader uses.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+The resolution of the filter. Setting this to be lower will lower the quality but increase the performance of the filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### state: <span><code>State</code></span>
+The WebGL state the filter requires to render.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniforms: <span><code>Dict&#60;any&#62;</code></span>
+Shader uniform values, shortcut for `uniformGroup.uniforms`.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### apply: <span><code>(filterManager&#58; PIXI.FilterSystem, input&#58; PIXI.RenderTexture, output&#58; PIXI.RenderTexture, clearMode&#58; PIXI.CLEAR_MODES, _currentState&#58; object) -&#62; void</code></span>
+Applies the filter
+
+#### Parameters:
+| Name          | Type                            | Description                                                                                                                                                       |
+| ------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| filterManager | <code>PIXI.FilterSystem</code>  | The renderer to retrieve the filter from                                                                                                                          |
+| input         | <code>PIXI.RenderTexture</code> | The input render target.                                                                                                                                          |
+| output        | <code>PIXI.RenderTexture</code> | The target to output to.                                                                                                                                          |
+| clearMode     | <code>PIXI.CLEAR_MODES</code>   | Should the output be cleared before rendering to it.                                                                                                              |
+| _currentState | <code>object</code>             | It's current state of filter. There are some useful properties in the currentState &#58; target, filters, sourceFrame, destinationFrame, renderTarget, resolution |
+</article>
+
+
+---------------------------------------
+
+
+    

@@ -1,0 +1,81 @@
+---
+id: "PIXI.ExtensionFormatLoose.pixi_extensions"
+title: "Interface: PIXI.ExtensionFormatLoose"
+sidebar_label: "PIXI.ExtensionFormatLoose"
+custom_edit_url: null
+---
+
+[@pixi/extensions](../modules/pixi_extensions).[PIXI](../namespaces/PIXI).ExtensionFormatLoose
+
+
+Format when registering an extension. Generally, the extension should have these values as `extension` static property, but you can override name or type by providing an object.
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name     | Type                                              | Description                                                                   |
+| -------- | ------------------------------------------------- | ----------------------------------------------------------------------------- |
+| name     | <code>string</code>                               | Optional. Some plugins provide an API name/property, such as Renderer plugins |
+| priority | <code>number</code>                               | Optional, used for sorting the plugins in a particular order                  |
+| ref      | <code>any</code>                                  | Reference to the plugin object/class                                          |
+| type     | <code>ExtensionType &#124; ExtensionType[]</code> | The extension type, can be multiple types                                     |
+
+</p>
+</details>
+    
+
+
+
+
+## Members
+<article>
+
+### name: <span><code>string</code></span>
+Optional. Some plugins provide an API name/property, such as Renderer plugins
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### priority: <span><code>number</code></span>
+Optional, used for sorting the plugins in a particular order
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ref: <span><code>any</code></span>
+Reference to the plugin object/class
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### type: <span><code>ExtensionType &#124; ExtensionType[]</code></span>
+The extension type, can be multiple types
+
+</article>
+
+
+---------------------------------------
+
+
+
+  

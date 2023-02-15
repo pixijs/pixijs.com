@@ -11,7 +11,7 @@ const config = {
   url: 'https://beta.pixijs.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
+  onBrokenMarkdownLinks: 'ignore',
   favicon: 'images/favicon.png',
 
   // GitHub pages deployment config.

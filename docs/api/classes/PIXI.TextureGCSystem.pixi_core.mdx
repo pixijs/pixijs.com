@@ -1,0 +1,159 @@
+---
+id: "PIXI.TextureGCSystem.pixi_core"
+title: "Class: PIXI.TextureGCSystem"
+sidebar_label: "PIXI.TextureGCSystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).TextureGCSystem
+
+
+System plugin to the renderer to manage texture garbage collection on the GPU, ensuring that it does not get clogged up with textures that are no longer being used.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.TextureGCSystem: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                         |
+| -------- | --------------------- | ------------- | ----------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this System works for. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### defaultCheckCountMax: <span><code>unknown</code></span>
+- **Default Value**: <code>600</code>
+
+Default frames between two garbage collections.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultMaxIdle: <span><code>unknown</code></span>
+- **Default Value**: <code>3600</code>
+
+Default maximum idle frames before a texture is destroyed by garbage collection.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultMode: <span><code>PIXI.GC_MODES</code></span>
+- **Default Value**: <code>PIXI.GC_MODES.AUTO</code>
+
+Default garbage collection mode.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### checkCount: <span><code>number</code></span>
+Frame count since last garbage collection.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### checkCountMax: <span><code>number</code></span>
+Frames between two garbage collections.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### count: <span><code>number</code></span>
+Frame count since started.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### maxIdle: <span><code>number</code></span>
+Maximum idle frames before a texture is destroyed by garbage collection.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### mode: <span><code>GC_MODES</code></span>
+Current garbage collection mode.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### run: <span><code>() -&#62; void</code></span>
+Checks to see when the last time a texture was used. If the texture has not been used for a specified amount of time, it will be removed from the GPU.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### unload: <span><code>(displayObject&#58; PIXI.DisplayObject) -&#62; void</code></span>
+Removes all the textures within the specified displayObject and its children from the GPU.
+
+#### Parameters:
+| Name          | Type                            | Description                                    |
+| ------------- | ------------------------------- | ---------------------------------------------- |
+| displayObject | <code>PIXI.DisplayObject</code> | the displayObject to remove the textures from. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### postrender: <span><code>() -&#62; void</code></span>
+Checks to see when the last time a texture was used. If the texture has not been used for a specified amount of time, it will be removed from the GPU.
+
+</article>
+
+
+---------------------------------------
+
+
+    

@@ -1,0 +1,29 @@
+---
+id: "PIXI.CLEAR_MODES.pixi_constants"
+title: "Enum: PIXI.CLEAR_MODES"
+sidebar_label: "PIXI.CLEAR_MODES"
+custom_edit_url: null
+---
+
+[@pixi/constants](../modules/pixi_constants).[PIXI](../namespaces/PIXI).CLEAR_MODES
+
+Configure whether filter textures are cleared after binding.
+Filter textures need not be cleared if the filter does not use pixel blending. [PIXI.CLEAR_MODES.BLIT](../enums/PIXI.CLEAR_MODES.pixi_constants) will detect this and skip clearing as an optimization.
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+| Name               | Default | Description                                                                                                                                  |
+| ------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| <code>AUTO</code>  | 2       | Alias for BLIT                                                                                                                               |
+| <code>BLEND</code> | 0       | Do not clear the filter texture. The filter's output will blend on top of the output texture.                                                |
+| <code>BLIT</code>  | 2       | Clear only if [PIXI.FilterSystem.forceClear](../classes/PIXI.FilterSystem.pixi_core#forceClear) is set or if the filter uses pixel blending. |
+| <code>CLEAR</code> | 1       | Always clear the filter texture.                                                                                                             |
+| <code>NO</code>    | 0       | Alias for BLEND, same as `false` in earlier versions                                                                                         |
+| <code>YES</code>   | 1       | Alias for CLEAR, same as `true` in earlier versions                                                                                          |
+
+    

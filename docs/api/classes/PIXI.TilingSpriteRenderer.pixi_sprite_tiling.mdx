@@ -1,0 +1,124 @@
+---
+id: "PIXI.TilingSpriteRenderer.pixi_sprite_tiling"
+title: "Class: PIXI.TilingSpriteRenderer"
+sidebar_label: "PIXI.TilingSpriteRenderer"
+custom_edit_url: null
+---
+
+[@pixi/sprite-tiling](../modules/pixi_sprite_tiling).TilingSpriteRenderer
+
+
+WebGL renderer plugin for tiling sprites
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.TilingSpriteRenderer: <span><code>(renderer&#58; PIXI.Renderer) </code></span>
+constructor for renderer
+
+#### Parameters:
+| Name     | Type                       | Default       | Description                                     |
+| -------- | -------------------------- | ------------- | ----------------------------------------------- |
+| renderer | <code>PIXI.Renderer</code> | <code></code> | The renderer this tiling awesomeness works for. |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.ObjectRenderer](../classes/PIXI.ObjectRenderer.pixi_core)
+
+## Members
+<article>
+
+### state: <span><code>PIXI.State</code></span>
+The WebGL state in which this renderer will work.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderer: <span><code>Renderer</code></span>
+The renderer this manager works for.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### contextChange: <span><code>() -&#62; void</code></span>
+Creates shaders when context is initialized.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Generic destruction method that frees all resources. This should be called by subclasses.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### flush: <span><code>() -&#62; void</code></span>
+Stub method that should be used to empty the current batch by rendering objects now.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### render: <span><code>(ts&#58; PIXI.TilingSprite) -&#62; void</code></span>
+
+#### Parameters:
+| Name | Type                           | Description                 |
+| ---- | ------------------------------ | --------------------------- |
+| ts   | <code>PIXI.TilingSprite</code> | tilingSprite to be rendered |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### start: <span><code>() -&#62; void</code></span>
+Stub method that initializes any state required before rendering starts. It is different from the `prerender`signal, which occurs every frame, in that it is called whenever an object requests _this_ renderer specifically.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stop: <span><code>() -&#62; void</code></span>
+Stops the renderer. It should free up any state and become dormant.
+
+</article>
+
+
+---------------------------------------
+
+
+    

@@ -1,0 +1,181 @@
+---
+id: "PIXI.SpriteMaskFilter.pixi_core"
+title: "Class: PIXI.SpriteMaskFilter"
+sidebar_label: "PIXI.SpriteMaskFilter"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).SpriteMaskFilter
+
+This handles a Sprite acting as a mask, as opposed to a Graphic.
+WebGL only.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.SpriteMaskFilter: <span><code>(sprite&#58; PIXI.Sprite) </code></span>
+
+#### Parameters:
+| Name   | Type                     | Default       | Description        |
+| ------ | ------------------------ | ------------- | ------------------ |
+| sprite | <code>PIXI.Sprite</code> | <code></code> | The target sprite. |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.Filter](../classes/PIXI.Filter.pixi_core)
+
+## Members
+<article>
+
+### autoFit: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+If enabled, PixiJS will fit the filter area into boundaries for better performance. Switch it off if it does not work for specific shader.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### blendMode: <span><code>BLEND_MODES</code></span>
+- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+
+Sets the blend mode of the filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### enabled: <span><code>boolean</code></span>
+If enabled is true the filter is applied, if false it will not.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### legacy: <span><code>boolean</code></span>
+Legacy filters use position and uvs from attributes (set by filter system)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### maskMatrix: <span><code>Matrix</code></span>
+Mask matrix
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### maskSprite: <span><code>PIXI.DisplayObject</code></span>
+Sprite mask
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### multisample: <span><code>MSAA_QUALITY</code></span>
+The samples override of the filter instance.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### padding: <span><code>number</code></span>
+The padding of the filter. Some filters require extra space to breath such as a blur. Increasing this will add extra width and height to the bounds of the object that the filter is applied to.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### program: <span><code>Program</code></span>
+Program that the shader uses.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+The resolution of the filter. Setting this to be lower will lower the quality but increase the performance of the filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### state: <span><code>State</code></span>
+The WebGL state the filter requires to render.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniforms: <span><code>Dict&#60;any&#62;</code></span>
+Shader uniform values, shortcut for `uniformGroup.uniforms`.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### apply: <span><code>(filterManager&#58; FilterSystem, input&#58; RenderTexture, output&#58; RenderTexture, clearMode&#58; CLEAR_MODES) -&#62; void</code></span>
+Applies the filter
+
+#### Parameters:
+| Name          | Type                       | Description                                          |
+| ------------- | -------------------------- | ---------------------------------------------------- |
+| filterManager | <code>FilterSystem</code>  | The renderer to retrieve the filter from             |
+| input         | <code>RenderTexture</code> | The input render target.                             |
+| output        | <code>RenderTexture</code> | The target to output to.                             |
+| clearMode     | <code>CLEAR_MODES</code>   | Should the output be cleared before rendering to it. |
+</article>
+
+
+---------------------------------------
+
+
+    

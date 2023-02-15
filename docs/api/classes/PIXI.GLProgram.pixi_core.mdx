@@ -1,0 +1,111 @@
+---
+id: "PIXI.GLProgram.pixi_core"
+title: "Class: PIXI.GLProgram"
+sidebar_label: "PIXI.GLProgram"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).GLProgram
+
+
+Helper class to create a WebGL Program
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.GLProgram: <span><code>(program&#58; WebGLProgram, uniformData&#58; &#123; [key&#58; string]&#58; IGLUniformData &#125;) </code></span>
+Makes a new Pixi program.
+
+#### Parameters:
+| Name        | Type                                                             | Default       | Description   |
+| ----------- | ---------------------------------------------------------------- | ------------- | ------------- |
+| program     | <code>WebGLProgram</code>                                        | <code></code> | webgl program |
+| uniformData | <code>&#123; [key&#58; string]&#58; IGLUniformData &#125;</code> | <code></code> | uniforms      |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### program: <span><code>WebGLProgram</code></span>
+The shader program.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniformBufferBindings: <span><code>Dict&#60;any&#62;</code></span>
+A hash that stores where UBOs are bound to on the program.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniformData: <span><code>Dict&#60;any&#62;</code></span>
+Holds the uniform data which contains uniform locations and current uniform values used for caching and preventing unneeded GPU commands.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniformDirtyGroups: <span><code>Dict&#60;any&#62;</code></span>
+A place where dirty ticks are stored for groups If a tick here does not match with the Higher level Programs tick, it means we should re upload the data.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniformGroups: <span><code>Dict&#60;any&#62;</code></span>
+UniformGroups holds the various upload functions for the shader. Each uniform group and program have a unique upload function generated.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniformSync: <span><code>Dict&#60;any&#62;</code></span>
+A hash for lazily-generated uniform uploading functions.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Destroys this program.
+
+</article>
+
+
+---------------------------------------
+
+
+    

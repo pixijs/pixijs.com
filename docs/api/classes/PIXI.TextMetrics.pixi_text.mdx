@@ -1,0 +1,395 @@
+---
+id: "PIXI.TextMetrics.pixi_text"
+title: "Class: PIXI.TextMetrics"
+sidebar_label: "PIXI.TextMetrics"
+custom_edit_url: null
+---
+
+[@pixi/text](../modules/pixi_text).TextMetrics
+
+
+The TextMetrics object represents the measurement of a block of text with a specified style.
+
+
+```js
+ import { TextMetrics, TextStyle } from 'pixi.js';
+
+ const style = new TextStyle({
+     fontFamily: 'Arial',
+     fontSize: 24,
+     fill: 0xff1010,
+     align: 'center',
+ });
+ const textMetrics = TextMetrics.measureText('Your text', style);
+```
+      
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.TextMetrics: <span><code>(text&#58; string, style&#58; TextStyle, width&#58; number, height&#58; number, lines&#58; string[], lineWidths&#58; number[], lineHeight&#58; number, maxLineWidth&#58; number, fontProperties&#58; PIXI.IFontMetrics) </code></span>
+
+#### Parameters:
+| Name           | Type                           | Default       | Description                                                                          |
+| -------------- | ------------------------------ | ------------- | ------------------------------------------------------------------------------------ |
+| text           | <code>string</code>            | <code></code> | the text that was measured                                                           |
+| style          | <code>TextStyle</code>         | <code></code> | the style that was measured                                                          |
+| width          | <code>number</code>            | <code></code> | the measured width of the text                                                       |
+| height         | <code>number</code>            | <code></code> | the measured height of the text                                                      |
+| lines          | <code>string[]</code>          | <code></code> | an array of the lines of text broken by new lines and wrapping if specified in style |
+| lineWidths     | <code>number[]</code>          | <code></code> | an array of the line widths for each line matched to `lines`                         |
+| lineHeight     | <code>number</code>            | <code></code> | the measured line height for this style                                              |
+| maxLineWidth   | <code>number</code>            | <code></code> | the maximum line width for all measured lines                                        |
+| fontProperties | <code>PIXI.IFontMetrics</code> | <code></code> | the font properties object from TextMetrics.measureFont                              |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### ascent: <span><code>number</code></span>
+The ascent distance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### descent: <span><code>number</code></span>
+The descent distance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontSize: <span><code>number</code></span>
+Font size from ascent to descent
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### BASELINE_MULTIPLIER: <span><code>number</code></span>
+- **Default Value**: <code>1.4</code>
+
+Baseline multiplier for calculate font metrics.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### BASELINE_SYMBOL: <span><code>string</code></span>
+- **Default Value**: <code>"M"</code>
+
+Baseline symbol for calculate font metrics.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### experimentalLetterSpacing: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+New rendering behavior for letter-spacing which uses Chrome's new native API. This will lead to more accurate letter-spacing results because it does not try to manually draw each character. However, this Chrome API is experimental and may not serve all cases yet.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### experimentalLetterSpacingSupported: <span><code>boolean</code></span>
+Checking that we can use modern canvas 2D API.
+Note&#58; This is an unstable API, Chrome &#60; 94 use `textLetterSpacing`, later versions use `letterSpacing`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### graphemeSegmenter: <span><code>(s&#58; string) =&#62; string[]</code></span>
+A Unicode "character", or "grapheme cluster", can be composed of multiple Unicode code points, such as letters with diacritical marks (e.g. `'\u0065\u0301'`, letter e with acute) or emojis with modifiers (e.g. `'\uD83E\uDDD1\u200D\uD83D\uDCBB'`, technologist). The new `Intl.Segmenter` API in ES2022 can split the string into grapheme clusters correctly. If it is not available, PixiJS will fallback to use the iterator of String, which can only spilt the string into code points. If you want to get full functionality in environments that don't support `Intl.Segmenter` (such as Firefox), you can use other libraries such as [grapheme-splitter](https&#58;//www.npmjs.com/package/grapheme-splitter) or [graphemer](https&#58;//www.npmjs.com/package/graphemer) to create a polyfill. Since these libraries can be relatively large in size to handle various Unicode grapheme clusters properly, PixiJS won't use them directly.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### HEIGHT_MULTIPLIER: <span><code>number</code></span>
+- **Default Value**: <code>2</code>
+
+Height multiplier for setting height of canvas to calculate font metrics.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### METRICS_STRING: <span><code>string</code></span>
+- **Default Value**: <code>"&#124;ÉqÅ"</code>
+
+String used for calculate font metrics. These characters are all tall to help calculate the height required for text.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontProperties: <span><code>IFontMetrics</code></span>
+The font properties object from TextMetrics.measureFont.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### height: <span><code>number</code></span>
+The measured height of the text.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### lineHeight: <span><code>number</code></span>
+The measured line height for this style.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### lines: <span><code>string[]</code></span>
+An array of lines of the text broken by new lines and wrapping is specified in style.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### lineWidths: <span><code>number[]</code></span>
+An array of the line widths for each line matched to `lines`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### maxLineWidth: <span><code>number</code></span>
+The maximum line width for all measured lines.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### style: <span><code>TextStyle</code></span>
+The style that was measured.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### text: <span><code>string</code></span>
+The text that was measured.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width: <span><code>number</code></span>
+The measured width of the text.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### canBreakChars: <span><code>(_char&#58; string, _nextChar&#58; string, _token&#58; string, _index&#58; number, _breakWords&#58; boolean) -&#62; boolean</code></span>
+Overridable helper method used internally by TextMetrics, exposed to allow customizing the class's behavior.
+It allows one to determine whether a pair of characters should be broken by newlines For example certain characters in CJK langs or numbers. It must return a boolean.
+
+#### Parameters:
+| Name        | Type                 | Description                            |
+| ----------- | -------------------- | -------------------------------------- |
+| _char       | <code>string</code>  | The character                          |
+| _nextChar   | <code>string</code>  | The next character                     |
+| _token      | <code>string</code>  | The token/word the characters are from |
+| _index      | <code>number</code>  | The index in the token of the char     |
+| _breakWords | <code>boolean</code> | The style attr break words             |
+#### Returns:
+| Type                 | Description                  |
+| -------------------- | ---------------------------- |
+| <code>boolean</code> | whether to break word or not |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### canBreakWords: <span><code>(_token&#58; string, breakWords&#58; boolean) -&#62; boolean</code></span>
+Overridable helper method used internally by TextMetrics, exposed to allow customizing the class's behavior.
+It allows one to customise which words should break Examples are if the token is CJK or numbers. It must return a boolean.
+
+#### Parameters:
+| Name       | Type                 | Description                |
+| ---------- | -------------------- | -------------------------- |
+| _token     | <code>string</code>  | The token                  |
+| breakWords | <code>boolean</code> | The style attr break words |
+#### Returns:
+| Type                 | Description                  |
+| -------------------- | ---------------------------- |
+| <code>boolean</code> | Whether to break word or not |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clearMetrics: <span><code>(font&#58; string) -&#62; void</code></span>
+Clear font metrics in metrics cache.
+
+#### Parameters:
+| Name | Type                | Description                                                     |
+| ---- | ------------------- | --------------------------------------------------------------- |
+| font | <code>string</code> | font name. If font name not set then clear cache for all fonts. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isBreakingSpace: <span><code>(char&#58; string, _nextChar&#58; string) -&#62; boolean</code></span>
+Determines if char is a breaking whitespace.
+It allows one to determine whether char should be a breaking whitespace For example certain characters in CJK langs or numbers. It must return a boolean.
+
+#### Parameters:
+| Name      | Type                | Description        |
+| --------- | ------------------- | ------------------ |
+| char      | <code>string</code> | The character      |
+| _nextChar | <code>string</code> | The next character |
+#### Returns:
+| Type                 | Description                          |
+| -------------------- | ------------------------------------ |
+| <code>boolean</code> | True if whitespace, False otherwise. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### measureFont: <span><code>(font&#58; string) -&#62; IFontMetrics</code></span>
+Calculates the ascent, descent and fontSize of a given font-style
+
+#### Parameters:
+| Name | Type                | Description                               |
+| ---- | ------------------- | ----------------------------------------- |
+| font | <code>string</code> | String representing the style of the font |
+#### Returns:
+| Type                      | Description            |
+| ------------------------- | ---------------------- |
+| <code>IFontMetrics</code> | Font properties object |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### measureText: <span><code>(text&#58; string, style&#58; TextStyle, wordWrap&#58; boolean, canvas&#58; ICanvas) -&#62; TextMetrics</code></span>
+Measures the supplied string of text and returns a Rectangle.
+
+#### Parameters:
+| Name     | Type                   | Description                                                |
+| -------- | ---------------------- | ---------------------------------------------------------- |
+| text     | <code>string</code>    | The text to measure.                                       |
+| style    | <code>TextStyle</code> | The text style to use for measuring                        |
+| wordWrap | <code>boolean</code>   | Override for if word-wrap should be applied to the text.   |
+| canvas   | <code>ICanvas</code>   | optional specification of the canvas to use for measuring. |
+#### Returns:
+| Type                     | Description                            |
+| ------------------------ | -------------------------------------- |
+| <code>TextMetrics</code> | Measured width and height of the text. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### wordWrapSplit: <span><code>(token&#58; string) -&#62; string[]</code></span>
+Overridable helper method used internally by TextMetrics, exposed to allow customizing the class's behavior.
+It is called when a token (usually a word) has to be split into separate pieces in order to determine the point to break a word. It must return an array of characters.
+
+#### Parameters:
+| Name  | Type                | Description        |
+| ----- | ------------------- | ------------------ |
+| token | <code>string</code> | The token to split |
+#### Returns:
+| Type                  | Description                 |
+| --------------------- | --------------------------- |
+| <code>string[]</code> | The characters of the token |
+</article>
+
+
+---------------------------------------
+
+
+    

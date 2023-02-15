@@ -1,0 +1,142 @@
+---
+id: "PIXI.IPoint.pixi_math"
+title: "Interface: PIXI.IPoint"
+sidebar_label: "PIXI.IPoint"
+custom_edit_url: null
+---
+
+[@pixi/math](../modules/pixi_math).[PIXI](../namespaces/PIXI).IPoint
+
+
+Common interface for points. Both Point and ObservablePoint implement it
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name | Type                | Description |
+| ---- | ------------------- | ----------- |
+| x    | <code>number</code> | X coord     |
+| y    | <code>number</code> | Y coord     |
+
+</p>
+</details>
+    
+
+<details><summary>Methods</summary>
+<p>
+
+| Name     | Params                                       | Description                                                                               |
+| -------- | -------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| copyFrom | <code>(p&#58; PIXI.IPointData) </code>       | Copies x and y from the given point                                                       |
+| copyTo   | <code>(p&#58; PIXI.IPoint) </code>           | Copies x and y into the given point                                                       |
+| equals   | <code>(p&#58; PIXI.IPointData) </code>       | Returns true if the given point is equal to this point                                    |
+| set      | <code>(x&#58; number, y&#58; number) </code> | Sets the point to a new x and y position. If y is omitted, both x and y will be set to x. |
+
+</p>
+</details>
+    
+
+## Extends
+- [PIXI.IPointData](../interfaces/PIXI.IPointData.pixi_math)
+
+## Members
+<article>
+
+### x: <span><code>number</code></span>
+X coord
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### y: <span><code>number</code></span>
+Y coord
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### copyFrom: <span><code>(p&#58; PIXI.IPointData) -&#62; this</code></span>
+Copies x and y from the given point
+
+#### Parameters:
+| Name | Type                         | Description            |
+| ---- | ---------------------------- | ---------------------- |
+| p    | <code>PIXI.IPointData</code> | The point to copy from |
+#### Returns:
+| Type              | Description     |
+| ----------------- | --------------- |
+| <code>this</code> | Returns itself. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### copyTo: <span><code>(p&#58; PIXI.IPoint) -&#62; PIXI.IPoint</code></span>
+Copies x and y into the given point
+
+#### Parameters:
+| Name | Type                     | Description        |
+| ---- | ------------------------ | ------------------ |
+| p    | <code>PIXI.IPoint</code> | The point to copy. |
+#### Returns:
+| Type                     | Description                     |
+| ------------------------ | ------------------------------- |
+| <code>PIXI.IPoint</code> | Given point with values updated |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### equals: <span><code>(p&#58; PIXI.IPointData) -&#62; boolean</code></span>
+Returns true if the given point is equal to this point
+
+#### Parameters:
+| Name | Type                         | Description        |
+| ---- | ---------------------------- | ------------------ |
+| p    | <code>PIXI.IPointData</code> | The point to check |
+#### Returns:
+| Type                 | Description                                 |
+| -------------------- | ------------------------------------------- |
+| <code>boolean</code> | Whether the given point equal to this point |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### set: <span><code>(x&#58; number, y&#58; number) -&#62; </code></span>
+Sets the point to a new x and y position. If y is omitted, both x and y will be set to x.
+
+#### Parameters:
+| Name | Type                | Description                         |
+| ---- | ------------------- | ----------------------------------- |
+| x    | <code>number</code> | position of the point on the x axis |
+| y    | <code>number</code> | position of the point on the y axis |
+</article>
+
+
+---------------------------------------
+
+  

@@ -1,0 +1,81 @@
+---
+id: "PIXI.FormatDetectionParser.pixi_assets"
+title: "Interface: PIXI.FormatDetectionParser"
+sidebar_label: "PIXI.FormatDetectionParser"
+custom_edit_url: null
+---
+
+[@pixi/assets](../modules/pixi_assets).[PIXI](../namespaces/PIXI).FormatDetectionParser
+
+
+Format detection is useful for detecting feature support on the current platform.
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name      | Type                                                                  | Description                                                                                                                                                                                              |
+| --------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| add       | <code>(formats&#58; string[]) =&#62; Promise&#60;string[]&#62;</code> | Add formats (file extensions) to the existing list of formats. Return an new array with added formats, do not mutate the formats argument.                                                               |
+| extension | <code>ExtensionMetadata</code>                                        | Should be ExtensionType.DetectionParser                                                                                                                                                                  |
+| remove    | <code>(formats&#58; string[]) =&#62; Promise&#60;string[]&#62;</code> | Remove formats (file extensions) from the list of supported formats. This is used when uninstalling this DetectionParser. Return an new array with filtered formats, do not mutate the formats argument. |
+| test      | <code>() =&#62; Promise&#60;boolean&#62;</code>                       | Browser/platform feature detection supported if return true                                                                                                                                              |
+
+</p>
+</details>
+    
+
+
+
+
+## Members
+<article>
+
+### add: <span><code>(formats&#58; string[]) =&#62; Promise&#60;string[]&#62;</code></span>
+Add formats (file extensions) to the existing list of formats. Return an new array with added formats, do not mutate the formats argument.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### extension: <span><code>ExtensionMetadata</code></span>
+Should be ExtensionType.DetectionParser
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### remove: <span><code>(formats&#58; string[]) =&#62; Promise&#60;string[]&#62;</code></span>
+Remove formats (file extensions) from the list of supported formats. This is used when uninstalling this DetectionParser. Return an new array with filtered formats, do not mutate the formats argument.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### test: <span><code>() =&#62; Promise&#60;boolean&#62;</code></span>
+Browser/platform feature detection supported if return true
+
+</article>
+
+
+---------------------------------------
+
+
+
+  

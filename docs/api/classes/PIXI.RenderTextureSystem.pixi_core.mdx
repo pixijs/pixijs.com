@@ -1,0 +1,142 @@
+---
+id: "PIXI.RenderTextureSystem.pixi_core"
+title: "Class: PIXI.RenderTextureSystem"
+sidebar_label: "PIXI.RenderTextureSystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).RenderTextureSystem
+
+System plugin to the renderer to manage render textures.
+Should be added after FramebufferSystem
+
+### Frames
+
+The `RenderTextureSystem` holds a sourceFrame → destinationFrame projection. The following table explains the different coordinate spaces used&#58;
+
+&#124; Frame            &#124; Description                                                                                   &#124; Coordinate System                                                                                                                                                                                &#124;
+&#124; ---------------- &#124; --------------------------------------------------------------------------------------------- &#124; ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ &#124;
+&#124; sourceFrame      &#124; The rectangle inside of which display-objects are being rendered                              &#124; **World Space**&#58; The origin on the top-left                                                                                                                                                      &#124;
+&#124; destinationFrame &#124; The rectangle in the render-target (canvas or texture) into which contents should be rendered &#124; If rendering to the canvas, this is in screen space and the origin is on the top-left. If rendering to a render-texture, this is in its base-texture's space with the origin on the bottom-left. &#124;
+&#124; viewportFrame    &#124; The framebuffer viewport corresponding to the destination-frame                               &#124; **Window Coordinates**&#58; The origin is always on the bottom-left.                                                                                                                                 &#124;
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.RenderTextureSystem: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                         |
+| -------- | --------------------- | ------------- | ----------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this System works for. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### current: <span><code>RenderTexture &#124; null</code></span>
+Render texture currently bound. `null` if rendering to the canvas.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultMaskStack: <span><code>Array&#60;MaskData&#62;</code></span>
+List of masks for the [PIXI.StencilSystem](../classes/PIXI.StencilSystem.pixi_core).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destinationFrame: <span><code>Rectangle</code></span>
+The destination frame for the render-target's projection mapping.
+See [PIXI.ProjectionSystem#destinationFrame](../classes/PIXI.ProjectionSystem.pixi_core#destinationFrame) for more details.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### sourceFrame: <span><code>Rectangle</code></span>
+The source frame for the render-target's projection mapping.
+See [PIXI.ProjectionSystem#sourceFrame](../classes/PIXI.ProjectionSystem.pixi_core#sourceFrame) for more details
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### viewportFrame: <span><code>Rectangle</code></span>
+The viewport frame for the render-target's viewport binding. This is equal to the destination-frame for render-textures, while it is y-flipped when rendering to the screen (i.e. its origin is always on the bottom-left).
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### bind: <span><code>(renderTexture&#58; RenderTexture, sourceFrame&#58; Rectangle, destinationFrame&#58; Rectangle) -&#62; void</code></span>
+Bind the current render texture.
+
+#### Parameters:
+| Name             | Type                       | Description                                                            |
+| ---------------- | -------------------------- | ---------------------------------------------------------------------- |
+| renderTexture    | <code>RenderTexture</code> | RenderTexture to bind, by default its `null` \- the screen.            |
+| sourceFrame      | <code>Rectangle</code>     | Part of world that is mapped to the renderTexture.                     |
+| destinationFrame | <code>Rectangle</code>     | Part of renderTexture, by default it has the same size as sourceFrame. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clear: <span><code>(clearColor&#58; ColorSource, mask&#58; BUFFER_BITS) -&#62; void</code></span>
+Erases the render texture and fills the drawing area with a colour.
+
+#### Parameters:
+| Name       | Type                     | Description                                                                                      |
+| ---------- | ------------------------ | ------------------------------------------------------------------------------------------------ |
+| clearColor | <code>ColorSource</code> | The color as rgba, default to use the renderer backgroundColor                                   |
+| mask       | <code>BUFFER_BITS</code> | Bitwise OR of masks that indicate the buffers to be cleared, by default COLOR and DEPTH buffers. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### reset: <span><code>() -&#62; void</code></span>
+Resets render-texture state.
+
+</article>
+
+
+---------------------------------------
+
+
+    

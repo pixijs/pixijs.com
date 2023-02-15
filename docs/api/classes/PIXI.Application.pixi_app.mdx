@@ -1,0 +1,202 @@
+---
+id: "PIXI.Application.pixi_app"
+title: "Class: PIXI.Application"
+sidebar_label: "PIXI.Application"
+custom_edit_url: null
+---
+
+[@pixi/app](../modules/pixi_app).Application
+
+Convenience class to create a new PixiJS application.
+This class automatically creates the renderer, ticker and root container.
+
+
+```js
+ import { Application, Sprite } from 'pixi.js';
+
+ // Create the application
+ const app = new Application();
+
+ // Add the view to the DOM
+ document.body.appendChild(app.view);
+
+ // ex, add display objects
+ app.stage.addChild(Sprite.from('something.png'));
+```
+      
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Application: <span><code>(options&#58; PIXI.IApplicationOptions) </code></span>
+
+#### Parameters:
+| Name                          | Type                                        | Default                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ----------------------------- | ------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| options                       | <code>PIXI.IApplicationOptions</code>       | <code></code>                         | The optional application and renderer parameters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| options.antialias             | <code>boolean</code>                        | <code>false</code>                    | **WebGL Only.** Whether to enable anti-aliasing. This may affect performance.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| options.autoDensity           | <code>boolean</code>                        | <code>false</code>                    | Whether the CSS dimensions of the renderer's view should be resized automatically.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| options.autoStart             | <code>boolean</code>                        | <code>true</code>                     | Automatically starts the rendering after the construction.**Note**&#58; Setting this parameter to `false` does NOT stop the shared ticker even if you set`options.sharedTicker` to `true` in case that it is already started. Stop it by your own.                                                                                                                                                                                                                                                                             |
+| options.background            | <code>PIXI.ColorSource</code>               | <code></code>                         | Alias for `options.backgroundColor`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| options.backgroundAlpha       | <code>number</code>                         | <code>1</code>                        | Transparency of the background color, value from `0` (fully transparent) to `1` (fully opaque).                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| options.backgroundColor       | <code>PIXI.ColorSource</code>               | <code>0x000000</code>                 | The background color used to clear the canvas. See PIXI.ColorSource for accepted color values.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| options.clearBeforeRender     | <code>boolean</code>                        | <code>true</code>                     | Whether to clear the canvas before new render passes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| options.context               | <code>PIXI.IRenderingContext</code>         | <code></code>                         | **WebGL Only.** User-provided WebGL rendering context object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| options.forceCanvas           | <code>boolean</code>                        | <code>false</code>                    | Force using [PIXI.CanvasRenderer](../classes/PIXI.CanvasRenderer.pixi_canvas_renderer), even if WebGL is available. This option only is available when using **pixi.js-legacy** or **&#64;pixi/canvas-renderer** packages, otherwise it will throw an error.                                                                                                                                                                                                                                                                   |
+| options.height                | <code>number</code>                         | <code>600</code>                      | The height of the renderer's view.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| options.hello                 | <code>boolean</code>                        | <code>false</code>                    | Whether to log the version and type information of renderer to console.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| options.powerPreference       | <code>string</code>                         | <code></code>                         | **WebGL Only.** A hint indicating what configuration of GPU is suitable for the WebGL context, can be `'default'`, `'high-performance'` or `'low-power'`. Setting to `'high-performance'` will prioritize rendering performance over power consumption, while setting to `'low-power'` will prioritize power saving over rendering performance.                                                                                                                                                                                |
+| options.premultipliedAlpha    | <code>boolean</code>                        | <code>true</code>                     | **WebGL Only.** Whether the compositor will assume the drawing buffer contains colors with premultiplied alpha.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| options.preserveDrawingBuffer | <code>boolean</code>                        | <code>false</code>                    | **WebGL Only.** Whether to enable drawing buffer preservation. If enabled, the drawing buffer will preserve its value until cleared or overwritten. Enable this if you need to call `toDataUrl` on the WebGL context.                                                                                                                                                                                                                                                                                                          |
+| options.resizeTo              | <code>Window &#124; HTMLElement</code>      | <code></code>                         | Element to automatically resize stage to.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| options.resolution            | <code>number</code>                         | <code>PIXI.settings.RESOLUTION</code> | The resolution / device pixel ratio of the renderer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| options.sharedTicker          | <code>boolean</code>                        | <code>false</code>                    | `true` to use `Ticker.shared`, `false` to create new ticker. If set to `false`, you cannot register a handler to occur before anything that runs on the shared ticker. The system ticker will always run before both the shared ticker and the app ticker.                                                                                                                                                                                                                                                                     |
+| options.useContextAlpha       | <code>boolean &#124; 'notMultiplied'</code> | <code>true</code>                     | **Deprecated since 7.0.0, use `premultipliedAlpha` and `backgroundAlpha` instead.**   &#60;br /&#62;Pass-through value for canvas' context attribute `alpha`. This option is for cases where the canvas needs to be opaque, possibly for performance reasons on some older devices. If you want to set transparency, please use `backgroundAlpha`.   &#60;br /&#62;**WebGL Only&#58;** When set to `'notMultiplied'`, the canvas' context attribute `alpha` will be set to `true` and `premultipliedAlpha` will be to `false`. |
+| options.view                  | <code>PIXI.ICanvas</code>                   | <code>null</code>                     | The canvas to use as the view. If omitted, a new canvas will be created.                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| options.width                 | <code>number</code>                         | <code>800</code>                      | The width of the renderer's view.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### _plugins: <span><code>IApplicationPlugin[]</code></span>
+Collection of installed plugins.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderer: <span><code>PIXI.Renderer &#124; PIXI.CanvasRenderer</code></span>
+WebGL renderer if available, otherwise CanvasRenderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resizeTo: <span><code>Window &#124; HTMLElement</code></span>
+The HTML element or window to automatically resize the renderer's view element to match width and height.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### screen: <span><code>PIXI.Rectangle</code></span>
+Reference to the renderer's screen rectangle. Its safe to use as `filterArea` or `hitArea` for the whole screen.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stage: <span><code>PIXI.Container</code></span>
+The root display container that's rendered.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ticker: <span><code>PIXI.Ticker</code></span>
+- **Default Value**: <code>PIXI.Ticker.shared</code>
+
+Ticker for doing render updates.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### view: <span><code>PIXI.ICanvas</code></span>
+Reference to the renderer's canvas element.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### destroy: <span><code>(removeView&#58; boolean, stageOptions&#58; object &#124; boolean) -&#62; void</code></span>
+Destroy and don't use after this.
+
+#### Parameters:
+| Name                     | Type                               | Description                                                                                                                      |
+| ------------------------ | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| removeView               | <code>boolean</code>               | Automatically remove canvas from DOM.                                                                                            |
+| stageOptions             | <code>object &#124; boolean</code> | Options parameter. A boolean will act as if all options have been set to that value                                              |
+| stageOptions.children    | <code>boolean</code>               | if set to true, all the children will have their destroy method called as well. 'stageOptions' will be passed on to those calls. |
+| stageOptions.texture     | <code>boolean</code>               | Only used for child Sprites if stageOptions.children is set to true. Should it destroy the texture of the child sprite           |
+| stageOptions.baseTexture | <code>boolean</code>               | Only used for child Sprites if stageOptions.children is set to true. Should it destroy the base texture of the child sprite      |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### render: <span><code>() -&#62; void</code></span>
+Render the current stage.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resize: <span><code>() -&#62; void</code></span>
+Execute an immediate resize on the renderer, this is not throttled and can be expensive to call many times in a row. Will resize only if `resizeTo` property is set.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### start: <span><code>() -&#62; void</code></span>
+Convenience method for starting the render.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stop: <span><code>() -&#62; void</code></span>
+Convenience method for stopping the render.
+
+</article>
+
+
+---------------------------------------
+
+
+    

@@ -1,0 +1,124 @@
+---
+id: "PIXI.EventsTickerClass.pixi_events"
+title: "Class: PIXI.EventsTickerClass"
+sidebar_label: "PIXI.EventsTickerClass"
+custom_edit_url: null
+---
+
+[@pixi/events](../modules/pixi_events).EventsTickerClass
+
+
+This class handles automatic firing of PointerEvents in the case where the pointer is stationary for too long. This is to ensure that hit-tests are still run on moving objects.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.EventsTickerClass: <span><code>() </code></span>
+
+#### Parameters:
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### domElement: <span><code>HTMLElement</code></span>
+The DOM element to listen to events on.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### events: <span><code>EventSystem</code></span>
+The event system.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### interactionFrequency: <span><code>number</code></span>
+- **Default Value**: <code>10</code>
+
+The frequency that fake events will be fired.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pauseUpdate: <span><code>boolean</code></span>
+Whether to pause the update checks or not.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### addTickerListener: <span><code>() -&#62; void</code></span>
+Adds the ticker listener.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### init: <span><code>(events&#58; EventSystem) -&#62; void</code></span>
+Initializes the event ticker.
+
+#### Parameters:
+| Name   | Type                     | Description       |
+| ------ | ------------------------ | ----------------- |
+| events | <code>EventSystem</code> | The event system. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pointerMoved: <span><code>() -&#62; void</code></span>
+Sets flag to not fire extra events when the user has already moved there mouse
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### removeTickerListener: <span><code>() -&#62; void</code></span>
+Removes the ticker listener.
+
+</article>
+
+
+---------------------------------------
+
+
+    

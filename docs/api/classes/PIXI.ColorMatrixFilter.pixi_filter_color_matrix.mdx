@@ -1,0 +1,486 @@
+---
+id: "PIXI.ColorMatrixFilter.pixi_filter_color_matrix"
+title: "Class: PIXI.ColorMatrixFilter"
+sidebar_label: "PIXI.ColorMatrixFilter"
+custom_edit_url: null
+---
+
+[@pixi/filter-color-matrix](../modules/pixi_filter_color_matrix).ColorMatrixFilter
+
+
+The ColorMatrixFilter class lets you apply a 5x4 matrix transformation on the RGBA color and alpha values of every pixel on your displayObject to produce a result with a new set of RGBA color and alpha values. It's pretty powerful!
+
+
+```js
+ import { filters } from 'pixi.js';
+
+ const colorMatrix = new filters.ColorMatrixFilter();
+ container.filters = [colorMatrix];
+ colorMatrix.contrast(2);
+```
+      
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI()
+</article>
+
+## Extends
+- [PIXI.Filter](../classes/PIXI.Filter.pixi_core)
+
+## Members
+<article>
+
+### alpha: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+The opacity value to use when mixing the original and resultant colors.
+When the value is 0, the original color is used without modification. When the value is 1, the result color is used. When in the range (0, 1) the color is interpolated between the original and result by this amount.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### autoFit: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+If enabled, PixiJS will fit the filter area into boundaries for better performance. Switch it off if it does not work for specific shader.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### blendMode: <span><code>BLEND_MODES</code></span>
+- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+
+Sets the blend mode of the filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### enabled: <span><code>boolean</code></span>
+If enabled is true the filter is applied, if false it will not.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### legacy: <span><code>boolean</code></span>
+Legacy filters use position and uvs from attributes (set by filter system)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### matrix: <span><code>Array&#60;number&#62;</code></span>
+- **Default Value**: <code>[1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0]</code>
+
+The matrix of the color matrix filter
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### multisample: <span><code>MSAA_QUALITY</code></span>
+The samples override of the filter instance.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### padding: <span><code>number</code></span>
+The padding of the filter. Some filters require extra space to breath such as a blur. Increasing this will add extra width and height to the bounds of the object that the filter is applied to.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### program: <span><code>Program</code></span>
+Program that the shader uses.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+The resolution of the filter. Setting this to be lower will lower the quality but increase the performance of the filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### state: <span><code>State</code></span>
+The WebGL state the filter requires to render.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniforms: <span><code>Dict&#60;any&#62;</code></span>
+Shader uniform values, shortcut for `uniformGroup.uniforms`.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### apply: <span><code>(filterManager&#58; PIXI.FilterSystem, input&#58; PIXI.RenderTexture, output&#58; PIXI.RenderTexture, clearMode&#58; PIXI.CLEAR_MODES, _currentState&#58; object) -&#62; void</code></span>
+Applies the filter
+
+#### Parameters:
+| Name          | Type                            | Description                                                                                                                                                       |
+| ------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| filterManager | <code>PIXI.FilterSystem</code>  | The renderer to retrieve the filter from                                                                                                                          |
+| input         | <code>PIXI.RenderTexture</code> | The input render target.                                                                                                                                          |
+| output        | <code>PIXI.RenderTexture</code> | The target to output to.                                                                                                                                          |
+| clearMode     | <code>PIXI.CLEAR_MODES</code>   | Should the output be cleared before rendering to it.                                                                                                              |
+| _currentState | <code>object</code>             | It's current state of filter. There are some useful properties in the currentState &#58; target, filters, sourceFrame, destinationFrame, renderTarget, resolution |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### blackAndWhite: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
+Set the black and white matrice.
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### brightness: <span><code>(b&#58; number, multiply&#58; boolean) -&#62; void</code></span>
+Adjusts brightness
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| b        | <code>number</code>  | value of the brigthness (0-1, where 0 is black)                                                                 |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### browni: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
+Brown delicious browni filter (thanks Dominic Szablewski)
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### colorTone: <span><code>(desaturation&#58; number, toned&#58; number, lightColor&#58; number, darkColor&#58; number, multiply&#58; boolean) -&#62; void</code></span>
+We don't know exactly what it does, kind of gradient map, but funny to play with!
+
+#### Parameters:
+| Name         | Type                 | Description                                                                                                     |
+| ------------ | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| desaturation | <code>number</code>  | Tone values.                                                                                                    |
+| toned        | <code>number</code>  | Tone values.                                                                                                    |
+| lightColor   | <code>number</code>  | Tone values, example&#58; `0xFFE580`                                                                            |
+| darkColor    | <code>number</code>  | Tone values, example&#58; `0xFFE580`                                                                            |
+| multiply     | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### contrast: <span><code>(amount&#58; number, multiply&#58; boolean) -&#62; void</code></span>
+Set the contrast matrix, increase the separation between dark and bright Increase contrast &#58; shadows darker and highlights brighter Decrease contrast &#58; bring the shadows up and the highlights down
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| amount   | <code>number</code>  | value of the contrast (0-1)                                                                                     |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### desaturate: <span><code>() -&#62; void</code></span>
+Desaturate image (remove color) Call the saturate function
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### greyscale: <span><code>(scale&#58; number, multiply&#58; boolean) -&#62; void</code></span>
+Set the matrices in grey scales
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| scale    | <code>number</code>  | value of the grey (0-1, where 0 is black)                                                                       |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### hue: <span><code>(rotation&#58; number, multiply&#58; boolean) -&#62; void</code></span>
+Set the hue property of the color
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| rotation | <code>number</code>  | in degrees                                                                                                      |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### kodachrome: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
+Color reversal film introduced by Eastman Kodak in 1935\. (thanks Dominic Szablewski)
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### lsd: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
+LSD effect
+Multiply the current matrix
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### negative: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
+Negative image (inverse of classic rgb matrix)
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### night: <span><code>(intensity&#58; number, multiply&#58; boolean) -&#62; void</code></span>
+Night effect
+
+#### Parameters:
+| Name      | Type                 | Description                                                                                                     |
+| --------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| intensity | <code>number</code>  | The intensity of the night effect.                                                                              |
+| multiply  | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### polaroid: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
+Polaroid filter
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### predator: <span><code>(amount&#58; number, multiply&#58; boolean) -&#62; void</code></span>
+Predator effect
+Erase the current matrix by setting a new indepent one
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| amount   | <code>number</code>  | how much the predator feels his future victim                                                                   |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### reset: <span><code>() -&#62; void</code></span>
+Erase the current matrix by setting the default one.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### saturate: <span><code>(amount&#58; number, multiply&#58; boolean) -&#62; void</code></span>
+Set the saturation matrix, increase the separation between colors Increase saturation &#58; increase contrast, brightness, and sharpness
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| amount   | <code>number</code>  | The saturation amount (0-1)                                                                                     |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### sepia: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
+Sepia image
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### technicolor: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
+Color motion picture process invented in 1916 (thanks Dominic Szablewski)
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### tint: <span><code>(color&#58; number, multiply&#58; boolean) -&#62; void</code></span>
+Sets each channel on the diagonal of the color matrix. This can be used to achieve a tinting effect on Containers similar to the tint field of some display objects like Sprite, Text, Graphics, and Mesh.
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| color    | <code>number</code>  | Color of the tint. This is a hex value.                                                                         |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toBGR: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
+Filter who transforms &#58; Red -&#62; Blue and Blue -&#62; Red
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### vintage: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
+Vintage filter (thanks Dominic Szablewski)
+
+#### Parameters:
+| Name     | Type                 | Description                                                                                                     |
+| -------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| multiply | <code>boolean</code> | if true, current matrix and matrix are multiplied. If false, just set the current matrix with &#64;param matrix |
+</article>
+
+
+---------------------------------------
+
+
+    

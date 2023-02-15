@@ -1,0 +1,159 @@
+---
+id: "PIXI.CanvasContextSystem.pixi_canvas_renderer"
+title: "Class: PIXI.CanvasContextSystem"
+sidebar_label: "PIXI.CanvasContextSystem"
+custom_edit_url: null
+---
+
+[@pixi/canvas-renderer](../modules/pixi_canvas_renderer).CanvasContextSystem
+
+
+System that manages the canvas `2d` contexts
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.CanvasContextSystem: <span><code>(renderer&#58; CanvasRenderer) </code></span>
+
+#### Parameters:
+| Name     | Type                        | Default       | Description                         |
+| -------- | --------------------------- | ------------- | ----------------------------------- |
+| renderer | <code>CanvasRenderer</code> | <code></code> | A reference to the current renderer |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### _projTransform: <span><code>Matrix</code></span>
+- **Default Value**: <code>undefined</code>
+
+Projection transform, passed in render() stored here
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### activeContext: <span><code>CrossPlatformCanvasRenderingContext2D</code></span>
+The currently active canvas 2d context (could change with renderTextures)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### blendModes: <span><code>string[]</code></span>
+Tracks the blend modes useful for this renderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### rootContext: <span><code>CrossPlatformCanvasRenderingContext2D</code></span>
+The root canvas 2d context that everything is drawn with.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### smoothProperty: <span><code>SmoothingEnabledProperties</code></span>
+- **Default Value**: <code>"imageSmoothingEnabled"</code>
+
+The canvas property used to set the canvas smoothing property.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### clear: <span><code>(clearColor&#58; string, alpha&#58; number) -&#62; void</code></span>
+Clear the canvas of renderer.
+
+#### Parameters:
+| Name       | Type                | Description                                                         |
+| ---------- | ------------------- | ------------------------------------------------------------------- |
+| clearColor | <code>string</code> | Clear the canvas with this color, except the canvas is transparent. |
+| alpha      | <code>number</code> | Alpha to apply to the background fill color.                        |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### init: <span><code>() -&#62; void</code></span>
+initiates the system
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### invalidateBlendMode: <span><code>() -&#62; void</code></span>
+Checks if blend mode has changed.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setBlendMode: <span><code>(blendMode&#58; number, readyForOuterBlend&#58; boolean) -&#62; void</code></span>
+Sets the blend mode of the renderer.
+
+#### Parameters:
+| Name               | Type                 | Description                                                                                                      |
+| ------------------ | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| blendMode          | <code>number</code>  | See [PIXI.BLEND_MODES](../enums/PIXI.BLEND_MODES.pixi_constants) for valid values.                               |
+| readyForOuterBlend | <code>boolean</code> | Some blendModes are dangerous, they affect outer space of sprite. Pass `true` only if you are ready to use them. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setContextTransform: <span><code>(transform&#58; Matrix, roundPixels&#58; boolean, localResolution&#58; number) -&#62; void</code></span>
+Sets matrix of context. called only from render() methods takes care about resolution
+
+#### Parameters:
+| Name            | Type                 | Description                                                           |
+| --------------- | -------------------- | --------------------------------------------------------------------- |
+| transform       | <code>Matrix</code>  | world matrix of current element                                       |
+| roundPixels     | <code>boolean</code> | whether to round (tx,ty) coords                                       |
+| localResolution | <code>number</code>  | If specified, used instead of `renderer.resolution` for local scaling |
+</article>
+
+
+---------------------------------------
+
+
+    

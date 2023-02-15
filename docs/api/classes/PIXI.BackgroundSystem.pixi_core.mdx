@@ -1,0 +1,84 @@
+---
+id: "PIXI.BackgroundSystem.pixi_core"
+title: "Class: PIXI.BackgroundSystem"
+sidebar_label: "PIXI.BackgroundSystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).BackgroundSystem
+
+
+The background system manages the background color and alpha of the main view.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI()
+</article>
+
+
+
+## Members
+<article>
+
+### alpha: <span><code>number</code></span>
+The background color alpha. Setting this to 0 will make the canvas transparent.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### backgroundColor: <span><code>Color</code></span>
+The background color object.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clearBeforeRender: <span><code>boolean</code></span>
+This sets if the CanvasRenderer will clear the canvas or not before the new render pass. If the scene is NOT transparent PixiJS will use a canvas sized fillRect operation every frame to set the canvas background color. If the scene is transparent PixiJS will use clearRect to clear the canvas every frame. Disable this by setting this to false. For example, if your game has a canvas filling background image you often don't need this set.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### color: <span><code>PIXI.ColorSource</code></span>
+The background color to fill if not transparent.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### init: <span><code>(options&#58; BackgroundOptions) -&#62; void</code></span>
+initiates the background system
+
+#### Parameters:
+| Name    | Type                           | Description                           |
+| ------- | ------------------------------ | ------------------------------------- |
+| options | <code>BackgroundOptions</code> | the options for the background colors |
+</article>
+
+
+---------------------------------------
+
+
+    

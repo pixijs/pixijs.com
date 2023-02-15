@@ -1,0 +1,131 @@
+---
+id: "PIXI.Cache.pixi_assets"
+title: "Class: PIXI.Cache"
+sidebar_label: "PIXI.Cache"
+custom_edit_url: null
+---
+
+[@pixi/assets](../modules/pixi_assets).Cache
+
+A single Cache for all assets.
+When assets are added to the cache via set they normally are added to the cache as key-value pairs.
+
+With this cache, you can add parsers that will take the object and convert it to a list of assets that can be cached. for example a cacheSprite Sheet parser will add all of the textures found within its sprite sheet directly to the cache.
+
+This gives devs the flexibility to cache any type of object however we want.
+
+It is not intended that this class is created by developers - it is part of the Asset package. This is the first major system of PixiJS' main Assets class.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Cache: <span><code>() </code></span>
+A single Cache for all assets.
+
+#### Parameters:
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### parsers: <span><code>CacheParser[]</code></span>
+All loader parsers registered
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### get: <span><code>(key&#58; string) -&#62; T</code></span>
+Fetch entry by key
+
+#### Parameters:
+| Name | Type                | Description                 |
+| ---- | ------------------- | --------------------------- |
+| key  | <code>string</code> | The key of the entry to get |
+#### Returns:
+| Type           | Description |
+| -------------- | ----------- |
+| <code>T</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### has: <span><code>(key&#58; string) -&#62; boolean</code></span>
+Check if the key exists
+
+#### Parameters:
+| Name | Type                | Description      |
+| ---- | ------------------- | ---------------- |
+| key  | <code>string</code> | The key to check |
+#### Returns:
+| Type                 | Description |
+| -------------------- | ----------- |
+| <code>boolean</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### remove: <span><code>(key&#58; string) -&#62; void</code></span>
+Remove entry by key
+This function will also remove any associated alias from the cache also.
+
+#### Parameters:
+| Name | Type                | Description                    |
+| ---- | ------------------- | ------------------------------ |
+| key  | <code>string</code> | The key of the entry to remove |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### reset: <span><code>() -&#62; void</code></span>
+Clear all entries.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### set: <span><code>(key&#58; string &#124; string[], value&#58; unknown) -&#62; void</code></span>
+Set a value by key or keys name
+
+#### Parameters:
+| Name  | Type                                | Description                                                                     |
+| ----- | ----------------------------------- | ------------------------------------------------------------------------------- |
+| key   | <code>string &#124; string[]</code> | The key or keys to set                                                          |
+| value | <code>unknown</code>                | The value to store in the cache or from which cacheable assets will be derived. |
+</article>
+
+
+---------------------------------------
+
+
+    

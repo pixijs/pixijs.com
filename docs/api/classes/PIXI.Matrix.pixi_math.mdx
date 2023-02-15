@@ -1,0 +1,446 @@
+---
+id: "PIXI.Matrix.pixi_math"
+title: "Class: PIXI.Matrix"
+sidebar_label: "PIXI.Matrix"
+custom_edit_url: null
+---
+
+[@pixi/math](../modules/pixi_math).Matrix
+
+The PixiJS Matrix as a class makes it a lot faster.
+Here is a representation of it&#58;
+
+```
+| a | c | tx|
+| b | d | ty|
+| 0 | 0 | 1 |
+
+```
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Matrix: <span><code>(a&#58; number, b&#58; number, c&#58; number, d&#58; number, tx&#58; number, ty&#58; number) </code></span>
+
+#### Parameters:
+| Name | Type                | Default        | Description   |
+| ---- | ------------------- | -------------- | ------------- |
+| a    | <code>number</code> | <code>1</code> | x scale       |
+| b    | <code>number</code> | <code>0</code> | y skew        |
+| c    | <code>number</code> | <code>0</code> | x skew        |
+| d    | <code>number</code> | <code>1</code> | y scale       |
+| tx   | <code>number</code> | <code>0</code> | x translation |
+| ty   | <code>number</code> | <code>0</code> | y translation |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### IDENTITY: <span><code>Matrix</code></span>
+A default (identity) matrix
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### TEMP_MATRIX: <span><code>Matrix</code></span>
+A temp matrix
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### a: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### b: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### c: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### d: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### tx: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ty: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### append: <span><code>(matrix&#58; Matrix) -&#62; this</code></span>
+Appends the given Matrix to this Matrix.
+
+#### Parameters:
+| Name   | Type                | Description           |
+| ------ | ------------------- | --------------------- |
+| matrix | <code>Matrix</code> | The matrix to append. |
+#### Returns:
+| Type              | Description                                  |
+| ----------------- | -------------------------------------------- |
+| <code>this</code> | This matrix. Good for chaining method calls. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### apply: <span><code>(pos&#58; IPointData, newPos&#58; PIXI.Point) -&#62; PIXI.Point</code></span>
+Get a new position with the current transformation applied. Can be used to go from a child's coordinate space to the world coordinate space. (e.g. rendering)
+
+#### Parameters:
+| Name   | Type                    | Description                                                                  |
+| ------ | ----------------------- | ---------------------------------------------------------------------------- |
+| pos    | <code>IPointData</code> | The origin                                                                   |
+| newPos | <code>PIXI.Point</code> | The point that the new position is assigned to (allowed to be same as input) |
+#### Returns:
+| Type                    | Description                                    |
+| ----------------------- | ---------------------------------------------- |
+| <code>PIXI.Point</code> | The new point, transformed through this matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### applyInverse: <span><code>(pos&#58; IPointData, newPos&#58; PIXI.Point) -&#62; PIXI.Point</code></span>
+Get a new position with the inverse of the current transformation applied. Can be used to go from the world coordinate space to a child's coordinate space. (e.g. input)
+
+#### Parameters:
+| Name   | Type                    | Description                                                                  |
+| ------ | ----------------------- | ---------------------------------------------------------------------------- |
+| pos    | <code>IPointData</code> | The origin                                                                   |
+| newPos | <code>PIXI.Point</code> | The point that the new position is assigned to (allowed to be same as input) |
+#### Returns:
+| Type                    | Description                                            |
+| ----------------------- | ------------------------------------------------------ |
+| <code>PIXI.Point</code> | The new point, inverse-transformed through this matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clone: <span><code>() -&#62; Matrix</code></span>
+Creates a new Matrix object with the same values as this one.
+
+#### Returns:
+| Type                | Description                                            |
+| ------------------- | ------------------------------------------------------ |
+| <code>Matrix</code> | A copy of this matrix. Good for chaining method calls. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### copyFrom: <span><code>(matrix&#58; PIXI.Matrix) -&#62; PIXI.Matrix</code></span>
+Changes the values of the matrix to be the same as the ones in given matrix
+
+#### Parameters:
+| Name   | Type                     | Description              |
+| ------ | ------------------------ | ------------------------ |
+| matrix | <code>PIXI.Matrix</code> | The matrix to copy from. |
+#### Returns:
+| Type                     | Description |
+| ------------------------ | ----------- |
+| <code>PIXI.Matrix</code> | this        |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### copyTo: <span><code>(matrix&#58; Matrix) -&#62; Matrix</code></span>
+Changes the values of the given matrix to be the same as the ones in this matrix
+
+#### Parameters:
+| Name   | Type                | Description            |
+| ------ | ------------------- | ---------------------- |
+| matrix | <code>Matrix</code> | The matrix to copy to. |
+#### Returns:
+| Type                | Description                                            |
+| ------------------- | ------------------------------------------------------ |
+| <code>Matrix</code> | The matrix given in parameter with its values updated. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### decompose: <span><code>(transform&#58; Transform) -&#62; Transform</code></span>
+Decomposes the matrix (x, y, scaleX, scaleY, and rotation) and sets the properties on to a transform.
+
+#### Parameters:
+| Name      | Type                   | Description                               |
+| --------- | ---------------------- | ----------------------------------------- |
+| transform | <code>Transform</code> | The transform to apply the properties to. |
+#### Returns:
+| Type                   | Description                                     |
+| ---------------------- | ----------------------------------------------- |
+| <code>Transform</code> | The transform with the newly applied properties |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fromArray: <span><code>(array&#58; number[]) -&#62; void</code></span>
+Creates a Matrix object based on the given array. The Element to Matrix mapping order is as follows&#58;
+a = array[0] b = array[1] c = array[3] d = array[4] tx = array[2] ty = array[5]
+
+#### Parameters:
+| Name  | Type                  | Description                                       |
+| ----- | --------------------- | ------------------------------------------------- |
+| array | <code>number[]</code> | The array that the matrix will be populated from. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### identity: <span><code>() -&#62; this</code></span>
+Resets this Matrix to an identity (default) matrix.
+
+#### Returns:
+| Type              | Description                                  |
+| ----------------- | -------------------------------------------- |
+| <code>this</code> | This matrix. Good for chaining method calls. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### invert: <span><code>() -&#62; this</code></span>
+Inverts this matrix
+
+#### Returns:
+| Type              | Description                                  |
+| ----------------- | -------------------------------------------- |
+| <code>this</code> | This matrix. Good for chaining method calls. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### prepend: <span><code>(matrix&#58; Matrix) -&#62; this</code></span>
+Prepends the given Matrix to this Matrix.
+
+#### Parameters:
+| Name   | Type                | Description           |
+| ------ | ------------------- | --------------------- |
+| matrix | <code>Matrix</code> | The matrix to prepend |
+#### Returns:
+| Type              | Description                                  |
+| ----------------- | -------------------------------------------- |
+| <code>this</code> | This matrix. Good for chaining method calls. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### rotate: <span><code>(angle&#58; number) -&#62; this</code></span>
+Applies a rotation transformation to the matrix.
+
+#### Parameters:
+| Name  | Type                | Description           |
+| ----- | ------------------- | --------------------- |
+| angle | <code>number</code> | The angle in radians. |
+#### Returns:
+| Type              | Description                                  |
+| ----------------- | -------------------------------------------- |
+| <code>this</code> | This matrix. Good for chaining method calls. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### scale: <span><code>(x&#58; number, y&#58; number) -&#62; this</code></span>
+Applies a scale transformation to the matrix.
+
+#### Parameters:
+| Name | Type                | Description                      |
+| ---- | ------------------- | -------------------------------- |
+| x    | <code>number</code> | The amount to scale horizontally |
+| y    | <code>number</code> | The amount to scale vertically   |
+#### Returns:
+| Type              | Description                                  |
+| ----------------- | -------------------------------------------- |
+| <code>this</code> | This matrix. Good for chaining method calls. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### set: <span><code>(a&#58; number, b&#58; number, c&#58; number, d&#58; number, tx&#58; number, ty&#58; number) -&#62; this</code></span>
+Sets the matrix properties.
+
+#### Parameters:
+| Name | Type                | Description      |
+| ---- | ------------------- | ---------------- |
+| a    | <code>number</code> | Matrix component |
+| b    | <code>number</code> | Matrix component |
+| c    | <code>number</code> | Matrix component |
+| d    | <code>number</code> | Matrix component |
+| tx   | <code>number</code> | Matrix component |
+| ty   | <code>number</code> | Matrix component |
+#### Returns:
+| Type              | Description                                  |
+| ----------------- | -------------------------------------------- |
+| <code>this</code> | This matrix. Good for chaining method calls. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setTransform: <span><code>(x&#58; number, y&#58; number, pivotX&#58; number, pivotY&#58; number, scaleX&#58; number, scaleY&#58; number, rotation&#58; number, skewX&#58; number, skewY&#58; number) -&#62; this</code></span>
+Sets the matrix based on all the available properties
+
+#### Parameters:
+| Name     | Type                | Description            |
+| -------- | ------------------- | ---------------------- |
+| x        | <code>number</code> | Position on the x axis |
+| y        | <code>number</code> | Position on the y axis |
+| pivotX   | <code>number</code> | Pivot on the x axis    |
+| pivotY   | <code>number</code> | Pivot on the y axis    |
+| scaleX   | <code>number</code> | Scale on the x axis    |
+| scaleY   | <code>number</code> | Scale on the y axis    |
+| rotation | <code>number</code> | Rotation in radians    |
+| skewX    | <code>number</code> | Skew on the x axis     |
+| skewY    | <code>number</code> | Skew on the y axis     |
+#### Returns:
+| Type              | Description                                  |
+| ----------------- | -------------------------------------------- |
+| <code>this</code> | This matrix. Good for chaining method calls. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toArray: <span><code>(transpose&#58; boolean, out&#58; Float32Array) -&#62; Float32Array</code></span>
+Creates an array from the current Matrix object.
+
+#### Parameters:
+| Name      | Type                      | Description                                    |
+| --------- | ------------------------- | ---------------------------------------------- |
+| transpose | <code>boolean</code>      | Whether we need to transpose the matrix or not |
+| out       | <code>Float32Array</code> | If provided the array will be assigned to out  |
+#### Returns:
+| Type                      | Description                                       |
+| ------------------------- | ------------------------------------------------- |
+| <code>Float32Array</code> | The newly created array which contains the matrix |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### translate: <span><code>(x&#58; number, y&#58; number) -&#62; this</code></span>
+Translates the matrix on the x and y.
+
+#### Parameters:
+| Name | Type                | Description                |
+| ---- | ------------------- | -------------------------- |
+| x    | <code>number</code> | How much to translate x by |
+| y    | <code>number</code> | How much to translate y by |
+#### Returns:
+| Type              | Description                                  |
+| ----------------- | -------------------------------------------- |
+| <code>this</code> | This matrix. Good for chaining method calls. |
+</article>
+
+
+---------------------------------------
+
+
+    

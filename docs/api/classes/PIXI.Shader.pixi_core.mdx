@@ -1,0 +1,80 @@
+---
+id: "PIXI.Shader.pixi_core"
+title: "Class: PIXI.Shader"
+sidebar_label: "PIXI.Shader"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).Shader
+
+
+A helper class for shaders.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Shader: <span><code>(program&#58; Program, uniforms&#58; Dict&#60;any&#62;) </code></span>
+
+#### Parameters:
+| Name     | Type                           | Default       | Description                                          |
+| -------- | ------------------------------ | ------------- | ---------------------------------------------------- |
+| program  | <code>Program</code>           | <code></code> | The program the shader will use.                     |
+| uniforms | <code>Dict&#60;any&#62;</code> | <code></code> | Custom uniforms to use to augment the built-in ones. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### program: <span><code>Program</code></span>
+Program that the shader uses.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniforms: <span><code>Dict&#60;any&#62;</code></span>
+Shader uniform values, shortcut for `uniformGroup.uniforms`.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### from: <span><code>(vertexSrc&#58; string, fragmentSrc&#58; string, uniforms&#58; Dict&#60;any&#62;) -&#62; Shader</code></span>
+A short hand function to create a shader based of a vertex and fragment shader.
+
+#### Parameters:
+| Name        | Type                           | Description                                          |
+| ----------- | ------------------------------ | ---------------------------------------------------- |
+| vertexSrc   | <code>string</code>            | The source of the vertex shader.                     |
+| fragmentSrc | <code>string</code>            | The source of the fragment shader.                   |
+| uniforms    | <code>Dict&#60;any&#62;</code> | Custom uniforms to use to augment the built-in ones. |
+#### Returns:
+| Type                | Description                |
+| ------------------- | -------------------------- |
+| <code>Shader</code> | A shiny new PixiJS shader! |
+</article>
+
+
+---------------------------------------
+
+
+    

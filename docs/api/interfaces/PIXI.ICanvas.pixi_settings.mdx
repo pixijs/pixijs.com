@@ -1,0 +1,221 @@
+---
+id: "PIXI.ICanvas.pixi_settings"
+title: "Interface: PIXI.ICanvas"
+sidebar_label: "PIXI.ICanvas"
+custom_edit_url: null
+---
+
+[@pixi/settings](../modules/pixi_settings).[PIXI](../namespaces/PIXI).ICanvas
+
+
+Common interface for HTMLCanvasElement, OffscreenCanvas, and other custom canvas classes.
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name       | Type                                       | Description                |
+| ---------- | ------------------------------------------ | -------------------------- |
+| height     | <code>number</code>                        | Height of the canvas.      |
+| parentNode | <code>ICanvasParentNode &#124; null</code> | Parent node of the canvas. |
+| style      | <code>ICanvasStyle</code>                  | Style of the canvas.       |
+| width      | <code>number</code>                        | Width of the canvas.       |
+
+</p>
+</details>
+    
+
+<details><summary>Methods</summary>
+<p>
+
+| Name                  | Params                                                                                                                                  | Description                                   |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| addEventListener      | <code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; boolean &#124; AddEventListenerOptions) </code> | Adds the listener for the specified event.    |
+| convertToBlob         | <code>(options&#58; object) </code>                                                                                                     | Get the content of the canvas as Blob.        |
+| dispatchEvent         | <code>(event&#58; Event) </code>                                                                                                        | Dispatches a event.                           |
+| getBoundingClientRect | <code>() </code>                                                                                                                        | Get the position and the size of the canvas.  |
+| getContext            | <code>(contextId&#58; ContextIds, options&#58; ContextSettings) </code>                                                                 | Get rendering context of the canvas.          |
+| removeEventListener   | <code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; boolean &#124; EventListenerOptions) </code>    | Removes the listener for the specified event. |
+| toDataURL             | <code>(type&#58; string, options&#58; any) </code>                                                                                      | Get the content of the canvas as data URL.    |
+
+</p>
+</details>
+    
+
+## Extends
+- GlobalMixins.ICanvas
+- Partial&#60;EventTarget&#62;
+
+## Members
+<article>
+
+### height: <span><code>number</code></span>
+Height of the canvas.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### parentNode: <span><code>ICanvasParentNode &#124; null</code></span>
+Parent node of the canvas.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### style: <span><code>ICanvasStyle</code></span>
+Style of the canvas.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width: <span><code>number</code></span>
+Width of the canvas.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### addEventListener: <span><code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; boolean &#124; AddEventListenerOptions) -&#62; void</code></span>
+Adds the listener for the specified event.
+
+#### Parameters:
+| Name     | Type                                                | Description                                     |
+| -------- | --------------------------------------------------- | ----------------------------------------------- |
+| type     | <code>string</code>                                 | The type of event to listen for.                |
+| listener | <code>EventListenerOrEventListenerObject</code>     | The callback to invoke when the event is fired. |
+| options  | <code>boolean &#124; AddEventListenerOptions</code> | The options for adding event listener.          |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### convertToBlob: <span><code>(options&#58; object) -&#62; Promise&#60;Blob&#62;</code></span>
+Get the content of the canvas as Blob.
+
+#### Parameters:
+| Name            | Type                | Description                                                                                          |
+| --------------- | ------------------- | ---------------------------------------------------------------------------------------------------- |
+| options         | <code>object</code> | The options for creating Blob.                                                                       |
+| options.type    | <code>string</code> | The MIME type for the image format to return. If not specify, the default value is image/png.        |
+| options.quality | <code>string</code> | The image quality to be used when creating images using file formats that support lossy compression. |
+#### Returns:
+| Type                               | Description                        |
+| ---------------------------------- | ---------------------------------- |
+| <code>Promise&#60;Blob&#62;</code> | The content of the canvas as Blob. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dispatchEvent: <span><code>(event&#58; Event) -&#62; boolean</code></span>
+Dispatches a event.
+
+#### Parameters:
+| Name  | Type               | Description                                                                                     |
+| ----- | ------------------ | ----------------------------------------------------------------------------------------------- |
+| event | <code>Event</code> | The Event object to dispatch. Its Event.target property will be set to the current EventTarget. |
+#### Returns:
+| Type                 | Description                                                                                                                                      |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <code>boolean</code> | Returns false if event is cancelable, and at least one of the event handlers which received event called Event.preventDefault(). Otherwise true. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getBoundingClientRect: <span><code>() -&#62; ICanvasRect</code></span>
+Get the position and the size of the canvas.
+
+#### Returns:
+| Type                     | Description                                              |
+| ------------------------ | -------------------------------------------------------- |
+| <code>ICanvasRect</code> | The smallest rectangle which contains the entire canvas. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getContext: <span><code>(contextId&#58; ContextIds, options&#58; ContextSettings) -&#62; RenderingContext &#124; unknown</code></span>
+Get rendering context of the canvas.
+
+#### Parameters:
+| Name      | Type                         | Description                                      |
+| --------- | ---------------------------- | ------------------------------------------------ |
+| contextId | <code>ContextIds</code>      | The identifier of the type of context to create. |
+| options   | <code>ContextSettings</code> | The options for creating context.                |
+#### Returns:
+| Type                                         | Description                                                 |
+| -------------------------------------------- | ----------------------------------------------------------- |
+| <code>RenderingContext &#124; unknown</code> | The created context, or null if contextId is not supported. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### removeEventListener: <span><code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; boolean &#124; EventListenerOptions) -&#62; void</code></span>
+Removes the listener for the specified event.
+
+#### Parameters:
+| Name     | Type                                             | Description                                     |
+| -------- | ------------------------------------------------ | ----------------------------------------------- |
+| type     | <code>string</code>                              | The type of event to listen for.                |
+| listener | <code>EventListenerOrEventListenerObject</code>  | The callback to invoke when the event is fired. |
+| options  | <code>boolean &#124; EventListenerOptions</code> | The options for removing event listener.        |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toDataURL: <span><code>(type&#58; string, options&#58; any) -&#62; string</code></span>
+Get the content of the canvas as data URL.
+
+#### Parameters:
+| Name    | Type                | Description                                                                                   |
+| ------- | ------------------- | --------------------------------------------------------------------------------------------- |
+| type    | <code>string</code> | The MIME type for the image format to return. If not specify, the default value is image/png. |
+| options | <code>any</code>    | The options for creating data URL.                                                            |
+#### Returns:
+| Type                | Description                            |
+| ------------------- | -------------------------------------- |
+| <code>string</code> | The content of the canvas as data URL. |
+</article>
+
+
+---------------------------------------
+
+  

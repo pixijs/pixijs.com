@@ -1,0 +1,364 @@
+---
+id: "PIXI.VideoResource.pixi_core"
+title: "Class: PIXI.VideoResource"
+sidebar_label: "PIXI.VideoResource"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).VideoResource
+
+
+Resource type for [HTMLVideoElement](https&#58;//developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement).
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.VideoResource: <span><code>(source&#58; HTMLVideoElement &#124; object &#124; string &#124; Array&#60;string &#124; object&#62;, options&#58; object) </code></span>
+
+#### Parameters:
+| Name                | Type                                                                                                 | Default           | Description                                                                                         |
+| ------------------- | ---------------------------------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------- |
+| source              | <code>HTMLVideoElement &#124; object &#124; string &#124; Array&#60;string &#124; object&#62;</code> | <code></code>     | Video element to use.                                                                               |
+| options             | <code>object</code>                                                                                  | <code></code>     | Options to use                                                                                      |
+| options.autoLoad    | <code>boolean</code>                                                                                 | <code>true</code> | Start loading the video immediately                                                                 |
+| options.autoPlay    | <code>boolean</code>                                                                                 | <code>true</code> | Start playing video immediately                                                                     |
+| options.updateFPS   | <code>number</code>                                                                                  | <code>0</code>    | How many times a second to update the texture from the video. Leave at 0 to update at every render. |
+| options.crossorigin | <code>boolean</code>                                                                                 | <code>true</code> | Load image using cross origin                                                                       |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.BaseImageResource](../classes/PIXI.BaseImageResource.pixi_core)
+
+## Members
+<article>
+
+### MIME_TYPES: <span><code>Dict&#60;string&#62;</code></span>
+Map of video MIME types that can't be directly derived from file extensions.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### TYPES: <span><code>Array&#60;string&#62;</code></span>
+List of common video file extensions supported by VideoResource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### autoUpdate: <span><code>boolean</code></span>
+Should the base texture automatically update itself, set to true by default.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroyed: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+If resource has been destroyed.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### height: <span><code>number</code></span>
+The height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### internal: <span><code>boolean</code></span>
+`true` if resource is created by BaseTexture useful for doing cleanup with BaseTexture destroy and not cleaning up resources that were created externally.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### source: <span><code>HTMLVideoElement</code></span>
+Override the source to be the video element.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### src: <span><code>string</code></span>
+The url of the resource
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### updateFPS: <span><code>number</code></span>
+How many times a second to update the texture from the video. Leave at 0 to update at every render. A lower fps can help performance, as updating the texture at 60fps on a 30ps video may not be efficient.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### valid: <span><code>boolean</code></span>
+Has been validated
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width: <span><code>number</code></span>
+The width of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _autoUpdate: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+`true` to use Ticker.shared to auto update the base texture.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _height: <span><code>number</code></span>
+Internal height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _isConnectedToTicker: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+`true` if the instance is currently connected to PIXI.Ticker.shared to auto update the base texture.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _width: <span><code>number</code></span>
+Internal width of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### autoPlay: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+When set to true will automatically play videos used by this texture once they are loaded. If false, it will not modify the playing state.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### test: <span><code>(source&#58; unknown, extension&#58; string) -&#62; boolean</code></span>
+Used to auto-detect the type of resource.
+
+#### Parameters:
+| Name      | Type                 | Description                     |
+| --------- | -------------------- | ------------------------------- |
+| source    | <code>unknown</code> | The source object               |
+| extension | <code>string</code>  | The extension of source, if set |
+#### Returns:
+| Type                 | Description            |
+| -------------------- | ---------------------- |
+| <code>boolean</code> | `true` if video source |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### bind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
+Bind to a parent BaseTexture
+
+#### Parameters:
+| Name        | Type                     | Description    |
+| ----------- | ------------------------ | -------------- |
+| baseTexture | <code>BaseTexture</code> | Parent texture |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Call when destroying resource, unbind any BaseTexture object before calling this method, as reference counts are maintained internally.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dispose: <span><code>() -&#62; void</code></span>
+Destroys this texture.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### load: <span><code>() -&#62; Promise&#60;void&#62;</code></span>
+Start preloading the video resource.
+
+#### Returns:
+| Type                               | Description               |
+| ---------------------------------- | ------------------------- |
+| <code>Promise&#60;void&#62;</code> | Handle the validate event |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resize: <span><code>(width&#58; number, height&#58; number) -&#62; void</code></span>
+Trigger a resize event
+
+#### Parameters:
+| Name   | Type                | Description |
+| ------ | ------------------- | ----------- |
+| width  | <code>number</code> | X dimension |
+| height | <code>number</code> | Y dimension |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### style: <span><code>(_renderer&#58; Renderer, _baseTexture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code></span>
+Set the style, optional to override
+
+#### Parameters:
+| Name         | Type                     | Description                             |
+| ------------ | ------------------------ | --------------------------------------- |
+| _renderer    | <code>Renderer</code>    | yeah, renderer!                         |
+| _baseTexture | <code>BaseTexture</code> | the texture                             |
+| _glTexture   | <code>GLTexture</code>   | texture instance for this webgl context |
+#### Returns:
+| Type                 | Description         |
+| -------------------- | ------------------- |
+| <code>boolean</code> | * `true` is success |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### unbind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
+Unbind to a parent BaseTexture
+
+#### Parameters:
+| Name        | Type                     | Description    |
+| ----------- | ------------------------ | -------------- |
+| baseTexture | <code>BaseTexture</code> | Parent texture |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### update: <span><code>(_deltaTime&#58; number) -&#62; void</code></span>
+Trigger updating of the texture.
+
+#### Parameters:
+| Name       | Type                | Description                |
+| ---------- | ------------------- | -------------------------- |
+| _deltaTime | <code>number</code> | time delta since last tick |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### upload: <span><code>(renderer&#58; Renderer, baseTexture&#58; BaseTexture, glTexture&#58; GLTexture, source&#58; HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; PIXI.ICanvas) -&#62; boolean</code></span>
+Upload the texture to the GPU.
+
+#### Parameters:
+| Name        | Type                                                                                         | Description                 |
+| ----------- | -------------------------------------------------------------------------------------------- | --------------------------- |
+| renderer    | <code>Renderer</code>                                                                        | Upload to the renderer      |
+| baseTexture | <code>BaseTexture</code>                                                                     | Reference to parent texture |
+| glTexture   | <code>GLTexture</code>                                                                       |                             |
+| source      | <code>HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; PIXI.ICanvas</code> | (optional)                  |
+#### Returns:
+| Type                 | Description       |
+| -------------------- | ----------------- |
+| <code>boolean</code> | * true is success |
+</article>
+
+
+---------------------------------------
+
+
+    

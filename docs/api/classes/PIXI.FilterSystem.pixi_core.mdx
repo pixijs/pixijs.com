@@ -1,0 +1,367 @@
+---
+id: "PIXI.FilterSystem.pixi_core"
+title: "Class: PIXI.FilterSystem"
+sidebar_label: "PIXI.FilterSystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).FilterSystem
+
+System plugin to the renderer to manage filters.
+## Pipeline
+
+The FilterSystem executes the filtering pipeline by rendering the display-object into a texture, applying its [filters](../classes/PIXI.Filter.pixi_core) in series, and the last filter outputs into the final render-target.
+
+The filter-frame is the rectangle in world space being filtered, and those contents are mapped into`(0, 0, filterFrame.width, filterFrame.height)` into the filter render-texture. The filter-frame is also called the source-frame, as it is used to bind the filter render-textures. The last filter outputs to the `filterFrame`in the final render-target.
+
+## Usage
+
+[PIXI.Container#renderAdvanced](../classes/PIXI.Container.pixi_display#renderAdvanced) is an example of how to use the filter system. It is a 3 step process&#58;
+
+**push**&#58; Use [PIXI.FilterSystem#push](../classes/PIXI.FilterSystem.pixi_core#push) to push the set of filters to be applied on a filter-target.**render**&#58; Render the contents to be filtered using the renderer. The filter-system will only capture the contents inside the bounds of the filter-target. NOTE&#58; Using [PIXI.Renderer#render](../classes/PIXI.Renderer.pixi_core#render) is illegal during an existing render cycle, and it may reset the filter system.**pop**&#58; Use [PIXI.FilterSystem#pop](../classes/PIXI.FilterSystem.pixi_core#pop) to pop & execute the filters you initially pushed. It will apply them serially and output to the bounds of the filter-target.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.FilterSystem: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                         |
+| -------- | --------------------- | ------------- | ----------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this System works for. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### defaultFilterStack: <span><code>Array&#60;object&#62;</code></span>
+List of filters for the FilterSystem
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### forceClear: <span><code>boolean</code></span>
+Whether to clear output renderTexture in AUTO/BLIT mode. See [PIXI.CLEAR_MODES](../enums/PIXI.CLEAR_MODES.pixi_constants).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### statePool: <span><code>Array&#60;FilterState&#62;</code></span>
+A pool for storing filter states, save us creating new ones each tick.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### texturePool: <span><code>RenderTexturePool</code></span>
+Stores a bunch of POT textures used for filtering.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### useMaxPadding: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Old padding behavior is to use the max amount instead of sum padding. Use this flag if you need the old behavior.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### activeState: <span><code>object</code></span>
+Active state
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### globalUniforms: <span><code>UniformGroup</code></span>
+This uniform group is attached to filter uniforms when used.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### filterArea: <span><code>Float32Array</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### filterClamp: <span><code>Float32Array</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### inputClamp: <span><code>Float32Array</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### inputPixel: <span><code>Float32Array</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### inputSize: <span><code>Float32Array</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### outputFrame: <span><code>PIXI.Rectangle</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### quad: <span><code>Quad</code></span>
+A very simple geometry used when drawing a filter effect to the screen.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### quadUv: <span><code>QuadUv</code></span>
+Quad UVs
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### applyFilter: <span><code>(filter&#58; Filter, input&#58; RenderTexture, output&#58; RenderTexture, clearMode&#58; CLEAR_MODES) -&#62; void</code></span>
+Draws a filter using the default rendering process.
+This should be called only by [PIXI.Filter#apply](../classes/PIXI.Filter.pixi_core#apply).
+
+#### Parameters:
+| Name      | Type                       | Description                                         |
+| --------- | -------------------------- | --------------------------------------------------- |
+| filter    | <code>Filter</code>        | The filter to draw.                                 |
+| input     | <code>RenderTexture</code> | The input render target.                            |
+| output    | <code>RenderTexture</code> | The target to output to.                            |
+| clearMode | <code>CLEAR_MODES</code>   | Should the output be cleared before rendering to it |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### bindAndClear: <span><code>(filterTexture&#58; RenderTexture, clearMode&#58; CLEAR_MODES) -&#62; void</code></span>
+Binds a renderTexture with corresponding `filterFrame`, clears it if mode corresponds.
+
+#### Parameters:
+| Name          | Type                       | Description                                                                                           |
+| ------------- | -------------------------- | ----------------------------------------------------------------------------------------------------- |
+| filterTexture | <code>RenderTexture</code> | renderTexture to bind, should belong to filter pool or filter stack                                   |
+| clearMode     | <code>CLEAR_MODES</code>   | clearMode, by default its CLEAR/YES. See [PIXI.CLEAR_MODES](../enums/PIXI.CLEAR_MODES.pixi_constants) |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### calculateSpriteMatrix: <span><code>(outputMatrix&#58; Matrix, sprite&#58; PIXI.Sprite) -&#62; Matrix</code></span>
+Multiply _input normalized coordinates_ to this matrix to get _sprite texture normalized coordinates_.
+Use `outputMatrix * vTextureCoord` in the shader.
+
+#### Parameters:
+| Name         | Type                     | Description              |
+| ------------ | ------------------------ | ------------------------ |
+| outputMatrix | <code>Matrix</code>      | The matrix to output to. |
+| sprite       | <code>PIXI.Sprite</code> | The sprite to map to.    |
+#### Returns:
+| Type                | Description        |
+| ------------------- | ------------------ |
+| <code>Matrix</code> | The mapped matrix. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Destroys this Filter System.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### emptyPool: <span><code>() -&#62; void</code></span>
+Empties the texture pool.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getFilterTexture: <span><code>(input&#58; RenderTexture, resolution&#58; number, multisample&#58; MSAA_QUALITY) -&#62; RenderTexture</code></span>
+Gets extra render texture to use inside current filter To be compliant with older filters, you can use params in any order
+
+#### Parameters:
+| Name        | Type                       | Description                                                 |
+| ----------- | -------------------------- | ----------------------------------------------------------- |
+| input       | <code>RenderTexture</code> | renderTexture from which size and resolution will be copied |
+| resolution  | <code>number</code>        | override resolution of the renderTexture                    |
+| multisample | <code>MSAA_QUALITY</code>  | number of samples of the renderTexture                      |
+#### Returns:
+| Type                       | Description |
+| -------------------------- | ----------- |
+| <code>RenderTexture</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pop: <span><code>() -&#62; void</code></span>
+Pops off the filter and applies it.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### push: <span><code>(target&#58; PIXI.DisplayObject, filters&#58; Array&#60;Filter&#62;) -&#62; void</code></span>
+Pushes a set of filters to be applied later to the system. This will redirect further rendering into an input render-texture for the rest of the filtering pipeline.
+
+#### Parameters:
+| Name    | Type                               | Description                         |
+| ------- | ---------------------------------- | ----------------------------------- |
+| target  | <code>PIXI.DisplayObject</code>    | The target of the filter to render. |
+| filters | <code>Array&#60;Filter&#62;</code> | The filters to apply.               |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resize: <span><code>() -&#62; void</code></span>
+Calls `texturePool.resize()`, affects fullScreen renderTextures.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### returnFilterTexture: <span><code>(renderTexture&#58; RenderTexture) -&#62; void</code></span>
+Frees a render texture back into the pool.
+
+#### Parameters:
+| Name          | Type                       | Description              |
+| ------------- | -------------------------- | ------------------------ |
+| renderTexture | <code>RenderTexture</code> | The renderTarget to free |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getOptimalFilterTexture: <span><code>(minWidth&#58; number, minHeight&#58; number, resolution&#58; number, multisample&#58; MSAA_QUALITY) -&#62; RenderTexture</code></span>
+Gets a Power-of-Two render texture or fullScreen texture
+
+#### Parameters:
+| Name        | Type                      | Description                                              |
+| ----------- | ------------------------- | -------------------------------------------------------- |
+| minWidth    | <code>number</code>       | The minimum width of the render texture in real pixels.  |
+| minHeight   | <code>number</code>       | The minimum height of the render texture in real pixels. |
+| resolution  | <code>number</code>       | The resolution of the render texture.                    |
+| multisample | <code>MSAA_QUALITY</code> | Number of samples of the render texture.                 |
+#### Returns:
+| Type                       | Description               |
+| -------------------------- | ------------------------- |
+| <code>RenderTexture</code> | * The new render texture. |
+</article>
+
+
+---------------------------------------
+
+
+    

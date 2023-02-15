@@ -1,0 +1,298 @@
+---
+id: "PIXI.RopeGeometry.pixi_mesh_extras"
+title: "Class: PIXI.RopeGeometry"
+sidebar_label: "PIXI.RopeGeometry"
+custom_edit_url: null
+---
+
+[@pixi/mesh-extras](../modules/pixi_mesh_extras).RopeGeometry
+
+
+RopeGeometry allows you to draw a geometry across several points and then manipulate these points.
+
+
+```js
+ import { Point, RopeGeometry } from 'pixi.js';
+
+ for (let i = 0; i < 20; i++) {
+     points.push(new Point(i * 50, 0));
+ };
+ const rope = new RopeGeometry(100, points);
+```
+      
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.RopeGeometry: <span><code>(width&#58; number, points&#58; IPoint[], textureScale&#58; number) </code></span>
+
+#### Parameters:
+| Name         | Type                  | Default          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------ | --------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| width        | <code>number</code>   | <code>200</code> | The width (i.e., thickness) of the rope.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| points       | <code>IPoint[]</code> | <code></code>    | An array of [PIXI.Point](../classes/PIXI.Point.pixi_math) objects to construct this rope.                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| textureScale | <code>number</code>   | <code>0</code>   | By default the rope texture will be stretched to match rope length. If textureScale is positive this value will be treated as a scaling factor and the texture will preserve its aspect ratio instead. To create a tiling rope set baseTexture.wrapMode to [PIXI.WRAP_MODES.REPEAT](../enums/PIXI.WRAP_MODES.pixi_constants) and use a power of two texture, then set textureScale=1 to keep the original texture pixel size. In order to reduce alpha channel artifacts provide a larger texture and downsample - i.e. set textureScale=0.5 to scale it down twice. |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.MeshGeometry](../classes/PIXI.MeshGeometry.pixi_mesh)
+
+## Members
+<article>
+
+### _width: <span><code>number</code></span>
+The width (i.e., thickness) of the rope.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### glVertexArrayObjects: <span><code>object</code></span>
+A map of renderer IDs to webgl VAOs
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### instanceCount: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+Number of instances in this geometry, pass it to `GeometrySystem.draw()`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### instanced: <span><code>boolean</code></span>
+Whether the geometry is instanced.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### points: <span><code>IPoint[]</code></span>
+An array of points that determine the rope.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### refCount: <span><code>number</code></span>
+Count of existing (not destroyed) meshes that reference this geometry.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textureScale: <span><code>number</code></span>
+Rope texture scale, if zero then the rope texture is stretched.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width: <span><code>number</code></span>
+The width (i.e., thickness) of the rope.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### addAttribute: <span><code>(id&#58; string, buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;, size&#58; number, normalized&#58; boolean, type&#58; TYPES, stride&#58; number, start&#58; number, instance&#58; boolean) -&#62; this</code></span>
+Adds an attribute to the geometry Note&#58; `stride` and `start` should be `undefined` if you dont know them, not 0!
+
+#### Parameters:
+| Name       | Type                                                  | Description                                                                                                            |
+| ---------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| id         | <code>string</code>                                   | the name of the attribute (matching up to a shader)                                                                    |
+| buffer     | <code>PIXI.Buffer &#124; Array&#60;number&#62;</code> | the buffer that holds the data of the attribute . You can also provide an Array and a buffer will be created from it.  |
+| size       | <code>number</code>                                   | the size of the attribute. If you have 2 floats per vertex (eg position x and y) this would be 2                       |
+| normalized | <code>boolean</code>                                  | should the data be normalized.                                                                                         |
+| type       | <code>TYPES</code>                                    | what type of number is the attribute. Check [PIXI.TYPES](../enums/PIXI.TYPES.pixi_constants) to see the ones available |
+| stride     | <code>number</code>                                   | How far apart, in bytes, the start of each value is. (used for interleaving data)                                      |
+| start      | <code>number</code>                                   | How far into the array to start reading values (used for interleaving data)                                            |
+| instance   | <code>boolean</code>                                  | Instancing flag                                                                                                        |
+#### Returns:
+| Type              | Description                          |
+| ----------------- | ------------------------------------ |
+| <code>this</code> | * Returns self, useful for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addIndex: <span><code>(buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;) -&#62; Geometry</code></span>
+Adds an index buffer to the geometry The index buffer contains integers, three for each triangle in the geometry, which reference the various attribute buffers (position, colour, UV coordinates, other UV coordinates, normal, …). There is only ONE index buffer.
+
+#### Parameters:
+| Name   | Type                                                  | Description                                                                                                             |
+| ------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| buffer | <code>PIXI.Buffer &#124; Array&#60;number&#62;</code> | The buffer that holds the data of the index buffer. You can also provide an Array and a buffer will be created from it. |
+#### Returns:
+| Type                  | Description                          |
+| --------------------- | ------------------------------------ |
+| <code>Geometry</code> | * Returns self, useful for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clone: <span><code>() -&#62; Geometry</code></span>
+Returns a clone of the geometry.
+
+#### Returns:
+| Type                  | Description                     |
+| --------------------- | ------------------------------- |
+| <code>Geometry</code> | * A new clone of this geometry. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Destroys the geometry.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dispose: <span><code>() -&#62; void</code></span>
+Disposes WebGL resources that are connected to this geometry.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getAttribute: <span><code>(id&#58; string) -&#62; Attribute</code></span>
+Returns the requested attribute.
+
+#### Parameters:
+| Name | Type                | Description                        |
+| ---- | ------------------- | ---------------------------------- |
+| id   | <code>string</code> | The name of the attribute required |
+#### Returns:
+| Type                   | Description                |
+| ---------------------- | -------------------------- |
+| <code>Attribute</code> | * The attribute requested. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getBuffer: <span><code>(id&#58; string) -&#62; Buffer</code></span>
+Returns the requested buffer.
+
+#### Parameters:
+| Name | Type                | Description                      |
+| ---- | ------------------- | -------------------------------- |
+| id   | <code>string</code> | The name of the buffer required. |
+#### Returns:
+| Type                | Description             |
+| ------------------- | ----------------------- |
+| <code>Buffer</code> | * The buffer requested. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getIndex: <span><code>() -&#62; Buffer</code></span>
+Returns the index buffer
+
+#### Returns:
+| Type                | Description         |
+| ------------------- | ------------------- |
+| <code>Buffer</code> | * The index buffer. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getSize: <span><code>() -&#62; number</code></span>
+Get the size of the geometries, in vertices.
+
+#### Returns:
+| Type                | Description |
+| ------------------- | ----------- |
+| <code>number</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### interleave: <span><code>() -&#62; Geometry</code></span>
+This function modifies the structure so that all current attributes become interleaved into a single buffer This can be useful if your model remains static as it offers a little performance boost
+
+#### Returns:
+| Type                  | Description                          |
+| --------------------- | ------------------------------------ |
+| <code>Geometry</code> | * Returns self, useful for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### updateVertices: <span><code>() -&#62; void</code></span>
+refreshes vertices of Rope mesh
+
+</article>
+
+
+---------------------------------------
+
+
+    

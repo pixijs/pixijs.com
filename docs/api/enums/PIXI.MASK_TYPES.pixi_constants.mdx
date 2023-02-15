@@ -1,0 +1,28 @@
+---
+id: "PIXI.MASK_TYPES.pixi_constants"
+title: "Enum: PIXI.MASK_TYPES"
+sidebar_label: "PIXI.MASK_TYPES"
+custom_edit_url: null
+---
+
+[@pixi/constants](../modules/pixi_constants).[PIXI](../namespaces/PIXI).MASK_TYPES
+
+
+Constants for mask implementations. We use `type` suffix because it leads to very different behaviours
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+| Name                 | Default | Description                                                          |
+| -------------------- | ------- | -------------------------------------------------------------------- |
+| <code>COLOR</code>   | 4       | Color mask (RGBA)                                                    |
+| <code>NONE</code>    | 0       | Mask is ignored                                                      |
+| <code>SCISSOR</code> | 1       | Scissor mask, rectangle on screen, cheap                             |
+| <code>SPRITE</code>  | 3       | Mask that uses SpriteMaskFilter, uses temporary RenderTexture        |
+| <code>STENCIL</code> | 2       | Stencil mask, 1-bit, medium, works only if renderer supports stencil |
+
+    

@@ -1,0 +1,92 @@
+---
+id: "PIXI.IAdapter.pixi_settings"
+title: "Interface: PIXI.IAdapter"
+sidebar_label: "PIXI.IAdapter"
+custom_edit_url: null
+---
+
+[@pixi/settings](../modules/pixi_settings).[PIXI](../namespaces/PIXI).IAdapter
+
+
+This interface describes all the DOM dependent calls that Pixi makes throughout its codebase. Implementations of this interface can be used to make sure Pixi will work in any environment, such as browser, Web Workers, and Node.js.
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name                        | Type                                                                           | Description                                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| createCanvas                | <code>(width&#58; number, height&#58; number) =&#62; ICanvas</code>            | Returns a canvas object that can be used to create a webgl context.                                               |
+| getBaseUrl                  | <code>() =&#62; string</code>                                                  | Returns the current base URL For browser environments this is either the document.baseURI or window.location.href |
+| getCanvasRenderingContext2D | <code>() =&#62; &#123; prototype &#58; ICanvasRenderingContext2D &#125;</code> | Returns a 2D rendering context.                                                                                   |
+| getNavigator                | <code>() =&#62; &#123; userAgent &#58; string &#125;</code>                    | Returns a partial implementation of the browsers window.navigator                                                 |
+| getWebGLRenderingContext    | <code>() =&#62; typeof WebGLRenderingContext</code>                            | Returns a WebGL rendering context.                                                                                |
+
+</p>
+</details>
+    
+
+
+
+
+## Members
+<article>
+
+### createCanvas: <span><code>(width&#58; number, height&#58; number) =&#62; ICanvas</code></span>
+Returns a canvas object that can be used to create a webgl context.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getBaseUrl: <span><code>() =&#62; string</code></span>
+Returns the current base URL For browser environments this is either the document.baseURI or window.location.href
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getCanvasRenderingContext2D: <span><code>() =&#62; &#123; prototype &#58; ICanvasRenderingContext2D &#125;</code></span>
+Returns a 2D rendering context.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getNavigator: <span><code>() =&#62; &#123; userAgent &#58; string &#125;</code></span>
+Returns a partial implementation of the browsers window.navigator
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getWebGLRenderingContext: <span><code>() =&#62; typeof WebGLRenderingContext</code></span>
+Returns a WebGL rendering context.
+
+</article>
+
+
+---------------------------------------
+
+
+
+  

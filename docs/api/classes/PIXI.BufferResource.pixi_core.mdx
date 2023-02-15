@@ -1,0 +1,280 @@
+---
+id: "PIXI.BufferResource.pixi_core"
+title: "Class: PIXI.BufferResource"
+sidebar_label: "PIXI.BufferResource"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).BufferResource
+
+
+Buffer resource with data of typed array.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.BufferResource: <span><code>(source&#58; Float32Array &#124; Uint8Array &#124; Uint16Array &#124; Int32Array &#124; Uint32Array, options&#58; ISize) </code></span>
+
+#### Parameters:
+| Name           | Type                                                                                                | Default       | Description           |
+| -------------- | --------------------------------------------------------------------------------------------------- | ------------- | --------------------- |
+| source         | <code>Float32Array &#124; Uint8Array &#124; Uint16Array &#124; Int32Array &#124; Uint32Array</code> | <code></code> | Source buffer         |
+| options        | <code>ISize</code>                                                                                  | <code></code> | Options               |
+| options.width  | <code>number</code>                                                                                 | <code></code> | Width of the texture  |
+| options.height | <code>number</code>                                                                                 | <code></code> | Height of the texture |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.Resource](../classes/PIXI.Resource.pixi_core)
+
+## Members
+<article>
+
+### data: <span><code>Float32Array &#124; Uint8Array &#124; Uint16Array &#124; Int32Array &#124; Uint32Array</code></span>
+Source array Cannot be `ClampedUint8Array` because it cant be uploaded to WebGL
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroyed: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+If resource has been destroyed.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### height: <span><code>number</code></span>
+The height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### internal: <span><code>boolean</code></span>
+`true` if resource is created by BaseTexture useful for doing cleanup with BaseTexture destroy and not cleaning up resources that were created externally.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### src: <span><code>string</code></span>
+The url of the resource
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### valid: <span><code>boolean</code></span>
+Has been validated
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width: <span><code>number</code></span>
+The width of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _height: <span><code>number</code></span>
+Internal height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _width: <span><code>number</code></span>
+Internal width of the resource.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### test: <span><code>(source&#58; unknown) -&#62; boolean</code></span>
+Used to auto-detect the type of resource.
+
+#### Parameters:
+| Name   | Type                 | Description       |
+| ------ | -------------------- | ----------------- |
+| source | <code>unknown</code> | The source object |
+#### Returns:
+| Type                 | Description                |
+| -------------------- | -------------------------- |
+| <code>boolean</code> | `true` if &#60;canvas&#62; |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### bind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
+Bind to a parent BaseTexture
+
+#### Parameters:
+| Name        | Type                     | Description    |
+| ----------- | ------------------------ | -------------- |
+| baseTexture | <code>BaseTexture</code> | Parent texture |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Call when destroying resource, unbind any BaseTexture object before calling this method, as reference counts are maintained internally.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dispose: <span><code>() -&#62; void</code></span>
+Destroy and don't use after this.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resize: <span><code>(width&#58; number, height&#58; number) -&#62; void</code></span>
+Trigger a resize event
+
+#### Parameters:
+| Name   | Type                | Description |
+| ------ | ------------------- | ----------- |
+| width  | <code>number</code> | X dimension |
+| height | <code>number</code> | Y dimension |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### style: <span><code>(_renderer&#58; Renderer, _baseTexture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code></span>
+Set the style, optional to override
+
+#### Parameters:
+| Name         | Type                     | Description                             |
+| ------------ | ------------------------ | --------------------------------------- |
+| _renderer    | <code>Renderer</code>    | yeah, renderer!                         |
+| _baseTexture | <code>BaseTexture</code> | the texture                             |
+| _glTexture   | <code>GLTexture</code>   | texture instance for this webgl context |
+#### Returns:
+| Type                 | Description         |
+| -------------------- | ------------------- |
+| <code>boolean</code> | * `true` is success |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### unbind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
+Unbind to a parent BaseTexture
+
+#### Parameters:
+| Name        | Type                     | Description    |
+| ----------- | ------------------------ | -------------- |
+| baseTexture | <code>BaseTexture</code> | Parent texture |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### update: <span><code>() -&#62; void</code></span>
+Has been updated trigger event.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### upload: <span><code>(renderer&#58; Renderer, baseTexture&#58; BaseTexture, glTexture&#58; GLTexture) -&#62; boolean</code></span>
+Upload the texture to the GPU.
+
+#### Parameters:
+| Name        | Type                     | Description                 |
+| ----------- | ------------------------ | --------------------------- |
+| renderer    | <code>Renderer</code>    | Upload to the renderer      |
+| baseTexture | <code>BaseTexture</code> | Reference to parent texture |
+| glTexture   | <code>GLTexture</code>   | glTexture                   |
+#### Returns:
+| Type                 | Description       |
+| -------------------- | ----------------- |
+| <code>boolean</code> | * true is success |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### load: <span><code>() -&#62; Promise&#60;Resource&#62;</code></span>
+This can be overridden to start preloading a resource or do any other prepare step.
+
+#### Returns:
+| Type                                   | Description               |
+| -------------------------------------- | ------------------------- |
+| <code>Promise&#60;Resource&#62;</code> | Handle the validate event |
+</article>
+
+
+---------------------------------------
+
+
+    

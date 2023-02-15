@@ -1,0 +1,797 @@
+---
+id: "PIXI.HTMLTextStyle.pixi_text_html"
+title: "Class: PIXI.HTMLTextStyle"
+sidebar_label: "PIXI.HTMLTextStyle"
+custom_edit_url: null
+---
+
+[@pixi/text-html](../modules/pixi_text_html).HTMLTextStyle
+
+
+Used internally to restrict text style usage and convert easily to CSS.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.HTMLTextStyle: <span><code>(style&#58; PIXI.ITextStyle &#124; IHTMLTextStyle) </code></span>
+
+#### Parameters:
+| Name  | Type                                               | Default       | Description    |
+| ----- | -------------------------------------------------- | ------------- | -------------- |
+| style | <code>PIXI.ITextStyle &#124; IHTMLTextStyle</code> | <code></code> | Style to copy. |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.TextStyle](../classes/PIXI.TextStyle.pixi_text)
+
+## Members
+<article>
+
+### availableFonts: <span><code>Record&#60;string, IHTMLFont&#62;</code></span>
+The collection of installed fonts
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultOptions: <span><code>IHTMLTextStyle</code></span>
+List of default options, these are largely the same as TextStyle, with the exception of whiteSpace, which is set to 'normal' by default.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### align: <span><code>string</code></span>
+- **Default Value**: <code>"left"</code>
+
+Align
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### breakWords: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Break words
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadow: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Drop shadow
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowAlpha: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+Drop shadow alpha
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowAngle: <span><code>number</code></span>
+- **Default Value**: <code>Math.PI / 6</code>
+
+Drop shadow angle
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowBlur: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Drop shadow blur
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowColor: <span><code>string</code></span>
+- **Default Value**: <code>"black"</code>
+
+Drop shadow color
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowDistance: <span><code>number</code></span>
+- **Default Value**: <code>5</code>
+
+Drop shadow distance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fill: <span><code>string</code></span>
+- **Default Value**: <code>"black"</code>
+
+Fill
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontFamily: <span><code>string</code></span>
+- **Default Value**: <code>"Arial"</code>
+
+Font family
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontSize: <span><code>number</code></span>
+- **Default Value**: <code>26</code>
+
+Font size
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontStyle: <span><code>string</code></span>
+- **Default Value**: <code>"normal"</code>
+
+Font style
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontVariant: <span><code>string</code></span>
+- **Default Value**: <code>"normal"</code>
+
+Font variant
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontWeight: <span><code>string</code></span>
+- **Default Value**: <code>"normal"</code>
+
+Font weight
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### letterSpacing: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Letter spacing
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### lineHeight: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Line height
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### padding: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Padding
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stroke: <span><code>string</code></span>
+- **Default Value**: <code>"black"</code>
+
+Stroke
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### strokeThickness: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Stroke thickness
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### whiteSpace: <span><code>string</code></span>
+- **Default Value**: <code>"normal"</code>
+
+White space
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### wordWrap: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Word wrap
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### wordWrapWidth: <span><code>number</code></span>
+- **Default Value**: <code>100</code>
+
+Word wrap width
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### align: <span><code>'left' &#124; 'center' &#124; 'right' &#124; 'justify'</code></span>
+Alignment for multiline text, does not affect single line text.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### breakWords: <span><code>boolean</code></span>
+Indicates if lines can be wrapped within words, it needs wordWrap to be set to true.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadow: <span><code>boolean</code></span>
+Set a drop shadow for the text.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowAlpha: <span><code>number</code></span>
+Set alpha for the drop shadow.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowAngle: <span><code>number</code></span>
+Set a angle of the drop shadow.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowBlur: <span><code>number</code></span>
+Set a shadow blur radius.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowColor: <span><code>number &#124; string</code></span>
+A fill style to be used on the dropshadow e.g., 'red', '#00FF00'.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowDistance: <span><code>number</code></span>
+Set a distance of the drop shadow.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fill: <span><code>string &#124; Array&#60;string&#62; &#124; number &#124; Array&#60;number&#62; &#124; CanvasGradient &#124; CanvasPattern</code></span>
+A canvas fillstyle that will be used on the text e.g., 'red', '#00FF00'.
+Can be an array to create a gradient e.g., `['#000000','#FFFFFF']`[MDN](https&#58;//developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fillGradientStops: <span><code>number[]</code></span>
+If fill is an array of colours to create a gradient, this array can set the stop points (numbers between 0 and 1) for the color, overriding the default behaviour of evenly spacing them.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fillGradientType: <span><code>PIXI.TEXT_GRADIENT</code></span>
+If fill is an array of colours to create a gradient, this can change the type/direction of the gradient.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontFamily: <span><code>string &#124; string[]</code></span>
+The font family, can be a single font name, or a list of names where the first is the preferred font.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontSize: <span><code>number &#124; string</code></span>
+The font size (as a number it converts to px, but as a string, equivalents are '26px','20pt','160%' or '1.6em')
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontStyle: <span><code>'normal' &#124; 'italic' &#124; 'oblique'</code></span>
+The font style.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontVariant: <span><code>'normal' &#124; 'small-caps'</code></span>
+The font variant.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fontWeight: <span><code>'normal' &#124; 'bold' &#124; 'bolder' &#124; 'lighter' &#124; '100' &#124; '200' &#124; '300' &#124; '400' &#124; '500' &#124; '600' &#124; '700' &#124; '800' &#124; '900'</code></span>
+The font weight.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### leading: <span><code>number</code></span>
+The space between lines.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### letterSpacing: <span><code>number</code></span>
+The amount of spacing between letters, default is 0.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### lineHeight: <span><code>number</code></span>
+The line height, a number that represents the vertical space that a letter uses.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### lineJoin: <span><code>'miter' &#124; 'round' &#124; 'bevel'</code></span>
+The lineJoin property sets the type of corner created, it can resolve spiked text issues. Default is 'miter' (creates a sharp corner).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### miterLimit: <span><code>number</code></span>
+The miter limit to use when using the 'miter' lineJoin mode.
+This can reduce or increase the spikiness of rendered text.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### padding: <span><code>number</code></span>
+Occasionally some fonts are cropped. Adding some padding will prevent this from happening by adding padding to all sides of the text.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stroke: <span><code>string &#124; number</code></span>
+A canvas fillstyle that will be used on the text stroke, e.g., 'blue', '#FCFF00'
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### strokeThickness: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+A number that represents the thickness of the stroke.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stylesheet: <span><code>string</code></span>
+Internal stylesheet contents, useful for creating rules for rendering
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textBaseline: <span><code>'alphabetic' &#124; 'top' &#124; 'hanging' &#124; 'middle' &#124; 'ideographic' &#124; 'bottom'</code></span>
+The baseline of the text that is rendered.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### trim: <span><code>boolean</code></span>
+Trim transparent borders.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### whiteSpace: <span><code>'normal' &#124; 'pre' &#124; 'pre-line'</code></span>
+How newlines and spaces should be handled. Default is 'pre' (preserve, preserve).
+
+&#124; value      &#124; New lines &#124; Spaces   &#124;
+&#124; ---------- &#124; --------- &#124; -------- &#124;
+&#124; 'normal'   &#124; Collapse  &#124; Collapse &#124;
+&#124; 'pre'      &#124; Preserve  &#124; Preserve &#124;
+&#124; 'pre-line' &#124; Preserve  &#124; Collapse &#124;
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### wordWrap: <span><code>boolean</code></span>
+Indicates if word wrap should be used.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### wordWrapWidth: <span><code>number</code></span>
+The width at which text will wrap, it needs wordWrap to be set to true.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### from: <span><code>(originalStyle&#58; TextStyle &#124; Partial&#60;IHTMLTextStyle&#62;) -&#62; HTMLTextStyle</code></span>
+Convert a TextStyle to HTMLTextStyle
+
+```js
+import {TextStyle } from 'pixi.js';
+import {HTMLTextStyle} from '@pixi/text-html';
+const style = new TextStyle();
+const htmlStyle = HTMLTextStyle.from(style);
+```
+      
+
+#### Parameters:
+| Name          | Type                                                          | Description |
+| ------------- | ------------------------------------------------------------- | ----------- |
+| originalStyle | <code>TextStyle &#124; Partial&#60;IHTMLTextStyle&#62;</code> |             |
+#### Returns:
+| Type                       | Description |
+| -------------------------- | ----------- |
+| <code>HTMLTextStyle</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addOverride: <span><code>(value&#58; string) -&#62; void</code></span>
+Add a style override, this can be any CSS property it will override any built-in style. This is the property and the value as a string (e.g., `color: red`). This will override any other internal style.
+
+```js
+style.addOverride('background-color: red');
+```
+      
+
+#### Parameters:
+| Name  | Type                | Description          |
+| ----- | ------------------- | -------------------- |
+| value | <code>string</code> | CSS style(s) to add. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cleanFonts: <span><code>() -&#62; void</code></span>
+Clear the current font
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clone: <span><code>() -&#62; TextStyle</code></span>
+Creates a new TextStyle object with the same values as this one. Note that the only the properties of the object are cloned.
+
+#### Returns:
+| Type                   | Description                 |
+| ---------------------- | --------------------------- |
+| <code>TextStyle</code> | New cloned TextStyle object |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### loadFont: <span><code>(url&#58; string, options&#58; Partial&#60;Pick&#60;IHTMLFont, "weight" &#124; "style" &#124; "family"&#62;&#62;) -&#62; Promise&#60;void&#62;</code></span>
+Because of how HTMLText renders, fonts need to be imported
+
+#### Parameters:
+| Name    | Type                                                                                           | Description |
+| ------- | ---------------------------------------------------------------------------------------------- | ----------- |
+| url     | <code>string</code>                                                                            |             |
+| options | <code>Partial&#60;Pick&#60;IHTMLFont, "weight" &#124; "style" &#124; "family"&#62;&#62;</code> |             |
+#### Returns:
+| Type                               | Description |
+| ---------------------------------- | ----------- |
+| <code>Promise&#60;void&#62;</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### removeOverride: <span><code>(value&#58; string) -&#62; void</code></span>
+Remove any overrides that match the value.
+
+```js
+style.removeOverride('background-color: red');
+```
+      
+
+#### Parameters:
+| Name  | Type                | Description          |
+| ----- | ------------------- | -------------------- |
+| value | <code>string</code> | CSS style to remove. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### reset: <span><code>() -&#62; void</code></span>
+Resets all properties to the defaults specified in TextStyle.prototype._default
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toCSS: <span><code>(scale&#58; number) -&#62; string</code></span>
+Internally converts all of the style properties into CSS equivalents.
+
+#### Parameters:
+| Name  | Type                | Description |
+| ----- | ------------------- | ----------- |
+| scale | <code>number</code> |             |
+#### Returns:
+| Type                | Description                                                             |
+| ------------------- | ----------------------------------------------------------------------- |
+| <code>string</code> | The CSS style string, for setting `style` property of root HTMLElement. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toFontString: <span><code>() -&#62; string</code></span>
+Generates a font style string to use for `TextMetrics.measureFont()`.
+
+#### Returns:
+| Type                | Description                                                   |
+| ------------------- | ------------------------------------------------------------- |
+| <code>string</code> | Font style string, for passing to `TextMetrics.measureFont()` |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toGlobalCSS: <span><code>() -&#62; string</code></span>
+Get the font CSS styles from the loaded font, If available.
+
+#### Returns:
+| Type                | Description |
+| ------------------- | ----------- |
+| <code>string</code> |             |
+</article>
+
+
+---------------------------------------
+
+
+    

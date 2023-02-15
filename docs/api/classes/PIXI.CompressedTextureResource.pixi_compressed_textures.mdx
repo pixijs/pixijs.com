@@ -1,0 +1,339 @@
+---
+id: "PIXI.CompressedTextureResource.pixi_compressed_textures"
+title: "Class: PIXI.CompressedTextureResource"
+sidebar_label: "PIXI.CompressedTextureResource"
+custom_edit_url: null
+---
+
+[@pixi/compressed-textures](../modules/pixi_compressed_textures).CompressedTextureResource
+
+Resource for compressed texture formats, as follows&#58; S3TC/DXTn (& their sRGB formats), ATC, ASTC, ETC 1/2, PVRTC.
+Compressed textures improve performance when rendering is texture-bound. The texture data stays compressed in graphics memory, increasing memory locality and speeding up texture fetches. These formats can also be used to store more detail in the same amount of memory.
+
+For most developers, container file formats are a better abstraction instead of directly handling raw texture data. PixiJS provides native support for the following texture file formats (via PIXI.loadBasis, PIXI.loadKTX, and PIXI.loadDDS)&#58;
+
+**.dds** \- the DirectDraw Surface file format stores DXTn (DXT-1,3,5) data. See PIXI.parseDDS**.ktx** \- the Khronos Texture Container file format supports storing all the supported WebGL compression formats. See PIXI.parseKTX.**.basis** \- the BASIS supercompressed file format stores texture data in an internal format that is transcoded to the compression format supported on the device at _runtime_. It also supports transcoding into a uncompressed format as a fallback; you must install the `@pixi/basis-loader`, `@pixi/basis-transcoder` packages separately to use these files. See [PIXI.BasisParser](../classes/PIXI.BasisParser.pixi_basis).
+
+The loaders for the aforementioned formats use `CompressedTextureResource` internally. It is strongly suggested that they be used instead.
+
+## Working directly with CompressedTextureResource
+
+Since `CompressedTextureResource` inherits `BlobResource`, you can provide it a URL pointing to a file containing the raw texture data (with no file headers!)&#58;
+
+
+```js
+ import { CompressedTextureResource, INTERNAL_FORMATS } from '@pixi/compressed-textures';
+ import { BaseTexture, Texture, ALPHA_MODES } from 'pixi.js';
+
+ // The resource backing the texture data for your textures.
+ // NOTE: You can also provide a ArrayBufferView instead of a URL. This is used when loading data from a container file
+ //   format such as KTX, DDS, or BASIS.
+ const compressedResource = new CompressedTextureResource('bunny.dxt5', {
+     format: INTERNAL_FORMATS.COMPRESSED_RGBA_S3TC_DXT5_EXT,
+     width: 256,
+     height: 256,
+ });
+
+ // You can create a base-texture to the cache, so that future `Texture`s can be created using the `Texture.from` API.
+ const baseTexture = new BaseTexture(compressedResource, { pmaMode: ALPHA_MODES.NPM });
+
+ // Create a Texture to add to the TextureCache
+ const texture = new Texture(baseTexture);
+
+ // Add baseTexture & texture to the global texture cache
+ BaseTexture.addToCache(baseTexture, 'bunny.dxt5');
+ Texture.addToCache(texture, 'bunny.dxt5');
+```
+      
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.CompressedTextureResource: <span><code>(source&#58; string &#124; Uint8Array &#124; Uint32Array, options&#58; ICompressedTextureResourceOptions) </code></span>
+
+#### Parameters:
+| Name                 | Type                                                     | Default        | Description                                                                                                                                                               |
+| -------------------- | -------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| source               | <code>string &#124; Uint8Array &#124; Uint32Array</code> | <code></code>  | the buffer/URL holding the compressed texture data                                                                                                                        |
+| options              | <code>ICompressedTextureResourceOptions</code>           | <code></code>  |                                                                                                                                                                           |
+| options.format       | <code>PIXI.INTERNAL_FORMATS</code>                       | <code></code>  | the compression format                                                                                                                                                    |
+| options.width        | <code>number</code>                                      | <code></code>  | the image width in pixels.                                                                                                                                                |
+| options.height       | <code>number</code>                                      | <code></code>  | the image height in pixels.                                                                                                                                               |
+| options.level        | <code>number</code>                                      | <code>1</code> | the mipmap levels stored in the compressed texture, including level 0.                                                                                                    |
+| options.levelBuffers | <code>number</code>                                      | <code></code>  | the buffers for each mipmap level. `CompressedTextureResource` can allows you to pass `null` for `source`, for cases where each level is stored in non-contiguous memory. |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.BlobResource](../classes/PIXI.BlobResource.pixi_compressed_textures)
+
+## Members
+<article>
+
+### buffer: <span><code>ViewableBuffer</code></span>
+The viewable buffer on the data
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroyed: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+If resource has been destroyed.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### format: <span><code>INTERNAL_FORMATS</code></span>
+The compression format
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### height: <span><code>number</code></span>
+The height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### internal: <span><code>boolean</code></span>
+`true` if resource is created by BaseTexture useful for doing cleanup with BaseTexture destroy and not cleaning up resources that were created externally.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### levels: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+The number of mipmap levels stored in the resource buffer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### origin: <span><code>string</code></span>
+The URL of the texture file
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### src: <span><code>string</code></span>
+The url of the resource
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### valid: <span><code>boolean</code></span>
+Has been validated
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width: <span><code>number</code></span>
+The width of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _height: <span><code>number</code></span>
+Internal height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _width: <span><code>number</code></span>
+Internal width of the resource.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### bind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
+Bind to a parent BaseTexture
+
+#### Parameters:
+| Name        | Type                     | Description    |
+| ----------- | ------------------------ | -------------- |
+| baseTexture | <code>BaseTexture</code> | Parent texture |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Call when destroying resource, unbind any BaseTexture object before calling this method, as reference counts are maintained internally.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dispose: <span><code>() -&#62; void</code></span>
+Clean up anything, this happens when destroying is ready.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### load: <span><code>() -&#62; Promise&#60;Resource&#62;</code></span>
+Loads the blob
+
+#### Returns:
+| Type                                   | Description |
+| -------------------------------------- | ----------- |
+| <code>Promise&#60;Resource&#62;</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resize: <span><code>(width&#58; number, height&#58; number) -&#62; void</code></span>
+Trigger a resize event
+
+#### Parameters:
+| Name   | Type                | Description |
+| ------ | ------------------- | ----------- |
+| width  | <code>number</code> | X dimension |
+| height | <code>number</code> | Y dimension |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### style: <span><code>(_renderer&#58; Renderer, _baseTexture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code></span>
+Set the style, optional to override
+
+#### Parameters:
+| Name         | Type                     | Description                             |
+| ------------ | ------------------------ | --------------------------------------- |
+| _renderer    | <code>Renderer</code>    | yeah, renderer!                         |
+| _baseTexture | <code>BaseTexture</code> | the texture                             |
+| _glTexture   | <code>GLTexture</code>   | texture instance for this webgl context |
+#### Returns:
+| Type                 | Description         |
+| -------------------- | ------------------- |
+| <code>boolean</code> | * `true` is success |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### unbind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
+Unbind to a parent BaseTexture
+
+#### Parameters:
+| Name        | Type                     | Description    |
+| ----------- | ------------------------ | -------------- |
+| baseTexture | <code>BaseTexture</code> | Parent texture |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### update: <span><code>() -&#62; void</code></span>
+Has been updated trigger event.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### upload: <span><code>(renderer&#58; Renderer, _texture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code></span>
+
+#### Parameters:
+| Name       | Type                     | Description                             |
+| ---------- | ------------------------ | --------------------------------------- |
+| renderer   | <code>Renderer</code>    | A reference to the current renderer     |
+| _texture   | <code>BaseTexture</code> | the texture                             |
+| _glTexture | <code>GLTexture</code>   | texture instance for this webgl context |
+#### Returns:
+| Type                 | Description |
+| -------------------- | ----------- |
+| <code>boolean</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onBlobLoaded: <span><code>() -&#62; void</code></span>
+
+</article>
+
+
+---------------------------------------
+
+
+    

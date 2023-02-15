@@ -1,0 +1,147 @@
+---
+id: "PIXI.Program.pixi_core"
+title: "Class: PIXI.Program"
+sidebar_label: "PIXI.Program"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).Program
+
+
+Helper class to create a shader program.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Program: <span><code>(vertexSrc&#58; string, fragmentSrc&#58; string, name&#58; string, extra&#58; IProgramExtraData) </code></span>
+
+#### Parameters:
+| Name        | Type                           | Default                    | Description                        |
+| ----------- | ------------------------------ | -------------------------- | ---------------------------------- |
+| vertexSrc   | <code>string</code>            | <code></code>              | The source of the vertex shader.   |
+| fragmentSrc | <code>string</code>            | <code></code>              | The source of the fragment shader. |
+| name        | <code>string</code>            | <code>'pixi-shader'</code> | Name for shader                    |
+| extra       | <code>IProgramExtraData</code> | <code></code>              | Extra data for shader              |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### defaultFragmentPrecision: <span><code>PIXI.PRECISION</code></span>
+- **Default Value**: <code>PIXI.PRECISION.MEDIUM</code>
+
+Default specify float precision in fragment shader. iOS is best set at highp due to https&#58;//github.com/pixijs/pixijs/issues/3742
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultFragmentSrc: <span><code>string</code></span>
+The default fragment shader source.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultVertexPrecision: <span><code>PIXI.PRECISION</code></span>
+- **Default Value**: <code>PIXI.PRECISION.HIGH</code>
+
+Default specify float precision in vertex shader.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultVertexSrc: <span><code>string</code></span>
+The default vertex shader source.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### attributeData: <span><code>&#123; [key&#58; string]&#58; IAttributeData &#125;</code></span>
+Assigned when a program is first bound to the shader system.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fragmentSrc: <span><code>string</code></span>
+Source code for the fragment shader.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniformData: <span><code>&#123; [key&#58; string]&#58; IUniformData &#125;</code></span>
+Assigned when a program is first bound to the shader system.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### vertexSrc: <span><code>string</code></span>
+Source code for the vertex shader.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### from: <span><code>(vertexSrc&#58; string, fragmentSrc&#58; string, name&#58; string) -&#62; Program</code></span>
+A short hand function to create a program based of a vertex and fragment shader.
+This method will also check to see if there is a cached program.
+
+#### Parameters:
+| Name        | Type                | Description                        |
+| ----------- | ------------------- | ---------------------------------- |
+| vertexSrc   | <code>string</code> | The source of the vertex shader.   |
+| fragmentSrc | <code>string</code> | The source of the fragment shader. |
+| name        | <code>string</code> | Name for shader                    |
+#### Returns:
+| Type                 | Description                        |
+| -------------------- | ---------------------------------- |
+| <code>Program</code> | A shiny new PixiJS shader program! |
+</article>
+
+
+---------------------------------------
+
+
+    

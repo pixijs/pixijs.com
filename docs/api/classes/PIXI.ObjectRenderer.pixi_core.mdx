@@ -1,0 +1,103 @@
+---
+id: "PIXI.ObjectRenderer.pixi_core"
+title: "Class: PIXI.ObjectRenderer"
+sidebar_label: "PIXI.ObjectRenderer"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).ObjectRenderer
+
+
+Base for a common object renderer that can be used as a system renderer plugin.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.ObjectRenderer: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                          |
+| -------- | --------------------- | ------------- | ------------------------------------ |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this manager works for. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### renderer: <span><code>Renderer</code></span>
+The renderer this manager works for.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Generic destruction method that frees all resources. This should be called by subclasses.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### flush: <span><code>() -&#62; void</code></span>
+Stub method that should be used to empty the current batch by rendering objects now.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### render: <span><code>(_object&#58; PIXI.DisplayObject) -&#62; void</code></span>
+Keeps the object to render. It doesn't have to be rendered immediately.
+
+#### Parameters:
+| Name    | Type                            | Description           |
+| ------- | ------------------------------- | --------------------- |
+| _object | <code>PIXI.DisplayObject</code> | The object to render. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### start: <span><code>() -&#62; void</code></span>
+Stub method that initializes any state required before rendering starts. It is different from the `prerender`signal, which occurs every frame, in that it is called whenever an object requests _this_ renderer specifically.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stop: <span><code>() -&#62; void</code></span>
+Stops the renderer. It should free up any state and become dormant.
+
+</article>
+
+
+---------------------------------------
+
+
+    

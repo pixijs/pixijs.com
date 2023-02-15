@@ -1,0 +1,269 @@
+---
+id: "PIXI.IRenderer.pixi_core"
+title: "Interface: PIXI.IRenderer"
+sidebar_label: "PIXI.IRenderer"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).[PIXI](../namespaces/PIXI).IRenderer
+
+
+Starard Interface for a Pixi renderer.
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name               | Type                                                     | Description                                                                                                                  |
+| ------------------ | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| runners            | <code>&#123; [key&#58; string]&#58; Runner &#125;</code> | a collection of runners defined by the user                                                                                  |
+| height             | <code>number</code>                                      | the height of the screen                                                                                                     |
+| lastObjectRendered | <code>IRenderableObject</code>                           | the last object rendered by the renderer. Useful for other plugins like interaction managers                                 |
+| options            | <code>PIXI.IRendererOptions</code>                       | The options passed in to create a new instance of the renderer.                                                              |
+| plugins            | <code>IRendererPlugins</code>                            | Collection of plugins                                                                                                        |
+| rendererLogId      | <code>string</code>                                      | When logging Pixi to the console, this is the name we will show                                                              |
+| renderingToScreen  | <code>boolean</code>                                     | Flag if we are rendering to the screen vs renderTexture                                                                      |
+| resolution         | <code>number</code>                                      | The resolution / device pixel ratio of the renderer.                                                                         |
+| screen             | <code>Rectangle</code>                                   | Measurements of the screen. (0, 0, screenWidth, screenHeight). Its safe to use as filterArea or hitArea for the whole stage. |
+| type               | <code>RENDERER_TYPE</code>                               | The type of the renderer.                                                                                                    |
+| view               | <code>VIEW</code>                                        | The canvas element that everything is drawn to.                                                                              |
+| width              | <code>number</code>                                      | the width of the screen                                                                                                      |
+
+</p>
+</details>
+    
+
+<details><summary>Methods</summary>
+<p>
+
+| Name                  | Params                                                                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| --------------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| addRunners            | <code>(runnerIds&#58; string[]) </code>                                          | Create a bunch of runners based of a collection of ids                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| addSystem             | <code>(ClassRef&#58; ISystemConstructor&#60;R&#62;, name&#58; string) </code>    | Add a new system to the renderer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| destroy               | <code>() </code>                                                                 | destroy the all runners and systems. Its apps job to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| emitWithCustomOptions | <code>(runner&#58; Runner, options&#58; Record&#60;string, unknown&#62;) </code> | A function that will run a runner and call the runners function but pass in different options to each system based on there name.&#60;br /&#62;&#60;br /&#62;E.g. If you have two systems added called `systemA` and `systemB` you could call do the following&#58;&#60;br /&#62;&#60;br /&#62;```<br />system.emitWithCustomOptions(init, {<br />    systemA: {...optionsForA},<br />    systemB: {...optionsForB},<br />});<br /><br />```&#60;br /&#62;&#60;br /&#62;`init` would be called on system A passing `optionsForA` and on system B passing `optionsForB`. |
+| setup                 | <code>(config&#58; ISystemConfig&#60;R&#62;) </code>                             | Set up a system with a collection of SystemClasses and runners. Systems are attached dynamically to this class when added.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
+</p>
+</details>
+    
+
+## Extends
+- [PIXI.SystemManager](../classes/PIXI.SystemManager.pixi_core)
+- GlobalMixins.IRenderer
+
+## Members
+<article>
+
+### runners: <span><code>&#123; [key&#58; string]&#58; Runner &#125;</code></span>
+a collection of runners defined by the user
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### height: <span><code>number</code></span>
+the height of the screen
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### lastObjectRendered: <span><code>IRenderableObject</code></span>
+the last object rendered by the renderer. Useful for other plugins like interaction managers
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### options: <span><code>PIXI.IRendererOptions</code></span>
+The options passed in to create a new instance of the renderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### plugins: <span><code>IRendererPlugins</code></span>
+Collection of plugins
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### rendererLogId: <span><code>string</code></span>
+When logging Pixi to the console, this is the name we will show
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderingToScreen: <span><code>boolean</code></span>
+Flag if we are rendering to the screen vs renderTexture
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+The resolution / device pixel ratio of the renderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### screen: <span><code>Rectangle</code></span>
+Measurements of the screen. (0, 0, screenWidth, screenHeight). Its safe to use as filterArea or hitArea for the whole stage.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### type: <span><code>RENDERER_TYPE</code></span>
+The type of the renderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### view: <span><code>VIEW</code></span>
+The canvas element that everything is drawn to.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width: <span><code>number</code></span>
+the width of the screen
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### addRunners: <span><code>(runnerIds&#58; string[]) -&#62; void</code></span>
+Create a bunch of runners based of a collection of ids
+
+#### Parameters:
+| Name      | Type                  | Description           |
+| --------- | --------------------- | --------------------- |
+| runnerIds | <code>string[]</code> | the runner ids to add |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addSystem: <span><code>(ClassRef&#58; ISystemConstructor&#60;R&#62;, name&#58; string) -&#62; this</code></span>
+Add a new system to the renderer.
+
+#### Parameters:
+| Name     | Type                                       | Description                                                                                                                                                                                                             |
+| -------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ClassRef | <code>ISystemConstructor&#60;R&#62;</code> | Class reference                                                                                                                                                                                                         |
+| name     | <code>string</code>                        | Property name for system, if not specified will use a static `name` property on the class itself. This name will be assigned as s property on the Renderer so make sure it doesn't collide with properties on Renderer. |
+#### Returns:
+| Type              | Description                 |
+| ----------------- | --------------------------- |
+| <code>this</code> | Return instance of renderer |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+destroy the all runners and systems. Its apps job to
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### emitWithCustomOptions: <span><code>(runner&#58; Runner, options&#58; Record&#60;string, unknown&#62;) -&#62; void</code></span>
+A function that will run a runner and call the runners function but pass in different options to each system based on there name.
+
+E.g. If you have two systems added called `systemA` and `systemB` you could call do the following&#58;
+
+```
+system.emitWithCustomOptions(init, {
+    systemA: {...optionsForA},
+    systemB: {...optionsForB},
+});
+
+```
+
+`init` would be called on system A passing `optionsForA` and on system B passing `optionsForB`.
+
+#### Parameters:
+| Name    | Type                                         | Description                       |
+| ------- | -------------------------------------------- | --------------------------------- |
+| runner  | <code>Runner</code>                          | the runner to target              |
+| options | <code>Record&#60;string, unknown&#62;</code> | key value options for each system |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setup: <span><code>(config&#58; ISystemConfig&#60;R&#62;) -&#62; void</code></span>
+Set up a system with a collection of SystemClasses and runners. Systems are attached dynamically to this class when added.
+
+#### Parameters:
+| Name   | Type                                  | Description                       |
+| ------ | ------------------------------------- | --------------------------------- |
+| config | <code>ISystemConfig&#60;R&#62;</code> | the config for the system manager |
+</article>
+
+
+---------------------------------------
+
+  

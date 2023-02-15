@@ -1,0 +1,530 @@
+---
+id: "PIXI.utils.pixi_utils"
+title: "Namespace: PIXI.utils"
+sidebar_label: "PIXI.utils"
+custom_edit_url: null
+---
+
+[@pixi/utils](../modules/pixi_utils).[PIXI](../namespaces/PIXI).utils
+
+
+Generalized convenience utilities for PIXI.
+
+
+```js
+ import { utils } from 'pixi.js';
+ // Extend PIXI's internal Event Emitter.
+ class MyEmitter extends utils.EventEmitter {
+     constructor() {
+         super();
+         console.log('Emitter created!');
+     }
+ }
+
+ // Get info on current device
+ console.log(utils.isMobile);
+```
+      
+
+// TODO: @see
+
+        
+
+## Classes
+* [utils.BoundingBox](../classes/utils.BoundingBox.pixi_utils)
+* [utils.CanvasRenderTarget](../classes/utils.CanvasRenderTarget.pixi_utils)
+* [utils.EventEmitter](../classes/utils.EventEmitter.pixi_utils)
+
+## Interfaces
+* [utils.DecomposedDataUri](../interfaces/utils.DecomposedDataUri.pixi_utils)
+
+
+
+## Members
+<article>
+
+### BaseTextureCache: <span><code>Record&#60;string, BaseTexture&#62;</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ProgramCache: <span><code>Record&#60;string, Program&#62;</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### TextureCache: <span><code>Record&#60;string, Texture&#62;</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isMobile: <span><code>object</code></span>
+A simple JS library that detects mobile devices.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### path: <span><code>object</code></span>
+Browser and Node.js compatible path utilities. All paths that are passed in will become normalized to have posix separators.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### premultiplyBlendMode: <span><code>Array&#60;Array&#60;number&#62;&#62;</code></span>
+maps premultiply flag and blendMode to adjusted blendMode
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### url: <span><code>object</code></span>
+Node.js compatible URL utilities.
+
+</article>
+
+
+---------------------------------------
+
+
+## Functions
+<article>
+
+### sayHello: <span><code>() -&#62; void</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clearTextureCache: <span><code>() -&#62; void</code></span>
+Removes all textures from cache, but does not destroy them
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### correctBlendMode: <span><code>(blendMode&#58; number, premultiplied&#58; boolean) -&#62; number</code></span>
+changes blendMode according to texture format
+
+#### Parameters:
+| Name          | Type                 | Description                     |
+| ------------- | -------------------- | ------------------------------- |
+| blendMode     | <code>number</code>  | supposed blend mode             |
+| premultiplied | <code>boolean</code> | whether source is premultiplied |
+#### Returns:
+| Type                | Description                      |
+| ------------------- | -------------------------------- |
+| <code>number</code> | true blend mode for this texture |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### createIndicesForQuads: <span><code>(size&#58; number, outBuffer&#58; Uint16Array &#124; Uint32Array) -&#62; Uint16Array &#124; Uint32Array</code></span>
+Generic Mask Stack data structure
+
+#### Parameters:
+| Name      | Type                                        | Description                                    |
+| --------- | ------------------------------------------- | ---------------------------------------------- |
+| size      | <code>number</code>                         | Number of quads                                |
+| outBuffer | <code>Uint16Array &#124; Uint32Array</code> | Buffer for output, length has to be `6 * size` |
+#### Returns:
+| Type                                        | Description              |
+| ------------------------------------------- | ------------------------ |
+| <code>Uint16Array &#124; Uint32Array</code> | * Resulting index buffer |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### decomposeDataUri: <span><code>(dataUri&#58; string) -&#62; PIXI.utils.DecomposedDataUri &#124; unknown</code></span>
+Split a data URI into components. Returns undefined if parameter `dataUri` is not a valid data URI.
+
+#### Parameters:
+| Name    | Type                | Description           |
+| ------- | ------------------- | --------------------- |
+| dataUri | <code>string</code> | the data URI to check |
+#### Returns:
+| Type                                                     | Description                          |
+| -------------------------------------------------------- | ------------------------------------ |
+| <code>PIXI.utils.DecomposedDataUri &#124; unknown</code> | The decomposed data uri or undefined |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### deprecation: <span><code>(version&#58; string, message&#58; string, ignoreDepth&#58; number) -&#62; void</code></span>
+Helper for warning developers about deprecated features & settings. A stack track for warnings is given; useful for tracking-down where deprecated methods/properties/classes are being used within the code.
+
+#### Parameters:
+| Name        | Type                | Description                                                                                                      |
+| ----------- | ------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| version     | <code>string</code> | The version where the feature became deprecated                                                                  |
+| message     | <code>string</code> | Message should include what is deprecated, where, and the new solution                                           |
+| ignoreDepth | <code>number</code> | The number of steps to ignore at the top of the error stack this is mostly to ignore internal deprecation calls. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroyTextureCache: <span><code>() -&#62; void</code></span>
+Destroys all texture in the cache
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getCanvasBoundingBox: <span><code>(canvas&#58; PIXI.ICanvas) -&#62; PIXI.utils.BoundingBox</code></span>
+Measuring the bounds of a canvas' visible (non-transparent) pixels.
+
+#### Parameters:
+| Name   | Type                      | Description            |
+| ------ | ------------------------- | ---------------------- |
+| canvas | <code>PIXI.ICanvas</code> | The canvas to measure. |
+#### Returns:
+| Type                                | Description                                     |
+| ----------------------------------- | ----------------------------------------------- |
+| <code>PIXI.utils.BoundingBox</code> | The bounding box of the canvas' visible pixels. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getResolutionOfUrl: <span><code>(url&#58; string, defaultValue&#58; number) -&#62; number</code></span>
+get the resolution / device pixel ratio of an asset by looking for the prefix used by spritesheets and image urls
+
+#### Parameters:
+| Name         | Type                | Description                                    |
+| ------------ | ------------------- | ---------------------------------------------- |
+| url          | <code>string</code> | the image path                                 |
+| defaultValue | <code>number</code> | the defaultValue if no filename prefix is set. |
+#### Returns:
+| Type                | Description                                 |
+| ------------------- | ------------------------------------------- |
+| <code>number</code> | resolution / device pixel ratio of an asset |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### hex2rgb: <span><code>(hex&#58; number, out&#58; Array&#60;number&#62;) -&#62; Array&#60;number&#62;</code></span><span class="deprecated-tag"> Deprecated: since 7.2.0</span>
+Converts a hexadecimal color number to an [R, G, B] array of normalized floats (numbers from 0.0 to 1.0).
+
+#### Parameters:
+| Name | Type                               | Description                                                          |
+| ---- | ---------------------------------- | -------------------------------------------------------------------- |
+| hex  | <code>number</code>                | The hexadecimal number to convert                                    |
+| out  | <code>Array&#60;number&#62;</code> | If supplied, this array will be used rather than returning a new one |
+#### Returns:
+| Type                               | Description                                                                   |
+| ---------------------------------- | ----------------------------------------------------------------------------- |
+| <code>Array&#60;number&#62;</code> | An array representing the [R, G, B] of the color where all values are floats. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### hex2string: <span><code>(hex&#58; number) -&#62; string</code></span><span class="deprecated-tag"> Deprecated: since 7.2.0</span>
+Converts a hexadecimal color number to a string.
+
+#### Parameters:
+| Name | Type                | Description                      |
+| ---- | ------------------- | -------------------------------- |
+| hex  | <code>number</code> | Number in hex (e.g., `0xffffff`) |
+#### Returns:
+| Type                | Description                           |
+| ------------------- | ------------------------------------- |
+| <code>string</code> | The string color (e.g., `"#ffffff"`). |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isPow2: <span><code>(v&#58; number) -&#62; boolean</code></span>
+Checks if a number is a power of two.
+
+#### Parameters:
+| Name | Type                | Description |
+| ---- | ------------------- | ----------- |
+| v    | <code>number</code> | input value |
+#### Returns:
+| Type                 | Description                     |
+| -------------------- | ------------------------------- |
+| <code>boolean</code> | `true` if value is power of two |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isWebGLSupported: <span><code>() -&#62; boolean</code></span>
+Helper for checking for WebGL support.
+
+#### Returns:
+| Type                 | Description         |
+| -------------------- | ------------------- |
+| <code>boolean</code> | Is WebGL supported. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### log2: <span><code>(v&#58; number) -&#62; number</code></span>
+Computes ceil of log base 2
+
+#### Parameters:
+| Name | Type                | Description |
+| ---- | ------------------- | ----------- |
+| v    | <code>number</code> | input value |
+#### Returns:
+| Type                | Description      |
+| ------------------- | ---------------- |
+| <code>number</code> | logarithm base 2 |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### nextPow2: <span><code>(v&#58; number) -&#62; number</code></span>
+Rounds to next power of two.
+
+#### Parameters:
+| Name | Type                | Description |
+| ---- | ------------------- | ----------- |
+| v    | <code>number</code> | input value |
+#### Returns:
+| Type                | Description                 |
+| ------------------- | --------------------------- |
+| <code>number</code> | * next rounded power of two |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### premultiplyRgba: <span><code>(rgb&#58; Float32Array &#124; Array&#60;number&#62;, alpha&#58; number, out&#58; Float32Array, premultiply&#58; boolean) -&#62; Float32Array</code></span>
+combines rgb and alpha to out array
+
+#### Parameters:
+| Name        | Type                                                   | Description       |
+| ----------- | ------------------------------------------------------ | ----------------- |
+| rgb         | <code>Float32Array &#124; Array&#60;number&#62;</code> | input rgb         |
+| alpha       | <code>number</code>                                    | alpha param       |
+| out         | <code>Float32Array</code>                              | output            |
+| premultiply | <code>boolean</code>                                   | do premultiply it |
+#### Returns:
+| Type                      | Description |
+| ------------------------- | ----------- |
+| <code>Float32Array</code> | vec4 rgba   |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### premultiplyTint: <span><code>(tint&#58; number, alpha&#58; number) -&#62; number</code></span>
+premultiplies tint
+
+#### Parameters:
+| Name  | Type                | Description                    |
+| ----- | ------------------- | ------------------------------ |
+| tint  | <code>number</code> | integer RGB                    |
+| alpha | <code>number</code> | floating point alpha (0.0-1.0) |
+#### Returns:
+| Type                | Description              |
+| ------------------- | ------------------------ |
+| <code>number</code> | tint multiplied by alpha |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### premultiplyTintToRgba: <span><code>(tint&#58; number, alpha&#58; number, out&#58; Float32Array, premultiply&#58; boolean) -&#62; Float32Array</code></span>
+converts integer tint and float alpha to vec4 form, premultiplies by default
+
+#### Parameters:
+| Name        | Type                      | Description       |
+| ----------- | ------------------------- | ----------------- |
+| tint        | <code>number</code>       | input tint        |
+| alpha       | <code>number</code>       | alpha param       |
+| out         | <code>Float32Array</code> | output            |
+| premultiply | <code>boolean</code>      | do premultiply it |
+#### Returns:
+| Type                      | Description |
+| ------------------------- | ----------- |
+| <code>Float32Array</code> | vec4 rgba   |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### removeItems: <span><code>(arr&#58; Array&#60;any&#62;, startIdx&#58; number, removeCount&#58; number) -&#62; void</code></span>
+Remove items from a javascript array without generating garbage
+
+#### Parameters:
+| Name        | Type                            | Description                   |
+| ----------- | ------------------------------- | ----------------------------- |
+| arr         | <code>Array&#60;any&#62;</code> | Array to remove elements from |
+| startIdx    | <code>number</code>             | starting index                |
+| removeCount | <code>number</code>             | how many to remove            |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### rgb2hex: <span><code>(rgb&#58; Array&#60;number&#62;) -&#62; number</code></span><span class="deprecated-tag"> Deprecated: since 7.2.0</span>
+Converts a color as an [R, G, B] array of normalized floats to a hexadecimal number.
+
+#### Parameters:
+| Name | Type                               | Description                                                              |
+| ---- | ---------------------------------- | ------------------------------------------------------------------------ |
+| rgb  | <code>Array&#60;number&#62;</code> | Array of numbers where all values are normalized floats from 0.0 to 1.0. |
+#### Returns:
+| Type                | Description            |
+| ------------------- | ---------------------- |
+| <code>number</code> | Number in hexadecimal. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### sign: <span><code>(n&#58; number) -&#62; number</code></span>
+Returns sign of number
+
+#### Parameters:
+| Name | Type                | Description                     |
+| ---- | ------------------- | ------------------------------- |
+| n    | <code>number</code> | the number to check the sign of |
+#### Returns:
+| Type                | Description                                                |
+| ------------------- | ---------------------------------------------------------- |
+| <code>number</code> | 0 if `n` is 0, -1 if `n` is negative, 1 if `n` is positive |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### skipHello: <span><code>() -&#62; void</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### string2hex: <span><code>(string&#58; string) -&#62; number</code></span><span class="deprecated-tag"> Deprecated: since 7.2.0</span>
+Converts a string to a hexadecimal color number.
+
+#### Parameters:
+| Name   | Type                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| string | <code>string</code> | The string color (e.g., `"#ffffff"`) |
+#### Returns:
+| Type                | Description            |
+| ------------------- | ---------------------- |
+| <code>number</code> | Number in hexadecimal. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### trimCanvas: <span><code>(canvas&#58; PIXI.ICanvas) -&#62; &#123; width &#58; number, height &#58; number, data &#58; ImageData &#124; null &#125;</code></span>
+Trim transparent borders from a canvas.
+
+#### Parameters:
+| Name   | Type                      | Description         |
+| ------ | ------------------------- | ------------------- |
+| canvas | <code>PIXI.ICanvas</code> | The canvas to trim. |
+#### Returns:
+| Type                                                                                                 | Description              |
+| ---------------------------------------------------------------------------------------------------- | ------------------------ |
+| <code>&#123; width &#58; number, height &#58; number, data &#58; ImageData &#124; null &#125;</code> | The trimmed canvas data. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uid: <span><code>() -&#62; number</code></span>
+Gets the next unique identifier
+
+#### Returns:
+| Type                | Description                        |
+| ------------------- | ---------------------------------- |
+| <code>number</code> | The next unique identifier to use. |
+</article>
+
+
+---------------------------------------
+
+
+
+    

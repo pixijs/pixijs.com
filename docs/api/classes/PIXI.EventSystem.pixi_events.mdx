@@ -1,0 +1,228 @@
+---
+id: "PIXI.EventSystem.pixi_events"
+title: "Class: PIXI.EventSystem"
+sidebar_label: "PIXI.EventSystem"
+custom_edit_url: null
+---
+
+[@pixi/events](../modules/pixi_events).EventSystem
+
+
+The system for handling UI events.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.EventSystem: <span><code>(renderer&#58; PIXI.Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                       | Default       | Description |
+| -------- | -------------------------- | ------------- | ----------- |
+| renderer | <code>PIXI.Renderer</code> | <code></code> |             |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### defaultInteraction: <span><code>unknown</code></span>
+The default interaction mode for all display objects.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### autoPreventDefault: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+Should default browser actions automatically be prevented. Does not apply to pointer events for backwards compatibility preventDefault on pointer events stops mouse events from firing Thus, for every pointer event, there will always be either a mouse of touch event alongside it.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cursorStyles: <span><code>Record&#60;string, string &#124; ((mode&#58; string) =&#62; void) &#124; CSSStyleDeclaration&#62;</code></span>
+Dictionary of how different cursor modes are handled. Strings are handled as CSS cursor values, objects are handled as dictionaries of CSS values for `domElement`, and functions are called instead of changing the CSS. Default CSS cursor values are provided for 'default' and 'pointer' modes.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### domElement: <span><code>HTMLElement</code></span>
+- **Default Value**: <code>undefined</code>
+
+The DOM element to which the root event listeners are bound. This is automatically set to the renderer's [view](../classes/PIXI.Renderer.pixi_core#view).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderer: <span><code>IRenderer</code></span>
+The renderer managing this [PIXI.EventSystem](../classes/PIXI.EventSystem.pixi_events).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+The resolution used to convert between the DOM client space into world space.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### rootBoundary: <span><code>EventBoundary</code></span>
+The [PIXI.EventBoundary](../classes/PIXI.EventBoundary.pixi_events) for the stage.
+The [rootTarget](../classes/PIXI.EventBoundary.pixi_events#rootTarget) of this root boundary is automatically set to the last rendered object before any event processing is initiated. This means the main scene needs to be rendered atleast once before UI events will start propagating.
+
+The root boundary should only be changed during initialization. Otherwise, any state held by the event boundary may be lost (like hovered & pressed DisplayObjects).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### supportsPointerEvents: <span><code>unknown</code></span>
+- **Default Value**: <code>--</code>
+
+Does the device support pointer events https&#58;//www.w3.org/Submission/pointer-events/
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### supportsTouchEvents: <span><code>unknown</code></span>
+Does the device support touch events https&#58;//www.w3.org/TR/touch-events/
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Destroys all event listeners and detaches the renderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### mapPositionToPoint: <span><code>(point&#58; PIXI.IPointData, x&#58; number, y&#58; number) -&#62; void</code></span>
+Maps x and y coords from a DOM object and maps them correctly to the PixiJS view. The resulting value is stored in the point. This takes into account the fact that the DOM element could be scaled and positioned anywhere on the screen.
+
+#### Parameters:
+| Name  | Type                         | Description                                 |
+| ----- | ---------------------------- | ------------------------------------------- |
+| point | <code>PIXI.IPointData</code> | the point that the result will be stored in |
+| x     | <code>number</code>          | the x coord of the position to map          |
+| y     | <code>number</code>          | the y coord of the position to map          |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setCursor: <span><code>(mode&#58; string) -&#62; void</code></span>
+Sets the current cursor mode, handling any callbacks or CSS style changes.
+
+#### Parameters:
+| Name | Type                | Description                                         |
+| ---- | ------------------- | --------------------------------------------------- |
+| mode | <code>string</code> | cursor mode, a key from the cursorStyles dictionary |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setTargetElement: <span><code>(element&#58; HTMLElement) -&#62; void</code></span>
+Sets the [domElement](../classes/PIXI.EventSystem.pixi_events#domElement) and binds event listeners.
+To deregister the current DOM element without setting a new one, pass `null`.
+
+#### Parameters:
+| Name    | Type                     | Description          |
+| ------- | ------------------------ | -------------------- |
+| element | <code>HTMLElement</code> | The new DOM element. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### normalizeWheelEvent: <span><code>(nativeEvent&#58; WheelEvent) -&#62; FederatedWheelEvent</code></span>
+Normalizes the native [WheelEvent](https&#58;//w3c.github.io/uievents/#interface-wheelevent).
+The returned [PIXI.FederatedWheelEvent](../classes/PIXI.FederatedWheelEvent.pixi_events) is a shared instance. It will not persist across multiple native wheel events.
+
+#### Parameters:
+| Name        | Type                    | Description                                         |
+| ----------- | ----------------------- | --------------------------------------------------- |
+| nativeEvent | <code>WheelEvent</code> | The native wheel event that occurred on the canvas. |
+#### Returns:
+| Type                             | Description              |
+| -------------------------------- | ------------------------ |
+| <code>FederatedWheelEvent</code> | A federated wheel event. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onWheel: <span><code>(nativeEvent&#58; WheelEvent) -&#62; void</code></span>
+Passive handler for `wheel` events on [this.domElement](../classes/PIXI.EventSystem.pixi_events#domElement).
+
+#### Parameters:
+| Name        | Type                    | Description             |
+| ----------- | ----------------------- | ----------------------- |
+| nativeEvent | <code>WheelEvent</code> | The native wheel event. |
+</article>
+
+
+---------------------------------------
+
+
+    

@@ -1,0 +1,147 @@
+---
+id: "PIXI.ViewableBuffer.pixi_core"
+title: "Class: PIXI.ViewableBuffer"
+sidebar_label: "PIXI.ViewableBuffer"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).ViewableBuffer
+
+
+Flexible wrapper around `ArrayBuffer` that also provides typed array views on demand.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.ViewableBuffer: <span><code>(length&#58; number &#124; ArrayBuffer &#124; Uint8Array) </code></span>
+
+#### Parameters:
+| Name   | Type                                                     | Default       | Description                      |
+| ------ | -------------------------------------------------------- | ------------- | -------------------------------- |
+| length | <code>number &#124; ArrayBuffer &#124; Uint8Array</code> | <code></code> | The size of the buffer in bytes. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### float32View: <span><code>Float32Array</code></span>
+View on the raw binary data as a `Float32Array`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### int16View: <span><code>Int16Array</code></span>
+View on the raw binary data as a `Int16Array`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### int32View: <span><code>Int32Array</code></span>
+View on the raw binary data as a `Int32Array`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### int8View: <span><code>Int8Array</code></span>
+View on the raw binary data as a `Int8Array`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### rawBinaryData: <span><code>ArrayBuffer</code></span>
+Underlying `ArrayBuffer` that holds all the data and is of capacity `this.size`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uint16View: <span><code>Uint16Array</code></span>
+View on the raw binary data as a `Uint16Array`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uint32View: <span><code>Uint32Array</code></span>
+View on the raw binary data as a `Uint32Array`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uint8View: <span><code>Uint8Array</code></span>
+View on the raw binary data as a `Uint8Array`.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Destroys all buffer references. Do not use after calling this.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### view: <span><code>(type&#58; string) -&#62; ITypedArray</code></span>
+Returns the view of the given type.
+
+#### Parameters:
+| Name | Type                | Description                                                                 |
+| ---- | ------------------- | --------------------------------------------------------------------------- |
+| type | <code>string</code> | One of `int8`, `uint8`, `int16`,`uint16`, `int32`, `uint32`, and `float32`. |
+#### Returns:
+| Type                     | Description                 |
+| ------------------------ | --------------------------- |
+| <code>ITypedArray</code> | * typed array of given type |
+</article>
+
+
+---------------------------------------
+
+
+    

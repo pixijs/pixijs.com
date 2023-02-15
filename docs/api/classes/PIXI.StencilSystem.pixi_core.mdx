@@ -1,0 +1,116 @@
+---
+id: "PIXI.StencilSystem.pixi_core"
+title: "Class: PIXI.StencilSystem"
+sidebar_label: "PIXI.StencilSystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).StencilSystem
+
+
+System plugin to the renderer to manage stencils (used for masks).
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.StencilSystem: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                         |
+| -------- | --------------------- | ------------- | ----------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this System works for. |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.AbstractMaskSystem](../classes/PIXI.AbstractMaskSystem.pixi_core)
+
+## Members
+<article>
+
+### maskStack: <span><code>Array&#60;PIXI.MaskData&#62;</code></span>
+The mask stack
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Destroys the mask stack.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getStackLength: <span><code>() -&#62; number</code></span>
+Gets count of masks of certain type.
+
+#### Returns:
+| Type                | Description |
+| ------------------- | ----------- |
+| <code>number</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pop: <span><code>(maskObject&#58; PIXI.DisplayObject) -&#62; void</code></span>
+Pops stencil mask. MaskData is already removed from stack
+
+#### Parameters:
+| Name       | Type                            | Description                |
+| ---------- | ------------------------------- | -------------------------- |
+| maskObject | <code>PIXI.DisplayObject</code> | object of popped mask data |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### push: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
+Applies the Mask and adds it to the current stencil stack.
+
+#### Parameters:
+| Name     | Type                  | Description   |
+| -------- | --------------------- | ------------- |
+| maskData | <code>MaskData</code> | The mask data |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setMaskStack: <span><code>(maskStack&#58; Array&#60;PIXI.MaskData&#62;) -&#62; void</code></span>
+Changes the mask stack that is used by this System.
+
+#### Parameters:
+| Name      | Type                                      | Description    |
+| --------- | ----------------------------------------- | -------------- |
+| maskStack | <code>Array&#60;PIXI.MaskData&#62;</code> | The mask stack |
+</article>
+
+
+---------------------------------------
+
+
+    

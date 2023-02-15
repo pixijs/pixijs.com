@@ -1,0 +1,133 @@
+---
+id: "PIXI.TextureUvs.pixi_core"
+title: "Class: PIXI.TextureUvs"
+sidebar_label: "PIXI.TextureUvs"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).TextureUvs
+
+
+Stores a texture's frame in UV coordinates, in which everything lies in the rectangle `[(0,0), (1,0), (1,1), (0,1)]`.
+
+&#124; Corner       &#124; Coordinates &#124;
+&#124; ------------ &#124; ----------- &#124;
+&#124; Top-Left     &#124; (x0,y0)     &#124;
+&#124; Top-Right    &#124; (x1,y1)     &#124;
+&#124; Bottom-Right &#124; (x2,y2)     &#124;
+&#124; Bottom-Left  &#124; (x3,y3)     &#124;
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI()
+</article>
+
+
+
+## Members
+<article>
+
+### x0: <span><code>number</code></span>
+X-component of top-left corner `(x0,y0)`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### x1: <span><code>number</code></span>
+X-component of top-right corner `(x1,y1)`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### x2: <span><code>number</code></span>
+X-component of bottom-right corner `(x2,y2)`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### x3: <span><code>number</code></span>
+X-component of bottom-left corner `(x3,y3)`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### y0: <span><code>number</code></span>
+Y-component of top-left corner `(x0,y0)`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### y1: <span><code>number</code></span>
+Y-component of top-right corner `(x1,y1)`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### y2: <span><code>number</code></span>
+Y-component of bottom-right corner `(x2,y2)`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### y3: <span><code>number</code></span>
+Y-component of bottom-right corner `(x3,y3)`.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### set: <span><code>(frame&#58; Rectangle, baseFrame&#58; ISize, rotate&#58; number) -&#62; void</code></span>
+Sets the texture Uvs based on the given frame information.
+
+#### Parameters:
+| Name      | Type                   | Description                                                                 |
+| --------- | ---------------------- | --------------------------------------------------------------------------- |
+| frame     | <code>Rectangle</code> | The frame of the texture                                                    |
+| baseFrame | <code>ISize</code>     | The base frame of the texture                                               |
+| rotate    | <code>number</code>    | Rotation of frame, see [PIXI.groupD8](../namespaces/PIXI.groupD8.pixi_math) |
+</article>
+
+
+---------------------------------------
+
+
+    

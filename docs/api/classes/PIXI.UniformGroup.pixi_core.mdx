@@ -1,0 +1,158 @@
+---
+id: "PIXI.UniformGroup.pixi_core"
+title: "Class: PIXI.UniformGroup"
+sidebar_label: "PIXI.UniformGroup"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).UniformGroup
+
+Uniform group holds uniform map and some ID's for work
+`UniformGroup` has two modes&#58;
+
+1&#58; Normal mode Normal mode will upload the uniforms with individual function calls as required
+
+2&#58; Uniform buffer mode This mode will treat the uniforms as a uniform buffer. You can pass in either a buffer that you manually handle, or or a generic object that PixiJS will automatically map to a buffer for you. For maximum benefits, make Ubo UniformGroups static, and only update them each frame.
+
+Rules of UBOs&#58;
+
+* UBOs only work with WebGL2, so make sure you have a fallback!
+* Only floats are supported (including vec[2,3,4], mat[2,3,4])
+* Samplers cannot be used in ubo's (a GPU limitation)
+* You must ensure that the object you pass in exactly matches in the shader ubo structure. Otherwise, weirdness will ensue!
+* The name of the ubo object added to the group must match exactly the name of the ubo in the shader.
+
+```
+// UBO in shader:
+uniform myCoolData { // Declaring a UBO...
+    mat4 uCoolMatrix;
+    float uFloatyMcFloatFace;
+};
+
+```
+
+```
+// A new Uniform Buffer Object...
+const myCoolData = new UniformBufferGroup({
+    uCoolMatrix: new Matrix(),
+    uFloatyMcFloatFace: 23,
+}}
+
+// Build a shader...
+const shader = Shader.from(srcVert, srcFrag, {
+    myCoolData // Name matches the UBO name in the shader. Will be processed accordingly.
+})
+
+
+```
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.UniformGroup: <span><code>(uniforms&#58; object &#124; Buffer, isStatic&#58; boolean, isUbo&#58; boolean) </code></span>
+
+#### Parameters:
+| Name     | Type                              | Default       | Description                                                            |
+| -------- | --------------------------------- | ------------- | ---------------------------------------------------------------------- |
+| uniforms | <code>object &#124; Buffer</code> | <code></code> | Custom uniforms to use to augment the built-in ones. Or a pixi buffer. |
+| isStatic | <code>boolean</code>              | <code></code> | Uniforms wont be changed after creation.                               |
+| isUbo    | <code>boolean</code>              | <code></code> | If true, will treat this uniform group as a uniform buffer object.     |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### group: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+Its a group and not a single uniforms.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### static: <span><code>boolean</code></span>
+Flag for if uniforms wont be changed after creation.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ubo: <span><code>boolean</code></span>
+Flags whether this group is treated like a uniform buffer object.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniforms: <span><code>object</code></span>
+Uniform values
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dirtyId: <span><code>number</code></span>
+Dirty version
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### id: <span><code>number</code></span>
+unique id
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### uboFrom: <span><code>(uniforms&#58; Dict&#60;any&#62; &#124; Buffer, _static&#58; boolean) -&#62; UniformGroup</code></span>
+A short hand function for creating a static UBO UniformGroup.
+
+#### Parameters:
+| Name     | Type                                         | Description                                                         |
+| -------- | -------------------------------------------- | ------------------------------------------------------------------- |
+| uniforms | <code>Dict&#60;any&#62; &#124; Buffer</code> | the ubo item                                                        |
+| _static  | <code>boolean</code>                         | should this be updated each time it is used? defaults to true here! |
+#### Returns:
+| Type                      | Description |
+| ------------------------- | ----------- |
+| <code>UniformGroup</code> |             |
+</article>
+
+
+---------------------------------------
+
+
+    

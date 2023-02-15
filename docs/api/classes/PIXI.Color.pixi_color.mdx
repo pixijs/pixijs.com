@@ -1,0 +1,403 @@
+---
+id: "PIXI.Color.pixi_color"
+title: "Class: PIXI.Color"
+sidebar_label: "PIXI.Color"
+custom_edit_url: null
+---
+
+[@pixi/color](../modules/pixi_color).Color
+
+
+Color utility class.
+
+
+```js
+import { Color } from 'pixi.js';
+new Color('red').toArray(); // [1, 0, 0, 1]
+new Color(0xff0000).toArray(); // [1, 0, 0, 1]
+new Color('ff0000').toArray(); // [1, 0, 0, 1]
+new Color('#f00').toArray(); // [1, 0, 0, 1]
+new Color('0xff0000ff').toArray(); // [1, 0, 0, 1]
+new Color('#f00f').toArray(); // [1, 0, 0, 1]
+new Color({ r: 255, g: 0, b: 0, a: 0.5 }).toArray(); // [1, 0, 0, 0.5]
+new Color('rgb(255, 0, 0, 0.5)').toArray(); // [1, 0, 0, 0.5]
+new Color([1, 1, 1]).toArray(); // [1, 1, 1, 1]
+new Color([1, 0, 0, 0.5]).toArray(); // [1, 0, 0, 0.5]
+new Color(new Float32Array([1, 0, 0, 0.5])).toArray(); // [1, 0, 0, 0.5]
+new Color(new Uint8Array([255, 0, 0, 255])).toArray(); // [1, 0, 0, 1]
+new Color(new Uint8ClampedArray([255, 0, 0, 255])).toArray(); // [1, 0, 0, 1]
+new Color({ h: 0, s: 100, l: 50, a: 0.5 }).toArray(); // [1, 0, 0, 0.5]
+new Color('hsl(0, 100%, 50%, 50%)').toArray(); // [1, 0, 0, 0.5]
+new Color({ h: 0, s: 100, v: 100, a: 0.5 }).toArray(); // [1, 0, 0, 0.5]
+```
+      
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Color: <span><code>(value&#58; PIXI.ColorSource) </code></span>
+
+#### Parameters:
+| Name  | Type                          | Default               | Description                                            |
+| ----- | ----------------------------- | --------------------- | ------------------------------------------------------ |
+| value | <code>PIXI.ColorSource</code> | <code>0xffffff</code> | Optional value to use, if not provided, white is used. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### shared: <span><code>unknown</code></span>
+Default Color object for static uses
+
+```js
+import { Color } from 'pixi.js';
+Color.shared.setValue(0xffffff).toHex(); // '#ffffff'
+```
+      
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### alpha: <span><code>number</code></span>
+Get alpha component (0 - 1)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### blue: <span><code>number</code></span>
+Get blue component (0 - 1)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### green: <span><code>number</code></span>
+Get green component (0 - 1)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### red: <span><code>number</code></span>
+Get red component (0 - 1)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### value: <span><code>PIXI.ColorSource</code></span>
+Set the current color source. A return value of `null` means the previous value was overridden (e.g., `multiply`, `round`).
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### multiply: <span><code>(value&#58; PIXI.ColorSource) -&#62; this</code></span>
+Multiply with another color. This action is destructive, and will override the previous `value` property to be `null`.
+
+#### Parameters:
+| Name  | Type                          | Description               |
+| ----- | ----------------------------- | ------------------------- |
+| value | <code>PIXI.ColorSource</code> | The color to multiply by. |
+#### Returns:
+| Type              | Description |
+| ----------------- | ----------- |
+| <code>this</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### round: <span><code>(step&#58; number) -&#62; this</code></span>
+Rounds the specified color according to the step. This action is destructive, and will override the previous `value` property to be `null`.
+
+#### Parameters:
+| Name | Type                | Description                                                      |
+| ---- | ------------------- | ---------------------------------------------------------------- |
+| step | <code>number</code> | Number of steps which will be used as a cap when rounding colors |
+#### Returns:
+| Type              | Description |
+| ----------------- | ----------- |
+| <code>this</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setAlpha: <span><code>(alpha&#58; number) -&#62; this</code></span>
+Set alpha, suitable for chaining.
+
+#### Parameters:
+| Name  | Type                | Description |
+| ----- | ------------------- | ----------- |
+| alpha | <code>number</code> |             |
+#### Returns:
+| Type              | Description |
+| ----------------- | ----------- |
+| <code>this</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setValue: <span><code>(value&#58; ColorSource) -&#62; this</code></span>
+Set the value, suitable for chaining
+
+#### Parameters:
+| Name  | Type                     | Description |
+| ----- | ------------------------ | ----------- |
+| value | <code>ColorSource</code> |             |
+#### Returns:
+| Type              | Description |
+| ----------------- | ----------- |
+| <code>this</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toArray: <span><code>(out&#58; Array&#60;number&#62; &#124; Float32Array) -&#62; T</code></span>
+Convert to an [R, G, B, A] array of normalized floats (numbers from 0.0 to 1.0).
+
+```js
+import { Color } from 'pixi.js';
+new Color('white').toArray(); // returns [1, 1, 1, 1]
+```
+      
+
+#### Parameters:
+| Name | Type                                                   | Description  |
+| ---- | ------------------------------------------------------ | ------------ |
+| out  | <code>Array&#60;number&#62; &#124; Float32Array</code> | Output array |
+#### Returns:
+| Type           | Description |
+| -------------- | ----------- |
+| <code>T</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toHex: <span><code>() -&#62; string</code></span>
+Convert to a hexidecimal string.
+
+```js
+import { Color } from 'pixi.js';
+new Color('white').toHex(); // returns "#ffffff"
+```
+      
+
+#### Returns:
+| Type                | Description |
+| ------------------- | ----------- |
+| <code>string</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toHexa: <span><code>() -&#62; string</code></span>
+Convert to a hexidecimal string with alpha.
+
+```js
+import { Color } from 'pixi.js';
+new Color('white').toHexa(); // returns "#ffffffff"
+```
+      
+
+#### Returns:
+| Type                | Description |
+| ------------------- | ----------- |
+| <code>string</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toLittleEndianNumber: <span><code>() -&#62; number</code></span>
+Convert to a hexadecimal number in little endian format (e.g., BBGGRR).
+
+```js
+import { Color } from 'pixi.js';
+new Color(0xffcc99).toLittleEndianNumber(); // returns 0x99ccff
+```
+      
+
+#### Returns:
+| Type                | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| <code>number</code> | * The color as a number in little endian format. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toNumber: <span><code>() -&#62; number</code></span>
+Convert to a hexadecimal number.
+
+```js
+import { Color } from 'pixi.js';
+new Color('white').toNumber(); // returns 16777215
+```
+      
+
+#### Returns:
+| Type                | Description |
+| ------------------- | ----------- |
+| <code>number</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toRgb: <span><code>() -&#62; RgbColor</code></span>
+Convert to a RGB color object.
+
+```js
+import { Color } from 'pixi.js';
+new Color('white').toRgb(); // returns { r: 1, g: 1, b: 1 }
+```
+      
+
+#### Returns:
+| Type                  | Description |
+| --------------------- | ----------- |
+| <code>RgbColor</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toRgba: <span><code>() -&#62; RgbaColor</code></span>
+Convert to a RGBA color object.
+
+```js
+import { Color } from 'pixi.js';
+new Color('white').toRgb(); // returns { r: 1, g: 1, b: 1, a: 1 }
+```
+      
+
+#### Returns:
+| Type                   | Description |
+| ---------------------- | ----------- |
+| <code>RgbaColor</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toRgbArray: <span><code>(out&#58; Array&#60;number&#62; &#124; Float32Array) -&#62; T</code></span>
+Convert to an [R, G, B] array of normalized floats (numbers from 0.0 to 1.0).
+
+```js
+import { Color } from 'pixi.js';
+new Color('white').toRgbArray(); // returns [1, 1, 1]
+```
+      
+
+#### Parameters:
+| Name | Type                                                   | Description  |
+| ---- | ------------------------------------------------------ | ------------ |
+| out  | <code>Array&#60;number&#62; &#124; Float32Array</code> | Output array |
+#### Returns:
+| Type           | Description |
+| -------------- | ----------- |
+| <code>T</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toRgbaString: <span><code>() -&#62; string</code></span>
+Convert to a CSS-style rgba string&#58; `rgba(255,255,255,1.0)`.
+
+#### Returns:
+| Type                | Description |
+| ------------------- | ----------- |
+| <code>string</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toUint8RgbArray: <span><code>(out&#58; Array&#60;number&#62; &#124; Uint8Array &#124; Uint8ClampedArray) -&#62; T</code></span>
+Convert to an [R, G, B] array of clamped uint8 values (0 to 255).
+
+```js
+import { Color } from 'pixi.js';
+new Color('white').toUint8RgbArray(); // returns [255, 255, 255]
+```
+      
+
+#### Parameters:
+| Name | Type                                                                          | Description  |
+| ---- | ----------------------------------------------------------------------------- | ------------ |
+| out  | <code>Array&#60;number&#62; &#124; Uint8Array &#124; Uint8ClampedArray</code> | Output array |
+#### Returns:
+| Type           | Description |
+| -------------- | ----------- |
+| <code>T</code> |             |
+</article>
+
+
+---------------------------------------
+
+
+    

@@ -1,0 +1,179 @@
+---
+id: "PIXI.AlphaFilter.pixi_filter_alpha"
+title: "Class: PIXI.AlphaFilter"
+sidebar_label: "PIXI.AlphaFilter"
+custom_edit_url: null
+---
+
+[@pixi/filter-alpha](../modules/pixi_filter_alpha).AlphaFilter
+
+Simplest filter - applies alpha.
+Use this instead of Container's alpha property to avoid visual layering of individual elements. AlphaFilter applies alpha evenly across the entire display object and any opaque elements it contains. If elements are not opaque, they will blend with each other anyway.
+
+Very handy if you want to use common features of all filters&#58;
+
+1. Assign a blendMode to this filter, blend all elements inside display object with background.
+2. To use clipping in display coordinates, assign a filterArea to the same container that has this filter.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.AlphaFilter: <span><code>(alpha&#58; number) </code></span>
+
+#### Parameters:
+| Name  | Type                | Default          | Description                                         |
+| ----- | ------------------- | ---------------- | --------------------------------------------------- |
+| alpha | <code>number</code> | <code>1.0</code> | Amount of alpha from 0 to 1, where 0 is transparent |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.Filter](../classes/PIXI.Filter.pixi_core)
+
+## Members
+<article>
+
+### alpha: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+Coefficient for alpha multiplication
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### autoFit: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+If enabled, PixiJS will fit the filter area into boundaries for better performance. Switch it off if it does not work for specific shader.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### blendMode: <span><code>BLEND_MODES</code></span>
+- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+
+Sets the blend mode of the filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### enabled: <span><code>boolean</code></span>
+If enabled is true the filter is applied, if false it will not.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### legacy: <span><code>boolean</code></span>
+Legacy filters use position and uvs from attributes (set by filter system)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### multisample: <span><code>MSAA_QUALITY</code></span>
+The samples override of the filter instance.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### padding: <span><code>number</code></span>
+The padding of the filter. Some filters require extra space to breath such as a blur. Increasing this will add extra width and height to the bounds of the object that the filter is applied to.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### program: <span><code>Program</code></span>
+Program that the shader uses.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+The resolution of the filter. Setting this to be lower will lower the quality but increase the performance of the filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### state: <span><code>State</code></span>
+The WebGL state the filter requires to render.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniforms: <span><code>Dict&#60;any&#62;</code></span>
+Shader uniform values, shortcut for `uniformGroup.uniforms`.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### apply: <span><code>(filterManager&#58; PIXI.FilterSystem, input&#58; PIXI.RenderTexture, output&#58; PIXI.RenderTexture, clearMode&#58; PIXI.CLEAR_MODES, _currentState&#58; object) -&#62; void</code></span>
+Applies the filter
+
+#### Parameters:
+| Name          | Type                            | Description                                                                                                                                                       |
+| ------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| filterManager | <code>PIXI.FilterSystem</code>  | The renderer to retrieve the filter from                                                                                                                          |
+| input         | <code>PIXI.RenderTexture</code> | The input render target.                                                                                                                                          |
+| output        | <code>PIXI.RenderTexture</code> | The target to output to.                                                                                                                                          |
+| clearMode     | <code>PIXI.CLEAR_MODES</code>   | Should the output be cleared before rendering to it.                                                                                                              |
+| _currentState | <code>object</code>             | It's current state of filter. There are some useful properties in the currentState &#58; target, filters, sourceFrame, destinationFrame, renderTarget, resolution |
+</article>
+
+
+---------------------------------------
+
+
+    

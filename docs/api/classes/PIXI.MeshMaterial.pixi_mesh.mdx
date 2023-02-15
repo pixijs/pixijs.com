@@ -1,0 +1,159 @@
+---
+id: "PIXI.MeshMaterial.pixi_mesh"
+title: "Class: PIXI.MeshMaterial"
+sidebar_label: "PIXI.MeshMaterial"
+custom_edit_url: null
+---
+
+[@pixi/mesh](../modules/pixi_mesh).MeshMaterial
+
+
+Slightly opinionated default shader for PixiJS 2D objects.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.MeshMaterial: <span><code>(uSampler&#58; Texture, options&#58; IMeshMaterialOptions) </code></span>
+
+#### Parameters:
+| Name               | Type                              | Default               | Description                           |
+| ------------------ | --------------------------------- | --------------------- | ------------------------------------- |
+| uSampler           | <code>Texture</code>              | <code></code>         | Texture that material uses to render. |
+| options            | <code>IMeshMaterialOptions</code> | <code></code>         | Additional options                    |
+| options.alpha      | <code>number</code>               | <code>1</code>        | Default alpha.                        |
+| options.tint       | <code>number</code>               | <code>0xFFFFFF</code> | Default tint.                         |
+| options.pluginName | <code>string</code>               | <code>'batch'</code>  | Renderer plugin for batching.         |
+| options.program    | <code>PIXI.Program</code>         | <code>0xFFFFFF</code> | Custom program.                       |
+| options.uniforms   | <code>object</code>               | <code></code>         | Custom uniforms.                      |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.Shader](../classes/PIXI.Shader.pixi_core)
+
+## Members
+<article>
+
+### alpha: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+This gets automatically set by the object using this.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### batchable: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+`true` if shader can be batch with the renderer's batch system.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pluginName: <span><code>string</code></span>
+- **Default Value**: <code>'batch'</code>
+
+Renderer plugin for batching.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### program: <span><code>Program</code></span>
+Program that the shader uses.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### texture: <span><code>Texture</code></span>
+Reference to the texture being rendered.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### tint: <span><code>number</code></span>
+- **Default Value**: <code>0xFFFFFF</code>
+
+Multiply tint for the material.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniforms: <span><code>Dict&#60;any&#62;</code></span>
+Shader uniform values, shortcut for `uniformGroup.uniforms`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uvMatrix: <span><code>TextureMatrix</code></span>
+TextureMatrix instance for this Mesh, used to track Texture changes.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### update: <span><code>() -&#62; void</code></span>
+Gets called automatically by the Mesh. Intended to be overridden for custom [PIXI.MeshMaterial](../classes/PIXI.MeshMaterial.pixi_mesh) objects.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### render: <span><code>(renderer&#58; PIXI.CanvasRenderer, mesh&#58; PIXI.Mesh) -&#62; void</code></span>
+Renders the mesh using the Canvas renderer
+
+#### Parameters:
+| Name     | Type                             | Description          |
+| -------- | -------------------------------- | -------------------- |
+| renderer | <code>PIXI.CanvasRenderer</code> | The canvas renderer. |
+| mesh     | <code>PIXI.Mesh</code>           | Mesh to render.      |
+</article>
+
+
+---------------------------------------
+
+
+    

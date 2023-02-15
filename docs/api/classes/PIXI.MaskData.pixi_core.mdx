@@ -1,0 +1,172 @@
+---
+id: "PIXI.MaskData.pixi_core"
+title: "Class: PIXI.MaskData"
+sidebar_label: "PIXI.MaskData"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).MaskData
+
+Component for masked elements.
+Holds mask mode and temporary data about current mask.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.MaskData: <span><code>(maskObject&#58; PIXI.DisplayObject) </code></span>
+Create MaskData
+
+#### Parameters:
+| Name       | Type                            | Default           | Description                    |
+| ---------- | ------------------------------- | ----------------- | ------------------------------ |
+| maskObject | <code>PIXI.DisplayObject</code> | <code>null</code> | object that describes the mask |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### autoDetect: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+Whether we know the mask type beforehand
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### colorMask: <span><code>COLOR_MASK_BITS</code></span>
+Color mask.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### enabled: <span><code>boolean</code></span>
+If enabled is true the mask is applied, if false it will not.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### filter: <span><code>ISpriteMaskFilter</code></span>
+- **Default Value**: <code>null</code>
+
+The sprite mask filter. If set to `null`, the default sprite mask filter is used.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isMaskData: <span><code>boolean</code></span>
+Indicator of the type (always true for [PIXI.MaskData](../classes/PIXI.MaskData.pixi_core) objects)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### maskObject: <span><code>PIXI.DisplayObject</code></span>
+Which element we use to mask
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### multisample: <span><code>MSAA_QUALITY</code></span>
+- **Default Value**: <code>PIXI.Filter.defaultMultisample</code>
+
+Number of samples of the sprite mask filter. If set to `null`, the sample count of the current render target is used.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pooled: <span><code>boolean</code></span>
+Whether it belongs to MaskSystem pool
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+- **Default Value**: <code>null</code>
+
+Resolution of the sprite mask filter. If set to `null` or `0`, the resolution of the current render target is used.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### type: <span><code>MASK_TYPES</code></span>
+Mask type
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### copyCountersOrReset: <span><code>(maskAbove&#58; MaskData) -&#62; void</code></span>
+Copies counters from maskData above, called from pushMask().
+
+#### Parameters:
+| Name      | Type                  | Description |
+| --------- | --------------------- | ----------- |
+| maskAbove | <code>MaskData</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### reset: <span><code>() -&#62; void</code></span>
+Resets the mask data after popMask().
+
+</article>
+
+
+---------------------------------------
+
+
+    

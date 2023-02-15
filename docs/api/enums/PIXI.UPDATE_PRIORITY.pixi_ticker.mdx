@@ -1,0 +1,28 @@
+---
+id: "PIXI.UPDATE_PRIORITY.pixi_ticker"
+title: "Enum: PIXI.UPDATE_PRIORITY"
+sidebar_label: "PIXI.UPDATE_PRIORITY"
+custom_edit_url: null
+---
+
+[@pixi/ticker](../modules/pixi_ticker).[PIXI](../namespaces/PIXI).UPDATE_PRIORITY
+
+
+Represents the update priorities used by internal PIXI classes when registered with the [PIXI.Ticker](../classes/PIXI.Ticker.pixi_ticker) object. Higher priority items are updated first and lower priority items, such as render, should go later.
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+| Name                     | Default | Description                                                                                                 |
+| ------------------------ | ------- | ----------------------------------------------------------------------------------------------------------- |
+| <code>HIGH</code>        | 25      | High priority updating, used by [PIXI.AnimatedSprite](../classes/PIXI.AnimatedSprite.pixi_sprite_animated)  |
+| <code>INTERACTION</code> | 50      | Highest priority used for interaction events in [PIXI.EventSystem](../classes/PIXI.EventSystem.pixi_events) |
+| <code>LOW</code>         | -25     | Low priority used for [PIXI.Application](../classes/PIXI.Application.pixi_app) rendering.                   |
+| <code>NORMAL</code>      | 0       | Default priority for ticker events, see [PIXI.Ticker#add](../classes/PIXI.Ticker.pixi_ticker#add).          |
+| <code>UTILITY</code>     | -50     | Lowest priority used for [PIXI.BasePrepare](../classes/PIXI.BasePrepare.pixi_prepare) utility.              |
+
+    

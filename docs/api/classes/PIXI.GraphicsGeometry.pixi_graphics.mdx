@@ -1,0 +1,766 @@
+---
+id: "PIXI.GraphicsGeometry.pixi_graphics"
+title: "Class: PIXI.GraphicsGeometry"
+sidebar_label: "PIXI.GraphicsGeometry"
+custom_edit_url: null
+---
+
+[@pixi/graphics](../modules/pixi_graphics).GraphicsGeometry
+
+
+The Graphics class contains methods used to draw primitive shapes such as lines, circles and rectangles to the display, and to color and fill them.
+
+GraphicsGeometry is designed to not be continually updating the geometry since it's expensive to re-tesselate using **earcut**. Consider using [PIXI.Mesh](../classes/PIXI.Mesh.pixi_mesh) for this use-case, it's much faster.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI()
+</article>
+
+## Extends
+- [PIXI.BatchGeometry](../classes/PIXI.BatchGeometry.pixi_core)
+
+## Members
+<article>
+
+### BATCHABLE_SIZE: <span><code>number</code></span>
+- **Default Value**: <code>100</code>
+
+The maximum number of points to consider an object "batchable", able to be batched by the renderer's batch system.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### batchDirty: <span><code>number</code></span>
+- **Default Value**: <code>-1</code>
+
+Batches need to regenerated if the geometry is updated.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### batches: <span><code>Array&#60;PIXI.graphicsUtils.BatchPart&#62;</code></span>
+Intermediate abstract format sent to batch system. Can be converted to drawCalls or to batchable objects.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### bounds: <span><code>Bounds</code></span>
+Get the current bounds of the graphic geometry.
+Since 6.5.0, bounds of the graphics geometry are calculated based on the vertices of generated geometry. Since shapes or strokes with full transparency (`alpha: 0`) will not generate geometry, they are not considered when calculating bounds for the graphics geometry. See PR [#8343](https&#58;//github.com/pixijs/pixijs/pull/8343) and issue [#8623](https&#58;//github.com/pixijs/pixijs/pull/8623).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### boundsPadding: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Padding to add to the bounds.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### closePointEps: <span><code>number</code></span>
+- **Default Value**: <code>0.0001</code>
+
+Minimal distance between points that are considered different. Affects line tesselation.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### colors: <span><code>number[]</code></span>
+The collection of colors
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### drawCalls: <span><code>Array&#60;PIXI.BatchDrawCall&#62;</code></span>
+List of current draw calls drived from the batches.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### glVertexArrayObjects: <span><code>object</code></span>
+A map of renderer IDs to webgl VAOs
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### graphicsData: <span><code>Array&#60;PIXI.GraphicsData&#62;</code></span>
+The collection of drawn shapes.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### indices: <span><code>number[]</code></span>
+The indices of the vertices
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### instanceCount: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+Number of instances in this geometry, pass it to `GeometrySystem.draw()`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### instanced: <span><code>boolean</code></span>
+Whether the geometry is instanced.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### points: <span><code>number[]</code></span>
+An array of points to draw, 2 numbers per point
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### refCount: <span><code>number</code></span>
+Count of existing (not destroyed) meshes that reference this geometry.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textureIds: <span><code>number[]</code></span>
+Reference to the texture IDs.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uvs: <span><code>number[]</code></span>
+The UVs collection
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _bounds: <span><code>Bounds</code></span>
+Cached bounds.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _buffer: <span><code>Buffer</code></span>
+Buffer used for position, color, texture IDs
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _indexBuffer: <span><code>Buffer</code></span>
+Index buffer data
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### boundsDirty: <span><code>number</code></span>
+- **Default Value**: <code>-1</code>
+
+The bounds dirty flag.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cacheDirty: <span><code>number</code></span>
+- **Default Value**: <code>-1</code>
+
+Used to check if the cache is dirty.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clearDirty: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Used to detect if we cleared the graphicsData.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dirty: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Used to detect if the graphics object has changed.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### shapeIndex: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Index of the last batched shape in the stack of calls.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### addAttribute: <span><code>(id&#58; string, buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;, size&#58; number, normalized&#58; boolean, type&#58; TYPES, stride&#58; number, start&#58; number, instance&#58; boolean) -&#62; this</code></span>
+Adds an attribute to the geometry Note&#58; `stride` and `start` should be `undefined` if you dont know them, not 0!
+
+#### Parameters:
+| Name       | Type                                                  | Description                                                                                                            |
+| ---------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| id         | <code>string</code>                                   | the name of the attribute (matching up to a shader)                                                                    |
+| buffer     | <code>PIXI.Buffer &#124; Array&#60;number&#62;</code> | the buffer that holds the data of the attribute . You can also provide an Array and a buffer will be created from it.  |
+| size       | <code>number</code>                                   | the size of the attribute. If you have 2 floats per vertex (eg position x and y) this would be 2                       |
+| normalized | <code>boolean</code>                                  | should the data be normalized.                                                                                         |
+| type       | <code>TYPES</code>                                    | what type of number is the attribute. Check [PIXI.TYPES](../enums/PIXI.TYPES.pixi_constants) to see the ones available |
+| stride     | <code>number</code>                                   | How far apart, in bytes, the start of each value is. (used for interleaving data)                                      |
+| start      | <code>number</code>                                   | How far into the array to start reading values (used for interleaving data)                                            |
+| instance   | <code>boolean</code>                                  | Instancing flag                                                                                                        |
+#### Returns:
+| Type              | Description                          |
+| ----------------- | ------------------------------------ |
+| <code>this</code> | * Returns self, useful for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addIndex: <span><code>(buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;) -&#62; Geometry</code></span>
+Adds an index buffer to the geometry The index buffer contains integers, three for each triangle in the geometry, which reference the various attribute buffers (position, colour, UV coordinates, other UV coordinates, normal, …). There is only ONE index buffer.
+
+#### Parameters:
+| Name   | Type                                                  | Description                                                                                                             |
+| ------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| buffer | <code>PIXI.Buffer &#124; Array&#60;number&#62;</code> | The buffer that holds the data of the index buffer. You can also provide an Array and a buffer will be created from it. |
+#### Returns:
+| Type                  | Description                          |
+| --------------------- | ------------------------------------ |
+| <code>Geometry</code> | * Returns self, useful for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clear: <span><code>() -&#62; GraphicsGeometry</code></span>
+Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
+
+#### Returns:
+| Type                          | Description                                                    |
+| ----------------------------- | -------------------------------------------------------------- |
+| <code>GraphicsGeometry</code> | * This GraphicsGeometry object. Good for chaining method calls |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clone: <span><code>() -&#62; Geometry</code></span>
+Returns a clone of the geometry.
+
+#### Returns:
+| Type                  | Description                     |
+| --------------------- | ------------------------------- |
+| <code>Geometry</code> | * A new clone of this geometry. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### containsPoint: <span><code>(point&#58; IPointData) -&#62; boolean</code></span>
+Check to see if a point is contained within this geometry.
+
+#### Parameters:
+| Name  | Type                    | Description                       |
+| ----- | ----------------------- | --------------------------------- |
+| point | <code>IPointData</code> | Point to check if it's contained. |
+#### Returns:
+| Type                 | Description                                       |
+| -------------------- | ------------------------------------------------- |
+| <code>boolean</code> | `true` if the point is contained within geometry. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Destroys the GraphicsGeometry object.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dispose: <span><code>() -&#62; void</code></span>
+Disposes WebGL resources that are connected to this geometry.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### drawHole: <span><code>(shape&#58; PIXI.Circle &#124; PIXI.Ellipse &#124; PIXI.Polygon &#124; PIXI.Rectangle &#124; PIXI.RoundedRectangle, matrix&#58; Matrix) -&#62; GraphicsGeometry</code></span>
+Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
+
+#### Parameters:
+| Name   | Type                                                                                                                | Description                                   |
+| ------ | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| shape  | <code>PIXI.Circle &#124; PIXI.Ellipse &#124; PIXI.Polygon &#124; PIXI.Rectangle &#124; PIXI.RoundedRectangle</code> | The shape object to draw.                     |
+| matrix | <code>Matrix</code>                                                                                                 | Transform applied to the points of the shape. |
+#### Returns:
+| Type                          | Description                      |
+| ----------------------------- | -------------------------------- |
+| <code>GraphicsGeometry</code> | * Returns geometry for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### drawShape: <span><code>(shape&#58; PIXI.Circle &#124; PIXI.Ellipse &#124; PIXI.Polygon &#124; PIXI.Rectangle &#124; PIXI.RoundedRectangle, fillStyle&#58; FillStyle, lineStyle&#58; LineStyle, matrix&#58; Matrix) -&#62; GraphicsGeometry</code></span>
+Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
+
+#### Parameters:
+| Name      | Type                                                                                                                | Description                                   |
+| --------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| shape     | <code>PIXI.Circle &#124; PIXI.Ellipse &#124; PIXI.Polygon &#124; PIXI.Rectangle &#124; PIXI.RoundedRectangle</code> | The shape object to draw.                     |
+| fillStyle | <code>FillStyle</code>                                                                                              | Defines style of the fill.                    |
+| lineStyle | <code>LineStyle</code>                                                                                              | Defines style of the lines.                   |
+| matrix    | <code>Matrix</code>                                                                                                 | Transform applied to the points of the shape. |
+#### Returns:
+| Type                          | Description                      |
+| ----------------------------- | -------------------------------- |
+| <code>GraphicsGeometry</code> | * Returns geometry for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getAttribute: <span><code>(id&#58; string) -&#62; Attribute</code></span>
+Returns the requested attribute.
+
+#### Parameters:
+| Name | Type                | Description                        |
+| ---- | ------------------- | ---------------------------------- |
+| id   | <code>string</code> | The name of the attribute required |
+#### Returns:
+| Type                   | Description                |
+| ---------------------- | -------------------------- |
+| <code>Attribute</code> | * The attribute requested. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getBuffer: <span><code>(id&#58; string) -&#62; Buffer</code></span>
+Returns the requested buffer.
+
+#### Parameters:
+| Name | Type                | Description                      |
+| ---- | ------------------- | -------------------------------- |
+| id   | <code>string</code> | The name of the buffer required. |
+#### Returns:
+| Type                | Description             |
+| ------------------- | ----------------------- |
+| <code>Buffer</code> | * The buffer requested. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getIndex: <span><code>() -&#62; Buffer</code></span>
+Returns the index buffer
+
+#### Returns:
+| Type                | Description         |
+| ------------------- | ------------------- |
+| <code>Buffer</code> | * The index buffer. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getSize: <span><code>() -&#62; number</code></span>
+Get the size of the geometries, in vertices.
+
+#### Returns:
+| Type                | Description |
+| ------------------- | ----------- |
+| <code>number</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### interleave: <span><code>() -&#62; Geometry</code></span>
+This function modifies the structure so that all current attributes become interleaved into a single buffer This can be useful if your model remains static as it offers a little performance boost
+
+#### Returns:
+| Type                  | Description                          |
+| --------------------- | ------------------------------------ |
+| <code>Geometry</code> | * Returns self, useful for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### updateBatches: <span><code>() -&#62; void</code></span>
+Generates intermediate batch data. Either gets converted to drawCalls or used to convert to batch objects directly by the Graphics object.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _compareStyles: <span><code>(styleA&#58; FillStyle &#124; LineStyle, styleB&#58; FillStyle &#124; LineStyle) -&#62; boolean</code></span>
+Affinity check
+
+#### Parameters:
+| Name   | Type                                    | Description |
+| ------ | --------------------------------------- | ----------- |
+| styleA | <code>FillStyle &#124; LineStyle</code> |             |
+| styleB | <code>FillStyle &#124; LineStyle</code> |             |
+#### Returns:
+| Type                 | Description |
+| -------------------- | ----------- |
+| <code>boolean</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addColors: <span><code>(colors&#58; Array&#60;number&#62;, color&#58; number, alpha&#58; number, size&#58; number, offset&#58; number) -&#62; void</code></span>
+Add colors.
+
+#### Parameters:
+| Name   | Type                               | Description              |
+| ------ | ---------------------------------- | ------------------------ |
+| colors | <code>Array&#60;number&#62;</code> | List of colors to add to |
+| color  | <code>number</code>                | Color to add             |
+| alpha  | <code>number</code>                | Alpha to use             |
+| size   | <code>number</code>                | Number of colors to add  |
+| offset | <code>number</code>                |                          |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addTextureIds: <span><code>(textureIds&#58; Array&#60;number&#62;, id&#58; number, size&#58; number, offset&#58; number) -&#62; void</code></span>
+Add texture id that the shader/fragment wants to use.
+
+#### Parameters:
+| Name       | Type                               | Description |
+| ---------- | ---------------------------------- | ----------- |
+| textureIds | <code>Array&#60;number&#62;</code> |             |
+| id         | <code>number</code>                |             |
+| size       | <code>number</code>                |             |
+| offset     | <code>number</code>                |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addUvs: <span><code>(verts&#58; Array&#60;number&#62;, uvs&#58; Array&#60;number&#62;, texture&#58; Texture, start&#58; number, size&#58; number, matrix&#58; Matrix) -&#62; void</code></span>
+Generates the UVs for a shape.
+
+#### Parameters:
+| Name    | Type                               | Description                        |
+| ------- | ---------------------------------- | ---------------------------------- |
+| verts   | <code>Array&#60;number&#62;</code> | Vertices                           |
+| uvs     | <code>Array&#60;number&#62;</code> | UVs                                |
+| texture | <code>Texture</code>               | Reference to Texture               |
+| start   | <code>number</code>                | Index buffer start index.          |
+| size    | <code>number</code>                | The size/length for index buffer.  |
+| matrix  | <code>Matrix</code>                | Optional transform for all points. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### adjustUvs: <span><code>(uvs&#58; Array&#60;number&#62;, texture&#58; Texture, start&#58; number, size&#58; number) -&#62; void</code></span>
+Modify uvs array according to position of texture region Does not work with rotated or trimmed textures
+
+#### Parameters:
+| Name    | Type                               | Description               |
+| ------- | ---------------------------------- | ------------------------- |
+| uvs     | <code>Array&#60;number&#62;</code> | array                     |
+| texture | <code>Texture</code>               | region                    |
+| start   | <code>number</code>                | starting index for uvs    |
+| size    | <code>number</code>                | how many points to adjust |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### buildDrawCalls: <span><code>() -&#62; void</code></span>
+Converts intermediate batches data to drawCalls.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### calculateBounds: <span><code>() -&#62; void</code></span>
+Update the local bounds of the object. Expensive to use performance-wise.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### invalidate: <span><code>() -&#62; void</code></span>
+Call if you changed graphicsData manually. Empties all batch buffers.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isBatchable: <span><code>() -&#62; boolean</code></span>
+Checks to see if this graphics geometry can be batched. Currently it needs to be small enough and not contain any native lines.
+
+#### Returns:
+| Type                 | Description |
+| -------------------- | ----------- |
+| <code>boolean</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### packAttributes: <span><code>() -&#62; void</code></span>
+Packs attributes to single buffer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### packBatches: <span><code>() -&#62; void</code></span>
+Offset the indices so that it works with the batcher.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### processFill: <span><code>(data&#58; GraphicsData) -&#62; void</code></span>
+Process fill part of Graphics.
+
+#### Parameters:
+| Name | Type                      | Description |
+| ---- | ------------------------- | ----------- |
+| data | <code>GraphicsData</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### processHoles: <span><code>(holes&#58; Array&#60;GraphicsData&#62;) -&#62; void</code></span>
+Process the holes data.
+
+#### Parameters:
+| Name  | Type                                     | Description |
+| ----- | ---------------------------------------- | ----------- |
+| holes | <code>Array&#60;GraphicsData&#62;</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### processLine: <span><code>(data&#58; GraphicsData) -&#62; void</code></span>
+Process line part of Graphics.
+
+#### Parameters:
+| Name | Type                      | Description |
+| ---- | ------------------------- | ----------- |
+| data | <code>GraphicsData</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### transformPoints: <span><code>(points&#58; Array&#60;number&#62;, matrix&#58; Matrix) -&#62; void</code></span>
+Transform points using matrix.
+
+#### Parameters:
+| Name   | Type                               | Description         |
+| ------ | ---------------------------------- | ------------------- |
+| points | <code>Array&#60;number&#62;</code> | Points to transform |
+| matrix | <code>Matrix</code>                | Transform matrix    |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### validateBatching: <span><code>() -&#62; boolean</code></span>
+Test geometry for batching process.
+
+#### Returns:
+| Type                 | Description |
+| -------------------- | ----------- |
+| <code>boolean</code> |             |
+</article>
+
+
+---------------------------------------
+
+
+    

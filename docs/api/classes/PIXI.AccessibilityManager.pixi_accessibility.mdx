@@ -1,0 +1,123 @@
+---
+id: "PIXI.AccessibilityManager.pixi_accessibility"
+title: "Class: PIXI.AccessibilityManager"
+sidebar_label: "PIXI.AccessibilityManager"
+custom_edit_url: null
+---
+
+[@pixi/accessibility](../modules/pixi_accessibility).AccessibilityManager
+
+
+The Accessibility manager recreates the ability to tab and have content read by screen readers. This is very important as it can possibly help people with disabilities access PixiJS content.
+
+A DisplayObject can be made accessible just like it can be made interactive. This manager will map the events as if the mouse was being used, minimizing the effort required to implement.
+
+An instance of this class is automatically created by default, and can be found at `renderer.plugins.accessibility`
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.AccessibilityManager: <span><code>(renderer&#58; PIXI.CanvasRenderer &#124; PIXI.Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                                                  | Default       | Description                         |
+| -------- | ----------------------------------------------------- | ------------- | ----------------------------------- |
+| renderer | <code>PIXI.CanvasRenderer &#124; PIXI.Renderer</code> | <code></code> | A reference to the current renderer |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### debug: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Setting this to true will visually show the divs.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isActive: <span><code>boolean</code></span>
+Value of `true` if accessibility is currently active and accessibility layers are showing.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isMobileAccessibility: <span><code>boolean</code></span>
+Value of `true` if accessibility is enabled for touch devices.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderer: <span><code>PIXI.CanvasRenderer &#124; PIXI.Renderer</code></span>
+The renderer this accessibility manager works for.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### capHitArea: <span><code>(hitArea&#58; PIXI.Rectangle) -&#62; void</code></span>
+Adjust the hit area based on the bounds of a display object
+
+#### Parameters:
+| Name    | Type                        | Description         |
+| ------- | --------------------------- | ------------------- |
+| hitArea | <code>PIXI.Rectangle</code> | Bounds of the child |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Destroys the accessibility manager
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### updateDebugHTML: <span><code>(div&#58; HTMLElement) -&#62; void</code></span>
+private function that will visually add the information to the accessability div
+
+#### Parameters:
+| Name | Type                     | Description |
+| ---- | ------------------------ | ----------- |
+| div  | <code>HTMLElement</code> |             |
+</article>
+
+
+---------------------------------------
+
+
+    

@@ -1,0 +1,345 @@
+---
+id: "PIXI.AbstractMultiResource.pixi_core"
+title: "Class: PIXI.AbstractMultiResource"
+sidebar_label: "PIXI.AbstractMultiResource"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).AbstractMultiResource
+
+
+Resource that can manage several resource (items) inside. All resources need to have the same pixel size. Parent class for CubeResource and ArrayResource
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.AbstractMultiResource: <span><code>(length&#58; number, options&#58; ISize) </code></span>
+
+#### Parameters:
+| Name           | Type                | Default       | Description                         |
+| -------------- | ------------------- | ------------- | ----------------------------------- |
+| length         | <code>number</code> | <code></code> |                                     |
+| options        | <code>ISize</code>  | <code></code> | Options to for Resource constructor |
+| options.width  | <code>number</code> | <code></code> | Width of the resource               |
+| options.height | <code>number</code> | <code></code> | Height of the resource              |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.Resource](../classes/PIXI.Resource.pixi_core)
+
+## Members
+<article>
+
+### baseTexture: <span><code>BaseTexture</code></span>
+Bound baseTexture, there can only be one.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroyed: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+If resource has been destroyed.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### height: <span><code>number</code></span>
+The height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### internal: <span><code>boolean</code></span>
+`true` if resource is created by BaseTexture useful for doing cleanup with BaseTexture destroy and not cleaning up resources that were created externally.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### itemDirtyIds: <span><code>Array&#60;number&#62;</code></span>
+Dirty IDs for each part.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### items: <span><code>Array&#60;BaseTexture&#62;</code></span>
+Collection of partial baseTextures that correspond to resources.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### length: <span><code>number</code></span>
+Number of elements in array.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### src: <span><code>string</code></span>
+The url of the resource
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### valid: <span><code>boolean</code></span>
+Has been validated
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width: <span><code>number</code></span>
+The width of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _height: <span><code>number</code></span>
+Internal height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _width: <span><code>number</code></span>
+Internal width of the resource.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### addBaseTextureAt: <span><code>(baseTexture&#58; BaseTexture, index&#58; number) -&#62; this</code></span>
+Set a baseTexture by ID
+
+#### Parameters:
+| Name        | Type                     | Description                         |
+| ----------- | ------------------------ | ----------------------------------- |
+| baseTexture | <code>BaseTexture</code> |                                     |
+| index       | <code>number</code>      | Zero-based index of resource to set |
+#### Returns:
+| Type              | Description             |
+| ----------------- | ----------------------- |
+| <code>this</code> | * Instance for chaining |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addResourceAt: <span><code>(resource&#58; Resource, index&#58; number) -&#62; this</code></span>
+Set a resource by ID
+
+#### Parameters:
+| Name     | Type                  | Description                         |
+| -------- | --------------------- | ----------------------------------- |
+| resource | <code>Resource</code> |                                     |
+| index    | <code>number</code>   | Zero-based index of resource to set |
+#### Returns:
+| Type              | Description             |
+| ----------------- | ----------------------- |
+| <code>this</code> | * Instance for chaining |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### bind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
+Set the parent base texture.
+
+#### Parameters:
+| Name        | Type                     | Description |
+| ----------- | ------------------------ | ----------- |
+| baseTexture | <code>BaseTexture</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Call when destroying resource, unbind any BaseTexture object before calling this method, as reference counts are maintained internally.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dispose: <span><code>() -&#62; void</code></span>
+Destroy this BaseImageResource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### load: <span><code>() -&#62; Promise&#60;this&#62;</code></span>
+Load all the resources simultaneously
+
+#### Returns:
+| Type                               | Description             |
+| ---------------------------------- | ----------------------- |
+| <code>Promise&#60;this&#62;</code> | * When load is resolved |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resize: <span><code>(width&#58; number, height&#58; number) -&#62; void</code></span>
+Trigger a resize event
+
+#### Parameters:
+| Name   | Type                | Description |
+| ------ | ------------------- | ----------- |
+| width  | <code>number</code> | X dimension |
+| height | <code>number</code> | Y dimension |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### style: <span><code>(_renderer&#58; Renderer, _baseTexture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code></span>
+Set the style, optional to override
+
+#### Parameters:
+| Name         | Type                     | Description                             |
+| ------------ | ------------------------ | --------------------------------------- |
+| _renderer    | <code>Renderer</code>    | yeah, renderer!                         |
+| _baseTexture | <code>BaseTexture</code> | the texture                             |
+| _glTexture   | <code>GLTexture</code>   | texture instance for this webgl context |
+#### Returns:
+| Type                 | Description         |
+| -------------------- | ------------------- |
+| <code>boolean</code> | * `true` is success |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### unbind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
+Unset the parent base texture.
+
+#### Parameters:
+| Name        | Type                     | Description |
+| ----------- | ------------------------ | ----------- |
+| baseTexture | <code>BaseTexture</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### update: <span><code>() -&#62; void</code></span>
+Has been updated trigger event.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### upload: <span><code>(renderer&#58; Renderer, baseTexture&#58; BaseTexture, glTexture&#58; GLTexture) -&#62; boolean</code></span>
+Uploads the texture or returns false if it cant for some reason. Override this.
+
+#### Parameters:
+| Name        | Type                     | Description                             |
+| ----------- | ------------------------ | --------------------------------------- |
+| renderer    | <code>Renderer</code>    | yeah, renderer!                         |
+| baseTexture | <code>BaseTexture</code> | the texture                             |
+| glTexture   | <code>GLTexture</code>   | texture instance for this webgl context |
+#### Returns:
+| Type                 | Description       |
+| -------------------- | ----------------- |
+| <code>boolean</code> | * true is success |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### initFromArray: <span><code>(resources&#58; Array&#60;any&#62;, options&#58; IAutoDetectOptions) -&#62; void</code></span>
+Used from ArrayResource and CubeResource constructors.
+
+#### Parameters:
+| Name      | Type                            | Description                                                                                  |
+| --------- | ------------------------------- | -------------------------------------------------------------------------------------------- |
+| resources | <code>Array&#60;any&#62;</code> | Can be resources, image elements, canvas, etc. , length should be same as constructor length |
+| options   | <code>IAutoDetectOptions</code> | Detect options for resources                                                                 |
+</article>
+
+
+---------------------------------------
+
+
+    

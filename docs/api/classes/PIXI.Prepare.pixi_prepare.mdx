@@ -1,0 +1,218 @@
+---
+id: "PIXI.Prepare.pixi_prepare"
+title: "Class: PIXI.Prepare"
+sidebar_label: "PIXI.Prepare"
+custom_edit_url: null
+---
+
+[@pixi/prepare](../modules/pixi_prepare).Prepare
+
+
+The prepare plugin provides renderer-specific plugins for pre-rendering DisplayObjects. These plugins are useful for asynchronously preparing and uploading to the GPU assets, textures, graphics waiting to be displayed.
+
+Do not instantiate this plugin directly. It is available from the `renderer.prepare` property.
+
+
+```js
+ import { Application, Graphics } from 'pixi.js';
+
+ // Create a new application (prepare will be auto-added to renderer)
+ const app = new Application();
+ document.body.appendChild(app.view);
+
+ // Don't start rendering right away
+ app.stop();
+
+ // Create a display object
+ const rect = new Graphics()
+     .beginFill(0x00ff00)
+     .drawRect(40, 40, 200, 200);
+
+ // Add to the stage
+ app.stage.addChild(rect);
+
+ // Don't start rendering until the graphic is uploaded to the GPU
+ app.renderer.prepare.upload(app.stage, () => {
+     app.start();
+ });
+```
+      
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Prepare: <span><code>(renderer&#58; PIXI.Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                       | Default       | Description                         |
+| -------- | -------------------------- | ------------- | ----------------------------------- |
+| renderer | <code>PIXI.Renderer</code> | <code></code> | A reference to the current renderer |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.BasePrepare](../classes/PIXI.BasePrepare.pixi_prepare)
+
+## Members
+<article>
+
+### addHooks: <span><code>Array&#60;Function&#62;</code></span>
+Collection of additional hooks for finding assets.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### completes: <span><code>Array&#60;Function&#62;</code></span>
+Callback to call after completed.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ticking: <span><code>boolean</code></span>
+If prepare is ticking (running).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uploadHooks: <span><code>Array&#60;Function&#62;</code></span>
+Collection of additional hooks for processing assets.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### queue: <span><code>Array&#60;any&#62;</code></span>
+Collection of items to uploads at once.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderer: <span><code>IRenderer</code></span>
+Reference to the renderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uploadHookHelper: <span><code>any</code></span>
+The only real difference between CanvasPrepare and Prepare is what they pass to upload hooks. That different parameter is stored here.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### add: <span><code>(item&#58; PIXI.DisplayObject &#124; PIXI.Container &#124; PIXI.BaseTexture &#124; PIXI.Texture &#124; PIXI.Graphics &#124; PIXI.Text &#124; unknown) -&#62; this</code></span>
+Manually add an item to the uploading queue.
+
+#### Parameters:
+| Name | Type                                                                                                                                                   | Description                |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| item | <code>PIXI.DisplayObject &#124; PIXI.Container &#124; PIXI.BaseTexture &#124; PIXI.Texture &#124; PIXI.Graphics &#124; PIXI.Text &#124; unknown</code> | Object to add to the queue |
+#### Returns:
+| Type              | Description                      |
+| ----------------- | -------------------------------- |
+| <code>this</code> | Instance of plugin for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Destroys the plugin, don't use after this.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### registerFindHook: <span><code>(addHook&#58; Function) -&#62; this</code></span>
+Adds hooks for finding items.
+
+#### Parameters:
+| Name    | Type                  | Description                                                                                                                            |
+| ------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| addHook | <code>Function</code> | Function call that takes two parameters&#58; `item:*, queue:Array`function must return `true` if it was able to add item to the queue. |
+#### Returns:
+| Type              | Description                      |
+| ----------------- | -------------------------------- |
+| <code>this</code> | Instance of plugin for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### registerUploadHook: <span><code>(uploadHook&#58; Function) -&#62; this</code></span>
+Adds hooks for uploading items.
+
+#### Parameters:
+| Name       | Type                  | Description                                                                                                                                           |
+| ---------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| uploadHook | <code>Function</code> | Function call that takes two parameters&#58; `prepare:CanvasPrepare, item:*` and function must return `true` if it was able to handle upload of item. |
+#### Returns:
+| Type              | Description                      |
+| ----------------- | -------------------------------- |
+| <code>this</code> | Instance of plugin for chaining. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### upload: <span><code>(item&#58; PIXI.DisplayObject &#124; PIXI.Container &#124; PIXI.BaseTexture &#124; PIXI.Texture &#124; PIXI.Graphics &#124; PIXI.Text) -&#62; Promise&#60;void&#62;</code></span>
+Upload all the textures and graphics to the GPU.
+
+#### Parameters:
+| Name | Type                                                                                                                                    | Description                                                                                                                                                                                                        |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| item | <code>PIXI.DisplayObject &#124; PIXI.Container &#124; PIXI.BaseTexture &#124; PIXI.Texture &#124; PIXI.Graphics &#124; PIXI.Text</code> | Container or display object to search for items to upload or the items to upload themselves, or optionally ommitted, if items have been added using [`prepare.add`](../classes/PIXI.BasePrepare.pixi_prepare#add). |
+#### Returns:
+| Type                               | Description |
+| ---------------------------------- | ----------- |
+| <code>Promise&#60;void&#62;</code> |             |
+</article>
+
+
+---------------------------------------
+
+
+    

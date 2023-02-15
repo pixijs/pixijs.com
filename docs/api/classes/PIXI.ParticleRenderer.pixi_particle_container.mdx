@@ -1,0 +1,219 @@
+---
+id: "PIXI.ParticleRenderer.pixi_particle_container"
+title: "Class: PIXI.ParticleRenderer"
+sidebar_label: "PIXI.ParticleRenderer"
+custom_edit_url: null
+---
+
+[@pixi/particle-container](../modules/pixi_particle_container).ParticleRenderer
+
+
+Renderer for Particles that is designer for speed over feature set.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.ParticleRenderer: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                               |
+| -------- | --------------------- | ------------- | ----------------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this sprite batch works for. |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.ObjectRenderer](../classes/PIXI.ObjectRenderer.pixi_core)
+
+## Members
+<article>
+
+### shader: <span><code>Shader</code></span>
+The default shader that is used if a sprite doesn't have a more specific one.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### state: <span><code>State</code></span>
+The WebGL state in which this renderer will work.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderer: <span><code>Renderer</code></span>
+The renderer this manager works for.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### destroy: <span><code>() -&#62; void</code></span>
+Destroys the ParticleRenderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### flush: <span><code>() -&#62; void</code></span>
+Stub method that should be used to empty the current batch by rendering objects now.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### render: <span><code>(container&#58; ParticleContainer) -&#62; void</code></span>
+Renders the particle container object.
+
+#### Parameters:
+| Name      | Type                           | Description                                          |
+| --------- | ------------------------------ | ---------------------------------------------------- |
+| container | <code>ParticleContainer</code> | The container to render using this ParticleRenderer. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### start: <span><code>() -&#62; void</code></span>
+Stub method that initializes any state required before rendering starts. It is different from the `prerender`signal, which occurs every frame, in that it is called whenever an object requests _this_ renderer specifically.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stop: <span><code>() -&#62; void</code></span>
+Stops the renderer. It should free up any state and become dormant.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uploadPosition: <span><code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code></span>
+Uploads the position.
+
+#### Parameters:
+| Name       | Type                  | Description                                                    |
+| ---------- | --------------------- | -------------------------------------------------------------- |
+| children   | <code>Sprite[]</code> | the array of sprites to render                                 |
+| startIndex | <code>number</code>   | the index to start from in the children array                  |
+| amount     | <code>number</code>   | the amount of children that will have their positions uploaded |
+| array      | <code>number[]</code> | The vertices to upload.                                        |
+| stride     | <code>number</code>   | Stride to use for iteration.                                   |
+| offset     | <code>number</code>   | Offset to start at.                                            |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uploadRotation: <span><code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code></span>
+Uploads the rotation.
+
+#### Parameters:
+| Name       | Type                  | Description                                                   |
+| ---------- | --------------------- | ------------------------------------------------------------- |
+| children   | <code>Sprite[]</code> | the array of sprites to render                                |
+| startIndex | <code>number</code>   | the index to start from in the children array                 |
+| amount     | <code>number</code>   | the amount of children that will have their rotation uploaded |
+| array      | <code>number[]</code> | The vertices to upload.                                       |
+| stride     | <code>number</code>   | Stride to use for iteration.                                  |
+| offset     | <code>number</code>   | Offset to start at.                                           |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uploadTint: <span><code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code></span>
+Uploads the tint.
+
+#### Parameters:
+| Name       | Type                  | Description                                                   |
+| ---------- | --------------------- | ------------------------------------------------------------- |
+| children   | <code>Sprite[]</code> | the array of sprites to render                                |
+| startIndex | <code>number</code>   | the index to start from in the children array                 |
+| amount     | <code>number</code>   | the amount of children that will have their rotation uploaded |
+| array      | <code>number[]</code> | The vertices to upload.                                       |
+| stride     | <code>number</code>   | Stride to use for iteration.                                  |
+| offset     | <code>number</code>   | Offset to start at.                                           |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uploadUvs: <span><code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code></span>
+Uploads the UVs.
+
+#### Parameters:
+| Name       | Type                  | Description                                                   |
+| ---------- | --------------------- | ------------------------------------------------------------- |
+| children   | <code>Sprite[]</code> | the array of sprites to render                                |
+| startIndex | <code>number</code>   | the index to start from in the children array                 |
+| amount     | <code>number</code>   | the amount of children that will have their rotation uploaded |
+| array      | <code>number[]</code> | The vertices to upload.                                       |
+| stride     | <code>number</code>   | Stride to use for iteration.                                  |
+| offset     | <code>number</code>   | Offset to start at.                                           |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uploadVertices: <span><code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code></span>
+Uploads the vertices.
+
+#### Parameters:
+| Name       | Type                  | Description                                                   |
+| ---------- | --------------------- | ------------------------------------------------------------- |
+| children   | <code>Sprite[]</code> | the array of sprites to render                                |
+| startIndex | <code>number</code>   | the index to start from in the children array                 |
+| amount     | <code>number</code>   | the amount of children that will have their vertices uploaded |
+| array      | <code>number[]</code> | The vertices to upload.                                       |
+| stride     | <code>number</code>   | Stride to use for iteration.                                  |
+| offset     | <code>number</code>   | Offset to start at.                                           |
+</article>
+
+
+---------------------------------------
+
+
+    

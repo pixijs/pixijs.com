@@ -1,0 +1,339 @@
+---
+id: "PIXI.settings.pixi_settings"
+title: "Namespace: PIXI.settings"
+sidebar_label: "PIXI.settings"
+custom_edit_url: null
+---
+
+[@pixi/settings](../modules/pixi_settings).[PIXI](../namespaces/PIXI).settings
+
+
+User's customizable globals for overriding the default PIXI settings, such as a renderer's default resolution, framerate, float precision, etc.
+
+
+```js
+ import { settings, ENV } from 'pixi.js';
+
+ // Use the native window resolution as the default resolution
+ // will support high-density displays when rendering
+ settings.RESOLUTION = window.devicePixelRatio;
+
+ // Used for older v1 WebGL devices for backwards compatibility
+ settings.PREFER_ENV = ENV.WEBGL_LEGACY;
+```
+      
+
+// TODO: @see
+
+        
+
+
+
+
+
+
+
+## Members
+<article>
+
+### ADAPTER: <span><code>PIXI.IAdapter</code></span>
+- **Default Value**: <code>PIXI.BrowserAdapter</code>
+
+This adapter is used to call methods that are platform dependent. For example `document.createElement` only runs on the web but fails in node environments. This allows us to support more platforms by abstracting away specific implementations per platform.
+
+By default the adapter is set to work in the browser. However you can create your own by implementing the `IAdapter` interface. See `IAdapter` for more information.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ANISOTROPIC_LEVEL: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### CAN_UPLOAD_SAME_BUFFER: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Can we upload the same buffer in a single frame?
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### CREATE_IMAGE_BITMAP: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Enables bitmap creation before image load. This feature is experimental.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### FAIL_IF_MAJOR_PERFORMANCE_CAVEAT: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Should the `failIfMajorPerformanceCaveat` flag be enabled as a context option used in the `isWebGLSupported` function. If set to true, a WebGL renderer can fail to be created if the browser thinks there could be performance issues when using WebGL.
+
+In PixiJS v6 this has changed from true to false by default, to allow WebGL to work in as many scenarios as possible. However, some users may have a poor experience, for example, if a user has a gpu or driver version blacklisted by the browser.
+
+If your application requires high performance rendering, you may wish to set this to false. We recommend one of two options if you decide to set this flag to false&#58;
+
+1&#58; Use the `pixi.js-legacy` package, which includes a Canvas renderer as a fallback in case high performance WebGL is not supported.
+
+2&#58; Call `isWebGLSupported` (which if found in the PIXI.utils package) in your code before attempting to create a PixiJS renderer, and show an error message to the user if the function returns false, explaining that their device & browser combination does not support high performance WebGL. This is a much better strategy than trying to create a PixiJS renderer and finding it then fails.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### FILTER_MULTISAMPLE: <span><code>PIXI.MSAA_QUALITY</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Default filter samples.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### FILTER_RESOLUTION: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Default filter resolution.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### GC_MAX_CHECK_COUNT: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Default Garbage Collection maximum check count.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### GC_MAX_IDLE: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Default Garbage Collection max idle.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### GC_MODE: <span><code>PIXI.GC_MODES</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Default Garbage Collection mode.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### MESH_CANVAS_PADDING: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Default `canvasPadding` for canvas-based Mesh rendering.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### MIPMAP_TEXTURES: <span><code>PIXI.MIPMAP_MODES</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### PRECISION_FRAGMENT: <span><code>PIXI.PRECISION</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Default specify float precision in fragment shader.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### PRECISION_VERTEX: <span><code>PIXI.PRECISION</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Default specify float precision in vertex shader.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### PREFER_ENV: <span><code>number</code></span>
+- **Default Value**: <code>PIXI.ENV.WEBGL2</code>
+
+The maximum support for using WebGL. If a device does not support WebGL version, for instance WebGL 2, it will still attempt to fallback support to WebGL 1\. If you want to explicitly remove feature support to target a more stable baseline, prefer a lower environment.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### RENDER_OPTIONS: <span><code>object</code></span>
+The default render options if none are supplied to [PIXI.Renderer](../classes/PIXI.Renderer.pixi_core) or [PIXI.CanvasRenderer](../classes/PIXI.CanvasRenderer.pixi_canvas_renderer).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### RESOLUTION: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+Default resolution / device pixel ratio of the renderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### RETINA_PREFIX: <span><code>RegExp</code></span>
+- **Default Value**: <code>/&#64;([0-9\.]+)x/</code>
+
+The prefix that denotes a URL is for a retina asset.
+
+```js
+`@2x`
+```
+      
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ROUND_PIXELS: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+If true PixiJS will Math.floor() x/y values when rendering, stopping pixel interpolation. Advantages can include sharper image quality (like text) and faster rendering on canvas. The main disadvantage is movement of objects may appear less smooth.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### SCALE_MODE: <span><code>PIXI.SCALE_MODES</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### SORTABLE_CHILDREN: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Sets the default value for the container property 'sortableChildren'.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### SPRITE_BATCH_SIZE: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+The default sprite batch size.
+The default aims to balance desktop and mobile devices.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### SPRITE_MAX_TEXTURES: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+The maximum textures that this device supports.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### STRICT_TEXTURE_CACHE: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+If set to `true`, _only_ Textures and BaseTexture objects stored in the caches ([TextureCache](../namespaces/PIXI.utils.pixi_utils#TextureCache) and [BaseTextureCache](../namespaces/PIXI.utils.pixi_utils#BaseTextureCache)) can be used when calling [Texture.from](../classes/PIXI.Texture.pixi_core#from) or [BaseTexture.from](../classes/PIXI.BaseTexture.pixi_core#from). Otherwise, these `from` calls throw an exception. Using this property can be useful if you want to enforce preloading all assets with [Loader](../namespaces/PIXI.Assets.pixi_assets).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### TARGET_FPMS: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Target frames per millisecond.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### UPLOADS_PER_FRAME: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+Default number of uploads per frame using prepare plugin.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### WRAP_MODE: <span><code>PIXI.WRAP_MODES</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+
+</article>
+
+
+---------------------------------------
+
+
+
+
+
+    

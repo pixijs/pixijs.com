@@ -1,8 +1,0 @@
----
-id: "pixi_canvas_display"
-title: "Module: @pixi/canvas-display"
-sidebar_label: "@pixi/canvas-display"
-sidebar_position: 0
-custom_edit_url: null
----
-

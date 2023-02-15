@@ -1,0 +1,133 @@
+---
+id: "PIXI.Circle.pixi_math"
+title: "Class: PIXI.Circle"
+sidebar_label: "PIXI.Circle"
+custom_edit_url: null
+---
+
+[@pixi/math](../modules/pixi_math).Circle
+
+
+The Circle object is used to help draw graphics and can also be used to specify a hit area for displayObjects.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Circle: <span><code>(x&#58; number, y&#58; number, radius&#58; number) </code></span>
+
+#### Parameters:
+| Name   | Type                | Default        | Description                                   |
+| ------ | ------------------- | -------------- | --------------------------------------------- |
+| x      | <code>number</code> | <code>0</code> | The X coordinate of the center of this circle |
+| y      | <code>number</code> | <code>0</code> | The Y coordinate of the center of this circle |
+| radius | <code>number</code> | <code>0</code> | The radius of the circle                      |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### radius: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### type: <span><code>SHAPES.CIRC</code></span>
+- **Default Value**: <code>PIXI.SHAPES.CIRC</code>
+
+The type of the object, mainly used to avoid `instanceof` checks
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### x: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### y: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### clone: <span><code>() -&#62; Circle</code></span>
+Creates a clone of this Circle instance
+
+#### Returns:
+| Type                | Description          |
+| ------------------- | -------------------- |
+| <code>Circle</code> | A copy of the Circle |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### contains: <span><code>(x&#58; number, y&#58; number) -&#62; boolean</code></span>
+Checks whether the x and y coordinates given are contained within this circle
+
+#### Parameters:
+| Name | Type                | Description                           |
+| ---- | ------------------- | ------------------------------------- |
+| x    | <code>number</code> | The X coordinate of the point to test |
+| y    | <code>number</code> | The Y coordinate of the point to test |
+#### Returns:
+| Type                 | Description                                        |
+| -------------------- | -------------------------------------------------- |
+| <code>boolean</code> | Whether the x/y coordinates are within this Circle |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getBounds: <span><code>() -&#62; Rectangle</code></span>
+Returns the framing rectangle of the circle as a Rectangle object
+
+#### Returns:
+| Type                   | Description           |
+| ---------------------- | --------------------- |
+| <code>Rectangle</code> | The framing rectangle |
+</article>
+
+
+---------------------------------------
+
+
+    

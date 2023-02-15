@@ -1,0 +1,253 @@
+---
+id: "PIXI.GeometrySystem.pixi_core"
+title: "Class: PIXI.GeometrySystem"
+sidebar_label: "PIXI.GeometrySystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).GeometrySystem
+
+
+System plugin to the renderer to manage geometry.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.GeometrySystem: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                         |
+| -------- | --------------------- | ------------- | ----------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this System works for. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### canUseUInt32ElementIndex: <span><code>boolean</code></span>
+`true` if support `gl.UNSIGNED_INT` in `gl.drawElements` or `gl.drawElementsInstanced`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### hasInstance: <span><code>boolean</code></span>
+`true` if has `ANGLE_instanced_arrays` extension.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### hasVao: <span><code>boolean</code></span>
+`true` if we has `*_vertex_array_object` extension.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### managedGeometries: <span><code>&#123; [key&#58; number]&#58; Geometry &#125;</code></span>
+Cache for all geometries by id, used in case renderer gets destroyed or for profiling.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### bind: <span><code>(geometry&#58; Geometry, shader&#58; Shader) -&#62; void</code></span>
+Binds geometry so that is can be drawn. Creating a Vao if required
+
+#### Parameters:
+| Name     | Type                  | Description                        |
+| -------- | --------------------- | ---------------------------------- |
+| geometry | <code>Geometry</code> | Instance of geometry to bind.      |
+| shader   | <code>Shader</code>   | Instance of shader to use vao for. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### disposeAll: <span><code>(contextLost&#58; boolean) -&#62; void</code></span>
+Dispose all WebGL resources of all managed geometries.
+
+#### Parameters:
+| Name        | Type                 | Description                                        |
+| ----------- | -------------------- | -------------------------------------------------- |
+| contextLost | <code>boolean</code> | If context was lost, we suppress `gl.delete` calls |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### disposeGeometry: <span><code>(geometry&#58; Geometry, contextLost&#58; boolean) -&#62; void</code></span>
+Disposes geometry.
+
+#### Parameters:
+| Name        | Type                  | Description                                        |
+| ----------- | --------------------- | -------------------------------------------------- |
+| geometry    | <code>Geometry</code> | Geometry with buffers. Only VAO will be disposed   |
+| contextLost | <code>boolean</code>  | If context was lost, we suppress deleteVertexArray |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### draw: <span><code>(type&#58; DRAW_MODES, size&#58; number, start&#58; number, instanceCount&#58; number) -&#62; this</code></span>
+Draws the currently bound geometry.
+
+#### Parameters:
+| Name          | Type                    | Description                                                                                                            |
+| ------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| type          | <code>DRAW_MODES</code> | The type primitive to render.                                                                                          |
+| size          | <code>number</code>     | The number of elements to be rendered. If not specified, all vertices after the starting vertex will be drawn.         |
+| start         | <code>number</code>     | The starting vertex in the geometry to start drawing from. If not specified, drawing will start from the first vertex. |
+| instanceCount | <code>number</code>     | The number of instances of the set of elements to execute. If not specified, all instances will be drawn.              |
+#### Returns:
+| Type              | Description |
+| ----------------- | ----------- |
+| <code>this</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### reset: <span><code>() -&#62; void</code></span>
+Reset and unbind any active VAO and geometry.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### updateBuffers: <span><code>() -&#62; void</code></span>
+Update buffers of the currently bound geometry.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### activateVao: <span><code>(geometry&#58; Geometry, program&#58; Program) -&#62; void</code></span>
+Activate vertex array object.
+
+#### Parameters:
+| Name     | Type                  | Description              |
+| -------- | --------------------- | ------------------------ |
+| geometry | <code>Geometry</code> | Geometry instance.       |
+| program  | <code>Program</code>  | Shader program instance. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### checkCompatibility: <span><code>(geometry&#58; Geometry, program&#58; Program) -&#62; void</code></span>
+Check compatibility between a geometry and a program
+
+#### Parameters:
+| Name     | Type                  | Description        |
+| -------- | --------------------- | ------------------ |
+| geometry | <code>Geometry</code> | Geometry instance. |
+| program  | <code>Program</code>  | Program instance.  |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### contextChange: <span><code>() -&#62; void</code></span>
+Sets up the renderer context and necessary buffers.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getSignature: <span><code>(geometry&#58; Geometry, program&#58; Program) -&#62; string</code></span>
+Takes a geometry and program and generates a unique signature for them.
+
+#### Parameters:
+| Name     | Type                  | Description               |
+| -------- | --------------------- | ------------------------- |
+| geometry | <code>Geometry</code> | To get signature from.    |
+| program  | <code>Program</code>  | To test geometry against. |
+#### Returns:
+| Type                | Description                                    |
+| ------------------- | ---------------------------------------------- |
+| <code>string</code> | * Unique signature of the geometry and program |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### initGeometryVao: <span><code>(geometry&#58; Geometry, shader&#58; Shader, incRefCount&#58; boolean) -&#62; WebGLVertexArrayObject</code></span>
+Creates or gets Vao with the same structure as the geometry and stores it on the geometry. If vao is created, it is bound automatically. We use a shader to infer what and how to set up the attribute locations.
+
+#### Parameters:
+| Name        | Type                  | Description                                  |
+| ----------- | --------------------- | -------------------------------------------- |
+| geometry    | <code>Geometry</code> | Instance of geometry to to generate Vao for. |
+| shader      | <code>Shader</code>   | Instance of the shader.                      |
+| incRefCount | <code>boolean</code>  | Increment refCount of all geometry buffers.  |
+#### Returns:
+| Type                                | Description |
+| ----------------------------------- | ----------- |
+| <code>WebGLVertexArrayObject</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### unbind: <span><code>() -&#62; void</code></span>
+Unbind/reset everything.
+
+</article>
+
+
+---------------------------------------
+
+
+    

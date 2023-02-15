@@ -1,0 +1,153 @@
+---
+id: "PIXI.TextureSystem.pixi_core"
+title: "Class: PIXI.TextureSystem"
+sidebar_label: "PIXI.TextureSystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).TextureSystem
+
+
+System plugin to the renderer to manage textures.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.TextureSystem: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                         |
+| -------- | --------------------- | ------------- | ----------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this system works for. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### boundTextures: <span><code>BaseTexture[]</code></span>
+Bound textures.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### currentLocation: <span><code>number</code></span>
+Current location.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### managedTextures: <span><code>Array&#60;BaseTexture&#62;</code></span>
+List of managed textures.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### hasIntegerTextures: <span><code>boolean</code></span>
+Whether glTexture with int/uint sampler type was uploaded.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### unknownTexture: <span><code>BaseTexture</code></span>
+BaseTexture value that shows that we don't know what is bound.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### bind: <span><code>(texture&#58; Texture &#124; BaseTexture, location&#58; number) -&#62; void</code></span>
+Bind a texture to a specific location
+If you want to unbind something, please use `unbind(texture)` instead of `bind(null, textureLocation)`
+
+#### Parameters:
+| Name     | Type                                    | Description         |
+| -------- | --------------------------------------- | ------------------- |
+| texture  | <code>Texture &#124; BaseTexture</code> | Texture to bind     |
+| location | <code>number</code>                     | Location to bind at |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### contextChange: <span><code>() -&#62; void</code></span>
+Sets up the renderer context and necessary buffers.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ensureSamplerType: <span><code>(maxTextures&#58; number) -&#62; void</code></span>
+Ensures that current boundTextures all have FLOAT sampler type, see [PIXI.SAMPLER_TYPES](../enums/PIXI.SAMPLER_TYPES.pixi_constants) for explanation.
+
+#### Parameters:
+| Name        | Type                | Description                  |
+| ----------- | ------------------- | ---------------------------- |
+| maxTextures | <code>number</code> | number of locations to check |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### reset: <span><code>() -&#62; void</code></span>
+Resets texture location and bound textures Actual `bind(null, i)` calls will be performed at next `unbind()` call
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### unbind: <span><code>(texture&#58; BaseTexture) -&#62; void</code></span>
+Unbind a texture.
+
+#### Parameters:
+| Name    | Type                     | Description     |
+| ------- | ------------------------ | --------------- |
+| texture | <code>BaseTexture</code> | Texture to bind |
+</article>
+
+
+---------------------------------------
+
+
+    

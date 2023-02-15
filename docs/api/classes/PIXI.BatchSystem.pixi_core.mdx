@@ -1,0 +1,125 @@
+---
+id: "PIXI.BatchSystem.pixi_core"
+title: "Class: PIXI.BatchSystem"
+sidebar_label: "PIXI.BatchSystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).BatchSystem
+
+
+System plugin to the renderer to manage batching.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.BatchSystem: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                         |
+| -------- | --------------------- | ------------- | ----------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this System works for. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### currentRenderer: <span><code>ObjectRenderer</code></span>
+The currently active ObjectRenderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### emptyRenderer: <span><code>ObjectRenderer</code></span>
+An empty renderer.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### boundArray: <span><code>(texArray&#58; BatchTextureArray, boundTextures&#58; Array&#60;BaseTexture&#62;, batchId&#58; number, maxTextures&#58; number) -&#62; void</code></span>
+Assigns batch locations to textures in array based on boundTextures state. All textures in texArray should have `_batchEnabled = _batchId`, and their count should be less than `maxTextures`.
+
+#### Parameters:
+| Name          | Type                                    | Description                                            |
+| ------------- | --------------------------------------- | ------------------------------------------------------ |
+| texArray      | <code>BatchTextureArray</code>          | textures to bound                                      |
+| boundTextures | <code>Array&#60;BaseTexture&#62;</code> | current state of bound textures                        |
+| batchId       | <code>number</code>                     | marker for _batchEnabled param of textures in texArray |
+| maxTextures   | <code>number</code>                     | number of texture locations to manipulate              |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### copyBoundTextures: <span><code>(arr&#58; BaseTexture[], maxTextures&#58; number) -&#62; void</code></span>
+Handy function for batch renderers&#58; copies bound textures in first maxTextures locations to array sets actual _batchLocation for them
+
+#### Parameters:
+| Name        | Type                       | Description               |
+| ----------- | -------------------------- | ------------------------- |
+| arr         | <code>BaseTexture[]</code> | arr copy destination      |
+| maxTextures | <code>number</code>        | number of copied elements |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### flush: <span><code>() -&#62; void</code></span>
+This should be called if you wish to do some custom rendering It will basically render anything that may be batched up such as sprites
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### reset: <span><code>() -&#62; void</code></span>
+Reset the system to an empty renderer
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setObjectRenderer: <span><code>(objectRenderer&#58; ObjectRenderer) -&#62; void</code></span>
+Changes the current renderer to the one given in parameter
+
+#### Parameters:
+| Name           | Type                        | Description                 |
+| -------------- | --------------------------- | --------------------------- |
+| objectRenderer | <code>ObjectRenderer</code> | The object renderer to use. |
+</article>
+
+
+---------------------------------------
+
+
+    

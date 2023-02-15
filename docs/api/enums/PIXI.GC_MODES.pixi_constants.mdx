@@ -1,0 +1,27 @@
+---
+id: "PIXI.GC_MODES.pixi_constants"
+title: "Enum: PIXI.GC_MODES"
+sidebar_label: "PIXI.GC_MODES"
+custom_edit_url: null
+---
+
+[@pixi/constants](../modules/pixi_constants).[PIXI](../namespaces/PIXI).GC_MODES
+
+The gc modes that are supported by pixi.
+The [PIXI.TextureGCSystem.defaultMode](../classes/PIXI.TextureGCSystem.pixi_core#defaultMode) Garbage Collection mode for PixiJS textures is AUTO If set to GC_MODE, the renderer will occasionally check textures usage. If they are not used for a specified period of time they will be removed from the GPU. They will of course be uploaded again when they are required. This is a silent behind the scenes process that should ensure that the GPU does not get filled up.
+
+Handy for mobile devices! This property only affects WebGL.
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+| Name                | Default | Description                                               |
+| ------------------- | ------- | --------------------------------------------------------- |
+| <code>AUTO</code>   | 0       | Garbage collection will happen periodically automatically |
+| <code>MANUAL</code> | 1       | Garbage collection will need to be called manually        |
+
+    

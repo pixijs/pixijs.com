@@ -1,0 +1,739 @@
+---
+id: "PIXI.Renderer.pixi_core"
+title: "Class: PIXI.Renderer"
+sidebar_label: "PIXI.Renderer"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).Renderer
+
+The Renderer draws the scene and all its content onto a WebGL enabled canvas.
+This renderer should be used for browsers that support WebGL.
+
+This renderer works by automatically managing WebGLBatches, so no need for Sprite Batches or Sprite Clouds. Don't forget to add the view to your DOM or you will not see anything!
+
+Renderer is composed of systems that manage specific tasks. The following systems are added by default whenever you create a renderer&#58;
+
+&#124; System &#124; Description &#124;
+&#124; ------ &#124; ----------- &#124;
+
+&#124; Generic Systems                                                     &#124; Systems that manage functionality that all renderer types share &#124;
+&#124; ------------------------------------------------------------------- &#124; --------------------------------------------------------------- &#124;
+&#124; [PIXI.ViewSystem](../classes/PIXI.ViewSystem.pixi_core)             &#124; This manages the main view of the renderer usually a Canvas     &#124;
+&#124; [PIXI.PluginSystem](../classes/PIXI.PluginSystem.pixi_core)         &#124; This manages plugins for the renderer                           &#124;
+&#124; [PIXI.BackgroundSystem](../classes/PIXI.BackgroundSystem.pixi_core) &#124; This manages the main views background color and alpha          &#124;
+&#124; [PIXI.StartupSystem](../classes/PIXI.StartupSystem.pixi_core)       &#124; Boots up a renderer and initiatives all the systems             &#124;
+&#124; [PIXI.EventSystem](../classes/PIXI.EventSystem.pixi_events)         &#124; This manages UI events.                                         &#124;
+
+&#124; WebGL Core Systems                                                    &#124; Provide an optimised, easy to use API to work with WebGL                    &#124;
+&#124; --------------------------------------------------------------------- &#124; --------------------------------------------------------------------------- &#124;
+&#124; [PIXI.ContextSystem](../classes/PIXI.ContextSystem.pixi_core)         &#124; This manages the WebGL context and extensions.                              &#124;
+&#124; [PIXI.FramebufferSystem](../classes/PIXI.FramebufferSystem.pixi_core) &#124; This manages framebuffers, which are used for offscreen rendering.          &#124;
+&#124; [PIXI.GeometrySystem](../classes/PIXI.GeometrySystem.pixi_core)       &#124; This manages geometries & buffers, which are used to draw object meshes.    &#124;
+&#124; [PIXI.ShaderSystem](../classes/PIXI.ShaderSystem.pixi_core)           &#124; This manages shaders, programs that run on the GPU to calculate 'em pixels. &#124;
+&#124; [PIXI.StateSystem](../classes/PIXI.StateSystem.pixi_core)             &#124; This manages the WebGL state variables like blend mode, depth testing, etc. &#124;
+&#124; [PIXI.TextureSystem](../classes/PIXI.TextureSystem.pixi_core)         &#124; This manages textures and their resources on the GPU.                       &#124;
+&#124; [PIXI.TextureGCSystem](../classes/PIXI.TextureGCSystem.pixi_core)     &#124; This will automatically remove textures from the GPU if they are not used.  &#124;
+&#124; [PIXI.MultisampleSystem](../classes/PIXI.MultisampleSystem.pixi_core) &#124; This manages the multisample const on the WEbGL Renderer                    &#124;
+
+&#124; PixiJS High-Level Systems                                                     &#124; Set of specific systems designed to work with PixiJS objects                                                    &#124;
+&#124; ----------------------------------------------------------------------------- &#124; --------------------------------------------------------------------------------------------------------------- &#124;
+&#124; [PIXI.GenerateTextureSystem](../classes/PIXI.GenerateTextureSystem.pixi_core) &#124; This adds the ability to generate textures from any PIXI.DisplayObject                                          &#124;
+&#124; [PIXI.ProjectionSystem](../classes/PIXI.ProjectionSystem.pixi_core)           &#124; This manages the projectionMatrix, used by shaders to get NDC coordinates.                                      &#124;
+&#124; [PIXI.RenderTextureSystem](../classes/PIXI.RenderTextureSystem.pixi_core)     &#124; This manages render-textures, which are an abstraction over framebuffers.                                       &#124;
+&#124; [PIXI.MaskSystem](../classes/PIXI.MaskSystem.pixi_core)                       &#124; This manages masking operations.                                                                                &#124;
+&#124; [PIXI.ScissorSystem](../classes/PIXI.ScissorSystem.pixi_core)                 &#124; This handles scissor masking, and is used internally by [PIXI.MaskSystem](../classes/PIXI.MaskSystem.pixi_core) &#124;
+&#124; [PIXI.StencilSystem](../classes/PIXI.StencilSystem.pixi_core)                 &#124; This handles stencil masking, and is used internally by [PIXI.MaskSystem](../classes/PIXI.MaskSystem.pixi_core) &#124;
+&#124; [PIXI.FilterSystem](../classes/PIXI.FilterSystem.pixi_core)                   &#124; This manages the filtering pipeline for post-processing effects.                                                &#124;
+&#124; [PIXI.BatchSystem](../classes/PIXI.BatchSystem.pixi_core)                     &#124; This manages object renderers that defer rendering until a flush.                                               &#124;
+&#124; [PIXI.Prepare](../classes/PIXI.Prepare.pixi_prepare)                          &#124; This manages uploading assets to the GPU.                                                                       &#124;
+&#124; [PIXI.Extract](../classes/PIXI.Extract.pixi_extract)                          &#124; This extracts image data from display objects.                                                                  &#124;
+
+The breadth of the API surface provided by the renderer is contained within these systems.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Renderer: <span><code>(options&#58; PIXI.IRendererOptions) </code></span>
+
+#### Parameters:
+| Name                          | Type                                        | Default                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ----------------------------- | ------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| options                       | <code>PIXI.IRendererOptions</code>          | <code></code>                         | The optional renderer parameters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| options.antialias             | <code>boolean</code>                        | <code>false</code>                    | **WebGL Only.** Whether to enable anti-aliasing. This may affect performance.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| options.autoDensity           | <code>boolean</code>                        | <code>false</code>                    | Whether the CSS dimensions of the renderer's view should be resized automatically.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| options.background            | <code>PIXI.ColorSource</code>               | <code></code>                         | Alias for `options.backgroundColor`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| options.backgroundAlpha       | <code>number</code>                         | <code>1</code>                        | Transparency of the background color, value from `0` (fully transparent) to `1` (fully opaque).                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| options.backgroundColor       | <code>PIXI.ColorSource</code>               | <code>0x000000</code>                 | The background color used to clear the canvas. See PIXI.ColorSource for accepted color values.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| options.clearBeforeRender     | <code>boolean</code>                        | <code>true</code>                     | Whether to clear the canvas before new render passes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| options.context               | <code>PIXI.IRenderingContext</code>         | <code></code>                         | **WebGL Only.** User-provided WebGL rendering context object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| options.height                | <code>number</code>                         | <code>600</code>                      | The height of the renderer's view.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| options.hello                 | <code>boolean</code>                        | <code>false</code>                    | Whether to log the version and type information of renderer to console.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| options.powerPreference       | <code>string</code>                         | <code></code>                         | **WebGL Only.** A hint indicating what configuration of GPU is suitable for the WebGL context, can be `'default'`, `'high-performance'` or `'low-power'`. Setting to `'high-performance'` will prioritize rendering performance over power consumption, while setting to `'low-power'` will prioritize power saving over rendering performance.                                                                                                                                                                                |
+| options.premultipliedAlpha    | <code>boolean</code>                        | <code>true</code>                     | **WebGL Only.** Whether the compositor will assume the drawing buffer contains colors with premultiplied alpha.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| options.preserveDrawingBuffer | <code>boolean</code>                        | <code>false</code>                    | **WebGL Only.** Whether to enable drawing buffer preservation. If enabled, the drawing buffer will preserve its value until cleared or overwritten. Enable this if you need to call `toDataUrl` on the WebGL context.                                                                                                                                                                                                                                                                                                          |
+| options.resolution            | <code>number</code>                         | <code>PIXI.settings.RESOLUTION</code> | The resolution / device pixel ratio of the renderer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| options.useContextAlpha       | <code>boolean &#124; 'notMultiplied'</code> | <code>true</code>                     | **Deprecated since 7.0.0, use `premultipliedAlpha` and `backgroundAlpha` instead.**   &#60;br /&#62;Pass-through value for canvas' context attribute `alpha`. This option is for cases where the canvas needs to be opaque, possibly for performance reasons on some older devices. If you want to set transparency, please use `backgroundAlpha`.   &#60;br /&#62;**WebGL Only&#58;** When set to `'notMultiplied'`, the canvas' context attribute `alpha` will be set to `true` and `premultipliedAlpha` will be to `false`. |
+| options.view                  | <code>PIXI.ICanvas</code>                   | <code>null</code>                     | The canvas to use as the view. If omitted, a new canvas will be created.                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| options.width                 | <code>number</code>                         | <code>800</code>                      | The width of the renderer's view.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
+</article>
+
+---------------------------------------
+
+
+## Extends
+- [PIXI.SystemManager](../classes/PIXI.SystemManager.pixi_core)
+
+## Members
+<article>
+
+### _multisample: <span><code>MultisampleSystem</code></span>
+_multisample system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _plugin: <span><code>PluginSystem</code></span>
+plugin system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _view: <span><code>ViewSystem</code></span>
+_view system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### autoDensity: <span><code>boolean</code></span>
+Whether CSS dimensions of canvas view should be resized to screen dimensions automatically.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### background: <span><code>BackgroundSystem</code></span>
+background system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### backgroundAlpha: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+The background color alpha. Setting this to 0 will make the canvas transparent.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### backgroundAlpha: <span><code>unknown</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### backgroundColor: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+The background color to fill if not transparent
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### batch: <span><code>BatchSystem</code></span>
+Batch system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### buffer: <span><code>BufferSystem</code></span>
+Buffer system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clearBeforeRender: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+This sets weather the screen is totally cleared between each frame withthe background color and alpha
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### context: <span><code>ContextSystem</code></span>
+Context system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### CONTEXT_UID: <span><code>number</code></span>
+Unique UID assigned to the renderer's WebGL context.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### filter: <span><code>FilterSystem</code></span>
+Filter system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### framebuffer: <span><code>FramebufferSystem</code></span>
+Framebuffer system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### geometry: <span><code>GeometrySystem</code></span>
+Geometry system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### gl: <span><code>WebGLRenderingContext</code></span>
+WebGL context, set by [this.context](../classes/PIXI.ContextSystem.pixi_core).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### globalUniforms: <span><code>UniformGroup</code></span>
+Global uniforms Add any uniforms you want shared across your shaders. the must be added before the scene is rendered for the first time as we dynamically buildcode to handle all global var per shader
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### height: <span><code>number</code></span>
+- **Default Value**: <code>600</code>
+
+Same as view.height, actual number of pixels in the canvas by vertical.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### lastObjectRendered: <span><code>IRenderableObject</code></span>
+the last object rendered by the renderer. Useful for other plugins like interaction managers
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### mask: <span><code>MaskSystem</code></span>
+Mask system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### multisample: <span><code>MSAA_QUALITY</code></span>
+The number of msaa samples of the canvas.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### objectRenderer: <span><code>ObjectRendererSystem</code></span>
+_render system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### options: <span><code>PIXI.IRendererOptions</code></span>
+Options passed to the constructor.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### plugins: <span><code>IRendererPlugins</code></span>
+Collection of plugins
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### powerPreference: <span><code>WebGLPowerPreference</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### preserveDrawingBuffer: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+readonly drawing buffer preservation we can only know this if Pixi created the context
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### projection: <span><code>ProjectionSystem</code></span>
+Projection system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### rendererLogId: <span><code>string</code></span>
+When logging Pixi to the console, this is the name we will show
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderingToScreen: <span><code>boolean</code></span>
+Flag if we are rendering to the screen vs renderTexture
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderTexture: <span><code>RenderTextureSystem</code></span>
+RenderTexture system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+The resolution / device pixel ratio of the renderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### runners: <span><code>&#123; [key&#58; string]&#58; Runner &#125;</code></span>
+a collection of runners defined by the user
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### scissor: <span><code>ScissorSystem</code></span>
+Scissor system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### screen: <span><code>PIXI.Rectangle</code></span>
+Measurements of the screen. (0, 0, screenWidth, screenHeight).
+Its safe to use as filterArea or hitArea for the whole stage.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### shader: <span><code>ShaderSystem</code></span>
+Shader system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### startup: <span><code>StartupSystem</code></span>
+startup system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### state: <span><code>StateSystem</code></span>
+State system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stencil: <span><code>StencilSystem</code></span>
+Stencil system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### texture: <span><code>TextureSystem</code></span>
+Texture system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textureGC: <span><code>TextureGCSystem</code></span>
+Texture garbage collector system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textureGenerator: <span><code>GenerateTextureSystem</code></span>
+textureGenerator system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### transformFeedback: <span><code>TransformFeedbackSystem</code></span>
+TransformFeedback system instance
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### type: <span><code>number</code></span>
+The type of the renderer. will be PIXI.RENDERER_TYPE.CANVAS
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### useContextAlpha: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+Pass-thru setting for the canvas' context `alpha` property. This is typically not something you need to fiddle with. If you want transparency, use `backgroundAlpha`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### view: <span><code>ICanvas</code></span>
+The canvas element that everything is drawn to.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width: <span><code>number</code></span>
+- **Default Value**: <code>800</code>
+
+Same as view.width, actual number of pixels in the canvas by horizontal.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### addRunners: <span><code>(runnerIds&#58; string[]) -&#62; void</code></span>
+Create a bunch of runners based of a collection of ids
+
+#### Parameters:
+| Name      | Type                  | Description           |
+| --------- | --------------------- | --------------------- |
+| runnerIds | <code>string[]</code> | the runner ids to add |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addSystem: <span><code>(ClassRef&#58; ISystemConstructor&#60;R&#62;, name&#58; string) -&#62; this</code></span>
+Add a new system to the renderer.
+
+#### Parameters:
+| Name     | Type                                       | Description                                                                                                                                                                                                             |
+| -------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ClassRef | <code>ISystemConstructor&#60;R&#62;</code> | Class reference                                                                                                                                                                                                         |
+| name     | <code>string</code>                        | Property name for system, if not specified will use a static `name` property on the class itself. This name will be assigned as s property on the Renderer so make sure it doesn't collide with properties on Renderer. |
+#### Returns:
+| Type              | Description                 |
+| ----------------- | --------------------------- |
+| <code>this</code> | Return instance of renderer |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clear: <span><code>() -&#62; void</code></span>
+Clear the frame buffer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### destroy: <span><code>(removeView&#58; boolean) -&#62; void</code></span>
+Removes everything from the renderer (event listeners, spritebatch, etc...)
+
+#### Parameters:
+| Name       | Type                 | Description                                                                                        |
+| ---------- | -------------------- | -------------------------------------------------------------------------------------------------- |
+| removeView | <code>boolean</code> | Removes the Canvas element from the DOM. See&#58; https&#58;//github.com/pixijs/pixijs/issues/2233 |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### emitWithCustomOptions: <span><code>(runner&#58; Runner, options&#58; Record&#60;string, unknown&#62;) -&#62; void</code></span>
+A function that will run a runner and call the runners function but pass in different options to each system based on there name.
+
+E.g. If you have two systems added called `systemA` and `systemB` you could call do the following&#58;
+
+```
+system.emitWithCustomOptions(init, {
+    systemA: {...optionsForA},
+    systemB: {...optionsForB},
+});
+
+```
+
+`init` would be called on system A passing `optionsForA` and on system B passing `optionsForB`.
+
+#### Parameters:
+| Name    | Type                                         | Description                       |
+| ------- | -------------------------------------------- | --------------------------------- |
+| runner  | <code>Runner</code>                          | the runner to target              |
+| options | <code>Record&#60;string, unknown&#62;</code> | key value options for each system |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### generateTexture: <span><code>(displayObject&#58; IRenderableObject, options&#58; object) -&#62; RenderTexture</code></span>
+Useful function that returns a texture of the display object that can then be used to create sprites This can be quite useful if your displayObject is complicated and needs to be reused multiple times.
+
+#### Parameters:
+| Name                | Type                           | Description                                                                                                                            |
+| ------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| displayObject       | <code>IRenderableObject</code> | The displayObject the object will be generated from.                                                                                   |
+| options             | <code>object</code>            | Generate texture options.                                                                                                              |
+| options.scaleMode   | <code>PIXI.SCALE_MODES</code>  | The scale mode of the texture.                                                                                                         |
+| options.resolution  | <code>number</code>            | The resolution / device pixel ratio of the texture being generated.                                                                    |
+| options.region      | <code>PIXI.Rectangle</code>    | The region of the displayObject, that shall be rendered, if no region is specified, defaults to the local bounds of the displayObject. |
+| options.multisample | <code>PIXI.MSAA_QUALITY</code> | The number of samples of the frame buffer.                                                                                             |
+#### Returns:
+| Type                       | Description                       |
+| -------------------------- | --------------------------------- |
+| <code>RenderTexture</code> | A texture of the graphics object. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### render: <span><code>(displayObject&#58; IRenderableObject, options&#58; object) -&#62; void</code></span>
+Renders the object to its WebGL view.
+
+#### Parameters:
+| Name                        | Type                            | Description                                                  |
+| --------------------------- | ------------------------------- | ------------------------------------------------------------ |
+| displayObject               | <code>IRenderableObject</code>  | The object to be rendered.                                   |
+| options                     | <code>object</code>             | Object to use for render options.                            |
+| options.renderTexture       | <code>PIXI.RenderTexture</code> | The render texture to render to.                             |
+| options.clear               | <code>boolean</code>            | Should the canvas be cleared before the new render.          |
+| options.transform           | <code>PIXI.Matrix</code>        | A transform to apply to the render texture before rendering. |
+| options.skipUpdateTransform | <code>boolean</code>            | Should we skip the update transform pass?                    |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### reset: <span><code>() -&#62; this</code></span>
+Resets the WebGL state so you can render things however you fancy!
+
+#### Returns:
+| Type              | Description     |
+| ----------------- | --------------- |
+| <code>this</code> | Returns itself. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resize: <span><code>(desiredScreenWidth&#58; number, desiredScreenHeight&#58; number) -&#62; void</code></span>
+Resizes the WebGL view to the specified width and height.
+
+#### Parameters:
+| Name                | Type                | Description                       |
+| ------------------- | ------------------- | --------------------------------- |
+| desiredScreenWidth  | <code>number</code> | The desired width of the screen.  |
+| desiredScreenHeight | <code>number</code> | The desired height of the screen. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setup: <span><code>(config&#58; ISystemConfig&#60;R&#62;) -&#62; void</code></span>
+Set up a system with a collection of SystemClasses and runners. Systems are attached dynamically to this class when added.
+
+#### Parameters:
+| Name   | Type                                  | Description                       |
+| ------ | ------------------------------------- | --------------------------------- |
+| config | <code>ISystemConfig&#60;R&#62;</code> | the config for the system manager |
+</article>
+
+
+---------------------------------------
+
+
+    

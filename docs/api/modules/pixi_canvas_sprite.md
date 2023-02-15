@@ -1,8 +1,0 @@
----
-id: "pixi_canvas_sprite"
-title: "Module: @pixi/canvas-sprite"
-sidebar_label: "@pixi/canvas-sprite"
-sidebar_position: 0
-custom_edit_url: null
----
-

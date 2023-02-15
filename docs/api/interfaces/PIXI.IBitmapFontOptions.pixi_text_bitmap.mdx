@@ -1,0 +1,155 @@
+---
+id: "PIXI.IBitmapFontOptions.pixi_text_bitmap"
+title: "Interface: PIXI.IBitmapFontOptions"
+sidebar_label: "PIXI.IBitmapFontOptions"
+custom_edit_url: null
+---
+
+[@pixi/text-bitmap](../modules/pixi_text_bitmap).[PIXI](../namespaces/PIXI).IBitmapFontOptions
+
+
+
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name             | Type                                                  | Description                                                                                                                                                                                                                                                                                                                      |
+| ---------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| alphaMode        | <code>ALPHA_MODES</code>                              | Pre multiply the image alpha. Note&#58; for MSDF/SDF fonts, alphaMode is not supported.                                                                                                                                                                                                                                          |
+| anisotropicLevel | <code>number</code>                                   | Anisotropic filtering level of texture.                                                                                                                                                                                                                                                                                          |
+| chars            | <code>string &#124; (string &#124; string[])[]</code> | Characters included in the font set. You can also use ranges. For example, `[['a', 'z'], ['A', 'Z'], "!@#$%^&*()~{}[] "]`. Don't forget to include spaces ' ' in your character set!                                                                                                                                             |
+| mipmap           | <code>MIPMAP_MODES</code>                             | If mipmapping is enabled for texture. For instance, by default PixiJS only enables mipmapping on Power-of-Two textures. If your textureWidth or textureHeight are not power-of-two, you may consider enabling mipmapping to get better quality with lower font sizes. Note&#58; for MSDF/SDF fonts, mipmapping is not supported. |
+| padding          | <code>number</code>                                   | Padding between glyphs on texture atlas. Lower values could mean more visual artifacts and bleeding from other glyphs, larger values increase the space required on the texture.                                                                                                                                                 |
+| resolution       | <code>number</code>                                   | Render resolution for glyphs.                                                                                                                                                                                                                                                                                                    |
+| scaleMode        | <code>SCALE_MODES</code>                              | Default scale mode, linear, nearest. Nearest can be helpful for bitmap-style fonts.                                                                                                                                                                                                                                              |
+| textureHeight    | <code>number</code>                                   | Optional height of atlas, smaller values to reduce memory.                                                                                                                                                                                                                                                                       |
+| textureWidth     | <code>number</code>                                   | Optional width of atlas, smaller values to reduce memory.                                                                                                                                                                                                                                                                        |
+
+</p>
+</details>
+    
+
+
+## Extends
+- BaseOptions
+
+## Members
+<article>
+
+### alphaMode: <span><code>ALPHA_MODES</code></span>
+- **Default Value**: <code>PIXI.BaseTexture.defaultOptions.alphaMode</code>
+
+Pre multiply the image alpha. Note&#58; for MSDF/SDF fonts, alphaMode is not supported.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### anisotropicLevel: <span><code>number</code></span>
+- **Default Value**: <code>PIXI.BaseTexture.defaultOptions.anisotropicLevel</code>
+
+Anisotropic filtering level of texture.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### chars: <span><code>string &#124; (string &#124; string[])[]</code></span>
+- **Default Value**: <code>PIXI.BitmapFont.ALPHANUMERIC</code>
+
+Characters included in the font set. You can also use ranges. For example, `[['a', 'z'], ['A', 'Z'], "!@#$%^&*()~{}[] "]`. Don't forget to include spaces ' ' in your character set!
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### mipmap: <span><code>MIPMAP_MODES</code></span>
+- **Default Value**: <code>PIXI.BaseTexture.defaultOptions.mipmap</code>
+
+If mipmapping is enabled for texture. For instance, by default PixiJS only enables mipmapping on Power-of-Two textures. If your textureWidth or textureHeight are not power-of-two, you may consider enabling mipmapping to get better quality with lower font sizes. Note&#58; for MSDF/SDF fonts, mipmapping is not supported.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### padding: <span><code>number</code></span>
+- **Default Value**: <code>4</code>
+
+Padding between glyphs on texture atlas. Lower values could mean more visual artifacts and bleeding from other glyphs, larger values increase the space required on the texture.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+- **Default Value**: <code>1</code>
+
+Render resolution for glyphs.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### scaleMode: <span><code>SCALE_MODES</code></span>
+- **Default Value**: <code>PIXI.BaseTexture.defaultOptions.scaleMode</code>
+
+Default scale mode, linear, nearest. Nearest can be helpful for bitmap-style fonts.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textureHeight: <span><code>number</code></span>
+- **Default Value**: <code>512</code>
+
+Optional height of atlas, smaller values to reduce memory.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textureWidth: <span><code>number</code></span>
+- **Default Value**: <code>512</code>
+
+Optional width of atlas, smaller values to reduce memory.
+
+</article>
+
+
+---------------------------------------
+
+
+
+  

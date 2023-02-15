@@ -1,0 +1,83 @@
+---
+id: "PIXI.CountLimiter.pixi_prepare"
+title: "Class: PIXI.CountLimiter"
+sidebar_label: "PIXI.CountLimiter"
+custom_edit_url: null
+---
+
+[@pixi/prepare](../modules/pixi_prepare).CountLimiter
+
+
+CountLimiter limits the number of items handled by a [PIXI.BasePrepare](../classes/PIXI.BasePrepare.pixi_prepare) to a specified number of items per frame.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.CountLimiter: <span><code>(maxItemsPerFrame&#58; number) </code></span>
+
+#### Parameters:
+| Name             | Type                | Default       | Description                                                  |
+| ---------------- | ------------------- | ------------- | ------------------------------------------------------------ |
+| maxItemsPerFrame | <code>number</code> | <code></code> | The maximum number of items that can be prepared each frame. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### itemsLeft: <span><code>number</code></span>
+The number of items that can be prepared in the current frame.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### maxItemsPerFrame: <span><code>number</code></span>
+The maximum number of items that can be prepared each frame.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### allowedToUpload: <span><code>() -&#62; boolean</code></span>
+Checks to see if another item can be uploaded. This should only be called once per item.
+
+#### Returns:
+| Type                 | Description                            |
+| -------------------- | -------------------------------------- |
+| <code>boolean</code> | If the item is allowed to be uploaded. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### beginFrame: <span><code>() -&#62; void</code></span>
+Resets any counting properties to start fresh on a new frame.
+
+</article>
+
+
+---------------------------------------
+
+
+    

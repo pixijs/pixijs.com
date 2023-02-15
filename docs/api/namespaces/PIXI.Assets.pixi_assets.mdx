@@ -1,0 +1,225 @@
+---
+id: "PIXI.Assets.pixi_assets"
+title: "Namespace: PIXI.Assets"
+sidebar_label: "PIXI.Assets"
+custom_edit_url: null
+---
+
+[@pixi/assets](../modules/pixi_assets).[PIXI](../namespaces/PIXI).Assets
+
+
+A one stop shop for all Pixi resource management! Super modern and easy to use, with enough flexibility to customize and do what you need!
+
+Only one Asset Class exists accessed via the Global Asset object.
+
+It has four main responsibilities&#58;
+
+1. Allows users to map URLs to keys and resolve them according to the user's browser capabilities
+2. Loads the resources and transforms them into assets that developers understand.
+3. Caches the assets and provides a way to access them.
+4. Allow developers to unload assets and clear the cache.
+
+It also has a few advanced features&#58;
+
+1. Allows developers to provide a manifest upfront of all assets and help manage them via 'bundles'.
+2. Allows users to background load assets. Shortening (or eliminating) load times and improving UX. With this feature, in-game loading bars can be a thing of the past!
+
+### Assets Loading
+
+Do not be afraid to load things multiple times - under the hood, it will NEVER load anything more than once.
+
+For example&#58;
+
+```
+import { Assets } from 'pixi.js';
+
+promise1 = Assets.load('bunny.png')
+promise2 = Assets.load('bunny.png')
+
+// promise1 === promise2
+
+```
+
+Here both promises will be the same. Once resolved... Forever resolved! It makes for really easy resource management!
+
+Out of the box it supports the following files&#58;
+
+* textures (avif, webp, png, jpg, gif, svg)
+* sprite sheets (json)
+* bitmap fonts (xml, fnt, txt)
+* web fonts (ttf, woff, woff2)
+* json files (json)
+* text files (txt)
+
+More types can be added fairly easily by creating additional loader parsers.
+
+### Textures
+
+* Textures are loaded as ImageBitmap on a worker thread where possible. Leading to much less janky load + parse times.
+* By default, we will prefer to load AVIF and WebP image files if you specify them. But if the browser doesn't support AVIF or WebP we will fall back to png and jpg.
+* Textures can also be accessed via Texture.from(...) and now use this asset manager under the hood!
+* Don't worry if you set preferences for textures that don't exist (for example you prefer 2x resolutions images but only 1x is available for that texture, the Asset manager will pick that up as a fallback automatically)
+
+#### Sprite sheets
+
+* It's hard to know what resolution a sprite sheet is without loading it first, to address this there is a naming convention we have added that will let Pixi understand the image format and resolution of the spritesheet via its file name&#58;
+
+`my-spritesheet{resolution}.{imageFormat}.json`
+
+For example&#58;
+
+`my-spritesheet@2x.webp.json` // 2x resolution, WebP sprite sheet`my-spritesheet@0.5x.png.json` // 0.5x resolution, png sprite sheet
+
+This is optional! You can just load a sprite sheet as normal. This is only useful if you have a bunch of different res / formatted spritesheets.
+
+### Fonts
+
+Web fonts will be loaded with all weights. It is possible to load only specific weights by doing the following&#58;
+
+```
+import { Assets } from 'pixi.js';
+
+// Load specific weights..
+await Assets.load({
+    data: {
+        weights: ['normal'], // Only loads the weight
+    },
+    src: `outfit.woff2`,
+});
+
+// Load everything...
+await Assets.load(`outfit.woff2`);
+
+```
+
+### Background Loading
+
+Background loading will load stuff for you passively behind the scenes. To minimize jank, it will only load one asset at a time. As soon as a developer calls `Assets.load(...)` the background loader is paused and requested assets are loaded as a priority. Don't worry if something is in there that's already loaded, it will just get skipped!
+
+You still need to call `Assets.load(...)` to get an asset that has been loaded in the background. It's just that this promise will resolve instantly if the asset has already been loaded.
+
+### Manifest and Bundles
+
+* Manifest is a JSON file that contains a list of all assets and their properties.
+* Bundles are a way to group assets together.
+
+```
+import { Assets } from 'pixi.js';
+
+// Manifest Example
+const manifest = {
+    bundles: [
+        {
+            name: 'load-screen',
+            assets: [
+                {
+                    name: 'background',
+                    srcs: 'sunset.png',
+                },
+                {
+                    name: 'bar',
+                    srcs: 'load-bar.{png,webp}',
+                },
+            ],
+        },
+        {
+            name: 'game-screen',
+            assets: [
+                {
+                    name: 'character',
+                    srcs: 'robot.png',
+                },
+                {
+                    name: 'enemy',
+                    srcs: 'bad-guy.png',
+                },
+            ],
+        },
+    ]
+};
+
+await Asset.init({ manifest });
+
+// Load a bundle...
+loadScreenAssets = await Assets.loadBundle('load-screen');
+// Load another bundle...
+gameScreenAssets = await Assets.loadBundle('game-screen');
+
+```
+
+
+```js
+ import { Assets } from 'pixi.js';
+
+ const bunny = await Assets.load('bunny.png');
+```
+      
+
+// TODO: @see
+
+        
+
+
+
+
+
+
+
+## Members
+<article>
+
+### cache: <span><code>PIXI.Cache</code></span>
+The global cache of all assets within PixiJS
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### detections: <span><code>FormatDetectionParser[]</code></span>
+All the detection parsers currently added to the Assets class.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### loader: <span><code>PIXI.AssetLoader</code></span>
+The loader, loads stuff!
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### preferWorkers: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+When set to `true`, loading and decoding images will happen with Worker thread, if available on the browser. This is much more performant as network requests and decoding can be expensive on the CPU. However, not all environments support Workers, in some cases it can be helpful to disable by setting to `false`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolver: <span><code>Resolver</code></span>
+the resolver to map various urls
+
+</article>
+
+
+---------------------------------------
+
+
+
+
+
+    

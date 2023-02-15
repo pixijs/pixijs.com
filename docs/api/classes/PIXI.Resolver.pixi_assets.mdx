@@ -1,0 +1,437 @@
+---
+id: "PIXI.Resolver.pixi_assets"
+title: "Class: PIXI.Resolver"
+sidebar_label: "PIXI.Resolver"
+custom_edit_url: null
+---
+
+[@pixi/assets](../modules/pixi_assets).Resolver
+
+
+A class that is responsible for resolving mapping asset URLs to keys. At its most basic it can be used for Aliases&#58;
+
+```
+resolver.add('foo', 'bar');
+resolver.resolveUrl('foo') // => 'bar'
+
+```
+
+It can also be used to resolve the most appropriate asset for a given URL&#58;
+
+```
+resolver.prefer({
+    params: {
+        format: 'webp',
+        resolution: 2,
+    }
+});
+
+resolver.add('foo', ['bar@2x.webp', 'bar@2x.png', 'bar.webp', 'bar.png']);
+
+resolver.resolveUrl('foo') // => 'bar@2x.webp'
+
+```
+
+Other features include&#58;
+
+* Ability to process a manifest file to get the correct understanding of how to resolve all assets
+* Ability to add custom parsers for specific file types
+* Ability to add custom prefer rules
+
+This class only cares about the URL, not the loading of the asset itself.
+
+It is not intended that this class is created by developers - its part of the Asset class This is the third major system of PixiJS' main Assets class
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Resolver: <span><code>() </code></span>
+
+#### Parameters:
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### basePath: <span><code>string</code></span>
+Set the base path to prepend to all urls when resolving
+
+```js
+resolver.basePath = 'https://home.com/';
+resolver.add('foo', 'bar.ong');
+resolver.resolveUrl('foo', 'bar.png'); // => 'https://home.com/bar.png'
+```
+      
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### parsers: <span><code>ResolveURLParser[]</code></span>
+All the active URL parsers that help the parser to extract information and create an asset object-based on parsing the URL itself.
+
+Can be added using the extensions API
+
+```js
+ resolver.add('foo', [
+     {
+         resolution: 2,
+         format: 'png',
+         src: 'image@2x.png',
+     },
+     {
+         resolution:1,
+         format:'png',
+         src: 'image.png',
+     },
+ ]);
+
+ // With a url parser the information such as resolution and file format could extracted from the url itself:
+ extensions.add({
+     extension: ExtensionType.ResolveParser,
+     test: loadTextures.test, // test if url ends in an image
+     parse: (value: string) =>
+     ({
+         resolution: parseFloat(settings.RETINA_PREFIX.exec(value)?.[1] ?? '1'),
+         format: value.split('.').pop(),
+         src: value,
+     }),
+ });
+
+ // Now resolution and format can be extracted from the url
+ resolver.add('foo', [
+     'image@2x.png',
+     'image.png',
+ ]);
+```
+      
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### rootPath: <span><code>string</code></span>
+Set the root path for root-relative URLs. By default the `basePath`'s root is used. If no `basePath` is set, then the default value for browsers is `window.location.origin`
+
+```js
+// Application hosted on https://home.com/some-path/index.html
+resolver.basePath = 'https://home.com/some-path/';
+resolver.rootPath = 'https://home.com/';
+resolver.add('foo', '/bar.png');
+resolver.resolveUrl('foo', '/bar.png'); // => 'https://home.com/bar.png'
+```
+      
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### add: <span><code>(keysIn&#58; string &#124; string[], assetsIn&#58; string &#124; ResolveAsset &#124; (string &#124; ResolveAsset)[], data&#58; unknown) -&#62; void</code></span>
+Tells the resolver what keys are associated with witch asset. The most important thing the resolver does
+
+```js
+ // Single key, single asset:
+ resolver.add('foo', 'bar.png');
+ resolver.resolveUrl('foo') // => 'bar.png'
+
+ // Multiple keys, single asset:
+ resolver.add(['foo', 'boo'], 'bar.png');
+ resolver.resolveUrl('foo') // => 'bar.png'
+ resolver.resolveUrl('boo') // => 'bar.png'
+
+ // Multiple keys, multiple assets:
+ resolver.add(['foo', 'boo'], ['bar.png', 'bar.webp']);
+ resolver.resolveUrl('foo') // => 'bar.png'
+
+ // Add custom data attached to the resolver
+ Resolver.add(
+     'bunnyBooBooSmooth',
+     'bunny{png,webp}',
+     { scaleMode:SCALE_MODES.NEAREST }, // Base texture options
+ );
+
+ resolver.resolve('bunnyBooBooSmooth') // => { src: 'bunny.png', data: { scaleMode: SCALE_MODES.NEAREST } }
+```
+      
+
+#### Parameters:
+| Name     | Type                                                                          | Description                                                        |
+| -------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| keysIn   | <code>string &#124; string[]</code>                                           | The keys to map, can be an array or a single key                   |
+| assetsIn | <code>string &#124; ResolveAsset &#124; (string &#124; ResolveAsset)[]</code> | The assets to associate with the key(s)                            |
+| data     | <code>unknown</code>                                                          | The data that will be attached to the object that resolved object. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addBundle: <span><code>(bundleId&#58; string, assets&#58; ResolverBundle["assets"]) -&#62; void</code></span>
+This adds a bundle of assets in one go so that you can resolve them as a group. For example you could add a bundle for each screen in you pixi app
+
+```js
+ resolver.addBundle('animals', {
+     bunny: 'bunny.png',
+     chicken: 'chicken.png',
+     thumper: 'thumper.png',
+ });
+
+ const resolvedAssets = await resolver.resolveBundle('animals');
+```
+      
+
+#### Parameters:
+| Name     | Type                                  | Description                                                                                 |
+| -------- | ------------------------------------- | ------------------------------------------------------------------------------------------- |
+| bundleId | <code>string</code>                   | The id of the bundle to add                                                                 |
+| assets   | <code>ResolverBundle["assets"]</code> | A record of the asset or assets that will be chosen from when loading via the specified key |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addManifest: <span><code>(manifest&#58; ResolverManifest) -&#62; void</code></span>
+Add a manifest to the asset resolver. This is a nice way to add all the asset information in one go. generally a manifest would be built using a tool.
+
+#### Parameters:
+| Name     | Type                          | Description                         |
+| -------- | ----------------------------- | ----------------------------------- |
+| manifest | <code>ResolverManifest</code> | the manifest to add to the resolver |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### hasBundle: <span><code>(key&#58; string) -&#62; boolean</code></span>
+Checks if a bundle with the given key exists in the resolver
+
+#### Parameters:
+| Name | Type                | Description           |
+| ---- | ------------------- | --------------------- |
+| key  | <code>string</code> | The key of the bundle |
+#### Returns:
+| Type                 | Description |
+| -------------------- | ----------- |
+| <code>boolean</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### hasKey: <span><code>(key&#58; string) -&#62; boolean</code></span>
+Checks if an asset with a given key exists in the resolver
+
+#### Parameters:
+| Name | Type                | Description          |
+| ---- | ------------------- | -------------------- |
+| key  | <code>string</code> | The key of the asset |
+#### Returns:
+| Type                 | Description |
+| -------------------- | ----------- |
+| <code>boolean</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### prefer: <span><code>(preferOrders&#58; PreferOrder[]) -&#62; void</code></span>
+Let the resolver know which assets you prefer to use when resolving assets. Multiple prefer user defined rules can be added.
+
+```js
+resolver.prefer({
+    // first look for something with the correct format, and then then correct resolution
+    priority: ['format', 'resolution'],
+    params:{
+        format:'webp', // prefer webp images
+        resolution: 2, // prefer a resolution of 2
+    }
+})
+resolver.add('foo', ['bar@2x.webp', 'bar@2x.png', 'bar.webp', 'bar.png']);
+resolver.resolveUrl('foo') // => 'bar@2x.webp'
+```
+      
+
+#### Parameters:
+| Name         | Type                       | Description        |
+| ------------ | -------------------------- | ------------------ |
+| preferOrders | <code>PreferOrder[]</code> | the prefer options |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### reset: <span><code>() -&#62; void</code></span>
+Used for testing, this resets the resolver to its initial state
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolve: <span><code>(keys&#58; string &#124; string[]) -&#62; ResolveAsset &#124; Record&#60;string, ResolveAsset&#62;</code></span>
+Resolves each key in the list to an asset object. Another key function of the resolver! After adding all the various key/asset pairs. this will run the logic of finding which asset to return based on any preferences set using the `prefer` function by default the same key passed in will be returned if nothing is matched by the resolver.
+
+```js
+ resolver.add('boo', 'bunny.png');
+
+ resolver.resolve('boo') // => { src: 'bunny.png' }
+
+ // Will return the same string as no key was added for this value..
+ resolver.resolve('another-thing.png') // => { src: 'another-thing.png' }
+```
+      
+
+#### Parameters:
+| Name | Type                                | Description            |
+| ---- | ----------------------------------- | ---------------------- |
+| keys | <code>string &#124; string[]</code> | key or keys to resolve |
+#### Returns:
+| Type                                                                  | Description                                                            |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| <code>ResolveAsset &#124; Record&#60;string, ResolveAsset&#62;</code> | * the resolve asset or a hash of resolve assets for each key specified |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolveBundle: <span><code>(bundleIds&#58; string &#124; string[]) -&#62; Record&#60;string, ResolveAsset&#62; &#124; Record&#60;string, Record&#60;string, ResolveAsset&#62;&#62;</code></span>
+If the resolver has had a manifest set via setManifest, this will return the assets urls for a given bundleId or bundleIds.
+
+```js
+ // Manifest Example
+ const manifest = {
+     bundles: [
+         {
+             name: 'load-screen',
+             assets: [
+                 {
+                     name: 'background',
+                     srcs: 'sunset.png',
+                 },
+                 {
+                     name: 'bar',
+                     srcs: 'load-bar.{png,webp}',
+                 },
+             ],
+         },
+         {
+             name: 'game-screen',
+             assets: [
+                 {
+                     name: 'character',
+                     srcs: 'robot.png',
+                 },
+                 {
+                     name: 'enemy',
+                     srcs: 'bad-guy.png',
+                 },
+             ],
+         },
+     ]
+ };
+
+ resolver.setManifest(manifest);
+ const resolved = resolver.resolveBundle('load-screen');
+```
+      
+
+#### Parameters:
+| Name      | Type                                | Description               |
+| --------- | ----------------------------------- | ------------------------- |
+| bundleIds | <code>string &#124; string[]</code> | The bundle ids to resolve |
+#### Returns:
+| Type                                                                                                                  | Description                                                          |
+| --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| <code>Record&#60;string, ResolveAsset&#62; &#124; Record&#60;string, Record&#60;string, ResolveAsset&#62;&#62;</code> | All the bundles assets or a hash of assets for each bundle specified |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolveUrl: <span><code>(key&#58; string &#124; string[]) -&#62; string &#124; Record&#60;string, string&#62;</code></span>
+Does exactly what resolve does, but returns just the URL rather than the whole asset object
+
+#### Parameters:
+| Name | Type                                | Description                |
+| ---- | ----------------------------------- | -------------------------- |
+| key  | <code>string &#124; string[]</code> | The key or keys to resolve |
+#### Returns:
+| Type                                                      | Description                           |
+| --------------------------------------------------------- | ------------------------------------- |
+| <code>string &#124; Record&#60;string, string&#62;</code> | * The URLs associated with the key(s) |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setBundleIdentifier: <span><code>(bundleIdentifier&#58; BundleIdentifierOptions) -&#62; void</code></span>
+Override how the resolver deals with generating bundle ids. must be called before any bundles are added
+
+#### Parameters:
+| Name             | Type                                 | Description                   |
+| ---------------- | ------------------------------------ | ----------------------------- |
+| bundleIdentifier | <code>BundleIdentifierOptions</code> | the bundle identifier options |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setDefaultSearchParams: <span><code>(searchParams&#58; string &#124; Record&#60;string, unknown&#62;) -&#62; void</code></span>
+Sets the default URL search parameters for the URL resolver. The urls can be specified as a string or an object.
+
+#### Parameters:
+| Name         | Type                                                       | Description                                              |
+| ------------ | ---------------------------------------------------------- | -------------------------------------------------------- |
+| searchParams | <code>string &#124; Record&#60;string, unknown&#62;</code> | the default url parameters to append when resolving urls |
+</article>
+
+
+---------------------------------------
+
+
+    

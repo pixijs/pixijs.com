@@ -1,0 +1,350 @@
+---
+id: "PIXI.Bounds.pixi_display"
+title: "Class: PIXI.Bounds"
+sidebar_label: "PIXI.Bounds"
+custom_edit_url: null
+---
+
+[@pixi/display](../modules/pixi_display).Bounds
+
+'Builder' pattern for bounds rectangles.
+This could be called an Axis-Aligned Bounding Box. It is not an actual shape. It is a mutable thing; no 'EMPTY' or those kind of problems.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI()
+</article>
+
+
+
+## Members
+<article>
+
+### maxX: <span><code>number</code></span>
+- **Default Value**: <code>-Infinity</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### maxY: <span><code>number</code></span>
+- **Default Value**: <code>-Infinity</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### minX: <span><code>number</code></span>
+- **Default Value**: <code>Infinity</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### minY: <span><code>number</code></span>
+- **Default Value**: <code>Infinity</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### updateID: <span><code>number</code></span>
+It is updated to _boundsID of corresponding object to keep bounds in sync with content. Updated from outside, thus public modifier.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### addBounds: <span><code>(bounds&#58; Bounds) -&#62; void</code></span>
+Adds other [PIXI.Bounds](../classes/PIXI.Bounds.pixi_display).
+
+#### Parameters:
+| Name   | Type                | Description            |
+| ------ | ------------------- | ---------------------- |
+| bounds | <code>Bounds</code> | The Bounds to be added |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addBoundsArea: <span><code>(bounds&#58; Bounds, area&#58; Rectangle) -&#62; void</code></span>
+Adds other Bounds, masked with Rectangle.
+
+#### Parameters:
+| Name   | Type                   | Description |
+| ------ | ---------------------- | ----------- |
+| bounds | <code>Bounds</code>    | TODO        |
+| area   | <code>Rectangle</code> | TODO        |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addBoundsMask: <span><code>(bounds&#58; Bounds, mask&#58; Bounds) -&#62; void</code></span>
+Adds other Bounds, masked with Bounds.
+
+#### Parameters:
+| Name   | Type                | Description             |
+| ------ | ------------------- | ----------------------- |
+| bounds | <code>Bounds</code> | The Bounds to be added. |
+| mask   | <code>Bounds</code> | TODO                    |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addBoundsMatrix: <span><code>(bounds&#58; Bounds, matrix&#58; Matrix) -&#62; void</code></span>
+Adds other Bounds, multiplied by matrix. Bounds shouldn't be empty.
+
+#### Parameters:
+| Name   | Type                | Description   |
+| ------ | ------------------- | ------------- |
+| bounds | <code>Bounds</code> | other bounds  |
+| matrix | <code>Matrix</code> | multiplicator |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addFrame: <span><code>(transform&#58; Transform, x0&#58; number, y0&#58; number, x1&#58; number, y1&#58; number) -&#62; void</code></span>
+Adds sprite frame, transformed.
+
+#### Parameters:
+| Name      | Type                   | Description        |
+| --------- | ---------------------- | ------------------ |
+| transform | <code>Transform</code> | transform to apply |
+| x0        | <code>number</code>    | left X of frame    |
+| y0        | <code>number</code>    | top Y of frame     |
+| x1        | <code>number</code>    | right X of frame   |
+| y1        | <code>number</code>    | bottom Y of frame  |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addFrameMatrix: <span><code>(matrix&#58; Matrix, x0&#58; number, y0&#58; number, x1&#58; number, y1&#58; number) -&#62; void</code></span>
+Adds sprite frame, multiplied by matrix
+
+#### Parameters:
+| Name   | Type                | Description       |
+| ------ | ------------------- | ----------------- |
+| matrix | <code>Matrix</code> | matrix to apply   |
+| x0     | <code>number</code> | left X of frame   |
+| y0     | <code>number</code> | top Y of frame    |
+| x1     | <code>number</code> | right X of frame  |
+| y1     | <code>number</code> | bottom Y of frame |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addFramePad: <span><code>(x0&#58; number, y0&#58; number, x1&#58; number, y1&#58; number, padX&#58; number, padY&#58; number) -&#62; void</code></span>
+Adds padded frame. (x0, y0) should be strictly less than (x1, y1)
+
+#### Parameters:
+| Name | Type                | Description       |
+| ---- | ------------------- | ----------------- |
+| x0   | <code>number</code> | left X of frame   |
+| y0   | <code>number</code> | top Y of frame    |
+| x1   | <code>number</code> | right X of frame  |
+| y1   | <code>number</code> | bottom Y of frame |
+| padX | <code>number</code> | padding X         |
+| padY | <code>number</code> | padding Y         |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addPoint: <span><code>(point&#58; IPointData) -&#62; void</code></span>
+This function should be inlined when its possible.
+
+#### Parameters:
+| Name  | Type                    | Description       |
+| ----- | ----------------------- | ----------------- |
+| point | <code>IPointData</code> | The point to add. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addPointMatrix: <span><code>(matrix&#58; Matrix, point&#58; IPointData) -&#62; void</code></span>
+Adds a point, after transformed. This should be inlined when its possible.
+
+#### Parameters:
+| Name   | Type                    | Description |
+| ------ | ----------------------- | ----------- |
+| matrix | <code>Matrix</code>     |             |
+| point  | <code>IPointData</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addQuad: <span><code>(vertices&#58; Float32Array) -&#62; void</code></span>
+Adds a quad, not transformed
+
+#### Parameters:
+| Name     | Type                      | Description       |
+| -------- | ------------------------- | ----------------- |
+| vertices | <code>Float32Array</code> | The verts to add. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addVertexData: <span><code>(vertexData&#58; Float32Array, beginOffset&#58; number, endOffset&#58; number) -&#62; void</code></span>
+Adds screen vertices from array
+
+#### Parameters:
+| Name        | Type                      | Description          |
+| ----------- | ------------------------- | -------------------- |
+| vertexData  | <code>Float32Array</code> | calculated vertices  |
+| beginOffset | <code>number</code>       | begin offset         |
+| endOffset   | <code>number</code>       | end offset, excluded |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addVertices: <span><code>(transform&#58; Transform, vertices&#58; Float32Array, beginOffset&#58; number, endOffset&#58; number) -&#62; void</code></span>
+Add an array of mesh vertices
+
+#### Parameters:
+| Name        | Type                      | Description               |
+| ----------- | ------------------------- | ------------------------- |
+| transform   | <code>Transform</code>    | mesh transform            |
+| vertices    | <code>Float32Array</code> | mesh coordinates in array |
+| beginOffset | <code>number</code>       | begin offset              |
+| endOffset   | <code>number</code>       | end offset, excluded      |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### addVerticesMatrix: <span><code>(matrix&#58; Matrix, vertices&#58; Float32Array, beginOffset&#58; number, endOffset&#58; number, padX&#58; number, padY&#58; ) -&#62; void</code></span>
+Add an array of mesh vertices.
+
+#### Parameters:
+| Name        | Type                      | Description               |
+| ----------- | ------------------------- | ------------------------- |
+| matrix      | <code>Matrix</code>       | mesh matrix               |
+| vertices    | <code>Float32Array</code> | mesh coordinates in array |
+| beginOffset | <code>number</code>       | begin offset              |
+| endOffset   | <code>number</code>       | end offset, excluded      |
+| padX        | <code>number</code>       | x padding                 |
+| padY        |                           | y padding                 |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clear: <span><code>() -&#62; void</code></span>
+Clears the bounds and resets.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getRectangle: <span><code>(rect&#58; Rectangle) -&#62; Rectangle</code></span>
+Can return Rectangle.EMPTY constant, either construct new rectangle, either use your rectangle It is not guaranteed that it will return tempRect
+
+#### Parameters:
+| Name | Type                   | Description                                        |
+| ---- | ---------------------- | -------------------------------------------------- |
+| rect | <code>Rectangle</code> | Temporary object will be used if AABB is not empty |
+#### Returns:
+| Type                   | Description                 |
+| ---------------------- | --------------------------- |
+| <code>Rectangle</code> | * A rectangle of the bounds |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isEmpty: <span><code>() -&#62; boolean</code></span>
+Checks if bounds are empty.
+
+#### Returns:
+| Type                 | Description      |
+| -------------------- | ---------------- |
+| <code>boolean</code> | * True if empty. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pad: <span><code>(paddingX&#58; number, paddingY&#58; ) -&#62; void</code></span>
+Pads bounds object, making it grow in all directions. If paddingY is omitted, both paddingX and paddingY will be set to paddingX.
+
+#### Parameters:
+| Name     | Type                | Description                    |
+| -------- | ------------------- | ------------------------------ |
+| paddingX | <code>number</code> | The horizontal padding amount. |
+| paddingY |                     | The vertical padding amount.   |
+</article>
+
+
+---------------------------------------
+
+
+    

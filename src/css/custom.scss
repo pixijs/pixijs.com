@@ -164,3 +164,19 @@ html[data-theme='dark'] {
     max-width: 100%;
   }
 }
+
+// TODO: this is hacked in
+h3 span code {
+  font-size: 0.8rem;
+  color: var(--ifm-color-primary-lightest);
+}
+
+.deprecated-tag {
+  background-color: #e91e63;
+  color: white;
+  font-weight: 700;
+  border-radius: 3px;
+  font-size: 0.7em;
+  margin-left: 10px;
+  padding: 2px 5px;
+}

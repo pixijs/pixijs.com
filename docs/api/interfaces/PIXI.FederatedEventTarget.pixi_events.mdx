@@ -1,0 +1,529 @@
+---
+id: "PIXI.FederatedEventTarget.pixi_events"
+title: "Interface: PIXI.FederatedEventTarget"
+sidebar_label: "PIXI.FederatedEventTarget"
+custom_edit_url: null
+---
+
+[@pixi/events](../modules/pixi_events).[PIXI](../namespaces/PIXI).FederatedEventTarget
+
+
+Describes the shape for a [PIXI.FederatedEvent](../classes/PIXI.FederatedEvent.pixi_events)'s' `eventTarget`.
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name                 | Type                                                                        | Description                                                                                                  |
+| -------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| _internalInteractive | <code>Interactive</code>                                                    | The internal value of the interactive state of an object.                                                    |
+| _userSetInteractive  | <code>boolean &#124; Interactive</code>                                     | The interactive value the user set                                                                           |
+| children             | <code>ReadonlyArray&#60;FederatedEventTarget&#62;</code>                    | The children of this event target.                                                                           |
+| cursor               | <code>Cursor &#124; string</code>                                           | The cursor preferred when the mouse pointer is hovering over.                                                |
+| hitArea              | <code>IHitArea &#124; null</code>                                           | The hit-area specifies the area for which pointer events should be captured by this event target.            |
+| interactive          | <code>boolean &#124; Interactive</code>                                     | Whether this event target should fire UI events.                                                             |
+| interactiveChildren  | <code>boolean</code>                                                        | Whether this event target has any children that need UI events. This can be used optimize event propagation. |
+| isInteractive        | <code>() =&#62; boolean</code>                                              | Returns true if the DisplayObject has interactive 'static' or 'dynamic'                                      |
+| onclick              | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'click' event                                                                                    |
+| onglobalmousemove    | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'globalmousemove' event                                                                          |
+| onglobalpointermove  | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'globalpointermove' event                                                                        |
+| onglobaltouchmove    | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'globaltouchmove' event                                                                          |
+| onmousedown          | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'mousedown' event                                                                                |
+| onmouseenter         | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'mouseenter' event                                                                               |
+| onmouseleave         | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'mouseleave' event                                                                               |
+| onmousemove          | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'mousemove' event                                                                                |
+| onmouseout           | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'mouseout' event                                                                                 |
+| onmouseover          | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'mouseover' event                                                                                |
+| onmouseup            | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'mouseup' event                                                                                  |
+| onmouseupoutside     | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'mouseupoutside' event                                                                           |
+| onpointercancel      | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'pointercancel' event                                                                            |
+| onpointerdown        | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'pointerdown' event                                                                              |
+| onpointerenter       | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'pointerenter' event                                                                             |
+| onpointerleave       | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'pointerleave' event                                                                             |
+| onpointermove        | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'pointermove' event                                                                              |
+| onpointerout         | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'pointerout' event                                                                               |
+| onpointerover        | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'pointerover' event                                                                              |
+| onpointertap         | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'pointertap' event                                                                               |
+| onpointerup          | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'pointerup' event                                                                                |
+| onpointerupoutside   | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'pointerupoutside' event                                                                         |
+| onrightclick         | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'rightclick' event                                                                               |
+| onrightdown          | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'rightdown' event                                                                                |
+| onrightup            | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'rightup' event                                                                                  |
+| onrightupoutside     | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'rightupoutside' event                                                                           |
+| ontap                | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'tap' event                                                                                      |
+| ontouchcancel        | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'touchcancel' event                                                                              |
+| ontouchend           | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'touchend' event                                                                                 |
+| ontouchendoutside    | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'touchendoutside' event                                                                          |
+| ontouchmove          | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'touchmove' event                                                                                |
+| ontouchstart         | <code>FederatedEventHandler &#124; null</code>                              | Handler for 'touchstart' event                                                                               |
+| onwheel              | <code>FederatedEventHandler&#60;FederatedWheelEvent&#62; &#124; null</code> | Handler for 'wheel' event                                                                                    |
+| parent               | <code>FederatedEventTarget</code>                                           | The parent of this event target.                                                                             |
+
+</p>
+</details>
+    
+
+<details><summary>Methods</summary>
+<p>
+
+| Name               | Params                                          | Description                                            |
+| ------------------ | ----------------------------------------------- | ------------------------------------------------------ |
+| removeAllListeners | <code>(event&#58; string &#124; Symbol) </code> | Remove all listeners, or those of the specified event. |
+
+</p>
+</details>
+    
+
+## Extends
+- [utils.EventEmitter](../classes/utils.EventEmitter.pixi_utils)
+- [EventTarget](https&#58;//developer.mozilla.org/en-US/docs/Web/API/EventTarget)
+
+## Members
+<article>
+
+### _internalInteractive: <span><code>Interactive</code></span>
+The internal value of the interactive state of an object.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _userSetInteractive: <span><code>boolean &#124; Interactive</code></span>
+The interactive value the user set
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### children: <span><code>ReadonlyArray&#60;FederatedEventTarget&#62;</code></span>
+The children of this event target.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cursor: <span><code>Cursor &#124; string</code></span>
+The cursor preferred when the mouse pointer is hovering over.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### hitArea: <span><code>IHitArea &#124; null</code></span>
+The hit-area specifies the area for which pointer events should be captured by this event target.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### interactive: <span><code>boolean &#124; Interactive</code></span>
+Whether this event target should fire UI events.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### interactiveChildren: <span><code>boolean</code></span>
+Whether this event target has any children that need UI events. This can be used optimize event propagation.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isInteractive: <span><code>() =&#62; boolean</code></span>
+Returns true if the DisplayObject has interactive 'static' or 'dynamic'
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onclick: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'click' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onglobalmousemove: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'globalmousemove' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onglobalpointermove: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'globalpointermove' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onglobaltouchmove: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'globaltouchmove' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onmousedown: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'mousedown' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onmouseenter: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'mouseenter' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onmouseleave: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'mouseleave' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onmousemove: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'mousemove' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onmouseout: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'mouseout' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onmouseover: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'mouseover' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onmouseup: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'mouseup' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onmouseupoutside: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'mouseupoutside' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onpointercancel: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'pointercancel' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onpointerdown: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'pointerdown' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onpointerenter: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'pointerenter' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onpointerleave: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'pointerleave' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onpointermove: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'pointermove' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onpointerout: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'pointerout' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onpointerover: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'pointerover' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onpointertap: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'pointertap' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onpointerup: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'pointerup' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onpointerupoutside: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'pointerupoutside' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onrightclick: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'rightclick' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onrightdown: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'rightdown' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onrightup: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'rightup' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onrightupoutside: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'rightupoutside' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ontap: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'tap' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ontouchcancel: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'touchcancel' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ontouchend: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'touchend' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ontouchendoutside: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'touchendoutside' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ontouchmove: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'touchmove' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ontouchstart: <span><code>FederatedEventHandler &#124; null</code></span>
+Handler for 'touchstart' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onwheel: <span><code>FederatedEventHandler&#60;FederatedWheelEvent&#62; &#124; null</code></span>
+Handler for 'wheel' event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### parent: <span><code>FederatedEventTarget</code></span>
+The parent of this event target.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### removeAllListeners: <span><code>(event&#58; string &#124; Symbol) -&#62; this</code></span>
+Remove all listeners, or those of the specified event.
+
+#### Parameters:
+| Name  | Type                              | Description |
+| ----- | --------------------------------- | ----------- |
+| event | <code>string &#124; Symbol</code> |             |
+#### Returns:
+| Type              | Description |
+| ----------------- | ----------- |
+| <code>this</code> |             |
+</article>
+
+
+---------------------------------------
+
+  

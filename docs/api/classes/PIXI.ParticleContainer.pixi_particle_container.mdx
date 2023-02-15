@@ -1,0 +1,182 @@
+---
+id: "PIXI.ParticleContainer.pixi_particle_container"
+title: "Class: PIXI.ParticleContainer"
+sidebar_label: "PIXI.ParticleContainer"
+custom_edit_url: null
+---
+
+[@pixi/particle-container](../modules/pixi_particle_container).ParticleContainer
+
+
+The ParticleContainer class is a really fast version of the Container built solely for speed, so use when you need a lot of sprites or particles.
+
+The tradeoff of the ParticleContainer is that most advanced functionality will not work. ParticleContainer implements the basic object transform (position, scale, rotation) and some advanced functionality like tint (as of v4.5.6).
+
+Other more advanced functionality like masking, children, filters, etc will not work on sprites in this batch.
+
+It's extremely easy to use. And here you have a hundred sprites that will be rendered at the speed of light.
+
+
+```js
+ import { ParticleContainer, Sprite } from 'pixi.js';
+
+ const container = new ParticleContainer();
+
+ for (let i = 0; i < 100; ++i)
+ {
+     let sprite = Sprite.from('myImage.png');
+     container.addChild(sprite);
+ }
+```
+      
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.ParticleContainer: <span><code>(maxSize&#58; number, properties&#58; IParticleProperties, batchSize&#58; number, autoResize&#58; boolean) </code></span>
+
+#### Parameters:
+| Name                | Type                             | Default            | Description                                                                                                             |
+| ------------------- | -------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| maxSize             | <code>number</code>              | <code>1500</code>  | The maximum number of particles that can be rendered by the container. Affects size of allocated buffers.               |
+| properties          | <code>IParticleProperties</code> | <code></code>      | The properties of children that should be uploaded to the gpu and applied.                                              |
+| properties.vertices | <code>boolean</code>             | <code>false</code> | When true, vertices be uploaded and applied. if sprite's ` scale/anchor/trim/frame/orig` is dynamic, please set `true`. |
+| properties.position | <code>boolean</code>             | <code>true</code>  | When true, position be uploaded and applied.                                                                            |
+| properties.rotation | <code>boolean</code>             | <code>false</code> | When true, rotation be uploaded and applied.                                                                            |
+| properties.uvs      | <code>boolean</code>             | <code>false</code> | When true, uvs be uploaded and applied.                                                                                 |
+| properties.tint     | <code>boolean</code>             | <code>false</code> | When true, alpha and tint be uploaded and applied.                                                                      |
+| batchSize           | <code>number</code>              | <code>16384</code> | Number of particles per batch. If less than maxSize, it uses maxSize instead.                                           |
+| autoResize          | <code>boolean</code>             | <code>false</code> | If true, container allocates more batches in case there are more than `maxSize` particles.                              |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### autoResize: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+If true, container allocates more batches in case there are more than `maxSize` particles.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### baseTexture: <span><code>BaseTexture</code></span>
+The texture used to render the children.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### blendMode: <span><code>BLEND_MODES</code></span>
+- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+
+The blend mode to be applied to the sprite. Apply a value of `PIXI.BLEND_MODES.NORMAL`to reset the blend mode.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### roundPixels: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+If true PixiJS will Math.floor() x/y values when rendering, stopping pixel interpolation. Advantages can include sharper image quality (like text) and faster rendering on canvas. The main disadvantage is movement of objects may appear less smooth. Default to true here as performance is usually the priority for particles.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### tint: <span><code>number</code></span>
+- **Default Value**: <code>0xFFFFFF</code>
+
+The tint applied to the container. This is a hex value. A value of 0xFFFFFF will remove any tint effect. IMPORTANT&#58; This is a WebGL only feature and will be ignored by the canvas renderer.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### destroy: <span><code>(options&#58; IDestroyOptions &#124; boolean) -&#62; void</code></span>
+Destroys the container
+
+#### Parameters:
+| Name                | Type                                        | Description                                                                                                                 |
+| ------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| options             | <code>IDestroyOptions &#124; boolean</code> | Options parameter. A boolean will act as if all options have been set to that value                                         |
+| options.children    | <code>boolean</code>                        | if set to true, all the children will have their destroy method called as well. 'options' will be passed on to those calls. |
+| options.texture     | <code>boolean</code>                        | Only used for child Sprites if options.children is set to true Should it destroy the texture of the child sprite            |
+| options.baseTexture | <code>boolean</code>                        | Only used for child Sprites if options.children is set to true Should it destroy the base texture of the child sprite       |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### render: <span><code>(renderer&#58; Renderer) -&#62; void</code></span>
+Renders the container using the WebGL renderer.
+
+#### Parameters:
+| Name     | Type                  | Description         |
+| -------- | --------------------- | ------------------- |
+| renderer | <code>Renderer</code> | The WebGL renderer. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setProperties: <span><code>(properties&#58; IParticleProperties) -&#62; void</code></span>
+Sets the private properties array to dynamic / static based on the passed properties object
+
+#### Parameters:
+| Name       | Type                             | Description                   |
+| ---------- | -------------------------------- | ----------------------------- |
+| properties | <code>IParticleProperties</code> | The properties to be uploaded |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### onChildrenChange: <span><code>(smallestChildIndex&#58; number) -&#62; void</code></span>
+Set the flag that static data should be updated to true
+
+#### Parameters:
+| Name               | Type                | Description               |
+| ------------------ | ------------------- | ------------------------- |
+| smallestChildIndex | <code>number</code> | The smallest child index. |
+</article>
+
+
+---------------------------------------
+
+
+    

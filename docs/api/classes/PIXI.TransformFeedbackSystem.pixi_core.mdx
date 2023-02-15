@@ -1,0 +1,135 @@
+---
+id: "PIXI.TransformFeedbackSystem.pixi_core"
+title: "Class: PIXI.TransformFeedbackSystem"
+sidebar_label: "PIXI.TransformFeedbackSystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).TransformFeedbackSystem
+
+
+TransformFeedbackSystem provides TransformFeedback of WebGL2 https&#58;//developer.mozilla.org/en-US/docs/Web/API/WebGLTransformFeedback
+
+For example, you can use TransformFeedbackSystem to implement GPU Particle or general purpose computing on GPU (aka GPGPU).
+
+It also manages a lifetime of GLTransformFeedback object
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.TransformFeedbackSystem: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                         |
+| -------- | --------------------- | ------------- | ----------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this System works for. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+
+
+## Methods
+<article>
+
+### beginTransformFeedback: <span><code>(drawMode&#58; DRAW_MODES, shader&#58; Shader) -&#62; </code></span>
+Begin TransformFeedback
+
+#### Parameters:
+| Name     | Type                    | Description                                                                            |
+| -------- | ----------------------- | -------------------------------------------------------------------------------------- |
+| drawMode | <code>DRAW_MODES</code> | DrawMode for TransformFeedback                                                         |
+| shader   | <code>Shader</code>     | A Shader used by TransformFeedback. Current bound shader will be used if not provided. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### bind: <span><code>(transformFeedback&#58; TransformFeedback) -&#62; </code></span>
+Bind TransformFeedback and buffers
+
+#### Parameters:
+| Name              | Type                           | Description               |
+| ----------------- | ------------------------------ | ------------------------- |
+| transformFeedback | <code>TransformFeedback</code> | TransformFeedback to bind |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### disposeTransformFeedback: <span><code>(tf&#58; PIXI.TransformFeedback, contextLost&#58; boolean) -&#62; void</code></span>
+Disposes TransfromFeedback
+
+#### Parameters:
+| Name        | Type                                | Description                                               |
+| ----------- | ----------------------------------- | --------------------------------------------------------- |
+| tf          | <code>PIXI.TransformFeedback</code> | TransformFeedback                                         |
+| contextLost | <code>boolean</code>                | If context was lost, we suppress delete TransformFeedback |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### endTransformFeedback: <span><code>() -&#62; </code></span>
+End TransformFeedback
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### unbind: <span><code>() -&#62; </code></span>
+Unbind TransformFeedback
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### contextChange: <span><code>() -&#62; void</code></span>
+Sets up the renderer context and necessary buffers.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### createGLTransformFeedback: <span><code>(tf&#58; TransformFeedback) -&#62; </code></span>
+Create TransformFeedback and bind buffers
+
+#### Parameters:
+| Name | Type                           | Description       |
+| ---- | ------------------------------ | ----------------- |
+| tf   | <code>TransformFeedback</code> | TransformFeedback |
+#### Returns:
+| Type | Description            |
+| ---- | ---------------------- |
+|      | WebGLTransformFeedback |
+</article>
+
+
+---------------------------------------
+
+
+    

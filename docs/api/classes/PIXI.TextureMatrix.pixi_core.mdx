@@ -1,0 +1,177 @@
+---
+id: "PIXI.TextureMatrix.pixi_core"
+title: "Class: PIXI.TextureMatrix"
+sidebar_label: "PIXI.TextureMatrix"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).TextureMatrix
+
+Class controls uv mapping from Texture normal space to BaseTexture normal space.
+Takes `trim` and `rotate` into account. May contain clamp settings for Meshes and TilingSprite.
+
+Can be used in Texture `uvMatrix` field, or separately, you can use different clamp settings on the same texture. If you want to add support for texture region of certain feature or filter, that's what you're looking for.
+
+Takes track of Texture changes through `_lastTextureID` private field. Use `update()` method call to track it from outside.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.TextureMatrix: <span><code>(texture&#58; Texture, clampMargin&#58; number) </code></span>
+
+#### Parameters:
+| Name        | Type                 | Default       | Description                                                        |
+| ----------- | -------------------- | ------------- | ------------------------------------------------------------------ |
+| texture     | <code>Texture</code> | <code></code> | observed texture                                                   |
+| clampMargin | <code>number</code>  | <code></code> | Changes frame clamping, 0.5 by default. Use -0.5 for extra border. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### clampMargin: <span><code>number</code></span>
+- **Default Value**: <code>0.5</code>
+
+Changes frame clamping Works with TilingSprite and Mesh Change to -0.5 to add a pixel to the edge, recommended for transparent trimmed textures in atlas
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clampOffset: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Changes frame clamping Works with TilingSprite and Mesh Change to 1.5 if you texture has repeated right and bottom lines, that leads to smoother borders
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isSimple: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+If texture size is the same as baseTexture.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### mapCoord: <span><code>Matrix</code></span>
+Matrix operation that converts texture region coords to texture coords
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### texture: <span><code>Texture</code></span>
+Texture property.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uClampFrame: <span><code>Float32Array</code></span>
+Clamp region for normalized coords, left-top pixel center in xy , bottom-right in zw. Calculated based on clampOffset.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uClampOffset: <span><code>Float32Array</code></span>
+Normalized clamp offset. Calculated based on clampOffset.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _textureID: <span><code>number</code></span>
+Tracks Texture frame changes.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _updateID: <span><code>number</code></span>
+Tracks Texture frame changes.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### multiplyUvs: <span><code>(uvs&#58; Float32Array, out&#58; Float32Array) -&#62; Float32Array</code></span>
+Multiplies uvs array to transform
+
+#### Parameters:
+| Name | Type                      | Description |
+| ---- | ------------------------- | ----------- |
+| uvs  | <code>Float32Array</code> | mesh uvs    |
+| out  | <code>Float32Array</code> | output      |
+#### Returns:
+| Type                      | Description |
+| ------------------------- | ----------- |
+| <code>Float32Array</code> | * output    |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### update: <span><code>(forceUpdate&#58; boolean) -&#62; boolean</code></span>
+Updates matrices if texture was changed.
+
+#### Parameters:
+| Name        | Type                 | Description                                |
+| ----------- | -------------------- | ------------------------------------------ |
+| forceUpdate | <code>boolean</code> | if true, matrices will be updated any case |
+#### Returns:
+| Type                 | Description                     |
+| -------------------- | ------------------------------- |
+| <code>boolean</code> | * Whether or not it was updated |
+</article>
+
+
+---------------------------------------
+
+
+    

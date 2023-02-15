@@ -1,0 +1,278 @@
+---
+id: "PIXI.ContextSystem.pixi_core"
+title: "Class: PIXI.ContextSystem"
+sidebar_label: "PIXI.ContextSystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).ContextSystem
+
+
+System plugin to the renderer to manage the context.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.ContextSystem: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                         |
+| -------- | --------------------- | ------------- | ----------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this System works for. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### extensions: <span><code>object</code></span>
+Extensions available.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### anisotropicFiltering: <span><code>EXT_texture_filter_anisotropic</code></span>
+WebGL v1 and v2 extension
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### depthTexture: <span><code>WEBGL_depth_texture</code></span>
+WebGL v1 extension
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### drawBuffers: <span><code>WEBGL_draw_buffers</code></span>
+WebGL v1 extension
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### floatTexture: <span><code>OES_texture_float</code></span>
+WebGL v1 extension
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### loseContext: <span><code>WEBGL_lose_context</code></span>
+WebGL v1 extension
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### vertexArrayObject: <span><code>OES_vertex_array_object</code></span>
+WebGL v1 extension
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isLost: <span><code>boolean</code></span>
+`true` if the context is lost
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### supports: <span><code>object</code></span>
+Features supported by current context.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uint32Indices: <span><code>boolean</code></span>
+Support for 32-bit indices buffer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### useContextAlpha: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+Pass-thru setting for the canvas' context `alpha` property. This is typically not something you need to fiddle with. If you want transparency, use `backgroundAlpha`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### webGLVersion: <span><code>number</code></span>
+Either 1 or 2 to reflect the WebGL version being used.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### createContext: <span><code>(canvas&#58; ICanvas, options&#58; WebGLContextAttributes) -&#62; WebGLRenderingContext</code></span>
+Helper class to create a WebGL Context
+
+#### Parameters:
+| Name    | Type                                | Description                                                                                   |
+| ------- | ----------------------------------- | --------------------------------------------------------------------------------------------- |
+| canvas  | <code>ICanvas</code>                | the canvas element that we will get the context from                                          |
+| options | <code>WebGLContextAttributes</code> | An options object that gets passed in to the canvas element containing the context attributes |
+#### Returns:
+| Type                               | Description       |
+| ---------------------------------- | ----------------- |
+| <code>WebGLRenderingContext</code> | the WebGL context |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### contextChange: <span><code>(gl&#58; WebGLRenderingContext) -&#62; void</code></span>
+Handles the context change event.
+
+#### Parameters:
+| Name | Type                               | Description        |
+| ---- | ---------------------------------- | ------------------ |
+| gl   | <code>WebGLRenderingContext</code> | New WebGL context. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getExtensions: <span><code>() -&#62; void</code></span>
+Auto-populate the [extensions](../classes/PIXI.ContextSystem.pixi_core#extensions).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### handleContextLost: <span><code>(event&#58; WebGLContextEvent) -&#62; void</code></span>
+Handles a lost webgl context
+
+#### Parameters:
+| Name  | Type                           | Description             |
+| ----- | ------------------------------ | ----------------------- |
+| event | <code>WebGLContextEvent</code> | The context lost event. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### handleContextRestored: <span><code>() -&#62; void</code></span>
+Handles a restored webgl context.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### initFromContext: <span><code>(gl&#58; WebGLRenderingContext) -&#62; void</code></span>
+Initializes the context.
+
+#### Parameters:
+| Name | Type                               | Description   |
+| ---- | ---------------------------------- | ------------- |
+| gl   | <code>WebGLRenderingContext</code> | WebGL context |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### initFromOptions: <span><code>(options&#58; object) -&#62; void</code></span>
+Initialize from context options
+
+#### Parameters:
+| Name    | Type                | Description        |
+| ------- | ------------------- | ------------------ |
+| options | <code>object</code> | context attributes |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### postrender: <span><code>() -&#62; void</code></span>
+Handle the post-render runner event.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### validateContext: <span><code>(gl&#58; WebGLRenderingContext) -&#62; void</code></span>
+Validate context.
+
+#### Parameters:
+| Name | Type                               | Description     |
+| ---- | ---------------------------------- | --------------- |
+| gl   | <code>WebGLRenderingContext</code> | Render context. |
+</article>
+
+
+---------------------------------------
+
+
+    

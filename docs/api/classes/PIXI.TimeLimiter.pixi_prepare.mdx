@@ -1,0 +1,83 @@
+---
+id: "PIXI.TimeLimiter.pixi_prepare"
+title: "Class: PIXI.TimeLimiter"
+sidebar_label: "PIXI.TimeLimiter"
+custom_edit_url: null
+---
+
+[@pixi/prepare](../modules/pixi_prepare).TimeLimiter
+
+
+TimeLimiter limits the number of items handled by a [PIXI.BasePrepare](../classes/PIXI.BasePrepare.pixi_prepare) to a specified number of milliseconds per frame.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.TimeLimiter: <span><code>(maxMilliseconds&#58; number) </code></span>
+
+#### Parameters:
+| Name            | Type                | Default       | Description                                                            |
+| --------------- | ------------------- | ------------- | ---------------------------------------------------------------------- |
+| maxMilliseconds | <code>number</code> | <code></code> | The maximum milliseconds that can be spent preparing items each frame. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### frameStart: <span><code>number</code></span>
+The start time of the current frame.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### maxMilliseconds: <span><code>number</code></span>
+The maximum milliseconds that can be spent preparing items each frame.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### allowedToUpload: <span><code>() -&#62; boolean</code></span>
+Checks to see if another item can be uploaded. This should only be called once per item.
+
+#### Returns:
+| Type                 | Description                              |
+| -------------------- | ---------------------------------------- |
+| <code>boolean</code> | * If the item is allowed to be uploaded. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### beginFrame: <span><code>() -&#62; void</code></span>
+Resets any counting properties to start fresh on a new frame.
+
+</article>
+
+
+---------------------------------------
+
+
+    

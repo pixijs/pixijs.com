@@ -1,0 +1,194 @@
+---
+id: "PIXI.MaskSystem.pixi_core"
+title: "Class: PIXI.MaskSystem"
+sidebar_label: "PIXI.MaskSystem"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).MaskSystem
+
+System plugin to the renderer to manage masks.
+There are three built-in types of masking&#58;**Scissor Masking**&#58; Scissor masking discards pixels that are outside of a rectangle called the scissor box. It is the most performant as the scissor test is inexpensive. However, it can only be used when the mask is rectangular.**Stencil Masking**&#58; Stencil masking discards pixels that don't overlap with the pixels rendered into the stencil buffer. It is the next fastest option as it does not require rendering into a separate framebuffer. However, it does cause the mask to be rendered **twice** for each masking operation; hence, minimize the rendering cost of your masks.**Sprite Mask Filtering**&#58; Sprite mask filtering discards pixels based on the red channel of the sprite-mask's texture. (Generally, the masking texture is grayscale). Using advanced techniques, you might be able to embed this type of masking in a custom shader - and hence, bypassing the masking system fully for performance wins.
+
+The best type of masking is auto-detected when you `push` one. To use scissor masking, you must pass in a `Graphics`object with just a rectangle drawn.
+
+## Mask Stacks
+
+In the scene graph, masks can be applied recursively, i.e. a mask can be applied during a masking operation. The mask stack stores the currently applied masks in order. Each [PIXI.BaseRenderTexture](../classes/PIXI.BaseRenderTexture.pixi_core) holds its own mask stack, i.e. when you switch render-textures, the old masks only applied when you switch back to rendering to the old render-target.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.MaskSystem: <span><code>(renderer&#58; Renderer) </code></span>
+
+#### Parameters:
+| Name     | Type                  | Default       | Description                         |
+| -------- | --------------------- | ------------- | ----------------------------------- |
+| renderer | <code>Renderer</code> | <code></code> | The renderer this System works for. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### enableScissor: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+Flag to enable scissor masking.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### alphaMaskIndex: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+Current index of alpha mask pool.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### alphaMaskPool: <span><code>Array&#60;SpriteMaskFilter[]&#62;</code></span>
+Pool of used sprite mask filters.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### detect: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
+Sets type of MaskData based on its maskObject.
+
+#### Parameters:
+| Name     | Type                  | Description |
+| -------- | --------------------- | ----------- |
+| maskData | <code>MaskData</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pop: <span><code>(target&#58; PIXI.IMaskTarget) -&#62; void</code></span>
+Removes the last mask from the mask stack and doesn't return it.
+NOTE&#58; The batch renderer should be flushed beforehand to render the masked contents before the mask is removed.
+
+#### Parameters:
+| Name   | Type                          | Description                         |
+| ------ | ----------------------------- | ----------------------------------- |
+| target | <code>PIXI.IMaskTarget</code> | Display Object to pop the mask from |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### popColorMask: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
+Pops the color mask.
+
+#### Parameters:
+| Name     | Type                  | Description   |
+| -------- | --------------------- | ------------- |
+| maskData | <code>MaskData</code> | The mask data |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### popSpriteMask: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
+Removes the last filter from the filter stack and doesn't return it.
+
+#### Parameters:
+| Name     | Type                  | Description                    |
+| -------- | --------------------- | ------------------------------ |
+| maskData | <code>MaskData</code> | Sprite to be used as the mask. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### push: <span><code>(target&#58; PIXI.DisplayObject, maskDataOrTarget&#58; PIXI.MaskData &#124; PIXI.Sprite &#124; PIXI.Graphics &#124; PIXI.DisplayObject) -&#62; void</code></span>
+Enables the mask and appends it to the current mask stack.
+NOTE&#58; The batch renderer should be flushed beforehand to prevent pending renders from being masked.
+
+#### Parameters:
+| Name             | Type                                                                                         | Description                        |
+| ---------------- | -------------------------------------------------------------------------------------------- | ---------------------------------- |
+| target           | <code>PIXI.DisplayObject</code>                                                              | Display Object to push the mask to |
+| maskDataOrTarget | <code>PIXI.MaskData &#124; PIXI.Sprite &#124; PIXI.Graphics &#124; PIXI.DisplayObject</code> | The masking data.                  |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pushColorMask: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
+Pushes the color mask.
+
+#### Parameters:
+| Name     | Type                  | Description   |
+| -------- | --------------------- | ------------- |
+| maskData | <code>MaskData</code> | The mask data |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pushSpriteMask: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
+Applies the Mask and adds it to the current filter stack.
+
+#### Parameters:
+| Name     | Type                  | Description                    |
+| -------- | --------------------- | ------------------------------ |
+| maskData | <code>MaskData</code> | Sprite to be used as the mask. |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### setMaskStack: <span><code>(maskStack&#58; Array&#60;MaskData&#62;) -&#62; void</code></span>
+Changes the mask stack that is used by this System.
+
+#### Parameters:
+| Name      | Type                                 | Description    |
+| --------- | ------------------------------------ | -------------- |
+| maskStack | <code>Array&#60;MaskData&#62;</code> | The mask stack |
+</article>
+
+
+---------------------------------------
+
+
+    

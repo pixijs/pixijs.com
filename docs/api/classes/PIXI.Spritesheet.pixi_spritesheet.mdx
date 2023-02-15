@@ -1,0 +1,222 @@
+---
+id: "PIXI.Spritesheet.pixi_spritesheet"
+title: "Class: PIXI.Spritesheet"
+sidebar_label: "PIXI.Spritesheet"
+custom_edit_url: null
+---
+
+[@pixi/spritesheet](../modules/pixi_spritesheet).Spritesheet
+
+
+Utility class for maintaining reference to a collection of Textures on a single Spritesheet.
+
+To access a sprite sheet from your code you may pass its JSON data file to Pixi's loader&#58;
+
+```
+import { Assets } from 'pixi.js';
+
+const sheet = await Assets.load('images/spritesheet.json');
+
+```
+
+Alternately, you may circumvent the loader by instantiating the Spritesheet directly&#58;
+
+```
+import { Spritesheet } from 'pixi.js';
+
+const sheet = new Spritesheet(texture, spritesheetData);
+await sheet.parse();
+console.log('Spritesheet ready to use!');
+
+```
+
+With the `sheet.textures` you can create Sprite objects, and `sheet.animations` can be used to create an AnimatedSprite.
+
+Here's an example of a sprite sheet JSON data file&#58;
+
+```
+{
+    "frames": {
+        "enemy1.png":
+        {
+            "frame": {"x":103,"y":1,"w":32,"h":32},
+            "spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+            "sourceSize": {"w":32,"h":32},
+            "anchor": {"x":16,"y":16}
+        },
+        "enemy2.png":
+        {
+            "frame": {"x":103,"y":35,"w":32,"h":32},
+            "spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+            "sourceSize": {"w":32,"h":32},
+            "anchor": {"x":16,"y":16}
+        },
+        "button.png":
+        {
+            "frame": {"x":1,"y":1,"w":100,"h":100},
+            "spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
+            "sourceSize": {"w":100,"h":100},
+            "anchor": {"x":0,"y":0},
+            "borders": {"left":35,"top":35,"right":35,"bottom":35}
+        }
+    },
+
+    "animations": {
+        "enemy": ["enemy1.png","enemy2.png"]
+    },
+
+    "meta": {
+        "image": "sheet.png",
+        "format": "RGBA8888",
+        "size": {"w":136,"h":102},
+        "scale": "1"
+    }
+}
+
+```
+
+Sprite sheets can be packed using tools like [TexturePacker](https&#58;//codeandweb.com/texturepacker), [Shoebox](https&#58;//renderhjs.net/shoebox/) or [Spritesheet.js](https&#58;//github.com/krzysztof-o/spritesheet.js). Default anchor points (see [PIXI.Texture#defaultAnchor](../classes/PIXI.Texture.pixi_core#defaultAnchor)), default 9-slice borders (see [PIXI.Texture#defaultBorders](../classes/PIXI.Texture.pixi_core#defaultBorders)) and grouping of animation sprites are currently only supported by TexturePacker.
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.Spritesheet: <span><code>(texture&#58; BaseTexture &#124; Texture, data&#58; object, resolutionFilename&#58; string) </code></span>
+
+#### Parameters:
+| Name               | Type                                    | Default                | Description                                                                                                                                 |
+| ------------------ | --------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| texture            | <code>BaseTexture &#124; Texture</code> | <code></code>          | Reference to the source BaseTexture object.                                                                                                 |
+| data               | <code>object</code>                     | <code></code>          | Spritesheet image data.                                                                                                                     |
+| resolutionFilename | <code>string</code>                     | <code>undefined</code> | The filename to consider when determining the resolution of the spritesheet. If not provided, the imageUrl will be used on the BaseTexture. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### BATCH_SIZE: <span><code>number</code></span>
+- **Default Value**: <code>1000</code>
+
+The maximum number of Textures to build per process.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### animations: <span><code>utils.Dict&#60;Texture[]&#62;</code></span>
+A map containing the textures for each animation. Can be used to create an [AnimatedSprite](../classes/PIXI.AnimatedSprite.pixi_sprite_animated)&#58;
+
+```js
+ import { AnimatedSprite } from 'pixi.js';
+
+ new AnimatedSprite(sheet.animations['anim_name']);
+```
+      
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### baseTexture: <span><code>BaseTexture</code></span>
+Reference to ths source texture.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### data: <span><code>object</code></span>
+Reference to the original JSON data.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### linkedSheets: <span><code>Spritesheet[]</code></span>
+For multi-packed spritesheets, this contains a reference to all the other spritesheets it depends on.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution: <span><code>number</code></span>
+The resolution of the spritesheet.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textures: <span><code>utils.Dict&#60;Texture&#62;</code></span>
+A map containing all textures of the sprite sheet. Can be used to create a [Sprite](../classes/PIXI.Sprite.pixi_sprite)&#58;
+
+```js
+ import { Sprite } from 'pixi.js';
+
+ new Sprite(sheet.textures['image.png']);
+```
+      
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### destroy: <span><code>(destroyBase&#58; boolean) -&#62; void</code></span>
+Destroy Spritesheet and don't use after this.
+
+#### Parameters:
+| Name        | Type                 | Description                                 |
+| ----------- | -------------------- | ------------------------------------------- |
+| destroyBase | <code>boolean</code> | Whether to destroy the base texture as well |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### parse: <span><code>() -&#62; Promise&#60;utils.Dict&#60;Texture&#62;&#62;</code></span>
+Parser spritesheet from loaded data. This is done asynchronously to prevent creating too many Texture within a single process.
+
+#### Returns:
+| Type                                                      | Description |
+| --------------------------------------------------------- | ----------- |
+| <code>Promise&#60;utils.Dict&#60;Texture&#62;&#62;</code> |             |
+</article>
+
+
+---------------------------------------
+
+
+    

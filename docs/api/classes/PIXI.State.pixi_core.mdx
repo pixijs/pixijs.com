@@ -1,0 +1,126 @@
+---
+id: "PIXI.State.pixi_core"
+title: "Class: PIXI.State"
+sidebar_label: "PIXI.State"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).State
+
+This is a WebGL state, and is is passed to [PIXI.StateSystem](../classes/PIXI.StateSystem.pixi_core).
+Each mesh rendered may require WebGL to be in a different state. For example you may want different blend mode or to enable polygon offsets
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI()
+</article>
+
+
+
+## Members
+<article>
+
+### blend: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+Activates blending of the computed fragment color values.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### blendMode: <span><code>BLEND_MODES</code></span>
+- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+
+The blend mode to be applied when this state is set. Apply a value of `PIXI.BLEND_MODES.NORMAL` to reset the blend mode. Setting this mode to anything other than NO_BLEND will automatically switch blending on.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clockwiseFrontFace: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Specifies whether or not front or back-facing polygons can be culled.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### culling: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Activates culling of polygons.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### depthMask: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+Enables or disables writing to the depth buffer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### depthTest: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Activates depth comparisons and updates to the depth buffer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### offsets: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Activates adding an offset to depth values of polygon's fragments
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### polygonOffset: <span><code>number</code></span>
+- **Default Value**: <code>0</code>
+
+The polygon offset. Setting this property to anything other than 0 will automatically enable polygon offset fill.
+
+</article>
+
+
+---------------------------------------
+
+
+
+
+    

@@ -1,0 +1,416 @@
+---
+id: "PIXI.FederatedEvent.pixi_events"
+title: "Class: PIXI.FederatedEvent"
+sidebar_label: "PIXI.FederatedEvent"
+custom_edit_url: null
+---
+
+[@pixi/events](../modules/pixi_events).FederatedEvent
+
+
+An DOM-compatible synthetic event implementation that is "forwarded" on behalf of an original FederatedEvent or native [Event](https&#58;//dom.spec.whatwg.org/#event).
+
+
+
+// TODO: @see
+
+        
+
+<article>
+
+### new PIXI.FederatedEvent: <span><code>(manager&#58; EventBoundary) </code></span>
+
+#### Parameters:
+| Name    | Type                       | Default       | Description                                                                                                 |
+| ------- | -------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------- |
+| manager | <code>EventBoundary</code> | <code></code> | The event boundary which manages this event. Propagation can only occur within the boundary's jurisdiction. |
+
+</article>
+
+---------------------------------------
+
+
+
+
+## Members
+<article>
+
+### bubbles: <span><code>boolean</code></span>
+- **Default Value**: <code>true</code>
+
+Flags whether this event bubbles. This will take effect only if it is set before propagation.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cancelable: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Flags whether this event can be canceled using [PIXI.FederatedEvent.preventDefault](../classes/PIXI.FederatedEvent.pixi_events#preventDefault). This is always false (for now).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cancelBubble: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+- **Default Value**: <code>true</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### composed: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Flag added for compatibility with DOM `Event`. It is not used in the Federated Events API.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### currentTarget: <span><code>FederatedEventTarget</code></span>
+The listeners of the event target that are being notified.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### data: <span><code>this</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+Fallback for the deprecated &#64;code&#123;PIXI.InteractionEvent.data&#125;.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### defaultPrevented: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Flags whether the default response of the user agent was prevent through this event.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### detail: <span><code>number</code></span>
+Event-specific detail
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### eventPhase: <span><code>unknown</code></span>
+- **Default Value**: <code>&#123;&#64;link PIXI.FederatedEvent.NONE&#125;</code>
+
+The propagation phase.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### isTrusted: <span><code>boolean</code></span>
+Flags whether this is a user-trusted event
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### layer: <span><code>Point</code></span>
+The coordinates of the evnet relative to the nearest DOM layer. This is a non-standard property.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### layerX: <span><code>number</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### layerY: <span><code>number</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### manager: <span><code>EventBoundary</code></span>
+The [PIXI.EventBoundary](../classes/PIXI.EventBoundary.pixi_events) that manages this event. Null for root events.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### nativeEvent: <span><code>N</code></span>
+The native event that caused the foremost original event.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### originalEvent: <span><code>FederatedEvent&#60;N&#62;</code></span>
+The original event that caused this event, if any.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### page: <span><code>Point</code></span>
+The coordinates of the event relative to the DOM document. This is a non-standard property.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pageX: <span><code>number</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pageY: <span><code>number</code></span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### path: <span><code>FederatedEventTarget[]</code></span>
+The composed path of the event's propagation. The `target` is at the end.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### propagationImmediatelyStopped: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Flags whether propagation was immediately stopped.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### propagationStopped: <span><code>boolean</code></span>
+- **Default Value**: <code>false</code>
+
+Flags whether propagation was stopped.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### returnValue: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### srcElement: <span><code>EventTarget</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### target: <span><code>FederatedEventTarget</code></span>
+The event target that this will be dispatched to.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### timeStamp: <span><code>number</code></span>
+The timestamp of when the event was created.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### type: <span><code>string</code></span>
+The type of event, e.g. `"mouseup"`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### view: <span><code>WindowProxy</code></span>
+The global Window object.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### which: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+Not supported.
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### composedPath: <span><code>() -&#62; FederatedEventTarget[]</code></span>
+The propagation path for this event. Alias for [PIXI.EventBoundary.propagationPath](../classes/PIXI.EventBoundary.pixi_events#propagationPath).
+
+#### Returns:
+| Type                                | Description |
+| ----------------------------------- | ----------- |
+| <code>FederatedEventTarget[]</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### initEvent: <span><code>(_type&#58; string, _bubbles&#58; boolean, _cancelable&#58; boolean) -&#62; void</code></span><span class="deprecated-tag"> Deprecated: </span>
+Unimplemented method included for implementing the DOM interface `Event`. It will throw an `Error`.
+
+#### Parameters:
+| Name        | Type                 | Description |
+| ----------- | -------------------- | ----------- |
+| _type       | <code>string</code>  |             |
+| _bubbles    | <code>boolean</code> |             |
+| _cancelable | <code>boolean</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### initUIEvent: <span><code>(_typeArg&#58; string, _bubblesArg&#58; boolean, _cancelableArg&#58; boolean, _viewArg&#58; Window &#124; null, _detailArg&#58; number) -&#62; void</code></span><span class="deprecated-tag"> Deprecated: </span>
+Unimplemented method included for implementing the DOM interface `UIEvent`. It will throw an `Error`.
+
+#### Parameters:
+| Name           | Type                            | Description |
+| -------------- | ------------------------------- | ----------- |
+| _typeArg       | <code>string</code>             |             |
+| _bubblesArg    | <code>boolean</code>            |             |
+| _cancelableArg | <code>boolean</code>            |             |
+| _viewArg       | <code>Window &#124; null</code> |             |
+| _detailArg     | <code>number</code>             |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### preventDefault: <span><code>() -&#62; void</code></span>
+Prevent default behavior of PixiJS and the user agent.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stopImmediatePropagation: <span><code>() -&#62; void</code></span>
+Stop this event from propagating to any addition listeners, including on the [currentTarget](../interfaces/PIXI.FederatedEventTarget.pixi_events#currentTarget) and also the following event targets on the propagation path.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### stopPropagation: <span><code>() -&#62; void</code></span>
+Stop this event from propagating to the next [PIXI.FederatedEventTarget](../interfaces/PIXI.FederatedEventTarget.pixi_events). The rest of the listeners on the [currentTarget](../interfaces/PIXI.FederatedEventTarget.pixi_events#currentTarget) will still be notified.
+
+</article>
+
+
+---------------------------------------
+
+
+    

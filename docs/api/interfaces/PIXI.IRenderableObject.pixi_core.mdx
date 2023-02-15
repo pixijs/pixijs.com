@@ -1,0 +1,125 @@
+---
+id: "PIXI.IRenderableObject.pixi_core"
+title: "Interface: PIXI.IRenderableObject"
+sidebar_label: "PIXI.IRenderableObject"
+custom_edit_url: null
+---
+
+[@pixi/core](../modules/pixi_core).[PIXI](../namespaces/PIXI).IRenderableObject
+
+
+Interface for DisplayObject to interface with Renderer. The minimum APIs needed to implement a renderable object.
+
+
+
+// TODO: @see
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name      | Type                              | Description                         |
+| --------- | --------------------------------- | ----------------------------------- |
+| parent    | <code>IRenderableContainer</code> | Object must have a parent container |
+| transform | <code>Transform</code>            | Object must have a transform        |
+
+</p>
+</details>
+    
+
+<details><summary>Methods</summary>
+<p>
+
+| Name              | Params                                           | Description                         |
+| ----------------- | ------------------------------------------------ | ----------------------------------- |
+| disableTempParent | <code>(parent&#58; IRenderableContainer) </code> | After method for transform updates  |
+| enableTempParent  | <code>() </code>                                 | Before method for transform updates |
+| render            | <code>(renderer&#58; IRenderer) </code>          | Render object directly              |
+| updateTransform   | <code>() </code>                                 | Update the transforms               |
+
+</p>
+</details>
+    
+
+## Extends
+- GlobalMixins.IRenderableObject
+
+## Members
+<article>
+
+### parent: <span><code>IRenderableContainer</code></span>
+Object must have a parent container
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### transform: <span><code>Transform</code></span>
+Object must have a transform
+
+</article>
+
+
+---------------------------------------
+
+
+## Methods
+<article>
+
+### disableTempParent: <span><code>(parent&#58; IRenderableContainer) -&#62; void</code></span>
+After method for transform updates
+
+#### Parameters:
+| Name   | Type                              | Description |
+| ------ | --------------------------------- | ----------- |
+| parent | <code>IRenderableContainer</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### enableTempParent: <span><code>() -&#62; IRenderableContainer</code></span>
+Before method for transform updates
+
+#### Returns:
+| Type                              | Description |
+| --------------------------------- | ----------- |
+| <code>IRenderableContainer</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### render: <span><code>(renderer&#58; IRenderer) -&#62; void</code></span>
+Render object directly
+
+#### Parameters:
+| Name     | Type                   | Description |
+| -------- | ---------------------- | ----------- |
+| renderer | <code>IRenderer</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### updateTransform: <span><code>() -&#62; void</code></span>
+Update the transforms
+
+</article>
+
+
+---------------------------------------
+
+  
