@@ -1,6 +1,6 @@
 # Sprites
 
-Sprites are the simplest and most common renderable object in PixiJS.  They represent a single image to be displayed on the screen.  Each [Sprite](/api/classes/pixi_sprite.Sprite) contains a [Texture](/api/classes/pixi_core.Texture) to be drawn, along with all the transformation and display state required to function in the scene graph.
+Sprites are the simplest and most common renderable object in PixiJS.  They represent a single image to be displayed on the screen.  Each [Sprite](/api/classes/PIXI.Sprite.pixi_sprite) contains a [Texture](/api/classes/PIXI.Texture.pixi_core) to be drawn, along with all the transformation and display state required to function in the scene graph.
 
 ## Creating Sprites
 

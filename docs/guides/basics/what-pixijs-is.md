@@ -12,11 +12,11 @@ One of the major features that distinguishes PixiJS from other web-based renderi
 
 ## ... More Than Just Sprites
 
-Drawing images on a page can be handled with HTML5 and the DOM, so why use PixiJS?  Beyond performance, the answer is that PixiJS goes well beyond simple images.  Draw trails and tracks with [SimpleRope](/api/classes/pixi_mesh_extras.SimpleRope).  Draw polygons, lines, circles and other primitives with [Graphics](/api/classes/pixi_graphics.Graphics). [Text](/api/classes/pixi_text.Text) provides full text rendering support that's just as performant as sprites.  And even when drawing simple images, PixiJS natively supports spritesheets for efficient loading and ease of development.
+Drawing images on a page can be handled with HTML5 and the DOM, so why use PixiJS?  Beyond performance, the answer is that PixiJS goes well beyond simple images.  Draw trails and tracks with [SimpleRope](/api/classes/PIXI.SimpleRope.pixi_mesh_extras).  Draw polygons, lines, circles and other primitives with [Graphics](/api/classes/PIXI.Graphics.pixi_graphics). [Text](/api/classes/PIXI.Text.pixi_text) provides full text rendering support that's just as performant as sprites.  And even when drawing simple images, PixiJS natively supports spritesheets for efficient loading and ease of development.
 
 ## ... WebGL Native
 
-WebGL is the JavaScript API for accessing users' GPUs for fast rendering and advanced effects.  PixiJS leverages WebGL to display thousands of moving sprites efficiently even on mobile devices.  But using WebGL offers more than just speed.  By using the [Filter](/api/classes/pixi_core.Filter) class, you can write shader programs (or use pre-built ones!) to achieve displacement maps, blurring, and other advanced visual effects that cannot be accomplished with just the DOM or Canvas APIs.
+WebGL is the JavaScript API for accessing users' GPUs for fast rendering and advanced effects.  PixiJS leverages WebGL to display thousands of moving sprites efficiently even on mobile devices.  But using WebGL offers more than just speed.  By using the [Filter](/api/classes/PIXI.Filter.pixi_core) class, you can write shader programs (or use pre-built ones!) to achieve displacement maps, blurring, and other advanced visual effects that cannot be accomplished with just the DOM or Canvas APIs.
 
 ## ... Open Source
 

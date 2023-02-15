@@ -1,6 +1,6 @@
 # Spritesheets
 
-Now that you understand basic sprites, it's time to talk about a better way to create them - the [Spritesheet](/api/classes/pixi_spritesheet.Spritesheet) class.
+Now that you understand basic sprites, it's time to talk about a better way to create them - the [Spritesheet](/api/classes/PIXI.Spritesheet.pixi_spritesheet) class.
 
 A Spritesheet is a media format for more efficiently downloading and rendering Sprites.  While somewhat more complex to create and use, they are a key tool in optimizing your project.
 

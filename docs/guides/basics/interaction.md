@@ -17,7 +17,7 @@ let sprite = PIXI.Sprite.from('/some/texture.png');
 sprite.on('pointerdown', (event) => { alert('clicked!'); });
 ```
 
-Check out the [DisplayObject](/api/classes/pixi_display.DisplayObject) for the list of interaction events supported.
+Check out the [DisplayObject](/api/classes/PIXI.DisplayObject.pixi_display) for the list of interaction events supported.
 
 ## Use Pointer Events
 

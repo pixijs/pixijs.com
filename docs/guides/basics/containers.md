@@ -1,6 +1,6 @@
 # Containers
 
-The [Container](/api/classes/pixi_display.Container) class provides a simple display object that does what its name implies - collect a set of child objects together.  But beyond grouping objects, containers have a few uses that you should be aware of.
+The [Container](/api/classes/PIXI.Container.pixi_display) class provides a simple display object that does what its name implies - collect a set of child objects together.  But beyond grouping objects, containers have a few uses that you should be aware of.
 
 ## Containers as Groups
 
@@ -74,9 +74,9 @@ app.ticker.add((delta) => {
 
 There are two types of masks supported by PixiJS:
 
-Use a [Graphics](/api/classes/pixi_graphics.Graphics) object to create a mask with an arbitrary shape - powerful, but doesn't support anti-aliasing
+Use a [Graphics](/api/classes/PIXI.Graphics.pixi_graphics) object to create a mask with an arbitrary shape - powerful, but doesn't support anti-aliasing
 
-Sprite: Use the alpha channel from a [Sprite](/api/classes/pixi_sprite.Sprite) as your mask, providing anti-aliased edging - _not_ supported on the Canvas renderer
+Sprite: Use the alpha channel from a [Sprite](/api/classes/PIXI.Sprite.pixi_sprite) as your mask, providing anti-aliased edging - _not_ supported on the Canvas renderer
 
 ## Filtering
 
