@@ -16,7 +16,7 @@ To start with, you have the image you want to display.  The first step is to mak
 
 ### Loading the Image
 
-To work with the image, the first step is to pull the image file from your webserver into the user's web browser.  To do this, we can use `PIXI.Texture.from()`, which works for quick demos, but in production you'll use the [Loader](/api/classes/PIXI.Loader.pixi_assets) class.  A Loader  wraps and manages using an `<IMG>` element to tell the browser to fetch the image, and then notifies you when that has been completed.  This process is *asynchronous* - you request the load, then time passes, then an event fires to let you know the load is completed.  We'll go into the loader in a lot more depth in a later guide.
+To work with the image, the first step is to pull the image file from your webserver into the user's web browser.  To do this, we can use `PIXI.Texture.from()`, which works for quick demos, but in production you'll use the Loader class.  A Loader  wraps and manages using an `<IMG>` element to tell the browser to fetch the image, and then notifies you when that has been completed.  This process is *asynchronous* - you request the load, then time passes, then an event fires to let you know the load is completed.  We'll go into the loader in a lot more depth in a later guide.
 
 ### BaseTextures Own the Data
 
@@ -68,7 +68,7 @@ Canvas: Similarly, you can wrap an HTML5 `<CANVAS>` element in a BaseTexture to 
 
 SVG: Pass in an `<SVG>` element or load a .svg URL, and PixiJS will attempt to rasterize it.  For highly network-constrained projects, this can allow for beautiful graphics with minimal network load times.
 
-RenderTexture: A more advanced (but very powerful!) feature is to build a Texture from a [RenderTexture](/api/classes/PIXI.RenderTexture).pixi_core.  This can allow for building complex geometry using a [Geometry](/api/classes/PIXI.Geometry.pixi_core) object, then baking that geometry down to a simple texture.
+RenderTexture: A more advanced (but very powerful!) feature is to build a Texture from a [RenderTexture](/api/classes/PIXI.RenderTexture.pixi_core).  This can allow for building complex geometry using a [Geometry](/api/classes/PIXI.Geometry.pixi_core) object, then baking that geometry down to a simple texture.
 
 Each of these texture sources has caveats and nuances that we can't cover in this guide, but they should give you a feeling for the power of PixiJS's texture system. <!--TODO: link to advanced textures guide-->
 
