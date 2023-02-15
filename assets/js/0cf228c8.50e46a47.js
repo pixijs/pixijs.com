@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([[33568],{75421:s=>{s.exports=JSON.parse('{"label":"pixi-website","permalink":"/blog/tags/pixi-website","allTagsPath":"/blog/tags","count":1}')}}]);

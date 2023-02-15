@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([[20451],{4437:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/pixi-v-8","page":1,"postsPerPage":1,"totalPages":1,"totalCount":1,"blogDescription":"Blog Description Here","blogTitle":"PixiJS News"}')}}]);
