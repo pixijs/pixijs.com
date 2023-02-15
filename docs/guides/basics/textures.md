@@ -41,7 +41,7 @@ We will discuss resource loading in a later guide, but one of the most common is
 Instead, here's a quick cheat sheet of one good solution:
 
 1. Show a loading image
-2. Create a [Loader](/api/classes/PIXI.Loader.pixi_assets)
+2. Create a Loader
 3. Run all texture-based objects, add their textures to the loader
 4. Start the loader, and optionally update your loading image based on progress callbacks
 5. On loader completion, run all objects and use `PIXI.Texture.from()` to pull the loaded textures out of the texture cache
