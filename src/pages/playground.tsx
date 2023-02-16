@@ -4,10 +4,9 @@ import BrowserOnly from '@docusaurus/BrowserOnly'
 
 import PixiPlayground from '../components/PixiPlayground'
 import styles from './playground.module.css'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
-const defaultCode = `import * as PIXI from 'pixi.js';
-
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const defaultCode = `const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
 // create a new Sprite from an image path
@@ -60,6 +59,8 @@ export default function PlaygroundPage (): JSX.Element {
         {() => {
           const payload = readPayload()
           const code = payload?.code ?? defaultCode
+
+          console.log(useDocusaurusContext())
           function onCodeChanged (code?: string): void {
             if (code != null) {
               writePayload({ code })

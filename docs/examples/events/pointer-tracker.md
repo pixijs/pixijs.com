@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Pointer Tracker
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 // In this a example, a circle will follow the pointer wherever it
 // moves over the canvas.
 

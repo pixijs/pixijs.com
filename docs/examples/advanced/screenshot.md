@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Screenshot
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 const app = new PIXI.Application<HTMLCanvasElement>({ backgroundColor: '#111', resizeTo: window });
 document.body.appendChild(app.view);
 

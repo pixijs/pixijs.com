@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Gradient Resource
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 // PixiJS V5 Texture-Resource API + canvas2d gradient API + WebGL texImage2D
 // Look here for advanced upload function:
 // https://github.com/pixijs/pixi.js/blob/dev/packages/core/src/textures/resources/BaseImageResource.js#L54

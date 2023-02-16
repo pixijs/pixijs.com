@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Mouse Blending
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 /**
  * https://github.com/pixijs/pixi.js/wiki/v5-Creating-Filters
  */

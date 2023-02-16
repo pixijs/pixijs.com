@@ -82,6 +82,9 @@
     }
 
     &.fullscreen{
+      // TODO: fix this
+      height: 95vh;
+
       @media only screen and (max-width: 375px) {
         button {
           display: unset;

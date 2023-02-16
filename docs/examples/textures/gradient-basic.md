@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Gradient Basic
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 // This demo uses canvas2d gradient API
 // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
 
