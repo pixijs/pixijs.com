@@ -5,20 +5,24 @@ sidebar_label: "PIXI.Ellipse"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/math](../modules/pixi_math).Ellipse
+
+</div>
 
 
 The Ellipse object is used to help draw graphics and can also be used to specify a hit area for displayObjects.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Ellipse: <span><code>(x&#58; number, y&#58; number, halfWidth&#58; number, halfHeight&#58; number) </code></span>
+### Constructor:
+<h4><code>new PIXI.Ellipse(x&#58; number, y&#58; number, halfWidth&#58; number, halfHeight&#58; number) </code></h4>
 
 #### Parameters:
 | Name       | Type                | Default        | Description                                    |
@@ -38,8 +42,10 @@ The Ellipse object is used to help draw graphics and can also be used to specify
 ## Members
 <article>
 
-### height: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### height 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -49,21 +55,12 @@ The Ellipse object is used to help draw graphics and can also be used to specify
 
 <article>
 
-### type: <span><code>SHAPES.ELIP</code></span>
-- **Default Value**: <code>PIXI.SHAPES.ELIP</code>
+### type 
+**Type:** <code>SHAPES.ELIP</code>
 
-The type of the object, mainly used to avoid `instanceof` checks
+**Default Value**: <code>PIXI.SHAPES.ELIP</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### width: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
+**Description:** The type of the object, mainly used to avoid `instanceof` checks
 
 </article>
 
@@ -72,8 +69,10 @@ The type of the object, mainly used to avoid `instanceof` checks
 
 <article>
 
-### x: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### width 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -83,8 +82,23 @@ The type of the object, mainly used to avoid `instanceof` checks
 
 <article>
 
-### y: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### x 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### y 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -96,8 +110,10 @@ The type of the object, mainly used to avoid `instanceof` checks
 ## Methods
 <article>
 
-### clone: <span><code>() -&#62; PIXI.Ellipse</code></span>
-Creates a clone of this Ellipse instance
+### clone 
+**Type:** <code>() -&#62; PIXI.Ellipse</code>
+
+**Description:** Creates a clone of this Ellipse instance
 
 #### Returns:
 | Type                      | Description           |
@@ -110,8 +126,10 @@ Creates a clone of this Ellipse instance
 
 <article>
 
-### contains: <span><code>(x&#58; number, y&#58; number) -&#62; boolean</code></span>
-Checks whether the x and y coordinates given are contained within this ellipse
+### contains 
+**Type:** <code>(x&#58; number, y&#58; number) -&#62; boolean</code>
+
+**Description:** Checks whether the x and y coordinates given are contained within this ellipse
 
 #### Parameters:
 | Name | Type                | Description                           |
@@ -129,8 +147,10 @@ Checks whether the x and y coordinates given are contained within this ellipse
 
 <article>
 
-### getBounds: <span><code>() -&#62; Rectangle</code></span>
-Returns the framing rectangle of the ellipse as a Rectangle object
+### getBounds 
+**Type:** <code>() -&#62; Rectangle</code>
+
+**Description:** Returns the framing rectangle of the ellipse as a Rectangle object
 
 #### Returns:
 | Type                   | Description           |

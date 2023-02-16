@@ -5,20 +5,24 @@ sidebar_label: "PIXI.GLProgram"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).GLProgram
+
+</div>
 
 
 Helper class to create a WebGL Program
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.GLProgram: <span><code>(program&#58; WebGLProgram, uniformData&#58; &#123; [key&#58; string]&#58; IGLUniformData &#125;) </code></span>
+### Constructor:
+<h4><code>new PIXI.GLProgram(program&#58; WebGLProgram, uniformData&#58; &#123; [key&#58; string]&#58; IGLUniformData &#125;) </code></h4>
 Makes a new Pixi program.
 
 #### Parameters:
@@ -37,8 +41,10 @@ Makes a new Pixi program.
 ## Members
 <article>
 
-### program: <span><code>WebGLProgram</code></span>
-The shader program.
+### program 
+**Type:** <code>WebGLProgram</code>
+
+**Description:** The shader program.
 
 </article>
 
@@ -47,8 +53,10 @@ The shader program.
 
 <article>
 
-### uniformBufferBindings: <span><code>Dict&#60;any&#62;</code></span>
-A hash that stores where UBOs are bound to on the program.
+### uniformBufferBindings 
+**Type:** <code>Dict&#60;any&#62;</code>
+
+**Description:** A hash that stores where UBOs are bound to on the program.
 
 </article>
 
@@ -57,8 +65,10 @@ A hash that stores where UBOs are bound to on the program.
 
 <article>
 
-### uniformData: <span><code>Dict&#60;any&#62;</code></span>
-Holds the uniform data which contains uniform locations and current uniform values used for caching and preventing unneeded GPU commands.
+### uniformData 
+**Type:** <code>Dict&#60;any&#62;</code>
+
+**Description:** Holds the uniform data which contains uniform locations and current uniform values used for caching and preventing unneeded GPU commands.
 
 </article>
 
@@ -67,8 +77,10 @@ Holds the uniform data which contains uniform locations and current uniform valu
 
 <article>
 
-### uniformDirtyGroups: <span><code>Dict&#60;any&#62;</code></span>
-A place where dirty ticks are stored for groups If a tick here does not match with the Higher level Programs tick, it means we should re upload the data.
+### uniformDirtyGroups 
+**Type:** <code>Dict&#60;any&#62;</code>
+
+**Description:** A place where dirty ticks are stored for groups If a tick here does not match with the Higher level Programs tick, it means we should re upload the data.
 
 </article>
 
@@ -77,8 +89,10 @@ A place where dirty ticks are stored for groups If a tick here does not match wi
 
 <article>
 
-### uniformGroups: <span><code>Dict&#60;any&#62;</code></span>
-UniformGroups holds the various upload functions for the shader. Each uniform group and program have a unique upload function generated.
+### uniformGroups 
+**Type:** <code>Dict&#60;any&#62;</code>
+
+**Description:** UniformGroups holds the various upload functions for the shader. Each uniform group and program have a unique upload function generated.
 
 </article>
 
@@ -87,8 +101,10 @@ UniformGroups holds the various upload functions for the shader. Each uniform gr
 
 <article>
 
-### uniformSync: <span><code>Dict&#60;any&#62;</code></span>
-A hash for lazily-generated uniform uploading functions.
+### uniformSync 
+**Type:** <code>Dict&#60;any&#62;</code>
+
+**Description:** A hash for lazily-generated uniform uploading functions.
 
 </article>
 
@@ -99,8 +115,10 @@ A hash for lazily-generated uniform uploading functions.
 ## Methods
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys this program.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys this program.
 
 </article>
 

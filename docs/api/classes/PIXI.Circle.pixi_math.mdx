@@ -5,20 +5,24 @@ sidebar_label: "PIXI.Circle"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/math](../modules/pixi_math).Circle
+
+</div>
 
 
 The Circle object is used to help draw graphics and can also be used to specify a hit area for displayObjects.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Circle: <span><code>(x&#58; number, y&#58; number, radius&#58; number) </code></span>
+### Constructor:
+<h4><code>new PIXI.Circle(x&#58; number, y&#58; number, radius&#58; number) </code></h4>
 
 #### Parameters:
 | Name   | Type                | Default        | Description                                   |
@@ -37,8 +41,10 @@ The Circle object is used to help draw graphics and can also be used to specify 
 ## Members
 <article>
 
-### radius: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### radius 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -48,21 +54,12 @@ The Circle object is used to help draw graphics and can also be used to specify 
 
 <article>
 
-### type: <span><code>SHAPES.CIRC</code></span>
-- **Default Value**: <code>PIXI.SHAPES.CIRC</code>
+### type 
+**Type:** <code>SHAPES.CIRC</code>
 
-The type of the object, mainly used to avoid `instanceof` checks
+**Default Value**: <code>PIXI.SHAPES.CIRC</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### x: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
+**Description:** The type of the object, mainly used to avoid `instanceof` checks
 
 </article>
 
@@ -71,8 +68,23 @@ The type of the object, mainly used to avoid `instanceof` checks
 
 <article>
 
-### y: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### x 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### y 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -84,8 +96,10 @@ The type of the object, mainly used to avoid `instanceof` checks
 ## Methods
 <article>
 
-### clone: <span><code>() -&#62; Circle</code></span>
-Creates a clone of this Circle instance
+### clone 
+**Type:** <code>() -&#62; Circle</code>
+
+**Description:** Creates a clone of this Circle instance
 
 #### Returns:
 | Type                | Description          |
@@ -98,8 +112,10 @@ Creates a clone of this Circle instance
 
 <article>
 
-### contains: <span><code>(x&#58; number, y&#58; number) -&#62; boolean</code></span>
-Checks whether the x and y coordinates given are contained within this circle
+### contains 
+**Type:** <code>(x&#58; number, y&#58; number) -&#62; boolean</code>
+
+**Description:** Checks whether the x and y coordinates given are contained within this circle
 
 #### Parameters:
 | Name | Type                | Description                           |
@@ -117,8 +133,10 @@ Checks whether the x and y coordinates given are contained within this circle
 
 <article>
 
-### getBounds: <span><code>() -&#62; Rectangle</code></span>
-Returns the framing rectangle of the circle as a Rectangle object
+### getBounds 
+**Type:** <code>() -&#62; Rectangle</code>
+
+**Description:** Returns the framing rectangle of the circle as a Rectangle object
 
 #### Returns:
 | Type                   | Description           |

@@ -5,29 +5,36 @@ sidebar_label: "PIXI.GLFramebuffer"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).GLFramebuffer
+
+</div>
 
 
 Internal framebuffer for WebGL context.
 
 
 
-// TODO: @see
-
         
 
 <article>
+### Contructor:
+<h4><code>new PIXI()</code></h4>
 
-### new PIXI()
 </article>
+            
 
 
 
 ## Members
 <article>
 
-### blitFramebuffer: <span><code>Framebuffer</code></span>
-In case we use MSAA, this is actual framebuffer that has colorTextures[0] The contents of that framebuffer are read when we use that renderTexture in sprites
+### blitFramebuffer 
+**Type:** <code>Framebuffer</code>
+
+**Description:** In case we use MSAA, this is actual framebuffer that has colorTextures[0] The contents of that framebuffer are read when we use that renderTexture in sprites
 
 </article>
 
@@ -36,8 +43,10 @@ In case we use MSAA, this is actual framebuffer that has colorTextures[0] The co
 
 <article>
 
-### dirtyFormat: <span><code>number</code></span>
-Latest known version of framebuffer format.
+### dirtyFormat 
+**Type:** <code>number</code>
+
+**Description:** Latest known version of framebuffer format.
 
 </article>
 
@@ -46,8 +55,10 @@ Latest known version of framebuffer format.
 
 <article>
 
-### dirtyId: <span><code>number</code></span>
-Latest known version of framebuffer.
+### dirtyId 
+**Type:** <code>number</code>
+
+**Description:** Latest known version of framebuffer.
 
 </article>
 
@@ -56,8 +67,10 @@ Latest known version of framebuffer.
 
 <article>
 
-### dirtySize: <span><code>number</code></span>
-Latest known version of framebuffer size.
+### dirtySize 
+**Type:** <code>number</code>
+
+**Description:** Latest known version of framebuffer size.
 
 </article>
 
@@ -66,8 +79,10 @@ Latest known version of framebuffer size.
 
 <article>
 
-### framebuffer: <span><code>WebGLFramebuffer</code></span>
-The WebGL framebuffer.
+### framebuffer 
+**Type:** <code>WebGLFramebuffer</code>
+
+**Description:** The WebGL framebuffer.
 
 </article>
 
@@ -76,8 +91,10 @@ The WebGL framebuffer.
 
 <article>
 
-### mipLevel: <span><code>number</code></span>
-Store the current mipmap of the textures the framebuffer will write too.
+### mipLevel 
+**Type:** <code>number</code>
+
+**Description:** Store the current mipmap of the textures the framebuffer will write too.
 
 </article>
 
@@ -86,8 +103,10 @@ Store the current mipmap of the textures the framebuffer will write too.
 
 <article>
 
-### msaaBuffer: <span><code>WebGLRenderbuffer</code></span>
-In case MSAA, we use this Renderbuffer instead of colorTextures[0] when we write info.
+### msaaBuffer 
+**Type:** <code>WebGLRenderbuffer</code>
+
+**Description:** In case MSAA, we use this Renderbuffer instead of colorTextures[0] when we write info.
 
 </article>
 
@@ -96,8 +115,10 @@ In case MSAA, we use this Renderbuffer instead of colorTextures[0] when we write
 
 <article>
 
-### multisample: <span><code>MSAA_QUALITY</code></span>
-Detected AA samples number.
+### multisample 
+**Type:** <code>MSAA_QUALITY</code>
+
+**Description:** Detected AA samples number.
 
 </article>
 
@@ -106,8 +127,10 @@ Detected AA samples number.
 
 <article>
 
-### stencil: <span><code>WebGLRenderbuffer</code></span>
-Stencil+depth , usually costs 32bits per pixel.
+### stencil 
+**Type:** <code>WebGLRenderbuffer</code>
+
+**Description:** Stencil+depth , usually costs 32bits per pixel.
 
 </article>
 

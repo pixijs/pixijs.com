@@ -5,7 +5,12 @@ sidebar_label: "PIXI.UniformGroup"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).UniformGroup
+
+</div>
 
 Uniform group holds uniform map and some ID's for work
 `UniformGroup` has two modes&#58;
@@ -48,13 +53,12 @@ const shader = Shader.from(srcVert, srcFrag, {
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.UniformGroup: <span><code>(uniforms&#58; object &#124; Buffer, isStatic&#58; boolean, isUbo&#58; boolean) </code></span>
+### Constructor:
+<h4><code>new PIXI.UniformGroup(uniforms&#58; object &#124; Buffer, isStatic&#58; boolean, isUbo&#58; boolean) </code></h4>
 
 #### Parameters:
 | Name     | Type                              | Default       | Description                                                            |
@@ -73,20 +77,12 @@ const shader = Shader.from(srcVert, srcFrag, {
 ## Members
 <article>
 
-### group: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### group 
+**Type:** <code>boolean</code>
 
-Its a group and not a single uniforms.
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### static: <span><code>boolean</code></span>
-Flag for if uniforms wont be changed after creation.
+**Description:** Its a group and not a single uniforms.
 
 </article>
 
@@ -95,8 +91,10 @@ Flag for if uniforms wont be changed after creation.
 
 <article>
 
-### ubo: <span><code>boolean</code></span>
-Flags whether this group is treated like a uniform buffer object.
+### static 
+**Type:** <code>boolean</code>
+
+**Description:** Flag for if uniforms wont be changed after creation.
 
 </article>
 
@@ -105,8 +103,10 @@ Flags whether this group is treated like a uniform buffer object.
 
 <article>
 
-### uniforms: <span><code>object</code></span>
-Uniform values
+### ubo 
+**Type:** <code>boolean</code>
+
+**Description:** Flags whether this group is treated like a uniform buffer object.
 
 </article>
 
@@ -115,8 +115,10 @@ Uniform values
 
 <article>
 
-### dirtyId: <span><code>number</code></span>
-Dirty version
+### uniforms 
+**Type:** <code>object</code>
+
+**Description:** Uniform values
 
 </article>
 
@@ -125,8 +127,22 @@ Dirty version
 
 <article>
 
-### id: <span><code>number</code></span>
-unique id
+### dirtyId 
+**Type:** <code>number</code>
+
+**Description:** Dirty version
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### id 
+**Type:** <code>number</code>
+
+**Description:** unique id
 
 </article>
 
@@ -137,8 +153,10 @@ unique id
 ## Methods
 <article>
 
-### uboFrom: <span><code>(uniforms&#58; Dict&#60;any&#62; &#124; Buffer, _static&#58; boolean) -&#62; UniformGroup</code></span>
-A short hand function for creating a static UBO UniformGroup.
+### uboFrom 
+**Type:** <code>(uniforms&#58; Dict&#60;any&#62; &#124; Buffer, _static&#58; boolean) -&#62; UniformGroup</code>
+
+**Description:** A short hand function for creating a static UBO UniformGroup.
 
 #### Parameters:
 | Name     | Type                                         | Description                                                         |

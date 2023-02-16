@@ -5,7 +5,12 @@ sidebar_label: "PIXI.BasisParser"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/basis](../modules/pixi_basis).BasisParser
+
+</div>
 
 Loader plugin for handling BASIS supercompressed texture files.
 To use this loader, you must bind the basis_universal WebAssembly transcoder. There are two ways of doing this&#58;
@@ -36,13 +41,12 @@ NOTE&#58; This can only be used with web-workers.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.BasisParser: <span><code>() </code></span>
+### Constructor:
+<h4><code>new PIXI.BasisParser() </code></h4>
 Loader plugin for handling BASIS supercompressed texture files.
 
 #### Parameters:
@@ -59,8 +63,10 @@ Loader plugin for handling BASIS supercompressed texture files.
 ## Members
 <article>
 
-### bindingURL: <span><code>string</code></span>
-URL for the script containing the basis_universal library.
+### bindingURL 
+**Type:** <code>string</code>
+
+**Description:** URL for the script containing the basis_universal library.
 
 </article>
 
@@ -69,8 +75,10 @@ URL for the script containing the basis_universal library.
 
 <article>
 
-### onTranscoderInitialized: <span><code>unknown</code></span>
-a promise that when reslved means the transcoder is ready to be used
+### onTranscoderInitialized 
+**Type:** <code>unknown</code>
+
+**Description:** a promise that when reslved means the transcoder is ready to be used
 
 </article>
 
@@ -79,8 +87,10 @@ a promise that when reslved means the transcoder is ready to be used
 
 <article>
 
-### workerURL: <span><code>string</code></span>
-Generated URL for the transcoder worker script.
+### workerURL 
+**Type:** <code>string</code>
+
+**Description:** Generated URL for the transcoder worker script.
 
 </article>
 
@@ -89,8 +99,10 @@ Generated URL for the transcoder worker script.
 
 <article>
 
-### onMessage: <span><code>unknown</code></span>
-Handles responses from the web-worker
+### onMessage 
+**Type:** <code>unknown</code>
+
+**Description:** Handles responses from the web-worker
 
 </article>
 
@@ -101,8 +113,10 @@ Handles responses from the web-worker
 ## Methods
 <article>
 
-### loadTranscoder: <span><code>(jsURL&#58; string, wasmURL&#58; string) -&#62; Promise&#60;[void, void]&#62;</code></span>
-Loads the transcoder source code
+### loadTranscoder 
+**Type:** <code>(jsURL&#58; string, wasmURL&#58; string) -&#62; Promise&#60;[void, void]&#62;</code>
+
+**Description:** Loads the transcoder source code
 
 #### Parameters:
 | Name    | Type                | Description                            |
@@ -120,8 +134,10 @@ Loads the transcoder source code
 
 <article>
 
-### setTranscoder: <span><code>(jsSource&#58; string, wasmSource&#58; ArrayBuffer) -&#62; void</code></span>
-Set the transcoder source code directly
+### setTranscoder 
+**Type:** <code>(jsSource&#58; string, wasmSource&#58; ArrayBuffer) -&#62; void</code>
+
+**Description:** Set the transcoder source code directly
 
 #### Parameters:
 | Name       | Type                     | Description                                |
@@ -135,7 +151,9 @@ Set the transcoder source code directly
 
 <article>
 
-### initAsync: <span><code>() -&#62; Promise&#60;void&#62;</code></span>
+### initAsync 
+**Type:** <code>() -&#62; Promise&#60;void&#62;</code>
+
 
 #### Returns:
 | Type                               | Description                                                   |
@@ -148,8 +166,10 @@ Set the transcoder source code directly
 
 <article>
 
-### transcodeAsync: <span><code>(basisData&#58; Uint8Array, rgbaFormat&#58; BASIS_FORMATS, rgbFormat&#58; BASIS_FORMATS) -&#62; Promise&#60;ITranscodeResponse&#62;</code></span>
-Creates a promise that will resolve when the transcoding of a \*.basis file is complete.
+### transcodeAsync 
+**Type:** <code>(basisData&#58; Uint8Array, rgbaFormat&#58; BASIS_FORMATS, rgbFormat&#58; BASIS_FORMATS) -&#62; Promise&#60;ITranscodeResponse&#62;</code>
+
+**Description:** Creates a promise that will resolve when the transcoding of a \*.basis file is complete.
 
 #### Parameters:
 | Name       | Type                       | Description                       |

@@ -5,20 +5,24 @@ sidebar_label: "PIXI.MeshMaterial"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/mesh](../modules/pixi_mesh).MeshMaterial
+
+</div>
 
 
 Slightly opinionated default shader for PixiJS 2D objects.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.MeshMaterial: <span><code>(uSampler&#58; Texture, options&#58; IMeshMaterialOptions) </code></span>
+### Constructor:
+<h4><code>new PIXI.MeshMaterial(uSampler&#58; Texture, options&#58; IMeshMaterialOptions) </code></h4>
 
 #### Parameters:
 | Name               | Type                              | Default               | Description                           |
@@ -42,22 +46,12 @@ Slightly opinionated default shader for PixiJS 2D objects.
 ## Members
 <article>
 
-### alpha: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
+### alpha 
+**Type:** <code>number</code>
 
-This gets automatically set by the object using this.
+**Default Value**: <code>1</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### batchable: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
-
-`true` if shader can be batch with the renderer's batch system.
+**Description:** This gets automatically set by the object using this.
 
 </article>
 
@@ -66,20 +60,12 @@ This gets automatically set by the object using this.
 
 <article>
 
-### pluginName: <span><code>string</code></span>
-- **Default Value**: <code>'batch'</code>
+### batchable 
+**Type:** <code>boolean</code>
 
-Renderer plugin for batching.
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### program: <span><code>Program</code></span>
-Program that the shader uses.
+**Description:** `true` if shader can be batch with the renderer's batch system.
 
 </article>
 
@@ -88,8 +74,12 @@ Program that the shader uses.
 
 <article>
 
-### texture: <span><code>Texture</code></span>
-Reference to the texture being rendered.
+### pluginName 
+**Type:** <code>string</code>
+
+**Default Value**: <code>'batch'</code>
+
+**Description:** Renderer plugin for batching.
 
 </article>
 
@@ -98,20 +88,10 @@ Reference to the texture being rendered.
 
 <article>
 
-### tint: <span><code>number</code></span>
-- **Default Value**: <code>0xFFFFFF</code>
+### program 
+**Type:** <code>Program</code>
 
-Multiply tint for the material.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### uniforms: <span><code>Dict&#60;any&#62;</code></span>
-Shader uniform values, shortcut for `uniformGroup.uniforms`.
+**Description:** Program that the shader uses.
 
 </article>
 
@@ -120,8 +100,48 @@ Shader uniform values, shortcut for `uniformGroup.uniforms`.
 
 <article>
 
-### uvMatrix: <span><code>TextureMatrix</code></span>
-TextureMatrix instance for this Mesh, used to track Texture changes.
+### texture 
+**Type:** <code>Texture</code>
+
+**Description:** Reference to the texture being rendered.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### tint 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0xFFFFFF</code>
+
+**Description:** Multiply tint for the material.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniforms 
+**Type:** <code>Dict&#60;any&#62;</code>
+
+**Description:** Shader uniform values, shortcut for `uniformGroup.uniforms`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uvMatrix 
+**Type:** <code>TextureMatrix</code>
+
+**Description:** TextureMatrix instance for this Mesh, used to track Texture changes.
 
 </article>
 
@@ -132,8 +152,10 @@ TextureMatrix instance for this Mesh, used to track Texture changes.
 ## Methods
 <article>
 
-### update: <span><code>() -&#62; void</code></span>
-Gets called automatically by the Mesh. Intended to be overridden for custom [PIXI.MeshMaterial](../classes/PIXI.MeshMaterial.pixi_mesh) objects.
+### update 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Gets called automatically by the Mesh. Intended to be overridden for custom [PIXI.MeshMaterial](../classes/PIXI.MeshMaterial.pixi_mesh) objects.
 
 </article>
 
@@ -142,8 +164,10 @@ Gets called automatically by the Mesh. Intended to be overridden for custom [PIX
 
 <article>
 
-### render: <span><code>(renderer&#58; PIXI.CanvasRenderer, mesh&#58; PIXI.Mesh) -&#62; void</code></span>
-Renders the mesh using the Canvas renderer
+### render 
+**Type:** <code>(renderer&#58; PIXI.CanvasRenderer, mesh&#58; PIXI.Mesh) -&#62; void</code>
+
+**Description:** Renders the mesh using the Canvas renderer
 
 #### Parameters:
 | Name     | Type                             | Description          |

@@ -5,20 +5,24 @@ sidebar_label: "PIXI.BitmapFont"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/text-bitmap](../modules/pixi_text_bitmap).BitmapFont
+
+</div>
 
 
 BitmapFont represents a typeface available for use with the BitmapText class. Use the `install`method for adding a font to be used.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.BitmapFont: <span><code>(data&#58; BitmapFontData, textures&#58; Texture[] &#124; utils.Dict&#60;Texture&#62;, ownsTextures&#58; boolean) </code></span>
+### Constructor:
+<h4><code>new PIXI.BitmapFont(data&#58; BitmapFontData, textures&#58; Texture[] &#124; utils.Dict&#60;Texture&#62;, ownsTextures&#58; boolean) </code></h4>
 
 #### Parameters:
 | Name         | Type                                                      | Default       | Description                                                                |
@@ -37,8 +41,11 @@ BitmapFont represents a typeface available for use with the BitmapText class. Us
 ## Members
 <article>
 
-### ALPHA: <span><code>Array&#60;Array&#60;string&#62;&#62;</code></span>
-This character set includes all the letters in the alphabet (both lower- and upper- case).
+### ALPHA 
+**Type:** <code>Array&#60;Array&#60;string&#62;&#62;</code>
+
+**Description:** This character set includes all the letters in the alphabet (both lower- and upper- case).
+
 
 ```js
 BitmapFont.from('ExampleFont', style, { chars: BitmapFont.ALPHA })
@@ -52,8 +59,10 @@ BitmapFont.from('ExampleFont', style, { chars: BitmapFont.ALPHA })
 
 <article>
 
-### ALPHANUMERIC: <span><code>Array&#60;Array&#60;string&#62;&#62;</code></span>
-This character set is the union of `BitmapFont.ALPHA` and `BitmapFont.NUMERIC`.
+### ALPHANUMERIC 
+**Type:** <code>Array&#60;Array&#60;string&#62;&#62;</code>
+
+**Description:** This character set is the union of `BitmapFont.ALPHA` and `BitmapFont.NUMERIC`.
 
 </article>
 
@@ -62,8 +71,10 @@ This character set is the union of `BitmapFont.ALPHA` and `BitmapFont.NUMERIC`.
 
 <article>
 
-### ASCII: <span><code>Array&#60;Array&#60;string&#62;&#62;</code></span>
-This character set consists of all the ASCII table.
+### ASCII 
+**Type:** <code>Array&#60;Array&#60;string&#62;&#62;</code>
+
+**Description:** This character set consists of all the ASCII table.
 
 </article>
 
@@ -72,8 +83,10 @@ This character set consists of all the ASCII table.
 
 <article>
 
-### available: <span><code>utils.Dict&#60;BitmapFont&#62;</code></span>
-Collection of available/installed fonts.
+### available 
+**Type:** <code>utils.Dict&#60;BitmapFont&#62;</code>
+
+**Description:** Collection of available/installed fonts.
 
 </article>
 
@@ -82,8 +95,10 @@ Collection of available/installed fonts.
 
 <article>
 
-### defaultOptions: <span><code>IBitmapFontOptions</code></span>
-Collection of default options when using `BitmapFont.from`.
+### defaultOptions 
+**Type:** <code>IBitmapFontOptions</code>
+
+**Description:** Collection of default options when using `BitmapFont.from`.
 
 </article>
 
@@ -92,28 +107,8 @@ Collection of default options when using `BitmapFont.from`.
 
 <article>
 
-### chars: <span><code>string &#124; Array&#60;string&#62; &#124; Array&#60;Array&#60;string&#62;&#62;</code></span>
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### padding: <span><code>number</code></span>
-- **Default Value**: <code>4</code>
-
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### resolution: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
+### chars 
+**Type:** <code>string &#124; Array&#60;string&#62; &#124; Array&#60;Array&#60;string&#62;&#62;</code>
 
 
 </article>
@@ -123,8 +118,10 @@ Collection of default options when using `BitmapFont.from`.
 
 <article>
 
-### textureHeight: <span><code>number</code></span>
-- **Default Value**: <code>512</code>
+### padding 
+**Type:** <code>number</code>
+
+**Default Value**: <code>4</code>
 
 
 </article>
@@ -134,8 +131,10 @@ Collection of default options when using `BitmapFont.from`.
 
 <article>
 
-### textureWidth: <span><code>number</code></span>
-- **Default Value**: <code>512</code>
+### resolution 
+**Type:** <code>number</code>
+
+**Default Value**: <code>1</code>
 
 
 </article>
@@ -145,8 +144,37 @@ Collection of default options when using `BitmapFont.from`.
 
 <article>
 
-### NUMERIC: <span><code>Array&#60;Array&#60;string&#62;&#62;</code></span>
-This character set includes all decimal digits (from 0 to 9).
+### textureHeight 
+**Type:** <code>number</code>
+
+**Default Value**: <code>512</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textureWidth 
+**Type:** <code>number</code>
+
+**Default Value**: <code>512</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### NUMERIC 
+**Type:** <code>Array&#60;Array&#60;string&#62;&#62;</code>
+
+**Description:** This character set includes all decimal digits (from 0 to 9).
+
 
 ```js
 BitmapFont.from('ExampleFont', style, { chars: BitmapFont.NUMERIC })
@@ -160,8 +188,10 @@ BitmapFont.from('ExampleFont', style, { chars: BitmapFont.NUMERIC })
 
 <article>
 
-### chars: <span><code>utils.Dict&#60;IBitmapFontCharacter&#62;</code></span>
-The map of characters by character code.
+### chars 
+**Type:** <code>utils.Dict&#60;IBitmapFontCharacter&#62;</code>
+
+**Description:** The map of characters by character code.
 
 </article>
 
@@ -170,8 +200,10 @@ The map of characters by character code.
 
 <article>
 
-### distanceFieldRange: <span><code>number</code></span>
-The range of the distance field in pixels.
+### distanceFieldRange 
+**Type:** <code>number</code>
+
+**Description:** The range of the distance field in pixels.
 
 </article>
 
@@ -180,8 +212,10 @@ The range of the distance field in pixels.
 
 <article>
 
-### distanceFieldType: <span><code>string</code></span>
-The kind of distance field for this font or "none".
+### distanceFieldType 
+**Type:** <code>string</code>
+
+**Description:** The kind of distance field for this font or "none".
 
 </article>
 
@@ -190,8 +224,10 @@ The kind of distance field for this font or "none".
 
 <article>
 
-### font: <span><code>string</code></span>
-The name of the font face.
+### font 
+**Type:** <code>string</code>
+
+**Description:** The name of the font face.
 
 </article>
 
@@ -200,8 +236,10 @@ The name of the font face.
 
 <article>
 
-### lineHeight: <span><code>number</code></span>
-The line-height of the font face in pixels.
+### lineHeight 
+**Type:** <code>number</code>
+
+**Description:** The line-height of the font face in pixels.
 
 </article>
 
@@ -210,8 +248,10 @@ The line-height of the font face in pixels.
 
 <article>
 
-### pageTextures: <span><code>utils.Dict&#60;Texture&#62;</code></span>
-The map of base page textures (i.e., sheets of glyphs).
+### pageTextures 
+**Type:** <code>utils.Dict&#60;Texture&#62;</code>
+
+**Description:** The map of base page textures (i.e., sheets of glyphs).
 
 </article>
 
@@ -220,8 +260,10 @@ The map of base page textures (i.e., sheets of glyphs).
 
 <article>
 
-### size: <span><code>number</code></span>
-The size of the font face in pixels.
+### size 
+**Type:** <code>number</code>
+
+**Description:** The size of the font face in pixels.
 
 </article>
 
@@ -232,8 +274,10 @@ The size of the font face in pixels.
 ## Methods
 <article>
 
-### from: <span><code>(name&#58; string, textStyle&#58; TextStyle &#124; Partial&#60;ITextStyle&#62;, options&#58; IBitmapFontOptions) -&#62; BitmapFont</code></span>
-Generates a bitmap-font for the given style and character set. This does not support kernings yet. With `style` properties, only the following non-layout properties are used&#58;
+### from 
+**Type:** <code>(name&#58; string, textStyle&#58; TextStyle &#124; Partial&#60;ITextStyle&#62;, options&#58; IBitmapFontOptions) -&#62; BitmapFont</code>
+
+**Description:** Generates a bitmap-font for the given style and character set. This does not support kernings yet. With `style` properties, only the following non-layout properties are used&#58;
 
 * [dropShadow](../classes/PIXI.TextStyle.pixi_text#dropShadow)
 * [dropShadowDistance](../classes/PIXI.TextStyle.pixi_text#dropShadowDistance)
@@ -252,6 +296,7 @@ Generates a bitmap-font for the given style and character set. This does not sup
 * [stroke](../classes/PIXI.TextStyle.pixi_text#stroke)
 * [strokeThickness](../classes/PIXI.TextStyle.pixi_text#strokeThickness)
 * [textBaseline](../classes/PIXI.TextStyle.pixi_text#textBaseline)
+
 
 ```js
  import { BitmapFont, BitmapText } from 'pixi.js';
@@ -284,8 +329,10 @@ Generates a bitmap-font for the given style and character set. This does not sup
 
 <article>
 
-### install: <span><code>(data&#58; string &#124; XMLDocument &#124; BitmapFontData, textures&#58; Texture &#124; Texture[] &#124; utils.Dict&#60;Texture&#62;, ownsTextures&#58; boolean) -&#62; PIXI.BitmapFont</code></span>
-Register a new bitmap font.
+### install 
+**Type:** <code>(data&#58; string &#124; XMLDocument &#124; BitmapFontData, textures&#58; Texture &#124; Texture[] &#124; utils.Dict&#60;Texture&#62;, ownsTextures&#58; boolean) -&#62; PIXI.BitmapFont</code>
+
+**Description:** Register a new bitmap font.
 
 #### Parameters:
 | Name         | Type                                                                     | Description                                                                                                                                                    |
@@ -304,8 +351,10 @@ Register a new bitmap font.
 
 <article>
 
-### uninstall: <span><code>(name&#58; string) -&#62; void</code></span>
-Remove bitmap font by name.
+### uninstall 
+**Type:** <code>(name&#58; string) -&#62; void</code>
+
+**Description:** Remove bitmap font by name.
 
 #### Parameters:
 | Name | Type                | Description                    |
@@ -318,8 +367,10 @@ Remove bitmap font by name.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Remove references to created glyph textures.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Remove references to created glyph textures.
 
 </article>
 

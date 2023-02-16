@@ -5,20 +5,24 @@ sidebar_label: "PIXI.ImageResource"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).ImageResource
+
+</div>
 
 
 Resource type for HTMLImageElement.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.ImageResource: <span><code>(source&#58; HTMLImageElement &#124; string, options&#58; IImageResourceOptions) </code></span>
+### Constructor:
+<h4><code>new PIXI.ImageResource(source&#58; HTMLImageElement &#124; string, options&#58; IImageResourceOptions) </code></h4>
 
 #### Parameters:
 | Name                 | Type                                        | Default                                        | Description                                           |
@@ -41,8 +45,10 @@ Resource type for HTMLImageElement.
 ## Members
 <article>
 
-### alphaMode: <span><code>ALPHA_MODES</code></span>
-Controls texture alphaMode field Copies from options Default is `null`, copies option from baseTexture
+### alphaMode 
+**Type:** <code>ALPHA_MODES</code>
+
+**Description:** Controls texture alphaMode field Copies from options Default is `null`, copies option from baseTexture
 
 </article>
 
@@ -51,22 +57,12 @@ Controls texture alphaMode field Copies from options Default is `null`, copies o
 
 <article>
 
-### bitmap: <span><code>ImageBitmap</code></span>
-- **Default Value**: <code>null</code>
+### bitmap 
+**Type:** <code>ImageBitmap</code>
 
-The ImageBitmap element created for a [HTMLImageElement](https&#58;//developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement).
+**Default Value**: <code>null</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### createBitmap: <span><code>boolean</code></span>
-- **Default Value**: <code>PIXI.settings.CREATE_IMAGE_BITMAP</code>
-
-If capable, convert the image using createImageBitmap API.
+**Description:** The ImageBitmap element created for a [HTMLImageElement](https&#58;//developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement).
 
 </article>
 
@@ -75,20 +71,12 @@ If capable, convert the image using createImageBitmap API.
 
 <article>
 
-### destroyed: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### createBitmap 
+**Type:** <code>boolean</code>
 
-If resource has been destroyed.
+**Default Value**: <code>PIXI.settings.CREATE_IMAGE_BITMAP</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### height: <span><code>number</code></span>
-The height of the resource.
+**Description:** If capable, convert the image using createImageBitmap API.
 
 </article>
 
@@ -97,8 +85,12 @@ The height of the resource.
 
 <article>
 
-### internal: <span><code>boolean</code></span>
-`true` if resource is created by BaseTexture useful for doing cleanup with BaseTexture destroy and not cleaning up resources that were created externally.
+### destroyed 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** If resource has been destroyed.
 
 </article>
 
@@ -107,20 +99,10 @@ The height of the resource.
 
 <article>
 
-### preserveBitmap: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### height 
+**Type:** <code>number</code>
 
-If the image should be disposed after upload
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### source: <span><code>HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; PIXI.ICanvas</code></span>
-The source element.
+**Description:** The height of the resource.
 
 </article>
 
@@ -129,8 +111,10 @@ The source element.
 
 <article>
 
-### src: <span><code>string</code></span>
-The url of the resource
+### internal 
+**Type:** <code>boolean</code>
+
+**Description:** `true` if resource is created by BaseTexture useful for doing cleanup with BaseTexture destroy and not cleaning up resources that were created externally.
 
 </article>
 
@@ -139,8 +123,12 @@ The url of the resource
 
 <article>
 
-### url: <span><code>string</code></span>
-URL of the image source
+### preserveBitmap 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** If the image should be disposed after upload
 
 </article>
 
@@ -149,8 +137,10 @@ URL of the image source
 
 <article>
 
-### valid: <span><code>boolean</code></span>
-Has been validated
+### source 
+**Type:** <code>HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; PIXI.ICanvas</code>
+
+**Description:** The source element.
 
 </article>
 
@@ -159,8 +149,10 @@ Has been validated
 
 <article>
 
-### width: <span><code>number</code></span>
-The width of the resource.
+### src 
+**Type:** <code>string</code>
+
+**Description:** The url of the resource
 
 </article>
 
@@ -169,8 +161,10 @@ The width of the resource.
 
 <article>
 
-### _height: <span><code>number</code></span>
-Internal height of the resource.
+### url 
+**Type:** <code>string</code>
+
+**Description:** URL of the image source
 
 </article>
 
@@ -179,8 +173,46 @@ Internal height of the resource.
 
 <article>
 
-### _width: <span><code>number</code></span>
-Internal width of the resource.
+### valid 
+**Type:** <code>boolean</code>
+
+**Description:** Has been validated
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width 
+**Type:** <code>number</code>
+
+**Description:** The width of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _height 
+**Type:** <code>number</code>
+
+**Description:** Internal height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _width 
+**Type:** <code>number</code>
+
+**Description:** Internal width of the resource.
 
 </article>
 
@@ -191,8 +223,10 @@ Internal width of the resource.
 ## Methods
 <article>
 
-### test: <span><code>(source&#58; unknown) -&#62; boolean</code></span>
-Used to auto-detect the type of resource.
+### test 
+**Type:** <code>(source&#58; unknown) -&#62; boolean</code>
+
+**Description:** Used to auto-detect the type of resource.
 
 #### Parameters:
 | Name   | Type                 | Description       |
@@ -209,8 +243,10 @@ Used to auto-detect the type of resource.
 
 <article>
 
-### bind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
-Bind to a parent BaseTexture
+### bind 
+**Type:** <code>(baseTexture&#58; BaseTexture) -&#62; void</code>
+
+**Description:** Bind to a parent BaseTexture
 
 #### Parameters:
 | Name        | Type                     | Description    |
@@ -223,8 +259,10 @@ Bind to a parent BaseTexture
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Call when destroying resource, unbind any BaseTexture object before calling this method, as reference counts are maintained internally.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Call when destroying resource, unbind any BaseTexture object before calling this method, as reference counts are maintained internally.
 
 </article>
 
@@ -233,8 +271,10 @@ Call when destroying resource, unbind any BaseTexture object before calling this
 
 <article>
 
-### dispose: <span><code>() -&#62; void</code></span>
-Destroys this resource.
+### dispose 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys this resource.
 
 </article>
 
@@ -243,8 +283,10 @@ Destroys this resource.
 
 <article>
 
-### load: <span><code>(createBitmap&#58; boolean) -&#62; Promise&#60;ImageResource&#62;</code></span>
-Returns a promise when image will be loaded and processed.
+### load 
+**Type:** <code>(createBitmap&#58; boolean) -&#62; Promise&#60;ImageResource&#62;</code>
+
+**Description:** Returns a promise when image will be loaded and processed.
 
 #### Parameters:
 | Name         | Type                 | Description                       |
@@ -261,8 +303,10 @@ Returns a promise when image will be loaded and processed.
 
 <article>
 
-### process: <span><code>() -&#62; Promise&#60;ImageResource&#62;</code></span>
-Called when we need to convert image into BitmapImage. Can be called multiple times, real promise is cached inside.
+### process 
+**Type:** <code>() -&#62; Promise&#60;ImageResource&#62;</code>
+
+**Description:** Called when we need to convert image into BitmapImage. Can be called multiple times, real promise is cached inside.
 
 #### Returns:
 | Type                                        | Description                          |
@@ -275,8 +319,10 @@ Called when we need to convert image into BitmapImage. Can be called multiple ti
 
 <article>
 
-### resize: <span><code>(width&#58; number, height&#58; number) -&#62; void</code></span>
-Trigger a resize event
+### resize 
+**Type:** <code>(width&#58; number, height&#58; number) -&#62; void</code>
+
+**Description:** Trigger a resize event
 
 #### Parameters:
 | Name   | Type                | Description |
@@ -290,8 +336,10 @@ Trigger a resize event
 
 <article>
 
-### style: <span><code>(_renderer&#58; Renderer, _baseTexture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code></span>
-Set the style, optional to override
+### style 
+**Type:** <code>(_renderer&#58; Renderer, _baseTexture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code>
+
+**Description:** Set the style, optional to override
 
 #### Parameters:
 | Name         | Type                     | Description                             |
@@ -310,8 +358,10 @@ Set the style, optional to override
 
 <article>
 
-### unbind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
-Unbind to a parent BaseTexture
+### unbind 
+**Type:** <code>(baseTexture&#58; BaseTexture) -&#62; void</code>
+
+**Description:** Unbind to a parent BaseTexture
 
 #### Parameters:
 | Name        | Type                     | Description    |
@@ -324,8 +374,10 @@ Unbind to a parent BaseTexture
 
 <article>
 
-### update: <span><code>() -&#62; void</code></span>
-Checks if source width/height was changed, resize can cause extra baseTexture update. Triggers one update in any case.
+### update 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Checks if source width/height was changed, resize can cause extra baseTexture update. Triggers one update in any case.
 
 </article>
 
@@ -334,8 +386,10 @@ Checks if source width/height was changed, resize can cause extra baseTexture up
 
 <article>
 
-### upload: <span><code>(renderer&#58; Renderer, baseTexture&#58; BaseTexture, glTexture&#58; GLTexture) -&#62; boolean</code></span>
-Upload the image resource to GPU.
+### upload 
+**Type:** <code>(renderer&#58; Renderer, baseTexture&#58; BaseTexture, glTexture&#58; GLTexture) -&#62; boolean</code>
+
+**Description:** Upload the image resource to GPU.
 
 #### Parameters:
 | Name        | Type                     | Description                   |

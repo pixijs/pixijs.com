@@ -5,7 +5,12 @@ sidebar_label: "PIXI.CompressedTextureResource"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/compressed-textures](../modules/pixi_compressed_textures).CompressedTextureResource
+
+</div>
 
 Resource for compressed texture formats, as follows&#58; S3TC/DXTn (& their sRGB formats), ATC, ASTC, ETC 1/2, PVRTC.
 Compressed textures improve performance when rendering is texture-bound. The texture data stays compressed in graphics memory, increasing memory locality and speeding up texture fetches. These formats can also be used to store more detail in the same amount of memory.
@@ -46,13 +51,12 @@ Since `CompressedTextureResource` inherits `BlobResource`, you can provide it a 
 ```
       
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.CompressedTextureResource: <span><code>(source&#58; string &#124; Uint8Array &#124; Uint32Array, options&#58; ICompressedTextureResourceOptions) </code></span>
+### Constructor:
+<h4><code>new PIXI.CompressedTextureResource(source&#58; string &#124; Uint8Array &#124; Uint32Array, options&#58; ICompressedTextureResourceOptions) </code></h4>
 
 #### Parameters:
 | Name                 | Type                                                     | Default        | Description                                                                                                                                                               |
@@ -76,8 +80,10 @@ Since `CompressedTextureResource` inherits `BlobResource`, you can provide it a 
 ## Members
 <article>
 
-### buffer: <span><code>ViewableBuffer</code></span>
-The viewable buffer on the data
+### buffer 
+**Type:** <code>ViewableBuffer</code>
+
+**Description:** The viewable buffer on the data
 
 </article>
 
@@ -86,20 +92,12 @@ The viewable buffer on the data
 
 <article>
 
-### destroyed: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### destroyed 
+**Type:** <code>boolean</code>
 
-If resource has been destroyed.
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### format: <span><code>INTERNAL_FORMATS</code></span>
-The compression format
+**Description:** If resource has been destroyed.
 
 </article>
 
@@ -108,8 +106,10 @@ The compression format
 
 <article>
 
-### height: <span><code>number</code></span>
-The height of the resource.
+### format 
+**Type:** <code>INTERNAL_FORMATS</code>
+
+**Description:** The compression format
 
 </article>
 
@@ -118,8 +118,10 @@ The height of the resource.
 
 <article>
 
-### internal: <span><code>boolean</code></span>
-`true` if resource is created by BaseTexture useful for doing cleanup with BaseTexture destroy and not cleaning up resources that were created externally.
+### height 
+**Type:** <code>number</code>
+
+**Description:** The height of the resource.
 
 </article>
 
@@ -128,20 +130,10 @@ The height of the resource.
 
 <article>
 
-### levels: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
+### internal 
+**Type:** <code>boolean</code>
 
-The number of mipmap levels stored in the resource buffer.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### origin: <span><code>string</code></span>
-The URL of the texture file
+**Description:** `true` if resource is created by BaseTexture useful for doing cleanup with BaseTexture destroy and not cleaning up resources that were created externally.
 
 </article>
 
@@ -150,8 +142,12 @@ The URL of the texture file
 
 <article>
 
-### src: <span><code>string</code></span>
-The url of the resource
+### levels 
+**Type:** <code>number</code>
+
+**Default Value**: <code>1</code>
+
+**Description:** The number of mipmap levels stored in the resource buffer.
 
 </article>
 
@@ -160,8 +156,10 @@ The url of the resource
 
 <article>
 
-### valid: <span><code>boolean</code></span>
-Has been validated
+### origin 
+**Type:** <code>string</code>
+
+**Description:** The URL of the texture file
 
 </article>
 
@@ -170,8 +168,10 @@ Has been validated
 
 <article>
 
-### width: <span><code>number</code></span>
-The width of the resource.
+### src 
+**Type:** <code>string</code>
+
+**Description:** The url of the resource
 
 </article>
 
@@ -180,8 +180,10 @@ The width of the resource.
 
 <article>
 
-### _height: <span><code>number</code></span>
-Internal height of the resource.
+### valid 
+**Type:** <code>boolean</code>
+
+**Description:** Has been validated
 
 </article>
 
@@ -190,8 +192,34 @@ Internal height of the resource.
 
 <article>
 
-### _width: <span><code>number</code></span>
-Internal width of the resource.
+### width 
+**Type:** <code>number</code>
+
+**Description:** The width of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _height 
+**Type:** <code>number</code>
+
+**Description:** Internal height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _width 
+**Type:** <code>number</code>
+
+**Description:** Internal width of the resource.
 
 </article>
 
@@ -202,8 +230,10 @@ Internal width of the resource.
 ## Methods
 <article>
 
-### bind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
-Bind to a parent BaseTexture
+### bind 
+**Type:** <code>(baseTexture&#58; BaseTexture) -&#62; void</code>
+
+**Description:** Bind to a parent BaseTexture
 
 #### Parameters:
 | Name        | Type                     | Description    |
@@ -216,8 +246,10 @@ Bind to a parent BaseTexture
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Call when destroying resource, unbind any BaseTexture object before calling this method, as reference counts are maintained internally.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Call when destroying resource, unbind any BaseTexture object before calling this method, as reference counts are maintained internally.
 
 </article>
 
@@ -226,8 +258,10 @@ Call when destroying resource, unbind any BaseTexture object before calling this
 
 <article>
 
-### dispose: <span><code>() -&#62; void</code></span>
-Clean up anything, this happens when destroying is ready.
+### dispose 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Clean up anything, this happens when destroying is ready.
 
 </article>
 
@@ -236,8 +270,10 @@ Clean up anything, this happens when destroying is ready.
 
 <article>
 
-### load: <span><code>() -&#62; Promise&#60;Resource&#62;</code></span>
-Loads the blob
+### load 
+**Type:** <code>() -&#62; Promise&#60;Resource&#62;</code>
+
+**Description:** Loads the blob
 
 #### Returns:
 | Type                                   | Description |
@@ -250,8 +286,10 @@ Loads the blob
 
 <article>
 
-### resize: <span><code>(width&#58; number, height&#58; number) -&#62; void</code></span>
-Trigger a resize event
+### resize 
+**Type:** <code>(width&#58; number, height&#58; number) -&#62; void</code>
+
+**Description:** Trigger a resize event
 
 #### Parameters:
 | Name   | Type                | Description |
@@ -265,8 +303,10 @@ Trigger a resize event
 
 <article>
 
-### style: <span><code>(_renderer&#58; Renderer, _baseTexture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code></span>
-Set the style, optional to override
+### style 
+**Type:** <code>(_renderer&#58; Renderer, _baseTexture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code>
+
+**Description:** Set the style, optional to override
 
 #### Parameters:
 | Name         | Type                     | Description                             |
@@ -285,8 +325,10 @@ Set the style, optional to override
 
 <article>
 
-### unbind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
-Unbind to a parent BaseTexture
+### unbind 
+**Type:** <code>(baseTexture&#58; BaseTexture) -&#62; void</code>
+
+**Description:** Unbind to a parent BaseTexture
 
 #### Parameters:
 | Name        | Type                     | Description    |
@@ -299,8 +341,10 @@ Unbind to a parent BaseTexture
 
 <article>
 
-### update: <span><code>() -&#62; void</code></span>
-Has been updated trigger event.
+### update 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Has been updated trigger event.
 
 </article>
 
@@ -309,7 +353,9 @@ Has been updated trigger event.
 
 <article>
 
-### upload: <span><code>(renderer&#58; Renderer, _texture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code></span>
+### upload 
+**Type:** <code>(renderer&#58; Renderer, _texture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code>
+
 
 #### Parameters:
 | Name       | Type                     | Description                             |
@@ -328,7 +374,9 @@ Has been updated trigger event.
 
 <article>
 
-### onBlobLoaded: <span><code>() -&#62; void</code></span>
+### onBlobLoaded 
+**Type:** <code>() -&#62; void</code>
+
 
 </article>
 

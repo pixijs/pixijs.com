@@ -5,20 +5,24 @@ sidebar_label: "PIXI.AbstractMultiResource"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).AbstractMultiResource
+
+</div>
 
 
 Resource that can manage several resource (items) inside. All resources need to have the same pixel size. Parent class for CubeResource and ArrayResource
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.AbstractMultiResource: <span><code>(length&#58; number, options&#58; ISize) </code></span>
+### Constructor:
+<h4><code>new PIXI.AbstractMultiResource(length&#58; number, options&#58; ISize) </code></h4>
 
 #### Parameters:
 | Name           | Type                | Default       | Description                         |
@@ -39,8 +43,10 @@ Resource that can manage several resource (items) inside. All resources need to 
 ## Members
 <article>
 
-### baseTexture: <span><code>BaseTexture</code></span>
-Bound baseTexture, there can only be one.
+### baseTexture 
+**Type:** <code>BaseTexture</code>
+
+**Description:** Bound baseTexture, there can only be one.
 
 </article>
 
@@ -49,20 +55,12 @@ Bound baseTexture, there can only be one.
 
 <article>
 
-### destroyed: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### destroyed 
+**Type:** <code>boolean</code>
 
-If resource has been destroyed.
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### height: <span><code>number</code></span>
-The height of the resource.
+**Description:** If resource has been destroyed.
 
 </article>
 
@@ -71,8 +69,10 @@ The height of the resource.
 
 <article>
 
-### internal: <span><code>boolean</code></span>
-`true` if resource is created by BaseTexture useful for doing cleanup with BaseTexture destroy and not cleaning up resources that were created externally.
+### height 
+**Type:** <code>number</code>
+
+**Description:** The height of the resource.
 
 </article>
 
@@ -81,8 +81,10 @@ The height of the resource.
 
 <article>
 
-### itemDirtyIds: <span><code>Array&#60;number&#62;</code></span>
-Dirty IDs for each part.
+### internal 
+**Type:** <code>boolean</code>
+
+**Description:** `true` if resource is created by BaseTexture useful for doing cleanup with BaseTexture destroy and not cleaning up resources that were created externally.
 
 </article>
 
@@ -91,8 +93,10 @@ Dirty IDs for each part.
 
 <article>
 
-### items: <span><code>Array&#60;BaseTexture&#62;</code></span>
-Collection of partial baseTextures that correspond to resources.
+### itemDirtyIds 
+**Type:** <code>Array&#60;number&#62;</code>
+
+**Description:** Dirty IDs for each part.
 
 </article>
 
@@ -101,8 +105,10 @@ Collection of partial baseTextures that correspond to resources.
 
 <article>
 
-### length: <span><code>number</code></span>
-Number of elements in array.
+### items 
+**Type:** <code>Array&#60;BaseTexture&#62;</code>
+
+**Description:** Collection of partial baseTextures that correspond to resources.
 
 </article>
 
@@ -111,8 +117,10 @@ Number of elements in array.
 
 <article>
 
-### src: <span><code>string</code></span>
-The url of the resource
+### length 
+**Type:** <code>number</code>
+
+**Description:** Number of elements in array.
 
 </article>
 
@@ -121,8 +129,10 @@ The url of the resource
 
 <article>
 
-### valid: <span><code>boolean</code></span>
-Has been validated
+### src 
+**Type:** <code>string</code>
+
+**Description:** The url of the resource
 
 </article>
 
@@ -131,8 +141,10 @@ Has been validated
 
 <article>
 
-### width: <span><code>number</code></span>
-The width of the resource.
+### valid 
+**Type:** <code>boolean</code>
+
+**Description:** Has been validated
 
 </article>
 
@@ -141,8 +153,10 @@ The width of the resource.
 
 <article>
 
-### _height: <span><code>number</code></span>
-Internal height of the resource.
+### width 
+**Type:** <code>number</code>
+
+**Description:** The width of the resource.
 
 </article>
 
@@ -151,8 +165,22 @@ Internal height of the resource.
 
 <article>
 
-### _width: <span><code>number</code></span>
-Internal width of the resource.
+### _height 
+**Type:** <code>number</code>
+
+**Description:** Internal height of the resource.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _width 
+**Type:** <code>number</code>
+
+**Description:** Internal width of the resource.
 
 </article>
 
@@ -163,8 +191,10 @@ Internal width of the resource.
 ## Methods
 <article>
 
-### addBaseTextureAt: <span><code>(baseTexture&#58; BaseTexture, index&#58; number) -&#62; this</code></span>
-Set a baseTexture by ID
+### addBaseTextureAt 
+**Type:** <code>(baseTexture&#58; BaseTexture, index&#58; number) -&#62; this</code>
+
+**Description:** Set a baseTexture by ID
 
 #### Parameters:
 | Name        | Type                     | Description                         |
@@ -182,8 +212,10 @@ Set a baseTexture by ID
 
 <article>
 
-### addResourceAt: <span><code>(resource&#58; Resource, index&#58; number) -&#62; this</code></span>
-Set a resource by ID
+### addResourceAt 
+**Type:** <code>(resource&#58; Resource, index&#58; number) -&#62; this</code>
+
+**Description:** Set a resource by ID
 
 #### Parameters:
 | Name     | Type                  | Description                         |
@@ -201,8 +233,10 @@ Set a resource by ID
 
 <article>
 
-### bind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
-Set the parent base texture.
+### bind 
+**Type:** <code>(baseTexture&#58; BaseTexture) -&#62; void</code>
+
+**Description:** Set the parent base texture.
 
 #### Parameters:
 | Name        | Type                     | Description |
@@ -215,8 +249,10 @@ Set the parent base texture.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Call when destroying resource, unbind any BaseTexture object before calling this method, as reference counts are maintained internally.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Call when destroying resource, unbind any BaseTexture object before calling this method, as reference counts are maintained internally.
 
 </article>
 
@@ -225,8 +261,10 @@ Call when destroying resource, unbind any BaseTexture object before calling this
 
 <article>
 
-### dispose: <span><code>() -&#62; void</code></span>
-Destroy this BaseImageResource.
+### dispose 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroy this BaseImageResource.
 
 </article>
 
@@ -235,8 +273,10 @@ Destroy this BaseImageResource.
 
 <article>
 
-### load: <span><code>() -&#62; Promise&#60;this&#62;</code></span>
-Load all the resources simultaneously
+### load 
+**Type:** <code>() -&#62; Promise&#60;this&#62;</code>
+
+**Description:** Load all the resources simultaneously
 
 #### Returns:
 | Type                               | Description             |
@@ -249,8 +289,10 @@ Load all the resources simultaneously
 
 <article>
 
-### resize: <span><code>(width&#58; number, height&#58; number) -&#62; void</code></span>
-Trigger a resize event
+### resize 
+**Type:** <code>(width&#58; number, height&#58; number) -&#62; void</code>
+
+**Description:** Trigger a resize event
 
 #### Parameters:
 | Name   | Type                | Description |
@@ -264,8 +306,10 @@ Trigger a resize event
 
 <article>
 
-### style: <span><code>(_renderer&#58; Renderer, _baseTexture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code></span>
-Set the style, optional to override
+### style 
+**Type:** <code>(_renderer&#58; Renderer, _baseTexture&#58; BaseTexture, _glTexture&#58; GLTexture) -&#62; boolean</code>
+
+**Description:** Set the style, optional to override
 
 #### Parameters:
 | Name         | Type                     | Description                             |
@@ -284,8 +328,10 @@ Set the style, optional to override
 
 <article>
 
-### unbind: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
-Unset the parent base texture.
+### unbind 
+**Type:** <code>(baseTexture&#58; BaseTexture) -&#62; void</code>
+
+**Description:** Unset the parent base texture.
 
 #### Parameters:
 | Name        | Type                     | Description |
@@ -298,8 +344,10 @@ Unset the parent base texture.
 
 <article>
 
-### update: <span><code>() -&#62; void</code></span>
-Has been updated trigger event.
+### update 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Has been updated trigger event.
 
 </article>
 
@@ -308,8 +356,10 @@ Has been updated trigger event.
 
 <article>
 
-### upload: <span><code>(renderer&#58; Renderer, baseTexture&#58; BaseTexture, glTexture&#58; GLTexture) -&#62; boolean</code></span>
-Uploads the texture or returns false if it cant for some reason. Override this.
+### upload 
+**Type:** <code>(renderer&#58; Renderer, baseTexture&#58; BaseTexture, glTexture&#58; GLTexture) -&#62; boolean</code>
+
+**Description:** Uploads the texture or returns false if it cant for some reason. Override this.
 
 #### Parameters:
 | Name        | Type                     | Description                             |
@@ -328,8 +378,10 @@ Uploads the texture or returns false if it cant for some reason. Override this.
 
 <article>
 
-### initFromArray: <span><code>(resources&#58; Array&#60;any&#62;, options&#58; IAutoDetectOptions) -&#62; void</code></span>
-Used from ArrayResource and CubeResource constructors.
+### initFromArray 
+**Type:** <code>(resources&#58; Array&#60;any&#62;, options&#58; IAutoDetectOptions) -&#62; void</code>
+
+**Description:** Used from ArrayResource and CubeResource constructors.
 
 #### Parameters:
 | Name      | Type                            | Description                                                                                  |

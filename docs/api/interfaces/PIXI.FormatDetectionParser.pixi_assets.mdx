@@ -5,14 +5,17 @@ sidebar_label: "PIXI.FormatDetectionParser"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/assets](../modules/pixi_assets).FormatDetectionParser
+
+</div>
 
 
 Format detection is useful for detecting feature support on the current platform.
 
 
-
-// TODO: @see
 
         
 
@@ -38,8 +41,10 @@ Format detection is useful for detecting feature support on the current platform
 ## Members
 <article>
 
-### add: <span><code>(formats&#58; string[]) =&#62; Promise&#60;string[]&#62;</code></span>
-Add formats (file extensions) to the existing list of formats. Return an new array with added formats, do not mutate the formats argument.
+### add 
+**Type:** <code>(formats&#58; string[]) =&#62; Promise&#60;string[]&#62;</code>
+
+**Description:** Add formats (file extensions) to the existing list of formats. Return an new array with added formats, do not mutate the formats argument.
 
 </article>
 
@@ -48,8 +53,10 @@ Add formats (file extensions) to the existing list of formats. Return an new arr
 
 <article>
 
-### extension: <span><code>ExtensionMetadata</code></span>
-Should be ExtensionType.DetectionParser
+### extension 
+**Type:** <code>ExtensionMetadata</code>
+
+**Description:** Should be ExtensionType.DetectionParser
 
 </article>
 
@@ -58,8 +65,10 @@ Should be ExtensionType.DetectionParser
 
 <article>
 
-### remove: <span><code>(formats&#58; string[]) =&#62; Promise&#60;string[]&#62;</code></span>
-Remove formats (file extensions) from the list of supported formats. This is used when uninstalling this DetectionParser. Return an new array with filtered formats, do not mutate the formats argument.
+### remove 
+**Type:** <code>(formats&#58; string[]) =&#62; Promise&#60;string[]&#62;</code>
+
+**Description:** Remove formats (file extensions) from the list of supported formats. This is used when uninstalling this DetectionParser. Return an new array with filtered formats, do not mutate the formats argument.
 
 </article>
 
@@ -68,8 +77,10 @@ Remove formats (file extensions) from the list of supported formats. This is use
 
 <article>
 
-### test: <span><code>() =&#62; Promise&#60;boolean&#62;</code></span>
-Browser/platform feature detection supported if return true
+### test 
+**Type:** <code>() =&#62; Promise&#60;boolean&#62;</code>
+
+**Description:** Browser/platform feature detection supported if return true
 
 </article>
 

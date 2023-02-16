@@ -5,20 +5,24 @@ sidebar_label: "PIXI.ProjectionSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).ProjectionSystem
+
+</div>
 
 System plugin to the renderer to manage the projection matrix.
 The `projectionMatrix` is a global uniform provided to all shaders. It is used to transform points in world space to normalized device coordinates.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.ProjectionSystem: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.ProjectionSystem(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -35,8 +39,10 @@ The `projectionMatrix` is a global uniform provided to all shaders. It is used t
 ## Members
 <article>
 
-### defaultFrame: <span><code>Rectangle</code></span>
-Default destination frame
+### defaultFrame 
+**Type:** <code>Rectangle</code>
+
+**Description:** Default destination frame
 This is not used internally. It is not advised to use this feature specifically unless you know what you're doing. The `update` method will default to this frame if you do not pass the destination frame.
 
 </article>
@@ -46,8 +52,10 @@ This is not used internally. It is not advised to use this feature specifically 
 
 <article>
 
-### destinationFrame: <span><code>Rectangle</code></span>
-The destination frame used to calculate the current projection matrix.
+### destinationFrame 
+**Type:** <code>Rectangle</code>
+
+**Description:** The destination frame used to calculate the current projection matrix.
 The destination frame is the rectangle in the render-target into which contents are rendered. If rendering to the screen, the origin is on the top-left. If rendering to a framebuffer, the origin is on the bottom-left. This "flipping" phenomenon is because of WebGL convention for (shader) texture coordinates, where the bottom-left corner is (0,0). It allows display-objects to map their (0,0) position in local-space (top-left) to (0,0) in texture space (bottom-left). In other words, a sprite's top-left corner actually renders the texture's bottom-left corner. You will also notice this when using a tool like SpectorJS to view your textures at runtime.
 
 The destination frame's dimensions (width,height) should be equal to the source frame. This is because, otherwise, the contents will be scaled to fill the destination frame. Similarly, the destination frame's (x,y) coordinates are (0,0) unless you know what you're doing.
@@ -59,8 +67,10 @@ The destination frame's dimensions (width,height) should be equal to the source 
 
 <article>
 
-### projectionMatrix: <span><code>Matrix</code></span>
-Projection matrix
+### projectionMatrix 
+**Type:** <code>Matrix</code>
+
+**Description:** Projection matrix
 This matrix can be used to transform points from world space to normalized device coordinates, and is calculated from the sourceFrame → destinationFrame mapping provided.
 
 The renderer's `globalUniforms` keeps a reference to this, and so it is available for all shaders to use as a uniform.
@@ -72,8 +82,10 @@ The renderer's `globalUniforms` keeps a reference to this, and so it is availabl
 
 <article>
 
-### sourceFrame: <span><code>Rectangle</code></span>
-The source frame used to calculate the current projection matrix.
+### sourceFrame 
+**Type:** <code>Rectangle</code>
+
+**Description:** The source frame used to calculate the current projection matrix.
 The source frame is the rectangle in world space containing the contents to be rendered.
 
 </article>
@@ -83,8 +95,10 @@ The source frame is the rectangle in world space containing the contents to be r
 
 <article>
 
-### transform: <span><code>PIXI.Matrix</code></span>
-A transform to be appended to the projection matrix.
+### transform 
+**Type:** <code>PIXI.Matrix</code>
+
+**Description:** A transform to be appended to the projection matrix.
 This can be used to transform points in world-space one last time before they are outputted by the shader. You can use to rotate the whole scene, for example. Remember to clear it once you've rendered everything.
 
 </article>
@@ -96,8 +110,10 @@ This can be used to transform points in world-space one last time before they ar
 ## Methods
 <article>
 
-### calculateProjection: <span><code>(_destinationFrame&#58; Rectangle, sourceFrame&#58; Rectangle, _resolution&#58; number, root&#58; boolean) -&#62; void</code></span>
-Calculates the `projectionMatrix` to map points inside `sourceFrame` to inside `destinationFrame`.
+### calculateProjection 
+**Type:** <code>(_destinationFrame&#58; Rectangle, sourceFrame&#58; Rectangle, _resolution&#58; number, root&#58; boolean) -&#62; void</code>
+
+**Description:** Calculates the `projectionMatrix` to map points inside `sourceFrame` to inside `destinationFrame`.
 
 #### Parameters:
 | Name              | Type                   | Description                                                                                               |
@@ -113,8 +129,10 @@ Calculates the `projectionMatrix` to map points inside `sourceFrame` to inside `
 
 <article>
 
-### setTransform: <span><code>(_matrix&#58; Matrix) -&#62; void</code></span>
-Sets the transform of the active render target to the given matrix.
+### setTransform 
+**Type:** <code>(_matrix&#58; Matrix) -&#62; void</code>
+
+**Description:** Sets the transform of the active render target to the given matrix.
 
 #### Parameters:
 | Name    | Type                | Description               |
@@ -127,8 +145,10 @@ Sets the transform of the active render target to the given matrix.
 
 <article>
 
-### update: <span><code>(destinationFrame&#58; Rectangle, sourceFrame&#58; Rectangle, resolution&#58; number, root&#58; boolean) -&#62; void</code></span>
-Updates the projection-matrix based on the sourceFrame → destinationFrame mapping provided.
+### update 
+**Type:** <code>(destinationFrame&#58; Rectangle, sourceFrame&#58; Rectangle, resolution&#58; number, root&#58; boolean) -&#62; void</code>
+
+**Description:** Updates the projection-matrix based on the sourceFrame → destinationFrame mapping provided.
 NOTE&#58; It is expected you call `renderer.framebuffer.setViewport(destinationFrame)` after this. This is because the framebuffer viewport converts shader vertex output in normalized device coordinates to window coordinates.
 
 NOTE-2&#58; [PIXI.RenderTextureSystem#bind](../classes/PIXI.RenderTextureSystem.pixi_core#bind) updates the projection-matrix when you bind a render-texture. It is expected that you dirty the current bindings when calling this manually.

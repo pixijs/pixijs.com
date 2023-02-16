@@ -5,20 +5,24 @@ sidebar_label: "PIXI.CanvasContextSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/canvas-renderer](../modules/pixi_canvas_renderer).CanvasContextSystem
+
+</div>
 
 
 System that manages the canvas `2d` contexts
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.CanvasContextSystem: <span><code>(renderer&#58; CanvasRenderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.CanvasContextSystem(renderer&#58; CanvasRenderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                        | Default       | Description                         |
@@ -35,20 +39,12 @@ System that manages the canvas `2d` contexts
 ## Members
 <article>
 
-### _projTransform: <span><code>Matrix</code></span>
-- **Default Value**: <code>undefined</code>
+### _projTransform 
+**Type:** <code>Matrix</code>
 
-Projection transform, passed in render() stored here
+**Default Value**: <code>undefined</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### activeContext: <span><code>CrossPlatformCanvasRenderingContext2D</code></span>
-The currently active canvas 2d context (could change with renderTextures)
+**Description:** Projection transform, passed in render() stored here
 
 </article>
 
@@ -57,8 +53,10 @@ The currently active canvas 2d context (could change with renderTextures)
 
 <article>
 
-### blendModes: <span><code>string[]</code></span>
-Tracks the blend modes useful for this renderer.
+### activeContext 
+**Type:** <code>CrossPlatformCanvasRenderingContext2D</code>
+
+**Description:** The currently active canvas 2d context (could change with renderTextures)
 
 </article>
 
@@ -67,8 +65,10 @@ Tracks the blend modes useful for this renderer.
 
 <article>
 
-### rootContext: <span><code>CrossPlatformCanvasRenderingContext2D</code></span>
-The root canvas 2d context that everything is drawn with.
+### blendModes 
+**Type:** <code>string[]</code>
+
+**Description:** Tracks the blend modes useful for this renderer.
 
 </article>
 
@@ -77,10 +77,24 @@ The root canvas 2d context that everything is drawn with.
 
 <article>
 
-### smoothProperty: <span><code>SmoothingEnabledProperties</code></span>
-- **Default Value**: <code>"imageSmoothingEnabled"</code>
+### rootContext 
+**Type:** <code>CrossPlatformCanvasRenderingContext2D</code>
 
-The canvas property used to set the canvas smoothing property.
+**Description:** The root canvas 2d context that everything is drawn with.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### smoothProperty 
+**Type:** <code>SmoothingEnabledProperties</code>
+
+**Default Value**: <code>"imageSmoothingEnabled"</code>
+
+**Description:** The canvas property used to set the canvas smoothing property.
 
 </article>
 
@@ -91,8 +105,10 @@ The canvas property used to set the canvas smoothing property.
 ## Methods
 <article>
 
-### clear: <span><code>(clearColor&#58; string, alpha&#58; number) -&#62; void</code></span>
-Clear the canvas of renderer.
+### clear 
+**Type:** <code>(clearColor&#58; string, alpha&#58; number) -&#62; void</code>
+
+**Description:** Clear the canvas of renderer.
 
 #### Parameters:
 | Name       | Type                | Description                                                         |
@@ -106,8 +122,10 @@ Clear the canvas of renderer.
 
 <article>
 
-### init: <span><code>() -&#62; void</code></span>
-initiates the system
+### init 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** initiates the system
 
 </article>
 
@@ -116,8 +134,10 @@ initiates the system
 
 <article>
 
-### invalidateBlendMode: <span><code>() -&#62; void</code></span>
-Checks if blend mode has changed.
+### invalidateBlendMode 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Checks if blend mode has changed.
 
 </article>
 
@@ -126,8 +146,10 @@ Checks if blend mode has changed.
 
 <article>
 
-### setBlendMode: <span><code>(blendMode&#58; number, readyForOuterBlend&#58; boolean) -&#62; void</code></span>
-Sets the blend mode of the renderer.
+### setBlendMode 
+**Type:** <code>(blendMode&#58; number, readyForOuterBlend&#58; boolean) -&#62; void</code>
+
+**Description:** Sets the blend mode of the renderer.
 
 #### Parameters:
 | Name               | Type                 | Description                                                                                                      |
@@ -141,8 +163,10 @@ Sets the blend mode of the renderer.
 
 <article>
 
-### setContextTransform: <span><code>(transform&#58; Matrix, roundPixels&#58; boolean, localResolution&#58; number) -&#62; void</code></span>
-Sets matrix of context. called only from render() methods takes care about resolution
+### setContextTransform 
+**Type:** <code>(transform&#58; Matrix, roundPixels&#58; boolean, localResolution&#58; number) -&#62; void</code>
+
+**Description:** Sets matrix of context. called only from render() methods takes care about resolution
 
 #### Parameters:
 | Name            | Type                 | Description                                                           |

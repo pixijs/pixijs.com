@@ -5,29 +5,36 @@ sidebar_label: "PIXI.Bounds"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/display](../modules/pixi_display).Bounds
+
+</div>
 
 'Builder' pattern for bounds rectangles.
 This could be called an Axis-Aligned Bounding Box. It is not an actual shape. It is a mutable thing; no 'EMPTY' or those kind of problems.
 
 
 
-// TODO: @see
-
         
 
 <article>
+### Contructor:
+<h4><code>new PIXI()</code></h4>
 
-### new PIXI()
 </article>
+            
 
 
 
 ## Members
 <article>
 
-### maxX: <span><code>number</code></span>
-- **Default Value**: <code>-Infinity</code>
+### maxX 
+**Type:** <code>number</code>
+
+**Default Value**: <code>-Infinity</code>
 
 
 </article>
@@ -37,8 +44,10 @@ This could be called an Axis-Aligned Bounding Box. It is not an actual shape. It
 
 <article>
 
-### maxY: <span><code>number</code></span>
-- **Default Value**: <code>-Infinity</code>
+### maxY 
+**Type:** <code>number</code>
+
+**Default Value**: <code>-Infinity</code>
 
 
 </article>
@@ -48,8 +57,10 @@ This could be called an Axis-Aligned Bounding Box. It is not an actual shape. It
 
 <article>
 
-### minX: <span><code>number</code></span>
-- **Default Value**: <code>Infinity</code>
+### minX 
+**Type:** <code>number</code>
+
+**Default Value**: <code>Infinity</code>
 
 
 </article>
@@ -59,8 +70,10 @@ This could be called an Axis-Aligned Bounding Box. It is not an actual shape. It
 
 <article>
 
-### minY: <span><code>number</code></span>
-- **Default Value**: <code>Infinity</code>
+### minY 
+**Type:** <code>number</code>
+
+**Default Value**: <code>Infinity</code>
 
 
 </article>
@@ -70,8 +83,10 @@ This could be called an Axis-Aligned Bounding Box. It is not an actual shape. It
 
 <article>
 
-### updateID: <span><code>number</code></span>
-It is updated to _boundsID of corresponding object to keep bounds in sync with content. Updated from outside, thus public modifier.
+### updateID 
+**Type:** <code>number</code>
+
+**Description:** It is updated to _boundsID of corresponding object to keep bounds in sync with content. Updated from outside, thus public modifier.
 
 </article>
 
@@ -82,8 +97,10 @@ It is updated to _boundsID of corresponding object to keep bounds in sync with c
 ## Methods
 <article>
 
-### addBounds: <span><code>(bounds&#58; Bounds) -&#62; void</code></span>
-Adds other [PIXI.Bounds](../classes/PIXI.Bounds.pixi_display).
+### addBounds 
+**Type:** <code>(bounds&#58; Bounds) -&#62; void</code>
+
+**Description:** Adds other [PIXI.Bounds](../classes/PIXI.Bounds.pixi_display).
 
 #### Parameters:
 | Name   | Type                | Description            |
@@ -96,8 +113,10 @@ Adds other [PIXI.Bounds](../classes/PIXI.Bounds.pixi_display).
 
 <article>
 
-### addBoundsArea: <span><code>(bounds&#58; Bounds, area&#58; Rectangle) -&#62; void</code></span>
-Adds other Bounds, masked with Rectangle.
+### addBoundsArea 
+**Type:** <code>(bounds&#58; Bounds, area&#58; Rectangle) -&#62; void</code>
+
+**Description:** Adds other Bounds, masked with Rectangle.
 
 #### Parameters:
 | Name   | Type                   | Description |
@@ -111,8 +130,10 @@ Adds other Bounds, masked with Rectangle.
 
 <article>
 
-### addBoundsMask: <span><code>(bounds&#58; Bounds, mask&#58; Bounds) -&#62; void</code></span>
-Adds other Bounds, masked with Bounds.
+### addBoundsMask 
+**Type:** <code>(bounds&#58; Bounds, mask&#58; Bounds) -&#62; void</code>
+
+**Description:** Adds other Bounds, masked with Bounds.
 
 #### Parameters:
 | Name   | Type                | Description             |
@@ -126,8 +147,10 @@ Adds other Bounds, masked with Bounds.
 
 <article>
 
-### addBoundsMatrix: <span><code>(bounds&#58; Bounds, matrix&#58; Matrix) -&#62; void</code></span>
-Adds other Bounds, multiplied by matrix. Bounds shouldn't be empty.
+### addBoundsMatrix 
+**Type:** <code>(bounds&#58; Bounds, matrix&#58; Matrix) -&#62; void</code>
+
+**Description:** Adds other Bounds, multiplied by matrix. Bounds shouldn't be empty.
 
 #### Parameters:
 | Name   | Type                | Description   |
@@ -141,8 +164,10 @@ Adds other Bounds, multiplied by matrix. Bounds shouldn't be empty.
 
 <article>
 
-### addFrame: <span><code>(transform&#58; Transform, x0&#58; number, y0&#58; number, x1&#58; number, y1&#58; number) -&#62; void</code></span>
-Adds sprite frame, transformed.
+### addFrame 
+**Type:** <code>(transform&#58; Transform, x0&#58; number, y0&#58; number, x1&#58; number, y1&#58; number) -&#62; void</code>
+
+**Description:** Adds sprite frame, transformed.
 
 #### Parameters:
 | Name      | Type                   | Description        |
@@ -159,8 +184,10 @@ Adds sprite frame, transformed.
 
 <article>
 
-### addFrameMatrix: <span><code>(matrix&#58; Matrix, x0&#58; number, y0&#58; number, x1&#58; number, y1&#58; number) -&#62; void</code></span>
-Adds sprite frame, multiplied by matrix
+### addFrameMatrix 
+**Type:** <code>(matrix&#58; Matrix, x0&#58; number, y0&#58; number, x1&#58; number, y1&#58; number) -&#62; void</code>
+
+**Description:** Adds sprite frame, multiplied by matrix
 
 #### Parameters:
 | Name   | Type                | Description       |
@@ -177,8 +204,10 @@ Adds sprite frame, multiplied by matrix
 
 <article>
 
-### addFramePad: <span><code>(x0&#58; number, y0&#58; number, x1&#58; number, y1&#58; number, padX&#58; number, padY&#58; number) -&#62; void</code></span>
-Adds padded frame. (x0, y0) should be strictly less than (x1, y1)
+### addFramePad 
+**Type:** <code>(x0&#58; number, y0&#58; number, x1&#58; number, y1&#58; number, padX&#58; number, padY&#58; number) -&#62; void</code>
+
+**Description:** Adds padded frame. (x0, y0) should be strictly less than (x1, y1)
 
 #### Parameters:
 | Name | Type                | Description       |
@@ -196,8 +225,10 @@ Adds padded frame. (x0, y0) should be strictly less than (x1, y1)
 
 <article>
 
-### addPoint: <span><code>(point&#58; IPointData) -&#62; void</code></span>
-This function should be inlined when its possible.
+### addPoint 
+**Type:** <code>(point&#58; IPointData) -&#62; void</code>
+
+**Description:** This function should be inlined when its possible.
 
 #### Parameters:
 | Name  | Type                    | Description       |
@@ -210,8 +241,10 @@ This function should be inlined when its possible.
 
 <article>
 
-### addPointMatrix: <span><code>(matrix&#58; Matrix, point&#58; IPointData) -&#62; void</code></span>
-Adds a point, after transformed. This should be inlined when its possible.
+### addPointMatrix 
+**Type:** <code>(matrix&#58; Matrix, point&#58; IPointData) -&#62; void</code>
+
+**Description:** Adds a point, after transformed. This should be inlined when its possible.
 
 #### Parameters:
 | Name   | Type                    | Description |
@@ -225,8 +258,10 @@ Adds a point, after transformed. This should be inlined when its possible.
 
 <article>
 
-### addQuad: <span><code>(vertices&#58; Float32Array) -&#62; void</code></span>
-Adds a quad, not transformed
+### addQuad 
+**Type:** <code>(vertices&#58; Float32Array) -&#62; void</code>
+
+**Description:** Adds a quad, not transformed
 
 #### Parameters:
 | Name     | Type                      | Description       |
@@ -239,8 +274,10 @@ Adds a quad, not transformed
 
 <article>
 
-### addVertexData: <span><code>(vertexData&#58; Float32Array, beginOffset&#58; number, endOffset&#58; number) -&#62; void</code></span>
-Adds screen vertices from array
+### addVertexData 
+**Type:** <code>(vertexData&#58; Float32Array, beginOffset&#58; number, endOffset&#58; number) -&#62; void</code>
+
+**Description:** Adds screen vertices from array
 
 #### Parameters:
 | Name        | Type                      | Description          |
@@ -255,8 +292,10 @@ Adds screen vertices from array
 
 <article>
 
-### addVertices: <span><code>(transform&#58; Transform, vertices&#58; Float32Array, beginOffset&#58; number, endOffset&#58; number) -&#62; void</code></span>
-Add an array of mesh vertices
+### addVertices 
+**Type:** <code>(transform&#58; Transform, vertices&#58; Float32Array, beginOffset&#58; number, endOffset&#58; number) -&#62; void</code>
+
+**Description:** Add an array of mesh vertices
 
 #### Parameters:
 | Name        | Type                      | Description               |
@@ -272,8 +311,10 @@ Add an array of mesh vertices
 
 <article>
 
-### addVerticesMatrix: <span><code>(matrix&#58; Matrix, vertices&#58; Float32Array, beginOffset&#58; number, endOffset&#58; number, padX&#58; number, padY&#58; ) -&#62; void</code></span>
-Add an array of mesh vertices.
+### addVerticesMatrix 
+**Type:** <code>(matrix&#58; Matrix, vertices&#58; Float32Array, beginOffset&#58; number, endOffset&#58; number, padX&#58; number, padY&#58; ) -&#62; void</code>
+
+**Description:** Add an array of mesh vertices.
 
 #### Parameters:
 | Name        | Type                      | Description               |
@@ -291,8 +332,10 @@ Add an array of mesh vertices.
 
 <article>
 
-### clear: <span><code>() -&#62; void</code></span>
-Clears the bounds and resets.
+### clear 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Clears the bounds and resets.
 
 </article>
 
@@ -301,8 +344,10 @@ Clears the bounds and resets.
 
 <article>
 
-### getRectangle: <span><code>(rect&#58; Rectangle) -&#62; Rectangle</code></span>
-Can return Rectangle.EMPTY constant, either construct new rectangle, either use your rectangle It is not guaranteed that it will return tempRect
+### getRectangle 
+**Type:** <code>(rect&#58; Rectangle) -&#62; Rectangle</code>
+
+**Description:** Can return Rectangle.EMPTY constant, either construct new rectangle, either use your rectangle It is not guaranteed that it will return tempRect
 
 #### Parameters:
 | Name | Type                   | Description                                        |
@@ -319,8 +364,10 @@ Can return Rectangle.EMPTY constant, either construct new rectangle, either use 
 
 <article>
 
-### isEmpty: <span><code>() -&#62; boolean</code></span>
-Checks if bounds are empty.
+### isEmpty 
+**Type:** <code>() -&#62; boolean</code>
+
+**Description:** Checks if bounds are empty.
 
 #### Returns:
 | Type                 | Description      |
@@ -333,8 +380,10 @@ Checks if bounds are empty.
 
 <article>
 
-### pad: <span><code>(paddingX&#58; number, paddingY&#58; ) -&#62; void</code></span>
-Pads bounds object, making it grow in all directions. If paddingY is omitted, both paddingX and paddingY will be set to paddingX.
+### pad 
+**Type:** <code>(paddingX&#58; number, paddingY&#58; ) -&#62; void</code>
+
+**Description:** Pads bounds object, making it grow in all directions. If paddingY is omitted, both paddingX and paddingY will be set to paddingX.
 
 #### Parameters:
 | Name     | Type                | Description                    |

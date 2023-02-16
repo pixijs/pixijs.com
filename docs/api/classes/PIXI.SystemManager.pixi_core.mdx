@@ -5,20 +5,24 @@ sidebar_label: "PIXI.SystemManager"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).SystemManager
+
+</div>
 
 
 The SystemManager is a class that provides functions for managing a set of systems This is a base class, that is generic (no render code or knowledge at all)
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.SystemManager: <span><code>() </code></span>
+### Constructor:
+<h4><code>new PIXI.SystemManager() </code></h4>
 
 #### Parameters:
 | Name | Type | Default | Description |
@@ -35,8 +39,10 @@ The SystemManager is a class that provides functions for managing a set of syste
 ## Members
 <article>
 
-### runners: <span><code>&#123; [key&#58; string]&#58; Runner &#125;</code></span>
-a collection of runners defined by the user
+### runners 
+**Type:** <code>&#123; [key&#58; string]&#58; Runner &#125;</code>
+
+**Description:** a collection of runners defined by the user
 
 </article>
 
@@ -47,8 +53,10 @@ a collection of runners defined by the user
 ## Methods
 <article>
 
-### addRunners: <span><code>(runnerIds&#58; string[]) -&#62; void</code></span>
-Create a bunch of runners based of a collection of ids
+### addRunners 
+**Type:** <code>(runnerIds&#58; string[]) -&#62; void</code>
+
+**Description:** Create a bunch of runners based of a collection of ids
 
 #### Parameters:
 | Name      | Type                  | Description           |
@@ -61,8 +69,10 @@ Create a bunch of runners based of a collection of ids
 
 <article>
 
-### addSystem: <span><code>(ClassRef&#58; ISystemConstructor&#60;R&#62;, name&#58; string) -&#62; this</code></span>
-Add a new system to the renderer.
+### addSystem 
+**Type:** <code>(ClassRef&#58; ISystemConstructor&#60;R&#62;, name&#58; string) -&#62; this</code>
+
+**Description:** Add a new system to the renderer.
 
 #### Parameters:
 | Name     | Type                                       | Description                                                                                                                                                                                                             |
@@ -80,8 +90,10 @@ Add a new system to the renderer.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-destroy the all runners and systems. Its apps job to
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** destroy the all runners and systems. Its apps job to
 
 </article>
 
@@ -90,8 +102,10 @@ destroy the all runners and systems. Its apps job to
 
 <article>
 
-### emitWithCustomOptions: <span><code>(runner&#58; Runner, options&#58; Record&#60;string, unknown&#62;) -&#62; void</code></span>
-A function that will run a runner and call the runners function but pass in different options to each system based on there name.
+### emitWithCustomOptions 
+**Type:** <code>(runner&#58; Runner, options&#58; Record&#60;string, unknown&#62;) -&#62; void</code>
+
+**Description:** A function that will run a runner and call the runners function but pass in different options to each system based on there name.
 
 E.g. If you have two systems added called `systemA` and `systemB` you could call do the following&#58;
 
@@ -117,8 +131,10 @@ system.emitWithCustomOptions(init, {
 
 <article>
 
-### setup: <span><code>(config&#58; ISystemConfig&#60;R&#62;) -&#62; void</code></span>
-Set up a system with a collection of SystemClasses and runners. Systems are attached dynamically to this class when added.
+### setup 
+**Type:** <code>(config&#58; ISystemConfig&#60;R&#62;) -&#62; void</code>
+
+**Description:** Set up a system with a collection of SystemClasses and runners. Systems are attached dynamically to this class when added.
 
 #### Parameters:
 | Name   | Type                                  | Description                       |

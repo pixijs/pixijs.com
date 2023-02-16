@@ -5,20 +5,24 @@ sidebar_label: "PIXI.EventsTickerClass"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/events](../modules/pixi_events).EventsTickerClass
+
+</div>
 
 
 This class handles automatic firing of PointerEvents in the case where the pointer is stationary for too long. This is to ensure that hit-tests are still run on moving objects.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.EventsTickerClass: <span><code>() </code></span>
+### Constructor:
+<h4><code>new PIXI.EventsTickerClass() </code></h4>
 
 #### Parameters:
 | Name | Type | Default | Description |
@@ -34,8 +38,10 @@ This class handles automatic firing of PointerEvents in the case where the point
 ## Members
 <article>
 
-### domElement: <span><code>HTMLElement</code></span>
-The DOM element to listen to events on.
+### domElement 
+**Type:** <code>HTMLElement</code>
+
+**Description:** The DOM element to listen to events on.
 
 </article>
 
@@ -44,8 +50,10 @@ The DOM element to listen to events on.
 
 <article>
 
-### events: <span><code>EventSystem</code></span>
-The event system.
+### events 
+**Type:** <code>EventSystem</code>
+
+**Description:** The event system.
 
 </article>
 
@@ -54,10 +62,12 @@ The event system.
 
 <article>
 
-### interactionFrequency: <span><code>number</code></span>
-- **Default Value**: <code>10</code>
+### interactionFrequency 
+**Type:** <code>number</code>
 
-The frequency that fake events will be fired.
+**Default Value**: <code>10</code>
+
+**Description:** The frequency that fake events will be fired.
 
 </article>
 
@@ -66,8 +76,10 @@ The frequency that fake events will be fired.
 
 <article>
 
-### pauseUpdate: <span><code>boolean</code></span>
-Whether to pause the update checks or not.
+### pauseUpdate 
+**Type:** <code>boolean</code>
+
+**Description:** Whether to pause the update checks or not.
 
 </article>
 
@@ -78,8 +90,10 @@ Whether to pause the update checks or not.
 ## Methods
 <article>
 
-### addTickerListener: <span><code>() -&#62; void</code></span>
-Adds the ticker listener.
+### addTickerListener 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Adds the ticker listener.
 
 </article>
 
@@ -88,8 +102,10 @@ Adds the ticker listener.
 
 <article>
 
-### init: <span><code>(events&#58; EventSystem) -&#62; void</code></span>
-Initializes the event ticker.
+### init 
+**Type:** <code>(events&#58; EventSystem) -&#62; void</code>
+
+**Description:** Initializes the event ticker.
 
 #### Parameters:
 | Name   | Type                     | Description       |
@@ -102,8 +118,10 @@ Initializes the event ticker.
 
 <article>
 
-### pointerMoved: <span><code>() -&#62; void</code></span>
-Sets flag to not fire extra events when the user has already moved there mouse
+### pointerMoved 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Sets flag to not fire extra events when the user has already moved there mouse
 
 </article>
 
@@ -112,8 +130,10 @@ Sets flag to not fire extra events when the user has already moved there mouse
 
 <article>
 
-### removeTickerListener: <span><code>() -&#62; void</code></span>
-Removes the ticker listener.
+### removeTickerListener 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Removes the ticker listener.
 
 </article>
 

@@ -1,0 +1,125 @@
+---
+id: "PIXI.LoaderParser.pixi_assets"
+title: "Interface: PIXI.LoaderParser"
+sidebar_label: "PIXI.LoaderParser"
+custom_edit_url: null
+---
+
+
+<div class="package-name">
+
+[@pixi/assets](../modules/pixi_assets).LoaderParser
+
+</div>
+
+All functions are optional here. The flow&#58;
+for every asset,
+
+1. `parser.test()`&#58; Test the asset url.
+2. `parser.load()`&#58; If test passes call the load function with the url
+3. `parser.testParse()`&#58; Test to see if the asset should be parsed by the plugin
+4. `parse.parse()`&#58; If test is parsed, then run the parse function on the asset.
+
+some plugins may only be used for parsing, some only for loading and some for both!
+
+
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name      | Type                                                                                                                             | Description                                                                                                                                                                                                    |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| config    | <code>Record&#60;string, any&#62;</code>                                                                                         | A config to adjust the parser                                                                                                                                                                                  |
+| load      | <code>(url&#58; string, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; Promise&#60;T&#62;</code>        | This is the promise that loads the URL provided resolves with a loaded asset if returned by the parser.                                                                                                        |
+| parse     | <code>(asset&#58; ASSET, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; Promise&#60;T&#62;</code>       | Gets called on the asset it testParse passes. Useful to convert a raw asset into something more useful than                                                                                                    |
+| test      | <code>(url&#58; string, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; boolean</code>                   | each URL to load will be tested here, if the test is passed the assets are loaded using the load function below. Good place to test for things like file extensions!                                           |
+| testParse | <code>(asset&#58; ASSET, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; Promise&#60;boolean&#62;</code> | This function is used to test if the parse function should be run on the asset If this returns true then parse is called with the asset                                                                        |
+| unload    | <code>(asset&#58; ASSET, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; void</code>                     | If an asset is parsed using this parser, the unload function will be called when the user requests an asset to be unloaded. This is useful for things like sounds or textures that can be unloaded from memory |
+
+</p>
+</details>
+    
+
+
+
+
+## Members
+<article>
+
+### config 
+**Type:** <code>Record&#60;string, any&#62;</code>
+
+**Description:** A config to adjust the parser
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### load 
+**Type:** <code>(url&#58; string, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; Promise&#60;T&#62;</code>
+
+**Description:** This is the promise that loads the URL provided resolves with a loaded asset if returned by the parser.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### parse 
+**Type:** <code>(asset&#58; ASSET, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; Promise&#60;T&#62;</code>
+
+**Description:** Gets called on the asset it testParse passes. Useful to convert a raw asset into something more useful than
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### test 
+**Type:** <code>(url&#58; string, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; boolean</code>
+
+**Description:** each URL to load will be tested here, if the test is passed the assets are loaded using the load function below. Good place to test for things like file extensions!
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### testParse 
+**Type:** <code>(asset&#58; ASSET, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; Promise&#60;boolean&#62;</code>
+
+**Description:** This function is used to test if the parse function should be run on the asset If this returns true then parse is called with the asset
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### unload 
+**Type:** <code>(asset&#58; ASSET, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; void</code>
+
+**Description:** If an asset is parsed using this parser, the unload function will be called when the user requests an asset to be unloaded. This is useful for things like sounds or textures that can be unloaded from memory
+
+</article>
+
+
+---------------------------------------
+
+
+
+  

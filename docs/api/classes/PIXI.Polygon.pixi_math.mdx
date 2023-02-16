@@ -5,20 +5,24 @@ sidebar_label: "PIXI.Polygon"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/math](../modules/pixi_math).Polygon
+
+</div>
 
 
 A class to define a shape via user defined coordinates.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Polygon: <span><code>(points&#58; Array&#60;PIXI.IPointData&#62; &#124; Array&#60;number&#62;) </code></span>
+### Constructor:
+<h4><code>new PIXI.Polygon(points&#58; Array&#60;PIXI.IPointData&#62; &#124; Array&#60;number&#62;) </code></h4>
 
 #### Parameters:
 | Name   | Type                                                                     | Default       | Description                                                                                                                                                                                                                                                                                                                                                    |
@@ -35,8 +39,10 @@ A class to define a shape via user defined coordinates.
 ## Members
 <article>
 
-### closeStroke: <span><code>boolean</code></span>
-`false` after moveTo, `true` after `closePath`. In all other cases it is `true`.
+### closeStroke 
+**Type:** <code>boolean</code>
+
+**Description:** `false` after moveTo, `true` after `closePath`. In all other cases it is `true`.
 
 </article>
 
@@ -45,8 +51,10 @@ A class to define a shape via user defined coordinates.
 
 <article>
 
-### points: <span><code>number[]</code></span>
-An array of the points of this polygon.
+### points 
+**Type:** <code>number[]</code>
+
+**Description:** An array of the points of this polygon.
 
 </article>
 
@@ -55,10 +63,12 @@ An array of the points of this polygon.
 
 <article>
 
-### type: <span><code>SHAPES.POLY</code></span>
-- **Default Value**: <code>PIXI.SHAPES.POLY</code>
+### type 
+**Type:** <code>SHAPES.POLY</code>
 
-The type of the object, mainly used to avoid `instanceof` checks
+**Default Value**: <code>PIXI.SHAPES.POLY</code>
+
+**Description:** The type of the object, mainly used to avoid `instanceof` checks
 
 </article>
 
@@ -69,8 +79,10 @@ The type of the object, mainly used to avoid `instanceof` checks
 ## Methods
 <article>
 
-### clone: <span><code>() -&#62; Polygon</code></span>
-Creates a clone of this polygon.
+### clone 
+**Type:** <code>() -&#62; Polygon</code>
+
+**Description:** Creates a clone of this polygon.
 
 #### Returns:
 | Type                 | Description              |
@@ -83,8 +95,10 @@ Creates a clone of this polygon.
 
 <article>
 
-### contains: <span><code>(x&#58; number, y&#58; number) -&#62; boolean</code></span>
-Checks whether the x and y coordinates passed to this function are contained within this polygon.
+### contains 
+**Type:** <code>(x&#58; number, y&#58; number) -&#62; boolean</code>
+
+**Description:** Checks whether the x and y coordinates passed to this function are contained within this polygon.
 
 #### Parameters:
 | Name | Type                | Description                            |

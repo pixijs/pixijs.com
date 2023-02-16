@@ -5,7 +5,12 @@ sidebar_label: "PIXI.ParticleContainer"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/particle-container](../modules/pixi_particle_container).ParticleContainer
+
+</div>
 
 
 The ParticleContainer class is a really fast version of the Container built solely for speed, so use when you need a lot of sprites or particles.
@@ -30,13 +35,12 @@ It's extremely easy to use. And here you have a hundred sprites that will be ren
 ```
       
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.ParticleContainer: <span><code>(maxSize&#58; number, properties&#58; IParticleProperties, batchSize&#58; number, autoResize&#58; boolean) </code></span>
+### Constructor:
+<h4><code>new PIXI.ParticleContainer(maxSize&#58; number, properties&#58; IParticleProperties, batchSize&#58; number, autoResize&#58; boolean) </code></h4>
 
 #### Parameters:
 | Name                | Type                             | Default            | Description                                                                                                             |
@@ -61,20 +65,12 @@ It's extremely easy to use. And here you have a hundred sprites that will be ren
 ## Members
 <article>
 
-### autoResize: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### autoResize 
+**Type:** <code>boolean</code>
 
-If true, container allocates more batches in case there are more than `maxSize` particles.
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### baseTexture: <span><code>BaseTexture</code></span>
-The texture used to render the children.
+**Description:** If true, container allocates more batches in case there are more than `maxSize` particles.
 
 </article>
 
@@ -83,22 +79,10 @@ The texture used to render the children.
 
 <article>
 
-### blendMode: <span><code>BLEND_MODES</code></span>
-- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+### baseTexture 
+**Type:** <code>BaseTexture</code>
 
-The blend mode to be applied to the sprite. Apply a value of `PIXI.BLEND_MODES.NORMAL`to reset the blend mode.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### roundPixels: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
-
-If true PixiJS will Math.floor() x/y values when rendering, stopping pixel interpolation. Advantages can include sharper image quality (like text) and faster rendering on canvas. The main disadvantage is movement of objects may appear less smooth. Default to true here as performance is usually the priority for particles.
+**Description:** The texture used to render the children.
 
 </article>
 
@@ -107,10 +91,40 @@ If true PixiJS will Math.floor() x/y values when rendering, stopping pixel inter
 
 <article>
 
-### tint: <span><code>number</code></span>
-- **Default Value**: <code>0xFFFFFF</code>
+### blendMode 
+**Type:** <code>BLEND_MODES</code>
 
-The tint applied to the container. This is a hex value. A value of 0xFFFFFF will remove any tint effect. IMPORTANT&#58; This is a WebGL only feature and will be ignored by the canvas renderer.
+**Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+
+**Description:** The blend mode to be applied to the sprite. Apply a value of `PIXI.BLEND_MODES.NORMAL`to reset the blend mode.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### roundPixels 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>true</code>
+
+**Description:** If true PixiJS will Math.floor() x/y values when rendering, stopping pixel interpolation. Advantages can include sharper image quality (like text) and faster rendering on canvas. The main disadvantage is movement of objects may appear less smooth. Default to true here as performance is usually the priority for particles.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### tint 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0xFFFFFF</code>
+
+**Description:** The tint applied to the container. This is a hex value. A value of 0xFFFFFF will remove any tint effect. IMPORTANT&#58; This is a WebGL only feature and will be ignored by the canvas renderer.
 
 </article>
 
@@ -121,8 +135,10 @@ The tint applied to the container. This is a hex value. A value of 0xFFFFFF will
 ## Methods
 <article>
 
-### destroy: <span><code>(options&#58; IDestroyOptions &#124; boolean) -&#62; void</code></span>
-Destroys the container
+### destroy 
+**Type:** <code>(options&#58; IDestroyOptions &#124; boolean) -&#62; void</code>
+
+**Description:** Destroys the container
 
 #### Parameters:
 | Name                | Type                                        | Description                                                                                                                 |
@@ -138,8 +154,10 @@ Destroys the container
 
 <article>
 
-### render: <span><code>(renderer&#58; Renderer) -&#62; void</code></span>
-Renders the container using the WebGL renderer.
+### render 
+**Type:** <code>(renderer&#58; Renderer) -&#62; void</code>
+
+**Description:** Renders the container using the WebGL renderer.
 
 #### Parameters:
 | Name     | Type                  | Description         |
@@ -152,8 +170,10 @@ Renders the container using the WebGL renderer.
 
 <article>
 
-### setProperties: <span><code>(properties&#58; IParticleProperties) -&#62; void</code></span>
-Sets the private properties array to dynamic / static based on the passed properties object
+### setProperties 
+**Type:** <code>(properties&#58; IParticleProperties) -&#62; void</code>
+
+**Description:** Sets the private properties array to dynamic / static based on the passed properties object
 
 #### Parameters:
 | Name       | Type                             | Description                   |
@@ -166,8 +186,10 @@ Sets the private properties array to dynamic / static based on the passed proper
 
 <article>
 
-### onChildrenChange: <span><code>(smallestChildIndex&#58; number) -&#62; void</code></span>
-Set the flag that static data should be updated to true
+### onChildrenChange 
+**Type:** <code>(smallestChildIndex&#58; number) -&#62; void</code>
+
+**Description:** Set the flag that static data should be updated to true
 
 #### Parameters:
 | Name               | Type                | Description               |

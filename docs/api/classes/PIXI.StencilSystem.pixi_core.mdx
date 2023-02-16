@@ -5,20 +5,24 @@ sidebar_label: "PIXI.StencilSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).StencilSystem
+
+</div>
 
 
 System plugin to the renderer to manage stencils (used for masks).
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.StencilSystem: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.StencilSystem(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -36,8 +40,10 @@ System plugin to the renderer to manage stencils (used for masks).
 ## Members
 <article>
 
-### maskStack: <span><code>Array&#60;PIXI.MaskData&#62;</code></span>
-The mask stack
+### maskStack 
+**Type:** <code>Array&#60;PIXI.MaskData&#62;</code>
+
+**Description:** The mask stack
 
 </article>
 
@@ -48,8 +54,10 @@ The mask stack
 ## Methods
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys the mask stack.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys the mask stack.
 
 </article>
 
@@ -58,8 +66,10 @@ Destroys the mask stack.
 
 <article>
 
-### getStackLength: <span><code>() -&#62; number</code></span>
-Gets count of masks of certain type.
+### getStackLength 
+**Type:** <code>() -&#62; number</code>
+
+**Description:** Gets count of masks of certain type.
 
 #### Returns:
 | Type                | Description |
@@ -72,8 +82,10 @@ Gets count of masks of certain type.
 
 <article>
 
-### pop: <span><code>(maskObject&#58; PIXI.DisplayObject) -&#62; void</code></span>
-Pops stencil mask. MaskData is already removed from stack
+### pop 
+**Type:** <code>(maskObject&#58; PIXI.DisplayObject) -&#62; void</code>
+
+**Description:** Pops stencil mask. MaskData is already removed from stack
 
 #### Parameters:
 | Name       | Type                            | Description                |
@@ -86,8 +98,10 @@ Pops stencil mask. MaskData is already removed from stack
 
 <article>
 
-### push: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
-Applies the Mask and adds it to the current stencil stack.
+### push 
+**Type:** <code>(maskData&#58; MaskData) -&#62; void</code>
+
+**Description:** Applies the Mask and adds it to the current stencil stack.
 
 #### Parameters:
 | Name     | Type                  | Description   |
@@ -100,8 +114,10 @@ Applies the Mask and adds it to the current stencil stack.
 
 <article>
 
-### setMaskStack: <span><code>(maskStack&#58; Array&#60;PIXI.MaskData&#62;) -&#62; void</code></span>
-Changes the mask stack that is used by this System.
+### setMaskStack 
+**Type:** <code>(maskStack&#58; Array&#60;PIXI.MaskData&#62;) -&#62; void</code>
+
+**Description:** Changes the mask stack that is used by this System.
 
 #### Parameters:
 | Name      | Type                                      | Description    |

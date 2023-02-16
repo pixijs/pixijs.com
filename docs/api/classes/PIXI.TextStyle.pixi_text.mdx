@@ -5,7 +5,12 @@ sidebar_label: "PIXI.TextStyle"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/text](../modules/pixi_text).TextStyle
+
+</div>
 
 A TextStyle Object contains information to decorate a Text objects.
 An instance can be shared between multiple Text objects; then changing the style will update all text objects using it.
@@ -22,13 +27,12 @@ const style = new TextStyle({
 ```
       
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.TextStyle: <span><code>(style&#58; Partial&#60;ITextStyle&#62;) </code></span>
+### Constructor:
+<h4><code>new PIXI.TextStyle(style&#58; Partial&#60;ITextStyle&#62;) </code></h4>
 
 #### Parameters:
 | Name  | Type                                     | Default       | Description                                                                                                                                             |
@@ -45,8 +49,10 @@ const style = new TextStyle({
 ## Members
 <article>
 
-### defaultStyle: <span><code>PIXI.ITextStyle</code></span>
-Default style options used for all TextStyle instances.
+### defaultStyle 
+**Type:** <code>PIXI.ITextStyle</code>
+
+**Description:** Default style options used for all TextStyle instances.
 
 </article>
 
@@ -55,22 +61,12 @@ Default style options used for all TextStyle instances.
 
 <article>
 
-### align: <span><code>'left' &#124; 'center' &#124; 'right' &#124; 'justify'</code></span>
-- **Default Value**: <code>"left"</code>
+### align 
+**Type:** <code>'left' &#124; 'center' &#124; 'right' &#124; 'justify'</code>
 
-See [PIXI.TextStyle.align](../classes/PIXI.TextStyle.pixi_text#align)
+**Default Value**: <code>"left"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### breakWords: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
-
-See [PIXI.TextStyle.breakWords](../classes/PIXI.TextStyle.pixi_text#breakWords)
+**Description:** See [PIXI.TextStyle.align](../classes/PIXI.TextStyle.pixi_text#align)
 
 </article>
 
@@ -79,22 +75,12 @@ See [PIXI.TextStyle.breakWords](../classes/PIXI.TextStyle.pixi_text#breakWords)
 
 <article>
 
-### dropShadow: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### breakWords 
+**Type:** <code>boolean</code>
 
-See [PIXI.TextStyle.dropShadow](../classes/PIXI.TextStyle.pixi_text#dropShadow)
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### dropShadowAlpha: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
-
-See [PIXI.TextStyle.dropShadowAlpha](../classes/PIXI.TextStyle.pixi_text#dropShadowAlpha)
+**Description:** See [PIXI.TextStyle.breakWords](../classes/PIXI.TextStyle.pixi_text#breakWords)
 
 </article>
 
@@ -103,22 +89,12 @@ See [PIXI.TextStyle.dropShadowAlpha](../classes/PIXI.TextStyle.pixi_text#dropSha
 
 <article>
 
-### dropShadowAngle: <span><code>number</code></span>
-- **Default Value**: <code>Math.PI / 6</code>
+### dropShadow 
+**Type:** <code>boolean</code>
 
-See [PIXI.TextStyle.dropShadowAngle](../classes/PIXI.TextStyle.pixi_text#dropShadowAngle)
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### dropShadowBlur: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-See [PIXI.TextStyle.dropShadowBlur](../classes/PIXI.TextStyle.pixi_text#dropShadowBlur)
+**Description:** See [PIXI.TextStyle.dropShadow](../classes/PIXI.TextStyle.pixi_text#dropShadow)
 
 </article>
 
@@ -127,22 +103,12 @@ See [PIXI.TextStyle.dropShadowBlur](../classes/PIXI.TextStyle.pixi_text#dropShad
 
 <article>
 
-### dropShadowColor: <span><code>string &#124; number</code></span>
-- **Default Value**: <code>"black"</code>
+### dropShadowAlpha 
+**Type:** <code>number</code>
 
-See [PIXI.TextStyle.dropShadowColor](../classes/PIXI.TextStyle.pixi_text#dropShadowColor)
+**Default Value**: <code>1</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### dropShadowDistance: <span><code>number</code></span>
-- **Default Value**: <code>5</code>
-
-See [PIXI.TextStyle.dropShadowDistance](../classes/PIXI.TextStyle.pixi_text#dropShadowDistance)
+**Description:** See [PIXI.TextStyle.dropShadowAlpha](../classes/PIXI.TextStyle.pixi_text#dropShadowAlpha)
 
 </article>
 
@@ -151,22 +117,12 @@ See [PIXI.TextStyle.dropShadowDistance](../classes/PIXI.TextStyle.pixi_text#drop
 
 <article>
 
-### fill: <span><code>string &#124; Array&#60;string&#62; &#124; number &#124; Array&#60;number&#62; &#124; CanvasGradient &#124; CanvasPattern</code></span>
-- **Default Value**: <code>"black"</code>
+### dropShadowAngle 
+**Type:** <code>number</code>
 
-See [PIXI.TextStyle.fill](../classes/PIXI.TextStyle.pixi_text#fill)
+**Default Value**: <code>Math.PI / 6</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### fillGradientStops: <span><code>Array&#60;number&#62;</code></span>
-- **Default Value**: <code>[]</code>
-
-See [PIXI.TextStyle.fillGradientStops](../classes/PIXI.TextStyle.pixi_text#fillGradientStops)
+**Description:** See [PIXI.TextStyle.dropShadowAngle](../classes/PIXI.TextStyle.pixi_text#dropShadowAngle)
 
 </article>
 
@@ -175,22 +131,12 @@ See [PIXI.TextStyle.fillGradientStops](../classes/PIXI.TextStyle.pixi_text#fillG
 
 <article>
 
-### fillGradientType: <span><code>PIXI.TEXT_GRADIENT</code></span>
-- **Default Value**: <code>PIXI.TEXT_GRADIENT.LINEAR_VERTICAL</code>
+### dropShadowBlur 
+**Type:** <code>number</code>
 
-See [PIXI.TextStyle.fillGradientType](../classes/PIXI.TextStyle.pixi_text#fillGradientType)
+**Default Value**: <code>0</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### fontFamily: <span><code>string &#124; Array&#60;string&#62;</code></span>
-- **Default Value**: <code>"Arial"</code>
-
-See [PIXI.TextStyle.fontFamily](../classes/PIXI.TextStyle.pixi_text#fontFamily)
+**Description:** See [PIXI.TextStyle.dropShadowBlur](../classes/PIXI.TextStyle.pixi_text#dropShadowBlur)
 
 </article>
 
@@ -199,22 +145,12 @@ See [PIXI.TextStyle.fontFamily](../classes/PIXI.TextStyle.pixi_text#fontFamily)
 
 <article>
 
-### fontSize: <span><code>number &#124; string</code></span>
-- **Default Value**: <code>26</code>
+### dropShadowColor 
+**Type:** <code>string &#124; number</code>
 
-See [PIXI.TextStyle.fontSize](../classes/PIXI.TextStyle.pixi_text#fontSize)
+**Default Value**: <code>"black"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### fontStyle: <span><code>'normal' &#124; 'italic' &#124; 'oblique'</code></span>
-- **Default Value**: <code>"normal"</code>
-
-See [PIXI.TextStyle.fontStyle](../classes/PIXI.TextStyle.pixi_text#fontStyle)
+**Description:** See [PIXI.TextStyle.dropShadowColor](../classes/PIXI.TextStyle.pixi_text#dropShadowColor)
 
 </article>
 
@@ -223,22 +159,12 @@ See [PIXI.TextStyle.fontStyle](../classes/PIXI.TextStyle.pixi_text#fontStyle)
 
 <article>
 
-### fontVariant: <span><code>'normal' &#124; 'small-caps'</code></span>
-- **Default Value**: <code>"normal"</code>
+### dropShadowDistance 
+**Type:** <code>number</code>
 
-See [PIXI.TextStyle.fontVariant](../classes/PIXI.TextStyle.pixi_text#fontVariant)
+**Default Value**: <code>5</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### fontWeight: <span><code>'normal' &#124; 'bold' &#124; 'bolder' &#124; 'lighter' &#124; '100' &#124; '200' &#124; '300' &#124; '400' &#124; '500' &#124; '600' &#124; '700' &#124; '800' &#124; '900'</code></span>
-- **Default Value**: <code>"normal"</code>
-
-See [PIXI.TextStyle.fontWeight](../classes/PIXI.TextStyle.pixi_text#fontWeight)
+**Description:** See [PIXI.TextStyle.dropShadowDistance](../classes/PIXI.TextStyle.pixi_text#dropShadowDistance)
 
 </article>
 
@@ -247,22 +173,12 @@ See [PIXI.TextStyle.fontWeight](../classes/PIXI.TextStyle.pixi_text#fontWeight)
 
 <article>
 
-### leading: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### fill 
+**Type:** <code>string &#124; Array&#60;string&#62; &#124; number &#124; Array&#60;number&#62; &#124; CanvasGradient &#124; CanvasPattern</code>
 
-See [PIXI.TextStyle.leading](../classes/PIXI.TextStyle.pixi_text#leading)
+**Default Value**: <code>"black"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### letterSpacing: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-See [PIXI.TextStyle.letterSpacing](../classes/PIXI.TextStyle.pixi_text#letterSpacing)
+**Description:** See [PIXI.TextStyle.fill](../classes/PIXI.TextStyle.pixi_text#fill)
 
 </article>
 
@@ -271,22 +187,12 @@ See [PIXI.TextStyle.letterSpacing](../classes/PIXI.TextStyle.pixi_text#letterSpa
 
 <article>
 
-### lineHeight: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### fillGradientStops 
+**Type:** <code>Array&#60;number&#62;</code>
 
-See [PIXI.TextStyle.lineHeight](../classes/PIXI.TextStyle.pixi_text#lineHeight)
+**Default Value**: <code>[]</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### lineJoin: <span><code>'miter' &#124; 'round' &#124; 'bevel'</code></span>
-- **Default Value**: <code>"miter"</code>
-
-See [PIXI.TextStyle.lineJoin](../classes/PIXI.TextStyle.pixi_text#lineJoin)
+**Description:** See [PIXI.TextStyle.fillGradientStops](../classes/PIXI.TextStyle.pixi_text#fillGradientStops)
 
 </article>
 
@@ -295,22 +201,12 @@ See [PIXI.TextStyle.lineJoin](../classes/PIXI.TextStyle.pixi_text#lineJoin)
 
 <article>
 
-### miterLimit: <span><code>number</code></span>
-- **Default Value**: <code>10</code>
+### fillGradientType 
+**Type:** <code>PIXI.TEXT_GRADIENT</code>
 
-See [PIXI.TextStyle.miterLimit](../classes/PIXI.TextStyle.pixi_text#miterLimit)
+**Default Value**: <code>PIXI.TEXT_GRADIENT.LINEAR_VERTICAL</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### padding: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-See [PIXI.TextStyle.padding](../classes/PIXI.TextStyle.pixi_text#padding)
+**Description:** See [PIXI.TextStyle.fillGradientType](../classes/PIXI.TextStyle.pixi_text#fillGradientType)
 
 </article>
 
@@ -319,22 +215,12 @@ See [PIXI.TextStyle.padding](../classes/PIXI.TextStyle.pixi_text#padding)
 
 <article>
 
-### stroke: <span><code>string &#124; number</code></span>
-- **Default Value**: <code>"black"</code>
+### fontFamily 
+**Type:** <code>string &#124; Array&#60;string&#62;</code>
 
-See [PIXI.TextStyle.stroke](../classes/PIXI.TextStyle.pixi_text#stroke)
+**Default Value**: <code>"Arial"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### strokeThickness: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-See [PIXI.TextStyle.strokeThickness](../classes/PIXI.TextStyle.pixi_text#strokeThickness)
+**Description:** See [PIXI.TextStyle.fontFamily](../classes/PIXI.TextStyle.pixi_text#fontFamily)
 
 </article>
 
@@ -343,22 +229,12 @@ See [PIXI.TextStyle.strokeThickness](../classes/PIXI.TextStyle.pixi_text#strokeT
 
 <article>
 
-### textBaseline: <span><code>'alphabetic' &#124; 'top' &#124; 'hanging' &#124; 'middle' &#124; 'ideographic' &#124; 'bottom'</code></span>
-- **Default Value**: <code>"alphabetic"</code>
+### fontSize 
+**Type:** <code>number &#124; string</code>
 
-See [PIXI.TextStyle.textBaseline](../classes/PIXI.TextStyle.pixi_text#textBaseline)
+**Default Value**: <code>26</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### trim: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
-
-See [PIXI.TextStyle.trim](../classes/PIXI.TextStyle.pixi_text#trim)
+**Description:** See [PIXI.TextStyle.fontSize](../classes/PIXI.TextStyle.pixi_text#fontSize)
 
 </article>
 
@@ -367,22 +243,12 @@ See [PIXI.TextStyle.trim](../classes/PIXI.TextStyle.pixi_text#trim)
 
 <article>
 
-### whiteSpace: <span><code>'normal' &#124; 'pre' &#124; 'pre-line'</code></span>
-- **Default Value**: <code>"pre"</code>
+### fontStyle 
+**Type:** <code>'normal' &#124; 'italic' &#124; 'oblique'</code>
 
-See [PIXI.TextStyle.whiteSpace](../classes/PIXI.TextStyle.pixi_text#whiteSpace)
+**Default Value**: <code>"normal"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### wordWrap: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
-
-See [PIXI.TextStyle.wordWrap](../classes/PIXI.TextStyle.pixi_text#wordWrap)
+**Description:** See [PIXI.TextStyle.fontStyle](../classes/PIXI.TextStyle.pixi_text#fontStyle)
 
 </article>
 
@@ -391,20 +257,12 @@ See [PIXI.TextStyle.wordWrap](../classes/PIXI.TextStyle.pixi_text#wordWrap)
 
 <article>
 
-### wordWrapWidth: <span><code>number</code></span>
-- **Default Value**: <code>100</code>
+### fontVariant 
+**Type:** <code>'normal' &#124; 'small-caps'</code>
 
-See [PIXI.TextStyle.wordWrapWidth](../classes/PIXI.TextStyle.pixi_text#wordWrapWidth)
+**Default Value**: <code>"normal"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### align: <span><code>'left' &#124; 'center' &#124; 'right' &#124; 'justify'</code></span>
-Alignment for multiline text, does not affect single line text.
+**Description:** See [PIXI.TextStyle.fontVariant](../classes/PIXI.TextStyle.pixi_text#fontVariant)
 
 </article>
 
@@ -413,8 +271,12 @@ Alignment for multiline text, does not affect single line text.
 
 <article>
 
-### breakWords: <span><code>boolean</code></span>
-Indicates if lines can be wrapped within words, it needs wordWrap to be set to true.
+### fontWeight 
+**Type:** <code>'normal' &#124; 'bold' &#124; 'bolder' &#124; 'lighter' &#124; '100' &#124; '200' &#124; '300' &#124; '400' &#124; '500' &#124; '600' &#124; '700' &#124; '800' &#124; '900'</code>
+
+**Default Value**: <code>"normal"</code>
+
+**Description:** See [PIXI.TextStyle.fontWeight](../classes/PIXI.TextStyle.pixi_text#fontWeight)
 
 </article>
 
@@ -423,8 +285,12 @@ Indicates if lines can be wrapped within words, it needs wordWrap to be set to t
 
 <article>
 
-### dropShadow: <span><code>boolean</code></span>
-Set a drop shadow for the text.
+### leading 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** See [PIXI.TextStyle.leading](../classes/PIXI.TextStyle.pixi_text#leading)
 
 </article>
 
@@ -433,8 +299,12 @@ Set a drop shadow for the text.
 
 <article>
 
-### dropShadowAlpha: <span><code>number</code></span>
-Set alpha for the drop shadow.
+### letterSpacing 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** See [PIXI.TextStyle.letterSpacing](../classes/PIXI.TextStyle.pixi_text#letterSpacing)
 
 </article>
 
@@ -443,8 +313,12 @@ Set alpha for the drop shadow.
 
 <article>
 
-### dropShadowAngle: <span><code>number</code></span>
-Set a angle of the drop shadow.
+### lineHeight 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** See [PIXI.TextStyle.lineHeight](../classes/PIXI.TextStyle.pixi_text#lineHeight)
 
 </article>
 
@@ -453,8 +327,12 @@ Set a angle of the drop shadow.
 
 <article>
 
-### dropShadowBlur: <span><code>number</code></span>
-Set a shadow blur radius.
+### lineJoin 
+**Type:** <code>'miter' &#124; 'round' &#124; 'bevel'</code>
+
+**Default Value**: <code>"miter"</code>
+
+**Description:** See [PIXI.TextStyle.lineJoin](../classes/PIXI.TextStyle.pixi_text#lineJoin)
 
 </article>
 
@@ -463,8 +341,12 @@ Set a shadow blur radius.
 
 <article>
 
-### dropShadowColor: <span><code>number &#124; string</code></span>
-A fill style to be used on the dropshadow e.g., 'red', '#00FF00'.
+### miterLimit 
+**Type:** <code>number</code>
+
+**Default Value**: <code>10</code>
+
+**Description:** See [PIXI.TextStyle.miterLimit](../classes/PIXI.TextStyle.pixi_text#miterLimit)
 
 </article>
 
@@ -473,8 +355,12 @@ A fill style to be used on the dropshadow e.g., 'red', '#00FF00'.
 
 <article>
 
-### dropShadowDistance: <span><code>number</code></span>
-Set a distance of the drop shadow.
+### padding 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** See [PIXI.TextStyle.padding](../classes/PIXI.TextStyle.pixi_text#padding)
 
 </article>
 
@@ -483,8 +369,204 @@ Set a distance of the drop shadow.
 
 <article>
 
-### fill: <span><code>string &#124; Array&#60;string&#62; &#124; number &#124; Array&#60;number&#62; &#124; CanvasGradient &#124; CanvasPattern</code></span>
-A canvas fillstyle that will be used on the text e.g., 'red', '#00FF00'.
+### stroke 
+**Type:** <code>string &#124; number</code>
+
+**Default Value**: <code>"black"</code>
+
+**Description:** See [PIXI.TextStyle.stroke](../classes/PIXI.TextStyle.pixi_text#stroke)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### strokeThickness 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** See [PIXI.TextStyle.strokeThickness](../classes/PIXI.TextStyle.pixi_text#strokeThickness)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textBaseline 
+**Type:** <code>'alphabetic' &#124; 'top' &#124; 'hanging' &#124; 'middle' &#124; 'ideographic' &#124; 'bottom'</code>
+
+**Default Value**: <code>"alphabetic"</code>
+
+**Description:** See [PIXI.TextStyle.textBaseline](../classes/PIXI.TextStyle.pixi_text#textBaseline)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### trim 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** See [PIXI.TextStyle.trim](../classes/PIXI.TextStyle.pixi_text#trim)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### whiteSpace 
+**Type:** <code>'normal' &#124; 'pre' &#124; 'pre-line'</code>
+
+**Default Value**: <code>"pre"</code>
+
+**Description:** See [PIXI.TextStyle.whiteSpace](../classes/PIXI.TextStyle.pixi_text#whiteSpace)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### wordWrap 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** See [PIXI.TextStyle.wordWrap](../classes/PIXI.TextStyle.pixi_text#wordWrap)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### wordWrapWidth 
+**Type:** <code>number</code>
+
+**Default Value**: <code>100</code>
+
+**Description:** See [PIXI.TextStyle.wordWrapWidth](../classes/PIXI.TextStyle.pixi_text#wordWrapWidth)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### align 
+**Type:** <code>'left' &#124; 'center' &#124; 'right' &#124; 'justify'</code>
+
+**Description:** Alignment for multiline text, does not affect single line text.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### breakWords 
+**Type:** <code>boolean</code>
+
+**Description:** Indicates if lines can be wrapped within words, it needs wordWrap to be set to true.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadow 
+**Type:** <code>boolean</code>
+
+**Description:** Set a drop shadow for the text.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowAlpha 
+**Type:** <code>number</code>
+
+**Description:** Set alpha for the drop shadow.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowAngle 
+**Type:** <code>number</code>
+
+**Description:** Set a angle of the drop shadow.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowBlur 
+**Type:** <code>number</code>
+
+**Description:** Set a shadow blur radius.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowColor 
+**Type:** <code>number &#124; string</code>
+
+**Description:** A fill style to be used on the dropshadow e.g., 'red', '#00FF00'.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowDistance 
+**Type:** <code>number</code>
+
+**Description:** Set a distance of the drop shadow.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fill 
+**Type:** <code>string &#124; Array&#60;string&#62; &#124; number &#124; Array&#60;number&#62; &#124; CanvasGradient &#124; CanvasPattern</code>
+
+**Description:** A canvas fillstyle that will be used on the text e.g., 'red', '#00FF00'.
 Can be an array to create a gradient e.g., `['#000000','#FFFFFF']`[MDN](https&#58;//developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)
 
 </article>
@@ -494,8 +576,10 @@ Can be an array to create a gradient e.g., `['#000000','#FFFFFF']`[MDN](https&#5
 
 <article>
 
-### fillGradientStops: <span><code>number[]</code></span>
-If fill is an array of colours to create a gradient, this array can set the stop points (numbers between 0 and 1) for the color, overriding the default behaviour of evenly spacing them.
+### fillGradientStops 
+**Type:** <code>number[]</code>
+
+**Description:** If fill is an array of colours to create a gradient, this array can set the stop points (numbers between 0 and 1) for the color, overriding the default behaviour of evenly spacing them.
 
 </article>
 
@@ -504,8 +588,10 @@ If fill is an array of colours to create a gradient, this array can set the stop
 
 <article>
 
-### fillGradientType: <span><code>PIXI.TEXT_GRADIENT</code></span>
-If fill is an array of colours to create a gradient, this can change the type/direction of the gradient.
+### fillGradientType 
+**Type:** <code>PIXI.TEXT_GRADIENT</code>
+
+**Description:** If fill is an array of colours to create a gradient, this can change the type/direction of the gradient.
 
 </article>
 
@@ -514,8 +600,10 @@ If fill is an array of colours to create a gradient, this can change the type/di
 
 <article>
 
-### fontFamily: <span><code>string &#124; string[]</code></span>
-The font family, can be a single font name, or a list of names where the first is the preferred font.
+### fontFamily 
+**Type:** <code>string &#124; string[]</code>
+
+**Description:** The font family, can be a single font name, or a list of names where the first is the preferred font.
 
 </article>
 
@@ -524,8 +612,10 @@ The font family, can be a single font name, or a list of names where the first i
 
 <article>
 
-### fontSize: <span><code>number &#124; string</code></span>
-The font size (as a number it converts to px, but as a string, equivalents are '26px','20pt','160%' or '1.6em')
+### fontSize 
+**Type:** <code>number &#124; string</code>
+
+**Description:** The font size (as a number it converts to px, but as a string, equivalents are '26px','20pt','160%' or '1.6em')
 
 </article>
 
@@ -534,8 +624,10 @@ The font size (as a number it converts to px, but as a string, equivalents are '
 
 <article>
 
-### fontStyle: <span><code>'normal' &#124; 'italic' &#124; 'oblique'</code></span>
-The font style.
+### fontStyle 
+**Type:** <code>'normal' &#124; 'italic' &#124; 'oblique'</code>
+
+**Description:** The font style.
 
 </article>
 
@@ -544,8 +636,10 @@ The font style.
 
 <article>
 
-### fontVariant: <span><code>'normal' &#124; 'small-caps'</code></span>
-The font variant.
+### fontVariant 
+**Type:** <code>'normal' &#124; 'small-caps'</code>
+
+**Description:** The font variant.
 
 </article>
 
@@ -554,8 +648,10 @@ The font variant.
 
 <article>
 
-### fontWeight: <span><code>'normal' &#124; 'bold' &#124; 'bolder' &#124; 'lighter' &#124; '100' &#124; '200' &#124; '300' &#124; '400' &#124; '500' &#124; '600' &#124; '700' &#124; '800' &#124; '900'</code></span>
-The font weight.
+### fontWeight 
+**Type:** <code>'normal' &#124; 'bold' &#124; 'bolder' &#124; 'lighter' &#124; '100' &#124; '200' &#124; '300' &#124; '400' &#124; '500' &#124; '600' &#124; '700' &#124; '800' &#124; '900'</code>
+
+**Description:** The font weight.
 
 </article>
 
@@ -564,8 +660,10 @@ The font weight.
 
 <article>
 
-### leading: <span><code>number</code></span>
-The space between lines.
+### leading 
+**Type:** <code>number</code>
+
+**Description:** The space between lines.
 
 </article>
 
@@ -574,8 +672,10 @@ The space between lines.
 
 <article>
 
-### letterSpacing: <span><code>number</code></span>
-The amount of spacing between letters, default is 0.
+### letterSpacing 
+**Type:** <code>number</code>
+
+**Description:** The amount of spacing between letters, default is 0.
 
 </article>
 
@@ -584,8 +684,10 @@ The amount of spacing between letters, default is 0.
 
 <article>
 
-### lineHeight: <span><code>number</code></span>
-The line height, a number that represents the vertical space that a letter uses.
+### lineHeight 
+**Type:** <code>number</code>
+
+**Description:** The line height, a number that represents the vertical space that a letter uses.
 
 </article>
 
@@ -594,8 +696,10 @@ The line height, a number that represents the vertical space that a letter uses.
 
 <article>
 
-### lineJoin: <span><code>'miter' &#124; 'round' &#124; 'bevel'</code></span>
-The lineJoin property sets the type of corner created, it can resolve spiked text issues. Default is 'miter' (creates a sharp corner).
+### lineJoin 
+**Type:** <code>'miter' &#124; 'round' &#124; 'bevel'</code>
+
+**Description:** The lineJoin property sets the type of corner created, it can resolve spiked text issues. Default is 'miter' (creates a sharp corner).
 
 </article>
 
@@ -604,8 +708,10 @@ The lineJoin property sets the type of corner created, it can resolve spiked tex
 
 <article>
 
-### miterLimit: <span><code>number</code></span>
-The miter limit to use when using the 'miter' lineJoin mode.
+### miterLimit 
+**Type:** <code>number</code>
+
+**Description:** The miter limit to use when using the 'miter' lineJoin mode.
 This can reduce or increase the spikiness of rendered text.
 
 </article>
@@ -615,8 +721,10 @@ This can reduce or increase the spikiness of rendered text.
 
 <article>
 
-### padding: <span><code>number</code></span>
-Occasionally some fonts are cropped. Adding some padding will prevent this from happening by adding padding to all sides of the text.
+### padding 
+**Type:** <code>number</code>
+
+**Description:** Occasionally some fonts are cropped. Adding some padding will prevent this from happening by adding padding to all sides of the text.
 
 </article>
 
@@ -625,8 +733,10 @@ Occasionally some fonts are cropped. Adding some padding will prevent this from 
 
 <article>
 
-### stroke: <span><code>string &#124; number</code></span>
-A canvas fillstyle that will be used on the text stroke, e.g., 'blue', '#FCFF00'
+### stroke 
+**Type:** <code>string &#124; number</code>
+
+**Description:** A canvas fillstyle that will be used on the text stroke, e.g., 'blue', '#FCFF00'
 
 </article>
 
@@ -635,20 +745,12 @@ A canvas fillstyle that will be used on the text stroke, e.g., 'blue', '#FCFF00'
 
 <article>
 
-### strokeThickness: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### strokeThickness 
+**Type:** <code>number</code>
 
-A number that represents the thickness of the stroke.
+**Default Value**: <code>0</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### textBaseline: <span><code>'alphabetic' &#124; 'top' &#124; 'hanging' &#124; 'middle' &#124; 'ideographic' &#124; 'bottom'</code></span>
-The baseline of the text that is rendered.
+**Description:** A number that represents the thickness of the stroke.
 
 </article>
 
@@ -657,8 +759,10 @@ The baseline of the text that is rendered.
 
 <article>
 
-### trim: <span><code>boolean</code></span>
-Trim transparent borders.
+### textBaseline 
+**Type:** <code>'alphabetic' &#124; 'top' &#124; 'hanging' &#124; 'middle' &#124; 'ideographic' &#124; 'bottom'</code>
+
+**Description:** The baseline of the text that is rendered.
 
 </article>
 
@@ -667,8 +771,22 @@ Trim transparent borders.
 
 <article>
 
-### whiteSpace: <span><code>'normal' &#124; 'pre' &#124; 'pre-line'</code></span>
-How newlines and spaces should be handled. Default is 'pre' (preserve, preserve).
+### trim 
+**Type:** <code>boolean</code>
+
+**Description:** Trim transparent borders.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### whiteSpace 
+**Type:** <code>'normal' &#124; 'pre' &#124; 'pre-line'</code>
+
+**Description:** How newlines and spaces should be handled. Default is 'pre' (preserve, preserve).
 
 &#124; value      &#124; New lines &#124; Spaces   &#124;
 &#124; ---------- &#124; --------- &#124; -------- &#124;
@@ -683,8 +801,10 @@ How newlines and spaces should be handled. Default is 'pre' (preserve, preserve)
 
 <article>
 
-### wordWrap: <span><code>boolean</code></span>
-Indicates if word wrap should be used.
+### wordWrap 
+**Type:** <code>boolean</code>
+
+**Description:** Indicates if word wrap should be used.
 
 </article>
 
@@ -693,8 +813,10 @@ Indicates if word wrap should be used.
 
 <article>
 
-### wordWrapWidth: <span><code>number</code></span>
-The width at which text will wrap, it needs wordWrap to be set to true.
+### wordWrapWidth 
+**Type:** <code>number</code>
+
+**Description:** The width at which text will wrap, it needs wordWrap to be set to true.
 
 </article>
 
@@ -705,8 +827,10 @@ The width at which text will wrap, it needs wordWrap to be set to true.
 ## Methods
 <article>
 
-### clone: <span><code>() -&#62; TextStyle</code></span>
-Creates a new TextStyle object with the same values as this one. Note that the only the properties of the object are cloned.
+### clone 
+**Type:** <code>() -&#62; TextStyle</code>
+
+**Description:** Creates a new TextStyle object with the same values as this one. Note that the only the properties of the object are cloned.
 
 #### Returns:
 | Type                   | Description                 |
@@ -719,8 +843,10 @@ Creates a new TextStyle object with the same values as this one. Note that the o
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-Resets all properties to the defaults specified in TextStyle.prototype._default
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Resets all properties to the defaults specified in TextStyle.prototype._default
 
 </article>
 
@@ -729,8 +855,10 @@ Resets all properties to the defaults specified in TextStyle.prototype._default
 
 <article>
 
-### toFontString: <span><code>() -&#62; string</code></span>
-Generates a font style string to use for `TextMetrics.measureFont()`.
+### toFontString 
+**Type:** <code>() -&#62; string</code>
+
+**Description:** Generates a font style string to use for `TextMetrics.measureFont()`.
 
 #### Returns:
 | Type                | Description                                                   |

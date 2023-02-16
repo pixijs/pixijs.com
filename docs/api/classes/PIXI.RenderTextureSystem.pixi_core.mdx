@@ -5,7 +5,12 @@ sidebar_label: "PIXI.RenderTextureSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).RenderTextureSystem
+
+</div>
 
 System plugin to the renderer to manage render textures.
 Should be added after FramebufferSystem
@@ -22,13 +27,12 @@ The `RenderTextureSystem` holds a sourceFrame → destinationFrame projection. T
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.RenderTextureSystem: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.RenderTextureSystem(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -45,8 +49,10 @@ The `RenderTextureSystem` holds a sourceFrame → destinationFrame projection. T
 ## Members
 <article>
 
-### current: <span><code>RenderTexture &#124; null</code></span>
-Render texture currently bound. `null` if rendering to the canvas.
+### current 
+**Type:** <code>RenderTexture &#124; null</code>
+
+**Description:** Render texture currently bound. `null` if rendering to the canvas.
 
 </article>
 
@@ -55,8 +61,10 @@ Render texture currently bound. `null` if rendering to the canvas.
 
 <article>
 
-### defaultMaskStack: <span><code>Array&#60;MaskData&#62;</code></span>
-List of masks for the [PIXI.StencilSystem](../classes/PIXI.StencilSystem.pixi_core).
+### defaultMaskStack 
+**Type:** <code>Array&#60;MaskData&#62;</code>
+
+**Description:** List of masks for the [PIXI.StencilSystem](../classes/PIXI.StencilSystem.pixi_core).
 
 </article>
 
@@ -65,8 +73,10 @@ List of masks for the [PIXI.StencilSystem](../classes/PIXI.StencilSystem.pixi_co
 
 <article>
 
-### destinationFrame: <span><code>Rectangle</code></span>
-The destination frame for the render-target's projection mapping.
+### destinationFrame 
+**Type:** <code>Rectangle</code>
+
+**Description:** The destination frame for the render-target's projection mapping.
 See [PIXI.ProjectionSystem#destinationFrame](../classes/PIXI.ProjectionSystem.pixi_core#destinationFrame) for more details.
 
 </article>
@@ -76,8 +86,10 @@ See [PIXI.ProjectionSystem#destinationFrame](../classes/PIXI.ProjectionSystem.pi
 
 <article>
 
-### sourceFrame: <span><code>Rectangle</code></span>
-The source frame for the render-target's projection mapping.
+### sourceFrame 
+**Type:** <code>Rectangle</code>
+
+**Description:** The source frame for the render-target's projection mapping.
 See [PIXI.ProjectionSystem#sourceFrame](../classes/PIXI.ProjectionSystem.pixi_core#sourceFrame) for more details
 
 </article>
@@ -87,8 +99,10 @@ See [PIXI.ProjectionSystem#sourceFrame](../classes/PIXI.ProjectionSystem.pixi_co
 
 <article>
 
-### viewportFrame: <span><code>Rectangle</code></span>
-The viewport frame for the render-target's viewport binding. This is equal to the destination-frame for render-textures, while it is y-flipped when rendering to the screen (i.e. its origin is always on the bottom-left).
+### viewportFrame 
+**Type:** <code>Rectangle</code>
+
+**Description:** The viewport frame for the render-target's viewport binding. This is equal to the destination-frame for render-textures, while it is y-flipped when rendering to the screen (i.e. its origin is always on the bottom-left).
 
 </article>
 
@@ -99,8 +113,10 @@ The viewport frame for the render-target's viewport binding. This is equal to th
 ## Methods
 <article>
 
-### bind: <span><code>(renderTexture&#58; RenderTexture, sourceFrame&#58; Rectangle, destinationFrame&#58; Rectangle) -&#62; void</code></span>
-Bind the current render texture.
+### bind 
+**Type:** <code>(renderTexture&#58; RenderTexture, sourceFrame&#58; Rectangle, destinationFrame&#58; Rectangle) -&#62; void</code>
+
+**Description:** Bind the current render texture.
 
 #### Parameters:
 | Name             | Type                       | Description                                                            |
@@ -115,8 +131,10 @@ Bind the current render texture.
 
 <article>
 
-### clear: <span><code>(clearColor&#58; ColorSource, mask&#58; BUFFER_BITS) -&#62; void</code></span>
-Erases the render texture and fills the drawing area with a colour.
+### clear 
+**Type:** <code>(clearColor&#58; ColorSource, mask&#58; BUFFER_BITS) -&#62; void</code>
+
+**Description:** Erases the render texture and fills the drawing area with a colour.
 
 #### Parameters:
 | Name       | Type                     | Description                                                                                      |
@@ -130,8 +148,10 @@ Erases the render texture and fills the drawing area with a colour.
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-Resets render-texture state.
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Resets render-texture state.
 
 </article>
 

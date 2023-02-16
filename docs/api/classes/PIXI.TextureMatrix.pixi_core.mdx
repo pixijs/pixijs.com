@@ -5,7 +5,12 @@ sidebar_label: "PIXI.TextureMatrix"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).TextureMatrix
+
+</div>
 
 Class controls uv mapping from Texture normal space to BaseTexture normal space.
 Takes `trim` and `rotate` into account. May contain clamp settings for Meshes and TilingSprite.
@@ -16,13 +21,12 @@ Takes track of Texture changes through `_lastTextureID` private field. Use `upda
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.TextureMatrix: <span><code>(texture&#58; Texture, clampMargin&#58; number) </code></span>
+### Constructor:
+<h4><code>new PIXI.TextureMatrix(texture&#58; Texture, clampMargin&#58; number) </code></h4>
 
 #### Parameters:
 | Name        | Type                 | Default       | Description                                                        |
@@ -40,22 +44,12 @@ Takes track of Texture changes through `_lastTextureID` private field. Use `upda
 ## Members
 <article>
 
-### clampMargin: <span><code>number</code></span>
-- **Default Value**: <code>0.5</code>
+### clampMargin 
+**Type:** <code>number</code>
 
-Changes frame clamping Works with TilingSprite and Mesh Change to -0.5 to add a pixel to the edge, recommended for transparent trimmed textures in atlas
+**Default Value**: <code>0.5</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### clampOffset: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-Changes frame clamping Works with TilingSprite and Mesh Change to 1.5 if you texture has repeated right and bottom lines, that leads to smoother borders
+**Description:** Changes frame clamping Works with TilingSprite and Mesh Change to -0.5 to add a pixel to the edge, recommended for transparent trimmed textures in atlas
 
 </article>
 
@@ -64,20 +58,12 @@ Changes frame clamping Works with TilingSprite and Mesh Change to 1.5 if you tex
 
 <article>
 
-### isSimple: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### clampOffset 
+**Type:** <code>number</code>
 
-If texture size is the same as baseTexture.
+**Default Value**: <code>0</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### mapCoord: <span><code>Matrix</code></span>
-Matrix operation that converts texture region coords to texture coords
+**Description:** Changes frame clamping Works with TilingSprite and Mesh Change to 1.5 if you texture has repeated right and bottom lines, that leads to smoother borders
 
 </article>
 
@@ -86,8 +72,12 @@ Matrix operation that converts texture region coords to texture coords
 
 <article>
 
-### texture: <span><code>Texture</code></span>
-Texture property.
+### isSimple 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** If texture size is the same as baseTexture.
 
 </article>
 
@@ -96,8 +86,10 @@ Texture property.
 
 <article>
 
-### uClampFrame: <span><code>Float32Array</code></span>
-Clamp region for normalized coords, left-top pixel center in xy , bottom-right in zw. Calculated based on clampOffset.
+### mapCoord 
+**Type:** <code>Matrix</code>
+
+**Description:** Matrix operation that converts texture region coords to texture coords
 
 </article>
 
@@ -106,8 +98,10 @@ Clamp region for normalized coords, left-top pixel center in xy , bottom-right i
 
 <article>
 
-### uClampOffset: <span><code>Float32Array</code></span>
-Normalized clamp offset. Calculated based on clampOffset.
+### texture 
+**Type:** <code>Texture</code>
+
+**Description:** Texture property.
 
 </article>
 
@@ -116,8 +110,10 @@ Normalized clamp offset. Calculated based on clampOffset.
 
 <article>
 
-### _textureID: <span><code>number</code></span>
-Tracks Texture frame changes.
+### uClampFrame 
+**Type:** <code>Float32Array</code>
+
+**Description:** Clamp region for normalized coords, left-top pixel center in xy , bottom-right in zw. Calculated based on clampOffset.
 
 </article>
 
@@ -126,8 +122,34 @@ Tracks Texture frame changes.
 
 <article>
 
-### _updateID: <span><code>number</code></span>
-Tracks Texture frame changes.
+### uClampOffset 
+**Type:** <code>Float32Array</code>
+
+**Description:** Normalized clamp offset. Calculated based on clampOffset.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _textureID 
+**Type:** <code>number</code>
+
+**Description:** Tracks Texture frame changes.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _updateID 
+**Type:** <code>number</code>
+
+**Description:** Tracks Texture frame changes.
 
 </article>
 
@@ -138,8 +160,10 @@ Tracks Texture frame changes.
 ## Methods
 <article>
 
-### multiplyUvs: <span><code>(uvs&#58; Float32Array, out&#58; Float32Array) -&#62; Float32Array</code></span>
-Multiplies uvs array to transform
+### multiplyUvs 
+**Type:** <code>(uvs&#58; Float32Array, out&#58; Float32Array) -&#62; Float32Array</code>
+
+**Description:** Multiplies uvs array to transform
 
 #### Parameters:
 | Name | Type                      | Description |
@@ -157,8 +181,10 @@ Multiplies uvs array to transform
 
 <article>
 
-### update: <span><code>(forceUpdate&#58; boolean) -&#62; boolean</code></span>
-Updates matrices if texture was changed.
+### update 
+**Type:** <code>(forceUpdate&#58; boolean) -&#62; boolean</code>
+
+**Description:** Updates matrices if texture was changed.
 
 #### Parameters:
 | Name        | Type                 | Description                                |

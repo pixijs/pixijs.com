@@ -5,20 +5,24 @@ sidebar_label: "PIXI.BatchShaderGenerator"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).BatchShaderGenerator
+
+</div>
 
 
 Helper that generates batching multi-texture shader. Use it with your new BatchRenderer
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.BatchShaderGenerator: <span><code>(vertexSrc&#58; string, fragTemplate&#58; string) </code></span>
+### Constructor:
+<h4><code>new PIXI.BatchShaderGenerator(vertexSrc&#58; string, fragTemplate&#58; string) </code></h4>
 
 #### Parameters:
 | Name         | Type                | Default       | Description              |
@@ -36,8 +40,10 @@ Helper that generates batching multi-texture shader. Use it with your new BatchR
 ## Members
 <article>
 
-### fragTemplate: <span><code>string</code></span>
-Reference to the fragment shader template. Must contain "%count%" and "%forloop%".
+### fragTemplate 
+**Type:** <code>string</code>
+
+**Description:** Reference to the fragment shader template. Must contain "%count%" and "%forloop%".
 
 </article>
 
@@ -46,8 +52,10 @@ Reference to the fragment shader template. Must contain "%count%" and "%forloop%
 
 <article>
 
-### vertexSrc: <span><code>string</code></span>
-Reference to the vertex shader source.
+### vertexSrc 
+**Type:** <code>string</code>
+
+**Description:** Reference to the vertex shader source.
 
 </article>
 

@@ -5,20 +5,24 @@ sidebar_label: "PIXI.BaseTexture"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).BaseTexture
+
+</div>
 
 
 A Texture stores the information that represents an image. All textures have a base texture, which contains information about the source. Therefore you can have many textures all using a single BaseTexture
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.BaseTexture: <span><code>(resource&#58; PIXI.Resource &#124; HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; ICanvas &#124; string, options&#58; IBaseTextureOptions&#60;RO&#62;) </code></span>
+### Constructor:
+<h4><code>new PIXI.BaseTexture(resource&#58; PIXI.Resource &#124; HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; ICanvas &#124; string, options&#58; IBaseTextureOptions&#60;RO&#62;) </code></h4>
 
 #### Parameters:
 | Name                     | Type                                                                                                                       | Default                               | Description                                                                                                                                    |
@@ -49,20 +53,12 @@ A Texture stores the information that represents an image. All textures have a b
 ## Members
 <article>
 
-### _globalBatch: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### _globalBatch 
+**Type:** <code>number</code>
 
-Global number of the texture batch, used by multi-texture renderers.
+**Default Value**: <code>0</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### defaultOptions: <span><code>PIXI.IBaseTextureOptions</code></span>
-Default options used when creating BaseTexture objects.
+**Description:** Global number of the texture batch, used by multi-texture renderers.
 
 </article>
 
@@ -71,22 +67,10 @@ Default options used when creating BaseTexture objects.
 
 <article>
 
-### alphaMode: <span><code>PIXI.ALPHA_MODES</code></span>
-- **Default Value**: <code>PIXI.ALPHA_MODES.UNPACK</code>
+### defaultOptions 
+**Type:** <code>PIXI.IBaseTextureOptions</code>
 
-Pre multiply the image alpha
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### anisotropicLevel: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-Anisotropic filtering level of texture
+**Description:** Default options used when creating BaseTexture objects.
 
 </article>
 
@@ -95,22 +79,12 @@ Anisotropic filtering level of texture
 
 <article>
 
-### format: <span><code>PIXI.FORMATS</code></span>
-- **Default Value**: <code>PIXI.FORMATS.RGBA</code>
+### alphaMode 
+**Type:** <code>PIXI.ALPHA_MODES</code>
 
-GL format type
+**Default Value**: <code>PIXI.ALPHA_MODES.UNPACK</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### mipmap: <span><code>PIXI.MIPMAP_MODES</code></span>
-- **Default Value**: <code>PIXI.MIPMAP_MODES.POW2</code>
-
-If mipmapping is enabled for texture.
+**Description:** Pre multiply the image alpha
 
 </article>
 
@@ -119,22 +93,12 @@ If mipmapping is enabled for texture.
 
 <article>
 
-### scaleMode: <span><code>PIXI.SCALE_MODES</code></span>
-- **Default Value**: <code>PIXI.SCALE_MODES.LINEAR</code>
+### anisotropicLevel 
+**Type:** <code>number</code>
 
-Default scale mode, linear, nearest.
+**Default Value**: <code>0</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### target: <span><code>PIXI.TARGETS</code></span>
-- **Default Value**: <code>PIXI.TARGETS.TEXTURE_2D</code>
-
-GL texture target
+**Description:** Anisotropic filtering level of texture
 
 </article>
 
@@ -143,22 +107,12 @@ GL texture target
 
 <article>
 
-### type: <span><code>PIXI.TYPES</code></span>
-- **Default Value**: <code>PIXI.TYPES.UNSIGNED_BYTE</code>
+### format 
+**Type:** <code>PIXI.FORMATS</code>
 
-GL data type
+**Default Value**: <code>PIXI.FORMATS.RGBA</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### wrapMode: <span><code>PIXI.WRAP_MODES</code></span>
-- **Default Value**: <code>PIXI.WRAP_MODES.CLAMP</code>
-
-Wrap mode for textures.
+**Description:** GL format type
 
 </article>
 
@@ -167,8 +121,12 @@ Wrap mode for textures.
 
 <article>
 
-### _batchEnabled: <span><code>number</code></span>
-Number of the texture batch, used by multi-texture renderers
+### mipmap 
+**Type:** <code>PIXI.MIPMAP_MODES</code>
+
+**Default Value**: <code>PIXI.MIPMAP_MODES.POW2</code>
+
+**Description:** If mipmapping is enabled for texture.
 
 </article>
 
@@ -177,8 +135,12 @@ Number of the texture batch, used by multi-texture renderers
 
 <article>
 
-### _batchLocation: <span><code>number</code></span>
-Location inside texture batch, used by multi-texture renderers
+### scaleMode 
+**Type:** <code>PIXI.SCALE_MODES</code>
+
+**Default Value**: <code>PIXI.SCALE_MODES.LINEAR</code>
+
+**Description:** Default scale mode, linear, nearest.
 
 </article>
 
@@ -187,22 +149,12 @@ Location inside texture batch, used by multi-texture renderers
 
 <article>
 
-### alphaMode: <span><code>PIXI.ALPHA_MODES</code></span>
-- **Default Value**: <code>PIXI.ALPHA_MODES.UNPACK</code>
+### target 
+**Type:** <code>PIXI.TARGETS</code>
 
-How to treat premultiplied alpha, see [PIXI.ALPHA_MODES](../enums/PIXI.ALPHA_MODES.pixi_constants).
+**Default Value**: <code>PIXI.TARGETS.TEXTURE_2D</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### anisotropicLevel: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-Anisotropic filtering level of texture
+**Description:** GL texture target
 
 </article>
 
@@ -211,8 +163,12 @@ Anisotropic filtering level of texture
 
 <article>
 
-### cacheId: <span><code>string</code></span>
-Currently default cache ID.
+### type 
+**Type:** <code>PIXI.TYPES</code>
+
+**Default Value**: <code>PIXI.TYPES.UNSIGNED_BYTE</code>
+
+**Description:** GL data type
 
 </article>
 
@@ -221,8 +177,12 @@ Currently default cache ID.
 
 <article>
 
-### destroyed: <span><code>boolean</code></span>
-Flag if BaseTexture has been destroyed.
+### wrapMode 
+**Type:** <code>PIXI.WRAP_MODES</code>
+
+**Default Value**: <code>PIXI.WRAP_MODES.CLAMP</code>
+
+**Description:** Wrap mode for textures.
 
 </article>
 
@@ -231,8 +191,10 @@ Flag if BaseTexture has been destroyed.
 
 <article>
 
-### dirtyId: <span><code>number</code></span>
-Used by TextureSystem to only update texture to the GPU when needed. Please call `update()` to increment it.
+### _batchEnabled 
+**Type:** <code>number</code>
+
+**Description:** Number of the texture batch, used by multi-texture renderers
 
 </article>
 
@@ -241,20 +203,10 @@ Used by TextureSystem to only update texture to the GPU when needed. Please call
 
 <article>
 
-### format: <span><code>FORMATS</code></span>
-- **Default Value**: <code>PIXI.FORMATS.RGBA</code>
+### _batchLocation 
+**Type:** <code>number</code>
 
-The pixel format of the texture
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### height: <span><code>number</code></span>
-The height of the base texture set when the image has loaded
+**Description:** Location inside texture batch, used by multi-texture renderers
 
 </article>
 
@@ -263,22 +215,12 @@ The height of the base texture set when the image has loaded
 
 <article>
 
-### isPowerOfTwo: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### alphaMode 
+**Type:** <code>PIXI.ALPHA_MODES</code>
 
-Whether or not the texture is a power of two, try to use power of two textures as much as you can
+**Default Value**: <code>PIXI.ALPHA_MODES.UNPACK</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### mipmap: <span><code>MIPMAP_MODES</code></span>
-- **Default Value**: <code>PIXI.MIPMAP_MODES.POW2</code>
-
-Mipmap mode of the texture, affects downscaled images
+**Description:** How to treat premultiplied alpha, see [PIXI.ALPHA_MODES](../enums/PIXI.ALPHA_MODES.pixi_constants).
 
 </article>
 
@@ -287,8 +229,12 @@ Mipmap mode of the texture, affects downscaled images
 
 <article>
 
-### parentTextureArray: <span><code>PIXI.BaseTexture</code></span>
-Whether its a part of another texture, handled by ArrayResource or CubeResource
+### anisotropicLevel 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** Anisotropic filtering level of texture
 
 </article>
 
@@ -297,8 +243,10 @@ Whether its a part of another texture, handled by ArrayResource or CubeResource
 
 <article>
 
-### realHeight: <span><code>number</code></span>
-Pixel height of the source of this texture
+### cacheId 
+**Type:** <code>string</code>
+
+**Description:** Currently default cache ID.
 
 </article>
 
@@ -307,8 +255,10 @@ Pixel height of the source of this texture
 
 <article>
 
-### realWidth: <span><code>number</code></span>
-Pixel width of the source of this texture
+### destroyed 
+**Type:** <code>boolean</code>
+
+**Description:** Flag if BaseTexture has been destroyed.
 
 </article>
 
@@ -317,20 +267,10 @@ Pixel width of the source of this texture
 
 <article>
 
-### resolution: <span><code>number</code></span>
-- **Default Value**: <code>PIXI.settings.RESOLUTION</code>
+### dirtyId 
+**Type:** <code>number</code>
 
-The resolution / device pixel ratio of the texture
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### resource: <span><code>PIXI.Resource</code></span>
-The resource used by this BaseTexture, there can only be one resource per BaseTexture, but textures can share resources.
+**Description:** Used by TextureSystem to only update texture to the GPU when needed. Please call `update()` to increment it.
 
 </article>
 
@@ -339,22 +279,12 @@ The resource used by this BaseTexture, there can only be one resource per BaseTe
 
 <article>
 
-### scaleMode: <span><code>SCALE_MODES</code></span>
-- **Default Value**: <code>PIXI.SCALE_MODES.LINEAR</code>
+### format 
+**Type:** <code>FORMATS</code>
 
-The scale mode to apply when scaling this texture
+**Default Value**: <code>PIXI.FORMATS.RGBA</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### target: <span><code>TARGETS</code></span>
-- **Default Value**: <code>PIXI.TARGETS.TEXTURE_2D</code>
-
-The target type
+**Description:** The pixel format of the texture
 
 </article>
 
@@ -363,8 +293,10 @@ The target type
 
 <article>
 
-### textureCacheIds: <span><code>Array&#60;string&#62;</code></span>
-The collection of alternative cache ids, since some BaseTextures can have more than one ID, short name and longer full URL
+### height 
+**Type:** <code>number</code>
+
+**Description:** The height of the base texture set when the image has loaded
 
 </article>
 
@@ -373,20 +305,12 @@ The collection of alternative cache ids, since some BaseTextures can have more t
 
 <article>
 
-### type: <span><code>TYPES</code></span>
-- **Default Value**: <code>PIXI.TYPES.UNSIGNED_BYTE</code>
+### isPowerOfTwo 
+**Type:** <code>boolean</code>
 
-The type of resource data
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### valid: <span><code>boolean</code></span>
-Generally speaking means when resource is loaded.
+**Description:** Whether or not the texture is a power of two, try to use power of two textures as much as you can
 
 </article>
 
@@ -395,8 +319,12 @@ Generally speaking means when resource is loaded.
 
 <article>
 
-### width: <span><code>number</code></span>
-The width of the base texture set when the image has loaded
+### mipmap 
+**Type:** <code>MIPMAP_MODES</code>
+
+**Default Value**: <code>PIXI.MIPMAP_MODES.POW2</code>
+
+**Description:** Mipmap mode of the texture, affects downscaled images
 
 </article>
 
@@ -405,20 +333,10 @@ The width of the base texture set when the image has loaded
 
 <article>
 
-### wrapMode: <span><code>WRAP_MODES</code></span>
-- **Default Value**: <code>PIXI.WRAP_MODES.CLAMP</code>
+### parentTextureArray 
+**Type:** <code>PIXI.BaseTexture</code>
 
-How the texture wraps
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### dirtyStyleId: <span><code>number</code></span>
-Used by TextureSystem to only update texture style when needed.
+**Description:** Whether its a part of another texture, handled by ArrayResource or CubeResource
 
 </article>
 
@@ -427,8 +345,10 @@ Used by TextureSystem to only update texture style when needed.
 
 <article>
 
-### touched: <span><code>number</code></span>
-Used by automatic texture Garbage Collection, stores last GC tick when it was bound
+### realHeight 
+**Type:** <code>number</code>
+
+**Description:** Pixel height of the source of this texture
 
 </article>
 
@@ -437,8 +357,164 @@ Used by automatic texture Garbage Collection, stores last GC tick when it was bo
 
 <article>
 
-### uid: <span><code>number</code></span>
-Global unique identifier for this BaseTexture
+### realWidth 
+**Type:** <code>number</code>
+
+**Description:** Pixel width of the source of this texture
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution 
+**Type:** <code>number</code>
+
+**Default Value**: <code>PIXI.settings.RESOLUTION</code>
+
+**Description:** The resolution / device pixel ratio of the texture
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resource 
+**Type:** <code>PIXI.Resource</code>
+
+**Description:** The resource used by this BaseTexture, there can only be one resource per BaseTexture, but textures can share resources.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### scaleMode 
+**Type:** <code>SCALE_MODES</code>
+
+**Default Value**: <code>PIXI.SCALE_MODES.LINEAR</code>
+
+**Description:** The scale mode to apply when scaling this texture
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### target 
+**Type:** <code>TARGETS</code>
+
+**Default Value**: <code>PIXI.TARGETS.TEXTURE_2D</code>
+
+**Description:** The target type
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textureCacheIds 
+**Type:** <code>Array&#60;string&#62;</code>
+
+**Description:** The collection of alternative cache ids, since some BaseTextures can have more than one ID, short name and longer full URL
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### type 
+**Type:** <code>TYPES</code>
+
+**Default Value**: <code>PIXI.TYPES.UNSIGNED_BYTE</code>
+
+**Description:** The type of resource data
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### valid 
+**Type:** <code>boolean</code>
+
+**Description:** Generally speaking means when resource is loaded.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width 
+**Type:** <code>number</code>
+
+**Description:** The width of the base texture set when the image has loaded
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### wrapMode 
+**Type:** <code>WRAP_MODES</code>
+
+**Default Value**: <code>PIXI.WRAP_MODES.CLAMP</code>
+
+**Description:** How the texture wraps
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dirtyStyleId 
+**Type:** <code>number</code>
+
+**Description:** Used by TextureSystem to only update texture style when needed.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### touched 
+**Type:** <code>number</code>
+
+**Description:** Used by automatic texture Garbage Collection, stores last GC tick when it was bound
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uid 
+**Type:** <code>number</code>
+
+**Description:** Global unique identifier for this BaseTexture
 
 </article>
 
@@ -449,8 +525,10 @@ Global unique identifier for this BaseTexture
 ## Methods
 <article>
 
-### addToCache: <span><code>(baseTexture&#58; PIXI.BaseTexture, id&#58; string) -&#62; void</code></span>
-Adds a BaseTexture to the global BaseTextureCache. This cache is shared across the whole PIXI object.
+### addToCache 
+**Type:** <code>(baseTexture&#58; PIXI.BaseTexture, id&#58; string) -&#62; void</code>
+
+**Description:** Adds a BaseTexture to the global BaseTextureCache. This cache is shared across the whole PIXI object.
 
 #### Parameters:
 | Name        | Type                          | Description                                         |
@@ -464,8 +542,10 @@ Adds a BaseTexture to the global BaseTextureCache. This cache is shared across t
 
 <article>
 
-### from: <span><code>(source&#58; HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; PIXI.ICanvas &#124; string &#124; Array&#60;string&#62;, options&#58; IBaseTextureOptions&#60;RO&#62;, strict&#58; boolean) -&#62; PIXI.BaseTexture</code></span>
-Helper function that creates a base texture based on the source you provide. The source can be - image url, image element, canvas element. If the source is an image url or an image element and not in the base texture cache, it will be created and loaded.
+### from 
+**Type:** <code>(source&#58; HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; PIXI.ICanvas &#124; string &#124; Array&#60;string&#62;, options&#58; IBaseTextureOptions&#60;RO&#62;, strict&#58; boolean) -&#62; PIXI.BaseTexture</code>
+
+**Description:** Helper function that creates a base texture based on the source you provide. The source can be - image url, image element, canvas element. If the source is an image url or an image element and not in the base texture cache, it will be created and loaded.
 
 #### Parameters:
 | Name                 | Type                                                                                                                                    | Description                                                                                                                    |
@@ -485,8 +565,10 @@ Helper function that creates a base texture based on the source you provide. The
 
 <article>
 
-### fromBuffer: <span><code>(buffer&#58; Float32Array &#124; Uint8Array, width&#58; number, height&#58; number, options&#58; IBaseTextureOptions) -&#62; BaseTexture&#60;BufferResource&#62;</code></span>
-Create a new BaseTexture with a BufferResource from a Float32Array. RGBA values are floats from 0 to 1.
+### fromBuffer 
+**Type:** <code>(buffer&#58; Float32Array &#124; Uint8Array, width&#58; number, height&#58; number, options&#58; IBaseTextureOptions) -&#62; BaseTexture&#60;BufferResource&#62;</code>
+
+**Description:** Create a new BaseTexture with a BufferResource from a Float32Array. RGBA values are floats from 0 to 1.
 
 #### Parameters:
 | Name              | Type                                        | Description                                                                                                                                                |
@@ -509,8 +591,10 @@ Create a new BaseTexture with a BufferResource from a Float32Array. RGBA values 
 
 <article>
 
-### removeFromCache: <span><code>(baseTexture&#58; string &#124; PIXI.BaseTexture) -&#62; PIXI.BaseTexture &#124; unknown</code></span>
-Remove a BaseTexture from the global BaseTextureCache.
+### removeFromCache 
+**Type:** <code>(baseTexture&#58; string &#124; PIXI.BaseTexture) -&#62; PIXI.BaseTexture &#124; unknown</code>
+
+**Description:** Remove a BaseTexture from the global BaseTextureCache.
 
 #### Parameters:
 | Name        | Type                                        | Description                                                          |
@@ -527,8 +611,10 @@ Remove a BaseTexture from the global BaseTextureCache.
 
 <article>
 
-### castToBaseTexture: <span><code>() -&#62; BaseTexture</code></span>
-Utility function for BaseTexture&#124;Texture cast.
+### castToBaseTexture 
+**Type:** <code>() -&#62; BaseTexture</code>
+
+**Description:** Utility function for BaseTexture&#124;Texture cast.
 
 #### Returns:
 | Type                     | Description |
@@ -541,8 +627,10 @@ Utility function for BaseTexture&#124;Texture cast.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys this base texture. The method stops if resource doesn't want this texture to be destroyed. Removes texture from all caches.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys this base texture. The method stops if resource doesn't want this texture to be destroyed. Removes texture from all caches.
 
 </article>
 
@@ -551,8 +639,10 @@ Destroys this base texture. The method stops if resource doesn't want this textu
 
 <article>
 
-### dispose: <span><code>() -&#62; void</code></span>
-Frees the texture from WebGL memory without destroying this texture object. This means you can still use the texture later which will upload it to GPU memory again.
+### dispose 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Frees the texture from WebGL memory without destroying this texture object. This means you can still use the texture later which will upload it to GPU memory again.
 
 </article>
 
@@ -561,8 +651,10 @@ Frees the texture from WebGL memory without destroying this texture object. This
 
 <article>
 
-### getDrawableSource: <span><code>() -&#62; PIXI.ICanvasImageSource</code></span>
-Get the drawable source, such as HTMLCanvasElement or HTMLImageElement suitable for rendering with CanvasRenderer. Provided by **&#64;pixi/canvas-renderer** package.
+### getDrawableSource 
+**Type:** <code>() -&#62; PIXI.ICanvasImageSource</code>
+
+**Description:** Get the drawable source, such as HTMLCanvasElement or HTMLImageElement suitable for rendering with CanvasRenderer. Provided by **&#64;pixi/canvas-renderer** package.
 
 #### Returns:
 | Type                                 | Description                          |
@@ -575,8 +667,10 @@ Get the drawable source, such as HTMLCanvasElement or HTMLImageElement suitable 
 
 <article>
 
-### setRealSize: <span><code>(realWidth&#58; number, realHeight&#58; number, resolution&#58; number) -&#62; this</code></span>
-Sets real size of baseTexture, preserves current resolution.
+### setRealSize 
+**Type:** <code>(realWidth&#58; number, realHeight&#58; number, resolution&#58; number) -&#62; this</code>
+
+**Description:** Sets real size of baseTexture, preserves current resolution.
 
 #### Parameters:
 | Name       | Type                | Description               |
@@ -595,8 +689,10 @@ Sets real size of baseTexture, preserves current resolution.
 
 <article>
 
-### setResolution: <span><code>(resolution&#58; number) -&#62; this</code></span>
-Changes resolution
+### setResolution 
+**Type:** <code>(resolution&#58; number) -&#62; this</code>
+
+**Description:** Changes resolution
 
 #### Parameters:
 | Name       | Type                | Description |
@@ -613,8 +709,10 @@ Changes resolution
 
 <article>
 
-### setResource: <span><code>(resource&#58; R) -&#62; this</code></span>
-Sets the resource if it wasn't set. Throws error if resource already present
+### setResource 
+**Type:** <code>(resource&#58; R) -&#62; this</code>
+
+**Description:** Sets the resource if it wasn't set. Throws error if resource already present
 
 #### Parameters:
 | Name     | Type           | Description                       |
@@ -631,8 +729,10 @@ Sets the resource if it wasn't set. Throws error if resource already present
 
 <article>
 
-### setSize: <span><code>(desiredWidth&#58; number, desiredHeight&#58; number, resolution&#58; number) -&#62; this</code></span>
-Changes w/h/resolution. Texture becomes valid if width and height are greater than zero.
+### setSize 
+**Type:** <code>(desiredWidth&#58; number, desiredHeight&#58; number, resolution&#58; number) -&#62; this</code>
+
+**Description:** Changes w/h/resolution. Texture becomes valid if width and height are greater than zero.
 
 #### Parameters:
 | Name          | Type                | Description               |
@@ -651,8 +751,10 @@ Changes w/h/resolution. Texture becomes valid if width and height are greater th
 
 <article>
 
-### setStyle: <span><code>(scaleMode&#58; SCALE_MODES, mipmap&#58; MIPMAP_MODES) -&#62; this</code></span>
-Changes style options of BaseTexture
+### setStyle 
+**Type:** <code>(scaleMode&#58; SCALE_MODES, mipmap&#58; MIPMAP_MODES) -&#62; this</code>
+
+**Description:** Changes style options of BaseTexture
 
 #### Parameters:
 | Name      | Type                      | Description    |
@@ -670,8 +772,10 @@ Changes style options of BaseTexture
 
 <article>
 
-### update: <span><code>() -&#62; void</code></span>
-Invalidates the object. Texture becomes valid if width and height are greater than zero.
+### update 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Invalidates the object. Texture becomes valid if width and height are greater than zero.
 
 </article>
 

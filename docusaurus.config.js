@@ -59,27 +59,6 @@ const config = {
 
   plugins: [
     'docusaurus-plugin-sass',
-
-    process.env.DOCUSAURUS_GENERATE_TYPEDOC
-      ? [
-          'docusaurus-plugin-typedoc',
-          {
-            entryPointStrategy: 'packages',
-            entryPoints: [
-              '../pixijs/packages/*'
-            ],
-            sidebar: {
-              fullNames: false
-            },
-            tsconfig: '../pixijs/tsconfig.types.json',
-            readme: 'none',
-            excludeExternals: true,
-            excludeInternal: true,
-            excludePrivate: true,
-            excludeProtected: true
-          }
-        ]
-      : null
   ],
 
   themeConfig:

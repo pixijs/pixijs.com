@@ -5,25 +5,29 @@ sidebar_label: "PIXI.HTMLTextStyle"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/text-html](../modules/pixi_text_html).HTMLTextStyle
+
+</div>
 
 
 Used internally to restrict text style usage and convert easily to CSS.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.HTMLTextStyle: <span><code>(style&#58; PIXI.ITextStyle &#124; IHTMLTextStyle) </code></span>
+### Constructor:
+<h4><code>new PIXI.HTMLTextStyle(style&#58; PIXI.ITextStyle &#124; PIXI.IHTMLTextStyle) </code></h4>
 
 #### Parameters:
-| Name  | Type                                               | Default       | Description    |
-| ----- | -------------------------------------------------- | ------------- | -------------- |
-| style | <code>PIXI.ITextStyle &#124; IHTMLTextStyle</code> | <code></code> | Style to copy. |
+| Name  | Type                                                    | Default       | Description    |
+| ----- | ------------------------------------------------------- | ------------- | -------------- |
+| style | <code>PIXI.ITextStyle &#124; PIXI.IHTMLTextStyle</code> | <code></code> | Style to copy. |
 
 </article>
 
@@ -36,8 +40,10 @@ Used internally to restrict text style usage and convert easily to CSS.
 ## Members
 <article>
 
-### availableFonts: <span><code>Record&#60;string, IHTMLFont&#62;</code></span>
-The collection of installed fonts
+### availableFonts 
+**Type:** <code>Record&#60;string, IHTMLFont&#62;</code>
+
+**Description:** The collection of installed fonts
 
 </article>
 
@@ -46,8 +52,10 @@ The collection of installed fonts
 
 <article>
 
-### defaultOptions: <span><code>IHTMLTextStyle</code></span>
-List of default options, these are largely the same as TextStyle, with the exception of whiteSpace, which is set to 'normal' by default.
+### defaultOptions 
+**Type:** <code>IHTMLTextStyle</code>
+
+**Description:** List of default options, these are largely the same as TextStyle, with the exception of whiteSpace, which is set to 'normal' by default.
 
 </article>
 
@@ -56,22 +64,12 @@ List of default options, these are largely the same as TextStyle, with the excep
 
 <article>
 
-### align: <span><code>string</code></span>
-- **Default Value**: <code>"left"</code>
+### align 
+**Type:** <code>string</code>
 
-Align
+**Default Value**: <code>"left"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### breakWords: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
-
-Break words
+**Description:** Align
 
 </article>
 
@@ -80,22 +78,12 @@ Break words
 
 <article>
 
-### dropShadow: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### breakWords 
+**Type:** <code>boolean</code>
 
-Drop shadow
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### dropShadowAlpha: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
-
-Drop shadow alpha
+**Description:** Break words
 
 </article>
 
@@ -104,22 +92,12 @@ Drop shadow alpha
 
 <article>
 
-### dropShadowAngle: <span><code>number</code></span>
-- **Default Value**: <code>Math.PI / 6</code>
+### dropShadow 
+**Type:** <code>boolean</code>
 
-Drop shadow angle
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### dropShadowBlur: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-Drop shadow blur
+**Description:** Drop shadow
 
 </article>
 
@@ -128,22 +106,12 @@ Drop shadow blur
 
 <article>
 
-### dropShadowColor: <span><code>string</code></span>
-- **Default Value**: <code>"black"</code>
+### dropShadowAlpha 
+**Type:** <code>number</code>
 
-Drop shadow color
+**Default Value**: <code>1</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### dropShadowDistance: <span><code>number</code></span>
-- **Default Value**: <code>5</code>
-
-Drop shadow distance
+**Description:** Drop shadow alpha
 
 </article>
 
@@ -152,22 +120,12 @@ Drop shadow distance
 
 <article>
 
-### fill: <span><code>string</code></span>
-- **Default Value**: <code>"black"</code>
+### dropShadowAngle 
+**Type:** <code>number</code>
 
-Fill
+**Default Value**: <code>Math.PI / 6</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### fontFamily: <span><code>string</code></span>
-- **Default Value**: <code>"Arial"</code>
-
-Font family
+**Description:** Drop shadow angle
 
 </article>
 
@@ -176,22 +134,12 @@ Font family
 
 <article>
 
-### fontSize: <span><code>number</code></span>
-- **Default Value**: <code>26</code>
+### dropShadowBlur 
+**Type:** <code>number</code>
 
-Font size
+**Default Value**: <code>0</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### fontStyle: <span><code>string</code></span>
-- **Default Value**: <code>"normal"</code>
-
-Font style
+**Description:** Drop shadow blur
 
 </article>
 
@@ -200,22 +148,12 @@ Font style
 
 <article>
 
-### fontVariant: <span><code>string</code></span>
-- **Default Value**: <code>"normal"</code>
+### dropShadowColor 
+**Type:** <code>string</code>
 
-Font variant
+**Default Value**: <code>"black"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### fontWeight: <span><code>string</code></span>
-- **Default Value**: <code>"normal"</code>
-
-Font weight
+**Description:** Drop shadow color
 
 </article>
 
@@ -224,22 +162,12 @@ Font weight
 
 <article>
 
-### letterSpacing: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### dropShadowDistance 
+**Type:** <code>number</code>
 
-Letter spacing
+**Default Value**: <code>5</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### lineHeight: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-Line height
+**Description:** Drop shadow distance
 
 </article>
 
@@ -248,22 +176,12 @@ Line height
 
 <article>
 
-### padding: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### fill 
+**Type:** <code>string</code>
 
-Padding
+**Default Value**: <code>"black"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### stroke: <span><code>string</code></span>
-- **Default Value**: <code>"black"</code>
-
-Stroke
+**Description:** Fill
 
 </article>
 
@@ -272,22 +190,12 @@ Stroke
 
 <article>
 
-### strokeThickness: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### fontFamily 
+**Type:** <code>string</code>
 
-Stroke thickness
+**Default Value**: <code>"Arial"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### whiteSpace: <span><code>string</code></span>
-- **Default Value**: <code>"normal"</code>
-
-White space
+**Description:** Font family
 
 </article>
 
@@ -296,22 +204,12 @@ White space
 
 <article>
 
-### wordWrap: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### fontSize 
+**Type:** <code>number</code>
 
-Word wrap
+**Default Value**: <code>26</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### wordWrapWidth: <span><code>number</code></span>
-- **Default Value**: <code>100</code>
-
-Word wrap width
+**Description:** Font size
 
 </article>
 
@@ -320,8 +218,12 @@ Word wrap width
 
 <article>
 
-### align: <span><code>'left' &#124; 'center' &#124; 'right' &#124; 'justify'</code></span>
-Alignment for multiline text, does not affect single line text.
+### fontStyle 
+**Type:** <code>string</code>
+
+**Default Value**: <code>"normal"</code>
+
+**Description:** Font style
 
 </article>
 
@@ -330,8 +232,12 @@ Alignment for multiline text, does not affect single line text.
 
 <article>
 
-### breakWords: <span><code>boolean</code></span>
-Indicates if lines can be wrapped within words, it needs wordWrap to be set to true.
+### fontVariant 
+**Type:** <code>string</code>
+
+**Default Value**: <code>"normal"</code>
+
+**Description:** Font variant
 
 </article>
 
@@ -340,8 +246,12 @@ Indicates if lines can be wrapped within words, it needs wordWrap to be set to t
 
 <article>
 
-### dropShadow: <span><code>boolean</code></span>
-Set a drop shadow for the text.
+### fontWeight 
+**Type:** <code>string</code>
+
+**Default Value**: <code>"normal"</code>
+
+**Description:** Font weight
 
 </article>
 
@@ -350,8 +260,12 @@ Set a drop shadow for the text.
 
 <article>
 
-### dropShadowAlpha: <span><code>number</code></span>
-Set alpha for the drop shadow.
+### letterSpacing 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** Letter spacing
 
 </article>
 
@@ -360,8 +274,12 @@ Set alpha for the drop shadow.
 
 <article>
 
-### dropShadowAngle: <span><code>number</code></span>
-Set a angle of the drop shadow.
+### lineHeight 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** Line height
 
 </article>
 
@@ -370,8 +288,12 @@ Set a angle of the drop shadow.
 
 <article>
 
-### dropShadowBlur: <span><code>number</code></span>
-Set a shadow blur radius.
+### padding 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** Padding
 
 </article>
 
@@ -380,8 +302,12 @@ Set a shadow blur radius.
 
 <article>
 
-### dropShadowColor: <span><code>number &#124; string</code></span>
-A fill style to be used on the dropshadow e.g., 'red', '#00FF00'.
+### stroke 
+**Type:** <code>string</code>
+
+**Default Value**: <code>"black"</code>
+
+**Description:** Stroke
 
 </article>
 
@@ -390,8 +316,12 @@ A fill style to be used on the dropshadow e.g., 'red', '#00FF00'.
 
 <article>
 
-### dropShadowDistance: <span><code>number</code></span>
-Set a distance of the drop shadow.
+### strokeThickness 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** Stroke thickness
 
 </article>
 
@@ -400,8 +330,148 @@ Set a distance of the drop shadow.
 
 <article>
 
-### fill: <span><code>string &#124; Array&#60;string&#62; &#124; number &#124; Array&#60;number&#62; &#124; CanvasGradient &#124; CanvasPattern</code></span>
-A canvas fillstyle that will be used on the text e.g., 'red', '#00FF00'.
+### whiteSpace 
+**Type:** <code>string</code>
+
+**Default Value**: <code>"normal"</code>
+
+**Description:** White space
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### wordWrap 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** Word wrap
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### wordWrapWidth 
+**Type:** <code>number</code>
+
+**Default Value**: <code>100</code>
+
+**Description:** Word wrap width
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### align 
+**Type:** <code>'left' &#124; 'center' &#124; 'right' &#124; 'justify'</code>
+
+**Description:** Alignment for multiline text, does not affect single line text.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### breakWords 
+**Type:** <code>boolean</code>
+
+**Description:** Indicates if lines can be wrapped within words, it needs wordWrap to be set to true.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadow 
+**Type:** <code>boolean</code>
+
+**Description:** Set a drop shadow for the text.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowAlpha 
+**Type:** <code>number</code>
+
+**Description:** Set alpha for the drop shadow.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowAngle 
+**Type:** <code>number</code>
+
+**Description:** Set a angle of the drop shadow.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowBlur 
+**Type:** <code>number</code>
+
+**Description:** Set a shadow blur radius.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowColor 
+**Type:** <code>number &#124; string</code>
+
+**Description:** A fill style to be used on the dropshadow e.g., 'red', '#00FF00'.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dropShadowDistance 
+**Type:** <code>number</code>
+
+**Description:** Set a distance of the drop shadow.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### fill 
+**Type:** <code>string &#124; Array&#60;string&#62; &#124; number &#124; Array&#60;number&#62; &#124; CanvasGradient &#124; CanvasPattern</code>
+
+**Description:** A canvas fillstyle that will be used on the text e.g., 'red', '#00FF00'.
 Can be an array to create a gradient e.g., `['#000000','#FFFFFF']`[MDN](https&#58;//developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)
 
 </article>
@@ -411,8 +481,10 @@ Can be an array to create a gradient e.g., `['#000000','#FFFFFF']`[MDN](https&#5
 
 <article>
 
-### fillGradientStops: <span><code>number[]</code></span>
-If fill is an array of colours to create a gradient, this array can set the stop points (numbers between 0 and 1) for the color, overriding the default behaviour of evenly spacing them.
+### fillGradientStops 
+**Type:** <code>number[]</code>
+
+**Description:** If fill is an array of colours to create a gradient, this array can set the stop points (numbers between 0 and 1) for the color, overriding the default behaviour of evenly spacing them.
 
 </article>
 
@@ -421,8 +493,10 @@ If fill is an array of colours to create a gradient, this array can set the stop
 
 <article>
 
-### fillGradientType: <span><code>PIXI.TEXT_GRADIENT</code></span>
-If fill is an array of colours to create a gradient, this can change the type/direction of the gradient.
+### fillGradientType 
+**Type:** <code>PIXI.TEXT_GRADIENT</code>
+
+**Description:** If fill is an array of colours to create a gradient, this can change the type/direction of the gradient.
 
 </article>
 
@@ -431,8 +505,10 @@ If fill is an array of colours to create a gradient, this can change the type/di
 
 <article>
 
-### fontFamily: <span><code>string &#124; string[]</code></span>
-The font family, can be a single font name, or a list of names where the first is the preferred font.
+### fontFamily 
+**Type:** <code>string &#124; string[]</code>
+
+**Description:** The font family, can be a single font name, or a list of names where the first is the preferred font.
 
 </article>
 
@@ -441,8 +517,10 @@ The font family, can be a single font name, or a list of names where the first i
 
 <article>
 
-### fontSize: <span><code>number &#124; string</code></span>
-The font size (as a number it converts to px, but as a string, equivalents are '26px','20pt','160%' or '1.6em')
+### fontSize 
+**Type:** <code>number &#124; string</code>
+
+**Description:** The font size (as a number it converts to px, but as a string, equivalents are '26px','20pt','160%' or '1.6em')
 
 </article>
 
@@ -451,8 +529,10 @@ The font size (as a number it converts to px, but as a string, equivalents are '
 
 <article>
 
-### fontStyle: <span><code>'normal' &#124; 'italic' &#124; 'oblique'</code></span>
-The font style.
+### fontStyle 
+**Type:** <code>'normal' &#124; 'italic' &#124; 'oblique'</code>
+
+**Description:** The font style.
 
 </article>
 
@@ -461,8 +541,10 @@ The font style.
 
 <article>
 
-### fontVariant: <span><code>'normal' &#124; 'small-caps'</code></span>
-The font variant.
+### fontVariant 
+**Type:** <code>'normal' &#124; 'small-caps'</code>
+
+**Description:** The font variant.
 
 </article>
 
@@ -471,8 +553,10 @@ The font variant.
 
 <article>
 
-### fontWeight: <span><code>'normal' &#124; 'bold' &#124; 'bolder' &#124; 'lighter' &#124; '100' &#124; '200' &#124; '300' &#124; '400' &#124; '500' &#124; '600' &#124; '700' &#124; '800' &#124; '900'</code></span>
-The font weight.
+### fontWeight 
+**Type:** <code>'normal' &#124; 'bold' &#124; 'bolder' &#124; 'lighter' &#124; '100' &#124; '200' &#124; '300' &#124; '400' &#124; '500' &#124; '600' &#124; '700' &#124; '800' &#124; '900'</code>
+
+**Description:** The font weight.
 
 </article>
 
@@ -481,8 +565,10 @@ The font weight.
 
 <article>
 
-### leading: <span><code>number</code></span>
-The space between lines.
+### leading 
+**Type:** <code>number</code>
+
+**Description:** The space between lines.
 
 </article>
 
@@ -491,8 +577,10 @@ The space between lines.
 
 <article>
 
-### letterSpacing: <span><code>number</code></span>
-The amount of spacing between letters, default is 0.
+### letterSpacing 
+**Type:** <code>number</code>
+
+**Description:** The amount of spacing between letters, default is 0.
 
 </article>
 
@@ -501,8 +589,10 @@ The amount of spacing between letters, default is 0.
 
 <article>
 
-### lineHeight: <span><code>number</code></span>
-The line height, a number that represents the vertical space that a letter uses.
+### lineHeight 
+**Type:** <code>number</code>
+
+**Description:** The line height, a number that represents the vertical space that a letter uses.
 
 </article>
 
@@ -511,8 +601,10 @@ The line height, a number that represents the vertical space that a letter uses.
 
 <article>
 
-### lineJoin: <span><code>'miter' &#124; 'round' &#124; 'bevel'</code></span>
-The lineJoin property sets the type of corner created, it can resolve spiked text issues. Default is 'miter' (creates a sharp corner).
+### lineJoin 
+**Type:** <code>'miter' &#124; 'round' &#124; 'bevel'</code>
+
+**Description:** The lineJoin property sets the type of corner created, it can resolve spiked text issues. Default is 'miter' (creates a sharp corner).
 
 </article>
 
@@ -521,8 +613,10 @@ The lineJoin property sets the type of corner created, it can resolve spiked tex
 
 <article>
 
-### miterLimit: <span><code>number</code></span>
-The miter limit to use when using the 'miter' lineJoin mode.
+### miterLimit 
+**Type:** <code>number</code>
+
+**Description:** The miter limit to use when using the 'miter' lineJoin mode.
 This can reduce or increase the spikiness of rendered text.
 
 </article>
@@ -532,8 +626,10 @@ This can reduce or increase the spikiness of rendered text.
 
 <article>
 
-### padding: <span><code>number</code></span>
-Occasionally some fonts are cropped. Adding some padding will prevent this from happening by adding padding to all sides of the text.
+### padding 
+**Type:** <code>number</code>
+
+**Description:** Occasionally some fonts are cropped. Adding some padding will prevent this from happening by adding padding to all sides of the text.
 
 </article>
 
@@ -542,8 +638,10 @@ Occasionally some fonts are cropped. Adding some padding will prevent this from 
 
 <article>
 
-### stroke: <span><code>string &#124; number</code></span>
-A canvas fillstyle that will be used on the text stroke, e.g., 'blue', '#FCFF00'
+### stroke 
+**Type:** <code>string &#124; number</code>
+
+**Description:** A canvas fillstyle that will be used on the text stroke, e.g., 'blue', '#FCFF00'
 
 </article>
 
@@ -552,20 +650,12 @@ A canvas fillstyle that will be used on the text stroke, e.g., 'blue', '#FCFF00'
 
 <article>
 
-### strokeThickness: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### strokeThickness 
+**Type:** <code>number</code>
 
-A number that represents the thickness of the stroke.
+**Default Value**: <code>0</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### stylesheet: <span><code>string</code></span>
-Internal stylesheet contents, useful for creating rules for rendering
+**Description:** A number that represents the thickness of the stroke.
 
 </article>
 
@@ -574,8 +664,10 @@ Internal stylesheet contents, useful for creating rules for rendering
 
 <article>
 
-### textBaseline: <span><code>'alphabetic' &#124; 'top' &#124; 'hanging' &#124; 'middle' &#124; 'ideographic' &#124; 'bottom'</code></span>
-The baseline of the text that is rendered.
+### stylesheet 
+**Type:** <code>string</code>
+
+**Description:** Internal stylesheet contents, useful for creating rules for rendering
 
 </article>
 
@@ -584,8 +676,10 @@ The baseline of the text that is rendered.
 
 <article>
 
-### trim: <span><code>boolean</code></span>
-Trim transparent borders.
+### textBaseline 
+**Type:** <code>'alphabetic' &#124; 'top' &#124; 'hanging' &#124; 'middle' &#124; 'ideographic' &#124; 'bottom'</code>
+
+**Description:** The baseline of the text that is rendered.
 
 </article>
 
@@ -594,8 +688,22 @@ Trim transparent borders.
 
 <article>
 
-### whiteSpace: <span><code>'normal' &#124; 'pre' &#124; 'pre-line'</code></span>
-How newlines and spaces should be handled. Default is 'pre' (preserve, preserve).
+### trim 
+**Type:** <code>boolean</code>
+
+**Description:** Trim transparent borders.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### whiteSpace 
+**Type:** <code>'normal' &#124; 'pre' &#124; 'pre-line'</code>
+
+**Description:** How newlines and spaces should be handled. Default is 'pre' (preserve, preserve).
 
 &#124; value      &#124; New lines &#124; Spaces   &#124;
 &#124; ---------- &#124; --------- &#124; -------- &#124;
@@ -610,8 +718,10 @@ How newlines and spaces should be handled. Default is 'pre' (preserve, preserve)
 
 <article>
 
-### wordWrap: <span><code>boolean</code></span>
-Indicates if word wrap should be used.
+### wordWrap 
+**Type:** <code>boolean</code>
+
+**Description:** Indicates if word wrap should be used.
 
 </article>
 
@@ -620,8 +730,10 @@ Indicates if word wrap should be used.
 
 <article>
 
-### wordWrapWidth: <span><code>number</code></span>
-The width at which text will wrap, it needs wordWrap to be set to true.
+### wordWrapWidth 
+**Type:** <code>number</code>
+
+**Description:** The width at which text will wrap, it needs wordWrap to be set to true.
 
 </article>
 
@@ -632,8 +744,11 @@ The width at which text will wrap, it needs wordWrap to be set to true.
 ## Methods
 <article>
 
-### from: <span><code>(originalStyle&#58; TextStyle &#124; Partial&#60;IHTMLTextStyle&#62;) -&#62; HTMLTextStyle</code></span>
-Convert a TextStyle to HTMLTextStyle
+### from 
+**Type:** <code>(originalStyle&#58; TextStyle &#124; Partial&#60;IHTMLTextStyle&#62;) -&#62; HTMLTextStyle</code>
+
+**Description:** Convert a TextStyle to HTMLTextStyle
+
 
 ```js
 import {TextStyle } from 'pixi.js';
@@ -658,8 +773,11 @@ const htmlStyle = HTMLTextStyle.from(style);
 
 <article>
 
-### addOverride: <span><code>(value&#58; string) -&#62; void</code></span>
-Add a style override, this can be any CSS property it will override any built-in style. This is the property and the value as a string (e.g., `color: red`). This will override any other internal style.
+### addOverride 
+**Type:** <code>(value&#58; string) -&#62; void</code>
+
+**Description:** Add a style override, this can be any CSS property it will override any built-in style. This is the property and the value as a string (e.g., `color: red`). This will override any other internal style.
+
 
 ```js
 style.addOverride('background-color: red');
@@ -677,8 +795,10 @@ style.addOverride('background-color: red');
 
 <article>
 
-### cleanFonts: <span><code>() -&#62; void</code></span>
-Clear the current font
+### cleanFonts 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Clear the current font
 
 </article>
 
@@ -687,8 +807,10 @@ Clear the current font
 
 <article>
 
-### clone: <span><code>() -&#62; TextStyle</code></span>
-Creates a new TextStyle object with the same values as this one. Note that the only the properties of the object are cloned.
+### clone 
+**Type:** <code>() -&#62; TextStyle</code>
+
+**Description:** Creates a new TextStyle object with the same values as this one. Note that the only the properties of the object are cloned.
 
 #### Returns:
 | Type                   | Description                 |
@@ -701,8 +823,10 @@ Creates a new TextStyle object with the same values as this one. Note that the o
 
 <article>
 
-### loadFont: <span><code>(url&#58; string, options&#58; Partial&#60;Pick&#60;IHTMLFont, "weight" &#124; "style" &#124; "family"&#62;&#62;) -&#62; Promise&#60;void&#62;</code></span>
-Because of how HTMLText renders, fonts need to be imported
+### loadFont 
+**Type:** <code>(url&#58; string, options&#58; Partial&#60;Pick&#60;IHTMLFont, "weight" &#124; "style" &#124; "family"&#62;&#62;) -&#62; Promise&#60;void&#62;</code>
+
+**Description:** Because of how HTMLText renders, fonts need to be imported
 
 #### Parameters:
 | Name    | Type                                                                                           | Description |
@@ -720,8 +844,11 @@ Because of how HTMLText renders, fonts need to be imported
 
 <article>
 
-### removeOverride: <span><code>(value&#58; string) -&#62; void</code></span>
-Remove any overrides that match the value.
+### removeOverride 
+**Type:** <code>(value&#58; string) -&#62; void</code>
+
+**Description:** Remove any overrides that match the value.
+
 
 ```js
 style.removeOverride('background-color: red');
@@ -739,8 +866,10 @@ style.removeOverride('background-color: red');
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-Resets all properties to the defaults specified in TextStyle.prototype._default
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Resets all properties to the defaults specified in TextStyle.prototype._default
 
 </article>
 
@@ -749,8 +878,10 @@ Resets all properties to the defaults specified in TextStyle.prototype._default
 
 <article>
 
-### toCSS: <span><code>(scale&#58; number) -&#62; string</code></span>
-Internally converts all of the style properties into CSS equivalents.
+### toCSS 
+**Type:** <code>(scale&#58; number) -&#62; string</code>
+
+**Description:** Internally converts all of the style properties into CSS equivalents.
 
 #### Parameters:
 | Name  | Type                | Description |
@@ -767,8 +898,10 @@ Internally converts all of the style properties into CSS equivalents.
 
 <article>
 
-### toFontString: <span><code>() -&#62; string</code></span>
-Generates a font style string to use for `TextMetrics.measureFont()`.
+### toFontString 
+**Type:** <code>() -&#62; string</code>
+
+**Description:** Generates a font style string to use for `TextMetrics.measureFont()`.
 
 #### Returns:
 | Type                | Description                                                   |
@@ -781,8 +914,10 @@ Generates a font style string to use for `TextMetrics.measureFont()`.
 
 <article>
 
-### toGlobalCSS: <span><code>() -&#62; string</code></span>
-Get the font CSS styles from the loaded font, If available.
+### toGlobalCSS 
+**Type:** <code>() -&#62; string</code>
+
+**Description:** Get the font CSS styles from the loaded font, If available.
 
 #### Returns:
 | Type                | Description |

@@ -5,7 +5,12 @@ sidebar_label: "PIXI.MaskSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).MaskSystem
+
+</div>
 
 System plugin to the renderer to manage masks.
 There are three built-in types of masking&#58;**Scissor Masking**&#58; Scissor masking discards pixels that are outside of a rectangle called the scissor box. It is the most performant as the scissor test is inexpensive. However, it can only be used when the mask is rectangular.**Stencil Masking**&#58; Stencil masking discards pixels that don't overlap with the pixels rendered into the stencil buffer. It is the next fastest option as it does not require rendering into a separate framebuffer. However, it does cause the mask to be rendered **twice** for each masking operation; hence, minimize the rendering cost of your masks.**Sprite Mask Filtering**&#58; Sprite mask filtering discards pixels based on the red channel of the sprite-mask's texture. (Generally, the masking texture is grayscale). Using advanced techniques, you might be able to embed this type of masking in a custom shader - and hence, bypassing the masking system fully for performance wins.
@@ -18,13 +23,12 @@ In the scene graph, masks can be applied recursively, i.e. a mask can be applied
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.MaskSystem: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.MaskSystem(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -41,22 +45,12 @@ In the scene graph, masks can be applied recursively, i.e. a mask can be applied
 ## Members
 <article>
 
-### enableScissor: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### enableScissor 
+**Type:** <code>boolean</code>
 
-Flag to enable scissor masking.
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### alphaMaskIndex: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-Current index of alpha mask pool.
+**Description:** Flag to enable scissor masking.
 
 </article>
 
@@ -65,8 +59,24 @@ Current index of alpha mask pool.
 
 <article>
 
-### alphaMaskPool: <span><code>Array&#60;SpriteMaskFilter[]&#62;</code></span>
-Pool of used sprite mask filters.
+### alphaMaskIndex 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** Current index of alpha mask pool.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### alphaMaskPool 
+**Type:** <code>Array&#60;SpriteMaskFilter[]&#62;</code>
+
+**Description:** Pool of used sprite mask filters.
 
 </article>
 
@@ -77,8 +87,10 @@ Pool of used sprite mask filters.
 ## Methods
 <article>
 
-### detect: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
-Sets type of MaskData based on its maskObject.
+### detect 
+**Type:** <code>(maskData&#58; MaskData) -&#62; void</code>
+
+**Description:** Sets type of MaskData based on its maskObject.
 
 #### Parameters:
 | Name     | Type                  | Description |
@@ -91,8 +103,10 @@ Sets type of MaskData based on its maskObject.
 
 <article>
 
-### pop: <span><code>(target&#58; PIXI.IMaskTarget) -&#62; void</code></span>
-Removes the last mask from the mask stack and doesn't return it.
+### pop 
+**Type:** <code>(target&#58; PIXI.IMaskTarget) -&#62; void</code>
+
+**Description:** Removes the last mask from the mask stack and doesn't return it.
 NOTE&#58; The batch renderer should be flushed beforehand to render the masked contents before the mask is removed.
 
 #### Parameters:
@@ -106,8 +120,10 @@ NOTE&#58; The batch renderer should be flushed beforehand to render the masked c
 
 <article>
 
-### popColorMask: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
-Pops the color mask.
+### popColorMask 
+**Type:** <code>(maskData&#58; MaskData) -&#62; void</code>
+
+**Description:** Pops the color mask.
 
 #### Parameters:
 | Name     | Type                  | Description   |
@@ -120,8 +136,10 @@ Pops the color mask.
 
 <article>
 
-### popSpriteMask: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
-Removes the last filter from the filter stack and doesn't return it.
+### popSpriteMask 
+**Type:** <code>(maskData&#58; MaskData) -&#62; void</code>
+
+**Description:** Removes the last filter from the filter stack and doesn't return it.
 
 #### Parameters:
 | Name     | Type                  | Description                    |
@@ -134,8 +152,10 @@ Removes the last filter from the filter stack and doesn't return it.
 
 <article>
 
-### push: <span><code>(target&#58; PIXI.DisplayObject, maskDataOrTarget&#58; PIXI.MaskData &#124; PIXI.Sprite &#124; PIXI.Graphics &#124; PIXI.DisplayObject) -&#62; void</code></span>
-Enables the mask and appends it to the current mask stack.
+### push 
+**Type:** <code>(target&#58; PIXI.DisplayObject, maskDataOrTarget&#58; PIXI.MaskData &#124; PIXI.Sprite &#124; PIXI.Graphics &#124; PIXI.DisplayObject) -&#62; void</code>
+
+**Description:** Enables the mask and appends it to the current mask stack.
 NOTE&#58; The batch renderer should be flushed beforehand to prevent pending renders from being masked.
 
 #### Parameters:
@@ -150,8 +170,10 @@ NOTE&#58; The batch renderer should be flushed beforehand to prevent pending ren
 
 <article>
 
-### pushColorMask: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
-Pushes the color mask.
+### pushColorMask 
+**Type:** <code>(maskData&#58; MaskData) -&#62; void</code>
+
+**Description:** Pushes the color mask.
 
 #### Parameters:
 | Name     | Type                  | Description   |
@@ -164,8 +186,10 @@ Pushes the color mask.
 
 <article>
 
-### pushSpriteMask: <span><code>(maskData&#58; MaskData) -&#62; void</code></span>
-Applies the Mask and adds it to the current filter stack.
+### pushSpriteMask 
+**Type:** <code>(maskData&#58; MaskData) -&#62; void</code>
+
+**Description:** Applies the Mask and adds it to the current filter stack.
 
 #### Parameters:
 | Name     | Type                  | Description                    |
@@ -178,8 +202,10 @@ Applies the Mask and adds it to the current filter stack.
 
 <article>
 
-### setMaskStack: <span><code>(maskStack&#58; Array&#60;MaskData&#62;) -&#62; void</code></span>
-Changes the mask stack that is used by this System.
+### setMaskStack 
+**Type:** <code>(maskStack&#58; Array&#60;MaskData&#62;) -&#62; void</code>
+
+**Description:** Changes the mask stack that is used by this System.
 
 #### Parameters:
 | Name      | Type                                 | Description    |

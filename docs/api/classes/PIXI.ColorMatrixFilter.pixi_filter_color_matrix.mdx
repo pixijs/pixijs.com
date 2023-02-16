@@ -5,7 +5,12 @@ sidebar_label: "PIXI.ColorMatrixFilter"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/filter-color-matrix](../modules/pixi_filter_color_matrix).ColorMatrixFilter
+
+</div>
 
 
 The ColorMatrixFilter class lets you apply a 5x4 matrix transformation on the RGBA color and alpha values of every pixel on your displayObject to produce a result with a new set of RGBA color and alpha values. It's pretty powerful!
@@ -20,14 +25,14 @@ The ColorMatrixFilter class lets you apply a 5x4 matrix transformation on the RG
 ```
       
 
-// TODO: @see
-
         
 
 <article>
+### Contructor:
+<h4><code>new PIXI()</code></h4>
 
-### new PIXI()
 </article>
+            
 
 ## Extends
 - [PIXI.Filter](../classes/PIXI.Filter.pixi_core)
@@ -35,10 +40,12 @@ The ColorMatrixFilter class lets you apply a 5x4 matrix transformation on the RG
 ## Members
 <article>
 
-### alpha: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
+### alpha 
+**Type:** <code>number</code>
 
-The opacity value to use when mixing the original and resultant colors.
+**Default Value**: <code>1</code>
+
+**Description:** The opacity value to use when mixing the original and resultant colors.
 When the value is 0, the original color is used without modification. When the value is 1, the result color is used. When in the range (0, 1) the color is interpolated between the original and result by this amount.
 
 </article>
@@ -48,22 +55,12 @@ When the value is 0, the original color is used without modification. When the v
 
 <article>
 
-### autoFit: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### autoFit 
+**Type:** <code>boolean</code>
 
-If enabled, PixiJS will fit the filter area into boundaries for better performance. Switch it off if it does not work for specific shader.
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### blendMode: <span><code>BLEND_MODES</code></span>
-- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
-
-Sets the blend mode of the filter.
+**Description:** If enabled, PixiJS will fit the filter area into boundaries for better performance. Switch it off if it does not work for specific shader.
 
 </article>
 
@@ -72,8 +69,12 @@ Sets the blend mode of the filter.
 
 <article>
 
-### enabled: <span><code>boolean</code></span>
-If enabled is true the filter is applied, if false it will not.
+### blendMode 
+**Type:** <code>BLEND_MODES</code>
+
+**Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+
+**Description:** Sets the blend mode of the filter.
 
 </article>
 
@@ -82,8 +83,10 @@ If enabled is true the filter is applied, if false it will not.
 
 <article>
 
-### legacy: <span><code>boolean</code></span>
-Legacy filters use position and uvs from attributes (set by filter system)
+### enabled 
+**Type:** <code>boolean</code>
+
+**Description:** If enabled is true the filter is applied, if false it will not.
 
 </article>
 
@@ -92,20 +95,10 @@ Legacy filters use position and uvs from attributes (set by filter system)
 
 <article>
 
-### matrix: <span><code>Array&#60;number&#62;</code></span>
-- **Default Value**: <code>[1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0]</code>
+### legacy 
+**Type:** <code>boolean</code>
 
-The matrix of the color matrix filter
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### multisample: <span><code>MSAA_QUALITY</code></span>
-The samples override of the filter instance.
+**Description:** Legacy filters use position and uvs from attributes (set by filter system)
 
 </article>
 
@@ -114,8 +107,12 @@ The samples override of the filter instance.
 
 <article>
 
-### padding: <span><code>number</code></span>
-The padding of the filter. Some filters require extra space to breath such as a blur. Increasing this will add extra width and height to the bounds of the object that the filter is applied to.
+### matrix 
+**Type:** <code>Array&#60;number&#62;</code>
+
+**Default Value**: <code>[1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0]</code>
+
+**Description:** The matrix of the color matrix filter
 
 </article>
 
@@ -124,8 +121,10 @@ The padding of the filter. Some filters require extra space to breath such as a 
 
 <article>
 
-### program: <span><code>Program</code></span>
-Program that the shader uses.
+### multisample 
+**Type:** <code>MSAA_QUALITY</code>
+
+**Description:** The samples override of the filter instance.
 
 </article>
 
@@ -134,8 +133,10 @@ Program that the shader uses.
 
 <article>
 
-### resolution: <span><code>number</code></span>
-The resolution of the filter. Setting this to be lower will lower the quality but increase the performance of the filter.
+### padding 
+**Type:** <code>number</code>
+
+**Description:** The padding of the filter. Some filters require extra space to breath such as a blur. Increasing this will add extra width and height to the bounds of the object that the filter is applied to.
 
 </article>
 
@@ -144,8 +145,10 @@ The resolution of the filter. Setting this to be lower will lower the quality bu
 
 <article>
 
-### state: <span><code>State</code></span>
-The WebGL state the filter requires to render.
+### program 
+**Type:** <code>Program</code>
+
+**Description:** Program that the shader uses.
 
 </article>
 
@@ -154,8 +157,34 @@ The WebGL state the filter requires to render.
 
 <article>
 
-### uniforms: <span><code>Dict&#60;any&#62;</code></span>
-Shader uniform values, shortcut for `uniformGroup.uniforms`.
+### resolution 
+**Type:** <code>number</code>
+
+**Description:** The resolution of the filter. Setting this to be lower will lower the quality but increase the performance of the filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### state 
+**Type:** <code>State</code>
+
+**Description:** The WebGL state the filter requires to render.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniforms 
+**Type:** <code>Dict&#60;any&#62;</code>
+
+**Description:** Shader uniform values, shortcut for `uniformGroup.uniforms`.
 
 </article>
 
@@ -166,8 +195,10 @@ Shader uniform values, shortcut for `uniformGroup.uniforms`.
 ## Methods
 <article>
 
-### apply: <span><code>(filterManager&#58; PIXI.FilterSystem, input&#58; PIXI.RenderTexture, output&#58; PIXI.RenderTexture, clearMode&#58; PIXI.CLEAR_MODES, _currentState&#58; object) -&#62; void</code></span>
-Applies the filter
+### apply 
+**Type:** <code>(filterManager&#58; PIXI.FilterSystem, input&#58; PIXI.RenderTexture, output&#58; PIXI.RenderTexture, clearMode&#58; PIXI.CLEAR_MODES, _currentState&#58; object) -&#62; void</code>
+
+**Description:** Applies the filter
 
 #### Parameters:
 | Name          | Type                            | Description                                                                                                                                                       |
@@ -184,8 +215,10 @@ Applies the filter
 
 <article>
 
-### blackAndWhite: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
-Set the black and white matrice.
+### blackAndWhite 
+**Type:** <code>(multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Set the black and white matrice.
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -198,8 +231,10 @@ Set the black and white matrice.
 
 <article>
 
-### brightness: <span><code>(b&#58; number, multiply&#58; boolean) -&#62; void</code></span>
-Adjusts brightness
+### brightness 
+**Type:** <code>(b&#58; number, multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Adjusts brightness
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -213,8 +248,10 @@ Adjusts brightness
 
 <article>
 
-### browni: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
-Brown delicious browni filter (thanks Dominic Szablewski)
+### browni 
+**Type:** <code>(multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Brown delicious browni filter (thanks Dominic Szablewski)
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -227,8 +264,10 @@ Brown delicious browni filter (thanks Dominic Szablewski)
 
 <article>
 
-### colorTone: <span><code>(desaturation&#58; number, toned&#58; number, lightColor&#58; number, darkColor&#58; number, multiply&#58; boolean) -&#62; void</code></span>
-We don't know exactly what it does, kind of gradient map, but funny to play with!
+### colorTone 
+**Type:** <code>(desaturation&#58; number, toned&#58; number, lightColor&#58; number, darkColor&#58; number, multiply&#58; boolean) -&#62; void</code>
+
+**Description:** We don't know exactly what it does, kind of gradient map, but funny to play with!
 
 #### Parameters:
 | Name         | Type                 | Description                                                                                                     |
@@ -245,8 +284,10 @@ We don't know exactly what it does, kind of gradient map, but funny to play with
 
 <article>
 
-### contrast: <span><code>(amount&#58; number, multiply&#58; boolean) -&#62; void</code></span>
-Set the contrast matrix, increase the separation between dark and bright Increase contrast &#58; shadows darker and highlights brighter Decrease contrast &#58; bring the shadows up and the highlights down
+### contrast 
+**Type:** <code>(amount&#58; number, multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Set the contrast matrix, increase the separation between dark and bright Increase contrast &#58; shadows darker and highlights brighter Decrease contrast &#58; bring the shadows up and the highlights down
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -260,8 +301,10 @@ Set the contrast matrix, increase the separation between dark and bright Increas
 
 <article>
 
-### desaturate: <span><code>() -&#62; void</code></span>
-Desaturate image (remove color) Call the saturate function
+### desaturate 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Desaturate image (remove color) Call the saturate function
 
 </article>
 
@@ -270,8 +313,10 @@ Desaturate image (remove color) Call the saturate function
 
 <article>
 
-### greyscale: <span><code>(scale&#58; number, multiply&#58; boolean) -&#62; void</code></span>
-Set the matrices in grey scales
+### greyscale 
+**Type:** <code>(scale&#58; number, multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Set the matrices in grey scales
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -285,8 +330,10 @@ Set the matrices in grey scales
 
 <article>
 
-### hue: <span><code>(rotation&#58; number, multiply&#58; boolean) -&#62; void</code></span>
-Set the hue property of the color
+### hue 
+**Type:** <code>(rotation&#58; number, multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Set the hue property of the color
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -300,8 +347,10 @@ Set the hue property of the color
 
 <article>
 
-### kodachrome: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
-Color reversal film introduced by Eastman Kodak in 1935\. (thanks Dominic Szablewski)
+### kodachrome 
+**Type:** <code>(multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Color reversal film introduced by Eastman Kodak in 1935\. (thanks Dominic Szablewski)
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -314,8 +363,10 @@ Color reversal film introduced by Eastman Kodak in 1935\. (thanks Dominic Szable
 
 <article>
 
-### lsd: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
-LSD effect
+### lsd 
+**Type:** <code>(multiply&#58; boolean) -&#62; void</code>
+
+**Description:** LSD effect
 Multiply the current matrix
 
 #### Parameters:
@@ -329,8 +380,10 @@ Multiply the current matrix
 
 <article>
 
-### negative: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
-Negative image (inverse of classic rgb matrix)
+### negative 
+**Type:** <code>(multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Negative image (inverse of classic rgb matrix)
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -343,8 +396,10 @@ Negative image (inverse of classic rgb matrix)
 
 <article>
 
-### night: <span><code>(intensity&#58; number, multiply&#58; boolean) -&#62; void</code></span>
-Night effect
+### night 
+**Type:** <code>(intensity&#58; number, multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Night effect
 
 #### Parameters:
 | Name      | Type                 | Description                                                                                                     |
@@ -358,8 +413,10 @@ Night effect
 
 <article>
 
-### polaroid: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
-Polaroid filter
+### polaroid 
+**Type:** <code>(multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Polaroid filter
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -372,8 +429,10 @@ Polaroid filter
 
 <article>
 
-### predator: <span><code>(amount&#58; number, multiply&#58; boolean) -&#62; void</code></span>
-Predator effect
+### predator 
+**Type:** <code>(amount&#58; number, multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Predator effect
 Erase the current matrix by setting a new indepent one
 
 #### Parameters:
@@ -388,8 +447,10 @@ Erase the current matrix by setting a new indepent one
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-Erase the current matrix by setting the default one.
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Erase the current matrix by setting the default one.
 
 </article>
 
@@ -398,8 +459,10 @@ Erase the current matrix by setting the default one.
 
 <article>
 
-### saturate: <span><code>(amount&#58; number, multiply&#58; boolean) -&#62; void</code></span>
-Set the saturation matrix, increase the separation between colors Increase saturation &#58; increase contrast, brightness, and sharpness
+### saturate 
+**Type:** <code>(amount&#58; number, multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Set the saturation matrix, increase the separation between colors Increase saturation &#58; increase contrast, brightness, and sharpness
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -413,8 +476,10 @@ Set the saturation matrix, increase the separation between colors Increase satur
 
 <article>
 
-### sepia: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
-Sepia image
+### sepia 
+**Type:** <code>(multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Sepia image
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -427,8 +492,10 @@ Sepia image
 
 <article>
 
-### technicolor: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
-Color motion picture process invented in 1916 (thanks Dominic Szablewski)
+### technicolor 
+**Type:** <code>(multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Color motion picture process invented in 1916 (thanks Dominic Szablewski)
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -441,8 +508,10 @@ Color motion picture process invented in 1916 (thanks Dominic Szablewski)
 
 <article>
 
-### tint: <span><code>(color&#58; number, multiply&#58; boolean) -&#62; void</code></span>
-Sets each channel on the diagonal of the color matrix. This can be used to achieve a tinting effect on Containers similar to the tint field of some display objects like Sprite, Text, Graphics, and Mesh.
+### tint 
+**Type:** <code>(color&#58; number, multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Sets each channel on the diagonal of the color matrix. This can be used to achieve a tinting effect on Containers similar to the tint field of some display objects like Sprite, Text, Graphics, and Mesh.
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -456,8 +525,10 @@ Sets each channel on the diagonal of the color matrix. This can be used to achie
 
 <article>
 
-### toBGR: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
-Filter who transforms &#58; Red -&#62; Blue and Blue -&#62; Red
+### toBGR 
+**Type:** <code>(multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Filter who transforms &#58; Red -&#62; Blue and Blue -&#62; Red
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |
@@ -470,8 +541,10 @@ Filter who transforms &#58; Red -&#62; Blue and Blue -&#62; Red
 
 <article>
 
-### vintage: <span><code>(multiply&#58; boolean) -&#62; void</code></span>
-Vintage filter (thanks Dominic Szablewski)
+### vintage 
+**Type:** <code>(multiply&#58; boolean) -&#62; void</code>
+
+**Description:** Vintage filter (thanks Dominic Szablewski)
 
 #### Parameters:
 | Name     | Type                 | Description                                                                                                     |

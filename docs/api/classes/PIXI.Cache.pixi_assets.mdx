@@ -5,7 +5,12 @@ sidebar_label: "PIXI.Cache"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/assets](../modules/pixi_assets).Cache
+
+</div>
 
 A single Cache for all assets.
 When assets are added to the cache via set they normally are added to the cache as key-value pairs.
@@ -18,13 +23,12 @@ It is not intended that this class is created by developers - it is part of the 
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Cache: <span><code>() </code></span>
+### Constructor:
+<h4><code>new PIXI.Cache() </code></h4>
 A single Cache for all assets.
 
 #### Parameters:
@@ -41,8 +45,10 @@ A single Cache for all assets.
 ## Members
 <article>
 
-### parsers: <span><code>CacheParser[]</code></span>
-All loader parsers registered
+### parsers 
+**Type:** <code>CacheParser[]</code>
+
+**Description:** All loader parsers registered
 
 </article>
 
@@ -53,8 +59,10 @@ All loader parsers registered
 ## Methods
 <article>
 
-### get: <span><code>(key&#58; string) -&#62; T</code></span>
-Fetch entry by key
+### get 
+**Type:** <code>(key&#58; string) -&#62; T</code>
+
+**Description:** Fetch entry by key
 
 #### Parameters:
 | Name | Type                | Description                 |
@@ -71,8 +79,10 @@ Fetch entry by key
 
 <article>
 
-### has: <span><code>(key&#58; string) -&#62; boolean</code></span>
-Check if the key exists
+### has 
+**Type:** <code>(key&#58; string) -&#62; boolean</code>
+
+**Description:** Check if the key exists
 
 #### Parameters:
 | Name | Type                | Description      |
@@ -89,8 +99,10 @@ Check if the key exists
 
 <article>
 
-### remove: <span><code>(key&#58; string) -&#62; void</code></span>
-Remove entry by key
+### remove 
+**Type:** <code>(key&#58; string) -&#62; void</code>
+
+**Description:** Remove entry by key
 This function will also remove any associated alias from the cache also.
 
 #### Parameters:
@@ -104,8 +116,10 @@ This function will also remove any associated alias from the cache also.
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-Clear all entries.
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Clear all entries.
 
 </article>
 
@@ -114,8 +128,10 @@ Clear all entries.
 
 <article>
 
-### set: <span><code>(key&#58; string &#124; string[], value&#58; unknown) -&#62; void</code></span>
-Set a value by key or keys name
+### set 
+**Type:** <code>(key&#58; string &#124; string[], value&#58; unknown) -&#62; void</code>
+
+**Description:** Set a value by key or keys name
 
 #### Parameters:
 | Name  | Type                                | Description                                                                     |

@@ -5,20 +5,24 @@ sidebar_label: "PIXI.BatchRenderer"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).BatchRenderer
+
+</div>
 
 Renderer dedicated to drawing and batching sprites.
 This is the default batch renderer. It buffers objects with texture-based geometries and renders them in batches. It uploads multiple textures to the GPU to reduce to the number of draw calls.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.BatchRenderer: <span><code>(renderer&#58; PIXI.Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.BatchRenderer(renderer&#58; PIXI.Renderer) </code></h4>
 This will hook onto the renderer's `contextChange`and `prerender` signals.
 
 #### Parameters:
@@ -37,8 +41,10 @@ This will hook onto the renderer's `contextChange`and `prerender` signals.
 ## Members
 <article>
 
-### _drawCallPool: <span><code>Array&#60;PIXI.BatchDrawCall&#62;</code></span>
-Pool of `BatchDrawCall` objects that `flush` used to create "batches" of the objects being rendered.
+### _drawCallPool 
+**Type:** <code>Array&#60;PIXI.BatchDrawCall&#62;</code>
+
+**Description:** Pool of `BatchDrawCall` objects that `flush` used to create "batches" of the objects being rendered.
 
 These are never re-allocated again. Shared between all batch renderers because it can be only one "flush" working at the moment.
 
@@ -49,8 +55,10 @@ These are never re-allocated again. Shared between all batch renderers because i
 
 <article>
 
-### _textureArrayPool: <span><code>Array&#60;PIXI.BatchTextureArray&#62;</code></span>
-Pool of `BatchDrawCall` objects that `flush` used to create "batches" of the objects being rendered.
+### _textureArrayPool 
+**Type:** <code>Array&#60;PIXI.BatchTextureArray&#62;</code>
+
+**Description:** Pool of `BatchDrawCall` objects that `flush` used to create "batches" of the objects being rendered.
 
 These are never re-allocated again. Shared between all batch renderers because it can be only one "flush" working at the moment.
 
@@ -61,8 +69,10 @@ These are never re-allocated again. Shared between all batch renderers because i
 
 <article>
 
-### canUploadSameBuffer: <span><code>boolean</code></span>
-Can we upload the same buffer in a single frame?
+### canUploadSameBuffer 
+**Type:** <code>boolean</code>
+
+**Description:** Can we upload the same buffer in a single frame?
 
 </article>
 
@@ -71,10 +81,12 @@ Can we upload the same buffer in a single frame?
 
 <article>
 
-### defaultBatchSize: <span><code>number</code></span>
-- **Default Value**: <code>4096</code>
+### defaultBatchSize 
+**Type:** <code>number</code>
 
-The default sprite batch size.
+**Default Value**: <code>4096</code>
+
+**Description:** The default sprite batch size.
 The default aims to balance desktop and mobile devices.
 
 </article>
@@ -84,8 +96,10 @@ The default aims to balance desktop and mobile devices.
 
 <article>
 
-### defaultFragmentTemplate: <span><code>string</code></span>
-The default fragment shader source
+### defaultFragmentTemplate 
+**Type:** <code>string</code>
+
+**Description:** The default fragment shader source
 
 </article>
 
@@ -94,20 +108,12 @@ The default fragment shader source
 
 <article>
 
-### defaultMaxTextures: <span><code>number</code></span>
-- **Default Value**: <code>32</code>
+### defaultMaxTextures 
+**Type:** <code>number</code>
 
-The maximum textures that this device supports.
+**Default Value**: <code>32</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### defaultVertexSrc: <span><code>string</code></span>
-The default vertex shader source
+**Description:** The maximum textures that this device supports.
 
 </article>
 
@@ -116,7 +122,10 @@ The default vertex shader source
 
 <article>
 
-### MAX_TEXTURES: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+### defaultVertexSrc 
+**Type:** <code>string</code>
+
+**Description:** The default vertex shader source
 
 </article>
 
@@ -125,8 +134,9 @@ The default vertex shader source
 
 <article>
 
-### maxTextures: <span><code>number</code></span>
-Maximum number of textures that can be uploaded to the GPU under the current context. It is initialized properly in `this.contextChange`.
+### MAX_TEXTURES : <span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -135,20 +145,10 @@ Maximum number of textures that can be uploaded to the GPU under the current con
 
 <article>
 
-### size: <span><code>number</code></span>
-- **Default Value**: <code>PIXI.BatchRenderer.defaultBatchSize * 4</code>
+### maxTextures 
+**Type:** <code>number</code>
 
-The number of bufferable objects before a flush occurs automatically.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### state: <span><code>State</code></span>
-The WebGL state in which this renderer will work.
+**Description:** Maximum number of textures that can be uploaded to the GPU under the current context. It is initialized properly in `this.contextChange`.
 
 </article>
 
@@ -157,8 +157,36 @@ The WebGL state in which this renderer will work.
 
 <article>
 
-### _aBuffers: <span><code>Array&#60;PIXI.ViewableBuffer&#62;</code></span>
-Pool of `ViewableBuffer` objects that are sorted in order of increasing size. The flush method uses the buffer with the least size above the amount it requires. These are used for passing attributes.
+### size 
+**Type:** <code>number</code>
+
+**Default Value**: <code>PIXI.BatchRenderer.defaultBatchSize * 4</code>
+
+**Description:** The number of bufferable objects before a flush occurs automatically.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### state 
+**Type:** <code>State</code>
+
+**Description:** The WebGL state in which this renderer will work.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _aBuffers 
+**Type:** <code>Array&#60;PIXI.ViewableBuffer&#62;</code>
+
+**Description:** Pool of `ViewableBuffer` objects that are sorted in order of increasing size. The flush method uses the buffer with the least size above the amount it requires. These are used for passing attributes.
 
 The first buffer has a size of 8; each subsequent buffer has double capacity of its previous.
 
@@ -169,8 +197,10 @@ The first buffer has a size of 8; each subsequent buffer has double capacity of 
 
 <article>
 
-### _bufferedElements: <span><code>Array&#60;PIXI.DisplayObject&#62;</code></span>
-Buffer of objects that are yet to be rendered.
+### _bufferedElements 
+**Type:** <code>Array&#60;PIXI.DisplayObject&#62;</code>
+
+**Description:** Buffer of objects that are yet to be rendered.
 
 </article>
 
@@ -179,8 +209,10 @@ Buffer of objects that are yet to be rendered.
 
 <article>
 
-### _bufferedTextures: <span><code>Array&#60;PIXI.BaseTexture&#62;</code></span>
-Data for texture batch builder, helps to save a bit of CPU on a pass.
+### _bufferedTextures 
+**Type:** <code>Array&#60;PIXI.BaseTexture&#62;</code>
+
+**Description:** Data for texture batch builder, helps to save a bit of CPU on a pass.
 
 </article>
 
@@ -189,8 +221,10 @@ Data for texture batch builder, helps to save a bit of CPU on a pass.
 
 <article>
 
-### _bufferSize: <span><code>number</code></span>
-Number of elements that are buffered and are waiting to be flushed.
+### _bufferSize 
+**Type:** <code>number</code>
+
+**Description:** Number of elements that are buffered and are waiting to be flushed.
 
 </article>
 
@@ -199,8 +233,10 @@ Number of elements that are buffered and are waiting to be flushed.
 
 <article>
 
-### _flushId: <span><code>number</code></span>
-A flush may occur multiple times in a single frame. On iOS devices or when`BatchRenderer.canUploadSameBuffer` is false, the batch renderer does not upload data to the same`WebGLBuffer` for performance reasons.
+### _flushId 
+**Type:** <code>number</code>
+
+**Description:** A flush may occur multiple times in a single frame. On iOS devices or when`BatchRenderer.canUploadSameBuffer` is false, the batch renderer does not upload data to the same`WebGLBuffer` for performance reasons.
 
 This is the index into `packedGeometries` that points to geometry holding the most recent buffers.
 
@@ -211,8 +247,10 @@ This is the index into `packedGeometries` that points to geometry holding the mo
 
 <article>
 
-### _iBuffers: <span><code>Array&#60;Uint16Array&#62;</code></span>
-Pool of `Uint16Array` objects that are sorted in order of increasing size. The flush method uses the buffer with the least size above the amount it requires. These are used for passing indices.
+### _iBuffers 
+**Type:** <code>Array&#60;Uint16Array&#62;</code>
+
+**Description:** Pool of `Uint16Array` objects that are sorted in order of increasing size. The flush method uses the buffer with the least size above the amount it requires. These are used for passing indices.
 
 The first buffer has a size of 12; each subsequent buffer has double capacity of its previous.
 
@@ -223,8 +261,10 @@ The first buffer has a size of 12; each subsequent buffer has double capacity of
 
 <article>
 
-### _indexCount: <span><code>number</code></span>
-Total count of all indices used by the currently buffered objects.
+### _indexCount 
+**Type:** <code>number</code>
+
+**Description:** Total count of all indices used by the currently buffered objects.
 
 </article>
 
@@ -233,8 +273,10 @@ Total count of all indices used by the currently buffered objects.
 
 <article>
 
-### _shader: <span><code>Shader</code></span>
-This shader is generated by `this.shaderGenerator`.
+### _shader 
+**Type:** <code>Shader</code>
+
+**Description:** This shader is generated by `this.shaderGenerator`.
 It is generated specifically to handle the required number of textures being batched together.
 
 </article>
@@ -244,8 +286,10 @@ It is generated specifically to handle the required number of textures being bat
 
 <article>
 
-### _vertexCount: <span><code>number</code></span>
-Total count of all vertices used by the currently buffered objects.
+### _vertexCount 
+**Type:** <code>number</code>
+
+**Description:** Total count of all vertices used by the currently buffered objects.
 
 </article>
 
@@ -254,20 +298,12 @@ Total count of all vertices used by the currently buffered objects.
 
 <article>
 
-### geometryClass: <span><code>object</code></span>
-- **Default Value**: <code>PIXI.BatchGeometry</code>
+### geometryClass 
+**Type:** <code>object</code>
 
-The class that represents the geometry of objects that are going to be batched with this.
+**Default Value**: <code>PIXI.BatchGeometry</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### renderer: <span><code>Renderer</code></span>
-The renderer this manager works for.
+**Description:** The class that represents the geometry of objects that are going to be batched with this.
 
 </article>
 
@@ -276,8 +312,22 @@ The renderer this manager works for.
 
 <article>
 
-### shaderGenerator: <span><code>BatchShaderGenerator</code></span>
-This is used to generate a shader that can color each vertex based on a `aTextureId`attribute that points to an texture in `uSampler`.
+### renderer 
+**Type:** <code>Renderer</code>
+
+**Description:** The renderer this manager works for.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### shaderGenerator 
+**Type:** <code>BatchShaderGenerator</code>
+
+**Description:** This is used to generate a shader that can color each vertex based on a `aTextureId`attribute that points to an texture in `uSampler`.
 
 This enables the objects with different textures to be drawn in the same draw call.
 
@@ -290,10 +340,12 @@ You can customize your shader by creating your custom shader generator.
 
 <article>
 
-### vertexSize: <span><code>number</code></span>
-- **Default Value**: <code>6</code>
+### vertexSize 
+**Type:** <code>number</code>
 
-Size of data being buffered per vertex in the attribute buffers (in floats). By default, the batch-renderer plugin uses 6&#58;
+**Default Value**: <code>6</code>
+
+**Description:** Size of data being buffered per vertex in the attribute buffers (in floats). By default, the batch-renderer plugin uses 6&#58;
 
 &#124; aVertexPosition &#124; 2 &#124;
 &#124; --------------- &#124; - &#124;
@@ -310,8 +362,10 @@ Size of data being buffered per vertex in the attribute buffers (in floats). By 
 ## Methods
 <article>
 
-### bindAndClearTexArray: <span><code>(texArray&#58; BatchTextureArray) -&#62; void</code></span>
-Bind textures for current rendering
+### bindAndClearTexArray 
+**Type:** <code>(texArray&#58; BatchTextureArray) -&#62; void</code>
+
+**Description:** Bind textures for current rendering
 
 #### Parameters:
 | Name     | Type                           | Description |
@@ -324,8 +378,10 @@ Bind textures for current rendering
 
 <article>
 
-### buildDrawCalls: <span><code>(texArray&#58; BatchTextureArray, start&#58; number, finish&#58; number) -&#62; void</code></span>
-Populating drawcalls for rendering
+### buildDrawCalls 
+**Type:** <code>(texArray&#58; BatchTextureArray, start&#58; number, finish&#58; number) -&#62; void</code>
+
+**Description:** Populating drawcalls for rendering
 
 #### Parameters:
 | Name     | Type                           | Description |
@@ -340,8 +396,10 @@ Populating drawcalls for rendering
 
 <article>
 
-### contextChange: <span><code>() -&#62; void</code></span>
-Handles the `contextChange` signal.
+### contextChange 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Handles the `contextChange` signal.
 It calculates `this.maxTextures` and allocating the packed-geometry object pool.
 
 </article>
@@ -351,8 +409,10 @@ It calculates `this.maxTextures` and allocating the packed-geometry object pool.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys this `BatchRenderer`. It cannot be used again.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys this `BatchRenderer`. It cannot be used again.
 
 </article>
 
@@ -361,8 +421,10 @@ Destroys this `BatchRenderer`. It cannot be used again.
 
 <article>
 
-### flush: <span><code>() -&#62; void</code></span>
-Renders the content _now_ and empties the current batch.
+### flush 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Renders the content _now_ and empties the current batch.
 
 </article>
 
@@ -371,8 +433,10 @@ Renders the content _now_ and empties the current batch.
 
 <article>
 
-### getAttributeBuffer: <span><code>(size&#58; number) -&#62; ViewableBuffer</code></span>
-Fetches an attribute buffer from `this._aBuffers` that can hold atleast `size` floats.
+### getAttributeBuffer 
+**Type:** <code>(size&#58; number) -&#62; ViewableBuffer</code>
+
+**Description:** Fetches an attribute buffer from `this._aBuffers` that can hold atleast `size` floats.
 
 #### Parameters:
 | Name | Type                | Description               |
@@ -389,8 +453,10 @@ Fetches an attribute buffer from `this._aBuffers` that can hold atleast `size` f
 
 <article>
 
-### getIndexBuffer: <span><code>(size&#58; number) -&#62; Uint16Array</code></span>
-Fetches an index buffer from `this._iBuffers` that can have at least `size` capacity.
+### getIndexBuffer 
+**Type:** <code>(size&#58; number) -&#62; Uint16Array</code>
+
+**Description:** Fetches an index buffer from `this._iBuffers` that can have at least `size` capacity.
 
 #### Parameters:
 | Name | Type                | Description               |
@@ -407,8 +473,10 @@ Fetches an index buffer from `this._iBuffers` that can have at least `size` capa
 
 <article>
 
-### initFlushBuffers: <span><code>() -&#62; void</code></span>
-Makes sure that static and dynamic flush pooled objects have correct dimensions.
+### initFlushBuffers 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Makes sure that static and dynamic flush pooled objects have correct dimensions.
 
 </article>
 
@@ -417,8 +485,10 @@ Makes sure that static and dynamic flush pooled objects have correct dimensions.
 
 <article>
 
-### onPrerender: <span><code>() -&#62; void</code></span>
-Handles the `prerender` signal. It ensures that flushes start from the first geometry object again.
+### onPrerender 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Handles the `prerender` signal. It ensures that flushes start from the first geometry object again.
 
 </article>
 
@@ -427,8 +497,10 @@ Handles the `prerender` signal. It ensures that flushes start from the first geo
 
 <article>
 
-### packInterleavedGeometry: <span><code>(element&#58; PIXI.DisplayObject, attributeBuffer&#58; ViewableBuffer, indexBuffer&#58; Uint16Array, aIndex&#58; number, iIndex&#58; number) -&#62; void</code></span>
-Takes the four batching parameters of `element`, interleaves and pushes them into the batching attribute/index buffers given.
+### packInterleavedGeometry 
+**Type:** <code>(element&#58; PIXI.DisplayObject, attributeBuffer&#58; ViewableBuffer, indexBuffer&#58; Uint16Array, aIndex&#58; number, iIndex&#58; number) -&#62; void</code>
+
+**Description:** Takes the four batching parameters of `element`, interleaves and pushes them into the batching attribute/index buffers given.
 
 It uses these properties&#58; `vertexData` `uvs`, `textureId` and`indicies`. It also uses the "tint" of the base-texture, if present.
 
@@ -447,8 +519,10 @@ It uses these properties&#58; `vertexData` `uvs`, `textureId` and`indicies`. It 
 
 <article>
 
-### render: <span><code>(element&#58; PIXI.DisplayObject) -&#62; void</code></span>
-Buffers the "batchable" object. It need not be rendered immediately.
+### render 
+**Type:** <code>(element&#58; PIXI.DisplayObject) -&#62; void</code>
+
+**Description:** Buffers the "batchable" object. It need not be rendered immediately.
 
 #### Parameters:
 | Name    | Type                            | Description                                    |
@@ -461,8 +535,10 @@ Buffers the "batchable" object. It need not be rendered immediately.
 
 <article>
 
-### setShaderGenerator: <span><code>(options&#58; object) -&#62; void</code></span>
-Set the shader generator.
+### setShaderGenerator 
+**Type:** <code>(options&#58; object) -&#62; void</code>
+
+**Description:** Set the shader generator.
 
 #### Parameters:
 | Name             | Type                | Description              |
@@ -477,8 +553,10 @@ Set the shader generator.
 
 <article>
 
-### start: <span><code>() -&#62; void</code></span>
-Starts a new sprite batch.
+### start 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Starts a new sprite batch.
 
 </article>
 
@@ -487,8 +565,10 @@ Starts a new sprite batch.
 
 <article>
 
-### stop: <span><code>() -&#62; void</code></span>
-Stops and flushes the current batch.
+### stop 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stops and flushes the current batch.
 
 </article>
 

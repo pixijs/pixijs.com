@@ -5,20 +5,24 @@ sidebar_label: "PIXI.Shader"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).Shader
+
+</div>
 
 
 A helper class for shaders.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Shader: <span><code>(program&#58; Program, uniforms&#58; Dict&#60;any&#62;) </code></span>
+### Constructor:
+<h4><code>new PIXI.Shader(program&#58; Program, uniforms&#58; Dict&#60;any&#62;) </code></h4>
 
 #### Parameters:
 | Name     | Type                           | Default       | Description                                          |
@@ -36,8 +40,10 @@ A helper class for shaders.
 ## Members
 <article>
 
-### program: <span><code>Program</code></span>
-Program that the shader uses.
+### program 
+**Type:** <code>Program</code>
+
+**Description:** Program that the shader uses.
 
 </article>
 
@@ -46,8 +52,10 @@ Program that the shader uses.
 
 <article>
 
-### uniforms: <span><code>Dict&#60;any&#62;</code></span>
-Shader uniform values, shortcut for `uniformGroup.uniforms`.
+### uniforms 
+**Type:** <code>Dict&#60;any&#62;</code>
+
+**Description:** Shader uniform values, shortcut for `uniformGroup.uniforms`.
 
 </article>
 
@@ -58,8 +66,10 @@ Shader uniform values, shortcut for `uniformGroup.uniforms`.
 ## Methods
 <article>
 
-### from: <span><code>(vertexSrc&#58; string, fragmentSrc&#58; string, uniforms&#58; Dict&#60;any&#62;) -&#62; Shader</code></span>
-A short hand function to create a shader based of a vertex and fragment shader.
+### from 
+**Type:** <code>(vertexSrc&#58; string, fragmentSrc&#58; string, uniforms&#58; Dict&#60;any&#62;) -&#62; Shader</code>
+
+**Description:** A short hand function to create a shader based of a vertex and fragment shader.
 
 #### Parameters:
 | Name        | Type                           | Description                                          |

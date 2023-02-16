@@ -5,7 +5,12 @@ sidebar_label: "PIXI.GraphicsGeometry"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/graphics](../modules/pixi_graphics).GraphicsGeometry
+
+</div>
 
 
 The Graphics class contains methods used to draw primitive shapes such as lines, circles and rectangles to the display, and to color and fill them.
@@ -14,14 +19,14 @@ GraphicsGeometry is designed to not be continually updating the geometry since i
 
 
 
-// TODO: @see
-
         
 
 <article>
+### Contructor:
+<h4><code>new PIXI()</code></h4>
 
-### new PIXI()
 </article>
+            
 
 ## Extends
 - [PIXI.BatchGeometry](../classes/PIXI.BatchGeometry.pixi_core)
@@ -29,22 +34,12 @@ GraphicsGeometry is designed to not be continually updating the geometry since i
 ## Members
 <article>
 
-### BATCHABLE_SIZE: <span><code>number</code></span>
-- **Default Value**: <code>100</code>
+### BATCHABLE_SIZE 
+**Type:** <code>number</code>
 
-The maximum number of points to consider an object "batchable", able to be batched by the renderer's batch system.
+**Default Value**: <code>100</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### batchDirty: <span><code>number</code></span>
-- **Default Value**: <code>-1</code>
-
-Batches need to regenerated if the geometry is updated.
+**Description:** The maximum number of points to consider an object "batchable", able to be batched by the renderer's batch system.
 
 </article>
 
@@ -53,8 +48,12 @@ Batches need to regenerated if the geometry is updated.
 
 <article>
 
-### batches: <span><code>Array&#60;PIXI.graphicsUtils.BatchPart&#62;</code></span>
-Intermediate abstract format sent to batch system. Can be converted to drawCalls or to batchable objects.
+### batchDirty 
+**Type:** <code>number</code>
+
+**Default Value**: <code>-1</code>
+
+**Description:** Batches need to regenerated if the geometry is updated.
 
 </article>
 
@@ -63,8 +62,22 @@ Intermediate abstract format sent to batch system. Can be converted to drawCalls
 
 <article>
 
-### bounds: <span><code>Bounds</code></span>
-Get the current bounds of the graphic geometry.
+### batches 
+**Type:** <code>Array&#60;PIXI.graphicsUtils.BatchPart&#62;</code>
+
+**Description:** Intermediate abstract format sent to batch system. Can be converted to drawCalls or to batchable objects.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### bounds 
+**Type:** <code>Bounds</code>
+
+**Description:** Get the current bounds of the graphic geometry.
 Since 6.5.0, bounds of the graphics geometry are calculated based on the vertices of generated geometry. Since shapes or strokes with full transparency (`alpha: 0`) will not generate geometry, they are not considered when calculating bounds for the graphics geometry. See PR [#8343](https&#58;//github.com/pixijs/pixijs/pull/8343) and issue [#8623](https&#58;//github.com/pixijs/pixijs/pull/8623).
 
 </article>
@@ -74,22 +87,12 @@ Since 6.5.0, bounds of the graphics geometry are calculated based on the vertice
 
 <article>
 
-### boundsPadding: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### boundsPadding 
+**Type:** <code>number</code>
 
-Padding to add to the bounds.
+**Default Value**: <code>0</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### closePointEps: <span><code>number</code></span>
-- **Default Value**: <code>0.0001</code>
-
-Minimal distance between points that are considered different. Affects line tesselation.
+**Description:** Padding to add to the bounds.
 
 </article>
 
@@ -98,8 +101,12 @@ Minimal distance between points that are considered different. Affects line tess
 
 <article>
 
-### colors: <span><code>number[]</code></span>
-The collection of colors
+### closePointEps 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0.0001</code>
+
+**Description:** Minimal distance between points that are considered different. Affects line tesselation.
 
 </article>
 
@@ -108,8 +115,10 @@ The collection of colors
 
 <article>
 
-### drawCalls: <span><code>Array&#60;PIXI.BatchDrawCall&#62;</code></span>
-List of current draw calls drived from the batches.
+### colors 
+**Type:** <code>number[]</code>
+
+**Description:** The collection of colors
 
 </article>
 
@@ -118,8 +127,10 @@ List of current draw calls drived from the batches.
 
 <article>
 
-### glVertexArrayObjects: <span><code>object</code></span>
-A map of renderer IDs to webgl VAOs
+### drawCalls 
+**Type:** <code>Array&#60;PIXI.BatchDrawCall&#62;</code>
+
+**Description:** List of current draw calls drived from the batches.
 
 </article>
 
@@ -128,8 +139,10 @@ A map of renderer IDs to webgl VAOs
 
 <article>
 
-### graphicsData: <span><code>Array&#60;PIXI.GraphicsData&#62;</code></span>
-The collection of drawn shapes.
+### glVertexArrayObjects 
+**Type:** <code>object</code>
+
+**Description:** A map of renderer IDs to webgl VAOs
 
 </article>
 
@@ -138,8 +151,10 @@ The collection of drawn shapes.
 
 <article>
 
-### indices: <span><code>number[]</code></span>
-The indices of the vertices
+### graphicsData 
+**Type:** <code>Array&#60;PIXI.GraphicsData&#62;</code>
+
+**Description:** The collection of drawn shapes.
 
 </article>
 
@@ -148,20 +163,10 @@ The indices of the vertices
 
 <article>
 
-### instanceCount: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
+### indices 
+**Type:** <code>number[]</code>
 
-Number of instances in this geometry, pass it to `GeometrySystem.draw()`.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### instanced: <span><code>boolean</code></span>
-Whether the geometry is instanced.
+**Description:** The indices of the vertices
 
 </article>
 
@@ -170,8 +175,12 @@ Whether the geometry is instanced.
 
 <article>
 
-### points: <span><code>number[]</code></span>
-An array of points to draw, 2 numbers per point
+### instanceCount 
+**Type:** <code>number</code>
+
+**Default Value**: <code>1</code>
+
+**Description:** Number of instances in this geometry, pass it to `GeometrySystem.draw()`.
 
 </article>
 
@@ -180,8 +189,10 @@ An array of points to draw, 2 numbers per point
 
 <article>
 
-### refCount: <span><code>number</code></span>
-Count of existing (not destroyed) meshes that reference this geometry.
+### instanced 
+**Type:** <code>boolean</code>
+
+**Description:** Whether the geometry is instanced.
 
 </article>
 
@@ -190,8 +201,10 @@ Count of existing (not destroyed) meshes that reference this geometry.
 
 <article>
 
-### textureIds: <span><code>number[]</code></span>
-Reference to the texture IDs.
+### points 
+**Type:** <code>number[]</code>
+
+**Description:** An array of points to draw, 2 numbers per point
 
 </article>
 
@@ -200,8 +213,10 @@ Reference to the texture IDs.
 
 <article>
 
-### uvs: <span><code>number[]</code></span>
-The UVs collection
+### refCount 
+**Type:** <code>number</code>
+
+**Description:** Count of existing (not destroyed) meshes that reference this geometry.
 
 </article>
 
@@ -210,8 +225,10 @@ The UVs collection
 
 <article>
 
-### _bounds: <span><code>Bounds</code></span>
-Cached bounds.
+### textureIds 
+**Type:** <code>number[]</code>
+
+**Description:** Reference to the texture IDs.
 
 </article>
 
@@ -220,8 +237,10 @@ Cached bounds.
 
 <article>
 
-### _buffer: <span><code>Buffer</code></span>
-Buffer used for position, color, texture IDs
+### uvs 
+**Type:** <code>number[]</code>
+
+**Description:** The UVs collection
 
 </article>
 
@@ -230,8 +249,10 @@ Buffer used for position, color, texture IDs
 
 <article>
 
-### _indexBuffer: <span><code>Buffer</code></span>
-Index buffer data
+### _bounds 
+**Type:** <code>Bounds</code>
+
+**Description:** Cached bounds.
 
 </article>
 
@@ -240,22 +261,10 @@ Index buffer data
 
 <article>
 
-### boundsDirty: <span><code>number</code></span>
-- **Default Value**: <code>-1</code>
+### _buffer 
+**Type:** <code>Buffer</code>
 
-The bounds dirty flag.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### cacheDirty: <span><code>number</code></span>
-- **Default Value**: <code>-1</code>
-
-Used to check if the cache is dirty.
+**Description:** Buffer used for position, color, texture IDs
 
 </article>
 
@@ -264,22 +273,10 @@ Used to check if the cache is dirty.
 
 <article>
 
-### clearDirty: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### _indexBuffer 
+**Type:** <code>Buffer</code>
 
-Used to detect if we cleared the graphicsData.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### dirty: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-Used to detect if the graphics object has changed.
+**Description:** Index buffer data
 
 </article>
 
@@ -288,10 +285,68 @@ Used to detect if the graphics object has changed.
 
 <article>
 
-### shapeIndex: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### boundsDirty 
+**Type:** <code>number</code>
 
-Index of the last batched shape in the stack of calls.
+**Default Value**: <code>-1</code>
+
+**Description:** The bounds dirty flag.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cacheDirty 
+**Type:** <code>number</code>
+
+**Default Value**: <code>-1</code>
+
+**Description:** Used to check if the cache is dirty.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### clearDirty 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** Used to detect if we cleared the graphicsData.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### dirty 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** Used to detect if the graphics object has changed.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### shapeIndex 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** Index of the last batched shape in the stack of calls.
 
 </article>
 
@@ -302,8 +357,10 @@ Index of the last batched shape in the stack of calls.
 ## Methods
 <article>
 
-### addAttribute: <span><code>(id&#58; string, buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;, size&#58; number, normalized&#58; boolean, type&#58; TYPES, stride&#58; number, start&#58; number, instance&#58; boolean) -&#62; this</code></span>
-Adds an attribute to the geometry Note&#58; `stride` and `start` should be `undefined` if you dont know them, not 0!
+### addAttribute 
+**Type:** <code>(id&#58; string, buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;, size&#58; number, normalized&#58; boolean, type&#58; TYPES, stride&#58; number, start&#58; number, instance&#58; boolean) -&#62; this</code>
+
+**Description:** Adds an attribute to the geometry Note&#58; `stride` and `start` should be `undefined` if you dont know them, not 0!
 
 #### Parameters:
 | Name       | Type                                                  | Description                                                                                                            |
@@ -327,8 +384,10 @@ Adds an attribute to the geometry Note&#58; `stride` and `start` should be `unde
 
 <article>
 
-### addIndex: <span><code>(buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;) -&#62; Geometry</code></span>
-Adds an index buffer to the geometry The index buffer contains integers, three for each triangle in the geometry, which reference the various attribute buffers (position, colour, UV coordinates, other UV coordinates, normal, …). There is only ONE index buffer.
+### addIndex 
+**Type:** <code>(buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;) -&#62; Geometry</code>
+
+**Description:** Adds an index buffer to the geometry The index buffer contains integers, three for each triangle in the geometry, which reference the various attribute buffers (position, colour, UV coordinates, other UV coordinates, normal, …). There is only ONE index buffer.
 
 #### Parameters:
 | Name   | Type                                                  | Description                                                                                                             |
@@ -345,8 +404,10 @@ Adds an index buffer to the geometry The index buffer contains integers, three f
 
 <article>
 
-### clear: <span><code>() -&#62; GraphicsGeometry</code></span>
-Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
+### clear 
+**Type:** <code>() -&#62; GraphicsGeometry</code>
+
+**Description:** Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
 
 #### Returns:
 | Type                          | Description                                                    |
@@ -359,8 +420,10 @@ Clears the graphics that were drawn to this Graphics object, and resets fill and
 
 <article>
 
-### clone: <span><code>() -&#62; Geometry</code></span>
-Returns a clone of the geometry.
+### clone 
+**Type:** <code>() -&#62; Geometry</code>
+
+**Description:** Returns a clone of the geometry.
 
 #### Returns:
 | Type                  | Description                     |
@@ -373,8 +436,10 @@ Returns a clone of the geometry.
 
 <article>
 
-### containsPoint: <span><code>(point&#58; IPointData) -&#62; boolean</code></span>
-Check to see if a point is contained within this geometry.
+### containsPoint 
+**Type:** <code>(point&#58; IPointData) -&#62; boolean</code>
+
+**Description:** Check to see if a point is contained within this geometry.
 
 #### Parameters:
 | Name  | Type                    | Description                       |
@@ -391,8 +456,10 @@ Check to see if a point is contained within this geometry.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys the GraphicsGeometry object.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys the GraphicsGeometry object.
 
 </article>
 
@@ -401,8 +468,10 @@ Destroys the GraphicsGeometry object.
 
 <article>
 
-### dispose: <span><code>() -&#62; void</code></span>
-Disposes WebGL resources that are connected to this geometry.
+### dispose 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Disposes WebGL resources that are connected to this geometry.
 
 </article>
 
@@ -411,8 +480,10 @@ Disposes WebGL resources that are connected to this geometry.
 
 <article>
 
-### drawHole: <span><code>(shape&#58; PIXI.Circle &#124; PIXI.Ellipse &#124; PIXI.Polygon &#124; PIXI.Rectangle &#124; PIXI.RoundedRectangle, matrix&#58; Matrix) -&#62; GraphicsGeometry</code></span>
-Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
+### drawHole 
+**Type:** <code>(shape&#58; PIXI.Circle &#124; PIXI.Ellipse &#124; PIXI.Polygon &#124; PIXI.Rectangle &#124; PIXI.RoundedRectangle, matrix&#58; Matrix) -&#62; GraphicsGeometry</code>
+
+**Description:** Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
 
 #### Parameters:
 | Name   | Type                                                                                                                | Description                                   |
@@ -430,8 +501,10 @@ Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, 
 
 <article>
 
-### drawShape: <span><code>(shape&#58; PIXI.Circle &#124; PIXI.Ellipse &#124; PIXI.Polygon &#124; PIXI.Rectangle &#124; PIXI.RoundedRectangle, fillStyle&#58; FillStyle, lineStyle&#58; LineStyle, matrix&#58; Matrix) -&#62; GraphicsGeometry</code></span>
-Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
+### drawShape 
+**Type:** <code>(shape&#58; PIXI.Circle &#124; PIXI.Ellipse &#124; PIXI.Polygon &#124; PIXI.Rectangle &#124; PIXI.RoundedRectangle, fillStyle&#58; FillStyle, lineStyle&#58; LineStyle, matrix&#58; Matrix) -&#62; GraphicsGeometry</code>
+
+**Description:** Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
 
 #### Parameters:
 | Name      | Type                                                                                                                | Description                                   |
@@ -451,8 +524,10 @@ Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, 
 
 <article>
 
-### getAttribute: <span><code>(id&#58; string) -&#62; Attribute</code></span>
-Returns the requested attribute.
+### getAttribute 
+**Type:** <code>(id&#58; string) -&#62; Attribute</code>
+
+**Description:** Returns the requested attribute.
 
 #### Parameters:
 | Name | Type                | Description                        |
@@ -469,8 +544,10 @@ Returns the requested attribute.
 
 <article>
 
-### getBuffer: <span><code>(id&#58; string) -&#62; Buffer</code></span>
-Returns the requested buffer.
+### getBuffer 
+**Type:** <code>(id&#58; string) -&#62; Buffer</code>
+
+**Description:** Returns the requested buffer.
 
 #### Parameters:
 | Name | Type                | Description                      |
@@ -487,8 +564,10 @@ Returns the requested buffer.
 
 <article>
 
-### getIndex: <span><code>() -&#62; Buffer</code></span>
-Returns the index buffer
+### getIndex 
+**Type:** <code>() -&#62; Buffer</code>
+
+**Description:** Returns the index buffer
 
 #### Returns:
 | Type                | Description         |
@@ -501,8 +580,10 @@ Returns the index buffer
 
 <article>
 
-### getSize: <span><code>() -&#62; number</code></span>
-Get the size of the geometries, in vertices.
+### getSize 
+**Type:** <code>() -&#62; number</code>
+
+**Description:** Get the size of the geometries, in vertices.
 
 #### Returns:
 | Type                | Description |
@@ -515,8 +596,10 @@ Get the size of the geometries, in vertices.
 
 <article>
 
-### interleave: <span><code>() -&#62; Geometry</code></span>
-This function modifies the structure so that all current attributes become interleaved into a single buffer This can be useful if your model remains static as it offers a little performance boost
+### interleave 
+**Type:** <code>() -&#62; Geometry</code>
+
+**Description:** This function modifies the structure so that all current attributes become interleaved into a single buffer This can be useful if your model remains static as it offers a little performance boost
 
 #### Returns:
 | Type                  | Description                          |
@@ -529,8 +612,10 @@ This function modifies the structure so that all current attributes become inter
 
 <article>
 
-### updateBatches: <span><code>() -&#62; void</code></span>
-Generates intermediate batch data. Either gets converted to drawCalls or used to convert to batch objects directly by the Graphics object.
+### updateBatches 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Generates intermediate batch data. Either gets converted to drawCalls or used to convert to batch objects directly by the Graphics object.
 
 </article>
 
@@ -539,8 +624,10 @@ Generates intermediate batch data. Either gets converted to drawCalls or used to
 
 <article>
 
-### _compareStyles: <span><code>(styleA&#58; FillStyle &#124; LineStyle, styleB&#58; FillStyle &#124; LineStyle) -&#62; boolean</code></span>
-Affinity check
+### _compareStyles 
+**Type:** <code>(styleA&#58; FillStyle &#124; LineStyle, styleB&#58; FillStyle &#124; LineStyle) -&#62; boolean</code>
+
+**Description:** Affinity check
 
 #### Parameters:
 | Name   | Type                                    | Description |
@@ -558,8 +645,10 @@ Affinity check
 
 <article>
 
-### addColors: <span><code>(colors&#58; Array&#60;number&#62;, color&#58; number, alpha&#58; number, size&#58; number, offset&#58; number) -&#62; void</code></span>
-Add colors.
+### addColors 
+**Type:** <code>(colors&#58; Array&#60;number&#62;, color&#58; number, alpha&#58; number, size&#58; number, offset&#58; number) -&#62; void</code>
+
+**Description:** Add colors.
 
 #### Parameters:
 | Name   | Type                               | Description              |
@@ -576,8 +665,10 @@ Add colors.
 
 <article>
 
-### addTextureIds: <span><code>(textureIds&#58; Array&#60;number&#62;, id&#58; number, size&#58; number, offset&#58; number) -&#62; void</code></span>
-Add texture id that the shader/fragment wants to use.
+### addTextureIds 
+**Type:** <code>(textureIds&#58; Array&#60;number&#62;, id&#58; number, size&#58; number, offset&#58; number) -&#62; void</code>
+
+**Description:** Add texture id that the shader/fragment wants to use.
 
 #### Parameters:
 | Name       | Type                               | Description |
@@ -593,8 +684,10 @@ Add texture id that the shader/fragment wants to use.
 
 <article>
 
-### addUvs: <span><code>(verts&#58; Array&#60;number&#62;, uvs&#58; Array&#60;number&#62;, texture&#58; Texture, start&#58; number, size&#58; number, matrix&#58; Matrix) -&#62; void</code></span>
-Generates the UVs for a shape.
+### addUvs 
+**Type:** <code>(verts&#58; Array&#60;number&#62;, uvs&#58; Array&#60;number&#62;, texture&#58; Texture, start&#58; number, size&#58; number, matrix&#58; Matrix) -&#62; void</code>
+
+**Description:** Generates the UVs for a shape.
 
 #### Parameters:
 | Name    | Type                               | Description                        |
@@ -612,8 +705,10 @@ Generates the UVs for a shape.
 
 <article>
 
-### adjustUvs: <span><code>(uvs&#58; Array&#60;number&#62;, texture&#58; Texture, start&#58; number, size&#58; number) -&#62; void</code></span>
-Modify uvs array according to position of texture region Does not work with rotated or trimmed textures
+### adjustUvs 
+**Type:** <code>(uvs&#58; Array&#60;number&#62;, texture&#58; Texture, start&#58; number, size&#58; number) -&#62; void</code>
+
+**Description:** Modify uvs array according to position of texture region Does not work with rotated or trimmed textures
 
 #### Parameters:
 | Name    | Type                               | Description               |
@@ -629,8 +724,10 @@ Modify uvs array according to position of texture region Does not work with rota
 
 <article>
 
-### buildDrawCalls: <span><code>() -&#62; void</code></span>
-Converts intermediate batches data to drawCalls.
+### buildDrawCalls 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Converts intermediate batches data to drawCalls.
 
 </article>
 
@@ -639,8 +736,10 @@ Converts intermediate batches data to drawCalls.
 
 <article>
 
-### calculateBounds: <span><code>() -&#62; void</code></span>
-Update the local bounds of the object. Expensive to use performance-wise.
+### calculateBounds 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Update the local bounds of the object. Expensive to use performance-wise.
 
 </article>
 
@@ -649,8 +748,10 @@ Update the local bounds of the object. Expensive to use performance-wise.
 
 <article>
 
-### invalidate: <span><code>() -&#62; void</code></span>
-Call if you changed graphicsData manually. Empties all batch buffers.
+### invalidate 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Call if you changed graphicsData manually. Empties all batch buffers.
 
 </article>
 
@@ -659,8 +760,10 @@ Call if you changed graphicsData manually. Empties all batch buffers.
 
 <article>
 
-### isBatchable: <span><code>() -&#62; boolean</code></span>
-Checks to see if this graphics geometry can be batched. Currently it needs to be small enough and not contain any native lines.
+### isBatchable 
+**Type:** <code>() -&#62; boolean</code>
+
+**Description:** Checks to see if this graphics geometry can be batched. Currently it needs to be small enough and not contain any native lines.
 
 #### Returns:
 | Type                 | Description |
@@ -673,8 +776,10 @@ Checks to see if this graphics geometry can be batched. Currently it needs to be
 
 <article>
 
-### packAttributes: <span><code>() -&#62; void</code></span>
-Packs attributes to single buffer.
+### packAttributes 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Packs attributes to single buffer.
 
 </article>
 
@@ -683,8 +788,10 @@ Packs attributes to single buffer.
 
 <article>
 
-### packBatches: <span><code>() -&#62; void</code></span>
-Offset the indices so that it works with the batcher.
+### packBatches 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Offset the indices so that it works with the batcher.
 
 </article>
 
@@ -693,8 +800,10 @@ Offset the indices so that it works with the batcher.
 
 <article>
 
-### processFill: <span><code>(data&#58; GraphicsData) -&#62; void</code></span>
-Process fill part of Graphics.
+### processFill 
+**Type:** <code>(data&#58; GraphicsData) -&#62; void</code>
+
+**Description:** Process fill part of Graphics.
 
 #### Parameters:
 | Name | Type                      | Description |
@@ -707,8 +816,10 @@ Process fill part of Graphics.
 
 <article>
 
-### processHoles: <span><code>(holes&#58; Array&#60;GraphicsData&#62;) -&#62; void</code></span>
-Process the holes data.
+### processHoles 
+**Type:** <code>(holes&#58; Array&#60;GraphicsData&#62;) -&#62; void</code>
+
+**Description:** Process the holes data.
 
 #### Parameters:
 | Name  | Type                                     | Description |
@@ -721,8 +832,10 @@ Process the holes data.
 
 <article>
 
-### processLine: <span><code>(data&#58; GraphicsData) -&#62; void</code></span>
-Process line part of Graphics.
+### processLine 
+**Type:** <code>(data&#58; GraphicsData) -&#62; void</code>
+
+**Description:** Process line part of Graphics.
 
 #### Parameters:
 | Name | Type                      | Description |
@@ -735,8 +848,10 @@ Process line part of Graphics.
 
 <article>
 
-### transformPoints: <span><code>(points&#58; Array&#60;number&#62;, matrix&#58; Matrix) -&#62; void</code></span>
-Transform points using matrix.
+### transformPoints 
+**Type:** <code>(points&#58; Array&#60;number&#62;, matrix&#58; Matrix) -&#62; void</code>
+
+**Description:** Transform points using matrix.
 
 #### Parameters:
 | Name   | Type                               | Description         |
@@ -750,8 +865,10 @@ Transform points using matrix.
 
 <article>
 
-### validateBatching: <span><code>() -&#62; boolean</code></span>
-Test geometry for batching process.
+### validateBatching 
+**Type:** <code>() -&#62; boolean</code>
+
+**Description:** Test geometry for batching process.
 
 #### Returns:
 | Type                 | Description |

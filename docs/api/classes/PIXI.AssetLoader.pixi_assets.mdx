@@ -5,7 +5,12 @@ sidebar_label: "PIXI.AssetLoader"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/assets](../modules/pixi_assets).AssetLoader
+
+</div>
 
 
 The Loader is responsible for loading all assets, such as images, spritesheets, audio files, etc. It does not do anything clever with URLs - it just loads stuff! Behind the scenes all things are cached using promises. This means it's impossible to load an asset more than once. Through the use of LoaderParsers, the loader can understand how to load any kind of file!
@@ -14,13 +19,12 @@ It is not intended that this class is created by developers - its part of the As
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.AssetLoader: <span><code>() </code></span>
+### Constructor:
+<h4><code>new PIXI.AssetLoader() </code></h4>
 
 #### Parameters:
 | Name | Type | Default | Description |
@@ -36,8 +40,10 @@ It is not intended that this class is created by developers - its part of the As
 ## Members
 <article>
 
-### parsers: <span><code>LoaderParser[]</code></span>
-All loader parsers registered
+### parsers 
+**Type:** <code>LoaderParser[]</code>
+
+**Description:** All loader parsers registered
 
 </article>
 
@@ -46,8 +52,10 @@ All loader parsers registered
 
 <article>
 
-### promiseCache: <span><code>Record&#60;string, PromiseAndParser&#62;</code></span>
-Cache loading promises that ae currently active
+### promiseCache 
+**Type:** <code>Record&#60;string, PromiseAndParser&#62;</code>
+
+**Description:** Cache loading promises that ae currently active
 
 </article>
 
@@ -58,8 +66,11 @@ Cache loading promises that ae currently active
 ## Methods
 <article>
 
-### load: <span><code>(assetsToLoadIn&#58; string &#124; string[] &#124; LoadAsset &#124; LoadAsset[], onProgress&#58; (progress&#58; number) =&#62; void) -&#62; Promise&#60;T &#124; Record&#60;string, T&#62;&#62;</code></span>
-Loads one or more assets using the parsers added to the Loader.
+### load 
+**Type:** <code>(assetsToLoadIn&#58; string &#124; string[] &#124; LoadAsset &#124; LoadAsset[], onProgress&#58; (progress&#58; number) =&#62; void) -&#62; Promise&#60;T &#124; Record&#60;string, T&#62;&#62;</code>
+
+**Description:** Loads one or more assets using the parsers added to the Loader.
+
 
 ```js
  // Single asset:
@@ -88,8 +99,10 @@ Loads one or more assets using the parsers added to the Loader.
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-function used for testing
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** function used for testing
 
 </article>
 
@@ -98,8 +111,11 @@ function used for testing
 
 <article>
 
-### unload: <span><code>(assetsToUnloadIn&#58; string &#124; string[] &#124; LoadAsset &#124; LoadAsset[]) -&#62; Promise&#60;void&#62;</code></span>
-Unloads one or more assets. Any unloaded assets will be destroyed, freeing up memory for your app. The parser that created the asset, will be the one that unloads it.
+### unload 
+**Type:** <code>(assetsToUnloadIn&#58; string &#124; string[] &#124; LoadAsset &#124; LoadAsset[]) -&#62; Promise&#60;void&#62;</code>
+
+**Description:** Unloads one or more assets. Any unloaded assets will be destroyed, freeing up memory for your app. The parser that created the asset, will be the one that unloads it.
+
 
 ```js
  // Single asset:

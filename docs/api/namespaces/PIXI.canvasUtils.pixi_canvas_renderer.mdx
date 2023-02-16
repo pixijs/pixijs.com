@@ -5,14 +5,17 @@ sidebar_label: "PIXI.canvasUtils"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/canvas-renderer](../modules/pixi_canvas_renderer).canvasUtils
+
+</div>
 
 Utility methods for Sprite/Texture tinting.
 Tinting with the CanvasRenderer involves creating a new canvas to use as a texture, so be aware of the performance implications.
 
 
-
-// TODO: @see
 
         
 
@@ -25,20 +28,12 @@ Tinting with the CanvasRenderer involves creating a new canvas to use as a textu
 ## Members
 <article>
 
-### cacheStepsPerColorChannel: <span><code>number</code></span>
-- **Default Value**: <code>8</code>
+### cacheStepsPerColorChannel 
+**Type:** <code>number</code>
 
-Number of steps which will be used as a cap when rounding colors.
+**Default Value**: <code>8</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### canUseMultiply: <span><code>boolean</code></span>
-Whether or not the Canvas BlendModes are supported, consequently the ability to tint using the multiply method.
+**Description:** Number of steps which will be used as a cap when rounding colors.
 
 </article>
 
@@ -47,10 +42,10 @@ Whether or not the Canvas BlendModes are supported, consequently the ability to 
 
 <article>
 
-### convertTintToImage: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### canUseMultiply 
+**Type:** <code>boolean</code>
 
-Tint cache boolean flag.
+**Description:** Whether or not the Canvas BlendModes are supported, consequently the ability to tint using the multiply method.
 
 </article>
 
@@ -59,8 +54,24 @@ Tint cache boolean flag.
 
 <article>
 
-### tintMethod: <span><code>Function</code></span>
-The tinting method that will be used.
+### convertTintToImage 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** Tint cache boolean flag.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### tintMethod 
+**Type:** <code>Function</code>
+
+**Description:** The tinting method that will be used.
 
 </article>
 

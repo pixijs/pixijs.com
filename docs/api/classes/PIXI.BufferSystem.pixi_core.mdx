@@ -5,7 +5,12 @@ sidebar_label: "PIXI.BufferSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).BufferSystem
+
+</div>
 
 System plugin to the renderer to manage buffers.
 WebGL uses Buffers as a way to store objects to the GPU. This system makes working with them a lot easier.
@@ -20,13 +25,12 @@ This system will handle the binding of buffers to the GPU as well as uploading t
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.BufferSystem: <span><code>(renderer&#58; PIXI.Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.BufferSystem(renderer&#58; PIXI.Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                       | Default       | Description                         |
@@ -43,8 +47,10 @@ This system will handle the binding of buffers to the GPU as well as uploading t
 ## Members
 <article>
 
-### boundBufferBases: <span><code>&#123; [key&#58; number]&#58; Buffer &#125;</code></span>
-Cache keeping track of the base bound buffer bases
+### boundBufferBases 
+**Type:** <code>&#123; [key&#58; number]&#58; Buffer &#125;</code>
+
+**Description:** Cache keeping track of the base bound buffer bases
 
 </article>
 
@@ -53,8 +59,10 @@ Cache keeping track of the base bound buffer bases
 
 <article>
 
-### managedBuffers: <span><code>&#123; [key&#58; number]&#58; Buffer &#125;</code></span>
-Cache for all buffers by id, used in case renderer gets destroyed or for profiling
+### managedBuffers 
+**Type:** <code>&#123; [key&#58; number]&#58; Buffer &#125;</code>
+
+**Description:** Cache for all buffers by id, used in case renderer gets destroyed or for profiling
 
 </article>
 
@@ -65,8 +73,10 @@ Cache for all buffers by id, used in case renderer gets destroyed or for profili
 ## Methods
 <article>
 
-### bind: <span><code>(buffer&#58; Buffer) -&#62; void</code></span>
-This binds specified buffer. On first run, it will create the webGL buffers for the context too
+### bind 
+**Type:** <code>(buffer&#58; Buffer) -&#62; void</code>
+
+**Description:** This binds specified buffer. On first run, it will create the webGL buffers for the context too
 
 #### Parameters:
 | Name   | Type                | Description                        |
@@ -79,8 +89,10 @@ This binds specified buffer. On first run, it will create the webGL buffers for 
 
 <article>
 
-### bindBufferBase: <span><code>(buffer&#58; Buffer, index&#58; number) -&#62; void</code></span>
-Binds an uniform buffer to at the given index.
+### bindBufferBase 
+**Type:** <code>(buffer&#58; Buffer, index&#58; number) -&#62; void</code>
+
+**Description:** Binds an uniform buffer to at the given index.
 A cache is used so a buffer will not be bound again if already bound.
 
 #### Parameters:
@@ -95,8 +107,10 @@ A cache is used so a buffer will not be bound again if already bound.
 
 <article>
 
-### bindBufferRange: <span><code>(buffer&#58; Buffer, index&#58; number, offset&#58; number) -&#62; void</code></span>
-Binds a buffer whilst also binding its range. This will make the buffer start from the offset supplied rather than 0 when it is read.
+### bindBufferRange 
+**Type:** <code>(buffer&#58; Buffer, index&#58; number, offset&#58; number) -&#62; void</code>
+
+**Description:** Binds a buffer whilst also binding its range. This will make the buffer start from the offset supplied rather than 0 when it is read.
 
 #### Parameters:
 | Name   | Type                | Description                                                                |
@@ -111,8 +125,10 @@ Binds a buffer whilst also binding its range. This will make the buffer start fr
 
 <article>
 
-### dispose: <span><code>(buffer&#58; PIXI.Buffer, contextLost&#58; boolean) -&#62; void</code></span>
-Disposes buffer
+### dispose 
+**Type:** <code>(buffer&#58; PIXI.Buffer, contextLost&#58; boolean) -&#62; void</code>
+
+**Description:** Disposes buffer
 
 #### Parameters:
 | Name        | Type                     | Description                                        |
@@ -126,8 +142,10 @@ Disposes buffer
 
 <article>
 
-### disposeAll: <span><code>(contextLost&#58; boolean) -&#62; void</code></span>
-dispose all WebGL resources of all managed buffers
+### disposeAll 
+**Type:** <code>(contextLost&#58; boolean) -&#62; void</code>
+
+**Description:** dispose all WebGL resources of all managed buffers
 
 #### Parameters:
 | Name        | Type                 | Description                                        |
@@ -140,8 +158,10 @@ dispose all WebGL resources of all managed buffers
 
 <article>
 
-### update: <span><code>(buffer&#58; PIXI.Buffer) -&#62; void</code></span>
-Will ensure the data in the buffer is uploaded to the GPU.
+### update 
+**Type:** <code>(buffer&#58; PIXI.Buffer) -&#62; void</code>
+
+**Description:** Will ensure the data in the buffer is uploaded to the GPU.
 
 #### Parameters:
 | Name   | Type                     | Description          |
@@ -154,8 +174,10 @@ Will ensure the data in the buffer is uploaded to the GPU.
 
 <article>
 
-### contextChange: <span><code>() -&#62; void</code></span>
-Sets up the renderer context and necessary buffers.
+### contextChange 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Sets up the renderer context and necessary buffers.
 
 </article>
 
@@ -164,8 +186,10 @@ Sets up the renderer context and necessary buffers.
 
 <article>
 
-### createGLBuffer: <span><code>(buffer&#58; Buffer) -&#62; GLBuffer</code></span>
-creates and attaches a GLBuffer object tied to the current context.
+### createGLBuffer 
+**Type:** <code>(buffer&#58; Buffer) -&#62; GLBuffer</code>
+
+**Description:** creates and attaches a GLBuffer object tied to the current context.
 
 #### Parameters:
 | Name   | Type                | Description |

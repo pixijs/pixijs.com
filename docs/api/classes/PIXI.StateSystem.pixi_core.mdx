@@ -5,41 +5,38 @@ sidebar_label: "PIXI.StateSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).StateSystem
+
+</div>
 
 
 System plugin to the renderer to manage WebGL state machines.
 
 
 
-// TODO: @see
-
         
 
 <article>
+### Contructor:
+<h4><code>new PIXI()</code></h4>
 
-### new PIXI()
 </article>
+            
 
 
 
 ## Members
 <article>
 
-### blendMode: <span><code>BLEND_MODES</code></span>
-- **Default Value**: <code>PIXI.BLEND_MODES.NONE</code>
+### blendMode 
+**Type:** <code>BLEND_MODES</code>
 
-Blend mode
+**Default Value**: <code>PIXI.BLEND_MODES.NONE</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### polygonOffset: <span><code>number</code></span>
-Polygon offset
+**Description:** Blend mode
 
 </article>
 
@@ -48,8 +45,10 @@ Polygon offset
 
 <article>
 
-### stateId: <span><code>number</code></span>
-State ID
+### polygonOffset 
+**Type:** <code>number</code>
+
+**Description:** Polygon offset
 
 </article>
 
@@ -58,8 +57,10 @@ State ID
 
 <article>
 
-### _blendEq: <span><code>boolean</code></span>
-Whether current blend equation is different
+### stateId 
+**Type:** <code>number</code>
+
+**Description:** State ID
 
 </article>
 
@@ -68,8 +69,10 @@ Whether current blend equation is different
 
 <article>
 
-### checks: <span><code>Array&#60;Function&#62;</code></span>
-Collection of check calls
+### _blendEq 
+**Type:** <code>boolean</code>
+
+**Description:** Whether current blend equation is different
 
 </article>
 
@@ -78,8 +81,10 @@ Collection of check calls
 
 <article>
 
-### defaultState: <span><code>State</code></span>
-Default WebGL State
+### checks 
+**Type:** <code>Array&#60;Function&#62;</code>
+
+**Description:** Collection of check calls
 
 </article>
 
@@ -88,8 +93,10 @@ Default WebGL State
 
 <article>
 
-### gl: <span><code>WebGLRenderingContext</code></span>
-GL context
+### defaultState 
+**Type:** <code>State</code>
+
+**Description:** Default WebGL State
 
 </article>
 
@@ -98,8 +105,22 @@ GL context
 
 <article>
 
-### map: <span><code>Array&#60;Function&#62;</code></span>
-Collection of calls
+### gl 
+**Type:** <code>WebGLRenderingContext</code>
+
+**Description:** GL context
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### map 
+**Type:** <code>Array&#60;Function&#62;</code>
+
+**Description:** Collection of calls
 
 </article>
 
@@ -110,8 +131,10 @@ Collection of calls
 ## Methods
 <article>
 
-### forceState: <span><code>(state&#58; unknown) -&#62; void</code></span>
-Sets the state, when previous state is unknown.
+### forceState 
+**Type:** <code>(state&#58; unknown) -&#62; void</code>
+
+**Description:** Sets the state, when previous state is unknown.
 
 #### Parameters:
 | Name  | Type                 | Description      |
@@ -124,8 +147,10 @@ Sets the state, when previous state is unknown.
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-Resets all the logic and disables the VAOs.
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Resets all the logic and disables the VAOs.
 
 </article>
 
@@ -134,8 +159,10 @@ Resets all the logic and disables the VAOs.
 
 <article>
 
-### set: <span><code>(state&#58; unknown) -&#62; void</code></span>
-Sets the current state
+### set 
+**Type:** <code>(state&#58; unknown) -&#62; void</code>
+
+**Description:** Sets the current state
 
 #### Parameters:
 | Name  | Type                 | Description       |
@@ -148,8 +175,10 @@ Sets the current state
 
 <article>
 
-### setBlend: <span><code>(value&#58; boolean) -&#62; void</code></span>
-Sets whether to enable or disable blending.
+### setBlend 
+**Type:** <code>(value&#58; boolean) -&#62; void</code>
+
+**Description:** Sets whether to enable or disable blending.
 
 #### Parameters:
 | Name  | Type                 | Description                    |
@@ -162,8 +191,10 @@ Sets whether to enable or disable blending.
 
 <article>
 
-### setBlendMode: <span><code>(value&#58; number) -&#62; void</code></span>
-Sets the blend mode.
+### setBlendMode 
+**Type:** <code>(value&#58; number) -&#62; void</code>
+
+**Description:** Sets the blend mode.
 
 #### Parameters:
 | Name  | Type                | Description               |
@@ -176,8 +207,10 @@ Sets the blend mode.
 
 <article>
 
-### setCullFace: <span><code>(value&#58; boolean) -&#62; void</code></span>
-Sets whether to enable or disable cull face.
+### setCullFace 
+**Type:** <code>(value&#58; boolean) -&#62; void</code>
+
+**Description:** Sets whether to enable or disable cull face.
 
 #### Parameters:
 | Name  | Type                 | Description                     |
@@ -190,8 +223,10 @@ Sets whether to enable or disable cull face.
 
 <article>
 
-### setDepthMask: <span><code>(value&#58; boolean) -&#62; void</code></span>
-Sets whether to enable or disable depth mask.
+### setDepthMask 
+**Type:** <code>(value&#58; boolean) -&#62; void</code>
+
+**Description:** Sets whether to enable or disable depth mask.
 
 #### Parameters:
 | Name  | Type                 | Description                      |
@@ -204,8 +239,10 @@ Sets whether to enable or disable depth mask.
 
 <article>
 
-### setDepthTest: <span><code>(value&#58; boolean) -&#62; void</code></span>
-Sets whether to enable or disable depth test.
+### setDepthTest 
+**Type:** <code>(value&#58; boolean) -&#62; void</code>
+
+**Description:** Sets whether to enable or disable depth test.
 
 #### Parameters:
 | Name  | Type                 | Description                         |
@@ -218,8 +255,10 @@ Sets whether to enable or disable depth test.
 
 <article>
 
-### setFrontFace: <span><code>(value&#58; boolean) -&#62; void</code></span>
-Sets the gl front face.
+### setFrontFace 
+**Type:** <code>(value&#58; boolean) -&#62; void</code>
+
+**Description:** Sets the gl front face.
 
 #### Parameters:
 | Name  | Type                 | Description                                      |
@@ -232,8 +271,10 @@ Sets the gl front face.
 
 <article>
 
-### setOffset: <span><code>(value&#58; boolean) -&#62; void</code></span>
-Sets whether to enable or disable polygon offset fill.
+### setOffset 
+**Type:** <code>(value&#58; boolean) -&#62; void</code>
+
+**Description:** Sets whether to enable or disable polygon offset fill.
 
 #### Parameters:
 | Name  | Type                 | Description                                  |
@@ -246,8 +287,10 @@ Sets whether to enable or disable polygon offset fill.
 
 <article>
 
-### setPolygonOffset: <span><code>(value&#58; number, scale&#58; number) -&#62; void</code></span>
-Sets the polygon offset.
+### setPolygonOffset 
+**Type:** <code>(value&#58; number, scale&#58; number) -&#62; void</code>
+
+**Description:** Sets the polygon offset.
 
 #### Parameters:
 | Name  | Type                | Description              |
@@ -261,8 +304,10 @@ Sets the polygon offset.
 
 <article>
 
-### updateCheck: <span><code>(func&#58; (system&#58; this, state&#58; State) =&#62; void, value&#58; boolean) -&#62; void</code></span>
-Checks to see which updates should be checked based on which settings have been activated.
+### updateCheck 
+**Type:** <code>(func&#58; (system&#58; this, state&#58; State) =&#62; void, value&#58; boolean) -&#62; void</code>
+
+**Description:** Checks to see which updates should be checked based on which settings have been activated.
 For example, if blend is enabled then we should check the blend modes each time the state is changed or if polygon fill is activated then we need to check if the polygon offset changes. The idea is that we only check what we have too.
 
 #### Parameters:

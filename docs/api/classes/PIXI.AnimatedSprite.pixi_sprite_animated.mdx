@@ -5,7 +5,12 @@ sidebar_label: "PIXI.AnimatedSprite"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/sprite-animated](../modules/pixi_sprite_animated).AnimatedSprite
+
+</div>
 
 An AnimatedSprite is a simple way to display an animation depicted by a list of textures.
 ```
@@ -40,13 +45,12 @@ The more efficient and simpler way to create an animated sprite is using a [PIXI
 ```
       
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.AnimatedSprite: <span><code>(textures&#58; Texture[] &#124; FrameObject[], autoUpdate&#58; boolean) </code></span>
+### Constructor:
+<h4><code>new PIXI.AnimatedSprite(textures&#58; Texture[] &#124; FrameObject[], autoUpdate&#58; boolean) </code></h4>
 
 #### Parameters:
 | Name       | Type                                        | Default           | Description                                                                                                |
@@ -65,8 +69,10 @@ The more efficient and simpler way to create an animated sprite is using a [PIXI
 ## Members
 <article>
 
-### _accessibleActive: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### _accessibleActive 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
 
 
 </article>
@@ -76,8 +82,10 @@ The more efficient and simpler way to create an animated sprite is using a [PIXI
 
 <article>
 
-### _accessibleDiv: <span><code>boolean</code></span>
-- **Default Value**: <code>undefined</code>
+### _accessibleDiv 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>undefined</code>
 
 
 </article>
@@ -87,8 +95,10 @@ The more efficient and simpler way to create an animated sprite is using a [PIXI
 
 <article>
 
-### _bounds: <span><code>Bounds</code></span>
-The bounds object, this is used to calculate and store the bounds of the displayObject.
+### _bounds 
+**Type:** <code>Bounds</code>
+
+**Description:** The bounds object, this is used to calculate and store the bounds of the displayObject.
 
 </article>
 
@@ -97,8 +107,10 @@ The bounds object, this is used to calculate and store the bounds of the display
 
 <article>
 
-### _localBounds: <span><code>Bounds</code></span>
-Local bounds object, swapped with `_bounds` when using `getLocalBounds()`.
+### _localBounds 
+**Type:** <code>Bounds</code>
+
+**Description:** Local bounds object, swapped with `_bounds` when using `getLocalBounds()`.
 
 </article>
 
@@ -107,22 +119,12 @@ Local bounds object, swapped with `_bounds` when using `getLocalBounds()`.
 
 <article>
 
-### accessible: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### accessible 
+**Type:** <code>boolean</code>
 
-Flag for if the object is accessible. If true AccessibilityManager will overlay a shadow div with attributes set
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### accessibleChildren: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
-
-Setting to false will prevent any children inside this container to be accessible. Defaults to true.
+**Description:** Flag for if the object is accessible. If true AccessibilityManager will overlay a shadow div with attributes set
 
 </article>
 
@@ -131,22 +133,12 @@ Setting to false will prevent any children inside this container to be accessibl
 
 <article>
 
-### accessibleHint: <span><code>string</code></span>
-- **Default Value**: <code>undefined</code>
+### accessibleChildren 
+**Type:** <code>boolean</code>
 
-Sets the aria-label attribute of the shadow div
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### accessiblePointerEvents: <span><code>string</code></span>
-- **Default Value**: <code>'auto'</code>
-
-Specify the pointer-events the accessible div will use Defaults to auto.
+**Description:** Setting to false will prevent any children inside this container to be accessible. Defaults to true.
 
 </article>
 
@@ -155,22 +147,12 @@ Specify the pointer-events the accessible div will use Defaults to auto.
 
 <article>
 
-### accessibleTitle: <span><code>?string</code></span>
-- **Default Value**: <code>undefined</code>
+### accessibleHint 
+**Type:** <code>string</code>
 
-Sets the title attribute of the shadow div If accessibleTitle AND accessibleHint has not been this will default to 'displayObject [tabIndex]'
+**Default Value**: <code>undefined</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### accessibleType: <span><code>string</code></span>
-- **Default Value**: <code>'button'</code>
-
-Specify the type of div the accessible layer is. Screen readers treat the element differently depending on this type. Defaults to button.
+**Description:** Sets the aria-label attribute of the shadow div
 
 </article>
 
@@ -179,8 +161,12 @@ Specify the type of div the accessible layer is. Screen readers treat the elemen
 
 <article>
 
-### alpha: <span><code>number</code></span>
-The opacity of the object.
+### accessiblePointerEvents 
+**Type:** <code>string</code>
+
+**Default Value**: <code>'auto'</code>
+
+**Description:** Specify the pointer-events the accessible div will use Defaults to auto.
 
 </article>
 
@@ -189,8 +175,50 @@ The opacity of the object.
 
 <article>
 
-### anchor: <span><code>ObservablePoint</code></span>
-The anchor sets the origin point of the sprite. The default value is taken from the [Texture](../classes/PIXI.Texture.pixi_core) and passed to the constructor.
+### accessibleTitle 
+**Type:** <code>?string</code>
+
+**Default Value**: <code>undefined</code>
+
+**Description:** Sets the title attribute of the shadow div If accessibleTitle AND accessibleHint has not been this will default to 'displayObject [tabIndex]'
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### accessibleType 
+**Type:** <code>string</code>
+
+**Default Value**: <code>'button'</code>
+
+**Description:** Specify the type of div the accessible layer is. Screen readers treat the element differently depending on this type. Defaults to button.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### alpha 
+**Type:** <code>number</code>
+
+**Description:** The opacity of the object.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### anchor 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The anchor sets the origin point of the sprite. The default value is taken from the [Texture](../classes/PIXI.Texture.pixi_core) and passed to the constructor.
 
 The default is `(0,0)`, this means the sprite's origin is the top left.
 
@@ -199,6 +227,7 @@ Setting the anchor to `(0.5,0.5)` means the sprite's origin is centered.
 Setting the anchor to `(1,1)` would mean the sprite's origin point will be the bottom right corner.
 
 If you pass only single parameter, it will set both x and y to the same value as shown in the example below.
+
 
 ```js
  import { Sprite } from 'pixi.js';
@@ -215,8 +244,10 @@ If you pass only single parameter, it will set both x and y to the same value as
 
 <article>
 
-### angle: <span><code>number</code></span>
-The angle of the object in degrees. 'rotation' and 'angle' have the same effect on a display object; rotation is in radians, angle is in degrees.
+### angle 
+**Type:** <code>number</code>
+
+**Description:** The angle of the object in degrees. 'rotation' and 'angle' have the same effect on a display object; rotation is in radians, angle is in degrees.
 
 </article>
 
@@ -225,20 +256,12 @@ The angle of the object in degrees. 'rotation' and 'angle' have the same effect 
 
 <article>
 
-### animationSpeed: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
+### animationSpeed 
+**Type:** <code>number</code>
 
-The speed that the AnimatedSprite will play at. Higher is faster, lower is slower.
+**Default Value**: <code>1</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### autoUpdate: <span><code>boolean</code></span>
-Whether to use Ticker.shared to auto update animation time.
+**Description:** The speed that the AnimatedSprite will play at. Higher is faster, lower is slower.
 
 </article>
 
@@ -247,10 +270,10 @@ Whether to use Ticker.shared to auto update animation time.
 
 <article>
 
-### blendMode: <span><code>BLEND_MODES</code></span>
-- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+### autoUpdate 
+**Type:** <code>boolean</code>
 
-The blend mode to be applied to the sprite. Apply a value of `PIXI.BLEND_MODES.NORMAL` to reset the blend mode.
+**Description:** Whether to use Ticker.shared to auto update animation time.
 
 </article>
 
@@ -259,8 +282,24 @@ The blend mode to be applied to the sprite. Apply a value of `PIXI.BLEND_MODES.N
 
 <article>
 
-### cacheAsBitmap: <span><code>boolean</code></span>
-Set this to true if you want this display object to be cached as a bitmap. This basically takes a snapshot of the display object as it is at that moment. It can provide a performance benefit for complex static displayObjects. To remove simply set this property to `false`
+### blendMode 
+**Type:** <code>BLEND_MODES</code>
+
+**Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+
+**Description:** The blend mode to be applied to the sprite. Apply a value of `PIXI.BLEND_MODES.NORMAL` to reset the blend mode.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cacheAsBitmap 
+**Type:** <code>boolean</code>
+
+**Description:** Set this to true if you want this display object to be cached as a bitmap. This basically takes a snapshot of the display object as it is at that moment. It can provide a performance benefit for complex static displayObjects. To remove simply set this property to `false`
 
 IMPORTANT GOTCHA - Make sure that all your textures are preloaded BEFORE setting this property to true as it will take a snapshot of what is currently there. If the textures have not loaded then they will not appear.
 
@@ -271,22 +310,12 @@ IMPORTANT GOTCHA - Make sure that all your textures are preloaded BEFORE setting
 
 <article>
 
-### cacheAsBitmapMultisample: <span><code>number</code></span>
-- **Default Value**: <code>null</code>
+### cacheAsBitmapMultisample 
+**Type:** <code>number</code>
 
-The number of samples to use for cacheAsBitmap. If set to `null`, the renderer's sample count is used. If `cacheAsBitmap` is set to `true`, this will re-render with the new number of samples.
+**Default Value**: <code>null</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### cacheAsBitmapResolution: <span><code>number</code></span>
-- **Default Value**: <code>null</code>
-
-The resolution to use for cacheAsBitmap. By default this will use the renderer's resolution but can be overriden for performance. Lower values will reduce memory usage at the expense of render quality. A falsey value of `null` or `0` will default to the renderer's resolution. If `cacheAsBitmap` is set to `true`, this will re-render with the new resolution.
+**Description:** The number of samples to use for cacheAsBitmap. If set to `null`, the renderer's sample count is used. If `cacheAsBitmap` is set to `true`, this will re-render with the new number of samples.
 
 </article>
 
@@ -295,8 +324,12 @@ The resolution to use for cacheAsBitmap. By default this will use the renderer's
 
 <article>
 
-### children: <span><code>T[]</code></span>
-The array of children of this container.
+### cacheAsBitmapResolution 
+**Type:** <code>number</code>
+
+**Default Value**: <code>null</code>
+
+**Description:** The resolution to use for cacheAsBitmap. By default this will use the renderer's resolution but can be overriden for performance. Lower values will reduce memory usage at the expense of render quality. A falsey value of `null` or `0` will default to the renderer's resolution. If `cacheAsBitmap` is set to `true`, this will re-render with the new resolution.
 
 </article>
 
@@ -305,8 +338,22 @@ The array of children of this container.
 
 <article>
 
-### cullable: <span><code>boolean</code></span>
-Should this object be rendered if the bounds of this object are out of frame?
+### children 
+**Type:** <code>T[]</code>
+
+**Description:** The array of children of this container.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cullable 
+**Type:** <code>boolean</code>
+
+**Description:** Should this object be rendered if the bounds of this object are out of frame?
 Culling has no effect on whether updateTransform is called.
 
 </article>
@@ -316,8 +363,10 @@ Culling has no effect on whether updateTransform is called.
 
 <article>
 
-### cullArea: <span><code>Rectangle</code></span>
-If set, this shape is used for culling instead of the bounds of this object. It can improve the culling performance of objects with many children. The culling area is defined in local space.
+### cullArea 
+**Type:** <code>Rectangle</code>
+
+**Description:** If set, this shape is used for culling instead of the bounds of this object. It can improve the culling performance of objects with many children. The culling area is defined in local space.
 
 </article>
 
@@ -326,8 +375,10 @@ If set, this shape is used for culling instead of the bounds of this object. It 
 
 <article>
 
-### currentFrame: <span><code>number</code></span>
-The AnimatedSprite's current frame index.
+### currentFrame 
+**Type:** <code>number</code>
+
+**Description:** The AnimatedSprite's current frame index.
 
 </article>
 
@@ -336,8 +387,10 @@ The AnimatedSprite's current frame index.
 
 <article>
 
-### destroyed: <span><code>boolean</code></span>
-Readonly flag for destroyed display objects.
+### destroyed 
+**Type:** <code>boolean</code>
+
+**Description:** Readonly flag for destroyed display objects.
 
 </article>
 
@@ -346,8 +399,10 @@ Readonly flag for destroyed display objects.
 
 <article>
 
-### filterArea: <span><code>Rectangle</code></span>
-The area the filter is applied to. This is used as more of an optimization rather than figuring out the dimensions of the displayObject each frame you can set this rectangle.
+### filterArea 
+**Type:** <code>Rectangle</code>
+
+**Description:** The area the filter is applied to. This is used as more of an optimization rather than figuring out the dimensions of the displayObject each frame you can set this rectangle.
 
 Also works as an interaction mask.
 
@@ -358,8 +413,10 @@ Also works as an interaction mask.
 
 <article>
 
-### filters: <span><code>Filter[] &#124; null</code></span>
-Sets the filters for the displayObject. IMPORTANT&#58; This is a WebGL only feature and will be ignored by the canvas renderer. To remove filters simply set this property to `'null'`.
+### filters 
+**Type:** <code>Filter[] &#124; null</code>
+
+**Description:** Sets the filters for the displayObject. IMPORTANT&#58; This is a WebGL only feature and will be ignored by the canvas renderer. To remove filters simply set this property to `'null'`.
 
 </article>
 
@@ -368,8 +425,10 @@ Sets the filters for the displayObject. IMPORTANT&#58; This is a WebGL only feat
 
 <article>
 
-### height: <span><code>number</code></span>
-The height of the sprite, setting this will actually modify the scale to achieve the value set.
+### height 
+**Type:** <code>number</code>
+
+**Description:** The height of the sprite, setting this will actually modify the scale to achieve the value set.
 
 </article>
 
@@ -378,10 +437,13 @@ The height of the sprite, setting this will actually modify the scale to achieve
 
 <article>
 
-### hitArea: <span><code>PIXI.IHitArea</code></span>
-- **Default Value**: <code>undefined</code>
+### hitArea 
+**Type:** <code>PIXI.IHitArea</code>
 
-Interaction shape. Children will be hit first, then this shape will be checked. Setting this will cause this shape to be checked in hit tests rather than the displayObject's bounds.
+**Default Value**: <code>undefined</code>
+
+**Description:** Interaction shape. Children will be hit first, then this shape will be checked. Setting this will cause this shape to be checked in hit tests rather than the displayObject's bounds.
+
 
 ```js
  import { Rectangle, Sprite } from 'pixi.js';
@@ -399,14 +461,17 @@ Interaction shape. Children will be hit first, then this shape will be checked. 
 
 <article>
 
-### interactive: <span><code>unknown</code></span>
-Enable interaction events for the DisplayObject. Touch, pointer and mouse There is 4 types of interaction settings&#58;
+### interactive 
+**Type:** <code>unknown</code>
+
+**Description:** Enable interaction events for the DisplayObject. Touch, pointer and mouse There is 4 types of interaction settings&#58;
 
 * `'none'`&#58; Ignores all interaction events, even on its children.
 * `'passive'`&#58; Does not emit events and ignores all hit testing on itself and non-interactive children. Interactive children will still emit events.
 * `'auto'`&#58; Does not emit events and but is hit tested if parent is interactive. Same as `interactive = false` in v7
 * `'static'`&#58; Emit events and is hit tested. Same as `interaction = true` in v7
 * `'dynamic'`&#58; Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving
+
 
 ```js
  import { Sprite } from 'pixi.js';
@@ -426,20 +491,12 @@ Enable interaction events for the DisplayObject. Touch, pointer and mouse There 
 
 <article>
 
-### interactiveChildren: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### interactiveChildren 
+**Type:** <code>boolean</code>
 
-Determines if the children to the displayObject can be clicked/touched Setting this to false allows PixiJS to bypass a recursive `hitTest` function
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### isMask: <span><code>boolean</code></span>
-Does any other displayObject use this object as a mask?
+**Description:** Determines if the children to the displayObject can be clicked/touched Setting this to false allows PixiJS to bypass a recursive `hitTest` function
 
 </article>
 
@@ -448,20 +505,10 @@ Does any other displayObject use this object as a mask?
 
 <article>
 
-### isSprite: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### isMask 
+**Type:** <code>boolean</code>
 
-Used to fast check if a sprite is.. a sprite!
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### localTransform: <span><code>Matrix</code></span>
-Current transform of the object based on local factors&#58; position, scale, other stuff.
+**Description:** Does any other displayObject use this object as a mask?
 
 </article>
 
@@ -470,10 +517,12 @@ Current transform of the object based on local factors&#58; position, scale, oth
 
 <article>
 
-### loop: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### isSprite 
+**Type:** <code>boolean</code>
 
-Whether or not the animate sprite repeats after playing.
+**Default Value**: <code>true</code>
+
+**Description:** Used to fast check if a sprite is.. a sprite!
 
 </article>
 
@@ -482,10 +531,39 @@ Whether or not the animate sprite repeats after playing.
 
 <article>
 
-### mask: <span><code>Container &#124; MaskData &#124; null</code></span>
-Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it. In PixiJS a regular mask must be a [PIXI.Graphics](../classes/PIXI.Graphics.pixi_graphics) or a [PIXI.Sprite](../classes/PIXI.Sprite.pixi_sprite) object. This allows for much faster masking in canvas as it utilities shape clipping. Furthermore, a mask of an object must be in the subtree of its parent. Otherwise, `getLocalBounds` may calculate incorrect bounds, which makes the container's width and height wrong. To remove a mask, set this property to `null`.
+### localTransform 
+**Type:** <code>Matrix</code>
+
+**Description:** Current transform of the object based on local factors&#58; position, scale, other stuff.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### loop 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>true</code>
+
+**Description:** Whether or not the animate sprite repeats after playing.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### mask 
+**Type:** <code>Container &#124; MaskData &#124; null</code>
+
+**Description:** Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it. In PixiJS a regular mask must be a [PIXI.Graphics](../classes/PIXI.Graphics.pixi_graphics) or a [PIXI.Sprite](../classes/PIXI.Sprite.pixi_sprite) object. This allows for much faster masking in canvas as it utilities shape clipping. Furthermore, a mask of an object must be in the subtree of its parent. Otherwise, `getLocalBounds` may calculate incorrect bounds, which makes the container's width and height wrong. To remove a mask, set this property to `null`.
 
 For sprite mask both alpha and red channel are used. Black mask is the same as transparent mask.
+
 
 ```js
  import { Graphics, Sprite } from 'pixi.js';
@@ -507,10 +585,12 @@ For sprite mask both alpha and red channel are used. Black mask is the same as t
 
 <article>
 
-### name: <span><code>string</code></span>
-- **Default Value**: <code>undefined</code>
+### name 
+**Type:** <code>string</code>
 
-The instance name of the object.
+**Default Value**: <code>undefined</code>
+
+**Description:** The instance name of the object.
 
 </article>
 
@@ -519,10 +599,13 @@ The instance name of the object.
 
 <article>
 
-### onclick: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onclick 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `click` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `click` event.
+
 
 ```js
 this.onclick = (event) => {
@@ -538,8 +621,11 @@ this.onclick = (event) => {
 
 <article>
 
-### onComplete: <span><code>() =&#62; void</code></span>
-User-assigned function to call when an AnimatedSprite finishes playing.
+### onComplete 
+**Type:** <code>() =&#62; void</code>
+
+**Description:** User-assigned function to call when an AnimatedSprite finishes playing.
+
 
 ```js
 animation.onComplete = () => {
@@ -555,8 +641,11 @@ animation.onComplete = () => {
 
 <article>
 
-### onFrameChange: <span><code>(currentFrame&#58; number) =&#62; void</code></span>
-User-assigned function to call when an AnimatedSprite changes which texture is being rendered.
+### onFrameChange 
+**Type:** <code>(currentFrame&#58; number) =&#62; void</code>
+
+**Description:** User-assigned function to call when an AnimatedSprite changes which texture is being rendered.
+
 
 ```js
 animation.onFrameChange = () => {
@@ -572,10 +661,13 @@ animation.onFrameChange = () => {
 
 <article>
 
-### onglobalmousemove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onglobalmousemove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `globalmousemove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `globalmousemove` event.
+
 
 ```js
 this.onglobalmousemove = (event) => {
@@ -591,10 +683,13 @@ this.onglobalmousemove = (event) => {
 
 <article>
 
-### onglobalpointermove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onglobalpointermove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `globalpointermove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `globalpointermove` event.
+
 
 ```js
 this.onglobalpointermove = (event) => {
@@ -610,10 +705,13 @@ this.onglobalpointermove = (event) => {
 
 <article>
 
-### onglobaltouchmove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onglobaltouchmove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `globaltouchmove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `globaltouchmove` event.
+
 
 ```js
 this.onglobaltouchmove = (event) => {
@@ -629,8 +727,11 @@ this.onglobaltouchmove = (event) => {
 
 <article>
 
-### onLoop: <span><code>() =&#62; void</code></span>
-User-assigned function to call when `loop` is true, and an AnimatedSprite is played and loops around to start again.
+### onLoop 
+**Type:** <code>() =&#62; void</code>
+
+**Description:** User-assigned function to call when `loop` is true, and an AnimatedSprite is played and loops around to start again.
+
 
 ```js
 animation.onLoop = () => {
@@ -646,10 +747,13 @@ animation.onLoop = () => {
 
 <article>
 
-### onmousedown: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmousedown 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mousedown` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mousedown` event.
+
 
 ```js
 this.onmousedown = (event) => {
@@ -665,10 +769,13 @@ this.onmousedown = (event) => {
 
 <article>
 
-### onmouseenter: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseenter 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseenter` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseenter` event.
+
 
 ```js
 this.onmouseenter = (event) => {
@@ -684,10 +791,13 @@ this.onmouseenter = (event) => {
 
 <article>
 
-### onmouseleave: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseleave 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseleave` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseleave` event.
+
 
 ```js
 this.onmouseleave = (event) => {
@@ -703,10 +813,13 @@ this.onmouseleave = (event) => {
 
 <article>
 
-### onmousemove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmousemove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mousemove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mousemove` event.
+
 
 ```js
 this.onmousemove = (event) => {
@@ -722,10 +835,13 @@ this.onmousemove = (event) => {
 
 <article>
 
-### onmouseout: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseout 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseout` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseout` event.
+
 
 ```js
 this.onmouseout = (event) => {
@@ -741,10 +857,13 @@ this.onmouseout = (event) => {
 
 <article>
 
-### onmouseover: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseover 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseover` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseover` event.
+
 
 ```js
 this.onmouseover = (event) => {
@@ -760,10 +879,13 @@ this.onmouseover = (event) => {
 
 <article>
 
-### onmouseup: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseup 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseup` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseup` event.
+
 
 ```js
 this.onmouseup = (event) => {
@@ -779,10 +901,13 @@ this.onmouseup = (event) => {
 
 <article>
 
-### onmouseupoutside: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseupoutside 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseupoutside` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseupoutside` event.
+
 
 ```js
 this.onmouseupoutside = (event) => {
@@ -798,10 +923,13 @@ this.onmouseupoutside = (event) => {
 
 <article>
 
-### onpointercancel: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointercancel 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointercancel` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointercancel` event.
+
 
 ```js
 this.onpointercancel = (event) => {
@@ -817,10 +945,13 @@ this.onpointercancel = (event) => {
 
 <article>
 
-### onpointerdown: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerdown 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerdown` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerdown` event.
+
 
 ```js
 this.onpointerdown = (event) => {
@@ -836,10 +967,13 @@ this.onpointerdown = (event) => {
 
 <article>
 
-### onpointerenter: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerenter 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerenter` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerenter` event.
+
 
 ```js
 this.onpointerenter = (event) => {
@@ -855,10 +989,13 @@ this.onpointerenter = (event) => {
 
 <article>
 
-### onpointerleave: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerleave 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerleave` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerleave` event.
+
 
 ```js
 this.onpointerleave = (event) => {
@@ -874,10 +1011,13 @@ this.onpointerleave = (event) => {
 
 <article>
 
-### onpointermove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointermove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointermove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointermove` event.
+
 
 ```js
 this.onpointermove = (event) => {
@@ -893,10 +1033,13 @@ this.onpointermove = (event) => {
 
 <article>
 
-### onpointerout: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerout 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerout` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerout` event.
+
 
 ```js
 this.onpointerout = (event) => {
@@ -912,10 +1055,13 @@ this.onpointerout = (event) => {
 
 <article>
 
-### onpointerover: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerover 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerover` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerover` event.
+
 
 ```js
 this.onpointerover = (event) => {
@@ -931,10 +1077,13 @@ this.onpointerover = (event) => {
 
 <article>
 
-### onpointertap: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointertap 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointertap` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointertap` event.
+
 
 ```js
 this.onpointertap = (event) => {
@@ -950,10 +1099,13 @@ this.onpointertap = (event) => {
 
 <article>
 
-### onpointerup: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerup 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerup` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerup` event.
+
 
 ```js
 this.onpointerup = (event) => {
@@ -969,10 +1121,13 @@ this.onpointerup = (event) => {
 
 <article>
 
-### onpointerupoutside: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerupoutside 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerupoutside` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerupoutside` event.
+
 
 ```js
 this.onpointerupoutside = (event) => {
@@ -988,10 +1143,13 @@ this.onpointerupoutside = (event) => {
 
 <article>
 
-### onrightclick: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onrightclick 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `rightclick` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `rightclick` event.
+
 
 ```js
 this.onrightclick = (event) => {
@@ -1007,10 +1165,13 @@ this.onrightclick = (event) => {
 
 <article>
 
-### onrightdown: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onrightdown 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `rightdown` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `rightdown` event.
+
 
 ```js
 this.onrightdown = (event) => {
@@ -1026,10 +1187,13 @@ this.onrightdown = (event) => {
 
 <article>
 
-### onrightup: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onrightup 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `rightup` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `rightup` event.
+
 
 ```js
 this.onrightup = (event) => {
@@ -1045,10 +1209,13 @@ this.onrightup = (event) => {
 
 <article>
 
-### onrightupoutside: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onrightupoutside 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `rightupoutside` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `rightupoutside` event.
+
 
 ```js
 this.onrightupoutside = (event) => {
@@ -1064,10 +1231,13 @@ this.onrightupoutside = (event) => {
 
 <article>
 
-### ontap: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontap 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `tap` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `tap` event.
+
 
 ```js
 this.ontap = (event) => {
@@ -1083,10 +1253,13 @@ this.ontap = (event) => {
 
 <article>
 
-### ontouchcancel: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontouchcancel 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `touchcancel` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `touchcancel` event.
+
 
 ```js
 this.ontouchcancel = (event) => {
@@ -1102,10 +1275,13 @@ this.ontouchcancel = (event) => {
 
 <article>
 
-### ontouchend: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontouchend 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `touchend` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `touchend` event.
+
 
 ```js
 this.ontouchend = (event) => {
@@ -1121,10 +1297,13 @@ this.ontouchend = (event) => {
 
 <article>
 
-### ontouchendoutside: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontouchendoutside 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `touchendoutside` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `touchendoutside` event.
+
 
 ```js
 this.ontouchendoutside = (event) => {
@@ -1140,10 +1319,13 @@ this.ontouchendoutside = (event) => {
 
 <article>
 
-### ontouchmove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontouchmove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `touchmove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `touchmove` event.
+
 
 ```js
 this.ontouchmove = (event) => {
@@ -1159,10 +1341,13 @@ this.ontouchmove = (event) => {
 
 <article>
 
-### ontouchstart: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontouchstart 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `touchstart` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `touchstart` event.
+
 
 ```js
 this.ontouchstart = (event) => {
@@ -1178,10 +1363,13 @@ this.ontouchstart = (event) => {
 
 <article>
 
-### onwheel: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onwheel 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `wheel` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `wheel` event.
+
 
 ```js
 this.onwheel = (event) => {
@@ -1197,8 +1385,10 @@ this.onwheel = (event) => {
 
 <article>
 
-### parent: <span><code>Container</code></span>
-The display object container that contains this display object.
+### parent 
+**Type:** <code>Container</code>
+
+**Description:** The display object container that contains this display object.
 
 </article>
 
@@ -1207,8 +1397,10 @@ The display object container that contains this display object.
 
 <article>
 
-### pivot: <span><code>ObservablePoint</code></span>
-The center of rotation, scaling, and skewing for this display object in its local space. The `position`is the projection of `pivot` in the parent's local space.
+### pivot 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The center of rotation, scaling, and skewing for this display object in its local space. The `position`is the projection of `pivot` in the parent's local space.
 
 By default, the pivot is the origin (0, 0).
 
@@ -1219,8 +1411,10 @@ By default, the pivot is the origin (0, 0).
 
 <article>
 
-### playing: <span><code>boolean</code></span>
-Indicates if the AnimatedSprite is currently playing.
+### playing 
+**Type:** <code>boolean</code>
+
+**Description:** Indicates if the AnimatedSprite is currently playing.
 
 </article>
 
@@ -1229,20 +1423,12 @@ Indicates if the AnimatedSprite is currently playing.
 
 <article>
 
-### pluginName: <span><code>string</code></span>
-- **Default Value**: <code>'batch'</code>
+### pluginName 
+**Type:** <code>string</code>
 
-Plugin that is responsible for rendering this element. Allows to customize the rendering process without overriding '_render' & '_renderCanvas' methods.
+**Default Value**: <code>'batch'</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### position: <span><code>ObservablePoint</code></span>
-The coordinate of the object relative to the local coordinates of the parent.
+**Description:** Plugin that is responsible for rendering this element. Allows to customize the rendering process without overriding '_render' & '_renderCanvas' methods.
 
 </article>
 
@@ -1251,8 +1437,22 @@ The coordinate of the object relative to the local coordinates of the parent.
 
 <article>
 
-### renderable: <span><code>boolean</code></span>
-Can this object be rendered, if false the object will not be drawn but the updateTransform methods will still be called.
+### position 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The coordinate of the object relative to the local coordinates of the parent.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderable 
+**Type:** <code>boolean</code>
+
+**Description:** Can this object be rendered, if false the object will not be drawn but the updateTransform methods will still be called.
 
 Only affects recursive calls from parent. You can ask for bounds manually.
 
@@ -1263,8 +1463,10 @@ Only affects recursive calls from parent. You can ask for bounds manually.
 
 <article>
 
-### rotation: <span><code>number</code></span>
-The rotation of the object in radians. 'rotation' and 'angle' have the same effect on a display object; rotation is in radians, angle is in degrees.
+### rotation 
+**Type:** <code>number</code>
+
+**Description:** The rotation of the object in radians. 'rotation' and 'angle' have the same effect on a display object; rotation is in radians, angle is in degrees.
 
 </article>
 
@@ -1273,10 +1475,12 @@ The rotation of the object in radians. 'rotation' and 'angle' have the same effe
 
 <article>
 
-### roundPixels: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### roundPixels 
+**Type:** <code>boolean</code>
 
-If true PixiJS will Math.floor() x/y values when rendering, stopping pixel interpolation.
+**Default Value**: <code>false</code>
+
+**Description:** If true PixiJS will Math.floor() x/y values when rendering, stopping pixel interpolation.
 Advantages can include sharper image quality (like text) and faster rendering on canvas. The main disadvantage is movement of objects may appear less smooth.
 
 To set the global default, change [PIXI.settings.ROUND_PIXELS](../namespaces/PIXI.settings.pixi_settings#ROUND_PIXELS).
@@ -1288,8 +1492,10 @@ To set the global default, change [PIXI.settings.ROUND_PIXELS](../namespaces/PIX
 
 <article>
 
-### scale: <span><code>ObservablePoint</code></span>
-The scale factors of this object along the local coordinate axes.
+### scale 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The scale factors of this object along the local coordinate axes.
 The default scale is (1, 1).
 
 </article>
@@ -1299,8 +1505,10 @@ The default scale is (1, 1).
 
 <article>
 
-### skew: <span><code>ObservablePoint</code></span>
-The skew factor for the object in radians.
+### skew 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The skew factor for the object in radians.
 
 </article>
 
@@ -1309,8 +1517,10 @@ The skew factor for the object in radians.
 
 <article>
 
-### sortableChildren: <span><code>boolean</code></span>
-If set to true, the container will sort its children by `zIndex` value when `updateTransform()` is called, or manually if `sortChildren()` is called.
+### sortableChildren 
+**Type:** <code>boolean</code>
+
+**Description:** If set to true, the container will sort its children by `zIndex` value when `updateTransform()` is called, or manually if `sortChildren()` is called.
 
 This actually changes the order of elements in the array, so should be treated as a basic solution that is not performant compared to other solutions, such as [PixiJS Layers](https&#58;//github.com/pixijs/layers)
 
@@ -1323,8 +1533,10 @@ Also be aware of that this may not work nicely with the `addChildAt()` function,
 
 <article>
 
-### sortDirty: <span><code>boolean</code></span>
-Should children be sorted by zIndex at the next updateTransform call.
+### sortDirty 
+**Type:** <code>boolean</code>
+
+**Description:** Should children be sorted by zIndex at the next updateTransform call.
 Will get automatically set to true if a new child is added, or if a child's zIndex changes.
 
 </article>
@@ -1334,8 +1546,10 @@ Will get automatically set to true if a new child is added, or if a child's zInd
 
 <article>
 
-### texture: <span><code>Texture</code></span>
-The texture that the sprite is using.
+### texture 
+**Type:** <code>Texture</code>
+
+**Description:** The texture that the sprite is using.
 
 </article>
 
@@ -1344,8 +1558,10 @@ The texture that the sprite is using.
 
 <article>
 
-### textures: <span><code>Texture[] &#124; FrameObject[]</code></span>
-The array of textures used for this AnimatedSprite.
+### textures 
+**Type:** <code>Texture[] &#124; FrameObject[]</code>
+
+**Description:** The array of textures used for this AnimatedSprite.
 
 </article>
 
@@ -1354,10 +1570,12 @@ The array of textures used for this AnimatedSprite.
 
 <article>
 
-### tint: <span><code>number</code></span>
-- **Default Value**: <code>0xFFFFFF</code>
+### tint 
+**Type:** <code>number</code>
 
-The tint applied to the sprite. This is a hex value.
+**Default Value**: <code>0xFFFFFF</code>
+
+**Description:** The tint applied to the sprite. This is a hex value.
 A value of 0xFFFFFF will remove any tint effect.
 
 </article>
@@ -1367,20 +1585,12 @@ A value of 0xFFFFFF will remove any tint effect.
 
 <article>
 
-### totalFrames: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### totalFrames 
+**Type:** <code>number</code>
 
-The total number of frames in the AnimatedSprite. This is the same as number of textures assigned to the AnimatedSprite.
+**Default Value**: <code>0</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### transform: <span><code>Transform</code></span>
-World transform and local transform of this object. This will become read-only later, please do not assign anything there unless you know what are you doing.
+**Description:** The total number of frames in the AnimatedSprite. This is the same as number of textures assigned to the AnimatedSprite.
 
 </article>
 
@@ -1389,10 +1599,24 @@ World transform and local transform of this object. This will become read-only l
 
 <article>
 
-### updateAnchor: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### transform 
+**Type:** <code>Transform</code>
 
-Update anchor to [Texture's defaultAnchor](../classes/PIXI.Texture.pixi_core#defaultAnchor) when frame changes.
+**Description:** World transform and local transform of this object. This will become read-only later, please do not assign anything there unless you know what are you doing.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### updateAnchor 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** Update anchor to [Texture's defaultAnchor](../classes/PIXI.Texture.pixi_core#defaultAnchor) when frame changes.
 Useful with [sprite sheet animations](../classes/PIXI.Spritesheet.pixi_spritesheet#animations) created with tools. Changing anchor for each frame allows to pin sprite origin to certain moving feature of the frame (e.g. left foot).
 
 Note&#58; Enabling this will override any previously set `anchor` on each frame change.
@@ -1404,8 +1628,10 @@ Note&#58; Enabling this will override any previously set `anchor` on each frame 
 
 <article>
 
-### visible: <span><code>boolean</code></span>
-The visibility of the object. If false the object will not be drawn, and the updateTransform function will not be called.
+### visible 
+**Type:** <code>boolean</code>
+
+**Description:** The visibility of the object. If false the object will not be drawn, and the updateTransform function will not be called.
 
 Only affects recursive calls from parent. You can ask for bounds or call updateTransform manually.
 
@@ -1416,8 +1642,10 @@ Only affects recursive calls from parent. You can ask for bounds or call updateT
 
 <article>
 
-### width: <span><code>number</code></span>
-The width of the sprite, setting this will actually modify the scale to achieve the value set.
+### width 
+**Type:** <code>number</code>
+
+**Description:** The width of the sprite, setting this will actually modify the scale to achieve the value set.
 
 </article>
 
@@ -1426,8 +1654,10 @@ The width of the sprite, setting this will actually modify the scale to achieve 
 
 <article>
 
-### worldAlpha: <span><code>number</code></span>
-The multiplied alpha of the displayObject.
+### worldAlpha 
+**Type:** <code>number</code>
+
+**Description:** The multiplied alpha of the displayObject.
 
 </article>
 
@@ -1436,8 +1666,10 @@ The multiplied alpha of the displayObject.
 
 <article>
 
-### worldTransform: <span><code>Matrix</code></span>
-Current transform of the object based on world (parent) factors.
+### worldTransform 
+**Type:** <code>Matrix</code>
+
+**Description:** Current transform of the object based on world (parent) factors.
 
 </article>
 
@@ -1446,8 +1678,10 @@ Current transform of the object based on world (parent) factors.
 
 <article>
 
-### worldVisible: <span><code>boolean</code></span>
-Indicates if the object is globally visible.
+### worldVisible 
+**Type:** <code>boolean</code>
+
+**Description:** Indicates if the object is globally visible.
 
 </article>
 
@@ -1456,8 +1690,10 @@ Indicates if the object is globally visible.
 
 <article>
 
-### x: <span><code>number</code></span>
-The position of the displayObject on the x axis relative to the local coordinates of the parent. An alias to position.x
+### x 
+**Type:** <code>number</code>
+
+**Description:** The position of the displayObject on the x axis relative to the local coordinates of the parent. An alias to position.x
 
 </article>
 
@@ -1466,8 +1702,10 @@ The position of the displayObject on the x axis relative to the local coordinate
 
 <article>
 
-### y: <span><code>number</code></span>
-The position of the displayObject on the y axis relative to the local coordinates of the parent. An alias to position.y
+### y 
+**Type:** <code>number</code>
+
+**Description:** The position of the displayObject on the y axis relative to the local coordinates of the parent. An alias to position.y
 
 </article>
 
@@ -1476,8 +1714,10 @@ The position of the displayObject on the y axis relative to the local coordinate
 
 <article>
 
-### zIndex: <span><code>number</code></span>
-The zIndex of the displayObject.
+### zIndex 
+**Type:** <code>number</code>
+
+**Description:** The zIndex of the displayObject.
 If a container has the sortableChildren property set to true, children will be automatically sorted by zIndex value; a higher value will mean it will be moved towards the end of the array, and thus rendered on top of other display objects within the same container.
 
 </article>
@@ -1487,10 +1727,12 @@ If a container has the sortableChildren property set to true, children will be a
 
 <article>
 
-### _anchor: <span><code>ObservablePoint</code></span>
-- **Default Value**: <code>`this.texture.defaultAnchor`</code>
+### _anchor 
+**Type:** <code>ObservablePoint</code>
 
-The anchor point defines the normalized coordinates in the texture that map to the position of this sprite.
+**Default Value**: <code>`this.texture.defaultAnchor`</code>
+
+**Description:** The anchor point defines the normalized coordinates in the texture that map to the position of this sprite.
 
 By default, this is `(0,0)` (or `texture.defaultAnchor`if you have modified that), which means the position`(x,y)` of this `Sprite` will be the top-left corner.
 
@@ -1505,8 +1747,10 @@ Note&#58; Updating `texture.defaultAnchor` after constructing a `Sprite` does _n
 
 <article>
 
-### _boundsID: <span><code>number</code></span>
-Flags the cached bounds as dirty.
+### _boundsID 
+**Type:** <code>number</code>
+
+**Description:** Flags the cached bounds as dirty.
 
 </article>
 
@@ -1515,8 +1759,10 @@ Flags the cached bounds as dirty.
 
 <article>
 
-### _boundsRect: <span><code>Rectangle</code></span>
-Cache of this display-object's bounds-rectangle.
+### _boundsRect 
+**Type:** <code>Rectangle</code>
+
+**Description:** Cache of this display-object's bounds-rectangle.
 
 </article>
 
@@ -1525,20 +1771,12 @@ Cache of this display-object's bounds-rectangle.
 
 <article>
 
-### _cachedTint: <span><code>number</code></span>
-- **Default Value**: <code>0xFFFFFF</code>
+### _cachedTint 
+**Type:** <code>number</code>
 
-Cached tint value so we can tell when the tint is changed. Value is used for 2d CanvasRenderer.
+**Default Value**: <code>0xFFFFFF</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### _destroyed: <span><code>boolean</code></span>
-If the object has been destroyed via destroy(). If true, it should not be used.
+**Description:** Cached tint value so we can tell when the tint is changed. Value is used for 2d CanvasRenderer.
 
 </article>
 
@@ -1547,8 +1785,10 @@ If the object has been destroyed via destroy(). If true, it should not be used.
 
 <article>
 
-### _enabledFilters: <span><code>Filter[]</code></span>
-Currently enabled filters.
+### _destroyed 
+**Type:** <code>boolean</code>
+
+**Description:** If the object has been destroyed via destroy(). If true, it should not be used.
 
 </article>
 
@@ -1557,8 +1797,10 @@ Currently enabled filters.
 
 <article>
 
-### _height: <span><code>number</code></span>
-The height of the sprite (this is initially set by the texture)
+### _enabledFilters 
+**Type:** <code>Filter[]</code>
+
+**Description:** Currently enabled filters.
 
 </article>
 
@@ -1567,8 +1809,10 @@ The height of the sprite (this is initially set by the texture)
 
 <article>
 
-### _lastSortedIndex: <span><code>number</code></span>
-Which index in the children array the display component was before the previous zIndex sort. Used by containers to help sort objects with the same zIndex, by using previous array index as the decider.
+### _height 
+**Type:** <code>number</code>
+
+**Description:** The height of the sprite (this is initially set by the texture)
 
 </article>
 
@@ -1577,8 +1821,10 @@ Which index in the children array the display component was before the previous 
 
 <article>
 
-### _localBoundsRect: <span><code>Rectangle</code></span>
-Cache of this display-object's local-bounds rectangle.
+### _lastSortedIndex 
+**Type:** <code>number</code>
+
+**Description:** Which index in the children array the display component was before the previous zIndex sort. Used by containers to help sort objects with the same zIndex, by using previous array index as the decider.
 
 </article>
 
@@ -1587,8 +1833,10 @@ Cache of this display-object's local-bounds rectangle.
 
 <article>
 
-### _mask: <span><code>Container &#124; MaskData</code></span>
-The original, cached mask of the object.
+### _localBoundsRect 
+**Type:** <code>Rectangle</code>
+
+**Description:** Cache of this display-object's local-bounds rectangle.
 
 </article>
 
@@ -1597,7 +1845,10 @@ The original, cached mask of the object.
 
 <article>
 
-### _tempDisplayObjectParent: <span><code>PIXI.Container</code></span>
+### _mask 
+**Type:** <code>Container &#124; MaskData</code>
+
+**Description:** The original, cached mask of the object.
 
 </article>
 
@@ -1606,10 +1857,9 @@ The original, cached mask of the object.
 
 <article>
 
-### _tintedCanvas: <span><code>PIXI.ICanvas &#124; HTMLImageElement</code></span>
-- **Default Value**: <code>undefined</code>
+### _tempDisplayObjectParent 
+**Type:** <code>PIXI.Container</code>
 
-Cached tinted texture.
 
 </article>
 
@@ -1618,8 +1868,12 @@ Cached tinted texture.
 
 <article>
 
-### _width: <span><code>number</code></span>
-The width of the sprite (this is initially set by the texture).
+### _tintedCanvas 
+**Type:** <code>PIXI.ICanvas &#124; HTMLImageElement</code>
+
+**Default Value**: <code>undefined</code>
+
+**Description:** Cached tinted texture.
 
 </article>
 
@@ -1628,8 +1882,10 @@ The width of the sprite (this is initially set by the texture).
 
 <article>
 
-### _zIndex: <span><code>number</code></span>
-The zIndex of the displayObject. A higher value will mean it will be rendered on top of other displayObjects within the same container.
+### _width 
+**Type:** <code>number</code>
+
+**Description:** The width of the sprite (this is initially set by the texture).
 
 </article>
 
@@ -1638,8 +1894,10 @@ The zIndex of the displayObject. A higher value will mean it will be rendered on
 
 <article>
 
-### uvs: <span><code>Float32Array</code></span>
-This is used to store the uvs data of the sprite, assigned at the same time as the vertexData in calculateVertices().
+### _zIndex 
+**Type:** <code>number</code>
+
+**Description:** The zIndex of the displayObject. A higher value will mean it will be rendered on top of other displayObjects within the same container.
 
 </article>
 
@@ -1648,8 +1906,10 @@ This is used to store the uvs data of the sprite, assigned at the same time as t
 
 <article>
 
-### vertexData: <span><code>Float32Array</code></span>
-This is used to store the vertex data of the sprite (basically a quad).
+### uvs 
+**Type:** <code>Float32Array</code>
+
+**Description:** This is used to store the uvs data of the sprite, assigned at the same time as the vertexData in calculateVertices().
 
 </article>
 
@@ -1658,8 +1918,10 @@ This is used to store the vertex data of the sprite (basically a quad).
 
 <article>
 
-### texture: <span><code>Texture</code></span>
-The [PIXI.Texture](../classes/PIXI.Texture.pixi_core) of the frame.
+### vertexData 
+**Type:** <code>Float32Array</code>
+
+**Description:** This is used to store the vertex data of the sprite (basically a quad).
 
 </article>
 
@@ -1668,8 +1930,22 @@ The [PIXI.Texture](../classes/PIXI.Texture.pixi_core) of the frame.
 
 <article>
 
-### time: <span><code>number</code></span>
-The duration of the frame, in milliseconds.
+### texture 
+**Type:** <code>Texture</code>
+
+**Description:** The [PIXI.Texture](../classes/PIXI.Texture.pixi_core) of the frame.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### time 
+**Type:** <code>number</code>
+
+**Description:** The duration of the frame, in milliseconds.
 
 </article>
 
@@ -1680,8 +1956,10 @@ The duration of the frame, in milliseconds.
 ## Methods
 <article>
 
-### fromFrames: <span><code>(frames&#58; string[]) -&#62; AnimatedSprite</code></span>
-A short hand way of creating an AnimatedSprite from an array of frame ids.
+### fromFrames 
+**Type:** <code>(frames&#58; string[]) -&#62; AnimatedSprite</code>
+
+**Description:** A short hand way of creating an AnimatedSprite from an array of frame ids.
 
 #### Parameters:
 | Name   | Type                  | Description                                                                |
@@ -1698,8 +1976,10 @@ A short hand way of creating an AnimatedSprite from an array of frame ids.
 
 <article>
 
-### fromImages: <span><code>(images&#58; string[]) -&#62; AnimatedSprite</code></span>
-A short hand way of creating an AnimatedSprite from an array of image ids.
+### fromImages 
+**Type:** <code>(images&#58; string[]) -&#62; AnimatedSprite</code>
+
+**Description:** A short hand way of creating an AnimatedSprite from an array of image ids.
 
 #### Parameters:
 | Name   | Type                  | Description                                                                |
@@ -1716,8 +1996,10 @@ A short hand way of creating an AnimatedSprite from an array of image ids.
 
 <article>
 
-### addChild: <span><code>(children&#58; PIXI.DisplayObject) -&#62; PIXI.DisplayObject</code></span>
-Adds one or more children to the container.
+### addChild 
+**Type:** <code>(children&#58; PIXI.DisplayObject) -&#62; PIXI.DisplayObject</code>
+
+**Description:** Adds one or more children to the container.
 Multiple items can be added like so&#58; `myContainer.addChild(thingOne, thingTwo, thingThree)`
 
 #### Parameters:
@@ -1735,8 +2017,10 @@ Multiple items can be added like so&#58; `myContainer.addChild(thingOne, thingTw
 
 <article>
 
-### addChildAt: <span><code>(child&#58; PIXI.DisplayObject, index&#58; number) -&#62; PIXI.DisplayObject</code></span>
-Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
+### addChildAt 
+**Type:** <code>(child&#58; PIXI.DisplayObject, index&#58; number) -&#62; PIXI.DisplayObject</code>
+
+**Description:** Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
 
 #### Parameters:
 | Name  | Type                            | Description                     |
@@ -1754,8 +2038,11 @@ Adds a child to the container at a specified index. If the index is out of bound
 
 <article>
 
-### addEventListener: <span><code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; AddListenerOptions) -&#62; </code></span>
-Unlike `on` or `addListener` which are methods from EventEmitter, `addEventListener`seeks to be compatible with the DOM's `addEventListener` with support for options.**IMPORTANT&#58;** _Only_ available if using the `@pixi/events` package.
+### addEventListener 
+**Type:** <code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; AddListenerOptions) -&#62; </code>
+
+**Description:** Unlike `on` or `addListener` which are methods from EventEmitter, `addEventListener`seeks to be compatible with the DOM's `addEventListener` with support for options.**IMPORTANT&#58;** _Only_ available if using the `@pixi/events` package.
+
 
 ```js
  // Tell the user whether they did a single, double, triple, or nth click.
@@ -1797,8 +2084,10 @@ Unlike `on` or `addListener` which are methods from EventEmitter, `addEventListe
 
 <article>
 
-### calculateBounds: <span><code>() -&#62; void</code></span>
-Recalculates the bounds of the container.
+### calculateBounds 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Recalculates the bounds of the container.
 This implementation will automatically fit the children's bounds into the calculation. Each child's bounds is limited to its mask's bounds or filterArea, if any is applied.
 
 </article>
@@ -1808,8 +2097,10 @@ This implementation will automatically fit the children's bounds into the calcul
 
 <article>
 
-### calculateTrimmedVertices: <span><code>() -&#62; void</code></span>
-Calculates worldTransform \* vertices for a non texture with a trim. store it in vertexTrimmedData.
+### calculateTrimmedVertices 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Calculates worldTransform \* vertices for a non texture with a trim. store it in vertexTrimmedData.
 This is used to ensure that the true width and height of a trimmed texture is respected.
 
 </article>
@@ -1819,8 +2110,10 @@ This is used to ensure that the true width and height of a trimmed texture is re
 
 <article>
 
-### calculateVertices: <span><code>() -&#62; void</code></span>
-Calculates worldTransform \* vertices, store it in vertexData.
+### calculateVertices 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Calculates worldTransform \* vertices, store it in vertexData.
 
 </article>
 
@@ -1829,8 +2122,10 @@ Calculates worldTransform \* vertices, store it in vertexData.
 
 <article>
 
-### containerUpdateTransform: <span><code>() -&#62; </code></span>
-Container default updateTransform, does update children of container. Will crash if there's no parent element.
+### containerUpdateTransform 
+**Type:** <code>() -&#62; </code>
+
+**Description:** Container default updateTransform, does update children of container. Will crash if there's no parent element.
 
 </article>
 
@@ -1839,8 +2134,10 @@ Container default updateTransform, does update children of container. Will crash
 
 <article>
 
-### containsPoint: <span><code>(point&#58; IPointData) -&#62; boolean</code></span>
-Tests if a point is inside this sprite
+### containsPoint 
+**Type:** <code>(point&#58; IPointData) -&#62; boolean</code>
+
+**Description:** Tests if a point is inside this sprite
 
 #### Parameters:
 | Name  | Type                    | Description       |
@@ -1857,8 +2154,10 @@ Tests if a point is inside this sprite
 
 <article>
 
-### destroy: <span><code>(options&#58; object &#124; boolean) -&#62; void</code></span>
-Stops the AnimatedSprite and destroys it.
+### destroy 
+**Type:** <code>(options&#58; object &#124; boolean) -&#62; void</code>
+
+**Description:** Stops the AnimatedSprite and destroys it.
 
 #### Parameters:
 | Name                | Type                               | Description                                                                                                                 |
@@ -1874,8 +2173,10 @@ Stops the AnimatedSprite and destroys it.
 
 <article>
 
-### disableTempParent: <span><code>(cacheParent&#58; Container) -&#62; void</code></span>
-Pair method for `enableTempParent`
+### disableTempParent 
+**Type:** <code>(cacheParent&#58; Container) -&#62; void</code>
+
+**Description:** Pair method for `enableTempParent`
 
 #### Parameters:
 | Name        | Type                   | Description              |
@@ -1888,11 +2189,14 @@ Pair method for `enableTempParent`
 
 <article>
 
-### dispatchEvent: <span><code>(e&#58; Event) -&#62; boolean</code></span>
-Dispatch the event on this [PIXI.DisplayObject](../classes/PIXI.DisplayObject.pixi_display) using the event's [PIXI.EventBoundary](../classes/PIXI.EventBoundary.pixi_events).
+### dispatchEvent 
+**Type:** <code>(e&#58; Event) -&#62; boolean</code>
+
+**Description:** Dispatch the event on this [PIXI.DisplayObject](../classes/PIXI.DisplayObject.pixi_display) using the event's [PIXI.EventBoundary](../classes/PIXI.EventBoundary.pixi_events).
 The target of the event is set to `this` and the `defaultPrevented` flag is cleared before dispatch.
 
 **IMPORTANT&#58;** _Only_ available if using the `@pixi/events` package.
+
 
 ```js
 // Reuse a click event!
@@ -1915,8 +2219,10 @@ button.dispatchEvent(clickEvent);
 
 <article>
 
-### displayObjectUpdateTransform: <span><code>() -&#62; </code></span>
-DisplayObject default updateTransform, does not update children of container. Will crash if there's no parent element.
+### displayObjectUpdateTransform 
+**Type:** <code>() -&#62; </code>
+
+**Description:** DisplayObject default updateTransform, does not update children of container. Will crash if there's no parent element.
 
 </article>
 
@@ -1925,8 +2231,10 @@ DisplayObject default updateTransform, does not update children of container. Wi
 
 <article>
 
-### enableTempParent: <span><code>() -&#62; Container</code></span>
-Used in Renderer, cacheAsBitmap and other places where you call an `updateTransform` on root.
+### enableTempParent 
+**Type:** <code>() -&#62; Container</code>
+
+**Description:** Used in Renderer, cacheAsBitmap and other places where you call an `updateTransform` on root.
 ```
 const cacheParent = elem.enableTempParent();
 elem.updateTransform();
@@ -1945,8 +2253,10 @@ elem.disableTempParent(cacheParent);
 
 <article>
 
-### getBounds: <span><code>(skipUpdate&#58; boolean, rect&#58; Rectangle) -&#62; Rectangle</code></span>
-Calculates and returns the (world) bounds of the display object as a [Rectangle](../classes/PIXI.Rectangle.pixi_math).
+### getBounds 
+**Type:** <code>(skipUpdate&#58; boolean, rect&#58; Rectangle) -&#62; Rectangle</code>
+
+**Description:** Calculates and returns the (world) bounds of the display object as a [Rectangle](../classes/PIXI.Rectangle.pixi_math).
 This method is expensive on containers with a large subtree (like the stage). This is because the bounds of a container depend on its children's bounds, which recursively causes all bounds in the subtree to be recalculated. The upside, however, is that calling `getBounds` once on a container will indeed update the bounds of all children (the whole subtree, in fact). This side effect should be exploited by using`displayObject._bounds.getRectangle()` when traversing through all the bounds in a scene graph. Otherwise, calling `getBounds` on each object in a subtree will cause the total cost to increase quadratically as its height increases.
 
 The transforms of all objects in a container's **subtree** and of all **ancestors** are updated. The world bounds of all display objects in a container's **subtree** will also be recalculated.
@@ -1978,8 +2288,10 @@ Do know that usage of `getLocalBounds` can corrupt the `_bounds` of children (th
 
 <article>
 
-### getChildAt: <span><code>(index&#58; number) -&#62; T</code></span>
-Returns the child at the specified index
+### getChildAt 
+**Type:** <code>(index&#58; number) -&#62; T</code>
+
+**Description:** Returns the child at the specified index
 
 #### Parameters:
 | Name  | Type                | Description                   |
@@ -1996,8 +2308,10 @@ Returns the child at the specified index
 
 <article>
 
-### getChildByName: <span><code>(name&#58; string, deep&#58; boolean) -&#62; PIXI.DisplayObject</code></span>
-Returns the display object in the container.
+### getChildByName 
+**Type:** <code>(name&#58; string, deep&#58; boolean) -&#62; PIXI.DisplayObject</code>
+
+**Description:** Returns the display object in the container.
 Recursive searches are done in a preorder traversal.
 
 #### Parameters:
@@ -2016,8 +2330,10 @@ Recursive searches are done in a preorder traversal.
 
 <article>
 
-### getChildIndex: <span><code>(child&#58; T) -&#62; number</code></span>
-Returns the index position of a child DisplayObject instance
+### getChildIndex 
+**Type:** <code>(child&#58; T) -&#62; number</code>
+
+**Description:** Returns the index position of a child DisplayObject instance
 
 #### Parameters:
 | Name  | Type           | Description                            |
@@ -2034,8 +2350,10 @@ Returns the index position of a child DisplayObject instance
 
 <article>
 
-### getGlobalPosition: <span><code>(point&#58; PIXI.Point, skipUpdate&#58; boolean) -&#62; PIXI.Point</code></span>
-Returns the global position of the displayObject. Does not depend on object scale, rotation and pivot.
+### getGlobalPosition 
+**Type:** <code>(point&#58; PIXI.Point, skipUpdate&#58; boolean) -&#62; PIXI.Point</code>
+
+**Description:** Returns the global position of the displayObject. Does not depend on object scale, rotation and pivot.
 
 #### Parameters:
 | Name       | Type                    | Description                                                                                                                                                                        |
@@ -2053,8 +2371,10 @@ Returns the global position of the displayObject. Does not depend on object scal
 
 <article>
 
-### getLocalBounds: <span><code>(rect&#58; Rectangle) -&#62; Rectangle</code></span>
-Gets the local bounds of the sprite object.
+### getLocalBounds 
+**Type:** <code>(rect&#58; Rectangle) -&#62; Rectangle</code>
+
+**Description:** Gets the local bounds of the sprite object.
 
 #### Parameters:
 | Name | Type                   | Description                |
@@ -2071,8 +2391,10 @@ Gets the local bounds of the sprite object.
 
 <article>
 
-### gotoAndPlay: <span><code>(frameNumber&#58; number) -&#62; void</code></span>
-Goes to a specific frame and begins playing the AnimatedSprite.
+### gotoAndPlay 
+**Type:** <code>(frameNumber&#58; number) -&#62; void</code>
+
+**Description:** Goes to a specific frame and begins playing the AnimatedSprite.
 
 #### Parameters:
 | Name        | Type                | Description              |
@@ -2085,8 +2407,10 @@ Goes to a specific frame and begins playing the AnimatedSprite.
 
 <article>
 
-### gotoAndStop: <span><code>(frameNumber&#58; number) -&#62; void</code></span>
-Stops the AnimatedSprite and goes to a specific frame.
+### gotoAndStop 
+**Type:** <code>(frameNumber&#58; number) -&#62; void</code>
+
+**Description:** Stops the AnimatedSprite and goes to a specific frame.
 
 #### Parameters:
 | Name        | Type                | Description             |
@@ -2099,8 +2423,11 @@ Stops the AnimatedSprite and goes to a specific frame.
 
 <article>
 
-### isInteractive: <span><code>() -&#62; boolean</code></span>
-Determines if the displayObject is interactive or not
+### isInteractive 
+**Type:** <code>() -&#62; boolean</code>
+
+**Description:** Determines if the displayObject is interactive or not
+
 
 ```js
  import { Sprite } from 'pixi.js';
@@ -2133,8 +2460,10 @@ Determines if the displayObject is interactive or not
 
 <article>
 
-### play: <span><code>() -&#62; void</code></span>
-Plays the AnimatedSprite.
+### play 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Plays the AnimatedSprite.
 
 </article>
 
@@ -2143,8 +2472,10 @@ Plays the AnimatedSprite.
 
 <article>
 
-### removeChild: <span><code>(children&#58; PIXI.DisplayObject) -&#62; PIXI.DisplayObject</code></span>
-Removes one or more children from the container.
+### removeChild 
+**Type:** <code>(children&#58; PIXI.DisplayObject) -&#62; PIXI.DisplayObject</code>
+
+**Description:** Removes one or more children from the container.
 
 #### Parameters:
 | Name     | Type                            | Description                    |
@@ -2161,8 +2492,10 @@ Removes one or more children from the container.
 
 <article>
 
-### removeChildAt: <span><code>(index&#58; number) -&#62; T</code></span>
-Removes a child from the specified index position.
+### removeChildAt 
+**Type:** <code>(index&#58; number) -&#62; T</code>
+
+**Description:** Removes a child from the specified index position.
 
 #### Parameters:
 | Name  | Type                | Description                     |
@@ -2179,8 +2512,10 @@ Removes a child from the specified index position.
 
 <article>
 
-### removeChildren: <span><code>(beginIndex&#58; number, endIndex&#58; ) -&#62; T[]</code></span>
-Removes all children from this container that are within the begin and end indexes.
+### removeChildren 
+**Type:** <code>(beginIndex&#58; number, endIndex&#58; ) -&#62; T[]</code>
+
+**Description:** Removes all children from this container that are within the begin and end indexes.
 
 #### Parameters:
 | Name       | Type                | Description                                                  |
@@ -2198,8 +2533,10 @@ Removes all children from this container that are within the begin and end index
 
 <article>
 
-### removeEventListener: <span><code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; RemoveListenerOptions) -&#62; </code></span>
-Unlike `off` or `removeListener` which are methods from EventEmitter, `removeEventListener`seeks to be compatible with the DOM's `removeEventListener` with support for options.**IMPORTANT&#58;** _Only_ available if using the `@pixi/events` package.
+### removeEventListener 
+**Type:** <code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; RemoveListenerOptions) -&#62; </code>
+
+**Description:** Unlike `off` or `removeListener` which are methods from EventEmitter, `removeEventListener`seeks to be compatible with the DOM's `removeEventListener` with support for options.**IMPORTANT&#58;** _Only_ available if using the `@pixi/events` package.
 
 #### Parameters:
 | Name     | Type                                            | Description                                                                             |
@@ -2214,8 +2551,10 @@ Unlike `off` or `removeListener` which are methods from EventEmitter, `removeEve
 
 <article>
 
-### removeFromParent: <span><code>() -&#62; </code></span>
-Remove the DisplayObject from its parent Container. If the DisplayObject has no parent, do nothing.
+### removeFromParent 
+**Type:** <code>() -&#62; </code>
+
+**Description:** Remove the DisplayObject from its parent Container. If the DisplayObject has no parent, do nothing.
 
 </article>
 
@@ -2224,8 +2563,10 @@ Remove the DisplayObject from its parent Container. If the DisplayObject has no 
 
 <article>
 
-### render: <span><code>(renderer&#58; Renderer) -&#62; void</code></span>
-Renders the object using the WebGL renderer.
+### render 
+**Type:** <code>(renderer&#58; Renderer) -&#62; void</code>
+
+**Description:** Renders the object using the WebGL renderer.
 The [_render](../classes/PIXI.Container.pixi_display#_render) method is be overriden for rendering the contents of the container itself. This `render` method will invoke it, and also invoke the `render` methods of all children afterward.
 
 If `renderable` or `visible` is false or if `worldAlpha` is not positive or if `cullable` is true and the bounds of this object are out of frame, this implementation will entirely skip rendering. See [PIXI.DisplayObject](../classes/PIXI.DisplayObject.pixi_display) for choosing between `renderable` or `visible`. Generally, setting alpha to zero is not recommended for purely skipping rendering.
@@ -2245,8 +2586,10 @@ The [renderAdvanced](../classes/PIXI.Container.pixi_display#renderAdvanced) meth
 
 <article>
 
-### renderCanvas: <span><code>(renderer&#58; PIXI.CanvasRenderer) -&#62; void</code></span>
-Renders the object using the Canvas renderer
+### renderCanvas 
+**Type:** <code>(renderer&#58; PIXI.CanvasRenderer) -&#62; void</code>
+
+**Description:** Renders the object using the Canvas renderer
 
 #### Parameters:
 | Name     | Type                             | Description  |
@@ -2259,8 +2602,10 @@ Renders the object using the Canvas renderer
 
 <article>
 
-### setChildIndex: <span><code>(child&#58; T, index&#58; number) -&#62; void</code></span>
-Changes the position of an existing child in the display object container
+### setChildIndex 
+**Type:** <code>(child&#58; T, index&#58; number) -&#62; void</code>
+
+**Description:** Changes the position of an existing child in the display object container
 
 #### Parameters:
 | Name  | Type                | Description                                                                    |
@@ -2274,8 +2619,10 @@ Changes the position of an existing child in the display object container
 
 <article>
 
-### setParent: <span><code>(container&#58; Container) -&#62; Container</code></span>
-Set the parent Container of this DisplayObject.
+### setParent 
+**Type:** <code>(container&#58; Container) -&#62; Container</code>
+
+**Description:** Set the parent Container of this DisplayObject.
 
 #### Parameters:
 | Name      | Type                   | Description                                 |
@@ -2292,8 +2639,10 @@ Set the parent Container of this DisplayObject.
 
 <article>
 
-### setTransform: <span><code>(x&#58; number, y&#58; number, scaleX&#58; number, scaleY&#58; number, rotation&#58; number, skewX&#58; number, skewY&#58; number, pivotX&#58; number, pivotY&#58; number) -&#62; this</code></span>
-Convenience function to set the position, scale, skew and pivot at once.
+### setTransform 
+**Type:** <code>(x&#58; number, y&#58; number, scaleX&#58; number, scaleY&#58; number, rotation&#58; number, skewX&#58; number, skewY&#58; number, pivotX&#58; number, pivotY&#58; number) -&#62; this</code>
+
+**Description:** Convenience function to set the position, scale, skew and pivot at once.
 
 #### Parameters:
 | Name     | Type                | Description       |
@@ -2318,8 +2667,10 @@ Convenience function to set the position, scale, skew and pivot at once.
 
 <article>
 
-### sortChildren: <span><code>() -&#62; void</code></span>
-Sorts children by zIndex. Previous order is maintained for 2 children with the same zIndex.
+### sortChildren 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Sorts children by zIndex. Previous order is maintained for 2 children with the same zIndex.
 
 </article>
 
@@ -2328,8 +2679,10 @@ Sorts children by zIndex. Previous order is maintained for 2 children with the s
 
 <article>
 
-### stop: <span><code>() -&#62; void</code></span>
-Stops the AnimatedSprite.
+### stop 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stops the AnimatedSprite.
 
 </article>
 
@@ -2338,8 +2691,10 @@ Stops the AnimatedSprite.
 
 <article>
 
-### swapChildren: <span><code>(child&#58; T, child2&#58; T) -&#62; void</code></span>
-Swaps the position of 2 Display Objects within this container.
+### swapChildren 
+**Type:** <code>(child&#58; T, child2&#58; T) -&#62; void</code>
+
+**Description:** Swaps the position of 2 Display Objects within this container.
 
 #### Parameters:
 | Name   | Type           | Description                   |
@@ -2353,8 +2708,10 @@ Swaps the position of 2 Display Objects within this container.
 
 <article>
 
-### toGlobal: <span><code>(position&#58; IPointData, point&#58; P, skipUpdate&#58; boolean) -&#62; P</code></span>
-Calculates the global position of the display object.
+### toGlobal 
+**Type:** <code>(position&#58; IPointData, point&#58; P, skipUpdate&#58; boolean) -&#62; P</code>
+
+**Description:** Calculates the global position of the display object.
 
 #### Parameters:
 | Name       | Type                    | Description                                                                               |
@@ -2373,8 +2730,10 @@ Calculates the global position of the display object.
 
 <article>
 
-### toLocal: <span><code>(position&#58; IPointData, from&#58; DisplayObject, point&#58; P, skipUpdate&#58; boolean) -&#62; P</code></span>
-Calculates the local position of the display object relative to another point.
+### toLocal 
+**Type:** <code>(position&#58; IPointData, from&#58; DisplayObject, point&#58; P, skipUpdate&#58; boolean) -&#62; P</code>
+
+**Description:** Calculates the local position of the display object relative to another point.
 
 #### Parameters:
 | Name       | Type                       | Description                                                                               |
@@ -2394,8 +2753,10 @@ Calculates the local position of the display object relative to another point.
 
 <article>
 
-### update: <span><code>(deltaTime&#58; number) -&#62; void</code></span>
-Updates the object transform for rendering.
+### update 
+**Type:** <code>(deltaTime&#58; number) -&#62; void</code>
+
+**Description:** Updates the object transform for rendering.
 
 #### Parameters:
 | Name      | Type                | Description           |
@@ -2408,8 +2769,10 @@ Updates the object transform for rendering.
 
 <article>
 
-### updateTransform: <span><code>() -&#62; void</code></span>
-Updates the transform on all children of this container for rendering.
+### updateTransform 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Updates the transform on all children of this container for rendering.
 
 </article>
 
@@ -2418,8 +2781,10 @@ Updates the transform on all children of this container for rendering.
 
 <article>
 
-### _calculateBounds: <span><code>() -&#62; void</code></span>
-Updates the bounds of the sprite.
+### _calculateBounds 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Updates the bounds of the sprite.
 
 </article>
 
@@ -2428,8 +2793,10 @@ Updates the bounds of the sprite.
 
 <article>
 
-### _onTextureUpdate: <span><code>() -&#62; void</code></span>
-When the texture is updated, this event will fire to update the scale and frame.
+### _onTextureUpdate 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** When the texture is updated, this event will fire to update the scale and frame.
 
 </article>
 
@@ -2438,8 +2805,10 @@ When the texture is updated, this event will fire to update the scale and frame.
 
 <article>
 
-### _recursivePostUpdateTransform: <span><code>() -&#62; void</code></span>
-Recursively updates transform of all objects from the root to this one internal function for toLocal()
+### _recursivePostUpdateTransform 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Recursively updates transform of all objects from the root to this one internal function for toLocal()
 
 </article>
 
@@ -2448,8 +2817,10 @@ Recursively updates transform of all objects from the root to this one internal 
 
 <article>
 
-### _render: <span><code>(renderer&#58; Renderer) -&#62; void</code></span>
-Renders the object using the WebGL renderer
+### _render 
+**Type:** <code>(renderer&#58; Renderer) -&#62; void</code>
+
+**Description:** Renders the object using the WebGL renderer
 
 #### Parameters:
 | Name     | Type                  | Description                |
@@ -2462,8 +2833,10 @@ Renders the object using the WebGL renderer
 
 <article>
 
-### _renderWithCulling: <span><code>(renderer&#58; PIXI.Renderer) -&#62; void</code></span>
-Renders this object and its children with culling.
+### _renderWithCulling 
+**Type:** <code>(renderer&#58; PIXI.Renderer) -&#62; void</code>
+
+**Description:** Renders this object and its children with culling.
 
 #### Parameters:
 | Name     | Type                       | Description  |
@@ -2476,8 +2849,10 @@ Renders this object and its children with culling.
 
 <article>
 
-### onChildrenChange: <span><code>(_length&#58; number) -&#62; void</code></span>
-Overridable method that can be used by Container subclasses whenever the children array is modified.
+### onChildrenChange 
+**Type:** <code>(_length&#58; number) -&#62; void</code>
+
+**Description:** Overridable method that can be used by Container subclasses whenever the children array is modified.
 
 #### Parameters:
 | Name    | Type                | Description |
@@ -2490,8 +2865,10 @@ Overridable method that can be used by Container subclasses whenever the childre
 
 <article>
 
-### renderAdvanced: <span><code>(renderer&#58; Renderer) -&#62; void</code></span>
-Render the object using the WebGL renderer and advanced features.
+### renderAdvanced 
+**Type:** <code>(renderer&#58; Renderer) -&#62; void</code>
+
+**Description:** Render the object using the WebGL renderer and advanced features.
 
 #### Parameters:
 | Name     | Type                  | Description  |

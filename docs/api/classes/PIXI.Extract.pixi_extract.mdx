@@ -5,7 +5,12 @@ sidebar_label: "PIXI.Extract"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/extract](../modules/pixi_extract).Extract
+
+</div>
 
 
 This class provides renderer-specific plugins for exporting content from a renderer. For instance, these plugins can be used for saving an Image, Canvas element or for exporting the raw image data (pixels).
@@ -30,13 +35,12 @@ Do not instantiate these plugins directly. It is available from the `renderer.ex
 ```
       
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Extract: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.Extract(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -55,8 +59,10 @@ Do not instantiate these plugins directly. It is available from the `renderer.ex
 ## Methods
 <article>
 
-### base64: <span><code>(target&#58; DisplayObject &#124; RenderTexture, format&#58; string, quality&#58; number) -&#62; Promise&#60;string&#62;</code></span>
-Will return a base64 encoded string of this target. It works by calling`Extract.getCanvas` and then running toDataURL on that.
+### base64 
+**Type:** <code>(target&#58; DisplayObject &#124; RenderTexture, format&#58; string, quality&#58; number) -&#62; Promise&#60;string&#62;</code>
+
+**Description:** Will return a base64 encoded string of this target. It works by calling`Extract.getCanvas` and then running toDataURL on that.
 
 #### Parameters:
 | Name    | Type                                            | Description                                                                           |
@@ -75,8 +81,10 @@ Will return a base64 encoded string of this target. It works by calling`Extract.
 
 <article>
 
-### canvas: <span><code>(target&#58; DisplayObject &#124; RenderTexture, frame&#58; Rectangle) -&#62; ICanvas</code></span>
-Creates a Canvas element, renders this target to it and then returns it.
+### canvas 
+**Type:** <code>(target&#58; DisplayObject &#124; RenderTexture, frame&#58; Rectangle) -&#62; ICanvas</code>
+
+**Description:** Creates a Canvas element, renders this target to it and then returns it.
 
 #### Parameters:
 | Name   | Type                                            | Description                                                                           |
@@ -94,8 +102,10 @@ Creates a Canvas element, renders this target to it and then returns it.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys the extract.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys the extract.
 
 </article>
 
@@ -104,8 +114,10 @@ Destroys the extract.
 
 <article>
 
-### image: <span><code>(target&#58; DisplayObject &#124; RenderTexture, format&#58; string, quality&#58; number) -&#62; Promise&#60;HTMLImageElement&#62;</code></span>
-Will return a HTML Image of the target
+### image 
+**Type:** <code>(target&#58; DisplayObject &#124; RenderTexture, format&#58; string, quality&#58; number) -&#62; Promise&#60;HTMLImageElement&#62;</code>
+
+**Description:** Will return a HTML Image of the target
 
 #### Parameters:
 | Name    | Type                                            | Description                                                                           |
@@ -124,8 +136,10 @@ Will return a HTML Image of the target
 
 <article>
 
-### pixels: <span><code>(target&#58; DisplayObject &#124; RenderTexture, frame&#58; Rectangle) -&#62; Uint8Array</code></span>
-Will return a one-dimensional array containing the pixel data of the entire texture in RGBA order, with integer values between 0 and 255 (included).
+### pixels 
+**Type:** <code>(target&#58; DisplayObject &#124; RenderTexture, frame&#58; Rectangle) -&#62; Uint8Array</code>
+
+**Description:** Will return a one-dimensional array containing the pixel data of the entire texture in RGBA order, with integer values between 0 and 255 (included).
 
 #### Parameters:
 | Name   | Type                                            | Description                                                                           |

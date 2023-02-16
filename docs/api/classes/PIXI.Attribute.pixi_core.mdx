@@ -5,20 +5,24 @@ sidebar_label: "PIXI.Attribute"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).Attribute
+
+</div>
 
 Holds the information for a single attribute structure required to render geometry.
 This does not contain the actual data, but instead has a buffer id that maps to a [PIXI.Buffer](../classes/PIXI.Buffer.pixi_core) This can include anything from positions, uvs, normals, colors etc.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Attribute: <span><code>(buffer&#58; number, size&#58; number, normalized&#58; boolean, type&#58; PIXI.TYPES, stride&#58; number, start&#58; number, instance&#58; boolean, divisor&#58; number) </code></span>
+### Constructor:
+<h4><code>new PIXI.Attribute(buffer&#58; number, size&#58; number, normalized&#58; boolean, type&#58; PIXI.TYPES, stride&#58; number, start&#58; number, instance&#58; boolean, divisor&#58; number) </code></h4>
 
 #### Parameters:
 | Name       | Type                    | Default                       | Description                                                                                                            |
@@ -44,8 +48,10 @@ This does not contain the actual data, but instead has a buffer id that maps to 
 ## Methods
 <article>
 
-### from: <span><code>(buffer&#58; number, size&#58; number, normalized&#58; boolean, type&#58; TYPES, stride&#58; number) -&#62; Attribute</code></span>
-Helper function that creates an Attribute based on the information provided
+### from 
+**Type:** <code>(buffer&#58; number, size&#58; number, normalized&#58; boolean, type&#58; TYPES, stride&#58; number) -&#62; Attribute</code>
+
+**Description:** Helper function that creates an Attribute based on the information provided
 
 #### Parameters:
 | Name       | Type                 | Description                                                                                                            |
@@ -66,8 +72,10 @@ Helper function that creates an Attribute based on the information provided
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys the Attribute.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys the Attribute.
 
 </article>
 

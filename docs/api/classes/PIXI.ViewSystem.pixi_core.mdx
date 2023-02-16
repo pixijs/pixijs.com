@@ -5,29 +5,36 @@ sidebar_label: "PIXI.ViewSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).ViewSystem
+
+</div>
 
 
 The view system manages the main canvas that is attached to the DOM. This main role is to deal with how the holding the view reference and dealing with how it is resized.
 
 
 
-// TODO: @see
-
         
 
 <article>
+### Contructor:
+<h4><code>new PIXI()</code></h4>
 
-### new PIXI()
 </article>
+            
 
 
 
 ## Members
 <article>
 
-### autoDensity: <span><code>boolean</code></span>
-Whether CSS dimensions of canvas view should be resized to screen dimensions automatically.
+### autoDensity 
+**Type:** <code>boolean</code>
+
+**Description:** Whether CSS dimensions of canvas view should be resized to screen dimensions automatically.
 
 </article>
 
@@ -36,8 +43,10 @@ Whether CSS dimensions of canvas view should be resized to screen dimensions aut
 
 <article>
 
-### element: <span><code>PIXI.ICanvas</code></span>
-The canvas element that everything is drawn to.
+### element 
+**Type:** <code>PIXI.ICanvas</code>
+
+**Description:** The canvas element that everything is drawn to.
 
 </article>
 
@@ -46,10 +55,12 @@ The canvas element that everything is drawn to.
 
 <article>
 
-### resolution: <span><code>number</code></span>
-- **Default Value**: <code>PIXI.settings.RESOLUTION</code>
+### resolution 
+**Type:** <code>number</code>
 
-The resolution / device pixel ratio of the renderer.
+**Default Value**: <code>PIXI.settings.RESOLUTION</code>
+
+**Description:** The resolution / device pixel ratio of the renderer.
 
 </article>
 
@@ -58,8 +69,10 @@ The resolution / device pixel ratio of the renderer.
 
 <article>
 
-### screen: <span><code>PIXI.Rectangle</code></span>
-Measurements of the screen. (0, 0, screenWidth, screenHeight).
+### screen 
+**Type:** <code>PIXI.Rectangle</code>
+
+**Description:** Measurements of the screen. (0, 0, screenWidth, screenHeight).
 Its safe to use as filterArea or hitArea for the whole stage.
 
 </article>
@@ -71,8 +84,10 @@ Its safe to use as filterArea or hitArea for the whole stage.
 ## Methods
 <article>
 
-### destroy: <span><code>(removeView&#58; boolean) -&#62; void</code></span>
-Destroys this System and optionally removes the canvas from the dom.
+### destroy 
+**Type:** <code>(removeView&#58; boolean) -&#62; void</code>
+
+**Description:** Destroys this System and optionally removes the canvas from the dom.
 
 #### Parameters:
 | Name       | Type                 | Description                                |
@@ -85,8 +100,10 @@ Destroys this System and optionally removes the canvas from the dom.
 
 <article>
 
-### init: <span><code>(options&#58; PIXI.ViewOptions) -&#62; void</code></span>
-initiates the view system
+### init 
+**Type:** <code>(options&#58; PIXI.ViewOptions) -&#62; void</code>
+
+**Description:** initiates the view system
 
 #### Parameters:
 | Name    | Type                          | Description              |
@@ -99,8 +116,10 @@ initiates the view system
 
 <article>
 
-### resizeView: <span><code>(desiredScreenWidth&#58; number, desiredScreenHeight&#58; number) -&#62; void</code></span>
-Resizes the screen and canvas to the specified dimensions.
+### resizeView 
+**Type:** <code>(desiredScreenWidth&#58; number, desiredScreenHeight&#58; number) -&#62; void</code>
+
+**Description:** Resizes the screen and canvas to the specified dimensions.
 
 #### Parameters:
 | Name                | Type                | Description                   |

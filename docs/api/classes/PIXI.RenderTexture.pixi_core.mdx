@@ -5,7 +5,12 @@ sidebar_label: "PIXI.RenderTexture"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).RenderTexture
+
+</div>
 
 A RenderTexture is a special texture that allows any PixiJS display object to be rendered to it.
 **Hint**&#58; All DisplayObjects (i.e. Sprites) that render to a RenderTexture should be preloaded otherwise black rectangles will be drawn instead.
@@ -41,13 +46,12 @@ A RenderTexture takes a snapshot of any Display Object given to its render metho
 ```
       
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.RenderTexture: <span><code>(baseRenderTexture&#58; BaseRenderTexture, frame&#58; Rectangle) </code></span>
+### Constructor:
+<h4><code>new PIXI.RenderTexture(baseRenderTexture&#58; BaseRenderTexture, frame&#58; Rectangle) </code></h4>
 
 #### Parameters:
 | Name              | Type                           | Default       | Description                                     |
@@ -66,8 +70,10 @@ A RenderTexture takes a snapshot of any Display Object given to its render metho
 ## Members
 <article>
 
-### _frame: <span><code>Rectangle</code></span>
-This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering, irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
+### _frame 
+**Type:** <code>Rectangle</code>
+
+**Description:** This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering, irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
 
 </article>
 
@@ -76,8 +82,10 @@ This is the area of the BaseTexture image to actually copy to the Canvas / WebGL
 
 <article>
 
-### baseTexture: <span><code>BaseTexture&#60;R&#62;</code></span>
-The base texture that this texture uses.
+### baseTexture 
+**Type:** <code>BaseTexture&#60;R&#62;</code>
+
+**Description:** The base texture that this texture uses.
 
 </article>
 
@@ -86,20 +94,12 @@ The base texture that this texture uses.
 
 <article>
 
-### defaultAnchor: <span><code>Point</code></span>
-- **Default Value**: <code>&#123;0,0&#125;</code>
+### defaultAnchor 
+**Type:** <code>Point</code>
 
-Anchor point that is used as default if sprite is created with this texture. Changing the `defaultAnchor` at a later point of time will not update Sprite's anchor point.
+**Default Value**: <code>&#123;0,0&#125;</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### defaultBorders: <span><code>ITextureBorders</code></span>
-Default width of the non-scalable border that is used if 9-slice plane is created with this texture. (See [PIXI.NineSlicePlane](../classes/PIXI.NineSlicePlane.pixi_mesh_extras))
+**Description:** Anchor point that is used as default if sprite is created with this texture. Changing the `defaultAnchor` at a later point of time will not update Sprite's anchor point.
 
 </article>
 
@@ -108,8 +108,22 @@ Default width of the non-scalable border that is used if 9-slice plane is create
 
 <article>
 
-### filterFrame: <span><code>Rectangle &#124; null</code></span>
-Stores `sourceFrame` when this texture is inside current filter stack.
+### defaultBorders 
+**Type:** <code>ITextureBorders</code>
+
+**Description:** Default width of the non-scalable border that is used if 9-slice plane is created with this texture.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### filterFrame 
+**Type:** <code>Rectangle &#124; null</code>
+
+**Description:** Stores `sourceFrame` when this texture is inside current filter stack.
 You can read it inside filters.
 
 </article>
@@ -119,8 +133,10 @@ You can read it inside filters.
 
 <article>
 
-### filterPoolKey: <span><code>string &#124; number &#124; null</code></span>
-The key for pooled texture of FilterSystem.
+### filterPoolKey 
+**Type:** <code>string &#124; number &#124; null</code>
+
+**Description:** The key for pooled texture of FilterSystem.
 
 </article>
 
@@ -129,8 +145,10 @@ The key for pooled texture of FilterSystem.
 
 <article>
 
-### frame: <span><code>Rectangle</code></span>
-The frame specifies the region of the base texture that this texture uses. Please call `updateUvs()` after you change coordinates of `frame` manually.
+### frame 
+**Type:** <code>Rectangle</code>
+
+**Description:** The frame specifies the region of the base texture that this texture uses. Please call `updateUvs()` after you change coordinates of `frame` manually.
 
 </article>
 
@@ -139,8 +157,10 @@ The frame specifies the region of the base texture that this texture uses. Pleas
 
 <article>
 
-### framebuffer: <span><code>Framebuffer</code></span>
-Shortcut to `this.baseTexture.framebuffer`, saves baseTexture cast.
+### framebuffer 
+**Type:** <code>Framebuffer</code>
+
+**Description:** Shortcut to `this.baseTexture.framebuffer`, saves baseTexture cast.
 
 </article>
 
@@ -149,8 +169,10 @@ Shortcut to `this.baseTexture.framebuffer`, saves baseTexture cast.
 
 <article>
 
-### height: <span><code>number</code></span>
-The height of the Texture in pixels.
+### height 
+**Type:** <code>number</code>
+
+**Description:** The height of the Texture in pixels.
 
 </article>
 
@@ -159,10 +181,12 @@ The height of the Texture in pixels.
 
 <article>
 
-### multisample: <span><code>MSAA_QUALITY</code></span>
-- **Default Value**: <code>PIXI.MSAA_QUALITY.NONE</code>
+### multisample 
+**Type:** <code>MSAA_QUALITY</code>
 
-Shortcut to `this.framebuffer.multisample`.
+**Default Value**: <code>PIXI.MSAA_QUALITY.NONE</code>
+
+**Description:** Shortcut to `this.framebuffer.multisample`.
 
 </article>
 
@@ -171,8 +195,10 @@ Shortcut to `this.framebuffer.multisample`.
 
 <article>
 
-### noFrame: <span><code>boolean</code></span>
-Does this Texture have any frame data assigned to it?
+### noFrame 
+**Type:** <code>boolean</code>
+
+**Description:** Does this Texture have any frame data assigned to it?
 This mode is enabled automatically if no frame was passed inside constructor.
 
 In this mode texture is subscribed to baseTexture events, and fires `update` on any change.
@@ -180,6 +206,7 @@ In this mode texture is subscribed to baseTexture events, and fires `update` on 
 Beware, after loading or resize of baseTexture event can fired two times! If you want more control, subscribe on baseTexture itself.
 
 Any assignment of `frame` switches off `noFrame` mode.
+
 
 ```js
 texture.on('update', () => {});
@@ -193,8 +220,10 @@ texture.on('update', () => {});
 
 <article>
 
-### orig: <span><code>Rectangle</code></span>
-This is the area of original texture, before it was put in atlas.
+### orig 
+**Type:** <code>Rectangle</code>
+
+**Description:** This is the area of original texture, before it was put in atlas.
 
 </article>
 
@@ -203,8 +232,10 @@ This is the area of original texture, before it was put in atlas.
 
 <article>
 
-### resolution: <span><code>number</code></span>
-Returns resolution of baseTexture
+### resolution 
+**Type:** <code>number</code>
+
+**Description:** Returns resolution of baseTexture
 
 </article>
 
@@ -213,8 +244,10 @@ Returns resolution of baseTexture
 
 <article>
 
-### rotate: <span><code>number</code></span>
-Indicates whether the texture is rotated inside the atlas set to 2 to compensate for texture packer rotation set to 6 to compensate for spine packer rotation can be used to rotate or mirror sprites See [PIXI.groupD8](../namespaces/PIXI.groupD8.pixi_math) for explanation
+### rotate 
+**Type:** <code>number</code>
+
+**Description:** Indicates whether the texture is rotated inside the atlas set to 2 to compensate for texture packer rotation set to 6 to compensate for spine packer rotation can be used to rotate or mirror sprites See [PIXI.groupD8](../namespaces/PIXI.groupD8.pixi_math) for explanation
 
 </article>
 
@@ -223,8 +256,10 @@ Indicates whether the texture is rotated inside the atlas set to 2 to compensate
 
 <article>
 
-### textureCacheIds: <span><code>Array&#60;string&#62;</code></span>
-The ids under which this Texture has been added to the texture cache. This is automatically set as long as Texture.addToCache is used, but may not be set if a Texture is added directly to the TextureCache array.
+### textureCacheIds 
+**Type:** <code>Array&#60;string&#62;</code>
+
+**Description:** The ids under which this Texture has been added to the texture cache. This is automatically set as long as Texture.addToCache is used, but may not be set if a Texture is added directly to the TextureCache array.
 
 </article>
 
@@ -233,8 +268,10 @@ The ids under which this Texture has been added to the texture cache. This is au
 
 <article>
 
-### trim: <span><code>Rectangle</code></span>
-This is the trimmed area of original texture, before it was put in atlas Please call `updateUvs()` after you change coordinates of `trim` manually.
+### trim 
+**Type:** <code>Rectangle</code>
+
+**Description:** This is the trimmed area of original texture, before it was put in atlas Please call `updateUvs()` after you change coordinates of `trim` manually.
 
 </article>
 
@@ -243,8 +280,10 @@ This is the trimmed area of original texture, before it was put in atlas Please 
 
 <article>
 
-### uvMatrix: <span><code>TextureMatrix</code></span>
-Default TextureMatrix instance for this texture. By default, that object is not created because its heavy.
+### uvMatrix 
+**Type:** <code>TextureMatrix</code>
+
+**Description:** Default TextureMatrix instance for this texture. By default, that object is not created because its heavy.
 
 </article>
 
@@ -253,8 +292,10 @@ Default TextureMatrix instance for this texture. By default, that object is not 
 
 <article>
 
-### valid: <span><code>boolean</code></span>
-This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
+### valid 
+**Type:** <code>boolean</code>
+
+**Description:** This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
 
 </article>
 
@@ -263,8 +304,10 @@ This will let the renderer know if the texture is valid. If it's not then it can
 
 <article>
 
-### width: <span><code>number</code></span>
-The width of the Texture in pixels.
+### width 
+**Type:** <code>number</code>
+
+**Description:** The width of the Texture in pixels.
 
 </article>
 
@@ -273,8 +316,10 @@ The width of the Texture in pixels.
 
 <article>
 
-### _updateID: <span><code>number</code></span>
-Update ID is observed by sprites and TextureMatrix instances. Call updateUvs() to increment it.
+### _updateID 
+**Type:** <code>number</code>
+
+**Description:** Update ID is observed by sprites and TextureMatrix instances. Call updateUvs() to increment it.
 
 </article>
 
@@ -283,8 +328,10 @@ Update ID is observed by sprites and TextureMatrix instances. Call updateUvs() t
 
 <article>
 
-### _uvs: <span><code>TextureUvs</code></span>
-The WebGL UV data cache. Can be used as quad UV.
+### _uvs 
+**Type:** <code>TextureUvs</code>
+
+**Description:** The WebGL UV data cache. Can be used as quad UV.
 
 </article>
 
@@ -295,8 +342,10 @@ The WebGL UV data cache. Can be used as quad UV.
 ## Methods
 <article>
 
-### create: <span><code>(options&#58; IBaseTextureOptions) -&#62; RenderTexture</code></span>
-A short hand way of creating a render texture.
+### create 
+**Type:** <code>(options&#58; IBaseTextureOptions) -&#62; RenderTexture</code>
+
+**Description:** A short hand way of creating a render texture.
 
 #### Parameters:
 | Name                | Type                             | Description                                                                          |
@@ -318,8 +367,10 @@ A short hand way of creating a render texture.
 
 <article>
 
-### castToBaseTexture: <span><code>() -&#62; BaseTexture</code></span>
-Utility function for BaseTexture&#124;Texture cast.
+### castToBaseTexture 
+**Type:** <code>() -&#62; BaseTexture</code>
+
+**Description:** Utility function for BaseTexture&#124;Texture cast.
 
 #### Returns:
 | Type                     | Description |
@@ -332,8 +383,10 @@ Utility function for BaseTexture&#124;Texture cast.
 
 <article>
 
-### clone: <span><code>() -&#62; Texture</code></span>
-Creates a new texture object that acts the same as this one.
+### clone 
+**Type:** <code>() -&#62; Texture</code>
+
+**Description:** Creates a new texture object that acts the same as this one.
 
 #### Returns:
 | Type                 | Description       |
@@ -346,8 +399,10 @@ Creates a new texture object that acts the same as this one.
 
 <article>
 
-### destroy: <span><code>(destroyBase&#58; boolean) -&#62; void</code></span>
-Destroys this texture
+### destroy 
+**Type:** <code>(destroyBase&#58; boolean) -&#62; void</code>
+
+**Description:** Destroys this texture
 
 #### Parameters:
 | Name        | Type                 | Description                                 |
@@ -360,8 +415,10 @@ Destroys this texture
 
 <article>
 
-### resize: <span><code>(desiredWidth&#58; number, desiredHeight&#58; number, resizeBaseTexture&#58; boolean) -&#62; void</code></span>
-Resizes the RenderTexture.
+### resize 
+**Type:** <code>(desiredWidth&#58; number, desiredHeight&#58; number, resizeBaseTexture&#58; boolean) -&#62; void</code>
+
+**Description:** Resizes the RenderTexture.
 
 #### Parameters:
 | Name              | Type                 | Description                                                        |
@@ -376,8 +433,10 @@ Resizes the RenderTexture.
 
 <article>
 
-### setResolution: <span><code>(resolution&#58; number) -&#62; void</code></span>
-Changes the resolution of baseTexture, but does not change framebuffer size.
+### setResolution 
+**Type:** <code>(resolution&#58; number) -&#62; void</code>
+
+**Description:** Changes the resolution of baseTexture, but does not change framebuffer size.
 
 #### Parameters:
 | Name       | Type                | Description                                  |
@@ -390,8 +449,10 @@ Changes the resolution of baseTexture, but does not change framebuffer size.
 
 <article>
 
-### update: <span><code>() -&#62; void</code></span>
-Updates this texture on the gpu.
+### update 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Updates this texture on the gpu.
 Calls the TextureResource update.
 
 If you adjusted `frame` manually, please call `updateUvs()` instead.
@@ -403,8 +464,10 @@ If you adjusted `frame` manually, please call `updateUvs()` instead.
 
 <article>
 
-### updateUvs: <span><code>() -&#62; void</code></span>
-Updates the internal WebGL UV cache. Use it after you change `frame` or `trim` of the texture. Call it after changing the frame
+### updateUvs 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Updates the internal WebGL UV cache. Use it after you change `frame` or `trim` of the texture. Call it after changing the frame
 
 </article>
 
@@ -413,8 +476,10 @@ Updates the internal WebGL UV cache. Use it after you change `frame` or `trim` o
 
 <article>
 
-### onBaseTextureUpdated: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
-Called when the base texture is updated
+### onBaseTextureUpdated 
+**Type:** <code>(baseTexture&#58; BaseTexture) -&#62; void</code>
+
+**Description:** Called when the base texture is updated
 
 #### Parameters:
 | Name        | Type                     | Description       |

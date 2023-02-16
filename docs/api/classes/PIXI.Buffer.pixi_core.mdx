@@ -5,20 +5,24 @@ sidebar_label: "PIXI.Buffer"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).Buffer
+
+</div>
 
 
 A wrapper for data so that it can be used and uploaded by WebGL
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Buffer: <span><code>(data&#58; PIXI.IArrayBuffer, _static&#58; boolean, index&#58; boolean) </code></span>
+### Constructor:
+<h4><code>new PIXI.Buffer(data&#58; PIXI.IArrayBuffer, _static&#58; boolean, index&#58; boolean) </code></h4>
 
 #### Parameters:
 | Name    | Type                           | Default            | Description                      |
@@ -37,8 +41,10 @@ A wrapper for data so that it can be used and uploaded by WebGL
 ## Members
 <article>
 
-### data: <span><code>PIXI.IArrayBuffer</code></span>
-The data in the buffer, as a typed array
+### data 
+**Type:** <code>PIXI.IArrayBuffer</code>
+
+**Description:** The data in the buffer, as a typed array
 
 </article>
 
@@ -47,8 +53,10 @@ The data in the buffer, as a typed array
 
 <article>
 
-### index: <span><code>boolean</code></span>
-Flags whether this is an index buffer.
+### index 
+**Type:** <code>boolean</code>
+
+**Description:** Flags whether this is an index buffer.
 Index buffers are of type `ELEMENT_ARRAY_BUFFER`. Note that setting this property to false will make the buffer of type `ARRAY_BUFFER`.
 
 For backwards compatibility.
@@ -60,8 +68,10 @@ For backwards compatibility.
 
 <article>
 
-### type: <span><code>BUFFER_TYPE</code></span>
-The type of buffer this is, one of&#58;
+### type 
+**Type:** <code>BUFFER_TYPE</code>
+
+**Description:** The type of buffer this is, one of&#58;
 
 * ELEMENT_ARRAY_BUFFER - used as an index buffer
 * ARRAY_BUFFER - used as an attribute buffer
@@ -76,8 +86,10 @@ The type of buffer this is, one of&#58;
 ## Methods
 <article>
 
-### from: <span><code>(data&#58; ArrayBufferView &#124; Array&#60;number&#62;) -&#62; Buffer</code></span>
-Helper function that creates a buffer based on an array or TypedArray
+### from 
+**Type:** <code>(data&#58; ArrayBufferView &#124; Array&#60;number&#62;) -&#62; Buffer</code>
+
+**Description:** Helper function that creates a buffer based on an array or TypedArray
 
 #### Parameters:
 | Name | Type                                                      | Description                                                                                                   |
@@ -94,8 +106,10 @@ Helper function that creates a buffer based on an array or TypedArray
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys the buffer.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys the buffer.
 
 </article>
 
@@ -104,8 +118,10 @@ Destroys the buffer.
 
 <article>
 
-### dispose: <span><code>() -&#62; void</code></span>
-Disposes WebGL resources that are connected to this geometry.
+### dispose 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Disposes WebGL resources that are connected to this geometry.
 
 </article>
 
@@ -114,8 +130,10 @@ Disposes WebGL resources that are connected to this geometry.
 
 <article>
 
-### update: <span><code>(data&#58; PIXI.IArrayBuffer &#124; Array&#60;number&#62;) -&#62; void</code></span>
-Flags this buffer as requiring an upload to the GPU.
+### update 
+**Type:** <code>(data&#58; PIXI.IArrayBuffer &#124; Array&#60;number&#62;) -&#62; void</code>
+
+**Description:** Flags this buffer as requiring an upload to the GPU.
 
 #### Parameters:
 | Name | Type                                                        | Description                       |

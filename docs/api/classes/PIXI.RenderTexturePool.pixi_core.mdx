@@ -5,7 +5,12 @@ sidebar_label: "PIXI.RenderTexturePool"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).RenderTexturePool
+
+</div>
 
 Texture pool, used by FilterSystem and plugins.
 Stores collection of temporary pow2 or screen-sized renderTextures
@@ -14,13 +19,12 @@ If you use custom RenderTexturePool for your filters, you can use methods`getFil
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.RenderTexturePool: <span><code>(textureOptions&#58; IBaseTextureOptions) </code></span>
+### Constructor:
+<h4><code>new PIXI.RenderTexturePool(textureOptions&#58; IBaseTextureOptions) </code></h4>
 
 #### Parameters:
 | Name                     | Type                             | Default       | Description                                                                           |
@@ -38,10 +42,12 @@ If you use custom RenderTexturePool for your filters, you can use methods`getFil
 ## Members
 <article>
 
-### SCREEN_KEY: <span><code>number</code></span>
-- **Default Value**: <code>-1</code>
+### SCREEN_KEY 
+**Type:** <code>number</code>
 
-Key that is used to store fullscreen renderTextures in a pool
+**Default Value**: <code>-1</code>
+
+**Description:** Key that is used to store fullscreen renderTextures in a pool
 
 </article>
 
@@ -50,10 +56,12 @@ Key that is used to store fullscreen renderTextures in a pool
 
 <article>
 
-### enableFullScreen: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### enableFullScreen 
+**Type:** <code>boolean</code>
 
-Allow renderTextures of the same size as screen, not just pow2
+**Default Value**: <code>false</code>
+
+**Description:** Allow renderTextures of the same size as screen, not just pow2
 Automatically sets to true after `setScreenSize`
 
 </article>
@@ -65,8 +73,10 @@ Automatically sets to true after `setScreenSize`
 ## Methods
 <article>
 
-### clear: <span><code>(destroyTextures&#58; boolean) -&#62; void</code></span>
-Clears the pool.
+### clear 
+**Type:** <code>(destroyTextures&#58; boolean) -&#62; void</code>
+
+**Description:** Clears the pool.
 
 #### Parameters:
 | Name            | Type                 | Description                  |
@@ -79,8 +89,10 @@ Clears the pool.
 
 <article>
 
-### createTexture: <span><code>(realWidth&#58; number, realHeight&#58; number, multisample&#58; ) -&#62; RenderTexture</code></span>
-Creates texture with params that were specified in pool constructor.
+### createTexture 
+**Type:** <code>(realWidth&#58; number, realHeight&#58; number, multisample&#58; ) -&#62; RenderTexture</code>
+
+**Description:** Creates texture with params that were specified in pool constructor.
 
 #### Parameters:
 | Name        | Type                | Description                           |
@@ -99,8 +111,10 @@ Creates texture with params that were specified in pool constructor.
 
 <article>
 
-### getFilterTexture: <span><code>(input&#58; RenderTexture, resolution&#58; number, multisample&#58; MSAA_QUALITY) -&#62; RenderTexture</code></span>
-Gets extra texture of the same size as input renderTexture
+### getFilterTexture 
+**Type:** <code>(input&#58; RenderTexture, resolution&#58; number, multisample&#58; MSAA_QUALITY) -&#62; RenderTexture</code>
+
+**Description:** Gets extra texture of the same size as input renderTexture
 `getFilterTexture(input, 0.5)` or `getFilterTexture(0.5, input)`
 
 #### Parameters:
@@ -120,8 +134,10 @@ Gets extra texture of the same size as input renderTexture
 
 <article>
 
-### getOptimalTexture: <span><code>(minWidth&#58; number, minHeight&#58; number, resolution&#58; number, multisample&#58; ) -&#62; RenderTexture</code></span>
-Gets a Power-of-Two render texture or fullScreen texture
+### getOptimalTexture 
+**Type:** <code>(minWidth&#58; number, minHeight&#58; number, resolution&#58; number, multisample&#58; ) -&#62; RenderTexture</code>
+
+**Description:** Gets a Power-of-Two render texture or fullScreen texture
 
 #### Parameters:
 | Name        | Type                | Description                               |
@@ -141,8 +157,10 @@ Gets a Power-of-Two render texture or fullScreen texture
 
 <article>
 
-### returnFilterTexture: <span><code>(renderTexture&#58; RenderTexture) -&#62; void</code></span>
-Alias for returnTexture, to be compliant with FilterSystem interface.
+### returnFilterTexture 
+**Type:** <code>(renderTexture&#58; RenderTexture) -&#62; void</code>
+
+**Description:** Alias for returnTexture, to be compliant with FilterSystem interface.
 
 #### Parameters:
 | Name          | Type                       | Description               |
@@ -155,8 +173,10 @@ Alias for returnTexture, to be compliant with FilterSystem interface.
 
 <article>
 
-### returnTexture: <span><code>(renderTexture&#58; RenderTexture) -&#62; void</code></span>
-Place a render texture back into the pool.
+### returnTexture 
+**Type:** <code>(renderTexture&#58; RenderTexture) -&#62; void</code>
+
+**Description:** Place a render texture back into the pool.
 
 #### Parameters:
 | Name          | Type                       | Description               |
@@ -169,8 +189,10 @@ Place a render texture back into the pool.
 
 <article>
 
-### setScreenSize: <span><code>(size&#58; ISize) -&#62; void</code></span>
-If screen size was changed, drops all screen-sized textures, sets new screen size, sets `enableFullScreen` to true
+### setScreenSize 
+**Type:** <code>(size&#58; ISize) -&#62; void</code>
+
+**Description:** If screen size was changed, drops all screen-sized textures, sets new screen size, sets `enableFullScreen` to true
 
 Size is measured in pixels, `renderer.view` can be passed here, not `renderer.screen`
 

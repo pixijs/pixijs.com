@@ -5,20 +5,24 @@ sidebar_label: "PIXI.GeometrySystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).GeometrySystem
+
+</div>
 
 
 System plugin to the renderer to manage geometry.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.GeometrySystem: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.GeometrySystem(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -35,8 +39,10 @@ System plugin to the renderer to manage geometry.
 ## Members
 <article>
 
-### canUseUInt32ElementIndex: <span><code>boolean</code></span>
-`true` if support `gl.UNSIGNED_INT` in `gl.drawElements` or `gl.drawElementsInstanced`.
+### canUseUInt32ElementIndex 
+**Type:** <code>boolean</code>
+
+**Description:** `true` if support `gl.UNSIGNED_INT` in `gl.drawElements` or `gl.drawElementsInstanced`.
 
 </article>
 
@@ -45,8 +51,10 @@ System plugin to the renderer to manage geometry.
 
 <article>
 
-### hasInstance: <span><code>boolean</code></span>
-`true` if has `ANGLE_instanced_arrays` extension.
+### hasInstance 
+**Type:** <code>boolean</code>
+
+**Description:** `true` if has `ANGLE_instanced_arrays` extension.
 
 </article>
 
@@ -55,8 +63,10 @@ System plugin to the renderer to manage geometry.
 
 <article>
 
-### hasVao: <span><code>boolean</code></span>
-`true` if we has `*_vertex_array_object` extension.
+### hasVao 
+**Type:** <code>boolean</code>
+
+**Description:** `true` if we has `*_vertex_array_object` extension.
 
 </article>
 
@@ -65,8 +75,10 @@ System plugin to the renderer to manage geometry.
 
 <article>
 
-### managedGeometries: <span><code>&#123; [key&#58; number]&#58; Geometry &#125;</code></span>
-Cache for all geometries by id, used in case renderer gets destroyed or for profiling.
+### managedGeometries 
+**Type:** <code>&#123; [key&#58; number]&#58; Geometry &#125;</code>
+
+**Description:** Cache for all geometries by id, used in case renderer gets destroyed or for profiling.
 
 </article>
 
@@ -77,8 +89,10 @@ Cache for all geometries by id, used in case renderer gets destroyed or for prof
 ## Methods
 <article>
 
-### bind: <span><code>(geometry&#58; Geometry, shader&#58; Shader) -&#62; void</code></span>
-Binds geometry so that is can be drawn. Creating a Vao if required
+### bind 
+**Type:** <code>(geometry&#58; Geometry, shader&#58; Shader) -&#62; void</code>
+
+**Description:** Binds geometry so that is can be drawn. Creating a Vao if required
 
 #### Parameters:
 | Name     | Type                  | Description                        |
@@ -92,8 +106,10 @@ Binds geometry so that is can be drawn. Creating a Vao if required
 
 <article>
 
-### disposeAll: <span><code>(contextLost&#58; boolean) -&#62; void</code></span>
-Dispose all WebGL resources of all managed geometries.
+### disposeAll 
+**Type:** <code>(contextLost&#58; boolean) -&#62; void</code>
+
+**Description:** Dispose all WebGL resources of all managed geometries.
 
 #### Parameters:
 | Name        | Type                 | Description                                        |
@@ -106,8 +122,10 @@ Dispose all WebGL resources of all managed geometries.
 
 <article>
 
-### disposeGeometry: <span><code>(geometry&#58; Geometry, contextLost&#58; boolean) -&#62; void</code></span>
-Disposes geometry.
+### disposeGeometry 
+**Type:** <code>(geometry&#58; Geometry, contextLost&#58; boolean) -&#62; void</code>
+
+**Description:** Disposes geometry.
 
 #### Parameters:
 | Name        | Type                  | Description                                        |
@@ -121,8 +139,10 @@ Disposes geometry.
 
 <article>
 
-### draw: <span><code>(type&#58; DRAW_MODES, size&#58; number, start&#58; number, instanceCount&#58; number) -&#62; this</code></span>
-Draws the currently bound geometry.
+### draw 
+**Type:** <code>(type&#58; DRAW_MODES, size&#58; number, start&#58; number, instanceCount&#58; number) -&#62; this</code>
+
+**Description:** Draws the currently bound geometry.
 
 #### Parameters:
 | Name          | Type                    | Description                                                                                                            |
@@ -142,8 +162,10 @@ Draws the currently bound geometry.
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-Reset and unbind any active VAO and geometry.
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Reset and unbind any active VAO and geometry.
 
 </article>
 
@@ -152,8 +174,10 @@ Reset and unbind any active VAO and geometry.
 
 <article>
 
-### updateBuffers: <span><code>() -&#62; void</code></span>
-Update buffers of the currently bound geometry.
+### updateBuffers 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Update buffers of the currently bound geometry.
 
 </article>
 
@@ -162,8 +186,10 @@ Update buffers of the currently bound geometry.
 
 <article>
 
-### activateVao: <span><code>(geometry&#58; Geometry, program&#58; Program) -&#62; void</code></span>
-Activate vertex array object.
+### activateVao 
+**Type:** <code>(geometry&#58; Geometry, program&#58; Program) -&#62; void</code>
+
+**Description:** Activate vertex array object.
 
 #### Parameters:
 | Name     | Type                  | Description              |
@@ -177,8 +203,10 @@ Activate vertex array object.
 
 <article>
 
-### checkCompatibility: <span><code>(geometry&#58; Geometry, program&#58; Program) -&#62; void</code></span>
-Check compatibility between a geometry and a program
+### checkCompatibility 
+**Type:** <code>(geometry&#58; Geometry, program&#58; Program) -&#62; void</code>
+
+**Description:** Check compatibility between a geometry and a program
 
 #### Parameters:
 | Name     | Type                  | Description        |
@@ -192,8 +220,10 @@ Check compatibility between a geometry and a program
 
 <article>
 
-### contextChange: <span><code>() -&#62; void</code></span>
-Sets up the renderer context and necessary buffers.
+### contextChange 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Sets up the renderer context and necessary buffers.
 
 </article>
 
@@ -202,8 +232,10 @@ Sets up the renderer context and necessary buffers.
 
 <article>
 
-### getSignature: <span><code>(geometry&#58; Geometry, program&#58; Program) -&#62; string</code></span>
-Takes a geometry and program and generates a unique signature for them.
+### getSignature 
+**Type:** <code>(geometry&#58; Geometry, program&#58; Program) -&#62; string</code>
+
+**Description:** Takes a geometry and program and generates a unique signature for them.
 
 #### Parameters:
 | Name     | Type                  | Description               |
@@ -221,8 +253,10 @@ Takes a geometry and program and generates a unique signature for them.
 
 <article>
 
-### initGeometryVao: <span><code>(geometry&#58; Geometry, shader&#58; Shader, incRefCount&#58; boolean) -&#62; WebGLVertexArrayObject</code></span>
-Creates or gets Vao with the same structure as the geometry and stores it on the geometry. If vao is created, it is bound automatically. We use a shader to infer what and how to set up the attribute locations.
+### initGeometryVao 
+**Type:** <code>(geometry&#58; Geometry, shader&#58; Shader, incRefCount&#58; boolean) -&#62; WebGLVertexArrayObject</code>
+
+**Description:** Creates or gets Vao with the same structure as the geometry and stores it on the geometry. If vao is created, it is bound automatically. We use a shader to infer what and how to set up the attribute locations.
 
 #### Parameters:
 | Name        | Type                  | Description                                  |
@@ -241,8 +275,10 @@ Creates or gets Vao with the same structure as the geometry and stores it on the
 
 <article>
 
-### unbind: <span><code>() -&#62; void</code></span>
-Unbind/reset everything.
+### unbind 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Unbind/reset everything.
 
 </article>
 

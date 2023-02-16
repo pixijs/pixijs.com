@@ -5,20 +5,24 @@ sidebar_label: "PIXI.AbstractMaskSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).AbstractMaskSystem
+
+</div>
 
 
 System plugin to the renderer to manage specific types of masking operations.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.AbstractMaskSystem: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.AbstractMaskSystem(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -35,8 +39,10 @@ System plugin to the renderer to manage specific types of masking operations.
 ## Members
 <article>
 
-### maskStack: <span><code>Array&#60;PIXI.MaskData&#62;</code></span>
-The mask stack
+### maskStack 
+**Type:** <code>Array&#60;PIXI.MaskData&#62;</code>
+
+**Description:** The mask stack
 
 </article>
 
@@ -47,8 +53,10 @@ The mask stack
 ## Methods
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys the mask stack.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys the mask stack.
 
 </article>
 
@@ -57,8 +65,10 @@ Destroys the mask stack.
 
 <article>
 
-### getStackLength: <span><code>() -&#62; number</code></span>
-Gets count of masks of certain type.
+### getStackLength 
+**Type:** <code>() -&#62; number</code>
+
+**Description:** Gets count of masks of certain type.
 
 #### Returns:
 | Type                | Description |
@@ -71,8 +81,10 @@ Gets count of masks of certain type.
 
 <article>
 
-### setMaskStack: <span><code>(maskStack&#58; Array&#60;PIXI.MaskData&#62;) -&#62; void</code></span>
-Changes the mask stack that is used by this System.
+### setMaskStack 
+**Type:** <code>(maskStack&#58; Array&#60;PIXI.MaskData&#62;) -&#62; void</code>
+
+**Description:** Changes the mask stack that is used by this System.
 
 #### Parameters:
 | Name      | Type                                      | Description    |

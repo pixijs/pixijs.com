@@ -5,7 +5,12 @@ sidebar_label: "PIXI.Resolver"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/assets](../modules/pixi_assets).Resolver
+
+</div>
 
 
 A class that is responsible for resolving mapping asset URLs to keys. At its most basic it can be used for Aliases&#58;
@@ -44,13 +49,12 @@ It is not intended that this class is created by developers - its part of the As
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Resolver: <span><code>() </code></span>
+### Constructor:
+<h4><code>new PIXI.Resolver() </code></h4>
 
 #### Parameters:
 | Name | Type | Default | Description |
@@ -66,8 +70,11 @@ It is not intended that this class is created by developers - its part of the As
 ## Members
 <article>
 
-### basePath: <span><code>string</code></span>
-Set the base path to prepend to all urls when resolving
+### basePath 
+**Type:** <code>string</code>
+
+**Description:** Set the base path to prepend to all urls when resolving
+
 
 ```js
 resolver.basePath = 'https://home.com/';
@@ -83,10 +90,13 @@ resolver.resolveUrl('foo', 'bar.png'); // => 'https://home.com/bar.png'
 
 <article>
 
-### parsers: <span><code>ResolveURLParser[]</code></span>
-All the active URL parsers that help the parser to extract information and create an asset object-based on parsing the URL itself.
+### parsers 
+**Type:** <code>ResolveURLParser[]</code>
+
+**Description:** All the active URL parsers that help the parser to extract information and create an asset object-based on parsing the URL itself.
 
 Can be added using the extensions API
+
 
 ```js
  resolver.add('foo', [
@@ -129,8 +139,11 @@ Can be added using the extensions API
 
 <article>
 
-### rootPath: <span><code>string</code></span>
-Set the root path for root-relative URLs. By default the `basePath`'s root is used. If no `basePath` is set, then the default value for browsers is `window.location.origin`
+### rootPath 
+**Type:** <code>string</code>
+
+**Description:** Set the root path for root-relative URLs. By default the `basePath`'s root is used. If no `basePath` is set, then the default value for browsers is `window.location.origin`
+
 
 ```js
 // Application hosted on https://home.com/some-path/index.html
@@ -150,8 +163,11 @@ resolver.resolveUrl('foo', '/bar.png'); // => 'https://home.com/bar.png'
 ## Methods
 <article>
 
-### add: <span><code>(keysIn&#58; string &#124; string[], assetsIn&#58; string &#124; ResolveAsset &#124; (string &#124; ResolveAsset)[], data&#58; unknown) -&#62; void</code></span>
-Tells the resolver what keys are associated with witch asset. The most important thing the resolver does
+### add 
+**Type:** <code>(keysIn&#58; string &#124; string[], assetsIn&#58; string &#124; ResolveAsset &#124; (string &#124; ResolveAsset)[], data&#58; unknown) -&#62; void</code>
+
+**Description:** Tells the resolver what keys are associated with witch asset. The most important thing the resolver does
+
 
 ```js
  // Single key, single asset:
@@ -191,8 +207,11 @@ Tells the resolver what keys are associated with witch asset. The most important
 
 <article>
 
-### addBundle: <span><code>(bundleId&#58; string, assets&#58; ResolverBundle["assets"]) -&#62; void</code></span>
-This adds a bundle of assets in one go so that you can resolve them as a group. For example you could add a bundle for each screen in you pixi app
+### addBundle 
+**Type:** <code>(bundleId&#58; string, assets&#58; ResolverBundle["assets"]) -&#62; void</code>
+
+**Description:** This adds a bundle of assets in one go so that you can resolve them as a group. For example you could add a bundle for each screen in you pixi app
+
 
 ```js
  resolver.addBundle('animals', {
@@ -217,8 +236,10 @@ This adds a bundle of assets in one go so that you can resolve them as a group. 
 
 <article>
 
-### addManifest: <span><code>(manifest&#58; ResolverManifest) -&#62; void</code></span>
-Add a manifest to the asset resolver. This is a nice way to add all the asset information in one go. generally a manifest would be built using a tool.
+### addManifest 
+**Type:** <code>(manifest&#58; ResolverManifest) -&#62; void</code>
+
+**Description:** Add a manifest to the asset resolver. This is a nice way to add all the asset information in one go. generally a manifest would be built using a tool.
 
 #### Parameters:
 | Name     | Type                          | Description                         |
@@ -231,8 +252,10 @@ Add a manifest to the asset resolver. This is a nice way to add all the asset in
 
 <article>
 
-### hasBundle: <span><code>(key&#58; string) -&#62; boolean</code></span>
-Checks if a bundle with the given key exists in the resolver
+### hasBundle 
+**Type:** <code>(key&#58; string) -&#62; boolean</code>
+
+**Description:** Checks if a bundle with the given key exists in the resolver
 
 #### Parameters:
 | Name | Type                | Description           |
@@ -249,8 +272,10 @@ Checks if a bundle with the given key exists in the resolver
 
 <article>
 
-### hasKey: <span><code>(key&#58; string) -&#62; boolean</code></span>
-Checks if an asset with a given key exists in the resolver
+### hasKey 
+**Type:** <code>(key&#58; string) -&#62; boolean</code>
+
+**Description:** Checks if an asset with a given key exists in the resolver
 
 #### Parameters:
 | Name | Type                | Description          |
@@ -267,8 +292,11 @@ Checks if an asset with a given key exists in the resolver
 
 <article>
 
-### prefer: <span><code>(preferOrders&#58; PreferOrder[]) -&#62; void</code></span>
-Let the resolver know which assets you prefer to use when resolving assets. Multiple prefer user defined rules can be added.
+### prefer 
+**Type:** <code>(preferOrders&#58; PreferOrder[]) -&#62; void</code>
+
+**Description:** Let the resolver know which assets you prefer to use when resolving assets. Multiple prefer user defined rules can be added.
+
 
 ```js
 resolver.prefer({
@@ -295,8 +323,10 @@ resolver.resolveUrl('foo') // => 'bar@2x.webp'
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-Used for testing, this resets the resolver to its initial state
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Used for testing, this resets the resolver to its initial state
 
 </article>
 
@@ -305,8 +335,11 @@ Used for testing, this resets the resolver to its initial state
 
 <article>
 
-### resolve: <span><code>(keys&#58; string &#124; string[]) -&#62; ResolveAsset &#124; Record&#60;string, ResolveAsset&#62;</code></span>
-Resolves each key in the list to an asset object. Another key function of the resolver! After adding all the various key/asset pairs. this will run the logic of finding which asset to return based on any preferences set using the `prefer` function by default the same key passed in will be returned if nothing is matched by the resolver.
+### resolve 
+**Type:** <code>(keys&#58; string &#124; string[]) -&#62; ResolveAsset &#124; Record&#60;string, ResolveAsset&#62;</code>
+
+**Description:** Resolves each key in the list to an asset object. Another key function of the resolver! After adding all the various key/asset pairs. this will run the logic of finding which asset to return based on any preferences set using the `prefer` function by default the same key passed in will be returned if nothing is matched by the resolver.
+
 
 ```js
  resolver.add('boo', 'bunny.png');
@@ -333,8 +366,11 @@ Resolves each key in the list to an asset object. Another key function of the re
 
 <article>
 
-### resolveBundle: <span><code>(bundleIds&#58; string &#124; string[]) -&#62; Record&#60;string, ResolveAsset&#62; &#124; Record&#60;string, Record&#60;string, ResolveAsset&#62;&#62;</code></span>
-If the resolver has had a manifest set via setManifest, this will return the assets urls for a given bundleId or bundleIds.
+### resolveBundle 
+**Type:** <code>(bundleIds&#58; string &#124; string[]) -&#62; Record&#60;string, ResolveAsset&#62; &#124; Record&#60;string, Record&#60;string, ResolveAsset&#62;&#62;</code>
+
+**Description:** If the resolver has had a manifest set via setManifest, this will return the assets urls for a given bundleId or bundleIds.
+
 
 ```js
  // Manifest Example
@@ -389,8 +425,10 @@ If the resolver has had a manifest set via setManifest, this will return the ass
 
 <article>
 
-### resolveUrl: <span><code>(key&#58; string &#124; string[]) -&#62; string &#124; Record&#60;string, string&#62;</code></span>
-Does exactly what resolve does, but returns just the URL rather than the whole asset object
+### resolveUrl 
+**Type:** <code>(key&#58; string &#124; string[]) -&#62; string &#124; Record&#60;string, string&#62;</code>
+
+**Description:** Does exactly what resolve does, but returns just the URL rather than the whole asset object
 
 #### Parameters:
 | Name | Type                                | Description                |
@@ -407,8 +445,10 @@ Does exactly what resolve does, but returns just the URL rather than the whole a
 
 <article>
 
-### setBundleIdentifier: <span><code>(bundleIdentifier&#58; BundleIdentifierOptions) -&#62; void</code></span>
-Override how the resolver deals with generating bundle ids. must be called before any bundles are added
+### setBundleIdentifier 
+**Type:** <code>(bundleIdentifier&#58; BundleIdentifierOptions) -&#62; void</code>
+
+**Description:** Override how the resolver deals with generating bundle ids. must be called before any bundles are added
 
 #### Parameters:
 | Name             | Type                                 | Description                   |
@@ -421,8 +461,10 @@ Override how the resolver deals with generating bundle ids. must be called befor
 
 <article>
 
-### setDefaultSearchParams: <span><code>(searchParams&#58; string &#124; Record&#60;string, unknown&#62;) -&#62; void</code></span>
-Sets the default URL search parameters for the URL resolver. The urls can be specified as a string or an object.
+### setDefaultSearchParams 
+**Type:** <code>(searchParams&#58; string &#124; Record&#60;string, unknown&#62;) -&#62; void</code>
+
+**Description:** Sets the default URL search parameters for the URL resolver. The urls can be specified as a string or an object.
 
 #### Parameters:
 | Name         | Type                                                       | Description                                              |

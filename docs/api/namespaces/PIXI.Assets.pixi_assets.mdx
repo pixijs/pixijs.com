@@ -5,7 +5,12 @@ sidebar_label: "PIXI.Assets"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/assets](../modules/pixi_assets).Assets
+
+</div>
 
 
 A one stop shop for all Pixi resource management! Super modern and easy to use, with enough flexibility to customize and do what you need!
@@ -155,8 +160,6 @@ gameScreenAssets = await Assets.loadBundle('game-screen');
 ```
       
 
-// TODO: @see
-
         
 
 
@@ -168,8 +171,10 @@ gameScreenAssets = await Assets.loadBundle('game-screen');
 ## Members
 <article>
 
-### cache: <span><code>PIXI.Cache</code></span>
-The global cache of all assets within PixiJS
+### cache 
+**Type:** <code>PIXI.Cache</code>
+
+**Description:** The global cache of all assets within PixiJS
 
 </article>
 
@@ -178,8 +183,10 @@ The global cache of all assets within PixiJS
 
 <article>
 
-### detections: <span><code>FormatDetectionParser[]</code></span>
-All the detection parsers currently added to the Assets class.
+### detections 
+**Type:** <code>FormatDetectionParser[]</code>
+
+**Description:** All the detection parsers currently added to the Assets class.
 
 </article>
 
@@ -188,8 +195,10 @@ All the detection parsers currently added to the Assets class.
 
 <article>
 
-### loader: <span><code>PIXI.AssetLoader</code></span>
-The loader, loads stuff!
+### loader 
+**Type:** <code>PIXI.AssetLoader</code>
+
+**Description:** The loader, loads stuff!
 
 </article>
 
@@ -198,10 +207,12 @@ The loader, loads stuff!
 
 <article>
 
-### preferWorkers: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### preferWorkers 
+**Type:** <code>boolean</code>
 
-When set to `true`, loading and decoding images will happen with Worker thread, if available on the browser. This is much more performant as network requests and decoding can be expensive on the CPU. However, not all environments support Workers, in some cases it can be helpful to disable by setting to `false`.
+**Default Value**: <code>true</code>
+
+**Description:** When set to `true`, loading and decoding images will happen with Worker thread, if available on the browser. This is much more performant as network requests and decoding can be expensive on the CPU. However, not all environments support Workers, in some cases it can be helpful to disable by setting to `false`.
 
 </article>
 
@@ -210,8 +221,10 @@ When set to `true`, loading and decoding images will happen with Worker thread, 
 
 <article>
 
-### resolver: <span><code>Resolver</code></span>
-the resolver to map various urls
+### resolver 
+**Type:** <code>Resolver</code>
+
+**Description:** the resolver to map various urls
 
 </article>
 

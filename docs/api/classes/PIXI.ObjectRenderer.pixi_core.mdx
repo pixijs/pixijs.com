@@ -5,20 +5,24 @@ sidebar_label: "PIXI.ObjectRenderer"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).ObjectRenderer
+
+</div>
 
 
 Base for a common object renderer that can be used as a system renderer plugin.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.ObjectRenderer: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.ObjectRenderer(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                          |
@@ -35,8 +39,10 @@ Base for a common object renderer that can be used as a system renderer plugin.
 ## Members
 <article>
 
-### renderer: <span><code>Renderer</code></span>
-The renderer this manager works for.
+### renderer 
+**Type:** <code>Renderer</code>
+
+**Description:** The renderer this manager works for.
 
 </article>
 
@@ -47,8 +53,10 @@ The renderer this manager works for.
 ## Methods
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Generic destruction method that frees all resources. This should be called by subclasses.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Generic destruction method that frees all resources. This should be called by subclasses.
 
 </article>
 
@@ -57,8 +65,10 @@ Generic destruction method that frees all resources. This should be called by su
 
 <article>
 
-### flush: <span><code>() -&#62; void</code></span>
-Stub method that should be used to empty the current batch by rendering objects now.
+### flush 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stub method that should be used to empty the current batch by rendering objects now.
 
 </article>
 
@@ -67,8 +77,10 @@ Stub method that should be used to empty the current batch by rendering objects 
 
 <article>
 
-### render: <span><code>(_object&#58; PIXI.DisplayObject) -&#62; void</code></span>
-Keeps the object to render. It doesn't have to be rendered immediately.
+### render 
+**Type:** <code>(_object&#58; PIXI.DisplayObject) -&#62; void</code>
+
+**Description:** Keeps the object to render. It doesn't have to be rendered immediately.
 
 #### Parameters:
 | Name    | Type                            | Description           |
@@ -81,8 +93,10 @@ Keeps the object to render. It doesn't have to be rendered immediately.
 
 <article>
 
-### start: <span><code>() -&#62; void</code></span>
-Stub method that initializes any state required before rendering starts. It is different from the `prerender`signal, which occurs every frame, in that it is called whenever an object requests _this_ renderer specifically.
+### start 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stub method that initializes any state required before rendering starts. It is different from the `prerender`signal, which occurs every frame, in that it is called whenever an object requests _this_ renderer specifically.
 
 </article>
 
@@ -91,8 +105,10 @@ Stub method that initializes any state required before rendering starts. It is d
 
 <article>
 
-### stop: <span><code>() -&#62; void</code></span>
-Stops the renderer. It should free up any state and become dormant.
+### stop 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stops the renderer. It should free up any state and become dormant.
 
 </article>
 

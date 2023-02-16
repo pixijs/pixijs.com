@@ -5,7 +5,12 @@ sidebar_label: "PIXI.Framebuffer"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).Framebuffer
+
+</div>
 
 
 A framebuffer can be used to render contents off of the screen. [PIXI.BaseRenderTexture](../classes/PIXI.BaseRenderTexture.pixi_core) uses one internally to render into itself. You can attach a depth or stencil buffer to a framebuffer.
@@ -14,13 +19,12 @@ On WebGL 2 machines, shaders can output to multiple textures simultaneously with
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Framebuffer: <span><code>(width&#58; number, height&#58; number) </code></span>
+### Constructor:
+<h4><code>new PIXI.Framebuffer(width&#58; number, height&#58; number) </code></h4>
 
 #### Parameters:
 | Name   | Type                | Default       | Description                |
@@ -38,8 +42,10 @@ On WebGL 2 machines, shaders can output to multiple textures simultaneously with
 ## Members
 <article>
 
-### colorTexture: <span><code>BaseTexture</code></span>
-Reference to the colorTexture.
+### colorTexture 
+**Type:** <code>BaseTexture</code>
+
+**Description:** Reference to the colorTexture.
 
 </article>
 
@@ -48,8 +54,10 @@ Reference to the colorTexture.
 
 <article>
 
-### height: <span><code>number</code></span>
-Height of framebuffer in pixels.
+### height 
+**Type:** <code>number</code>
+
+**Description:** Height of framebuffer in pixels.
 
 </article>
 
@@ -58,11 +66,14 @@ Height of framebuffer in pixels.
 
 <article>
 
-### multisample: <span><code>MSAA_QUALITY</code></span>
-- **Default Value**: <code>PIXI.MSAA_QUALITY.NONE</code>
+### multisample 
+**Type:** <code>MSAA_QUALITY</code>
 
-Desired number of samples for antialiasing. 0 means AA should not be used.
+**Default Value**: <code>PIXI.MSAA_QUALITY.NONE</code>
+
+**Description:** Desired number of samples for antialiasing. 0 means AA should not be used.
 Experimental WebGL2 feature, allows to use antialiasing in individual renderTextures. Antialiasing is the same as for main buffer with renderer `antialias: true` options. Seriously affects GPU memory consumption and GPU performance.
+
 
 ```js
  import { MSAA_QUALITY } from 'pixi.js';
@@ -81,8 +92,10 @@ Experimental WebGL2 feature, allows to use antialiasing in individual renderText
 
 <article>
 
-### width: <span><code>number</code></span>
-Width of framebuffer in pixels.
+### width 
+**Type:** <code>number</code>
+
+**Description:** Width of framebuffer in pixels.
 
 </article>
 
@@ -93,8 +106,10 @@ Width of framebuffer in pixels.
 ## Methods
 <article>
 
-### addColorTexture: <span><code>(index&#58; number, texture&#58; BaseTexture) -&#62; this</code></span>
-Add texture to the colorTexture array.
+### addColorTexture 
+**Type:** <code>(index&#58; number, texture&#58; BaseTexture) -&#62; this</code>
+
+**Description:** Add texture to the colorTexture array.
 
 #### Parameters:
 | Name    | Type                     | Description                              |
@@ -112,8 +127,10 @@ Add texture to the colorTexture array.
 
 <article>
 
-### addDepthTexture: <span><code>(texture&#58; BaseTexture) -&#62; this</code></span>
-Add a depth texture to the frame buffer.
+### addDepthTexture 
+**Type:** <code>(texture&#58; BaseTexture) -&#62; this</code>
+
+**Description:** Add a depth texture to the frame buffer.
 
 #### Parameters:
 | Name    | Type                     | Description     |
@@ -130,8 +147,10 @@ Add a depth texture to the frame buffer.
 
 <article>
 
-### destroyDepthTexture: <span><code>() -&#62; void</code></span>
-Destroys and removes the depth texture added to this framebuffer.
+### destroyDepthTexture 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys and removes the depth texture added to this framebuffer.
 
 </article>
 
@@ -140,8 +159,10 @@ Destroys and removes the depth texture added to this framebuffer.
 
 <article>
 
-### dispose: <span><code>() -&#62; void</code></span>
-Disposes WebGL resources that are connected to this geometry.
+### dispose 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Disposes WebGL resources that are connected to this geometry.
 
 </article>
 
@@ -150,8 +171,10 @@ Disposes WebGL resources that are connected to this geometry.
 
 <article>
 
-### enableDepth: <span><code>() -&#62; this</code></span>
-Enable depth on the frame buffer.
+### enableDepth 
+**Type:** <code>() -&#62; this</code>
+
+**Description:** Enable depth on the frame buffer.
 
 #### Returns:
 | Type              | Description |
@@ -164,8 +187,10 @@ Enable depth on the frame buffer.
 
 <article>
 
-### enableStencil: <span><code>() -&#62; this</code></span>
-Enable stencil on the frame buffer.
+### enableStencil 
+**Type:** <code>() -&#62; this</code>
+
+**Description:** Enable stencil on the frame buffer.
 
 #### Returns:
 | Type              | Description |
@@ -178,8 +203,10 @@ Enable stencil on the frame buffer.
 
 <article>
 
-### resize: <span><code>(width&#58; number, height&#58; number) -&#62; void</code></span>
-Resize the frame buffer
+### resize 
+**Type:** <code>(width&#58; number, height&#58; number) -&#62; void</code>
+
+**Description:** Resize the frame buffer
 
 #### Parameters:
 | Name   | Type                | Description                             |

@@ -5,20 +5,24 @@ sidebar_label: "PIXI.ContextSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).ContextSystem
+
+</div>
 
 
 System plugin to the renderer to manage the context.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.ContextSystem: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.ContextSystem(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -35,8 +39,10 @@ System plugin to the renderer to manage the context.
 ## Members
 <article>
 
-### extensions: <span><code>object</code></span>
-Extensions available.
+### extensions 
+**Type:** <code>object</code>
+
+**Description:** Extensions available.
 
 </article>
 
@@ -45,8 +51,10 @@ Extensions available.
 
 <article>
 
-### anisotropicFiltering: <span><code>EXT_texture_filter_anisotropic</code></span>
-WebGL v1 and v2 extension
+### anisotropicFiltering 
+**Type:** <code>EXT_texture_filter_anisotropic</code>
+
+**Description:** WebGL v1 and v2 extension
 
 </article>
 
@@ -55,8 +63,10 @@ WebGL v1 and v2 extension
 
 <article>
 
-### depthTexture: <span><code>WEBGL_depth_texture</code></span>
-WebGL v1 extension
+### depthTexture 
+**Type:** <code>WEBGL_depth_texture</code>
+
+**Description:** WebGL v1 extension
 
 </article>
 
@@ -65,8 +75,10 @@ WebGL v1 extension
 
 <article>
 
-### drawBuffers: <span><code>WEBGL_draw_buffers</code></span>
-WebGL v1 extension
+### drawBuffers 
+**Type:** <code>WEBGL_draw_buffers</code>
+
+**Description:** WebGL v1 extension
 
 </article>
 
@@ -75,8 +87,10 @@ WebGL v1 extension
 
 <article>
 
-### floatTexture: <span><code>OES_texture_float</code></span>
-WebGL v1 extension
+### floatTexture 
+**Type:** <code>OES_texture_float</code>
+
+**Description:** WebGL v1 extension
 
 </article>
 
@@ -85,8 +99,10 @@ WebGL v1 extension
 
 <article>
 
-### loseContext: <span><code>WEBGL_lose_context</code></span>
-WebGL v1 extension
+### loseContext 
+**Type:** <code>WEBGL_lose_context</code>
+
+**Description:** WebGL v1 extension
 
 </article>
 
@@ -95,8 +111,10 @@ WebGL v1 extension
 
 <article>
 
-### vertexArrayObject: <span><code>OES_vertex_array_object</code></span>
-WebGL v1 extension
+### vertexArrayObject 
+**Type:** <code>OES_vertex_array_object</code>
+
+**Description:** WebGL v1 extension
 
 </article>
 
@@ -105,8 +123,10 @@ WebGL v1 extension
 
 <article>
 
-### isLost: <span><code>boolean</code></span>
-`true` if the context is lost
+### isLost 
+**Type:** <code>boolean</code>
+
+**Description:** `true` if the context is lost
 
 </article>
 
@@ -115,8 +135,10 @@ WebGL v1 extension
 
 <article>
 
-### supports: <span><code>object</code></span>
-Features supported by current context.
+### supports 
+**Type:** <code>object</code>
+
+**Description:** Features supported by current context.
 
 </article>
 
@@ -125,8 +147,10 @@ Features supported by current context.
 
 <article>
 
-### uint32Indices: <span><code>boolean</code></span>
-Support for 32-bit indices buffer.
+### uint32Indices 
+**Type:** <code>boolean</code>
+
+**Description:** Support for 32-bit indices buffer.
 
 </article>
 
@@ -135,8 +159,10 @@ Support for 32-bit indices buffer.
 
 <article>
 
-### useContextAlpha: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
-Pass-thru setting for the canvas' context `alpha` property. This is typically not something you need to fiddle with. If you want transparency, use `backgroundAlpha`.
+### useContextAlpha : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>boolean</code>
+
+**Description:** Pass-thru setting for the canvas' context `alpha` property. This is typically not something you need to fiddle with. If you want transparency, use `backgroundAlpha`.
 
 </article>
 
@@ -145,8 +171,10 @@ Pass-thru setting for the canvas' context `alpha` property. This is typically no
 
 <article>
 
-### webGLVersion: <span><code>number</code></span>
-Either 1 or 2 to reflect the WebGL version being used.
+### webGLVersion 
+**Type:** <code>number</code>
+
+**Description:** Either 1 or 2 to reflect the WebGL version being used.
 
 </article>
 
@@ -157,8 +185,10 @@ Either 1 or 2 to reflect the WebGL version being used.
 ## Methods
 <article>
 
-### createContext: <span><code>(canvas&#58; ICanvas, options&#58; WebGLContextAttributes) -&#62; WebGLRenderingContext</code></span>
-Helper class to create a WebGL Context
+### createContext 
+**Type:** <code>(canvas&#58; ICanvas, options&#58; WebGLContextAttributes) -&#62; WebGLRenderingContext</code>
+
+**Description:** Helper class to create a WebGL Context
 
 #### Parameters:
 | Name    | Type                                | Description                                                                                   |
@@ -176,8 +206,10 @@ Helper class to create a WebGL Context
 
 <article>
 
-### contextChange: <span><code>(gl&#58; WebGLRenderingContext) -&#62; void</code></span>
-Handles the context change event.
+### contextChange 
+**Type:** <code>(gl&#58; WebGLRenderingContext) -&#62; void</code>
+
+**Description:** Handles the context change event.
 
 #### Parameters:
 | Name | Type                               | Description        |
@@ -190,8 +222,10 @@ Handles the context change event.
 
 <article>
 
-### getExtensions: <span><code>() -&#62; void</code></span>
-Auto-populate the [extensions](../classes/PIXI.ContextSystem.pixi_core#extensions).
+### getExtensions 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Auto-populate the [extensions](../classes/PIXI.ContextSystem.pixi_core#extensions).
 
 </article>
 
@@ -200,8 +234,10 @@ Auto-populate the [extensions](../classes/PIXI.ContextSystem.pixi_core#extension
 
 <article>
 
-### handleContextLost: <span><code>(event&#58; WebGLContextEvent) -&#62; void</code></span>
-Handles a lost webgl context
+### handleContextLost 
+**Type:** <code>(event&#58; WebGLContextEvent) -&#62; void</code>
+
+**Description:** Handles a lost webgl context
 
 #### Parameters:
 | Name  | Type                           | Description             |
@@ -214,8 +250,10 @@ Handles a lost webgl context
 
 <article>
 
-### handleContextRestored: <span><code>() -&#62; void</code></span>
-Handles a restored webgl context.
+### handleContextRestored 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Handles a restored webgl context.
 
 </article>
 
@@ -224,8 +262,10 @@ Handles a restored webgl context.
 
 <article>
 
-### initFromContext: <span><code>(gl&#58; WebGLRenderingContext) -&#62; void</code></span>
-Initializes the context.
+### initFromContext 
+**Type:** <code>(gl&#58; WebGLRenderingContext) -&#62; void</code>
+
+**Description:** Initializes the context.
 
 #### Parameters:
 | Name | Type                               | Description   |
@@ -238,8 +278,10 @@ Initializes the context.
 
 <article>
 
-### initFromOptions: <span><code>(options&#58; object) -&#62; void</code></span>
-Initialize from context options
+### initFromOptions 
+**Type:** <code>(options&#58; object) -&#62; void</code>
+
+**Description:** Initialize from context options
 
 #### Parameters:
 | Name    | Type                | Description        |
@@ -252,8 +294,10 @@ Initialize from context options
 
 <article>
 
-### postrender: <span><code>() -&#62; void</code></span>
-Handle the post-render runner event.
+### postrender 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Handle the post-render runner event.
 
 </article>
 
@@ -262,8 +306,10 @@ Handle the post-render runner event.
 
 <article>
 
-### validateContext: <span><code>(gl&#58; WebGLRenderingContext) -&#62; void</code></span>
-Validate context.
+### validateContext 
+**Type:** <code>(gl&#58; WebGLRenderingContext) -&#62; void</code>
+
+**Description:** Validate context.
 
 #### Parameters:
 | Name | Type                               | Description     |

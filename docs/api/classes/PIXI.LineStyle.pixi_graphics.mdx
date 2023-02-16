@@ -5,20 +5,24 @@ sidebar_label: "PIXI.LineStyle"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/graphics](../modules/pixi_graphics).LineStyle
+
+</div>
 
 
 Represents the line style for Graphics.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.LineStyle: <span><code>() </code></span>
+### Constructor:
+<h4><code>new PIXI.LineStyle() </code></h4>
 
 #### Parameters:
 | Name | Type | Default | Description |
@@ -35,22 +39,12 @@ Represents the line style for Graphics.
 ## Members
 <article>
 
-### alignment: <span><code>number</code></span>
-- **Default Value**: <code>0.5</code>
+### alignment 
+**Type:** <code>number</code>
 
-The alignment of any lines drawn (0.5 = middle, 1 = outer, 0 = inner). WebGL only.
+**Default Value**: <code>0.5</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### alpha: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
-
-The alpha value used when filling the Graphics object.
+**Description:** The alignment of any lines drawn (0.5 = middle, 1 = outer, 0 = inner). WebGL only.
 
 </article>
 
@@ -59,22 +53,12 @@ The alpha value used when filling the Graphics object.
 
 <article>
 
-### cap: <span><code>PIXI.LINE_CAP</code></span>
-- **Default Value**: <code>PIXI.LINE_CAP.BUTT</code>
+### alpha 
+**Type:** <code>number</code>
 
-Line cap style.
+**Default Value**: <code>1</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### color: <span><code>number</code></span>
-- **Default Value**: <code>0xFFFFFF</code>
-
-The hex color value used when coloring the Graphics object.
+**Description:** The alpha value used when filling the Graphics object.
 
 </article>
 
@@ -83,22 +67,12 @@ The hex color value used when coloring the Graphics object.
 
 <article>
 
-### join: <span><code>PIXI.LINE_JOIN</code></span>
-- **Default Value**: <code>PIXI.LINE_JOIN.MITER</code>
+### cap 
+**Type:** <code>PIXI.LINE_CAP</code>
 
-Line join style.
+**Default Value**: <code>PIXI.LINE_CAP.BUTT</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### matrix: <span><code>Matrix</code></span>
-- **Default Value**: <code>null</code>
-
-The transform applied to the texture.
+**Description:** Line cap style.
 
 </article>
 
@@ -107,22 +81,12 @@ The transform applied to the texture.
 
 <article>
 
-### miterLimit: <span><code>number</code></span>
-- **Default Value**: <code>10</code>
+### color 
+**Type:** <code>number</code>
 
-Miter limit.
+**Default Value**: <code>0xFFFFFF</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### native: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
-
-If true the lines will be draw using LINES instead of TRIANGLE_STRIP.
+**Description:** The hex color value used when coloring the Graphics object.
 
 </article>
 
@@ -131,22 +95,12 @@ If true the lines will be draw using LINES instead of TRIANGLE_STRIP.
 
 <article>
 
-### texture: <span><code>Texture</code></span>
-- **Default Value**: <code>0</code>
+### join 
+**Type:** <code>PIXI.LINE_JOIN</code>
 
-The texture to be used for the fill.
+**Default Value**: <code>PIXI.LINE_JOIN.MITER</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### visible: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
-
-If the current fill is visible.
+**Description:** Line join style.
 
 </article>
 
@@ -155,10 +109,82 @@ If the current fill is visible.
 
 <article>
 
-### width: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### matrix 
+**Type:** <code>Matrix</code>
 
-The width (thickness) of any lines drawn.
+**Default Value**: <code>null</code>
+
+**Description:** The transform applied to the texture.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### miterLimit 
+**Type:** <code>number</code>
+
+**Default Value**: <code>10</code>
+
+**Description:** Miter limit.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### native 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** If true the lines will be draw using LINES instead of TRIANGLE_STRIP.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### texture 
+**Type:** <code>Texture</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** The texture to be used for the fill.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### visible 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** If the current fill is visible.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** The width (thickness) of any lines drawn.
 
 </article>
 
@@ -169,8 +195,10 @@ The width (thickness) of any lines drawn.
 ## Methods
 <article>
 
-### clone: <span><code>() -&#62; LineStyle</code></span>
-Clones the object.
+### clone 
+**Type:** <code>() -&#62; LineStyle</code>
+
+**Description:** Clones the object.
 
 #### Returns:
 | Type                   | Description |
@@ -183,8 +211,10 @@ Clones the object.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroy and don't use after this.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroy and don't use after this.
 
 </article>
 
@@ -193,8 +223,10 @@ Destroy and don't use after this.
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-Reset the line style to default.
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Reset the line style to default.
 
 </article>
 

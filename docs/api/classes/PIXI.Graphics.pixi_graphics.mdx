@@ -5,7 +5,12 @@ sidebar_label: "PIXI.Graphics"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/graphics](../modules/pixi_graphics).Graphics
+
+</div>
 
 
 The Graphics class is primarily used to render primitive shapes such as lines, circles and rectangles to the display, and to color and fill them. However, you can also use a Graphics object to build a list of primitives to use as a mask, or as a complex hitArea.
@@ -16,13 +21,12 @@ Once a GraphicsGeometry list is built, you can re-use it in other Geometry objec
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Graphics: <span><code>(geometry&#58; GraphicsGeometry) </code></span>
+### Constructor:
+<h4><code>new PIXI.Graphics(geometry&#58; GraphicsGeometry) </code></h4>
 
 #### Parameters:
 | Name     | Type                          | Default                | Description                                                              |
@@ -40,8 +44,10 @@ Once a GraphicsGeometry list is built, you can re-use it in other Geometry objec
 ## Members
 <article>
 
-### curves: <span><code>unknown</code></span>
-Graphics curves resolution settings. If `adaptive` flag is set to `true`, the resolution is calculated based on the curve's length to ensure better visual quality. Adaptive draw works with `bezierCurveTo` and `quadraticCurveTo`.
+### curves 
+**Type:** <code>unknown</code>
+
+**Description:** Graphics curves resolution settings. If `adaptive` flag is set to `true`, the resolution is calculated based on the curve's length to ensure better visual quality. Adaptive draw works with `bezierCurveTo` and `quadraticCurveTo`.
 
 </article>
 
@@ -50,22 +56,12 @@ Graphics curves resolution settings. If `adaptive` flag is set to `true`, the re
 
 <article>
 
-### adaptive: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### adaptive 
+**Type:** <code>boolean</code>
 
-flag indicating if the resolution should be adaptive
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### epsilon: <span><code>number</code></span>
-- **Default Value**: <code>0.0001</code>
-
-precision of the curve fitting
+**Description:** flag indicating if the resolution should be adaptive
 
 </article>
 
@@ -74,22 +70,12 @@ precision of the curve fitting
 
 <article>
 
-### maxLength: <span><code>number</code></span>
-- **Default Value**: <code>10</code>
+### epsilon 
+**Type:** <code>number</code>
 
-maximal length of a single segment of the curve (if adaptive = false, ignored)
+**Default Value**: <code>0.0001</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### maxSegments: <span><code>number</code></span>
-- **Default Value**: <code>2048</code>
-
-maximal number of segments in the curve (if adaptive = false, ignored)
+**Description:** precision of the curve fitting
 
 </article>
 
@@ -98,21 +84,12 @@ maximal number of segments in the curve (if adaptive = false, ignored)
 
 <article>
 
-### minSegments: <span><code>number</code></span>
-- **Default Value**: <code>8</code>
+### maxLength 
+**Type:** <code>number</code>
 
-minimal number of segments in the curve (if adaptive = false, ignored)
+**Default Value**: <code>10</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### _accessibleActive: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
-
+**Description:** maximal length of a single segment of the curve (if adaptive = false, ignored)
 
 </article>
 
@@ -121,8 +98,38 @@ minimal number of segments in the curve (if adaptive = false, ignored)
 
 <article>
 
-### _accessibleDiv: <span><code>boolean</code></span>
-- **Default Value**: <code>undefined</code>
+### maxSegments 
+**Type:** <code>number</code>
+
+**Default Value**: <code>2048</code>
+
+**Description:** maximal number of segments in the curve (if adaptive = false, ignored)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### minSegments 
+**Type:** <code>number</code>
+
+**Default Value**: <code>8</code>
+
+**Description:** minimal number of segments in the curve (if adaptive = false, ignored)
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### _accessibleActive 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
 
 
 </article>
@@ -132,8 +139,11 @@ minimal number of segments in the curve (if adaptive = false, ignored)
 
 <article>
 
-### _bounds: <span><code>Bounds</code></span>
-The bounds object, this is used to calculate and store the bounds of the displayObject.
+### _accessibleDiv 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>undefined</code>
+
 
 </article>
 
@@ -142,8 +152,10 @@ The bounds object, this is used to calculate and store the bounds of the display
 
 <article>
 
-### _localBounds: <span><code>Bounds</code></span>
-Local bounds object, swapped with `_bounds` when using `getLocalBounds()`.
+### _bounds 
+**Type:** <code>Bounds</code>
+
+**Description:** The bounds object, this is used to calculate and store the bounds of the displayObject.
 
 </article>
 
@@ -152,22 +164,10 @@ Local bounds object, swapped with `_bounds` when using `getLocalBounds()`.
 
 <article>
 
-### accessible: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### _localBounds 
+**Type:** <code>Bounds</code>
 
-Flag for if the object is accessible. If true AccessibilityManager will overlay a shadow div with attributes set
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### accessibleChildren: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
-
-Setting to false will prevent any children inside this container to be accessible. Defaults to true.
+**Description:** Local bounds object, swapped with `_bounds` when using `getLocalBounds()`.
 
 </article>
 
@@ -176,22 +176,12 @@ Setting to false will prevent any children inside this container to be accessibl
 
 <article>
 
-### accessibleHint: <span><code>string</code></span>
-- **Default Value**: <code>undefined</code>
+### accessible 
+**Type:** <code>boolean</code>
 
-Sets the aria-label attribute of the shadow div
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### accessiblePointerEvents: <span><code>string</code></span>
-- **Default Value**: <code>'auto'</code>
-
-Specify the pointer-events the accessible div will use Defaults to auto.
+**Description:** Flag for if the object is accessible. If true AccessibilityManager will overlay a shadow div with attributes set
 
 </article>
 
@@ -200,22 +190,12 @@ Specify the pointer-events the accessible div will use Defaults to auto.
 
 <article>
 
-### accessibleTitle: <span><code>?string</code></span>
-- **Default Value**: <code>undefined</code>
+### accessibleChildren 
+**Type:** <code>boolean</code>
 
-Sets the title attribute of the shadow div If accessibleTitle AND accessibleHint has not been this will default to 'displayObject [tabIndex]'
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### accessibleType: <span><code>string</code></span>
-- **Default Value**: <code>'button'</code>
-
-Specify the type of div the accessible layer is. Screen readers treat the element differently depending on this type. Defaults to button.
+**Description:** Setting to false will prevent any children inside this container to be accessible. Defaults to true.
 
 </article>
 
@@ -224,8 +204,12 @@ Specify the type of div the accessible layer is. Screen readers treat the elemen
 
 <article>
 
-### alpha: <span><code>number</code></span>
-The opacity of the object.
+### accessibleHint 
+**Type:** <code>string</code>
+
+**Default Value**: <code>undefined</code>
+
+**Description:** Sets the aria-label attribute of the shadow div
 
 </article>
 
@@ -234,8 +218,12 @@ The opacity of the object.
 
 <article>
 
-### angle: <span><code>number</code></span>
-The angle of the object in degrees. 'rotation' and 'angle' have the same effect on a display object; rotation is in radians, angle is in degrees.
+### accessiblePointerEvents 
+**Type:** <code>string</code>
+
+**Default Value**: <code>'auto'</code>
+
+**Description:** Specify the pointer-events the accessible div will use Defaults to auto.
 
 </article>
 
@@ -244,22 +232,12 @@ The angle of the object in degrees. 'rotation' and 'angle' have the same effect 
 
 <article>
 
-### blendMode: <span><code>BLEND_MODES</code></span>
-- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+### accessibleTitle 
+**Type:** <code>?string</code>
 
-The blend mode to be applied to the graphic shape. Apply a value of`PIXI.BLEND_MODES.NORMAL` to reset the blend mode. Note that, since each primitive in the GraphicsGeometry list is rendered sequentially, modes such as `PIXI.BLEND_MODES.ADD` and `PIXI.BLEND_MODES.MULTIPLY` will be applied per-primitive.
+**Default Value**: <code>undefined</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### cacheAsBitmap: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
-
-When cacheAsBitmap is set to true the graphics object will be rendered as if it was a sprite. This is useful if your graphics element does not change often, as it will speed up the rendering of the object in exchange for taking up texture memory. It is also useful if you need the graphics object to be anti-aliased, because it will be rendered using canvas. This is not recommended if you are constantly redrawing the graphics element.
+**Description:** Sets the title attribute of the shadow div If accessibleTitle AND accessibleHint has not been this will default to 'displayObject [tabIndex]'
 
 </article>
 
@@ -268,22 +246,12 @@ When cacheAsBitmap is set to true the graphics object will be rendered as if it 
 
 <article>
 
-### cacheAsBitmapMultisample: <span><code>number</code></span>
-- **Default Value**: <code>null</code>
+### accessibleType 
+**Type:** <code>string</code>
 
-The number of samples to use for cacheAsBitmap. If set to `null`, the renderer's sample count is used. If `cacheAsBitmap` is set to `true`, this will re-render with the new number of samples.
+**Default Value**: <code>'button'</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### cacheAsBitmapResolution: <span><code>number</code></span>
-- **Default Value**: <code>null</code>
-
-The resolution to use for cacheAsBitmap. By default this will use the renderer's resolution but can be overriden for performance. Lower values will reduce memory usage at the expense of render quality. A falsey value of `null` or `0` will default to the renderer's resolution. If `cacheAsBitmap` is set to `true`, this will re-render with the new resolution.
+**Description:** Specify the type of div the accessible layer is. Screen readers treat the element differently depending on this type. Defaults to button.
 
 </article>
 
@@ -292,8 +260,10 @@ The resolution to use for cacheAsBitmap. By default this will use the renderer's
 
 <article>
 
-### children: <span><code>T[]</code></span>
-The array of children of this container.
+### alpha 
+**Type:** <code>number</code>
+
+**Description:** The opacity of the object.
 
 </article>
 
@@ -302,8 +272,90 @@ The array of children of this container.
 
 <article>
 
-### cullable: <span><code>boolean</code></span>
-Should this object be rendered if the bounds of this object are out of frame?
+### angle 
+**Type:** <code>number</code>
+
+**Description:** The angle of the object in degrees. 'rotation' and 'angle' have the same effect on a display object; rotation is in radians, angle is in degrees.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### blendMode 
+**Type:** <code>BLEND_MODES</code>
+
+**Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
+
+**Description:** The blend mode to be applied to the graphic shape. Apply a value of`PIXI.BLEND_MODES.NORMAL` to reset the blend mode. Note that, since each primitive in the GraphicsGeometry list is rendered sequentially, modes such as `PIXI.BLEND_MODES.ADD` and `PIXI.BLEND_MODES.MULTIPLY` will be applied per-primitive.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cacheAsBitmap 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** When cacheAsBitmap is set to true the graphics object will be rendered as if it was a sprite. This is useful if your graphics element does not change often, as it will speed up the rendering of the object in exchange for taking up texture memory. It is also useful if you need the graphics object to be anti-aliased, because it will be rendered using canvas. This is not recommended if you are constantly redrawing the graphics element.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cacheAsBitmapMultisample 
+**Type:** <code>number</code>
+
+**Default Value**: <code>null</code>
+
+**Description:** The number of samples to use for cacheAsBitmap. If set to `null`, the renderer's sample count is used. If `cacheAsBitmap` is set to `true`, this will re-render with the new number of samples.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cacheAsBitmapResolution 
+**Type:** <code>number</code>
+
+**Default Value**: <code>null</code>
+
+**Description:** The resolution to use for cacheAsBitmap. By default this will use the renderer's resolution but can be overriden for performance. Lower values will reduce memory usage at the expense of render quality. A falsey value of `null` or `0` will default to the renderer's resolution. If `cacheAsBitmap` is set to `true`, this will re-render with the new resolution.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### children 
+**Type:** <code>T[]</code>
+
+**Description:** The array of children of this container.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### cullable 
+**Type:** <code>boolean</code>
+
+**Description:** Should this object be rendered if the bounds of this object are out of frame?
 Culling has no effect on whether updateTransform is called.
 
 </article>
@@ -313,8 +365,10 @@ Culling has no effect on whether updateTransform is called.
 
 <article>
 
-### cullArea: <span><code>Rectangle</code></span>
-If set, this shape is used for culling instead of the bounds of this object. It can improve the culling performance of objects with many children. The culling area is defined in local space.
+### cullArea 
+**Type:** <code>Rectangle</code>
+
+**Description:** If set, this shape is used for culling instead of the bounds of this object. It can improve the culling performance of objects with many children. The culling area is defined in local space.
 
 </article>
 
@@ -323,20 +377,12 @@ If set, this shape is used for culling instead of the bounds of this object. It 
 
 <article>
 
-### currentPath: <span><code>Polygon</code></span>
-- **Default Value**: <code>undefined</code>
+### currentPath 
+**Type:** <code>Polygon</code>
 
-Current path
+**Default Value**: <code>undefined</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### destroyed: <span><code>boolean</code></span>
-Readonly flag for destroyed display objects.
+**Description:** Current path
 
 </article>
 
@@ -345,8 +391,10 @@ Readonly flag for destroyed display objects.
 
 <article>
 
-### fill: <span><code>FillStyle</code></span>
-The current fill style.
+### destroyed 
+**Type:** <code>boolean</code>
+
+**Description:** Readonly flag for destroyed display objects.
 
 </article>
 
@@ -355,8 +403,22 @@ The current fill style.
 
 <article>
 
-### filterArea: <span><code>Rectangle</code></span>
-The area the filter is applied to. This is used as more of an optimization rather than figuring out the dimensions of the displayObject each frame you can set this rectangle.
+### fill 
+**Type:** <code>FillStyle</code>
+
+**Description:** The current fill style.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### filterArea 
+**Type:** <code>Rectangle</code>
+
+**Description:** The area the filter is applied to. This is used as more of an optimization rather than figuring out the dimensions of the displayObject each frame you can set this rectangle.
 
 Also works as an interaction mask.
 
@@ -367,8 +429,10 @@ Also works as an interaction mask.
 
 <article>
 
-### filters: <span><code>Filter[] &#124; null</code></span>
-Sets the filters for the displayObject. IMPORTANT&#58; This is a WebGL only feature and will be ignored by the canvas renderer. To remove filters simply set this property to `'null'`.
+### filters 
+**Type:** <code>Filter[] &#124; null</code>
+
+**Description:** Sets the filters for the displayObject. IMPORTANT&#58; This is a WebGL only feature and will be ignored by the canvas renderer. To remove filters simply set this property to `'null'`.
 
 </article>
 
@@ -377,8 +441,10 @@ Sets the filters for the displayObject. IMPORTANT&#58; This is a WebGL only feat
 
 <article>
 
-### geometry: <span><code>GraphicsGeometry</code></span>
-Includes vertex positions, face indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of passing all this data to the GPU. Can be shared between multiple Mesh or Graphics objects.
+### geometry 
+**Type:** <code>GraphicsGeometry</code>
+
+**Description:** Includes vertex positions, face indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of passing all this data to the GPU. Can be shared between multiple Mesh or Graphics objects.
 
 </article>
 
@@ -387,8 +453,10 @@ Includes vertex positions, face indices, normals, colors, UVs, and custom attrib
 
 <article>
 
-### height: <span><code>number</code></span>
-The height of the Container, setting this will actually modify the scale to achieve the value set.
+### height 
+**Type:** <code>number</code>
+
+**Description:** The height of the Container, setting this will actually modify the scale to achieve the value set.
 
 </article>
 
@@ -397,10 +465,13 @@ The height of the Container, setting this will actually modify the scale to achi
 
 <article>
 
-### hitArea: <span><code>PIXI.IHitArea</code></span>
-- **Default Value**: <code>undefined</code>
+### hitArea 
+**Type:** <code>PIXI.IHitArea</code>
 
-Interaction shape. Children will be hit first, then this shape will be checked. Setting this will cause this shape to be checked in hit tests rather than the displayObject's bounds.
+**Default Value**: <code>undefined</code>
+
+**Description:** Interaction shape. Children will be hit first, then this shape will be checked. Setting this will cause this shape to be checked in hit tests rather than the displayObject's bounds.
+
 
 ```js
  import { Rectangle, Sprite } from 'pixi.js';
@@ -418,14 +489,17 @@ Interaction shape. Children will be hit first, then this shape will be checked. 
 
 <article>
 
-### interactive: <span><code>unknown</code></span>
-Enable interaction events for the DisplayObject. Touch, pointer and mouse There is 4 types of interaction settings&#58;
+### interactive 
+**Type:** <code>unknown</code>
+
+**Description:** Enable interaction events for the DisplayObject. Touch, pointer and mouse There is 4 types of interaction settings&#58;
 
 * `'none'`&#58; Ignores all interaction events, even on its children.
 * `'passive'`&#58; Does not emit events and ignores all hit testing on itself and non-interactive children. Interactive children will still emit events.
 * `'auto'`&#58; Does not emit events and but is hit tested if parent is interactive. Same as `interactive = false` in v7
 * `'static'`&#58; Emit events and is hit tested. Same as `interaction = true` in v7
 * `'dynamic'`&#58; Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving
+
 
 ```js
  import { Sprite } from 'pixi.js';
@@ -445,20 +519,12 @@ Enable interaction events for the DisplayObject. Touch, pointer and mouse There 
 
 <article>
 
-### interactiveChildren: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### interactiveChildren 
+**Type:** <code>boolean</code>
 
-Determines if the children to the displayObject can be clicked/touched Setting this to false allows PixiJS to bypass a recursive `hitTest` function
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### isMask: <span><code>boolean</code></span>
-Does any other displayObject use this object as a mask?
+**Description:** Determines if the children to the displayObject can be clicked/touched Setting this to false allows PixiJS to bypass a recursive `hitTest` function
 
 </article>
 
@@ -467,8 +533,10 @@ Does any other displayObject use this object as a mask?
 
 <article>
 
-### isSprite: <span><code>boolean</code></span>
-Used to fast check if a sprite is.. a sprite!
+### isMask 
+**Type:** <code>boolean</code>
+
+**Description:** Does any other displayObject use this object as a mask?
 
 </article>
 
@@ -477,8 +545,10 @@ Used to fast check if a sprite is.. a sprite!
 
 <article>
 
-### line: <span><code>LineStyle</code></span>
-The current line style.
+### isSprite 
+**Type:** <code>boolean</code>
+
+**Description:** Used to fast check if a sprite is.. a sprite!
 
 </article>
 
@@ -487,8 +557,10 @@ The current line style.
 
 <article>
 
-### localTransform: <span><code>Matrix</code></span>
-Current transform of the object based on local factors&#58; position, scale, other stuff.
+### line 
+**Type:** <code>LineStyle</code>
+
+**Description:** The current line style.
 
 </article>
 
@@ -497,10 +569,25 @@ Current transform of the object based on local factors&#58; position, scale, oth
 
 <article>
 
-### mask: <span><code>Container &#124; MaskData &#124; null</code></span>
-Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it. In PixiJS a regular mask must be a [PIXI.Graphics](../classes/PIXI.Graphics.pixi_graphics) or a [PIXI.Sprite](../classes/PIXI.Sprite.pixi_sprite) object. This allows for much faster masking in canvas as it utilities shape clipping. Furthermore, a mask of an object must be in the subtree of its parent. Otherwise, `getLocalBounds` may calculate incorrect bounds, which makes the container's width and height wrong. To remove a mask, set this property to `null`.
+### localTransform 
+**Type:** <code>Matrix</code>
+
+**Description:** Current transform of the object based on local factors&#58; position, scale, other stuff.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### mask 
+**Type:** <code>Container &#124; MaskData &#124; null</code>
+
+**Description:** Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it. In PixiJS a regular mask must be a [PIXI.Graphics](../classes/PIXI.Graphics.pixi_graphics) or a [PIXI.Sprite](../classes/PIXI.Sprite.pixi_sprite) object. This allows for much faster masking in canvas as it utilities shape clipping. Furthermore, a mask of an object must be in the subtree of its parent. Otherwise, `getLocalBounds` may calculate incorrect bounds, which makes the container's width and height wrong. To remove a mask, set this property to `null`.
 
 For sprite mask both alpha and red channel are used. Black mask is the same as transparent mask.
+
 
 ```js
  import { Graphics, Sprite } from 'pixi.js';
@@ -522,10 +609,12 @@ For sprite mask both alpha and red channel are used. Black mask is the same as t
 
 <article>
 
-### name: <span><code>string</code></span>
-- **Default Value**: <code>undefined</code>
+### name 
+**Type:** <code>string</code>
 
-The instance name of the object.
+**Default Value**: <code>undefined</code>
+
+**Description:** The instance name of the object.
 
 </article>
 
@@ -534,10 +623,13 @@ The instance name of the object.
 
 <article>
 
-### onclick: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onclick 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `click` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `click` event.
+
 
 ```js
 this.onclick = (event) => {
@@ -553,10 +645,13 @@ this.onclick = (event) => {
 
 <article>
 
-### onglobalmousemove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onglobalmousemove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `globalmousemove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `globalmousemove` event.
+
 
 ```js
 this.onglobalmousemove = (event) => {
@@ -572,10 +667,13 @@ this.onglobalmousemove = (event) => {
 
 <article>
 
-### onglobalpointermove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onglobalpointermove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `globalpointermove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `globalpointermove` event.
+
 
 ```js
 this.onglobalpointermove = (event) => {
@@ -591,10 +689,13 @@ this.onglobalpointermove = (event) => {
 
 <article>
 
-### onglobaltouchmove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onglobaltouchmove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `globaltouchmove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `globaltouchmove` event.
+
 
 ```js
 this.onglobaltouchmove = (event) => {
@@ -610,10 +711,13 @@ this.onglobaltouchmove = (event) => {
 
 <article>
 
-### onmousedown: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmousedown 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mousedown` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mousedown` event.
+
 
 ```js
 this.onmousedown = (event) => {
@@ -629,10 +733,13 @@ this.onmousedown = (event) => {
 
 <article>
 
-### onmouseenter: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseenter 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseenter` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseenter` event.
+
 
 ```js
 this.onmouseenter = (event) => {
@@ -648,10 +755,13 @@ this.onmouseenter = (event) => {
 
 <article>
 
-### onmouseleave: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseleave 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseleave` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseleave` event.
+
 
 ```js
 this.onmouseleave = (event) => {
@@ -667,10 +777,13 @@ this.onmouseleave = (event) => {
 
 <article>
 
-### onmousemove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmousemove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mousemove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mousemove` event.
+
 
 ```js
 this.onmousemove = (event) => {
@@ -686,10 +799,13 @@ this.onmousemove = (event) => {
 
 <article>
 
-### onmouseout: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseout 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseout` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseout` event.
+
 
 ```js
 this.onmouseout = (event) => {
@@ -705,10 +821,13 @@ this.onmouseout = (event) => {
 
 <article>
 
-### onmouseover: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseover 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseover` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseover` event.
+
 
 ```js
 this.onmouseover = (event) => {
@@ -724,10 +843,13 @@ this.onmouseover = (event) => {
 
 <article>
 
-### onmouseup: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseup 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseup` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseup` event.
+
 
 ```js
 this.onmouseup = (event) => {
@@ -743,10 +865,13 @@ this.onmouseup = (event) => {
 
 <article>
 
-### onmouseupoutside: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onmouseupoutside 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `mouseupoutside` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `mouseupoutside` event.
+
 
 ```js
 this.onmouseupoutside = (event) => {
@@ -762,10 +887,13 @@ this.onmouseupoutside = (event) => {
 
 <article>
 
-### onpointercancel: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointercancel 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointercancel` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointercancel` event.
+
 
 ```js
 this.onpointercancel = (event) => {
@@ -781,10 +909,13 @@ this.onpointercancel = (event) => {
 
 <article>
 
-### onpointerdown: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerdown 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerdown` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerdown` event.
+
 
 ```js
 this.onpointerdown = (event) => {
@@ -800,10 +931,13 @@ this.onpointerdown = (event) => {
 
 <article>
 
-### onpointerenter: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerenter 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerenter` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerenter` event.
+
 
 ```js
 this.onpointerenter = (event) => {
@@ -819,10 +953,13 @@ this.onpointerenter = (event) => {
 
 <article>
 
-### onpointerleave: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerleave 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerleave` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerleave` event.
+
 
 ```js
 this.onpointerleave = (event) => {
@@ -838,10 +975,13 @@ this.onpointerleave = (event) => {
 
 <article>
 
-### onpointermove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointermove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointermove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointermove` event.
+
 
 ```js
 this.onpointermove = (event) => {
@@ -857,10 +997,13 @@ this.onpointermove = (event) => {
 
 <article>
 
-### onpointerout: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerout 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerout` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerout` event.
+
 
 ```js
 this.onpointerout = (event) => {
@@ -876,10 +1019,13 @@ this.onpointerout = (event) => {
 
 <article>
 
-### onpointerover: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerover 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerover` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerover` event.
+
 
 ```js
 this.onpointerover = (event) => {
@@ -895,10 +1041,13 @@ this.onpointerover = (event) => {
 
 <article>
 
-### onpointertap: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointertap 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointertap` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointertap` event.
+
 
 ```js
 this.onpointertap = (event) => {
@@ -914,10 +1063,13 @@ this.onpointertap = (event) => {
 
 <article>
 
-### onpointerup: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerup 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerup` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerup` event.
+
 
 ```js
 this.onpointerup = (event) => {
@@ -933,10 +1085,13 @@ this.onpointerup = (event) => {
 
 <article>
 
-### onpointerupoutside: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onpointerupoutside 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `pointerupoutside` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `pointerupoutside` event.
+
 
 ```js
 this.onpointerupoutside = (event) => {
@@ -952,10 +1107,13 @@ this.onpointerupoutside = (event) => {
 
 <article>
 
-### onrightclick: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onrightclick 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `rightclick` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `rightclick` event.
+
 
 ```js
 this.onrightclick = (event) => {
@@ -971,10 +1129,13 @@ this.onrightclick = (event) => {
 
 <article>
 
-### onrightdown: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onrightdown 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `rightdown` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `rightdown` event.
+
 
 ```js
 this.onrightdown = (event) => {
@@ -990,10 +1151,13 @@ this.onrightdown = (event) => {
 
 <article>
 
-### onrightup: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onrightup 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `rightup` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `rightup` event.
+
 
 ```js
 this.onrightup = (event) => {
@@ -1009,10 +1173,13 @@ this.onrightup = (event) => {
 
 <article>
 
-### onrightupoutside: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onrightupoutside 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `rightupoutside` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `rightupoutside` event.
+
 
 ```js
 this.onrightupoutside = (event) => {
@@ -1028,10 +1195,13 @@ this.onrightupoutside = (event) => {
 
 <article>
 
-### ontap: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontap 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `tap` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `tap` event.
+
 
 ```js
 this.ontap = (event) => {
@@ -1047,10 +1217,13 @@ this.ontap = (event) => {
 
 <article>
 
-### ontouchcancel: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontouchcancel 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `touchcancel` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `touchcancel` event.
+
 
 ```js
 this.ontouchcancel = (event) => {
@@ -1066,10 +1239,13 @@ this.ontouchcancel = (event) => {
 
 <article>
 
-### ontouchend: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontouchend 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `touchend` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `touchend` event.
+
 
 ```js
 this.ontouchend = (event) => {
@@ -1085,10 +1261,13 @@ this.ontouchend = (event) => {
 
 <article>
 
-### ontouchendoutside: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontouchendoutside 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `touchendoutside` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `touchendoutside` event.
+
 
 ```js
 this.ontouchendoutside = (event) => {
@@ -1104,10 +1283,13 @@ this.ontouchendoutside = (event) => {
 
 <article>
 
-### ontouchmove: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontouchmove 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `touchmove` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `touchmove` event.
+
 
 ```js
 this.ontouchmove = (event) => {
@@ -1123,10 +1305,13 @@ this.ontouchmove = (event) => {
 
 <article>
 
-### ontouchstart: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### ontouchstart 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `touchstart` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `touchstart` event.
+
 
 ```js
 this.ontouchstart = (event) => {
@@ -1142,10 +1327,13 @@ this.ontouchstart = (event) => {
 
 <article>
 
-### onwheel: <span><code>unknown</code></span>
-- **Default Value**: <code>null</code>
+### onwheel 
+**Type:** <code>unknown</code>
 
-Property-based event handler for the `wheel` event.
+**Default Value**: <code>null</code>
+
+**Description:** Property-based event handler for the `wheel` event.
+
 
 ```js
 this.onwheel = (event) => {
@@ -1161,8 +1349,10 @@ this.onwheel = (event) => {
 
 <article>
 
-### parent: <span><code>Container</code></span>
-The display object container that contains this display object.
+### parent 
+**Type:** <code>Container</code>
+
+**Description:** The display object container that contains this display object.
 
 </article>
 
@@ -1171,8 +1361,10 @@ The display object container that contains this display object.
 
 <article>
 
-### pivot: <span><code>ObservablePoint</code></span>
-The center of rotation, scaling, and skewing for this display object in its local space. The `position`is the projection of `pivot` in the parent's local space.
+### pivot 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The center of rotation, scaling, and skewing for this display object in its local space. The `position`is the projection of `pivot` in the parent's local space.
 
 By default, the pivot is the origin (0, 0).
 
@@ -1183,20 +1375,12 @@ By default, the pivot is the origin (0, 0).
 
 <article>
 
-### pluginName: <span><code>string</code></span>
-- **Default Value**: <code>"batch"</code>
+### pluginName 
+**Type:** <code>string</code>
 
-Renderer plugin for batching
+**Default Value**: <code>"batch"</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### position: <span><code>ObservablePoint</code></span>
-The coordinate of the object relative to the local coordinates of the parent.
+**Description:** Renderer plugin for batching
 
 </article>
 
@@ -1205,8 +1389,22 @@ The coordinate of the object relative to the local coordinates of the parent.
 
 <article>
 
-### renderable: <span><code>boolean</code></span>
-Can this object be rendered, if false the object will not be drawn but the updateTransform methods will still be called.
+### position 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The coordinate of the object relative to the local coordinates of the parent.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderable 
+**Type:** <code>boolean</code>
+
+**Description:** Can this object be rendered, if false the object will not be drawn but the updateTransform methods will still be called.
 
 Only affects recursive calls from parent. You can ask for bounds manually.
 
@@ -1217,8 +1415,10 @@ Only affects recursive calls from parent. You can ask for bounds manually.
 
 <article>
 
-### rotation: <span><code>number</code></span>
-The rotation of the object in radians. 'rotation' and 'angle' have the same effect on a display object; rotation is in radians, angle is in degrees.
+### rotation 
+**Type:** <code>number</code>
+
+**Description:** The rotation of the object in radians. 'rotation' and 'angle' have the same effect on a display object; rotation is in radians, angle is in degrees.
 
 </article>
 
@@ -1227,8 +1427,10 @@ The rotation of the object in radians. 'rotation' and 'angle' have the same effe
 
 <article>
 
-### scale: <span><code>ObservablePoint</code></span>
-The scale factors of this object along the local coordinate axes.
+### scale 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The scale factors of this object along the local coordinate axes.
 The default scale is (1, 1).
 
 </article>
@@ -1238,20 +1440,12 @@ The default scale is (1, 1).
 
 <article>
 
-### shader: <span><code>Shader</code></span>
-- **Default Value**: <code>undefined</code>
+### shader 
+**Type:** <code>Shader</code>
 
-Represents the vertex and fragment shaders that processes the geometry and runs on the GPU. Can be shared between multiple Graphics objects.
+**Default Value**: <code>undefined</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### skew: <span><code>ObservablePoint</code></span>
-The skew factor for the object in radians.
+**Description:** Represents the vertex and fragment shaders that processes the geometry and runs on the GPU. Can be shared between multiple Graphics objects.
 
 </article>
 
@@ -1260,8 +1454,22 @@ The skew factor for the object in radians.
 
 <article>
 
-### sortableChildren: <span><code>boolean</code></span>
-If set to true, the container will sort its children by `zIndex` value when `updateTransform()` is called, or manually if `sortChildren()` is called.
+### skew 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The skew factor for the object in radians.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### sortableChildren 
+**Type:** <code>boolean</code>
+
+**Description:** If set to true, the container will sort its children by `zIndex` value when `updateTransform()` is called, or manually if `sortChildren()` is called.
 
 This actually changes the order of elements in the array, so should be treated as a basic solution that is not performant compared to other solutions, such as [PixiJS Layers](https&#58;//github.com/pixijs/layers)
 
@@ -1274,8 +1482,10 @@ Also be aware of that this may not work nicely with the `addChildAt()` function,
 
 <article>
 
-### sortDirty: <span><code>boolean</code></span>
-Should children be sorted by zIndex at the next updateTransform call.
+### sortDirty 
+**Type:** <code>boolean</code>
+
+**Description:** Should children be sorted by zIndex at the next updateTransform call.
 Will get automatically set to true if a new child is added, or if a child's zIndex changes.
 
 </article>
@@ -1285,20 +1495,12 @@ Will get automatically set to true if a new child is added, or if a child's zInd
 
 <article>
 
-### tint: <span><code>number</code></span>
-- **Default Value**: <code>0xFFFFFF</code>
+### tint 
+**Type:** <code>number</code>
 
-The tint applied to each graphic shape. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
+**Default Value**: <code>0xFFFFFF</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### transform: <span><code>Transform</code></span>
-World transform and local transform of this object. This will become read-only later, please do not assign anything there unless you know what are you doing.
+**Description:** The tint applied to each graphic shape. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
 
 </article>
 
@@ -1307,8 +1509,22 @@ World transform and local transform of this object. This will become read-only l
 
 <article>
 
-### visible: <span><code>boolean</code></span>
-The visibility of the object. If false the object will not be drawn, and the updateTransform function will not be called.
+### transform 
+**Type:** <code>Transform</code>
+
+**Description:** World transform and local transform of this object. This will become read-only later, please do not assign anything there unless you know what are you doing.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### visible 
+**Type:** <code>boolean</code>
+
+**Description:** The visibility of the object. If false the object will not be drawn, and the updateTransform function will not be called.
 
 Only affects recursive calls from parent. You can ask for bounds or call updateTransform manually.
 
@@ -1319,8 +1535,10 @@ Only affects recursive calls from parent. You can ask for bounds or call updateT
 
 <article>
 
-### width: <span><code>number</code></span>
-The width of the Container, setting this will actually modify the scale to achieve the value set.
+### width 
+**Type:** <code>number</code>
+
+**Description:** The width of the Container, setting this will actually modify the scale to achieve the value set.
 
 </article>
 
@@ -1329,8 +1547,10 @@ The width of the Container, setting this will actually modify the scale to achie
 
 <article>
 
-### worldAlpha: <span><code>number</code></span>
-The multiplied alpha of the displayObject.
+### worldAlpha 
+**Type:** <code>number</code>
+
+**Description:** The multiplied alpha of the displayObject.
 
 </article>
 
@@ -1339,8 +1559,10 @@ The multiplied alpha of the displayObject.
 
 <article>
 
-### worldTransform: <span><code>Matrix</code></span>
-Current transform of the object based on world (parent) factors.
+### worldTransform 
+**Type:** <code>Matrix</code>
+
+**Description:** Current transform of the object based on world (parent) factors.
 
 </article>
 
@@ -1349,8 +1571,10 @@ Current transform of the object based on world (parent) factors.
 
 <article>
 
-### worldVisible: <span><code>boolean</code></span>
-Indicates if the object is globally visible.
+### worldVisible 
+**Type:** <code>boolean</code>
+
+**Description:** Indicates if the object is globally visible.
 
 </article>
 
@@ -1359,8 +1583,10 @@ Indicates if the object is globally visible.
 
 <article>
 
-### x: <span><code>number</code></span>
-The position of the displayObject on the x axis relative to the local coordinates of the parent. An alias to position.x
+### x 
+**Type:** <code>number</code>
+
+**Description:** The position of the displayObject on the x axis relative to the local coordinates of the parent. An alias to position.x
 
 </article>
 
@@ -1369,8 +1595,10 @@ The position of the displayObject on the x axis relative to the local coordinate
 
 <article>
 
-### y: <span><code>number</code></span>
-The position of the displayObject on the y axis relative to the local coordinates of the parent. An alias to position.y
+### y 
+**Type:** <code>number</code>
+
+**Description:** The position of the displayObject on the y axis relative to the local coordinates of the parent. An alias to position.y
 
 </article>
 
@@ -1379,8 +1607,10 @@ The position of the displayObject on the y axis relative to the local coordinate
 
 <article>
 
-### zIndex: <span><code>number</code></span>
-The zIndex of the displayObject.
+### zIndex 
+**Type:** <code>number</code>
+
+**Description:** The zIndex of the displayObject.
 If a container has the sortableChildren property set to true, children will be automatically sorted by zIndex value; a higher value will mean it will be moved towards the end of the array, and thus rendered on top of other display objects within the same container.
 
 </article>
@@ -1390,8 +1620,10 @@ If a container has the sortableChildren property set to true, children will be a
 
 <article>
 
-### _boundsID: <span><code>number</code></span>
-Flags the cached bounds as dirty.
+### _boundsID 
+**Type:** <code>number</code>
+
+**Description:** Flags the cached bounds as dirty.
 
 </article>
 
@@ -1400,8 +1632,10 @@ Flags the cached bounds as dirty.
 
 <article>
 
-### _boundsRect: <span><code>Rectangle</code></span>
-Cache of this display-object's bounds-rectangle.
+### _boundsRect 
+**Type:** <code>Rectangle</code>
+
+**Description:** Cache of this display-object's bounds-rectangle.
 
 </article>
 
@@ -1410,8 +1644,10 @@ Cache of this display-object's bounds-rectangle.
 
 <article>
 
-### _destroyed: <span><code>boolean</code></span>
-If the object has been destroyed via destroy(). If true, it should not be used.
+### _destroyed 
+**Type:** <code>boolean</code>
+
+**Description:** If the object has been destroyed via destroy(). If true, it should not be used.
 
 </article>
 
@@ -1420,8 +1656,10 @@ If the object has been destroyed via destroy(). If true, it should not be used.
 
 <article>
 
-### _enabledFilters: <span><code>Filter[]</code></span>
-Currently enabled filters.
+### _enabledFilters 
+**Type:** <code>Filter[]</code>
+
+**Description:** Currently enabled filters.
 
 </article>
 
@@ -1430,8 +1668,10 @@ Currently enabled filters.
 
 <article>
 
-### _fillStyle: <span><code>FillStyle</code></span>
-Current fill style.
+### _fillStyle 
+**Type:** <code>FillStyle</code>
+
+**Description:** Current fill style.
 
 </article>
 
@@ -1440,20 +1680,12 @@ Current fill style.
 
 <article>
 
-### _holeMode: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### _holeMode 
+**Type:** <code>boolean</code>
 
-Current hole mode is enabled.
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### _lastSortedIndex: <span><code>number</code></span>
-Which index in the children array the display component was before the previous zIndex sort. Used by containers to help sort objects with the same zIndex, by using previous array index as the decider.
+**Description:** Current hole mode is enabled.
 
 </article>
 
@@ -1462,8 +1694,10 @@ Which index in the children array the display component was before the previous 
 
 <article>
 
-### _lineStyle: <span><code>LineStyle</code></span>
-Current line style.
+### _lastSortedIndex 
+**Type:** <code>number</code>
+
+**Description:** Which index in the children array the display component was before the previous zIndex sort. Used by containers to help sort objects with the same zIndex, by using previous array index as the decider.
 
 </article>
 
@@ -1472,8 +1706,10 @@ Current line style.
 
 <article>
 
-### _localBoundsRect: <span><code>Rectangle</code></span>
-Cache of this display-object's local-bounds rectangle.
+### _lineStyle 
+**Type:** <code>LineStyle</code>
+
+**Description:** Current line style.
 
 </article>
 
@@ -1482,8 +1718,10 @@ Cache of this display-object's local-bounds rectangle.
 
 <article>
 
-### _mask: <span><code>Container &#124; MaskData</code></span>
-The original, cached mask of the object.
+### _localBoundsRect 
+**Type:** <code>Rectangle</code>
+
+**Description:** Cache of this display-object's local-bounds rectangle.
 
 </article>
 
@@ -1492,19 +1730,10 @@ The original, cached mask of the object.
 
 <article>
 
-### _matrix: <span><code>Matrix</code></span>
-- **Default Value**: <code>undefined</code>
+### _mask 
+**Type:** <code>Container &#124; MaskData</code>
 
-Current shape transform matrix.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### _tempDisplayObjectParent: <span><code>PIXI.Container</code></span>
+**Description:** The original, cached mask of the object.
 
 </article>
 
@@ -1513,8 +1742,12 @@ Current shape transform matrix.
 
 <article>
 
-### _zIndex: <span><code>number</code></span>
-The zIndex of the displayObject. A higher value will mean it will be rendered on top of other displayObjects within the same container.
+### _matrix 
+**Type:** <code>Matrix</code>
+
+**Default Value**: <code>undefined</code>
+
+**Description:** Current shape transform matrix.
 
 </article>
 
@@ -1523,10 +1756,9 @@ The zIndex of the displayObject. A higher value will mean it will be rendered on
 
 <article>
 
-### batchDirty: <span><code>number</code></span>
-- **Default Value**: <code>-1</code>
+### _tempDisplayObjectParent 
+**Type:** <code>PIXI.Container</code>
 
-Update dirty for limiting calculating batches.
 
 </article>
 
@@ -1535,8 +1767,10 @@ Update dirty for limiting calculating batches.
 
 <article>
 
-### batches: <span><code>Array&#60;IGraphicsBatchElement&#62;</code></span>
-A collections of batches! These can be drawn by the renderer batch system.
+### _zIndex 
+**Type:** <code>number</code>
+
+**Description:** The zIndex of the displayObject. A higher value will mean it will be rendered on top of other displayObjects within the same container.
 
 </article>
 
@@ -1545,10 +1779,12 @@ A collections of batches! These can be drawn by the renderer batch system.
 
 <article>
 
-### batchTint: <span><code>number</code></span>
-- **Default Value**: <code>-1</code>
+### batchDirty 
+**Type:** <code>number</code>
 
-Update dirty for limiting calculating tints for batches.
+**Default Value**: <code>-1</code>
+
+**Description:** Update dirty for limiting calculating batches.
 
 </article>
 
@@ -1557,10 +1793,38 @@ Update dirty for limiting calculating tints for batches.
 
 <article>
 
-### vertexData: <span><code>Float32Array</code></span>
-- **Default Value**: <code>undefined</code>
+### batches 
+**Type:** <code>Array&#60;IGraphicsBatchElement&#62;</code>
 
-Copy of the object vertex data.
+**Description:** A collections of batches! These can be drawn by the renderer batch system.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### batchTint 
+**Type:** <code>number</code>
+
+**Default Value**: <code>-1</code>
+
+**Description:** Update dirty for limiting calculating tints for batches.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### vertexData 
+**Type:** <code>Float32Array</code>
+
+**Default Value**: <code>undefined</code>
+
+**Description:** Copy of the object vertex data.
 
 </article>
 
@@ -1571,8 +1835,10 @@ Copy of the object vertex data.
 ## Methods
 <article>
 
-### addChild: <span><code>(children&#58; PIXI.DisplayObject) -&#62; PIXI.DisplayObject</code></span>
-Adds one or more children to the container.
+### addChild 
+**Type:** <code>(children&#58; PIXI.DisplayObject) -&#62; PIXI.DisplayObject</code>
+
+**Description:** Adds one or more children to the container.
 Multiple items can be added like so&#58; `myContainer.addChild(thingOne, thingTwo, thingThree)`
 
 #### Parameters:
@@ -1590,8 +1856,10 @@ Multiple items can be added like so&#58; `myContainer.addChild(thingOne, thingTw
 
 <article>
 
-### addChildAt: <span><code>(child&#58; PIXI.DisplayObject, index&#58; number) -&#62; PIXI.DisplayObject</code></span>
-Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
+### addChildAt 
+**Type:** <code>(child&#58; PIXI.DisplayObject, index&#58; number) -&#62; PIXI.DisplayObject</code>
+
+**Description:** Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
 
 #### Parameters:
 | Name  | Type                            | Description                     |
@@ -1609,8 +1877,11 @@ Adds a child to the container at a specified index. If the index is out of bound
 
 <article>
 
-### addEventListener: <span><code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; AddListenerOptions) -&#62; </code></span>
-Unlike `on` or `addListener` which are methods from EventEmitter, `addEventListener`seeks to be compatible with the DOM's `addEventListener` with support for options.**IMPORTANT&#58;** _Only_ available if using the `@pixi/events` package.
+### addEventListener 
+**Type:** <code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; AddListenerOptions) -&#62; </code>
+
+**Description:** Unlike `on` or `addListener` which are methods from EventEmitter, `addEventListener`seeks to be compatible with the DOM's `addEventListener` with support for options.**IMPORTANT&#58;** _Only_ available if using the `@pixi/events` package.
+
 
 ```js
  // Tell the user whether they did a single, double, triple, or nth click.
@@ -1652,8 +1923,10 @@ Unlike `on` or `addListener` which are methods from EventEmitter, `addEventListe
 
 <article>
 
-### arc: <span><code>(cx&#58; number, cy&#58; number, radius&#58; number, startAngle&#58; number, endAngle&#58; number, anticlockwise&#58; boolean) -&#62; this</code></span>
-The arc method creates an arc/curve (used to create circles, or parts of circles).
+### arc 
+**Type:** <code>(cx&#58; number, cy&#58; number, radius&#58; number, startAngle&#58; number, endAngle&#58; number, anticlockwise&#58; boolean) -&#62; this</code>
+
+**Description:** The arc method creates an arc/curve (used to create circles, or parts of circles).
 
 #### Parameters:
 | Name          | Type                 | Description                                                                                                                                                |
@@ -1675,8 +1948,10 @@ The arc method creates an arc/curve (used to create circles, or parts of circles
 
 <article>
 
-### arcTo: <span><code>(x1&#58; number, y1&#58; number, x2&#58; number, y2&#58; number, radius&#58; number) -&#62; this</code></span>
-The `arcTo` method creates an arc/curve between two tangents on the canvas. The first tangent is from the start point to the first control point, and the second tangent is from the first control point to the second control point. Note that the second control point is not necessarily the end point of the arc.
+### arcTo 
+**Type:** <code>(x1&#58; number, y1&#58; number, x2&#58; number, y2&#58; number, radius&#58; number) -&#62; this</code>
+
+**Description:** The `arcTo` method creates an arc/curve between two tangents on the canvas. The first tangent is from the start point to the first control point, and the second tangent is from the first control point to the second control point. Note that the second control point is not necessarily the end point of the arc.
 
 "borrowed" from https&#58;//code.google.com/p/fxcanvas/ - thanks google!
 
@@ -1699,8 +1974,10 @@ The `arcTo` method creates an arc/curve between two tangents on the canvas. The 
 
 <article>
 
-### beginFill: <span><code>(color&#58; PIXI.ColorSource, alpha&#58; number) -&#62; this</code></span>
-Specifies a simple one-color fill that subsequent calls to other Graphics methods (such as lineTo() or drawCircle()) use when drawing.
+### beginFill 
+**Type:** <code>(color&#58; PIXI.ColorSource, alpha&#58; number) -&#62; this</code>
+
+**Description:** Specifies a simple one-color fill that subsequent calls to other Graphics methods (such as lineTo() or drawCircle()) use when drawing.
 
 #### Parameters:
 | Name  | Type                          | Description                                            |
@@ -1718,8 +1995,10 @@ Specifies a simple one-color fill that subsequent calls to other Graphics method
 
 <article>
 
-### beginHole: <span><code>() -&#62; this</code></span>
-Begin adding holes to the last draw shape IMPORTANT&#58; holes must be fully inside a shape to work Also weirdness ensues if holes overlap! Ellipses, Circles, Rectangles and Rounded Rectangles cannot be holes or host for holes in CanvasRenderer, please use `moveTo` `lineTo`, `quadraticCurveTo` if you rely on pixi-legacy bundle.
+### beginHole 
+**Type:** <code>() -&#62; this</code>
+
+**Description:** Begin adding holes to the last draw shape IMPORTANT&#58; holes must be fully inside a shape to work Also weirdness ensues if holes overlap! Ellipses, Circles, Rectangles and Rounded Rectangles cannot be holes or host for holes in CanvasRenderer, please use `moveTo` `lineTo`, `quadraticCurveTo` if you rely on pixi-legacy bundle.
 
 #### Returns:
 | Type              | Description       |
@@ -1732,8 +2011,10 @@ Begin adding holes to the last draw shape IMPORTANT&#58; holes must be fully ins
 
 <article>
 
-### beginTextureFill: <span><code>(options&#58; IFillStyleOptions) -&#62; PIXI.Graphics</code></span>
-Begin the texture fill. Note&#58; The wrap mode of the texture is forced to REPEAT on render.
+### beginTextureFill 
+**Type:** <code>(options&#58; IFillStyleOptions) -&#62; PIXI.Graphics</code>
+
+**Description:** Begin the texture fill. Note&#58; The wrap mode of the texture is forced to REPEAT on render.
 
 #### Parameters:
 | Name            | Type                           | Description                                |
@@ -1754,8 +2035,10 @@ Begin the texture fill. Note&#58; The wrap mode of the texture is forced to REPE
 
 <article>
 
-### bezierCurveTo: <span><code>(cpX&#58; number, cpY&#58; number, cpX2&#58; number, cpY2&#58; number, toX&#58; number, toY&#58; number) -&#62; this</code></span>
-Calculate the points for a bezier curve and then draws it.
+### bezierCurveTo 
+**Type:** <code>(cpX&#58; number, cpY&#58; number, cpX2&#58; number, cpY2&#58; number, toX&#58; number, toY&#58; number) -&#62; this</code>
+
+**Description:** Calculate the points for a bezier curve and then draws it.
 
 #### Parameters:
 | Name | Type                | Description            |
@@ -1777,8 +2060,10 @@ Calculate the points for a bezier curve and then draws it.
 
 <article>
 
-### calculateBounds: <span><code>() -&#62; void</code></span>
-Recalculates the bounds of the container.
+### calculateBounds 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Recalculates the bounds of the container.
 This implementation will automatically fit the children's bounds into the calculation. Each child's bounds is limited to its mask's bounds or filterArea, if any is applied.
 
 </article>
@@ -1788,8 +2073,10 @@ This implementation will automatically fit the children's bounds into the calcul
 
 <article>
 
-### clear: <span><code>() -&#62; this</code></span>
-Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
+### clear 
+**Type:** <code>() -&#62; this</code>
+
+**Description:** Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
 
 #### Returns:
 | Type              | Description                                            |
@@ -1802,8 +2089,10 @@ Clears the graphics that were drawn to this Graphics object, and resets fill and
 
 <article>
 
-### clone: <span><code>() -&#62; Graphics</code></span>
-Creates a new Graphics object with the same values as this one. Note that only the geometry of the object is cloned, not its transform (position,scale,etc)
+### clone 
+**Type:** <code>() -&#62; Graphics</code>
+
+**Description:** Creates a new Graphics object with the same values as this one. Note that only the geometry of the object is cloned, not its transform (position,scale,etc)
 
 #### Returns:
 | Type                  | Description                      |
@@ -1816,8 +2105,10 @@ Creates a new Graphics object with the same values as this one. Note that only t
 
 <article>
 
-### closePath: <span><code>() -&#62; this</code></span>
-Closes the current path.
+### closePath 
+**Type:** <code>() -&#62; this</code>
+
+**Description:** Closes the current path.
 
 #### Returns:
 | Type              | Description       |
@@ -1830,8 +2121,10 @@ Closes the current path.
 
 <article>
 
-### containerUpdateTransform: <span><code>() -&#62; </code></span>
-Container default updateTransform, does update children of container. Will crash if there's no parent element.
+### containerUpdateTransform 
+**Type:** <code>() -&#62; </code>
+
+**Description:** Container default updateTransform, does update children of container. Will crash if there's no parent element.
 
 </article>
 
@@ -1840,8 +2133,10 @@ Container default updateTransform, does update children of container. Will crash
 
 <article>
 
-### containsPoint: <span><code>(point&#58; IPointData) -&#62; boolean</code></span>
-Tests if a point is inside this graphics object
+### containsPoint 
+**Type:** <code>(point&#58; IPointData) -&#62; boolean</code>
+
+**Description:** Tests if a point is inside this graphics object
 
 #### Parameters:
 | Name  | Type                    | Description       |
@@ -1858,8 +2153,10 @@ Tests if a point is inside this graphics object
 
 <article>
 
-### destroy: <span><code>(options&#58; IDestroyOptions &#124; boolean) -&#62; void</code></span>
-Destroys the Graphics object.
+### destroy 
+**Type:** <code>(options&#58; IDestroyOptions &#124; boolean) -&#62; void</code>
+
+**Description:** Destroys the Graphics object.
 
 #### Parameters:
 | Name                | Type                                        | Description                                                                                                                 |
@@ -1875,8 +2172,10 @@ Destroys the Graphics object.
 
 <article>
 
-### disableTempParent: <span><code>(cacheParent&#58; Container) -&#62; void</code></span>
-Pair method for `enableTempParent`
+### disableTempParent 
+**Type:** <code>(cacheParent&#58; Container) -&#62; void</code>
+
+**Description:** Pair method for `enableTempParent`
 
 #### Parameters:
 | Name        | Type                   | Description              |
@@ -1889,11 +2188,14 @@ Pair method for `enableTempParent`
 
 <article>
 
-### dispatchEvent: <span><code>(e&#58; Event) -&#62; boolean</code></span>
-Dispatch the event on this [PIXI.DisplayObject](../classes/PIXI.DisplayObject.pixi_display) using the event's [PIXI.EventBoundary](../classes/PIXI.EventBoundary.pixi_events).
+### dispatchEvent 
+**Type:** <code>(e&#58; Event) -&#62; boolean</code>
+
+**Description:** Dispatch the event on this [PIXI.DisplayObject](../classes/PIXI.DisplayObject.pixi_display) using the event's [PIXI.EventBoundary](../classes/PIXI.EventBoundary.pixi_events).
 The target of the event is set to `this` and the `defaultPrevented` flag is cleared before dispatch.
 
 **IMPORTANT&#58;** _Only_ available if using the `@pixi/events` package.
+
 
 ```js
 // Reuse a click event!
@@ -1916,8 +2218,10 @@ button.dispatchEvent(clickEvent);
 
 <article>
 
-### displayObjectUpdateTransform: <span><code>() -&#62; </code></span>
-DisplayObject default updateTransform, does not update children of container. Will crash if there's no parent element.
+### displayObjectUpdateTransform 
+**Type:** <code>() -&#62; </code>
+
+**Description:** DisplayObject default updateTransform, does not update children of container. Will crash if there's no parent element.
 
 </article>
 
@@ -1926,8 +2230,10 @@ DisplayObject default updateTransform, does not update children of container. Wi
 
 <article>
 
-### drawChamferRect: <span><code>(this&#58; Graphics, x&#58; number, y&#58; number, width&#58; number, height&#58; number, chamfer&#58; number) -&#62; PIXI.Graphics</code></span>
-Draw Rectangle with chamfer corners. These are angled corners.
+### drawChamferRect 
+**Type:** <code>(this&#58; Graphics, x&#58; number, y&#58; number, width&#58; number, height&#58; number, chamfer&#58; number) -&#62; PIXI.Graphics</code>
+
+**Description:** Draw Rectangle with chamfer corners. These are angled corners.
 _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 #### Parameters:
@@ -1950,8 +2256,10 @@ _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 <article>
 
-### drawCircle: <span><code>(x&#58; number, y&#58; number, radius&#58; number) -&#62; this</code></span>
-Draws a circle.
+### drawCircle 
+**Type:** <code>(x&#58; number, y&#58; number, radius&#58; number) -&#62; this</code>
+
+**Description:** Draws a circle.
 
 #### Parameters:
 | Name   | Type                | Description                                  |
@@ -1970,8 +2278,10 @@ Draws a circle.
 
 <article>
 
-### drawEllipse: <span><code>(x&#58; number, y&#58; number, width&#58; number, height&#58; number) -&#62; this</code></span>
-Draws an ellipse.
+### drawEllipse 
+**Type:** <code>(x&#58; number, y&#58; number, width&#58; number, height&#58; number) -&#62; this</code>
+
+**Description:** Draws an ellipse.
 
 #### Parameters:
 | Name   | Type                | Description                                   |
@@ -1991,8 +2301,10 @@ Draws an ellipse.
 
 <article>
 
-### drawFilletRect: <span><code>(this&#58; Graphics, x&#58; number, y&#58; number, width&#58; number, height&#58; number, fillet&#58; number) -&#62; PIXI.Graphics</code></span>
-Draw Rectangle with fillet corners. This is much like rounded rectangle however it support negative numbers as well for the corner radius.
+### drawFilletRect 
+**Type:** <code>(this&#58; Graphics, x&#58; number, y&#58; number, width&#58; number, height&#58; number, fillet&#58; number) -&#62; PIXI.Graphics</code>
+
+**Description:** Draw Rectangle with fillet corners. This is much like rounded rectangle however it support negative numbers as well for the corner radius.
 
 _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
@@ -2016,8 +2328,10 @@ _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 <article>
 
-### drawPolygon: <span><code>(path&#58; Array&#60;number&#62; &#124; Array&#60;PIXI.IPointData&#62; &#124; PIXI.Polygon) -&#62; this</code></span>
-Draws a polygon using the given path.
+### drawPolygon 
+**Type:** <code>(path&#58; Array&#60;number&#62; &#124; Array&#60;PIXI.IPointData&#62; &#124; PIXI.Polygon) -&#62; this</code>
+
+**Description:** Draws a polygon using the given path.
 
 #### Parameters:
 | Name | Type                                                                                         | Description                                  |
@@ -2034,8 +2348,10 @@ Draws a polygon using the given path.
 
 <article>
 
-### drawRect: <span><code>(x&#58; number, y&#58; number, width&#58; number, height&#58; number) -&#62; this</code></span>
-Draws a rectangle shape.
+### drawRect 
+**Type:** <code>(x&#58; number, y&#58; number, width&#58; number, height&#58; number) -&#62; this</code>
+
+**Description:** Draws a rectangle shape.
 
 #### Parameters:
 | Name   | Type                | Description                                  |
@@ -2055,8 +2371,10 @@ Draws a rectangle shape.
 
 <article>
 
-### drawRegularPolygon: <span><code>(this&#58; Graphics, x&#58; number, y&#58; number, radius&#58; number, sides&#58; number, rotation&#58; number) -&#62; PIXI.Graphics</code></span>
-Draw a regular polygon where all sides are the same length.
+### drawRegularPolygon 
+**Type:** <code>(this&#58; Graphics, x&#58; number, y&#58; number, radius&#58; number, sides&#58; number, rotation&#58; number) -&#62; PIXI.Graphics</code>
+
+**Description:** Draw a regular polygon where all sides are the same length.
 _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 #### Parameters:
@@ -2079,8 +2397,10 @@ _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 <article>
 
-### drawRoundedPolygon: <span><code>(this&#58; Graphics, x&#58; number, y&#58; number, radius&#58; number, sides&#58; number, corner&#58; number, rotation&#58; number) -&#62; PIXI.Graphics</code></span>
-Draw a regular polygon with rounded corners.
+### drawRoundedPolygon 
+**Type:** <code>(this&#58; Graphics, x&#58; number, y&#58; number, radius&#58; number, sides&#58; number, corner&#58; number, rotation&#58; number) -&#62; PIXI.Graphics</code>
+
+**Description:** Draw a regular polygon with rounded corners.
 _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 #### Parameters:
@@ -2104,8 +2424,10 @@ _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 <article>
 
-### drawRoundedRect: <span><code>(x&#58; number, y&#58; number, width&#58; number, height&#58; number, radius&#58; number) -&#62; this</code></span>
-Draw a rectangle shape with rounded/beveled corners.
+### drawRoundedRect 
+**Type:** <code>(x&#58; number, y&#58; number, width&#58; number, height&#58; number, radius&#58; number) -&#62; this</code>
+
+**Description:** Draw a rectangle shape with rounded/beveled corners.
 
 #### Parameters:
 | Name   | Type                | Description                                  |
@@ -2126,8 +2448,10 @@ Draw a rectangle shape with rounded/beveled corners.
 
 <article>
 
-### drawShape: <span><code>(shape&#58; PIXI.Circle &#124; PIXI.Ellipse &#124; PIXI.Polygon &#124; PIXI.Rectangle &#124; PIXI.RoundedRectangle) -&#62; this</code></span>
-Draw any shape.
+### drawShape 
+**Type:** <code>(shape&#58; PIXI.Circle &#124; PIXI.Ellipse &#124; PIXI.Polygon &#124; PIXI.Rectangle &#124; PIXI.RoundedRectangle) -&#62; this</code>
+
+**Description:** Draw any shape.
 
 #### Parameters:
 | Name  | Type                                                                                                                | Description   |
@@ -2144,8 +2468,10 @@ Draw any shape.
 
 <article>
 
-### drawStar: <span><code>(this&#58; Graphics, x&#58; number, y&#58; number, points&#58; number, radius&#58; number, innerRadius&#58; number, rotation&#58; number) -&#62; Graphics</code></span>
-Draw a star shape with an arbitrary number of points.
+### drawStar 
+**Type:** <code>(this&#58; Graphics, x&#58; number, y&#58; number, points&#58; number, radius&#58; number, innerRadius&#58; number, rotation&#58; number) -&#62; Graphics</code>
+
+**Description:** Draw a star shape with an arbitrary number of points.
 _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 #### Parameters:
@@ -2169,8 +2495,10 @@ _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 <article>
 
-### drawTorus: <span><code>(this&#58; Graphics, x&#58; number, y&#58; number, innerRadius&#58; number, outerRadius&#58; number, startArc&#58; number, endArc&#58; number) -&#62; PIXI.Graphics</code></span>
-Draw a torus shape, like a donut. Can be used for something like a circle loader.
+### drawTorus 
+**Type:** <code>(this&#58; Graphics, x&#58; number, y&#58; number, innerRadius&#58; number, outerRadius&#58; number, startArc&#58; number, endArc&#58; number) -&#62; PIXI.Graphics</code>
+
+**Description:** Draw a torus shape, like a donut. Can be used for something like a circle loader.
 _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 #### Parameters:
@@ -2194,8 +2522,10 @@ _Note&#58; Only available with **&#64;pixi/graphics-extras**._
 
 <article>
 
-### enableTempParent: <span><code>() -&#62; Container</code></span>
-Used in Renderer, cacheAsBitmap and other places where you call an `updateTransform` on root.
+### enableTempParent 
+**Type:** <code>() -&#62; Container</code>
+
+**Description:** Used in Renderer, cacheAsBitmap and other places where you call an `updateTransform` on root.
 ```
 const cacheParent = elem.enableTempParent();
 elem.updateTransform();
@@ -2214,8 +2544,10 @@ elem.disableTempParent(cacheParent);
 
 <article>
 
-### endFill: <span><code>() -&#62; this</code></span>
-Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.
+### endFill 
+**Type:** <code>() -&#62; this</code>
+
+**Description:** Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.
 
 #### Returns:
 | Type              | Description                                            |
@@ -2228,8 +2560,10 @@ Applies a fill to the lines and shapes that were added since the last call to th
 
 <article>
 
-### endHole: <span><code>() -&#62; this</code></span>
-End adding holes to the last draw shape.
+### endHole 
+**Type:** <code>() -&#62; this</code>
+
+**Description:** End adding holes to the last draw shape.
 
 #### Returns:
 | Type              | Description       |
@@ -2242,8 +2576,10 @@ End adding holes to the last draw shape.
 
 <article>
 
-### generateCanvasTexture: <span><code>(scaleMode&#58; PIXI.SCALE_MODES, resolution&#58; number) -&#62; PIXI.Texture</code></span>
-Generates a canvas texture. Only available with **pixi.js-legacy** bundle or the **&#64;pixi/canvas-graphics** package.
+### generateCanvasTexture 
+**Type:** <code>(scaleMode&#58; PIXI.SCALE_MODES, resolution&#58; number) -&#62; PIXI.Texture</code>
+
+**Description:** Generates a canvas texture. Only available with **pixi.js-legacy** bundle or the **&#64;pixi/canvas-graphics** package.
 
 #### Parameters:
 | Name       | Type                          | Description                    |
@@ -2261,8 +2597,10 @@ Generates a canvas texture. Only available with **pixi.js-legacy** bundle or the
 
 <article>
 
-### getBounds: <span><code>(skipUpdate&#58; boolean, rect&#58; Rectangle) -&#62; Rectangle</code></span>
-Calculates and returns the (world) bounds of the display object as a [Rectangle](../classes/PIXI.Rectangle.pixi_math).
+### getBounds 
+**Type:** <code>(skipUpdate&#58; boolean, rect&#58; Rectangle) -&#62; Rectangle</code>
+
+**Description:** Calculates and returns the (world) bounds of the display object as a [Rectangle](../classes/PIXI.Rectangle.pixi_math).
 This method is expensive on containers with a large subtree (like the stage). This is because the bounds of a container depend on its children's bounds, which recursively causes all bounds in the subtree to be recalculated. The upside, however, is that calling `getBounds` once on a container will indeed update the bounds of all children (the whole subtree, in fact). This side effect should be exploited by using`displayObject._bounds.getRectangle()` when traversing through all the bounds in a scene graph. Otherwise, calling `getBounds` on each object in a subtree will cause the total cost to increase quadratically as its height increases.
 
 The transforms of all objects in a container's **subtree** and of all **ancestors** are updated. The world bounds of all display objects in a container's **subtree** will also be recalculated.
@@ -2294,8 +2632,10 @@ Do know that usage of `getLocalBounds` can corrupt the `_bounds` of children (th
 
 <article>
 
-### getChildAt: <span><code>(index&#58; number) -&#62; T</code></span>
-Returns the child at the specified index
+### getChildAt 
+**Type:** <code>(index&#58; number) -&#62; T</code>
+
+**Description:** Returns the child at the specified index
 
 #### Parameters:
 | Name  | Type                | Description                   |
@@ -2312,8 +2652,10 @@ Returns the child at the specified index
 
 <article>
 
-### getChildByName: <span><code>(name&#58; string, deep&#58; boolean) -&#62; PIXI.DisplayObject</code></span>
-Returns the display object in the container.
+### getChildByName 
+**Type:** <code>(name&#58; string, deep&#58; boolean) -&#62; PIXI.DisplayObject</code>
+
+**Description:** Returns the display object in the container.
 Recursive searches are done in a preorder traversal.
 
 #### Parameters:
@@ -2332,8 +2674,10 @@ Recursive searches are done in a preorder traversal.
 
 <article>
 
-### getChildIndex: <span><code>(child&#58; T) -&#62; number</code></span>
-Returns the index position of a child DisplayObject instance
+### getChildIndex 
+**Type:** <code>(child&#58; T) -&#62; number</code>
+
+**Description:** Returns the index position of a child DisplayObject instance
 
 #### Parameters:
 | Name  | Type           | Description                            |
@@ -2350,8 +2694,10 @@ Returns the index position of a child DisplayObject instance
 
 <article>
 
-### getGlobalPosition: <span><code>(point&#58; PIXI.Point, skipUpdate&#58; boolean) -&#62; PIXI.Point</code></span>
-Returns the global position of the displayObject. Does not depend on object scale, rotation and pivot.
+### getGlobalPosition 
+**Type:** <code>(point&#58; PIXI.Point, skipUpdate&#58; boolean) -&#62; PIXI.Point</code>
+
+**Description:** Returns the global position of the displayObject. Does not depend on object scale, rotation and pivot.
 
 #### Parameters:
 | Name       | Type                    | Description                                                                                                                                                                        |
@@ -2369,8 +2715,10 @@ Returns the global position of the displayObject. Does not depend on object scal
 
 <article>
 
-### getLocalBounds: <span><code>(rect&#58; Rectangle, skipChildrenUpdate&#58; boolean) -&#62; Rectangle</code></span>
-Retrieves the local bounds of the displayObject as a rectangle object.
+### getLocalBounds 
+**Type:** <code>(rect&#58; Rectangle, skipChildrenUpdate&#58; boolean) -&#62; Rectangle</code>
+
+**Description:** Retrieves the local bounds of the displayObject as a rectangle object.
 Calling `getLocalBounds` may invalidate the `_bounds` of the whole subtree below. If using it inside a render() call, it is advised to call `getBounds()` immediately after to recalculate the world bounds of the subtree.
 
 #### Parameters:
@@ -2389,8 +2737,10 @@ Calling `getLocalBounds` may invalidate the `_bounds` of the whole subtree below
 
 <article>
 
-### isFastRect: <span><code>() -&#62; boolean</code></span>
-True if graphics consists of one rectangle, and thus, can be drawn like a Sprite and masked with gl.scissor.
+### isFastRect 
+**Type:** <code>() -&#62; boolean</code>
+
+**Description:** True if graphics consists of one rectangle, and thus, can be drawn like a Sprite and masked with gl.scissor.
 
 #### Returns:
 | Type                 | Description            |
@@ -2403,8 +2753,11 @@ True if graphics consists of one rectangle, and thus, can be drawn like a Sprite
 
 <article>
 
-### isInteractive: <span><code>() -&#62; boolean</code></span>
-Determines if the displayObject is interactive or not
+### isInteractive 
+**Type:** <code>() -&#62; boolean</code>
+
+**Description:** Determines if the displayObject is interactive or not
+
 
 ```js
  import { Sprite } from 'pixi.js';
@@ -2437,8 +2790,10 @@ Determines if the displayObject is interactive or not
 
 <article>
 
-### lineStyle: <span><code>(width&#58; ILineStyleOptions &#124; number, color&#58; ColorSource, alpha&#58; number, alignment&#58; number, native&#58; boolean) -&#62; this</code></span>
-Specifies the line style used for subsequent calls to Graphics methods such as the lineTo() method or the drawCircle() method.
+### lineStyle 
+**Type:** <code>(width&#58; ILineStyleOptions &#124; number, color&#58; ColorSource, alpha&#58; number, alignment&#58; number, native&#58; boolean) -&#62; this</code>
+
+**Description:** Specifies the line style used for subsequent calls to Graphics methods such as the lineTo() method or the drawCircle() method.
 
 #### Parameters:
 | Name      | Type                                         | Description                                                                      |
@@ -2459,8 +2814,10 @@ Specifies the line style used for subsequent calls to Graphics methods such as t
 
 <article>
 
-### lineStyle: <span><code>(options&#58; ILineStyleOptions) -&#62; PIXI.Graphics</code></span>
-Specifies the line style used for subsequent calls to Graphics methods such as the lineTo() method or the drawCircle() method.
+### lineStyle 
+**Type:** <code>(options&#58; ILineStyleOptions) -&#62; PIXI.Graphics</code>
+
+**Description:** Specifies the line style used for subsequent calls to Graphics methods such as the lineTo() method or the drawCircle() method.
 
 #### Parameters:
 | Name               | Type                           | Description                                                                      |
@@ -2485,8 +2842,10 @@ Specifies the line style used for subsequent calls to Graphics methods such as t
 
 <article>
 
-### lineTextureStyle: <span><code>(options&#58; ILineStyleOptions) -&#62; PIXI.Graphics</code></span>
-Like line style but support texture for line fill.
+### lineTextureStyle 
+**Type:** <code>(options&#58; ILineStyleOptions) -&#62; PIXI.Graphics</code>
+
+**Description:** Like line style but support texture for line fill.
 
 #### Parameters:
 | Name               | Type                           | Description                                                                                           |
@@ -2513,8 +2872,10 @@ Like line style but support texture for line fill.
 
 <article>
 
-### lineTo: <span><code>(x&#58; number, y&#58; number) -&#62; this</code></span>
-Draws a line using the current line style from the current drawing position to (x, y); The current drawing position is then set to (x, y).
+### lineTo 
+**Type:** <code>(x&#58; number, y&#58; number) -&#62; this</code>
+
+**Description:** Draws a line using the current line style from the current drawing position to (x, y); The current drawing position is then set to (x, y).
 
 #### Parameters:
 | Name | Type                | Description                 |
@@ -2532,8 +2893,10 @@ Draws a line using the current line style from the current drawing position to (
 
 <article>
 
-### moveTo: <span><code>(x&#58; number, y&#58; number) -&#62; this</code></span>
-Moves the current drawing position to x, y.
+### moveTo 
+**Type:** <code>(x&#58; number, y&#58; number) -&#62; this</code>
+
+**Description:** Moves the current drawing position to x, y.
 
 #### Parameters:
 | Name | Type                | Description                 |
@@ -2551,8 +2914,10 @@ Moves the current drawing position to x, y.
 
 <article>
 
-### quadraticCurveTo: <span><code>(cpX&#58; number, cpY&#58; number, toX&#58; number, toY&#58; number) -&#62; this</code></span>
-Calculate the points for a quadratic bezier curve and then draws it. Based on&#58; https&#58;//stackoverflow.com/questions/785097/how-do-i-implement-a-bezier-curve-in-c
+### quadraticCurveTo 
+**Type:** <code>(cpX&#58; number, cpY&#58; number, toX&#58; number, toY&#58; number) -&#62; this</code>
+
+**Description:** Calculate the points for a quadratic bezier curve and then draws it. Based on&#58; https&#58;//stackoverflow.com/questions/785097/how-do-i-implement-a-bezier-curve-in-c
 
 #### Parameters:
 | Name | Type                | Description         |
@@ -2572,8 +2937,10 @@ Calculate the points for a quadratic bezier curve and then draws it. Based on&#5
 
 <article>
 
-### removeChild: <span><code>(children&#58; PIXI.DisplayObject) -&#62; PIXI.DisplayObject</code></span>
-Removes one or more children from the container.
+### removeChild 
+**Type:** <code>(children&#58; PIXI.DisplayObject) -&#62; PIXI.DisplayObject</code>
+
+**Description:** Removes one or more children from the container.
 
 #### Parameters:
 | Name     | Type                            | Description                    |
@@ -2590,8 +2957,10 @@ Removes one or more children from the container.
 
 <article>
 
-### removeChildAt: <span><code>(index&#58; number) -&#62; T</code></span>
-Removes a child from the specified index position.
+### removeChildAt 
+**Type:** <code>(index&#58; number) -&#62; T</code>
+
+**Description:** Removes a child from the specified index position.
 
 #### Parameters:
 | Name  | Type                | Description                     |
@@ -2608,8 +2977,10 @@ Removes a child from the specified index position.
 
 <article>
 
-### removeChildren: <span><code>(beginIndex&#58; number, endIndex&#58; ) -&#62; T[]</code></span>
-Removes all children from this container that are within the begin and end indexes.
+### removeChildren 
+**Type:** <code>(beginIndex&#58; number, endIndex&#58; ) -&#62; T[]</code>
+
+**Description:** Removes all children from this container that are within the begin and end indexes.
 
 #### Parameters:
 | Name       | Type                | Description                                                  |
@@ -2627,8 +2998,10 @@ Removes all children from this container that are within the begin and end index
 
 <article>
 
-### removeEventListener: <span><code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; RemoveListenerOptions) -&#62; </code></span>
-Unlike `off` or `removeListener` which are methods from EventEmitter, `removeEventListener`seeks to be compatible with the DOM's `removeEventListener` with support for options.**IMPORTANT&#58;** _Only_ available if using the `@pixi/events` package.
+### removeEventListener 
+**Type:** <code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; RemoveListenerOptions) -&#62; </code>
+
+**Description:** Unlike `off` or `removeListener` which are methods from EventEmitter, `removeEventListener`seeks to be compatible with the DOM's `removeEventListener` with support for options.**IMPORTANT&#58;** _Only_ available if using the `@pixi/events` package.
 
 #### Parameters:
 | Name     | Type                                            | Description                                                                             |
@@ -2643,8 +3016,10 @@ Unlike `off` or `removeListener` which are methods from EventEmitter, `removeEve
 
 <article>
 
-### removeFromParent: <span><code>() -&#62; </code></span>
-Remove the DisplayObject from its parent Container. If the DisplayObject has no parent, do nothing.
+### removeFromParent 
+**Type:** <code>() -&#62; </code>
+
+**Description:** Remove the DisplayObject from its parent Container. If the DisplayObject has no parent, do nothing.
 
 </article>
 
@@ -2653,8 +3028,10 @@ Remove the DisplayObject from its parent Container. If the DisplayObject has no 
 
 <article>
 
-### render: <span><code>(renderer&#58; Renderer) -&#62; void</code></span>
-Renders the object using the WebGL renderer.
+### render 
+**Type:** <code>(renderer&#58; Renderer) -&#62; void</code>
+
+**Description:** Renders the object using the WebGL renderer.
 The [_render](../classes/PIXI.Container.pixi_display#_render) method is be overriden for rendering the contents of the container itself. This `render` method will invoke it, and also invoke the `render` methods of all children afterward.
 
 If `renderable` or `visible` is false or if `worldAlpha` is not positive or if `cullable` is true and the bounds of this object are out of frame, this implementation will entirely skip rendering. See [PIXI.DisplayObject](../classes/PIXI.DisplayObject.pixi_display) for choosing between `renderable` or `visible`. Generally, setting alpha to zero is not recommended for purely skipping rendering.
@@ -2674,8 +3051,10 @@ The [renderAdvanced](../classes/PIXI.Container.pixi_display#renderAdvanced) meth
 
 <article>
 
-### renderCanvas: <span><code>(renderer&#58; PIXI.CanvasRenderer) -&#62; void</code></span>
-Renders the object using the Canvas renderer
+### renderCanvas 
+**Type:** <code>(renderer&#58; PIXI.CanvasRenderer) -&#62; void</code>
+
+**Description:** Renders the object using the Canvas renderer
 
 #### Parameters:
 | Name     | Type                             | Description  |
@@ -2688,8 +3067,10 @@ Renders the object using the Canvas renderer
 
 <article>
 
-### setChildIndex: <span><code>(child&#58; T, index&#58; number) -&#62; void</code></span>
-Changes the position of an existing child in the display object container
+### setChildIndex 
+**Type:** <code>(child&#58; T, index&#58; number) -&#62; void</code>
+
+**Description:** Changes the position of an existing child in the display object container
 
 #### Parameters:
 | Name  | Type                | Description                                                                    |
@@ -2703,8 +3084,10 @@ Changes the position of an existing child in the display object container
 
 <article>
 
-### setMatrix: <span><code>(matrix&#58; Matrix) -&#62; this</code></span>
-Apply a matrix to the positional data.
+### setMatrix 
+**Type:** <code>(matrix&#58; Matrix) -&#62; this</code>
+
+**Description:** Apply a matrix to the positional data.
 
 #### Parameters:
 | Name   | Type                | Description                                |
@@ -2721,8 +3104,10 @@ Apply a matrix to the positional data.
 
 <article>
 
-### setParent: <span><code>(container&#58; Container) -&#62; Container</code></span>
-Set the parent Container of this DisplayObject.
+### setParent 
+**Type:** <code>(container&#58; Container) -&#62; Container</code>
+
+**Description:** Set the parent Container of this DisplayObject.
 
 #### Parameters:
 | Name      | Type                   | Description                                 |
@@ -2739,8 +3124,10 @@ Set the parent Container of this DisplayObject.
 
 <article>
 
-### setTransform: <span><code>(x&#58; number, y&#58; number, scaleX&#58; number, scaleY&#58; number, rotation&#58; number, skewX&#58; number, skewY&#58; number, pivotX&#58; number, pivotY&#58; number) -&#62; this</code></span>
-Convenience function to set the position, scale, skew and pivot at once.
+### setTransform 
+**Type:** <code>(x&#58; number, y&#58; number, scaleX&#58; number, scaleY&#58; number, rotation&#58; number, skewX&#58; number, skewY&#58; number, pivotX&#58; number, pivotY&#58; number) -&#62; this</code>
+
+**Description:** Convenience function to set the position, scale, skew and pivot at once.
 
 #### Parameters:
 | Name     | Type                | Description       |
@@ -2765,8 +3152,10 @@ Convenience function to set the position, scale, skew and pivot at once.
 
 <article>
 
-### sortChildren: <span><code>() -&#62; void</code></span>
-Sorts children by zIndex. Previous order is maintained for 2 children with the same zIndex.
+### sortChildren 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Sorts children by zIndex. Previous order is maintained for 2 children with the same zIndex.
 
 </article>
 
@@ -2775,8 +3164,10 @@ Sorts children by zIndex. Previous order is maintained for 2 children with the s
 
 <article>
 
-### swapChildren: <span><code>(child&#58; T, child2&#58; T) -&#62; void</code></span>
-Swaps the position of 2 Display Objects within this container.
+### swapChildren 
+**Type:** <code>(child&#58; T, child2&#58; T) -&#62; void</code>
+
+**Description:** Swaps the position of 2 Display Objects within this container.
 
 #### Parameters:
 | Name   | Type           | Description                   |
@@ -2790,8 +3181,10 @@ Swaps the position of 2 Display Objects within this container.
 
 <article>
 
-### toGlobal: <span><code>(position&#58; IPointData, point&#58; P, skipUpdate&#58; boolean) -&#62; P</code></span>
-Calculates the global position of the display object.
+### toGlobal 
+**Type:** <code>(position&#58; IPointData, point&#58; P, skipUpdate&#58; boolean) -&#62; P</code>
+
+**Description:** Calculates the global position of the display object.
 
 #### Parameters:
 | Name       | Type                    | Description                                                                               |
@@ -2810,8 +3203,10 @@ Calculates the global position of the display object.
 
 <article>
 
-### toLocal: <span><code>(position&#58; IPointData, from&#58; DisplayObject, point&#58; P, skipUpdate&#58; boolean) -&#62; P</code></span>
-Calculates the local position of the display object relative to another point.
+### toLocal 
+**Type:** <code>(position&#58; IPointData, from&#58; DisplayObject, point&#58; P, skipUpdate&#58; boolean) -&#62; P</code>
+
+**Description:** Calculates the local position of the display object relative to another point.
 
 #### Parameters:
 | Name       | Type                       | Description                                                                               |
@@ -2831,8 +3226,10 @@ Calculates the local position of the display object relative to another point.
 
 <article>
 
-### updateTransform: <span><code>() -&#62; void</code></span>
-Updates the transform on all children of this container for rendering.
+### updateTransform 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Updates the transform on all children of this container for rendering.
 
 </article>
 
@@ -2841,8 +3238,10 @@ Updates the transform on all children of this container for rendering.
 
 <article>
 
-### _calculateBounds: <span><code>() -&#62; void</code></span>
-Retrieves the bounds of the graphic shape as a rectangle object.
+### _calculateBounds 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Retrieves the bounds of the graphic shape as a rectangle object.
 
 </article>
 
@@ -2851,8 +3250,10 @@ Retrieves the bounds of the graphic shape as a rectangle object.
 
 <article>
 
-### _initCurve: <span><code>(x&#58; number, y&#58; number) -&#62; void</code></span>
-Initialize the curve
+### _initCurve 
+**Type:** <code>(x&#58; number, y&#58; number) -&#62; void</code>
+
+**Description:** Initialize the curve
 
 #### Parameters:
 | Name | Type                | Description |
@@ -2866,8 +3267,10 @@ Initialize the curve
 
 <article>
 
-### _populateBatches: <span><code>() -&#62; void</code></span>
-Populating batches for rendering.
+### _populateBatches 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Populating batches for rendering.
 
 </article>
 
@@ -2876,8 +3279,10 @@ Populating batches for rendering.
 
 <article>
 
-### _recursivePostUpdateTransform: <span><code>() -&#62; void</code></span>
-Recursively updates transform of all objects from the root to this one internal function for toLocal()
+### _recursivePostUpdateTransform 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Recursively updates transform of all objects from the root to this one internal function for toLocal()
 
 </article>
 
@@ -2886,8 +3291,10 @@ Recursively updates transform of all objects from the root to this one internal 
 
 <article>
 
-### _render: <span><code>(renderer&#58; Renderer) -&#62; void</code></span>
-Renders the object using the WebGL renderer
+### _render 
+**Type:** <code>(renderer&#58; Renderer) -&#62; void</code>
+
+**Description:** Renders the object using the WebGL renderer
 
 #### Parameters:
 | Name     | Type                  | Description  |
@@ -2900,8 +3307,10 @@ Renders the object using the WebGL renderer
 
 <article>
 
-### _renderBatched: <span><code>(renderer&#58; Renderer) -&#62; void</code></span>
-Renders the batches using the BathedRenderer plugin
+### _renderBatched 
+**Type:** <code>(renderer&#58; Renderer) -&#62; void</code>
+
+**Description:** Renders the batches using the BathedRenderer plugin
 
 #### Parameters:
 | Name     | Type                  | Description  |
@@ -2914,8 +3323,10 @@ Renders the batches using the BathedRenderer plugin
 
 <article>
 
-### _renderDirect: <span><code>(renderer&#58; Renderer) -&#62; void</code></span>
-Renders the graphics direct
+### _renderDirect 
+**Type:** <code>(renderer&#58; Renderer) -&#62; void</code>
+
+**Description:** Renders the graphics direct
 
 #### Parameters:
 | Name     | Type                  | Description  |
@@ -2928,8 +3339,10 @@ Renders the graphics direct
 
 <article>
 
-### _renderDrawCallDirect: <span><code>(renderer&#58; Renderer, drawCall&#58; BatchDrawCall) -&#62; void</code></span>
-Renders specific DrawCall
+### _renderDrawCallDirect 
+**Type:** <code>(renderer&#58; Renderer, drawCall&#58; BatchDrawCall) -&#62; void</code>
+
+**Description:** Renders specific DrawCall
 
 #### Parameters:
 | Name     | Type                       | Description |
@@ -2943,8 +3356,10 @@ Renders specific DrawCall
 
 <article>
 
-### _renderWithCulling: <span><code>(renderer&#58; PIXI.Renderer) -&#62; void</code></span>
-Renders this object and its children with culling.
+### _renderWithCulling 
+**Type:** <code>(renderer&#58; PIXI.Renderer) -&#62; void</code>
+
+**Description:** Renders this object and its children with culling.
 
 #### Parameters:
 | Name     | Type                       | Description  |
@@ -2957,8 +3372,10 @@ Renders this object and its children with culling.
 
 <article>
 
-### _resolveDirectShader: <span><code>(renderer&#58; Renderer) -&#62; Shader</code></span>
-Resolves shader for direct rendering
+### _resolveDirectShader 
+**Type:** <code>(renderer&#58; Renderer) -&#62; Shader</code>
+
+**Description:** Resolves shader for direct rendering
 
 #### Parameters:
 | Name     | Type                  | Description  |
@@ -2975,8 +3392,10 @@ Resolves shader for direct rendering
 
 <article>
 
-### calculateTints: <span><code>() -&#62; void</code></span>
-Recalculate the tint by applying tint to batches using Graphics tint.
+### calculateTints 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Recalculate the tint by applying tint to batches using Graphics tint.
 
 </article>
 
@@ -2985,8 +3404,10 @@ Recalculate the tint by applying tint to batches using Graphics tint.
 
 <article>
 
-### calculateVertices: <span><code>() -&#62; void</code></span>
-If there's a transform update or a change to the shape of the geometry, recalculate the vertices.
+### calculateVertices 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** If there's a transform update or a change to the shape of the geometry, recalculate the vertices.
 
 </article>
 
@@ -2995,8 +3416,10 @@ If there's a transform update or a change to the shape of the geometry, recalcul
 
 <article>
 
-### finishPoly: <span><code>() -&#62; void</code></span>
-Finish the polygon object.
+### finishPoly 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Finish the polygon object.
 
 </article>
 
@@ -3005,8 +3428,10 @@ Finish the polygon object.
 
 <article>
 
-### onChildrenChange: <span><code>(_length&#58; number) -&#62; void</code></span>
-Overridable method that can be used by Container subclasses whenever the children array is modified.
+### onChildrenChange 
+**Type:** <code>(_length&#58; number) -&#62; void</code>
+
+**Description:** Overridable method that can be used by Container subclasses whenever the children array is modified.
 
 #### Parameters:
 | Name    | Type                | Description |
@@ -3019,8 +3444,10 @@ Overridable method that can be used by Container subclasses whenever the childre
 
 <article>
 
-### renderAdvanced: <span><code>(renderer&#58; Renderer) -&#62; void</code></span>
-Render the object using the WebGL renderer and advanced features.
+### renderAdvanced 
+**Type:** <code>(renderer&#58; Renderer) -&#62; void</code>
+
+**Description:** Render the object using the WebGL renderer and advanced features.
 
 #### Parameters:
 | Name     | Type                  | Description  |
@@ -3033,8 +3460,10 @@ Render the object using the WebGL renderer and advanced features.
 
 <article>
 
-### startPoly: <span><code>() -&#62; void</code></span>
-Start a polygon object internally.
+### startPoly 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Start a polygon object internally.
 
 </article>
 

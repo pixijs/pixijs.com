@@ -5,7 +5,12 @@ sidebar_label: "PIXI.AccessibilityManager"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/accessibility](../modules/pixi_accessibility).AccessibilityManager
+
+</div>
 
 
 The Accessibility manager recreates the ability to tab and have content read by screen readers. This is very important as it can possibly help people with disabilities access PixiJS content.
@@ -16,13 +21,12 @@ An instance of this class is automatically created by default, and can be found 
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.AccessibilityManager: <span><code>(renderer&#58; PIXI.CanvasRenderer &#124; PIXI.Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.AccessibilityManager(renderer&#58; PIXI.CanvasRenderer &#124; PIXI.Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                                                  | Default       | Description                         |
@@ -39,20 +43,12 @@ An instance of this class is automatically created by default, and can be found 
 ## Members
 <article>
 
-### debug: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### debug 
+**Type:** <code>boolean</code>
 
-Setting this to true will visually show the divs.
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### isActive: <span><code>boolean</code></span>
-Value of `true` if accessibility is currently active and accessibility layers are showing.
+**Description:** Setting this to true will visually show the divs.
 
 </article>
 
@@ -61,8 +57,10 @@ Value of `true` if accessibility is currently active and accessibility layers ar
 
 <article>
 
-### isMobileAccessibility: <span><code>boolean</code></span>
-Value of `true` if accessibility is enabled for touch devices.
+### isActive 
+**Type:** <code>boolean</code>
+
+**Description:** Value of `true` if accessibility is currently active and accessibility layers are showing.
 
 </article>
 
@@ -71,8 +69,22 @@ Value of `true` if accessibility is enabled for touch devices.
 
 <article>
 
-### renderer: <span><code>PIXI.CanvasRenderer &#124; PIXI.Renderer</code></span>
-The renderer this accessibility manager works for.
+### isMobileAccessibility 
+**Type:** <code>boolean</code>
+
+**Description:** Value of `true` if accessibility is enabled for touch devices.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### renderer 
+**Type:** <code>PIXI.CanvasRenderer &#124; PIXI.Renderer</code>
+
+**Description:** The renderer this accessibility manager works for.
 
 </article>
 
@@ -83,8 +95,10 @@ The renderer this accessibility manager works for.
 ## Methods
 <article>
 
-### capHitArea: <span><code>(hitArea&#58; PIXI.Rectangle) -&#62; void</code></span>
-Adjust the hit area based on the bounds of a display object
+### capHitArea 
+**Type:** <code>(hitArea&#58; PIXI.Rectangle) -&#62; void</code>
+
+**Description:** Adjust the hit area based on the bounds of a display object
 
 #### Parameters:
 | Name    | Type                        | Description         |
@@ -97,8 +111,10 @@ Adjust the hit area based on the bounds of a display object
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys the accessibility manager
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys the accessibility manager
 
 </article>
 
@@ -107,8 +123,10 @@ Destroys the accessibility manager
 
 <article>
 
-### updateDebugHTML: <span><code>(div&#58; HTMLElement) -&#62; void</code></span>
-private function that will visually add the information to the accessability div
+### updateDebugHTML 
+**Type:** <code>(div&#58; HTMLElement) -&#62; void</code>
+
+**Description:** private function that will visually add the information to the accessability div
 
 #### Parameters:
 | Name | Type                     | Description |

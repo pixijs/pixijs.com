@@ -5,7 +5,12 @@ sidebar_label: "PIXI.CanvasRenderer"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/canvas-renderer](../modules/pixi_canvas_renderer).CanvasRenderer
+
+</div>
 
 The CanvasRenderer draws the scene and all its content onto a 2d canvas.
 This renderer should be used for browsers that support WebGL.
@@ -37,30 +42,17 @@ The breadth of the API surface provided by the renderer is contained within thes
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.CanvasRenderer: <span><code>(options&#58; PIXI.IRendererOptions) </code></span>
+### Constructor:
+<h4><code>new PIXI.CanvasRenderer(options&#58; PIXI.IRendererOptions) </code></h4>
 
 #### Parameters:
-| Name                      | Type                                | Default                               | Description                                                                                                                                                                                                                                                                                                                                        |
-| ------------------------- | ----------------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| options                   | <code>PIXI.IRendererOptions</code>  | <code></code>                         | The optional renderer parameters.                                                                                                                                                                                                                                                                                                                  |
-| options.autoDensity       | <code>boolean</code>                | <code>false</code>                    | Whether the CSS dimensions of the renderer's view should be resized automatically.                                                                                                                                                                                                                                                                 |
-| options.background        | <code>PIXI.ColorSource</code>       | <code></code>                         | Alias for `options.backgroundColor`.                                                                                                                                                                                                                                                                                                               |
-| options.backgroundAlpha   | <code>number</code>                 | <code>1</code>                        | Transparency of the background color, value from `0` (fully transparent) to `1` (fully opaque).                                                                                                                                                                                                                                                    |
-| options.backgroundColor   | <code>PIXI.ColorSource</code>       | <code>0x000000</code>                 | The background color used to clear the canvas. See PIXI.ColorSource for accepted color values.                                                                                                                                                                                                                                                     |
-| options.clearBeforeRender | <code>boolean</code>                | <code>true</code>                     | Whether to clear the canvas before new render passes.                                                                                                                                                                                                                                                                                              |
-| options.context           | <code>PIXI.IRenderingContext</code> | <code></code>                         | **WebGL Only.** User-provided WebGL rendering context object.                                                                                                                                                                                                                                                                                      |
-| options.height            | <code>number</code>                 | <code>600</code>                      | The height of the renderer's view.                                                                                                                                                                                                                                                                                                                 |
-| options.hello             | <code>boolean</code>                | <code>false</code>                    | Whether to log the version and type information of renderer to console.                                                                                                                                                                                                                                                                            |
-| options.resolution        | <code>number</code>                 | <code>PIXI.settings.RESOLUTION</code> | The resolution / device pixel ratio of the renderer.                                                                                                                                                                                                                                                                                               |
-| options.useContextAlpha   | <code>boolean</code>                | <code>true</code>                     | **Deprecated since 7.0.0, use `premultipliedAlpha` and `backgroundAlpha` instead.**   &#60;br /&#62;Pass-through value for canvas' context attribute `alpha`. This option is for cases where the canvas needs to be opaque, possibly for performance reasons on some older devices. If you want to set transparency, please use `backgroundAlpha`. |
-| options.view              | <code>PIXI.ICanvas</code>           | <code>null</code>                     | The canvas to use as the view. If omitted, a new canvas will be created.                                                                                                                                                                                                                                                                           |
-| options.width             | <code>number</code>                 | <code>800</code>                      | The width of the renderer's view.                                                                                                                                                                                                                                                                                                                  |
+| Name    | Type                               | Default       | Description                                                                                                |
+| ------- | ---------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------- |
+| options | <code>PIXI.IRendererOptions</code> | <code></code> | See [PIXI.settings.RENDER_OPTIONS](../namespaces/PIXI.settings.pixi_settings#RENDER_OPTIONS) for defaults. |
 
 </article>
 
@@ -73,8 +65,10 @@ The breadth of the API surface provided by the renderer is contained within thes
 ## Members
 <article>
 
-### _plugin: <span><code>PluginSystem</code></span>
-plugin system instance
+### _plugin 
+**Type:** <code>PluginSystem</code>
+
+**Description:** plugin system instance
 
 </article>
 
@@ -83,8 +77,10 @@ plugin system instance
 
 <article>
 
-### _view: <span><code>ViewSystem</code></span>
-View system instance
+### _view 
+**Type:** <code>ViewSystem</code>
+
+**Description:** View system instance
 
 </article>
 
@@ -93,8 +89,10 @@ View system instance
 
 <article>
 
-### autoDensity: <span><code>boolean</code></span>
-Whether CSS dimensions of canvas view should be resized to screen dimensions automatically.
+### autoDensity 
+**Type:** <code>boolean</code>
+
+**Description:** Whether CSS dimensions of canvas view should be resized to screen dimensions automatically.
 
 </article>
 
@@ -103,8 +101,10 @@ Whether CSS dimensions of canvas view should be resized to screen dimensions aut
 
 <article>
 
-### background: <span><code>BackgroundSystem</code></span>
-background system instance
+### background 
+**Type:** <code>BackgroundSystem</code>
+
+**Description:** background system instance
 
 </article>
 
@@ -113,8 +113,10 @@ background system instance
 
 <article>
 
-### backgroundAlpha: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
-The background color alpha. Setting this to 0 will make the canvas transparent.
+### backgroundAlpha : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>number</code>
+
+**Description:** The background color alpha. Setting this to 0 will make the canvas transparent.
 
 </article>
 
@@ -123,7 +125,9 @@ The background color alpha. Setting this to 0 will make the canvas transparent.
 
 <article>
 
-### backgroundAlpha: <span><code>unknown</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+### backgroundAlpha : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>unknown</code>
+
 
 </article>
 
@@ -132,8 +136,10 @@ The background color alpha. Setting this to 0 will make the canvas transparent.
 
 <article>
 
-### backgroundColor: <span><code>ColorSource</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
-The background color to fill if not transparent
+### backgroundColor : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>ColorSource</code>
+
+**Description:** The background color to fill if not transparent
 
 </article>
 
@@ -142,7 +148,9 @@ The background color to fill if not transparent
 
 <article>
 
-### backgroundColor: <span><code>unknown</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+### backgroundColor : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>unknown</code>
+
 
 </article>
 
@@ -151,8 +159,10 @@ The background color to fill if not transparent
 
 <article>
 
-### blendModes: <span><code>string[]</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0 use `renderer.canvasContext.blendModes` instead</span>
-Tracks the blend modes useful for this renderer.
+### blendModes : <span class="deprecated-tag"> Deprecated: since 7.0.0 use `renderer.canvasContext.blendModes` instead</span>
+**Type:** <code>string[]</code>
+
+**Description:** Tracks the blend modes useful for this renderer.
 
 </article>
 
@@ -161,8 +171,10 @@ Tracks the blend modes useful for this renderer.
 
 <article>
 
-### canvasContext: <span><code>CanvasContextSystem</code></span>
-Canvas context system instance
+### canvasContext 
+**Type:** <code>CanvasContextSystem</code>
+
+**Description:** Canvas context system instance
 
 </article>
 
@@ -171,8 +183,10 @@ Canvas context system instance
 
 <article>
 
-### clearBeforeRender: <span><code>boolean</code></span>
-This sets if the CanvasRenderer will clear the canvas or not before the new render pass. If the scene is NOT transparent PixiJS will use a canvas sized fillRect operation every frame to set the canvas background color. If the scene is transparent PixiJS will use clearRect to clear the canvas every frame. Disable this by setting this to false. For example, if your game has a canvas filling background image you often don't need this set.
+### clearBeforeRender 
+**Type:** <code>boolean</code>
+
+**Description:** This sets if the CanvasRenderer will clear the canvas or not before the new render pass. If the scene is NOT transparent PixiJS will use a canvas sized fillRect operation every frame to set the canvas background color. If the scene is transparent PixiJS will use clearRect to clear the canvas every frame. Disable this by setting this to false. For example, if your game has a canvas filling background image you often don't need this set.
 
 </article>
 
@@ -181,8 +195,10 @@ This sets if the CanvasRenderer will clear the canvas or not before the new rend
 
 <article>
 
-### context: <span><code>ICanvasRenderingContext2D</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0 Use `renderer.canvasContext.activeContext instead</span>
-The currently active canvas 2d context (could change with renderTextures)
+### context : <span class="deprecated-tag"> Deprecated: since 7.0.0 Use `renderer.canvasContext.activeContext instead</span>
+**Type:** <code>ICanvasRenderingContext2D</code>
+
+**Description:** The currently active canvas 2d context (could change with renderTextures)
 
 </article>
 
@@ -191,20 +207,12 @@ The currently active canvas 2d context (could change with renderTextures)
 
 <article>
 
-### height: <span><code>number</code></span>
-- **Default Value**: <code>600</code>
+### height 
+**Type:** <code>number</code>
 
-Same as view.height, actual number of pixels in the canvas by vertical.
+**Default Value**: <code>600</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### lastObjectRendered: <span><code>IRenderableObject</code></span>
-the last object rendered by the renderer. Useful for other plugins like interaction managers
+**Description:** Same as view.height, actual number of pixels in the canvas by vertical.
 
 </article>
 
@@ -213,8 +221,10 @@ the last object rendered by the renderer. Useful for other plugins like interact
 
 <article>
 
-### mask: <span><code>CanvasMaskSystem</code></span>
-canvas mask system instance
+### lastObjectRendered 
+**Type:** <code>IRenderableObject</code>
+
+**Description:** the last object rendered by the renderer. Useful for other plugins like interaction managers
 
 </article>
 
@@ -223,8 +233,10 @@ canvas mask system instance
 
 <article>
 
-### maskManager: <span><code>CanvasMaskSystem</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0 use `renderer.canvasContext.mask`</span>
-system that manages canvas masks
+### mask 
+**Type:** <code>CanvasMaskSystem</code>
+
+**Description:** canvas mask system instance
 
 </article>
 
@@ -233,8 +245,10 @@ system that manages canvas masks
 
 <article>
 
-### objectRenderer: <span><code>CanvasObjectRendererSystem</code></span>
-renderer system instance
+### maskManager : <span class="deprecated-tag"> Deprecated: since 7.0.0 use `renderer.canvasContext.mask`</span>
+**Type:** <code>CanvasMaskSystem</code>
+
+**Description:** system that manages canvas masks
 
 </article>
 
@@ -243,8 +257,10 @@ renderer system instance
 
 <article>
 
-### options: <span><code>PIXI.IRendererOptions</code></span>
-Options passed to the constructor.
+### objectRenderer 
+**Type:** <code>CanvasObjectRendererSystem</code>
+
+**Description:** renderer system instance
 
 </article>
 
@@ -253,8 +269,10 @@ Options passed to the constructor.
 
 <article>
 
-### plugins: <span><code>IRendererPlugins</code></span>
-Collection of plugins
+### options 
+**Type:** <code>PIXI.IRendererOptions</code>
+
+**Description:** Options passed to the constructor.
 
 </article>
 
@@ -263,8 +281,10 @@ Collection of plugins
 
 <article>
 
-### preserveDrawingBuffer: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
-old abstract function not used by canvas renderer
+### plugins 
+**Type:** <code>IRendererPlugins</code>
+
+**Description:** Collection of plugins
 
 </article>
 
@@ -273,8 +293,10 @@ old abstract function not used by canvas renderer
 
 <article>
 
-### refresh: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
-Boolean flag controlling canvas refresh.
+### preserveDrawingBuffer : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>boolean</code>
+
+**Description:** old abstract function not used by canvas renderer
 
 </article>
 
@@ -283,20 +305,10 @@ Boolean flag controlling canvas refresh.
 
 <article>
 
-### rendererLogId: <span><code>string</code></span>
-- **Default Value**: <code>"Canvas"</code>
+### refresh : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>boolean</code>
 
-When logging Pixi to the console, this is the name we will show
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### renderingToScreen: <span><code>boolean</code></span>
-Flag if we are rendering to the screen vs renderTexture
+**Description:** Boolean flag controlling canvas refresh.
 
 </article>
 
@@ -305,8 +317,12 @@ Flag if we are rendering to the screen vs renderTexture
 
 <article>
 
-### resolution: <span><code>number</code></span>
-The resolution / device pixel ratio of the renderer.
+### rendererLogId 
+**Type:** <code>string</code>
+
+**Default Value**: <code>"Canvas"</code>
+
+**Description:** When logging Pixi to the console, this is the name we will show
 
 </article>
 
@@ -315,8 +331,10 @@ The resolution / device pixel ratio of the renderer.
 
 <article>
 
-### rootContext: <span><code>ICanvasRenderingContext2D</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0 Use `renderer.canvasContext.rootContext instead</span>
-The root canvas 2d context that everything is drawn with.
+### renderingToScreen 
+**Type:** <code>boolean</code>
+
+**Description:** Flag if we are rendering to the screen vs renderTexture
 
 </article>
 
@@ -325,8 +343,10 @@ The root canvas 2d context that everything is drawn with.
 
 <article>
 
-### runners: <span><code>&#123; [key&#58; string]&#58; Runner &#125;</code></span>
-a collection of runners defined by the user
+### resolution 
+**Type:** <code>number</code>
+
+**Description:** The resolution / device pixel ratio of the renderer.
 
 </article>
 
@@ -335,8 +355,10 @@ a collection of runners defined by the user
 
 <article>
 
-### screen: <span><code>Rectangle</code></span>
-Measurements of the screen. (0, 0, screenWidth, screenHeight). Its safe to use as filterArea or hitArea for the whole stage.
+### rootContext : <span class="deprecated-tag"> Deprecated: since 7.0.0 Use `renderer.canvasContext.rootContext instead</span>
+**Type:** <code>ICanvasRenderingContext2D</code>
+
+**Description:** The root canvas 2d context that everything is drawn with.
 
 </article>
 
@@ -345,8 +367,10 @@ Measurements of the screen. (0, 0, screenWidth, screenHeight). Its safe to use a
 
 <article>
 
-### smoothProperty: <span><code>SmoothingEnabledProperties</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0 Use `renderer.canvasContext.smoothProperty` instead.</span>
-The canvas property used to set the canvas smoothing property.
+### runners 
+**Type:** <code>&#123; [key&#58; string]&#58; Runner &#125;</code>
+
+**Description:** a collection of runners defined by the user
 
 </article>
 
@@ -355,8 +379,10 @@ The canvas property used to set the canvas smoothing property.
 
 <article>
 
-### startup: <span><code>StartupSystem</code></span>
-Startup system instance
+### screen 
+**Type:** <code>Rectangle</code>
+
+**Description:** Measurements of the screen. (0, 0, screenWidth, screenHeight). Its safe to use as filterArea or hitArea for the whole stage.
 
 </article>
 
@@ -365,8 +391,10 @@ Startup system instance
 
 <article>
 
-### textureGenerator: <span><code>GenerateTextureSystem</code></span>
-textureGenerator system instance
+### smoothProperty : <span class="deprecated-tag"> Deprecated: since 7.0.0 Use `renderer.canvasContext.smoothProperty` instead.</span>
+**Type:** <code>SmoothingEnabledProperties</code>
+
+**Description:** The canvas property used to set the canvas smoothing property.
 
 </article>
 
@@ -375,8 +403,10 @@ textureGenerator system instance
 
 <article>
 
-### type: <span><code>number</code></span>
-The type of the renderer. will be PIXI.RENDERER_TYPE.CANVAS
+### startup 
+**Type:** <code>StartupSystem</code>
+
+**Description:** Startup system instance
 
 </article>
 
@@ -385,8 +415,10 @@ The type of the renderer. will be PIXI.RENDERER_TYPE.CANVAS
 
 <article>
 
-### useContextAlpha: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
-old abstract function not used by canvas renderer
+### textureGenerator 
+**Type:** <code>GenerateTextureSystem</code>
+
+**Description:** textureGenerator system instance
 
 </article>
 
@@ -395,8 +427,10 @@ old abstract function not used by canvas renderer
 
 <article>
 
-### view: <span><code>ICanvas</code></span>
-The canvas element that everything is drawn to.
+### type 
+**Type:** <code>number</code>
+
+**Description:** The type of the renderer. will be PIXI.RENDERER_TYPE.CANVAS
 
 </article>
 
@@ -405,20 +439,10 @@ The canvas element that everything is drawn to.
 
 <article>
 
-### width: <span><code>number</code></span>
-- **Default Value**: <code>800</code>
+### useContextAlpha : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>boolean</code>
 
-Same as view.width, actual number of pixels in the canvas by horizontal.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### plugins: <span><code>object</code></span>
-Collection of installed plugins. These are included by default in PIXI, but can be excluded by creating a custom build. Consult the README for more information about creating custom builds and excluding plugins.
+**Description:** old abstract function not used by canvas renderer
 
 </article>
 
@@ -427,8 +451,48 @@ Collection of installed plugins. These are included by default in PIXI, but can 
 
 <article>
 
-### accessibility: <span><code>PIXI.AccessibilityManager</code></span>
-Support tabbing interactive elements.
+### view 
+**Type:** <code>ICanvas</code>
+
+**Description:** The canvas element that everything is drawn to.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width 
+**Type:** <code>number</code>
+
+**Default Value**: <code>800</code>
+
+**Description:** Same as view.width, actual number of pixels in the canvas by horizontal.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### plugins 
+**Type:** <code>object</code>
+
+**Description:** Collection of installed plugins. These are included by default in PIXI, but can be excluded by creating a custom build. Consult the README for more information about creating custom builds and excluding plugins.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### accessibility 
+**Type:** <code>PIXI.AccessibilityManager</code>
+
+**Description:** Support tabbing interactive elements.
 
 </article>
 
@@ -439,8 +503,10 @@ Support tabbing interactive elements.
 ## Methods
 <article>
 
-### addRunners: <span><code>(runnerIds&#58; string[]) -&#62; void</code></span>
-Create a bunch of runners based of a collection of ids
+### addRunners 
+**Type:** <code>(runnerIds&#58; string[]) -&#62; void</code>
+
+**Description:** Create a bunch of runners based of a collection of ids
 
 #### Parameters:
 | Name      | Type                  | Description           |
@@ -453,8 +519,10 @@ Create a bunch of runners based of a collection of ids
 
 <article>
 
-### addSystem: <span><code>(ClassRef&#58; ISystemConstructor&#60;R&#62;, name&#58; string) -&#62; this</code></span>
-Add a new system to the renderer.
+### addSystem 
+**Type:** <code>(ClassRef&#58; ISystemConstructor&#60;R&#62;, name&#58; string) -&#62; this</code>
+
+**Description:** Add a new system to the renderer.
 
 #### Parameters:
 | Name     | Type                                       | Description                                                                                                                                                                                                             |
@@ -472,8 +540,10 @@ Add a new system to the renderer.
 
 <article>
 
-### clear: <span><code>() -&#62; void</code></span>
-Clear the canvas of renderer.
+### clear 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Clear the canvas of renderer.
 
 </article>
 
@@ -482,8 +552,10 @@ Clear the canvas of renderer.
 
 <article>
 
-### destroy: <span><code>(removeView&#58; boolean) -&#62; void</code></span>
-Removes everything from the renderer and optionally removes the Canvas DOM element.
+### destroy 
+**Type:** <code>(removeView&#58; boolean) -&#62; void</code>
+
+**Description:** Removes everything from the renderer and optionally removes the Canvas DOM element.
 
 #### Parameters:
 | Name       | Type                 | Description                              |
@@ -496,8 +568,10 @@ Removes everything from the renderer and optionally removes the Canvas DOM eleme
 
 <article>
 
-### emitWithCustomOptions: <span><code>(runner&#58; Runner, options&#58; Record&#60;string, unknown&#62;) -&#62; void</code></span>
-A function that will run a runner and call the runners function but pass in different options to each system based on there name.
+### emitWithCustomOptions 
+**Type:** <code>(runner&#58; Runner, options&#58; Record&#60;string, unknown&#62;) -&#62; void</code>
+
+**Description:** A function that will run a runner and call the runners function but pass in different options to each system based on there name.
 
 E.g. If you have two systems added called `systemA` and `systemB` you could call do the following&#58;
 
@@ -523,8 +597,10 @@ system.emitWithCustomOptions(init, {
 
 <article>
 
-### generateTexture: <span><code>(displayObject&#58; IRenderableObject, options&#58; object) -&#62; RenderTexture</code></span>
-Useful function that returns a texture of the display object that can then be used to create sprites This can be quite useful if your displayObject is complicated and needs to be reused multiple times.
+### generateTexture 
+**Type:** <code>(displayObject&#58; IRenderableObject, options&#58; object) -&#62; RenderTexture</code>
+
+**Description:** Useful function that returns a texture of the display object that can then be used to create sprites This can be quite useful if your displayObject is complicated and needs to be reused multiple times.
 
 #### Parameters:
 | Name                | Type                           | Description                                                                                                                            |
@@ -546,8 +622,10 @@ Useful function that returns a texture of the display object that can then be us
 
 <article>
 
-### invalidateBlendMode: <span><code>() -&#62; void</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0 Use `renderer.canvasContext.invalidateBlendMode` instead.</span>
-Checks if blend mode has changed.
+### invalidateBlendMode : <span class="deprecated-tag"> Deprecated: since 7.0.0 Use `renderer.canvasContext.invalidateBlendMode` instead.</span>
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Checks if blend mode has changed.
 
 </article>
 
@@ -556,8 +634,10 @@ Checks if blend mode has changed.
 
 <article>
 
-### render: <span><code>(displayObject&#58; DisplayObject, options&#58; IRendererRenderOptions) -&#62; void</code></span>
-Renders the object to its WebGL view.
+### render 
+**Type:** <code>(displayObject&#58; DisplayObject, options&#58; IRendererRenderOptions) -&#62; void</code>
+
+**Description:** Renders the object to its WebGL view.
 
 #### Parameters:
 | Name                        | Type                                | Description                                                  |
@@ -575,8 +655,10 @@ Renders the object to its WebGL view.
 
 <article>
 
-### resize: <span><code>(desiredScreenWidth&#58; number, desiredScreenHeight&#58; number) -&#62; void</code></span>
-Resizes the canvas view to the specified width and height.
+### resize 
+**Type:** <code>(desiredScreenWidth&#58; number, desiredScreenHeight&#58; number) -&#62; void</code>
+
+**Description:** Resizes the canvas view to the specified width and height.
 
 #### Parameters:
 | Name                | Type                | Description                      |
@@ -590,8 +672,10 @@ Resizes the canvas view to the specified width and height.
 
 <article>
 
-### setBlendMode: <span><code>(blendMode&#58; number, readyForOuterBlend&#58; boolean) -&#62; void</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0 Use `renderer.canvasContext.setBlendMode` instead.</span>
-Sets the blend mode of the renderer.
+### setBlendMode : <span class="deprecated-tag"> Deprecated: since 7.0.0 Use `renderer.canvasContext.setBlendMode` instead.</span>
+**Type:** <code>(blendMode&#58; number, readyForOuterBlend&#58; boolean) -&#62; void</code>
+
+**Description:** Sets the blend mode of the renderer.
 
 #### Parameters:
 | Name               | Type                 | Description                                                                                                      |
@@ -605,8 +689,10 @@ Sets the blend mode of the renderer.
 
 <article>
 
-### setContextTransform: <span><code>(transform&#58; Matrix, roundPixels&#58; boolean, localResolution&#58; number) -&#62; void</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0 - Use `renderer.canvasContext.setContextTransform` instead.</span>
-Sets matrix of context. called only from render() methods takes care about resolution
+### setContextTransform : <span class="deprecated-tag"> Deprecated: since 7.0.0 - Use `renderer.canvasContext.setContextTransform` instead.</span>
+**Type:** <code>(transform&#58; Matrix, roundPixels&#58; boolean, localResolution&#58; number) -&#62; void</code>
+
+**Description:** Sets matrix of context. called only from render() methods takes care about resolution
 
 #### Parameters:
 | Name            | Type                 | Description                                                           |
@@ -621,8 +707,10 @@ Sets matrix of context. called only from render() methods takes care about resol
 
 <article>
 
-### setup: <span><code>(config&#58; ISystemConfig&#60;R&#62;) -&#62; void</code></span>
-Set up a system with a collection of SystemClasses and runners. Systems are attached dynamically to this class when added.
+### setup 
+**Type:** <code>(config&#58; ISystemConfig&#60;R&#62;) -&#62; void</code>
+
+**Description:** Set up a system with a collection of SystemClasses and runners. Systems are attached dynamically to this class when added.
 
 #### Parameters:
 | Name   | Type                                  | Description                       |

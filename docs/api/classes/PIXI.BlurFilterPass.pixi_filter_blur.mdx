@@ -5,20 +5,24 @@ sidebar_label: "PIXI.BlurFilterPass"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/filter-blur](../modules/pixi_filter_blur).BlurFilterPass
+
+</div>
 
 
 The BlurFilterPass applies a horizontal or vertical Gaussian blur to an object.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.BlurFilterPass: <span><code>(horizontal&#58; boolean, strength&#58; number, quality&#58; number, resolution&#58; , kernelSize&#58; number) </code></span>
+### Constructor:
+<h4><code>new PIXI.BlurFilterPass(horizontal&#58; boolean, strength&#58; number, quality&#58; number, resolution&#58; , kernelSize&#58; number) </code></h4>
 
 #### Parameters:
 | Name       | Type                 | Default        | Description                                                         |
@@ -40,22 +44,12 @@ The BlurFilterPass applies a horizontal or vertical Gaussian blur to an object.
 ## Members
 <article>
 
-### autoFit: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### autoFit 
+**Type:** <code>boolean</code>
 
-If enabled, PixiJS will fit the filter area into boundaries for better performance. Switch it off if it does not work for specific shader.
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### blendMode: <span><code>BLEND_MODES</code></span>
-- **Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
-
-Sets the blend mode of the filter.
+**Description:** If enabled, PixiJS will fit the filter area into boundaries for better performance. Switch it off if it does not work for specific shader.
 
 </article>
 
@@ -64,20 +58,12 @@ Sets the blend mode of the filter.
 
 <article>
 
-### blur: <span><code>number</code></span>
-- **Default Value**: <code>16</code>
+### blendMode 
+**Type:** <code>BLEND_MODES</code>
 
-Sets the strength of both the blur.
+**Default Value**: <code>PIXI.BLEND_MODES.NORMAL</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### enabled: <span><code>boolean</code></span>
-If enabled is true the filter is applied, if false it will not.
+**Description:** Sets the blend mode of the filter.
 
 </article>
 
@@ -86,8 +72,12 @@ If enabled is true the filter is applied, if false it will not.
 
 <article>
 
-### legacy: <span><code>boolean</code></span>
-Legacy filters use position and uvs from attributes (set by filter system)
+### blur 
+**Type:** <code>number</code>
+
+**Default Value**: <code>16</code>
+
+**Description:** Sets the strength of both the blur.
 
 </article>
 
@@ -96,8 +86,10 @@ Legacy filters use position and uvs from attributes (set by filter system)
 
 <article>
 
-### multisample: <span><code>MSAA_QUALITY</code></span>
-The samples override of the filter instance.
+### enabled 
+**Type:** <code>boolean</code>
+
+**Description:** If enabled is true the filter is applied, if false it will not.
 
 </article>
 
@@ -106,8 +98,10 @@ The samples override of the filter instance.
 
 <article>
 
-### padding: <span><code>number</code></span>
-The padding of the filter. Some filters require extra space to breath such as a blur. Increasing this will add extra width and height to the bounds of the object that the filter is applied to.
+### legacy 
+**Type:** <code>boolean</code>
+
+**Description:** Legacy filters use position and uvs from attributes (set by filter system)
 
 </article>
 
@@ -116,8 +110,10 @@ The padding of the filter. Some filters require extra space to breath such as a 
 
 <article>
 
-### program: <span><code>Program</code></span>
-Program that the shader uses.
+### multisample 
+**Type:** <code>MSAA_QUALITY</code>
+
+**Description:** The samples override of the filter instance.
 
 </article>
 
@@ -126,20 +122,10 @@ Program that the shader uses.
 
 <article>
 
-### quality: <span><code>number</code></span>
-- **Default Value**: <code>4</code>
+### padding 
+**Type:** <code>number</code>
 
-Sets the quality of the blur by modifying the number of passes. More passes means higher quality bluring but the lower the performance.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### resolution: <span><code>number</code></span>
-The resolution of the filter. Setting this to be lower will lower the quality but increase the performance of the filter.
+**Description:** The padding of the filter. Some filters require extra space to breath such as a blur. Increasing this will add extra width and height to the bounds of the object that the filter is applied to.
 
 </article>
 
@@ -148,8 +134,10 @@ The resolution of the filter. Setting this to be lower will lower the quality bu
 
 <article>
 
-### state: <span><code>State</code></span>
-The WebGL state the filter requires to render.
+### program 
+**Type:** <code>Program</code>
+
+**Description:** Program that the shader uses.
 
 </article>
 
@@ -158,8 +146,48 @@ The WebGL state the filter requires to render.
 
 <article>
 
-### uniforms: <span><code>Dict&#60;any&#62;</code></span>
-Shader uniform values, shortcut for `uniformGroup.uniforms`.
+### quality 
+**Type:** <code>number</code>
+
+**Default Value**: <code>4</code>
+
+**Description:** Sets the quality of the blur by modifying the number of passes. More passes means higher quality bluring but the lower the performance.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution 
+**Type:** <code>number</code>
+
+**Description:** The resolution of the filter. Setting this to be lower will lower the quality but increase the performance of the filter.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### state 
+**Type:** <code>State</code>
+
+**Description:** The WebGL state the filter requires to render.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uniforms 
+**Type:** <code>Dict&#60;any&#62;</code>
+
+**Description:** Shader uniform values, shortcut for `uniformGroup.uniforms`.
 
 </article>
 
@@ -170,8 +198,10 @@ Shader uniform values, shortcut for `uniformGroup.uniforms`.
 ## Methods
 <article>
 
-### apply: <span><code>(filterManager&#58; FilterSystem, input&#58; RenderTexture, output&#58; RenderTexture, clearMode&#58; CLEAR_MODES) -&#62; void</code></span>
-Applies the filter.
+### apply 
+**Type:** <code>(filterManager&#58; FilterSystem, input&#58; RenderTexture, output&#58; RenderTexture, clearMode&#58; CLEAR_MODES) -&#62; void</code>
+
+**Description:** Applies the filter.
 
 #### Parameters:
 | Name          | Type                       | Description        |

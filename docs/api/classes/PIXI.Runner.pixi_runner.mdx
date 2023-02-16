@@ -5,7 +5,12 @@ sidebar_label: "PIXI.Runner"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/runner](../modules/pixi_runner).Runner
+
+</div>
 
 
 A Runner is a highly performant and simple alternative to signals. Best used in situations where events are dispatched to many objects at high frequency (say every frame!)
@@ -54,13 +59,12 @@ myGame.update.emit(time);
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Runner: <span><code>(name&#58; string) </code></span>
+### Constructor:
+<h4><code>new PIXI.Runner(name&#58; string) </code></h4>
 
 #### Parameters:
 | Name | Type                | Default       | Description                                                                    |
@@ -77,8 +81,10 @@ myGame.update.emit(time);
 ## Members
 <article>
 
-### empty: <span><code>boolean</code></span>
-`true` if there are no this Runner contains no listeners
+### empty 
+**Type:** <code>boolean</code>
+
+**Description:** `true` if there are no this Runner contains no listeners
 
 </article>
 
@@ -87,8 +93,10 @@ myGame.update.emit(time);
 
 <article>
 
-### name: <span><code>string</code></span>
-The name of the runner.
+### name 
+**Type:** <code>string</code>
+
+**Description:** The name of the runner.
 
 </article>
 
@@ -99,8 +107,10 @@ The name of the runner.
 ## Methods
 <article>
 
-### add: <span><code>(item&#58; any) -&#62; this</code></span>
-Add a listener to the Runner
+### add 
+**Type:** <code>(item&#58; any) -&#62; this</code>
+
+**Description:** Add a listener to the Runner
 Runners do not need to have scope or functions passed to them. All that is required is to pass the listening object and ensure that it has contains a function that has the same name as the name provided to the Runner when it was created.
 
 E.g. A listener passed to this Runner will require a 'complete' function.
@@ -129,8 +139,10 @@ The scope used will be the object itself.
 
 <article>
 
-### contains: <span><code>(item&#58; any) -&#62; boolean</code></span>
-Check to see if the listener is already in the Runner
+### contains 
+**Type:** <code>(item&#58; any) -&#62; boolean</code>
+
+**Description:** Check to see if the listener is already in the Runner
 
 #### Parameters:
 | Name | Type             | Description                                |
@@ -147,8 +159,10 @@ Check to see if the listener is already in the Runner
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Remove all references, don't use after this.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Remove all references, don't use after this.
 
 </article>
 
@@ -157,8 +171,10 @@ Remove all references, don't use after this.
 
 <article>
 
-### dispatch: <span><code>() -&#62; </code></span>
-Alias for `emit`
+### dispatch 
+**Type:** <code>() -&#62; </code>
+
+**Description:** Alias for `emit`
 
 </article>
 
@@ -167,8 +183,10 @@ Alias for `emit`
 
 <article>
 
-### emit: <span><code>(params&#58; any) -&#62; this</code></span>
-Dispatch/Broadcast Runner to all listeners added to the queue.
+### emit 
+**Type:** <code>(params&#58; any) -&#62; this</code>
+
+**Description:** Dispatch/Broadcast Runner to all listeners added to the queue.
 
 #### Parameters:
 | Name   | Type             | Description                                    |
@@ -185,8 +203,10 @@ Dispatch/Broadcast Runner to all listeners added to the queue.
 
 <article>
 
-### remove: <span><code>(item&#58; any) -&#62; this</code></span>
-Remove a single listener from the dispatch queue.
+### remove 
+**Type:** <code>(item&#58; any) -&#62; this</code>
+
+**Description:** Remove a single listener from the dispatch queue.
 
 #### Parameters:
 | Name | Type             | Description                                 |
@@ -203,8 +223,10 @@ Remove a single listener from the dispatch queue.
 
 <article>
 
-### removeAll: <span><code>() -&#62; this</code></span>
-Remove all listeners from the Runner
+### removeAll 
+**Type:** <code>() -&#62; this</code>
+
+**Description:** Remove all listeners from the Runner
 
 #### Returns:
 | Type              | Description |
@@ -217,8 +239,10 @@ Remove all listeners from the Runner
 
 <article>
 
-### run: <span><code>() -&#62; </code></span>
-Alias for `emit`
+### run 
+**Type:** <code>() -&#62; </code>
+
+**Description:** Alias for `emit`
 
 </article>
 

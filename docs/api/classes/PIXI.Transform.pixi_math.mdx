@@ -5,29 +5,36 @@ sidebar_label: "PIXI.Transform"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/math](../modules/pixi_math).Transform
+
+</div>
 
 
 Transform that takes care about its versions.
 
 
 
-// TODO: @see
-
         
 
 <article>
+### Contructor:
+<h4><code>new PIXI()</code></h4>
 
-### new PIXI()
 </article>
+            
 
 
 
 ## Members
 <article>
 
-### IDENTITY: <span><code>PIXI.Transform</code></span>
-A default (identity) transform.
+### IDENTITY 
+**Type:** <code>PIXI.Transform</code>
+
+**Description:** A default (identity) transform.
 
 </article>
 
@@ -36,8 +43,10 @@ A default (identity) transform.
 
 <article>
 
-### _parentID: <span><code>number</code></span>
-The locally unique ID of the parent's world transform used to calculate the current world transformation matrix.
+### _parentID 
+**Type:** <code>number</code>
+
+**Description:** The locally unique ID of the parent's world transform used to calculate the current world transformation matrix.
 
 </article>
 
@@ -46,8 +55,10 @@ The locally unique ID of the parent's world transform used to calculate the curr
 
 <article>
 
-### _worldID: <span><code>number</code></span>
-The locally unique ID of the world transform.
+### _worldID 
+**Type:** <code>number</code>
+
+**Description:** The locally unique ID of the world transform.
 
 </article>
 
@@ -56,8 +67,10 @@ The locally unique ID of the world transform.
 
 <article>
 
-### localTransform: <span><code>Matrix</code></span>
-The local transformation matrix.
+### localTransform 
+**Type:** <code>Matrix</code>
+
+**Description:** The local transformation matrix.
 
 </article>
 
@@ -66,8 +79,10 @@ The local transformation matrix.
 
 <article>
 
-### pivot: <span><code>ObservablePoint</code></span>
-The pivot point of the displayObject that it rotates around.
+### pivot 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The pivot point of the displayObject that it rotates around.
 
 </article>
 
@@ -76,8 +91,10 @@ The pivot point of the displayObject that it rotates around.
 
 <article>
 
-### position: <span><code>ObservablePoint</code></span>
-The coordinate of the object relative to the local coordinates of the parent.
+### position 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The coordinate of the object relative to the local coordinates of the parent.
 
 </article>
 
@@ -86,8 +103,10 @@ The coordinate of the object relative to the local coordinates of the parent.
 
 <article>
 
-### rotation: <span><code>number</code></span>
-The rotation of the object in radians.
+### rotation 
+**Type:** <code>number</code>
+
+**Description:** The rotation of the object in radians.
 
 </article>
 
@@ -96,8 +115,10 @@ The rotation of the object in radians.
 
 <article>
 
-### scale: <span><code>ObservablePoint</code></span>
-The scale factor of the object.
+### scale 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The scale factor of the object.
 
 </article>
 
@@ -106,8 +127,10 @@ The scale factor of the object.
 
 <article>
 
-### skew: <span><code>ObservablePoint</code></span>
-The skew amount, on the x and y axis.
+### skew 
+**Type:** <code>ObservablePoint</code>
+
+**Description:** The skew amount, on the x and y axis.
 
 </article>
 
@@ -116,8 +139,10 @@ The skew amount, on the x and y axis.
 
 <article>
 
-### worldTransform: <span><code>Matrix</code></span>
-The world transformation matrix.
+### worldTransform 
+**Type:** <code>Matrix</code>
+
+**Description:** The world transformation matrix.
 
 </article>
 
@@ -126,8 +151,10 @@ The world transformation matrix.
 
 <article>
 
-### _currentLocalID: <span><code>number</code></span>
-The locally unique ID of the local transform used to calculate the current local transformation matrix.
+### _currentLocalID 
+**Type:** <code>number</code>
+
+**Description:** The locally unique ID of the local transform used to calculate the current local transformation matrix.
 
 </article>
 
@@ -136,8 +163,10 @@ The locally unique ID of the local transform used to calculate the current local
 
 <article>
 
-### _cx: <span><code>number</code></span>
-The X-coordinate value of the normalized local X axis, the first column of the local transformation matrix without a scale.
+### _cx 
+**Type:** <code>number</code>
+
+**Description:** The X-coordinate value of the normalized local X axis, the first column of the local transformation matrix without a scale.
 
 </article>
 
@@ -146,8 +175,10 @@ The X-coordinate value of the normalized local X axis, the first column of the l
 
 <article>
 
-### _cy: <span><code>number</code></span>
-The X-coordinate value of the normalized local Y axis, the second column of the local transformation matrix without a scale.
+### _cy 
+**Type:** <code>number</code>
+
+**Description:** The X-coordinate value of the normalized local Y axis, the second column of the local transformation matrix without a scale.
 
 </article>
 
@@ -156,8 +187,10 @@ The X-coordinate value of the normalized local Y axis, the second column of the 
 
 <article>
 
-### _localID: <span><code>number</code></span>
-The locally unique ID of the local transform.
+### _localID 
+**Type:** <code>number</code>
+
+**Description:** The locally unique ID of the local transform.
 
 </article>
 
@@ -166,8 +199,10 @@ The locally unique ID of the local transform.
 
 <article>
 
-### _rotation: <span><code>number</code></span>
-The rotation amount.
+### _rotation 
+**Type:** <code>number</code>
+
+**Description:** The rotation amount.
 
 </article>
 
@@ -176,8 +211,10 @@ The rotation amount.
 
 <article>
 
-### _sx: <span><code>number</code></span>
-The Y-coordinate value of the normalized local X axis, the first column of the local transformation matrix without a scale.
+### _sx 
+**Type:** <code>number</code>
+
+**Description:** The Y-coordinate value of the normalized local X axis, the first column of the local transformation matrix without a scale.
 
 </article>
 
@@ -186,8 +223,10 @@ The Y-coordinate value of the normalized local X axis, the first column of the l
 
 <article>
 
-### _sy: <span><code>number</code></span>
-The Y-coordinate value of the normalized local Y axis, the second column of the local transformation matrix without a scale.
+### _sy 
+**Type:** <code>number</code>
+
+**Description:** The Y-coordinate value of the normalized local Y axis, the second column of the local transformation matrix without a scale.
 
 </article>
 
@@ -198,8 +237,10 @@ The Y-coordinate value of the normalized local Y axis, the second column of the 
 ## Methods
 <article>
 
-### setFromMatrix: <span><code>(matrix&#58; Matrix) -&#62; void</code></span>
-Decomposes a matrix and sets the transforms properties based on it.
+### setFromMatrix 
+**Type:** <code>(matrix&#58; Matrix) -&#62; void</code>
+
+**Description:** Decomposes a matrix and sets the transforms properties based on it.
 
 #### Parameters:
 | Name   | Type                | Description             |
@@ -212,8 +253,10 @@ Decomposes a matrix and sets the transforms properties based on it.
 
 <article>
 
-### updateLocalTransform: <span><code>() -&#62; void</code></span>
-Updates the local transformation matrix.
+### updateLocalTransform 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Updates the local transformation matrix.
 
 </article>
 
@@ -222,8 +265,10 @@ Updates the local transformation matrix.
 
 <article>
 
-### updateTransform: <span><code>(parentTransform&#58; Transform) -&#62; void</code></span>
-Updates the local and the world transformation matrices.
+### updateTransform 
+**Type:** <code>(parentTransform&#58; Transform) -&#62; void</code>
+
+**Description:** Updates the local and the world transformation matrices.
 
 #### Parameters:
 | Name            | Type                   | Description          |
@@ -236,8 +281,10 @@ Updates the local and the world transformation matrices.
 
 <article>
 
-### onChange: <span><code>() -&#62; void</code></span>
-Called when a value changes.
+### onChange 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Called when a value changes.
 
 </article>
 
@@ -246,8 +293,10 @@ Called when a value changes.
 
 <article>
 
-### updateSkew: <span><code>() -&#62; void</code></span>
-Called when the skew or the rotation changes.
+### updateSkew 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Called when the skew or the rotation changes.
 
 </article>
 

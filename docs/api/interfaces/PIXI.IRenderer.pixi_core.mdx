@@ -5,14 +5,17 @@ sidebar_label: "PIXI.IRenderer"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).IRenderer
+
+</div>
 
 
 Starard Interface for a Pixi renderer.
 
 
-
-// TODO: @see
 
         
 
@@ -62,8 +65,10 @@ Starard Interface for a Pixi renderer.
 ## Members
 <article>
 
-### runners: <span><code>&#123; [key&#58; string]&#58; Runner &#125;</code></span>
-a collection of runners defined by the user
+### runners 
+**Type:** <code>&#123; [key&#58; string]&#58; Runner &#125;</code>
+
+**Description:** a collection of runners defined by the user
 
 </article>
 
@@ -72,8 +77,10 @@ a collection of runners defined by the user
 
 <article>
 
-### height: <span><code>number</code></span>
-the height of the screen
+### height 
+**Type:** <code>number</code>
+
+**Description:** the height of the screen
 
 </article>
 
@@ -82,8 +89,10 @@ the height of the screen
 
 <article>
 
-### lastObjectRendered: <span><code>IRenderableObject</code></span>
-the last object rendered by the renderer. Useful for other plugins like interaction managers
+### lastObjectRendered 
+**Type:** <code>IRenderableObject</code>
+
+**Description:** the last object rendered by the renderer. Useful for other plugins like interaction managers
 
 </article>
 
@@ -92,8 +101,10 @@ the last object rendered by the renderer. Useful for other plugins like interact
 
 <article>
 
-### options: <span><code>PIXI.IRendererOptions</code></span>
-The options passed in to create a new instance of the renderer.
+### options 
+**Type:** <code>PIXI.IRendererOptions</code>
+
+**Description:** The options passed in to create a new instance of the renderer.
 
 </article>
 
@@ -102,8 +113,10 @@ The options passed in to create a new instance of the renderer.
 
 <article>
 
-### plugins: <span><code>IRendererPlugins</code></span>
-Collection of plugins
+### plugins 
+**Type:** <code>IRendererPlugins</code>
+
+**Description:** Collection of plugins
 
 </article>
 
@@ -112,8 +125,10 @@ Collection of plugins
 
 <article>
 
-### rendererLogId: <span><code>string</code></span>
-When logging Pixi to the console, this is the name we will show
+### rendererLogId 
+**Type:** <code>string</code>
+
+**Description:** When logging Pixi to the console, this is the name we will show
 
 </article>
 
@@ -122,8 +137,10 @@ When logging Pixi to the console, this is the name we will show
 
 <article>
 
-### renderingToScreen: <span><code>boolean</code></span>
-Flag if we are rendering to the screen vs renderTexture
+### renderingToScreen 
+**Type:** <code>boolean</code>
+
+**Description:** Flag if we are rendering to the screen vs renderTexture
 
 </article>
 
@@ -132,8 +149,10 @@ Flag if we are rendering to the screen vs renderTexture
 
 <article>
 
-### resolution: <span><code>number</code></span>
-The resolution / device pixel ratio of the renderer.
+### resolution 
+**Type:** <code>number</code>
+
+**Description:** The resolution / device pixel ratio of the renderer.
 
 </article>
 
@@ -142,8 +161,10 @@ The resolution / device pixel ratio of the renderer.
 
 <article>
 
-### screen: <span><code>Rectangle</code></span>
-Measurements of the screen. (0, 0, screenWidth, screenHeight). Its safe to use as filterArea or hitArea for the whole stage.
+### screen 
+**Type:** <code>Rectangle</code>
+
+**Description:** Measurements of the screen. (0, 0, screenWidth, screenHeight). Its safe to use as filterArea or hitArea for the whole stage.
 
 </article>
 
@@ -152,8 +173,10 @@ Measurements of the screen. (0, 0, screenWidth, screenHeight). Its safe to use a
 
 <article>
 
-### type: <span><code>RENDERER_TYPE</code></span>
-The type of the renderer.
+### type 
+**Type:** <code>RENDERER_TYPE</code>
+
+**Description:** The type of the renderer.
 
 </article>
 
@@ -162,8 +185,10 @@ The type of the renderer.
 
 <article>
 
-### view: <span><code>VIEW</code></span>
-The canvas element that everything is drawn to.
+### view 
+**Type:** <code>VIEW</code>
+
+**Description:** The canvas element that everything is drawn to.
 
 </article>
 
@@ -172,8 +197,10 @@ The canvas element that everything is drawn to.
 
 <article>
 
-### width: <span><code>number</code></span>
-the width of the screen
+### width 
+**Type:** <code>number</code>
+
+**Description:** the width of the screen
 
 </article>
 
@@ -184,8 +211,10 @@ the width of the screen
 ## Methods
 <article>
 
-### addRunners: <span><code>(runnerIds&#58; string[]) -&#62; void</code></span>
-Create a bunch of runners based of a collection of ids
+### addRunners 
+**Type:** <code>(runnerIds&#58; string[]) -&#62; void</code>
+
+**Description:** Create a bunch of runners based of a collection of ids
 
 #### Parameters:
 | Name      | Type                  | Description           |
@@ -198,8 +227,10 @@ Create a bunch of runners based of a collection of ids
 
 <article>
 
-### addSystem: <span><code>(ClassRef&#58; ISystemConstructor&#60;R&#62;, name&#58; string) -&#62; this</code></span>
-Add a new system to the renderer.
+### addSystem 
+**Type:** <code>(ClassRef&#58; ISystemConstructor&#60;R&#62;, name&#58; string) -&#62; this</code>
+
+**Description:** Add a new system to the renderer.
 
 #### Parameters:
 | Name     | Type                                       | Description                                                                                                                                                                                                             |
@@ -217,8 +248,10 @@ Add a new system to the renderer.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-destroy the all runners and systems. Its apps job to
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** destroy the all runners and systems. Its apps job to
 
 </article>
 
@@ -227,8 +260,10 @@ destroy the all runners and systems. Its apps job to
 
 <article>
 
-### emitWithCustomOptions: <span><code>(runner&#58; Runner, options&#58; Record&#60;string, unknown&#62;) -&#62; void</code></span>
-A function that will run a runner and call the runners function but pass in different options to each system based on there name.
+### emitWithCustomOptions 
+**Type:** <code>(runner&#58; Runner, options&#58; Record&#60;string, unknown&#62;) -&#62; void</code>
+
+**Description:** A function that will run a runner and call the runners function but pass in different options to each system based on there name.
 
 E.g. If you have two systems added called `systemA` and `systemB` you could call do the following&#58;
 
@@ -254,8 +289,10 @@ system.emitWithCustomOptions(init, {
 
 <article>
 
-### setup: <span><code>(config&#58; ISystemConfig&#60;R&#62;) -&#62; void</code></span>
-Set up a system with a collection of SystemClasses and runners. Systems are attached dynamically to this class when added.
+### setup 
+**Type:** <code>(config&#58; ISystemConfig&#60;R&#62;) -&#62; void</code>
+
+**Description:** Set up a system with a collection of SystemClasses and runners. Systems are attached dynamically to this class when added.
 
 #### Parameters:
 | Name   | Type                                  | Description                       |

@@ -5,21 +5,26 @@ sidebar_label: "PIXI.StartupSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).StartupSystem
+
+</div>
 
 
 A simple system responsible for initiating the renderer.
 
 
 
-// TODO: @see
-
         
 
 <article>
+### Contructor:
+<h4><code>new PIXI()</code></h4>
 
-### new PIXI()
 </article>
+            
 
 
 
@@ -28,13 +33,15 @@ A simple system responsible for initiating the renderer.
 ## Methods
 <article>
 
-### run: <span><code>(options&#58; StartupOptions) -&#62; void</code></span>
-It all starts here! This initiates every system, passing in the options for any system by name.
+### run 
+**Type:** <code>(options&#58; StartupSystemOptions) -&#62; void</code>
+
+**Description:** It all starts here! This initiates every system, passing in the options for any system by name.
 
 #### Parameters:
-| Name    | Type                        | Description                                     |
-| ------- | --------------------------- | ----------------------------------------------- |
-| options | <code>StartupOptions</code> | the config for the renderer and all its systems |
+| Name    | Type                              | Description                                     |
+| ------- | --------------------------------- | ----------------------------------------------- |
+| options | <code>StartupSystemOptions</code> | the config for the renderer and all its systems |
 </article>
 
 

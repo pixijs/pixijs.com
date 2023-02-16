@@ -5,7 +5,12 @@ sidebar_label: "PIXI.ObservablePoint"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/math](../modules/pixi_math).ObservablePoint
+
+</div>
 
 
 The ObservablePoint object represents a location in a two-dimensional coordinate system, where `x` represents the position on the horizontal axis and `y` represents the position on the vertical axis.
@@ -14,13 +19,12 @@ An `ObservablePoint` is a point that triggers a callback when the point's positi
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.ObservablePoint: <span><code>(cb&#58; (this&#58; T) =&#62; any, scope&#58; T, x&#58; number, y&#58; number) </code></span>
+### Constructor:
+<h4><code>new PIXI.ObservablePoint(cb&#58; (this&#58; T) =&#62; any, scope&#58; T, x&#58; number, y&#58; number) </code></h4>
 Creates a new `ObservablePoint`
 
 #### Parameters:
@@ -41,8 +45,10 @@ Creates a new `ObservablePoint`
 ## Members
 <article>
 
-### cb: <span><code>(this&#58; T) =&#62; any</code></span>
-The callback function triggered when `x` and/or `y` are changed
+### cb 
+**Type:** <code>(this&#58; T) =&#62; any</code>
+
+**Description:** The callback function triggered when `x` and/or `y` are changed
 
 </article>
 
@@ -51,8 +57,10 @@ The callback function triggered when `x` and/or `y` are changed
 
 <article>
 
-### scope: <span><code>any</code></span>
-The owner of the callback
+### scope 
+**Type:** <code>any</code>
+
+**Description:** The owner of the callback
 
 </article>
 
@@ -61,8 +69,10 @@ The owner of the callback
 
 <article>
 
-### x: <span><code>number</code></span>
-Position of the observable point on the x axis.
+### x 
+**Type:** <code>number</code>
+
+**Description:** Position of the observable point on the x axis.
 
 </article>
 
@@ -71,8 +81,10 @@ Position of the observable point on the x axis.
 
 <article>
 
-### y: <span><code>number</code></span>
-Position of the observable point on the y axis.
+### y 
+**Type:** <code>number</code>
+
+**Description:** Position of the observable point on the y axis.
 
 </article>
 
@@ -83,8 +95,10 @@ Position of the observable point on the y axis.
 ## Methods
 <article>
 
-### add: <span><code>(other&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code></span>
-Adds `other` to `this` point and outputs into `outPoint` or a new Point.
+### add 
+**Type:** <code>(other&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code>
+
+**Description:** Adds `other` to `this` point and outputs into `outPoint` or a new Point.
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 #### Parameters:
@@ -103,8 +117,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### clone: <span><code>(cb&#58; , scope&#58; ) -&#62; ObservablePoint</code></span>
-Creates a clone of this point. The callback and scope params can be overridden otherwise they will default to the clone object's values.
+### clone 
+**Type:** <code>(cb&#58; , scope&#58; ) -&#62; ObservablePoint</code>
+
+**Description:** Creates a clone of this point. The callback and scope params can be overridden otherwise they will default to the clone object's values.
 
 #### Parameters:
 | Name  | Type | Description                                                     |
@@ -122,8 +138,10 @@ Creates a clone of this point. The callback and scope params can be overridden o
 
 <article>
 
-### copyFrom: <span><code>(p&#58; IPointData) -&#62; this</code></span>
-Copies x and y from the given point (`p`)
+### copyFrom 
+**Type:** <code>(p&#58; IPointData) -&#62; this</code>
+
+**Description:** Copies x and y from the given point (`p`)
 
 #### Parameters:
 | Name | Type                    | Description                                                                |
@@ -140,8 +158,10 @@ Copies x and y from the given point (`p`)
 
 <article>
 
-### copyTo: <span><code>(p&#58; T) -&#62; T</code></span>
-Copies this point's x and y into that of the given point (`p`)
+### copyTo 
+**Type:** <code>(p&#58; T) -&#62; T</code>
+
+**Description:** Copies this point's x and y into that of the given point (`p`)
 
 #### Parameters:
 | Name | Type           | Description                                                              |
@@ -158,8 +178,10 @@ Copies this point's x and y into that of the given point (`p`)
 
 <article>
 
-### cross: <span><code>(other&#58; IPointData) -&#62; number</code></span>
-Computes the cross product of `other` with `this` point. Given two linearly independent R3 vectors a and b, the cross product, a × b (read "a cross b"), is a vector that is perpendicular to both a and b, and thus normal to the plane containing them. While cross product only exists on 3D space, we can assume the z component of 2D to be zero and the result becomes a vector that will only have magnitude on the z axis.
+### cross 
+**Type:** <code>(other&#58; IPointData) -&#62; number</code>
+
+**Description:** Computes the cross product of `other` with `this` point. Given two linearly independent R3 vectors a and b, the cross product, a × b (read "a cross b"), is a vector that is perpendicular to both a and b, and thus normal to the plane containing them. While cross product only exists on 3D space, we can assume the z component of 2D to be zero and the result becomes a vector that will only have magnitude on the z axis.
 
 This function returns the z component of the cross product of the two points.
 
@@ -180,8 +202,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### dot: <span><code>(other&#58; IPointData) -&#62; number</code></span>
-Computes the dot product of `other` with `this` point. The dot product is the sum of the products of the corresponding components of two vectors.
+### dot 
+**Type:** <code>(other&#58; IPointData) -&#62; number</code>
+
+**Description:** Computes the dot product of `other` with `this` point. The dot product is the sum of the products of the corresponding components of two vectors.
 
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 
@@ -200,8 +224,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### equals: <span><code>(p&#58; IPointData) -&#62; boolean</code></span>
-Accepts another point (`p`) and returns `true` if the given point is equal to this point
+### equals 
+**Type:** <code>(p&#58; IPointData) -&#62; boolean</code>
+
+**Description:** Accepts another point (`p`) and returns `true` if the given point is equal to this point
 
 #### Parameters:
 | Name | Type                    | Description        |
@@ -218,8 +244,10 @@ Accepts another point (`p`) and returns `true` if the given point is equal to th
 
 <article>
 
-### magnitude: <span><code>() -&#62; number</code></span>
-Computes the magnitude of this point (Euclidean distance from 0, 0).
+### magnitude 
+**Type:** <code>() -&#62; number</code>
+
+**Description:** Computes the magnitude of this point (Euclidean distance from 0, 0).
 Defined as the square root of the sum of the squares of each component.
 
 _Note&#58; Only available with **&#64;pixi/math-extras**._
@@ -235,8 +263,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### magnitudeSquared: <span><code>() -&#62; number</code></span>
-Computes the square magnitude of this point. If you are comparing the lengths of vectors, you should compare the length squared instead as it is slightly more efficient to calculate.
+### magnitudeSquared 
+**Type:** <code>() -&#62; number</code>
+
+**Description:** Computes the square magnitude of this point. If you are comparing the lengths of vectors, you should compare the length squared instead as it is slightly more efficient to calculate.
 
 Defined as the sum of the squares of each component.
 
@@ -253,8 +283,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### multiply: <span><code>(other&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code></span>
-Multiplies component-wise `other` and `this` points and outputs into `outPoint` or a new Point.
+### multiply 
+**Type:** <code>(other&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code>
+
+**Description:** Multiplies component-wise `other` and `this` points and outputs into `outPoint` or a new Point.
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 #### Parameters:
@@ -273,8 +305,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### multiplyScalar: <span><code>(scalar&#58; number, outPoint&#58; IPointData) -&#62; IPointData</code></span>
-Multiplies each component of `this` point with the number `scalar` and outputs into `outPoint` or a new Point.
+### multiplyScalar 
+**Type:** <code>(scalar&#58; number, outPoint&#58; IPointData) -&#62; IPointData</code>
+
+**Description:** Multiplies each component of `this` point with the number `scalar` and outputs into `outPoint` or a new Point.
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 #### Parameters:
@@ -293,8 +327,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### normalize: <span><code>(outPoint&#58; IPointData) -&#62; IPointData</code></span>
-Computes a normalized version of `this` point.
+### normalize 
+**Type:** <code>(outPoint&#58; IPointData) -&#62; IPointData</code>
+
+**Description:** Computes a normalized version of `this` point.
 A normalized vector is a vector of magnitude (length) 1
 
 _Note&#58; Only available with **&#64;pixi/math-extras**._
@@ -314,8 +350,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### project: <span><code>(onto&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code></span>
-Computes vector projection of `this` on `onto`.
+### project 
+**Type:** <code>(onto&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code>
+
+**Description:** Computes vector projection of `this` on `onto`.
 Imagine a light source, parallel to `onto`, above `this`. The light would cast rays perpendicular to `onto`.`this.project(onto)` is the shadow cast by `this` on the line defined by `onto` .
 
 _Note&#58; Only available with **&#64;pixi/math-extras**._
@@ -336,8 +374,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### reflect: <span><code>(normal&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code></span>
-Reflects `this` vector off of a plane orthogonal to `normal`.`normal` is not normalized during this process. Consider normalizing your `normal` before use.
+### reflect 
+**Type:** <code>(normal&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code>
+
+**Description:** Reflects `this` vector off of a plane orthogonal to `normal`.`normal` is not normalized during this process. Consider normalizing your `normal` before use.
 
 Imagine a light source bouncing onto a mirror.`this` vector is the light and `normal` is a vector perpendicular to the mirror.`this.reflect(normal)` is the reflection of `this` on that mirror.
 
@@ -359,8 +399,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### set: <span><code>(x&#58; number, y&#58; number) -&#62; this</code></span>
-Sets the point to a new `x` and `y` position. If `y` is omitted, both `x` and `y` will be set to `x`.
+### set 
+**Type:** <code>(x&#58; number, y&#58; number) -&#62; this</code>
+
+**Description:** Sets the point to a new `x` and `y` position. If `y` is omitted, both `x` and `y` will be set to `x`.
 
 #### Parameters:
 | Name | Type                | Description                         |
@@ -378,8 +420,10 @@ Sets the point to a new `x` and `y` position. If `y` is omitted, both `x` and `y
 
 <article>
 
-### subtract: <span><code>(other&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code></span>
-Subtracts `other` from `this` point and outputs into `outPoint` or a new Point.
+### subtract 
+**Type:** <code>(other&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code>
+
+**Description:** Subtracts `other` from `this` point and outputs into `outPoint` or a new Point.
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 #### Parameters:

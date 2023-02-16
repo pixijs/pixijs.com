@@ -5,7 +5,12 @@ sidebar_label: "PIXI.FilterSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).FilterSystem
+
+</div>
 
 System plugin to the renderer to manage filters.
 ## Pipeline
@@ -22,13 +27,12 @@ The filter-frame is the rectangle in world space being filtered, and those conte
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.FilterSystem: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.FilterSystem(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -45,8 +49,10 @@ The filter-frame is the rectangle in world space being filtered, and those conte
 ## Members
 <article>
 
-### defaultFilterStack: <span><code>Array&#60;object&#62;</code></span>
-List of filters for the FilterSystem
+### defaultFilterStack 
+**Type:** <code>Array&#60;object&#62;</code>
+
+**Description:** List of filters for the FilterSystem
 
 </article>
 
@@ -55,8 +61,10 @@ List of filters for the FilterSystem
 
 <article>
 
-### forceClear: <span><code>boolean</code></span>
-Whether to clear output renderTexture in AUTO/BLIT mode. See [PIXI.CLEAR_MODES](../enums/PIXI.CLEAR_MODES.pixi_constants).
+### forceClear 
+**Type:** <code>boolean</code>
+
+**Description:** Whether to clear output renderTexture in AUTO/BLIT mode. See [PIXI.CLEAR_MODES](../enums/PIXI.CLEAR_MODES.pixi_constants).
 
 </article>
 
@@ -65,8 +73,10 @@ Whether to clear output renderTexture in AUTO/BLIT mode. See [PIXI.CLEAR_MODES](
 
 <article>
 
-### statePool: <span><code>Array&#60;FilterState&#62;</code></span>
-A pool for storing filter states, save us creating new ones each tick.
+### statePool 
+**Type:** <code>Array&#60;FilterState&#62;</code>
+
+**Description:** A pool for storing filter states, save us creating new ones each tick.
 
 </article>
 
@@ -75,8 +85,10 @@ A pool for storing filter states, save us creating new ones each tick.
 
 <article>
 
-### texturePool: <span><code>RenderTexturePool</code></span>
-Stores a bunch of POT textures used for filtering.
+### texturePool 
+**Type:** <code>RenderTexturePool</code>
+
+**Description:** Stores a bunch of POT textures used for filtering.
 
 </article>
 
@@ -85,20 +97,12 @@ Stores a bunch of POT textures used for filtering.
 
 <article>
 
-### useMaxPadding: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### useMaxPadding 
+**Type:** <code>boolean</code>
 
-Old padding behavior is to use the max amount instead of sum padding. Use this flag if you need the old behavior.
+**Default Value**: <code>false</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### activeState: <span><code>object</code></span>
-Active state
+**Description:** Old padding behavior is to use the max amount instead of sum padding. Use this flag if you need the old behavior.
 
 </article>
 
@@ -107,8 +111,10 @@ Active state
 
 <article>
 
-### globalUniforms: <span><code>UniformGroup</code></span>
-This uniform group is attached to filter uniforms when used.
+### activeState 
+**Type:** <code>object</code>
+
+**Description:** Active state
 
 </article>
 
@@ -117,7 +123,10 @@ This uniform group is attached to filter uniforms when used.
 
 <article>
 
-### filterArea: <span><code>Float32Array</code></span>
+### globalUniforms 
+**Type:** <code>UniformGroup</code>
+
+**Description:** This uniform group is attached to filter uniforms when used.
 
 </article>
 
@@ -126,7 +135,9 @@ This uniform group is attached to filter uniforms when used.
 
 <article>
 
-### filterClamp: <span><code>Float32Array</code></span>
+### filterArea 
+**Type:** <code>Float32Array</code>
+
 
 </article>
 
@@ -135,7 +146,9 @@ This uniform group is attached to filter uniforms when used.
 
 <article>
 
-### inputClamp: <span><code>Float32Array</code></span>
+### filterClamp 
+**Type:** <code>Float32Array</code>
+
 
 </article>
 
@@ -144,7 +157,9 @@ This uniform group is attached to filter uniforms when used.
 
 <article>
 
-### inputPixel: <span><code>Float32Array</code></span>
+### inputClamp 
+**Type:** <code>Float32Array</code>
+
 
 </article>
 
@@ -153,7 +168,9 @@ This uniform group is attached to filter uniforms when used.
 
 <article>
 
-### inputSize: <span><code>Float32Array</code></span>
+### inputPixel 
+**Type:** <code>Float32Array</code>
+
 
 </article>
 
@@ -162,7 +179,9 @@ This uniform group is attached to filter uniforms when used.
 
 <article>
 
-### outputFrame: <span><code>PIXI.Rectangle</code></span>
+### inputSize 
+**Type:** <code>Float32Array</code>
+
 
 </article>
 
@@ -171,7 +190,9 @@ This uniform group is attached to filter uniforms when used.
 
 <article>
 
-### resolution: <span><code>number</code></span>
+### outputFrame 
+**Type:** <code>PIXI.Rectangle</code>
+
 
 </article>
 
@@ -180,8 +201,9 @@ This uniform group is attached to filter uniforms when used.
 
 <article>
 
-### quad: <span><code>Quad</code></span>
-A very simple geometry used when drawing a filter effect to the screen.
+### resolution 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -190,8 +212,22 @@ A very simple geometry used when drawing a filter effect to the screen.
 
 <article>
 
-### quadUv: <span><code>QuadUv</code></span>
-Quad UVs
+### quad 
+**Type:** <code>Quad</code>
+
+**Description:** A very simple geometry used when drawing a filter effect to the screen.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### quadUv 
+**Type:** <code>QuadUv</code>
+
+**Description:** Quad UVs
 
 </article>
 
@@ -202,8 +238,10 @@ Quad UVs
 ## Methods
 <article>
 
-### applyFilter: <span><code>(filter&#58; Filter, input&#58; RenderTexture, output&#58; RenderTexture, clearMode&#58; CLEAR_MODES) -&#62; void</code></span>
-Draws a filter using the default rendering process.
+### applyFilter 
+**Type:** <code>(filter&#58; Filter, input&#58; RenderTexture, output&#58; RenderTexture, clearMode&#58; CLEAR_MODES) -&#62; void</code>
+
+**Description:** Draws a filter using the default rendering process.
 This should be called only by [PIXI.Filter#apply](../classes/PIXI.Filter.pixi_core#apply).
 
 #### Parameters:
@@ -220,8 +258,10 @@ This should be called only by [PIXI.Filter#apply](../classes/PIXI.Filter.pixi_co
 
 <article>
 
-### bindAndClear: <span><code>(filterTexture&#58; RenderTexture, clearMode&#58; CLEAR_MODES) -&#62; void</code></span>
-Binds a renderTexture with corresponding `filterFrame`, clears it if mode corresponds.
+### bindAndClear 
+**Type:** <code>(filterTexture&#58; RenderTexture, clearMode&#58; CLEAR_MODES) -&#62; void</code>
+
+**Description:** Binds a renderTexture with corresponding `filterFrame`, clears it if mode corresponds.
 
 #### Parameters:
 | Name          | Type                       | Description                                                                                           |
@@ -235,8 +275,10 @@ Binds a renderTexture with corresponding `filterFrame`, clears it if mode corres
 
 <article>
 
-### calculateSpriteMatrix: <span><code>(outputMatrix&#58; Matrix, sprite&#58; PIXI.Sprite) -&#62; Matrix</code></span>
-Multiply _input normalized coordinates_ to this matrix to get _sprite texture normalized coordinates_.
+### calculateSpriteMatrix 
+**Type:** <code>(outputMatrix&#58; Matrix, sprite&#58; PIXI.Sprite) -&#62; Matrix</code>
+
+**Description:** Multiply _input normalized coordinates_ to this matrix to get _sprite texture normalized coordinates_.
 Use `outputMatrix * vTextureCoord` in the shader.
 
 #### Parameters:
@@ -255,8 +297,10 @@ Use `outputMatrix * vTextureCoord` in the shader.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys this Filter System.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys this Filter System.
 
 </article>
 
@@ -265,8 +309,10 @@ Destroys this Filter System.
 
 <article>
 
-### emptyPool: <span><code>() -&#62; void</code></span>
-Empties the texture pool.
+### emptyPool 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Empties the texture pool.
 
 </article>
 
@@ -275,8 +321,10 @@ Empties the texture pool.
 
 <article>
 
-### getFilterTexture: <span><code>(input&#58; RenderTexture, resolution&#58; number, multisample&#58; MSAA_QUALITY) -&#62; RenderTexture</code></span>
-Gets extra render texture to use inside current filter To be compliant with older filters, you can use params in any order
+### getFilterTexture 
+**Type:** <code>(input&#58; RenderTexture, resolution&#58; number, multisample&#58; MSAA_QUALITY) -&#62; RenderTexture</code>
+
+**Description:** Gets extra render texture to use inside current filter To be compliant with older filters, you can use params in any order
 
 #### Parameters:
 | Name        | Type                       | Description                                                 |
@@ -295,8 +343,10 @@ Gets extra render texture to use inside current filter To be compliant with olde
 
 <article>
 
-### pop: <span><code>() -&#62; void</code></span>
-Pops off the filter and applies it.
+### pop 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Pops off the filter and applies it.
 
 </article>
 
@@ -305,8 +355,10 @@ Pops off the filter and applies it.
 
 <article>
 
-### push: <span><code>(target&#58; PIXI.DisplayObject, filters&#58; Array&#60;Filter&#62;) -&#62; void</code></span>
-Pushes a set of filters to be applied later to the system. This will redirect further rendering into an input render-texture for the rest of the filtering pipeline.
+### push 
+**Type:** <code>(target&#58; PIXI.DisplayObject, filters&#58; Array&#60;Filter&#62;) -&#62; void</code>
+
+**Description:** Pushes a set of filters to be applied later to the system. This will redirect further rendering into an input render-texture for the rest of the filtering pipeline.
 
 #### Parameters:
 | Name    | Type                               | Description                         |
@@ -320,8 +372,10 @@ Pushes a set of filters to be applied later to the system. This will redirect fu
 
 <article>
 
-### resize: <span><code>() -&#62; void</code></span>
-Calls `texturePool.resize()`, affects fullScreen renderTextures.
+### resize 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Calls `texturePool.resize()`, affects fullScreen renderTextures.
 
 </article>
 
@@ -330,8 +384,10 @@ Calls `texturePool.resize()`, affects fullScreen renderTextures.
 
 <article>
 
-### returnFilterTexture: <span><code>(renderTexture&#58; RenderTexture) -&#62; void</code></span>
-Frees a render texture back into the pool.
+### returnFilterTexture 
+**Type:** <code>(renderTexture&#58; RenderTexture) -&#62; void</code>
+
+**Description:** Frees a render texture back into the pool.
 
 #### Parameters:
 | Name          | Type                       | Description              |
@@ -344,8 +400,10 @@ Frees a render texture back into the pool.
 
 <article>
 
-### getOptimalFilterTexture: <span><code>(minWidth&#58; number, minHeight&#58; number, resolution&#58; number, multisample&#58; MSAA_QUALITY) -&#62; RenderTexture</code></span>
-Gets a Power-of-Two render texture or fullScreen texture
+### getOptimalFilterTexture 
+**Type:** <code>(minWidth&#58; number, minHeight&#58; number, resolution&#58; number, multisample&#58; MSAA_QUALITY) -&#62; RenderTexture</code>
+
+**Description:** Gets a Power-of-Two render texture or fullScreen texture
 
 #### Parameters:
 | Name        | Type                      | Description                                              |

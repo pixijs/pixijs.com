@@ -5,7 +5,12 @@ sidebar_label: "PIXI.RopeGeometry"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/mesh-extras](../modules/pixi_mesh_extras).RopeGeometry
+
+</div>
 
 
 RopeGeometry allows you to draw a geometry across several points and then manipulate these points.
@@ -21,13 +26,12 @@ RopeGeometry allows you to draw a geometry across several points and then manipu
 ```
       
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.RopeGeometry: <span><code>(width&#58; number, points&#58; IPoint[], textureScale&#58; number) </code></span>
+### Constructor:
+<h4><code>new PIXI.RopeGeometry(width&#58; number, points&#58; IPoint[], textureScale&#58; number) </code></h4>
 
 #### Parameters:
 | Name         | Type                  | Default          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
@@ -47,8 +51,10 @@ RopeGeometry allows you to draw a geometry across several points and then manipu
 ## Members
 <article>
 
-### _width: <span><code>number</code></span>
-The width (i.e., thickness) of the rope.
+### _width 
+**Type:** <code>number</code>
+
+**Description:** The width (i.e., thickness) of the rope.
 
 </article>
 
@@ -57,8 +63,10 @@ The width (i.e., thickness) of the rope.
 
 <article>
 
-### glVertexArrayObjects: <span><code>object</code></span>
-A map of renderer IDs to webgl VAOs
+### glVertexArrayObjects 
+**Type:** <code>object</code>
+
+**Description:** A map of renderer IDs to webgl VAOs
 
 </article>
 
@@ -67,20 +75,12 @@ A map of renderer IDs to webgl VAOs
 
 <article>
 
-### instanceCount: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
+### instanceCount 
+**Type:** <code>number</code>
 
-Number of instances in this geometry, pass it to `GeometrySystem.draw()`.
+**Default Value**: <code>1</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### instanced: <span><code>boolean</code></span>
-Whether the geometry is instanced.
+**Description:** Number of instances in this geometry, pass it to `GeometrySystem.draw()`.
 
 </article>
 
@@ -89,8 +89,10 @@ Whether the geometry is instanced.
 
 <article>
 
-### points: <span><code>IPoint[]</code></span>
-An array of points that determine the rope.
+### instanced 
+**Type:** <code>boolean</code>
+
+**Description:** Whether the geometry is instanced.
 
 </article>
 
@@ -99,8 +101,10 @@ An array of points that determine the rope.
 
 <article>
 
-### refCount: <span><code>number</code></span>
-Count of existing (not destroyed) meshes that reference this geometry.
+### points 
+**Type:** <code>IPoint[]</code>
+
+**Description:** An array of points that determine the rope.
 
 </article>
 
@@ -109,8 +113,10 @@ Count of existing (not destroyed) meshes that reference this geometry.
 
 <article>
 
-### textureScale: <span><code>number</code></span>
-Rope texture scale, if zero then the rope texture is stretched.
+### refCount 
+**Type:** <code>number</code>
+
+**Description:** Count of existing (not destroyed) meshes that reference this geometry.
 
 </article>
 
@@ -119,8 +125,22 @@ Rope texture scale, if zero then the rope texture is stretched.
 
 <article>
 
-### width: <span><code>number</code></span>
-The width (i.e., thickness) of the rope.
+### textureScale 
+**Type:** <code>number</code>
+
+**Description:** Rope texture scale, if zero then the rope texture is stretched.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width 
+**Type:** <code>number</code>
+
+**Description:** The width (i.e., thickness) of the rope.
 
 </article>
 
@@ -131,8 +151,10 @@ The width (i.e., thickness) of the rope.
 ## Methods
 <article>
 
-### addAttribute: <span><code>(id&#58; string, buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;, size&#58; number, normalized&#58; boolean, type&#58; TYPES, stride&#58; number, start&#58; number, instance&#58; boolean) -&#62; this</code></span>
-Adds an attribute to the geometry Note&#58; `stride` and `start` should be `undefined` if you dont know them, not 0!
+### addAttribute 
+**Type:** <code>(id&#58; string, buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;, size&#58; number, normalized&#58; boolean, type&#58; TYPES, stride&#58; number, start&#58; number, instance&#58; boolean) -&#62; this</code>
+
+**Description:** Adds an attribute to the geometry Note&#58; `stride` and `start` should be `undefined` if you dont know them, not 0!
 
 #### Parameters:
 | Name       | Type                                                  | Description                                                                                                            |
@@ -156,8 +178,10 @@ Adds an attribute to the geometry Note&#58; `stride` and `start` should be `unde
 
 <article>
 
-### addIndex: <span><code>(buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;) -&#62; Geometry</code></span>
-Adds an index buffer to the geometry The index buffer contains integers, three for each triangle in the geometry, which reference the various attribute buffers (position, colour, UV coordinates, other UV coordinates, normal, …). There is only ONE index buffer.
+### addIndex 
+**Type:** <code>(buffer&#58; PIXI.Buffer &#124; Array&#60;number&#62;) -&#62; Geometry</code>
+
+**Description:** Adds an index buffer to the geometry The index buffer contains integers, three for each triangle in the geometry, which reference the various attribute buffers (position, colour, UV coordinates, other UV coordinates, normal, …). There is only ONE index buffer.
 
 #### Parameters:
 | Name   | Type                                                  | Description                                                                                                             |
@@ -174,8 +198,10 @@ Adds an index buffer to the geometry The index buffer contains integers, three f
 
 <article>
 
-### clone: <span><code>() -&#62; Geometry</code></span>
-Returns a clone of the geometry.
+### clone 
+**Type:** <code>() -&#62; Geometry</code>
+
+**Description:** Returns a clone of the geometry.
 
 #### Returns:
 | Type                  | Description                     |
@@ -188,8 +214,10 @@ Returns a clone of the geometry.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys the geometry.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys the geometry.
 
 </article>
 
@@ -198,8 +226,10 @@ Destroys the geometry.
 
 <article>
 
-### dispose: <span><code>() -&#62; void</code></span>
-Disposes WebGL resources that are connected to this geometry.
+### dispose 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Disposes WebGL resources that are connected to this geometry.
 
 </article>
 
@@ -208,8 +238,10 @@ Disposes WebGL resources that are connected to this geometry.
 
 <article>
 
-### getAttribute: <span><code>(id&#58; string) -&#62; Attribute</code></span>
-Returns the requested attribute.
+### getAttribute 
+**Type:** <code>(id&#58; string) -&#62; Attribute</code>
+
+**Description:** Returns the requested attribute.
 
 #### Parameters:
 | Name | Type                | Description                        |
@@ -226,8 +258,10 @@ Returns the requested attribute.
 
 <article>
 
-### getBuffer: <span><code>(id&#58; string) -&#62; Buffer</code></span>
-Returns the requested buffer.
+### getBuffer 
+**Type:** <code>(id&#58; string) -&#62; Buffer</code>
+
+**Description:** Returns the requested buffer.
 
 #### Parameters:
 | Name | Type                | Description                      |
@@ -244,8 +278,10 @@ Returns the requested buffer.
 
 <article>
 
-### getIndex: <span><code>() -&#62; Buffer</code></span>
-Returns the index buffer
+### getIndex 
+**Type:** <code>() -&#62; Buffer</code>
+
+**Description:** Returns the index buffer
 
 #### Returns:
 | Type                | Description         |
@@ -258,8 +294,10 @@ Returns the index buffer
 
 <article>
 
-### getSize: <span><code>() -&#62; number</code></span>
-Get the size of the geometries, in vertices.
+### getSize 
+**Type:** <code>() -&#62; number</code>
+
+**Description:** Get the size of the geometries, in vertices.
 
 #### Returns:
 | Type                | Description |
@@ -272,8 +310,10 @@ Get the size of the geometries, in vertices.
 
 <article>
 
-### interleave: <span><code>() -&#62; Geometry</code></span>
-This function modifies the structure so that all current attributes become interleaved into a single buffer This can be useful if your model remains static as it offers a little performance boost
+### interleave 
+**Type:** <code>() -&#62; Geometry</code>
+
+**Description:** This function modifies the structure so that all current attributes become interleaved into a single buffer This can be useful if your model remains static as it offers a little performance boost
 
 #### Returns:
 | Type                  | Description                          |
@@ -286,8 +326,10 @@ This function modifies the structure so that all current attributes become inter
 
 <article>
 
-### updateVertices: <span><code>() -&#62; void</code></span>
-refreshes vertices of Rope mesh
+### updateVertices 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** refreshes vertices of Rope mesh
 
 </article>
 

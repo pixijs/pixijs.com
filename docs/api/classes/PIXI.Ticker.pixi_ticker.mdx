@@ -5,33 +5,41 @@ sidebar_label: "PIXI.Ticker"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/ticker](../modules/pixi_ticker).Ticker
+
+</div>
 
 A Ticker class that runs an update loop that other objects listen to.
 This class is composed around listeners meant for execution on the next requested animation frame. Animation frames are requested only when necessary, e.g. When the ticker is started and the emitter has listeners.
 
 
 
-// TODO: @see
-
         
 
 <article>
+### Contructor:
+<h4><code>new PIXI()</code></h4>
 
-### new PIXI()
 </article>
+            
 
 
 
 ## Members
 <article>
 
-### shared: <span><code>PIXI.Ticker</code></span>
-The shared ticker instance used by [PIXI.AnimatedSprite](../classes/PIXI.AnimatedSprite.pixi_sprite_animated) and by [PIXI.VideoResource](../classes/PIXI.VideoResource.pixi_core) to update animation frames / video textures.
+### shared 
+**Type:** <code>PIXI.Ticker</code>
+
+**Description:** The shared ticker instance used by [PIXI.AnimatedSprite](../classes/PIXI.AnimatedSprite.pixi_sprite_animated) and by [PIXI.VideoResource](../classes/PIXI.VideoResource.pixi_core) to update animation frames / video textures.
 
 It may also be used by [PIXI.Application](../classes/PIXI.Application.pixi_app) if created with the `sharedTicker` option property set to true.
 
 The property [PIXI.Ticker#autoStart](../classes/PIXI.Ticker.pixi_ticker#autoStart) is set to `true` for this instance. Please follow the examples for usage, including how to opt-out of auto-starting the shared ticker.
+
 
 ```js
  import { Ticker } from 'pixi.js';
@@ -78,8 +86,10 @@ The property [PIXI.Ticker#autoStart](../classes/PIXI.Ticker.pixi_ticker#autoStar
 
 <article>
 
-### system: <span><code>PIXI.Ticker</code></span>
-The system ticker instance used by [PIXI.BasePrepare](../classes/PIXI.BasePrepare.pixi_prepare) for core timing functionality that shouldn't usually need to be paused, unlike the `shared`ticker which drives visual animations and rendering which may want to be paused.
+### system 
+**Type:** <code>PIXI.Ticker</code>
+
+**Description:** The system ticker instance used by [PIXI.BasePrepare](../classes/PIXI.BasePrepare.pixi_prepare) for core timing functionality that shouldn't usually need to be paused, unlike the `shared`ticker which drives visual animations and rendering which may want to be paused.
 
 The property [PIXI.Ticker#autoStart](../classes/PIXI.Ticker.pixi_ticker#autoStart) is set to `true` for this instance.
 
@@ -90,22 +100,12 @@ The property [PIXI.Ticker#autoStart](../classes/PIXI.Ticker.pixi_ticker#autoStar
 
 <article>
 
-### targetFPMS: <span><code>number</code></span>
-- **Default Value**: <code>0.06</code>
+### targetFPMS 
+**Type:** <code>number</code>
 
-Target frames per millisecond.
+**Default Value**: <code>0.06</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### autoStart: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
-
-Whether or not this ticker should invoke the method [PIXI.Ticker#start](../classes/PIXI.Ticker.pixi_ticker#start) automatically when a listener is added.
+**Description:** Target frames per millisecond.
 
 </article>
 
@@ -114,8 +114,12 @@ Whether or not this ticker should invoke the method [PIXI.Ticker#start](../class
 
 <article>
 
-### count: <span><code>number</code></span>
-The number of listeners on this ticker, calculated by walking through linked list
+### autoStart 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** Whether or not this ticker should invoke the method [PIXI.Ticker#start](../classes/PIXI.Ticker.pixi_ticker#start) automatically when a listener is added.
 
 </article>
 
@@ -124,22 +128,10 @@ The number of listeners on this ticker, calculated by walking through linked lis
 
 <article>
 
-### deltaMS: <span><code>number</code></span>
-- **Default Value**: <code>16.66</code>
+### count 
+**Type:** <code>number</code>
 
-Scaler time elapsed in milliseconds from last frame to this frame. This value is capped by setting [PIXI.Ticker#minFPS](../classes/PIXI.Ticker.pixi_ticker#minFPS) and is scaled with [PIXI.Ticker#speed](../classes/PIXI.Ticker.pixi_ticker#speed).**Note&#58;** The cap may be exceeded by scaling. If the platform supports DOMHighResTimeStamp, this value will have a precision of 1 µs. Defaults to target frame time
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### deltaTime: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
-
-Scalar time value from last frame to this frame. This value is capped by setting [PIXI.Ticker#minFPS](../classes/PIXI.Ticker.pixi_ticker#minFPS) and is scaled with [PIXI.Ticker#speed](../classes/PIXI.Ticker.pixi_ticker#speed).**Note&#58;** The cap may be exceeded by scaling.
+**Description:** The number of listeners on this ticker, calculated by walking through linked list
 
 </article>
 
@@ -148,20 +140,12 @@ Scalar time value from last frame to this frame. This value is capped by setting
 
 <article>
 
-### elapsedMS: <span><code>number</code></span>
-- **Default Value**: <code>16.66</code>
+### deltaMS 
+**Type:** <code>number</code>
 
-Time elapsed in milliseconds from last frame to this frame. Opposed to what the scalar [PIXI.Ticker#deltaTime](../classes/PIXI.Ticker.pixi_ticker#deltaTime) is based, this value is neither capped nor scaled. If the platform supports DOMHighResTimeStamp, this value will have a precision of 1 µs. Defaults to target frame time
+**Default Value**: <code>16.66</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### FPS: <span><code>number</code></span>
-The frames per second at which this ticker is running. The default is approximately 60 in most modern browsers.**Note&#58;** This does not factor in the value of [PIXI.Ticker#speed](../classes/PIXI.Ticker.pixi_ticker#speed), which is specific to scaling [PIXI.Ticker#deltaTime](../classes/PIXI.Ticker.pixi_ticker#deltaTime).
+**Description:** Scaler time elapsed in milliseconds from last frame to this frame. This value is capped by setting [PIXI.Ticker#minFPS](../classes/PIXI.Ticker.pixi_ticker#minFPS) and is scaled with [PIXI.Ticker#speed](../classes/PIXI.Ticker.pixi_ticker#speed).**Note&#58;** The cap may be exceeded by scaling. If the platform supports DOMHighResTimeStamp, this value will have a precision of 1 µs. Defaults to target frame time
 
 </article>
 
@@ -170,22 +154,12 @@ The frames per second at which this ticker is running. The default is approximat
 
 <article>
 
-### lastTime: <span><code>number</code></span>
-- **Default Value**: <code>-1</code>
+### deltaTime 
+**Type:** <code>number</code>
 
-The last time [PIXI.Ticker#update](../classes/PIXI.Ticker.pixi_ticker#update) was invoked. This value is also reset internally outside of invoking update, but only when a new animation frame is requested. If the platform supports DOMHighResTimeStamp, this value will have a precision of 1 µs.
+**Default Value**: <code>1</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### maxFPS: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-Manages the minimum amount of milliseconds required to elapse between invoking [PIXI.Ticker#update](../classes/PIXI.Ticker.pixi_ticker#update). This will effect the measured value of [PIXI.Ticker#FPS](../classes/PIXI.Ticker.pixi_ticker#FPS). If it is set to `0`, then there is no limit; PixiJS will render as many frames as it can. Otherwise it will be at least `minFPS`
+**Description:** Scalar time value from last frame to this frame. This value is capped by setting [PIXI.Ticker#minFPS](../classes/PIXI.Ticker.pixi_ticker#minFPS) and is scaled with [PIXI.Ticker#speed](../classes/PIXI.Ticker.pixi_ticker#speed).**Note&#58;** The cap may be exceeded by scaling.
 
 </article>
 
@@ -194,10 +168,12 @@ Manages the minimum amount of milliseconds required to elapse between invoking [
 
 <article>
 
-### minFPS: <span><code>number</code></span>
-- **Default Value**: <code>10</code>
+### elapsedMS 
+**Type:** <code>number</code>
 
-Manages the maximum amount of milliseconds allowed to elapse between invoking [PIXI.Ticker#update](../classes/PIXI.Ticker.pixi_ticker#update). This value is used to cap [PIXI.Ticker#deltaTime](../classes/PIXI.Ticker.pixi_ticker#deltaTime), but does not effect the measured value of [PIXI.Ticker#FPS](../classes/PIXI.Ticker.pixi_ticker#FPS). When setting this property it is clamped to a value between`0` and `Ticker.targetFPMS * 1000`.
+**Default Value**: <code>16.66</code>
+
+**Description:** Time elapsed in milliseconds from last frame to this frame. Opposed to what the scalar [PIXI.Ticker#deltaTime](../classes/PIXI.Ticker.pixi_ticker#deltaTime) is based, this value is neither capped nor scaled. If the platform supports DOMHighResTimeStamp, this value will have a precision of 1 µs. Defaults to target frame time
 
 </article>
 
@@ -206,10 +182,67 @@ Manages the maximum amount of milliseconds allowed to elapse between invoking [P
 
 <article>
 
-### speed: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
+### FPS 
+**Type:** <code>number</code>
 
-Factor of current [PIXI.Ticker#deltaTime](../classes/PIXI.Ticker.pixi_ticker#deltaTime).
+**Description:** The frames per second at which this ticker is running. The default is approximately 60 in most modern browsers.**Note&#58;** This does not factor in the value of [PIXI.Ticker#speed](../classes/PIXI.Ticker.pixi_ticker#speed), which is specific to scaling [PIXI.Ticker#deltaTime](../classes/PIXI.Ticker.pixi_ticker#deltaTime).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### lastTime 
+**Type:** <code>number</code>
+
+**Default Value**: <code>-1</code>
+
+**Description:** The last time [PIXI.Ticker#update](../classes/PIXI.Ticker.pixi_ticker#update) was invoked. This value is also reset internally outside of invoking update, but only when a new animation frame is requested. If the platform supports DOMHighResTimeStamp, this value will have a precision of 1 µs.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### maxFPS 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+**Description:** Manages the minimum amount of milliseconds required to elapse between invoking [PIXI.Ticker#update](../classes/PIXI.Ticker.pixi_ticker#update). This will effect the measured value of [PIXI.Ticker#FPS](../classes/PIXI.Ticker.pixi_ticker#FPS). If it is set to `0`, then there is no limit; PixiJS will render as many frames as it can. Otherwise it will be at least `minFPS`
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### minFPS 
+**Type:** <code>number</code>
+
+**Default Value**: <code>10</code>
+
+**Description:** Manages the maximum amount of milliseconds allowed to elapse between invoking [PIXI.Ticker#update](../classes/PIXI.Ticker.pixi_ticker#update). This value is used to cap [PIXI.Ticker#deltaTime](../classes/PIXI.Ticker.pixi_ticker#deltaTime), but does not effect the measured value of [PIXI.Ticker#FPS](../classes/PIXI.Ticker.pixi_ticker#FPS). When setting this property it is clamped to a value between`0` and `Ticker.targetFPMS * 1000`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### speed 
+**Type:** <code>number</code>
+
+**Default Value**: <code>1</code>
+
+**Description:** Factor of current [PIXI.Ticker#deltaTime](../classes/PIXI.Ticker.pixi_ticker#deltaTime).
+
 
 ```js
 // Scales ticker.deltaTime to what would be
@@ -225,10 +258,12 @@ ticker.speed = 2;
 
 <article>
 
-### started: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### started 
+**Type:** <code>boolean</code>
 
-Whether or not this ticker has been started.`true` if [PIXI.Ticker#start](../classes/PIXI.Ticker.pixi_ticker#start) has been called.`false` if [PIXI.Ticker#stop](../classes/PIXI.Ticker.pixi_ticker#stop) has been called. While `false`, this value may change to `true` in the event of [PIXI.Ticker#autoStart](../classes/PIXI.Ticker.pixi_ticker#autoStart) being `true`and a listener is added.
+**Default Value**: <code>false</code>
+
+**Description:** Whether or not this ticker has been started.`true` if [PIXI.Ticker#start](../classes/PIXI.Ticker.pixi_ticker#start) has been called.`false` if [PIXI.Ticker#stop](../classes/PIXI.Ticker.pixi_ticker#stop) has been called. While `false`, this value may change to `true` in the event of [PIXI.Ticker#autoStart](../classes/PIXI.Ticker.pixi_ticker#autoStart) being `true`and a listener is added.
 
 </article>
 
@@ -239,8 +274,10 @@ Whether or not this ticker has been started.`true` if [PIXI.Ticker#start](../cla
 ## Methods
 <article>
 
-### add: <span><code>(fn&#58; TickerCallback&#60;T&#62;, context&#58; T, priority&#58; number) -&#62; this</code></span>
-Register a handler for tick events. Calls continuously unless it is removed or the ticker is stopped.
+### add 
+**Type:** <code>(fn&#58; TickerCallback&#60;T&#62;, context&#58; T, priority&#58; number) -&#62; this</code>
+
+**Description:** Register a handler for tick events. Calls continuously unless it is removed or the ticker is stopped.
 
 #### Parameters:
 | Name     | Type                                   | Description                                   |
@@ -259,8 +296,10 @@ Register a handler for tick events. Calls continuously unless it is removed or t
 
 <article>
 
-### addOnce: <span><code>(fn&#58; TickerCallback&#60;T&#62;, context&#58; T, priority&#58; number) -&#62; this</code></span>
-Add a handler for the tick event which is only execute once.
+### addOnce 
+**Type:** <code>(fn&#58; TickerCallback&#60;T&#62;, context&#58; T, priority&#58; number) -&#62; this</code>
+
+**Description:** Add a handler for the tick event which is only execute once.
 
 #### Parameters:
 | Name     | Type                                   | Description                                      |
@@ -279,8 +318,10 @@ Add a handler for the tick event which is only execute once.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroy the ticker and don't use after this. Calling this method removes all references to internal events.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroy the ticker and don't use after this. Calling this method removes all references to internal events.
 
 </article>
 
@@ -289,8 +330,10 @@ Destroy the ticker and don't use after this. Calling this method removes all ref
 
 <article>
 
-### remove: <span><code>(fn&#58; TickerCallback&#60;T&#62;, context&#58; T) -&#62; this</code></span>
-Removes any handlers matching the function and context parameters. If no handlers are left after removing, then it cancels the animation frame.
+### remove 
+**Type:** <code>(fn&#58; TickerCallback&#60;T&#62;, context&#58; T) -&#62; this</code>
+
+**Description:** Removes any handlers matching the function and context parameters. If no handlers are left after removing, then it cancels the animation frame.
 
 #### Parameters:
 | Name    | Type                                   | Description                         |
@@ -308,8 +351,10 @@ Removes any handlers matching the function and context parameters. If no handler
 
 <article>
 
-### start: <span><code>() -&#62; void</code></span>
-Starts the ticker. If the ticker has listeners a new animation frame is requested at this point.
+### start 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Starts the ticker. If the ticker has listeners a new animation frame is requested at this point.
 
 </article>
 
@@ -318,8 +363,10 @@ Starts the ticker. If the ticker has listeners a new animation frame is requeste
 
 <article>
 
-### stop: <span><code>() -&#62; void</code></span>
-Stops the ticker. If the ticker has requested an animation frame it is canceled at this point.
+### stop 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stops the ticker. If the ticker has requested an animation frame it is canceled at this point.
 
 </article>
 
@@ -328,8 +375,10 @@ Stops the ticker. If the ticker has requested an animation frame it is canceled 
 
 <article>
 
-### update: <span><code>(currentTime&#58; number) -&#62; void</code></span>
-Triggers an update. An update entails setting the current [PIXI.Ticker#elapsedMS](../classes/PIXI.Ticker.pixi_ticker#elapsedMS), the current [PIXI.Ticker#deltaTime](../classes/PIXI.Ticker.pixi_ticker#deltaTime), invoking all listeners with current deltaTime, and then finally setting [PIXI.Ticker#lastTime](../classes/PIXI.Ticker.pixi_ticker#lastTime) with the value of currentTime that was provided. This method will be called automatically by animation frame callbacks if the ticker instance has been started and listeners are added.
+### update 
+**Type:** <code>(currentTime&#58; number) -&#62; void</code>
+
+**Description:** Triggers an update. An update entails setting the current [PIXI.Ticker#elapsedMS](../classes/PIXI.Ticker.pixi_ticker#elapsedMS), the current [PIXI.Ticker#deltaTime](../classes/PIXI.Ticker.pixi_ticker#deltaTime), invoking all listeners with current deltaTime, and then finally setting [PIXI.Ticker#lastTime](../classes/PIXI.Ticker.pixi_ticker#lastTime) with the value of currentTime that was provided. This method will be called automatically by animation frame callbacks if the ticker instance has been started and listeners are added.
 
 #### Parameters:
 | Name        | Type                | Description                   |

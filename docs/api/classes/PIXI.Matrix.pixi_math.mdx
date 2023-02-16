@@ -5,7 +5,12 @@ sidebar_label: "PIXI.Matrix"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/math](../modules/pixi_math).Matrix
+
+</div>
 
 The PixiJS Matrix as a class makes it a lot faster.
 Here is a representation of it&#58;
@@ -19,13 +24,12 @@ Here is a representation of it&#58;
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Matrix: <span><code>(a&#58; number, b&#58; number, c&#58; number, d&#58; number, tx&#58; number, ty&#58; number) </code></span>
+### Constructor:
+<h4><code>new PIXI.Matrix(a&#58; number, b&#58; number, c&#58; number, d&#58; number, tx&#58; number, ty&#58; number) </code></h4>
 
 #### Parameters:
 | Name | Type                | Default        | Description   |
@@ -47,8 +51,10 @@ Here is a representation of it&#58;
 ## Members
 <article>
 
-### IDENTITY: <span><code>Matrix</code></span>
-A default (identity) matrix
+### IDENTITY 
+**Type:** <code>Matrix</code>
+
+**Description:** A default (identity) matrix
 
 </article>
 
@@ -57,8 +63,10 @@ A default (identity) matrix
 
 <article>
 
-### TEMP_MATRIX: <span><code>Matrix</code></span>
-A temp matrix
+### TEMP_MATRIX 
+**Type:** <code>Matrix</code>
+
+**Description:** A temp matrix
 
 </article>
 
@@ -67,30 +75,10 @@ A temp matrix
 
 <article>
 
-### a: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
+### a 
+**Type:** <code>number</code>
 
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### b: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
-
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### c: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+**Default Value**: <code>1</code>
 
 
 </article>
@@ -100,8 +88,10 @@ A temp matrix
 
 <article>
 
-### d: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
+### b 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -111,8 +101,10 @@ A temp matrix
 
 <article>
 
-### tx: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### c 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -122,8 +114,36 @@ A temp matrix
 
 <article>
 
-### ty: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### d 
+**Type:** <code>number</code>
+
+**Default Value**: <code>1</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### tx 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### ty 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -135,8 +155,10 @@ A temp matrix
 ## Methods
 <article>
 
-### append: <span><code>(matrix&#58; Matrix) -&#62; this</code></span>
-Appends the given Matrix to this Matrix.
+### append 
+**Type:** <code>(matrix&#58; Matrix) -&#62; this</code>
+
+**Description:** Appends the given Matrix to this Matrix.
 
 #### Parameters:
 | Name   | Type                | Description           |
@@ -153,8 +175,10 @@ Appends the given Matrix to this Matrix.
 
 <article>
 
-### apply: <span><code>(pos&#58; IPointData, newPos&#58; PIXI.Point) -&#62; PIXI.Point</code></span>
-Get a new position with the current transformation applied. Can be used to go from a child's coordinate space to the world coordinate space. (e.g. rendering)
+### apply 
+**Type:** <code>(pos&#58; IPointData, newPos&#58; PIXI.Point) -&#62; PIXI.Point</code>
+
+**Description:** Get a new position with the current transformation applied. Can be used to go from a child's coordinate space to the world coordinate space. (e.g. rendering)
 
 #### Parameters:
 | Name   | Type                    | Description                                                                  |
@@ -172,8 +196,10 @@ Get a new position with the current transformation applied. Can be used to go fr
 
 <article>
 
-### applyInverse: <span><code>(pos&#58; IPointData, newPos&#58; PIXI.Point) -&#62; PIXI.Point</code></span>
-Get a new position with the inverse of the current transformation applied. Can be used to go from the world coordinate space to a child's coordinate space. (e.g. input)
+### applyInverse 
+**Type:** <code>(pos&#58; IPointData, newPos&#58; PIXI.Point) -&#62; PIXI.Point</code>
+
+**Description:** Get a new position with the inverse of the current transformation applied. Can be used to go from the world coordinate space to a child's coordinate space. (e.g. input)
 
 #### Parameters:
 | Name   | Type                    | Description                                                                  |
@@ -191,8 +217,10 @@ Get a new position with the inverse of the current transformation applied. Can b
 
 <article>
 
-### clone: <span><code>() -&#62; Matrix</code></span>
-Creates a new Matrix object with the same values as this one.
+### clone 
+**Type:** <code>() -&#62; Matrix</code>
+
+**Description:** Creates a new Matrix object with the same values as this one.
 
 #### Returns:
 | Type                | Description                                            |
@@ -205,8 +233,10 @@ Creates a new Matrix object with the same values as this one.
 
 <article>
 
-### copyFrom: <span><code>(matrix&#58; PIXI.Matrix) -&#62; PIXI.Matrix</code></span>
-Changes the values of the matrix to be the same as the ones in given matrix
+### copyFrom 
+**Type:** <code>(matrix&#58; PIXI.Matrix) -&#62; PIXI.Matrix</code>
+
+**Description:** Changes the values of the matrix to be the same as the ones in given matrix
 
 #### Parameters:
 | Name   | Type                     | Description              |
@@ -223,8 +253,10 @@ Changes the values of the matrix to be the same as the ones in given matrix
 
 <article>
 
-### copyTo: <span><code>(matrix&#58; Matrix) -&#62; Matrix</code></span>
-Changes the values of the given matrix to be the same as the ones in this matrix
+### copyTo 
+**Type:** <code>(matrix&#58; Matrix) -&#62; Matrix</code>
+
+**Description:** Changes the values of the given matrix to be the same as the ones in this matrix
 
 #### Parameters:
 | Name   | Type                | Description            |
@@ -241,8 +273,10 @@ Changes the values of the given matrix to be the same as the ones in this matrix
 
 <article>
 
-### decompose: <span><code>(transform&#58; Transform) -&#62; Transform</code></span>
-Decomposes the matrix (x, y, scaleX, scaleY, and rotation) and sets the properties on to a transform.
+### decompose 
+**Type:** <code>(transform&#58; Transform) -&#62; Transform</code>
+
+**Description:** Decomposes the matrix (x, y, scaleX, scaleY, and rotation) and sets the properties on to a transform.
 
 #### Parameters:
 | Name      | Type                   | Description                               |
@@ -259,8 +293,10 @@ Decomposes the matrix (x, y, scaleX, scaleY, and rotation) and sets the properti
 
 <article>
 
-### fromArray: <span><code>(array&#58; number[]) -&#62; void</code></span>
-Creates a Matrix object based on the given array. The Element to Matrix mapping order is as follows&#58;
+### fromArray 
+**Type:** <code>(array&#58; number[]) -&#62; void</code>
+
+**Description:** Creates a Matrix object based on the given array. The Element to Matrix mapping order is as follows&#58;
 a = array[0] b = array[1] c = array[3] d = array[4] tx = array[2] ty = array[5]
 
 #### Parameters:
@@ -274,8 +310,10 @@ a = array[0] b = array[1] c = array[3] d = array[4] tx = array[2] ty = array[5]
 
 <article>
 
-### identity: <span><code>() -&#62; this</code></span>
-Resets this Matrix to an identity (default) matrix.
+### identity 
+**Type:** <code>() -&#62; this</code>
+
+**Description:** Resets this Matrix to an identity (default) matrix.
 
 #### Returns:
 | Type              | Description                                  |
@@ -288,8 +326,10 @@ Resets this Matrix to an identity (default) matrix.
 
 <article>
 
-### invert: <span><code>() -&#62; this</code></span>
-Inverts this matrix
+### invert 
+**Type:** <code>() -&#62; this</code>
+
+**Description:** Inverts this matrix
 
 #### Returns:
 | Type              | Description                                  |
@@ -302,8 +342,10 @@ Inverts this matrix
 
 <article>
 
-### prepend: <span><code>(matrix&#58; Matrix) -&#62; this</code></span>
-Prepends the given Matrix to this Matrix.
+### prepend 
+**Type:** <code>(matrix&#58; Matrix) -&#62; this</code>
+
+**Description:** Prepends the given Matrix to this Matrix.
 
 #### Parameters:
 | Name   | Type                | Description           |
@@ -320,8 +362,10 @@ Prepends the given Matrix to this Matrix.
 
 <article>
 
-### rotate: <span><code>(angle&#58; number) -&#62; this</code></span>
-Applies a rotation transformation to the matrix.
+### rotate 
+**Type:** <code>(angle&#58; number) -&#62; this</code>
+
+**Description:** Applies a rotation transformation to the matrix.
 
 #### Parameters:
 | Name  | Type                | Description           |
@@ -338,8 +382,10 @@ Applies a rotation transformation to the matrix.
 
 <article>
 
-### scale: <span><code>(x&#58; number, y&#58; number) -&#62; this</code></span>
-Applies a scale transformation to the matrix.
+### scale 
+**Type:** <code>(x&#58; number, y&#58; number) -&#62; this</code>
+
+**Description:** Applies a scale transformation to the matrix.
 
 #### Parameters:
 | Name | Type                | Description                      |
@@ -357,8 +403,10 @@ Applies a scale transformation to the matrix.
 
 <article>
 
-### set: <span><code>(a&#58; number, b&#58; number, c&#58; number, d&#58; number, tx&#58; number, ty&#58; number) -&#62; this</code></span>
-Sets the matrix properties.
+### set 
+**Type:** <code>(a&#58; number, b&#58; number, c&#58; number, d&#58; number, tx&#58; number, ty&#58; number) -&#62; this</code>
+
+**Description:** Sets the matrix properties.
 
 #### Parameters:
 | Name | Type                | Description      |
@@ -380,8 +428,10 @@ Sets the matrix properties.
 
 <article>
 
-### setTransform: <span><code>(x&#58; number, y&#58; number, pivotX&#58; number, pivotY&#58; number, scaleX&#58; number, scaleY&#58; number, rotation&#58; number, skewX&#58; number, skewY&#58; number) -&#62; this</code></span>
-Sets the matrix based on all the available properties
+### setTransform 
+**Type:** <code>(x&#58; number, y&#58; number, pivotX&#58; number, pivotY&#58; number, scaleX&#58; number, scaleY&#58; number, rotation&#58; number, skewX&#58; number, skewY&#58; number) -&#62; this</code>
+
+**Description:** Sets the matrix based on all the available properties
 
 #### Parameters:
 | Name     | Type                | Description            |
@@ -406,8 +456,10 @@ Sets the matrix based on all the available properties
 
 <article>
 
-### toArray: <span><code>(transpose&#58; boolean, out&#58; Float32Array) -&#62; Float32Array</code></span>
-Creates an array from the current Matrix object.
+### toArray 
+**Type:** <code>(transpose&#58; boolean, out&#58; Float32Array) -&#62; Float32Array</code>
+
+**Description:** Creates an array from the current Matrix object.
 
 #### Parameters:
 | Name      | Type                      | Description                                    |
@@ -425,8 +477,10 @@ Creates an array from the current Matrix object.
 
 <article>
 
-### translate: <span><code>(x&#58; number, y&#58; number) -&#62; this</code></span>
-Translates the matrix on the x and y.
+### translate 
+**Type:** <code>(x&#58; number, y&#58; number) -&#62; this</code>
+
+**Description:** Translates the matrix on the x and y.
 
 #### Parameters:
 | Name | Type                | Description                |

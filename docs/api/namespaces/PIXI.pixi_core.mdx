@@ -5,14 +5,17 @@ sidebar_label: "PIXI"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).PIXI
 
+</div>
 
 
 
 
 
-// TODO: @see
 
         
 
@@ -187,6 +190,9 @@ custom_edit_url: null
 * [FrameObject](../interfaces/FrameObject.pixi_sprite_animated)
 * [PIXI.AssetExtension](../interfaces/PIXI.AssetExtension.pixi_assets)
 * [PIXI.AssetInitOptions](../interfaces/PIXI.AssetInitOptions.pixi_assets)
+* [PIXI.BackgroundSytemOptions](../interfaces/PIXI.BackgroundSytemOptions.pixi_core)
+* [PIXI.CacheParser](../interfaces/PIXI.CacheParser.pixi_assets)
+* [PIXI.ContextSystemOptions](../interfaces/PIXI.ContextSystemOptions.pixi_core)
 * [PIXI.ExtensionFormat](../interfaces/PIXI.ExtensionFormat.pixi_extensions)
 * [PIXI.ExtensionFormatLoose](../interfaces/PIXI.ExtensionFormatLoose.pixi_extensions)
 * [PIXI.FederatedEventTarget](../interfaces/PIXI.FederatedEventTarget.pixi_events)
@@ -194,6 +200,7 @@ custom_edit_url: null
 * [PIXI.IAdapter](../interfaces/PIXI.IAdapter.pixi_settings)
 * [PIXI.IApplicationOptions](../interfaces/PIXI.IApplicationOptions.pixi_app)
 * [PIXI.IApplicationPlugin](../interfaces/PIXI.IApplicationPlugin.pixi_app)
+* [PIXI.IArrayBuffer](../interfaces/PIXI.IArrayBuffer.pixi_core)
 * [PIXI.IBatchableElement](../interfaces/PIXI.IBatchableElement.pixi_core)
 * [PIXI.IBitmapFontDataChar](../interfaces/PIXI.IBitmapFontDataChar.pixi_text_bitmap)
 * [PIXI.IBitmapFontDataCommon](../interfaces/PIXI.IBitmapFontDataCommon.pixi_text_bitmap)
@@ -204,6 +211,9 @@ custom_edit_url: null
 * [PIXI.IBitmapFontOptions](../interfaces/PIXI.IBitmapFontOptions.pixi_text_bitmap)
 * [PIXI.ICanvas](../interfaces/PIXI.ICanvas.pixi_settings)
 * [PIXI.ICanvasRenderingContext2D](../interfaces/PIXI.ICanvasRenderingContext2D.pixi_settings)
+* [PIXI.ICubeResourceOptions](../interfaces/PIXI.ICubeResourceOptions.pixi_core)
+* [PIXI.IGraphicsBatchElement](../interfaces/PIXI.IGraphicsBatchElement.pixi_graphics)
+* [PIXI.IGraphicsCurvesSettings](../interfaces/PIXI.IGraphicsCurvesSettings.pixi_graphics)
 * [PIXI.IHTMLFont](../interfaces/PIXI.IHTMLFont.pixi_text_html)
 * [PIXI.IHTMLTextStyle](../interfaces/PIXI.IHTMLTextStyle.pixi_text_html)
 * [PIXI.IPoint](../interfaces/PIXI.IPoint.pixi_math)
@@ -216,13 +226,19 @@ custom_edit_url: null
 * [PIXI.IRenderingContext](../interfaces/PIXI.IRenderingContext.pixi_core)
 * [PIXI.IResourcePlugin](../interfaces/PIXI.IResourcePlugin.pixi_core)
 * [PIXI.ISize](../interfaces/PIXI.ISize.pixi_math)
+* [PIXI.ISpritesheetData](../interfaces/PIXI.ISpritesheetData.pixi_spritesheet)
+* [PIXI.ISpritesheetFrameData](../interfaces/PIXI.ISpritesheetFrameData.pixi_spritesheet)
 * [PIXI.ISystem](../interfaces/PIXI.ISystem.pixi_core)
 * [PIXI.ITextStyle](../interfaces/PIXI.ITextStyle.pixi_text)
+* [PIXI.ITextureBorders](../interfaces/PIXI.ITextureBorders.pixi_core)
+* [PIXI.ITypedArray](../interfaces/PIXI.ITypedArray.pixi_core)
+* [PIXI.LoaderParser](../interfaces/PIXI.LoaderParser.pixi_assets)
 * [PIXI.PreferOrder](../interfaces/PIXI.PreferOrder.pixi_assets)
 * [PIXI.ResolveAsset](../interfaces/PIXI.ResolveAsset.pixi_assets)
 * [PIXI.ResolverBundle](../interfaces/PIXI.ResolverBundle.pixi_assets)
 * [PIXI.ResolveURLParser](../interfaces/PIXI.ResolveURLParser.pixi_assets)
-* [PIXI.ViewOptions](../interfaces/PIXI.ViewOptions.pixi_core)
+* [PIXI.StartupSystemOptions](../interfaces/PIXI.StartupSystemOptions.pixi_core)
+* [PIXI.ViewSystemOptions](../interfaces/PIXI.ViewSystemOptions.pixi_core)
 
 ## Enums
 * [PIXI.ALPHA_MODES](../enums/PIXI.ALPHA_MODES.pixi_constants)
@@ -237,7 +253,6 @@ custom_edit_url: null
 * [PIXI.INTERNAL_FORMATS](../enums/PIXI.INTERNAL_FORMATS.pixi_compressed_textures)
 * [PIXI.LINE_CAP](../enums/PIXI.LINE_CAP.pixi_graphics)
 * [PIXI.LINE_JOIN](../enums/PIXI.LINE_JOIN.pixi_graphics)
-* [PIXI.LoaderParserPriority](../enums/PIXI.LoaderParserPriority.pixi_assets)
 * [PIXI.MASK_TYPES](../enums/PIXI.MASK_TYPES.pixi_constants)
 * [PIXI.MIPMAP_MODES](../enums/PIXI.MIPMAP_MODES.pixi_constants)
 * [PIXI.MSAA_QUALITY](../enums/PIXI.MSAA_QUALITY.pixi_constants)
@@ -253,14 +268,18 @@ custom_edit_url: null
 * [PIXI.WRAP_MODES](../enums/PIXI.WRAP_MODES.pixi_constants)
 * [PIXI.BLEND_MODES](../enums/PIXI.BLEND_MODES.pixi_constants)
 * [PIXI.ExtensionType](../enums/PIXI.ExtensionType.pixi_extensions)
+* [PIXI.LoaderParserPriority](../enums/PIXI.LoaderParserPriority.pixi_assets)
 
 ## Members
 <article>
 
-### DATA_URI: <span><code>RegExp</code></span>
-- **Default Value**: <code>undefined</code>
+### DATA_URI 
+**Type:** <code>RegExp</code>
 
-Regexp for data URI. Based on&#58; [https&#58;//github.com/ragingwind/data-uri-regex](https&#58;//github.com/ragingwind/data-uri-regex)
+**Default Value**: <code>undefined</code>
+
+**Description:** Regexp for data URI. Based on&#58; [https&#58;//github.com/ragingwind/data-uri-regex](https&#58;//github.com/ragingwind/data-uri-regex)
+
 
 ```js
  import { DATA_URI } from 'pixi.js';
@@ -276,8 +295,10 @@ Regexp for data URI. Based on&#58; [https&#58;//github.com/ragingwind/data-uri-r
 
 <article>
 
-### DEG_TO_RAD: <span><code>number</code></span>
-Conversion factor for converting degrees to radians.
+### DEG_TO_RAD 
+**Type:** <code>number</code>
+
+**Description:** Conversion factor for converting degrees to radians.
 
 </article>
 
@@ -286,7 +307,9 @@ Conversion factor for converting degrees to radians.
 
 <article>
 
-### GRAPHICS_CURVES: <span><code>object</code></span><span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+### GRAPHICS_CURVES : <span class="deprecated-tag"> Deprecated: since 7.1.0</span>
+**Type:** <code>object</code>
+
 
 </article>
 
@@ -295,8 +318,11 @@ Conversion factor for converting degrees to radians.
 
 <article>
 
-### INSTALLED: <span><code>Array&#60;PIXI.IResourcePlugin&#62;</code></span>
-Collection of installed resource types, class must extend [PIXI.Resource](../classes/PIXI.Resource.pixi_core).
+### INSTALLED 
+**Type:** <code>Array&#60;PIXI.IResourcePlugin&#62;</code>
+
+**Description:** Collection of installed resource types, class must extend [PIXI.Resource](../classes/PIXI.Resource.pixi_core).
+
 
 ```js
 class CustomResource extends PIXI.Resource {
@@ -326,8 +352,10 @@ PIXI.INSTALLED.push(CustomResource);
 
 <article>
 
-### PI_2: <span><code>number</code></span>
-Two Pi.
+### PI_2 
+**Type:** <code>number</code>
+
+**Description:** Two Pi.
 
 </article>
 
@@ -336,8 +364,10 @@ Two Pi.
 
 <article>
 
-### RAD_TO_DEG: <span><code>number</code></span>
-Conversion factor for converting radians to degrees.
+### RAD_TO_DEG 
+**Type:** <code>number</code>
+
+**Description:** Conversion factor for converting radians to degrees.
 
 </article>
 
@@ -346,8 +376,10 @@ Conversion factor for converting radians to degrees.
 
 <article>
 
-### defaultFilterVertex: <span><code>string</code></span>
-Default filter vertex shader
+### defaultFilterVertex 
+**Type:** <code>string</code>
+
+**Description:** Default filter vertex shader
 
 </article>
 
@@ -356,8 +388,10 @@ Default filter vertex shader
 
 <article>
 
-### defaultVertex: <span><code>string</code></span>
-Default vertex shader
+### defaultVertex 
+**Type:** <code>string</code>
+
+**Description:** Default vertex shader
 
 </article>
 
@@ -366,8 +400,10 @@ Default vertex shader
 
 <article>
 
-### EventsTicker: <span><code>PIXI.EventsTickerClass</code></span>
-This class handles automatic firing of PointerEvents in the case where the pointer is stationary for too long. This is to ensure that hit-tests are still run on moving objects.
+### EventsTicker 
+**Type:** <code>PIXI.EventsTickerClass</code>
+
+**Description:** This class handles automatic firing of PointerEvents in the case where the pointer is stationary for too long. This is to ensure that hit-tests are still run on moving objects.
 
 </article>
 
@@ -376,8 +412,10 @@ This class handles automatic firing of PointerEvents in the case where the point
 
 <article>
 
-### spritesheetAsset: <span><code>PIXI.AssetExtension</code></span>
-Asset extension for loading spritesheets.
+### spritesheetAsset 
+**Type:** <code>PIXI.AssetExtension</code>
+
+**Description:** Asset extension for loading spritesheets.
 
 </article>
 
@@ -386,10 +424,12 @@ Asset extension for loading spritesheets.
 
 <article>
 
-### VERSION: <span><code>string</code></span>
-- **Default Value**: <code>"$_VERSION"</code>
+### VERSION 
+**Type:** <code>string</code>
 
-String of the current PIXI version.
+**Default Value**: <code>"$_VERSION"</code>
+
+**Description:** String of the current PIXI version.
 
 </article>
 
@@ -400,8 +440,10 @@ String of the current PIXI version.
 ## Functions
 <article>
 
-### autoDetectResource: <span><code>(source&#58; string &#124; unknown, options&#58; object) -&#62; PIXI.Resource</code></span>
-Create a resource element from a single source element. This auto-detects which type of resource to create. All resources that are auto-detectable must have a static `test` method and a constructor with the arguments `(source, options?)`. Currently, the supported resources for auto-detection include&#58;
+### autoDetectResource 
+**Type:** <code>(source&#58; string &#124; unknown, options&#58; object) -&#62; PIXI.Resource</code>
+
+**Description:** Create a resource element from a single source element. This auto-detects which type of resource to create. All resources that are auto-detectable must have a static `test` method and a constructor with the arguments `(source, options?)`. Currently, the supported resources for auto-detection include&#58;
 
 * [PIXI.ImageResource](../classes/PIXI.ImageResource.pixi_core)
 * [PIXI.CanvasResource](../classes/PIXI.CanvasResource.pixi_core)
@@ -433,34 +475,19 @@ Create a resource element from a single source element. This auto-detects which 
 
 <article>
 
-### autoDetectRenderer: <span><code>(options&#58; PIXI.IRendererOptionsAuto) -&#62; IRenderer&#60;VIEW&#62;</code></span>
-This helper function will automatically detect which renderer you should be using. WebGL is the preferred renderer as it is a lot faster. If WebGL is not supported by the browser then this function will return a canvas renderer.
+### autoDetectRenderer 
+**Type:** <code>(options&#58; Partial&#60;IRendererOptionsAuto&#62;) -&#62; IRenderer&#60;VIEW&#62;</code>
+
+**Description:** This helper function will automatically detect which renderer you should be using. WebGL is the preferred renderer as it is a lot faster. If WebGL is not supported by the browser then this function will return a canvas renderer.
 
 #### Parameters:
-| Name                          | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ----------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| options                       | <code>PIXI.IRendererOptionsAuto</code>      | The optional renderer parameters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| options.antialias             | <code>boolean</code>                        | **WebGL Only.** Whether to enable anti-aliasing. This may affect performance.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| options.autoDensity           | <code>boolean</code>                        | Whether the CSS dimensions of the renderer's view should be resized automatically.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| options.background            | <code>PIXI.ColorSource</code>               | Alias for `options.backgroundColor`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| options.backgroundAlpha       | <code>number</code>                         | Transparency of the background color, value from `0` (fully transparent) to `1` (fully opaque).                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| options.backgroundColor       | <code>PIXI.ColorSource</code>               | The background color used to clear the canvas. See PIXI.ColorSource for accepted color values.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| options.clearBeforeRender     | <code>boolean</code>                        | Whether to clear the canvas before new render passes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| options.context               | <code>PIXI.IRenderingContext</code>         | **WebGL Only.** User-provided WebGL rendering context object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| options.forceCanvas           | <code>boolean</code>                        | Force using [PIXI.CanvasRenderer](../classes/PIXI.CanvasRenderer.pixi_canvas_renderer), even if WebGL is available. This option only is available when using **pixi.js-legacy** or **&#64;pixi/canvas-renderer** packages, otherwise it will throw an error.                                                                                                                                                                                                                                                                   |
-| options.height                | <code>number</code>                         | The height of the renderer's view.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| options.hello                 | <code>boolean</code>                        | Whether to log the version and type information of renderer to console.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| options.powerPreference       | <code>string</code>                         | **WebGL Only.** A hint indicating what configuration of GPU is suitable for the WebGL context, can be `'default'`, `'high-performance'` or `'low-power'`. Setting to `'high-performance'` will prioritize rendering performance over power consumption, while setting to `'low-power'` will prioritize power saving over rendering performance.                                                                                                                                                                                |
-| options.premultipliedAlpha    | <code>boolean</code>                        | **WebGL Only.** Whether the compositor will assume the drawing buffer contains colors with premultiplied alpha.                                                                                                                                                                                                                                                                                                                                                                                                                |
-| options.preserveDrawingBuffer | <code>boolean</code>                        | **WebGL Only.** Whether to enable drawing buffer preservation. If enabled, the drawing buffer will preserve its value until cleared or overwritten. Enable this if you need to call `toDataUrl` on the WebGL context.                                                                                                                                                                                                                                                                                                          |
-| options.resolution            | <code>number</code>                         | The resolution / device pixel ratio of the renderer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| options.useContextAlpha       | <code>boolean &#124; 'notMultiplied'</code> | **Deprecated since 7.0.0, use `premultipliedAlpha` and `backgroundAlpha` instead.**   &#60;br /&#62;Pass-through value for canvas' context attribute `alpha`. This option is for cases where the canvas needs to be opaque, possibly for performance reasons on some older devices. If you want to set transparency, please use `backgroundAlpha`.   &#60;br /&#62;**WebGL Only&#58;** When set to `'notMultiplied'`, the canvas' context attribute `alpha` will be set to `true` and `premultipliedAlpha` will be to `false`. |
-| options.view                  | <code>PIXI.ICanvas</code>                   | The canvas to use as the view. If omitted, a new canvas will be created.                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| options.width                 | <code>number</code>                         | The width of the renderer's view.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Name    | Type                                               | Description     |
+| ------- | -------------------------------------------------- | --------------- |
+| options | <code>Partial&#60;IRendererOptionsAuto&#62;</code> | Options to use. |
 #### Returns:
-| Type                                 | Description                                                                                                                                                              |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <code>IRenderer&#60;VIEW&#62;</code> | Returns [PIXI.Renderer](../classes/PIXI.Renderer.pixi_core) if WebGL is available, otherwise [PIXI.CanvasRenderer](../classes/PIXI.CanvasRenderer.pixi_canvas_renderer). |
+| Type                                 | Description |
+| ------------------------------------ | ----------- |
+| <code>IRenderer&#60;VIEW&#62;</code> |             |
 </article>
 
 
@@ -468,8 +495,10 @@ This helper function will automatically detect which renderer you should be usin
 
 <article>
 
-### floatEqual: <span><code>(a&#58; number, b&#58; number, epsilon&#58; number) -&#62; boolean</code></span>
-The idea of a relative epsilon comparison is to find the difference between the two numbers, and see if it is less than a given epsilon. A good epsilon would be the N% of the largest of the two values or `Math.EPSILON`.
+### floatEqual 
+**Type:** <code>(a&#58; number, b&#58; number, epsilon&#58; number) -&#62; boolean</code>
+
+**Description:** The idea of a relative epsilon comparison is to find the difference between the two numbers, and see if it is less than a given epsilon. A good epsilon would be the N% of the largest of the two values or `Math.EPSILON`.
 
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 
@@ -490,8 +519,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### lineIntersection: <span><code>(aStart&#58; IPointData, aEnd&#58; IPointData, bStart&#58; IPointData, bEnd&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code></span>
-Computes the point where non-coincident and non-parallel Lines intersect. Coincident or parallel lines return a `NaN` point `{x: NaN, y: NaN}`. The intersection point may land outside the extents of the lines.
+### lineIntersection 
+**Type:** <code>(aStart&#58; IPointData, aEnd&#58; IPointData, bStart&#58; IPointData, bEnd&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code>
+
+**Description:** Computes the point where non-coincident and non-parallel Lines intersect. Coincident or parallel lines return a `NaN` point `{x: NaN, y: NaN}`. The intersection point may land outside the extents of the lines.
 
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 
@@ -514,8 +545,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### parseDDS: <span><code>(arrayBuffer&#58; ArrayBuffer) -&#62; CompressedTextureResource[]</code></span>
-Parses the DDS file header, generates base-textures, and puts them into the texture cache.
+### parseDDS 
+**Type:** <code>(arrayBuffer&#58; ArrayBuffer) -&#62; CompressedTextureResource[]</code>
+
+**Description:** Parses the DDS file header, generates base-textures, and puts them into the texture cache.
 
 #### Parameters:
 | Name        | Type                     | Description |
@@ -532,8 +565,10 @@ Parses the DDS file header, generates base-textures, and puts them into the text
 
 <article>
 
-### segmentIntersection: <span><code>(aStart&#58; IPointData, aEnd&#58; IPointData, bStart&#58; IPointData, bEnd&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code></span>
-Computes the point where non-coincident and non-parallel segments intersect. Coincident, parallel or non-intersecting segments return a `NaN` point `{x: NaN, y: NaN}`. The intersection point must land inside the extents of the segments or return a `NaN` Point.
+### segmentIntersection 
+**Type:** <code>(aStart&#58; IPointData, aEnd&#58; IPointData, bStart&#58; IPointData, bEnd&#58; IPointData, outPoint&#58; IPointData) -&#62; IPointData</code>
+
+**Description:** Computes the point where non-coincident and non-parallel segments intersect. Coincident, parallel or non-intersecting segments return a `NaN` point `{x: NaN, y: NaN}`. The intersection point must land inside the extents of the segments or return a `NaN` Point.
 
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 

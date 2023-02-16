@@ -5,20 +5,24 @@ sidebar_label: "PIXI.ViewableBuffer"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).ViewableBuffer
+
+</div>
 
 
 Flexible wrapper around `ArrayBuffer` that also provides typed array views on demand.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.ViewableBuffer: <span><code>(length&#58; number &#124; ArrayBuffer &#124; Uint8Array) </code></span>
+### Constructor:
+<h4><code>new PIXI.ViewableBuffer(length&#58; number &#124; ArrayBuffer &#124; Uint8Array) </code></h4>
 
 #### Parameters:
 | Name   | Type                                                     | Default       | Description                      |
@@ -35,8 +39,10 @@ Flexible wrapper around `ArrayBuffer` that also provides typed array views on de
 ## Members
 <article>
 
-### float32View: <span><code>Float32Array</code></span>
-View on the raw binary data as a `Float32Array`.
+### float32View 
+**Type:** <code>Float32Array</code>
+
+**Description:** View on the raw binary data as a `Float32Array`.
 
 </article>
 
@@ -45,8 +51,10 @@ View on the raw binary data as a `Float32Array`.
 
 <article>
 
-### int16View: <span><code>Int16Array</code></span>
-View on the raw binary data as a `Int16Array`.
+### int16View 
+**Type:** <code>Int16Array</code>
+
+**Description:** View on the raw binary data as a `Int16Array`.
 
 </article>
 
@@ -55,8 +63,10 @@ View on the raw binary data as a `Int16Array`.
 
 <article>
 
-### int32View: <span><code>Int32Array</code></span>
-View on the raw binary data as a `Int32Array`.
+### int32View 
+**Type:** <code>Int32Array</code>
+
+**Description:** View on the raw binary data as a `Int32Array`.
 
 </article>
 
@@ -65,8 +75,10 @@ View on the raw binary data as a `Int32Array`.
 
 <article>
 
-### int8View: <span><code>Int8Array</code></span>
-View on the raw binary data as a `Int8Array`.
+### int8View 
+**Type:** <code>Int8Array</code>
+
+**Description:** View on the raw binary data as a `Int8Array`.
 
 </article>
 
@@ -75,8 +87,10 @@ View on the raw binary data as a `Int8Array`.
 
 <article>
 
-### rawBinaryData: <span><code>ArrayBuffer</code></span>
-Underlying `ArrayBuffer` that holds all the data and is of capacity `this.size`.
+### rawBinaryData 
+**Type:** <code>ArrayBuffer</code>
+
+**Description:** Underlying `ArrayBuffer` that holds all the data and is of capacity `this.size`.
 
 </article>
 
@@ -85,8 +99,10 @@ Underlying `ArrayBuffer` that holds all the data and is of capacity `this.size`.
 
 <article>
 
-### uint16View: <span><code>Uint16Array</code></span>
-View on the raw binary data as a `Uint16Array`.
+### uint16View 
+**Type:** <code>Uint16Array</code>
+
+**Description:** View on the raw binary data as a `Uint16Array`.
 
 </article>
 
@@ -95,8 +111,10 @@ View on the raw binary data as a `Uint16Array`.
 
 <article>
 
-### uint32View: <span><code>Uint32Array</code></span>
-View on the raw binary data as a `Uint32Array`.
+### uint32View 
+**Type:** <code>Uint32Array</code>
+
+**Description:** View on the raw binary data as a `Uint32Array`.
 
 </article>
 
@@ -105,8 +123,10 @@ View on the raw binary data as a `Uint32Array`.
 
 <article>
 
-### uint8View: <span><code>Uint8Array</code></span>
-View on the raw binary data as a `Uint8Array`.
+### uint8View 
+**Type:** <code>Uint8Array</code>
+
+**Description:** View on the raw binary data as a `Uint8Array`.
 
 </article>
 
@@ -117,8 +137,10 @@ View on the raw binary data as a `Uint8Array`.
 ## Methods
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys all buffer references. Do not use after calling this.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys all buffer references. Do not use after calling this.
 
 </article>
 
@@ -127,8 +149,10 @@ Destroys all buffer references. Do not use after calling this.
 
 <article>
 
-### view: <span><code>(type&#58; string) -&#62; ITypedArray</code></span>
-Returns the view of the given type.
+### view 
+**Type:** <code>(type&#58; string) -&#62; ITypedArray</code>
+
+**Description:** Returns the view of the given type.
 
 #### Parameters:
 | Name | Type                | Description                                                                 |

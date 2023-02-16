@@ -5,14 +5,17 @@ sidebar_label: "PIXI.ICanvas"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/settings](../modules/pixi_settings).ICanvas
+
+</div>
 
 
 Common interface for HTMLCanvasElement, OffscreenCanvas, and other custom canvas classes.
 
 
-
-// TODO: @see
 
         
 
@@ -56,8 +59,10 @@ Common interface for HTMLCanvasElement, OffscreenCanvas, and other custom canvas
 ## Members
 <article>
 
-### height: <span><code>number</code></span>
-Height of the canvas.
+### height 
+**Type:** <code>number</code>
+
+**Description:** Height of the canvas.
 
 </article>
 
@@ -66,8 +71,10 @@ Height of the canvas.
 
 <article>
 
-### parentNode: <span><code>ICanvasParentNode &#124; null</code></span>
-Parent node of the canvas.
+### parentNode 
+**Type:** <code>ICanvasParentNode &#124; null</code>
+
+**Description:** Parent node of the canvas.
 
 </article>
 
@@ -76,8 +83,10 @@ Parent node of the canvas.
 
 <article>
 
-### style: <span><code>ICanvasStyle</code></span>
-Style of the canvas.
+### style 
+**Type:** <code>ICanvasStyle</code>
+
+**Description:** Style of the canvas.
 
 </article>
 
@@ -86,8 +95,10 @@ Style of the canvas.
 
 <article>
 
-### width: <span><code>number</code></span>
-Width of the canvas.
+### width 
+**Type:** <code>number</code>
+
+**Description:** Width of the canvas.
 
 </article>
 
@@ -98,8 +109,10 @@ Width of the canvas.
 ## Methods
 <article>
 
-### addEventListener: <span><code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; boolean &#124; AddEventListenerOptions) -&#62; void</code></span>
-Adds the listener for the specified event.
+### addEventListener 
+**Type:** <code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; boolean &#124; AddEventListenerOptions) -&#62; void</code>
+
+**Description:** Adds the listener for the specified event.
 
 #### Parameters:
 | Name     | Type                                                | Description                                     |
@@ -114,8 +127,10 @@ Adds the listener for the specified event.
 
 <article>
 
-### convertToBlob: <span><code>(options&#58; object) -&#62; Promise&#60;Blob&#62;</code></span>
-Get the content of the canvas as Blob.
+### convertToBlob 
+**Type:** <code>(options&#58; object) -&#62; Promise&#60;Blob&#62;</code>
+
+**Description:** Get the content of the canvas as Blob.
 
 #### Parameters:
 | Name            | Type                | Description                                                                                          |
@@ -134,8 +149,10 @@ Get the content of the canvas as Blob.
 
 <article>
 
-### dispatchEvent: <span><code>(event&#58; Event) -&#62; boolean</code></span>
-Dispatches a event.
+### dispatchEvent 
+**Type:** <code>(event&#58; Event) -&#62; boolean</code>
+
+**Description:** Dispatches a event.
 
 #### Parameters:
 | Name  | Type               | Description                                                                                     |
@@ -152,8 +169,10 @@ Dispatches a event.
 
 <article>
 
-### getBoundingClientRect: <span><code>() -&#62; ICanvasRect</code></span>
-Get the position and the size of the canvas.
+### getBoundingClientRect 
+**Type:** <code>() -&#62; ICanvasRect</code>
+
+**Description:** Get the position and the size of the canvas.
 
 #### Returns:
 | Type                     | Description                                              |
@@ -166,8 +185,10 @@ Get the position and the size of the canvas.
 
 <article>
 
-### getContext: <span><code>(contextId&#58; ContextIds, options&#58; ContextSettings) -&#62; RenderingContext &#124; unknown</code></span>
-Get rendering context of the canvas.
+### getContext 
+**Type:** <code>(contextId&#58; ContextIds, options&#58; ContextSettings) -&#62; RenderingContext &#124; unknown</code>
+
+**Description:** Get rendering context of the canvas.
 
 #### Parameters:
 | Name      | Type                         | Description                                      |
@@ -185,8 +206,10 @@ Get rendering context of the canvas.
 
 <article>
 
-### removeEventListener: <span><code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; boolean &#124; EventListenerOptions) -&#62; void</code></span>
-Removes the listener for the specified event.
+### removeEventListener 
+**Type:** <code>(type&#58; string, listener&#58; EventListenerOrEventListenerObject, options&#58; boolean &#124; EventListenerOptions) -&#62; void</code>
+
+**Description:** Removes the listener for the specified event.
 
 #### Parameters:
 | Name     | Type                                             | Description                                     |
@@ -201,8 +224,10 @@ Removes the listener for the specified event.
 
 <article>
 
-### toDataURL: <span><code>(type&#58; string, options&#58; any) -&#62; string</code></span>
-Get the content of the canvas as data URL.
+### toDataURL 
+**Type:** <code>(type&#58; string, options&#58; any) -&#62; string</code>
+
+**Description:** Get the content of the canvas as data URL.
 
 #### Parameters:
 | Name    | Type                | Description                                                                                   |

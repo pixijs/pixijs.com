@@ -5,7 +5,12 @@ sidebar_label: "PIXI.Texture"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).Texture
+
+</div>
 
 A texture stores the information that represents an image or part of an image.
 It cannot be added to the display list directly; instead use it as the texture for a Sprite. If no frame is provided for a texture, then the whole image is used.
@@ -38,13 +43,12 @@ You can use a ticker or rAF to ensure your sprites load the finished textures af
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Texture: <span><code>(baseTexture&#58; BaseTexture&#60;R&#62;, frame&#58; Rectangle, orig&#58; Rectangle, trim&#58; Rectangle, rotate&#58; number, anchor&#58; IPointData, borders&#58; ITextureBorders) </code></span>
+### Constructor:
+<h4><code>new PIXI.Texture(baseTexture&#58; BaseTexture&#60;R&#62;, frame&#58; Rectangle, orig&#58; Rectangle, trim&#58; Rectangle, rotate&#58; number, anchor&#58; IPointData, borders&#58; ITextureBorders) </code></h4>
 
 #### Parameters:
 | Name        | Type                                | Default       | Description                                                                                                          |
@@ -68,8 +72,10 @@ You can use a ticker or rAF to ensure your sprites load the finished textures af
 ## Members
 <article>
 
-### EMPTY: <span><code>Texture&#60;Resource&#62;</code></span>
-An empty texture, used often to not have to create multiple empty textures. Can not be destroyed.
+### EMPTY 
+**Type:** <code>Texture&#60;Resource&#62;</code>
+
+**Description:** An empty texture, used often to not have to create multiple empty textures. Can not be destroyed.
 
 </article>
 
@@ -78,8 +84,10 @@ An empty texture, used often to not have to create multiple empty textures. Can 
 
 <article>
 
-### WHITE: <span><code>Texture&#60;CanvasResource&#62;</code></span>
-A white texture of 16x16 size, used for graphics and other things Can not be destroyed.
+### WHITE 
+**Type:** <code>Texture&#60;CanvasResource&#62;</code>
+
+**Description:** A white texture of 16x16 size, used for graphics and other things Can not be destroyed.
 
 </article>
 
@@ -88,8 +96,10 @@ A white texture of 16x16 size, used for graphics and other things Can not be des
 
 <article>
 
-### _frame: <span><code>Rectangle</code></span>
-This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering, irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
+### _frame 
+**Type:** <code>Rectangle</code>
+
+**Description:** This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering, irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
 
 </article>
 
@@ -98,8 +108,10 @@ This is the area of the BaseTexture image to actually copy to the Canvas / WebGL
 
 <article>
 
-### baseTexture: <span><code>BaseTexture&#60;R&#62;</code></span>
-The base texture that this texture uses.
+### baseTexture 
+**Type:** <code>BaseTexture&#60;R&#62;</code>
+
+**Description:** The base texture that this texture uses.
 
 </article>
 
@@ -108,20 +120,12 @@ The base texture that this texture uses.
 
 <article>
 
-### defaultAnchor: <span><code>Point</code></span>
-- **Default Value**: <code>&#123;0,0&#125;</code>
+### defaultAnchor 
+**Type:** <code>Point</code>
 
-Anchor point that is used as default if sprite is created with this texture. Changing the `defaultAnchor` at a later point of time will not update Sprite's anchor point.
+**Default Value**: <code>&#123;0,0&#125;</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### defaultBorders: <span><code>ITextureBorders</code></span>
-Default width of the non-scalable border that is used if 9-slice plane is created with this texture. (See [PIXI.NineSlicePlane](../classes/PIXI.NineSlicePlane.pixi_mesh_extras))
+**Description:** Anchor point that is used as default if sprite is created with this texture. Changing the `defaultAnchor` at a later point of time will not update Sprite's anchor point.
 
 </article>
 
@@ -130,8 +134,10 @@ Default width of the non-scalable border that is used if 9-slice plane is create
 
 <article>
 
-### frame: <span><code>Rectangle</code></span>
-The frame specifies the region of the base texture that this texture uses. Please call `updateUvs()` after you change coordinates of `frame` manually.
+### defaultBorders 
+**Type:** <code>ITextureBorders</code>
+
+**Description:** Default width of the non-scalable border that is used if 9-slice plane is created with this texture.
 
 </article>
 
@@ -140,8 +146,10 @@ The frame specifies the region of the base texture that this texture uses. Pleas
 
 <article>
 
-### height: <span><code>number</code></span>
-The height of the Texture in pixels.
+### frame 
+**Type:** <code>Rectangle</code>
+
+**Description:** The frame specifies the region of the base texture that this texture uses. Please call `updateUvs()` after you change coordinates of `frame` manually.
 
 </article>
 
@@ -150,8 +158,22 @@ The height of the Texture in pixels.
 
 <article>
 
-### noFrame: <span><code>boolean</code></span>
-Does this Texture have any frame data assigned to it?
+### height 
+**Type:** <code>number</code>
+
+**Description:** The height of the Texture in pixels.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### noFrame 
+**Type:** <code>boolean</code>
+
+**Description:** Does this Texture have any frame data assigned to it?
 This mode is enabled automatically if no frame was passed inside constructor.
 
 In this mode texture is subscribed to baseTexture events, and fires `update` on any change.
@@ -159,6 +181,7 @@ In this mode texture is subscribed to baseTexture events, and fires `update` on 
 Beware, after loading or resize of baseTexture event can fired two times! If you want more control, subscribe on baseTexture itself.
 
 Any assignment of `frame` switches off `noFrame` mode.
+
 
 ```js
 texture.on('update', () => {});
@@ -172,8 +195,10 @@ texture.on('update', () => {});
 
 <article>
 
-### orig: <span><code>Rectangle</code></span>
-This is the area of original texture, before it was put in atlas.
+### orig 
+**Type:** <code>Rectangle</code>
+
+**Description:** This is the area of original texture, before it was put in atlas.
 
 </article>
 
@@ -182,8 +207,10 @@ This is the area of original texture, before it was put in atlas.
 
 <article>
 
-### resolution: <span><code>number</code></span>
-Returns resolution of baseTexture
+### resolution 
+**Type:** <code>number</code>
+
+**Description:** Returns resolution of baseTexture
 
 </article>
 
@@ -192,8 +219,10 @@ Returns resolution of baseTexture
 
 <article>
 
-### rotate: <span><code>number</code></span>
-Indicates whether the texture is rotated inside the atlas set to 2 to compensate for texture packer rotation set to 6 to compensate for spine packer rotation can be used to rotate or mirror sprites See [PIXI.groupD8](../namespaces/PIXI.groupD8.pixi_math) for explanation
+### rotate 
+**Type:** <code>number</code>
+
+**Description:** Indicates whether the texture is rotated inside the atlas set to 2 to compensate for texture packer rotation set to 6 to compensate for spine packer rotation can be used to rotate or mirror sprites See [PIXI.groupD8](../namespaces/PIXI.groupD8.pixi_math) for explanation
 
 </article>
 
@@ -202,8 +231,10 @@ Indicates whether the texture is rotated inside the atlas set to 2 to compensate
 
 <article>
 
-### textureCacheIds: <span><code>Array&#60;string&#62;</code></span>
-The ids under which this Texture has been added to the texture cache. This is automatically set as long as Texture.addToCache is used, but may not be set if a Texture is added directly to the TextureCache array.
+### textureCacheIds 
+**Type:** <code>Array&#60;string&#62;</code>
+
+**Description:** The ids under which this Texture has been added to the texture cache. This is automatically set as long as Texture.addToCache is used, but may not be set if a Texture is added directly to the TextureCache array.
 
 </article>
 
@@ -212,8 +243,10 @@ The ids under which this Texture has been added to the texture cache. This is au
 
 <article>
 
-### trim: <span><code>Rectangle</code></span>
-This is the trimmed area of original texture, before it was put in atlas Please call `updateUvs()` after you change coordinates of `trim` manually.
+### trim 
+**Type:** <code>Rectangle</code>
+
+**Description:** This is the trimmed area of original texture, before it was put in atlas Please call `updateUvs()` after you change coordinates of `trim` manually.
 
 </article>
 
@@ -222,8 +255,10 @@ This is the trimmed area of original texture, before it was put in atlas Please 
 
 <article>
 
-### uvMatrix: <span><code>TextureMatrix</code></span>
-Default TextureMatrix instance for this texture. By default, that object is not created because its heavy.
+### uvMatrix 
+**Type:** <code>TextureMatrix</code>
+
+**Description:** Default TextureMatrix instance for this texture. By default, that object is not created because its heavy.
 
 </article>
 
@@ -232,8 +267,10 @@ Default TextureMatrix instance for this texture. By default, that object is not 
 
 <article>
 
-### valid: <span><code>boolean</code></span>
-This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
+### valid 
+**Type:** <code>boolean</code>
+
+**Description:** This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
 
 </article>
 
@@ -242,8 +279,10 @@ This will let the renderer know if the texture is valid. If it's not then it can
 
 <article>
 
-### width: <span><code>number</code></span>
-The width of the Texture in pixels.
+### width 
+**Type:** <code>number</code>
+
+**Description:** The width of the Texture in pixels.
 
 </article>
 
@@ -252,8 +291,10 @@ The width of the Texture in pixels.
 
 <article>
 
-### _updateID: <span><code>number</code></span>
-Update ID is observed by sprites and TextureMatrix instances. Call updateUvs() to increment it.
+### _updateID 
+**Type:** <code>number</code>
+
+**Description:** Update ID is observed by sprites and TextureMatrix instances. Call updateUvs() to increment it.
 
 </article>
 
@@ -262,8 +303,10 @@ Update ID is observed by sprites and TextureMatrix instances. Call updateUvs() t
 
 <article>
 
-### _uvs: <span><code>TextureUvs</code></span>
-The WebGL UV data cache. Can be used as quad UV.
+### _uvs 
+**Type:** <code>TextureUvs</code>
+
+**Description:** The WebGL UV data cache. Can be used as quad UV.
 
 </article>
 
@@ -274,8 +317,10 @@ The WebGL UV data cache. Can be used as quad UV.
 ## Methods
 <article>
 
-### addToCache: <span><code>(texture&#58; Texture, id&#58; string) -&#62; void</code></span>
-Adds a Texture to the global TextureCache. This cache is shared across the whole PIXI object.
+### addToCache 
+**Type:** <code>(texture&#58; Texture, id&#58; string) -&#62; void</code>
+
+**Description:** Adds a Texture to the global TextureCache. This cache is shared across the whole PIXI object.
 
 #### Parameters:
 | Name    | Type                 | Description                                     |
@@ -289,8 +334,10 @@ Adds a Texture to the global TextureCache. This cache is shared across the whole
 
 <article>
 
-### from: <span><code>(source&#58; string &#124; PIXI.BaseTexture &#124; HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; PIXI.ICanvas, options&#58; IBaseTextureOptions&#60;RO&#62;, strict&#58; boolean) -&#62; PIXI.Texture</code></span>
-Helper function that creates a new Texture based on the source you provide. The source can be - frame id, image url, video url, canvas element, video element, base texture
+### from 
+**Type:** <code>(source&#58; string &#124; PIXI.BaseTexture &#124; HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; PIXI.ICanvas, options&#58; IBaseTextureOptions&#60;RO&#62;, strict&#58; boolean) -&#62; PIXI.Texture</code>
+
+**Description:** Helper function that creates a new Texture based on the source you provide. The source can be - frame id, image url, video url, canvas element, video element, base texture
 
 #### Parameters:
 | Name                 | Type                                                                                                                               | Description                                                                                                                    |
@@ -310,8 +357,10 @@ Helper function that creates a new Texture based on the source you provide. The 
 
 <article>
 
-### fromBuffer: <span><code>(buffer&#58; Float32Array &#124; Uint8Array, width&#58; number, height&#58; number, options&#58; IBaseTextureOptions&#60;ISize&#62;) -&#62; Texture&#60;BufferResource&#62;</code></span>
-Create a new Texture with a BufferResource from a Float32Array. RGBA values are floats from 0 to 1.
+### fromBuffer 
+**Type:** <code>(buffer&#58; Float32Array &#124; Uint8Array, width&#58; number, height&#58; number, options&#58; IBaseTextureOptions&#60;ISize&#62;) -&#62; Texture&#60;BufferResource&#62;</code>
+
+**Description:** Create a new Texture with a BufferResource from a Float32Array. RGBA values are floats from 0 to 1.
 
 #### Parameters:
 | Name    | Type                                            | Description                                                                              |
@@ -331,8 +380,10 @@ Create a new Texture with a BufferResource from a Float32Array. RGBA values are 
 
 <article>
 
-### fromLoader: <span><code>(source&#58; HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; PIXI.ICanvas &#124; string, imageUrl&#58; string, name&#58; string, options&#58; IBaseTextureOptions) -&#62; Promise&#60;Texture&#60;R&#62;&#62;</code></span>
-Create a texture from a source and add to the cache.
+### fromLoader 
+**Type:** <code>(source&#58; HTMLImageElement &#124; HTMLVideoElement &#124; ImageBitmap &#124; PIXI.ICanvas &#124; string, imageUrl&#58; string, name&#58; string, options&#58; IBaseTextureOptions) -&#62; Promise&#60;Texture&#60;R&#62;&#62;</code>
+
+**Description:** Create a texture from a source and add to the cache.
 
 #### Parameters:
 | Name     | Type                                                                                                       | Description                                                                                                       |
@@ -352,8 +403,10 @@ Create a texture from a source and add to the cache.
 
 <article>
 
-### fromURL: <span><code>(url&#58; string &#124; string[], options&#58; IBaseTextureOptions&#60;RO&#62;) -&#62; Promise&#60;Texture&#60;R&#62;&#62;</code></span>
-Useful for loading textures via URLs. Use instead of `Texture.from` because it does a better job of handling failed URLs more effectively. This also ignores`PIXI.settings.STRICT_TEXTURE_CACHE`. Works for Videos, SVGs, Images.
+### fromURL 
+**Type:** <code>(url&#58; string &#124; string[], options&#58; IBaseTextureOptions&#60;RO&#62;) -&#62; Promise&#60;Texture&#60;R&#62;&#62;</code>
+
+**Description:** Useful for loading textures via URLs. Use instead of `Texture.from` because it does a better job of handling failed URLs more effectively. This also ignores`PIXI.settings.STRICT_TEXTURE_CACHE`. Works for Videos, SVGs, Images.
 
 #### Parameters:
 | Name    | Type                                         | Description                              |
@@ -371,8 +424,10 @@ Useful for loading textures via URLs. Use instead of `Texture.from` because it d
 
 <article>
 
-### removeFromCache: <span><code>(texture&#58; string &#124; Texture) -&#62; Texture &#124; null</code></span>
-Remove a Texture from the global TextureCache.
+### removeFromCache 
+**Type:** <code>(texture&#58; string &#124; Texture) -&#62; Texture &#124; null</code>
+
+**Description:** Remove a Texture from the global TextureCache.
 
 #### Parameters:
 | Name    | Type                               | Description                                                 |
@@ -389,8 +444,10 @@ Remove a Texture from the global TextureCache.
 
 <article>
 
-### castToBaseTexture: <span><code>() -&#62; BaseTexture</code></span>
-Utility function for BaseTexture&#124;Texture cast.
+### castToBaseTexture 
+**Type:** <code>() -&#62; BaseTexture</code>
+
+**Description:** Utility function for BaseTexture&#124;Texture cast.
 
 #### Returns:
 | Type                     | Description |
@@ -403,8 +460,10 @@ Utility function for BaseTexture&#124;Texture cast.
 
 <article>
 
-### clone: <span><code>() -&#62; Texture</code></span>
-Creates a new texture object that acts the same as this one.
+### clone 
+**Type:** <code>() -&#62; Texture</code>
+
+**Description:** Creates a new texture object that acts the same as this one.
 
 #### Returns:
 | Type                 | Description       |
@@ -417,8 +476,10 @@ Creates a new texture object that acts the same as this one.
 
 <article>
 
-### destroy: <span><code>(destroyBase&#58; boolean) -&#62; void</code></span>
-Destroys this texture
+### destroy 
+**Type:** <code>(destroyBase&#58; boolean) -&#62; void</code>
+
+**Description:** Destroys this texture
 
 #### Parameters:
 | Name        | Type                 | Description                                 |
@@ -431,8 +492,10 @@ Destroys this texture
 
 <article>
 
-### update: <span><code>() -&#62; void</code></span>
-Updates this texture on the gpu.
+### update 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Updates this texture on the gpu.
 Calls the TextureResource update.
 
 If you adjusted `frame` manually, please call `updateUvs()` instead.
@@ -444,8 +507,10 @@ If you adjusted `frame` manually, please call `updateUvs()` instead.
 
 <article>
 
-### updateUvs: <span><code>() -&#62; void</code></span>
-Updates the internal WebGL UV cache. Use it after you change `frame` or `trim` of the texture. Call it after changing the frame
+### updateUvs 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Updates the internal WebGL UV cache. Use it after you change `frame` or `trim` of the texture. Call it after changing the frame
 
 </article>
 
@@ -454,8 +519,10 @@ Updates the internal WebGL UV cache. Use it after you change `frame` or `trim` o
 
 <article>
 
-### onBaseTextureUpdated: <span><code>(baseTexture&#58; BaseTexture) -&#62; void</code></span>
-Called when the base texture is updated
+### onBaseTextureUpdated 
+**Type:** <code>(baseTexture&#58; BaseTexture) -&#62; void</code>
+
+**Description:** Called when the base texture is updated
 
 #### Parameters:
 | Name        | Type                     | Description       |

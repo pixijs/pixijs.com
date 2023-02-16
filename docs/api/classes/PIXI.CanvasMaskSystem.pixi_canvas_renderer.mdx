@@ -5,20 +5,24 @@ sidebar_label: "PIXI.CanvasMaskSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/canvas-renderer](../modules/pixi_canvas_renderer).CanvasMaskSystem
+
+</div>
 
 A set of functions used to handle masking.
 Sprite masking is not supported on the CanvasRenderer.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.CanvasMaskSystem: <span><code>(renderer&#58; CanvasRenderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.CanvasMaskSystem(renderer&#58; CanvasRenderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                        | Default       | Description                         |
@@ -37,8 +41,10 @@ Sprite masking is not supported on the CanvasRenderer.
 ## Methods
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys this canvas mask manager.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys this canvas mask manager.
 
 </article>
 
@@ -47,8 +53,10 @@ Destroys this canvas mask manager.
 
 <article>
 
-### popMask: <span><code>(renderer&#58; CanvasRenderer) -&#62; void</code></span>
-Restores the current drawing context to the state it was before the mask was applied.
+### popMask 
+**Type:** <code>(renderer&#58; CanvasRenderer) -&#62; void</code>
+
+**Description:** Restores the current drawing context to the state it was before the mask was applied.
 
 #### Parameters:
 | Name     | Type                        | Description                  |
@@ -61,8 +69,10 @@ Restores the current drawing context to the state it was before the mask was app
 
 <article>
 
-### pushMask: <span><code>(maskData&#58; MaskData &#124; Graphics) -&#62; void</code></span>
-This method adds it to the current stack of masks.
+### pushMask 
+**Type:** <code>(maskData&#58; MaskData &#124; Graphics) -&#62; void</code>
+
+**Description:** This method adds it to the current stack of masks.
 
 #### Parameters:
 | Name     | Type                                  | Description                      |
@@ -75,8 +85,10 @@ This method adds it to the current stack of masks.
 
 <article>
 
-### recursiveFindShapes: <span><code>(container&#58; Container, out&#58; Array&#60;Graphics&#62;) -&#62; void</code></span>
-Renders all PIXI.Graphics shapes in a subtree.
+### recursiveFindShapes 
+**Type:** <code>(container&#58; Container, out&#58; Array&#60;Graphics&#62;) -&#62; void</code>
+
+**Description:** Renders all PIXI.Graphics shapes in a subtree.
 
 #### Parameters:
 | Name      | Type                                 | Description               |
@@ -90,8 +102,10 @@ Renders all PIXI.Graphics shapes in a subtree.
 
 <article>
 
-### renderGraphicsShape: <span><code>(graphics&#58; Graphics) -&#62; void</code></span>
-Renders a PIXI.Graphics shape.
+### renderGraphicsShape 
+**Type:** <code>(graphics&#58; Graphics) -&#62; void</code>
+
+**Description:** Renders a PIXI.Graphics shape.
 
 #### Parameters:
 | Name     | Type                  | Description           |

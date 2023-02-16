@@ -5,20 +5,24 @@ sidebar_label: "PIXI.ParticleRenderer"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/particle-container](../modules/pixi_particle_container).ParticleRenderer
+
+</div>
 
 
 Renderer for Particles that is designer for speed over feature set.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.ParticleRenderer: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.ParticleRenderer(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                               |
@@ -36,8 +40,10 @@ Renderer for Particles that is designer for speed over feature set.
 ## Members
 <article>
 
-### shader: <span><code>Shader</code></span>
-The default shader that is used if a sprite doesn't have a more specific one.
+### shader 
+**Type:** <code>Shader</code>
+
+**Description:** The default shader that is used if a sprite doesn't have a more specific one.
 
 </article>
 
@@ -46,8 +52,10 @@ The default shader that is used if a sprite doesn't have a more specific one.
 
 <article>
 
-### state: <span><code>State</code></span>
-The WebGL state in which this renderer will work.
+### state 
+**Type:** <code>State</code>
+
+**Description:** The WebGL state in which this renderer will work.
 
 </article>
 
@@ -56,8 +64,10 @@ The WebGL state in which this renderer will work.
 
 <article>
 
-### renderer: <span><code>Renderer</code></span>
-The renderer this manager works for.
+### renderer 
+**Type:** <code>Renderer</code>
+
+**Description:** The renderer this manager works for.
 
 </article>
 
@@ -68,8 +78,10 @@ The renderer this manager works for.
 ## Methods
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys the ParticleRenderer.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys the ParticleRenderer.
 
 </article>
 
@@ -78,8 +90,10 @@ Destroys the ParticleRenderer.
 
 <article>
 
-### flush: <span><code>() -&#62; void</code></span>
-Stub method that should be used to empty the current batch by rendering objects now.
+### flush 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stub method that should be used to empty the current batch by rendering objects now.
 
 </article>
 
@@ -88,8 +102,10 @@ Stub method that should be used to empty the current batch by rendering objects 
 
 <article>
 
-### render: <span><code>(container&#58; ParticleContainer) -&#62; void</code></span>
-Renders the particle container object.
+### render 
+**Type:** <code>(container&#58; ParticleContainer) -&#62; void</code>
+
+**Description:** Renders the particle container object.
 
 #### Parameters:
 | Name      | Type                           | Description                                          |
@@ -102,8 +118,10 @@ Renders the particle container object.
 
 <article>
 
-### start: <span><code>() -&#62; void</code></span>
-Stub method that initializes any state required before rendering starts. It is different from the `prerender`signal, which occurs every frame, in that it is called whenever an object requests _this_ renderer specifically.
+### start 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stub method that initializes any state required before rendering starts. It is different from the `prerender`signal, which occurs every frame, in that it is called whenever an object requests _this_ renderer specifically.
 
 </article>
 
@@ -112,8 +130,10 @@ Stub method that initializes any state required before rendering starts. It is d
 
 <article>
 
-### stop: <span><code>() -&#62; void</code></span>
-Stops the renderer. It should free up any state and become dormant.
+### stop 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stops the renderer. It should free up any state and become dormant.
 
 </article>
 
@@ -122,8 +142,10 @@ Stops the renderer. It should free up any state and become dormant.
 
 <article>
 
-### uploadPosition: <span><code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code></span>
-Uploads the position.
+### uploadPosition 
+**Type:** <code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code>
+
+**Description:** Uploads the position.
 
 #### Parameters:
 | Name       | Type                  | Description                                                    |
@@ -141,8 +163,10 @@ Uploads the position.
 
 <article>
 
-### uploadRotation: <span><code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code></span>
-Uploads the rotation.
+### uploadRotation 
+**Type:** <code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code>
+
+**Description:** Uploads the rotation.
 
 #### Parameters:
 | Name       | Type                  | Description                                                   |
@@ -160,8 +184,10 @@ Uploads the rotation.
 
 <article>
 
-### uploadTint: <span><code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code></span>
-Uploads the tint.
+### uploadTint 
+**Type:** <code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code>
+
+**Description:** Uploads the tint.
 
 #### Parameters:
 | Name       | Type                  | Description                                                   |
@@ -179,8 +205,10 @@ Uploads the tint.
 
 <article>
 
-### uploadUvs: <span><code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code></span>
-Uploads the UVs.
+### uploadUvs 
+**Type:** <code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code>
+
+**Description:** Uploads the UVs.
 
 #### Parameters:
 | Name       | Type                  | Description                                                   |
@@ -198,8 +226,10 @@ Uploads the UVs.
 
 <article>
 
-### uploadVertices: <span><code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code></span>
-Uploads the vertices.
+### uploadVertices 
+**Type:** <code>(children&#58; Sprite[], startIndex&#58; number, amount&#58; number, array&#58; number[], stride&#58; number, offset&#58; number) -&#62; void</code>
+
+**Description:** Uploads the vertices.
 
 #### Parameters:
 | Name       | Type                  | Description                                                   |

@@ -5,20 +5,24 @@ sidebar_label: "PIXI.FederatedMouseEvent"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/events](../modules/pixi_events).FederatedMouseEvent
+
+</div>
 
 
 A [PIXI.FederatedEvent](../classes/PIXI.FederatedEvent.pixi_events) for mouse events.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.FederatedMouseEvent: <span><code>() </code></span>
+### Constructor:
+<h4><code>new PIXI.FederatedMouseEvent() </code></h4>
 
 #### Parameters:
 | Name | Type | Default | Description |
@@ -35,8 +39,10 @@ A [PIXI.FederatedEvent](../classes/PIXI.FederatedEvent.pixi_events) for mouse ev
 ## Members
 <article>
 
-### altKey: <span><code>boolean</code></span>
-Whether the "alt" key was pressed when this mouse event occurred.
+### altKey 
+**Type:** <code>boolean</code>
+
+**Description:** Whether the "alt" key was pressed when this mouse event occurred.
 
 </article>
 
@@ -45,20 +51,12 @@ Whether the "alt" key was pressed when this mouse event occurred.
 
 <article>
 
-### bubbles: <span><code>boolean</code></span>
-- **Default Value**: <code>true</code>
+### bubbles 
+**Type:** <code>boolean</code>
 
-Flags whether this event bubbles. This will take effect only if it is set before propagation.
+**Default Value**: <code>true</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### button: <span><code>number</code></span>
-The specific button that was pressed in this mouse event.
+**Description:** Flags whether this event bubbles. This will take effect only if it is set before propagation.
 
 </article>
 
@@ -67,8 +65,10 @@ The specific button that was pressed in this mouse event.
 
 <article>
 
-### buttons: <span><code>number</code></span>
-The button depressed when this event occurred.
+### button 
+**Type:** <code>number</code>
+
+**Description:** The specific button that was pressed in this mouse event.
 
 </article>
 
@@ -77,21 +77,10 @@ The button depressed when this event occurred.
 
 <article>
 
-### cancelable: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### buttons 
+**Type:** <code>number</code>
 
-Flags whether this event can be canceled using [PIXI.FederatedEvent.preventDefault](../classes/PIXI.FederatedEvent.pixi_events#preventDefault). This is always false (for now).
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### cancelBubble: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
-- **Default Value**: <code>true</code>
-
+**Description:** The button depressed when this event occurred.
 
 </article>
 
@@ -100,8 +89,12 @@ Flags whether this event can be canceled using [PIXI.FederatedEvent.preventDefau
 
 <article>
 
-### client: <span><code>Point</code></span>
-The coordinates of the mouse event relative to the canvas.
+### cancelable 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** Flags whether this event can be canceled using [PIXI.FederatedEvent.preventDefault](../classes/PIXI.FederatedEvent.pixi_events#preventDefault). This is always false (for now).
 
 </article>
 
@@ -110,7 +103,11 @@ The coordinates of the mouse event relative to the canvas.
 
 <article>
 
-### clientX: <span><code>number</code></span>
+### cancelBubble : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>true</code>
+
 
 </article>
 
@@ -119,7 +116,10 @@ The coordinates of the mouse event relative to the canvas.
 
 <article>
 
-### clientY: <span><code>number</code></span>
+### client 
+**Type:** <code>Point</code>
+
+**Description:** The coordinates of the mouse event relative to the canvas.
 
 </article>
 
@@ -128,10 +128,9 @@ The coordinates of the mouse event relative to the canvas.
 
 <article>
 
-### composed: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### clientX 
+**Type:** <code>number</code>
 
-Flag added for compatibility with DOM `Event`. It is not used in the Federated Events API.
 
 </article>
 
@@ -140,8 +139,9 @@ Flag added for compatibility with DOM `Event`. It is not used in the Federated E
 
 <article>
 
-### ctrlKey: <span><code>boolean</code></span>
-Whether the "control" key was pressed when this mouse event occurred.
+### clientY 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -150,8 +150,12 @@ Whether the "control" key was pressed when this mouse event occurred.
 
 <article>
 
-### currentTarget: <span><code>FederatedEventTarget</code></span>
-The listeners of the event target that are being notified.
+### composed 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** Flag added for compatibility with DOM `Event`. It is not used in the Federated Events API.
 
 </article>
 
@@ -160,8 +164,10 @@ The listeners of the event target that are being notified.
 
 <article>
 
-### data: <span><code>this</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
-Fallback for the deprecated &#64;code&#123;PIXI.InteractionEvent.data&#125;.
+### ctrlKey 
+**Type:** <code>boolean</code>
+
+**Description:** Whether the "control" key was pressed when this mouse event occurred.
 
 </article>
 
@@ -170,20 +176,10 @@ Fallback for the deprecated &#64;code&#123;PIXI.InteractionEvent.data&#125;.
 
 <article>
 
-### defaultPrevented: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### currentTarget 
+**Type:** <code>FederatedEventTarget</code>
 
-Flags whether the default response of the user agent was prevent through this event.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### detail: <span><code>number</code></span>
-This is the number of clicks that occurs in 200ms/click of each other.
+**Description:** The listeners of the event target that are being notified.
 
 </article>
 
@@ -192,20 +188,10 @@ This is the number of clicks that occurs in 200ms/click of each other.
 
 <article>
 
-### eventPhase: <span><code>unknown</code></span>
-- **Default Value**: <code>&#123;&#64;link PIXI.FederatedEvent.NONE&#125;</code>
+### data : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>this</code>
 
-The propagation phase.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### global: <span><code>Point</code></span>
-The pointer coordinates in world space.
+**Description:** Fallback for the deprecated &#64;code&#123;PIXI.InteractionEvent.data&#125;.
 
 </article>
 
@@ -214,7 +200,12 @@ The pointer coordinates in world space.
 
 <article>
 
-### globalX: <span><code>number</code></span>
+### defaultPrevented 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** Flags whether the default response of the user agent was prevent through this event.
 
 </article>
 
@@ -223,7 +214,10 @@ The pointer coordinates in world space.
 
 <article>
 
-### globalY: <span><code>number</code></span>
+### detail 
+**Type:** <code>number</code>
+
+**Description:** This is the number of clicks that occurs in 200ms/click of each other.
 
 </article>
 
@@ -232,8 +226,12 @@ The pointer coordinates in world space.
 
 <article>
 
-### isTrusted: <span><code>boolean</code></span>
-Flags whether this is a user-trusted event
+### eventPhase 
+**Type:** <code>unknown</code>
+
+**Default Value**: <code>&#123;&#64;link PIXI.FederatedEvent.NONE&#125;</code>
+
+**Description:** The propagation phase.
 
 </article>
 
@@ -242,8 +240,10 @@ Flags whether this is a user-trusted event
 
 <article>
 
-### layer: <span><code>Point</code></span>
-The coordinates of the evnet relative to the nearest DOM layer. This is a non-standard property.
+### global 
+**Type:** <code>Point</code>
+
+**Description:** The pointer coordinates in world space.
 
 </article>
 
@@ -252,7 +252,9 @@ The coordinates of the evnet relative to the nearest DOM layer. This is a non-st
 
 <article>
 
-### layerX: <span><code>number</code></span>
+### globalX 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -261,7 +263,9 @@ The coordinates of the evnet relative to the nearest DOM layer. This is a non-st
 
 <article>
 
-### layerY: <span><code>number</code></span>
+### globalY 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -270,8 +274,10 @@ The coordinates of the evnet relative to the nearest DOM layer. This is a non-st
 
 <article>
 
-### manager: <span><code>EventBoundary</code></span>
-The [PIXI.EventBoundary](../classes/PIXI.EventBoundary.pixi_events) that manages this event. Null for root events.
+### isTrusted 
+**Type:** <code>boolean</code>
+
+**Description:** Flags whether this is a user-trusted event
 
 </article>
 
@@ -280,8 +286,10 @@ The [PIXI.EventBoundary](../classes/PIXI.EventBoundary.pixi_events) that manages
 
 <article>
 
-### metaKey: <span><code>boolean</code></span>
-Whether the "meta" key was pressed when this mouse event occurred.
+### layer 
+**Type:** <code>Point</code>
+
+**Description:** The coordinates of the evnet relative to the nearest DOM layer. This is a non-standard property.
 
 </article>
 
@@ -290,8 +298,9 @@ Whether the "meta" key was pressed when this mouse event occurred.
 
 <article>
 
-### movement: <span><code>Point</code></span>
-The movement in this pointer relative to the last `mousemove` event.
+### layerX 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -300,7 +309,9 @@ The movement in this pointer relative to the last `mousemove` event.
 
 <article>
 
-### movementX: <span><code>number</code></span>
+### layerY 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -309,7 +320,10 @@ The movement in this pointer relative to the last `mousemove` event.
 
 <article>
 
-### movementY: <span><code>number</code></span>
+### manager 
+**Type:** <code>EventBoundary</code>
+
+**Description:** The [PIXI.EventBoundary](../classes/PIXI.EventBoundary.pixi_events) that manages this event. Null for root events.
 
 </article>
 
@@ -318,8 +332,10 @@ The movement in this pointer relative to the last `mousemove` event.
 
 <article>
 
-### nativeEvent: <span><code>N</code></span>
-The native event that caused the foremost original event.
+### metaKey 
+**Type:** <code>boolean</code>
+
+**Description:** Whether the "meta" key was pressed when this mouse event occurred.
 
 </article>
 
@@ -328,8 +344,10 @@ The native event that caused the foremost original event.
 
 <article>
 
-### offset: <span><code>Point</code></span>
-The offset of the pointer coordinates w.r.t. target DisplayObject in world space. This is not supported at the moment.
+### movement 
+**Type:** <code>Point</code>
+
+**Description:** The movement in this pointer relative to the last `mousemove` event.
 
 </article>
 
@@ -338,7 +356,9 @@ The offset of the pointer coordinates w.r.t. target DisplayObject in world space
 
 <article>
 
-### offsetX: <span><code>number</code></span>
+### movementX 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -347,7 +367,9 @@ The offset of the pointer coordinates w.r.t. target DisplayObject in world space
 
 <article>
 
-### offsetY: <span><code>number</code></span>
+### movementY 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -356,8 +378,10 @@ The offset of the pointer coordinates w.r.t. target DisplayObject in world space
 
 <article>
 
-### originalEvent: <span><code>FederatedEvent&#60;N&#62;</code></span>
-The original event that caused this event, if any.
+### nativeEvent 
+**Type:** <code>N</code>
+
+**Description:** The native event that caused the foremost original event.
 
 </article>
 
@@ -366,8 +390,10 @@ The original event that caused this event, if any.
 
 <article>
 
-### page: <span><code>Point</code></span>
-The coordinates of the event relative to the DOM document. This is a non-standard property.
+### offset 
+**Type:** <code>Point</code>
+
+**Description:** The offset of the pointer coordinates w.r.t. target DisplayObject in world space. This is not supported at the moment.
 
 </article>
 
@@ -376,7 +402,9 @@ The coordinates of the event relative to the DOM document. This is a non-standar
 
 <article>
 
-### pageX: <span><code>number</code></span>
+### offsetX 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -385,7 +413,9 @@ The coordinates of the event relative to the DOM document. This is a non-standar
 
 <article>
 
-### pageY: <span><code>number</code></span>
+### offsetY 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -394,8 +424,10 @@ The coordinates of the event relative to the DOM document. This is a non-standar
 
 <article>
 
-### path: <span><code>FederatedEventTarget[]</code></span>
-The composed path of the event's propagation. The `target` is at the end.
+### originalEvent 
+**Type:** <code>FederatedEvent&#60;N&#62;</code>
+
+**Description:** The original event that caused this event, if any.
 
 </article>
 
@@ -404,22 +436,10 @@ The composed path of the event's propagation. The `target` is at the end.
 
 <article>
 
-### propagationImmediatelyStopped: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
+### page 
+**Type:** <code>Point</code>
 
-Flags whether propagation was immediately stopped.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### propagationStopped: <span><code>boolean</code></span>
-- **Default Value**: <code>false</code>
-
-Flags whether propagation was stopped.
+**Description:** The coordinates of the event relative to the DOM document. This is a non-standard property.
 
 </article>
 
@@ -428,8 +448,9 @@ Flags whether propagation was stopped.
 
 <article>
 
-### relatedTarget: <span><code>EventTarget</code></span>
-This is currently not implemented in the Federated Events API.
+### pageX 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -438,7 +459,9 @@ This is currently not implemented in the Federated Events API.
 
 <article>
 
-### returnValue: <span><code>boolean</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+### pageY 
+**Type:** <code>number</code>
+
 
 </article>
 
@@ -447,8 +470,10 @@ This is currently not implemented in the Federated Events API.
 
 <article>
 
-### screen: <span><code>Point</code></span>
-The pointer coordinates in the renderer's [screen](../classes/PIXI.Renderer.pixi_core#screen). This has slightly different semantics than native PointerEvent screenX/screenY.
+### path 
+**Type:** <code>FederatedEventTarget[]</code>
+
+**Description:** The composed path of the event's propagation. The `target` is at the end.
 
 </article>
 
@@ -457,8 +482,12 @@ The pointer coordinates in the renderer's [screen](../classes/PIXI.Renderer.pixi
 
 <article>
 
-### screenX: <span><code>number</code></span>
-The pointer coordinates in the renderer's screen. Alias for `screen.x`.
+### propagationImmediatelyStopped 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** Flags whether propagation was immediately stopped.
 
 </article>
 
@@ -467,8 +496,12 @@ The pointer coordinates in the renderer's screen. Alias for `screen.x`.
 
 <article>
 
-### screenY: <span><code>number</code></span>
-The pointer coordinates in the renderer's screen. Alias for `screen.y`.
+### propagationStopped 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>false</code>
+
+**Description:** Flags whether propagation was stopped.
 
 </article>
 
@@ -477,8 +510,10 @@ The pointer coordinates in the renderer's screen. Alias for `screen.y`.
 
 <article>
 
-### shiftKey: <span><code>boolean</code></span>
-Whether the "shift" key was pressed when this mouse event occurred.
+### relatedTarget 
+**Type:** <code>EventTarget</code>
+
+**Description:** This is currently not implemented in the Federated Events API.
 
 </article>
 
@@ -487,7 +522,9 @@ Whether the "shift" key was pressed when this mouse event occurred.
 
 <article>
 
-### srcElement: <span><code>EventTarget</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+### returnValue : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>boolean</code>
+
 
 </article>
 
@@ -496,8 +533,10 @@ Whether the "shift" key was pressed when this mouse event occurred.
 
 <article>
 
-### target: <span><code>FederatedEventTarget</code></span>
-The event target that this will be dispatched to.
+### screen 
+**Type:** <code>Point</code>
+
+**Description:** The pointer coordinates in the renderer's [screen](../classes/PIXI.Renderer.pixi_core#screen). This has slightly different semantics than native PointerEvent screenX/screenY.
 
 </article>
 
@@ -506,8 +545,10 @@ The event target that this will be dispatched to.
 
 <article>
 
-### timeStamp: <span><code>number</code></span>
-The timestamp of when the event was created.
+### screenX 
+**Type:** <code>number</code>
+
+**Description:** The pointer coordinates in the renderer's screen. Alias for `screen.x`.
 
 </article>
 
@@ -516,8 +557,10 @@ The timestamp of when the event was created.
 
 <article>
 
-### type: <span><code>string</code></span>
-The type of event, e.g. `"mouseup"`.
+### screenY 
+**Type:** <code>number</code>
+
+**Description:** The pointer coordinates in the renderer's screen. Alias for `screen.y`.
 
 </article>
 
@@ -526,8 +569,10 @@ The type of event, e.g. `"mouseup"`.
 
 <article>
 
-### view: <span><code>WindowProxy</code></span>
-The global Window object.
+### shiftKey 
+**Type:** <code>boolean</code>
+
+**Description:** Whether the "shift" key was pressed when this mouse event occurred.
 
 </article>
 
@@ -536,8 +581,9 @@ The global Window object.
 
 <article>
 
-### which: <span><code>number</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
-Not supported.
+### srcElement : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>EventTarget</code>
+
 
 </article>
 
@@ -546,8 +592,10 @@ Not supported.
 
 <article>
 
-### x: <span><code>number</code></span>
-Alias for [this.clientX](../classes/PIXI.FederatedMouseEvent.pixi_events#clientX).
+### target 
+**Type:** <code>FederatedEventTarget</code>
+
+**Description:** The event target that this will be dispatched to.
 
 </article>
 
@@ -556,8 +604,70 @@ Alias for [this.clientX](../classes/PIXI.FederatedMouseEvent.pixi_events#clientX
 
 <article>
 
-### y: <span><code>number</code></span>
-Alias for [this.clientY](../classes/PIXI.FederatedMouseEvent.pixi_events#clientY).
+### timeStamp 
+**Type:** <code>number</code>
+
+**Description:** The timestamp of when the event was created.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### type 
+**Type:** <code>string</code>
+
+**Description:** The type of event, e.g. `"mouseup"`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### view 
+**Type:** <code>WindowProxy</code>
+
+**Description:** The global Window object.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### which : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>number</code>
+
+**Description:** Not supported.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### x 
+**Type:** <code>number</code>
+
+**Description:** Alias for [this.clientX](../classes/PIXI.FederatedMouseEvent.pixi_events#clientX).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### y 
+**Type:** <code>number</code>
+
+**Description:** Alias for [this.clientY](../classes/PIXI.FederatedMouseEvent.pixi_events#clientY).
 
 </article>
 
@@ -568,8 +678,10 @@ Alias for [this.clientY](../classes/PIXI.FederatedMouseEvent.pixi_events#clientY
 ## Methods
 <article>
 
-### composedPath: <span><code>() -&#62; FederatedEventTarget[]</code></span>
-The propagation path for this event. Alias for [PIXI.EventBoundary.propagationPath](../classes/PIXI.EventBoundary.pixi_events#propagationPath).
+### composedPath 
+**Type:** <code>() -&#62; FederatedEventTarget[]</code>
+
+**Description:** The propagation path for this event. Alias for [PIXI.EventBoundary.propagationPath](../classes/PIXI.EventBoundary.pixi_events#propagationPath).
 
 #### Returns:
 | Type                                | Description |
@@ -582,8 +694,32 @@ The propagation path for this event. Alias for [PIXI.EventBoundary.propagationPa
 
 <article>
 
-### getModifierState: <span><code>(key&#58; string) -&#62; boolean</code></span>
-Whether the modifier key was pressed when this event natively occurred.
+### getLocalPosition 
+**Type:** <code>(displayObject&#58; PIXI.DisplayObject, point&#58; PIXI.IPointData, globalPos&#58; PIXI.IPointData) -&#62; P</code>
+
+**Description:** This will return the local coordinates of the specified displayObject for this InteractionData
+
+#### Parameters:
+| Name          | Type                            | Description                                                                                                  |
+| ------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| displayObject | <code>PIXI.DisplayObject</code> | The DisplayObject that you would like the local coords off                                                   |
+| point         | <code>PIXI.IPointData</code>    | A Point object in which to store the value, optional (otherwise will create a new point)                     |
+| globalPos     | <code>PIXI.IPointData</code>    | A Point object containing your custom global coords, optional (otherwise will use the current global coords) |
+#### Returns:
+| Type           | Description                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------- |
+| <code>P</code> | * A point containing the coordinates of the InteractionData position relative to the DisplayObject |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### getModifierState 
+**Type:** <code>(key&#58; string) -&#62; boolean</code>
+
+**Description:** Whether the modifier key was pressed when this event natively occurred.
 
 #### Parameters:
 | Name | Type                | Description       |
@@ -600,8 +736,10 @@ Whether the modifier key was pressed when this event natively occurred.
 
 <article>
 
-### initEvent: <span><code>(_type&#58; string, _bubbles&#58; boolean, _cancelable&#58; boolean) -&#62; void</code></span><span class="deprecated-tag"> Deprecated: </span>
-Unimplemented method included for implementing the DOM interface `Event`. It will throw an `Error`.
+### initEvent : <span class="deprecated-tag"> Deprecated: </span>
+**Type:** <code>(_type&#58; string, _bubbles&#58; boolean, _cancelable&#58; boolean) -&#62; void</code>
+
+**Description:** Unimplemented method included for implementing the DOM interface `Event`. It will throw an `Error`.
 
 #### Parameters:
 | Name        | Type                 | Description |
@@ -616,8 +754,10 @@ Unimplemented method included for implementing the DOM interface `Event`. It wil
 
 <article>
 
-### initMouseEvent: <span><code>(_typeArg&#58; string, _canBubbleArg&#58; boolean, _cancelableArg&#58; boolean, _viewArg&#58; Window, _detailArg&#58; number, _screenXArg&#58; number, _screenYArg&#58; number, _clientXArg&#58; number, _clientYArg&#58; number, _ctrlKeyArg&#58; boolean, _altKeyArg&#58; boolean, _shiftKeyArg&#58; boolean, _metaKeyArg&#58; boolean, _buttonArg&#58; number, _relatedTargetArg&#58; EventTarget) -&#62; void</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
-Not supported.
+### initMouseEvent : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>(_typeArg&#58; string, _canBubbleArg&#58; boolean, _cancelableArg&#58; boolean, _viewArg&#58; Window, _detailArg&#58; number, _screenXArg&#58; number, _screenYArg&#58; number, _clientXArg&#58; number, _clientYArg&#58; number, _ctrlKeyArg&#58; boolean, _altKeyArg&#58; boolean, _shiftKeyArg&#58; boolean, _metaKeyArg&#58; boolean, _buttonArg&#58; number, _relatedTargetArg&#58; EventTarget) -&#62; void</code>
+
+**Description:** Not supported.
 
 #### Parameters:
 | Name              | Type                     | Description |
@@ -644,8 +784,10 @@ Not supported.
 
 <article>
 
-### initUIEvent: <span><code>(_typeArg&#58; string, _bubblesArg&#58; boolean, _cancelableArg&#58; boolean, _viewArg&#58; Window &#124; null, _detailArg&#58; number) -&#62; void</code></span><span class="deprecated-tag"> Deprecated: </span>
-Unimplemented method included for implementing the DOM interface `UIEvent`. It will throw an `Error`.
+### initUIEvent : <span class="deprecated-tag"> Deprecated: </span>
+**Type:** <code>(_typeArg&#58; string, _bubblesArg&#58; boolean, _cancelableArg&#58; boolean, _viewArg&#58; Window &#124; null, _detailArg&#58; number) -&#62; void</code>
+
+**Description:** Unimplemented method included for implementing the DOM interface `UIEvent`. It will throw an `Error`.
 
 #### Parameters:
 | Name           | Type                            | Description |
@@ -662,8 +804,10 @@ Unimplemented method included for implementing the DOM interface `UIEvent`. It w
 
 <article>
 
-### preventDefault: <span><code>() -&#62; void</code></span>
-Prevent default behavior of PixiJS and the user agent.
+### preventDefault 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Prevent default behavior of PixiJS and the user agent.
 
 </article>
 
@@ -672,8 +816,10 @@ Prevent default behavior of PixiJS and the user agent.
 
 <article>
 
-### stopImmediatePropagation: <span><code>() -&#62; void</code></span>
-Stop this event from propagating to any addition listeners, including on the [currentTarget](../interfaces/PIXI.FederatedEventTarget.pixi_events#currentTarget) and also the following event targets on the propagation path.
+### stopImmediatePropagation 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stop this event from propagating to any addition listeners, including on the [currentTarget](../interfaces/PIXI.FederatedEventTarget.pixi_events#currentTarget) and also the following event targets on the propagation path.
 
 </article>
 
@@ -682,8 +828,10 @@ Stop this event from propagating to any addition listeners, including on the [cu
 
 <article>
 
-### stopPropagation: <span><code>() -&#62; void</code></span>
-Stop this event from propagating to the next [PIXI.FederatedEventTarget](../interfaces/PIXI.FederatedEventTarget.pixi_events). The rest of the listeners on the [currentTarget](../interfaces/PIXI.FederatedEventTarget.pixi_events#currentTarget) will still be notified.
+### stopPropagation 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Stop this event from propagating to the next [PIXI.FederatedEventTarget](../interfaces/PIXI.FederatedEventTarget.pixi_events). The rest of the listeners on the [currentTarget](../interfaces/PIXI.FederatedEventTarget.pixi_events#currentTarget) will still be notified.
 
 </article>
 

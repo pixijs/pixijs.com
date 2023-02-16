@@ -5,14 +5,17 @@ sidebar_label: "PIXI.IBitmapFontOptions"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/text-bitmap](../modules/pixi_text_bitmap).IBitmapFontOptions
 
+</div>
 
 
 
 
 
-// TODO: @see
 
         
 
@@ -44,22 +47,12 @@ custom_edit_url: null
 ## Members
 <article>
 
-### alphaMode: <span><code>ALPHA_MODES</code></span>
-- **Default Value**: <code>PIXI.BaseTexture.defaultOptions.alphaMode</code>
+### alphaMode 
+**Type:** <code>ALPHA_MODES</code>
 
-Pre multiply the image alpha. Note&#58; for MSDF/SDF fonts, alphaMode is not supported.
+**Default Value**: <code>PIXI.BaseTexture.defaultOptions.alphaMode</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### anisotropicLevel: <span><code>number</code></span>
-- **Default Value**: <code>PIXI.BaseTexture.defaultOptions.anisotropicLevel</code>
-
-Anisotropic filtering level of texture.
+**Description:** Pre multiply the image alpha. Note&#58; for MSDF/SDF fonts, alphaMode is not supported.
 
 </article>
 
@@ -68,22 +61,12 @@ Anisotropic filtering level of texture.
 
 <article>
 
-### chars: <span><code>string &#124; (string &#124; string[])[]</code></span>
-- **Default Value**: <code>PIXI.BitmapFont.ALPHANUMERIC</code>
+### anisotropicLevel 
+**Type:** <code>number</code>
 
-Characters included in the font set. You can also use ranges. For example, `[['a', 'z'], ['A', 'Z'], "!@#$%^&*()~{}[] "]`. Don't forget to include spaces ' ' in your character set!
+**Default Value**: <code>PIXI.BaseTexture.defaultOptions.anisotropicLevel</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### mipmap: <span><code>MIPMAP_MODES</code></span>
-- **Default Value**: <code>PIXI.BaseTexture.defaultOptions.mipmap</code>
-
-If mipmapping is enabled for texture. For instance, by default PixiJS only enables mipmapping on Power-of-Two textures. If your textureWidth or textureHeight are not power-of-two, you may consider enabling mipmapping to get better quality with lower font sizes. Note&#58; for MSDF/SDF fonts, mipmapping is not supported.
+**Description:** Anisotropic filtering level of texture.
 
 </article>
 
@@ -92,22 +75,12 @@ If mipmapping is enabled for texture. For instance, by default PixiJS only enabl
 
 <article>
 
-### padding: <span><code>number</code></span>
-- **Default Value**: <code>4</code>
+### chars 
+**Type:** <code>string &#124; (string &#124; string[])[]</code>
 
-Padding between glyphs on texture atlas. Lower values could mean more visual artifacts and bleeding from other glyphs, larger values increase the space required on the texture.
+**Default Value**: <code>PIXI.BitmapFont.ALPHANUMERIC</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### resolution: <span><code>number</code></span>
-- **Default Value**: <code>1</code>
-
-Render resolution for glyphs.
+**Description:** Characters included in the font set. You can also use ranges. For example, `[['a', 'z'], ['A', 'Z'], "!@#$%^&*()~{}[] "]`. Don't forget to include spaces ' ' in your character set!
 
 </article>
 
@@ -116,22 +89,12 @@ Render resolution for glyphs.
 
 <article>
 
-### scaleMode: <span><code>SCALE_MODES</code></span>
-- **Default Value**: <code>PIXI.BaseTexture.defaultOptions.scaleMode</code>
+### mipmap 
+**Type:** <code>MIPMAP_MODES</code>
 
-Default scale mode, linear, nearest. Nearest can be helpful for bitmap-style fonts.
+**Default Value**: <code>PIXI.BaseTexture.defaultOptions.mipmap</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### textureHeight: <span><code>number</code></span>
-- **Default Value**: <code>512</code>
-
-Optional height of atlas, smaller values to reduce memory.
+**Description:** If mipmapping is enabled for texture. For instance, by default PixiJS only enables mipmapping on Power-of-Two textures. If your textureWidth or textureHeight are not power-of-two, you may consider enabling mipmapping to get better quality with lower font sizes. Note&#58; for MSDF/SDF fonts, mipmapping is not supported.
 
 </article>
 
@@ -140,10 +103,68 @@ Optional height of atlas, smaller values to reduce memory.
 
 <article>
 
-### textureWidth: <span><code>number</code></span>
-- **Default Value**: <code>512</code>
+### padding 
+**Type:** <code>number</code>
 
-Optional width of atlas, smaller values to reduce memory.
+**Default Value**: <code>4</code>
+
+**Description:** Padding between glyphs on texture atlas. Lower values could mean more visual artifacts and bleeding from other glyphs, larger values increase the space required on the texture.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### resolution 
+**Type:** <code>number</code>
+
+**Default Value**: <code>1</code>
+
+**Description:** Render resolution for glyphs.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### scaleMode 
+**Type:** <code>SCALE_MODES</code>
+
+**Default Value**: <code>PIXI.BaseTexture.defaultOptions.scaleMode</code>
+
+**Description:** Default scale mode, linear, nearest. Nearest can be helpful for bitmap-style fonts.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textureHeight 
+**Type:** <code>number</code>
+
+**Default Value**: <code>512</code>
+
+**Description:** Optional height of atlas, smaller values to reduce memory.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### textureWidth 
+**Type:** <code>number</code>
+
+**Default Value**: <code>512</code>
+
+**Description:** Optional width of atlas, smaller values to reduce memory.
 
 </article>
 

@@ -5,20 +5,24 @@ sidebar_label: "PIXI.ShaderSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).ShaderSystem
+
+</div>
 
 
 System plugin to the renderer to manage shaders.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.ShaderSystem: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.ShaderSystem(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -35,8 +39,10 @@ System plugin to the renderer to manage shaders.
 ## Members
 <article>
 
-### gl: <span><code>WebGLRenderingContext</code></span>
-The current WebGL rendering context.
+### gl 
+**Type:** <code>WebGLRenderingContext</code>
+
+**Description:** The current WebGL rendering context.
 
 </article>
 
@@ -47,8 +53,10 @@ The current WebGL rendering context.
 ## Methods
 <article>
 
-### bind: <span><code>(shader&#58; Shader, dontSync&#58; boolean) -&#62; GLProgram</code></span>
-Changes the current shader to the one given in parameter.
+### bind 
+**Type:** <code>(shader&#58; Shader, dontSync&#58; boolean) -&#62; GLProgram</code>
+
+**Description:** Changes the current shader to the one given in parameter.
 
 #### Parameters:
 | Name     | Type                 | Description                                                 |
@@ -66,8 +74,10 @@ Changes the current shader to the one given in parameter.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys this System and removes all its textures.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys this System and removes all its textures.
 
 </article>
 
@@ -76,8 +86,10 @@ Destroys this System and removes all its textures.
 
 <article>
 
-### disposeShader: <span><code>(shader&#58; Shader) -&#62; void</code></span>
-Disposes shader. If disposing one equals with current shader, set current as null.
+### disposeShader 
+**Type:** <code>(shader&#58; Shader) -&#62; void</code>
+
+**Description:** Disposes shader. If disposing one equals with current shader, set current as null.
 
 #### Parameters:
 | Name   | Type                | Description   |
@@ -90,8 +102,10 @@ Disposes shader. If disposing one equals with current shader, set current as nul
 
 <article>
 
-### generateProgram: <span><code>(shader&#58; Shader) -&#62; GLProgram</code></span>
-Generates a glProgram version of the Shader provided.
+### generateProgram 
+**Type:** <code>(shader&#58; Shader) -&#62; GLProgram</code>
+
+**Description:** Generates a glProgram version of the Shader provided.
 
 #### Parameters:
 | Name   | Type                | Description                                     |
@@ -108,8 +122,10 @@ Generates a glProgram version of the Shader provided.
 
 <article>
 
-### getGlProgram: <span><code>() -&#62; GLProgram</code></span>
-Returns the underlying GLShade rof the currently bound shader.
+### getGlProgram 
+**Type:** <code>() -&#62; GLProgram</code>
+
+**Description:** Returns the underlying GLShade rof the currently bound shader.
 This can be handy for when you to have a little more control over the setting of your uniforms.
 
 #### Returns:
@@ -123,8 +139,10 @@ This can be handy for when you to have a little more control over the setting of
 
 <article>
 
-### reset: <span><code>() -&#62; void</code></span>
-Resets ShaderSystem state, does not affect WebGL state.
+### reset 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Resets ShaderSystem state, does not affect WebGL state.
 
 </article>
 
@@ -133,8 +151,10 @@ Resets ShaderSystem state, does not affect WebGL state.
 
 <article>
 
-### setUniforms: <span><code>(uniforms&#58; Dict&#60;any&#62;) -&#62; void</code></span>
-Uploads the uniforms values to the currently bound shader.
+### setUniforms 
+**Type:** <code>(uniforms&#58; Dict&#60;any&#62;) -&#62; void</code>
+
+**Description:** Uploads the uniforms values to the currently bound shader.
 
 #### Parameters:
 | Name     | Type                           | Description                                               |
@@ -147,8 +167,10 @@ Uploads the uniforms values to the currently bound shader.
 
 <article>
 
-### syncUniformBufferGroup: <span><code>(group&#58; UniformGroup, name&#58; string) -&#62; </code></span>
-Syncs uniform buffers
+### syncUniformBufferGroup 
+**Type:** <code>(group&#58; UniformGroup, name&#58; string) -&#62; </code>
+
+**Description:** Syncs uniform buffers
 
 #### Parameters:
 | Name  | Type                      | Description                      |
@@ -162,8 +184,10 @@ Syncs uniform buffers
 
 <article>
 
-### syncUniformGroup: <span><code>(group&#58; UniformGroup, syncData&#58; any) -&#62; void</code></span>
-Syncs uniforms on the group
+### syncUniformGroup 
+**Type:** <code>(group&#58; UniformGroup, syncData&#58; any) -&#62; void</code>
+
+**Description:** Syncs uniforms on the group
 
 #### Parameters:
 | Name     | Type                      | Description                                                                    |
@@ -177,8 +201,10 @@ Syncs uniforms on the group
 
 <article>
 
-### syncUniforms: <span><code>(group&#58; UniformGroup, glProgram&#58; GLProgram, syncData&#58; any) -&#62; void</code></span>
-Overrideable by the &#64;pixi/unsafe-eval package to use static syncUniforms instead.
+### syncUniforms 
+**Type:** <code>(group&#58; UniformGroup, glProgram&#58; GLProgram, syncData&#58; any) -&#62; void</code>
+
+**Description:** Overrideable by the &#64;pixi/unsafe-eval package to use static syncUniforms instead.
 
 #### Parameters:
 | Name      | Type                      | Description |
@@ -193,8 +219,10 @@ Overrideable by the &#64;pixi/unsafe-eval package to use static syncUniforms ins
 
 <article>
 
-### createSyncBufferGroup: <span><code>(group&#58; UniformGroup, glProgram&#58; GLProgram, name&#58; string) -&#62; UniformsSyncCallback</code></span>
-Will create a function that uploads a uniform buffer using the STD140 standard. The upload function will then be cached for future calls If a group is manually managed, then a simple upload function is generated
+### createSyncBufferGroup 
+**Type:** <code>(group&#58; UniformGroup, glProgram&#58; GLProgram, name&#58; string) -&#62; UniformsSyncCallback</code>
+
+**Description:** Will create a function that uploads a uniform buffer using the STD140 standard. The upload function will then be cached for future calls If a group is manually managed, then a simple upload function is generated
 
 #### Parameters:
 | Name      | Type                      | Description                                               |

@@ -5,29 +5,36 @@ sidebar_label: "PIXI.BackgroundSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).BackgroundSystem
+
+</div>
 
 
 The background system manages the background color and alpha of the main view.
 
 
 
-// TODO: @see
-
         
 
 <article>
+### Contructor:
+<h4><code>new PIXI()</code></h4>
 
-### new PIXI()
 </article>
+            
 
 
 
 ## Members
 <article>
 
-### alpha: <span><code>number</code></span>
-The background color alpha. Setting this to 0 will make the canvas transparent.
+### alpha 
+**Type:** <code>number</code>
+
+**Description:** The background color alpha. Setting this to 0 will make the canvas transparent.
 
 </article>
 
@@ -36,8 +43,10 @@ The background color alpha. Setting this to 0 will make the canvas transparent.
 
 <article>
 
-### backgroundColor: <span><code>Color</code></span>
-The background color object.
+### backgroundColor 
+**Type:** <code>Color</code>
+
+**Description:** The background color object.
 
 </article>
 
@@ -46,8 +55,10 @@ The background color object.
 
 <article>
 
-### clearBeforeRender: <span><code>boolean</code></span>
-This sets if the CanvasRenderer will clear the canvas or not before the new render pass. If the scene is NOT transparent PixiJS will use a canvas sized fillRect operation every frame to set the canvas background color. If the scene is transparent PixiJS will use clearRect to clear the canvas every frame. Disable this by setting this to false. For example, if your game has a canvas filling background image you often don't need this set.
+### clearBeforeRender 
+**Type:** <code>boolean</code>
+
+**Description:** This sets if the CanvasRenderer will clear the canvas or not before the new render pass. If the scene is NOT transparent PixiJS will use a canvas sized fillRect operation every frame to set the canvas background color. If the scene is transparent PixiJS will use clearRect to clear the canvas every frame. Disable this by setting this to false. For example, if your game has a canvas filling background image you often don't need this set.
 
 </article>
 
@@ -56,8 +67,10 @@ This sets if the CanvasRenderer will clear the canvas or not before the new rend
 
 <article>
 
-### color: <span><code>PIXI.ColorSource</code></span>
-The background color to fill if not transparent.
+### color 
+**Type:** <code>PIXI.ColorSource</code>
+
+**Description:** The background color to fill if not transparent.
 
 </article>
 
@@ -68,13 +81,15 @@ The background color to fill if not transparent.
 ## Methods
 <article>
 
-### init: <span><code>(options&#58; BackgroundOptions) -&#62; void</code></span>
-initiates the background system
+### init 
+**Type:** <code>(options&#58; PIXI.IRendererOptions) -&#62; void</code>
+
+**Description:** initiates the background system
 
 #### Parameters:
-| Name    | Type                           | Description                           |
-| ------- | ------------------------------ | ------------------------------------- |
-| options | <code>BackgroundOptions</code> | the options for the background colors |
+| Name    | Type                               | Description                           |
+| ------- | ---------------------------------- | ------------------------------------- |
+| options | <code>PIXI.IRendererOptions</code> | the options for the background colors |
 </article>
 
 

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600&family=Roboto+Mono&family=Roboto:wght@400;500;700&display=swap');
+@import "@pixi/webdoc-docusaurus-template/docusaurus/custom";
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -163,20 +164,4 @@ html[data-theme='dark'] {
   .navbar__inner {
     max-width: 100%;
   }
-}
-
-// TODO: this is hacked in
-h3 span code {
-  font-size: 0.8rem;
-  color: var(--ifm-color-primary-lightest);
-}
-
-.deprecated-tag {
-  background-color: #e91e63;
-  color: white;
-  font-weight: 700;
-  border-radius: 3px;
-  font-size: 0.7em;
-  margin-left: 10px;
-  padding: 2px 5px;
 }

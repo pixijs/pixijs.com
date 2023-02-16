@@ -5,7 +5,12 @@ sidebar_label: "PIXI.Spritesheet"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/spritesheet](../modules/pixi_spritesheet).Spritesheet
+
+</div>
 
 
 Utility class for maintaining reference to a collection of Textures on a single Spritesheet.
@@ -79,13 +84,12 @@ Sprite sheets can be packed using tools like [TexturePacker](https&#58;//codeand
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Spritesheet: <span><code>(texture&#58; BaseTexture &#124; Texture, data&#58; object, resolutionFilename&#58; string) </code></span>
+### Constructor:
+<h4><code>new PIXI.Spritesheet(texture&#58; BaseTexture &#124; Texture, data&#58; object, resolutionFilename&#58; string) </code></h4>
 
 #### Parameters:
 | Name               | Type                                    | Default                | Description                                                                                                                                 |
@@ -104,10 +108,12 @@ Sprite sheets can be packed using tools like [TexturePacker](https&#58;//codeand
 ## Members
 <article>
 
-### BATCH_SIZE: <span><code>number</code></span>
-- **Default Value**: <code>1000</code>
+### BATCH_SIZE 
+**Type:** <code>number</code>
 
-The maximum number of Textures to build per process.
+**Default Value**: <code>1000</code>
+
+**Description:** The maximum number of Textures to build per process.
 
 </article>
 
@@ -116,8 +122,11 @@ The maximum number of Textures to build per process.
 
 <article>
 
-### animations: <span><code>utils.Dict&#60;Texture[]&#62;</code></span>
-A map containing the textures for each animation. Can be used to create an [AnimatedSprite](../classes/PIXI.AnimatedSprite.pixi_sprite_animated)&#58;
+### animations 
+**Type:** <code>utils.Dict&#60;Texture[]&#62;</code>
+
+**Description:** A map containing the textures for each animation. Can be used to create an [AnimatedSprite](../classes/PIXI.AnimatedSprite.pixi_sprite_animated)&#58;
+
 
 ```js
  import { AnimatedSprite } from 'pixi.js';
@@ -133,8 +142,10 @@ A map containing the textures for each animation. Can be used to create an [Anim
 
 <article>
 
-### baseTexture: <span><code>BaseTexture</code></span>
-Reference to ths source texture.
+### baseTexture 
+**Type:** <code>BaseTexture</code>
+
+**Description:** Reference to ths source texture.
 
 </article>
 
@@ -143,8 +154,10 @@ Reference to ths source texture.
 
 <article>
 
-### data: <span><code>object</code></span>
-Reference to the original JSON data.
+### data 
+**Type:** <code>object</code>
+
+**Description:** Reference to the original JSON data.
 
 </article>
 
@@ -153,8 +166,10 @@ Reference to the original JSON data.
 
 <article>
 
-### linkedSheets: <span><code>Spritesheet[]</code></span>
-For multi-packed spritesheets, this contains a reference to all the other spritesheets it depends on.
+### linkedSheets 
+**Type:** <code>Spritesheet[]</code>
+
+**Description:** For multi-packed spritesheets, this contains a reference to all the other spritesheets it depends on.
 
 </article>
 
@@ -163,8 +178,10 @@ For multi-packed spritesheets, this contains a reference to all the other sprite
 
 <article>
 
-### resolution: <span><code>number</code></span>
-The resolution of the spritesheet.
+### resolution 
+**Type:** <code>number</code>
+
+**Description:** The resolution of the spritesheet.
 
 </article>
 
@@ -173,8 +190,11 @@ The resolution of the spritesheet.
 
 <article>
 
-### textures: <span><code>utils.Dict&#60;Texture&#62;</code></span>
-A map containing all textures of the sprite sheet. Can be used to create a [Sprite](../classes/PIXI.Sprite.pixi_sprite)&#58;
+### textures 
+**Type:** <code>utils.Dict&#60;Texture&#62;</code>
+
+**Description:** A map containing all textures of the sprite sheet. Can be used to create a [Sprite](../classes/PIXI.Sprite.pixi_sprite)&#58;
+
 
 ```js
  import { Sprite } from 'pixi.js';
@@ -192,8 +212,10 @@ A map containing all textures of the sprite sheet. Can be used to create a [Spri
 ## Methods
 <article>
 
-### destroy: <span><code>(destroyBase&#58; boolean) -&#62; void</code></span>
-Destroy Spritesheet and don't use after this.
+### destroy 
+**Type:** <code>(destroyBase&#58; boolean) -&#62; void</code>
+
+**Description:** Destroy Spritesheet and don't use after this.
 
 #### Parameters:
 | Name        | Type                 | Description                                 |
@@ -206,8 +228,10 @@ Destroy Spritesheet and don't use after this.
 
 <article>
 
-### parse: <span><code>() -&#62; Promise&#60;utils.Dict&#60;Texture&#62;&#62;</code></span>
-Parser spritesheet from loaded data. This is done asynchronously to prevent creating too many Texture within a single process.
+### parse 
+**Type:** <code>() -&#62; Promise&#60;utils.Dict&#60;Texture&#62;&#62;</code>
+
+**Description:** Parser spritesheet from loaded data. This is done asynchronously to prevent creating too many Texture within a single process.
 
 #### Returns:
 | Type                                                      | Description |

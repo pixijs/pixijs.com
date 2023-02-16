@@ -5,7 +5,12 @@ sidebar_label: "PIXI.TransformFeedbackSystem"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/core](../modules/pixi_core).TransformFeedbackSystem
+
+</div>
 
 
 TransformFeedbackSystem provides TransformFeedback of WebGL2 https&#58;//developer.mozilla.org/en-US/docs/Web/API/WebGLTransformFeedback
@@ -16,13 +21,12 @@ It also manages a lifetime of GLTransformFeedback object
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.TransformFeedbackSystem: <span><code>(renderer&#58; Renderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.TransformFeedbackSystem(renderer&#58; Renderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                  | Default       | Description                         |
@@ -41,8 +45,10 @@ It also manages a lifetime of GLTransformFeedback object
 ## Methods
 <article>
 
-### beginTransformFeedback: <span><code>(drawMode&#58; DRAW_MODES, shader&#58; Shader) -&#62; </code></span>
-Begin TransformFeedback
+### beginTransformFeedback 
+**Type:** <code>(drawMode&#58; DRAW_MODES, shader&#58; Shader) -&#62; </code>
+
+**Description:** Begin TransformFeedback
 
 #### Parameters:
 | Name     | Type                    | Description                                                                            |
@@ -56,8 +62,10 @@ Begin TransformFeedback
 
 <article>
 
-### bind: <span><code>(transformFeedback&#58; TransformFeedback) -&#62; </code></span>
-Bind TransformFeedback and buffers
+### bind 
+**Type:** <code>(transformFeedback&#58; TransformFeedback) -&#62; </code>
+
+**Description:** Bind TransformFeedback and buffers
 
 #### Parameters:
 | Name              | Type                           | Description               |
@@ -70,8 +78,10 @@ Bind TransformFeedback and buffers
 
 <article>
 
-### disposeTransformFeedback: <span><code>(tf&#58; PIXI.TransformFeedback, contextLost&#58; boolean) -&#62; void</code></span>
-Disposes TransfromFeedback
+### disposeTransformFeedback 
+**Type:** <code>(tf&#58; PIXI.TransformFeedback, contextLost&#58; boolean) -&#62; void</code>
+
+**Description:** Disposes TransfromFeedback
 
 #### Parameters:
 | Name        | Type                                | Description                                               |
@@ -85,8 +95,10 @@ Disposes TransfromFeedback
 
 <article>
 
-### endTransformFeedback: <span><code>() -&#62; </code></span>
-End TransformFeedback
+### endTransformFeedback 
+**Type:** <code>() -&#62; </code>
+
+**Description:** End TransformFeedback
 
 </article>
 
@@ -95,8 +107,10 @@ End TransformFeedback
 
 <article>
 
-### unbind: <span><code>() -&#62; </code></span>
-Unbind TransformFeedback
+### unbind 
+**Type:** <code>() -&#62; </code>
+
+**Description:** Unbind TransformFeedback
 
 </article>
 
@@ -105,8 +119,10 @@ Unbind TransformFeedback
 
 <article>
 
-### contextChange: <span><code>() -&#62; void</code></span>
-Sets up the renderer context and necessary buffers.
+### contextChange 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Sets up the renderer context and necessary buffers.
 
 </article>
 
@@ -115,8 +131,10 @@ Sets up the renderer context and necessary buffers.
 
 <article>
 
-### createGLTransformFeedback: <span><code>(tf&#58; TransformFeedback) -&#62; </code></span>
-Create TransformFeedback and bind buffers
+### createGLTransformFeedback 
+**Type:** <code>(tf&#58; TransformFeedback) -&#62; </code>
+
+**Description:** Create TransformFeedback and bind buffers
 
 #### Parameters:
 | Name | Type                           | Description       |

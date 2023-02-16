@@ -5,20 +5,24 @@ sidebar_label: "PIXI.Rectangle"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/math](../modules/pixi_math).Rectangle
+
+</div>
 
 
 Rectangle object is an area defined by its position, as indicated by its top-left corner point (x, y) and by its width and its height.
 
 
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.Rectangle: <span><code>(x&#58; string &#124; number, y&#58; string &#124; number, width&#58; string &#124; number, height&#58; string &#124; number) </code></span>
+### Constructor:
+<h4><code>new PIXI.Rectangle(x&#58; string &#124; number, y&#58; string &#124; number, width&#58; string &#124; number, height&#58; string &#124; number) </code></h4>
 
 #### Parameters:
 | Name   | Type                              | Default        | Description                                                |
@@ -38,8 +42,10 @@ Rectangle object is an area defined by its position, as indicated by its top-lef
 ## Members
 <article>
 
-### EMPTY: <span><code>Rectangle</code></span>
-A constant empty rectangle.
+### EMPTY 
+**Type:** <code>Rectangle</code>
+
+**Description:** A constant empty rectangle.
 
 </article>
 
@@ -48,8 +54,10 @@ A constant empty rectangle.
 
 <article>
 
-### bottom: <span><code>number</code></span>
-Returns the bottom edge of the rectangle.
+### bottom 
+**Type:** <code>number</code>
+
+**Description:** Returns the bottom edge of the rectangle.
 
 </article>
 
@@ -58,61 +66,10 @@ Returns the bottom edge of the rectangle.
 
 <article>
 
-### height: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### height 
+**Type:** <code>number</code>
 
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### left: <span><code>number</code></span>
-Returns the left edge of the rectangle.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### right: <span><code>number</code></span>
-Returns the right edge of the rectangle.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### top: <span><code>number</code></span>
-Returns the top edge of the rectangle.
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### type: <span><code>SHAPES.RECT</code></span>
-- **Default Value**: <code>PIXI.SHAPES.RECT</code>
-
-The type of the object, mainly used to avoid `instanceof` checks
-
-</article>
-
-
----------------------------------------
-
-<article>
-
-### width: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -122,8 +79,60 @@ The type of the object, mainly used to avoid `instanceof` checks
 
 <article>
 
-### x: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### left 
+**Type:** <code>number</code>
+
+**Description:** Returns the left edge of the rectangle.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### right 
+**Type:** <code>number</code>
+
+**Description:** Returns the right edge of the rectangle.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### top 
+**Type:** <code>number</code>
+
+**Description:** Returns the top edge of the rectangle.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### type 
+**Type:** <code>SHAPES.RECT</code>
+
+**Default Value**: <code>PIXI.SHAPES.RECT</code>
+
+**Description:** The type of the object, mainly used to avoid `instanceof` checks
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### width 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -133,8 +142,23 @@ The type of the object, mainly used to avoid `instanceof` checks
 
 <article>
 
-### y: <span><code>number</code></span>
-- **Default Value**: <code>0</code>
+### x 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
+
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### y 
+**Type:** <code>number</code>
+
+**Default Value**: <code>0</code>
 
 
 </article>
@@ -146,8 +170,10 @@ The type of the object, mainly used to avoid `instanceof` checks
 ## Methods
 <article>
 
-### ceil: <span><code>(resolution&#58; number, eps&#58; number) -&#62; this</code></span>
-Enlarges rectangle that way its corners lie on grid
+### ceil 
+**Type:** <code>(resolution&#58; number, eps&#58; number) -&#62; this</code>
+
+**Description:** Enlarges rectangle that way its corners lie on grid
 
 #### Parameters:
 | Name       | Type                | Description |
@@ -165,8 +191,10 @@ Enlarges rectangle that way its corners lie on grid
 
 <article>
 
-### clone: <span><code>() -&#62; Rectangle</code></span>
-Creates a clone of this Rectangle
+### clone 
+**Type:** <code>() -&#62; Rectangle</code>
+
+**Description:** Creates a clone of this Rectangle
 
 #### Returns:
 | Type                   | Description             |
@@ -179,8 +207,10 @@ Creates a clone of this Rectangle
 
 <article>
 
-### contains: <span><code>(x&#58; number, y&#58; number) -&#62; boolean</code></span>
-Checks whether the x and y coordinates given are contained within this Rectangle
+### contains 
+**Type:** <code>(x&#58; number, y&#58; number) -&#62; boolean</code>
+
+**Description:** Checks whether the x and y coordinates given are contained within this Rectangle
 
 #### Parameters:
 | Name | Type                | Description                           |
@@ -198,8 +228,10 @@ Checks whether the x and y coordinates given are contained within this Rectangle
 
 <article>
 
-### containsRect: <span><code>(other&#58; Rectangle) -&#62; boolean</code></span>
-Determines whether the `other` Rectangle is contained within `this` Rectangle object. Rectangles that occupy the same space are considered to be containing each other. Rectangles without area (width or height equal to zero) can't contain anything, not even other arealess rectangles.
+### containsRect 
+**Type:** <code>(other&#58; Rectangle) -&#62; boolean</code>
+
+**Description:** Determines whether the `other` Rectangle is contained within `this` Rectangle object. Rectangles that occupy the same space are considered to be containing each other. Rectangles without area (width or height equal to zero) can't contain anything, not even other arealess rectangles.
 
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 
@@ -218,8 +250,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### copyFrom: <span><code>(rectangle&#58; Rectangle) -&#62; Rectangle</code></span>
-Copies another rectangle to this one.
+### copyFrom 
+**Type:** <code>(rectangle&#58; Rectangle) -&#62; Rectangle</code>
+
+**Description:** Copies another rectangle to this one.
 
 #### Parameters:
 | Name      | Type                   | Description                 |
@@ -236,8 +270,10 @@ Copies another rectangle to this one.
 
 <article>
 
-### copyTo: <span><code>(rectangle&#58; Rectangle) -&#62; Rectangle</code></span>
-Copies this rectangle to another one.
+### copyTo 
+**Type:** <code>(rectangle&#58; Rectangle) -&#62; Rectangle</code>
+
+**Description:** Copies this rectangle to another one.
 
 #### Parameters:
 | Name      | Type                   | Description               |
@@ -254,8 +290,10 @@ Copies this rectangle to another one.
 
 <article>
 
-### enlarge: <span><code>(rectangle&#58; Rectangle) -&#62; this</code></span>
-Enlarges this rectangle to include the passed rectangle.
+### enlarge 
+**Type:** <code>(rectangle&#58; Rectangle) -&#62; this</code>
+
+**Description:** Enlarges this rectangle to include the passed rectangle.
 
 #### Parameters:
 | Name      | Type                   | Description               |
@@ -272,8 +310,10 @@ Enlarges this rectangle to include the passed rectangle.
 
 <article>
 
-### equals: <span><code>(other&#58; Rectangle) -&#62; boolean</code></span>
-Accepts `other` Rectangle and returns true if the given Rectangle is equal to `this` Rectangle.
+### equals 
+**Type:** <code>(other&#58; Rectangle) -&#62; boolean</code>
+
+**Description:** Accepts `other` Rectangle and returns true if the given Rectangle is equal to `this` Rectangle.
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 #### Parameters:
@@ -291,8 +331,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### fit: <span><code>(rectangle&#58; Rectangle) -&#62; this</code></span>
-Fits this rectangle around the passed one.
+### fit 
+**Type:** <code>(rectangle&#58; Rectangle) -&#62; this</code>
+
+**Description:** Fits this rectangle around the passed one.
 
 #### Parameters:
 | Name      | Type                   | Description           |
@@ -309,8 +351,10 @@ Fits this rectangle around the passed one.
 
 <article>
 
-### intersection: <span><code>(other&#58; Rectangle, outRect&#58; Rectangle) -&#62; Rectangle</code></span>
-If the area of the intersection between the Rectangles `other` and `this` is not zero, returns the area of intersection as a Rectangle object. Otherwise, return an empty Rectangle with its properties set to zero. Rectangles without area (width or height equal to zero) can't intersect or be intersected and will always return an empty rectangle with its properties set to zero.
+### intersection 
+**Type:** <code>(other&#58; Rectangle, outRect&#58; Rectangle) -&#62; Rectangle</code>
+
+**Description:** If the area of the intersection between the Rectangles `other` and `this` is not zero, returns the area of intersection as a Rectangle object. Otherwise, return an empty Rectangle with its properties set to zero. Rectangles without area (width or height equal to zero) can't intersect or be intersected and will always return an empty rectangle with its properties set to zero.
 
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 
@@ -330,8 +374,10 @@ _Note&#58; Only available with **&#64;pixi/math-extras**._
 
 <article>
 
-### intersects: <span><code>(other&#58; Rectangle, transform&#58; Matrix) -&#62; boolean</code></span>
-Determines whether the `other` Rectangle transformed by `transform` intersects with `this` Rectangle object. Returns true only if the area of the intersection is &#62;0, this means that Rectangles sharing a side are not overlapping. Another side effect is that an arealess rectangle (width or height equal to zero) can't intersect any other rectangle.
+### intersects 
+**Type:** <code>(other&#58; Rectangle, transform&#58; Matrix) -&#62; boolean</code>
+
+**Description:** Determines whether the `other` Rectangle transformed by `transform` intersects with `this` Rectangle object. Returns true only if the area of the intersection is &#62;0, this means that Rectangles sharing a side are not overlapping. Another side effect is that an arealess rectangle (width or height equal to zero) can't intersect any other rectangle.
 
 #### Parameters:
 | Name      | Type                   | Description                             |
@@ -349,8 +395,10 @@ Determines whether the `other` Rectangle transformed by `transform` intersects w
 
 <article>
 
-### pad: <span><code>(paddingX&#58; number, paddingY&#58; ) -&#62; this</code></span>
-Pads the rectangle making it grow in all directions. If paddingY is omitted, both paddingX and paddingY will be set to paddingX.
+### pad 
+**Type:** <code>(paddingX&#58; number, paddingY&#58; ) -&#62; this</code>
+
+**Description:** Pads the rectangle making it grow in all directions. If paddingY is omitted, both paddingX and paddingY will be set to paddingX.
 
 #### Parameters:
 | Name     | Type                | Description                    |
@@ -368,8 +416,10 @@ Pads the rectangle making it grow in all directions. If paddingY is omitted, bot
 
 <article>
 
-### union: <span><code>(other&#58; Rectangle, outRect&#58; Rectangle) -&#62; Rectangle</code></span>
-Adds `this` and `other` Rectangles together to create a new Rectangle object filling the horizontal and vertical space between the two rectangles.
+### union 
+**Type:** <code>(other&#58; Rectangle, outRect&#58; Rectangle) -&#62; Rectangle</code>
+
+**Description:** Adds `this` and `other` Rectangles together to create a new Rectangle object filling the horizontal and vertical space between the two rectangles.
 
 _Note&#58; Only available with **&#64;pixi/math-extras**._
 

@@ -5,7 +5,12 @@ sidebar_label: "PIXI.utils"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/utils](../modules/pixi_utils).utils
+
+</div>
 
 
 Generalized convenience utilities for PIXI.
@@ -26,8 +31,6 @@ Generalized convenience utilities for PIXI.
 ```
       
 
-// TODO: @see
-
         
 
 ## Classes
@@ -43,7 +46,9 @@ Generalized convenience utilities for PIXI.
 ## Members
 <article>
 
-### BaseTextureCache: <span><code>Record&#60;string, BaseTexture&#62;</code></span>
+### BaseTextureCache 
+**Type:** <code>Record&#60;string, BaseTexture&#62;</code>
+
 
 </article>
 
@@ -52,7 +57,9 @@ Generalized convenience utilities for PIXI.
 
 <article>
 
-### ProgramCache: <span><code>Record&#60;string, Program&#62;</code></span>
+### ProgramCache 
+**Type:** <code>Record&#60;string, Program&#62;</code>
+
 
 </article>
 
@@ -61,7 +68,9 @@ Generalized convenience utilities for PIXI.
 
 <article>
 
-### TextureCache: <span><code>Record&#60;string, Texture&#62;</code></span>
+### TextureCache 
+**Type:** <code>Record&#60;string, Texture&#62;</code>
+
 
 </article>
 
@@ -70,8 +79,10 @@ Generalized convenience utilities for PIXI.
 
 <article>
 
-### isMobile: <span><code>object</code></span>
-A simple JS library that detects mobile devices.
+### isMobile 
+**Type:** <code>object</code>
+
+**Description:** A simple JS library that detects mobile devices.
 
 </article>
 
@@ -80,8 +91,10 @@ A simple JS library that detects mobile devices.
 
 <article>
 
-### path: <span><code>object</code></span>
-Browser and Node.js compatible path utilities. All paths that are passed in will become normalized to have posix separators.
+### path 
+**Type:** <code>object</code>
+
+**Description:** Browser and Node.js compatible path utilities. All paths that are passed in will become normalized to have posix separators.
 
 </article>
 
@@ -90,8 +103,10 @@ Browser and Node.js compatible path utilities. All paths that are passed in will
 
 <article>
 
-### premultiplyBlendMode: <span><code>Array&#60;Array&#60;number&#62;&#62;</code></span>
-maps premultiply flag and blendMode to adjusted blendMode
+### premultiplyBlendMode 
+**Type:** <code>Array&#60;Array&#60;number&#62;&#62;</code>
+
+**Description:** maps premultiply flag and blendMode to adjusted blendMode
 
 </article>
 
@@ -100,8 +115,10 @@ maps premultiply flag and blendMode to adjusted blendMode
 
 <article>
 
-### url: <span><code>object</code></span>
-Node.js compatible URL utilities.
+### url 
+**Type:** <code>object</code>
+
+**Description:** Node.js compatible URL utilities.
 
 </article>
 
@@ -112,7 +129,9 @@ Node.js compatible URL utilities.
 ## Functions
 <article>
 
-### sayHello: <span><code>() -&#62; void</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+### sayHello : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>() -&#62; void</code>
+
 
 </article>
 
@@ -121,8 +140,10 @@ Node.js compatible URL utilities.
 
 <article>
 
-### clearTextureCache: <span><code>() -&#62; void</code></span>
-Removes all textures from cache, but does not destroy them
+### clearTextureCache 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Removes all textures from cache, but does not destroy them
 
 </article>
 
@@ -131,8 +152,10 @@ Removes all textures from cache, but does not destroy them
 
 <article>
 
-### correctBlendMode: <span><code>(blendMode&#58; number, premultiplied&#58; boolean) -&#62; number</code></span>
-changes blendMode according to texture format
+### correctBlendMode 
+**Type:** <code>(blendMode&#58; number, premultiplied&#58; boolean) -&#62; number</code>
+
+**Description:** changes blendMode according to texture format
 
 #### Parameters:
 | Name          | Type                 | Description                     |
@@ -150,8 +173,10 @@ changes blendMode according to texture format
 
 <article>
 
-### createIndicesForQuads: <span><code>(size&#58; number, outBuffer&#58; Uint16Array &#124; Uint32Array) -&#62; Uint16Array &#124; Uint32Array</code></span>
-Generic Mask Stack data structure
+### createIndicesForQuads 
+**Type:** <code>(size&#58; number, outBuffer&#58; Uint16Array &#124; Uint32Array) -&#62; Uint16Array &#124; Uint32Array</code>
+
+**Description:** Generic Mask Stack data structure
 
 #### Parameters:
 | Name      | Type                                        | Description                                    |
@@ -169,8 +194,10 @@ Generic Mask Stack data structure
 
 <article>
 
-### decomposeDataUri: <span><code>(dataUri&#58; string) -&#62; PIXI.utils.DecomposedDataUri &#124; unknown</code></span>
-Split a data URI into components. Returns undefined if parameter `dataUri` is not a valid data URI.
+### decomposeDataUri 
+**Type:** <code>(dataUri&#58; string) -&#62; PIXI.utils.DecomposedDataUri &#124; unknown</code>
+
+**Description:** Split a data URI into components. Returns undefined if parameter `dataUri` is not a valid data URI.
 
 #### Parameters:
 | Name    | Type                | Description           |
@@ -187,8 +214,10 @@ Split a data URI into components. Returns undefined if parameter `dataUri` is no
 
 <article>
 
-### deprecation: <span><code>(version&#58; string, message&#58; string, ignoreDepth&#58; number) -&#62; void</code></span>
-Helper for warning developers about deprecated features & settings. A stack track for warnings is given; useful for tracking-down where deprecated methods/properties/classes are being used within the code.
+### deprecation 
+**Type:** <code>(version&#58; string, message&#58; string, ignoreDepth&#58; number) -&#62; void</code>
+
+**Description:** Helper for warning developers about deprecated features & settings. A stack track for warnings is given; useful for tracking-down where deprecated methods/properties/classes are being used within the code.
 
 #### Parameters:
 | Name        | Type                | Description                                                                                                      |
@@ -203,8 +232,10 @@ Helper for warning developers about deprecated features & settings. A stack trac
 
 <article>
 
-### destroyTextureCache: <span><code>() -&#62; void</code></span>
-Destroys all texture in the cache
+### destroyTextureCache 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys all texture in the cache
 
 </article>
 
@@ -213,8 +244,10 @@ Destroys all texture in the cache
 
 <article>
 
-### getCanvasBoundingBox: <span><code>(canvas&#58; PIXI.ICanvas) -&#62; PIXI.utils.BoundingBox</code></span>
-Measuring the bounds of a canvas' visible (non-transparent) pixels.
+### getCanvasBoundingBox 
+**Type:** <code>(canvas&#58; PIXI.ICanvas) -&#62; PIXI.utils.BoundingBox</code>
+
+**Description:** Measuring the bounds of a canvas' visible (non-transparent) pixels.
 
 #### Parameters:
 | Name   | Type                      | Description            |
@@ -231,8 +264,10 @@ Measuring the bounds of a canvas' visible (non-transparent) pixels.
 
 <article>
 
-### getResolutionOfUrl: <span><code>(url&#58; string, defaultValue&#58; number) -&#62; number</code></span>
-get the resolution / device pixel ratio of an asset by looking for the prefix used by spritesheets and image urls
+### getResolutionOfUrl 
+**Type:** <code>(url&#58; string, defaultValue&#58; number) -&#62; number</code>
+
+**Description:** get the resolution / device pixel ratio of an asset by looking for the prefix used by spritesheets and image urls
 
 #### Parameters:
 | Name         | Type                | Description                                    |
@@ -250,8 +285,10 @@ get the resolution / device pixel ratio of an asset by looking for the prefix us
 
 <article>
 
-### hex2rgb: <span><code>(hex&#58; number, out&#58; Array&#60;number&#62;) -&#62; Array&#60;number&#62;</code></span><span class="deprecated-tag"> Deprecated: since 7.2.0</span>
-Converts a hexadecimal color number to an [R, G, B] array of normalized floats (numbers from 0.0 to 1.0).
+### hex2rgb : <span class="deprecated-tag"> Deprecated: since 7.2.0</span>
+**Type:** <code>(hex&#58; number, out&#58; Array&#60;number&#62;) -&#62; Array&#60;number&#62;</code>
+
+**Description:** Converts a hexadecimal color number to an [R, G, B] array of normalized floats (numbers from 0.0 to 1.0).
 
 #### Parameters:
 | Name | Type                               | Description                                                          |
@@ -269,8 +306,10 @@ Converts a hexadecimal color number to an [R, G, B] array of normalized floats (
 
 <article>
 
-### hex2string: <span><code>(hex&#58; number) -&#62; string</code></span><span class="deprecated-tag"> Deprecated: since 7.2.0</span>
-Converts a hexadecimal color number to a string.
+### hex2string : <span class="deprecated-tag"> Deprecated: since 7.2.0</span>
+**Type:** <code>(hex&#58; number) -&#62; string</code>
+
+**Description:** Converts a hexadecimal color number to a string.
 
 #### Parameters:
 | Name | Type                | Description                      |
@@ -287,8 +326,10 @@ Converts a hexadecimal color number to a string.
 
 <article>
 
-### isPow2: <span><code>(v&#58; number) -&#62; boolean</code></span>
-Checks if a number is a power of two.
+### isPow2 
+**Type:** <code>(v&#58; number) -&#62; boolean</code>
+
+**Description:** Checks if a number is a power of two.
 
 #### Parameters:
 | Name | Type                | Description |
@@ -305,8 +346,10 @@ Checks if a number is a power of two.
 
 <article>
 
-### isWebGLSupported: <span><code>() -&#62; boolean</code></span>
-Helper for checking for WebGL support.
+### isWebGLSupported 
+**Type:** <code>() -&#62; boolean</code>
+
+**Description:** Helper for checking for WebGL support.
 
 #### Returns:
 | Type                 | Description         |
@@ -319,8 +362,10 @@ Helper for checking for WebGL support.
 
 <article>
 
-### log2: <span><code>(v&#58; number) -&#62; number</code></span>
-Computes ceil of log base 2
+### log2 
+**Type:** <code>(v&#58; number) -&#62; number</code>
+
+**Description:** Computes ceil of log base 2
 
 #### Parameters:
 | Name | Type                | Description |
@@ -337,8 +382,10 @@ Computes ceil of log base 2
 
 <article>
 
-### nextPow2: <span><code>(v&#58; number) -&#62; number</code></span>
-Rounds to next power of two.
+### nextPow2 
+**Type:** <code>(v&#58; number) -&#62; number</code>
+
+**Description:** Rounds to next power of two.
 
 #### Parameters:
 | Name | Type                | Description |
@@ -355,8 +402,10 @@ Rounds to next power of two.
 
 <article>
 
-### premultiplyRgba: <span><code>(rgb&#58; Float32Array &#124; Array&#60;number&#62;, alpha&#58; number, out&#58; Float32Array, premultiply&#58; boolean) -&#62; Float32Array</code></span>
-combines rgb and alpha to out array
+### premultiplyRgba 
+**Type:** <code>(rgb&#58; Float32Array &#124; Array&#60;number&#62;, alpha&#58; number, out&#58; Float32Array, premultiply&#58; boolean) -&#62; Float32Array</code>
+
+**Description:** combines rgb and alpha to out array
 
 #### Parameters:
 | Name        | Type                                                   | Description       |
@@ -376,8 +425,10 @@ combines rgb and alpha to out array
 
 <article>
 
-### premultiplyTint: <span><code>(tint&#58; number, alpha&#58; number) -&#62; number</code></span>
-premultiplies tint
+### premultiplyTint 
+**Type:** <code>(tint&#58; number, alpha&#58; number) -&#62; number</code>
+
+**Description:** premultiplies tint
 
 #### Parameters:
 | Name  | Type                | Description                    |
@@ -395,8 +446,10 @@ premultiplies tint
 
 <article>
 
-### premultiplyTintToRgba: <span><code>(tint&#58; number, alpha&#58; number, out&#58; Float32Array, premultiply&#58; boolean) -&#62; Float32Array</code></span>
-converts integer tint and float alpha to vec4 form, premultiplies by default
+### premultiplyTintToRgba 
+**Type:** <code>(tint&#58; number, alpha&#58; number, out&#58; Float32Array, premultiply&#58; boolean) -&#62; Float32Array</code>
+
+**Description:** converts integer tint and float alpha to vec4 form, premultiplies by default
 
 #### Parameters:
 | Name        | Type                      | Description       |
@@ -416,8 +469,10 @@ converts integer tint and float alpha to vec4 form, premultiplies by default
 
 <article>
 
-### removeItems: <span><code>(arr&#58; Array&#60;any&#62;, startIdx&#58; number, removeCount&#58; number) -&#62; void</code></span>
-Remove items from a javascript array without generating garbage
+### removeItems 
+**Type:** <code>(arr&#58; Array&#60;any&#62;, startIdx&#58; number, removeCount&#58; number) -&#62; void</code>
+
+**Description:** Remove items from a javascript array without generating garbage
 
 #### Parameters:
 | Name        | Type                            | Description                   |
@@ -432,8 +487,10 @@ Remove items from a javascript array without generating garbage
 
 <article>
 
-### rgb2hex: <span><code>(rgb&#58; Array&#60;number&#62;) -&#62; number</code></span><span class="deprecated-tag"> Deprecated: since 7.2.0</span>
-Converts a color as an [R, G, B] array of normalized floats to a hexadecimal number.
+### rgb2hex : <span class="deprecated-tag"> Deprecated: since 7.2.0</span>
+**Type:** <code>(rgb&#58; Array&#60;number&#62;) -&#62; number</code>
+
+**Description:** Converts a color as an [R, G, B] array of normalized floats to a hexadecimal number.
 
 #### Parameters:
 | Name | Type                               | Description                                                              |
@@ -450,8 +507,10 @@ Converts a color as an [R, G, B] array of normalized floats to a hexadecimal num
 
 <article>
 
-### sign: <span><code>(n&#58; number) -&#62; number</code></span>
-Returns sign of number
+### sign 
+**Type:** <code>(n&#58; number) -&#62; number</code>
+
+**Description:** Returns sign of number
 
 #### Parameters:
 | Name | Type                | Description                     |
@@ -468,7 +527,9 @@ Returns sign of number
 
 <article>
 
-### skipHello: <span><code>() -&#62; void</code></span><span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+### skipHello : <span class="deprecated-tag"> Deprecated: since 7.0.0</span>
+**Type:** <code>() -&#62; void</code>
+
 
 </article>
 
@@ -477,8 +538,10 @@ Returns sign of number
 
 <article>
 
-### string2hex: <span><code>(string&#58; string) -&#62; number</code></span><span class="deprecated-tag"> Deprecated: since 7.2.0</span>
-Converts a string to a hexadecimal color number.
+### string2hex : <span class="deprecated-tag"> Deprecated: since 7.2.0</span>
+**Type:** <code>(string&#58; string) -&#62; number</code>
+
+**Description:** Converts a string to a hexadecimal color number.
 
 #### Parameters:
 | Name   | Type                | Description                          |
@@ -495,8 +558,10 @@ Converts a string to a hexadecimal color number.
 
 <article>
 
-### trimCanvas: <span><code>(canvas&#58; PIXI.ICanvas) -&#62; &#123; width &#58; number, height &#58; number, data &#58; ImageData &#124; null &#125;</code></span>
-Trim transparent borders from a canvas.
+### trimCanvas 
+**Type:** <code>(canvas&#58; PIXI.ICanvas) -&#62; &#123; width &#58; number, height &#58; number, data &#58; ImageData &#124; null &#125;</code>
+
+**Description:** Trim transparent borders from a canvas.
 
 #### Parameters:
 | Name   | Type                      | Description         |
@@ -513,8 +578,10 @@ Trim transparent borders from a canvas.
 
 <article>
 
-### uid: <span><code>() -&#62; number</code></span>
-Gets the next unique identifier
+### uid 
+**Type:** <code>() -&#62; number</code>
+
+**Description:** Gets the next unique identifier
 
 #### Returns:
 | Type                | Description                        |

@@ -5,7 +5,12 @@ sidebar_label: "PIXI.BasePrepare"
 custom_edit_url: null
 ---
 
+
+<div class="package-name">
+
 [@pixi/prepare](../modules/pixi_prepare).BasePrepare
+
+</div>
 
 The prepare manager provides functionality to upload content to the GPU.
 BasePrepare handles basic queuing functionality and is extended by [PIXI.Prepare](../classes/PIXI.Prepare.pixi_prepare) and [PIXI.CanvasPrepare](../classes/PIXI.CanvasPrepare.pixi_canvas_prepare) to provide preparation capabilities specific to their respective renderers.
@@ -23,13 +28,12 @@ BasePrepare handles basic queuing functionality and is extended by [PIXI.Prepare
 ```
       
 
-// TODO: @see
-
         
 
 <article>
 
-### new PIXI.BasePrepare: <span><code>(renderer&#58; PIXI.IRenderer) </code></span>
+### Constructor:
+<h4><code>new PIXI.BasePrepare(renderer&#58; PIXI.IRenderer) </code></h4>
 
 #### Parameters:
 | Name     | Type                        | Default       | Description                         |
@@ -46,20 +50,12 @@ BasePrepare handles basic queuing functionality and is extended by [PIXI.Prepare
 ## Members
 <article>
 
-### uploadsPerFrame: <span><code>number</code></span>
-- **Default Value**: <code>4</code>
+### uploadsPerFrame 
+**Type:** <code>number</code>
 
-The default maximum uploads per frame.
+**Default Value**: <code>4</code>
 
-</article>
-
-
----------------------------------------
-
-<article>
-
-### addHooks: <span><code>Array&#60;Function&#62;</code></span>
-Collection of additional hooks for finding assets.
+**Description:** The default maximum uploads per frame.
 
 </article>
 
@@ -68,8 +64,10 @@ Collection of additional hooks for finding assets.
 
 <article>
 
-### completes: <span><code>Array&#60;Function&#62;</code></span>
-Callback to call after completed.
+### addHooks 
+**Type:** <code>Array&#60;Function&#62;</code>
+
+**Description:** Collection of additional hooks for finding assets.
 
 </article>
 
@@ -78,8 +76,10 @@ Callback to call after completed.
 
 <article>
 
-### ticking: <span><code>boolean</code></span>
-If prepare is ticking (running).
+### completes 
+**Type:** <code>Array&#60;Function&#62;</code>
+
+**Description:** Callback to call after completed.
 
 </article>
 
@@ -88,8 +88,10 @@ If prepare is ticking (running).
 
 <article>
 
-### uploadHooks: <span><code>Array&#60;Function&#62;</code></span>
-Collection of additional hooks for processing assets.
+### ticking 
+**Type:** <code>boolean</code>
+
+**Description:** If prepare is ticking (running).
 
 </article>
 
@@ -98,8 +100,10 @@ Collection of additional hooks for processing assets.
 
 <article>
 
-### queue: <span><code>Array&#60;any&#62;</code></span>
-Collection of items to uploads at once.
+### uploadHooks 
+**Type:** <code>Array&#60;Function&#62;</code>
+
+**Description:** Collection of additional hooks for processing assets.
 
 </article>
 
@@ -108,8 +112,10 @@ Collection of items to uploads at once.
 
 <article>
 
-### renderer: <span><code>IRenderer</code></span>
-Reference to the renderer.
+### queue 
+**Type:** <code>Array&#60;any&#62;</code>
+
+**Description:** Collection of items to uploads at once.
 
 </article>
 
@@ -118,8 +124,22 @@ Reference to the renderer.
 
 <article>
 
-### uploadHookHelper: <span><code>any</code></span>
-The only real difference between CanvasPrepare and Prepare is what they pass to upload hooks. That different parameter is stored here.
+### renderer 
+**Type:** <code>IRenderer</code>
+
+**Description:** Reference to the renderer.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### uploadHookHelper 
+**Type:** <code>any</code>
+
+**Description:** The only real difference between CanvasPrepare and Prepare is what they pass to upload hooks. That different parameter is stored here.
 
 </article>
 
@@ -130,8 +150,10 @@ The only real difference between CanvasPrepare and Prepare is what they pass to 
 ## Methods
 <article>
 
-### add: <span><code>(item&#58; PIXI.DisplayObject &#124; PIXI.Container &#124; PIXI.BaseTexture &#124; PIXI.Texture &#124; PIXI.Graphics &#124; PIXI.Text &#124; unknown) -&#62; this</code></span>
-Manually add an item to the uploading queue.
+### add 
+**Type:** <code>(item&#58; PIXI.DisplayObject &#124; PIXI.Container &#124; PIXI.BaseTexture &#124; PIXI.Texture &#124; PIXI.Graphics &#124; PIXI.Text &#124; unknown) -&#62; this</code>
+
+**Description:** Manually add an item to the uploading queue.
 
 #### Parameters:
 | Name | Type                                                                                                                                                   | Description                |
@@ -148,8 +170,10 @@ Manually add an item to the uploading queue.
 
 <article>
 
-### destroy: <span><code>() -&#62; void</code></span>
-Destroys the plugin, don't use after this.
+### destroy 
+**Type:** <code>() -&#62; void</code>
+
+**Description:** Destroys the plugin, don't use after this.
 
 </article>
 
@@ -158,8 +182,10 @@ Destroys the plugin, don't use after this.
 
 <article>
 
-### registerFindHook: <span><code>(addHook&#58; Function) -&#62; this</code></span>
-Adds hooks for finding items.
+### registerFindHook 
+**Type:** <code>(addHook&#58; Function) -&#62; this</code>
+
+**Description:** Adds hooks for finding items.
 
 #### Parameters:
 | Name    | Type                  | Description                                                                                                                            |
@@ -176,8 +202,10 @@ Adds hooks for finding items.
 
 <article>
 
-### registerUploadHook: <span><code>(uploadHook&#58; Function) -&#62; this</code></span>
-Adds hooks for uploading items.
+### registerUploadHook 
+**Type:** <code>(uploadHook&#58; Function) -&#62; this</code>
+
+**Description:** Adds hooks for uploading items.
 
 #### Parameters:
 | Name       | Type                  | Description                                                                                                                                           |
@@ -194,8 +222,10 @@ Adds hooks for uploading items.
 
 <article>
 
-### upload: <span><code>(item&#58; PIXI.DisplayObject &#124; PIXI.Container &#124; PIXI.BaseTexture &#124; PIXI.Texture &#124; PIXI.Graphics &#124; PIXI.Text) -&#62; Promise&#60;void&#62;</code></span>
-Upload all the textures and graphics to the GPU.
+### upload 
+**Type:** <code>(item&#58; PIXI.DisplayObject &#124; PIXI.Container &#124; PIXI.BaseTexture &#124; PIXI.Texture &#124; PIXI.Graphics &#124; PIXI.Text) -&#62; Promise&#60;void&#62;</code>
+
+**Description:** Upload all the textures and graphics to the GPU.
 
 #### Parameters:
 | Name | Type                                                                                                                                    | Description                                                                                                                                                                                                        |
