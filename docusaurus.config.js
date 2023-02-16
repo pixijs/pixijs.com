@@ -245,9 +245,10 @@ const config = {
         respectPrefersColorScheme: true
       },
       algolia: {
-        appId: '63YUHLJPHS',
-        apiKey: '1d980568af57022ac23c2e4cbd61b9cc',
-        indexName: 'pixijs'
+        appId: 'JX6EBQCAGQ',
+        apiKey: '2ac1220b913a281bcfeccdf628fa6e99',
+        indexName: 'beta_pixijs',
+        contextualSearch: false
       }
     })
 }
