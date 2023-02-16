@@ -9,7 +9,7 @@
     <icon>https://beta.pixijs.com/images/favicon.png</icon>
     <entry>
         <title type="html"><![CDATA[Introducing PixiJS v8]]></title>
-        <id>pixi-v8-introduction</id>
+        <id>https://beta.pixijs.com/blog/pixi-v8-introduction</id>
         <link href="https://beta.pixijs.com/blog/pixi-v8-introduction"/>
         <updated>2023-01-31T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[PixiJS v8 Brief Description]]></summary>
@@ -23,7 +23,7 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Welcome to the new PixiJS Website!]]></title>
-        <id>pixi-website-v2</id>
+        <id>https://beta.pixijs.com/blog/pixi-website-v2</id>
         <link href="https://beta.pixijs.com/blog/pixi-website-v2"/>
         <updated>2023-01-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[PixiJS v2 Website Brief Description]]></summary>
