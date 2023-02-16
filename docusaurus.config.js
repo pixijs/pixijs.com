@@ -146,20 +146,16 @@ const config = {
                 href: 'https://github.com/ehtick/pixijs-assetpack'
               },
               {
-                label: 'Dev tools',
-                href: 'https://chrome.google.com/webstore/detail/pixijs-devtools/aamddddknhcagpehecnhphigffljadon'
-              },
-              {
-                label: 'Create-pixi-app',
-                href: 'https://github.com/choephix/create-pixi-app'
-              },
-              {
                 label: 'Storybook',
                 href: 'https://github.com/pixijs/storybook'
               },
               {
-                label: 'Customise',
-                href: 'https://github.com/pixijs/customize'
+                label: 'Text Style Editor',
+                href: 'https://pixijs.io/pixi-text-style/#'
+              },
+              {
+                label: 'Customise v6',
+                href: 'https://pixijs.io/customize/'
               },
               {
                 type: 'html',

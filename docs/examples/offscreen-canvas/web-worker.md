@@ -7,7 +7,7 @@ hide_table_of_contents: true
 ```js playground
 import * as PIXI from 'pixi.js';
 
-// This example is the based on demos-basic/container, but running in Web Worker.
+// This example is the based on basic/container, but running in Web Worker.
 
 function workerSource(self) {
     self.onmessage = async ({
