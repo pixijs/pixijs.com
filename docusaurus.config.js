@@ -1,6 +1,5 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-
 const lightCodeTheme = require('prism-react-renderer/themes/github')
 const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 
@@ -13,6 +12,10 @@ const config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'ignore',
   favicon: 'images/favicon.png',
+
+  customFields: {
+    PIXI_VERSION: process.env.PIXI_VERSION
+  },
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -39,7 +42,12 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/pixijs/pixijs.com/tree/main/',
-          routeBasePath: '/'
+          routeBasePath: '/',
+          versions: {
+            current: {
+              label: 'Dev'
+            }
+          }
         },
         blog: {
           blogTitle: 'PixiJS News',
@@ -205,6 +213,17 @@ const config = {
             label: 'Sponsor',
             position: 'left',
             href: 'https://opencollective.com/pixijs'
+          },
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+            dropdownActiveClassDisabled: true,
+            dropdownItemsAfter: [
+              {
+                to: '/versions',
+                label: 'All versions'
+              }
+            ]
           },
           {
             href: 'https://twitter.com/pixijs',

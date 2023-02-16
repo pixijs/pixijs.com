@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Slider
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 const app = new PIXI.Application<HTMLCanvasElement>({
 document.body.appendChild(app.view);
     antialias: true,

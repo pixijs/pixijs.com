@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Animated Sprite - Explosion
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 const app = new PIXI.Application<HTMLCanvasElement>({ autoStart: false, resizeTo: window });
 document.body.appendChild(app.view);
 

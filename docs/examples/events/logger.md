@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Logger
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 // This example logs the order of events hover-related events in the scene.
 const app = new PIXI.Application<HTMLCanvasElement>({
 document.body.appendChild(app.view);

@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Shadertoy filter
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 /**
 Please note that this is not the most optimal way of doing pure shader generated rendering and should be used when scene is wanted as input texture.
 Check the mesh version of example for more performant version if you need only shader generated content.

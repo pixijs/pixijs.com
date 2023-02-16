@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Multipass Shader Mesh
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 const app = new PIXI.Application<HTMLCanvasElement>({ height: 640, resizeTo: window });
 document.body.appendChild(app.view);
 

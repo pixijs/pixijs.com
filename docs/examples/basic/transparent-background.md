@@ -5,8 +5,6 @@ hide_table_of_contents: true
 # Transparent Background
 
 ```js playground
-import * as PIXI from 'pixi.js';
-
 const app = new PIXI.Application<HTMLCanvasElement>({ backgroundAlpha: 0, resizeTo: window });
 document.body.appendChild(app.view);
 
