@@ -56,7 +56,7 @@ const config = {
           blogSidebarTitle: 'All posts'
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.scss'),
+          customCss: require.resolve('./src/css/custom.scss')
         },
         googleAnalytics: {
           trackingID: 'UA-80710473-1'
