@@ -127,6 +127,7 @@ export default function PixiPlayground (props: { mode?: PlaygroundMode, code: st
         },
         externalResources: [
           'https://beta.pixijs.com/playground.css',
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/pixi.min.js`
         ]
       }}
