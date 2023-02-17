@@ -160,6 +160,27 @@ Color.shared.setValue(0xffffff).toHex(); // '#ffffff'
 
 <article>
 
+### premultiply 
+**Type:** <code>(alpha&#58; number, applyToRGB&#58; boolean) -&#62; PIXI.Color</code>
+
+**Description:** Converts color to a premultiplied alpha format. This action is destructive, and will override the previous `value` property to be `null`.
+
+#### Parameters:
+| Name       | Type                 | Description                          |
+| ---------- | -------------------- | ------------------------------------ |
+| alpha      | <code>number</code>  | The color to multiply by.            |
+| applyToRGB | <code>boolean</code> | Whether to premultiply RGB channels. |
+#### Returns:
+| Type                    | Description |
+| ----------------------- | ----------- |
+| <code>PIXI.Color</code> | * Itself.   |
+</article>
+
+
+---------------------------------------
+
+<article>
+
 ### round 
 **Type:** <code>(step&#58; number) -&#62; this</code>
 
@@ -332,6 +353,26 @@ new Color('white').toNumber(); // returns 16777215
 | Type                | Description |
 | ------------------- | ----------- |
 | <code>number</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### toPremultiplied 
+**Type:** <code>(alpha&#58; number) -&#62; number</code>
+
+**Description:** Premultiplies alpha with current color.
+
+#### Parameters:
+| Name  | Type                | Description                    |
+| ----- | ------------------- | ------------------------------ |
+| alpha | <code>number</code> | floating point alpha (0.0-1.0) |
+#### Returns:
+| Type                | Description              |
+| ------------------- | ------------------------ |
+| <code>number</code> | tint multiplied by alpha |
 </article>
 
 

@@ -6,6 +6,12 @@
     "docs": "/api"
   },
   {
+    "version": "7.2.x",
+    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v7.2.0-beta",
+    "build": "https://pixijs.download/v7.2.0-beta/pixi.min.js",
+    "docs": "https://pixijs.download/v7.2.0-beta/docs/index.html"
+  },
+  {
     "version": "7.1.x",
     "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v7.1.2",
     "build": "https://pixijs.download/v7.1.2/pixi.min.js",

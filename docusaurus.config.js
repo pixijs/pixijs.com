@@ -56,7 +56,7 @@ const config = {
           blogSidebarTitle: 'All posts'
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.scss')
+          customCss: require.resolve('./src/css/custom.scss'),
         },
         googleAnalytics: {
           trackingID: 'UA-80710473-1'
@@ -253,6 +253,12 @@ const config = {
           width: 100
         },
         copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labor of love built by Mat Groves <a href="https://twitter.com/doormat23">@doormat23</a> and the <a href="/team">PixiJS team</a>.`
+      },
+      image: 'images/ogimage.png',
+      announcementBar: {
+        isCloseable: true,
+        id: 'beta',
+        content: 'Please note that this is a beta version of the site and some features may not work as expected.'
       },
       prism: {
         theme: lightCodeTheme,

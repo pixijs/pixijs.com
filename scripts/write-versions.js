@@ -12,7 +12,7 @@
   const v5 = tags['latest-5.3.x']
   const v6 = tags['latest-6.x']
   const prerelease = tags.prerelease
-  const allV7s = pixiVersions.versions.filter(v => v.startsWith('7') && !v.includes('-'))
+  const allV7s = pixiVersions.versions.filter(v => v.startsWith('7'))
   const minorV7s = new Map()
 
   // loop through each minor version of v7 and add the largest to the array

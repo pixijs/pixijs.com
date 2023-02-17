@@ -428,36 +428,6 @@ Also works as an interaction mask.
 
 <article>
 
-### interactive 
-**Type:** <code>unknown</code>
-
-**Description:** Enable interaction events for the DisplayObject. Touch, pointer and mouse There is 4 types of interaction settings&#58;
-
-* `'none'`&#58; Ignores all interaction events, even on its children.
-* `'passive'`&#58; Does not emit events and ignores all hit testing on itself and non-interactive children. Interactive children will still emit events.
-* `'auto'`&#58; Does not emit events and but is hit tested if parent is interactive. Same as `interactive = false` in v7
-* `'static'`&#58; Emit events and is hit tested. Same as `interaction = true` in v7
-* `'dynamic'`&#58; Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving
-
-
-```js
- import { Sprite } from 'pixi.js';
-
- const sprite = new Sprite(texture);
- sprite.interactive = 'static';
- sprite.on('tap', (event) => {
-     // Handle event
- });
-```
-      
-
-</article>
-
-
----------------------------------------
-
-<article>
-
 ### interactiveChildren 
 **Type:** <code>boolean</code>
 
@@ -2056,6 +2026,40 @@ elem.disableTempParent(cacheParent);
 
 <article>
 
+### eventMode 
+**Type:** <code>(value&#58; ) -&#62; </code>
+
+**Description:** Enable interaction events for the DisplayObject. Touch, pointer and mouse. This now replaces the `interactive` property There is 5 types of interaction settings&#58;
+
+* `'none'`&#58; Ignores all interaction events, even on its children.
+* `'passive'`&#58; Does not emit events and ignores all hit testing on itself and non-interactive children. Interactive children will still emit events.
+* `'auto'`&#58; Does not emit events and but is hit tested if parent is interactive. Same as `interactive = false` in v7
+* `'static'`&#58; Emit events and is hit tested. Same as `interaction = true` in v7
+* `'dynamic'`&#58; Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving
+
+
+```js
+ import { Sprite } from 'pixi.js';
+
+ const sprite = new Sprite(texture);
+ sprite.eventMode = 'static';
+ sprite.on('tap', (event) => {
+     // Handle event
+ });
+```
+      
+
+#### Parameters:
+| Name  | Type | Description |
+| ----- | ---- | ----------- |
+| value |      |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
 ### getBounds 
 **Type:** <code>(skipUpdate&#58; boolean, rect&#58; Rectangle) -&#62; Rectangle</code>
 
@@ -2196,6 +2200,22 @@ Calling `getLocalBounds` may invalidate the `_bounds` of the whole subtree below
 
 <article>
 
+### interactive 
+**Type:** <code>(value&#58; boolean) -&#62; </code>
+
+**Description:** Enable interaction events for the DisplayObject. Touch, pointer and mouse
+
+#### Parameters:
+| Name  | Type                 | Description |
+| ----- | -------------------- | ----------- |
+| value | <code>boolean</code> |             |
+</article>
+
+
+---------------------------------------
+
+<article>
+
 ### isInteractive 
 **Type:** <code>() -&#62; boolean</code>
 
@@ -2205,19 +2225,19 @@ Calling `getLocalBounds` may invalidate the `_bounds` of the whole subtree below
 ```js
  import { Sprite } from 'pixi.js';
  const sprite = new Sprite(texture);
- sprite.interactive = 'static';
+ sprite.eventMode = 'static';
  sprite.isInteractive(); // true
 
- sprite.interactive = 'dynamic';
+ sprite.eventMode = 'dynamic';
  sprite.isInteractive(); // true
 
- sprite.interactive = 'none';
+ sprite.eventMode = 'none';
  sprite.isInteractive(); // false
 
- sprite.interactive = 'passive';
+ sprite.eventMode = 'passive';
  sprite.isInteractive(); // false
 
- sprite.interactive = 'auto';
+ sprite.eventMode = 'auto';
  sprite.isInteractive(); // false
 ```
       

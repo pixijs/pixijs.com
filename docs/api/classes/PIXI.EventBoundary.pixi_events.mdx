@@ -588,7 +588,7 @@ It is also advised that events not allocated from [this.allocateEvent](../classe
 <article>
 
 ### hitTestRecursive 
-**Type:** <code>(currentTarget&#58; DisplayObject, interactive&#58; Interactive, location&#58; Point, testFn&#58; (object&#58; DisplayObject, pt&#58; Point) =&#62; boolean, pruneFn&#58; (object&#58; DisplayObject, pt&#58; Point) =&#62; boolean) -&#62; DisplayObject[]</code>
+**Type:** <code>(currentTarget&#58; DisplayObject, eventMode&#58; EventMode, location&#58; Point, testFn&#58; (object&#58; DisplayObject, pt&#58; Point) =&#62; boolean, pruneFn&#58; (object&#58; DisplayObject, pt&#58; Point) =&#62; boolean) -&#62; DisplayObject[]</code>
 
 **Description:** Recursive implementation for [hitTest](../classes/PIXI.EventBoundary.pixi_events#hitTest).
 
@@ -596,7 +596,7 @@ It is also advised that events not allocated from [this.allocateEvent](../classe
 | Name          | Type                                                                   | Description                                                                                                                                                                          |
 | ------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | currentTarget | <code>DisplayObject</code>                                             | The DisplayObject that is to be hit tested.                                                                                                                                          |
-| interactive   | <code>Interactive</code>                                               | Flags whether `currentTarget` or one of its parents are interactive.                                                                                                                 |
+| eventMode     | <code>EventMode</code>                                                 | The event mode for the `currentTarget` or one of its parents.                                                                                                                        |
 | location      | <code>Point</code>                                                     | The location that is being tested for overlap.                                                                                                                                       |
 | testFn        | <code>(object&#58; DisplayObject, pt&#58; Point) =&#62; boolean</code> | Callback that determines whether the target passes hit testing. This callback can assume that `pruneFn` failed to prune the display object.                                          |
 | pruneFn       | <code>(object&#58; DisplayObject, pt&#58; Point) =&#62; boolean</code> | Callback that determiness whether the target and all of its children cannot pass the hit test. It is used as a preliminary optimization to prune entire subtrees of the scene graph. |
