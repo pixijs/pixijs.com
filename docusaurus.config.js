@@ -252,7 +252,7 @@ const config = {
           src: 'images/logo.svg',
           width: 100
         },
-        copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labor of love built by Mat Groves <a href="https://twitter.com/doormat23">@doormat23</a> and the <a href="https://github.com/pixijs/pixijs/wiki/Core-Team">PixiJS team</a>.`
+        copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labor of love built by Mat Groves <a href="https://twitter.com/doormat23">@doormat23</a> and the <a href="/team">PixiJS team</a>.`
       },
       prism: {
         theme: lightCodeTheme,
