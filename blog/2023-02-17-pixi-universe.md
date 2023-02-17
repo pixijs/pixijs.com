@@ -8,7 +8,6 @@ authors:
     url: https://github.com/zyie
     image_url: https://github.com/zyie.png
 tags: [PixiJS, PixiJS Universe]
-image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: true
 keywords: ['keyword', 'for', 'search', 'engines']
 ---
