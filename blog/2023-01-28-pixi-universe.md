@@ -1,19 +1,19 @@
 ---
-title: Welcome to the new PixiJS Website!
+title: Introducing the Pixi Universe!
 description: PixiJS v2 Website Brief Description
-slug: pixi-website-v2
+slug: pixi-universe
 authors:
-  - name: Bruno Garcia
-    title: Creator of PixiJS
-    url: https://github.com/aduros
-    image_url: https://github.com/aduros.png
-tags: [pixi-website, introduction]
+  - name: Zyie
+    title: PixiJS Maintainer
+    url: https://github.com/zyie
+    image_url: https://github.com/zyie.png
+tags: [PixiJS, Pixi Universe]
 image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: true
 keywords: ['keyword', 'for', 'search', 'engines']
 ---
 
-We just dropped a revamped PixiJS website that consolidates all of our scattered resources out there.
+Lorem ipsum dolor sit amet
 
 <!--truncate-->
 
