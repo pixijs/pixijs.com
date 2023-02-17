@@ -51,7 +51,7 @@ const config = {
         },
         blog: {
           blogTitle: 'PixiJS News',
-          blogDescription: 'Blog Description Here',
+          blogDescription: 'Latest news from the PixiJS team',
           postsPerPage: 'ALL',
           blogSidebarTitle: 'All posts'
         },
