@@ -18,6 +18,9 @@
   --ifm-color-primary-lightest: #f06695;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-breadcrumb-color-active: var(--ifm-text-color);
+  --ifm-breadcrumb-spacing: 2px;
 }
 
 html {
@@ -163,5 +166,16 @@ html[data-theme='dark'] {
 @media only screen and (max-width: 1280px) {
   .navbar__inner {
     max-width: 100%;
+  }
+}
+
+
+// breadcrumbs
+.theme-doc-breadcrumbs {
+  transition: opacity 250ms;
+  opacity: .75;
+
+  &:hover {
+    opacity: 1;
   }
 }
