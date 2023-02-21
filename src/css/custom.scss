@@ -117,16 +117,10 @@ html {
 }
 
 html[data-theme='dark'] {
+  .header-discord-link::before,
+  .header-github-link::before,
   .header-twitter-link::before {
-    background: url('/images/social/twitter-white.svg') no-repeat center;
-  }
-  
-  .header-discord-link::before {
-    background: url('/images/social/discord-white.svg') no-repeat center;
-  }
-
-  .header-github-link::before {
-    background: url('/images/social/github-white.svg') no-repeat center;
+    filter: invert(100%);
   }
 
   .header-link::before {
