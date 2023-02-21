@@ -6,10 +6,10 @@ hide_table_of_contents: true
 
 ```js playground
 const app = new PIXI.Application<HTMLCanvasElement>({
-document.body.appendChild(app.view);
     antialias: true,
     background: '#1099bb',
 });
+document.body.appendChild(app.view);
 
 const stageHeight = app.screen.height;
 const stageWidth = app.screen.width;

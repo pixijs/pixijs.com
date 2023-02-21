@@ -10,10 +10,10 @@ hide_table_of_contents: true
 // world onto the canvas.
 
 const app = new PIXI.Application<HTMLCanvasElement>({
-document.body.appendChild(app.view);
     antialias: true,
     background: '#1099bb',
 });
+document.body.appendChild(app.view);
 
 // A projector renders it's content using projection. The transforms in
 // the contents scene graph don't change if you move the camera. To achieve

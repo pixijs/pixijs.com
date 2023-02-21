@@ -9,10 +9,10 @@ hide_table_of_contents: true
 // moves over the canvas.
 
 const app = new PIXI.Application<HTMLCanvasElement>({
-document.body.appendChild(app.view);
     antialias: true,
     background: '#1099bb',
 });
+document.body.appendChild(app.view);
 
 // Create the circle
 const circle = app.stage.addChild(new PIXI.Graphics()

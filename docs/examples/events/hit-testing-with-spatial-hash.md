@@ -140,7 +140,6 @@ function main() {
     // Create app. autoStart = false so that the app doesn't render until
     // something changes - this prevents redundant spatial-hash updates.
     const app = new PIXI.Application<HTMLCanvasElement>({
-document.body.appendChild(app.view);
         antialias: true,
         autoStart: false,
         background: '#1099bb',

@@ -7,10 +7,10 @@ hide_table_of_contents: true
 ```js playground
 // This example logs the order of events hover-related events in the scene.
 const app = new PIXI.Application<HTMLCanvasElement>({
-document.body.appendChild(app.view);
     antialias: true,
     background: '#1099bb',
 });
+document.body.appendChild(app.view);
 
 const title = app.stage.addChild(new PIXI.Text(
     `Move your mouse slowly over the boxes to

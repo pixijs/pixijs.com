@@ -14,7 +14,7 @@ function workerSource(self) {
         self.importScripts(new URL(pixiWebWorkerUrl, baseUrl));
 
         const app = new PIXI.Application<HTMLCanvasElement>(options);
-document.body.appendChild(app.view);
+        document.body.appendChild(app.view);
 
         const container = new PIXI.Container();
 
