@@ -127,11 +127,12 @@ export default function PixiPlayground (props: { mode?: PlaygroundMode, code: st
         },
         externalResources: [
           'https://beta.pixijs.com/playground.css',
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          /* eslint-disable @typescript-eslint/restrict-template-expressions */
           `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/pixi.min.js`,
           `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/packages/graphics-extras.js`,
           `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/packages/math-extras.js`,
           `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/packages/webworker.js`
+          /* eslint-enable @typescript-eslint/restrict-template-expressions */
         ]
       }}
     >
