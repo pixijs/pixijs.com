@@ -138,7 +138,7 @@ html[data-theme='dark'] {
   }
 
   .underline::after {
-    background: #e91e63;
+    background: var(--ifm-color-primary);
   }
 }
 

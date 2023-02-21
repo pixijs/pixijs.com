@@ -87,7 +87,7 @@ html[data-theme='dark'] {
         color: #fff;
 
         .feature > div > h6 {
-            color: #e91e63;
+            color: var(--ifm-color-primary);
         }
     }
 }
