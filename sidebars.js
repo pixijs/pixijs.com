@@ -25,22 +25,30 @@ const sidebars = {
         'guides/basics/what-pixijs-is-not',
         'guides/basics/getting-started',
         'guides/basics/architecture-overview',
-        'guides/basics/containers',
-        'guides/basics/display-object',
-        'guides/basics/textures',
-        'guides/basics/graphics',
-        'guides/basics/interaction',
         'guides/basics/render-loop',
         'guides/basics/scene-graph',
-        'guides/basics/sprites',
-        'guides/basics/sprite-sheets',
-        'guides/basics/text',
-        'guides/basics/assets'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Components',
+      collapsed: false,
+      items: [
+        'guides/components/assets',
+        'guides/components/containers',
+        'guides/components/display-object',
+        'guides/components/graphics',
+        'guides/components/interaction',
+        'guides/components/sprites',
+        'guides/components/sprite-sheets',
+        'guides/components/text',
+        'guides/components/textures',
       ]
     },
     {
       type: 'category',
       label: 'Production',
+      collapsed: false,
       items: ['guides/production/performance-tips']
     }
   ],
