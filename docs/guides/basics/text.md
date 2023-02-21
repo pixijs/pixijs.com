@@ -14,7 +14,7 @@ In order to draw text to the screen, you use a [Text](/api/classes/PIXI.Text.pix
 
 So when working with PIXI.Text objects, there are two sets of options - standard display object options like position, rotation, etc that work *after* the text is rasterized internally, and text style options that are used *while* rasterizing.  Because text once rendered is basically just a sprite, there's no need to review the standard options.  Instead, let's focus on how text is styled.
 
-Check out the [text example code](/examples/text).
+Check out the [text example code](/examples/pixi-text).
 
 ## Text Styles
 
