@@ -63,19 +63,6 @@
     
             @media screen and (min-width: 997px) {
                 padding: 20px 30px;
-    
-                &:nth-of-type(odd) {
-                    text-align: right;
-    
-                    img {
-                        float: right;
-                    }
-            
-                    div {
-                        padding-left: 0;
-                        padding-right: 80px;
-                    }
-                }
             }
         }
     }
@@ -87,7 +74,7 @@ html[data-theme='dark'] {
         color: #fff;
 
         .feature > div > h6 {
-            color: #e91e63;
+            color: var(--ifm-color-primary);
         }
     }
 }

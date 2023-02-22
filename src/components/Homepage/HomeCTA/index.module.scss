@@ -1,5 +1,5 @@
 .button {
-    --button-color: #e91e63;
+    --button-color: var(--ifm-color-primary);
     --button-hover-color: #c2185b;
     width: 208px;
     height: 50px;
@@ -71,8 +71,8 @@
     }
 
     &.outline {
-        --button-hover-color: #e91e63;
-        color: #e91e63;
+        --button-hover-color: var(--ifm-color-primary);
+        color: var(--ifm-color-primary);
         background: none;
         border: 2px solid var(--button-color);
 
@@ -81,7 +81,7 @@
         }
 
         svg > line {
-            stroke: #e91e63;
+            stroke: var(--ifm-color-primary);
         }
 
         .buttonShadow > div {
@@ -113,10 +113,10 @@
         }
 
         &.outline:hover {
-            color: #e91e63;
+            color: var(--ifm-color-primary);
 
             svg > line {
-                stroke: #e91e63;
+                stroke: var(--ifm-color-primary);
             }
         }
     }

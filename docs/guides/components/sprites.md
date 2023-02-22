@@ -10,7 +10,7 @@ Check out the [sprite example code](/examples/sprite/basic).
 
 ## Using Sprites
 
-In our [DisplayObject guide]{@link basics/display-object}, we learned about the DisplayObject class and the various properties it defines.  Since Sprite objects are also display objects, you can move a sprite, rotate it, and update any other display property.
+In our [DisplayObject guide](display-object), we learned about the DisplayObject class and the various properties it defines.  Since Sprite objects are also display objects, you can move a sprite, rotate it, and update any other display property.
 
 ## Alpha, Tint and Blend Modes
 

@@ -42,7 +42,7 @@ html[data-theme='dark'] {
         background: #1a1a1a url('/images/tile.png') 0 0 repeat;
 
         span {
-            color: #e91e63;
+            color: var(--ifm-color-primary);
         }
     }
 }
