@@ -26,7 +26,7 @@ const sidebars = {
         'guides/basics/getting-started',
         'guides/basics/architecture-overview',
         'guides/basics/render-loop',
-        'guides/basics/scene-graph',
+        'guides/basics/scene-graph'
       ]
     },
     {
@@ -42,7 +42,7 @@ const sidebars = {
         'guides/components/sprites',
         'guides/components/sprite-sheets',
         'guides/components/text',
-        'guides/components/textures',
+        'guides/components/textures'
       ]
     },
     {

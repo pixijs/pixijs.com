@@ -10,7 +10,7 @@ const config = {
   url: 'https://beta.pixijs.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'ignore',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'images/favicon.png',
 
   customFields: {
