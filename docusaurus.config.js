@@ -143,7 +143,7 @@ const config = {
               {
                 label: 'Lights',
                 href: 'https://github.com/pixijs/lights'
-              },              
+              },
               {
                 label: 'UI',
                 href: 'https://github.com/pixijs/ui'
