@@ -190,6 +190,7 @@ custom_edit_url: null
 * [FrameObject](../interfaces/FrameObject.pixi_sprite_animated)
 * [PIXI.AssetExtension](../interfaces/PIXI.AssetExtension.pixi_assets)
 * [PIXI.AssetInitOptions](../interfaces/PIXI.AssetInitOptions.pixi_assets)
+* [PIXI.AssetsPreferences](../interfaces/PIXI.AssetsPreferences.pixi_assets)
 * [PIXI.BackgroundSytemOptions](../interfaces/PIXI.BackgroundSytemOptions.pixi_core)
 * [PIXI.CacheParser](../interfaces/PIXI.CacheParser.pixi_assets)
 * [PIXI.ContextSystemOptions](../interfaces/PIXI.ContextSystemOptions.pixi_core)
@@ -233,6 +234,7 @@ custom_edit_url: null
 * [PIXI.ITextureBorders](../interfaces/PIXI.ITextureBorders.pixi_core)
 * [PIXI.ITypedArray](../interfaces/PIXI.ITypedArray.pixi_core)
 * [PIXI.LoaderParser](../interfaces/PIXI.LoaderParser.pixi_assets)
+* [PIXI.LoadTextureConfig](../interfaces/PIXI.LoadTextureConfig.pixi_assets)
 * [PIXI.PreferOrder](../interfaces/PIXI.PreferOrder.pixi_assets)
 * [PIXI.ResolveAsset](../interfaces/PIXI.ResolveAsset.pixi_assets)
 * [PIXI.ResolverBundle](../interfaces/PIXI.ResolverBundle.pixi_assets)
@@ -404,6 +406,34 @@ PIXI.INSTALLED.push(CustomResource);
 **Type:** <code>PIXI.EventsTickerClass</code>
 
 **Description:** This class handles automatic firing of PointerEvents in the case where the pointer is stationary for too long. This is to ensure that hit-tests are still run on moving objects.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### loadTextures 
+**Type:** <code>unknown</code>
+
+**Description:** Loads our textures! this makes use of imageBitmaps where available. We load the ImageBitmap on a different thread using the WorkerManager We can then use the ImageBitmap as a source for a Pixi Texture
+
+You can customize the behavior of this loader by setting the `config` property.
+
+```
+// Set the config
+import { loadTextures } from '@pixi/assets';
+loadTextures.config = {
+   // If true we will use a worker to load the ImageBitmap
+   preferWorkers: true,
+   // If false we will use new Image() instead of createImageBitmap
+   // If false then this will also disable the use of workers as it requires createImageBitmap
+   preferCreateImageBitmap: true,
+   crossOrigin: 'anonymous',
+};
+
+```
 
 </article>
 

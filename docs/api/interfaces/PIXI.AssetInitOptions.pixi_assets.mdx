@@ -30,6 +30,7 @@ Initialization options object for Asset Class.
 | bundleIdentifier    | <code>BundleIdentifierOptions</code>                                                                      | advanced - override how bundlesIds are generated                                                                                                                                                                                                 |
 | defaultSearchParams | <code>string &#124; Record&#60;string, any&#62;</code>                                                    | a default URL parameter string to append to all assets loaded                                                                                                                                                                                    |
 | manifest            | <code>string &#124; ResolverManifest</code>                                                               | a manifest to tell the asset loader upfront what all your assets are this can be the manifest object itself, or a URL to the manifest.                                                                                                           |
+| preferences         | <code>Partial&#60;AssetsPreferences&#62;</code>                                                           | Optional loader preferences                                                                                                                                                                                                                      |
 | texturePreference   | <code>&#123; resolution? &#58; number &#124; number[], format? &#58; string &#124; string[] &#125;</code> | optional preferences for which textures preferences you have when resolving assets for example you might set the resolution to 0.5 if the user is on a rubbish old phone or you might set the resolution to 2 if the user is on a retina display |
 
 </p>
@@ -82,6 +83,18 @@ Initialization options object for Asset Class.
 **Type:** <code>string &#124; ResolverManifest</code>
 
 **Description:** a manifest to tell the asset loader upfront what all your assets are this can be the manifest object itself, or a URL to the manifest.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### preferences 
+**Type:** <code>Partial&#60;AssetsPreferences&#62;</code>
+
+**Description:** Optional loader preferences
 
 </article>
 

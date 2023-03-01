@@ -682,7 +682,7 @@ The tracking data for the specific pointer gets a new `overTarget`.
 ### mapPointerUp 
 **Type:** <code>(from&#58; FederatedEvent) -&#62; void</code>
 
-**Description:** Maps the upstream `pointerup` event to downstream `pointerup`, `pointerupoutside`, and `click`/`pointertap` events, in that order.
+**Description:** Maps the upstream `pointerup` event to downstream `pointerup`, `pointerupoutside`, and `click`/`rightclick`/`pointertap` events, in that order.
 
 The `pointerupoutside` event bubbles from the original `pointerdown` target to the most specific ancestor of the `pointerdown` and `pointerup` targets, which is also the `click` event's target. `touchend`,`rightup`, `mouseup`, `touchendoutside`, `rightupoutside`, `mouseupoutside`, and `tap` are fired as well for specific pointer types.
 

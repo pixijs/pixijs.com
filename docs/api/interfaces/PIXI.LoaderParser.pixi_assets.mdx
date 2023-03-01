@@ -33,7 +33,7 @@ some plugins may only be used for parsing, some only for loading and some for bo
 
 | Name      | Type                                                                                                                             | Description                                                                                                                                                                                                    |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| config    | <code>Record&#60;string, any&#62;</code>                                                                                         | A config to adjust the parser                                                                                                                                                                                  |
+| config    | <code>CONFIG</code>                                                                                                              | A config to adjust the parser                                                                                                                                                                                  |
 | load      | <code>(url&#58; string, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; Promise&#60;T&#62;</code>        | This is the promise that loads the URL provided resolves with a loaded asset if returned by the parser.                                                                                                        |
 | parse     | <code>(asset&#58; ASSET, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; Promise&#60;T&#62;</code>       | Gets called on the asset it testParse passes. Useful to convert a raw asset into something more useful than                                                                                                    |
 | test      | <code>(url&#58; string, loadAsset&#58; LoadAsset&#60;META_DATA&#62;, loader&#58; Loader) =&#62; boolean</code>                   | each URL to load will be tested here, if the test is passed the assets are loaded using the load function below. Good place to test for things like file extensions!                                           |
@@ -51,7 +51,7 @@ some plugins may only be used for parsing, some only for loading and some for bo
 <article>
 
 ### config 
-**Type:** <code>Record&#60;string, any&#62;</code>
+**Type:** <code>CONFIG</code>
 
 **Description:** A config to adjust the parser
 

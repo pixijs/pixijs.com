@@ -30,7 +30,7 @@ Slightly opinionated default shader for PixiJS 2D objects.
 | uSampler           | <code>Texture</code>              | <code></code>         | Texture that material uses to render. |
 | options            | <code>IMeshMaterialOptions</code> | <code></code>         | Additional options                    |
 | options.alpha      | <code>number</code>               | <code>1</code>        | Default alpha.                        |
-| options.tint       | <code>number</code>               | <code>0xFFFFFF</code> | Default tint.                         |
+| options.tint       | <code>PIXI.ColorSource</code>     | <code>0xFFFFFF</code> | Default tint.                         |
 | options.pluginName | <code>string</code>               | <code>'batch'</code>  | Renderer plugin for batching.         |
 | options.program    | <code>PIXI.Program</code>         | <code>0xFFFFFF</code> | Custom program.                       |
 | options.uniforms   | <code>object</code>               | <code></code>         | Custom uniforms.                      |
@@ -113,7 +113,7 @@ Slightly opinionated default shader for PixiJS 2D objects.
 <article>
 
 ### tint 
-**Type:** <code>number</code>
+**Type:** <code>ColorSource</code>
 
 **Default Value**: <code>0xFFFFFF</code>
 

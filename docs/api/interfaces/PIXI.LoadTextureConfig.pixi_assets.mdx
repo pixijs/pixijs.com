@@ -1,0 +1,85 @@
+---
+id: "PIXI.LoadTextureConfig.pixi_assets"
+title: "Interface: PIXI.LoadTextureConfig"
+sidebar_label: "PIXI.LoadTextureConfig"
+custom_edit_url: null
+---
+
+
+<div class="package-name">
+
+[@pixi/assets](../modules/pixi_assets).LoadTextureConfig
+
+</div>
+
+
+Configuration for the `loadTextures` loader plugin.
+
+
+
+        
+
+## Summary
+
+<details><summary>Properties</summary>
+<p>
+
+| Name                    | Type                                         | Description                                                                                                                                                                                                                                                                                                              |
+| ----------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| crossOrigin             | <code>HTMLImageElement["crossOrigin"]</code> | The crossOrigin value to use for images when `preferCreateImageBitmap` is `false`.                                                                                                                                                                                                                                       |
+| preferCreateImageBitmap | <code>boolean</code>                         | When set to `true`, loading and decoding images will happen with `createImageBitmap`, otherwise it will use `new Image()`.                                                                                                                                                                                               |
+| preferWorkers           | <code>boolean</code>                         | When set to `true`, loading and decoding images will happen with Worker thread, if available on the browser. This is much more performant as network requests and decoding can be expensive on the CPU. However, not all environments support Workers, in some cases it can be helpful to disable by setting to `false`. |
+
+</p>
+</details>
+    
+
+
+
+
+## Members
+<article>
+
+### crossOrigin 
+**Type:** <code>HTMLImageElement["crossOrigin"]</code>
+
+**Default Value**: <code>'anonymous'</code>
+
+**Description:** The crossOrigin value to use for images when `preferCreateImageBitmap` is `false`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### preferCreateImageBitmap 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>true</code>
+
+**Description:** When set to `true`, loading and decoding images will happen with `createImageBitmap`, otherwise it will use `new Image()`.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### preferWorkers 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>true</code>
+
+**Description:** When set to `true`, loading and decoding images will happen with Worker thread, if available on the browser. This is much more performant as network requests and decoding can be expensive on the CPU. However, not all environments support Workers, in some cases it can be helpful to disable by setting to `false`.
+
+</article>
+
+
+---------------------------------------
+
+
+
+  

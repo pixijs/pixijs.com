@@ -129,7 +129,18 @@ Color.shared.setValue(0xffffff).toHex(); // '#ffffff'
 ### value 
 **Type:** <code>PIXI.ColorSource</code>
 
-**Description:** Set the current color source. A return value of `null` means the previous value was overridden (e.g., `multiply`, `round`).
+**Description:** The current color source.
+When setting&#58;
+
+* Setting to an instance of `Color` will copy its color source and components.
+* Otherwise, `Color` will try to normalize the color source and set the components. If the color source is invalid, an `Error` will be thrown and the `Color` will left unchanged.
+
+Note&#58; The `null` in the setter's parameter type is added to match the TypeScript rule&#58; return type of getter must be assignable to its setter's parameter type. Setting `value` to `null` will throw an `Error`.
+
+When getting&#58;
+
+* A return value of `null` means the previous value was overridden (e.g., [multiply](../classes/PIXI.Color.pixi_color#multiply), [premultiply](../classes/PIXI.Color.pixi_color#premultiply) or [round](../classes/PIXI.Color.pixi_color#round)).
+* Otherwise, the color source used when setting is returned.
 
 </article>
 
