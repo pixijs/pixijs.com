@@ -56,6 +56,7 @@
   ]
 
   minorV7s.forEach(v => {
+    if (v.includes('-')) return
     versions.push({
       version: v.split('.').slice(0, 2).join('.') + '.x',
       releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${v}`,

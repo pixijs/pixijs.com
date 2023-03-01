@@ -141,14 +141,14 @@ export default function Version (): JSX.Element {
             <table>
               <tbody>
                 <tr>
-                  <th>{devVersion.version}</th>
+                  <th>{preReleaseVersion.version}</th>
                   <td>
-                    <Link to={devVersion.docs}>
+                    <Link to={preReleaseVersion.docs}>
                       <DocumentationLabel />
                     </Link>
                   </td>
                   <td>
-                    <Link to={latestVersion.build}>
+                    <Link to={preReleaseVersion.build}>
                       <BuildLabel />
                     </Link>
                   </td>
