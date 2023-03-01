@@ -141,6 +141,10 @@ const config = {
                 href: 'https://github.com/pixijs/animate'
               },
               {
+                label: 'Lights',
+                href: 'https://github.com/pixijs/lights'
+              },
+              {
                 label: 'UI',
                 href: 'https://github.com/pixijs/ui'
               },
