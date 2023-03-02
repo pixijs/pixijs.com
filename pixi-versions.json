@@ -6,10 +6,10 @@
     "docs": "/api"
   },
   {
-    "version": "7.2.0-beta.4",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v7.2.0-beta.4",
-    "build": "https://pixijs.download/v7.2.0-beta.4/pixi.min.js",
-    "docs": "https://pixijs.download/v7.2.0-beta.4/docs/index.html",
+    "version": "7.2.0-rc",
+    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v7.2.0-rc",
+    "build": "https://pixijs.download/v7.2.0-rc/pixi.min.js",
+    "docs": "https://pixijs.download/v7.2.0-rc/docs/index.html",
     "prerelease": true
   },
   {
