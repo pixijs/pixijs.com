@@ -74,4 +74,11 @@ await spritesheet.parse();
 
 // spritesheet is ready to use!
 const anim = new PIXI.AnimatedSprite(spritesheet.animations.enemy);
+
+// set the animation speed 
+anim.animationSpeed = 0.1666;
+// play the animation on a loop
+anim.play();
+// add it to the stage to render
+app.stage.addChild(anim);
 ```
