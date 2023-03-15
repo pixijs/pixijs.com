@@ -4,7 +4,7 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 import PixiPlayground from '../components/PixiPlayground';
 import styles from './playground.module.css';
 
-const defaultCode = `const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const defaultCode = `const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
 // create a new Sprite from an image path

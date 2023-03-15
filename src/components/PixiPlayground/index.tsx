@@ -148,10 +148,10 @@ export default function PixiPlayground({ code, onCodeChanged, mode = 'example' }
 
     return (
         <SandpackProvider
-            template="vanilla-ts"
+            template="vanilla"
             theme={colorMode}
             files={{
-                '/src/index.ts': props.code,
+                '/src/index.js': code,
             }}
             customSetup={{}}
             options={{
