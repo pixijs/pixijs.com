@@ -1,108 +1,108 @@
 .wrapper {
-    color: #333;
-    padding: 1rem;
+  color: #333;
+  padding: 1rem;
+
+  .card {
+    max-width: 550px;
+    height: 100%;
+    background: var(--ifm-navbar-background-color);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    border-radius: 1.2rem;
+    text-align: center;
+    padding: 2rem 0;
+    margin: 0 auto;
+
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 15%;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+      background: white;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+
+      h4 {
+        color: var(--ifm-color-primary);
+        border: solid 1px rgba(0, 0, 0, 0.2);
+        font-weight: 500;
+        padding: 0.3rem 0.7rem;
+        border-radius: 0.5rem;
+      }
+
+      &.inactive > h4 {
+        color: #aaa;
+        background: #eee;
+      }
+    }
+
+    .separator {
+      margin: 1rem auto;
+      width: 70%;
+      height: 0.01rem;
+      background: var(--ifm-font-color-base);
+      opacity: 0.1;
+    }
+
+    .social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+
+      .socialLink {
+        &::before {
+          content: '';
+          display: flex;
+          width: 24px;
+          height: 24px;
+          background: url('/images/social/github.svg') no-repeat center;
+          background-size: contain;
+        }
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 420px) {
+    padding: 0.75rem 0.25rem;
 
     .card {
-        max-width: 550px;
-        height: 100%;
-        background: var(--ifm-navbar-background-color);
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-        border-radius: 1.2rem;
-        text-align: center;
-        padding: 2rem 0;
-        margin: 0 auto;
-    
-        img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 15%;
-            box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-            background: white;
-        }
-    
-        .badges {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-    
-            h4 {
-                color: var(--ifm-color-primary);
-                border: solid 1px rgba(0, 0, 0, 0.2);
-                font-weight: 500;
-                padding: 0.3rem 0.7rem;
-                border-radius: 0.5rem;
-            }
-    
-            &.inactive > h4 {
-                color: #aaa;
-                background: #eee;
-            }
-        }
-    
-        .separator {
-            margin: 1rem auto;
-            width: 70%;
-            height: 0.01rem;
-            background: var(--ifm-font-color-base);
-            opacity: 0.1;
-        }
-        
-        .social {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.5rem;
-    
-            .socialLink {
-                &::before {
-                    content: '';
-                    display: flex;
-                    width: 24px;
-                    height: 24px;
-                    background: url('/images/social/github.svg') no-repeat center;
-                    background-size: contain;
-                }
-            
-                &:hover {
-                    opacity: 0.6;
-                }
-            }
-        }
+      padding: 1.5rem 1rem;
     }
+  }
 
-    @media screen and (max-width: 420px) {
-        padding: 0.75rem 0.25rem;
+  @media (max-width: 996px) {
+    --ifm-col-width: 50%;
+  }
 
-        .card {
-            padding: 1.5rem 1rem;
-        }
-    }
-
-    @media (max-width: 996px) {
-        --ifm-col-width: 50%;
-    }
-
-    @media (max-width: 650px) {
-        --ifm-col-width: 100%;
-    }
+  @media (max-width: 650px) {
+    --ifm-col-width: 100%;
+  }
 }
 
 html[data-theme='dark'] {
-    .wrapper {
-        color: #fff;
+  .wrapper {
+    color: #fff;
 
-        .badges {
-            h4 {
-                color: #fff;
-                background: var(--ifm-color-primary);
-            }
-    
-            &.inactive > h4 {
-                color: #999;
-                background: #555;
-            }
-        }
+    .badges {
+      h4 {
+        color: #fff;
+        background: var(--ifm-color-primary);
+      }
+
+      &.inactive > h4 {
+        color: #999;
+        background: #555;
+      }
     }
+  }
 }

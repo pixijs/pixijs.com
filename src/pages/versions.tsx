@@ -6,47 +6,47 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Link from '@docusaurus/Link'
-import Translate from '@docusaurus/Translate'
-import Versions from '@site/pixi-versions.json'
-import Heading from '@theme/Heading'
-import Layout from '@theme/Layout'
-import React from 'react'
+import Link from '@docusaurus/Link';
+import Translate from '@docusaurus/Translate';
+import Versions from '@site/pixi-versions.json';
+import Heading from '@theme/Heading';
+import Layout from '@theme/Layout';
+import React from 'react';
 
-function DocumentationLabel () {
+function DocumentationLabel() {
   return (
     <Translate id="versionsPage.versionEntry.link">Documentation</Translate>
-  )
+  );
 }
 
-function BuildLabel () {
-  return <Translate id="versionsPage.versionEntry.build">Build</Translate>
+function BuildLabel() {
+  return <Translate id="versionsPage.versionEntry.build">Build</Translate>;
 }
 
-function ReleaseNotesLabel () {
+function ReleaseNotesLabel() {
   return (
     <Translate id="versionsPage.versionEntry.releaseNotes">
       Release Notes
     </Translate>
-  )
+  );
 }
 
 interface IVersion {
-  version: string
-  releaseNotes: string
-  docs: string
-  build: string
-  prerelease: boolean
+  version: string;
+  releaseNotes: string;
+  docs: string;
+  build: string;
+  prerelease: boolean;
 }
 
-export default function Version (): JSX.Element {
-  const versions = Versions as IVersion[]
-  const devVersion: IVersion = versions[0]
+export default function Version(): JSX.Element {
+  const versions = Versions as IVersion[];
+  const devVersion: IVersion = versions[0];
   const latestVersion: IVersion = versions[1].prerelease
     ? versions[2]
-    : versions[1]
-  const preReleaseVersion = versions.find((version) => version.prerelease)
-  const pastVersions = versions.slice(2)
+    : versions[1];
+  const preReleaseVersion = versions.find((version) => version.prerelease);
+  const pastVersions = versions.slice(2);
 
   return (
     <Layout
@@ -193,5 +193,5 @@ export default function Version (): JSX.Element {
         )}
       </main>
     </Layout>
-  )
+  );
 }

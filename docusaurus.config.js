@@ -1,7 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-const lightCodeTheme = require('prism-react-renderer/themes/github')
-const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+const lightCodeTheme = require('prism-react-renderer/themes/github');
+const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -14,7 +14,7 @@ const config = {
   favicon: 'images/favicon.png',
 
   customFields: {
-    PIXI_VERSION: process.env.PIXI_VERSION || 'dev'
+    PIXI_VERSION: process.env.PIXI_VERSION || 'dev',
   },
 
   // GitHub pages deployment config.
@@ -28,7 +28,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en']
+    locales: ['en'],
   },
 
   presets: [
@@ -40,34 +40,31 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/pixijs/pixijs.com/tree/main/',
+          editUrl: 'https://github.com/pixijs/pixijs.com/tree/main/',
           routeBasePath: '/',
           versions: {
             current: {
-              label: 'Dev'
-            }
-          }
+              label: 'Dev',
+            },
+          },
         },
         blog: {
           blogTitle: 'PixiJS News',
           blogDescription: 'Latest news from the PixiJS team',
           postsPerPage: 'ALL',
-          blogSidebarTitle: 'All posts'
+          blogSidebarTitle: 'All posts',
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.scss')
+          customCss: require.resolve('./src/css/custom.scss'),
         },
         googleAnalytics: {
-          trackingID: 'UA-80710473-1'
-        }
-      })
-    ]
+          trackingID: 'UA-80710473-1',
+        },
+      }),
+    ],
   ],
 
-  plugins: [
-    'docusaurus-plugin-sass'
-  ],
+  plugins: ['docusaurus-plugin-sass'],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -75,7 +72,7 @@ const config = {
       navbar: {
         logo: {
           alt: 'PixiJS',
-          src: 'images/logo.svg'
+          src: 'images/logo.svg',
         },
         items: [
           {
@@ -86,29 +83,29 @@ const config = {
               {
                 type: 'doc',
                 docId: 'guides/index',
-                label: 'Guides'
+                label: 'Guides',
               },
               {
                 label: 'Tutorial',
-                to: 'tutorial'
+                to: 'tutorial',
               },
               {
                 type: 'doc',
                 docId: 'examples/index',
-                label: 'Examples'
-              }
-            ]
+                label: 'Examples',
+              },
+            ],
           },
           {
             type: 'doc',
             docId: 'api/index',
             label: 'API',
-            position: 'left'
+            position: 'left',
           },
           {
             to: 'playground',
             label: 'Playground',
-            position: 'left'
+            position: 'left',
           },
           {
             type: 'dropdown',
@@ -118,71 +115,71 @@ const config = {
               {
                 type: 'html',
                 value: 'Libraries',
-                className: 'nav-section-heading'
+                className: 'nav-section-heading',
               },
               {
                 label: 'React',
-                href: 'https://github.com/pixijs/pixi-react'
+                href: 'https://github.com/pixijs/pixi-react',
               },
               {
                 label: 'Spine',
-                href: 'https://github.com/pixijs/spine'
+                href: 'https://github.com/pixijs/spine',
               },
               {
                 label: 'Filters',
-                href: 'https://github.com/pixijs/filters'
+                href: 'https://github.com/pixijs/filters',
               },
               {
                 label: 'Sound',
-                href: 'https://github.com/pixijs/sound'
+                href: 'https://github.com/pixijs/sound',
               },
               {
                 label: 'Animate',
-                href: 'https://github.com/pixijs/animate'
+                href: 'https://github.com/pixijs/animate',
               },
               {
                 label: 'Lights',
-                href: 'https://github.com/pixijs/lights'
+                href: 'https://github.com/pixijs/lights',
               },
               {
                 label: 'UI',
-                href: 'https://github.com/pixijs/ui'
+                href: 'https://github.com/pixijs/ui',
               },
               {
                 type: 'html',
                 value: 'Tools',
-                className: 'nav-section-heading'
+                className: 'nav-section-heading',
               },
               {
                 label: 'AssetPack',
-                href: 'https://github.com/ehtick/pixijs-assetpack'
+                href: 'https://github.com/ehtick/pixijs-assetpack',
               },
               {
                 label: 'Storybook',
-                href: 'https://github.com/pixijs/storybook'
+                href: 'https://github.com/pixijs/storybook',
               },
               {
                 label: 'Text Style Editor',
-                href: 'https://pixijs.io/pixi-text-style/#'
+                href: 'https://pixijs.io/pixi-text-style/#',
               },
               {
                 label: 'Customise v6',
-                href: 'https://pixijs.io/customize/'
+                href: 'https://pixijs.io/customize/',
               },
               {
                 type: 'html',
                 value: 'Help',
-                className: 'nav-section-heading'
+                className: 'nav-section-heading',
               },
               {
                 label: 'Discussions',
-                href: 'https://github.com/pixijs/pixijs/discussions'
+                href: 'https://github.com/pixijs/pixijs/discussions',
               },
               {
                 label: 'Discord',
-                href: 'https://discord.gg/CPTjeb28nH'
-              }
-            ]
+                href: 'https://discord.gg/CPTjeb28nH',
+              },
+            ],
           },
           {
             type: 'dropdown',
@@ -191,32 +188,32 @@ const config = {
             items: [
               {
                 label: 'Team',
-                to: 'team'
+                to: 'team',
               },
               {
                 type: 'doc',
                 label: 'FAQ',
-                docId: 'faq'
+                docId: 'faq',
               },
               {
                 label: 'Community Guide',
-                href: 'https://github.com/pixijs/pixijs/blob/dev/.github/CONTRIBUTING.md'
+                href: 'https://github.com/pixijs/pixijs/blob/dev/.github/CONTRIBUTING.md',
               },
               {
                 label: 'Code of Conduct',
-                href: 'https://github.com/pixijs/pixijs/blob/dev/.github/CODE_OF_CONDUCT.md'
-              }
-            ]
+                href: 'https://github.com/pixijs/pixijs/blob/dev/.github/CODE_OF_CONDUCT.md',
+              },
+            ],
           },
           {
             to: 'blog',
             label: 'Blog',
-            position: 'left'
+            position: 'left',
           },
           {
             label: 'Sponsor',
             position: 'left',
-            href: 'https://opencollective.com/pixijs'
+            href: 'https://opencollective.com/pixijs',
           },
           {
             type: 'docsVersionDropdown',
@@ -225,61 +222,62 @@ const config = {
             dropdownItemsAfter: [
               {
                 to: '/versions',
-                label: 'All versions'
-              }
-            ]
+                label: 'All versions',
+              },
+            ],
           },
           {
             href: 'https://twitter.com/pixijs',
             position: 'right',
             className: 'header-link header-twitter-link',
-            'aria-label': 'Twitter account'
+            'aria-label': 'Twitter account',
           },
           {
             href: 'https://discord.gg/CPTjeb28nH',
             position: 'right',
             className: 'header-link header-discord-link',
-            'aria-label': 'Discord server'
+            'aria-label': 'Discord server',
           },
           {
             href: 'https://github.com/pixijs/pixijs',
             position: 'right',
             className: 'header-link header-github-link',
-            'aria-label': 'GitHub repository'
-          }
-        ]
+            'aria-label': 'GitHub repository',
+          },
+        ],
       },
       footer: {
         style: 'dark',
         logo: {
           alt: 'PixiJS',
           src: 'images/logo.svg',
-          width: 100
+          width: 100,
         },
-        copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labor of love built by Mat Groves <a href="https://twitter.com/doormat23">@doormat23</a> and the <a href="/team">PixiJS team</a>.`
+        copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labor of love built by Mat Groves <a href="https://twitter.com/doormat23">@doormat23</a> and the <a href="/team">PixiJS team</a>.`,
       },
       image: 'images/ogimage.png',
       announcementBar: {
         isCloseable: true,
         id: 'beta',
-        content: 'Please note that this is a beta version of the site and some features may not work as expected.'
+        content:
+          'Please note that this is a beta version of the site and some features may not work as expected.',
       },
       prism: {
         theme: lightCodeTheme,
-        darkTheme: darkCodeTheme
+        darkTheme: darkCodeTheme,
       },
       colorMode: {
         defaultMode: 'light',
         disableSwitch: false,
-        respectPrefersColorScheme: true
+        respectPrefersColorScheme: true,
       },
       algolia: {
         appId: 'JX6EBQCAGQ',
         apiKey: '2ac1220b913a281bcfeccdf628fa6e99',
         indexName: 'beta_pixijs',
-        contextualSearch: false
-      }
-    })
-}
+        contextualSearch: false,
+      },
+    }),
+};
 
-module.exports = config
+module.exports = config;

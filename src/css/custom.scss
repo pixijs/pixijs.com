@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600&family=Roboto+Mono&family=Roboto:wght@400;500;700&display=swap');
-@import "@pixi/webdoc-docusaurus-template/docusaurus/custom";
+@import '@pixi/webdoc-docusaurus-template/docusaurus/custom';
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -41,7 +41,7 @@ html {
 
 .navbar__inner {
   margin: 0 auto;
-  max-width: 90%
+  max-width: 90%;
 }
 
 .navbar__brand {
@@ -87,7 +87,7 @@ html {
 }
 
 .underline::after {
-  content: "";
+  content: '';
   display: block;
   width: 100px;
   height: 3px;
@@ -168,11 +168,10 @@ html[data-theme='dark'] {
   margin-top: 0.5rem !important;
 }
 
-
 // breadcrumbs
 .theme-doc-breadcrumbs {
   transition: opacity 250ms;
-  opacity: .75;
+  opacity: 0.75;
 
   &:hover {
     opacity: 1;

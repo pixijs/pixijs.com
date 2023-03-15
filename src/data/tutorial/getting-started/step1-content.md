@@ -6,10 +6,13 @@ Please go through the tutorial steps at your own pace and challenge yourself usi
 
 ```javascript
 // Create a PixiJS application of type cavas with specify background color and make it resizes to the iframe window
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window })
+const app =
+  new PIXI.Application() <
+  HTMLCanvasElement >
+  { background: '#1099bb', resizeTo: window };
 
 // Adding the application's view to the DOM
-document.body.appendChild(app.view)
+document.body.appendChild(app.view);
 ```
 
-When you are ready, proceed to the next exercise using the *Next >* button below or feel free to skip to any exercise using the drop-down menu on the top right hand corner of the card.
+When you are ready, proceed to the next exercise using the _Next >_ button below or feel free to skip to any exercise using the drop-down menu on the top right hand corner of the card.

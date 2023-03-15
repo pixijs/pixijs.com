@@ -43,11 +43,11 @@
       transition: background-color 0.12s ease-out;
 
       &:hover {
-          background: #e96e97;
+        background: #e96e97;
       }
 
       &:active {
-          background: #c52359;
+        background: #c52359;
       }
     }
 
@@ -56,20 +56,20 @@
         button {
           display: unset;
         }
-  
+
         .editorWrapper {
           display: unset;
         }
-  
+
         .previewWrapper {
           display: none;
         }
-  
+
         &.showOutput {
           .editorWrapper {
             display: none;
           }
-    
+
           .previewWrapper {
             display: flex;
           }
@@ -81,7 +81,7 @@
       }
     }
 
-    &.fullscreen{
+    &.fullscreen {
       // TODO: fix this
       height: 95vh;
 
@@ -89,20 +89,20 @@
         button {
           display: unset;
         }
-  
+
         .editorWrapper {
           display: unset;
         }
-  
+
         .previewWrapper {
           display: none;
         }
-  
+
         &.showOutput {
           .editorWrapper {
             display: none;
           }
-    
+
           .previewWrapper {
             display: flex;
           }
