@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React from 'react';
 import styles from './index.module.scss';
 import content from './content.json';
 import graphics from './graphics.json';
 
-export default function KeyOfferings(): JSX.Element {
+export default function KeyOfferings(): JSX.Element
+{
   return (
     <div className={`padding-vert--lg ${styles.highlights}`}>
       <div className="container flex">

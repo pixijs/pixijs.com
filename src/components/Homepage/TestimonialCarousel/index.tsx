@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React from 'react';
 import styles from './index.module.scss';
 
-export default function TestimonialCarousel(): JSX.Element {
+export default function TestimonialCarousel(): JSX.Element
+{
   const brands = [
     'adobe',
     '20th_century_fox',

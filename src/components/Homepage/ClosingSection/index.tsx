@@ -1,8 +1,8 @@
-import React from 'react';
 import HomeCTA from '../HomeCTA';
 import styles from './index.module.scss';
 
-export default function ClosingSection(): JSX.Element {
+export default function ClosingSection(): JSX.Element
+{
   return (
     <div className={`${styles.closing} padding-vert--xl`}>
       <div>

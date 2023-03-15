@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
@@ -11,19 +10,21 @@ import Translate from '@docusaurus/Translate';
 import Versions from '@site/pixi-versions.json';
 import Heading from '@theme/Heading';
 import Layout from '@theme/Layout';
-import React from 'react';
 
-function DocumentationLabel() {
+function DocumentationLabel()
+{
   return (
     <Translate id="versionsPage.versionEntry.link">Documentation</Translate>
   );
 }
 
-function BuildLabel() {
+function BuildLabel()
+{
   return <Translate id="versionsPage.versionEntry.build">Build</Translate>;
 }
 
-function ReleaseNotesLabel() {
+function ReleaseNotesLabel()
+{
   return (
     <Translate id="versionsPage.versionEntry.releaseNotes">
       Release Notes
@@ -39,7 +40,8 @@ interface IVersion {
   prerelease: boolean;
 }
 
-export default function Version(): JSX.Element {
+export default function Version(): JSX.Element
+{
   const versions = Versions as IVersion[];
   const devVersion: IVersion = versions[0];
   const latestVersion: IVersion = versions[1].prerelease

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React from 'react';
 import Link from '@docusaurus/Link';
 import styles from './index.module.scss';
 
@@ -10,14 +8,17 @@ export interface HomeCTAOptions {
   outline?: boolean;
 }
 
-export default function HomeCTA(opts: HomeCTAOptions): JSX.Element {
+export default function HomeCTA(opts: HomeCTAOptions): JSX.Element
+{
   let classNames = styles.button;
 
-  if (opts.white) {
+  if (opts.white)
+  {
     classNames += ` ${styles.white}`;
   }
 
-  if (opts.outline ?? false) {
+  if (opts.outline ?? false)
+  {
     classNames += ` ${styles.outline}`;
   }
 

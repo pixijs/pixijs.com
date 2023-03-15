@@ -1,8 +1,8 @@
-import React from 'react';
 import styles from './index.module.scss';
 import features from './features.json';
 
-export default function FeatureList(): JSX.Element {
+export default function FeatureList(): JSX.Element
+{
   return (
     <div className={`${styles.wrapper} padding--md padding-vert--xl`}>
       <div className="col col--12 margin-bottom--lg">

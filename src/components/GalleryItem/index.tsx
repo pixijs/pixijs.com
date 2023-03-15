@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './index.module.scss';
 
 export interface GalleryItemType {
@@ -8,7 +7,8 @@ export interface GalleryItemType {
   author: string;
 }
 
-export default function GalleryItem(item: GalleryItemType): JSX.Element {
+export default function GalleryItem(item: GalleryItemType): JSX.Element
+{
   return (
     <div className="col col--4" key={item.title}>
       <div className={styles.item}>

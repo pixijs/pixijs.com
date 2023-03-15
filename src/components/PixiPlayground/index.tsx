@@ -9,7 +9,7 @@ import {
   useSandpack,
 } from '@codesandbox/sandpack-react';
 import Editor from '@monaco-editor/react';
-import { editor } from 'monaco-editor';
+import type { editor } from 'monaco-editor';
 
 import styles from './index.module.scss';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -18,22 +18,28 @@ const ROOT_DIR = 'inmemory://model/';
 
 type PlaygroundMode = 'tutorial' | 'fullscreen' | 'example';
 
-function MonacoEditor(): JSX.Element {
+function MonacoEditor(): JSX.Element
+{
   const editorRef = useRef(null);
   const { code, updateCode } = useActiveCode();
   const { sandpack } = useSandpack();
 
-  const handleEditorDidMount = (editor: any): void => {
+  const handleEditorDidMount = (editor: any): void =>
+  {
     editorRef.current = editor;
   };
 
-  useEffect(() => {
-    const resetEditorLayout = (): void => {
+  useEffect(() =>
+  {
+    const resetEditorLayout = (): void =>
+    {
       if (editorRef.current != null) (editorRef.current as any).layout({});
     };
 
     window.addEventListener('resize', resetEditorLayout);
-    return () => {
+
+    return () =>
+    {
       window.removeEventListener('resize', resetEditorLayout);
     };
   }, []);
@@ -63,7 +69,8 @@ function MonacoEditor(): JSX.Element {
         key={sandpack.activeFile}
         defaultValue={code}
         defaultPath={`${ROOT_DIR}/src/index.ts`}
-        onChange={(value) => {
+        onChange={(value) =>
+        {
           updateCode(value ?? '');
         }}
         options={options}
@@ -77,23 +84,30 @@ function MonacoEditor(): JSX.Element {
 function Playground(props: {
   mode: PlaygroundMode;
   onCodeChanged?: (code: string | undefined) => void;
-}): JSX.Element {
+}): JSX.Element
+{
   const { code } = useActiveCode();
   const { sandpack } = useSandpack();
   const [showOutput, setShowOutput] = useState(false);
 
-  useEffect(() => {
-    if (props.onCodeChanged != null) {
+  useEffect(() =>
+  {
+    if (props.onCodeChanged != null)
+    {
       props.onCodeChanged(code);
-      return () => {
-        if (props.onCodeChanged != null) {
+
+      return () =>
+      {
+        if (props.onCodeChanged != null)
+        {
           props.onCodeChanged(undefined);
         }
       };
     }
   });
 
-  const handleToggle = (): void => {
+  const handleToggle = (): void =>
+  {
     setShowOutput(!showOutput);
   };
 
@@ -122,16 +136,22 @@ export default function PixiPlayground(props: {
   mode?: PlaygroundMode;
   code: string;
   onCodeChanged?: (code?: string) => void;
-}): JSX.Element {
+}): JSX.Element
+{
   const mode = props.mode ?? 'example';
 
   // Hack to make the examples pages full width on wide screens
-  useEffect(() => {
-    const mainContainer =
-      document.querySelector<HTMLDivElement>('main .container');
-    if (mode === 'example' && mainContainer != null) {
+  useEffect(() =>
+  {
+    const mainContainer
+      = document.querySelector<HTMLDivElement>('main .container');
+
+    if (mode === 'example' && mainContainer != null)
+    {
       mainContainer.style.maxWidth = '100%';
-      return () => {
+
+      return () =>
+      {
         mainContainer.style.maxWidth = '';
       };
     }
@@ -154,12 +174,10 @@ export default function PixiPlayground(props: {
         },
         externalResources: [
           'https://beta.pixijs.com/playground.css',
-          /* eslint-disable @typescript-eslint/restrict-template-expressions */
           `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/pixi.min.js`,
           `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/packages/graphics-extras.js`,
           `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/packages/math-extras.js`,
           `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/packages/webworker.js`,
-          /* eslint-enable @typescript-eslint/restrict-template-expressions */
         ],
       }}
     >

@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import styles from './index.module.scss';
-import React from 'react';
 import Link from '@docusaurus/Link';
 
 export interface MemberData {
@@ -13,10 +11,12 @@ export interface MemberData {
   active: boolean;
 }
 
-export default function MemberCard(props: MemberData): JSX.Element {
+export default function MemberCard(props: MemberData): JSX.Element
+{
   const links = [];
 
-  for (const key in props.social) {
+  for (const key in props.social)
+  {
     links.push({
       className: `header-link header-${key}-link`,
       to: props.social[key],
@@ -25,7 +25,8 @@ export default function MemberCard(props: MemberData): JSX.Element {
 
   let profileUrl = props.profile;
 
-  if (!profileUrl) {
+  if (!profileUrl)
+  {
     profileUrl = props.social?.github
       ? `${props.social.github}.png`
       : 'images/placeholders/avatar.jpg';

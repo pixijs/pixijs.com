@@ -1,4 +1,3 @@
-import React from 'react';
 import clsx from 'clsx';
 import { useBlogPost } from '@docusaurus/theme-common/internal';
 import BlogPostItemContainer from '@theme/BlogPostItem/Container';

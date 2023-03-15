@@ -1,4 +1,3 @@
-import React from 'react';
 import Layout from '@theme/Layout';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
@@ -33,41 +32,56 @@ interface Payload {
   code: string;
 }
 
-function writePayload(payload: Payload): void {
+function writePayload(payload: Payload): void
+{
   const json = JSON.stringify(payload);
-  history.replaceState(null, '', '#' + btoa(json));
+
+  history.replaceState(null, '', `#${btoa(json)}`);
 }
 
-function clearPayload(): void {
+function clearPayload(): void
+{
   history.replaceState(null, '', location.pathname + location.search);
 }
 
-function readPayload(): Payload | undefined {
-  if (location.hash !== '') {
-    try {
+function readPayload(): Payload | undefined
+{
+  if (location.hash !== '')
+  {
+    try
+    {
       return JSON.parse(atob(location.hash.substring(1)));
-    } catch {
+    }
+    catch
+    {
       // Ignore
     }
   }
 }
 
-export default function PlaygroundPage(): JSX.Element {
+export default function PlaygroundPage(): JSX.Element
+{
   return (
     <Layout title={'Playground'} noFooter wrapperClassName={styles.wrapper}>
       <BrowserOnly>
-        {() => {
+        {() =>
+        {
           const payload = readPayload();
           const code = payload?.code ?? defaultCode;
 
           console.log(useDocusaurusContext());
-          function onCodeChanged(code?: string): void {
-            if (code != null) {
+          function onCodeChanged(code?: string): void
+          {
+            if (code != null)
+            {
               writePayload({ code });
-            } else {
+            }
+            else
+            {
               clearPayload();
             }
           }
+
           return (
             <PixiPlayground
               mode="fullscreen"

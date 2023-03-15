@@ -1,19 +1,19 @@
-/* eslint-disable import/no-webpack-loader-syntax */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './index.module.scss';
 import Link from '@docusaurus/Link';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import PixiPlayground from '../PixiPlayground';
-import { TutorialStep } from '@site/src/data/tutorial/TutorialData';
+import type { TutorialStep } from '@site/src/data/tutorial/TutorialData';
 
 export default function Tutorial({
   data,
 }: {
   data: TutorialStep[];
-}): JSX.Element {
+}): JSX.Element
+{
   const [showEditor, setShowEditor] = useState(false);
-  const handleEditorToggle = (): void => {
+  const handleEditorToggle = (): void =>
+  {
     setShowEditor(!showEditor);
   };
 
@@ -24,7 +24,8 @@ export default function Tutorial({
       </button>
       {typeof window !== 'undefined' ? (
         <BrowserOnly>
-          {() => {
+          {() =>
+          {
             let step = Number(window.location.hash.replace('#', ''));
 
             if (!step || step <= 0 || step > data.length) step = 1;
@@ -33,10 +34,12 @@ export default function Tutorial({
             const { Content, code, completedCode } = data[step - 1];
             const [showSolution, setShowSolution] = useState(false);
 
-            const resetSolutionShowed = (): void => {
+            const resetSolutionShowed = (): void =>
+            {
               setShowSolution(false);
             };
-            const handleSolutionToggle = (): void => {
+            const handleSolutionToggle = (): void =>
+            {
               setShowSolution(!showSolution);
             };
 

@@ -1,15 +1,16 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import Layout from '@theme/Layout';
-import React from 'react';
-import MemberCard, { MemberData } from '../components/MemberCard';
+import type { MemberData } from '../components/MemberCard';
+import MemberCard from '../components/MemberCard';
 import team from './team.json';
 import styles from './team.module.scss';
 
-export default function Team(): JSX.Element {
+export default function Team(): JSX.Element
+{
   const actives: Array<Record<string, any>> = [];
   const inactives: Array<Record<string, any>> = [];
 
-  team.forEach((member) => {
+  team.forEach((member) =>
+  {
     member.active ? actives.push(member) : inactives.push(member);
   });
 

@@ -1,9 +1,9 @@
-import React from 'react';
 import clsx from 'clsx';
 import styles from './index.module.scss';
 import HomeCTA from '../HomeCTA';
 
-export default function HeroHeader(): JSX.Element {
+export default function HeroHeader(): JSX.Element
+{
   return (
     <header className={clsx('hero hero--dark', styles.heroBanner)}>
       <iframe
