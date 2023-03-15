@@ -1,5 +1,5 @@
 import { useColorMode } from '@docusaurus/theme-common';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { SandpackLayout, SandpackPreview, SandpackProvider, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
 import Editor from '@monaco-editor/react';
@@ -12,16 +12,21 @@ const ROOT_DIR = 'inmemory://model/';
 
 type PlaygroundMode = 'tutorial' | 'fullscreen' | 'example';
 
-function MonacoEditor(): JSX.Element
+type CodeChangeCallbackType = (code: string | undefined) => void;
+
+type MonacoEditorProps = {
+    code: string;
+    onChange: CodeChangeCallbackType;
+};
+
+function MonacoEditor({ code, onChange }: MonacoEditorProps)
 {
     const editorRef = useRef(null);
-    const { code, updateCode } = useActiveCode();
-    const { sandpack } = useSandpack();
 
-    const handleEditorDidMount = (editor: any): void =>
+    const handleEditorDidMount = useCallback((editor: any) =>
     {
         editorRef.current = editor;
-    };
+    }, []);
 
     useEffect(() =>
     {
@@ -56,66 +61,73 @@ function MonacoEditor(): JSX.Element
     const { colorMode } = useColorMode();
 
     return (
-        <div className={styles.editorWrapper}>
-            <Editor
-                defaultLanguage="javascript"
-                value={code}
-                key={sandpack.activeFile}
-                defaultValue={code}
-                defaultPath={`${ROOT_DIR}/src/index.ts`}
-                onChange={(value) =>
-                {
-                    updateCode(value ?? '');
-                }}
-                options={options}
-                onMount={handleEditorDidMount}
-                theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
-            />
-        </div>
+        <Editor
+            defaultLanguage="javascript"
+            value={code}
+            defaultValue={code}
+            defaultPath={`${ROOT_DIR}/src/index.ts`}
+            onChange={onChange}
+            options={options}
+            onMount={handleEditorDidMount}
+            theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
+        />
     );
 }
 
-function Playground(props: { mode: PlaygroundMode; onCodeChanged?: (code: string | undefined) => void }): JSX.Element
+type PlaygroundProps = {
+    mode: PlaygroundMode;
+    onCodeChanged?: CodeChangeCallbackType;
+};
+
+function Playground({ mode, onCodeChanged }: PlaygroundProps)
 {
-    const { code } = useActiveCode();
+    const { code, updateCode } = useActiveCode();
     const { sandpack } = useSandpack();
     const [showOutput, setShowOutput] = useState(false);
+    const { activeFile, bundlerState } = sandpack;
 
-    // TODO: is this intentionally running on every render? Doesn't actually look like onCodeChanged is being used?
-    useEffect(() =>
-    {
-        props.onCodeChanged?.(code);
-
-        return () =>
+    const handleCodeChange: CodeChangeCallbackType = useCallback(
+        (nextCode) =>
         {
-            props.onCodeChanged?.(undefined);
-        };
-    });
+            const nextCodeString = nextCode ?? '';
 
-    const handleToggle = (): void =>
+            updateCode(nextCodeString);
+            onCodeChanged?.(nextCodeString);
+        },
+        [onCodeChanged],
+    );
+
+    const handleToggle = () =>
     {
         setShowOutput(!showOutput);
     };
 
     return (
-        <SandpackLayout className={`${styles[props.mode]} ${showOutput ? styles.showOutput : ''}`}>
-            <MonacoEditor />
+        <SandpackLayout className={`${styles[mode]} ${showOutput ? styles.showOutput : ''}`}>
+            <div className={styles.editorWrapper}>
+                <MonacoEditor key={activeFile} code={code} onChange={handleCodeChange} />
+            </div>
+
             <div className={styles.previewWrapper}>
                 <SandpackPreview showOpenInCodeSandbox={true} className={styles.sandpackPreview} />
-                {sandpack.bundlerState === null && <div className={styles.sandpackLoadingOverlay}></div>}
+                {bundlerState === null && <div className={styles.sandpackLoadingOverlay}></div>}
             </div>
+
             <button onClick={handleToggle}>{showOutput ? 'Show Code' : 'Show Output'}</button>
         </SandpackLayout>
     );
 }
 
-export default function PixiPlayground(props: {
-    mode?: PlaygroundMode;
+type PixiPlaygroundProps = {
     code: string;
-    onCodeChanged?: (code?: string) => void;
-}): JSX.Element
+    mode?: PlaygroundMode;
+    onCodeChanged: CodeChangeCallbackType;
+};
+
+export default function PixiPlayground({ code, onCodeChanged, mode = 'example' }: PixiPlaygroundProps)
 {
-    const mode = props.mode ?? 'example';
+    const { siteConfig } = useDocusaurusContext();
+    const { colorMode } = useColorMode();
 
     // Hack to make the examples pages full width on wide screens
     // eslint-disable-next-line consistent-return
@@ -133,8 +145,6 @@ export default function PixiPlayground(props: {
             };
         }
     }, [mode]);
-    const { siteConfig } = useDocusaurusContext();
-    const { colorMode } = useColorMode();
 
     return (
         <SandpackProvider
@@ -158,7 +168,7 @@ export default function PixiPlayground(props: {
                 ],
             }}
         >
-            <Playground mode={mode} onCodeChanged={props.onCodeChanged} />
+            <Playground mode={mode} onCodeChanged={onCodeChanged} />
         </SandpackProvider>
     );
 }

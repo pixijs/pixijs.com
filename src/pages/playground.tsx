@@ -59,7 +59,7 @@ function readPayload(): Payload | undefined
     }
 }
 
-export default function PlaygroundPage(): JSX.Element
+export default function PlaygroundPage()
 {
     return (
         <Layout title={'Playground'} noFooter wrapperClassName={styles.wrapper}>
