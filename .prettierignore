@@ -5,7 +5,8 @@
 **/node_modules
 *.frag
 *.vert
+/build
 
 # TODO: just temporarily ignore these
-blog
-docs
+/blog
+/docs
