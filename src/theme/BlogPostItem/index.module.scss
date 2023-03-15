@@ -8,14 +8,16 @@
         text-decoration: none;
     }
 
-    h1, h2 {
+    h1,
+    h2 {
         font-size: 2.5rem;
     }
 
     @media only screen and (max-width: 481px) {
         padding: 2rem 1.5rem;
 
-        h1, h2 {
+        h1,
+        h2 {
             font-size: 2rem;
         }
     }

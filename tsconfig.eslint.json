@@ -1,0 +1,5 @@
+{
+    "extends": "./tsconfig.json",
+    "files": [".eslintrc.js", "babel.config.js", "docusaurus.config.js", "sidebars.js"],
+    "include": ["scripts/**/*", "src/**/*"]
+}

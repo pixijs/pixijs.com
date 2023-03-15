@@ -18,7 +18,7 @@
     transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 
     &::before {
-        content: "";
+        content: '';
         position: absolute;
         z-index: 1;
         left: 0;
@@ -88,7 +88,7 @@
             right: -8px;
             bottom: -8px;
         }
-        
+
         &:hover {
             color: #fff;
 

@@ -1,22 +1,24 @@
-import React from 'react'
-import clsx from 'clsx'
-import styles from './index.module.scss'
-import HomeCTA from '../HomeCTA'
+import clsx from 'clsx';
+import styles from './index.module.scss';
+import HomeCTA from '../HomeCTA';
 
-export default function HeroHeader (): JSX.Element {
-  return (
+export default function HeroHeader(): JSX.Element
+{
+    return (
         <header className={clsx('hero hero--dark', styles.heroBanner)}>
-          <iframe className={styles.heroBackground} src="https://pixijs.com/header/index.html"></iframe>
-          <div className="container">
-            <img className={styles.heroLogo} src="/images/logo.svg" alt="" />
-            <h1 className="hero__subtitle">The HTML5 Creation Engine</h1>
-            <h4 className="hero__subsubtitle">Create beautiful digital content with the fastest, most flexible 2D WebGL renderer.</h4>
-            <div className='buttonRow'>
-              <HomeCTA label="Download" link="https://github.com/pixijs/pixijs/releases" />
-              &nbsp;
-              <HomeCTA label="Get Started" link="/tutorial" white={true} outline={true} />
+            <iframe className={styles.heroBackground} src="https://pixijs.com/header/index.html"></iframe>
+            <div className="container">
+                <img className={styles.heroLogo} src="/images/logo.svg" alt="" />
+                <h1 className="hero__subtitle">The HTML5 Creation Engine</h1>
+                <h4 className="hero__subsubtitle">
+                    Create beautiful digital content with the fastest, most flexible 2D WebGL renderer.
+                </h4>
+                <div className="buttonRow">
+                    <HomeCTA label="Download" link="https://github.com/pixijs/pixijs/releases" />
+                    &nbsp;
+                    <HomeCTA label="Get Started" link="/tutorial" white={true} outline={true} />
+                </div>
             </div>
-          </div>
         </header>
-  )
+    );
 }

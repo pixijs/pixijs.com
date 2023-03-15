@@ -1,10 +1,9 @@
-import React from 'react'
-import Layout from '@theme/Layout'
-import BrowserOnly from '@docusaurus/BrowserOnly'
+import Layout from '@theme/Layout';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
-import PixiPlayground from '../components/PixiPlayground'
-import styles from './playground.module.css'
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import PixiPlayground from '../components/PixiPlayground';
+import styles from './playground.module.css';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const defaultCode = `const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
@@ -27,50 +26,65 @@ app.ticker.add((delta) => {
     // delta is 1 if running at 100% performance
     // creates frame-independent transformation
     bunny.rotation += 0.1 * delta;
-});`
+});`;
 
 interface Payload {
-  code: string
+    code: string;
 }
 
-function writePayload (payload: Payload): void {
-  const json = JSON.stringify(payload)
-  history.replaceState(null, '', '#' + btoa(json))
+function writePayload(payload: Payload): void
+{
+    const json = JSON.stringify(payload);
+
+    history.replaceState(null, '', `#${btoa(json)}`);
 }
 
-function clearPayload (): void {
-  history.replaceState(null, '', location.pathname + location.search)
+function clearPayload(): void
+{
+    history.replaceState(null, '', location.pathname + location.search);
 }
 
-function readPayload (): Payload | undefined {
-  if (location.hash !== '') {
-    try {
-      return JSON.parse(atob(location.hash.substring(1)))
-    } catch {
-      // Ignore
+function readPayload(): Payload | undefined
+{
+    if (location.hash !== '')
+    {
+        try
+        {
+            return JSON.parse(atob(location.hash.substring(1)));
+        }
+        catch
+        {
+            // Ignore
+        }
     }
-  }
 }
 
-export default function PlaygroundPage (): JSX.Element {
-  return (
-    <Layout title={'Playground'} noFooter wrapperClassName={styles.wrapper}>
-      <BrowserOnly>
-        {() => {
-          const payload = readPayload()
-          const code = payload?.code ?? defaultCode
+export default function PlaygroundPage(): JSX.Element
+{
+    return (
+        <Layout title={'Playground'} noFooter wrapperClassName={styles.wrapper}>
+            <BrowserOnly>
+                {() =>
+                {
+                    const payload = readPayload();
+                    const code = payload?.code ?? defaultCode;
 
-          console.log(useDocusaurusContext())
-          function onCodeChanged (code?: string): void {
-            if (code != null) {
-              writePayload({ code })
-            } else {
-              clearPayload()
-            }
-          }
-          return <PixiPlayground mode='fullscreen' code={code} onCodeChanged={onCodeChanged}/>
-        }}
-      </BrowserOnly>
-    </Layout>
-  )
+                    console.log(useDocusaurusContext());
+                    function onCodeChanged(code?: string): void
+                    {
+                        if (code != null)
+                        {
+                            writePayload({ code });
+                        }
+                        else
+                        {
+                            clearPayload();
+                        }
+                    }
+
+                    return <PixiPlayground mode="fullscreen" code={code} onCodeChanged={onCodeChanged} />;
+                }}
+            </BrowserOnly>
+        </Layout>
+    );
 }

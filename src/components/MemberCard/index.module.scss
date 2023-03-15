@@ -11,7 +11,7 @@
         text-align: center;
         padding: 2rem 0;
         margin: 0 auto;
-    
+
         img {
             width: 150px;
             height: 150px;
@@ -20,13 +20,13 @@
             box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
             background: white;
         }
-    
+
         .badges {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 0.5rem;
-    
+
             h4 {
                 color: var(--ifm-color-primary);
                 border: solid 1px rgba(0, 0, 0, 0.2);
@@ -34,13 +34,13 @@
                 padding: 0.3rem 0.7rem;
                 border-radius: 0.5rem;
             }
-    
+
             &.inactive > h4 {
                 color: #aaa;
                 background: #eee;
             }
         }
-    
+
         .separator {
             margin: 1rem auto;
             width: 70%;
@@ -48,13 +48,13 @@
             background: var(--ifm-font-color-base);
             opacity: 0.1;
         }
-        
+
         .social {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 1.5rem;
-    
+
             .socialLink {
                 &::before {
                     content: '';
@@ -64,7 +64,7 @@
                     background: url('/images/social/github.svg') no-repeat center;
                     background-size: contain;
                 }
-            
+
                 &:hover {
                     opacity: 0.6;
                 }
@@ -98,7 +98,7 @@ html[data-theme='dark'] {
                 color: #fff;
                 background: var(--ifm-color-primary);
             }
-    
+
             &.inactive > h4 {
                 color: #999;
                 background: #555;
