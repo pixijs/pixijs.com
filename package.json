@@ -9,6 +9,7 @@
     "docusaurus": "docusaurus",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "prettier:check": "prettier --check .",
     "prettify": "prettier --write .",
     "serve": "docusaurus serve",
     "start": "cross-env PIXI_VERSION=dev docusaurus start",
