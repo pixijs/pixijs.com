@@ -1,0 +1,11 @@
+**/.docusaurus
+**/.git
+**/.github
+**/.idea
+**/node_modules
+*.frag
+*.vert
+
+# TODO: just temporarily ignore these
+blog
+docs

@@ -9,6 +9,7 @@
     "docusaurus": "docusaurus",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "prettify": "prettier --write .",
     "serve": "docusaurus serve",
     "start": "cross-env PIXI_VERSION=dev docusaurus start",
     "swizzle": "docusaurus swizzle",
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.2.0",
+    "@pixi/eslint-config": "^4.0.1",
     "@tsconfig/docusaurus": "^1.0.6",
     "compare-versions": "^6.0.0-rc.1",
     "cross-env": "^7.0.3",
@@ -57,6 +59,8 @@
     "eslint": "^8.32.0",
     "eslint-config-standard-jsx": "^11.0.0",
     "eslint-config-standard-with-typescript": "^30.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^2.8.4",
     "typescript": "^4.9.4"
   },
   "engines": {

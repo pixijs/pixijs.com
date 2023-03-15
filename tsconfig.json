@@ -1,8 +1,25 @@
 {
-  "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
     "strict": true,
-    "baseUrl": ".",
-    "resolveJsonModule": true
+    "target": "ESNext"
+  },
+  "exclude": ["dist", "node_modules"],
+  "ts-node": {
+    "files": true,
+    "compilerOptions": {
+      "esModuleInterop": true
+    }
   }
 }
