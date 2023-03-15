@@ -110,7 +110,7 @@ export default function Version(): JSX.Element
                     </table>
                 </div>
 
-                {preReleaseVersion != null && (
+                {preReleaseVersion && (
                     <div className="margin-bottom--lg">
                         <Heading as="h3" id="latest">
                             <Translate id="versionsPage.next.title">Prerelease version</Translate>

@@ -3,7 +3,6 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 import PixiPlayground from '../components/PixiPlayground';
 import styles from './playground.module.css';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const defaultCode = `const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
@@ -44,6 +43,7 @@ function clearPayload(): void
     history.replaceState(null, '', location.pathname + location.search);
 }
 
+// eslint-disable-next-line consistent-return
 function readPayload(): Payload | undefined
 {
     if (location.hash !== '')
@@ -69,10 +69,9 @@ export default function PlaygroundPage(): JSX.Element
                     const payload = readPayload();
                     const code = payload?.code ?? defaultCode;
 
-                    console.log(useDocusaurusContext());
                     function onCodeChanged(code?: string): void
                     {
-                        if (code != null)
+                        if (code !== undefined)
                         {
                             writePayload({ code });
                         }
