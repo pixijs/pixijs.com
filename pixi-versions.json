@@ -1,45 +1,45 @@
 [
-  {
-    "version": "dev",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases",
-    "build": "https://pixijs.download/dev/pixi.min.js",
-    "docs": "/api"
-  },
-  {
-    "version": "7.2.0-rc",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v7.2.0-rc",
-    "build": "https://pixijs.download/v7.2.0-rc/pixi.min.js",
-    "docs": "https://pixijs.download/v7.2.0-rc/docs/index.html",
-    "prerelease": true
-  },
-  {
-    "version": "7.1.x",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v7.1.3",
-    "build": "https://pixijs.download/v7.1.3/pixi.min.js",
-    "docs": "https://pixijs.download/v7.1.3/docs/index.html"
-  },
-  {
-    "version": "7.0.x",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v7.0.5",
-    "build": "https://pixijs.download/v7.0.5/pixi.min.js",
-    "docs": "https://pixijs.download/v7.0.5/docs/index.html"
-  },
-  {
-    "version": "6.x",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v6.5.9",
-    "build": "https://pixijs.download/v6.5.9/pixi.min.js",
-    "docs": "https://pixijs.download/v6.5.9/docs/index.html"
-  },
-  {
-    "version": "5.x",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v5.3.12",
-    "build": "https://pixijs.download/v5.3.12/pixi.min.js",
-    "docs": "https://pixijs.download/v5.3.12/docs/index.html"
-  },
-  {
-    "version": "4.x",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v4.8.9",
-    "build": "https://pixijs.download/v4.8.9/pixi.min.js",
-    "docs": "https://pixijs.download/v4.8.9/docs/index.html"
-  }
+    {
+        "version": "dev",
+        "releaseNotes": "https://github.com/pixijs/pixijs/releases",
+        "build": "https://pixijs.download/dev/pixi.min.js",
+        "docs": "/api"
+    },
+    {
+        "version": "7.2.0-rc",
+        "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v7.2.0-rc",
+        "build": "https://pixijs.download/v7.2.0-rc/pixi.min.js",
+        "docs": "https://pixijs.download/v7.2.0-rc/docs/index.html",
+        "prerelease": true
+    },
+    {
+        "version": "7.1.x",
+        "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v7.1.3",
+        "build": "https://pixijs.download/v7.1.3/pixi.min.js",
+        "docs": "https://pixijs.download/v7.1.3/docs/index.html"
+    },
+    {
+        "version": "7.0.x",
+        "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v7.0.5",
+        "build": "https://pixijs.download/v7.0.5/pixi.min.js",
+        "docs": "https://pixijs.download/v7.0.5/docs/index.html"
+    },
+    {
+        "version": "6.x",
+        "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v6.5.9",
+        "build": "https://pixijs.download/v6.5.9/pixi.min.js",
+        "docs": "https://pixijs.download/v6.5.9/docs/index.html"
+    },
+    {
+        "version": "5.x",
+        "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v5.3.12",
+        "build": "https://pixijs.download/v5.3.12/pixi.min.js",
+        "docs": "https://pixijs.download/v5.3.12/docs/index.html"
+    },
+    {
+        "version": "4.x",
+        "releaseNotes": "https://github.com/pixijs/pixijs/releases/tags/v4.8.9",
+        "build": "https://pixijs.download/v4.8.9/pixi.min.js",
+        "docs": "https://pixijs.download/v4.8.9/docs/index.html"
+    }
 ]

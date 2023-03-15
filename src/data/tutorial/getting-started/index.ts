@@ -11,26 +11,26 @@ import content3 from './step3-content.md';
 import content4 from './step4-content.md';
 
 export const gettingStartedTutorial: TutorialStep[] = [
-  {
-    title: 'Getting Started',
-    Content: content1,
-    code: code1,
-  },
-  {
-    title: 'Set up something',
-    Content: content2,
-    code: code2,
-    completedCode: completedCode2,
-  },
-  {
-    title: 'Do something',
-    Content: content3,
-    code: code3,
-    completedCode: completedCode3,
-  },
-  {
-    title: 'You did it!',
-    Content: content4,
-    code: code4,
-  },
+    {
+        title: 'Getting Started',
+        Content: content1,
+        code: code1,
+    },
+    {
+        title: 'Set up something',
+        Content: content2,
+        code: code2,
+        completedCode: completedCode2,
+    },
+    {
+        title: 'Do something',
+        Content: content3,
+        code: code3,
+        completedCode: completedCode3,
+    },
+    {
+        title: 'You did it!',
+        Content: content4,
+        code: code4,
+    },
 ];

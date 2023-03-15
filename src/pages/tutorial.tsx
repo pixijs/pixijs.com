@@ -4,13 +4,9 @@ import Tutorial from '../components/Tutorial';
 
 export default function TutorialPage(): JSX.Element
 {
-  return (
-    <Layout
-      title="Tutorial"
-      description="Description will go into a meta tag in <head />"
-      noFooter
-    >
-      <Tutorial data={tutorialData.gettingStarted} />
-    </Layout>
-  );
+    return (
+        <Layout title="Tutorial" description="Description will go into a meta tag in <head />" noFooter>
+            <Tutorial data={tutorialData.gettingStarted} />
+        </Layout>
+    );
 }

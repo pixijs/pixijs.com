@@ -29,68 +29,62 @@ app.ticker.add((delta) => {
 });`;
 
 interface Payload {
-  code: string;
+    code: string;
 }
 
 function writePayload(payload: Payload): void
 {
-  const json = JSON.stringify(payload);
+    const json = JSON.stringify(payload);
 
-  history.replaceState(null, '', `#${btoa(json)}`);
+    history.replaceState(null, '', `#${btoa(json)}`);
 }
 
 function clearPayload(): void
 {
-  history.replaceState(null, '', location.pathname + location.search);
+    history.replaceState(null, '', location.pathname + location.search);
 }
 
 function readPayload(): Payload | undefined
 {
-  if (location.hash !== '')
-  {
-    try
+    if (location.hash !== '')
     {
-      return JSON.parse(atob(location.hash.substring(1)));
+        try
+        {
+            return JSON.parse(atob(location.hash.substring(1)));
+        }
+        catch
+        {
+            // Ignore
+        }
     }
-    catch
-    {
-      // Ignore
-    }
-  }
 }
 
 export default function PlaygroundPage(): JSX.Element
 {
-  return (
-    <Layout title={'Playground'} noFooter wrapperClassName={styles.wrapper}>
-      <BrowserOnly>
-        {() =>
-        {
-          const payload = readPayload();
-          const code = payload?.code ?? defaultCode;
+    return (
+        <Layout title={'Playground'} noFooter wrapperClassName={styles.wrapper}>
+            <BrowserOnly>
+                {() =>
+                {
+                    const payload = readPayload();
+                    const code = payload?.code ?? defaultCode;
 
-          console.log(useDocusaurusContext());
-          function onCodeChanged(code?: string): void
-          {
-            if (code != null)
-            {
-              writePayload({ code });
-            }
-            else
-            {
-              clearPayload();
-            }
-          }
+                    console.log(useDocusaurusContext());
+                    function onCodeChanged(code?: string): void
+                    {
+                        if (code != null)
+                        {
+                            writePayload({ code });
+                        }
+                        else
+                        {
+                            clearPayload();
+                        }
+                    }
 
-          return (
-            <PixiPlayground
-              mode="fullscreen"
-              code={code}
-              onCodeChanged={onCodeChanged}
-            />
-          );
-        }}
-      </BrowserOnly>
-    </Layout>
-  );
+                    return <PixiPlayground mode="fullscreen" code={code} onCodeChanged={onCodeChanged} />;
+                }}
+            </BrowserOnly>
+        </Layout>
+    );
 }

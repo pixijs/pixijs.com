@@ -8,22 +8,22 @@ import ClosingSection from './ClosingSection';
 
 export default function Homepage(): JSX.Element
 {
-  const { siteConfig } = useDocusaurusContext();
+    const { siteConfig } = useDocusaurusContext();
 
-  return (
-    <Layout
-      title={`${siteConfig.title} | The HTML5 Creation Engine`}
-      description="Description will go into a meta tag in <head />"
-    >
-      <main>
-        <div className="text--center">
-          <HeroHeader />
-          <TestimonialCarousel />
-          <KeyOfferings />
-          <FeatureList />
-          <ClosingSection />
-        </div>
-      </main>
-    </Layout>
-  );
+    return (
+        <Layout
+            title={`${siteConfig.title} | The HTML5 Creation Engine`}
+            description="Description will go into a meta tag in <head />"
+        >
+            <main>
+                <div className="text--center">
+                    <HeroHeader />
+                    <TestimonialCarousel />
+                    <KeyOfferings />
+                    <FeatureList />
+                    <ClosingSection />
+                </div>
+            </main>
+        </Layout>
+    );
 }

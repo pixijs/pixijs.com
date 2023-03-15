@@ -1,6 +1,6 @@
 declare module '*.scss'
 {
-  const content: Record<string, string>;
+    const content: Record<string, string>;
 
-  export = content;
+    export = content;
 }

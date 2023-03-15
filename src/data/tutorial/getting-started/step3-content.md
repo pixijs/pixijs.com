@@ -5,10 +5,10 @@ While you _can_ use PixiJS for static content, for most projects you'll want to 
 ```javascript
 // Listen for animate update
 app.ticker.add((delta) => {
-  // just for fun, let's rotate mr rabbit a little
-  // delta is 1 if running at 100% performance
-  // creates frame-independent transformation
-  bunny.rotation += 0.1 * delta;
+    // just for fun, let's rotate mr rabbit a little
+    // delta is 1 if running at 100% performance
+    // creates frame-independent transformation
+    bunny.rotation += 0.1 * delta;
 });
 ```
 

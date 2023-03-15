@@ -1,68 +1,67 @@
 @keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-250px * var(--carousel-amount)));
-  }
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-250px * var(--carousel-amount)));
+    }
 }
 
 .testimonialsSection {
-  background: #ecedf1;
+    background: #ecedf1;
 
-  .carouselText {
-    width: 100%;
-    color: #627189;
-    margin: 0 0 20px;
-    padding: 0 25px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: 0;
+    .carouselText {
+        width: 100%;
+        color: #627189;
+        margin: 0 0 20px;
+        padding: 0 25px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0;
 
-    @media only screen and (min-width: 481px) {
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
-      letter-spacing: 0;
-    }
-  }
-
-  .carouselWrapper {
-    width: 100%;
-    overflow: hidden;
-    --carousel-item-width: 150px;
-
-    @media only screen and (min-width: 481px) {
-      --carousel-item-width: 180px;
-    }
-
-    .carousel {
-      display: flex;
-      flex-wrap: nowrap;
-      animation: scroll calc(150s * (var(--carousel-amount) / 25)) linear
-        infinite;
-      width: calc(var(--carousel-item-width) * var(--carousel-amount) * 2);
-
-      .carouselItem {
-        flex-shrink: 0;
-        height: 60px;
-        width: var(--carousel-item-width);
-
-        @media only screen and (min-width: 768px) {
-          height: 80px;
+        @media only screen and (min-width: 481px) {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0;
         }
-      }
     }
-  }
+
+    .carouselWrapper {
+        width: 100%;
+        overflow: hidden;
+        --carousel-item-width: 150px;
+
+        @media only screen and (min-width: 481px) {
+            --carousel-item-width: 180px;
+        }
+
+        .carousel {
+            display: flex;
+            flex-wrap: nowrap;
+            animation: scroll calc(150s * (var(--carousel-amount) / 25)) linear infinite;
+            width: calc(var(--carousel-item-width) * var(--carousel-amount) * 2);
+
+            .carouselItem {
+                flex-shrink: 0;
+                height: 60px;
+                width: var(--carousel-item-width);
+
+                @media only screen and (min-width: 768px) {
+                    height: 80px;
+                }
+            }
+        }
+    }
 }
 
 html[data-theme='dark'] {
-  .testimonialsSection {
-    background: #1f2022;
+    .testimonialsSection {
+        background: #1f2022;
 
-    .carouselText {
-      color: #fff;
+        .carouselText {
+            color: #fff;
+        }
     }
-  }
 }

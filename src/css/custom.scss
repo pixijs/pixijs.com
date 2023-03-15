@@ -8,23 +8,23 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-font-family-base: 'Roboto';
-  --ifm-color-primary: #e91e63;
-  --ifm-color-primary-dark: #d81557;
-  --ifm-color-primary-darker: #cc1452;
-  --ifm-color-primary-darkest: #a81044;
-  --ifm-color-primary-light: #eb3674;
-  --ifm-color-primary-lighter: #ed427c;
-  --ifm-color-primary-lightest: #f06695;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+    --ifm-font-family-base: 'Roboto';
+    --ifm-color-primary: #e91e63;
+    --ifm-color-primary-dark: #d81557;
+    --ifm-color-primary-darker: #cc1452;
+    --ifm-color-primary-darkest: #a81044;
+    --ifm-color-primary-light: #eb3674;
+    --ifm-color-primary-lighter: #ed427c;
+    --ifm-color-primary-lightest: #f06695;
+    --ifm-code-font-size: 95%;
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
-  --ifm-breadcrumb-color-active: var(--ifm-text-color);
-  --ifm-breadcrumb-spacing: 2px;
+    --ifm-breadcrumb-color-active: var(--ifm-text-color);
+    --ifm-breadcrumb-spacing: 2px;
 }
 
 html {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -40,140 +40,140 @@ html {
 /* } */
 
 .navbar__inner {
-  margin: 0 auto;
-  max-width: 90%;
+    margin: 0 auto;
+    max-width: 90%;
 }
 
 .navbar__brand {
-  margin-right: 1rem;
+    margin-right: 1rem;
 }
 
 .header-twitter-link::before {
-  width: 26px;
-  height: 24px;
-  background: url('/images/social/twitter.svg') no-repeat center;
+    width: 26px;
+    height: 24px;
+    background: url('/images/social/twitter.svg') no-repeat center;
 }
 
 .header-discord-link::before {
-  width: 30px;
-  height: 24px;
-  background: url('/images/social/discord.svg') no-repeat center;
+    width: 30px;
+    height: 24px;
+    background: url('/images/social/discord.svg') no-repeat center;
 }
 
 .header-github-link::before {
-  width: 24px;
-  height: 24px;
-  background: url('/images/social/github.svg') no-repeat center;
+    width: 24px;
+    height: 24px;
+    background: url('/images/social/github.svg') no-repeat center;
 }
 
 .header-link {
-  &::before {
-    content: '';
-    display: flex;
-    background-size: contain;
-  }
+    &::before {
+        content: '';
+        display: flex;
+        background-size: contain;
+    }
 
-  &:hover {
-    opacity: 0.6;
-  }
+    &:hover {
+        opacity: 0.6;
+    }
 }
 
 .nav-section-heading {
-  font-size: small;
-  color: var(--ifm-color-primary-lightest);
-  margin-top: 0.2rem;
-  padding: 0.25rem 0.5rem;
-  text-transform: uppercase;
+    font-size: small;
+    color: var(--ifm-color-primary-lightest);
+    margin-top: 0.2rem;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
 }
 
 .underline::after {
-  content: '';
-  display: block;
-  width: 100px;
-  height: 3px;
-  background: #919bac;
-  margin: 13px auto 0;
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: #919bac;
+    margin: 13px auto 0;
 }
 
 .buttonRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .flex {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .footer__bottom {
-  color: #919bac;
+    color: #919bac;
 
-  .footer__copyright {
-    line-height: 35px;
-  }
+    .footer__copyright {
+        line-height: 35px;
+    }
 
-  a {
-    color: #fff;
-  }
+    a {
+        color: #fff;
+    }
 }
 
 html[data-theme='dark'] {
-  .header-discord-link::before,
-  .header-github-link::before,
-  .header-twitter-link::before {
-    filter: invert(100%);
-  }
+    .header-discord-link::before,
+    .header-github-link::before,
+    .header-twitter-link::before {
+        filter: invert(100%);
+    }
 
-  .header-link::before {
-    background-size: contain;
-  }
+    .header-link::before {
+        background-size: contain;
+    }
 
-  .footer {
-    background: #1a1a1a;
-  }
+    .footer {
+        background: #1a1a1a;
+    }
 
-  .underline::after {
-    background: var(--ifm-color-primary);
-  }
+    .underline::after {
+        background: var(--ifm-color-primary);
+    }
 }
 
 @media only screen and (max-width: 1020px) {
-  .navbar__brand {
-    margin-right: 0;
-  }
+    .navbar__brand {
+        margin-right: 0;
+    }
 }
 
 @media only screen and (max-width: 1090px) {
-  span.DocSearch-Button-Placeholder {
-    display: none;
-  }
+    span.DocSearch-Button-Placeholder {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 1180px) {
-  span.DocSearch-Button-Keys {
-    display: none;
-  }
+    span.DocSearch-Button-Keys {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 1280px) {
-  .navbar__inner {
-    max-width: 100%;
-  }
+    .navbar__inner {
+        max-width: 100%;
+    }
 }
 
 // sidebars
 .theme-doc-sidebar-item-category-level-1 {
-  margin-top: 0.5rem !important;
+    margin-top: 0.5rem !important;
 }
 
 // breadcrumbs
 .theme-doc-breadcrumbs {
-  transition: opacity 250ms;
-  opacity: 0.75;
+    transition: opacity 250ms;
+    opacity: 0.75;
 
-  &:hover {
-    opacity: 1;
-  }
+    &:hover {
+        opacity: 1;
+    }
 }

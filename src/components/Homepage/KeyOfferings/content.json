@@ -1,14 +1,14 @@
 [
-  {
-    "heading": "Fast",
-    "description": "PixiJS' strength is speed. When it comes to 2D rendering, PixiJS is the fastest there is."
-  },
-  {
-    "heading": "Flexible",
-    "description": "Friendly, feature-rich API lets PixiJS take care of the fundamentals whilst you focus on producing incredible multiplatform experiences."
-  },
-  {
-    "heading": "Free",
-    "description": "PixiJS is and always will be Open Source, with a large and supportive community pushing its growth and evolution."
-  }
+    {
+        "heading": "Fast",
+        "description": "PixiJS' strength is speed. When it comes to 2D rendering, PixiJS is the fastest there is."
+    },
+    {
+        "heading": "Flexible",
+        "description": "Friendly, feature-rich API lets PixiJS take care of the fundamentals whilst you focus on producing incredible multiplatform experiences."
+    },
+    {
+        "heading": "Free",
+        "description": "PixiJS is and always will be Open Source, with a large and supportive community pushing its growth and evolution."
+    }
 ]
