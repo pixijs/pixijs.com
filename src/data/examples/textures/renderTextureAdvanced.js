@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 const stageSize = {
@@ -45,8 +46,10 @@ const fruits = [
 const items = [];
 
 // now create some items and randomly position them in the stuff container
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 20; i++)
+{
     const item = PIXI.Sprite.from(fruits[i % fruits.length]);
+
     item.x = Math.random() * 400 - 200;
     item.y = Math.random() * 400 - 200;
     item.anchor.set(0.5);
@@ -57,10 +60,13 @@ for (let i = 0; i < 20; i++) {
 // used for spinning!
 let count = 0;
 
-app.ticker.add(() => {
-    for (let i = 0; i < items.length; i++) {
+app.ticker.add(() =>
+{
+    for (let i = 0; i < items.length; i++)
+    {
     // rotate each item
         const item = items[i];
+
         item.rotation += 0.1;
     }
 
@@ -68,6 +74,7 @@ app.ticker.add(() => {
 
     // swap the buffers ...
     const temp = renderTexture;
+
     renderTexture = renderTexture2;
     renderTexture2 = temp;
 

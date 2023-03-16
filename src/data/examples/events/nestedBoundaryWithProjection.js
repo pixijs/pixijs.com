@@ -2,10 +2,11 @@
 // into a disjoint scene graph. Here, a camera is used to project an different
 // world onto the canvas.
 
-const app = new PIXI.Application<HTMLCanvasElement>({
+const app = new PIXI.Application({
     antialias: true,
     background: '#1099bb',
 });
+
 document.body.appendChild(app.view);
 
 // A projector renders it's content using projection. The transforms in
@@ -15,8 +16,10 @@ document.body.appendChild(app.view);
 //
 // To solve this, we nest our own EventBoundary, and connect it using
 // addEventListener!
-class Projector extends PIXI.DisplayObject {
-    constructor() {
+class Projector extends PIXI.DisplayObject
+{
+    constructor()
+    {
         super();
 
         // The content root to be rendered by this camera.
@@ -31,7 +34,8 @@ class Projector extends PIXI.DisplayObject {
 
         // Override copyMouseData to apply inverse worldTransform on
         // global coords
-        this.boundary.copyMouseData = (from, to) => {
+        this.boundary.copyMouseData = (from, to) =>
+        {
             // Apply default implementation first
             PIXI.EventBoundary.prototype.copyMouseData.call(this.boundary, from, to);
 
@@ -50,7 +54,8 @@ class Projector extends PIXI.DisplayObject {
             'pointerover',
             'pointerout',
             'wheel',
-        ].forEach((event) => {
+        ].forEach((event) =>
+        {
             this.addEventListener(event, (e) => this.boundary.mapEvent(e));
         });
 
@@ -58,17 +63,20 @@ class Projector extends PIXI.DisplayObject {
     }
 
     // Pass through cursor
-    get cursor() {
+    get cursor()
+    {
         return this.boundary.cursor;
     }
 
     // eslint-disable-next-line class-methods-use-this
-    set cursor(value) {
+    set cursor(value)
+    {
         throw new Error('The camera\'s cursor is derived from its content!');
     }
 
     // Pass through calculateBounds
-    calculateBounds() {
+    calculateBounds()
+    {
         const contentBounds = this.content.getBounds();
 
         this._bounds.addFrameMatrix(
@@ -81,12 +89,14 @@ class Projector extends PIXI.DisplayObject {
     }
 
     // Pass through containsPoint
-    containsPoint(point) {
+    containsPoint(point)
+    {
         return !!this.boundary.hitTest(point.x, point.y);
     }
 
     // Render content with projection
-    render(renderer) {
+    render(renderer)
+    {
         renderer.batch.flush();
 
         const projectionSystem = renderer.projection;
@@ -107,7 +117,8 @@ class Projector extends PIXI.DisplayObject {
     }
 
     // updateTransform also updates content's transform
-    updateTransform() {
+    updateTransform()
+    {
         super.updateTransform();
 
         this.content.enableTempParent();
@@ -152,7 +163,8 @@ projector.hitArea = projector.content.hitArea;
 projector.content.interactive = true;
 
 // Make stars interactive & add wheel handlers
-stars.forEach((star) => {
+stars.forEach((star) =>
+{
     // Make star interactive
     star.interactive = true;
 
@@ -160,18 +172,23 @@ stars.forEach((star) => {
     star.cursor = 'zoom-in';
 
     // Add wheel rotation feedback
-    star.addEventListener('wheel', (e) => {
+    star.addEventListener('wheel', (e) =>
+    {
         const scroll = Math.sign(e.deltaY) * Math.min(15, Math.abs(e.deltaY));
 
         star.rotation += scroll / 100;
     });
 
     // Add click zoom-in/zoom-out handler
-    star.addEventListener('click', (e) => {
-        if (star.scale.x === 1) {
+    star.addEventListener('click', (e) =>
+    {
+        if (star.scale.x === 1)
+        {
             star.scale.set(1.33);
             star.cursor = 'zoom-out';
-        } else {
+        }
+        else
+        {
             star.scale.set(1);
             star.cursor = 'zoom-in';
         }
@@ -187,14 +204,17 @@ PIXI.BitmapFont.from('coordinates', {
 const coordinates = new PIXI.BitmapText('Global: (0, 0)\nScreen: (0, 0)', {
     fontName: 'coordinates',
 });
+
 coordinates.x = 110;
 coordinates.y = 550;
 
 app.stage.addChild(coordinates);
 
-projector.content.addEventListener('pointermove', (e) => {
+projector.content.addEventListener('pointermove', (e) =>
+{
     const global = `(${e.global.x | 0}, ${e.global.y | 0})`;
     const screen = `(${e.screen.x | 0}, ${e.screen.y | 0})`;
+
     coordinates.text = `Global: ${global}\nScreen: ${screen}`;
 });
 

@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // create a texture from an image path
@@ -13,11 +14,13 @@ const tilingSprite = new PIXI.TilingSprite(
     app.screen.width,
     app.screen.height,
 );
+
 app.stage.addChild(tilingSprite);
 
 let count = 0;
 
-app.ticker.add(() => {
+app.ticker.add(() =>
+{
     count += 0.005;
 
     tilingSprite.tileScale.x = 2 + Math.sin(count);

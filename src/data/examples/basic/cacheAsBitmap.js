@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 app.stop();
@@ -20,6 +21,7 @@ let count = 0;
 
 // create an empty container
 const alienContainer = new PIXI.Container();
+
 alienContainer.x = 400;
 alienContainer.y = 300;
 
@@ -27,13 +29,16 @@ alienContainer.y = 300;
 app.stage.interactive = true;
 app.stage.addChild(alienContainer);
 
-function onAssetsLoaded() {
+function onAssetsLoaded()
+{
     // add a bunch of aliens with textures from image paths
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 100; i++)
+    {
         const frameName = alienFrames[i % 4];
 
         // create an alien using the frame name..
         const alien = PIXI.Sprite.from(frameName);
+
         alien.tint = Math.random() * 0xFFFFFF;
 
         alien.x = Math.random() * 800 - 400;
@@ -49,14 +54,18 @@ function onAssetsLoaded() {
 // Combines both mouse click + touch tap
 app.stage.on('pointertap', onClick);
 
-function onClick() {
+function onClick()
+{
     alienContainer.cacheAsBitmap = !alienContainer.cacheAsBitmap;
 }
 
-app.ticker.add(() => {
+app.ticker.add(() =>
+{
     // let's rotate the aliens a little bit
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 100; i++)
+    {
         const alien = aliens[i];
+
         alien.rotation += 0.1;
     }
 

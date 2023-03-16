@@ -1,8 +1,9 @@
 // This example logs the order of events hover-related events in the scene.
-const app = new PIXI.Application<HTMLCanvasElement>({
+const app = new PIXI.Application({
     antialias: true,
     background: '#1099bb',
 });
+
 document.body.appendChild(app.view);
 
 const title = app.stage.addChild(new PIXI.Text(
@@ -30,6 +31,7 @@ const blackBox = app.stage.addChild(new PIXI.Graphics()
     .beginFill(0)
     .drawRect(0, 0, 400, 400)
     .endFill());
+
 blackBox.name = 'black box';
 blackBox.x = 400;
 
@@ -38,6 +40,7 @@ const whiteBox = blackBox.addChild(new PIXI.Graphics()
     .beginFill(0xffffff)
     .drawRect(100, 100, 200, 200)
     .endFill());
+
 whiteBox.name = 'white box';
 
 // Enable interactivity everywhere!
@@ -46,7 +49,8 @@ app.stage.hitArea = app.screen;
 whiteBox.interactive = true;
 blackBox.interactive = true;
 
-function onEvent(e) {
+function onEvent(e)
+{
     const type = e.type;
     const targetName = e.target.name;
     const currentTargetName = e.currentTarget.name;
@@ -56,13 +60,16 @@ function onEvent(e) {
 
     if (currentTargetName === 'stage'
         || type === 'pointerenter'
-        || type === 'pointerleave') {
+        || type === 'pointerleave')
+    {
         logs.push('-----------------------------------------', '');
     }
 
     // Prevent logs from growing too long
-    if (logs.length > 30) {
-        while (logs.length > 30) {
+    if (logs.length > 30)
+    {
+        while (logs.length > 30)
+        {
             logs.shift();
         }
     }
@@ -71,7 +78,8 @@ function onEvent(e) {
     logText.text = logs.join('\n');
 }
 
-[app.stage, whiteBox, blackBox].forEach((object) => {
+[app.stage, whiteBox, blackBox].forEach((object) =>
+{
     object.addEventListener('pointerenter', onEvent);
     object.addEventListener('pointerleave', onEvent);
     object.addEventListener('pointerover', onEvent);

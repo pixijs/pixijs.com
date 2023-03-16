@@ -1,15 +1,19 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ autoStart: false, resizeTo: window });
+const app = new PIXI.Application({ autoStart: false, resizeTo: window });
+
 document.body.appendChild(app.view);
 
-PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/0123456789.json').then((spritesheet) => {
+PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/0123456789.json').then((spritesheet) =>
+{
     // create an array to store the textures
     const textures = [];
     let i;
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 10; i++)
+    {
         const framekey = `0123456789 ${i}.ase`;
         const texture = PIXI.Texture.from(framekey);
         const time = spritesheet.data.frames[framekey].duration;
+
         textures.push({ texture, time });
     }
 
@@ -17,6 +21,7 @@ PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/0123456789.json').t
 
     // create a slow AnimatedSprite
     const slow = new PIXI.AnimatedSprite(textures);
+
     slow.anchor.set(0.5);
     slow.scale.set(scaling);
     slow.animationSpeed = 0.5;
@@ -27,6 +32,7 @@ PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/0123456789.json').t
 
     // create a fast AnimatedSprite
     const fast = new PIXI.AnimatedSprite(textures);
+
     fast.anchor.set(0.5);
     fast.scale.set(scaling);
     fast.x = (app.screen.width + fast.width) / 2;

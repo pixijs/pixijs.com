@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // holder to store the aliens
@@ -6,7 +7,8 @@ const aliens = [];
 
 const totalDudes = 20;
 
-for (let i = 0; i < totalDudes; i++) {
+for (let i = 0; i < totalDudes; i++)
+{
     // create a new Sprite that uses the image name that we just generated as its source
     const dude = PIXI.Sprite.from('https://beta.pixijs.com/assets/eggHead.png');
 
@@ -45,25 +47,34 @@ const dudeBounds = new PIXI.Rectangle(-dudeBoundsPadding,
     app.screen.width + dudeBoundsPadding * 2,
     app.screen.height + dudeBoundsPadding * 2);
 
-app.ticker.add(() => {
+app.ticker.add(() =>
+{
     // iterate through the dudes and update their position
-    for (let i = 0; i < aliens.length; i++) {
+    for (let i = 0; i < aliens.length; i++)
+    {
         const dude = aliens[i];
+
         dude.direction += dude.turningSpeed * 0.01;
         dude.x += Math.sin(dude.direction) * dude.speed;
         dude.y += Math.cos(dude.direction) * dude.speed;
         dude.rotation = -dude.direction - Math.PI / 2;
 
         // wrap the dudes by testing their bounds...
-        if (dude.x < dudeBounds.x) {
+        if (dude.x < dudeBounds.x)
+        {
             dude.x += dudeBounds.width;
-        } else if (dude.x > dudeBounds.x + dudeBounds.width) {
+        }
+        else if (dude.x > dudeBounds.x + dudeBounds.width)
+        {
             dude.x -= dudeBounds.width;
         }
 
-        if (dude.y < dudeBounds.y) {
+        if (dude.y < dudeBounds.y)
+        {
             dude.y += dudeBounds.height;
-        } else if (dude.y > dudeBounds.y + dudeBounds.height) {
+        }
+        else if (dude.y > dudeBounds.y + dudeBounds.height)
+        {
             dude.y -= dudeBounds.height;
         }
     }

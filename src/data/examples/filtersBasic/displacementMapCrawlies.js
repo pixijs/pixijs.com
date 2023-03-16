@@ -1,9 +1,11 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 app.stage.interactive = true;
 
 const container = new PIXI.Container();
+
 app.stage.addChild(container);
 
 const padding = 100;
@@ -15,8 +17,10 @@ const bounds = new PIXI.Rectangle(
 );
 const maggots = [];
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 20; i++)
+{
     const maggot = PIXI.Sprite.from('https://beta.pixijs.com/assets/maggot.png');
+
     maggot.anchor.set(0.5);
     container.addChild(maggot);
 
@@ -53,6 +57,7 @@ ring.visible = false;
 app.stage.addChild(ring);
 
 const bg = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_grass.jpg');
+
 bg.width = app.screen.width;
 bg.height = app.screen.height;
 
@@ -64,7 +69,8 @@ app.stage
     .on('mousemove', onPointerMove)
     .on('touchmove', onPointerMove);
 
-function onPointerMove(eventData) {
+function onPointerMove(eventData)
+{
     ring.visible = true;
 
     displacementSprite.position.set(eventData.data.global.x - 25, eventData.data.global.y);
@@ -73,10 +79,12 @@ function onPointerMove(eventData) {
 
 let count = 0;
 
-app.ticker.add(() => {
+app.ticker.add(() =>
+{
     count += 0.05;
 
-    for (let i = 0; i < maggots.length; i++) {
+    for (let i = 0; i < maggots.length; i++)
+    {
         const maggot = maggots[i];
 
         maggot.direction += maggot.turnSpeed * 0.01;
@@ -87,15 +95,21 @@ app.ticker.add(() => {
         maggot.scale.x = maggot.original.x + Math.sin(count) * 0.2;
 
         // wrap the maggots around as the crawl
-        if (maggot.x < bounds.x) {
+        if (maggot.x < bounds.x)
+        {
             maggot.x += bounds.width;
-        } else if (maggot.x > bounds.x + bounds.width) {
+        }
+        else if (maggot.x > bounds.x + bounds.width)
+        {
             maggot.x -= bounds.width;
         }
 
-        if (maggot.y < bounds.y) {
+        if (maggot.y < bounds.y)
+        {
             maggot.y += bounds.height;
-        } else if (maggot.y > bounds.y + bounds.height) {
+        }
+        else if (maggot.y > bounds.y + bounds.height)
+        {
             maggot.y -= bounds.height;
         }
     }

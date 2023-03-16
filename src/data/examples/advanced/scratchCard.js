@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // prepare circle texture, that will be our brush
@@ -13,7 +14,8 @@ PIXI.Assets.add('t1', 'https://beta.pixijs.com/assets/bg_grass.jpg');
 PIXI.Assets.add('t2', 'https://beta.pixijs.com/assets/bg_rotate.jpg');
 PIXI.Assets.load(['t1', 't2']).then(setup);
 
-function setup() {
+function setup()
+{
     const { width, height } = app.screen;
     const stageSize = { width, height };
 
@@ -40,8 +42,11 @@ function setup() {
 
     let dragging = false;
     let lastDrawnPoint = null;
-    function pointerMove({ global: { x, y } }) {
-        if (dragging) {
+
+    function pointerMove({ global: { x, y } })
+    {
+        if (dragging)
+        {
             brush.position.set(x, y);
             app.renderer.render(brush, {
                 renderTexture,
@@ -51,7 +56,8 @@ function setup() {
             // Smooth out the drawing a little bit to make it look nicer
             // this connects the previous drawn point to the current one
             // using a line
-            if (lastDrawnPoint) {
+            if (lastDrawnPoint)
+            {
                 line
                     .clear()
                     .lineStyle({ width: 100, color: 0xffffff })
@@ -68,12 +74,14 @@ function setup() {
         }
     }
 
-    function pointerDown(event) {
+    function pointerDown(event)
+    {
         dragging = true;
         pointerMove(event);
     }
 
-    function pointerUp(event) {
+    function pointerUp(event)
+    {
         dragging = false;
         lastDrawnPoint = null;
     }

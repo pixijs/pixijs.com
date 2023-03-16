@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // Load them google fonts before starting...
@@ -6,7 +7,8 @@ window.WebFontConfig = {
     google: {
         families: ['Snippet'],
     },
-    active() {
+    active()
+    {
         init();
     },
 };

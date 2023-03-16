@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ backgroundAlpha: 0, resizeTo: window });
+const app = new PIXI.Application({ backgroundAlpha: 0, resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // Create play button that can be used to trigger the video
@@ -31,7 +32,8 @@ app.stage.addChild(button);
 // not have this requirement
 button.on('pointertap', onPlayVideo);
 
-function onPlayVideo() {
+function onPlayVideo()
+{
     // Don't need the button anymore
     button.destroy();
 

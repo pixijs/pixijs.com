@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // create a texture from an image path
@@ -7,14 +8,16 @@ const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png');
 // Scale mode for pixelation
 texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++)
+{
     createBunny(
         Math.floor(Math.random() * app.screen.width),
         Math.floor(Math.random() * app.screen.height),
     );
 }
 
-function createBunny(x, y) {
+function createBunny(x, y)
+{
     // create our little bunny friend..
     const bunny = new PIXI.Sprite(texture);
 
@@ -49,13 +52,16 @@ app.stage.hitArea = app.screen;
 app.stage.on('pointerup', onDragEnd);
 app.stage.on('pointerupoutside', onDragEnd);
 
-function onDragMove(event) {
-    if (dragTarget) {
+function onDragMove(event)
+{
+    if (dragTarget)
+    {
         dragTarget.parent.toLocal(event.global, null, dragTarget.position);
     }
 }
 
-function onDragStart() {
+function onDragStart()
+{
     // store a reference to the data
     // the reason for this is because of multitouch
     // we want to track the movement of this particular touch
@@ -65,8 +71,10 @@ function onDragStart() {
     app.stage.on('pointermove', onDragMove);
 }
 
-function onDragEnd() {
-    if (dragTarget) {
+function onDragEnd()
+{
+    if (dragTarget)
+    {
         app.stage.off('pointermove', onDragMove);
         dragTarget.alpha = 1;
         dragTarget = null;

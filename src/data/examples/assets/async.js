@@ -1,8 +1,10 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // await can only be used inside an async function
-async function init() {
+async function init()
+{
     const texture = await PIXI.Assets.load('https://beta.pixijs.com/assets/bunny.png');
 
     // create a new Sprite from the awaited loaded Texture
@@ -19,4 +21,4 @@ async function init() {
 }
 
 // Call that async function
-init();
+init();

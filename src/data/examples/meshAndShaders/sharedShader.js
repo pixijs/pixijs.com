@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 const geometry = new PIXI.Geometry()
@@ -96,7 +97,8 @@ triangle2.scale.set(3);
 
 app.stage.addChild(triangle2, triangle);
 
-app.ticker.add((delta) => {
+app.ticker.add((delta) =>
+{
     triangle.rotation += 0.01;
     triangle2.rotation -= 0.005;
 });

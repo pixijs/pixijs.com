@@ -6,8 +6,10 @@
 // This special event boundary overrides the hit-testing implementation to use
 // HashingContainer's own childHash to find children near the pointer
 // location.
-class HashingEventBoundary extends PIXI.EventBoundary {
-    constructor(...args) {
+class HashingEventBoundary extends PIXI.EventBoundary
+{
+    constructor(...args)
+    {
         super(...args);
         // Create reusable temp rectangle for hit-testing!
         this.tempRect = new PIXI.Rectangle();
@@ -19,12 +21,14 @@ class HashingEventBoundary extends PIXI.EventBoundary {
         location,
         testFn,
         pruneFn,
-    ) {
+    )
+    {
         // If currentTarget isn't a HashingContainer, then default to the
         // regular hit-testing implementation provided by PixiJS.
         if (!currentTarget
                 || !currentTarget.visible
-                || !currentTarget.childHash) {
+                || !currentTarget.childHash)
+        {
             return super.hitTestRecursive(
                 currentTarget,
                 interactive,
@@ -39,7 +43,8 @@ class HashingEventBoundary extends PIXI.EventBoundary {
 
         // Time to get recursive and find the next child in the propagation
         // path of the event, accelerated using the childHash.
-        if (currentTarget.interactiveChildren) {
+        if (currentTarget.interactiveChildren)
+        {
             /* This is where the magic happens! */
             const tempRect = this.tempRect;
 
@@ -56,7 +61,8 @@ class HashingEventBoundary extends PIXI.EventBoundary {
                 .sort((a, b) => a.refIndex - b.refIndex);
 
             /* The following is copied from EventBoundary's code. */
-            for (let i = children.length - 1; i >= 0; i--) {
+            for (let i = children.length - 1; i >= 0; i--)
+            {
                 const child = children[i];
                 const nestedHit = this.hitTestRecursive(
                     child,
@@ -66,12 +72,14 @@ class HashingEventBoundary extends PIXI.EventBoundary {
                     pruneFn,
                 );
 
-                if (nestedHit) {
+                if (nestedHit)
+                {
                     // Its a good idea to check if a child has lost its
                     // parent. this means it has been removed whilst looping
                     // so its best
                     if (nestedHit.length > 0
-                            && !nestedHit[nestedHit.length - 1].parent) {
+                            && !nestedHit[nestedHit.length - 1].parent)
+                    {
                         // eslint-disable-next-line no-continue
                         continue;
                     }
@@ -80,7 +88,8 @@ class HashingEventBoundary extends PIXI.EventBoundary {
                     // chain if the chain has already started (i.e. the event
                     // target has been found) or if the current target is
                     // interactive (i.e. it becomes the event target).
-                    if (nestedHit.length > 0 || currentTarget.interactive) {
+                    if (nestedHit.length > 0 || currentTarget.interactive)
+                    {
                         nestedHit.push(currentTarget);
                     }
 
@@ -92,7 +101,8 @@ class HashingEventBoundary extends PIXI.EventBoundary {
         /* The following is copied from EventBoundary's own implementation. */
 
         // Finally, hit test this DisplayObject itself.
-        if (interactive && testFn(currentTarget, location)) {
+        if (interactive && testFn(currentTarget, location))
+        {
             // The current hit-test target is the event's target only if it
             // is interactive. Otherwise, the first interactive ancestor will
             // be the event's target.
@@ -106,20 +116,24 @@ class HashingEventBoundary extends PIXI.EventBoundary {
 // HashingContainer is a special kind of container that organizes its children
 // in a spatial hash. It also sets each child's refIndex property to its index
 // in the hashing container's children array.
-class HashingContainer extends PIXI.Container {
-    constructor() {
+class HashingContainer extends PIXI.Container
+{
+    constructor()
+    {
         super();
         this.childHash = new PIXI.SpatialHash();
     }
 
     // Override updateTransform to update this.childHash!
-    updateTransform() {
+    updateTransform()
+    {
         super.updateTransform();
 
         // Reset childHash & re-add all the children. This will
         // make the spatial hash re-evaluate the coverage of each child.
         this.childHash.reset();
-        for (let i = 0; i < this.children.length; i++) {
+        for (let i = 0; i < this.children.length; i++)
+        {
             const child = this.children[i];
 
             this.childHash.put(child);
@@ -129,14 +143,16 @@ class HashingContainer extends PIXI.Container {
 }
 
 // This is the actual program using HashingEventBoundary, HashingContainer.
-function main() {
+function main()
+{
     // Create app. autoStart = false so that the app doesn't render until
     // something changes - this prevents redundant spatial-hash updates.
-    const app = new PIXI.Application<HTMLCanvasElement>({
+    const app = new PIXI.Application({
         antialias: true,
         autoStart: false,
         background: '#1099bb',
     });
+
     document.body.appendChild(app.view);
 
     // Install our own EventBoundary!
@@ -152,12 +168,14 @@ function main() {
         PIXI.Texture.from('https://beta.pixijs.com/assets/helmlok.png'),
     ];
     // Rerender scene when each texture loads
+
     textures.forEach(
         (tex) => tex.baseTexture.once('loaded', () => app.render()),
     );
 
     // Populate the hashing container!
-    function makeMonster(x, y) {
+    function makeMonster(x, y)
+    {
         const texture = textures[Math.floor(Math.random() * textures.length)];
         const sprite = new PIXI.Sprite(texture);
 
@@ -180,13 +198,15 @@ function main() {
 
         return sprite;
     }
-    function onMonsterClicked(e) {
+    function onMonsterClicked(e)
+    {
         const monster = this;
         const pos = monster.position;
         const radius = Math.max(monster.width, monster.height) * 2;
 
         // Remove monster from scene once the event finishes propagating.
-        e.manager.dispatch.once('click', () => {
+        e.manager.dispatch.once('click', () =>
+        {
             // TODO: Fix PixiJS throwing errors since the monster is removed
             // from scene graph while was under hover.
 
@@ -194,7 +214,8 @@ function main() {
             PIXI.Ticker.shared.addOnce(() => app.render());
         });
 
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 8; i++)
+        {
             const x = pos.x + radius * Math.cos(i * Math.PI / 4);
             const y = pos.y + radius * Math.sin(i * Math.PI / 4);
 
@@ -213,6 +234,7 @@ function main() {
             },
         ),
     );
+
     title.position.set(12, 12);
 
     // Render the stage once

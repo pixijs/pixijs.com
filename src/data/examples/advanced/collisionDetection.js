@@ -1,6 +1,7 @@
 // Based somewhat on this article by Spicy Yoghurt
 // URL for further reading: https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#111', resizeTo: window });
+const app = new PIXI.Application({ background: '#111', resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // Options for how objects interact
@@ -12,7 +13,8 @@ const impulsePower = 5;
 
 // Test For Hit
 // A basic AABB check between two different squares
-function testForAABB(object1, object2) {
+function testForAABB(object1, object2)
+{
     const bounds1 = object1.getBounds();
     const bounds2 = object2.getBounds();
 
@@ -24,8 +26,10 @@ function testForAABB(object1, object2) {
 
 // Calculates the results of a collision, allowing us to give an impulse that
 // shoves objects apart
-function collisionResponse(object1, object2) {
-    if (!object1 || !object2) {
+function collisionResponse(object1, object2)
+{
+    if (!object1 || !object2)
+    {
         return new PIXI.Point(0);
     }
 
@@ -61,7 +65,8 @@ function collisionResponse(object1, object2) {
 }
 
 // Calculate the distance between two given points
-function distanceBetweenTwoPoints(p1, p2) {
+function distanceBetweenTwoPoints(p1, p2)
+{
     const a = p1.x - p2.x;
     const b = p1.y - p2.y;
 
@@ -70,6 +75,7 @@ function distanceBetweenTwoPoints(p1, p2) {
 
 // The green square we will knock about
 const greenSquare = new PIXI.Sprite(PIXI.Texture.WHITE);
+
 greenSquare.position.set((app.screen.width - 100) / 2, (app.screen.height - 100) / 2);
 greenSquare.width = 100;
 greenSquare.height = 100;
@@ -79,6 +85,7 @@ greenSquare.mass = 3;
 
 // The square you move around
 const redSquare = new PIXI.Sprite(PIXI.Texture.WHITE);
+
 redSquare.position.set(0, 0);
 redSquare.width = 100;
 redSquare.height = 100;
@@ -87,15 +94,18 @@ redSquare.acceleration = new PIXI.Point(0);
 redSquare.mass = 1;
 
 const mouseCoords = { x: 0, y: 0 };
+
 app.stage.interactive = true;
 app.stage.hitArea = app.screen;
-app.stage.on('mousemove', (event) => {
+app.stage.on('mousemove', (event) =>
+{
     mouseCoords.x = event.global.x;
     mouseCoords.y = event.global.y;
 });
 
 // Listen for animate update
-app.ticker.add((delta) => {
+app.ticker.add((delta) =>
+{
     // Applied deacceleration for both squares, done by reducing the
     // acceleration by 0.01% of the acceleration every loop
     redSquare.acceleration.set(redSquare.acceleration.x * 0.99, redSquare.acceleration.y * 0.99);
@@ -103,24 +113,28 @@ app.ticker.add((delta) => {
 
     // Check whether the green square ever moves off the screen
     // If so, reverse acceleration in that direction
-    if (greenSquare.x < 0 || greenSquare.x > (app.screen.width - 100)) {
+    if (greenSquare.x < 0 || greenSquare.x > (app.screen.width - 100))
+    {
         greenSquare.acceleration.x = -greenSquare.acceleration.x;
     }
 
-    if (greenSquare.y < 0 || greenSquare.y > (app.screen.height - 100)) {
+    if (greenSquare.y < 0 || greenSquare.y > (app.screen.height - 100))
+    {
         greenSquare.acceleration.y = -greenSquare.acceleration.y;
     }
 
     // If the green square pops out of the cordon, it pops back into the
     // middle
     if ((greenSquare.x < -30 || greenSquare.x > (app.screen.width + 30))
-        || greenSquare.y < -30 || greenSquare.y > (app.screen.height + 30)) {
+        || greenSquare.y < -30 || greenSquare.y > (app.screen.height + 30))
+    {
         greenSquare.position.set((app.screen.width - 100) / 2, (app.screen.height - 100) / 2);
     }
 
     // If the mouse is off screen, then don't update any further
     if (app.screen.width > mouseCoords.x || mouseCoords.x > 0
-        || app.screen.height > mouseCoords.y || mouseCoords.y > 0) {
+        || app.screen.height > mouseCoords.y || mouseCoords.y > 0)
+    {
         // Get the red square's center point
         const redSquareCenterPosition = new PIXI.Point(
             redSquare.x + (redSquare.width * 0.5),
@@ -156,11 +170,13 @@ app.ticker.add((delta) => {
     }
 
     // If the two squares are colliding
-    if (testForAABB(greenSquare, redSquare)) {
+    if (testForAABB(greenSquare, redSquare))
+    {
         // Calculate the changes in acceleration that should be made between
         // each square as a result of the collision
         const collisionPush = collisionResponse(greenSquare, redSquare);
         // Set the changes in acceleration for both squares
+
         redSquare.acceleration.set(
             (collisionPush.x * greenSquare.mass),
             (collisionPush.y * greenSquare.mass),

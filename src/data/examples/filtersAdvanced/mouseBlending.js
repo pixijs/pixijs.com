@@ -2,11 +2,13 @@
  * https://github.com/pixijs/pixi.js/wiki/v5-Creating-Filters
  */
 
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // Create background image
 const background = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_grass.jpg');
+
 background.width = app.screen.width;
 background.height = app.screen.height;
 app.stage.addChild(background);
@@ -36,15 +38,18 @@ void main() {
 `;
 
 const container = new PIXI.Container();
+
 container.filterArea = new PIXI.Rectangle(100, 100, app.screen.width - 200, app.screen.height - 200);
 app.stage.addChild(container);
 const filter = new PIXI.Filter(null, shaderFrag, {
     mouse: new PIXI.Point(),
 });
+
 container.filters = [filter];
 
 app.stage.hitArea = app.screen;
 app.stage.interactive = true;
-app.stage.on('pointermove', (event) => {
+app.stage.on('pointermove', (event) =>
+{
     filter.uniforms.mouse.copyFrom(event.global);
 });

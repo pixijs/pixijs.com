@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 const geometry = new PIXI.Geometry()
@@ -59,6 +60,7 @@ quad.scale.set(2);
 
 app.stage.addChild(quad);
 
-app.ticker.add((delta) => {
+app.ticker.add((delta) =>
+{
     quad.rotation += 0.01;
 });

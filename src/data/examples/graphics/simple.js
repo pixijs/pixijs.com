@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ antialias: true, resizeTo: window });
+const app = new PIXI.Application({ antialias: true, resizeTo: window });
+
 document.body.appendChild(app.view);
 
 const graphics = new PIXI.Graphics();

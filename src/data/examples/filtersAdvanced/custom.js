@@ -1,8 +1,10 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // Create background image
 const background = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_grass.jpg');
+
 background.width = app.screen.width;
 background.height = app.screen.height;
 app.stage.addChild(background);
@@ -17,7 +19,8 @@ fetch('https://beta.pixijs.com/assets/pixi-filters/shader.frag')
 let filter;
 
 // Handle the load completed
-function onLoaded(data) {
+function onLoaded(data)
+{
     // Create the new filter, arguments: (vertexShader, framentSource)
     filter = new PIXI.Filter(null, data, {
         customUniform: 0.0,
@@ -36,6 +39,7 @@ function onLoaded(data) {
 }
 
 // Animate the filter
-app.ticker.add((delta) => {
+app.ticker.add((delta) =>
+{
     filter.uniforms.customUniform += 0.04 * delta;
 });

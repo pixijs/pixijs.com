@@ -1,6 +1,6 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
-document.body.appendChild(app.view);
+const app = new PIXI.Application({ resizeTo: window });
 
+document.body.appendChild(app.view);
 
 const geometry = new PIXI.Geometry()
     .addAttribute('aVPos', [-100, 0, 100, 0, 0, -150]);
@@ -15,7 +15,8 @@ const buffer = new PIXI.Buffer(new Float32Array(geometry.instanceCount * (positi
 geometry.addAttribute('aIPos', buffer, positionSize, false, PIXI.TYPES.FLOAT, 4 * (positionSize + colorSize), 0, true);
 geometry.addAttribute('aICol', buffer, colorSize, false, PIXI.TYPES.FLOAT, 4 * (positionSize + colorSize), 4 * positionSize, true);
 
-for (let i = 0; i < geometry.instanceCount; i++) {
+for (let i = 0; i < geometry.instanceCount; i++)
+{
     const instanceOffset = i * (positionSize + colorSize);
 
     buffer.data[instanceOffset + 0] = i * 80;
@@ -57,6 +58,7 @@ triangles.position.set(400, 300);
 
 app.stage.addChild(triangles);
 
-app.ticker.add((delta) => {
+app.ticker.add((delta) =>
+{
     triangles.rotation += 0.01;
 });

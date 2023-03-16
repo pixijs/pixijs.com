@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
 document.body.appendChild(app.view);
 
 let isFlower = true;
@@ -22,12 +23,14 @@ app.stage.addChild(character);
 character.interactive = true;
 character.cursor = 'pointer';
 
-character.on('pointertap', () => {
+character.on('pointertap', () =>
+{
     isFlower = !isFlower;
     // Dynamically swap the texture
     character.texture = isFlower ? texture : secondTexture;
 });
 
-app.ticker.add(() => {
+app.ticker.add(() =>
+{
     character.rotation += 0.02;
 });

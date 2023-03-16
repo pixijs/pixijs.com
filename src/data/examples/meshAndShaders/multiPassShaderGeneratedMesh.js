@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ height: 640, resizeTo: window });
+const app = new PIXI.Application({ height: 640, resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // Build geometry.
@@ -56,7 +57,7 @@ void main()
     vec4 color2 = vec4(0.4, 0.4, 0.4, 1.0);
     vec4 outColor = mod(gUv.x + gUv.y, 2.) < 0.5 ? color1 : color2;
     gl_FragColor = outColor;
-    
+
 }`;
 
 const gridUniforms = {
@@ -67,6 +68,7 @@ const gridShader = PIXI.Shader.from(vertexSrc, fragmentGridSrc, gridUniforms);
 const gridTexture = PIXI.RenderTexture.create({ width: 200, height: 200 });
 const gridQuad = new PIXI.Mesh(geometry, gridShader);
 const gridContainer = new PIXI.Container();
+
 gridContainer.addChild(gridQuad);
 
 // Second pass. Takes grid as input and makes it ripple.
@@ -96,6 +98,7 @@ const rippleShader = PIXI.Shader.from(vertexSrc, fragmentRippleSrc, rippleUnifor
 const rippleTexture = PIXI.RenderTexture.create({ width: 200, height: 200 });
 const rippleQuad = new PIXI.Mesh(geometry, rippleShader);
 const rippleContainer = new PIXI.Container();
+
 rippleContainer.addChild(rippleQuad);
 
 // Second effect. Generates a filtered noise.
@@ -119,6 +122,7 @@ const noiseShader = PIXI.Shader.from(vertexSrc, fragmentNoiseSrc, noiseUniforms)
 const noiseTexture = PIXI.RenderTexture.create({ width: 200, height: 200 });
 const noiseQuad = new PIXI.Mesh(geometry, noiseShader);
 const noiseContainer = new PIXI.Container();
+
 noiseContainer.addChild(noiseQuad);
 
 // Third effect
@@ -132,15 +136,15 @@ void main()
 {
     //Offset uv so that center is 0,0 and edges are -1,1
     vec2 uv = (vUvs-vec2(0.5))*2.0;
-    
+
     vec3 outColor = vec3(0.);
-    
+
     //Simple wavefunctions inversed and with small offsets.
     outColor += 5./length(uv.y*200. - 50.0*sin( uv.x*0.25+ time*0.25)*amplitude);
     outColor += 4./length(uv.y*300. - 100.0*sin(uv.x*0.5+time*0.5)*amplitude*1.2);
     outColor += 3./length(uv.y*400. - 150.0*sin(uv.x*0.75+time*0.75)*amplitude*1.4);
     outColor += 2./length(uv.y*500. - 200.0*sin(uv.x+time)*amplitude*1.6);
-    
+
     gl_FragColor = vec4(outColor,1.0);
 }`;
 const waveUniforms = {
@@ -151,6 +155,7 @@ const waveShader = PIXI.Shader.from(vertexSrc, fragmentWaveSrc, waveUniforms);
 const waveTexture = PIXI.RenderTexture.create({ width: 200, height: 200 });
 const waveQuad = new PIXI.Mesh(geometry, waveShader);
 const waveContainer = new PIXI.Container();
+
 waveContainer.addChild(waveQuad);
 
 // Final combination pass
@@ -168,7 +173,7 @@ void main()
     vec4 ripple = texture2D(texRipple, vUvs);
     vec4 noise = texture2D(texNoise, vUvs);
     vec4 wave = texture2D(texWave, vUvs);
-    
+
     gl_FragColor = mix(ripple, wave,noise.r);
 }`;
 const combineUniforms = {
@@ -194,7 +199,9 @@ app.stage.addChild(combineQuad);
 
 // start the animation..
 let time = 0;
-app.ticker.add((delta) => {
+
+app.ticker.add((delta) =>
+{
     time += 1 / 60;
     // gridQuad.shader.uniforms.zoom = Math.sin(time)*5+10;
     rippleQuad.shader.uniforms.phase = -time;

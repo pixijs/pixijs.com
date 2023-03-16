@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 const geometry = new PIXI.Geometry()
@@ -66,7 +67,8 @@ app.stage.addChild(quad);
 // start the animation..
 // requestAnimationFrame(animate);
 
-app.ticker.add((delta) => {
+app.ticker.add((delta) =>
+{
     quad.rotation += 0.01;
     quad.shader.uniforms.time += 0.1;
 });

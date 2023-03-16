@@ -1,7 +1,8 @@
-const app = new PIXI.Application<HTMLCanvasElement>({
+const app = new PIXI.Application({
     antialias: true,
     background: '#1099bb',
 });
+
 document.body.appendChild(app.view);
 
 const stageHeight = app.screen.height;
@@ -23,6 +24,7 @@ slider.y = stageHeight * 0.75;
 const handle = new PIXI.Graphics()
     .beginFill(0xffffff)
     .drawCircle(0, 0, 8);
+
 handle.y = slider.height / 2;
 handle.x = sliderWidth / 2;
 handle.interactive = true;
@@ -38,6 +40,7 @@ slider.addChild(handle);
 
 // Add bunny whose scale can be changed by user using slider
 const bunny = app.stage.addChild(PIXI.Sprite.from('https://beta.pixijs.com/assets/bunny.png'));
+
 bunny.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 bunny.scale.set(3);
 bunny.anchor.set(0.5);
@@ -51,6 +54,7 @@ const title = new PIXI.Text('Drag the handle to change the scale of bunny.', {
     fontSize: 20,
     align: 'center',
 });
+
 title.roundPixels = true;
 title.x = stageWidth / 2;
 title.y = 40;
@@ -58,26 +62,31 @@ title.anchor.set(0.5, 0);
 app.stage.addChild(title);
 
 // Listen to pointermove on stage once handle is pressed.
-function onDragStart() {
+function onDragStart()
+{
     app.stage.interactive = true;
     app.stage.addEventListener('pointermove', onDrag);
 }
 
 // Stop dragging feedback once the handle is released.
-function onDragEnd(e) {
+function onDragEnd(e)
+{
     app.stage.interactive = false;
     app.stage.removeEventListener('pointermove', onDrag);
 }
 
 // Update the handle's position & bunny's scale when the handle is moved.
-function onDrag(e) {
+function onDrag(e)
+{
     const halfHandleWidth = handle.width / 2;
     // Set handle y-position to match pointer, clamped to (4, screen.height - 4).
+
     handle.x = Math.max(halfHandleWidth, Math.min(
         slider.toLocal(e.global).x,
         sliderWidth - halfHandleWidth,
     ));
     // Normalize handle position between -1 and 1.
     const t = 2 * ((handle.x / sliderWidth) - 0.5);
+
     bunny.scale.set(3 * (1.1 + t));
 }

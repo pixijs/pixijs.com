@@ -1,11 +1,14 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
 document.body.appendChild(app.view);
 
-PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/fighter.json').then(() => {
+PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/fighter.json').then(() =>
+{
     // create an array of textures from an image path
     const frames = [];
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 30; i++)
+    {
         const val = i < 10 ? `0${i}` : i;
 
         // magically works since the spritesheet was loaded with the pixi loader
@@ -28,7 +31,8 @@ PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/fighter.json').then
     app.stage.addChild(anim);
 
     // Animate the rotation
-    app.ticker.add(() => {
+    app.ticker.add(() =>
+    {
         anim.rotation += 0.01;
     });
 });

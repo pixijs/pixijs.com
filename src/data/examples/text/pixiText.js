@@ -1,7 +1,9 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
 document.body.appendChild(app.view);
 
 const basicText = new PIXI.Text('Basic text in pixi');
+
 basicText.x = 50;
 basicText.y = 100;
 
@@ -26,6 +28,7 @@ const style = new PIXI.TextStyle({
 });
 
 const richText = new PIXI.Text('Rich text with a lot of options and across multiple lines', style);
+
 richText.x = 50;
 richText.y = 220;
 
@@ -48,6 +51,7 @@ const skewStyle = new PIXI.TextStyle({
 });
 
 const skewText = new PIXI.Text('SKEW IS COOL', skewStyle);
+
 skewText.skew.set(0.65, -0.3);
 skewText.anchor.set(0.5, 0.5);
 skewText.x = 300;

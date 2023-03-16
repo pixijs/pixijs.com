@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // Scale mode for all textures, will retain pixelation
@@ -26,7 +27,8 @@ sprite.on('pointerdown', onClick);
 
 app.stage.addChild(sprite);
 
-function onClick() {
+function onClick()
+{
     sprite.scale.x *= 1.25;
     sprite.scale.y *= 1.25;
 }

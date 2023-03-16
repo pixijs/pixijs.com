@@ -1,9 +1,11 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 app.stage.interactive = true;
 
 const bg = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_rotate.jpg');
+
 bg.anchor.set(0.5);
 
 bg.x = app.screen.width / 2;
@@ -12,23 +14,28 @@ bg.y = app.screen.height / 2;
 const filter = new PIXI.filters.ColorMatrixFilter();
 
 const container = new PIXI.Container();
+
 container.x = app.screen.width / 2;
 container.y = app.screen.height / 2;
 
 const bgFront = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg');
+
 bgFront.anchor.set(0.5);
 
 container.addChild(bgFront);
 
 const light2 = PIXI.Sprite.from('https://beta.pixijs.com/assets/light_rotate_2.png');
+
 light2.anchor.set(0.5);
 container.addChild(light2);
 
 const light1 = PIXI.Sprite.from('https://beta.pixijs.com/assets/light_rotate_1.png');
+
 light1.anchor.set(0.5);
 container.addChild(light1);
 
 const panda = PIXI.Sprite.from('https://beta.pixijs.com/assets/panda.png');
+
 panda.anchor.set(0.5);
 
 container.addChild(panda);
@@ -40,7 +47,8 @@ app.stage.filters = [filter];
 let count = 0;
 let enabled = true;
 
-app.stage.on('pointertap', () => {
+app.stage.on('pointertap', () =>
+{
     enabled = !enabled;
     app.stage.filters = enabled ? [filter] : null;
 });
@@ -51,12 +59,14 @@ const help = new PIXI.Text('Click or tap to turn filters on / off.', {
     fontWeight: 'bold',
     fill: 'white',
 });
+
 help.y = app.screen.height - 25;
 help.x = 10;
 
 app.stage.addChild(help);
 
-app.ticker.add((delta) => {
+app.ticker.add((delta) =>
+{
     bg.rotation += 0.01;
     bgFront.rotation -= 0.01;
     light1.rotation += 0.02;

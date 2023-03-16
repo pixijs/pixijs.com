@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ backgroundAlpha: 0, resizeTo: window });
+const app = new PIXI.Application({ backgroundAlpha: 0, resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // create a new Sprite from an image path.
@@ -13,7 +14,8 @@ bunny.y = app.screen.height / 2;
 
 app.stage.addChild(bunny);
 
-app.ticker.add(() => {
+app.ticker.add(() =>
+{
     // just for fun, let's rotate mr rabbit a little
     bunny.rotation += 0.1;
 });

@@ -1,13 +1,17 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
 document.body.appendChild(app.view);
 
 const container = new PIXI.Container();
+
 app.stage.addChild(container);
 
 const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png');
 
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 25; i++)
+{
     const bunny = new PIXI.Sprite(texture);
+
     bunny.x = (i % 5) * 30;
     bunny.y = Math.floor(i / 5) * 30;
     bunny.rotation = Math.random() * (Math.PI * 2);
@@ -32,6 +36,7 @@ app.stage.addChild(sprite);
 container.x = 100;
 container.y = 60;
 
-app.ticker.add(() => {
+app.ticker.add(() =>
+{
     app.renderer.render(container, rt);
 });

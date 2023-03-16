@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // Build geometry.
@@ -111,6 +112,7 @@ const uniforms = {
     time: 0,
 };
 // Make sure repeat wrap is used and no mipmapping.
+
 uniforms.noise.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
 uniforms.noise.baseTexture.mipmap = false;
 
@@ -125,8 +127,10 @@ app.stage.addChild(quad);
 
 // start the animation..
 let time = 0;
-app.ticker.add((delta) => {
+
+app.ticker.add((delta) =>
+{
     time += 1 / 60;
     quad.shader.uniforms.time = time;
-    quad.scale.set(Math.cos(time) * 1 + 2, Math.sin(time * 0.7) * 1 + 2);
+    quad.scale.set(Number(Math.cos(time)) + 2, Number(Math.sin(time * 0.7)) + 2);
 });

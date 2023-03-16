@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 const sprites = new PIXI.ParticleContainer(10000, {
@@ -8,6 +9,7 @@ const sprites = new PIXI.ParticleContainer(10000, {
     uvs: true,
     alpha: true,
 });
+
 app.stage.addChild(sprites);
 
 // create an array to store all the sprites
@@ -15,7 +17,8 @@ const maggots = [];
 
 const totalSprites = app.renderer instanceof PIXI.Renderer ? 10000 : 100;
 
-for (let i = 0; i < totalSprites; i++) {
+for (let i = 0; i < totalSprites; i++)
+{
     // create a new Sprite
     const dude = PIXI.Sprite.from('https://beta.pixijs.com/assets/maggot_tiny.png');
 
@@ -59,10 +62,13 @@ const dudeBounds = new PIXI.Rectangle(
 
 let tick = 0;
 
-app.ticker.add(() => {
+app.ticker.add(() =>
+{
     // iterate through the sprites and update their position
-    for (let i = 0; i < maggots.length; i++) {
+    for (let i = 0; i < maggots.length; i++)
+    {
         const dude = maggots[i];
+
         dude.scale.y = 0.95 + Math.sin(tick + dude.offset) * 0.05;
         dude.direction += dude.turningSpeed * 0.01;
         dude.x += Math.sin(dude.direction) * (dude.speed * dude.scale.y);
@@ -70,15 +76,21 @@ app.ticker.add(() => {
         dude.rotation = -dude.direction + Math.PI;
 
         // wrap the maggots
-        if (dude.x < dudeBounds.x) {
+        if (dude.x < dudeBounds.x)
+        {
             dude.x += dudeBounds.width;
-        } else if (dude.x > dudeBounds.x + dudeBounds.width) {
+        }
+        else if (dude.x > dudeBounds.x + dudeBounds.width)
+        {
             dude.x -= dudeBounds.width;
         }
 
-        if (dude.y < dudeBounds.y) {
+        if (dude.y < dudeBounds.y)
+        {
             dude.y += dudeBounds.height;
-        } else if (dude.y > dudeBounds.y + dudeBounds.height) {
+        }
+        else if (dude.y > dudeBounds.y + dudeBounds.height)
+        {
             dude.y -= dudeBounds.height;
         }
     }

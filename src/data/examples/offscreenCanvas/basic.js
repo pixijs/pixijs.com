@@ -3,7 +3,8 @@
 const canvas = document.createElement('canvas');
 const view = canvas.transferControlToOffscreen();
 
-const app = new PIXI.Application<HTMLCanvasElement>({ view, background: 0x1099bb, resizeTo: window });
+const app = new PIXI.Application({ view, background: 0x1099bb, resizeTo: window });
+
 document.body.appendChild(app.view);
 
 const container = new PIXI.Container();
@@ -14,8 +15,10 @@ app.stage.addChild(container);
 const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png');
 
 // Create a 5x5 grid of bunnies
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 25; i++)
+{
     const bunny = new PIXI.Sprite(texture);
+
     bunny.anchor.set(0.5);
     bunny.x = (i % 5) * 40;
     bunny.y = Math.floor(i / 5) * 40;
@@ -31,7 +34,8 @@ container.pivot.x = container.width / 2;
 container.pivot.y = container.height / 2;
 
 // Listen for animate update
-app.ticker.add((delta) => {
+app.ticker.add((delta) =>
+{
     // rotate the container!
     // use delta to create frame-independent transform
     container.rotation -= 0.01 * delta;

@@ -1,17 +1,22 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ autoStart: false, resizeTo: window });
+const app = new PIXI.Application({ autoStart: false, resizeTo: window });
+
 document.body.appendChild(app.view);
 
-PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/mc.json').then(() => {
+PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/mc.json').then(() =>
+{
     // create an array to store the textures
     const explosionTextures = [];
     let i;
 
-    for (i = 0; i < 26; i++) {
+    for (i = 0; i < 26; i++)
+    {
         const texture = PIXI.Texture.from(`Explosion_Sequence_A ${i + 1}.png`);
+
         explosionTextures.push(texture);
     }
 
-    for (i = 0; i < 50; i++) {
+    for (i = 0; i < 50; i++)
+    {
         // create an explosion AnimatedSprite
         const explosion = new PIXI.AnimatedSprite(explosionTextures);
 

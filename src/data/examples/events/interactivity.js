@@ -1,8 +1,10 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // create a background...
 const background = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_button.jpg');
+
 background.width = app.screen.width;
 background.height = app.screen.height;
 
@@ -24,7 +26,8 @@ const buttonPositions = [
     685, 445,
 ];
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 5; i++)
+{
     const button = new PIXI.Sprite(textureButton);
 
     button.anchor.set(0.5);
@@ -71,32 +74,41 @@ buttons[3].scale.set(0.8);
 buttons[4].scale.set(0.8, 1.2);
 buttons[4].rotation = Math.PI;
 
-function onButtonDown() {
+function onButtonDown()
+{
     this.isdown = true;
     this.texture = textureButtonDown;
     this.alpha = 1;
 }
 
-function onButtonUp() {
+function onButtonUp()
+{
     this.isdown = false;
-    if (this.isOver) {
+    if (this.isOver)
+    {
         this.texture = textureButtonOver;
-    } else {
+    }
+    else
+    {
         this.texture = textureButton;
     }
 }
 
-function onButtonOver() {
+function onButtonOver()
+{
     this.isOver = true;
-    if (this.isdown) {
+    if (this.isdown)
+    {
         return;
     }
     this.texture = textureButtonOver;
 }
 
-function onButtonOut() {
+function onButtonOut()
+{
     this.isOver = false;
-    if (this.isdown) {
+    if (this.isdown)
+    {
         return;
     }
     this.texture = textureButton;

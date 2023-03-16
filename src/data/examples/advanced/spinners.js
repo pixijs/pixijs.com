@@ -1,24 +1,30 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
 document.body.appendChild(app.view);
 
 /* ---------------------------------------
  Spinner 1. Square with radial completion.
  -------------------------------------- */
-const generateSpinner1 = (position) => {
+const generateSpinner1 = (position) =>
+{
     const container = new PIXI.Container();
+
     container.position = position;
     app.stage.addChild(container);
 
     const base = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg');
     const size = 100;
+
     base.width = size;
     base.height = size;
 
     const bottom = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_rotate.jpg');
+
     bottom.width = size;
     bottom.height = size;
 
     const mask = new PIXI.Graphics();
+
     mask.position.set(size / 2, size / 2);
     base.mask = mask;
     window.mask = mask;
@@ -28,7 +34,9 @@ const generateSpinner1 = (position) => {
     container.addChild(mask);
 
     let phase = 0;
-    return (delta) => {
+
+    return (delta) =>
+    {
         // Update phase
         phase += delta / 60;
         phase %= (Math.PI * 2);
@@ -47,10 +55,14 @@ const generateSpinner1 = (position) => {
         // Find the intersecting segment.
         let intersection = null;
         let winding = 0;
-        for (let i = 0; i < segments.length; i++) {
+
+        for (let i = 0; i < segments.length; i++)
+        {
             const segment = segments[i];
             const hit = intersect(0, 0, x, y, segment[0], segment[1], segment[2], segment[3]);
-            if (hit) {
+
+            if (hit)
+            {
                 intersection = hit;
                 if (i === 0) winding = hit.x > 0 ? 0 : 4;
                 else winding = i;
@@ -76,7 +88,8 @@ const generateSpinner1 = (position) => {
         mask.lineTo(intersection.x, intersection.y);
 
         // fill the corners
-        for (let i = winding; i < corners.length / 2; i++) {
+        for (let i = winding; i < corners.length / 2; i++)
+        {
             mask.lineTo(corners[i * 2], corners[i * 2 + 1]);
         }
         mask.endFill();
@@ -86,16 +99,21 @@ const generateSpinner1 = (position) => {
 /* -----------------------
  Spinner 2. Scaling balls.
  ---------------------- */
-const generateSpinner2 = (position) => {
+const generateSpinner2 = (position) =>
+{
     const container = new PIXI.Container();
+
     container.position = position;
     app.stage.addChild(container);
 
     const size = 100;
     const ballAmount = 7;
     const balls = [];
-    for (let i = 0; i < ballAmount; i++) {
+
+    for (let i = 0; i < ballAmount; i++)
+    {
         const ball = PIXI.Sprite.from('https://beta.pixijs.com/assets/circle.png');
+
         ball.anchor.set(0.5);
         container.addChild(ball);
         ball.position.set(
@@ -106,15 +124,19 @@ const generateSpinner2 = (position) => {
     }
 
     let phase = 0;
-    return (delta) => {
+
+    return (delta) =>
+    {
         // Update phase
         phase += delta / 60;
         phase %= (Math.PI * 2);
 
         // Update ball scales
-        balls.forEach((b, i) => {
+        balls.forEach((b, i) =>
+        {
             const sin = Math.sin(i / ballAmount * Math.PI - phase);
             // Multiply sin with itself to get more steeper edge.
+
             b.scale.set(Math.abs(sin * sin * sin * 0.5) + 0.5);
         });
     };
@@ -123,17 +145,21 @@ const generateSpinner2 = (position) => {
 /* ---------------------
  Spinner 3. Radial mask.
  -------------------- */
-const generateSpinner3 = (position) => {
+const generateSpinner3 = (position) =>
+{
     const container = new PIXI.Container();
+
     container.position = position;
     app.stage.addChild(container);
 
     const base = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg');
     const size = 100;
+
     base.width = size;
     base.height = size;
 
     const mask = new PIXI.Graphics();
+
     mask.position.set(size / 2, size / 2);
     base.mask = mask;
     window.mask = mask;
@@ -142,7 +168,9 @@ const generateSpinner3 = (position) => {
     container.addChild(mask);
 
     let phase = 0;
-    return (delta) => {
+
+    return (delta) =>
+    {
         // Update phase
         phase += delta / 60;
         phase %= (Math.PI * 2);
@@ -169,8 +197,10 @@ const generateSpinner3 = (position) => {
 /* ---------------------------------
  Spinner 4. Rounded rectangle edges.
  ------------------------------- */
-const generateSpinner4 = (position) => {
+const generateSpinner4 = (position) =>
+{
     const container = new PIXI.Container();
+
     container.position = position;
     app.stage.addChild(container);
 
@@ -178,11 +208,13 @@ const generateSpinner4 = (position) => {
     const arcRadius = 15;
 
     const base = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg');
+
     base.width = size;
     base.height = size;
 
     // For better performance having assets prerounded would be better than masking.
     const roundingMask = new PIXI.Graphics();
+
     roundingMask.beginFill(0, 1);
     roundingMask.lineStyle(1, 0xff0000, 1);
     roundingMask.drawRoundedRect(0, 0, size, size, arcRadius);
@@ -192,12 +224,14 @@ const generateSpinner4 = (position) => {
     // The edge could be replaced with image as well.
     const lineSize = 5;
     const edge = new PIXI.Graphics();
+
     edge.lineStyle(lineSize, 0xff0000, 1);
     edge.drawRoundedRect(0, 0, size, size, arcRadius);
     edge.endFill();
 
     // Mask in this example works basically the same way as in example 1. Except it is reversed and calculates the mask in straight lines in edges.
     const mask = new PIXI.Graphics();
+
     mask.position.set(size / 2, size / 2);
     edge.mask = mask;
 
@@ -207,7 +241,9 @@ const generateSpinner4 = (position) => {
     container.addChild(mask);
 
     let phase = 0;
-    return (delta) => {
+
+    return (delta) =>
+    {
         // Update phase
         phase += delta / 160;
         phase %= (Math.PI * 2);
@@ -234,10 +270,14 @@ const generateSpinner4 = (position) => {
         let intersection = null;
         let winding = 0;
         // What direction should the line continue after hit has been found before hitting the line size
-        for (let i = 0; i < segments.length; i++) {
+
+        for (let i = 0; i < segments.length; i++)
+        {
             const segment = segments[i];
             const hit = intersect(0, 0, x, y, segment[0], segment[1], segment[2], segment[3]);
-            if (hit) {
+
+            if (hit)
+            {
                 intersection = hit;
                 if (i === 0) winding = hit.x < 0 ? 0 : 4;
                 else winding = 4 - i;
@@ -262,7 +302,8 @@ const generateSpinner4 = (position) => {
         mask.moveTo(0, -size / 2 - lineSize);
 
         // fill the corners
-        for (let i = 0; i < winding; i++) {
+        for (let i = 0; i < winding; i++)
+        {
             mask.lineTo(corners[i * 2], corners[i * 2 + 1]);
         }
 
@@ -277,12 +318,15 @@ const generateSpinner4 = (position) => {
 /* ---------------------
  Spinner 5. Rounded rectangle fixed length spinner by jonlepage
  -------------------- */
-const generateSpinner5 = (position) => {
+const generateSpinner5 = (position) =>
+{
     const container = new PIXI.Container();
+
     container.position = position;
     app.stage.addChild(container);
 
     const halfCircle = new PIXI.Graphics();
+
     halfCircle.beginFill(0xff0000);
     halfCircle.lineStyle(2, 0xffffff);
     halfCircle.arc(0, 0, 100, 0, Math.PI);
@@ -290,6 +334,7 @@ const generateSpinner5 = (position) => {
     halfCircle.position.set(50, 50);
 
     const rectangle = new PIXI.Graphics();
+
     rectangle.lineStyle(2, 0xffffff, 1);
     rectangle.drawRoundedRect(0, 0, 100, 100, 16);
     rectangle.endFill();
@@ -299,7 +344,9 @@ const generateSpinner5 = (position) => {
     container.addChild(halfCircle);
 
     let phase = 0;
-    return (delta) => {
+
+    return (delta) =>
+    {
         // Update phase
         phase += delta / 6;
         phase %= (Math.PI * 2);
@@ -317,9 +364,11 @@ const onTick = [
 ];
 
 // Listen for animate update
-app.ticker.add((delta) => {
+app.ticker.add((delta) =>
+{
     // Call tick handling for each spinner.
-    onTick.forEach((cb) => {
+    onTick.forEach((cb) =>
+    {
         cb(delta);
     });
 });
@@ -333,16 +382,19 @@ app.ticker.add((delta) => {
 
     Code modified from original to match pixi examples linting rules.
 */
-function intersect(x1, y1, x2, y2, x3, y3, x4, y4) {
+function intersect(x1, y1, x2, y2, x3, y3, x4, y4)
+{
     // Check if none of the lines are of length 0
-    if ((x1 === x2 && y1 === y2) || (x3 === x4 && y3 === y4)) {
+    if ((x1 === x2 && y1 === y2) || (x3 === x4 && y3 === y4))
+    {
         return false;
     }
 
     const denominator = ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
 
     // Lines are parallel
-    if (denominator === 0) {
+    if (denominator === 0)
+    {
         return false;
     }
 
@@ -350,7 +402,8 @@ function intersect(x1, y1, x2, y2, x3, y3, x4, y4) {
     const ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denominator;
 
     // is the intersection along the segments
-    if (ua < 0 || ua > 1 || ub < 0 || ub > 1) {
+    if (ua < 0 || ua > 1 || ub < 0 || ub > 1)
+    {
         return false;
     }
 

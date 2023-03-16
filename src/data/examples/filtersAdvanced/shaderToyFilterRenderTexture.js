@@ -3,7 +3,8 @@ Please note that this is not the most optimal way of doing pure shader generated
 Check the mesh version of example for more performant version if you need only shader generated content.
 * */
 
-const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
+const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
 document.body.appendChild(app.view);
 
 PIXI.Assets.load('https://beta.pixijs.com/assets/perlin.jpg').then(onAssetsLoaded);
@@ -11,6 +12,7 @@ PIXI.Assets.load('https://beta.pixijs.com/assets/perlin.jpg').then(onAssetsLoade
 let filter = null;
 
 const text = new PIXI.Text('PixiJS', { fill: 0xFFFFFF, fontSize: 80 });
+
 text.anchor.set(0.5, 0.5);
 text.position.set(app.renderer.screen.width / 2, app.renderer.screen.height / 2);
 
@@ -43,9 +45,9 @@ vec3 calclight(vec3 p, vec3 rd)
     dist(p+eps.xyx).x - dist(p-eps.xyx).x,
     dist(p+eps.xxy).x - dist(p-eps.xxy).x
   ));
-  
+
   vec3 d = vec3( max( 0., dot( -rd ,n)));
-  
+
   return d;
 }
 
@@ -54,7 +56,7 @@ void main()
   vec2 uv = vec2(vTextureCoord.x, 1.-vTextureCoord.y);
   uv *=2.;
   uv-=1.;
-  
+
   vec3 cam = vec3(0.,time -2., -3.);
   vec3 target = vec3(sin(time)*0.1, time+cos(time)+2., 0. );
   float fov = 2.2;
@@ -62,7 +64,7 @@ void main()
   vec3 up = normalize(cross( forward, vec3(0., 1.,0.)));
   vec3 right = normalize( cross( up, forward));
   vec3 raydir = normalize(vec3( uv.x *up + uv.y * right + fov*forward));
-  
+
   //Do the raymarch
   vec3 col = vec3(0.);
   float t = 0.;
@@ -87,7 +89,8 @@ void main()
 }
 `;
 
-function onAssetsLoaded(perlin) {
+function onAssetsLoaded(perlin)
+{
     // Add perlin noise for filter, make sure it's wrapping and does not have mipmap.
     perlin.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
     perlin.baseTexture.mipmap = false;
@@ -102,7 +105,8 @@ function onAssetsLoaded(perlin) {
     app.stage.filters = [filter];
 
     // Listen for animate update.
-    app.ticker.add((delta) => {
+    app.ticker.add((delta) =>
+    {
         filter.uniforms.time = totalTime;
         totalTime += delta / 60;
     });

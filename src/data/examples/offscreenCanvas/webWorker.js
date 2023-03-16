@@ -1,12 +1,15 @@
 // This example is the based on basic/container, but running in Web Worker.
 
-function workerSource(self) {
+function workerSource(self)
+{
     self.onmessage = async ({
         data: { baseUrl, pixiWebWorkerUrl, options },
-    }) => {
+    }) =>
+    {
         self.importScripts(new URL(pixiWebWorkerUrl, baseUrl));
 
-        const app = new PIXI.Application<HTMLCanvasElement>(options);
+        const app = new PIXI.Application(options);
+
         document.body.appendChild(app.view);
 
         const container = new PIXI.Container();
@@ -18,8 +21,10 @@ function workerSource(self) {
         const texture = PIXI.Texture.from(textureUrl);
 
         // Create a 5x5 grid of bunnies
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 25; i++)
+        {
             const bunny = new PIXI.Sprite(texture);
+
             bunny.anchor.set(0.5);
             bunny.x = (i % 5) * 40;
             bunny.y = Math.floor(i / 5) * 40;
@@ -35,7 +40,8 @@ function workerSource(self) {
         container.pivot.y = container.height / 2;
 
         // Listen for animate update
-        app.ticker.add((delta) => {
+        app.ticker.add((delta) =>
+        {
             // rotate the container!
             // use delta to create frame-independent transform
             container.rotation -= 0.01 * delta;
@@ -45,18 +51,21 @@ function workerSource(self) {
 const blob = new Blob(['(', workerSource, ')(self);'], { type: 'application/javascript' });
 const url = URL.createObjectURL(blob);
 const worker = new Worker(url);
+
 URL.revokeObjectURL(url);
 
 const width = 800;
 const height = 600;
 const resolution = window.devicePixelRatio;
 const canvas = document.createElement('canvas');
+
 canvas.style.width = `${width}px`;
 canvas.style.height = `${height}px`;
 const view = canvas.transferControlToOffscreen();
 
 const baseUrl = window.location.href;
 const pixiWebWorkerUrl = window.PIXI_WEBWORKER_URL;
+
 worker.postMessage({
     baseUrl,
     pixiWebWorkerUrl,

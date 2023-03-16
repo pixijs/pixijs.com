@@ -1,8 +1,10 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // create a new background sprite
 const background = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_rotate.jpg');
+
 background.width = app.screen.width;
 background.height = app.screen.height;
 app.stage.addChild(background);
@@ -12,7 +14,8 @@ const dudeArray = [];
 
 const totaldudes = 20;
 
-for (let i = 0; i < totaldudes; i++) {
+for (let i = 0; i < totaldudes; i++)
+{
     // create a new Sprite that uses the image name that we just generated as its source
     const dude = PIXI.Sprite.from('https://beta.pixijs.com/assets/flowerTop.png');
 
@@ -53,25 +56,34 @@ const dudeBounds = new PIXI.Rectangle(
     app.screen.height + dudeBoundsPadding * 2,
 );
 
-app.ticker.add(() => {
+app.ticker.add(() =>
+{
     // iterate through the dudes and update the positions
-    for (let i = 0; i < dudeArray.length; i++) {
+    for (let i = 0; i < dudeArray.length; i++)
+    {
         const dude = dudeArray[i];
+
         dude.direction += dude.turningSpeed * 0.01;
         dude.x += Math.sin(dude.direction) * dude.speed;
         dude.y += Math.cos(dude.direction) * dude.speed;
         dude.rotation = -dude.direction - Math.PI / 2;
 
         // wrap the dudes by testing their bounds...
-        if (dude.x < dudeBounds.x) {
+        if (dude.x < dudeBounds.x)
+        {
             dude.x += dudeBounds.width;
-        } else if (dude.x > dudeBounds.x + dudeBounds.width) {
+        }
+        else if (dude.x > dudeBounds.x + dudeBounds.width)
+        {
             dude.x -= dudeBounds.width;
         }
 
-        if (dude.y < dudeBounds.y) {
+        if (dude.y < dudeBounds.y)
+        {
             dude.y += dudeBounds.height;
-        } else if (dude.y > dudeBounds.y + dudeBounds.height) {
+        }
+        else if (dude.y > dudeBounds.y + dudeBounds.height)
+        {
             dude.y -= dudeBounds.height;
         }
     }

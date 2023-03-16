@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ resizeTo: window });
+const app = new PIXI.Application({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // Inner radius of the circle
@@ -7,8 +8,10 @@ const radius = 100;
 // The blur amount
 const blurSize = 32;
 
-PIXI.Assets.load('https://beta.pixijs.com/assets/bg_grass.jpg').then((grassTexture) => {
+PIXI.Assets.load('https://beta.pixijs.com/assets/bg_grass.jpg').then((grassTexture) =>
+{
     const background = new PIXI.Sprite(grassTexture);
+
     app.stage.addChild(background);
     background.width = app.screen.width;
     background.height = app.screen.height;
@@ -17,6 +20,7 @@ PIXI.Assets.load('https://beta.pixijs.com/assets/bg_grass.jpg').then((grassTextu
         .beginFill(0xFF0000)
         .drawCircle(radius + blurSize, radius + blurSize, radius)
         .endFill();
+
     circle.filters = [new PIXI.filters.BlurFilter(blurSize)];
 
     const bounds = new PIXI.Rectangle(0, 0, (radius + blurSize) * 2, (radius + blurSize) * 2);
@@ -28,7 +32,8 @@ PIXI.Assets.load('https://beta.pixijs.com/assets/bg_grass.jpg').then((grassTextu
 
     app.stage.interactive = true;
     app.stage.hitArea = app.screen;
-    app.stage.on('pointermove', (event) => {
+    app.stage.on('pointermove', (event) =>
+    {
         focus.position.x = event.global.x - focus.width / 2;
         focus.position.y = event.global.y - focus.height / 2;
     });

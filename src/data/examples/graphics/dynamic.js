@@ -1,4 +1,5 @@
-const app = new PIXI.Application<HTMLCanvasElement>({ antialias: true, resizeTo: window });
+const app = new PIXI.Application({ antialias: true, resizeTo: window });
+
 document.body.appendChild(app.view);
 
 app.stage.interactive = true;
@@ -53,6 +54,7 @@ app.stage.addChild(graphics);
 
 // let's create a moving shape
 const thing = new PIXI.Graphics();
+
 app.stage.addChild(thing);
 thing.x = 800 / 2;
 thing.y = 600 / 2;
@@ -61,7 +63,8 @@ let count = 0;
 
 // Just click on the stage to draw random lines
 window.app = app;
-app.stage.on('pointerdown', () => {
+app.stage.on('pointerdown', () =>
+{
     graphics.lineStyle(Math.random() * 30, Math.random() * 0xFFFFFF, 1);
     graphics.moveTo(Math.random() * 800, Math.random() * 600);
     graphics.bezierCurveTo(
@@ -71,7 +74,8 @@ app.stage.on('pointerdown', () => {
     );
 });
 
-app.ticker.add(() => {
+app.ticker.add(() =>
+{
     count += 0.1;
 
     thing.clear();
