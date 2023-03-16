@@ -18,8 +18,7 @@
         "write-heading-ids": "docusaurus write-heading-ids",
         "write-translations": "docusaurus write-translations",
         "write-versions": "node ./scripts/write-versions.js",
-        "prepare": "husky install",
-        "extractExamples": "./scripts/extractExampleJs.js"
+        "prepare": "husky install"
     },
     "husky": {
         "hooks": {
