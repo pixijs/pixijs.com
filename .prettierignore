@@ -6,7 +6,7 @@
 *.frag
 *.vert
 /build
-/src/data/examples
+/src/data/examples/**
 
 # TODO: just temporarily ignore these
 /blog
