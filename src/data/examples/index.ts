@@ -83,6 +83,7 @@ import gradientResource from '!!raw-loader!./textures/gradientResource.js';
 import renderTextureAdvanced from '!!raw-loader!./textures/renderTextureAdvanced.js';
 import renderTextureBasic from '!!raw-loader!./textures/renderTextureBasic.js';
 import textureRotate from '!!raw-loader!./textures/textureRotate.js';
+import type { OptionGroup } from '@site/src/components/Select';
 
 export type ExamplesSourceType = Record<string, Record<string, string>>;
 
@@ -187,3 +188,33 @@ export const examplesSource: ExamplesSourceType = {
         textureRotate,
     },
 };
+
+export function getExampleSource(pathString: string): string | undefined
+{
+    const [directory, example] = pathString.split('.');
+
+    return examplesSource[directory]?.[example];
+}
+
+function camelCaseToSentenceCase(str: string)
+{
+    const tmp = str.replace(/([A-Z])/g, ' $1');
+
+    return tmp.charAt(0).toUpperCase() + tmp.slice(1);
+}
+
+export function getExampleOptions(): OptionGroup[]
+{
+    return Object.entries(examplesSource).map(([folderKey, folderEntries]) =>
+    {
+        const options = Object.keys(folderEntries).map((exampleKey) => ({
+            value: `${folderKey}.${exampleKey}`,
+            label: camelCaseToSentenceCase(exampleKey),
+        }));
+
+        return {
+            label: camelCaseToSentenceCase(folderKey),
+            options
+        };
+    });
+}

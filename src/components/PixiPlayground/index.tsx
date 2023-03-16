@@ -1,78 +1,14 @@
 import { useColorMode } from '@docusaurus/theme-common';
-import { useCallback, useEffect, useRef, useState } from 'react';
-
+import { useCallback, useEffect, useState } from 'react';
+import classNames from 'classnames';
 import { SandpackLayout, SandpackPreview, SandpackProvider, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
-import Editor from '@monaco-editor/react';
-import type { editor } from 'monaco-editor';
+import MonacoEditor from './MonacoEditor';
+import type { CodeChangeCallbackType } from './MonacoEditor';
 
 import styles from './index.module.scss';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-const ROOT_DIR = 'inmemory://model/';
-
 type PlaygroundMode = 'tutorial' | 'fullscreen' | 'example';
-
-type CodeChangeCallbackType = (code: string | undefined) => void;
-
-type MonacoEditorProps = {
-    code: string;
-    onChange: CodeChangeCallbackType;
-};
-
-function MonacoEditor({ code, onChange }: MonacoEditorProps)
-{
-    const editorRef = useRef(null);
-
-    const handleEditorDidMount = useCallback((editor: any) =>
-    {
-        editorRef.current = editor;
-    }, []);
-
-    useEffect(() =>
-    {
-        const resetEditorLayout = (): void =>
-        {
-            if (editorRef.current !== null) (editorRef.current as any).layout({});
-        };
-
-        window.addEventListener('resize', resetEditorLayout);
-
-        return () =>
-        {
-            window.removeEventListener('resize', resetEditorLayout);
-        };
-    }, []);
-
-    const options: editor.IStandaloneEditorConstructionOptions = {
-        lineNumbers: 'off',
-        padding: {
-            top: 24,
-        },
-        minimap: {
-            enabled: false,
-        },
-        fontSize: 14,
-        scrollBeyondLastLine: false,
-        scrollbar: {
-            alwaysConsumeMouseWheel: false,
-        },
-    };
-
-    const { colorMode } = useColorMode();
-
-    return (
-        <Editor
-            defaultLanguage="javascript"
-            value={code}
-            defaultValue={code}
-            defaultPath={`${ROOT_DIR}/src/index.ts`}
-            onChange={onChange}
-            options={options}
-            onMount={handleEditorDidMount}
-            theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
-        />
-    );
-}
 
 type PlaygroundProps = {
     mode: PlaygroundMode;
@@ -103,7 +39,7 @@ function Playground({ mode, onCodeChanged }: PlaygroundProps)
     };
 
     return (
-        <SandpackLayout className={`${styles[mode]} ${showOutput ? styles.showOutput : ''}`}>
+        <SandpackLayout className={classNames(styles[mode], showOutput && styles.showOutput)}>
             <div className={styles.editorWrapper}>
                 <MonacoEditor key={activeFile} code={code} onChange={handleCodeChange} />
             </div>
