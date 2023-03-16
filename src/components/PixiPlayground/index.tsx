@@ -121,7 +121,7 @@ function Playground({ mode, onCodeChanged }: PlaygroundProps)
 type PixiPlaygroundProps = {
     code: string;
     mode?: PlaygroundMode;
-    onCodeChanged: CodeChangeCallbackType;
+    onCodeChanged?: CodeChangeCallbackType;
 };
 
 export default function PixiPlayground({ code, onCodeChanged, mode = 'example' }: PixiPlaygroundProps)

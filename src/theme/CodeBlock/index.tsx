@@ -4,10 +4,9 @@ import useIsBrowser from '@docusaurus/useIsBrowser';
 import CodeBlock from '@theme-original/CodeBlock';
 import PixiPlayground from '@site/src/components/PixiPlayground';
 
+import type { ExamplesSourceType } from '@site/src/data/examples';
 import { examplesSource } from '@site/src/data/examples';
 import styles from './index.module.css';
-
-type ExamplesHash = typeof examplesSource;
 
 type CodeBlockWrapperProps = { [key: string]: any } & {
     playground?: boolean;
@@ -15,10 +14,10 @@ type CodeBlockWrapperProps = { [key: string]: any } & {
 };
 
 type HashType = Record<string, any>;
-type ExampleSourceLevelType = HashType | string | undefined;
 type ExampleSourceType = string | undefined;
+type ExampleSourceLevelType = HashType | ExampleSourceType;
 
-function getExampleSource(pathString: string, object: ExamplesHash): ExampleSourceType
+function getExampleSource(pathString: string, object: ExamplesSourceType): ExampleSourceType
 {
     const path = pathString.split('.');
 
@@ -32,8 +31,7 @@ function getExampleSource(pathString: string, object: ExamplesHash): ExampleSour
 export default function CodeBlockWrapper({ children, playground = false, ...rest }: CodeBlockWrapperProps)
 {
     const isBrowser = useIsBrowser();
-    const exampleContent = useMemo(() =>
-        getExampleSource(children.trim(), examplesSource) || children, [children]);
+    const exampleContent = useMemo(() => getExampleSource(children.trim(), examplesSource) || children, [children]);
 
     if (playground && isBrowser)
     {
