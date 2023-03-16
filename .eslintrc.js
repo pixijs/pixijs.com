@@ -1,9 +1,14 @@
 module.exports = {
     root: true,
     extends: ['@pixi/eslint-config', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
+    plugins: ['react-hooks'],
     parserOptions: {
         project: ['tsconfig.eslint.json'],
         tsconfigRootDir: __dirname,
+    },
+    globals: {
+        React: true,
+        JSX: true,
     },
     settings: {
         jsdoc: {
@@ -21,6 +26,8 @@ module.exports = {
     rules: {
         'no-empty-function': 0,
         'no-prototype-builtins': 0,
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
         'spaced-comment': [1, 'always', { markers: ['/'] }],
         '@typescript-eslint/triple-slash-reference': [1, { path: 'always' }],
         '@typescript-eslint/consistent-type-imports': [1, { disallowTypeAnnotations: false }],

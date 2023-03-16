@@ -27,7 +27,7 @@ function MonacoEditor(): JSX.Element
     {
         const resetEditorLayout = (): void =>
         {
-            if (editorRef.current != null) (editorRef.current as any).layout({});
+            if (editorRef.current !== null) (editorRef.current as any).layout({});
         };
 
         window.addEventListener('resize', resetEditorLayout);
@@ -81,20 +81,15 @@ function Playground(props: { mode: PlaygroundMode; onCodeChanged?: (code: string
     const { sandpack } = useSandpack();
     const [showOutput, setShowOutput] = useState(false);
 
+    // TODO: is this intentionally running on every render? Doesn't actually look like onCodeChanged is being used?
     useEffect(() =>
     {
-        if (props.onCodeChanged != null)
-        {
-            props.onCodeChanged(code);
+        props.onCodeChanged?.(code);
 
-            return () =>
-            {
-                if (props.onCodeChanged != null)
-                {
-                    props.onCodeChanged(undefined);
-                }
-            };
-        }
+        return () =>
+        {
+            props.onCodeChanged?.(undefined);
+        };
     });
 
     const handleToggle = (): void =>
@@ -107,7 +102,7 @@ function Playground(props: { mode: PlaygroundMode; onCodeChanged?: (code: string
             <MonacoEditor />
             <div className={styles.previewWrapper}>
                 <SandpackPreview showOpenInCodeSandbox={true} className={styles.sandpackPreview} />
-                {sandpack.bundlerState == null && <div className={styles.sandpackLoadingOverlay}></div>}
+                {sandpack.bundlerState === null && <div className={styles.sandpackLoadingOverlay}></div>}
             </div>
             <button onClick={handleToggle}>{showOutput ? 'Show Code' : 'Show Output'}</button>
         </SandpackLayout>
@@ -123,11 +118,12 @@ export default function PixiPlayground(props: {
     const mode = props.mode ?? 'example';
 
     // Hack to make the examples pages full width on wide screens
+    // eslint-disable-next-line consistent-return
     useEffect(() =>
     {
         const mainContainer = document.querySelector<HTMLDivElement>('main .container');
 
-        if (mode === 'example' && mainContainer != null)
+        if (mode === 'example' && mainContainer !== null)
         {
             mainContainer.style.maxWidth = '100%';
 
@@ -136,7 +132,7 @@ export default function PixiPlayground(props: {
                 mainContainer.style.maxWidth = '';
             };
         }
-    });
+    }, [mode]);
     const { siteConfig } = useDocusaurusContext();
     const { colorMode } = useColorMode();
 
