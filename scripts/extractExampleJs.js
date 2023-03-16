@@ -49,13 +49,12 @@ async function go()
             };
         });
 
+    // This part doesn't totally work because the export Object should have nested properties
     const importLines = fileData.map(
         ({ directory, file, variable }) => `import ${variable} from '!!raw-loader!./${directory}/${file}'`,
     );
     const exportLines = ['export examplesSource = {', ...fileData.map(({ variable }) => `    ${variable}`), `};`];
     const indexSource = [...importLines, '', ...exportLines, ''].join('\n');
-
-    writeFileSync(`${EXAMPLES_JS_PATH}/index.ts`, indexSource, 'utf8');
 
     fileData.forEach(({ sourcePath, pathKey, destinationDirectory, destinationPath }) =>
     {
@@ -86,6 +85,8 @@ async function go()
 
         writeFileSync(destinationPath, jsSource, 'utf8');
     });
+
+    writeFileSync(`${EXAMPLES_JS_PATH}/index.ts`, indexSource, 'utf8');
 }
 
 go();
