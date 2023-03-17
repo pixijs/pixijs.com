@@ -9,5 +9,10 @@ export default function useWidget()
 
         script.setAttribute('src', 'https://opencollective.com/pixijs/banner.js');
         body?.appendChild(script);
+
+        return () =>
+        {
+            body?.removeChild(script);
+        };
     });
 }
