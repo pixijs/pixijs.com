@@ -1,0 +1,7 @@
+.wrapper {
+    & > div {
+        flex-flow: row wrap;
+        justify-content: center;
+        display: flex;
+    }
+}

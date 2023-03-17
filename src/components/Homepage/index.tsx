@@ -5,6 +5,7 @@ import TestimonialCarousel from './TestimonialCarousel';
 import KeyOfferings from './KeyOfferings';
 import FeatureList from './FeatureList';
 import ClosingSection from './ClosingSection';
+import OpenCollectiveWidget from './OpenCollective';
 
 export default function Homepage(): JSX.Element
 {
@@ -21,6 +22,7 @@ export default function Homepage(): JSX.Element
                     <TestimonialCarousel />
                     <KeyOfferings />
                     <FeatureList />
+                    <OpenCollectiveWidget />
                     <ClosingSection />
                 </div>
             </main>
