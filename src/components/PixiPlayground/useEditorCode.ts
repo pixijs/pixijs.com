@@ -7,16 +7,19 @@ interface Payload
     code: string;
 }
 
-function writePayload(payload: Payload)
+function writePayload(payload: Payload, pushState: boolean)
 {
     const json = JSON.stringify(payload);
+    const method = pushState ? 'pushState' : 'replaceState';
 
-    history.replaceState(null, '', `#${btoa(json)}`);
+    history[method](null, '', `#${btoa(json)}`);
 }
 
-function clearPayload()
+function clearPayload(pushState: boolean)
 {
-    history.replaceState(null, '', location.pathname + location.search);
+    const method = pushState ? 'pushState' : 'replaceState';
+
+    history[method](null, '', location.pathname + location.search);
 }
 
 // eslint-disable-next-line consistent-return
@@ -39,23 +42,23 @@ const defaultExampleId = 'sprite.basic';
 const defaultExampleOptions = getExampleOptions();
 
 type URLHashedCodeType = string | undefined;
-type SetURLHashedCodeType = (nextCode: URLHashedCodeType) => void;
+type SetURLHashedCodeType = (nextCode: URLHashedCodeType, pushState: boolean) => void;
 
 export const useURLHashedCode = (): [URLHashedCodeType, SetURLHashedCodeType] =>
 {
     const payload = readPayload();
     const code = payload?.code;
 
-    const setURLHashedCode = useCallback<SetURLHashedCodeType>((nextCode) =>
+    const setURLHashedCode = useCallback<SetURLHashedCodeType>((nextCode, pushState) =>
     {
         if (nextCode === undefined)
         {
-            clearPayload();
+            clearPayload(pushState);
 
             return;
         }
 
-        writePayload({ code: nextCode });
+        writePayload({ code: nextCode }, pushState);
     }, []);
 
     return [code, setURLHashedCode];
@@ -102,7 +105,7 @@ export const useCodeExamples = () =>
                 return;
             }
 
-            setURLHashedCode(undefined);
+            setURLHashedCode(undefined, true);
             setSelectedOptionId(nextSelectedId);
         },
         [selectedOptionId, setURLHashedCode],
@@ -120,7 +123,8 @@ export const useCodeExamples = () =>
                 return;
             }
 
-            setURLHashedCode(nextSourceCode);
+            // pushState when editing code for the first time
+            setURLHashedCode(nextSourceCode, !hasUrlHashedCode);
             setSelectedOptionId('custom');
         },
         [hasUrlHashedCode, sourceCode, setURLHashedCode],

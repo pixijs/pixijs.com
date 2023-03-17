@@ -38,6 +38,7 @@ function Playground({ mode, onCodeChanged }: PlaygroundProps)
         setShowOutput(!showOutput);
     };
 
+    // TODO: we don't change the value of activeFile so why the key?
     return (
         <SandpackLayout className={classNames(styles[mode], showOutput && styles.showOutput)}>
             <div className={styles.editorWrapper}>

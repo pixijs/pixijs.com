@@ -1,5 +1,11 @@
 .wrapper {
+    position: relative;
     display: flex;
-
     /* min-height: 0; */
+}
+
+.select {
+    position: absolute;
+    top: 8px;
+    right: 8px;
 }

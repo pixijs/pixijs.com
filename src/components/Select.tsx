@@ -1,5 +1,8 @@
 import type { ChangeEvent, HTMLAttributes } from 'react';
 import { useCallback } from 'react';
+import classNames from 'classnames';
+
+import styles from './Select.module.scss';
 
 export type Option = {
     label: string;
@@ -35,7 +38,7 @@ const mapOptionGroups = (optionGroups: OptionGroup[]) =>
     ));
 
 // TODO: use third party library? material or ant?
-export default function Select({ selectedId, options, onValueChange, ...rest }: SelectProps)
+export default function Select({ className, selectedId, options, onValueChange, ...rest }: SelectProps)
 {
     const onChange = useCallback(
         (e: ChangeEvent<HTMLSelectElement>) =>
@@ -48,7 +51,7 @@ export default function Select({ selectedId, options, onValueChange, ...rest }: 
     const isGroup = isOptionGroup(options);
 
     return (
-        <select {...rest} value={selectedId} onChange={onChange}>
+        <select className={classNames(styles.select, className)} {...rest} value={selectedId} onChange={onChange}>
             {isGroup && mapOptionGroups(options)}
             {!isGroup && mapOptions(options)}
         </select>
