@@ -6,7 +6,7 @@ export default function HeroHeader(): JSX.Element
 {
     return (
         <header className={clsx('hero hero--dark', styles.heroBanner)}>
-            <iframe className={styles.heroBackground} src="https://pixijs.com/header/index.html"></iframe>
+            <iframe className={styles.heroBackground} src="/header/index.html"></iframe>
             <div className="container">
                 <img className={styles.heroLogo} src="/images/logo.svg" alt="" />
                 <h1 className="hero__subtitle">The HTML5 Creation Engine</h1>
