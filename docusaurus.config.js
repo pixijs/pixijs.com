@@ -253,7 +253,8 @@ const config = {
                     src: 'images/logo.svg',
                     width: 100,
                 },
-                copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labor of love built by Mat Groves <a href="https://twitter.com/doormat23">@doormat23</a> and the <a href="/team">PixiJS team</a>.`,
+                // eslint-disable-next-line max-len
+                copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labour of love built by the <a href="/team">PixiJS team</a>.`,
             },
             image: 'images/ogimage.png',
             announcementBar: {
