@@ -10,9 +10,18 @@ const Features = (): JSX.Element =>
     });
 
     return (
-        <div ref={ref} className={`container flex ${inView ? 'animate-in' : ''}`}>
+        <div ref={ref} className={`container flex`}>
             {content.map((item, index) => (
-                <div key={index} className="col col--4 padding-vert--md">
+                <div
+                    key={index}
+                    className="col col--4 padding-vert--md"
+                    style={{
+                        transform: 'translateX(100vw)',
+                        animation: inView
+                            ? `feature-in 1s cubic-bezier(0.5, 1, 0.5, 1) ${Number(0.3 * index)}s forwards`
+                            : '',
+                    }}
+                >
                     <span>{`0${index + 1}`}</span>
                     <h2 className="underline">{item.heading}</h2>
                     <p>{item.description}</p>
@@ -22,18 +31,28 @@ const Features = (): JSX.Element =>
     );
 };
 
-export default function KeyOfferings(): JSX.Element
+const Devices = (): JSX.Element =>
 {
+    const { ref, inView } = useInView({
+        triggerOnce: true,
+    });
+
     return (
-        <div className={`padding-vert--lg ${styles.highlights} features`}>
-            <Features />
-            <div className={styles.devices}>
-                {graphics.devices.map((device, index) => (
+        <div ref={ref} className={styles.devices}>
+            {graphics.devices.map((device, index) =>
+            {
+                const duration = 0.3 * (index + 1);
+                const delay = device.styles.dataDelay;
+
+                return (
                     <div
                         key={index}
                         style={{
-                            position: 'absolute',
                             ...device.styles,
+                            position: 'absolute',
+                            animation: inView
+                                ? `device-in ${duration}s cubic-bezier(0.3, 1, 0.5, 1) ${delay}s forwards`
+                                : '',
                         }}
                     >
                         <img src={device.img} alt={device.alt} />
@@ -46,8 +65,18 @@ export default function KeyOfferings(): JSX.Element
                             }}
                         ></canvas>
                     </div>
-                ))}
-            </div>
+                );
+            })}
+        </div>
+    );
+};
+
+export default function KeyOfferings(): JSX.Element
+{
+    return (
+        <div className={`padding-vert--lg ${styles.highlights} features`}>
+            <Features />
+            <Devices />
         </div>
     );
 }
