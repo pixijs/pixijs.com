@@ -1,7 +1,7 @@
 name: Reusable Deploy
 
 on:
-  workflow-call:
+  workflow_call:
     secrets:
       GITHUB_TOKEN:
         required: true
