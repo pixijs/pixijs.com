@@ -112,6 +112,20 @@ Special events that do not bubble all the way to the root target are not emitted
 
 <article>
 
+### enableGlobalMoveEvents 
+**Type:** <code>boolean</code>
+
+**Default Value**: <code>true</code>
+
+**Description:** Enables the global move events. `globalpointermove`, `globaltouchmove`, and `globalmousemove`
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
 ### moveOnAll 
 **Type:** <code>boolean</code>
 
@@ -200,17 +214,17 @@ To modify the semantics of existing events, the built-in mapping methods of Even
 <article>
 
 ### all 
-**Type:** <code>(e&#58; FederatedEvent, type&#58; string, target&#58; FederatedEventTarget) -&#62; void</code>
+**Type:** <code>(e&#58; FederatedEvent, type&#58; string &#124; string[], targets&#58; ) -&#62; void</code>
 
-**Description:** Emits the event `e` to all display objects. The event is propagated in the bubbling phase always.
-This is used in the `pointermove` legacy mode.
+**Description:** Emits the event `e` to all interactive display objects. The event is propagated in the bubbling phase always.
+This is used in the `globalpointermove` event.
 
 #### Parameters:
-| Name   | Type                              | Description              |
-| ------ | --------------------------------- | ------------------------ |
-| e      | <code>FederatedEvent</code>       | The emitted event.       |
-| type   | <code>string</code>               | The listeners to notify. |
-| target | <code>FederatedEventTarget</code> |                          |
+| Name    | Type                                | Description              |
+| ------- | ----------------------------------- | ------------------------ |
+| e       | <code>FederatedEvent</code>         | The emitted event.       |
+| type    | <code>string &#124; string[]</code> | The listeners to notify. |
+| targets |                                     | The targets to notify.   |
 </article>
 
 
@@ -395,6 +409,7 @@ The following properties are copied&#58;
 * x
 * y
 * screen
+* shiftKey
 * global
 
 #### Parameters:

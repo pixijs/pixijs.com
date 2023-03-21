@@ -39,6 +39,18 @@ The system for handling UI events.
 ## Members
 <article>
 
+### defaultEventFeatures 
+**Type:** <code>EventSystemFeatures</code>
+
+**Description:** The event features that are enabled by the EventSystem This option only is available when using **&#64;pixi/events** package (included in the **pixi.js** and **pixi.js-legacy** bundle), otherwise it will be ignored.
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
 ### defaultEventMode 
 **Type:** <code>PIXI.EventMode</code>
 
@@ -83,6 +95,45 @@ The system for handling UI events.
 **Default Value**: <code>undefined</code>
 
 **Description:** The DOM element to which the root event listeners are bound. This is automatically set to the renderer's [view](../classes/PIXI.Renderer.pixi_core#view).
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### features 
+**Type:** <code>EventSystemFeatures</code>
+
+**Description:** The event features that are enabled by the EventSystem This option only is available when using **&#64;pixi/events** package (included in the **pixi.js** and **pixi.js-legacy** bundle), otherwise it will be ignored.
+
+
+```js
+ const app = new PIXI.Application()
+ app.renderer.events.features.globalMove = false
+
+ // to override all features use Object.assign
+ Object.assign(app.renderer.events.features, {
+  move: false,
+  globalMove: false,
+  click: false,
+  wheel: false,
+ })
+```
+      
+
+</article>
+
+
+---------------------------------------
+
+<article>
+
+### pointer 
+**Type:** <code>Readonly&#60;FederatedPointerEvent&#62;</code>
+
+**Description:** The global pointer event. Useful for getting the pointer position without listening to events.
 
 </article>
 
