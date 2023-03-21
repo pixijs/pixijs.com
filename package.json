@@ -7,7 +7,7 @@
         "clear": "docusaurus clear",
         "deploy": "docusaurus deploy",
         "docusaurus": "docusaurus",
-        "lint": "eslint . --ext .js,.mjs,.jsx,.ts,.tsx",
+        "lint": "eslint . --ext .js,.mjs,.jsx,.ts,.tsx --max-warnings=0",
         "lint:fix": "eslint . --fix --ext .js,.mjs,.jsx,.ts,.tsx",
         "prettier:check": "prettier --check .",
         "prettify": "prettier --write .",
