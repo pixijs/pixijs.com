@@ -1,12 +1,19 @@
 name: Pixi Dev Update
 on:
   repository_dispatch:
-    types: [update-dev]
+    types: [ update-dev ]
 jobs:
-  UpdateDev:
+  update-dev:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          ref: ${{ github.event.client_payload.ref }}
-      - run: echo ${{ github.event.client_payload.sha }}
+          node-version: '18'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run write-versions -- ${{ github.event.client_payload.sha }}
+  call-deploy:
+    uses: ./.github/workflows/reusable-deploy.yml
+    secrets: inherit
+

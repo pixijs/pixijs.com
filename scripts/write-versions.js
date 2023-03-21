@@ -4,7 +4,17 @@ const { compareVersions } = require('compare-versions');
 // async iife
 (async () =>
 {
+    const devCommitSha = process.argv.slice(2)[0];
+
+    if (!devCommitSha)
+    {
+        console.error('Script must be run with the commit SHA for the latest merged PR to pixijs/pixijs dev!');
+        process.exit(1);
+    }
+
     shell.exec('npm view pixi.js --json > scripts/pixiVersions.json');
+
+    const codeSandboxBaseUrl = `https://pkg.csb.dev/pixijs/pixijs/commit/${devCommitSha}`;
 
     // eslint-disable-next-line global-require
     const pixiVersions = require('./pixiVersions.json');
@@ -13,6 +23,7 @@ const { compareVersions } = require('compare-versions');
     const v4 = tags['latest-4.x'];
     const v5 = tags['latest-5.3.x'];
     const v6 = tags['latest-6.x'];
+    const latestVersion = tags.latest;
     const prerelease = tags.prerelease;
     const allV7s = pixiVersions.versions.filter((v) => v.startsWith('7'));
     const minorV7s = new Map();
@@ -41,55 +52,79 @@ const { compareVersions } = require('compare-versions');
 
     const versions = [
         {
-            version: '4.x',
+            versionLabel: 'v4.x',
+            version: v4,
             releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${v4}`,
             build: `https://pixijs.download/v${v4}/pixi.min.js`,
             docs: `https://pixijs.download/v${v4}/docs/index.html`,
+            npm: v4,
         },
         {
-            version: '5.x',
+            versionLabel: 'v5.x',
+            version: v5,
             releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${v5}`,
             build: `https://pixijs.download/v${v5}/pixi.min.js`,
             docs: `https://pixijs.download/v${v5}/docs/index.html`,
+            npm: v5,
         },
         {
-            version: '6.x',
+            versionLabel: 'v6.x',
+            version: v6,
             releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${v6}`,
             build: `https://pixijs.download/v${v6}/pixi.min.js`,
             docs: `https://pixijs.download/v${v6}/docs/index.html`,
+            npm: v6,
         },
     ];
 
     minorV7s.forEach((v) =>
     {
         if (v.includes('-')) return;
+
         versions.push({
-            version: `${v.split('.').slice(0, 2).join('.')}.x`,
+            versionLabel: `v${v.split('.').slice(0, 2).join('.')}.x`,
+            version: v,
             releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${v}`,
             build: `https://pixijs.download/v${v}/pixi.min.js`,
             docs: `https://pixijs.download/v${v}/docs/index.html`,
+            npm: v,
         });
     });
 
     if (addPrelease)
     {
         versions.push({
+            versionLabel: `v${prerelease}`,
             version: prerelease,
             releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${prerelease}`,
             build: `https://pixijs.download/v${prerelease}/pixi.min.js`,
             docs: `https://pixijs.download/v${prerelease}/docs/index.html`,
+            npm: prerelease,
             prerelease: true,
         });
     }
 
     versions.push({
+        versionLabel: 'dev',
         version: 'dev',
         releaseNotes: 'https://github.com/pixijs/pixijs/releases',
         build: 'https://pixijs.download/dev/pixi.min.js',
         docs: '/api',
+        dev: true,
+        npm: codeSandboxBaseUrl,
     });
 
-    const json = JSON.stringify(versions.reverse(), null, 2);
+    const versionsWithLatest = versions.map((version) =>
+    {
+        const isLatest = version.version === latestVersion ? true : undefined;
+
+        return {
+            ...version,
+            latest: isLatest,
+        };
+    });
+
+    const json = JSON.stringify(versionsWithLatest.reverse(), null, 2);
 
     shell.exec(`echo '${json}' > ./pixi-versions.json`);
     // delete the file
