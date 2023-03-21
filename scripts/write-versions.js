@@ -14,7 +14,7 @@ const { compareVersions } = require('compare-versions');
 
     shell.exec('npm view pixi.js --json > scripts/pixiVersions.json');
 
-    const codeSandboxBaseUrl = `https://pkg.csb.dev/pixijs/pixijs/commit/${devCommitSha}`;
+    const codeSandboxBaseUrl = `https://pkg.csb.dev/pixijs/pixijs/commit/${devCommitSha.substring(0, 8)}`;
 
     // eslint-disable-next-line global-require
     const pixiVersions = require('./pixiVersions.json');
