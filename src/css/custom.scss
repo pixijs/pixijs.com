@@ -178,6 +178,17 @@ html[data-theme='dark'] {
     }
 }
 
+@keyframes short-up {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes offering-in {
     0% {
         opacity: 0;
@@ -192,7 +203,7 @@ html[data-theme='dark'] {
 @keyframes feature-r-in {
     0% {
         opacity: 0;
-        transform: translateX(-150px);
+        transform: translateX(-200px);
     }
     100% {
         opacity: 1;
@@ -203,11 +214,22 @@ html[data-theme='dark'] {
 @keyframes feature-l-in {
     0% {
         opacity: 0;
-        transform: translateX(150px);
+        transform: translateX(200px);
     }
     100% {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+@keyframes device-in {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

@@ -24,7 +24,9 @@ const Offerings = (): JSX.Element =>
                         className="col col--4 padding-vert--md"
                         style={{
                             transform: 'translateX(100vw)',
-                            animation: `offering-in 1s cubic-bezier(0.5, 1, 0.5, 1) ${Number(0.15 * index)}s forwards`,
+                            animation: `offering-in 1s cubic-bezier(0.215, 0.61, 0.355, 1) ${Number(
+                                0.15 * index,
+                            )}s forwards`,
                         }}
                     >
                         <span>{`0${index + 1}`}</span>
@@ -60,7 +62,7 @@ const Devices = (): JSX.Element =>
                         style={{
                             ...device.styles,
                             position: 'absolute',
-                            animation: `device-in 0.4s cubic-bezier(0.3, 1, 0.5, 1) ${delay}s forwards`,
+                            animation: `device-in 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) ${delay}s forwards`,
                         }}
                     >
                         <img src={device.img} alt={device.alt} />
