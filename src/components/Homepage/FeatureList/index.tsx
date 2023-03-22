@@ -41,10 +41,16 @@ export default function FeatureList(): JSX.Element
 
                     const halfListSize = features.length / 2;
                     // Calculate the animation delay based on the column and position
-                    const delay
-                        = column === 0
-                            ? positionInColumn * 0.15 + 0.5 // 0.5s is the delay for the title
-                            : (positionInColumn + halfListSize) * 0.15 + 0.5;
+                    let delay = 0.5; // 0.5s is the delay for the title
+
+                    if (column === 0)
+                    {
+                        delay += positionInColumn * 0.15;
+                    }
+                    else
+                    {
+                        delay = (positionInColumn + halfListSize) * 0.15;
+                    }
 
                     return (
                         <div
