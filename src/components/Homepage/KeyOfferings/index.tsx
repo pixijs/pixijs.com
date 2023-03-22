@@ -77,7 +77,12 @@ const Devices = (): JSX.Element =>
 export default function KeyOfferings(): JSX.Element
 {
     return (
-        <div className={`padding-vert--lg ${styles.highlights} features`}>
+        <div
+            className={`padding-vert--lg ${styles.highlights} features`}
+            style={{
+                clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+            }}
+        >
             <Offerings />
             <Devices />
         </div>
