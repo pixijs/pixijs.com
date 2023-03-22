@@ -3,7 +3,7 @@ import content from './content.json';
 import graphics from './graphics.json';
 import { useInView } from 'react-intersection-observer';
 
-const Features = (): JSX.Element =>
+const Offerings = (): JSX.Element =>
 {
     const { ref, inView } = useInView({
         triggerOnce: true,
@@ -18,7 +18,7 @@ const Features = (): JSX.Element =>
                     style={{
                         transform: 'translateX(100vw)',
                         animation: inView
-                            ? `feature-in 1s cubic-bezier(0.5, 1, 0.5, 1) ${Number(0.3 * index)}s forwards`
+                            ? `offering-in 1s cubic-bezier(0.5, 1, 0.5, 1) ${Number(0.3 * index)}s forwards`
                             : '',
                     }}
                 >
@@ -44,15 +44,18 @@ const Devices = (): JSX.Element =>
                 const duration = 0.3 * (index + 1);
                 const delay = device.styles.dataDelay;
 
+                if (!inView)
+                {
+                    return null;
+                }
+
                 return (
                     <div
                         key={index}
                         style={{
                             ...device.styles,
                             position: 'absolute',
-                            animation: inView
-                                ? `device-in ${duration}s cubic-bezier(0.3, 1, 0.5, 1) ${delay}s forwards`
-                                : '',
+                            animation: `device-in ${duration}s cubic-bezier(0.3, 1, 0.5, 1) ${delay}s forwards`,
                         }}
                     >
                         <img src={device.img} alt={device.alt} />
@@ -75,7 +78,7 @@ export default function KeyOfferings(): JSX.Element
 {
     return (
         <div className={`padding-vert--lg ${styles.highlights} features`}>
-            <Features />
+            <Offerings />
             <Devices />
         </div>
     );

@@ -11,7 +11,7 @@
                 "zIndex": 1,
                 "marginLeft": "-193px",
                 "dataDelay": 0,
-                "transform": "translateY(100vh)"
+                "transform": "translateY(200vh)"
             },
             "canvas": {
                 "left": "19px",
@@ -29,7 +29,7 @@
                 "top": "138px",
                 "zIndex": 2,
                 "dataDelay": 0.15,
-                "transform": "translateY(100vh)"
+                "transform": "translateY(200vh)"
             },
             "canvas": {
                 "left": "17px",
@@ -47,7 +47,7 @@
                 "top": "177px",
                 "zIndex": 3,
                 "dataDelay": 0.45,
-                "transform": "translateY(100vh)"
+                "transform": "translateY(200vh)"
             },
             "canvas": {
                 "left": "10px",
@@ -65,7 +65,7 @@
                 "bottom": 0,
                 "zIndex": 4,
                 "dataDelay": 0.75,
-                "transform": "translateY(100vh)"
+                "transform": "translateY(200vh)"
             },
             "canvas": {
                 "left": "20px",
@@ -83,7 +83,7 @@
                 "top": "127px",
                 "zIndex": 2,
                 "dataDelay": 0.3,
-                "transform": "translateY(100vh)"
+                "transform": "translateY(200vh)"
             },
             "canvas": {
                 "left": "46px",
@@ -101,7 +101,7 @@
                 "bottom": 0,
                 "zIndex": 4,
                 "dataDelay": 0.6,
-                "transform": "translateY(100vh)"
+                "transform": "translateY(200vh)"
             },
             "canvas": {
                 "left": "17px",
