@@ -1,0 +1,101 @@
+{
+  "basic": [
+    "blendModes",
+    "cacheAsBitmap",
+    "container",
+    "particleContainer",
+    "simplePlane",
+    "tinting",
+    "transparentBackground"
+  ],
+  "sprite": [
+    "animatedSpriteAnimationSpeed",
+    "animatedSpriteExplosion",
+    "animatedSpriteJet",
+    "basic",
+    "textureSwap",
+    "tilingSprite",
+    "video"
+  ],
+  "text": [
+    "bitmapText",
+    "fromFont",
+    "pixiText",
+    "webFont"
+  ],
+  "graphics": [
+    "advanced",
+    "dynamic",
+    "simple"
+  ],
+  "events": [
+    "click",
+    "customHitarea",
+    "customMouseIcon",
+    "dragging",
+    "hitTestingWithSpatialHash",
+    "interactivity",
+    "logger",
+    "nestedBoundaryWithProjection",
+    "pointerTracker",
+    "slider"
+  ],
+  "masks": [
+    "filter",
+    "graphics",
+    "sprite"
+  ],
+  "textures": [
+    "gradientBasic",
+    "gradientResource",
+    "renderTextureAdvanced",
+    "renderTextureBasic",
+    "textureRotate"
+  ],
+  "assets": [
+    "async",
+    "background",
+    "bundle",
+    "multiple",
+    "promise"
+  ],
+  "offscreenCanvas": [
+    "basic",
+    "webWorker"
+  ],
+  "filtersBasic": [
+    "blur",
+    "colorMatrix",
+    "displacementMapCrawlies",
+    "displacementMapFlag"
+  ],
+  "filtersAdvanced": [
+    "custom",
+    "mouseBlending",
+    "shaderToyFilterRenderTexture"
+  ],
+  "advanced": [
+    "collisionDetection",
+    "mouseTrail",
+    "scratchCard",
+    "screenShot",
+    "slots",
+    "spinners",
+    "starWarp"
+  ],
+  "meshAndShaders": [
+    "instancedGeometry",
+    "interleavingGeometry",
+    "mergingGeometry",
+    "multiPassShaderGeneratedMesh",
+    "shaderToyMesh",
+    "sharedShader",
+    "sharingGeometry",
+    "texturedMeshAdvanced",
+    "texturedMeshBasic",
+    "triangleColor",
+    "triangleTextured",
+    "triangle",
+    "uniforms"
+  ]
+}

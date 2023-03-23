@@ -85,9 +85,12 @@ import renderTextureBasic from '!!raw-loader!./textures/renderTextureBasic.js';
 import textureRotate from '!!raw-loader!./textures/textureRotate.js';
 import type { OptionGroup } from '@site/src/components/Select';
 
+// Defines order of examples in documentation and playground dropdown, it's defined
+// separately here so it can be used in runtime code and in the md generation script
+import examplesOrder from './examplesOrder.json';
+
 export type ExamplesSourceType = Record<string, Record<string, string>>;
 
-// Key order here defines order of examples in dropdown
 export const examplesSource: ExamplesSourceType = {
     basic: {
         blendModes,
@@ -206,9 +209,9 @@ function camelCaseToSentenceCase(str: string)
 
 export function getExampleOptions(): OptionGroup[]
 {
-    return Object.entries(examplesSource).map(([folderKey, folderEntries]) =>
+    return Object.entries(examplesOrder).map(([folderKey, folderEntries]) =>
     {
-        const options = Object.keys(folderEntries).map((exampleKey) => ({
+        const options = folderEntries.map((exampleKey) => ({
             value: `${folderKey}.${exampleKey}`,
             label: camelCaseToSentenceCase(exampleKey),
         }));
