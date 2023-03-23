@@ -2,61 +2,73 @@
     {
         "icon": "/images/features/feature-multiplatform.png",
         "heading": "Multi-platform Support",
-        "description": "Interactive, visually compelling content on desktop, mobile and beyond, all reached with a single codebase to deliver transferable experiences."
+        "description": "Interactive, visually compelling content on desktop, mobile and beyond, all reached with a single codebase to deliver transferable experiences.",
+        "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-type.png",
         "heading": "Advanced Text Rendering",
-        "description": "Beautiful anti-aliased text at native and retina resolutions means that Pixi copy is as easy on the eye as it is on any other delivery method."
+        "description": "Beautiful anti-aliased text at native and retina resolutions means that Pixi copy is as easy on the eye as it is on any other delivery method.",
+        "data-anim": "feature-l-in"
     },
     {
         "icon": "/images/features/feature-tinting-blending.png",
         "heading": "Tinting & Blending Modes",
-        "description": "Designers and clients will be thrilled by Photoshop quality blending and colour modes."
+        "description": "Designers and clients will be thrilled by Photoshop quality blending and colour modes.",
+        "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-scenegraph.png",
         "heading": "Full Scene Graph",
-        "description": "Organise your objects in hierarchical trees, with parent-child relationships."
+        "description": "Organise your objects in hierarchical trees, with parent-child relationships.",
+        "data-anim": "feature-l-in"
     },
     {
         "icon": "/images/features/feature-sprite-sheet.png",
         "heading": "Sprite Sheet Support",
-        "description": "PixiJS caters for a range of sprite sheet formats and includes advanced support for features like trimming and rotational packing."
+        "description": "PixiJS caters for a range of sprite sheet formats and includes advanced support for features like trimming and rotational packing.",
+        "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-canvas.png",
         "heading": "Renderer Auto-detect",
-        "description": "Certain, older platforms may not be able to use WebGL. Not a problem with PixiJS as Canvas fallback is seamless and automated."
+        "description": "Certain, older platforms may not be able to use WebGL. Not a problem with PixiJS as Canvas fallback is seamless and automated.",
+        "data-anim": "feature-l-in"
     },
     {
         "icon": "/images/features/feature-asset-loader.png",
         "heading": "Asset Loader",
-        "description": "Sprite-sheets, graphics, fonts, animation data (soon to have Adobe Animate support). All your incoming assets can be loaded and handled by PixiJS."
+        "description": "Sprite-sheets, graphics, fonts, animation data (soon to have Adobe Animate support). All your incoming assets can be loaded and handled by PixiJS.",
+        "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-apps.png",
         "heading": "Deploy into Apps",
-        "description": "Use technologies such as Cordova to rapidly deploy your Pixi project as an App. Superb for both concepting and full delivery."
+        "description": "Use technologies such as Cordova to rapidly deploy your Pixi project as an App. Superb for both concepting and full delivery.",
+        "data-anim": "feature-l-in"
     },
     {
         "icon": "/images/features/feature-api.png",
         "heading": "Easy API",
-        "description": "Designed to be intuitive and easy to pick up. Developers old and new will find themselves right at home with its simple yet powerful API."
+        "description": "Designed to be intuitive and easy to pick up. Developers old and new will find themselves right at home with its simple yet powerful API.",
+        "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-accessibility.png",
         "heading": "Accessibility",
-        "description": "PixiJS is an inclusive technology and all content can be made to be screen reader accessible with ease. The only WebGL renderer out there that does."
+        "description": "PixiJS is an inclusive technology and all content can be made to be screen reader accessible with ease. The only WebGL renderer out there that does.",
+        "data-anim": "feature-l-in"
     },
     {
         "icon": "/images/features/feature-filters.png",
         "heading": "WebGL Filters",
-        "description": "Use and create your own spectacular WebGL filters and shaders to give your projects next-level visual fidelity and performance."
+        "description": "Use and create your own spectacular WebGL filters and shaders to give your projects next-level visual fidelity and performance.",
+        "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-multitouch.png",
         "heading": "Multi-touch Interactivity",
-        "description": "True multi-touch input and tracking means that you can create interactions such as pinch-to-scale that give audiences native feeling experiences."
+        "description": "True multi-touch input and tracking means that you can create interactions such as pinch-to-scale that give audiences native feeling experiences.",
+        "data-anim": "feature-l-in"
     }
 ]

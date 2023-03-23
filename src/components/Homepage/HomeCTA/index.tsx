@@ -1,11 +1,13 @@
 import Link from '@docusaurus/Link';
 import styles from './index.module.scss';
+import type React from 'react';
 
 export interface HomeCTAOptions {
     label: string;
     link: string;
     white?: boolean;
     outline?: boolean;
+    style?: React.CSSProperties;
 }
 
 export default function HomeCTA(opts: HomeCTAOptions): JSX.Element
@@ -23,7 +25,7 @@ export default function HomeCTA(opts: HomeCTAOptions): JSX.Element
     }
 
     return (
-        <Link className={classNames} to={opts.link}>
+        <Link className={classNames} to={opts.link} style={opts?.style || {}}>
             <div className={styles.buttonShadow}>
                 <div></div>
             </div>
