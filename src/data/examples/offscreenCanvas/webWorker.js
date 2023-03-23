@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 // This example is the based on basic/container, but running in Web Worker.
 
 function workerSource(self)

@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 // In this a example, a circle will follow the pointer wherever it
 // moves over the canvas.
 

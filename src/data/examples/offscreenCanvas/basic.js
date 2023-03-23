@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 // This example is the based on basic/container, but using OffscreenCanvas.
 
 const canvas = document.createElement('canvas');

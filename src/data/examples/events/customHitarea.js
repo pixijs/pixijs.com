@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 const app = new PIXI.Application(800, 600, { background: '#1099bb' });
 
 document.body.appendChild(app.view);

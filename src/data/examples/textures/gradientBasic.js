@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 // This demo uses canvas2d gradient API
 // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
 

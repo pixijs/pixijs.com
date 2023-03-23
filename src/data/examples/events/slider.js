@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 const app = new PIXI.Application({
     antialias: true,
     background: '#1099bb',

@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 // This example logs the order of events hover-related events in the scene.
 const app = new PIXI.Application({
     antialias: true,

@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 // This example shows how you can create your own EventBoundary to accelerate
 // hit-testing using spatial hashes. This can be used to optimize relatively
 // "flat" scene graphs, where  a container contains so many objects that it

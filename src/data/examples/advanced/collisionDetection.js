@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 // Based somewhat on this article by Spicy Yoghurt
 // URL for further reading: https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
 const app = new PIXI.Application({ background: '#111', resizeTo: window });

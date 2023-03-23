@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 const app = new PIXI.Application({ backgroundAlpha: 0, resizeTo: window });
 
 document.body.appendChild(app.view);
