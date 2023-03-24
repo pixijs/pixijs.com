@@ -178,6 +178,12 @@ html[data-theme='dark'] {
     }
 }
 
+.container {
+    &.example {
+        max-width: 100%;
+    }
+}
+
 @keyframes short-up {
     0% {
         opacity: 0;
