@@ -15,7 +15,7 @@ export type OptionGroup = {
 };
 
 type SelectProps = HTMLAttributes<HTMLSelectElement> & {
-    selectedId: string;
+    selectedId: string | undefined;
     options: Option[] | OptionGroup[];
     onValueChange: (id: string) => void;
 };
