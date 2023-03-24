@@ -13,6 +13,7 @@
         "prettier:check": "prettier --check .",
         "prettify": "prettier --write .",
         "serve": "docusaurus serve",
+        "prestart": "npm run write-example-docs",
         "start": "cross-env PIXI_VERSION=dev docusaurus start",
         "swizzle": "docusaurus swizzle",
         "types": "tsc --noEmit",
