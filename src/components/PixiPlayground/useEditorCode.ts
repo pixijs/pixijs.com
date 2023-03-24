@@ -76,7 +76,7 @@ export const useCodeExamples = () =>
         () => getExampleEntry(selectedOptionId),
         [selectedOptionId],
     );
-    const { source: sourceCode, usesWebWorkerLibrary } = useMemo<Partial<ExampleSourceEntry>>(
+    const { source: sourceCode, usesWebWorkerLibrary } = useMemo<Omit<ExampleSourceEntry, 'hide'>>(
         () =>
             (urlHashedCode
                 ? {
