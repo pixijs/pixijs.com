@@ -7,10 +7,16 @@ import styles from './index.module.css';
 
 type CodeBlockWrapperProps = { [key: string]: any } & {
     playground?: boolean;
+    usesWebWorkerLibrary?: boolean;
     children: string;
 };
 
-export default function CodeBlockWrapper({ children, playground = false, ...rest }: CodeBlockWrapperProps)
+export default function CodeBlockWrapper({
+    children,
+    playground = false,
+    usesWebWorkerLibrary = false,
+    ...rest
+}: CodeBlockWrapperProps)
 {
     const isBrowser = useIsBrowser();
 
@@ -18,7 +24,7 @@ export default function CodeBlockWrapper({ children, playground = false, ...rest
     {
         return (
             <div className={styles.playgroundCodeBlock}>
-                <PixiPlayground code={children} />
+                <PixiPlayground code={children} isPixiWebWorkerVersion={usesWebWorkerLibrary} />
             </div>
         );
     }
