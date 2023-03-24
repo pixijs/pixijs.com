@@ -48,7 +48,8 @@ varying vec2 vUvs;
 uniform sampler2D noise;
 uniform float time;
 
-//Distance function. Just calculates the height (z) from x,y plane with really simple length check. Its not exact as there could be shorter distances.
+// Distance function. Just calculates the height (z) from x,y plane with really simple length check.
+// Its not exact as there could be shorter distances.
 vec2 dist(vec3 p)
 {
     float id = floor(p.x)+floor(p.y);

@@ -32,7 +32,7 @@ function Playground({ mode, onCodeChanged }: PlaygroundProps)
             updateCode(nextCodeString);
             onCodeChanged?.(nextCodeString);
         },
-        [onCodeChanged],
+        [onCodeChanged, updateCode],
     );
 
     const handleToggle = useCallback(() =>

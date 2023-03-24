@@ -34,8 +34,6 @@ rope.blendmode = PIXI.BLEND_MODES.ADD;
 
 app.stage.addChild(rope);
 
-console.log('HELLO!');
-
 let mouseposition = null;
 
 app.stage.interactive = true;
@@ -89,7 +87,7 @@ function getTangent(k, factor, array)
 
 function cubicInterpolation(array, t, tangentFactor)
 {
-    if (tangentFactor == null) tangentFactor = 1;
+    if (tangentFactor === null) tangentFactor = 1;
 
     const k = Math.floor(t);
     const m = [getTangent(k, tangentFactor, array), getTangent(k + 1, tangentFactor, array)];

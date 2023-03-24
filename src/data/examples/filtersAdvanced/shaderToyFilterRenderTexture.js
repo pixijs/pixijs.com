@@ -1,10 +1,10 @@
 import * as PIXI from 'pixi.js';
 
 /**
-Please note that this is not the most optimal way of doing pure shader generated rendering and should be used when scene is wanted as input texture.
-Check the mesh version of example for more performant version if you need only shader generated content.
-* */
-
+ * Please note that this is not the most optimal way of doing pure shader generated rendering and should be used when the
+ * scene is wanted as input texture. Check the mesh version of example for more performant version if you need only shader
+ * generated content.
+ **/
 const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
 
 document.body.appendChild(app.view);
@@ -22,14 +22,16 @@ app.stage.addChild(text);
 
 let totalTime = 0;
 
-// Fragment shader, in real use this would be much cleaner when loaded from a file/embedded into the application as data resource.
+// Fragment shader, in real use this would be much cleaner when loaded from a file
+// or embedded into the application as data resource.
 const fragment = `//Based on this: https://www.shadertoy.com/view/wtlSWX
 
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler;
 uniform sampler2D noise;
 uniform float time;
-//Distance function. Just calculates the height (z) from x,y plane with really simple length check. Its not exact as there could be shorter distances.
+// Distance function. Just calculates the height (z) from x,y plane with really simple length check.
+// Its not exact as there could be shorter distances.
 vec2 dist(vec3 p)
 {
   float id = floor(p.x)+floor(p.y);

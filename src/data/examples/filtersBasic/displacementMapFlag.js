@@ -35,7 +35,8 @@ displacementFilter.scale.y = 60;
 
 app.ticker.add(() =>
 {
-    // Offset the sprite position to make vFilterCoord update to larger value. Repeat wrapping makes sure there's still pixels on the coordinates.
+    // Offset the sprite position to make vFilterCoord update to larger value.
+    // Repeat wrapping makes sure there's still pixels on the coordinates.
     displacementSprite.x++;
     // Reset x to 0 when it's over width to keep values from going to very huge numbers.
     if (displacementSprite.x > displacementSprite.width) { displacementSprite.x = 0; }

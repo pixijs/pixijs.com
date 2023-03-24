@@ -34,7 +34,8 @@ void main() {
   if (length(mouse - screenPos) < 25.0) {
       gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0) * 0.7; //yellow circle, alpha=0.7
   } else {
-      gl_FragColor = vec4( sin(time), (mouse.xy - outputFrame.xy) / outputFrame.zw, 1.0) * 0.5; // blend with underlying image, alpha=0.5
+      // blend with underlying image, alpha=0.5
+      gl_FragColor = vec4( sin(time), (mouse.xy - outputFrame.xy) / outputFrame.zw, 1.0) * 0.5;
   }
 }
 `;

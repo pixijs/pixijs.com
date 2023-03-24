@@ -79,8 +79,10 @@ app.ticker.add((delta) =>
 
         star.sprite.scale.x = distanceScale * starBaseSize;
         // Star is looking towards center so that y axis is towards center.
-        // Scale the star depending on how fast we are moving, what the stretchfactor is and depending on how far away it is from the center.
-        star.sprite.scale.y = distanceScale * starBaseSize + distanceScale * speed * starStretch * distanceCenter / app.renderer.screen.width;
+        // Scale the star depending on how fast we are moving, what the stretchfactor is
+        // and depending on how far away it is from the center.
+        star.sprite.scale.y = distanceScale * starBaseSize
+            + distanceScale * speed * starStretch * distanceCenter / app.renderer.screen.width;
         star.sprite.rotation = Math.atan2(dyCenter, dxCenter) + Math.PI / 2;
     }
 });

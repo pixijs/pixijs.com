@@ -66,7 +66,8 @@ const gridUniforms = {
     zoom: 10,
 };
 const gridShader = PIXI.Shader.from(vertexSrc, fragmentGridSrc, gridUniforms);
-// Sharing textures and meshes is possible. But for simplicity each pass has it's own output texture and mesh in this example.
+// Sharing textures and meshes is possible.
+// But for simplicity each pass has its own output texture and mesh in this example.
 const gridTexture = PIXI.RenderTexture.create({ width: 200, height: 200 });
 const gridQuad = new PIXI.Mesh(geometry, gridShader);
 const gridContainer = new PIXI.Container();

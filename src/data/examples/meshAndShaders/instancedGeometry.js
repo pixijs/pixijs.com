@@ -14,8 +14,25 @@ const positionSize = 2;
 const colorSize = 3;
 const buffer = new PIXI.Buffer(new Float32Array(geometry.instanceCount * (positionSize + colorSize)));
 
-geometry.addAttribute('aIPos', buffer, positionSize, false, PIXI.TYPES.FLOAT, 4 * (positionSize + colorSize), 0, true);
-geometry.addAttribute('aICol', buffer, colorSize, false, PIXI.TYPES.FLOAT, 4 * (positionSize + colorSize), 4 * positionSize, true);
+geometry.addAttribute(
+    'aIPos',
+    buffer,
+    positionSize,
+    false,
+    PIXI.TYPES.FLOAT,
+    4 * (positionSize + colorSize),
+    0,
+    true
+);
+geometry.addAttribute(
+    'aICol',
+    buffer,
+    colorSize,
+    false,
+    PIXI.TYPES.FLOAT,
+    4 * (positionSize + colorSize),
+    4 * positionSize, true
+);
 
 for (let i = 0; i < geometry.instanceCount; i++)
 {

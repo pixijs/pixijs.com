@@ -231,7 +231,8 @@ const generateSpinner4 = (position) =>
     edge.drawRoundedRect(0, 0, size, size, arcRadius);
     edge.endFill();
 
-    // Mask in this example works basically the same way as in example 1. Except it is reversed and calculates the mask in straight lines in edges.
+    // Mask in this example works basically the same way as in example 1.
+    // Except it is reversed and calculates the mask in straight lines in edges.
     const mask = new PIXI.Graphics();
 
     mask.position.set(size / 2, size / 2);
