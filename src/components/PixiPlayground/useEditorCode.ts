@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
-import { getExampleOptions, getExampleSource } from '@site/src/data/examples';
+import type { ExampleSourceEntry } from '@site/src/data/examples';
+import { getExampleOptions, getExampleEntry } from '@site/src/data/examples';
 import type { OptionGroup } from '@site/src/components/Select';
 
 interface Payload
@@ -71,9 +72,19 @@ export const useCodeExamples = () =>
 
     const hasUrlHashedCode = Boolean(urlHashedCode);
 
-    const sourceCode = useMemo<string>(
-        () => urlHashedCode ?? (getExampleSource(selectedOptionId) as string),
-        [urlHashedCode, selectedOptionId],
+    const exampleEntry = useMemo<ExampleSourceEntry | undefined>(
+        () => getExampleEntry(selectedOptionId),
+        [selectedOptionId],
+    );
+    const { source: sourceCode, usesWebWorkerLibrary } = useMemo<ExampleSourceEntry>(
+        () =>
+            (urlHashedCode
+                ? {
+                    source: urlHashedCode,
+                    usesWebWorkerLibrary: false,
+                }
+                : (exampleEntry as ExampleSourceEntry)),
+        [urlHashedCode, exampleEntry],
     );
 
     const exampleOptions = useMemo<OptionGroup[]>(
@@ -132,6 +143,7 @@ export const useCodeExamples = () =>
 
     return {
         sourceCode,
+        usesWebWorkerLibrary,
         selectedOptionId,
         exampleOptions,
         handleOptionSelected,
