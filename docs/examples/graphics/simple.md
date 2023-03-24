@@ -6,6 +6,7 @@ hide_table_of_contents: true
 
 ```js playground
 import * as PIXI from 'pixi.js';
+import '@pixi/graphics-extras';
 
 const app = new PIXI.Application({ antialias: true, resizeTo: window });
 

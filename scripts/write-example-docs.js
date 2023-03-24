@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const { join, resolve } = require('path');
 const { mkdirSync, readFileSync, rmSync, writeFileSync } = require('fs');
-const examplesOrder = require('../src/data/examples/examplesOrder.json');
+const examplesData = require('../src/data/examples/examplesData.json');
 
 const ROOT = resolve(__dirname, '..');
 const EXAMPLES_MD_PATH = resolve(ROOT, 'docs', 'examples');
@@ -17,19 +17,28 @@ const camelToTitle = (str) =>
 
 async function go()
 {
-    const directories = Object.keys(examplesOrder);
+    const directories = Object.keys(examplesData);
 
     const directoryData = directories.map((directoryKey) =>
     {
-        const categoryExamples = examplesOrder[directoryKey];
+        const categoryExamples = examplesData[directoryKey];
         const directoryName = camelToSnake(directoryKey);
         const categoryTitle = camelToTitle(directoryKey);
 
         return {
             categoryTitle,
             directoryPath: join(EXAMPLES_MD_PATH, directoryName),
-            examples: categoryExamples.map((exampleKey) =>
+            examples: categoryExamples.map((exampleData) =>
             {
+                let exampleKey = exampleData;
+                let usesWebWorkerLibrary = false;
+                let hide = false;
+
+                if (typeof exampleData !== 'string')
+                {
+                    ({ name: exampleKey, usesWebWorkerLibrary = false, hide = false } = exampleData);
+                }
+
                 const jsFile = `${exampleKey}.js`;
                 const mdFile = `${camelToSnake(exampleKey)}.md`;
 
@@ -40,6 +49,8 @@ async function go()
                     exampleSource: readFileSync(jsPath, 'utf8').trim(),
                     examplePath: mdPath,
                     exampleTitle: camelToTitle(exampleKey),
+                    hide,
+                    usesWebWorkerLibrary,
                 };
             }),
         };
@@ -58,8 +69,15 @@ async function go()
 
         writeFileSync(categoryYmlPath, categoryYml, 'utf8');
 
-        examples.forEach(({ exampleSource, examplePath, exampleTitle }) =>
+        examples.forEach(({ exampleSource, examplePath, exampleTitle, hide, usesWebWorkerLibrary }) =>
         {
+            if (hide)
+            {
+                return;
+            }
+
+            const webWorkerProp = usesWebWorkerLibrary ? ' usesWebWorkerLibrary' : '';
+
             const mdContents = [
                 '---',
                 'hide_table_of_contents: true',
@@ -67,7 +85,7 @@ async function go()
                 '',
                 `# ${exampleTitle}`,
                 '',
-                '```js playground',
+                `\`\`\`js playground${webWorkerProp}`,
                 exampleSource,
                 '```',
                 '',

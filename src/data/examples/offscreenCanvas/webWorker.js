@@ -1,4 +1,4 @@
-import * as PIXI from 'pixi.js';
+import * as PIXI from '@pixi/webworker';
 
 // This example is the based on basic/container, but running in Web Worker.
 
@@ -50,7 +50,9 @@ function workerSource(self)
         });
     };
 }
+
 const blob = new Blob(['(', workerSource, ')(self);'], { type: 'application/javascript' });
+
 const url = URL.createObjectURL(blob);
 const worker = new Worker(url);
 

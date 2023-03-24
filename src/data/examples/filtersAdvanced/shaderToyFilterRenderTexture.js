@@ -96,7 +96,6 @@ function onAssetsLoaded(perlin)
     // Add perlin noise for filter, make sure it's wrapping and does not have mipmap.
     perlin.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
     perlin.baseTexture.mipmap = false;
-    perlin.width = perlin.height = 200;
 
     // Build the filter
     filter = new PIXI.Filter(null, fragment, {

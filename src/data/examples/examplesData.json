@@ -33,7 +33,10 @@
     "customHitarea",
     "customMouseIcon",
     "dragging",
-    "hitTestingWithSpatialHash",
+    {
+      "name": "hitTestingWithSpatialHash",
+      "hide": true
+    },
     "interactivity",
     "logger",
     "nestedBoundaryWithProjection",
@@ -61,7 +64,11 @@
   ],
   "offscreenCanvas": [
     "basic",
-    "webWorker"
+    {
+      "name": "webWorker",
+      "hide": true,
+      "usesWebWorkerLibrary": true
+    }
   ],
   "filtersBasic": [
     "blur",

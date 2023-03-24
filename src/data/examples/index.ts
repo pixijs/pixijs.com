@@ -83,15 +83,31 @@ import gradientResource from '!!raw-loader!./textures/gradientResource.js';
 import renderTextureAdvanced from '!!raw-loader!./textures/renderTextureAdvanced.js';
 import renderTextureBasic from '!!raw-loader!./textures/renderTextureBasic.js';
 import textureRotate from '!!raw-loader!./textures/textureRotate.js';
-import type { OptionGroup } from '@site/src/components/Select';
+import type { Option, OptionGroup } from '@site/src/components/Select';
 
 // Defines order of examples in documentation and playground dropdown, it's defined
 // separately here so it can be used in runtime code and in the md generation script
-import examplesOrder from './examplesOrder.json';
+import examplesData from './examplesData.json';
 
+export type ExampleDataEntry = {
+    name: string,
+    hide?: boolean,
+    usesWebWorkerLibrary?: boolean,
+};
+export type ExampleSourceEntry = {
+    source: string,
+    hide: boolean;
+    usesWebWorkerLibrary: boolean,
+};
+// json data structure
+export type ExamplesJsonType = Record<string, (ExampleDataEntry | string)[]>;
+// sourcecode dictionary structure for below
 export type ExamplesSourceType = Record<string, Record<string, string>>;
+// normalized combination of the above
+export type CategoryDataType = Record<string, ExampleSourceEntry>;
+export type ExamplesDataType = Record<string, CategoryDataType>;
 
-export const examplesSource: ExamplesSourceType = {
+const examplesSource: ExamplesSourceType = {
     basic: {
         blendModes,
         cacheAsBitmap,
@@ -193,11 +209,52 @@ export const examplesSource: ExamplesSourceType = {
     },
 };
 
-export function getExampleSource(pathString: string): string | undefined
+const normalizeExampleDataEntry = (categoryExample: ExampleDataEntry | string): Required<ExampleDataEntry> =>
+{
+    const defaults = {
+        hide: false,
+        usesWebWorkerLibrary: false
+    };
+
+    if (typeof categoryExample === 'string')
+    {
+        return {
+            ...defaults,
+            name: categoryExample,
+        };
+    }
+
+    return {
+        ...defaults,
+        ...categoryExample
+    };
+};
+
+const normalizedExamplesData = Object.entries(examplesData as ExamplesJsonType)
+    .reduce((directoryAcc, [categoryKey, categoryExamples]) =>
+        ({
+            ...directoryAcc,
+            [categoryKey]: categoryExamples.reduce((categoryAcc, categoryExampleOrString) =>
+            {
+                const categoryExample = normalizeExampleDataEntry(categoryExampleOrString);
+                const { name: categoryName, hide, usesWebWorkerLibrary } = categoryExample;
+
+                return {
+                    ...categoryAcc,
+                    [categoryName]: {
+                        source: examplesSource[categoryKey][categoryName],
+                        hide,
+                        usesWebWorkerLibrary,
+                    }
+                };
+            }, {} as CategoryDataType)
+        }), {} as ExamplesDataType);
+
+export function getExampleEntry(pathString: string): ExampleSourceEntry | undefined
 {
     const [directory, example] = pathString.split('.');
 
-    return examplesSource[directory]?.[example];
+    return normalizedExamplesData[directory]?.[example];
 }
 
 function camelCaseToSentenceCase(str: string)
@@ -209,12 +266,22 @@ function camelCaseToSentenceCase(str: string)
 
 export function getExampleOptions(): OptionGroup[]
 {
-    return Object.entries(examplesOrder).map(([folderKey, folderEntries]) =>
+    return Object.entries(examplesData as ExamplesJsonType).map(([folderKey, folderEntries]) =>
     {
-        const options = folderEntries.map((exampleKey) => ({
-            value: `${folderKey}.${exampleKey}`,
-            label: camelCaseToSentenceCase(exampleKey),
-        }));
+        const options = folderEntries.reduce((acc, exampleDataEntry) =>
+        {
+            const { name: exampleKey, hide } = normalizeExampleDataEntry(exampleDataEntry);
+
+            if (hide)
+            {
+                return acc;
+            }
+
+            return acc.concat({
+                value: `${folderKey}.${exampleKey}`,
+                label: camelCaseToSentenceCase(exampleKey),
+            });
+        }, [] as Option[]);
 
         return {
             label: camelCaseToSentenceCase(folderKey),

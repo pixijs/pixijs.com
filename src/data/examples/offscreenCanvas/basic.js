@@ -7,7 +7,7 @@ const view = canvas.transferControlToOffscreen();
 
 const app = new PIXI.Application({ view, background: 0x1099bb, resizeTo: window });
 
-document.body.appendChild(app.view);
+document.body.appendChild(canvas);
 
 const container = new PIXI.Container();
 

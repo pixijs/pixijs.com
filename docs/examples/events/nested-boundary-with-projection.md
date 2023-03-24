@@ -6,6 +6,7 @@ hide_table_of_contents: true
 
 ```js playground
 import * as PIXI from 'pixi.js';
+import '@pixi/graphics-extras';
 
 // This example shows how you can setup a nested boundary to propagate events
 // into a disjoint scene graph. Here, a camera is used to project an different
