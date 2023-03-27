@@ -34,13 +34,15 @@ export default function PlaygroundPage()
             <div className={styles.playgroundWrapper}>
                 <div className={styles.nav}>
                     <Select
-                        className={styles.select}
+                        label="Example:"
+                        labelClassName={styles.select}
                         selectedId={selectedOptionId}
                         options={exampleOptions}
                         onValueChange={handleOptionSelected}
                     />
                     <Select
-                        className={styles.select}
+                        label="Version:"
+                        labelClassName={styles.select}
                         selectedId={selectedVersionId}
                         options={versionOptions}
                         onValueChange={handleVersionChanged}

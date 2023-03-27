@@ -15,6 +15,8 @@ export type OptionGroup = {
 };
 
 type SelectProps = HTMLAttributes<HTMLSelectElement> & {
+    label?: string;
+    labelClassName?: string;
     selectedId: string | undefined;
     options: Option[] | OptionGroup[];
     onValueChange: (id: string) => void;
@@ -38,7 +40,15 @@ const mapOptionGroups = (optionGroups: OptionGroup[]) =>
     ));
 
 // TODO: use third party library? material or ant?
-export default function Select({ className, selectedId, options, onValueChange, ...rest }: SelectProps)
+export default function Select({
+    className,
+    label,
+    labelClassName,
+    selectedId,
+    options,
+    onValueChange,
+    ...rest
+}: SelectProps)
 {
     const onChange = useCallback(
         (e: ChangeEvent<HTMLSelectElement>) =>
@@ -50,10 +60,22 @@ export default function Select({ className, selectedId, options, onValueChange, 
 
     const isGroup = isOptionGroup(options);
 
-    return (
+    const select = (
         <select className={classNames(styles.select, className)} {...rest} value={selectedId} onChange={onChange}>
             {isGroup && mapOptionGroups(options)}
             {!isGroup && mapOptions(options)}
         </select>
+    );
+
+    if (!label)
+    {
+        return select;
+    }
+
+    return (
+        <label className={classNames(styles.label, labelClassName)}>
+            <span className={styles.labelText}>{label}</span>
+            {select}
+        </label>
     );
 }

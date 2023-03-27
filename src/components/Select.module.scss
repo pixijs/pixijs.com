@@ -3,3 +3,14 @@
     padding: 4px;
     border-radius: 4px;
 }
+
+.label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+.labelText {
+    display: inline-block;
+    margin-right: 8px;
+}
