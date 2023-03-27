@@ -1,76 +1,21 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import type { ExampleSourceEntry } from '@site/src/data/examples';
 import { getExampleOptions, getExampleEntry } from '@site/src/data/examples';
 import type { OptionGroup } from '@site/src/components/Select';
+import type { SetURLStateType } from '@site/src/components/PixiPlayground/usePlaygroundURLState';
 
-interface Payload
-{
-    code: string;
-}
-
-function writePayload(payload: Payload, pushState: boolean)
-{
-    const json = JSON.stringify(payload);
-    const method = pushState ? 'pushState' : 'replaceState';
-
-    history[method](null, '', `#${btoa(json)}`);
-}
-
-function clearPayload(pushState: boolean)
-{
-    const method = pushState ? 'pushState' : 'replaceState';
-
-    history[method](null, '', location.pathname + location.search);
-}
-
-// eslint-disable-next-line consistent-return
-function readPayload(): Payload | undefined
-{
-    if (location.hash !== '')
-    {
-        try
-        {
-            return JSON.parse(atob(location.hash.substring(1)));
-        }
-        catch
-        {
-            // Ignore
-        }
-    }
-}
-
-const defaultExampleId = 'sprite.basic';
+export const defaultExampleId = 'sprite.basic';
 const defaultExampleOptions = getExampleOptions();
 
-type URLHashedCodeType = string | undefined;
-type SetURLHashedCodeType = (nextCode: URLHashedCodeType, pushState: boolean) => void;
-
-export const useURLHashedCode = (): [URLHashedCodeType, SetURLHashedCodeType] =>
-{
-    const payload = readPayload();
-    const code = payload?.code;
-
-    const setURLHashedCode = useCallback<SetURLHashedCodeType>((nextCode, pushState) =>
-    {
-        if (nextCode === undefined)
-        {
-            clearPayload(pushState);
-
-            return;
-        }
-
-        writePayload({ code: nextCode }, pushState);
-    }, []);
-
-    return [code, setURLHashedCode];
+type UseCodeExamplesParams = {
+    urlSourceCode: string | undefined;
+    selectedOptionId: string;
+    setURLState: SetURLStateType;
 };
 
-export const useCodeExamples = () =>
+export const useCodeExamples = ({ urlSourceCode, selectedOptionId, setURLState }: UseCodeExamplesParams) =>
 {
-    const [urlHashedCode, setURLHashedCode] = useURLHashedCode();
-    const [selectedOptionId, setSelectedOptionId] = useState(urlHashedCode ? 'custom' : defaultExampleId);
-
-    const hasUrlHashedCode = Boolean(urlHashedCode);
+    const hasUrlHashedCode = Boolean(urlSourceCode);
 
     const exampleEntry = useMemo<ExampleSourceEntry | undefined>(
         () => getExampleEntry(selectedOptionId),
@@ -78,13 +23,13 @@ export const useCodeExamples = () =>
     );
     const { source: sourceCode, usesWebWorkerLibrary } = useMemo<Omit<ExampleSourceEntry, 'hide'>>(
         () =>
-            (urlHashedCode
+            (urlSourceCode
                 ? {
-                    source: urlHashedCode,
+                    source: urlSourceCode,
                     usesWebWorkerLibrary: false,
                 }
                 : (exampleEntry as ExampleSourceEntry)),
-        [urlHashedCode, exampleEntry],
+        [urlSourceCode, exampleEntry],
     );
 
     const exampleOptions = useMemo<OptionGroup[]>(
@@ -116,10 +61,12 @@ export const useCodeExamples = () =>
                 return;
             }
 
-            setURLHashedCode(undefined, true);
-            setSelectedOptionId(nextSelectedId);
+            setURLState({
+                source: undefined,
+                exampleId: nextSelectedId,
+            });
         },
-        [selectedOptionId, setURLHashedCode],
+        [selectedOptionId, setURLState],
     );
 
     const handleEditorCodeChanged = useCallback(
@@ -134,17 +81,21 @@ export const useCodeExamples = () =>
                 return;
             }
 
-            // pushState when editing code for the first time
-            setURLHashedCode(nextSourceCode, !hasUrlHashedCode);
-            setSelectedOptionId('custom');
+            // pushState only when editing code for the first time
+            setURLState(
+                {
+                    source: nextSourceCode,
+                    exampleId: 'custom',
+                },
+                !hasUrlHashedCode,
+            );
         },
-        [hasUrlHashedCode, sourceCode, setURLHashedCode],
+        [hasUrlHashedCode, setURLState, sourceCode],
     );
 
     return {
         sourceCode,
         usesWebWorkerLibrary,
-        selectedOptionId,
         exampleOptions,
         handleOptionSelected,
         handleEditorCodeChanged,

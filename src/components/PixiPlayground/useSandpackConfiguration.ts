@@ -102,7 +102,8 @@ export const useSandpackConfiguration = ({
 
     const { dependenciesKey, dependencies } = useDependencies({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion });
 
-    // TODO: can we do this a better way without relying on code, perhaps remount higher up?
+    // TODO: adding code here is only necessary because of user edited code, otherwise we
+    // could flip between examples easily, investigate why it bugs out during editing
     const key = `${dependenciesKey}-${code}`;
 
     const customSetup = {
