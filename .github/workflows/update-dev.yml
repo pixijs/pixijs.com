@@ -12,8 +12,21 @@ jobs:
           node-version: '18'
           cache: 'npm'
       - run: npm ci
-      - run: npm run write-versions -- ${{ github.event.client_payload.sha }}
-  call-deploy:
-    uses: ./.github/workflows/reusable-deploy.yml
-    secrets: inherit
+
+      - name: write new pixi-versions.json
+        run: npm run write-versions -- ${{ github.event.client_payload.sha }}
+
+      - name: setup git config
+        run: |
+          git config --global user.name "$GITHUB_ACTOR"
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        env:
+          GIT_USER: $GITHUB_ACTOR
+          GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: commit
+        run: |
+          git add pixi-versions.json
+          git commit -m "new pixi-versions.json built from pixijs/pixijs: ${{ github.event.client_payload.ref }} merge commit: ${{ github.event.client_payload.pr_sha }} using CodeSandbox CI build: ${{ github.event.client_payload.sha }}"
+          git push origin main
 
