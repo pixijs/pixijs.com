@@ -94,7 +94,7 @@ export default function Version(): JSX.Element
                                     </Link>
                                 </td>
                                 <td>
-                                    <Link to={latestVersion.build}>
+                                    <Link to={devVersion.build}>
                                         <BuildLabel />
                                     </Link>
                                 </td>
