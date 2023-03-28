@@ -1,164 +1,107 @@
 import { useColorMode } from '@docusaurus/theme-common';
-import { useEffect, useRef, useState } from 'react';
-
+import { useCallback, useState } from 'react';
+import classNames from 'classnames';
 import { SandpackLayout, SandpackPreview, SandpackProvider, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
-import Editor from '@monaco-editor/react';
-import type { editor } from 'monaco-editor';
+import { useContainerClassNameModifier } from '@site/src/hooks/useContainerClassNameModifier';
+import { latestVersion } from './usePixiVersions';
+import MonacoEditor from './MonacoEditor';
+import { useSandpackConfiguration } from './useSandpackConfiguration';
+import type { CodeChangeCallbackType } from './MonacoEditor';
 
 import styles from './index.module.scss';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-
-const ROOT_DIR = 'inmemory://model/';
 
 type PlaygroundMode = 'tutorial' | 'fullscreen' | 'example';
 
-function MonacoEditor(): JSX.Element
+type PlaygroundProps = {
+    mode: PlaygroundMode;
+    onCodeChanged?: CodeChangeCallbackType;
+};
+
+function Playground({ mode, onCodeChanged }: PlaygroundProps)
 {
-    const editorRef = useRef(null);
     const { code, updateCode } = useActiveCode();
     const { sandpack } = useSandpack();
+    const [showOutput, setShowOutput] = useState(false);
+    const { activeFile, bundlerState } = sandpack;
 
-    const handleEditorDidMount = (editor: any): void =>
-    {
-        editorRef.current = editor;
-    };
-
-    useEffect(() =>
-    {
-        const resetEditorLayout = (): void =>
+    const handleCodeChange: CodeChangeCallbackType = useCallback(
+        (nextCode) =>
         {
-            if (editorRef.current !== null) (editorRef.current as any).layout({});
-        };
+            const nextCodeString = nextCode ?? '';
 
-        window.addEventListener('resize', resetEditorLayout);
+            updateCode(nextCodeString);
+            onCodeChanged?.(nextCodeString);
+        },
+        [onCodeChanged, updateCode],
+    );
 
-        return () =>
-        {
-            window.removeEventListener('resize', resetEditorLayout);
-        };
+    const handleToggle = useCallback(() =>
+    {
+        setShowOutput((lastShowOutput) => !lastShowOutput);
     }, []);
 
-    const options: editor.IStandaloneEditorConstructionOptions = {
-        lineNumbers: 'off',
-        padding: {
-            top: 24,
-        },
-        minimap: {
-            enabled: false,
-        },
-        fontSize: 14,
-        scrollBeyondLastLine: false,
-        scrollbar: {
-            alwaysConsumeMouseWheel: false,
-        },
-    };
-
-    const { colorMode } = useColorMode();
-
+    // TODO: we don't change the value of activeFile so why the key?
     return (
-        <div className={styles.editorWrapper}>
-            <Editor
-                defaultLanguage="javascript"
-                value={code}
-                key={sandpack.activeFile}
-                defaultValue={code}
-                defaultPath={`${ROOT_DIR}/src/index.ts`}
-                onChange={(value) =>
-                {
-                    updateCode(value ?? '');
-                }}
-                options={options}
-                onMount={handleEditorDidMount}
-                theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
-            />
-        </div>
-    );
-}
-
-function Playground(props: { mode: PlaygroundMode; onCodeChanged?: (code: string | undefined) => void }): JSX.Element
-{
-    const { code } = useActiveCode();
-    const { sandpack } = useSandpack();
-    const [showOutput, setShowOutput] = useState(false);
-
-    // TODO: is this intentionally running on every render? Doesn't actually look like onCodeChanged is being used?
-    useEffect(() =>
-    {
-        props.onCodeChanged?.(code);
-
-        return () =>
-        {
-            props.onCodeChanged?.(undefined);
-        };
-    });
-
-    const handleToggle = (): void =>
-    {
-        setShowOutput(!showOutput);
-    };
-
-    return (
-        <SandpackLayout className={`${styles[props.mode]} ${showOutput ? styles.showOutput : ''}`}>
-            <MonacoEditor />
-            <div className={styles.previewWrapper}>
-                <SandpackPreview showOpenInCodeSandbox={true} className={styles.sandpackPreview} />
-                {sandpack.bundlerState === null && <div className={styles.sandpackLoadingOverlay}></div>}
+        <SandpackLayout className={classNames(styles[mode], showOutput && styles.showOutput)}>
+            <div className={styles.editorWrapper}>
+                <MonacoEditor key={activeFile} code={code} onChange={handleCodeChange} />
             </div>
+
+            <div className={styles.previewWrapper}>
+                <SandpackPreview showOpenInCodeSandbox={true} />
+                {!bundlerState && <div className={styles.sandpackLoadingOverlay}></div>}
+            </div>
+
             <button onClick={handleToggle}>{showOutput ? 'Show Code' : 'Show Output'}</button>
         </SandpackLayout>
     );
 }
 
-export default function PixiPlayground(props: {
-    mode?: PlaygroundMode;
+type PixiPlaygroundProps = {
     code: string;
-    onCodeChanged?: (code?: string) => void;
-}): JSX.Element
+    isPixiWebWorkerVersion?: boolean;
+    isPixiDevVersion?: boolean;
+    pixiVersion?: string;
+    mode?: PlaygroundMode;
+    onCodeChanged?: CodeChangeCallbackType;
+};
+
+export default function PixiPlayground({
+    code,
+    onCodeChanged,
+    isPixiWebWorkerVersion = false,
+    isPixiDevVersion = false,
+    pixiVersion = latestVersion,
+    mode = 'example',
+}: PixiPlaygroundProps)
 {
-    const mode = props.mode ?? 'example';
+    const { colorMode } = useColorMode();
+
+    const { key, files, customSetup } = useSandpackConfiguration({
+        code,
+        isPixiDevVersion,
+        isPixiWebWorkerVersion,
+        pixiVersion,
+    });
 
     // Hack to make the examples pages full width on wide screens
-    // eslint-disable-next-line consistent-return
-    useEffect(() =>
-    {
-        const mainContainer = document.querySelector<HTMLDivElement>('main .container');
-
-        if (mode === 'example' && mainContainer !== null)
-        {
-            mainContainer.style.maxWidth = '100%';
-
-            return () =>
-            {
-                mainContainer.style.maxWidth = '';
-            };
-        }
-    }, [mode]);
-    const { siteConfig } = useDocusaurusContext();
-    const { colorMode } = useColorMode();
+    useContainerClassNameModifier('example', mode === 'example');
 
     return (
         <SandpackProvider
-            template="vanilla-ts"
+            key={key}
+            template="vanilla"
             theme={colorMode}
-            files={{
-                '/src/index.ts': props.code,
-            }}
-            customSetup={{}}
+            files={files}
+            customSetup={customSetup}
             options={{
                 classes: {
                     'sp-wrapper': styles.spWrapper,
                     'sp-layout': styles.spLayout,
                 },
-                externalResources: [
-                    'https://beta.pixijs.com/playground.css',
-                    `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/pixi.min.js`,
-                    `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/packages/graphics-extras.js`,
-                    `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/packages/math-extras.js`,
-                    `https://pixijs.download/${siteConfig.customFields?.PIXI_VERSION}/packages/webworker.js`,
-                ],
             }}
         >
-            <Playground mode={mode} onCodeChanged={props.onCodeChanged} />
+            <Playground mode={mode} onCodeChanged={onCodeChanged} />
         </SandpackProvider>
     );
 }

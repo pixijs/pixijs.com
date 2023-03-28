@@ -1,89 +1,63 @@
 import Layout from '@theme/Layout';
-import BrowserOnly from '@docusaurus/BrowserOnly';
 
-import PixiPlayground from '../components/PixiPlayground';
+import PixiPlayground from '@site/src/components/PixiPlayground';
+import Select from '@site/src/components/Select';
+import { defaultExampleId, useCodeExamples } from '@site/src/components/PixiPlayground/useEditorCode';
+import { latestVersion, usePixiVersions } from '@site/src/components/PixiPlayground/usePixiVersions';
+import { usePlaygroundURLState } from '@site/src/components/PixiPlayground/usePlaygroundURLState';
+
 import styles from './playground.module.css';
 
-const defaultCode = `const app = new PIXI.Application<HTMLCanvasElement>({ background: '#1099bb', resizeTo: window });
-document.body.appendChild(app.view);
-
-// create a new Sprite from an image path
-const bunny = PIXI.Sprite.from('https://beta.pixijs.com/assets/bunny.png');
-
-// center the sprite's anchor point
-bunny.anchor.set(0.5);
-
-// move the sprite to the center of the screen
-bunny.x = app.screen.width / 2;
-bunny.y = app.screen.height / 2;
-
-app.stage.addChild(bunny);
-
-// Listen for animate update
-app.ticker.add((delta) => {
-    // just for fun, let's rotate mr rabbit a little
-    // delta is 1 if running at 100% performance
-    // creates frame-independent transformation
-    bunny.rotation += 0.1 * delta;
-});`;
-
-interface Payload {
-    code: string;
-}
-
-function writePayload(payload: Payload): void
+export default function PlaygroundPage()
 {
-    const json = JSON.stringify(payload);
+    const [urlState, setURLState] = usePlaygroundURLState({
+        defaultExampleId,
+        defaultPixiVersion: latestVersion,
+    });
+    const { source: urlSourceCode, exampleId: selectedOptionId, pixiVersion: selectedVersionId } = urlState;
 
-    history.replaceState(null, '', `#${btoa(json)}`);
-}
+    const { sourceCode, usesWebWorkerLibrary, exampleOptions, handleOptionSelected, handleEditorCodeChanged }
+        = useCodeExamples({
+            urlSourceCode,
+            selectedOptionId,
+            setURLState,
+        });
 
-function clearPayload(): void
-{
-    history.replaceState(null, '', location.pathname + location.search);
-}
+    const { selectedVersion, handleVersionChanged, versionOptions } = usePixiVersions({
+        selectedVersionId,
+        setURLState,
+    });
+    const { npm, dev = false } = selectedVersion;
 
-// eslint-disable-next-line consistent-return
-function readPayload(): Payload | undefined
-{
-    if (location.hash !== '')
-    {
-        try
-        {
-            return JSON.parse(atob(location.hash.substring(1)));
-        }
-        catch
-        {
-            // Ignore
-        }
-    }
-}
-
-export default function PlaygroundPage(): JSX.Element
-{
     return (
-        <Layout title={'Playground'} noFooter wrapperClassName={styles.wrapper}>
-            <BrowserOnly>
-                {() =>
-                {
-                    const payload = readPayload();
-                    const code = payload?.code ?? defaultCode;
+        <Layout title={'Playground'} noFooter wrapperClassName={styles.pageWrapper}>
+            <div className={styles.playgroundWrapper}>
+                <div className={styles.nav}>
+                    <Select
+                        label="Example:"
+                        labelClassName={styles.select}
+                        selectedId={selectedOptionId}
+                        options={exampleOptions}
+                        onValueChange={handleOptionSelected}
+                    />
+                    <Select
+                        label="Version:"
+                        labelClassName={styles.select}
+                        selectedId={selectedVersionId}
+                        options={versionOptions}
+                        onValueChange={handleVersionChanged}
+                    />
+                </div>
 
-                    function onCodeChanged(code?: string): void
-                    {
-                        if (code !== undefined)
-                        {
-                            writePayload({ code });
-                        }
-                        else
-                        {
-                            clearPayload();
-                        }
-                    }
-
-                    return <PixiPlayground mode="fullscreen" code={code} onCodeChanged={onCodeChanged} />;
-                }}
-            </BrowserOnly>
+                <PixiPlayground
+                    code={sourceCode}
+                    pixiVersion={npm}
+                    isPixiDevVersion={dev}
+                    isPixiWebWorkerVersion={usesWebWorkerLibrary}
+                    onCodeChanged={handleEditorCodeChanged}
+                    mode="fullscreen"
+                />
+            </div>
         </Layout>
     );
 }

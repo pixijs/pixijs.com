@@ -21,13 +21,24 @@ module.exports = {
                 api: 'api',
             },
         },
+        react: {
+            version: 'detect',
+        },
     },
     ignorePatterns: ['build', 'node_modules'],
+    overrides: [
+        {
+            files: ['src/data/examples/**/*.js'],
+            rules: {
+                'no-mixed-operators': 'off',
+            },
+        },
+    ],
     rules: {
         'no-empty-function': 0,
         'no-prototype-builtins': 0,
         'react-hooks/rules-of-hooks': 'error',
-        'react-hooks/exhaustive-deps': 'warn',
+        'react-hooks/exhaustive-deps': 'error',
         'spaced-comment': [1, 'always', { markers: ['/'] }],
         '@typescript-eslint/triple-slash-reference': [1, { path: 'always' }],
         '@typescript-eslint/consistent-type-imports': [1, { disallowTypeAnnotations: false }],

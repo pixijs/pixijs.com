@@ -1,21 +1,33 @@
-import CodeBlock from '@theme-original/CodeBlock';
-
-import PixiPlayground from '../../components/PixiPlayground';
-import styles from './index.module.css';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 
-export default function CodeBlockWrapper(props: { playground: boolean; children: string }): JSX.Element
+import CodeBlock from '@theme-original/CodeBlock';
+import PixiPlayground from '@site/src/components/PixiPlayground';
+
+import styles from './index.module.css';
+
+type CodeBlockWrapperProps = { [key: string]: any } & {
+    playground?: boolean;
+    usesWebWorkerLibrary?: boolean;
+    children: string;
+};
+
+export default function CodeBlockWrapper({
+    children,
+    playground = false,
+    usesWebWorkerLibrary = false,
+    ...rest
+}: CodeBlockWrapperProps)
 {
     const isBrowser = useIsBrowser();
 
-    if (props.playground && isBrowser)
+    if (playground && isBrowser)
     {
         return (
             <div className={styles.playgroundCodeBlock}>
-                <PixiPlayground code={props.children} />
+                <PixiPlayground code={children} isPixiWebWorkerVersion={usesWebWorkerLibrary} />
             </div>
         );
     }
 
-    return <CodeBlock {...props} />;
+    return <CodeBlock {...rest}>{children}</CodeBlock>;
 }

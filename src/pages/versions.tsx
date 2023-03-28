@@ -10,6 +10,7 @@ import Translate from '@docusaurus/Translate';
 import Versions from '@site/pixi-versions.json';
 import Heading from '@theme/Heading';
 import Layout from '@theme/Layout';
+import type { IVersion } from '@site/src/components/PixiPlayground/usePixiVersions';
 
 function DocumentationLabel()
 {
@@ -24,14 +25,6 @@ function BuildLabel()
 function ReleaseNotesLabel()
 {
     return <Translate id="versionsPage.versionEntry.releaseNotes">Release Notes</Translate>;
-}
-
-interface IVersion {
-    version: string;
-    releaseNotes: string;
-    docs: string;
-    build: string;
-    prerelease: boolean;
 }
 
 export default function Version(): JSX.Element
