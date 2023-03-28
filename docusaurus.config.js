@@ -66,9 +66,40 @@ const config = {
 
     plugins: ['docusaurus-plugin-sass'],
 
+    themes: ['docusaurus-theme-search-typesense'],
+
     themeConfig:
         /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
         ({
+            typesense: {
+                // Replace this with the name of your index/collection.
+                // It should match the "index_name" entry in the scraper's "config.json" file.
+                typesenseCollectionName: 'beta_pixijs',
+                typesenseServerConfig: {
+                    nodes: [
+                        {
+                            host: 'localhost',
+                            port: 8108,
+                            protocol: 'http',
+                        },
+                        {
+                            host: 'localhost',
+                            port: 8108,
+                            protocol: 'http',
+                        },
+                        {
+                            host: 'localhost',
+                            port: 8108,
+                            protocol: 'http',
+                        },
+                    ],
+                    apiKey: 'xyz',
+                },
+                // Optional: Typesense search parameters: https://typesense.org/docs/0.24.0/api/search.html#search-parameters
+                typesenseSearchParameters: {},
+                // Optional
+                contextualSearch: true,
+            },
             navbar: {
                 logo: {
                     alt: 'PixiJS',
@@ -270,12 +301,6 @@ const config = {
                 defaultMode: 'light',
                 disableSwitch: false,
                 respectPrefersColorScheme: true,
-            },
-            algolia: {
-                appId: 'JX6EBQCAGQ',
-                apiKey: '2ac1220b913a281bcfeccdf628fa6e99',
-                indexName: 'beta_pixijs',
-                contextualSearch: false,
             },
         }),
 };
