@@ -6,6 +6,7 @@
         "prebuild": "npm run write-example-docs",
         "build": "docusaurus build",
         "clear": "docusaurus clear",
+        "predeploy": "npm run write-example-docs",
         "deploy": "docusaurus deploy",
         "docusaurus": "docusaurus",
         "lint": "eslint . --ext .js,.mjs,.jsx,.ts,.tsx --max-warnings=0",

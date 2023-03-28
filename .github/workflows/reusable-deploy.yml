@@ -16,11 +16,8 @@ jobs:
           cache: 'npm'
 
       - run: npm ci
-
       - run: npm run types
-
       - run: npm run lint
-
       - run: |
           git config --global user.name "$GITHUB_ACTOR"
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
