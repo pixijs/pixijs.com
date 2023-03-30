@@ -26,6 +26,7 @@ jobs:
 
       - name: commit
         run: |
+          git pull origin main
           git add pixi-versions.json
           git commit -m "new pixi-versions.json built from pixijs/pixijs: ${{ github.event.client_payload.ref }} merge commit: ${{ github.event.client_payload.pr_sha }} using CodeSandbox CI build: ${{ github.event.client_payload.sha }}"
           git push origin main
