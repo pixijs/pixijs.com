@@ -32,6 +32,7 @@ jobs:
           git push origin main
 
   call-deploy:
+    needs: update-dev
     uses: ./.github/workflows/reusable-deploy.yml
     secrets: inherit
 
