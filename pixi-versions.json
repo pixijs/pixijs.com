@@ -6,7 +6,7 @@
     "build": "https://pixijs.download/dev/pixi.min.js",
     "docs": "/api",
     "dev": true,
-    "npm": "https://pkg.csb.dev/pixijs/pixijs/commit/2715a248"
+    "npm": "https://pkg.csb.dev/pixijs/pixijs/commit/38dc96ff"
   },
   {
     "versionLabel": "v7.2.x",
