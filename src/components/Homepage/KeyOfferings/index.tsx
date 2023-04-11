@@ -60,11 +60,13 @@ const Devices = (): JSX.Element =>
                     <div
                         key={index}
                         className="device-anim"
-                        style={{
-                            ...device.styles,
-                            position: 'absolute',
-                            'animation-delay': `${delay}s`,
-                        }}
+                        style={
+                            {
+                                ...device.styles,
+                                position: 'absolute',
+                                'animation-delay': `${delay}s`,
+                            } as any
+                        }
                     >
                         <img src={device.img} alt={device.alt} />
                         <canvas
