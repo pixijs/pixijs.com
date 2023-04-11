@@ -17,11 +17,14 @@ export default function FeatureList(): JSX.Element
             <div ref={refTitle} className="col col--12 margin-bottom--lg">
                 {inViewTitle && (
                     <h2
-                        className={`${styles.title} underline`}
-                        style={{
-                            opacity: 0,
-                            animation: 'short-up 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s forwards',
-                        }}
+                        className={`${styles.title} underline short-up-anim`}
+                        style={
+                            {
+                                opacity: 0,
+                                'animation-duration': `0.3s`,
+                                'animation-delay': `0.5s`,
+                            } as any
+                        }
                     >
                         PixiJS Features
                     </h2>
