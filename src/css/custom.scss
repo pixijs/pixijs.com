@@ -184,6 +184,42 @@ html[data-theme='dark'] {
     }
 }
 
+.offering-anim {
+    animation-name: offering-in;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-fill-mode: forwards;
+    animation-delay: 0s;
+}
+.device-anim {
+    animation-name: device-in;
+    animation-duration: 0.4s;
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-fill-mode: forwards;
+    animation-delay: 0s;
+}
+.short-up-anim {
+    animation-name: short-up;
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-fill-mode: forwards;
+    animation-duration: 0s;
+    animation-delay: 0s;
+}
+.feature-l-in-anim {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-fill-mode: forwards;
+    animation-duration: 0.5s;
+    animation-name: feature-l-in;
+    animation-delay: 0s;
+}
+.feature-r-in-anim {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-fill-mode: forwards;
+    animation-duration: 0.5s;
+    animation-name: feature-r-in;
+    animation-delay: 0s;
+}
+
 @keyframes short-up {
     0% {
         opacity: 0;

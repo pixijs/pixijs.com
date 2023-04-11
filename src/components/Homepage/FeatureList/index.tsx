@@ -55,14 +55,14 @@ export default function FeatureList(): JSX.Element
                     return (
                         <div
                             key={index}
-                            className={`${styles.feature} col col--6`}
-                            style={{
-                                opacity: 0,
-                                transform: 'translateX(300px)',
-                                animation: `${feature['data-anim']}
-                                0.5s cubic-bezier(0.215, 0.61, 0.355, 1)
-                                ${delay}s forwards`,
-                            }}
+                            className={`${styles.feature} col col--6 ${feature['data-anim']}-anim`}
+                            style={
+                                {
+                                    opacity: 0,
+                                    transform: 'translateX(300px)',
+                                    'animation-delay': `${delay}s`,
+                                } as any
+                            }
                         >
                             <img src={feature.icon} />
                             <div>

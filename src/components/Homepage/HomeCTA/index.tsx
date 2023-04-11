@@ -8,6 +8,7 @@ export interface HomeCTAOptions {
     white?: boolean;
     outline?: boolean;
     style?: React.CSSProperties;
+    anim?: string;
 }
 
 export default function HomeCTA(opts: HomeCTAOptions): JSX.Element
@@ -22,6 +23,11 @@ export default function HomeCTA(opts: HomeCTAOptions): JSX.Element
     if (opts.outline ?? false)
     {
         classNames += ` ${styles.outline}`;
+    }
+
+    if (opts.anim)
+    {
+        classNames += ` ${opts.anim}`;
     }
 
     return (

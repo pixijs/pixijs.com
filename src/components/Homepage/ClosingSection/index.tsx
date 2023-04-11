@@ -4,8 +4,8 @@ import { useInView } from 'react-intersection-observer';
 
 const animShortUp = (duration: number, delay: number) => ({
     opacity: 0,
-    animation: `short-up ${duration}s
-            cubic-bezier(0.215, 0.61, 0.355, 1) ${delay}s forwards`,
+    'animation-duration': `${duration}s`,
+    'animation-delay': `${delay}s`,
 });
 
 export default function ClosingSection(): JSX.Element
@@ -19,18 +19,27 @@ export default function ClosingSection(): JSX.Element
             <div ref={ref}>
                 {inView && (
                     <>
-                        <h3 style={animShortUp(0.3, 0.25)}>Elevate your Traditional HTML5 Techniques</h3>
-                        <h5 style={animShortUp(0.3, 0.4)}>
+                        <h3 className="short-up-anim" style={animShortUp(0.3, 0.25)}>
+                            Elevate your Traditional HTML5 Techniques
+                        </h3>
+                        <h5 className="short-up-anim" style={animShortUp(0.3, 0.4)}>
                             Unbeatable performance, intuitive API, globally used and battle­tested.
                         </h5>
                         <div className="buttonRow">
                             <HomeCTA
+                                anim="short-up-anim"
                                 style={animShortUp(0.3, 0.55)}
                                 label="Download"
                                 link="https://github.com/pixijs/pixijs/releases"
                             />
                             &nbsp;
-                            <HomeCTA style={animShortUp(0.3, 0.7)} label="Get Started" link="/tutorial" outline={true} />
+                            <HomeCTA
+                                anim="short-up-anim"
+                                style={animShortUp(0.3, 0.7)}
+                                label="Get Started"
+                                link="/tutorial"
+                                outline={true}
+                            />
                         </div>
                     </>
                 )}

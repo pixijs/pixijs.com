@@ -21,13 +21,13 @@ const Offerings = (): JSX.Element =>
                 return (
                     <div
                         key={index}
-                        className="col col--4 padding-vert--md"
-                        style={{
-                            transform: 'translateX(100vw)',
-                            animation: `offering-in 1s cubic-bezier(0.215, 0.61, 0.355, 1) ${Number(
-                                0.15 * index,
-                            )}s forwards`,
-                        }}
+                        className="col col--4 padding-vert--md offering-anim"
+                        style={
+                            {
+                                transform: 'translateX(100vw)',
+                                'animation-delay': `${Number(0.15 * index)}s`,
+                            } as any
+                        }
                     >
                         <span>{`0${index + 1}`}</span>
                         <h2 className="underline">{item.heading}</h2>
@@ -59,10 +59,11 @@ const Devices = (): JSX.Element =>
                 return (
                     <div
                         key={index}
+                        className="device-anim"
                         style={{
                             ...device.styles,
                             position: 'absolute',
-                            animation: `device-in 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) ${delay}s forwards`,
+                            'animation-delay': `${delay}s`,
                         }}
                     >
                         <img src={device.img} alt={device.alt} />
