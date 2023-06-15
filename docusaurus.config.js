@@ -66,6 +66,20 @@ const config = {
 
     plugins: ['docusaurus-plugin-sass'],
 
+    themes: [
+        [
+            require.resolve('@easyops-cn/docusaurus-search-local'),
+            {
+                hashed: true,
+                removeDefaultStemmer: true,
+                highlightSearchTermsOnTargetPage: true,
+                docsRouteBasePath: '/',
+                explicitSearchResultPath: true,
+                searchContextByPaths: ['guides', 'examples', 'blog'],
+                useAllContextsWithNoSearchContext: true,
+            },
+        ],
+    ],
     themeConfig:
         /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
         ({
@@ -278,12 +292,12 @@ const config = {
                 disableSwitch: false,
                 respectPrefersColorScheme: true,
             },
-            algolia: {
-                appId: 'JX6EBQCAGQ',
-                apiKey: '2ac1220b913a281bcfeccdf628fa6e99',
-                indexName: 'beta_pixijs',
-                contextualSearch: false,
-            },
+            // algolia: {
+            //     appId: 'JX6EBQCAGQ',
+            //     apiKey: '2ac1220b913a281bcfeccdf628fa6e99',
+            //     indexName: 'beta_pixijs',
+            //     contextualSearch: false,
+            // },
         }),
 };
 
