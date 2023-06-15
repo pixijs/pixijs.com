@@ -109,7 +109,7 @@ const { compareVersions } = require('compare-versions');
         version: 'dev',
         releaseNotes: 'https://github.com/pixijs/pixijs/releases',
         build: 'https://pixijs.download/dev/pixi.min.js',
-        docs: '/api',
+        docs: 'https://pixijs.download/release/docs',
         dev: true,
         npm: codeSandboxBaseUrl,
     });

@@ -10,5 +10,5 @@ If you're new to PixiJS, we suggest you start with the Basics and read through t
 
 As you explore the guides, you may find these resources valuable:
 
-* [PixiJS API documentation](/api)
+* [PixiJS API documentation](https://pixijs.download/release/docs)
 * [PixiJS Github repo](https://github.com/pixijs/pixijs)

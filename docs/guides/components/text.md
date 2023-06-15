@@ -10,7 +10,7 @@ Because of the challenges of working with text in WebGL, PixiJS provides two ver
 
 ## The Text Object
 
-In order to draw text to the screen, you use a [Text](/api/classes/PIXI.Text.pixi_text) object.  Under the hood, this class draws text to an off-screen buffer using the browser's normal text rendering, then uses that offscreen buffer as the source for drawing the text object.  Effectively what this means is that whenever you create or change text, PixiJS creates a new rasterized image of that text, and then treats it like a sprite.  This approach allows truly rich text display while keeping rendering speed high.
+In order to draw text to the screen, you use a [Text](https://pixijs.download/release/docs/PIXI.Text.html) object.  Under the hood, this class draws text to an off-screen buffer using the browser's normal text rendering, then uses that offscreen buffer as the source for drawing the text object.  Effectively what this means is that whenever you create or change text, PixiJS creates a new rasterized image of that text, and then treats it like a sprite.  This approach allows truly rich text display while keeping rendering speed high.
 
 So when working with PIXI.Text objects, there are two sets of options - standard display object options like position, rotation, etc that work *after* the text is rasterized internally, and text style options that are used *while* rasterizing.  Because text once rendered is basically just a sprite, there's no need to review the standard options.  Instead, let's focus on how text is styled.
 
@@ -18,7 +18,7 @@ Check out the [text example code](/examples/text/pixi-text).
 
 ## Text Styles
 
-There are a lot of text style options available (see [TextStyle](/api/classes/PIXI.TextStyle.pixi_text)), but they break down into 5 main groups:
+There are a lot of text style options available (see [TextStyle](https://pixijs.download/release/docs/PIXI.TextStyle.html)), but they break down into 5 main groups:
 
 **Font**: `fontFamily` to select the webfont to use, `fontSize` to specify the size of the text to draw, along with options for font weight, style and variant.
 
@@ -68,7 +68,7 @@ font.load().then(() => {
 
 ## Caveats and Gotchas
 
-While PixiJS does make working with text easy, there are a few things you need to watch out for.  
+While PixiJS does make working with text easy, there are a few things you need to watch out for.
 
 First, changing an existing text string requires re-generating the internal render of that text, which is a slow operation that can impact performance if you change many text objects each frame.  If your project requires lots of frequently changing text on the screen at once, consider using a PIXI.BitmapText object (explained below) which uses a fixed bitmap font that doesn't require re-generation when text changes.
 

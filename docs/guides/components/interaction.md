@@ -69,7 +69,7 @@ sprite.on('pointerdown', (event) => { alert('clicked!'); });
 sprite.eventMode = 'static';
 ```
 
-Check out the [DisplayObject](/api/classes/PIXI.DisplayObject.pixi_display) for the list of interaction events supported.
+Check out the [DisplayObject](https://pixijs.download/release/docs/PIXI.DisplayObject.html) for the list of interaction events supported.
 
 ### Checking if Object is Interactive
 
