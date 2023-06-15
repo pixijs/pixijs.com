@@ -14,7 +14,7 @@
 - Sprites can be batched with up to 16 different textures (dependent on hardware)
 - This is the fastest way to render content
 - On older devices use smaller low resolution textures
-- Add the extention `@0.5x.png` to the 50% scale-down spritesheet so PixiJS will visually-double them automaticaly
+- Add the extention `@0.5x.png` to the 50% scale-down spritesheet so PixiJS will visually-double them automatically
 - Draw order can be important
 
 ### Graphics
@@ -33,9 +33,9 @@
 
 ### Text
 
-- Avoid changing it on everyframe as this can be expensive (each time it draws to a canvas and then uploads to GPU)
+- Avoid changing it on every frame as this can be expensive (each time it draws to a canvas and then uploads to GPU)
 - Bitmap Text gives much better performance for dynamically changing text
-- Text resolution matches the renderer resolution, to decreates resolution yourself by setting `resolution` property, which can consume less memory
+- Text resolution matches the renderer resolution, to decreases resolution yourself by setting `resolution` property, which can consume less memory
 
 ### Masks
 

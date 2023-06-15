@@ -3,7 +3,6 @@
         "name": "Mat Groves",
         "badges": ["Owner", "Creator"],
         "country": "🇬🇧",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/GoodBoyDigital",
             "twitter": "https://twitter.com/doormat23"
@@ -14,7 +13,6 @@
         "name": "Chad Engler",
         "badges": ["Owner"],
         "country": "🇺🇸",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/englercj",
             "twitter": "https://twitter.com/rolnaaba"
@@ -25,7 +23,6 @@
         "name": "Matt Karl",
         "badges": ["Owner"],
         "country": "🇺🇸",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/bigtimebuddy",
             "twitter": "https://twitter.com/bigtimebuddy"
@@ -36,7 +33,6 @@
         "name": "Sean Burns",
         "badges": ["Owner"],
         "country": "🇬🇧",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/Zyie",
             "twitter": "https://twitter.com/_Zyie_"
@@ -44,30 +40,9 @@
         "active": true
     },
     {
-        "name": "Dmytro Soldatov",
-        "badges": ["Member"],
-        "country": "🇪🇪",
-        "description": "Short member introduction",
-        "social": {
-            "github": "https://github.com/CyberDex"
-        },
-        "active": true
-    },
-    {
-        "name": "Alex Prokop",
-        "badges": ["Member"],
-        "country": "🇬🇧",
-        "description": "Short member introduction",
-        "social": {
-            "github": "https://github.com/baseten"
-        },
-        "active": true
-    },
-    {
         "name": "Ivan Popelyshev",
         "badges": ["Member"],
         "country": "🇷🇺",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/ivanpopelyshev",
             "twitter": "https://twitter.com/ivanpopelyshev"
@@ -78,7 +53,6 @@
         "name": "Dave Moore",
         "badges": ["Member"],
         "country": "🇬🇧",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/themoonrat",
             "twitter": "https://twitter.com/themoonrat"
@@ -89,7 +63,6 @@
         "name": "Andrew Start",
         "badges": ["Member"],
         "country": "🇺🇸",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/andrewstart"
         },
@@ -99,7 +72,6 @@
         "name": "Yevhenii Huselietov",
         "badges": ["Member"],
         "country": "🇺🇦",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/cursedcoder",
             "twitter": "https://twitter.com/cursedcoder"
@@ -110,7 +82,6 @@
         "name": "Shukant Kumar Pal",
         "badges": ["Member"],
         "country": "🇺🇸",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/ShukantPal",
             "twitter": "https://twitter.com/ShukantP"
@@ -121,7 +92,6 @@
         "name": "Milton Candelero",
         "badges": ["Member"],
         "country": "🇦🇷",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/miltoncandelero",
             "twitter": "https://twitter.com/miltoncandelero"
@@ -132,7 +102,6 @@
         "name": "Tianlan Zhou",
         "badges": ["Member"],
         "country": "🇨🇳",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/SuperSodaSea",
             "twitter": "https://twitter.com/super_soda"
@@ -143,10 +112,27 @@
         "name": "Viktor Persson",
         "badges": ["Member"],
         "country": "🇸🇪",
-        "description": "Short member introduction",
         "social": {
             "github": "https://github.com/vikpe"
         },
         "active": true
-    }
+    },
+    {
+      "name": "Dmytro Soldatov",
+      "badges": ["Member"],
+      "country": "🇪🇪",
+      "social": {
+          "github": "https://github.com/CyberDex"
+      },
+      "active": true
+  },
+  {
+      "name": "Alex Prokop",
+      "badges": ["Member"],
+      "country": "🇬🇧",
+      "social": {
+          "github": "https://github.com/baseten"
+      },
+      "active": true
+  }
 ]

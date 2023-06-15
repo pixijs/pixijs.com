@@ -44,7 +44,7 @@ const config = {
                     routeBasePath: '/',
                     versions: {
                         current: {
-                            label: 'Dev',
+                            label: 'Latest',
                         },
                     },
                 },
@@ -85,10 +85,11 @@ const config = {
                                 docId: 'guides/index',
                                 label: 'Guides',
                             },
-                            {
-                                label: 'Tutorial',
-                                to: 'tutorial',
-                            },
+                            // TODO: add tutorial back in
+                            // {
+                            //     label: 'Tutorial',
+                            //     to: 'tutorial',
+                            // },
                             {
                                 type: 'doc',
                                 docId: 'examples/index',
@@ -97,11 +98,17 @@ const config = {
                         ],
                     },
                     {
-                        type: 'doc',
-                        docId: 'api/index',
                         label: 'API',
                         position: 'left',
+                        href: `https://pixijs.download/release/docs/index.html`,
                     },
+                    // TODO: add docs back in
+                    // {
+                    //     type: 'doc',
+                    //     docId: 'api/index',
+                    //     label: 'API',
+                    //     position: 'left',
+                    // },
                     {
                         to: 'playground',
                         label: 'Playground',

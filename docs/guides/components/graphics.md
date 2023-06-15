@@ -95,7 +95,7 @@ The Graphics class is a complex beast, and so there are a number of things to be
 
 **Changing Geometry**: If you want to change the shape of a Graphics object, you don't need to delete and recreate it.  Instead you can use the `clear()` function to reset the contents of the geometry list, then add new primitives as desired.  Be careful of performance when doing this every frame.
 
-**Performance**: Graphics objects are generally quite performant.  However, if you build highly complex geometry, you may pass the threshhold that permits batching during rendering, which can negatively impact performance. It's better for batching to use many Graphics objects instead of a single Graphics with many shapes. 
+**Performance**: Graphics objects are generally quite performant.  However, if you build highly complex geometry, you may pass the threshold that permits batching during rendering, which can negatively impact performance. It's better for batching to use many Graphics objects instead of a single Graphics with many shapes.
 
 **Transparency**: Because the Graphics object renders its primitives sequentially, be careful when using blend modes or partial transparency with overlapping geometry.  Blend modes like `ADD` and `MULTIPLY` will work *on each primitive*, not on the final composite image.  Similarly, partially transparent Graphics objects will show primitives overlapping. To apply transparency or blend modes to a single flattened surface, consider using AlphaFilter or RenderTexture.
 

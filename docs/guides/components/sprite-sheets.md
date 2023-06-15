@@ -6,7 +6,7 @@ A Spritesheet is a media format for more efficiently downloading and rendering S
 
 ## Anatomy of a Spritesheet
 
-The basic idea of a spritesheet is to pack a series of images together into a single image, track where each source image ends up, and use that combined image as a shared BaseTexture for the resulting Sprites.  
+The basic idea of a spritesheet is to pack a series of images together into a single image, track where each source image ends up, and use that combined image as a shared BaseTexture for the resulting Sprites.
 
 The first step is to collect the images you want to combine.  The sprite packer then collects the images, and creates a new combined image.
 
@@ -34,7 +34,7 @@ You can use a 3rd party tool to assemble your sprite sheet files.  Here are two 
 
 [TexturePacker](https://www.codeandweb.com/texturepacker): TexturePacker is a more polished tool that supports advanced features and workflows. A free version is available which has all the necessary features for packing spritesheets for PixiJS. It's a good fit for larger projects and professional game development, or projects that need more complex tile mapping features.
 
-Spritesheet data can also be created manually or programatically, and supplied to a new AnimatedSprite. This may be an easier option if your sprites are already contained in a single image.
+Spritesheet data can also be created manually or programmatically, and supplied to a new AnimatedSprite. This may be an easier option if your sprites are already contained in a single image.
 
 ```javascript
 // Create object to store sprite sheet data
@@ -75,7 +75,7 @@ await spritesheet.parse();
 // spritesheet is ready to use!
 const anim = new PIXI.AnimatedSprite(spritesheet.animations.enemy);
 
-// set the animation speed 
+// set the animation speed
 anim.animationSpeed = 0.1666;
 // play the animation on a loop
 anim.play();
