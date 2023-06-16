@@ -4,7 +4,7 @@ const app = new PIXI.Application({ autoStart: false, resizeTo: window });
 
 document.body.appendChild(app.view);
 
-PIXI.Assets.load('https://beta.pixijs.com/assets/spritesheet/mc.json').then(() =>
+PIXI.Assets.load('https://pixijs.com/assets/spritesheet/mc.json').then(() =>
 {
     // create an array to store the textures
     const explosionTextures = [];

@@ -4,7 +4,7 @@ const app = new PIXI.Application({ antialias: true, resizeTo: window });
 
 document.body.appendChild(app.view);
 
-const sprite = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_rotate.jpg');
+const sprite = PIXI.Sprite.from('https://pixijs.com/assets/bg_rotate.jpg');
 
 // // BEZIER CURVE ////
 // information: https://en.wikipedia.org/wiki/Bézier_curve

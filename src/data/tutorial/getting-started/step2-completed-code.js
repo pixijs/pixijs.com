@@ -8,7 +8,7 @@ const app = new PIXI.Application({
 document.body.appendChild(app.view);
 
 // create a new Sprite from an image path
-const bunny = PIXI.Sprite.from('https://beta.pixijs.com/assets/bunny.png');
+const bunny = PIXI.Sprite.from('https://pixijs.com/assets/bunny.png');
 
 // add to stage
 app.stage.addChild(bunny);

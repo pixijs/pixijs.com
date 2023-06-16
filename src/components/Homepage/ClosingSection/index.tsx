@@ -4,8 +4,8 @@ import { useInView } from 'react-intersection-observer';
 
 const animShortUp = (duration: number, delay: number) => ({
     opacity: 0,
-    'animation-duration': `${duration}s`,
-    'animation-delay': `${delay}s`,
+    animationDuration: `${duration}s`,
+    animationDelay: `${delay}s`,
 });
 
 export default function ClosingSection(): JSX.Element

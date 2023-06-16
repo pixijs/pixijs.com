@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
     title: 'PixiJS',
     tagline: 'Homepage still needs to be revamped',
-    url: 'https://beta.pixijs.com',
+    url: 'https://pixijs.com',
     baseUrl: '/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
@@ -20,7 +20,7 @@ const config = {
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
     organizationName: 'pixijs', // Usually your GitHub org/user name.
-    projectName: 'beta.pixijs.com', // Usually your repo name.
+    projectName: 'pixijs.com', // Usually your repo name.
     trailingSlash: false,
 
     // Even if you don't use internalization, you can use this field to set useful
@@ -278,11 +278,6 @@ const config = {
                 copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labour of love built by the <a href="/team">PixiJS team</a>.`,
             },
             image: 'images/ogimage.png',
-            announcementBar: {
-                isCloseable: true,
-                id: 'beta',
-                content: 'Please note that this is a beta version of the site and some features may not work as expected.',
-            },
             prism: {
                 theme: lightCodeTheme,
                 darkTheme: darkCodeTheme,

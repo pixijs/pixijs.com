@@ -4,7 +4,7 @@ const app = new PIXI.Application({ backgroundColor: '#111', resizeTo: window });
 
 document.body.appendChild(app.view);
 
-const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png');
+const texture = PIXI.Texture.from('https://pixijs.com/assets/bunny.png');
 const bunnyContainer = new PIXI.Container();
 
 async function takeScreenshot()

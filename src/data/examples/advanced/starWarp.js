@@ -5,7 +5,7 @@ const app = new PIXI.Application({ resizeTo: window });
 document.body.appendChild(app.view);
 
 // Get the texture for star.
-const starTexture = PIXI.Texture.from('https://beta.pixijs.com/assets/star.png');
+const starTexture = PIXI.Texture.from('https://pixijs.com/assets/star.png');
 
 const starAmount = 1000;
 let cameraZ = 0;

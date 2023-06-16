@@ -9,7 +9,7 @@ const app = new PIXI.Application({ resizeTo: window });
 document.body.appendChild(app.view);
 
 // Create background image
-const background = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_grass.jpg');
+const background = PIXI.Sprite.from('https://pixijs.com/assets/bg_grass.jpg');
 
 background.width = app.screen.width;
 background.height = app.screen.height;

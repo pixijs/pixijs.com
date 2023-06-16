@@ -5,10 +5,10 @@ const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
 PIXI.Assets.load([
-    'https://beta.pixijs.com/assets/eggHead.png',
-    'https://beta.pixijs.com/assets/flowerTop.png',
-    'https://beta.pixijs.com/assets/helmlok.png',
-    'https://beta.pixijs.com/assets/skully.png',
+    'https://pixijs.com/assets/eggHead.png',
+    'https://pixijs.com/assets/flowerTop.png',
+    'https://pixijs.com/assets/helmlok.png',
+    'https://pixijs.com/assets/skully.png',
 ]).then(onAssetsLoaded);
 
 const REEL_WIDTH = 160;
@@ -19,10 +19,10 @@ function onAssetsLoaded()
 {
     // Create different slot symbols.
     const slotTextures = [
-        PIXI.Texture.from('https://beta.pixijs.com/assets/eggHead.png'),
-        PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png'),
-        PIXI.Texture.from('https://beta.pixijs.com/assets/helmlok.png'),
-        PIXI.Texture.from('https://beta.pixijs.com/assets/skully.png'),
+        PIXI.Texture.from('https://pixijs.com/assets/eggHead.png'),
+        PIXI.Texture.from('https://pixijs.com/assets/flowerTop.png'),
+        PIXI.Texture.from('https://pixijs.com/assets/helmlok.png'),
+        PIXI.Texture.from('https://pixijs.com/assets/skully.png'),
     ];
 
     // Build the reels

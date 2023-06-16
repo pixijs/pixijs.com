@@ -25,7 +25,7 @@ const Offerings = (): JSX.Element =>
                         style={
                             {
                                 transform: 'translateX(100vw)',
-                                'animation-delay': `${Number(0.15 * index)}s`,
+                                animationDelay: `${Number(0.15 * index)}s`,
                             } as any
                         }
                     >
@@ -64,7 +64,7 @@ const Devices = (): JSX.Element =>
                             {
                                 ...device.styles,
                                 position: 'absolute',
-                                'animation-delay': `${delay}s`,
+                                animationDelay: `${delay}s`,
                             } as any
                         }
                     >

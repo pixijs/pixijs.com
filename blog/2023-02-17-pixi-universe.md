@@ -12,7 +12,7 @@ hide_table_of_contents: true
 keywords: ['keyword', 'for', 'search', 'engines']
 ---
 
-We are excited to announce the launch of the PixiJS Universe, an initiative to further enhance the capabilities of PixiJS and make it even easier for developers to create amazing games and apps. 
+We are excited to announce the launch of the PixiJS Universe, an initiative to further enhance the capabilities of PixiJS and make it even easier for developers to create amazing games and apps.
 
 <!--truncate-->
 
@@ -29,8 +29,8 @@ The current documentation has suffered from long-term organic growth over the ye
 
 We are also planning on improving the documentation and adding more guides and examples, as well as considering translating the documentation into other languages.
 
-If you have any ideas on how to improve the site please let us know! 
-- [Github Repo](https://github.com/pixijs/beta.pixijs.com)
+If you have any ideas on how to improve the site please let us know!
+- [Github Repo](https://github.com/pixijs/pixijs.com)
 
 ### PixiJS React​
 Next up is PixiJS React. A library that provides a way to use PixiJS in React applications. PixiJS React is a continuation of the `react-pixi` library created by Patrick Brouwer, which has been widely used by the PixiJS community in React projects. PixiJS has taken over maintenance of the library and is dedicated to improving the library's performance, documentation, and support for new features.

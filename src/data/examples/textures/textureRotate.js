@@ -4,7 +4,7 @@ const app = new PIXI.Application({ resizeTo: window });
 
 document.body.appendChild(app.view);
 
-PIXI.Assets.load('https://beta.pixijs.com/assets/flowerTop.png').then((texture) =>
+PIXI.Assets.load('https://pixijs.com/assets/flowerTop.png').then((texture) =>
 {
     // create rotated textures
     const textures = [texture];

@@ -5,8 +5,8 @@ const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
 // Add the assets to load
-PIXI.Assets.add('flowerTop', 'https://beta.pixijs.com/assets/flowerTop.png');
-PIXI.Assets.add('eggHead', 'https://beta.pixijs.com/assets/eggHead.png');
+PIXI.Assets.add('flowerTop', 'https://pixijs.com/assets/flowerTop.png');
+PIXI.Assets.add('eggHead', 'https://pixijs.com/assets/eggHead.png');
 
 // Allow the assets to load in the background
 PIXI.Assets.backgroundLoad(['flowerTop', 'eggHead']);

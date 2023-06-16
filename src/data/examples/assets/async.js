@@ -7,7 +7,7 @@ document.body.appendChild(app.view);
 // await can only be used inside an async function
 async function init()
 {
-    const texture = await PIXI.Assets.load('https://beta.pixijs.com/assets/bunny.png');
+    const texture = await PIXI.Assets.load('https://pixijs.com/assets/bunny.png');
 
     // create a new Sprite from the awaited loaded Texture
     const bunny = PIXI.Sprite.from(texture);

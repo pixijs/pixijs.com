@@ -21,8 +21,8 @@ export default function FeatureList(): JSX.Element
                         style={
                             {
                                 opacity: 0,
-                                'animation-duration': `0.3s`,
-                                'animation-delay': `0.5s`,
+                                animationDuration: `0.3s`,
+                                animationDelay: `0.5s`,
                             } as any
                         }
                     >
@@ -63,7 +63,7 @@ export default function FeatureList(): JSX.Element
                                 {
                                     opacity: 0,
                                     transform: 'translateX(300px)',
-                                    'animation-delay': `${delay}s`,
+                                    animationDelay: `${delay}s`,
                                 } as any
                             }
                         >

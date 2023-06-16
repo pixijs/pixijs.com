@@ -14,13 +14,13 @@ const generateSpinner1 = (position) =>
     container.position = position;
     app.stage.addChild(container);
 
-    const base = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg');
+    const base = PIXI.Sprite.from('https://pixijs.com/assets/bg_scene_rotate.jpg');
     const size = 100;
 
     base.width = size;
     base.height = size;
 
-    const bottom = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_rotate.jpg');
+    const bottom = PIXI.Sprite.from('https://pixijs.com/assets/bg_rotate.jpg');
 
     bottom.width = size;
     bottom.height = size;
@@ -114,7 +114,7 @@ const generateSpinner2 = (position) =>
 
     for (let i = 0; i < ballAmount; i++)
     {
-        const ball = PIXI.Sprite.from('https://beta.pixijs.com/assets/circle.png');
+        const ball = PIXI.Sprite.from('https://pixijs.com/assets/circle.png');
 
         ball.anchor.set(0.5);
         container.addChild(ball);
@@ -154,7 +154,7 @@ const generateSpinner3 = (position) =>
     container.position = position;
     app.stage.addChild(container);
 
-    const base = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg');
+    const base = PIXI.Sprite.from('https://pixijs.com/assets/bg_scene_rotate.jpg');
     const size = 100;
 
     base.width = size;
@@ -209,7 +209,7 @@ const generateSpinner4 = (position) =>
     const size = 100;
     const arcRadius = 15;
 
-    const base = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg');
+    const base = PIXI.Sprite.from('https://pixijs.com/assets/bg_scene_rotate.jpg');
 
     base.width = size;
     base.height = size;

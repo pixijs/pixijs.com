@@ -59,7 +59,7 @@ const fragmentSrc = `
         gl_FragColor = texture2D(uSampler2, vUvs) * vec4(vColor, 1.0);
     }`;
 
-const uniforms = { uSampler2: PIXI.Texture.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg') };
+const uniforms = { uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg') };
 
 const shader = PIXI.Shader.from(vertexSrc, fragmentSrc, uniforms);
 

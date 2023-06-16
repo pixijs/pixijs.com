@@ -21,7 +21,7 @@ const maggots = [];
 
 for (let i = 0; i < 20; i++)
 {
-    const maggot = PIXI.Sprite.from('https://beta.pixijs.com/assets/maggot.png');
+    const maggot = PIXI.Sprite.from('https://pixijs.com/assets/maggot.png');
 
     maggot.anchor.set(0.5);
     container.addChild(maggot);
@@ -39,7 +39,7 @@ for (let i = 0; i < 20; i++)
     maggots.push(maggot);
 }
 
-const displacementSprite = PIXI.Sprite.from('https://beta.pixijs.com/assets/pixi-filters/displace.png');
+const displacementSprite = PIXI.Sprite.from('https://pixijs.com/assets/pixi-filters/displace.png');
 const displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
 
 app.stage.addChild(displacementSprite);
@@ -50,7 +50,7 @@ displacementFilter.scale.x = 110;
 displacementFilter.scale.y = 110;
 displacementSprite.anchor.set(0.5);
 
-const ring = PIXI.Sprite.from('https://beta.pixijs.com/assets/pixi-filters/ring.png');
+const ring = PIXI.Sprite.from('https://pixijs.com/assets/pixi-filters/ring.png');
 
 ring.anchor.set(0.5);
 
@@ -58,7 +58,7 @@ ring.visible = false;
 
 app.stage.addChild(ring);
 
-const bg = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_grass.jpg');
+const bg = PIXI.Sprite.from('https://pixijs.com/assets/bg_grass.jpg');
 
 bg.width = app.screen.width;
 bg.height = app.screen.height;

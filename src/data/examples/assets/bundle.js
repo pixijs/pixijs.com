@@ -13,7 +13,7 @@ async function init()
             assets: [
                 {
                     name: 'flowerTop',
-                    srcs: 'https://beta.pixijs.com/assets/flowerTop.png',
+                    srcs: 'https://pixijs.com/assets/flowerTop.png',
                 },
             ],
         },
@@ -22,7 +22,7 @@ async function init()
             assets: [
                 {
                     name: 'eggHead',
-                    srcs: 'https://beta.pixijs.com/assets/eggHead.png',
+                    srcs: 'https://pixijs.com/assets/eggHead.png',
                 },
             ],
         }],

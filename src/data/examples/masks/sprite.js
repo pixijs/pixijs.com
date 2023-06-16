@@ -6,15 +6,15 @@ document.body.appendChild(app.view);
 
 app.stage.interactive = true;
 
-const bg = PIXI.Sprite.from('https://beta.pixijs.com/assets/bg_plane.jpg');
+const bg = PIXI.Sprite.from('https://pixijs.com/assets/bg_plane.jpg');
 
 app.stage.addChild(bg);
 
-const cells = PIXI.Sprite.from('https://beta.pixijs.com/assets/cells.png');
+const cells = PIXI.Sprite.from('https://pixijs.com/assets/cells.png');
 
 cells.scale.set(1.5);
 
-const mask = PIXI.Sprite.from('https://beta.pixijs.com/assets/flowerTop.png');
+const mask = PIXI.Sprite.from('https://pixijs.com/assets/flowerTop.png');
 
 mask.anchor.set(0.5);
 mask.x = 310;

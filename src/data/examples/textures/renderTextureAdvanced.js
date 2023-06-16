@@ -34,14 +34,14 @@ app.stage.addChild(stuffContainer);
 
 // create an array of image ids..
 const fruits = [
-    'https://beta.pixijs.com/assets/rt_object_01.png',
-    'https://beta.pixijs.com/assets/rt_object_02.png',
-    'https://beta.pixijs.com/assets/rt_object_03.png',
-    'https://beta.pixijs.com/assets/rt_object_04.png',
-    'https://beta.pixijs.com/assets/rt_object_05.png',
-    'https://beta.pixijs.com/assets/rt_object_06.png',
-    'https://beta.pixijs.com/assets/rt_object_07.png',
-    'https://beta.pixijs.com/assets/rt_object_08.png',
+    'https://pixijs.com/assets/rt_object_01.png',
+    'https://pixijs.com/assets/rt_object_02.png',
+    'https://pixijs.com/assets/rt_object_03.png',
+    'https://pixijs.com/assets/rt_object_04.png',
+    'https://pixijs.com/assets/rt_object_05.png',
+    'https://pixijs.com/assets/rt_object_06.png',
+    'https://pixijs.com/assets/rt_object_07.png',
+    'https://pixijs.com/assets/rt_object_08.png',
 ];
 
 // create an array of items

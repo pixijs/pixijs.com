@@ -5,7 +5,7 @@ const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
 // create a texture from an image path
-const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png');
+const texture = PIXI.Texture.from('https://pixijs.com/assets/bunny.png');
 
 // Scale mode for pixelation
 texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;

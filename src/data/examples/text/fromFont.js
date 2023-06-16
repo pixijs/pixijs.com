@@ -6,10 +6,10 @@ document.body.appendChild(app.view);
 
 // Load from any font file!
 PIXI.Assets.addBundle('fonts', {
-    ChaChicle: 'https://beta.pixijs.com/assets/webfont-loader/ChaChicle.ttf',
-    Lineal: 'https://beta.pixijs.com/assets/webfont-loader/Lineal.otf',
-    'Dotrice Regular': 'https://beta.pixijs.com/assets/webfont-loader/Dotrice-Regular.woff',
-    Crosterian: 'https://beta.pixijs.com/assets/webfont-loader/Crosterian.woff2',
+    ChaChicle: 'https://pixijs.com/assets/webfont-loader/ChaChicle.ttf',
+    Lineal: 'https://pixijs.com/assets/webfont-loader/Lineal.otf',
+    'Dotrice Regular': 'https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff',
+    Crosterian: 'https://pixijs.com/assets/webfont-loader/Crosterian.woff2',
 });
 PIXI.Assets.loadBundle('fonts').then(() =>
 {

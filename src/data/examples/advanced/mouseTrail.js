@@ -5,7 +5,7 @@ const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
 document.body.appendChild(app.view);
 
 // Get the texture for rope.
-const trailTexture = PIXI.Texture.from('https://beta.pixijs.com/assets/trail.png');
+const trailTexture = PIXI.Texture.from('https://pixijs.com/assets/trail.png');
 const historyX = [];
 const historyY = [];
 // historySize determines how long the trail will be.

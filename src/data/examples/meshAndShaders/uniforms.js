@@ -53,7 +53,7 @@ const fragmentSrc = `
     }`;
 
 const uniforms = {
-    uSampler2: PIXI.Texture.from('https://beta.pixijs.com/assets/bg_scene_rotate.jpg'),
+    uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
     time: 0,
 };
 

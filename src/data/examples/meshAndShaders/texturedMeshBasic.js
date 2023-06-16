@@ -16,7 +16,7 @@ for (let i = 0; i < 20; i++)
     points.push(new PIXI.Point(i * ropeLength, 0));
 }
 
-const strip = new PIXI.SimpleRope(PIXI.Texture.from('https://beta.pixijs.com/assets/snake.png'), points);
+const strip = new PIXI.SimpleRope(PIXI.Texture.from('https://pixijs.com/assets/snake.png'), points);
 
 strip.x = -459;
 

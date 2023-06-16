@@ -8,7 +8,7 @@ const container = new PIXI.Container();
 
 app.stage.addChild(container);
 
-const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/bunny.png');
+const texture = PIXI.Texture.from('https://pixijs.com/assets/bunny.png');
 
 for (let i = 0; i < 25; i++)
 {

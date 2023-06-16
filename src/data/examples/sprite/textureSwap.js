@@ -6,8 +6,8 @@ document.body.appendChild(app.view);
 
 let isFlower = true;
 
-const texture = PIXI.Texture.from('https://beta.pixijs.com/assets/flowerTop.png');
-const secondTexture = PIXI.Texture.from('https://beta.pixijs.com/assets/eggHead.png');
+const texture = PIXI.Texture.from('https://pixijs.com/assets/flowerTop.png');
+const secondTexture = PIXI.Texture.from('https://pixijs.com/assets/eggHead.png');
 
 // create a new Sprite using the texture
 const character = new PIXI.Sprite(texture);

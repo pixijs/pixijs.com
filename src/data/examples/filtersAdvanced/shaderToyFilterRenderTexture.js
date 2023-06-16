@@ -9,7 +9,7 @@ const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
 
 document.body.appendChild(app.view);
 
-PIXI.Assets.load('https://beta.pixijs.com/assets/perlin.jpg').then(onAssetsLoaded);
+PIXI.Assets.load('https://pixijs.com/assets/perlin.jpg').then(onAssetsLoaded);
 
 let filter = null;
 
