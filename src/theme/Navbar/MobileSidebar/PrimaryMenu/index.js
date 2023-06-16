@@ -31,11 +31,11 @@ export default function NavbarMobilePrimaryMenu()
                 <NavbarItem mobile {...item} onClick={() => mobileSidebar.toggle()} key={i} />
             ))}
             <li className={styles.separator} />
-            <li className={styles.socialItems}>
+            <ul className={styles.socialItems}>
                 {socialItems.map((item, i) => (
                     <NavbarItem mobile {...item} onClick={() => mobileSidebar.toggle()} key={i} />
                 ))}
-            </li>
+            </ul>
         </ul>
     );
 }

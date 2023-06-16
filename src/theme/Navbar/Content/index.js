@@ -1,5 +1,5 @@
 import { useThemeConfig } from '@docusaurus/theme-common';
-import { splitNavbarItems, useNavbarMobileSidebar } from '@docusaurus/theme-common/internal';
+import { splitNavbarItems } from '@docusaurus/theme-common/internal';
 import NavbarItem from '@theme/NavbarItem';
 import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
 import SearchBar from '@theme/SearchBar';
@@ -7,6 +7,7 @@ import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
 import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
 import styles from './styles.module.scss';
+import { useEffect, useState } from 'react';
 
 function useNavbarItems()
 {
@@ -42,12 +43,31 @@ function NavbarContentLayout({ left, right })
 
 export default function NavbarContent()
 {
-    const mobileSidebar = useNavbarMobileSidebar();
     const items = useNavbarItems();
     const [leftItems, rightItems] = splitNavbarItems(items);
     const searchBarItem = items.find((item) => item.type === 'search');
     const navItems = [];
     const socialItems = [];
+
+    const [navbar, setNavbar] = useState({ socials: window.innerWidth > 1479, mobile: window.innerWidth < 1171 });
+
+    useEffect(() =>
+    {
+        const resetEditorLayout = () =>
+        {
+            setNavbar({
+                socials: window.innerWidth > 1479,
+                mobile: window.innerWidth < 1171,
+            });
+        };
+
+        window.addEventListener('resize', resetEditorLayout);
+
+        return () =>
+        {
+            window.removeEventListener('resize', resetEditorLayout);
+        };
+    }, [navbar]);
 
     rightItems.forEach((item) =>
     {
@@ -60,7 +80,7 @@ export default function NavbarContent()
             left={
                 // TODO stop hardcoding items?
                 <>
-                    {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
+                    {navbar.mobile && <NavbarMobileSidebarToggle />}
                     <NavbarLogo />
                     <NavbarItems items={leftItems} />
                 </>
@@ -74,11 +94,12 @@ export default function NavbarContent()
                             <SearchBar />
                         </NavbarSearch>
                     )}
+                    <span className={styles.separator} />
                     <NavbarItems items={navItems} />
                     <span className={styles.separator} />
                     <NavbarColorModeToggle className={styles.colorModeToggle} />
-                    <span className={styles.separator} />
-                    <NavbarItems items={socialItems} />
+                    {navbar.socials && <span className={styles.separator} />}
+                    {navbar.socials && <NavbarItems items={socialItems} />}
                 </>
             }
         />
