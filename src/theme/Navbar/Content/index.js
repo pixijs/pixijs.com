@@ -8,6 +8,7 @@ import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
 import styles from './styles.module.scss';
 import { useEffect, useState } from 'react';
+import useIsBrowser from '@docusaurus/useIsBrowser';
 
 function useNavbarItems()
 {
@@ -49,18 +50,25 @@ export default function NavbarContent()
     const navItems = [];
     const socialItems = [];
 
-    const [navbar, setNavbar] = useState({ socials: window.innerWidth > 1479, mobile: window.innerWidth < 1171 });
+    const isBrowser = useIsBrowser();
+
+    const [navbar, setNavbar] = useState({
+        socials: isBrowser ? window.innerWidth > 1423 : true,
+        search: isBrowser ? window.innerWidth > 1479 : true,
+        mobile: isBrowser ? window.innerWidth < 996 : false,
+    });
+
+    const resetEditorLayout = () =>
+    {
+        setNavbar({
+            socials: window.innerWidth > 1423,
+            search: window.innerWidth > 1479,
+            mobile: window.innerWidth < 996,
+        });
+    };
 
     useEffect(() =>
     {
-        const resetEditorLayout = () =>
-        {
-            setNavbar({
-                socials: window.innerWidth > 1479,
-                mobile: window.innerWidth < 1171,
-            });
-        };
-
         window.addEventListener('resize', resetEditorLayout);
 
         return () =>
@@ -68,6 +76,11 @@ export default function NavbarContent()
             window.removeEventListener('resize', resetEditorLayout);
         };
     }, [navbar]);
+
+    useEffect(() =>
+    {
+        resetEditorLayout();
+    }, []);
 
     rightItems.forEach((item) =>
     {
@@ -90,7 +103,7 @@ export default function NavbarContent()
                 // Ask the user to add the respective navbar items => more flexible
                 <>
                     {!searchBarItem && (
-                        <NavbarSearch>
+                        <NavbarSearch className={`${!navbar.search ? styles['short-search'] : ''}`}>
                             <SearchBar />
                         </NavbarSearch>
                     )}

@@ -6,6 +6,11 @@
     opacity: 0.25;
 }
 
+.short-search input {
+    // width: var(--search-local-modal-width-sm, 340px);
+    max-width: 150px;
+}
+
 @media (max-width: 996px) {
     .separator {
         display: none;
