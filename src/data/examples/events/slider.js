@@ -29,7 +29,7 @@ const handle = new PIXI.Graphics()
 
 handle.y = slider.height / 2;
 handle.x = sliderWidth / 2;
-handle.interactive = true;
+handle.eventMode = 'static';
 handle.cursor = 'pointer';
 
 handle
@@ -66,14 +66,14 @@ app.stage.addChild(title);
 // Listen to pointermove on stage once handle is pressed.
 function onDragStart()
 {
-    app.stage.interactive = true;
+    app.stage.eventMode = 'static';
     app.stage.addEventListener('pointermove', onDrag);
 }
 
 // Stop dragging feedback once the handle is released.
 function onDragEnd(e)
 {
-    app.stage.interactive = false;
+    app.stage.eventMode = 'auto';
     app.stage.removeEventListener('pointermove', onDrag);
 }
 

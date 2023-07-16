@@ -23,7 +23,7 @@ PIXI.Assets.load('eggHead').then((texture) =>
     character.anchor.set(0.5);
     character.x = app.screen.width / 2;
     character.y = app.screen.height / 2;
-    character.interactive = true;
+    character.eventMode = 'static';
     character.cursor = 'pointer';
 
     app.stage.addChild(character);

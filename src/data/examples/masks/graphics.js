@@ -4,7 +4,7 @@ const app = new PIXI.Application({ antialias: true, resizeTo: window });
 
 document.body.appendChild(app.view);
 
-app.stage.interactive = true;
+app.stage.eventMode = 'static';
 
 const bg = PIXI.Sprite.from('https://pixijs.com/assets/bg_rotate.jpg');
 

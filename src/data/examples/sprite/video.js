@@ -19,7 +19,7 @@ button.x = (app.screen.width - button.width) / 2;
 button.y = (app.screen.height - button.height) / 2;
 
 // Enable interactivity on the button
-button.interactive = true;
+button.eventMode = 'static';
 button.cursor = 'pointer';
 
 // Add to the stage

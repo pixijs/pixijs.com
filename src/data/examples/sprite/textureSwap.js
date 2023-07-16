@@ -22,7 +22,7 @@ character.y = app.screen.height / 2;
 app.stage.addChild(character);
 
 // make the sprite interactive
-character.interactive = true;
+character.eventMode = 'static';
 character.cursor = 'pointer';
 
 character.on('pointertap', () =>

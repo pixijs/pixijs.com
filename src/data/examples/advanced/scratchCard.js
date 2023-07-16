@@ -34,7 +34,7 @@ function setup()
         renderTextureSprite,
     );
 
-    app.stage.interactive = true;
+    app.stage.eventMode = 'static';
     app.stage.hitArea = app.screen;
     app.stage
         .on('pointerdown', pointerDown)

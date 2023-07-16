@@ -46,10 +46,10 @@ const whiteBox = blackBox.addChild(new PIXI.Graphics()
 whiteBox.name = 'white box';
 
 // Enable interactivity everywhere!
-app.stage.interactive = true;
+app.stage.eventMode = 'static';
 app.stage.hitArea = app.screen;
-whiteBox.interactive = true;
-blackBox.interactive = true;
+whiteBox.eventMode = 'static';
+blackBox.eventMode = 'static';
 
 function onEvent(e)
 {

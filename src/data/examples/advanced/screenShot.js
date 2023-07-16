@@ -21,7 +21,7 @@ async function takeScreenshot()
     app.start();
 }
 
-app.stage.interactive = true;
+app.stage.eventMode = 'static';
 app.stage.hitArea = app.screen;
 app.stage.on('pointerdown', takeScreenshot);
 

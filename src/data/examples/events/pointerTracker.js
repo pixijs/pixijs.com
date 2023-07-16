@@ -20,7 +20,7 @@ const circle = app.stage.addChild(new PIXI.Graphics()
 circle.position.set(app.screen.width / 2, app.screen.height / 2);
 
 // Enable interactivity!
-app.stage.interactive = true;
+app.stage.eventMode = 'static';
 
 // Make sure the whole canvas area is interactive, not just the circle.
 app.stage.hitArea = app.screen;

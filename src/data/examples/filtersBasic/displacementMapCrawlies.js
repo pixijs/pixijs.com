@@ -4,7 +4,7 @@ const app = new PIXI.Application({ resizeTo: window });
 
 document.body.appendChild(app.view);
 
-app.stage.interactive = true;
+app.stage.eventMode = 'static';
 
 const container = new PIXI.Container();
 

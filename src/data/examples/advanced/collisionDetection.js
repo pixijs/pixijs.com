@@ -97,7 +97,7 @@ redSquare.mass = 1;
 
 const mouseCoords = { x: 0, y: 0 };
 
-app.stage.interactive = true;
+app.stage.eventMode = 'static';
 app.stage.hitArea = app.screen;
 app.stage.on('mousemove', (event) =>
 {

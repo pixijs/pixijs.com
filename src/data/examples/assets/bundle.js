@@ -50,7 +50,7 @@ async function makeLoadScreen()
     goNext.y = app.screen.height / 2;
     app.stage.addChild(goNext);
 
-    goNext.interactive = true;
+    goNext.eventMode = 'static';
     goNext.cursor = 'pointer';
 
     goNext.on('pointertap', async () =>
@@ -75,7 +75,7 @@ async function makeGameScreen()
     goBack.y = app.screen.height / 2;
     app.stage.addChild(goBack);
 
-    goBack.interactive = true;
+    goBack.eventMode = 'static';
     goBack.cursor = 'pointer';
 
     goBack.on('pointertap', async () =>

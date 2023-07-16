@@ -32,7 +32,7 @@ PIXI.Assets.load('https://pixijs.com/assets/bg_grass.jpg').then((grassTexture) =
     app.stage.addChild(focus);
     background.mask = focus;
 
-    app.stage.interactive = true;
+    app.stage.eventMode = 'static';
     app.stage.hitArea = app.screen;
     app.stage.on('pointermove', (event) =>
     {
