@@ -20,7 +20,7 @@
         "types": "tsc --noEmit",
         "write-heading-ids": "docusaurus write-heading-ids",
         "write-translations": "docusaurus write-translations",
-        "write-example-docs": "./scripts/write-example-docs.js",
+        "write-example-docs": "node ./scripts/write-example-docs.js",
         "write-versions": "node ./scripts/write-versions.js",
         "prepare": "husky install"
     },
