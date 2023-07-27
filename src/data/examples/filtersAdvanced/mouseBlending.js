@@ -51,7 +51,7 @@ const filter = new PIXI.Filter(null, shaderFrag, {
 container.filters = [filter];
 
 app.stage.hitArea = app.screen;
-app.stage.interactive = true;
+app.stage.eventMode = 'static';
 app.stage.on('pointermove', (event) =>
 {
     filter.uniforms.mouse.copyFrom(event.global);

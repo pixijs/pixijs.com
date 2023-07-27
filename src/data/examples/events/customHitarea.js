@@ -11,7 +11,7 @@ const starButton1 = new PIXI.Sprite(yellowStar);
 
 starButton1.position.set(50, 200);
 starButton1.cursor = 'pointer';
-starButton1.interactive = true;
+starButton1.eventMode = 'static';
 
 starButton1
     .on('pointerdown', onClick, starButton1)
@@ -38,7 +38,7 @@ starButton2.hitArea = new PIXI.Polygon([
     60, 50,
 ]);
 starButton2.cursor = 'pointer';
-starButton2.interactive = true;
+starButton2.eventMode = 'static';
 
 starButton2
     .on('pointerdown', onClick, starButton2)
@@ -50,7 +50,7 @@ const starButton3 = new PIXI.Sprite(yellowStar);
 
 starButton3.position.set(450, 200);
 starButton3.cursor = 'pointer';
-starButton3.interactive = true;
+starButton3.eventMode = 'static';
 
 const squareMask = new PIXI.Graphics()
     .beginFill(0xFFFFFF)
@@ -92,7 +92,7 @@ starButton4.hitArea = new PIXI.Polygon([
     60, 50,
 ]);
 starButton4.cursor = 'pointer';
-starButton4.interactive = true;
+starButton4.eventMode = 'static';
 
 starButton4
     .on('pointerdown', onClick, starButton4)

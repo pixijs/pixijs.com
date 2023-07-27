@@ -4,7 +4,7 @@ const app = new PIXI.Application({ antialias: true, resizeTo: window });
 
 document.body.appendChild(app.view);
 
-app.stage.interactive = true;
+app.stage.eventMode = 'static';
 app.stage.hitArea = app.screen;
 
 const graphics = new PIXI.Graphics();

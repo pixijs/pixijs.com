@@ -46,7 +46,7 @@ for (let i = 0; i < 5; i++)
     button.y = buttonPositions[i * 2 + 1];
 
     // make the button interactive...
-    button.interactive = true;
+    button.eventMode = 'static';
 
     button
         .on('pointerdown', onButtonDown)

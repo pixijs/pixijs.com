@@ -113,7 +113,7 @@ function onAssetsLoaded()
     app.stage.addChild(bottom);
 
     // Set the interactivity.
-    bottom.interactive = true;
+    bottom.eventMode = 'static';
     bottom.cursor = 'pointer';
     bottom.addListener('pointerdown', () =>
     {

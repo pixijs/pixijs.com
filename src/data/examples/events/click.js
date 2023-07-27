@@ -15,12 +15,12 @@ sprite.x = app.screen.width / 2;
 sprite.y = app.screen.height / 2;
 
 // Opt-in to interactivity
-sprite.interactive = true;
+sprite.eventMode = 'static';
 
 // Shows hand cursor
 sprite.cursor = 'pointer';
 
-// Pointers normalize touch and mouse
+// Pointers normalize touch and mouse (good for mobile and desktop)
 sprite.on('pointerdown', onClick);
 
 // Alternatively, use the mouse & touch events:

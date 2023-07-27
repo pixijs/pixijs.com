@@ -28,7 +28,7 @@ alienContainer.x = 400;
 alienContainer.y = 300;
 
 // make the stage interactive
-app.stage.interactive = true;
+app.stage.eventMode = 'static';
 app.stage.addChild(alienContainer);
 
 function onAssetsLoaded()

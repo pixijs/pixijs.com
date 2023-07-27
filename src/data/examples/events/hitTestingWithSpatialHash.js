@@ -191,7 +191,7 @@ function main()
         sprite.scale.set(0.34);
 
         // Make the character interactive!
-        sprite.interactive = true;
+        sprite.eventMode = 'static';
 
         // Explode on clicks!
         sprite.addEventListener('click', onMonsterClicked);

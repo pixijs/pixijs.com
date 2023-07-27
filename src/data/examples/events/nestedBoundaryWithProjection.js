@@ -62,7 +62,7 @@ class Projector extends PIXI.DisplayObject
             this.addEventListener(event, (e) => this.boundary.mapEvent(e));
         });
 
-        this.interactive = true;
+        this.eventMode = 'static';
     }
 
     // Pass through cursor
@@ -163,13 +163,13 @@ projector.content.hitArea = new PIXI.Rectangle(-100, -300, app.screen.width, app
 // Make hit-area cover the whole screen so we can capture
 // pointermove everywhere!
 projector.hitArea = projector.content.hitArea;
-projector.content.interactive = true;
+projector.content.eventMode = 'static';
 
 // Make stars interactive & add wheel handlers
 stars.forEach((star) =>
 {
     // Make star interactive
-    star.interactive = true;
+    star.eventMode = 'static';
 
     // Set initial cursor
     star.cursor = 'zoom-in';

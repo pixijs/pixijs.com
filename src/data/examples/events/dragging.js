@@ -24,7 +24,7 @@ function createBunny(x, y)
     const bunny = new PIXI.Sprite(texture);
 
     // enable the bunny to be interactive... this will allow it to respond to mouse and touch events
-    bunny.interactive = true;
+    bunny.eventMode = 'static';
 
     // this button mode will mean the hand cursor appears when you roll over the bunny with your mouse
     bunny.cursor = 'pointer';
@@ -49,7 +49,7 @@ function createBunny(x, y)
 
 let dragTarget = null;
 
-app.stage.interactive = true;
+app.stage.eventMode = 'static';
 app.stage.hitArea = app.screen;
 app.stage.on('pointerup', onDragEnd);
 app.stage.on('pointerupoutside', onDragEnd);
