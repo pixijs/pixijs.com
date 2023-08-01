@@ -54,7 +54,7 @@ const { compareVersions } = require('compare-versions');
         {
             versionLabel: 'v4.x',
             version: v4,
-            releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${v4}`,
+            releaseNotes: `https://github.com/pixijs/pixijs/releases/tag/v${v4}`,
             build: `https://pixijs.download/v${v4}/pixi.min.js`,
             docs: `https://pixijs.download/v${v4}/docs/index.html`,
             npm: v4,
@@ -62,7 +62,7 @@ const { compareVersions } = require('compare-versions');
         {
             versionLabel: 'v5.x',
             version: v5,
-            releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${v5}`,
+            releaseNotes: `https://github.com/pixijs/pixijs/releases/tag/v${v5}`,
             build: `https://pixijs.download/v${v5}/pixi.min.js`,
             docs: `https://pixijs.download/v${v5}/docs/index.html`,
             npm: v5,
@@ -70,7 +70,7 @@ const { compareVersions } = require('compare-versions');
         {
             versionLabel: 'v6.x',
             version: v6,
-            releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${v6}`,
+            releaseNotes: `https://github.com/pixijs/pixijs/releases/tag/v${v6}`,
             build: `https://pixijs.download/v${v6}/pixi.min.js`,
             docs: `https://pixijs.download/v${v6}/docs/index.html`,
             npm: v6,
@@ -84,7 +84,7 @@ const { compareVersions } = require('compare-versions');
         versions.push({
             versionLabel: `v${v.split('.').slice(0, 2).join('.')}.x`,
             version: v,
-            releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${v}`,
+            releaseNotes: `https://github.com/pixijs/pixijs/releases/tag/v${v}`,
             build: `https://pixijs.download/v${v}/pixi.min.js`,
             docs: `https://pixijs.download/v${v}/docs/index.html`,
             npm: v,
@@ -96,7 +96,7 @@ const { compareVersions } = require('compare-versions');
         versions.push({
             versionLabel: `v${prerelease}`,
             version: prerelease,
-            releaseNotes: `https://github.com/pixijs/pixijs/releases/tags/v${prerelease}`,
+            releaseNotes: `https://github.com/pixijs/pixijs/releases/tag/v${prerelease}`,
             build: `https://pixijs.download/v${prerelease}/pixi.min.js`,
             docs: `https://pixijs.download/v${prerelease}/docs/index.html`,
             npm: prerelease,
