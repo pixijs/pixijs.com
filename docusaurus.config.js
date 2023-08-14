@@ -173,7 +173,7 @@ const config = {
                             },
                             {
                                 label: 'AssetPack',
-                                href: 'https://github.com/ehtick/pixijs-assetpack',
+                                href: 'https://github.com/pixijs/assetpack',
                             },
                             {
                                 label: 'Storybook',
