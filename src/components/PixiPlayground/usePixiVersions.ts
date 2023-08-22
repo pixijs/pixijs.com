@@ -36,9 +36,13 @@ export const usePixiVersions = ({ selectedVersionId, setURLState }: UsePixiVersi
 {
     const handleVersionChanged = useCallback(
         (nextVersionId: string) =>
-            setURLState({
-                pixiVersion: nextVersionId,
-            }),
+            setURLState(
+                {
+                    pixiVersion: nextVersionId,
+                },
+                true,
+                true,
+            ),
         [setURLState],
     );
 

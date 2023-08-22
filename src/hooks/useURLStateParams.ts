@@ -1,11 +1,11 @@
-import { useMemo, useRef } from 'react';
 import { useHistory } from '@docusaurus/router';
+import { useMemo, useRef } from 'react';
 
 type InitialStateInit<T> = (stateFromURL: Partial<T>) => T;
 type StateUpdaterType<T> = (state: T) => T;
 type SetStateParamType<T> = Partial<T> | StateUpdaterType<T>;
 
-export type SetStateType<T> = (state: SetStateParamType<T>, pushState?: boolean) => void;
+export type SetStateType<T> = (state: SetStateParamType<T>, pushState?: boolean, forceHistory?: boolean) => void;
 export type SerializeParamsType<T> = (state: Partial<T>) => Record<string, string>;
 export type DeserializeParamsType<T> = (searchParams: Record<string, string>) => Partial<T>;
 
@@ -29,12 +29,12 @@ export function useURLStateParams<T extends Record<string, any>>(
     deserializeParams: DeserializeParamsType<T>,
 ): [T, SetStateType<T>]
 {
-    const history = useHistory();
+    const historyState = useHistory();
 
     // deserialize state from URL
     const urlState = useMemo(
-        () => deserializeParams(searchToStringObject(history.location.search)),
-        [deserializeParams, history.location.search],
+        () => deserializeParams(searchToStringObject(historyState.location.search)),
+        [deserializeParams, historyState.location.search],
     );
 
     // setup initial state, then ignore any changes
@@ -52,7 +52,7 @@ export function useURLStateParams<T extends Record<string, any>>(
     );
 
     // merge state change with existing state and update URL
-    const setState = (s: SetStateParamType<T>, pushState = true) =>
+    const setState = (s: SetStateParamType<T>, pushState = true, forceHistory = false) =>
     {
         const nextState
             = typeof s === 'function'
@@ -61,7 +61,6 @@ export function useURLStateParams<T extends Record<string, any>>(
                     ...state,
                     ...s,
                 };
-
         const nonDefaultState = Object.entries(nextState).reduce((acc, [key, value]) =>
         {
             if (value === defaultState.current[key])
@@ -77,17 +76,28 @@ export function useURLStateParams<T extends Record<string, any>>(
 
         const searchParams = new URLSearchParams(Object.entries(serializeParams(nonDefaultState)));
         const historyOptions = {
-            pathname: history.location.pathname,
+            pathname: location.pathname,
             search: searchParams.toString(),
         };
 
-        if (pushState)
+        if (forceHistory)
         {
-            history.push(historyOptions);
+            if (pushState)
+            {
+                historyState.push(historyOptions);
+            }
+            else
+            {
+                historyState.replace(historyOptions);
+            }
+        }
+        else if (pushState)
+        {
+            history.pushState(historyOptions, '', `${historyOptions.pathname}?${searchParams.toString()}`);
         }
         else
         {
-            history.replace(historyOptions);
+            history.replaceState(historyOptions, '', `${historyOptions.pathname}?${searchParams.toString()}`);
         }
     };
 

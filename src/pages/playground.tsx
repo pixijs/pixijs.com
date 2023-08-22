@@ -7,6 +7,7 @@ import { latestVersion, usePixiVersions } from '@site/src/components/PixiPlaygro
 import { usePlaygroundURLState } from '@site/src/components/PixiPlayground/usePlaygroundURLState';
 
 import styles from './playground.module.css';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 export default function PlaygroundPage()
 {
@@ -30,34 +31,37 @@ export default function PlaygroundPage()
     const { npm, dev = false } = selectedVersion;
 
     return (
-        <Layout title={'Playground'} noFooter wrapperClassName={styles.pageWrapper}>
-            <div className={styles.playgroundWrapper}>
-                <div className={styles.nav}>
-                    <Select
-                        label="Example:"
-                        labelClassName={styles.select}
-                        selectedId={selectedOptionId}
-                        options={exampleOptions}
-                        onValueChange={handleOptionSelected}
-                    />
-                    <Select
-                        label="Version:"
-                        labelClassName={styles.select}
-                        selectedId={selectedVersionId}
-                        options={versionOptions}
-                        onValueChange={handleVersionChanged}
-                    />
-                </div>
-
-                <PixiPlayground
-                    code={sourceCode}
-                    pixiVersion={npm}
-                    isPixiDevVersion={dev}
-                    isPixiWebWorkerVersion={usesWebWorkerLibrary}
-                    onCodeChanged={handleEditorCodeChanged}
-                    mode="fullscreen"
-                />
-            </div>
+        <Layout title={'Playground'} noFooter wrapperClassName={styles.wrapper}>
+            <BrowserOnly>
+                {() => (
+                    <div className={styles.playgroundWrapper}>
+                        <div className={styles.nav}>
+                            <Select
+                                label="Example:"
+                                labelClassName={styles.select}
+                                selectedId={selectedOptionId}
+                                options={exampleOptions}
+                                onValueChange={handleOptionSelected}
+                            />
+                            <Select
+                                label="Version:"
+                                labelClassName={styles.select}
+                                selectedId={selectedVersionId}
+                                options={versionOptions}
+                                onValueChange={handleVersionChanged}
+                            />
+                        </div>
+                        <PixiPlayground
+                            code={sourceCode}
+                            pixiVersion={npm}
+                            isPixiDevVersion={dev}
+                            isPixiWebWorkerVersion={usesWebWorkerLibrary}
+                            onCodeChanged={handleEditorCodeChanged}
+                            mode="fullscreen"
+                        />
+                    </div>
+                )}
+            </BrowserOnly>
         </Layout>
     );
 }

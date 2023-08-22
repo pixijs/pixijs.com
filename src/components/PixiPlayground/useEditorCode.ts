@@ -61,10 +61,14 @@ export const useCodeExamples = ({ urlSourceCode, selectedOptionId, setURLState }
                 return;
             }
 
-            setURLState({
-                source: undefined,
-                exampleId: nextSelectedId,
-            });
+            setURLState(
+                {
+                    source: undefined,
+                    exampleId: nextSelectedId,
+                },
+                true,
+                true,
+            );
         },
         [selectedOptionId, setURLState],
     );
