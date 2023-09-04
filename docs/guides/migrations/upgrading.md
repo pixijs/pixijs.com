@@ -12,6 +12,6 @@ npm install pixi.js
 If you are using any PixiJS community plugins, please make sure to uninstall those too:
 
 ```
-npm uninstall pixi.js @pixi/particle-emitter pixi-sound
-npm install pixi.js @pixi/particle-emitter pixi-sound
+npm uninstall pixi.js @pixi/particle-emitter @pixi/sound
+npm install pixi.js @pixi/particle-emitter @pixi/sound
 ```
