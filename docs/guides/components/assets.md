@@ -1,4 +1,4 @@
-# PixiJS Guides
+# Assets
 ## The Assets package
 
 The Assets package is a modern replacement for the old `PIXI.Loader` class. It is a promise-based resource management solution that will download, cache and parse your assets into something you can use. The downloads can be simultaneous and in the background, meaning faster startup times for your app, the cache ensures that you never download the same asset twice and the extensible parser system allows you to easily extend and customize the process to your needs.
