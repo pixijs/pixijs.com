@@ -1,6 +1,7 @@
 .closing {
-    background: #ecedf1;
+    background: #f4f5f7;
     padding: 89px 20px 94px;
+    padding: 9px 20px 94px;
 
     & > div {
         margin: 0 auto;
@@ -39,7 +40,7 @@
 
 html[data-theme='dark'] {
     .closing {
-        background: #1f2022;
+        background: #201e1e;
 
         h3 {
             color: #fff;

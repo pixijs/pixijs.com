@@ -15,7 +15,7 @@ export default function ClosingSection(): JSX.Element
     });
 
     return (
-        <div className={`${styles.closing} padding-vert--xl`}>
+        <div className={`${styles.closing}`}>
             <div ref={ref}>
                 {inView && (
                     <>
@@ -23,7 +23,7 @@ export default function ClosingSection(): JSX.Element
                             Elevate your Traditional HTML5 Techniques
                         </h3>
                         <h5 className="short-up-anim" style={animShortUp(0.3, 0.4)}>
-                            Unbeatable performance, intuitive API, globally used and battle­tested.
+                            Unbeatable performance, intuitive API, globally used and battle tested.
                         </h5>
                         <div className="buttonRow">
                             <HomeCTA
