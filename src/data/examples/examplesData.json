@@ -1,74 +1,61 @@
 {
   "basic": [
-    "blendModes",
-    "cacheAsBitmap",
     "container",
-    "particleContainer",
-    "simplePlane",
+    "transparentBackground",
     "tinting",
-    "transparentBackground"
+    "cacheAsBitmap",
+    "particleContainer",
+    "blendModes",
+    "simplePlane"
+  ],
+  "advanced": [
+    "slots",
+    "scratchCard",
+    "starWarp",
+    "mouseTrail",
+    "screenShot",
+    "collisionDetection",
+    "spinners"
   ],
   "sprite": [
-    "animatedSpriteAnimationSpeed",
-    "animatedSpriteExplosion",
-    "animatedSpriteJet",
     "basic",
     "textureSwap",
+    "animatedSpriteExplosion",
+    "animatedSpriteJet",
+    "animatedSpriteAnimationSpeed",
     "tilingSprite",
     "video"
   ],
   "text": [
+    "pixiText",
     "bitmapText",
     "fromFont",
-    "pixiText",
     "webFont"
   ],
   "graphics": [
+    "simple",
     "advanced",
-    "dynamic",
-    "simple"
+    "dynamic"
   ],
   "events": [
     "click",
-    "customHitarea",
-    "customMouseIcon",
+    "interactivity",
     "dragging",
+    "customMouseIcon",
+    "customHitarea",
     {
       "name": "hitTestingWithSpatialHash",
       "hide": true
     },
-    "interactivity",
     "logger",
     "nestedBoundaryWithProjection",
     "pointerTracker",
     "slider"
   ],
   "masks": [
-    "filter",
     "graphics",
-    "sprite"
-  ],
-  "textures": [
-    "gradientBasic",
-    "gradientResource",
-    "renderTextureAdvanced",
-    "renderTextureBasic",
-    "textureRotate"
-  ],
-  "assets": [
-    "async",
-    "background",
-    "bundle",
-    "multiple",
-    "promise"
-  ],
-  "offscreenCanvas": [
-    "basic",
-    {
-      "name": "webWorker",
-      "hide": true,
-      "usesWebWorkerLibrary": true
-    }
+    "sprite",
+    "filter"
   ],
   "filtersBasic": [
     "blur",
@@ -77,32 +64,45 @@
     "displacementMapFlag"
   ],
   "filtersAdvanced": [
-    "custom",
     "mouseBlending",
+    "custom",
     "shaderToyFilterRenderTexture"
   ],
-  "advanced": [
-    "collisionDetection",
-    "mouseTrail",
-    "scratchCard",
-    "screenShot",
-    "slots",
-    "spinners",
-    "starWarp"
-  ],
   "meshAndShaders": [
-    "instancedGeometry",
-    "interleavingGeometry",
-    "mergingGeometry",
-    "multiPassShaderGeneratedMesh",
-    "shaderToyMesh",
-    "sharedShader",
-    "sharingGeometry",
-    "texturedMeshAdvanced",
     "texturedMeshBasic",
+    "texturedMeshAdvanced",
+    "triangle",
     "triangleColor",
     "triangleTextured",
-    "triangle",
-    "uniforms"
+    "uniforms",
+    "sharingGeometry",
+    "sharedShader",
+    "mergingGeometry",
+    "interleavingGeometry",
+    "instancedGeometry",
+    "shaderToyMesh",
+    "multiPassShaderGeneratedMesh"
+  ],
+  "textures": [
+    "textureRotate",
+    "renderTextureBasic",
+    "renderTextureAdvanced",
+    "gradientBasic",
+    "gradientResource"
+  ],
+  "assets": [
+    "promise",
+    "async",
+    "multiple",
+    "background",
+    "bundle"
+  ],
+  "offscreenCanvas": [
+    "basic",
+    {
+      "name": "webWorker",
+      "hide": true,
+      "usesWebWorkerLibrary": true
+    }
   ]
 }

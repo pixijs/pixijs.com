@@ -69,6 +69,8 @@ async function go()
 
         writeFileSync(categoryYmlPath, categoryYml, 'utf8');
 
+        let sidebarPosition = 0;
+
         examples.forEach(({ exampleSource, examplePath, exampleTitle, hide, usesWebWorkerLibrary }) =>
         {
             if (hide)
@@ -81,6 +83,7 @@ async function go()
             const mdContents = [
                 '---',
                 'hide_table_of_contents: true',
+                `sidebar_position: ${sidebarPosition++}`,
                 '---',
                 '',
                 `# ${exampleTitle}`,
