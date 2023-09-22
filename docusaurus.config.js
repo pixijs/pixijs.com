@@ -224,6 +224,11 @@ const config = {
                                 label: 'Code of Conduct',
                                 href: 'https://github.com/pixijs/pixijs/blob/dev/.github/CODE_OF_CONDUCT.md',
                             },
+                            {
+                                type: 'doc',
+                                label: 'Branding',
+                                docId: 'branding',
+                            },
                         ],
                     },
                     {
