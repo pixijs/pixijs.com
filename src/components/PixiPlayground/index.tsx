@@ -96,7 +96,7 @@ export default function PixiPlayground({
             customSetup={customSetup}
             options={{
                 classes: {
-                    'sp-wrapper': styles.spWrapper,
+                    'sp-wrapper': mode === 'tutorial' ? styles.tpWrapper : styles.spWrapper,
                     'sp-layout': styles.spLayout,
                 },
             }}

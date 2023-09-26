@@ -100,10 +100,10 @@ const config = {
                                 label: 'Guides',
                             },
                             // TODO: add tutorial back in
-                            // {
-                            //     label: 'Tutorial',
-                            //     to: 'tutorial',
-                            // },
+                            {
+                                label: 'Tutorial',
+                                to: 'tutorial',
+                            },
                             {
                                 type: 'doc',
                                 docId: 'examples/index',
