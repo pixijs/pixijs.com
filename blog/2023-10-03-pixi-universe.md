@@ -1,0 +1,126 @@
+---
+title: 🎉Introducing Pixi.js v8 Beta!
+description: Pixi.js v8 The Future of 2D Web Graphics Is (almost!) Here!
+slug: pixi-v8-beta
+authors:
+  - name: GoodBoyDigital
+    title: PixiJS Creator
+    url: https://github.com/GoodBoyDigital
+    image_url: https://github.com/GoodBoyDigital.png
+tags: [PixiJS, WebGPU, WebGL]
+hide_table_of_contents: true
+keywords: ['PixiJS', 'pixi.js', 'webGL', 'webGPU', 'performance', '2d rendering', '2d webGL', 'javascript graphics', 'game development']
+---
+
+We're thrilled to offer an exclusive preview of the future of 2D web graphics with the Beta release of Pixi.js v8. Although not yet finalized, this Beta iteration is packed with killer performance improvements and features we're eager for you to start playing with!
+
+Over the course of... [checks notes]... TEN YEARS working on Pixi, we've made some big changes to the engine, but the advancements in this new version are some of the most monumental yet!
+
+
+
+<!--truncate-->
+
+Two driving factors catalysed our approach to re-engineering the codebase and rendering pipeline in v8:
+
+### 1. 😍 Embracing WebGPU
+
+![PixiJS + webGPU = love](image-1.png)
+
+The newcomer WebGPU offers a substantial performance improvement over its predecessor, WebGL. It propels web computations and graphics into a new era, providing a more efficient and robust API. Soon, it will be the go-to method for rendering most GPU-powered content on the web.
+
+This shift is reminiscent of Pixi's initial launch. At that time, WebGL was new and only available in a handful of desktop browsers, while Canvas was ubiquitous. Pixi's standout feature was its ability to first attempt rendering with WebGL and then fall back to Canvas as a Plan B. This approach allowed Pixi content to immediately benefit as WebGL gained traction. Fast forward to today, and WebGL is now [available on 95% of browsers](https://caniuse.com/webgl).
+
+History is repeating itself with WebGPU, currently supported in only a few desktop browsers and roughly [27% of the market](https://caniuse.com/webgpu). However, it's only a matter of time before it becomes universally supported. Pixi aims to execute the same fallback strategy, allowing you to always leverage the best technology available without needing to rewrite your code. This is precisely what version 8 achieves and will future proof everything we make for another ten years :D
+
+### 2. 🚀 Turbocharging Performance
+
+![bunnies](image.png) 
+
+Pixi has always been synonymous with speed and high-performance graphics. With v8, we've revisited our architecture to optimize both static and dynamic rendering. While v7 is fast, it operates as a somewhat ‘naïve’ renderer.
+
+#### v7 approach:
+
+1. Traverse the scene graph and make sure all the transforms are correct
+2. Traverse the scene graph a second time and do the following
+   - Build batches to render
+   - Upload the data to the GPU
+   - Draw the batch to the screen.
+
+#### v8 approach
+
+1. Update the transform of *only things that changed*
+2. Traverse the scene graph and construct a set of instructions.
+3. Upload all scene data to GPU in one go.
+4. Execute rendering based on the instructions.
+
+There are three key changes to this loop that give us a performance bump. 
+
+- First, we update only the elements that have changed. If nothing has moved, no code is executed, optimizing computational overhead.
+- Second, if the scene graph remains unchanged in subsequent frames, we reuse the existing rendering instructions. This avoids the overhead of reconstructing these instructions for each frame.
+- Third, if no elements in the scene change position, the data upload step (Step 3) is entirely skipped, thereby saving bandwidth and further reducing computational work.
+
+The net effect of these improvements? A decent performance leap across varying use-cases:
+
+| Bunny Situation | V7 CPU  | V8 CPU |CPU Dif | V7 GPU | V8 GPU | GPU dif |
+|-----------------|------------|------------|--------------------|------------|------------|--------------------|
+| 100k sprites all moving | ~50ms | ~15ms | <div style={{backgroundColor:'lightgreen'}}>233%</div> | ~9ms | ~2ms | <div style={{backgroundColor:'lightgreen'}}>350%</div> |
+| 100k sprites not moving | ~21ms | ~0.12ms | <div style={{backgroundColor:'lightgreen'}}>17417%</div> | ~9ms | ~0.5ms | <div style={{backgroundColor:'lightgreen'}}>1700%</div> |
+| 100k sprites (changing scene structure) | ~50ms | ~24ms | <div style={{backgroundColor:'lightgreen'}}>108%</div> | ~9ms | ~2ms | <div style={{backgroundColor:'lightgreen'}}>350%</div> |
+
+This benchmark numbers are based on this Bunnymark test that you can try yourself!
+
+- [v7 Bunnymark](https://goodboydigital.github.io/pixi-bunnymark/dist/?version=v7&count=100000&renderer=webgpu)
+- [v8 Bunnmark - webGPU](https://goodboydigital.github.io/pixi-bunnymark/dist/?version=v8&count=100000&renderer=webgpu)
+- [v8 Bunnmark - webGPU](https://goodboydigital.github.io/pixi-bunnymark/dist/?version=v8&count=100000&renderer=webgl)
+- [Repo](https://goodboydigital.github.io/pixi-bunnymark)
+
+
+Please have a play, you can fiddle with the parameters in the url to change the number of bunnies. Curious to see what numbers you'all get!
+
+Best of all, these improvements apply to WebGPU *and* the WebGL renderer. As with all of PixiJs’s party tricks, this all happens automatically :D
+
+### But that's not all!
+
+Whilst they were the two key driving forces for this refactor, we have also taken this opportunity to improve the API and add a tonne of other new features to the engine, too much to reasonably cram into this post  :P
+
+I will be creating future blog posts that explore some of the other improvements and API tweaks we have made to enable you to make even more quality stuff! But check out the [**release notes**](https://github.com/pixijs/pixijs/releases/tag/v8.0.0-beta.0) for some a more in depth look at some of the changes.
+
+It’s super important to note that, whilst Pixi v8 has changed a a fair bit under the hood the API has remind almost exactly the same! Any changes we have made are in the interest of making PixiJS more robust and user-friendly. In those instances, the v7 way will still work, but you will see a deprecation warning that will give you a helpful hint as to how to tweak your approach.  
+
+#### Over to you!
+
+Whilst we continue to work towards release candidate, now it's your turn to dive in and start playing around with v8. Feedback at this stage is invaluable for refining our little engine even further. We would love for you to share your thoughts (good, bad and ugly!), report bugs, and even contribute code as that way we collaboratively work to elevate Pixi.js to new heights 🚀 
+
+
+
+##### Steps to install:
+
+via npm you can install the beta version like so:
+
+```
+npm install pixi.js@8.0.0.beta.3
+```
+
+then you can create the most appropriate renderer using the new `autoDetectRenderer` function:
+
+```
+import { autoDetectRenderer } from "pixi.js";
+
+async function init()
+{
+  const renderer = await autoDetectRenderer({
+    // any settings
+  }); // will return a WebGL or WebGPU renderer
+}
+```
+
+Start experimenting with Pixi.js v8 Beta today and join us in shaping the future of 2D web graphics! 🎉
+
+
+
+
+
+
+
+
+
