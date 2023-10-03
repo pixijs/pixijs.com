@@ -116,7 +116,11 @@ async function init()
 
 Start experimenting with Pixi.js v8 Beta today and join us in shaping the future of 2D web graphics! 🎉
 
+#### Keep in touch!
 
+To keep up to date, please follow [Doormat23](https://twitter.com/Doormat23) and [PixiJS](https://twitter.com/PixiJS) on X, where we will be sharing more juicy stuff soon!
+
+Or join the super friendly community on [Discord](https://discord.gg/nrnDP9wtyX)
 
 
 
