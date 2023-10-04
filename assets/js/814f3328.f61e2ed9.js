@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([[2535],{5641:i=>{i.exports=JSON.parse('{"title":"All posts","items":[{"title":"PixiJS v8 Beta! \ud83c\udf89","permalink":"/blog/pixi-v8-beta"},{"title":"Introducing the PixiJS Universe!","permalink":"/blog/pixi-universe"}]}')}}]);
