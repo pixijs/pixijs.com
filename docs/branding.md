@@ -6,7 +6,7 @@ Below are links to assorted PixiJS branding assets usable for including on your 
 
 This is the banner that is displayed at the top of our [README](https://github.com/pixijs/pixijs/blob/dev/README.md).
 
-![PixiJS Banner](https://pixijs.download/pixijs-banner-no-version.png)
+![PixiJS Banner](https://files.pixijs.download/branding/pixijs-banner.png)
 
 ## Logo
 
@@ -14,17 +14,31 @@ We recommend using the Logo in places where the audience may not be familiar wit
 
 ### Logo (Dark)
 
-Download: [SVG](https://pixijs.download/pixijs-logo-full-dark.svg)
-[PNG](https://pixijs.download/pixijs-logo-full-dark.png)
+Download: [SVG](https://files.pixijs.download/branding/pixijs-logo-full-dark.svg)
+[PNG](https://files.pixijs.download/branding/pixijs-logo-full-dark.png)
 
-![PixiJS Logo Full Dark](https://pixijs.download/pixijs-logo-full-dark.png)
+![PixiJS Logo Full Dark](https://files.pixijs.download/branding/pixijs-logo-full-dark.png)
+
+### Logo (Dark, Transparent)
+
+Download: [SVG](https://files.pixijs.download/branding/pixijs-logo-transparent-dark.svg)
+[PNG](https://files.pixijs.download/branding/pixijs-logo-transparent-dark.png)
+
+![PixiJS Logo Full Dark](https://files.pixijs.download/branding/pixijs-logo-transparent-dark.png)
 
 ### Logo (Pink)
 
-Download: [SVG](https://pixijs.download/pixijs-logo-full-light.svg)
-[PNG](https://pixijs.download/pixijs-logo-full-light.png)
+Download: [SVG](https://files.pixijs.download/branding/pixijs-logo-full-light.svg)
+[PNG](https://files.pixijs.download/branding/pixijs-logo-full-light.png)
 
-![PixiJS Logo Full Light](https://pixijs.download/pixijs-logo-full-light.png)
+![PixiJS Logo Full Light](https://files.pixijs.download/branding/pixijs-logo-full-light.png)
+
+### Logo (Pink, Transparent)
+
+Download: [SVG](https://files.pixijs.download/branding/pixijs-logo-transparent-light.svg)
+[PNG](https://files.pixijs.download/branding/pixijs-logo-transparent-light.png)
+
+![PixiJS Logo Full Light](https://files.pixijs.download/branding/pixijs-logo-transparent-light.png)
 
 ## Mark
 
@@ -34,19 +48,21 @@ We recommend using the Mark in places where the audience is someone familiar wit
 
 512px x 512px 
 
-Download: [SVG](https://pixijs.download/pixijs-logo.svg)
-[PNG](https://pixijs.download/pixijs-logo.png)
+Download: [SVG](https://files.pixijs.download/branding/pixijs-logo.svg)
+[PNG](https://files.pixijs.download/branding/pixijs-logo.png)
 
-![PixiJS Logo Full Dark](https://pixijs.download/pixijs-logo.png)
+![PixiJS Logo Full Dark](https://files.pixijs.download/branding/pixijs-logo.png)
 
 ### Mark (Pink)
 
-Download: [SVG](https://pixijs.download/pixijs-logo-mark-dark.svg)
+Download: [SVG](https://files.pixijs.download/branding/pixijs-logo-mark-dark.svg)
+[PNG](https://files.pixijs.download/branding/pixijs-logo-mark-dark.png)
 
-![PixiJS Logo Mark Dark](https://pixijs.download/pixijs-logo-mark-dark.svg)
+![PixiJS Logo Mark Dark](https://files.pixijs.download/branding/pixijs-logo-mark-dark.png)
 
 ### Mark (Light)
 
-Download: [SVG](https://pixijs.download/pixijs-logo-mark-light.svg)
+Download: [SVG](https://files.pixijs.download/branding/pixijs-logo-mark-light.svg)
+[PNG](https://files.pixijs.download/branding/pixijs-logo-mark-light.png)
 
-![PixiJS Logo Mark Light](https://pixijs.download/pixijs-logo-mark-light.svg)
+![PixiJS Logo Mark Light](https://files.pixijs.download/branding/pixijs-logo-mark-light.png)
