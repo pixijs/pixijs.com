@@ -1,15 +1,13 @@
-import Layout from '@theme/Layout';
-
-import PixiPlayground from '@site/src/components/PixiPlayground';
+import PixiPlayground from '@site/src/components/Playground/PixiPlayground';
 import Select from '@site/src/components/Select';
-import { defaultExampleId, useCodeExamples } from '@site/src/components/PixiPlayground/useEditorCode';
-import { latestVersion, usePixiVersions } from '@site/src/components/PixiPlayground/usePixiVersions';
-import { usePlaygroundURLState } from '@site/src/components/PixiPlayground/usePlaygroundURLState';
+import { defaultExampleId, useCodeExamples } from '@site/src/components/Playground/PixiPlayground/useEditorCode';
+import { latestVersion, usePixiVersions } from '@site/src/components/Playground/PixiPlayground/usePixiVersions';
+import { usePlaygroundURLState } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
 
-import styles from './playground.module.css';
+import styles from './index.module.scss';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
-export default function PlaygroundPage()
+export default function Playground()
 {
     const [urlState, setURLState] = usePlaygroundURLState({
         defaultExampleId,
@@ -31,10 +29,10 @@ export default function PlaygroundPage()
     const { npm, dev = false } = selectedVersion;
 
     return (
-        <Layout title={'Playground'} noFooter wrapperClassName={styles.wrapper}>
+        <div className={styles.wrapper}>
             <BrowserOnly>
                 {() => (
-                    <div className={styles.playgroundWrapper}>
+                    <>
                         <div className={styles.nav}>
                             <Select
                                 label="Example:"
@@ -59,9 +57,9 @@ export default function PlaygroundPage()
                             onCodeChanged={handleEditorCodeChanged}
                             mode="fullscreen"
                         />
-                    </div>
+                    </>
                 )}
             </BrowserOnly>
-        </Layout>
+        </div>
     );
 }

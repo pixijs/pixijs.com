@@ -10,7 +10,7 @@ import Translate from '@docusaurus/Translate';
 import Versions from '@site/pixi-versions.json';
 import Heading from '@theme/Heading';
 import Layout from '@theme/Layout';
-import type { IVersion } from '@site/src/components/PixiPlayground/usePixiVersions';
+import type { IVersion } from '@site/src/components/Playground/PixiPlayground/usePixiVersions';
 
 function DocumentationLabel()
 {

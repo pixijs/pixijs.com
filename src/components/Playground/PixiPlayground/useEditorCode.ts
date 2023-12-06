@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 import type { ExampleSourceEntry } from '@site/src/data/examples';
 import { getExampleOptions, getExampleEntry } from '@site/src/data/examples';
 import type { OptionGroup } from '@site/src/components/Select';
-import type { SetURLStateType } from '@site/src/components/PixiPlayground/usePlaygroundURLState';
+import type { SetURLStateType } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
 
 export const defaultExampleId = 'sprite.basic';
 const defaultExampleOptions = getExampleOptions();

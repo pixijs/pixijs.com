@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Link from '@docusaurus/Link';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import PixiPlayground from '../PixiPlayground';
+import PixiPlayground from '../Playground/PixiPlayground';
 import type { TutorialStep } from '@site/src/data/tutorial/TutorialData';
 
 function BrowserTutorial({ data }: { data: TutorialStep[] })

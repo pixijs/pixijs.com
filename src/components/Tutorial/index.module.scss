@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     overflow: hidden;
     height: calc(100vh - var(--ifm-navbar-height));
+    width: 100vw;
 
     & > div {
         flex: 1;
@@ -239,5 +240,17 @@ html[data-theme='dark'] {
 
     .wrapper .content .card .navigator .dropdown a:hover div {
         background: rgb(79, 79, 79);
+    }
+}
+
+// Hack approach to fill the view with the page content
+:global(.container) {
+    // Remove docs wrapping container padding and margin
+    padding: 0 !important;
+    margin: 0 !important;
+
+    // Hide docs pagination nav
+    nav {
+        display: none;
     }
 }

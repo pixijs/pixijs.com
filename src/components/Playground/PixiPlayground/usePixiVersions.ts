@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import versions from '@site/pixi-versions.json';
-import type { SetURLStateType } from '@site/src/components/PixiPlayground/usePlaygroundURLState';
+import type { SetURLStateType } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
 
 export interface IVersion
 {
