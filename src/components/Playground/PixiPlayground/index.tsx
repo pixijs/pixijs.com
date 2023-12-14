@@ -1,5 +1,5 @@
 import { useColorMode } from '@docusaurus/theme-common';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { SandpackLayout, SandpackPreview, SandpackProvider, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
 import { useContainerClassNameModifier } from '@site/src/hooks/useContainerClassNameModifier';
@@ -19,6 +19,21 @@ type PlaygroundProps = {
 
 function Playground({ mode, onCodeChanged }: PlaygroundProps)
 {
+    // Override main container styling when in coding mode
+    useEffect(() =>
+    {
+        const className = 'coding';
+        const container = document.querySelector('.container');
+
+        container?.classList.add(className);
+
+        // Cleanup function to remove the class when the component is unmounted
+        return () =>
+        {
+            container?.classList.remove(className);
+        };
+    }, []);
+
     const { code, updateCode } = useActiveCode();
     const { sandpack } = useSandpack();
     const [showOutput, setShowOutput] = useState(false);

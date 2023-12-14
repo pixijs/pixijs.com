@@ -182,6 +182,17 @@ html[data-theme='dark'] {
     &.example {
         max-width: 100%;
     }
+
+    &.coding {
+        // Remove docs wrapping container padding and margin
+        padding: 0 !important;
+        margin: 0 !important;
+
+        // Hide docs pagination nav
+        nav {
+            display: none;
+        }
+    }
 }
 
 .offering-anim {

@@ -15,15 +15,3 @@
         }
     }
 }
-
-// Hack approach to fill the view with the page content
-:global(.container) {
-    // Remove docs wrapping container padding and margin
-    padding: 0 !important;
-    margin: 0 !important;
-
-    // Hide docs pagination nav
-    nav {
-        display: none;
-    }
-}
