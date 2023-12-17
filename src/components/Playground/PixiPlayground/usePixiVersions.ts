@@ -2,8 +2,7 @@ import { useCallback, useMemo } from 'react';
 import versions from '@site/pixi-versions.json';
 import type { SetURLStateType } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
 
-export interface IVersion
-{
+export type IVersion = {
     version: string;
     versionLabel: string;
     releaseNotes: string;
@@ -13,7 +12,7 @@ export interface IVersion
     prerelease?: boolean;
     dev?: boolean;
     latest?: boolean;
-}
+};
 
 const versionOptions = (versions as IVersion[]).map(({ versionLabel, version }) => ({
     label: versionLabel,

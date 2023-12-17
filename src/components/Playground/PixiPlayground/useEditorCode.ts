@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
-import type { ExampleSourceEntry } from '@site/src/data/examples';
-import { getExampleOptions, getExampleEntry } from '@site/src/data/examples';
+import type { ExampleSourceEntry } from '@site/src/examples/v7.3.2';
+import { getExampleOptions, getExampleEntry } from '@site/src/examples/v7.3.2';
 import type { OptionGroup } from '@site/src/components/Select';
 import type { SetURLStateType } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
 

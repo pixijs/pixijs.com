@@ -3,9 +3,10 @@ import styles from './index.module.scss';
 import Link from '@docusaurus/Link';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import PixiPlayground from '../Playground/PixiPlayground';
-import type { TutorialStep } from '@site/src/data/tutorial/TutorialData';
+import { getTutorialEntry, type TutorialStep } from '@site/src/tutorials/v7.3.2';
+import type { IVersion } from '../Playground/PixiPlayground/usePixiVersions';
 
-function BrowserTutorial({ data }: { data: TutorialStep[] })
+function BrowserTutorial({ data, version }: { data: TutorialStep[]; version: IVersion })
 {
     let step = Number(window.location.hash.replace('#', ''));
 
@@ -39,7 +40,7 @@ function BrowserTutorial({ data }: { data: TutorialStep[] })
                             {data.map((datum, i) => (
                                 <Link key={i} onClick={resetSolutionShowed} to={`#${i + 1}`}>
                                     <div className={`${i === step - 1 ? styles.selected : ''}`}>{`${i + 1}.  ${
-                                        datum.title
+                                        datum.header
                                     }`}</div>
                                 </Link>
                             ))}
@@ -61,18 +62,24 @@ function BrowserTutorial({ data }: { data: TutorialStep[] })
                     </div>
                 </div>
             </div>
-            <PixiPlayground mode="tutorial" code={completedCode && showSolution ? completedCode : code} />
+            <PixiPlayground
+                code={completedCode && showSolution ? completedCode : code}
+                pixiVersion={version.npm}
+                isPixiDevVersion={version.dev}
+                mode="tutorial"
+            />
         </>
     );
 }
 
-export default function Tutorial({ data }: { data: TutorialStep[] }): JSX.Element
+export default function Tutorial({ id, version }: { id: string; version: IVersion }): JSX.Element
 {
     const [showEditor, setShowEditor] = useState(false);
     const handleEditorToggle = (): void =>
     {
         setShowEditor(!showEditor);
     };
+    const entry = getTutorialEntry(id);
 
     return (
         <div className={`${styles.wrapper} ${showEditor ? styles.showEditor : ''}`}>
@@ -80,7 +87,7 @@ export default function Tutorial({ data }: { data: TutorialStep[] }): JSX.Elemen
                 {showEditor ? '<  To Instructions' : 'To Editor >'}
             </button>
             <BrowserOnly fallback={<h1 className={styles.loader}>LOADING...</h1>}>
-                {() => <BrowserTutorial data={data} />}
+                {() => <BrowserTutorial data={entry.steps} version={version} />}
             </BrowserOnly>
         </div>
     );

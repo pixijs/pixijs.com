@@ -10,14 +10,14 @@ import type { CodeChangeCallbackType } from './MonacoEditor';
 
 import styles from './index.module.scss';
 
-type PlaygroundMode = 'tutorial' | 'fullscreen' | 'example';
+type BasePlaygroundMode = 'tutorial' | 'fullscreen' | 'example';
 
-type PlaygroundProps = {
-    mode: PlaygroundMode;
+type BasePlaygroundProps = {
+    mode: BasePlaygroundMode;
     onCodeChanged?: CodeChangeCallbackType;
 };
 
-function Playground({ mode, onCodeChanged }: PlaygroundProps)
+function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
 {
     // Override main container styling when in coding mode
     useEffect(() =>
@@ -77,7 +77,7 @@ type PixiPlaygroundProps = {
     isPixiWebWorkerVersion?: boolean;
     isPixiDevVersion?: boolean;
     pixiVersion?: string;
-    mode?: PlaygroundMode;
+    mode?: BasePlaygroundMode;
     onCodeChanged?: CodeChangeCallbackType;
 };
 
@@ -116,7 +116,7 @@ export default function PixiPlayground({
                 },
             }}
         >
-            <Playground mode={mode} onCodeChanged={onCodeChanged} />
+            <BasePlayground mode={mode} onCodeChanged={onCodeChanged} />
         </SandpackProvider>
     );
 }

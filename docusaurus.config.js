@@ -75,7 +75,7 @@ const config = {
                 highlightSearchTermsOnTargetPage: true,
                 docsRouteBasePath: '/',
                 explicitSearchResultPath: true,
-                searchContextByPaths: ['guides', 'examples', 'blog'],
+                searchContextByPaths: ['guides', 'examples', 'tutorials', 'blog'],
                 useAllContextsWithNoSearchContext: true,
             },
         ],
