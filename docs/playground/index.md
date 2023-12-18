@@ -5,7 +5,7 @@ pagination_prev: null
 custom_edit_url: null
 ---
 
-import Playground from '../../src/components/Playground/index';
+import Playground from '@site/src/components/Playground/index';
 import version from '../pixi-version.json';
 
 <Playground version={version} />
