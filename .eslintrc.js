@@ -38,6 +38,8 @@ module.exports = {
         'no-empty-function': 0,
         'no-prototype-builtins': 0,
         'no-mixed-operators': 0,
+        'no-console': 0,
+        'global-require': 0,
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'error',
         'spaced-comment': [1, 'always', { markers: ['/'] }],

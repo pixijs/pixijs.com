@@ -1,16 +1,9 @@
 #!/usr/bin/env node
-const { join, resolve } = require('path');
+const { join, resolve, dirname } = require('path');
 const { mkdirSync, readFileSync, rmSync, writeFileSync } = require('fs');
+const glob = require('glob');
 
-const PARAM = process.argv[2];
 const ROOT = resolve(__dirname, '..');
-const DOCS_PATH = resolve(ROOT, PARAM ? `website/versioned_docs/version-${PARAM}` : 'docs');
-const EXAMPLES_MD_PATH = resolve(DOCS_PATH, 'examples');
-
-const pixiVersion = require(`${DOCS_PATH}/pixi-version.json`);
-const VERSION = pixiVersion.version;
-const EXAMPLES_JS_PATH = resolve(ROOT, 'src', 'examples', `v${VERSION}`);
-const examplesData = require(`${EXAMPLES_JS_PATH}/examplesData.json`);
 
 function camelCaseToSentenceCase(str)
 {
@@ -26,91 +19,105 @@ function camelCaseToSnakeCase(str)
 
 async function go()
 {
-    const directories = Object.keys(examplesData);
+    // Find all pixi-version.json files
+    const versionFiles = glob.sync(`${ROOT}/**/pixi-version.json`);
 
-    const directoryData = directories.map((directoryKey) =>
+    // Perform the script on all the directories that they are in
+    for (const versionFile of versionFiles)
     {
-        const categoryExamples = examplesData[directoryKey];
-        const directoryName = camelCaseToSnakeCase(directoryKey);
-        const categoryTitle = camelCaseToSentenceCase(directoryKey);
+        const DOCS_PATH = dirname(versionFile);
+        const EXAMPLES_MD_PATH = resolve(DOCS_PATH, 'examples');
+        const pixiVersion = require(versionFile);
+        const VERSION = pixiVersion.version;
+        const EXAMPLES_JS_PATH = resolve(ROOT, 'src', 'examples', `v${VERSION}`);
+        const examplesData = require(`${EXAMPLES_JS_PATH}/examplesData.json`);
 
-        return {
-            categoryTitle,
-            directoryPath: join(EXAMPLES_MD_PATH, directoryName),
-            examples: categoryExamples.map((exampleData) =>
-            {
-                let exampleKey = exampleData;
-                let usesWebWorkerLibrary = false;
-                let hide = false;
+        const directories = Object.keys(examplesData);
 
-                if (typeof exampleData !== 'string')
+        const directoryData = directories.map((directoryKey) =>
+        {
+            const categoryExamples = examplesData[directoryKey];
+            const directoryName = camelCaseToSnakeCase(directoryKey);
+            const categoryTitle = camelCaseToSentenceCase(directoryKey);
+
+            return {
+                categoryTitle,
+                directoryPath: join(EXAMPLES_MD_PATH, directoryName),
+                examples: categoryExamples.map((exampleData) =>
                 {
-                    ({ name: exampleKey, usesWebWorkerLibrary = false, hide = false } = exampleData);
+                    let exampleKey = exampleData;
+                    let usesWebWorkerLibrary = false;
+                    let hide = false;
+
+                    if (typeof exampleData !== 'string')
+                    {
+                        ({ name: exampleKey, usesWebWorkerLibrary = false, hide = false } = exampleData);
+                    }
+
+                    const jsFile = `${exampleKey}.js`;
+                    const mdFile = `${camelCaseToSnakeCase(exampleKey)}.md`;
+
+                    const jsPath = resolve(EXAMPLES_JS_PATH, directoryKey, jsFile);
+                    const mdPath = join(EXAMPLES_MD_PATH, directoryName, mdFile);
+
+                    return {
+                        exampleKey: `${directoryKey}.${exampleKey}`,
+                        exampleSource: readFileSync(jsPath, 'utf8').trim(),
+                        examplePath: mdPath,
+                        exampleTitle: camelCaseToSentenceCase(exampleKey),
+                        hide,
+                        usesWebWorkerLibrary,
+                    };
+                }),
+            };
+        });
+
+        directoryData.forEach(({ categoryTitle, directoryPath, examples }, index) =>
+        {
+            // delete old stuff first
+            rmSync(directoryPath, { recursive: true, force: true });
+
+            // recreate directory and build everything
+            mkdirSync(directoryPath);
+
+            const categoryYml = [`label: ${categoryTitle}`, `position: ${index + 1}`].join('\n');
+            const categoryYmlPath = join(directoryPath, '_category_.yml');
+
+            writeFileSync(categoryYmlPath, categoryYml, 'utf8');
+
+            let sidebarPosition = 0;
+
+            examples.forEach(({ exampleKey, exampleSource, examplePath, exampleTitle, hide, usesWebWorkerLibrary }) =>
+            {
+                if (hide)
+                {
+                    return;
                 }
 
-                const jsFile = `${exampleKey}.js`;
-                const mdFile = `${camelCaseToSnakeCase(exampleKey)}.md`;
+                const webWorkerProp = usesWebWorkerLibrary ? ' usesWebWorkerLibrary' : '';
 
-                const jsPath = resolve(EXAMPLES_JS_PATH, directoryKey, jsFile);
-                const mdPath = join(EXAMPLES_MD_PATH, directoryName, mdFile);
+                const mdContents = [
+                    '---',
+                    'hide_table_of_contents: true',
+                    'hide_edit_this_page: true',
+                    `sidebar_position: ${sidebarPosition++}`,
+                    'hide_title: true',
+                    'custom_edit_url: null',
+                    '---',
+                    '<!-- AUTO-GENERATED BY [generate-example-docs] script -->',
+                    'import Example from \'@site/src/components/Example/index\';',
+                    'import version from \'../../pixi-version.json\';',
+                    '',
+                    `# ${exampleTitle}`,
+                    '',
+                    `<Example id="${exampleKey}" version={version}/>`,
+                    '',
+                ].join('\n');
 
-                return {
-                    exampleKey: `${directoryKey}.${exampleKey}`,
-                    exampleSource: readFileSync(jsPath, 'utf8').trim(),
-                    examplePath: mdPath,
-                    exampleTitle: camelCaseToSentenceCase(exampleKey),
-                    hide,
-                    usesWebWorkerLibrary,
-                };
-            }),
-        };
-    });
-
-    directoryData.forEach(({ categoryTitle, directoryPath, examples }, index) =>
-    {
-        // delete old stuff first
-        rmSync(directoryPath, { recursive: true, force: true });
-
-        // recreate directory and build everything
-        mkdirSync(directoryPath);
-
-        const categoryYml = [`label: ${categoryTitle}`, `position: ${index + 1}`].join('\n');
-        const categoryYmlPath = join(directoryPath, '_category_.yml');
-
-        writeFileSync(categoryYmlPath, categoryYml, 'utf8');
-
-        let sidebarPosition = 0;
-
-        examples.forEach(({ exampleKey, exampleSource, examplePath, exampleTitle, hide, usesWebWorkerLibrary }) =>
-        {
-            if (hide)
-            {
-                return;
-            }
-
-            const webWorkerProp = usesWebWorkerLibrary ? ' usesWebWorkerLibrary' : '';
-
-            const mdContents = [
-                '---',
-                'hide_table_of_contents: true',
-                'hide_edit_this_page: true',
-                `sidebar_position: ${sidebarPosition++}`,
-                'hide_title: true',
-                'custom_edit_url: null',
-                '---',
-                '<!-- AUTO-GENERATED BY [generate-example-docs] script -->',
-                'import Example from \'@site/src/components/Example/index\';',
-                'import version from \'../../pixi-version.json\';',
-                '',
-                `# ${exampleTitle}`,
-                '',
-                `<Example id="${exampleKey}" version={version}/>`,
-                '',
-            ].join('\n');
-
-            writeFileSync(examplePath, mdContents, 'utf8');
+                writeFileSync(examplePath, mdContents, 'utf8');
+            });
         });
-    });
+    }
 }
 
 go();
