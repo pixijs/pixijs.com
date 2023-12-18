@@ -29,11 +29,11 @@ function ReleaseNotesLabel()
 
 export default function Version(): JSX.Element
 {
+    // TODO: Make it an adaptive version listing instead
     const versions = Versions as IVersion[];
-    const devVersion: IVersion = versions[0];
-    const latestVersion: IVersion = versions[1].prerelease ? versions[2] : versions[1];
+    const latestVersion: IVersion = versions[0].prerelease ? versions[1] : versions[0];
     const preReleaseVersion = versions.find((version) => version.prerelease);
-    const pastVersions = versions.slice(2);
+    const pastVersions = versions.slice(1);
 
     return (
         <Layout title="Versions" description="PixiJS Versions page listing all API documentation versions">
@@ -68,34 +68,6 @@ export default function Version(): JSX.Element
                                 <td>
                                     <Link to={latestVersion.releaseNotes}>
                                         <ReleaseNotesLabel />
-                                    </Link>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div className="margin-bottom--lg">
-                    <Heading as="h3" id="latest">
-                        <Translate id="versionsPage.next.title">Next version (Unreleased)</Translate>
-                    </Heading>
-                    <p>
-                        <Translate id="versionsPage.next.description">
-                            Here you can find the documentation for work-in-process unreleased version.
-                        </Translate>
-                    </p>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>{devVersion.version}</th>
-                                <td>
-                                    <Link to={devVersion.docs}>
-                                        <DocumentationLabel />
-                                    </Link>
-                                </td>
-                                <td>
-                                    <Link to={devVersion.build}>
-                                        <BuildLabel />
                                     </Link>
                                 </td>
                             </tr>

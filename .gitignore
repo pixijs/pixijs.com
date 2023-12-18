@@ -21,3 +21,5 @@ yarn-error.log*
 .vscode
 .idea
 .eslintcache
+
+scripts/pixiVersions.json
