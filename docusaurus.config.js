@@ -43,8 +43,13 @@ const config = {
                     editUrl: 'https://github.com/pixijs/pixijs.com/tree/main/',
                     routeBasePath: '/',
                     versions: {
-                        current: {
+                        '7.3.2': {
                             label: 'v7.x (Latest)',
+                            path: '7.3.2',
+                        },
+
+                        current: {
+                            label: 'prerelease-v8',
                         },
                     },
                 },

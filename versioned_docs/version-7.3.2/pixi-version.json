@@ -1,0 +1,10 @@
+{
+  "versionLabel": "v7.x (Latest)",
+  "version": "7.3.2",
+  "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v7.3.2",
+  "build": "https://pixijs.download/v7.3.2/pixi.min.js",
+  "docs": "https://pixijs.download/v7.3.2/docs/index.html",
+  "npm": "7.3.2",
+  "prerelease": false,
+  "latest": true
+}
