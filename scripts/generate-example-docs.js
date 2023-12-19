@@ -110,7 +110,7 @@ async function go()
                     '',
                     `# ${exampleTitle}`,
                     '',
-                    `<Example id="${exampleKey}" version={version}/>`,
+                    `<Example id="${exampleKey}" pixiVersion={version}/>`,
                     '',
                 ].join('\n');
 

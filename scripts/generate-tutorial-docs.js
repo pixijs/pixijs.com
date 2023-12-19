@@ -70,7 +70,7 @@ async function go()
                 'import Tutorial from \'@site/src/components/tutorial/index\';',
                 'import version from \'../pixi-version.json\';',
                 '',
-                `<Tutorial id="${tutorialKey}" version={version}/>`,
+                `<Tutorial id="${tutorialKey}" pixiVersion={version}/>`,
                 '',
             ].join('\n');
 

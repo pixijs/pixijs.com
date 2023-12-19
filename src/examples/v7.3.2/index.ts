@@ -83,30 +83,13 @@ import gradientResource from '!!raw-loader!./textures/gradientResource.js';
 import renderTextureAdvanced from '!!raw-loader!./textures/renderTextureAdvanced.js';
 import renderTextureBasic from '!!raw-loader!./textures/renderTextureBasic.js';
 import textureRotate from '!!raw-loader!./textures/textureRotate.js';
-import type { Option, OptionGroup } from '@site/src/components/Select';
+import type { Option } from '@site/src/components/Select';
 
 // Defines order of examples in documentation and playground dropdown, it's defined
 // separately here so it can be used in runtime code and in the md generation script
 import examplesData from './examplesData.json';
 import { camelCaseToSentenceCase } from '@site/src/utils/utils';
-
-export type ExampleDataEntry = {
-    name: string;
-    hide?: boolean;
-    usesWebWorkerLibrary?: boolean;
-};
-export type ExampleSourceEntry = {
-    source: string;
-    hide: boolean;
-    usesWebWorkerLibrary: boolean;
-};
-// json data structure
-export type ExamplesJsonType = Record<string, (ExampleDataEntry | string)[]>;
-// sourcecode dictionary structure for below
-export type ExamplesSourceType = Record<string, Record<string, string>>;
-// normalized combination of the above
-export type CategoryDataType = Record<string, ExampleSourceEntry>;
-export type ExamplesDataType = Record<string, CategoryDataType>;
+import type { CategoryDataType, ExampleDataEntry, ExamplesDataType, ExamplesJsonType, ExamplesSourceType } from '..';
 
 const examplesSource: ExamplesSourceType = {
     basic: {
@@ -231,7 +214,7 @@ const normalizeExampleDataEntry = (categoryExample: ExampleDataEntry | string): 
     };
 };
 
-const normalizedExamplesData = Object.entries(examplesData as ExamplesJsonType).reduce(
+const entries = Object.entries(examplesData as ExamplesJsonType).reduce(
     (directoryAcc, [categoryKey, categoryExamples]) => ({
         ...directoryAcc,
         [categoryKey]: categoryExamples.reduce((categoryAcc, categoryExampleOrString) =>
@@ -252,35 +235,27 @@ const normalizedExamplesData = Object.entries(examplesData as ExamplesJsonType).
     {} as ExamplesDataType,
 );
 
-export function getExampleEntry(pathString: string): ExampleSourceEntry | undefined
+const options = Object.entries(examplesData as ExamplesJsonType).map(([folderKey, folderEntries]) =>
 {
-    const [directory, example] = pathString.split('.');
-
-    return normalizedExamplesData[directory]?.[example];
-}
-
-export function getExampleOptions(): OptionGroup[]
-{
-    return Object.entries(examplesData as ExamplesJsonType).map(([folderKey, folderEntries]) =>
+    const options = folderEntries.reduce((acc, exampleDataEntry) =>
     {
-        const options = folderEntries.reduce((acc, exampleDataEntry) =>
+        const { name: exampleKey, hide } = normalizeExampleDataEntry(exampleDataEntry);
+
+        if (hide)
         {
-            const { name: exampleKey, hide } = normalizeExampleDataEntry(exampleDataEntry);
+            return acc;
+        }
 
-            if (hide)
-            {
-                return acc;
-            }
+        return acc.concat({
+            value: `${folderKey}.${exampleKey}`,
+            label: camelCaseToSentenceCase(exampleKey),
+        });
+    }, [] as Option[]);
 
-            return acc.concat({
-                value: `${folderKey}.${exampleKey}`,
-                label: camelCaseToSentenceCase(exampleKey),
-            });
-        }, [] as Option[]);
+    return {
+        label: camelCaseToSentenceCase(folderKey),
+        options,
+    };
+});
 
-        return {
-            label: camelCaseToSentenceCase(folderKey),
-            options,
-        };
-    });
-}
+export default { entries, options };

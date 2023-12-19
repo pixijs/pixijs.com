@@ -3,10 +3,11 @@ import styles from './index.module.scss';
 import Link from '@docusaurus/Link';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import PixiPlayground from '../Playground/PixiPlayground';
-import { getTutorialEntry, type TutorialStep } from '@site/src/tutorials/v7.3.2';
 import type { IVersion } from '../Playground/PixiPlayground/usePixiVersions';
+import type { TutorialStep } from '@site/src/tutorials';
+import { getTutorialEntry } from '@site/src/tutorials';
 
-function BrowserTutorial({ data, version }: { data: TutorialStep[]; version: IVersion })
+function BrowserTutorial({ data, pixiVersion }: { data: TutorialStep[]; pixiVersion: IVersion })
 {
     let step = Number(window.location.hash.replace('#', ''));
 
@@ -64,22 +65,23 @@ function BrowserTutorial({ data, version }: { data: TutorialStep[]; version: IVe
             </div>
             <PixiPlayground
                 code={completedCode && showSolution ? completedCode : code}
-                pixiVersion={version.npm}
-                isPixiDevVersion={version.dev}
+                pixiVersion={pixiVersion.version}
+                isPixiDevVersion={pixiVersion.dev}
                 mode="tutorial"
             />
         </>
     );
 }
 
-export default function Tutorial({ id, version }: { id: string; version: IVersion }): JSX.Element
+export default function Tutorial({ id, pixiVersion }: { id: string; pixiVersion: IVersion }): JSX.Element
 {
+    const version = pixiVersion.version;
     const [showEditor, setShowEditor] = useState(false);
     const handleEditorToggle = (): void =>
     {
         setShowEditor(!showEditor);
     };
-    const entry = getTutorialEntry(id);
+    const entry = getTutorialEntry(version, id);
 
     return (
         <div className={`${styles.wrapper} ${showEditor ? styles.showEditor : ''}`}>
@@ -87,7 +89,7 @@ export default function Tutorial({ id, version }: { id: string; version: IVersio
                 {showEditor ? '<  To Instructions' : 'To Editor >'}
             </button>
             <BrowserOnly fallback={<h1 className={styles.loader}>LOADING...</h1>}>
-                {() => <BrowserTutorial data={entry.steps} version={version} />}
+                {() => <BrowserTutorial data={entry.steps} pixiVersion={pixiVersion} />}
             </BrowserOnly>
         </div>
     );
