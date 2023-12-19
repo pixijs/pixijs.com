@@ -65,7 +65,7 @@ This command will trigger tutorial markdowns generation on all of the docs direc
 $ npm start
 ```
 
-The local development command will also trigger the `generate-content` command which, in turns, calls the `generate-example-docs` script and `generate-tutorial-docs` script respectively. Currently there is no watch command for this so any of the mentioned command/scripts should be called to do the re-compilation to reflect any changes.
+The local development command will also trigger the `generate-content` command which, in turns, calls the `generate-example-docs` script and `generate-tutorial-docs` script respectively. Since the compiled markdown pages contain dynamic components, changes within the examples source or the tutorials source will be reflected on hot reloads.
 
 #### Versioning
 
