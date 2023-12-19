@@ -4,7 +4,7 @@ import completedCode2 from '!!raw-loader!./step2-completed-code';
 import code3 from '!!raw-loader!./step3-code';
 import completedCode3 from '!!raw-loader!./step3-completed-code';
 import code4 from '!!raw-loader!./step4-code';
-import type { TutorialStep } from '@site/src/tutorials/v7.3.2';
+import type { TutorialStep } from '../..';
 import content1 from './step1-content.md';
 import content2 from './step2-content.md';
 import content3 from './step3-content.md';
