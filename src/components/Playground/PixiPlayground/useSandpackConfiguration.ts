@@ -71,7 +71,13 @@ const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion
         const pixiPackageName = isPixiWebWorkerVersion ? '@pixi/webworker' : 'pixi.js';
         const getPackageVersion = (packageName: string) =>
             (isPixiDevVersion ? `${pixiVersion}/${packageName}` : pixiVersion);
-        const packages = [pixiPackageName, '@pixi/graphics-extras', '@pixi/math-extras'];
+        const packages = [pixiPackageName];
+
+        // Add these packages if we're using a version of pixi that doesn't have them built in, ie. < v8
+        if (Number(pixiVersion.split('.')[0]) < 8)
+        {
+            packages.push('@pixi/graphics-extras', '@pixi/math-extras');
+        }
 
         const dependencies = packages.reduce(
             (deps, packageName) => ({
