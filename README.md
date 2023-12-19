@@ -24,3 +24,79 @@ $ npm build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+### Working with Content
+
+Core content on the website is within the working `docs` directory and can have various versions that were snapshot and copied over into the `versioned_docs` directory.
+
+Core content consists of:
+- Guides
+- Examples
+- Tutorials
+
+#### Guides
+
+These are static markdown pages that can be added and edited directly within the `docs/guides` directory.
+
+#### Examples
+
+These are markdown compilations of the JS files on the `src/examples` directory. They are also versioned to match the versions of the docs snapshots. Only the `docs/examples/index.md` entry point can be altered, but the examples themselves should be worked on from within the `src/examples/{version}` directories. Once updated, the command below can be called to generate out the markdown compilations of the examples.
+
+```
+$ npm run generate-example-docs
+```
+
+This command will trigger example markdowns generation on all of the docs directories altogether, both the working docs directory and the versioned docs directories.
+
+__Note__: The examples within the docs version active on the website will be shown on the drop-down menu on the Playground page to serve as starting points for users to explore PixiJS features to their heart's content
+
+#### Tutorials
+
+These also markdown compilations of groups of files on the `src/tutorials` directory. Each tutorial group consists of a number of steps where each step contains a JS code file accompanied by an instruction markdown file, and a separate completed JS code file if there is a next step to proceed towards. These completed code can be toggled on/off from the instruction card of the corresponded step. Like the examples, these are also versioned to match the versions of the docs snapshots. Only the `docs/tutorials/index.md` entry point can be altered, but the tutorial groups themselves should be worked on from within the `src/tutorial/{version}` directories. Once updated, the command below can be called to generate out the markdown compilations of the tutorial groups.
+
+```
+$ npm run generate-tutorial-docs
+```
+
+This command will trigger tutorial markdowns generation on all of the docs directories altogether, both the working docs directory and the versioned docs directories.
+
+#### Workflow
+
+```
+$ npm start
+```
+
+The local development command will also trigger the `generate-content` command which, in turns, calls the `generate-example-docs` script and `generate-tutorial-docs` script respectively. Currently there is no watch command for this so any of the mentioned command/scripts should be called to do the re-compilation to reflect any changes.
+
+#### Versioning
+
+Docs versioning is native to Docusaurus, but to make it easier to manage it is coupled with the PixiJS version. A `pixi-version.json` is required on the working docs directory to create a versioned snapshot of the docs. This can be generated and altered using the following command:
+
+```
+$ npm run generate-pixi-version-config
+```
+
+The command will retrieve the up-to-date versions and tags from PixiJS and display out as an interactive list for selection.
+
+Once satisfied with the state of the working docs and wanting to create a snapshot to make way for another upcoming version, the following command can be called:
+
+```
+$ npm run create-docs-version-snapshot
+```
+
+This will copy everything from the working docs into its own directory within the `versioned_docs` directory and named correspondingly to the version number from the encapsulated `pixi-version.json`. The command will also trigger `update-global-version-config` script which adds the pixi version config to the master `pixi-versions.json` on the root and alter the version config on the `docusaurus.config.js` accordingly. Docusaurus will also add the version to its `versions.json` file on the root.
+
+An existing docs snapshot can be removed using the following command:
+
+```
+$ npm run remove-docs-version-snapshot
+```
+
+Or can have its pixi version config altered to another version using the command:
+
+```
+$ npm run switch-snapshot-pixi-version-config
+```
+
+where both come with an interactive list of all the snapshots for selection to be actioned on accordingly.
+
+The `update-pixi-version-configs` script is also called pre-build and pre-deploy to update all the outdated labels or metadata on the `pixi-version.json` config on all the docs directories.
