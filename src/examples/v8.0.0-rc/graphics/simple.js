@@ -1,99 +1,89 @@
-import * as PIXI from 'pixi.js';
-import '@pixi/graphics-extras';
+import { Application, Graphics } from 'pixi.js';
 
-const app = new PIXI.Application({ antialias: true, resizeTo: window });
+(async () =>
+{
+    // Create a new application
+    const app = new Application();
 
-document.body.appendChild(app.view);
+    // Initialize the application
+    await app.init({ antialias: true, resizeTo: window });
 
-const graphics = new PIXI.Graphics();
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-// Rectangle
-graphics.beginFill(0xde3249);
-graphics.drawRect(50, 50, 100, 100);
-graphics.endFill();
+    const graphics = new Graphics();
 
-// Rectangle + line style 1
-graphics.lineStyle(2, 0xfeeb77, 1);
-graphics.beginFill(0x650a5a);
-graphics.drawRect(200, 50, 100, 100);
-graphics.endFill();
+    // Rectangle
+    graphics.rect(50, 50, 100, 100);
+    graphics.fill(0xde3249);
 
-// Rectangle + line style 2
-graphics.lineStyle(10, 0xffbd01, 1);
-graphics.beginFill(0xc34288);
-graphics.drawRect(350, 50, 100, 100);
-graphics.endFill();
+    // Rectangle + line style 1
+    graphics.rect(200, 50, 100, 100);
+    graphics.fill(0x650a5a);
+    graphics.stroke({ width: 2, color: 0xfeeb77 });
 
-// Rectangle 2
-graphics.lineStyle(2, 0xffffff, 1);
-graphics.beginFill(0xaa4f08);
-graphics.drawRect(530, 50, 140, 100);
-graphics.endFill();
+    // Rectangle + line style 2
+    graphics.rect(350, 50, 100, 100);
+    graphics.fill(0xc34288);
+    graphics.stroke({ width: 10, color: 0xffbd01 });
 
-// Circle
-graphics.lineStyle(0); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
-graphics.beginFill(0xde3249, 1);
-graphics.drawCircle(100, 250, 50);
-graphics.endFill();
+    // Rectangle 2
+    graphics.rect(530, 50, 140, 100);
+    graphics.fill(0xaa4f08);
+    graphics.stroke({ width: 2, color: 0xffffff });
 
-// Circle + line style 1
-graphics.lineStyle(2, 0xfeeb77, 1);
-graphics.beginFill(0x650a5a, 1);
-graphics.drawCircle(250, 250, 50);
-graphics.endFill();
+    // Circle
+    graphics.circle(100, 250, 50);
+    graphics.fill(0xde3249, 1);
 
-// Circle + line style 2
-graphics.lineStyle(10, 0xffbd01, 1);
-graphics.beginFill(0xc34288, 1);
-graphics.drawCircle(400, 250, 50);
-graphics.endFill();
+    // Circle + line style 1
+    graphics.circle(250, 250, 50);
+    graphics.fill(0x650a5a, 1);
+    graphics.stroke({ width: 2, color: 0xfeeb77 });
 
-// Ellipse + line style 2
-graphics.lineStyle(2, 0xffffff, 1);
-graphics.beginFill(0xaa4f08, 1);
-graphics.drawEllipse(600, 250, 80, 50);
-graphics.endFill();
+    // Circle + line style 2
+    graphics.circle(400, 250, 50);
+    graphics.fill(0xc34288, 1);
+    graphics.stroke({ width: 10, color: 0xffbd01 });
 
-// draw a shape
-graphics.beginFill(0xff3300);
-graphics.lineStyle(4, 0xffd900, 1);
-graphics.moveTo(50, 350);
-graphics.lineTo(250, 350);
-graphics.lineTo(100, 400);
-graphics.lineTo(50, 350);
-graphics.closePath();
-graphics.endFill();
+    // Ellipse + line style 2
+    graphics.ellipse(600, 250, 80, 50);
+    graphics.fill(0xaa4f08, 1);
+    graphics.stroke({ width: 2, color: 0xffffff });
 
-// draw a rounded rectangle
-graphics.lineStyle(2, 0xff00ff, 1);
-graphics.beginFill(0x650a5a, 0.25);
-graphics.drawRoundedRect(50, 440, 100, 100, 16);
-graphics.endFill();
+    // Draw a shape
+    graphics.moveTo(50, 350);
+    graphics.lineTo(250, 350);
+    graphics.lineTo(100, 400);
+    graphics.lineTo(50, 350);
+    graphics.fill(0xff3300);
+    graphics.stroke({ width: 4, color: 0xffd900 });
 
-// draw star
-graphics.lineStyle(2, 0xffffff);
-graphics.beginFill(0x35cc5a, 1);
-graphics.drawStar(360, 370, 5, 50);
-graphics.endFill();
+    // Draw a rounded rectangle
+    graphics.roundRect(50, 440, 100, 100, 16);
+    graphics.fill(0x650a5a, 0.25);
+    graphics.stroke({ width: 2, color: 0xff00ff });
 
-// draw star 2
-graphics.lineStyle(2, 0xffffff);
-graphics.beginFill(0xffcc5a, 1);
-graphics.drawStar(280, 510, 7, 50);
-graphics.endFill();
+    // Draw star
+    graphics.star(360, 370, 5, 50);
+    graphics.fill(0x35cc5a);
+    graphics.stroke({ width: 2, color: 0xffffff });
 
-// draw star 3
-graphics.lineStyle(4, 0xffffff);
-graphics.beginFill(0x55335a, 1);
-graphics.drawStar(470, 450, 4, 50);
-graphics.endFill();
+    // Draw star 2
+    graphics.star(280, 510, 7, 50);
+    graphics.fill(0xffcc5a);
+    graphics.stroke({ width: 2, color: 0xfffffd });
 
-// draw polygon
-const path = [600, 370, 700, 460, 780, 420, 730, 570, 590, 520];
+    // Draw star 3
+    graphics.star(470, 450, 4, 50);
+    graphics.fill(0x55335a);
+    graphics.stroke(4, 0xffffff);
 
-graphics.lineStyle(0);
-graphics.beginFill(0x3500fa, 1);
-graphics.drawPolygon(path);
-graphics.endFill();
+    // Draw polygon
+    const path = [600, 370, 700, 460, 780, 420, 730, 570, 590, 520];
 
-app.stage.addChild(graphics);
+    graphics.poly(path);
+    graphics.fill(0x3500fa);
+
+    app.stage.addChild(graphics);
+})();

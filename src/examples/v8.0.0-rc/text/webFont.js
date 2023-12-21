@@ -1,8 +1,4 @@
-import * as PIXI from 'pixi.js';
-
-const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
-
-document.body.appendChild(app.view);
+import { Application, Text } from 'pixi.js';
 
 // Load them google fonts before starting...
 window.WebFontConfig = {
@@ -29,9 +25,18 @@ window.WebFontConfig = {
 })();
 /* eslint-enabled */
 
-function init() {
+async function init() {
+    // Create a new application
+    const app = new Application();
+
+    // Initialize the application
+    await app.init({ background: '#1099bb', resizeTo: window });
+
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
     // create some white text using the Snippet webfont
-    const textSample = new PIXI.Text('PixiJS text using the\ncustom "Snippet" Webfont', {
+    const textSample = new Text('PixiJS text using the\ncustom "Snippet" Webfont', {
         fontFamily: 'Snippet',
         fontSize: 50,
         fill: 'white',

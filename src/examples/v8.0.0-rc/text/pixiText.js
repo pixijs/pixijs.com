@@ -1,62 +1,86 @@
-import * as PIXI from 'pixi.js';
+import { Application, Text, TextStyle, Color, FillGradient } from 'pixi.js';
 
-const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+(async () =>
+{
+    // Create a new application
+    const app = new Application();
 
-document.body.appendChild(app.view);
+    // Initialize the application
+    await app.init({ background: '#1099bb', resizeTo: window });
 
-const basicText = new PIXI.Text('Basic text in pixi');
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-basicText.x = 50;
-basicText.y = 100;
+    const basicText = new Text({ text: 'Basic text in pixi' });
 
-app.stage.addChild(basicText);
+    basicText.x = 50;
+    basicText.y = 100;
 
-const style = new PIXI.TextStyle({
-    fontFamily: 'Arial',
-    fontSize: 36,
-    fontStyle: 'italic',
-    fontWeight: 'bold',
-    fill: ['#ffffff', '#00ff99'], // gradient
-    stroke: '#4a1850',
-    strokeThickness: 5,
-    dropShadow: true,
-    dropShadowColor: '#000000',
-    dropShadowBlur: 4,
-    dropShadowAngle: Math.PI / 6,
-    dropShadowDistance: 6,
-    wordWrap: true,
-    wordWrapWidth: 440,
-    lineJoin: 'round',
-});
+    app.stage.addChild(basicText);
 
-const richText = new PIXI.Text('Rich text with a lot of options and across multiple lines', style);
+    // Create gradient fill
+    const fill = new FillGradient(0, 0, 0, 36 * 1.7 * 7);
 
-richText.x = 50;
-richText.y = 220;
+    const colors = [0xffffff, 0x00ff99].map((color) => Color.shared.setValue(color).toNumber());
 
-app.stage.addChild(richText);
+    colors.forEach((number, index) =>
+    {
+        const ratio = index / colors.length;
 
-const skewStyle = new PIXI.TextStyle({
-    fontFamily: 'Arial',
-    dropShadow: true,
-    dropShadowAlpha: 0.8,
-    dropShadowAngle: 2.1,
-    dropShadowBlur: 4,
-    dropShadowColor: '0x111111',
-    dropShadowDistance: 10,
-    fill: ['#ffffff'],
-    stroke: '#004620',
-    fontSize: 60,
-    fontWeight: 'lighter',
-    lineJoin: 'round',
-    strokeThickness: 12,
-});
+        fill.addColorStop(ratio, number);
+    });
 
-const skewText = new PIXI.Text('SKEW IS COOL', skewStyle);
+    const style = new TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 36,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        fill: { fill },
+        stroke: { color: '#4a1850', width: 5, join: 'round' },
+        dropShadow: {
+            color: '#000000',
+            blur: 4,
+            angle: Math.PI / 6,
+            distance: 6,
+        },
+        wordWrap: true,
+        wordWrapWidth: 440,
+    });
 
-skewText.skew.set(0.65, -0.3);
-skewText.anchor.set(0.5, 0.5);
-skewText.x = 300;
-skewText.y = 480;
+    const richText = new Text({
+        text: 'Rich text with a lot of options and across multiple lines',
+        style,
+    });
 
-app.stage.addChild(skewText);
+    richText.x = 50;
+    richText.y = 220;
+
+    app.stage.addChild(richText);
+
+    const skewStyle = new TextStyle({
+        fontFamily: 'Arial',
+        dropShadow: {
+            alpha: 0.8,
+            angle: 2.1,
+            blur: 4,
+            color: '0x111111',
+            distance: 10,
+        },
+        fill: '#ffffff',
+        stroke: { color: '#004620', width: 12, join: 'round' },
+        fontSize: 60,
+        fontWeight: 'lighter',
+    });
+
+    const skewText = new Text({
+        text: 'SKEW IS COOL',
+        style: skewStyle,
+    });
+
+    skewText.skew.set(0.65, -0.3);
+    skewText.anchor.set(0.5, 0.5);
+    skewText.x = 300;
+    skewText.y = 480;
+
+    app.stage.addChild(skewText);
+})();

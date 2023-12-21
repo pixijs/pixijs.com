@@ -87,8 +87,8 @@ import {
 
     reelContainer.y = margin;
     reelContainer.x = Math.round(app.screen.width - REEL_WIDTH * 5);
-    const top = new Graphics().rect(0, 0, app.screen.width, margin).fill(0x000001, 1); // TODO: Investigate why setting to 0x000000 makes it white.
-    const bottom = new Graphics().rect(0, SYMBOL_SIZE * 3 + margin, app.screen.width, margin).fill(0x000001, 1);
+    const top = new Graphics().rect(0, 0, app.screen.width, margin).fill({ color: 0x0 });
+    const bottom = new Graphics().rect(0, SYMBOL_SIZE * 3 + margin, app.screen.width, margin).fill({ color: 0x0 });
 
     // Create gradient fill
     const fill = new FillGradient(0, 0, 0, 36 * 1.7);
