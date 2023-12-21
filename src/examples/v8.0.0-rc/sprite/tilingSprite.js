@@ -1,29 +1,42 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, TilingSprite, Ticker } from 'pixi.js';
 
-const app = new PIXI.Application({ resizeTo: window });
-
-document.body.appendChild(app.view);
-
-// create a texture from an image path
-const texture = PIXI.Texture.from('https://pixijs.com/assets/p2.jpeg');
-
-/* create a tiling sprite ...
- * requires a texture, a width and a height
- * in WebGL the image size should preferably be a power of two
- */
-const tilingSprite = new PIXI.TilingSprite(texture, app.screen.width, app.screen.height);
-
-app.stage.addChild(tilingSprite);
-
-let count = 0;
-
-app.ticker.add(() =>
+(async () =>
 {
-    count += 0.005;
+    // Create a new application
+    const app = new Application();
 
-    tilingSprite.tileScale.x = 2 + Math.sin(count);
-    tilingSprite.tileScale.y = 2 + Math.cos(count);
+    // Initialize the application
+    await app.init({ resizeTo: window });
 
-    tilingSprite.tilePosition.x += 1;
-    tilingSprite.tilePosition.y += 1;
-});
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
+    // Load the tile texture
+    const texture = await Assets.load('https://pixijs.com/assets/p2.jpeg');
+
+    /* Create a tiling sprite and add it to the stage...
+     * requires a texture, a width and a height
+     * in WebGL the image size should preferably be a power of two
+     */
+    const tilingSprite = new TilingSprite({
+        texture,
+        width: app.screen.width,
+        height: app.screen.height,
+    });
+
+    app.stage.addChild(tilingSprite);
+
+    let count = 0;
+
+    // Animate the tiling sprite
+    Ticker.shared.add(() =>
+    {
+        count += 0.005;
+
+        tilingSprite.tileScale.x = 2 + Math.sin(count);
+        tilingSprite.tileScale.y = 2 + Math.cos(count);
+
+        tilingSprite.tilePosition.x += 1;
+        tilingSprite.tilePosition.y += 1;
+    });
+})();

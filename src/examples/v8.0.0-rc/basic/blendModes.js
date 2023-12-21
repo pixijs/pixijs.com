@@ -1,92 +1,105 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Sprite, Ticker, Rectangle } from 'pixi.js';
 
-const app = new PIXI.Application({ resizeTo: window });
-
-document.body.appendChild(app.view);
-
-// create a new background sprite
-const background = PIXI.Sprite.from('https://pixijs.com/assets/bg_rotate.jpg');
-
-background.width = app.screen.width;
-background.height = app.screen.height;
-app.stage.addChild(background);
-
-// create an array to store a reference to the dudes
-const dudeArray = [];
-
-const totaldudes = 20;
-
-for (let i = 0; i < totaldudes; i++)
+(async () =>
 {
-    // create a new Sprite that uses the image name that we just generated as its source
-    const dude = PIXI.Sprite.from('https://pixijs.com/assets/flowerTop.png');
+    // Create a new application
+    const app = new Application();
 
-    dude.anchor.set(0.5);
+    // Initialize the application
+    await app.init({ resizeTo: window });
 
-    // set a random scale for the dude
-    dude.scale.set(0.8 + Math.random() * 0.3);
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-    // finally let's set the dude to be at a random position...
-    dude.x = Math.floor(Math.random() * app.screen.width);
-    dude.y = Math.floor(Math.random() * app.screen.height);
+    // Load the textures
+    const bgTexture = await Assets.load('https://pixijs.com/assets/bg_rotate.jpg');
+    const alienTexture = await Assets.load('https://pixijs.com/assets/flowerTop.png');
 
-    // The important bit of this example, this is how you change the default blend mode of the sprite
-    dude.blendMode = PIXI.BLEND_MODES.ADD;
+    // Create a new background sprite
+    const background = new Sprite(bgTexture);
 
-    // create some extra properties that will control movement
-    dude.direction = Math.random() * Math.PI * 2;
+    background.width = app.screen.width;
+    background.height = app.screen.height;
+    app.stage.addChild(background);
 
-    // this number will be used to modify the direction of the dude over time
-    dude.turningSpeed = Math.random() - 0.8;
+    // Create an array to store references to the dudes
+    const dudeArray = [];
 
-    // create a random speed for the dude between 0 - 2
-    dude.speed = 2 + Math.random() * 2;
+    const totaldudes = 20;
 
-    // finally we push the dude into the dudeArray so it it can be easily accessed later
-    dudeArray.push(dude);
-
-    app.stage.addChild(dude);
-}
-
-// create a bounding box for the little dudes
-const dudeBoundsPadding = 100;
-
-const dudeBounds = new PIXI.Rectangle(
-    -dudeBoundsPadding,
-    -dudeBoundsPadding,
-    app.screen.width + dudeBoundsPadding * 2,
-    app.screen.height + dudeBoundsPadding * 2,
-);
-
-app.ticker.add(() =>
-{
-    // iterate through the dudes and update the positions
-    for (let i = 0; i < dudeArray.length; i++)
+    for (let i = 0; i < totaldudes; i++)
     {
-        const dude = dudeArray[i];
+        // Create a new alien Sprite
+        const dude = new Sprite(alienTexture);
 
-        dude.direction += dude.turningSpeed * 0.01;
-        dude.x += Math.sin(dude.direction) * dude.speed;
-        dude.y += Math.cos(dude.direction) * dude.speed;
-        dude.rotation = -dude.direction - Math.PI / 2;
+        dude.anchor.set(0.5);
 
-        // wrap the dudes by testing their bounds...
-        if (dude.x < dudeBounds.x)
-        {
-            dude.x += dudeBounds.width;
-        }
-        else if (dude.x > dudeBounds.x + dudeBounds.width)
-        {
-            dude.x -= dudeBounds.width;
-        }
+        // Set a random scale for the dude
+        dude.scale.set(0.8 + Math.random() * 0.3);
 
-        if (dude.y < dudeBounds.y)
-        {
-            dude.y += dudeBounds.height;
-        }
-        else if (dude.y > dudeBounds.y + dudeBounds.height)
-        {
-            dude.y -= dudeBounds.height;
-        }
+        // Finally let's set the dude to be at a random position...
+        dude.x = Math.floor(Math.random() * app.screen.width);
+        dude.y = Math.floor(Math.random() * app.screen.height);
+
+        // The important bit of this example, this is how you change the default blend mode of the sprite
+        // Refer to this docs page for all the available blend modes out of the box: [TODO: LINK]
+        dude.blendMode = 'add';
+
+        // Create some extra properties that will control movement
+        dude.direction = Math.random() * Math.PI * 2;
+
+        // This number will be used to modify the direction of the dude over time
+        dude.turningSpeed = Math.random() - 0.8;
+
+        // Create a random speed for the dude between 0 - 2
+        dude.speed = 2 + Math.random() * 2;
+
+        // Finally we push the dude into the dudeArray so it it can be easily accessed later
+        dudeArray.push(dude);
+
+        app.stage.addChild(dude);
     }
-});
+
+    // Create a bounding box for the little dudes
+    const dudeBoundsPadding = 100;
+
+    const dudeBounds = new Rectangle(
+        -dudeBoundsPadding,
+        -dudeBoundsPadding,
+        app.screen.width + dudeBoundsPadding * 2,
+        app.screen.height + dudeBoundsPadding * 2,
+    );
+
+    Ticker.shared.add(() =>
+    {
+        // Iterate through the dudes and update the positions
+        for (let i = 0; i < dudeArray.length; i++)
+        {
+            const dude = dudeArray[i];
+
+            dude.direction += dude.turningSpeed * 0.01;
+            dude.x += Math.sin(dude.direction) * dude.speed;
+            dude.y += Math.cos(dude.direction) * dude.speed;
+            dude.rotation = -dude.direction - Math.PI / 2;
+
+            // Constrain the dudes' position by testing their bounds...
+            if (dude.x < dudeBounds.x)
+            {
+                dude.x += dudeBounds.width;
+            }
+            else if (dude.x > dudeBounds.x + dudeBounds.width)
+            {
+                dude.x -= dudeBounds.width;
+            }
+
+            if (dude.y < dudeBounds.y)
+            {
+                dude.y += dudeBounds.height;
+            }
+            else if (dude.y > dudeBounds.y + dudeBounds.height)
+            {
+                dude.y -= dudeBounds.height;
+            }
+        }
+    });
+})();

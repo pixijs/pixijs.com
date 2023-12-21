@@ -1,19 +1,27 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, AnimatedSprite, Texture } from 'pixi.js';
 
-const app = new PIXI.Application({ autoStart: false, resizeTo: window });
-
-document.body.appendChild(app.view);
-
-PIXI.Assets.load('https://pixijs.com/assets/spritesheet/0123456789.json').then((spritesheet) =>
+(async () =>
 {
-    // create an array to store the textures
+    // Create a new application
+    const app = new Application();
+
+    // Initialize the application
+    await app.init({ autoStart: false, resizeTo: window });
+
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
+    // Load the animation sprite sheet
+    const spritesheet = await Assets.load('https://pixijs.com/assets/spritesheet/0123456789.json');
+
+    // Create an array to store the textures
     const textures = [];
     let i;
 
     for (i = 0; i < 10; i++)
     {
         const framekey = `0123456789 ${i}.ase`;
-        const texture = PIXI.Texture.from(framekey);
+        const texture = Texture.from(framekey);
         const time = spritesheet.data.frames[framekey].duration;
 
         textures.push({ texture, time });
@@ -21,8 +29,8 @@ PIXI.Assets.load('https://pixijs.com/assets/spritesheet/0123456789.json').then((
 
     const scaling = 4;
 
-    // create a slow AnimatedSprite
-    const slow = new PIXI.AnimatedSprite(textures);
+    // Create a slow AnimatedSprite
+    const slow = new AnimatedSprite(textures);
 
     slow.anchor.set(0.5);
     slow.scale.set(scaling);
@@ -32,8 +40,8 @@ PIXI.Assets.load('https://pixijs.com/assets/spritesheet/0123456789.json').then((
     slow.play();
     app.stage.addChild(slow);
 
-    // create a fast AnimatedSprite
-    const fast = new PIXI.AnimatedSprite(textures);
+    // Create a fast AnimatedSprite
+    const fast = new AnimatedSprite(textures);
 
     fast.anchor.set(0.5);
     fast.scale.set(scaling);
@@ -42,6 +50,6 @@ PIXI.Assets.load('https://pixijs.com/assets/spritesheet/0123456789.json').then((
     fast.play();
     app.stage.addChild(fast);
 
-    // start animating
+    // Start animating
     app.start();
-});
+})();

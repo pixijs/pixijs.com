@@ -1,26 +1,35 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, AnimatedSprite, Texture } from 'pixi.js';
 
-const app = new PIXI.Application({ autoStart: false, resizeTo: window });
-
-document.body.appendChild(app.view);
-
-PIXI.Assets.load('https://pixijs.com/assets/spritesheet/mc.json').then(() =>
+(async () =>
 {
-    // create an array to store the textures
+    // Create a new application
+    const app = new Application();
+
+    // Initialize the application
+    await app.init({ autoStart: false, resizeTo: window });
+
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
+    // Load the animation sprite sheet
+    const texture = await Assets.load('https://pixijs.com/assets/spritesheet/mc.json');
+
+    // Create an array to store the textures
     const explosionTextures = [];
     let i;
 
     for (i = 0; i < 26; i++)
     {
-        const texture = PIXI.Texture.from(`Explosion_Sequence_A ${i + 1}.png`);
+        const texture = Texture.from(`Explosion_Sequence_A ${i + 1}.png`);
 
         explosionTextures.push(texture);
     }
 
+    // Create and randomly place the animated explosion sprites on the stage
     for (i = 0; i < 50; i++)
     {
-        // create an explosion AnimatedSprite
-        const explosion = new PIXI.AnimatedSprite(explosionTextures);
+        // Create an explosion AnimatedSprite
+        const explosion = new AnimatedSprite(explosionTextures);
 
         explosion.x = Math.random() * app.screen.width;
         explosion.y = Math.random() * app.screen.height;
@@ -31,6 +40,6 @@ PIXI.Assets.load('https://pixijs.com/assets/spritesheet/mc.json').then(() =>
         app.stage.addChild(explosion);
     }
 
-    // start animating
+    // Start animating
     app.start();
-});
+})();

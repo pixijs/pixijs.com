@@ -1,24 +1,32 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, AnimatedSprite, Texture, Ticker } from 'pixi.js';
 
-const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
-
-document.body.appendChild(app.view);
-
-PIXI.Assets.load('https://pixijs.com/assets/spritesheet/fighter.json').then(() =>
+(async () =>
 {
-    // create an array of textures from an image path
+    // Create a new application
+    const app = new Application();
+
+    // Initialize the application
+    await app.init({ background: '#1099bb', resizeTo: window });
+
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
+    // Load the animation sprite sheet
+    await Assets.load('https://pixijs.com/assets/spritesheet/fighter.json');
+
+    // Create an array of textures from the sprite sheet
     const frames = [];
 
     for (let i = 0; i < 30; i++)
     {
         const val = i < 10 ? `0${i}` : i;
 
-        // magically works since the spritesheet was loaded with the pixi loader
-        frames.push(PIXI.Texture.from(`rollSequence00${val}.png`));
+        // Magically works since the spritesheet was loaded with the pixi loader
+        frames.push(Texture.from(`rollSequence00${val}.png`));
     }
 
-    // create an AnimatedSprite (brings back memories from the days of Flash, right ?)
-    const anim = new PIXI.AnimatedSprite(frames);
+    // Create an AnimatedSprite (brings back memories from the days of Flash, right ?)
+    const anim = new AnimatedSprite(frames);
 
     /*
      * An AnimatedSprite inherits all the properties of a PIXI sprite
@@ -33,8 +41,8 @@ PIXI.Assets.load('https://pixijs.com/assets/spritesheet/fighter.json').then(() =
     app.stage.addChild(anim);
 
     // Animate the rotation
-    app.ticker.add(() =>
+    Ticker.shared.add(() =>
     {
         anim.rotation += 0.01;
     });
-});
+})();

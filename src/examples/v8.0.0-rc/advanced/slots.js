@@ -1,37 +1,55 @@
-import * as PIXI from 'pixi.js';
+import {
+    Application,
+    Assets,
+    Color,
+    Container,
+    Texture,
+    Sprite,
+    Ticker,
+    Graphics,
+    Text,
+    TextStyle,
+    BlurFilter,
+    FillGradient,
+} from 'pixi.js';
 
-const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
-
-document.body.appendChild(app.view);
-
-PIXI.Assets.load([
-    'https://pixijs.com/assets/eggHead.png',
-    'https://pixijs.com/assets/flowerTop.png',
-    'https://pixijs.com/assets/helmlok.png',
-    'https://pixijs.com/assets/skully.png',
-]).then(onAssetsLoaded);
-
-const REEL_WIDTH = 160;
-const SYMBOL_SIZE = 150;
-
-// onAssetsLoaded handler builds the example.
-function onAssetsLoaded()
+(async () =>
 {
-    // Create different slot symbols.
+    // Create a new application
+    const app = new Application();
+
+    // Initialize the application
+    await app.init({ background: '#1099bb', resizeTo: window });
+
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
+    // Load the textures
+    await Assets.load([
+        'https://pixijs.com/assets/eggHead.png',
+        'https://pixijs.com/assets/flowerTop.png',
+        'https://pixijs.com/assets/helmlok.png',
+        'https://pixijs.com/assets/skully.png',
+    ]);
+
+    const REEL_WIDTH = 160;
+    const SYMBOL_SIZE = 150;
+
+    // Create different slot symbols
     const slotTextures = [
-        PIXI.Texture.from('https://pixijs.com/assets/eggHead.png'),
-        PIXI.Texture.from('https://pixijs.com/assets/flowerTop.png'),
-        PIXI.Texture.from('https://pixijs.com/assets/helmlok.png'),
-        PIXI.Texture.from('https://pixijs.com/assets/skully.png'),
+        Texture.from('https://pixijs.com/assets/eggHead.png'),
+        Texture.from('https://pixijs.com/assets/flowerTop.png'),
+        Texture.from('https://pixijs.com/assets/helmlok.png'),
+        Texture.from('https://pixijs.com/assets/skully.png'),
     ];
 
     // Build the reels
     const reels = [];
-    const reelContainer = new PIXI.Container();
+    const reelContainer = new Container();
 
     for (let i = 0; i < 5; i++)
     {
-        const rc = new PIXI.Container();
+        const rc = new Container();
 
         rc.x = i * REEL_WIDTH;
         reelContainer.addChild(rc);
@@ -41,7 +59,7 @@ function onAssetsLoaded()
             symbols: [],
             position: 0,
             previousPosition: 0,
-            blur: new PIXI.filters.BlurFilter(),
+            blur: new BlurFilter(),
         };
 
         reel.blur.blurX = 0;
@@ -51,7 +69,7 @@ function onAssetsLoaded()
         // Build the symbols
         for (let j = 0; j < 4; j++)
         {
-            const symbol = new PIXI.Sprite(slotTextures[Math.floor(Math.random() * slotTextures.length)]);
+            const symbol = new Sprite(slotTextures[Math.floor(Math.random() * slotTextures.length)]);
             // Scale the symbol to fit symbol area.
 
             symbol.y = j * SYMBOL_SIZE;
@@ -69,41 +87,47 @@ function onAssetsLoaded()
 
     reelContainer.y = margin;
     reelContainer.x = Math.round(app.screen.width - REEL_WIDTH * 5);
-    const top = new PIXI.Graphics();
+    const top = new Graphics().rect(0, 0, app.screen.width, margin).fill(0x000001, 1); // TODO: Investigate why setting to 0x000000 makes it white.
+    const bottom = new Graphics().rect(0, SYMBOL_SIZE * 3 + margin, app.screen.width, margin).fill(0x000001, 1);
 
-    top.beginFill(0, 1);
-    top.drawRect(0, 0, app.screen.width, margin);
-    const bottom = new PIXI.Graphics();
+    // Create gradient fill
+    const fill = new FillGradient(0, 0, 0, 36 * 1.7);
 
-    bottom.beginFill(0, 1);
-    bottom.drawRect(0, SYMBOL_SIZE * 3 + margin, app.screen.width, margin);
+    const colors = [0xffffff, 0x00ff99].map((color) => Color.shared.setValue(color).toNumber());
+
+    colors.forEach((number, index) =>
+    {
+        const ratio = index / colors.length;
+
+        fill.addColorStop(ratio, number);
+    });
 
     // Add play text
-    const style = new PIXI.TextStyle({
+    const style = new TextStyle({
         fontFamily: 'Arial',
         fontSize: 36,
         fontStyle: 'italic',
         fontWeight: 'bold',
-        fill: ['#ffffff', '#00ff99'], // gradient
-        stroke: '#4a1850',
-        strokeThickness: 5,
-        dropShadow: true,
-        dropShadowColor: '#000000',
-        dropShadowBlur: 4,
-        dropShadowAngle: Math.PI / 6,
-        dropShadowDistance: 6,
+        fill: { fill },
+        stroke: { color: 0x4a1850, width: 5 },
+        dropShadow: {
+            color: 0x000000,
+            angle: Math.PI / 6,
+            blur: 4,
+            distance: 6,
+        },
         wordWrap: true,
         wordWrapWidth: 440,
     });
 
-    const playText = new PIXI.Text('Spin the wheels!', style);
+    const playText = new Text('Spin the wheels!', style);
 
     playText.x = Math.round((bottom.width - playText.width) / 2);
     playText.y = app.screen.height - margin + Math.round((margin - playText.height) / 2);
     bottom.addChild(playText);
 
     // Add header text
-    const headerText = new PIXI.Text('PIXI MONSTER SLOTS!', style);
+    const headerText = new Text('PIXI MONSTER SLOTS!', style);
 
     headerText.x = Math.round((top.width - headerText.width) / 2);
     headerText.y = Math.round((margin - headerText.height) / 2);
@@ -146,7 +170,7 @@ function onAssetsLoaded()
     }
 
     // Listen for animate update.
-    app.ticker.add((delta) =>
+    Ticker.shared.add(() =>
     {
         // Update the slots.
         for (let i = 0; i < reels.length; i++)
@@ -176,64 +200,64 @@ function onAssetsLoaded()
             }
         }
     });
-}
 
-// Very simple tweening utility function. This should be replaced with a proper tweening library in a real product.
-const tweening = [];
+    // Very simple tweening utility function. This should be replaced with a proper tweening library in a real product.
+    const tweening = [];
 
-function tweenTo(object, property, target, time, easing, onchange, oncomplete)
-{
-    const tween = {
-        object,
-        property,
-        propertyBeginValue: object[property],
-        target,
-        easing,
-        time,
-        change: onchange,
-        complete: oncomplete,
-        start: Date.now(),
-    };
-
-    tweening.push(tween);
-
-    return tween;
-}
-// Listen for animate update.
-app.ticker.add((delta) =>
-{
-    const now = Date.now();
-    const remove = [];
-
-    for (let i = 0; i < tweening.length; i++)
+    function tweenTo(object, property, target, time, easing, onchange, oncomplete)
     {
-        const t = tweening[i];
-        const phase = Math.min(1, (now - t.start) / t.time);
+        const tween = {
+            object,
+            property,
+            propertyBeginValue: object[property],
+            target,
+            easing,
+            time,
+            change: onchange,
+            complete: oncomplete,
+            start: Date.now(),
+        };
 
-        t.object[t.property] = lerp(t.propertyBeginValue, t.target, t.easing(phase));
-        if (t.change) t.change(t);
-        if (phase === 1)
+        tweening.push(tween);
+
+        return tween;
+    }
+    // Listen for animate update.
+    Ticker.shared.add(() =>
+    {
+        const now = Date.now();
+        const remove = [];
+
+        for (let i = 0; i < tweening.length; i++)
         {
-            t.object[t.property] = t.target;
-            if (t.complete) t.complete(t);
-            remove.push(t);
+            const t = tweening[i];
+            const phase = Math.min(1, (now - t.start) / t.time);
+
+            t.object[t.property] = lerp(t.propertyBeginValue, t.target, t.easing(phase));
+            if (t.change) t.change(t);
+            if (phase === 1)
+            {
+                t.object[t.property] = t.target;
+                if (t.complete) t.complete(t);
+                remove.push(t);
+            }
         }
-    }
-    for (let i = 0; i < remove.length; i++)
+        for (let i = 0; i < remove.length; i++)
+        {
+            tweening.splice(tweening.indexOf(remove[i]), 1);
+        }
+    });
+
+    // Basic lerp funtion.
+    function lerp(a1, a2, t)
     {
-        tweening.splice(tweening.indexOf(remove[i]), 1);
+        return a1 * (1 - t) + a2 * t;
     }
-});
 
-// Basic lerp funtion.
-function lerp(a1, a2, t)
-{
-    return a1 * (1 - t) + a2 * t;
-}
-
-// Backout function from tweenjs.
-// https://github.com/CreateJS/TweenJS/blob/master/src/tweenjs/Ease.js
-function backout(amount)
-{
-    return (t) => --t * t * ((amount + 1) * t + amount) + 1;
-}
+    // Backout function from tweenjs.
+    // https://github.com/CreateJS/TweenJS/blob/master/src/tweenjs/Ease.js
+    function backout(amount)
+    {
+        return (t) => --t * t * ((amount + 1) * t + amount) + 1;
+    }
+})();
