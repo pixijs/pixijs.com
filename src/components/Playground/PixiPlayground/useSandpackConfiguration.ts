@@ -114,20 +114,17 @@ export const useSandpackConfiguration = ({
     // could flip between examples easily, investigate why it bugs out during editing
     const key = `${dependenciesKey}-${code}`;
 
-    let customSetup: Record<string, any> = {
+    const customSetup: Record<string, any> = {
         entry: 'index.html',
         dependencies,
+        devDependencies: {
+            'parcel-bundler': '^1.6.1',
+        },
     };
 
     if (isPreV8(pixiVersion))
     {
-        customSetup = {
-            ...customSetup,
-            devDependencies: {
-                '@babel/core': '^7.21.3',
-                'parcel-bundler': '^1.6.1',
-            },
-        };
+        customSetup.devDependencies['@babel/core'] = '^7.21.3';
     }
 
     return {
