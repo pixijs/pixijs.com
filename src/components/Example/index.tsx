@@ -16,8 +16,7 @@ export default function Example({ id, pixiVersion }: { id: string; pixiVersion: 
                 {() => (
                     <PixiPlayground
                         code={source}
-                        pixiVersion={pixiVersion.version}
-                        isPixiDevVersion={pixiVersion.dev}
+                        pixiVersion={pixiVersion}
                         isPixiWebWorkerVersion={entry?.usesWebWorkerLibrary}
                         mode="example"
                     />

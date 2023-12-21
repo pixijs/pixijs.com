@@ -65,8 +65,7 @@ function BrowserTutorial({ data, pixiVersion }: { data: TutorialStep[]; pixiVers
             </div>
             <PixiPlayground
                 code={completedCode && showSolution ? completedCode : code}
-                pixiVersion={pixiVersion.version}
-                isPixiDevVersion={pixiVersion.dev}
+                pixiVersion={pixiVersion}
                 mode="tutorial"
             />
         </>

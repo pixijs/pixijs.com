@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import type { IVersion } from './usePixiVersions';
 
 const indexHTML = `
 <!DOCTYPE html>
@@ -61,22 +62,22 @@ export const useFiles = (code: string) =>
 
 type UseDependenciesParams = {
     isPixiWebWorkerVersion: boolean;
-    isPixiDevVersion: boolean;
-    pixiVersion: string;
+    pixiVersion: IVersion;
 };
 
-const isPreV8 = (pixiVersion: string) => Number(pixiVersion.split('.')[0]) < 8;
+const isPreV8 = (version: string) => version !== 'dev' && Number(version.split('.')[0]) < 8;
 
-const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion }: UseDependenciesParams) =>
+const useDependencies = ({ isPixiWebWorkerVersion, pixiVersion }: UseDependenciesParams) =>
     useMemo(() =>
     {
+        const isDev = !!pixiVersion.dev;
+        const version = pixiVersion.version;
         const pixiPackageName = isPixiWebWorkerVersion ? '@pixi/webworker' : 'pixi.js';
-        const getPackageVersion = (packageName: string) =>
-            (isPixiDevVersion ? `${pixiVersion}/${packageName}` : pixiVersion);
+        const getPackageVersion = (packageName: string) => (isDev ? `${pixiVersion.npm}/${packageName}` : version);
         const packages = [pixiPackageName];
 
         // Add these packages if we're using a version of pixi that doesn't have them built in, ie. < v8
-        if (isPreV8(pixiVersion))
+        if (isPreV8(version))
         {
             packages.push('@pixi/graphics-extras', '@pixi/math-extras');
         }
@@ -93,22 +94,16 @@ const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion
             dependenciesKey: `${pixiPackageName}-${pixiVersion}`,
             dependencies,
         };
-    }, [isPixiDevVersion, isPixiWebWorkerVersion, pixiVersion]);
+    }, [isPixiWebWorkerVersion, pixiVersion]);
 
 type UseSandpackConfigurationParams = UseDependenciesParams & {
     code: string;
 };
 
-export const useSandpackConfiguration = ({
-    code,
-    isPixiWebWorkerVersion,
-    isPixiDevVersion,
-    pixiVersion,
-}: UseSandpackConfigurationParams) =>
+export const useSandpackConfiguration = ({ code, isPixiWebWorkerVersion, pixiVersion }: UseSandpackConfigurationParams) =>
 {
     const files = useFiles(code);
-
-    const { dependenciesKey, dependencies } = useDependencies({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion });
+    const { dependenciesKey, dependencies } = useDependencies({ isPixiWebWorkerVersion, pixiVersion });
 
     // TODO: adding code here is only necessary because of user edited code, otherwise we
     // could flip between examples easily, investigate why it bugs out during editing
@@ -122,7 +117,7 @@ export const useSandpackConfiguration = ({
         },
     };
 
-    if (isPreV8(pixiVersion))
+    if (isPreV8(pixiVersion.version))
     {
         customSetup.devDependencies['@babel/core'] = '^7.21.3';
     }

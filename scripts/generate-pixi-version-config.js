@@ -4,6 +4,8 @@ const shell = require('shelljs');
 const inquirer = require('inquirer');
 const { compareVersions } = require('compare-versions');
 const glob = require('glob');
+const axios = require('axios');
+const { Octokit, App } = require('octokit');
 
 const PARAM = process.argv[2];
 const ROOT = resolve(__dirname, '..');
@@ -21,6 +23,49 @@ if (existsSync(OUT_PATH))
 
 // Compile out a list of all the versions of pixi.js
 shell.exec('npm view pixi.js --json > scripts/pixiVersions.json');
+
+// Github
+const devBranches = ['next-v8', 'dev'];
+const tokenPath = resolve(ROOT, '.ghtoken');
+const auth = existsSync(tokenPath) ? readFileSync(tokenPath, 'utf8').trim() : null;
+const octokit = auth ? new Octokit({ auth }) : undefined;
+const owner = 'pixijs';
+const repo = 'pixijs';
+
+async function getLatestCommitSHA(branch = 'master')
+{
+    if (!octokit)
+    {
+        console.warn('No auth token found. Please add please generate and add a token to \'.ghtoken\' on root...');
+
+        return null;
+    }
+
+    try
+    {
+        const result = await octokit.request(`GET /repos/${owner}/${repo}/branches/${branch}`, {
+            owner,
+            repo,
+            branch,
+            headers: {
+                'X-GitHub-Api-Version': '2022-11-28',
+            },
+        });
+
+        if (result.status === 200)
+        {
+            return result.data.commit.sha;
+        }
+
+        return null;
+    }
+    catch (e)
+    {
+        console.error(`Error getting the branch ${branch}. Please try again...`);
+
+        return null;
+    }
+}
 
 // Import the compiled list of versions
 const pixiVersions = require('./pixiVersions.json');
@@ -51,8 +96,10 @@ if (compareVersions(tags.prerelease, tags.latest) <= 0)
 const all = '[>] all versions';
 const back = '[<] back';
 const cancel = '[x] cancel';
-const options1 = [all, ...tagKeys];
+const dev = '[>] dev';
+const options1 = [all, dev, ...tagKeys];
 const options2 = [back, ...allVersions];
+const optionsDev = [back, ...devBranches];
 const intro = `${config ? 'Altering' : 'Generating'} ${PATH_FROM_ROOT}/${OUT_NAME}...\n`;
 const prompt = config
     ? `Config for PixiJS v${config.version} exists. Which version would you like to replace it with?`
@@ -101,9 +148,11 @@ async function doesVersionConfigExist(version)
     let version;
     let choice;
     let tag;
+    let branch;
+    let sha;
 
     // Prompt the user to select a version
-    while (!version || choice === all || choice === back)
+    while (!version && !sha)
     {
         choice = await inquirer.prompt([
             {
@@ -122,6 +171,29 @@ async function doesVersionConfigExist(version)
         {
             shell.rm('./scripts/pixiVersions.json');
             shell.exit(0);
+        }
+        else if (choice.selected === dev)
+        {
+            choice = await inquirer.prompt([
+                {
+                    type: 'list',
+                    name: 'selected',
+                    message: 'Which dev version would you want to use?',
+                    choices: optionsDev,
+                    loop: false,
+                },
+            ]);
+
+            if (choice.selected !== back)
+            {
+                branch = choice.selected;
+                const result = await getLatestCommitSHA(branch);
+
+                if (result)
+                {
+                    sha = result;
+                }
+            }
         }
         else if (choice.selected === all)
         {
@@ -149,39 +221,54 @@ async function doesVersionConfigExist(version)
         }
     }
 
-    const parts = version.split('.');
-    const major = parts[0];
-    const minor = parts[1];
-    const patch = parts[2].split('-')[0];
-    const isPrelease = parts[2].includes('-rc');
-    const isLatest = version === tags.latest;
-    let versionLabel;
-
-    if (isLatest)
+    if (sha)
     {
-        versionLabel = `v${[major, 'x'].join('.')} (Latest)`;
-    }
-    else if (tag)
-    {
-        const extracted = tag.replace('latest-', '');
-
-        versionLabel = extracted.match(/^\d/) ? `v${extracted}` : extracted;
+        config = {
+            versionLabel: branch,
+            version: 'dev',
+            releaseNotes: 'https://github.com/pixijs/pixijs/releases',
+            build: `https://pixijs.download/${branch}/pixi.min.js`,
+            docs: 'https://pixijs.download/release/docs',
+            npm: `https://pkg.csb.dev/pixijs/pixijs/commit/${sha.substring(0, 8)}`,
+            dev: true,
+        };
     }
     else
     {
-        versionLabel = `v${version}`;
-    }
+        const parts = version.split('.');
+        const major = parts[0];
+        const minor = parts[1];
+        const patch = parts[2].split('-')[0];
+        const isPrelease = parts[2].includes('-rc');
+        const isLatest = version === tags.latest;
+        let versionLabel;
 
-    config = {
-        versionLabel,
-        version,
-        releaseNotes: `https://github.com/pixijs/pixijs/releases/tag/v${version}`,
-        build: `https://pixijs.download/v${version}/pixi.min.js`,
-        docs: `https://pixijs.download/v${version}/docs/index.html`,
-        npm: version,
-        prerelease: isPrelease,
-        latest: isLatest,
-    };
+        if (isLatest)
+        {
+            versionLabel = `v${[major, 'x'].join('.')} (Latest)`;
+        }
+        else if (tag)
+        {
+            const extracted = tag.replace('latest-', '');
+
+            versionLabel = extracted.match(/^\d/) ? `v${extracted}` : extracted;
+        }
+        else
+        {
+            versionLabel = `v${version}`;
+        }
+
+        config = {
+            versionLabel,
+            version,
+            releaseNotes: `https://github.com/pixijs/pixijs/releases/tag/v${version}`,
+            build: `https://pixijs.download/v${version}/pixi.min.js`,
+            docs: `https://pixijs.download/v${version}/docs/index.html`,
+            npm: version,
+            prerelease: isPrelease,
+            latest: isLatest,
+        };
+    }
 
     const json = JSON.stringify(config, null, 2);
 

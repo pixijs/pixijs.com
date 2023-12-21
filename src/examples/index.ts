@@ -1,6 +1,6 @@
 import type { OptionGroup } from '../components/Select';
 import v7x from './v7.3.2/index';
-import v8x from './v8.0.0-rc/index';
+import dev from './dev/index';
 
 export type ExampleDataEntry = {
     name: string;
@@ -24,7 +24,7 @@ export type ExamplesDataType = Record<string, CategoryDataType>;
 // TODO: Use await import to dynamically load versioned content on demand instead?
 const versions: Record<string, { entries: ExamplesDataType; options: OptionGroup[] }> = {
     '7.3.2': v7x,
-    '8.0.0-rc': v8x,
+    dev,
 };
 
 export function getExampleEntry(version: string, pathString: string): ExampleSourceEntry | undefined

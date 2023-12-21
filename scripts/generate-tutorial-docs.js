@@ -29,7 +29,7 @@ async function go()
         const TUTORIALS_MD_PATH = resolve(DOCS_PATH, 'tutorials');
         const pixiVersion = require(versionFile);
         const VERSION = pixiVersion.version;
-        const TUTORIALS_JS_PATH = resolve(ROOT, 'src', 'tutorials', `v${VERSION}`);
+        const TUTORIALS_JS_PATH = resolve(ROOT, 'src', 'tutorials', VERSION === 'dev' ? VERSION : `v${VERSION}`);
         const tutorialsData = require(`${TUTORIALS_JS_PATH}/tutorialsData.json`);
 
         const fileData = tutorialsData.map((tutorialKey) =>

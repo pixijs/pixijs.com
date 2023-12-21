@@ -29,7 +29,7 @@ async function go()
         const EXAMPLES_MD_PATH = resolve(DOCS_PATH, 'examples');
         const pixiVersion = require(versionFile);
         const VERSION = pixiVersion.version;
-        const EXAMPLES_JS_PATH = resolve(ROOT, 'src', 'examples', `v${VERSION}`);
+        const EXAMPLES_JS_PATH = resolve(ROOT, 'src', 'examples', VERSION === 'dev' ? VERSION : `v${VERSION}`);
         const examplesData = require(`${EXAMPLES_JS_PATH}/examplesData.json`);
 
         const directories = Object.keys(examplesData);

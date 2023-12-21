@@ -1,10 +1,9 @@
 {
-  "versionLabel": "prerelease-v8",
-  "version": "8.0.0-rc",
-  "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v8.0.0-rc",
-  "build": "https://pixijs.download/v8.0.0-rc/pixi.min.js",
-  "docs": "https://pixijs.download/v8.0.0-rc/docs/index.html",
-  "npm": "8.0.0-rc",
-  "prerelease": true,
-  "latest": false
+  "versionLabel": "next-v8",
+  "version": "dev",
+  "releaseNotes": "https://github.com/pixijs/pixijs/releases",
+  "build": "https://pixijs.download/next-v8/pixi.min.js",
+  "docs": "https://pixijs.download/release/docs",
+  "npm": "https://pkg.csb.dev/pixijs/pixijs/commit/5b66fdf1",
+  "dev": true
 }

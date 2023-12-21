@@ -1,5 +1,5 @@
 import v7x from './v7.3.2/index';
-import v8x from './v8.0.0-rc/index';
+import dev from './dev/index';
 
 export type TutorialStep = {
     header: string;
@@ -17,7 +17,7 @@ export type TutorialEntry = {
 // TODO: Use await import to dynamically load versioned content on demand instead?
 const versions: Record<string, Record<string, TutorialEntry>> = {
     '7.3.2': v7x,
-    '8.0.0-rc': v8x,
+    dev,
 };
 
 export function getTutorialEntry(version: string, key: string)

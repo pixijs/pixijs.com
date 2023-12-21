@@ -34,6 +34,7 @@ export default function Version(): JSX.Element
     const latestVersion = versions.find((version) => version.latest);
     const preReleaseVersion = versions.find((version) => version.prerelease);
     const pastVersions = versions.filter((version) => !version.latest && !version.prerelease);
+    const devVersion = versions.find((version) => version.dev);
 
     return (
         <Layout title="Versions" description="PixiJS Versions page listing all API documentation versions">
@@ -41,6 +42,38 @@ export default function Version(): JSX.Element
                 <Heading as="h1">
                     <Translate id="versionsPage.title">PixiJS API documentation versions</Translate>
                 </Heading>
+
+                {devVersion && (
+                    <div className="margin-bottom--lg">
+                        <Heading as="h3" id="latest">
+                            <Translate id="versionsPage.next.title">Dev version</Translate>
+                        </Heading>
+                        <p>
+                            <Translate id="versionsPage.next.description">
+                                Please refer to the GitHub repository for the information on the latest dev.
+                            </Translate>
+                        </p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        {devVersion.version} (From brach: {devVersion.versionLabel})
+                                    </th>
+                                    <td>
+                                        <Link to={devVersion.docs}>
+                                            <DocumentationLabel />
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link to={devVersion.build}>
+                                            <BuildLabel />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                )}
 
                 {preReleaseVersion && (
                     <div className="margin-bottom--lg">

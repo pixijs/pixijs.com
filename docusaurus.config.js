@@ -49,7 +49,7 @@ const config = {
                         },
 
                         current: {
-                            label: 'prerelease-v8',
+                            label: 'next-v8',
                         },
                     },
                 },

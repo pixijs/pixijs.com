@@ -39,8 +39,7 @@ export default function Playground({ pixiVersion }: { pixiVersion: IVersion })
                         </div>
                         <PixiPlayground
                             code={sourceCode}
-                            pixiVersion={pixiVersion.version}
-                            isPixiDevVersion={pixiVersion.dev}
+                            pixiVersion={pixiVersion}
                             isPixiWebWorkerVersion={usesWebWorkerLibrary}
                             onCodeChanged={handleEditorCodeChanged}
                             mode="fullscreen"

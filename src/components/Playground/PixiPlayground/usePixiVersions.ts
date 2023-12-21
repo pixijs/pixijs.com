@@ -24,7 +24,7 @@ const propEq
         (object: Record<string, any>): boolean =>
             object[prop] === value;
 
-export const latestVersion = ((versions as IVersion[]).find(propEq('latest', true)) as IVersion).version;
+export const latestPixiVersion = (versions as IVersion[]).find(propEq('latest', true)) as IVersion;
 
 type UsePixiVersionsParams = {
     selectedVersionId: string;

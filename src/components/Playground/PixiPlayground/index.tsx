@@ -3,7 +3,8 @@ import { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { SandpackLayout, SandpackPreview, SandpackProvider, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
 import { useContainerClassNameModifier } from '@site/src/hooks/useContainerClassNameModifier';
-import { latestVersion } from './usePixiVersions';
+import type { IVersion } from './usePixiVersions';
+import { latestPixiVersion } from './usePixiVersions';
 import MonacoEditor from './MonacoEditor';
 import { useSandpackConfiguration } from './useSandpackConfiguration';
 import type { CodeChangeCallbackType } from './MonacoEditor';
@@ -75,8 +76,7 @@ function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
 type PixiPlaygroundProps = {
     code: string;
     isPixiWebWorkerVersion?: boolean;
-    isPixiDevVersion?: boolean;
-    pixiVersion?: string;
+    pixiVersion?: IVersion;
     mode?: BasePlaygroundMode;
     onCodeChanged?: CodeChangeCallbackType;
 };
@@ -85,8 +85,7 @@ export default function PixiPlayground({
     code,
     onCodeChanged,
     isPixiWebWorkerVersion = false,
-    isPixiDevVersion = false,
-    pixiVersion = latestVersion,
+    pixiVersion = latestPixiVersion,
     mode = 'example',
 }: PixiPlaygroundProps)
 {
@@ -94,7 +93,6 @@ export default function PixiPlayground({
 
     const { key, files, customSetup } = useSandpackConfiguration({
         code,
-        isPixiDevVersion,
         isPixiWebWorkerVersion,
         pixiVersion,
     });
