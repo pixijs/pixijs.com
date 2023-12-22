@@ -1,24 +1,32 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Sprite } from 'pixi.js';
 
-const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
-
-document.body.appendChild(app.view);
-
-// Start loading right away and create a promise
-const texturePromise = PIXI.Assets.load('https://pixijs.com/assets/bunny.png');
-
-// When the promise resolves, we have the texture!
-texturePromise.then((resolvedTexture) =>
+(async () =>
 {
-    // create a new Sprite from the resolved loaded Texture
-    const bunny = PIXI.Sprite.from(resolvedTexture);
+    // Create a new application
+    const app = new Application();
 
-    // center the sprite's anchor point
-    bunny.anchor.set(0.5);
+    // Initialize the application
+    await app.init({ background: '#1099bb', resizeTo: window });
 
-    // move the sprite to the center of the screen
-    bunny.x = app.screen.width / 2;
-    bunny.y = app.screen.height / 2;
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-    app.stage.addChild(bunny);
-});
+    // Start loading right away and create a promise
+    const texturePromise = Assets.load('https://pixijs.com/assets/bunny.png');
+
+    // When the promise resolves, we have the texture!
+    texturePromise.then((resolvedTexture) =>
+    {
+        // create a new Sprite from the resolved loaded Texture
+        const bunny = Sprite.from(resolvedTexture);
+
+        // center the sprite's anchor point
+        bunny.anchor.set(0.5);
+
+        // move the sprite to the center of the screen
+        bunny.x = app.screen.width / 2;
+        bunny.y = app.screen.height / 2;
+
+        app.stage.addChild(bunny);
+    });
+})();

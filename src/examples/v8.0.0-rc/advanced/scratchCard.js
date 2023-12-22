@@ -1,28 +1,32 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Graphics, Sprite, RenderTexture, Point } from 'pixi.js';
 
-const app = new PIXI.Application({ resizeTo: window });
-
-document.body.appendChild(app.view);
-
-// prepare circle texture, that will be our brush
-const brush = new PIXI.Graphics().beginFill(0xffffff).drawCircle(0, 0, 50);
-
-// Create a line that will interpolate the drawn points
-const line = new PIXI.Graphics();
-
-PIXI.Assets.add('t1', 'https://pixijs.com/assets/bg_grass.jpg');
-PIXI.Assets.add('t2', 'https://pixijs.com/assets/bg_rotate.jpg');
-PIXI.Assets.load(['t1', 't2']).then(setup);
-
-function setup()
+(async () =>
 {
+    // Create a new application
+    const app = new Application();
+
+    // Initialize the application
+    await app.init({ resizeTo: window });
+
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
+    // prepare circle texture, that will be our brush
+    const brush = new Graphics().circle(0, 0, 50).fill({ color: 0xffffff });
+
+    // Create a line that will interpolate the drawn points
+    const line = new Graphics();
+
+    // Load the textures
+    await Assets.load(['https://pixijs.com/assets/bg_grass.jpg', 'https://pixijs.com/assets/bg_rotate.jpg']);
+
     const { width, height } = app.screen;
     const stageSize = { width, height };
 
-    const background = Object.assign(PIXI.Sprite.from('t1'), stageSize);
-    const imageToReveal = Object.assign(PIXI.Sprite.from('t2'), stageSize);
-    const renderTexture = PIXI.RenderTexture.create(stageSize);
-    const renderTextureSprite = new PIXI.Sprite(renderTexture);
+    const background = Object.assign(Sprite.from('https://pixijs.com/assets/bg_grass.jpg'), stageSize);
+    const imageToReveal = Object.assign(Sprite.from('https://pixijs.com/assets/bg_rotate.jpg'), stageSize);
+    const renderTexture = RenderTexture.create(stageSize);
+    const renderTextureSprite = new Sprite(renderTexture);
 
     imageToReveal.mask = renderTextureSprite;
 
@@ -44,8 +48,9 @@ function setup()
         if (dragging)
         {
             brush.position.set(x, y);
-            app.renderer.render(brush, {
-                renderTexture,
+            app.renderer.render({
+                container: brush,
+                target: renderTexture,
                 clear: false,
                 skipUpdateTransform: false,
             });
@@ -54,17 +59,15 @@ function setup()
             // using a line
             if (lastDrawnPoint)
             {
-                line.clear()
-                    .lineStyle({ width: 100, color: 0xffffff })
-                    .moveTo(lastDrawnPoint.x, lastDrawnPoint.y)
-                    .lineTo(x, y);
-                app.renderer.render(line, {
-                    renderTexture,
+                line.clear().moveTo(lastDrawnPoint.x, lastDrawnPoint.y).lineTo(x, y).stroke({ width: 100, color: 0xffffff });
+                app.renderer.render({
+                    container: line,
+                    target: renderTexture,
                     clear: false,
                     skipUpdateTransform: false,
                 });
             }
-            lastDrawnPoint = lastDrawnPoint || new PIXI.Point();
+            lastDrawnPoint = lastDrawnPoint || new Point();
             lastDrawnPoint.set(x, y);
         }
     }
@@ -80,4 +83,4 @@ function setup()
         dragging = false;
         lastDrawnPoint = null;
     }
-}
+})();

@@ -1,58 +1,71 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Container, Sprite, Text, TextStyle, Ticker } from 'pixi.js';
 
-const app = new PIXI.Application({ backgroundColor: '#111', resizeTo: window });
-
-document.body.appendChild(app.view);
-
-const texture = PIXI.Texture.from('https://pixijs.com/assets/bunny.png');
-const bunnyContainer = new PIXI.Container();
-
-async function takeScreenshot()
+(async () =>
 {
-    app.stop();
-    const url = await app.renderer.extract.base64(bunnyContainer);
-    const a = document.createElement('a');
+    // Create a new application
+    const app = new Application();
 
-    document.body.append(a);
-    a.download = 'screenshot';
-    a.href = url;
-    a.click();
-    a.remove();
-    app.start();
-}
+    // Initialize the application
+    await app.init({ background: '#111', resizeTo: window });
 
-app.stage.eventMode = 'static';
-app.stage.hitArea = app.screen;
-app.stage.on('pointerdown', takeScreenshot);
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-for (let i = 0; i < 25; i++)
-{
-    const bunny = new PIXI.Sprite(texture);
+    // Load the bunny texture
+    const texture = await Assets.load('https://pixijs.com/assets/bunny.png');
 
-    bunny.anchor.set(0.5);
-    bunny.x = (i % 5) * 40;
-    bunny.y = Math.floor(i / 5) * 40;
-    bunnyContainer.addChild(bunny);
-}
+    // Create and add a container for the bunnies
+    const bunnyContainer = new Container();
 
-bunnyContainer.x = 400;
-bunnyContainer.y = 300;
-bunnyContainer.pivot.x = bunnyContainer.width / 2;
-bunnyContainer.pivot.y = bunnyContainer.height / 2;
+    // Take the screenshot and download it
+    async function takeScreenshot()
+    {
+        app.stop();
+        const url = await app.renderer.extract.base64(bunnyContainer);
+        const a = document.createElement('a');
 
-app.ticker.add((delta) =>
-{
-    bunnyContainer.rotation += 0.01 * delta;
-});
+        document.body.append(a);
+        a.download = 'screenshot';
+        a.href = url;
+        a.click();
+        a.remove();
+        app.start();
+    }
 
-const style = new PIXI.TextStyle({
-    fontFamily: 'Roboto',
-    fill: '#999',
-});
+    app.stage.eventMode = 'static';
+    app.stage.hitArea = app.screen;
+    app.stage.on('pointerdown', takeScreenshot);
 
-const screenshotText = new PIXI.Text('Click To Take Screenshot', style);
+    for (let i = 0; i < 25; i++)
+    {
+        const bunny = new Sprite(texture);
 
-screenshotText.x = Math.round((app.screen.width - screenshotText.width) / 2);
-screenshotText.y = Math.round(screenshotText.height / 2);
+        bunny.anchor.set(0.5);
+        bunny.x = (i % 5) * 40;
+        bunny.y = Math.floor(i / 5) * 40;
+        bunnyContainer.addChild(bunny);
+    }
 
-app.stage.addChild(screenshotText, bunnyContainer);
+    bunnyContainer.x = 400;
+    bunnyContainer.y = 300;
+    bunnyContainer.pivot.x = bunnyContainer.width / 2;
+    bunnyContainer.pivot.y = bunnyContainer.height / 2;
+
+    // Animate the bunnies container
+    Ticker.shared.add((time) =>
+    {
+        bunnyContainer.rotation += 0.01 * time.deltaTime;
+    });
+
+    const style = new TextStyle({
+        fontFamily: 'Roboto',
+        fill: '#999',
+    });
+
+    const screenshotText = new Text({ text: 'Click To Take Screenshot', style });
+
+    screenshotText.x = Math.round((app.screen.width - screenshotText.width) / 2);
+    screenshotText.y = Math.round(screenshotText.height / 2);
+
+    app.stage.addChild(screenshotText, bunnyContainer);
+})();

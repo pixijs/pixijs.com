@@ -1,43 +1,59 @@
-import * as PIXI from 'pixi.js';
+import { Application, Texture, Sprite, ImageSource } from 'pixi.js';
 
 // This demo uses canvas2d gradient API
 // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
 
-const app = new PIXI.Application({ antialias: true, resizeTo: window });
-
-document.body.appendChild(app.view);
-
-function createGradTexture()
+(async () =>
 {
-    // adjust it if somehow you need better quality for very very big images
-    const quality = 256;
-    const canvas = document.createElement('canvas');
+    // Create a new application
+    const app = new Application();
 
-    canvas.width = quality;
-    canvas.height = 1;
+    // Initialize the application
+    await app.init({ antialias: true, resizeTo: window });
 
-    const ctx = canvas.getContext('2d');
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-    // use canvas2d API to create gradient
-    const grd = ctx.createLinearGradient(0, 0, quality, 0);
+    function createGradTexture()
+    {
+        // Adjust it if somehow you need better quality for very very big images
+        const quality = 256;
+        const canvas = document.createElement('canvas');
 
-    grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
-    grd.addColorStop(0.3, 'cyan');
-    grd.addColorStop(0.7, 'red');
-    grd.addColorStop(1, 'green');
+        canvas.width = quality;
+        canvas.height = 1;
 
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, quality, 1);
+        const ctx = canvas.getContext('2d');
 
-    return PIXI.Texture.from(canvas);
-}
+        // Use canvas2d API to create gradient
+        const grd = ctx.createLinearGradient(0, 0, quality, 0);
 
-const gradTexture = createGradTexture();
+        grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
+        grd.addColorStop(0.3, 'cyan');
+        grd.addColorStop(0.7, 'red');
+        grd.addColorStop(1, 'green');
 
-const sprite = new PIXI.Sprite(gradTexture);
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, quality, 1);
 
-sprite.position.set(100, 100);
-sprite.rotation = Math.PI / 8;
-sprite.width = 500;
-sprite.height = 50;
-app.stage.addChild(sprite);
+        return new Texture({
+            source: new ImageSource({
+                resource: canvas,
+                style: {
+                    addressModeU: 'clamp-to-edge',
+                    addressModeV: 'repeat',
+                },
+            }),
+        });
+    }
+
+    const gradTexture = createGradTexture();
+
+    const sprite = new Sprite(gradTexture);
+
+    sprite.position.set(100, 100);
+    sprite.rotation = Math.PI / 8;
+    sprite.width = 500;
+    sprite.height = 50;
+    app.stage.addChild(sprite);
+})();

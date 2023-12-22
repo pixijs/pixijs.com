@@ -1,43 +1,55 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Point, Container, MeshRope, Ticker } from 'pixi.js';
 
-const app = new PIXI.Application({ resizeTo: window });
-
-document.body.appendChild(app.view);
-
-let count = 0;
-
-// build a rope!
-const ropeLength = 918 / 20;
-
-const points = [];
-
-for (let i = 0; i < 20; i++)
+(async () =>
 {
-    points.push(new PIXI.Point(i * ropeLength, 0));
-}
+    // Create a new application
+    const app = new Application();
 
-const strip = new PIXI.SimpleRope(PIXI.Texture.from('https://pixijs.com/assets/snake.png'), points);
+    // Initialize the application
+    await app.init({ resizeTo: window });
 
-strip.x = -459;
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-const snakeContainer = new PIXI.Container();
+    // Load the snake texture
+    const texture = await Assets.load('https://pixijs.com/assets/snake.png');
 
-snakeContainer.x = 400;
-snakeContainer.y = 300;
+    let count = 0;
 
-snakeContainer.scale.set(800 / 1100);
-app.stage.addChild(snakeContainer);
+    // Build a rope from points!
+    const ropeLength = 918 / 20;
+    const points = [];
 
-snakeContainer.addChild(strip);
-
-app.ticker.add(() =>
-{
-    count += 0.1;
-
-    // make the snake
-    for (let i = 0; i < points.length; i++)
+    for (let i = 0; i < 20; i++)
     {
-        points[i].y = Math.sin(i * 0.5 + count) * 30;
-        points[i].x = i * ropeLength + Math.cos(i * 0.3 + count) * 20;
+        points.push(new Point(i * ropeLength, 0));
     }
-});
+
+    // Create the snake MeshRope
+    const strip = new MeshRope({ texture, points });
+
+    strip.x = -459;
+
+    const snakeContainer = new Container();
+
+    snakeContainer.x = 400;
+    snakeContainer.y = 300;
+
+    snakeContainer.scale.set(800 / 1100);
+    app.stage.addChild(snakeContainer);
+
+    snakeContainer.addChild(strip);
+
+    // Animate the rope points
+    Ticker.shared.add(() =>
+    {
+        count += 0.1;
+
+        // make the snake
+        for (let i = 0; i < points.length; i++)
+        {
+            points[i].y = Math.sin(i * 0.5 + count) * 30;
+            points[i].x = i * ropeLength + Math.cos(i * 0.3 + count) * 20;
+        }
+    });
+})();

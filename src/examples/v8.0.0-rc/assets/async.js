@@ -1,21 +1,26 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Sprite } from 'pixi.js';
 
-const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
-
-document.body.appendChild(app.view);
-
-// await can only be used inside an async function
+// Await can only be used inside an async function
 async function init()
 {
-    const texture = await PIXI.Assets.load('https://pixijs.com/assets/bunny.png');
+    // Create a new application
+    const app = new Application();
 
-    // create a new Sprite from the awaited loaded Texture
-    const bunny = PIXI.Sprite.from(texture);
+    // Initialize the application
+    await app.init({ background: '#1099bb', resizeTo: window });
 
-    // center the sprite's anchor point
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
+    const texture = await Assets.load('https://pixijs.com/assets/bunny.png');
+
+    // Create a new Sprite from the awaited loaded Texture
+    const bunny = Sprite.from(texture);
+
+    // Center the sprite's anchor point
     bunny.anchor.set(0.5);
 
-    // move the sprite to the center of the screen
+    // Move the sprite to the center of the screen
     bunny.x = app.screen.width / 2;
     bunny.y = app.screen.height / 2;
 
