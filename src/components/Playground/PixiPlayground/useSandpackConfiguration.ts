@@ -114,13 +114,9 @@ export const useSandpackConfiguration = ({ code, isPixiWebWorkerVersion, pixiVer
         dependencies,
         devDependencies: {
             'parcel-bundler': '^1.6.1',
+            '@babel/core': '^7.21.3',
         },
     };
-
-    if (isPreV8(pixiVersion.version))
-    {
-        customSetup.devDependencies['@babel/core'] = '^7.21.3';
-    }
 
     return {
         files,
