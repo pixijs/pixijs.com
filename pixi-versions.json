@@ -16,7 +16,7 @@
     "releaseNotes": "https://github.com/pixijs/pixijs/releases",
     "build": "https://pixijs.download/next-v8/pixi.min.js",
     "docs": "https://pixijs.download/release/docs",
-    "npm": "https://pkg.csb.dev/pixijs/pixijs/commit/7f31f584",
+    "npm": "https://pkg.csb.dev/pixijs/pixijs/commit/4e5d8213",
     "dev": true,
     "isCurrent": true
   }

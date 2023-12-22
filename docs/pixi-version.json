@@ -4,6 +4,6 @@
   "releaseNotes": "https://github.com/pixijs/pixijs/releases",
   "build": "https://pixijs.download/next-v8/pixi.min.js",
   "docs": "https://pixijs.download/release/docs",
-  "npm": "https://pkg.csb.dev/pixijs/pixijs/commit/5b66fdf1",
+  "npm": "pixijs/pixijs/commit/4e5d8213",
   "dev": true
 }
