@@ -1,4 +1,4 @@
-import { Application, Assets, Geometry, Texture, Mesh, Shader } from 'js';
+import { Application, Assets, Geometry, Texture, Mesh, Shader, Program } from 'js';
 
 (async () =>
 {
