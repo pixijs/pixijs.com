@@ -1,39 +1,32 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Geometry, Texture, Mesh, Shader, Ticker } from 'js';
 
-const app = new PIXI.Application({ resizeTo: window });
+(async () =>
+{
+    // Create a new application
+    const app = new Application();
 
-document.body.appendChild(app.view);
+    // Initialize the application
+    await app.init({ resizeTo: window });
 
-const geometry = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100,
-            -100, // x, y
-            100,
-            -100, // x, y
-            100,
-            100,
-        ], // x, y
-        2,
-    ) // the size of the attribute
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-        ], // u, v
-        2,
-    ); // the size of the attribute
+    // Load the textures
+    await Assets.load([
+        'https://pixijs.com/assets/bg_scene_rotate.jpg',
+        'https://pixijs.com/assets/bg_rotate.jpg',
+        'https://pixijs.com/assets/bg_displacement.jpg',
+    ]);
 
-const program = PIXI.Program.from(
-    `
+    const geometry = new Geometry({
+        attributes: {
+            aVertexPosition: [-100, -100, 100, -100, 100, 100],
+            aUvs: [0, 0, 1, 0, 1, 1],
+        },
+    });
 
+    const program = Program.from(
+        `
     precision mediump float;
 
     attribute vec2 aVertexPosition;
@@ -51,7 +44,7 @@ const program = PIXI.Program.from(
 
     }`,
 
-    `precision mediump float;
+        `precision mediump float;
 
     varying vec2 vUvs;
 
@@ -63,42 +56,43 @@ const program = PIXI.Program.from(
     }
 
 `,
-);
+    );
 
-const triangle = new PIXI.Mesh(
-    geometry,
-    new PIXI.Shader(program, {
-        uSamplerTexture: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
-    }),
-);
+    const triangle = new Mesh(
+        geometry,
+        new Shader(program, {
+            uSamplerTexture: Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
+        }),
+    );
 
-const triangle2 = new PIXI.Mesh(
-    geometry,
-    new PIXI.Shader(program, {
-        uSamplerTexture: PIXI.Texture.from('https://pixijs.com/assets/bg_rotate.jpg'),
-    }),
-);
+    const triangle2 = new Mesh(
+        geometry,
+        new Shader(program, {
+            uSamplerTexture: Texture.from('https://pixijs.com/assets/bg_rotate.jpg'),
+        }),
+    );
 
-const triangle3 = new PIXI.Mesh(
-    geometry,
-    new PIXI.Shader(program, {
-        uSamplerTexture: PIXI.Texture.from('https://pixijs.com/assets/bg_displacement.jpg'),
-    }),
-);
+    const triangle3 = new Mesh(
+        geometry,
+        new Shader(program, {
+            uSamplerTexture: Texture.from('https://pixijs.com/assets/bg_displacement.jpg'),
+        }),
+    );
 
-triangle.position.set(400, 300);
-triangle.scale.set(2);
+    triangle.position.set(400, 300);
+    triangle.scale.set(2);
 
-triangle2.position.set(200, 100);
+    triangle2.position.set(200, 100);
 
-triangle3.position.set(500, 400);
-triangle3.scale.set(3);
+    triangle3.position.set(500, 400);
+    triangle3.scale.set(3);
 
-app.stage.addChild(triangle3, triangle2, triangle);
+    app.stage.addChild(triangle3, triangle2, triangle);
 
-app.ticker.add((delta) =>
-{
-    triangle.rotation += 0.01;
-    triangle2.rotation -= 0.01;
-    triangle3.rotation -= 0.005;
-});
+    Ticker.shared.add((delta) =>
+    {
+        triangle.rotation += 0.01;
+        triangle2.rotation -= 0.01;
+        triangle3.rotation -= 0.005;
+    });
+})();

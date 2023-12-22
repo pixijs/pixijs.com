@@ -1,71 +1,39 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Mesh, Geometry, Shader, Ticker } from 'js';
 
-const app = new PIXI.Application({ resizeTo: window });
+(async () =>
+{
+    // Create a new application
+    const app = new Application();
 
-document.body.appendChild(app.view);
+    // Initialize the application
+    await app.init({ resizeTo: window });
 
-const geometry = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100,
-            -100, // x, y
-            100,
-            -100, // x, y
-            100,
-            100,
-            -100,
-            100,
-        ], // x, y
-        2,
-    ) // the size of the attribute
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-            0,
-            1,
-        ], // u, v
-        2,
-    ) // the size of the attribute
-    .addIndex([0, 1, 2, 0, 2, 3]);
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-const geometry2 = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100 + 100,
-            -100, // x, y
-            100 + 100,
-            -100, // x, y
-            100 + 100,
-            100,
-        ], // x, y
-        2,
-    ) // the size of the attribute
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-        ], // u, v
-        2,
-    ) // the size of the attribute
-    .addIndex([0, 1, 2]);
+    // Load the texture
+    const texture = await Assets.load('https://pixijs.com/assets/bg_scene_rotate.jpg');
 
-const geometry3 = PIXI.Geometry.merge([geometry, geometry2]);
+    const geometry = new Geometry({
+        attributes: {
+            aVertexPosition: [-100, -100, 100, -100, 100, 100, -100, 100],
+            aUvs: [0, 0, 1, 0, 1, 1, 0, 1],
+        },
+        indexBuffer: [0, 1, 2, 0, 2, 3],
+    });
 
-const shader = PIXI.Shader.from(
-    `
+    const geometry2 = new Geometry({
+        attributes: {
+            aVertexPosition: [-100 + 100, -100, 100 + 100, -100, 100 + 100, 100],
+            aUvs: [0, 0, 1, 0, 1, 1],
+        },
+        indexBuffer: [0, 1, 2],
+    });
+
+    const geometry3 = Geometry.merge([geometry, geometry2]);
+
+    const shader = Shader.from(
+        `
 
     precision mediump float;
 
@@ -84,7 +52,7 @@ const shader = PIXI.Shader.from(
 
     }`,
 
-    `precision mediump float;
+        `precision mediump float;
 
     varying vec2 vUvs;
 
@@ -96,19 +64,20 @@ const shader = PIXI.Shader.from(
     }
 
 `,
+        {
+            uSampler2: texture,
+        },
+    );
+
+    const quad = new Mesh(geometry3, shader);
+
+    quad.position.set(400, 300);
+    quad.scale.set(2);
+
+    app.stage.addChild(quad);
+
+    Ticker.shared.add((delta) =>
     {
-        uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
-    },
-);
-
-const quad = new PIXI.Mesh(geometry3, shader);
-
-quad.position.set(400, 300);
-quad.scale.set(2);
-
-app.stage.addChild(quad);
-
-app.ticker.add((delta) =>
-{
-    quad.rotation += 0.01;
-});
+        quad.rotation += 0.01;
+    });
+})();

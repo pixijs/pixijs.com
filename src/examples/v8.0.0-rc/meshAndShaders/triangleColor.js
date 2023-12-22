@@ -1,42 +1,25 @@
-import * as PIXI from 'pixi.js';
+import { Application, Shader, Mesh, Geometry, Ticker } from 'pixi.js';
 
-const app = new PIXI.Application({ resizeTo: window });
+(async () =>
+{
+    // Create a new application
+    const app = new Application();
 
-document.body.appendChild(app.view);
+    // Initialize the application
+    await app.init({ resizeTo: window });
 
-const geometry = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100,
-            -50, // x, y
-            100,
-            -50, // x, y
-            0.0,
-            100.0,
-        ], // x, y
-        2,
-    ) // the size of the attribute
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-    .addAttribute(
-        'aColor', // the attribute name
-        [
-            1,
-            0,
-            0, // r, g, b
-            0,
-            1,
-            0, // r, g, b
-            0,
-            0,
-            1,
-        ], // r, g, b
-        3,
-    ); // the size of the attribute
+    const geometry = new Geometry({
+        attributes: {
+            aVertexPosition: [-100, -50, 100, -50, 0, 100],
+            aColor: [1, 0, 0, 0, 1, 0, 0, 0, 1],
+        },
+    });
 
-const shader = PIXI.Shader.from(
-    `
-
+    const shader = Shader.from(
+        `
     precision mediump float;
     attribute vec2 aVertexPosition;
     attribute vec3 aColor;
@@ -52,26 +35,26 @@ const shader = PIXI.Shader.from(
         gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
 
     }`,
+        `precision mediump float;
 
-    `precision mediump float;
+        varying vec3 vColor;
 
-    varying vec3 vColor;
+        void main() {
+            gl_FragColor = vec4(vColor, 1.0);
+        }
 
-    void main() {
-        gl_FragColor = vec4(vColor, 1.0);
-    }
+    `,
+    );
 
-`,
-);
+    const triangle = new Mesh(geometry, shader);
 
-const triangle = new PIXI.Mesh(geometry, shader);
+    triangle.position.set(400, 300);
+    triangle.scale.set(2);
 
-triangle.position.set(400, 300);
-triangle.scale.set(2);
+    app.stage.addChild(triangle);
 
-app.stage.addChild(triangle);
-
-app.ticker.add((delta) =>
-{
-    triangle.rotation += 0.01;
-});
+    Ticker.shared.add(() =>
+    {
+        triangle.rotation += 0.01;
+    });
+})();

@@ -1,36 +1,28 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Geometry, Shader, Mesh, Ticker } from 'js';
 
-const app = new PIXI.Application({ resizeTo: window });
+(async () =>
+{
+    // Create a new application
+    const app = new Application();
 
-document.body.appendChild(app.view);
+    // Initialize the application
+    await app.init({ resizeTo: window });
 
-const geometry = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100,
-            -100, // x, y
-            100,
-            -100, // x, y
-            100,
-            100,
-        ],
-    ) // x, y
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
 
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-        ],
-    ); // u, v
+    // Load the texture
+    const texture = await Assets.load('https://pixijs.com/assets/bg_scene_rotate.jpg');
 
-const shader = PIXI.Shader.from(
-    `
+    const geometry = new Geometry({
+        attributes: {
+            aVertexPosition: [-100, -100, 100, -100, 100, 100],
+            aUvs: [0, 0, 1, 0, 1, 1],
+        },
+    });
+
+    const shader = Shader.from(
+        `
 
     precision mediump float;
 
@@ -49,7 +41,7 @@ const shader = PIXI.Shader.from(
 
     }`,
 
-    `precision mediump float;
+        `precision mediump float;
 
     varying vec2 vUvs;
 
@@ -61,13 +53,13 @@ const shader = PIXI.Shader.from(
     }
 
 `,
-    {
-        uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
-    },
-);
+        {
+            uSampler2: texture,
+        },
+    );
 
-const shader2 = PIXI.Shader.from(
-    `
+    const shader2 = Shader.from(
+        `
 
     precision mediump float;
 
@@ -86,7 +78,7 @@ const shader2 = PIXI.Shader.from(
 
     }`,
 
-    `precision mediump float;
+        `precision mediump float;
 
     varying vec2 vUvs;
 
@@ -100,25 +92,26 @@ const shader2 = PIXI.Shader.from(
     }
 
 `,
+        {
+            uSampler2: texture,
+        },
+    );
+
+    const triangle = new Mesh(geometry, shader);
+
+    const triangle2 = new Mesh(geometry, shader2);
+
+    triangle.position.set(400, 300);
+    triangle.scale.set(2);
+
+    triangle2.position.set(500, 400);
+    triangle2.scale.set(3);
+
+    app.stage.addChild(triangle2, triangle);
+
+    Ticker.shared.add((delta) =>
     {
-        uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
-    },
-);
-
-const triangle = new PIXI.Mesh(geometry, shader);
-
-const triangle2 = new PIXI.Mesh(geometry, shader2);
-
-triangle.position.set(400, 300);
-triangle.scale.set(2);
-
-triangle2.position.set(500, 400);
-triangle2.scale.set(3);
-
-app.stage.addChild(triangle2, triangle);
-
-app.ticker.add((delta) =>
-{
-    triangle.rotation += 0.01;
-    triangle2.rotation -= 0.005;
-});
+        triangle.rotation += 0.01;
+        triangle2.rotation -= 0.005;
+    });
+})();
