@@ -1,4 +1,4 @@
-import { Application, Assets, Mesh, Geometry, Buffer, TYPES, Shader, Ticker } from 'js';
+import { Application, Assets, Mesh, Geometry, Buffer, TYPES, Shader } from 'js';
 
 (async () =>
 {
@@ -77,7 +77,7 @@ import { Application, Assets, Mesh, Geometry, Buffer, TYPES, Shader, Ticker } fr
 
     app.stage.addChild(triangles);
 
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         triangles.rotation += 0.01;
     });

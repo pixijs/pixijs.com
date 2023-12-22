@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, RenderTexture, Ticker, SCALE_MODES } from 'pixi.js';
+import { Application, Assets, Container, Sprite, RenderTexture, SCALE_MODES } from 'pixi.js';
 
 (async () =>
 {
@@ -50,7 +50,7 @@ import { Application, Assets, Container, Sprite, RenderTexture, Ticker, SCALE_MO
     container.x = 100;
     container.y = 60;
 
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         app.renderer.render(container, { renderTexture: rt });
     });

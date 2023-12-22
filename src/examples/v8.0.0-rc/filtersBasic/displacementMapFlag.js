@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, Ticker, WRAP_MODES, DisplacementFilter } from 'pixi.js';
+import { Application, Assets, Container, Sprite, WRAP_MODES, DisplacementFilter } from 'pixi.js';
 
 (async () =>
 {
@@ -46,7 +46,7 @@ import { Application, Assets, Container, Sprite, Ticker, WRAP_MODES, Displacemen
     // Apply the filter
     flag.filters = [displacementFilter];
 
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         // Offset the sprite position to make vFilterCoord update to larger value.
         // Repeat wrapping makes sure there's still pixels on the coordinates.

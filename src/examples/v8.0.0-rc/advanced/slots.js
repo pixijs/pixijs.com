@@ -5,7 +5,6 @@ import {
     Container,
     Texture,
     Sprite,
-    Ticker,
     Graphics,
     Text,
     TextStyle,
@@ -170,7 +169,7 @@ import {
     }
 
     // Listen for animate update.
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         // Update the slots.
         for (let i = 0; i < reels.length; i++)
@@ -223,7 +222,7 @@ import {
         return tween;
     }
     // Listen for animate update.
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         const now = Date.now();
         const remove = [];

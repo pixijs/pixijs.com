@@ -1,4 +1,4 @@
-import { Application, Assets, Point, Sprite, MeshRope, Ticker } from 'pixi.js';
+import { Application, Assets, Point, Sprite, MeshRope } from 'pixi.js';
 
 (async () =>
 {
@@ -55,7 +55,7 @@ import { Application, Assets, Point, Sprite, MeshRope, Ticker } from 'pixi.js';
     });
 
     // Listen for animate update
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         if (!mouseposition) return;
 

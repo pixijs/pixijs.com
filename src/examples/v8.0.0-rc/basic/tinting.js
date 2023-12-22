@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, Rectangle, Ticker } from 'pixi.js';
+import { Application, Assets, Sprite, Rectangle } from 'pixi.js';
 
 (async () =>
 {
@@ -63,7 +63,7 @@ import { Application, Assets, Sprite, Rectangle, Ticker } from 'pixi.js';
         app.screen.height + dudeBoundsPadding * 2,
     );
 
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         // Iterate through the dudes and update their position
         for (let i = 0; i < aliens.length; i++)

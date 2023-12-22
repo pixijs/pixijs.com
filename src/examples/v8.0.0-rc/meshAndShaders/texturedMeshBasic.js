@@ -1,4 +1,4 @@
-import { Application, Assets, Point, Container, MeshRope, Ticker } from 'pixi.js';
+import { Application, Assets, Point, Container, MeshRope } from 'pixi.js';
 
 (async () =>
 {
@@ -41,7 +41,7 @@ import { Application, Assets, Point, Container, MeshRope, Ticker } from 'pixi.js
     snakeContainer.addChild(strip);
 
     // Animate the rope points
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         count += 0.1;
 

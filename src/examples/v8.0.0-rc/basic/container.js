@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, Ticker } from 'pixi.js';
+import { Application, Assets, Container, Sprite } from 'pixi.js';
 
 (async () =>
 {
@@ -38,7 +38,7 @@ import { Application, Assets, Container, Sprite, Ticker } from 'pixi.js';
     container.pivot.y = container.height / 2;
 
     // Listen for animate update
-    Ticker.shared.add((time) =>
+    app.ticker.add((time) =>
     {
         // Continuously rotate the container!
         // * use delta to create frame-independent transform *

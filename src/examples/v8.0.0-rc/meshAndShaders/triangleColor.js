@@ -1,4 +1,4 @@
-import { Application, Shader, Mesh, Geometry, Ticker } from 'pixi.js';
+import { Application, Shader, Mesh, Geometry } from 'pixi.js';
 
 (async () =>
 {
@@ -53,7 +53,7 @@ import { Application, Shader, Mesh, Geometry, Ticker } from 'pixi.js';
 
     app.stage.addChild(triangle);
 
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         triangle.rotation += 0.01;
     });

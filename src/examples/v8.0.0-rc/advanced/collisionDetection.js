@@ -1,4 +1,4 @@
-import { Application, Assets, Point, Sprite, Texture, Ticker } from 'pixi.js';
+import { Application, Assets, Point, Sprite, Texture } from 'pixi.js';
 
 // Based somewhat on this article by Spicy Yoghurt
 // URL for further reading: https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
@@ -104,7 +104,7 @@ import { Application, Assets, Point, Sprite, Texture, Ticker } from 'pixi.js';
     });
 
     // Listen for animate update
-    Ticker.shared.add((time) =>
+    app.ticker.add((time) =>
     {
         const delta = time.deltaTime;
 

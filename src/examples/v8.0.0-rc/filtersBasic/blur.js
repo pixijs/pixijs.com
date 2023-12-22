@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, BlurFilter, Ticker } from 'pixi.js';
+import { Application, Assets, Sprite, BlurFilter } from 'pixi.js';
 
 (async () =>
 {
@@ -47,7 +47,7 @@ import { Application, Assets, Sprite, BlurFilter, Ticker } from 'pixi.js';
     let count = 0;
 
     // Animate the blur filters
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         count += 0.005;
 

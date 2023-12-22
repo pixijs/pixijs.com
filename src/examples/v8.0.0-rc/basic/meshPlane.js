@@ -1,4 +1,4 @@
-import { Application, MeshPlane, Assets, Ticker } from 'pixi.js';
+import { Application, MeshPlane, Assets } from 'pixi.js';
 
 (async () =>
 {
@@ -28,7 +28,7 @@ import { Application, MeshPlane, Assets, Ticker } from 'pixi.js';
     // Listen for animate update
     let timer = 0;
 
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         // Randomize the vertice positions a bit to create movement.
         for (let i = 0; i < buffer.data.length; i++)

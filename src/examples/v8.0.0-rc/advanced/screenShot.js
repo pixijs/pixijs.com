@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, Text, TextStyle, Ticker } from 'pixi.js';
+import { Application, Assets, Container, Sprite, Text, TextStyle } from 'pixi.js';
 
 (async () =>
 {
@@ -52,7 +52,7 @@ import { Application, Assets, Container, Sprite, Text, TextStyle, Ticker } from 
     bunnyContainer.pivot.y = bunnyContainer.height / 2;
 
     // Animate the bunnies container
-    Ticker.shared.add((time) =>
+    app.ticker.add((time) =>
     {
         bunnyContainer.rotation += 0.01 * time.deltaTime;
     });

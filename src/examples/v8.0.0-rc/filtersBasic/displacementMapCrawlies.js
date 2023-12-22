@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Rectangle, Sprite, Point, Ticker, DisplacementFilter } from 'pixi.js';
+import { Application, Assets, Container, Rectangle, Sprite, Point, DisplacementFilter } from 'pixi.js';
 
 (async () =>
 {
@@ -91,7 +91,7 @@ import { Application, Assets, Container, Rectangle, Sprite, Point, Ticker, Displ
     let count = 0;
 
     // Animate the maggots
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         count += 0.05;
 

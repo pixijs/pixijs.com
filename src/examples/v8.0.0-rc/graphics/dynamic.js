@@ -1,4 +1,4 @@
-import { Application, Graphics, Ticker } from 'pixi.js';
+import { Application, Graphics } from 'pixi.js';
 
 (async () =>
 {
@@ -79,7 +79,7 @@ import { Application, Graphics, Ticker } from 'pixi.js';
     });
 
     // Animate the moving shape
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         count += 0.1;
 

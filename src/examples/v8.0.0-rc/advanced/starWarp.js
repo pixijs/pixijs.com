@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, Ticker } from 'pixi.js';
+import { Application, Assets, Sprite } from 'pixi.js';
 
 (async () =>
 {
@@ -61,7 +61,7 @@ import { Application, Assets, Sprite, Ticker } from 'pixi.js';
     }, 5000);
 
     // Listen for animate update
-    Ticker.shared.add((time) =>
+    app.ticker.add((time) =>
     {
         // Simple easing. This should be changed to proper easing function when used for real.
         speed += (warpSpeed - speed) / 20;

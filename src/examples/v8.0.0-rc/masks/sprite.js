@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, Point, Ticker } from 'pixi.js';
+import { Application, Assets, Sprite, Point } from 'pixi.js';
 
 (async () =>
 {
@@ -49,7 +49,7 @@ import { Application, Assets, Sprite, Point, Ticker } from 'pixi.js';
     }
 
     // Animate the mask
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         mask.x += (target.x - mask.x) * 0.1;
         mask.y += (target.y - mask.y) * 0.1;

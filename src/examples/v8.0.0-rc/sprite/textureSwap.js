@@ -1,4 +1,4 @@
-import { Application, Assets, Texture, Sprite, Ticker } from 'pixi.js';
+import { Application, Assets, Texture, Sprite } from 'pixi.js';
 
 (async () =>
 {
@@ -40,7 +40,7 @@ import { Application, Assets, Texture, Sprite, Ticker } from 'pixi.js';
         character.texture = isAlien1 ? alien1texture : alien2texture;
     });
 
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         character.rotation += 0.02;
     });

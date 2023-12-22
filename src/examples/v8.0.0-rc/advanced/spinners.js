@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, Point, Graphics, Ticker } from 'pixi.js';
+import { Application, Assets, Container, Sprite, Point, Graphics } from 'pixi.js';
 
 (async () =>
 {
@@ -370,7 +370,7 @@ import { Application, Assets, Container, Sprite, Point, Graphics, Ticker } from 
     ];
 
     // Listen for animate update
-    Ticker.shared.add((time) =>
+    app.ticker.add((time) =>
     {
         // Call tick handling for each spinner.
         onTick.forEach((cb) =>

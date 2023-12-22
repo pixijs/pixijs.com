@@ -1,4 +1,4 @@
-import { Application, Assets, Mesh, Shader, WRAP_MODES, Geometry, Ticker } from 'js';
+import { Application, Assets, Mesh, Shader, WRAP_MODES, Geometry } from 'js';
 
 (async () =>
 {
@@ -157,7 +157,7 @@ gl_FragColor = vec4(col, 1.);
     // start the animation..
     let time = 0;
 
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         time += 1 / 60;
         quad.shader.uniforms.time = time;

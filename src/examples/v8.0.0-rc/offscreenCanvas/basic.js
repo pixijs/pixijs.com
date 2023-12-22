@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, Ticker } from 'pixi.js';
+import { Application, Assets, Container, Sprite } from 'pixi.js';
 
 // This example is the based on basic/container, but using OffscreenCanvas.
 
@@ -43,7 +43,7 @@ const view = canvas.transferControlToOffscreen();
     container.pivot.y = container.height / 2;
 
     // Listen for animate update
-    Ticker.shared.add((time) =>
+    app.ticker.add((time) =>
     {
         // Rotate the container!
         // * use delta to create frame-independent transform *

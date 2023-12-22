@@ -1,4 +1,4 @@
-import { Application, Assets, Mesh, Geometry, Shader, Ticker } from 'js';
+import { Application, Assets, Mesh, Geometry, Shader } from 'js';
 
 (async () =>
 {
@@ -76,7 +76,7 @@ import { Application, Assets, Mesh, Geometry, Shader, Ticker } from 'js';
 
     app.stage.addChild(quad);
 
-    Ticker.shared.add((delta) =>
+    app.ticker.add((delta) =>
     {
         quad.rotation += 0.01;
     });

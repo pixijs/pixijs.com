@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, Ticker } from 'pixi.js';
+import { Application, Assets, Sprite } from 'pixi.js';
 
 (async () =>
 {
@@ -27,7 +27,7 @@ import { Application, Assets, Sprite, Ticker } from 'pixi.js';
     app.stage.addChild(bunny);
 
     // Listen for animate update
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         // Just for fun, let's rotate our bunny over time!
         bunny.rotation += 0.1;

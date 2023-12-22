@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, Graphics, Text, Ticker } from 'pixi.js';
+import { Application, Assets, Container, Sprite, Graphics, Text } from 'pixi.js';
 
 (async () =>
 {
@@ -95,7 +95,7 @@ import { Application, Assets, Container, Sprite, Graphics, Text, Ticker } from '
     app.stage.addChild(help);
 
     // Animate the mask
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         bg.rotation += 0.01;
         bgFront.rotation -= 0.01;

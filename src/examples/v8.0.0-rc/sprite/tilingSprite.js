@@ -1,4 +1,4 @@
-import { Application, Assets, TilingSprite, Ticker } from 'pixi.js';
+import { Application, Assets, TilingSprite } from 'pixi.js';
 
 (async () =>
 {
@@ -29,7 +29,7 @@ import { Application, Assets, TilingSprite, Ticker } from 'pixi.js';
     let count = 0;
 
     // Animate the tiling sprite
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         count += 0.005;
 

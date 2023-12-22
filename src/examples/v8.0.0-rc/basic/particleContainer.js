@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, Ticker, Container, Rectangle } from 'pixi.js';
+import { Application, Assets, Sprite, Container, Rectangle } from 'pixi.js';
 
 (async () =>
 {
@@ -69,7 +69,7 @@ import { Application, Assets, Sprite, Ticker, Container, Rectangle } from 'pixi.
 
     let tick = 0;
 
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         // Iterate through the sprites and update their position
         for (let i = 0; i < maggots.length; i++)

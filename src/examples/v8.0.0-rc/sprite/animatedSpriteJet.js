@@ -1,4 +1,4 @@
-import { Application, Assets, AnimatedSprite, Texture, Ticker } from 'pixi.js';
+import { Application, Assets, AnimatedSprite, Texture } from 'pixi.js';
 
 (async () =>
 {
@@ -41,7 +41,7 @@ import { Application, Assets, AnimatedSprite, Texture, Ticker } from 'pixi.js';
     app.stage.addChild(anim);
 
     // Animate the rotation
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         anim.rotation += 0.01;
     });

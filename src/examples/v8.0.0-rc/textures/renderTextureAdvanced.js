@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, RenderTexture, Ticker } from 'pixi.js';
+import { Application, Assets, Container, Sprite, RenderTexture } from 'pixi.js';
 
 (async () =>
 {
@@ -72,7 +72,7 @@ import { Application, Assets, Container, Sprite, RenderTexture, Ticker } from 'p
     // Used for spinning!
     let count = 0;
 
-    Ticker.shared.add(() =>
+    app.ticker.add(() =>
     {
         for (let i = 0; i < items.length; i++)
         {
