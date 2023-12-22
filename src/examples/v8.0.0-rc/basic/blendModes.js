@@ -42,7 +42,6 @@ import { Application, Assets, Sprite, Ticker, Rectangle } from 'pixi.js';
         dude.y = Math.floor(Math.random() * app.screen.height);
 
         // The important bit of this example, this is how you change the default blend mode of the sprite
-        // Refer to this docs page for all the available blend modes out of the box: [TODO: LINK]
         dude.blendMode = 'add';
 
         // Create some extra properties that will control movement

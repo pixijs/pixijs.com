@@ -3,10 +3,10 @@
     "container",
     "transparentBackground",
     "tinting",
-    "cacheAsBitmap",
     "particleContainer",
     "blendModes",
-    "simplePlane"
+    "meshPlane",
+    "fillGradient"
   ],
   "advanced": [
     "slots",
@@ -78,7 +78,6 @@
     "sharingGeometry",
     "sharedShader",
     "mergingGeometry",
-    "interleavingGeometry",
     "instancedGeometry",
     "shaderToyMesh",
     "multiPassShaderGeneratedMesh"
@@ -86,9 +85,7 @@
   "textures": [
     "textureRotate",
     "renderTextureBasic",
-    "renderTextureAdvanced",
-    "gradientBasic",
-    "gradientResource"
+    "renderTextureAdvanced"
   ],
   "assets": [
     "promise",

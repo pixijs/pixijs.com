@@ -1,22 +1,31 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Text } from 'pixi.js';
 
-const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
-
-document.body.appendChild(app.view);
-
-// Load from any font file!
-PIXI.Assets.addBundle('fonts', {
-    ChaChicle: 'https://pixijs.com/assets/webfont-loader/ChaChicle.ttf',
-    Lineal: 'https://pixijs.com/assets/webfont-loader/Lineal.otf',
-    'Dotrice Regular': 'https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff',
-    Crosterian: 'https://pixijs.com/assets/webfont-loader/Crosterian.woff2',
-});
-PIXI.Assets.loadBundle('fonts').then(() =>
+(async () =>
 {
-    const text1 = new PIXI.Text('ChaChicle.ttf', new PIXI.TextStyle({ fontFamily: 'ChaChicle', fontSize: 50 }));
-    const text2 = new PIXI.Text('Lineal.otf', new PIXI.TextStyle({ fontFamily: 'Lineal', fontSize: 50 }));
-    const text3 = new PIXI.Text('Dotrice Regular.woff', new PIXI.TextStyle({ fontFamily: 'Dotrice Regular', fontSize: 50 }));
-    const text4 = new PIXI.Text('Crosterian.woff2', new PIXI.TextStyle({ fontFamily: 'Crosterian', fontSize: 50 }));
+    // Create a new application
+    const app = new Application();
+
+    // Initialize the application
+    await app.init({ background: '#1099bb', resizeTo: window });
+
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
+    // Add font files to the bundle
+    Assets.addBundle('fonts', [
+        { alias: 'ChaChicle', src: 'https://pixijs.com/assets/webfont-loader/ChaChicle.ttf' },
+        { alias: 'Lineal', src: 'https://pixijs.com/assets/webfont-loader/Lineal.otf' },
+        { alias: 'Dotrice Regular', src: 'https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff' },
+        { alias: 'Crosterian', src: 'https://pixijs.com/assets/webfont-loader/Crosterian.woff2' },
+    ]);
+
+    // Load the font bundle
+    await Assets.loadBundle('fonts');
+
+    const text1 = new Text({ text: 'ChaChicle.ttf', style: { fontFamily: 'ChaChicle', fontSize: 50 } });
+    const text2 = new Text({ text: 'Lineal.otf', style: { fontFamily: 'Lineal', fontSize: 50 } });
+    const text3 = new Text({ text: 'Dotrice Regular.woff', style: { fontFamily: 'Dotrice Regular', fontSize: 50 } });
+    const text4 = new Text({ text: 'Crosterian.woff2', style: { fontFamily: 'Crosterian', fontSize: 50 } });
 
     text2.y = 150;
     text3.y = 300;
@@ -26,4 +35,4 @@ PIXI.Assets.loadBundle('fonts').then(() =>
     app.stage.addChild(text2);
     app.stage.addChild(text3);
     app.stage.addChild(text4);
-});
+})();

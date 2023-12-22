@@ -13,12 +13,12 @@ import multiple from '!!raw-loader!./assets/multiple.js';
 import promise from '!!raw-loader!./assets/promise.js';
 
 import blendModes from '!!raw-loader!./basic/blendModes.js';
-import cacheAsBitmap from '!!raw-loader!./basic/cacheAsBitmap.js';
 import container from '!!raw-loader!./basic/container.js';
 import particleContainer from '!!raw-loader!./basic/particleContainer.js';
-import simplePlane from '!!raw-loader!./basic/simplePlane.js';
+import meshPlane from '!!raw-loader!./basic/meshPlane.js';
 import tinting from '!!raw-loader!./basic/tinting.js';
 import transparentBackground from '!!raw-loader!./basic/transparentBackground.js';
+import fillGradient from '!!raw-loader!./basic/fillGradient.js';
 
 import click from '!!raw-loader!./events/click.js';
 import customHitarea from '!!raw-loader!./events/customHitarea.js';
@@ -49,7 +49,6 @@ import graphics from '!!raw-loader!./masks/graphics.js';
 import sprite from '!!raw-loader!./masks/sprite.js';
 
 import instancedGeometry from '!!raw-loader!./meshAndShaders/instancedGeometry.js';
-import interleavingGeometry from '!!raw-loader!./meshAndShaders/interleavingGeometry.js';
 import mergingGeometry from '!!raw-loader!./meshAndShaders/mergingGeometry.js';
 import multiPassShaderGeneratedMesh from '!!raw-loader!./meshAndShaders/multiPassShaderGeneratedMesh.js';
 import shaderToyMesh from '!!raw-loader!./meshAndShaders/shaderToyMesh.js';
@@ -78,8 +77,6 @@ import fromFont from '!!raw-loader!./text/fromFont.js';
 import pixiText from '!!raw-loader!./text/pixiText.js';
 import webFont from '!!raw-loader!./text/webFont.js';
 
-import gradientBasic from '!!raw-loader!./textures/gradientBasic.js';
-import gradientResource from '!!raw-loader!./textures/gradientResource.js';
 import renderTextureAdvanced from '!!raw-loader!./textures/renderTextureAdvanced.js';
 import renderTextureBasic from '!!raw-loader!./textures/renderTextureBasic.js';
 import textureRotate from '!!raw-loader!./textures/textureRotate.js';
@@ -94,12 +91,12 @@ import type { CategoryDataType, ExampleDataEntry, ExamplesDataType, ExamplesJson
 const examplesSource: ExamplesSourceType = {
     basic: {
         blendModes,
-        cacheAsBitmap,
         container,
         particleContainer,
-        simplePlane,
+        meshPlane,
         tinting,
         transparentBackground,
+        fillGradient,
     },
     sprite: {
         animatedSpriteAnimationSpeed,
@@ -139,8 +136,6 @@ const examplesSource: ExamplesSourceType = {
         sprite,
     },
     textures: {
-        gradientBasic,
-        gradientResource,
         renderTextureAdvanced,
         renderTextureBasic,
         textureRotate,
@@ -178,7 +173,6 @@ const examplesSource: ExamplesSourceType = {
     },
     meshAndShaders: {
         instancedGeometry,
-        interleavingGeometry,
         mergingGeometry,
         multiPassShaderGeneratedMesh,
         shaderToyMesh,
