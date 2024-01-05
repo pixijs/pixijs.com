@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, Rectangle, Filter, Point } from 'pixi.js';
+import { Application, Assets, Container, Sprite, Rectangle, Filter, Point, GlProgram } from 'pixi.js';
 
 /**
  * https://github.com/pixijs/pixi.js/wiki/v5-Creating-Filters
@@ -10,7 +10,7 @@ import { Application, Assets, Container, Sprite, Rectangle, Filter, Point } from
     const app = new Application();
 
     // Initialize the application
-    await app.init({ resizeTo: window });
+    await app.init({ preference: 'webgl', resizeTo: window });
 
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
@@ -29,24 +29,53 @@ import { Application, Assets, Container, Sprite, Rectangle, Filter, Point } from
     // because v5 default vertex shader uses `inputSize` in it. Same uniform in fragment and vertex shader
     // cant have different precision :(
 
-    const shaderFrag = `
+    const vertex = `
+    in vec2 aPosition;
+    out vec2 vTextureCoord;
+
+    uniform vec4 uInputSize;
+    uniform vec4 uOutputFrame;
+    uniform vec4 uOutputTexture;
+
+    vec4 filterVertexPosition( void )
+    {
+        vec2 position = aPosition * uOutputFrame.zw + uOutputFrame.xy;
+        
+        position.x = position.x * (2.0 / uOutputTexture.x) - 1.0;
+        position.y = position.y * (2.0*uOutputTexture.z / uOutputTexture.y) - uOutputTexture.z;
+
+        return vec4(position, 0.0, 1.0);
+    }
+
+    vec2 filterTextureCoord( void )
+    {
+        return aPosition * (uOutputFrame.zw * uInputSize.zw);
+    }
+
+    void main(void)
+    {
+        gl_Position = filterVertexPosition();
+        vTextureCoord = filterTextureCoord();
+    }
+    `;
+    const fragment = `
     precision highp float;
+    in vec2 vTextureCoord;
+    out vec4 finalColor;
 
-    varying vec2 vTextureCoord;
-
-    uniform vec2 mouse;
-    uniform vec4 inputSize;
-    uniform vec4 outputFrame;
-    uniform float time;
+    uniform vec2 uMouse;
+    uniform vec4 uInputSize;
+    uniform vec4 uOutputFrame;
+    uniform float uTime;
 
     void main() {
-    vec2 screenPos = vTextureCoord * inputSize.xy + outputFrame.xy;
-    if (length(mouse - screenPos) < 25.0) {
-        gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0) * 0.7; //yellow circle, alpha=0.7
-    } else {
-        // blend with underlying image, alpha=0.5
-        gl_FragColor = vec4( sin(time), (mouse.xy - outputFrame.xy) / outputFrame.zw, 1.0) * 0.5;
-    }
+        vec2 screenPos = vTextureCoord * uInputSize.xy + uOutputFrame.xy;
+        if (length(uMouse - screenPos) < 25.0) {
+            finalColor = vec4(1.0, 1.0, 0.0, 1.0) * 0.7; //yellow circle, alpha=0.7
+        } else {
+            // blend with underlying image, alpha=0.5
+            finalColor = vec4( sin(uTime), (uMouse.xy - uOutputFrame.xy) / uOutputFrame.zw, 1.0) * 0.5;
+        }
     }
     `;
 
@@ -54,10 +83,13 @@ import { Application, Assets, Container, Sprite, Rectangle, Filter, Point } from
 
     container.filterArea = new Rectangle(100, 100, app.screen.width - 200, app.screen.height - 200);
     app.stage.addChild(container);
+
     const filter = new Filter({
+        glProgram: new GlProgram({ vertex, fragment }),
         resources: {
-            shader: shaderFrag,
-            mouse: new Point(),
+            localUniforms: {
+                uMouse: { value: new Point(), type: 'vec2<f32>' },
+            },
         },
     });
 
@@ -67,6 +99,6 @@ import { Application, Assets, Container, Sprite, Rectangle, Filter, Point } from
     app.stage.eventMode = 'static';
     app.stage.on('pointermove', (event) =>
     {
-        filter.uniforms.mouse.copyFrom(event.global);
+        filter.resources.localUniforms.uniforms.uMouse.copyFrom(event.global);
     });
 })();
