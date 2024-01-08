@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const { join, resolve, dirname } = require('path');
 const { readdirSync, mkdirSync, readFileSync, rmSync, writeFileSync } = require('fs');
+const { valid, lte, rcompare, prerelease, major, minor, patch } = require('semver');
 const glob = require('glob');
 
 const ROOT = resolve(__dirname, '..');
@@ -21,6 +22,12 @@ async function go()
 {
     // Find all pixi-version.json files
     const versionFiles = glob.sync(`${ROOT}/**/pixi-version.json`);
+    const TUTORIALS_PATH = resolve(ROOT, 'src', 'tutorials');
+
+    // Read the directories in the tutorials directory
+    const tutorialDirectories = readdirSync(TUTORIALS_PATH, { withFileTypes: true })
+        .filter((dirent) => dirent.isDirectory())
+        .map((dirent) => dirent.name);
 
     // Perform the script on all the directories that they are in
     for (const versionFile of versionFiles)
@@ -29,7 +36,19 @@ async function go()
         const TUTORIALS_MD_PATH = resolve(DOCS_PATH, 'tutorials');
         const pixiVersion = require(versionFile);
         const VERSION = pixiVersion.version;
-        const TUTORIALS_JS_PATH = resolve(ROOT, 'src', 'tutorials', `v${VERSION}`);
+        const isPrerelease = prerelease(`v${VERSION}`);
+        const versionToCompare = isPrerelease ? `v${major(VERSION)}.${minor(VERSION)}.${patch(VERSION)}` : `v${VERSION}`;
+
+        // Filter and sort the directories to find the best match
+        const bestMatch = tutorialDirectories
+            // eslint-disable-next-line no-loop-func
+            .filter((name) => valid(name) && lte(name, versionToCompare))
+            .sort((a, b) => rcompare(a, b))[0];
+
+        console.log(`Generating tutorials for v${VERSION} using the ${bestMatch} source`);
+
+        const TUTORIALS_JS_PATH = resolve(TUTORIALS_PATH, bestMatch);
+
         const tutorialsData = require(`${TUTORIALS_JS_PATH}/tutorialsData.json`);
 
         const fileData = tutorialsData.map((tutorialKey) =>
