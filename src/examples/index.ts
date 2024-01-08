@@ -1,5 +1,5 @@
 import type { OptionGroup } from '../components/Select';
-import semver, { lte, major, minor, patch, prerelease, rcompare, valid } from 'semver';
+import { lte, major, minor, patch, prerelease, rcompare, valid } from 'semver';
 import v7x from './v7.0.0/index';
 import v8x from './v8.0.0/index';
 
