@@ -24,4 +24,4 @@ yarn-error.log*
 
 scripts/pixiVersions.json
 
-.ghToken
+.ghtoken
