@@ -22,6 +22,10 @@
             padding: 2.5rem;
             word-wrap: normal;
 
+            & > h1 {
+                padding-left: 0;
+            }
+
             .navigator {
                 position: relative;
                 margin-top: 0.6rem;

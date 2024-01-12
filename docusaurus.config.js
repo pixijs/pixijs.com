@@ -44,7 +44,7 @@ const config = {
                     routeBasePath: '/',
                     versions: {
                         '7.3.2': {
-                            label: 'v7.x (Latest)',
+                            label: 'v7.3.2',
                             path: '7.3.2',
                         },
 

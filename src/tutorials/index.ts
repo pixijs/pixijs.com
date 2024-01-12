@@ -15,6 +15,12 @@ export type TutorialEntry = {
     steps: TutorialStep[];
 };
 
+export type TutorialCardData = {
+    title: string;
+    description: string;
+    thumbnail?: string;
+};
+
 // TODO: Use await import to dynamically load versioned content on demand instead?
 const versions: Record<string, Record<string, TutorialEntry>> = {
     'v7.0.0': v7x,
@@ -40,4 +46,20 @@ export function getTutorialEntry(version: string, key: string)
     const bestVersion = getBestVersion(version);
 
     return bestVersion?.[key];
+}
+
+export function getTutorialCardsData(version: string)
+{
+    const bestVersion = getBestVersion(version);
+    const list: TutorialCardData[] = [];
+
+    for (const key in bestVersion)
+    {
+        const tutorial = bestVersion[key];
+        const { description, thumbnail } = tutorial;
+
+        list.push({ title: key, description, thumbnail });
+    }
+
+    return list;
 }
