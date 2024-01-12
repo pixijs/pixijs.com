@@ -1,6 +1,6 @@
 # Adding a Background
 
-Now lets fill the pond with some rocks and pebbles, shall we?
+Now lets fill the pond with some rocks and pebbles, shall we? Let's work inside the already prepared `addBackground` function.
 
 ## Create and Setup Background Sprite
 

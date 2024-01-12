@@ -5,6 +5,7 @@ import completedCode2 from '!!raw-loader!./step2-completed-code';
 import code3 from '!!raw-loader!./step3-code';
 import completedCode3 from '!!raw-loader!./step3-completed-code';
 import code4 from '!!raw-loader!./step4-code';
+import completedCode4 from '!!raw-loader!./step4-completed-code';
 import type { TutorialStep } from '../..';
 import content1 from './step1-content.md';
 import content2 from './step2-content.md';
@@ -30,11 +31,12 @@ export const fishPondTutorialSteps: TutorialStep[] = [
         code: code3,
         completedCode: completedCode3,
     },
-    // {
-    //     header: 'Add Water Surface',
-    //     Content: content4,
-    //     code: code4,
-    // },
+    {
+        header: 'Adding Water Surface',
+        Content: content4,
+        code: code4,
+        completedCode: completedCode4,
+    },
     // {
     //     header: 'Add Displacement Effect',
     //     Content: content4,
