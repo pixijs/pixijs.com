@@ -6,7 +6,7 @@ Sprites are the simplest and most common renderable object in PixiJS.  They repr
 
 To create a Sprite, all you need is a Texture (check out the Texture guide).  Load a PNG's URL using the PIXI.Loader class, then call `PIXI.Sprite.from(url)` and you're all set.  As a convenience during prototyping, you can pass a non-loaded URL to `from()` and PixiJS will handle it, but your sprite will "pop in" after it loads if you don't pre-load your textures.
 
-Check out the [sprite example code](/examples/sprite/basic).
+Check out the [sprite example code](../../examples/sprite/basic).
 
 ## Using Sprites
 
