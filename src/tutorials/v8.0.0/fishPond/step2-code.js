@@ -8,7 +8,8 @@ const app = new Application();
 {
     await setup();
     await preload();
-    this.addBackground();
+
+    addBackground();
 })();
 
 async function setup()

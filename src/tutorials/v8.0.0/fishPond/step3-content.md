@@ -84,3 +84,5 @@ fishes.forEach((fish) =>
     }
 });
 ```
+
+They are beautiful aren't they! Next, let's add a water surface effect to make the pond feels more dynamic.

@@ -1,10 +1,13 @@
-import { Application, Assets, Container, Sprite } from 'pixi.js';
+import { Application, Assets, Container, Sprite, Texture, TilingSprite, DisplacementFilter } from 'pixi.js';
 
 // Create a PixiJS application.
 const app = new Application();
 
 // Store an array of fish sprites for animation.
 const fishes = [];
+
+// Reference to the water overlay.
+let overlay;
 
 // Asynchronous IIFE
 (async () =>
@@ -15,8 +18,17 @@ const fishes = [];
     addBackground();
     addFishes();
 
-    // Add the fish animation callback to the application's ticker.
-    app.ticker.add(animateFishes);
+    addWaterOverlay();
+    animateWaterOverlay();
+
+    addDisplacementEffect();
+
+    // Add the animation callbacks to the application's ticker.
+    app.ticker.add((time) =>
+    {
+        animateFishes(time);
+        animateWaterOverlay(time);
+    });
 })();
 
 async function setup()
@@ -165,4 +177,35 @@ function animateFishes(time)
             fish.y -= boundHeight;
         }
     });
+}
+
+function addWaterOverlay()
+{
+    // Create a water texture object.
+    const texture = Texture.from('overlay');
+
+    // Create a tiling sprite with the water texture and specify the dimensions.
+    overlay = new TilingSprite({
+        texture,
+        width: app.screen.width,
+        height: app.screen.height,
+    });
+
+    // Add the overlay to the stage.
+    app.stage.addChild(overlay);
+}
+
+function animateWaterOverlay(time)
+{
+    // Extract the delta time from the Ticker object.
+    const delta = time.deltaTime;
+
+    // Animate the overlay.
+    overlay.tilePosition.x -= delta;
+    overlay.tilePosition.y -= delta;
+}
+
+function addDisplacementEffect()
+{
+    /** -- INSERT CODE HERE -- */
 }

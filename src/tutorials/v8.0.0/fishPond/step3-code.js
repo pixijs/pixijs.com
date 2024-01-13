@@ -3,16 +3,20 @@ import { Application, Assets, Sprite, Container } from 'pixi.js';
 // Create a PixiJS application.
 const app = new Application();
 
+// Store an array of fish sprites for animation.
+const fishes = [];
+
 // Asynchronous IIFE
 (async () =>
 {
     await setup();
     await preload();
-    this.addBackground();
-    this.addFishes();
+
+    addBackground();
+    addFishes();
 
     // Add the fish animation callback to the application's ticker.
-    app.ticker.add(this.animateFishes);
+    app.ticker.add(animateFishes);
 })();
 
 async function setup()
@@ -61,10 +65,10 @@ function addBackground()
     }
     else
     {
-    /**
-     * If the preview is square or portrait, then fill the height of the screen instead
-     * and apply the scaling to the horizontal scale accordingly.
-     */
+        /**
+         * If the preview is square or portrait, then fill the height of the screen instead
+         * and apply the scaling to the horizontal scale accordingly.
+         */
         background.height = app.screen.height;
         background.scale.x = background.scale.y;
     }
