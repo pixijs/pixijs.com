@@ -91,7 +91,7 @@ What we're doing here is adding a JavaScript code block, and in that block creat
 
 When the PIXI.Application class creates the renderer, it builds a Canvas element that it will render *to*.  In order to see what we draw with PixiJS, we need to add this Canvas element to the web page's DOM.  Append the following line to your page's script block:
 
-```JavaScript
+```javascript
   document.body.appendChild(app.view);
 ```
 
@@ -105,7 +105,7 @@ There are a number of ways to draw images in PixiJS, but the simplest is by usin
 
 Before PixiJS can render an image, it needs to be loaded.  Just like in any web page, image loading happens asynchronously.  We'll talk a lot more about resource loading in later guides.  For now, we can use a helper method on the PIXI.Sprite class to handle the image loading for us:
 
-```JavaScript
+```javascript
   // Magically load the PNG asynchronously
   let sprite = PIXI.Sprite.from('sample.png');
 ```
@@ -116,7 +116,7 @@ Before PixiJS can render an image, it needs to be loaded.  Just like in any web 
 
 Finally, we need to add our new sprite to the stage.  The stage is simply a [Container](https://pixijs.download/release/docs/PIXI.Container.html) that is the root of the scene graph.  Every child of the stage container will be rendered every frame.  By adding our sprite to the stage, we tell PixiJS's renderer we want to draw it.
 
-```JavaScript
+```javascript
   app.stage.addChild(sprite);
 ```
 

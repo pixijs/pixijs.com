@@ -59,7 +59,7 @@ PixiJS supports the following event types:
 
 Any DisplayObject-derived object (Sprite, Container, etc.) can become interactive simply by setting its `eventMode` property to any of the eventModes listed above. Doing so will cause the object to emit interaction events that can be responded to in order to drive your project's behavior.
 
-Check out the [interaction example code](/examples/events/click).
+Check out the [interaction example code](../../examples/events/click).
 
 To respond to clicks and taps, bind to the events fired on the object, like so:
 

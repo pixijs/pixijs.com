@@ -72,4 +72,4 @@ RenderTexture: A more advanced (but very powerful!) feature is to build a Textur
 
 Each of these texture sources has caveats and nuances that we can't cover in this guide, but they should give you a feeling for the power of PixiJS's texture system. <!--TODO: link to advanced textures guide-->
 
-Check out the [render texture example code](/examples/textures/render-texture-basic).
+Check out the [render texture example code](../../examples/textures/render-texture-basic).
