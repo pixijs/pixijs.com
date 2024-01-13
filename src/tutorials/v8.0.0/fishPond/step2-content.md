@@ -6,7 +6,7 @@ Now lets fill the pond with some rocks and pebbles, shall we? Let's work inside 
 
 We already preloaded the pond background asset as the alias 'background' so we can just simply create a sprite
 
-```JavaScript
+```javascript
 const background = Sprite.from('background');
 
 background.anchor.set(0.5);
@@ -16,15 +16,17 @@ background.anchor.set(0.5);
 
 Now we want the background sprite to fill the whole screen without any distortion so we will compare and fill the longer axis and then apply the same scale on the smaller axis for a uniform scaling.
 
+_(Note: x1.2 scaling to the dimension is to overflow the screen slightly to compensate for the last's step distortion from post-processing)_
+
 ```javascript
 if (app.screen.width > app.screen.height)
 {
-    background.width = app.screen.width;
+    background.width = app.screen.width * 1.2;
     background.scale.y = background.scale.x;
 }
 else
 {
-    background.height = app.screen.height;
+    background.height = app.screen.height  * 1.2;
     background.scale.x = background.scale.y;
 }
 ```

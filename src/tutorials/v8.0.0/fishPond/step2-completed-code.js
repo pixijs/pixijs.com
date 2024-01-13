@@ -25,14 +25,14 @@ async function preload()
 {
     // Create an array of asset data to load.
     const assets = [
-        { alias: 'background', src: 'https://pixijs.com/assets/tutorials/pond_background.jpg' },
-        { alias: 'fish1', src: 'https://pixijs.com/assets/tutorials/fish1.png' },
-        { alias: 'fish2', src: 'https://pixijs.com/assets/tutorials/fish2.png' },
-        { alias: 'fish3', src: 'https://pixijs.com/assets/tutorials/fish3.png' },
-        { alias: 'fish4', src: 'https://pixijs.com/assets/tutorials/fish4.png' },
-        { alias: 'fish5', src: 'https://pixijs.com/assets/tutorials/fish5.png' },
-        { alias: 'overlay', src: 'https://pixijs.com/assets/tutorials/wave_overlay.png' },
-        { alias: 'displacement', src: 'https://pixijs.com/assets/tutorials/displacemnet_map.png' },
+        { alias: 'background', src: 'https://pixijs.com/assets/tutorials/fish-pond/pond_background.jpg' },
+        { alias: 'fish1', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish1.png' },
+        { alias: 'fish2', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish2.png' },
+        { alias: 'fish3', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish3.png' },
+        { alias: 'fish4', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish4.png' },
+        { alias: 'fish5', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish5.png' },
+        { alias: 'overlay', src: 'https://pixijs.com/assets/tutorials/fish-pond/wave_overlay.png' },
+        { alias: 'displacement', src: 'https://pixijs.com/assets/tutorials/fish-pond/displacement_map.png' },
     ];
 
     // Load the assets defined above.
@@ -53,7 +53,7 @@ function addBackground()
      */
     if (app.screen.width > app.screen.height)
     {
-        background.width = app.screen.width;
+        background.width = app.screen.width * 1.2;
         background.scale.y = background.scale.x;
     }
     else
@@ -62,7 +62,7 @@ function addBackground()
          * If the preview is square or portrait, then fill the height of the screen instead
          * and apply the scaling to the horizontal scale accordingly.
          */
-        background.height = app.screen.height;
+        background.height = app.screen.height * 1.2;
         background.scale.x = background.scale.y;
     }
 

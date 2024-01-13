@@ -35,10 +35,10 @@ for (let i = 0; i < fishCount; i++)
 
     fish.x = Math.random() * app.screen.width;
     fish.y = Math.random() * app.screen.height;
-    fish.scale.set(0.8 + Math.random() * 0.3);
+    fish.scale.set(0.5 + Math.random() * 0.2);
 
-    this.fishContainer.addChild(fish);
-    this.fishes.push(fish);
+    fishContainer.addChild(fish);
+    fishes.push(fish);
 }
 ```
 
