@@ -71,6 +71,19 @@ recast.visit(ast, {
                             );
                         }
 
+                        versionProps.push(
+                            recast.types.builders.property(
+                                'init',
+                                recast.types.builders.identifier('banner'),
+                                recast.types.builders.literal('none'),
+                            ),
+                            recast.types.builders.property(
+                                'init',
+                                recast.types.builders.identifier('badge'),
+                                recast.types.builders.literal(false),
+                            ),
+                        );
+
                         return recast.types.builders.property(
                             'init',
                             recast.types.builders.identifier(version.isCurrent ? 'current' : `'${version.version}'`),
