@@ -3,11 +3,11 @@ import type { IVersion } from '@site/src/components/Playground/PixiPlayground/us
 
 import styles from './index.module.scss';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import { getExampleEntry } from '@site/src/examples/v7.3.2';
+import { getExampleEntry } from '@site/src/examples';
 
-export default function Example({ id, version }: { id: string; version: IVersion })
+export default function Example({ id, pixiVersion }: { id: string; pixiVersion: IVersion })
 {
-    const entry = getExampleEntry(id);
+    const entry = getExampleEntry(pixiVersion.version, id);
     const source = (entry?.source ?? entry) as string;
 
     return (
@@ -16,8 +16,8 @@ export default function Example({ id, version }: { id: string; version: IVersion
                 {() => (
                     <PixiPlayground
                         code={source}
-                        pixiVersion={version.npm}
-                        isPixiDevVersion={version.dev}
+                        pixiVersion={pixiVersion.version}
+                        isPixiDevVersion={pixiVersion.dev}
                         isPixiWebWorkerVersion={entry?.usesWebWorkerLibrary}
                         mode="example"
                     />

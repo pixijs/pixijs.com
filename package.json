@@ -3,10 +3,10 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "prebuild": "npm run generate-content",
+        "prebuild": "npm run update-pixi-version-configs && npm run generate-content",
         "build": "docusaurus build",
         "clear": "docusaurus clear",
-        "predeploy": "npm run generate-content",
+        "predeploy": "npm run update-pixi-version-configs && npm run generate-content",
         "deploy": "docusaurus deploy",
         "docusaurus": "docusaurus",
         "lint": "eslint . --ext .js,.mjs,.jsx,.ts,.tsx --max-warnings=0",
@@ -24,6 +24,11 @@
         "generate-example-docs": "node ./scripts/generate-example-docs.js",
         "generate-tutorial-docs": "node ./scripts/generate-tutorial-docs.js",
         "generate-pixi-version-config": "node ./scripts/generate-pixi-version-config.js",
+        "create-docs-version-snapshot": "npm run generate-content && node ./scripts/create-docs-version-snapshot.js",
+        "remove-docs-version-snapshot": "node ./scripts/remove-docs-version-snapshot.js",
+        "switch-snapshot-pixi-version-config": "node ./scripts/switch-snapshot-pixi-version-config.js",
+        "update-global-version-configs": "node ./scripts/update-global-version-configs.js",
+        "update-pixi-version-configs": "node ./scripts/update-pixi-version-configs.js",
         "prepare": "husky install"
     },
     "husky": {
@@ -64,7 +69,6 @@
         "classnames": "^2.3.2",
         "clsx": "^1.2.1",
         "docusaurus-plugin-sass": "^0.2.3",
-        "inquirer": "^8.2.6",
         "pixi.js": "^7.0.4",
         "prism-react-renderer": "^1.3.5",
         "ramda": "^0.28.0",
@@ -89,8 +93,11 @@
         "eslint-plugin-react-hooks": "^4.6.0",
         "glob": "^10.3.10",
         "husky": "^8.0.0",
+        "inquirer": "^8.2.6",
         "lint-staged": "^13.2.0",
         "prettier": "^2.8.4",
+        "recast": "^0.23.4",
+        "semver": "^7.5.4",
         "typescript": "^4.9.4"
     },
     "engines": {
