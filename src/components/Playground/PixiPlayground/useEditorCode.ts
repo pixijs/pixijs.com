@@ -1,25 +1,28 @@
 import { useCallback, useMemo } from 'react';
-import type { ExampleSourceEntry } from '@site/src/examples/v7.3.2';
-import { getExampleOptions, getExampleEntry } from '@site/src/examples/v7.3.2';
 import type { OptionGroup } from '@site/src/components/Select';
 import type { SetURLStateType } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
+import type { ExampleSourceEntry } from '@site/src/examples';
+import { getExampleEntry, getExampleOptions } from '@site/src/examples';
+import type { IVersion } from './usePixiVersions';
 
 export const defaultExampleId = 'sprite.basic';
-const defaultExampleOptions = getExampleOptions();
 
 type UseCodeExamplesParams = {
     urlSourceCode: string | undefined;
     selectedOptionId: string;
     setURLState: SetURLStateType;
+    pixiVersion: IVersion;
 };
 
-export const useCodeExamples = ({ urlSourceCode, selectedOptionId, setURLState }: UseCodeExamplesParams) =>
+export const useCodeExamples = ({ urlSourceCode, selectedOptionId, setURLState, pixiVersion }: UseCodeExamplesParams) =>
 {
+    const version = pixiVersion.version;
+    const defaultExampleOptions = getExampleOptions(version);
     const hasUrlHashedCode = Boolean(urlSourceCode);
 
     const exampleEntry = useMemo<ExampleSourceEntry | undefined>(
-        () => getExampleEntry(selectedOptionId),
-        [selectedOptionId],
+        () => getExampleEntry(version, selectedOptionId),
+        [version, selectedOptionId],
     );
     const { source: sourceCode, usesWebWorkerLibrary } = useMemo<Omit<ExampleSourceEntry, 'hide'>>(
         () =>
@@ -50,7 +53,7 @@ export const useCodeExamples = ({ urlSourceCode, selectedOptionId, setURLState }
                         },
                     ],
                 })),
-        [hasUrlHashedCode],
+        [defaultExampleOptions, hasUrlHashedCode],
     );
 
     const handleOptionSelected = useCallback(

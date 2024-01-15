@@ -7,11 +7,11 @@ import { usePlaygroundURLState } from '@site/src/components/Playground/PixiPlayg
 import styles from './index.module.scss';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
-export default function Playground({ version }: { version: IVersion })
+export default function Playground({ pixiVersion }: { pixiVersion: IVersion })
 {
     const [urlState, setURLState] = usePlaygroundURLState({
         defaultExampleId,
-        defaultPixiVersion: version.version,
+        defaultPixiVersion: pixiVersion.version,
     });
     const { source: urlSourceCode, exampleId: selectedOptionId } = urlState;
 
@@ -20,6 +20,7 @@ export default function Playground({ version }: { version: IVersion })
             urlSourceCode,
             selectedOptionId,
             setURLState,
+            pixiVersion,
         });
 
     return (
@@ -38,8 +39,8 @@ export default function Playground({ version }: { version: IVersion })
                         </div>
                         <PixiPlayground
                             code={sourceCode}
-                            pixiVersion={version.npm}
-                            isPixiDevVersion={version.dev}
+                            pixiVersion={pixiVersion.version}
+                            isPixiDevVersion={pixiVersion.dev}
                             isPixiWebWorkerVersion={usesWebWorkerLibrary}
                             onCodeChanged={handleEditorCodeChanged}
                             mode="fullscreen"

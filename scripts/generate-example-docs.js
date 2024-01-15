@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const { join, resolve, dirname } = require('path');
-const { mkdirSync, readFileSync, rmSync, writeFileSync } = require('fs');
+const { mkdirSync, readFileSync, rmSync, writeFileSync, readdirSync } = require('fs');
+const { valid, lte, rcompare, prerelease, major, minor, patch } = require('semver');
 const glob = require('glob');
 
 const ROOT = resolve(__dirname, '..');
@@ -21,6 +22,12 @@ async function go()
 {
     // Find all pixi-version.json files
     const versionFiles = glob.sync(`${ROOT}/**/pixi-version.json`);
+    const EXAMPLES_PATH = resolve(ROOT, 'src', 'examples');
+
+    // Read the directories in the examples directory
+    const exampleDirectories = readdirSync(EXAMPLES_PATH, { withFileTypes: true })
+        .filter((dirent) => dirent.isDirectory())
+        .map((dirent) => dirent.name);
 
     // Perform the script on all the directories that they are in
     for (const versionFile of versionFiles)
@@ -29,7 +36,19 @@ async function go()
         const EXAMPLES_MD_PATH = resolve(DOCS_PATH, 'examples');
         const pixiVersion = require(versionFile);
         const VERSION = pixiVersion.version;
-        const EXAMPLES_JS_PATH = resolve(ROOT, 'src', 'examples', `v${VERSION}`);
+        const isPrerelease = prerelease(`v${VERSION}`);
+        const versionToCompare = isPrerelease ? `v${major(VERSION)}.${minor(VERSION)}.${patch(VERSION)}` : `v${VERSION}`;
+
+        // Filter and sort the directories to find the best match
+        const bestMatch = exampleDirectories
+            // eslint-disable-next-line no-loop-func
+            .filter((name) => valid(name) && lte(name, versionToCompare))
+            .sort((a, b) => rcompare(a, b))[0];
+
+        console.log(`Generating examples for v${VERSION} using the ${bestMatch} source`);
+
+        const EXAMPLES_JS_PATH = resolve(EXAMPLES_PATH, bestMatch);
+
         const examplesData = require(`${EXAMPLES_JS_PATH}/examplesData.json`);
 
         const directories = Object.keys(examplesData);
@@ -110,7 +129,7 @@ async function go()
                     '',
                     `# ${exampleTitle}`,
                     '',
-                    `<Example id="${exampleKey}" version={version}/>`,
+                    `<Example id="${exampleKey}" pixiVersion={version}/>`,
                     '',
                 ].join('\n');
 

@@ -65,6 +65,8 @@ type UseDependenciesParams = {
     pixiVersion: string;
 };
 
+const isPreV8 = (pixiVersion: string) => Number(pixiVersion.split('.')[0]) < 8;
+
 const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion }: UseDependenciesParams) =>
     useMemo(() =>
     {
@@ -74,7 +76,7 @@ const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion
         const packages = [pixiPackageName];
 
         // Add these packages if we're using a version of pixi that doesn't have them built in, ie. < v8
-        if (Number(pixiVersion.split('.')[0]) < 8)
+        if (isPreV8(pixiVersion))
         {
             packages.push('@pixi/graphics-extras', '@pixi/math-extras');
         }
@@ -112,12 +114,12 @@ export const useSandpackConfiguration = ({
     // could flip between examples easily, investigate why it bugs out during editing
     const key = `${dependenciesKey}-${code}`;
 
-    const customSetup = {
+    const customSetup: Record<string, any> = {
         entry: 'index.html',
         dependencies,
         devDependencies: {
-            '@babel/core': '^7.21.3',
             'parcel-bundler': '^1.6.1',
+            '@babel/core': '^7.21.3',
         },
     };
 
