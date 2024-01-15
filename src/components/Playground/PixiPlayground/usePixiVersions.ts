@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import versions from '@site/pixi-versions.json';
 import type { SetURLStateType } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
+import { gt } from 'semver';
 
 export type IVersion = {
     version: string;
@@ -24,7 +25,15 @@ const propEq
         (object: Record<string, any>): boolean =>
             object[prop] === value;
 
-export const latestVersion = ((versions as IVersion[]).find(propEq('latest', true)) as IVersion).version;
+export const latestVersion = versions.reduce((latest, current) =>
+{
+    if (gt(current.version, latest.version))
+    {
+        return current;
+    }
+
+    return latest;
+}, versions[0]).version;
 
 type UsePixiVersionsParams = {
     selectedVersionId: string;
