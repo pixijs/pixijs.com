@@ -91,8 +91,6 @@ export default function NavbarContent()
         else navItems.push(item);
     });
 
-    console.log(navbar);
-
     return (
         <NavbarContentLayout
             left={
