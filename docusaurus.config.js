@@ -51,7 +51,7 @@ const config = {
                         },
 
                         current: {
-                            label: 'prerelease-v8',
+                            label: 'v8.x',
                             banner: 'none',
                             badge: false,
                         },
