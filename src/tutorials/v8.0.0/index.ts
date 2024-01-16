@@ -1,3 +1,4 @@
+import { chooChooTrainTutorialSteps } from './chooChooTrain';
 import { fishPondTutorialSteps } from './fishPond';
 import { gettingStartedTutorialSteps } from './gettingStarted';
 
@@ -11,5 +12,10 @@ export default {
         description: 'Let\'s create a lively fish pond!',
         thumbnail: 'thumb_fish_pond.png',
         steps: fishPondTutorialSteps,
+    },
+    chooChooTrain: {
+        description: 'Onboard the graphical Choo Choo Train!',
+        // thumbnail: 'thumb_.png',
+        steps: chooChooTrainTutorialSteps,
     },
 };
