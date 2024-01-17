@@ -1,22 +1,22 @@
 [
   {
     "versionLabel": "v7.x (Latest)",
-    "version": "7.3.2",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v7.3.2",
-    "build": "https://pixijs.download/v7.3.2/pixi.min.js",
-    "docs": "https://pixijs.download/v7.3.2/docs/index.html",
-    "npm": "7.3.2",
+    "version": "7.3.3",
+    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v7.3.3",
+    "build": "https://pixijs.download/v7.3.3/pixi.min.js",
+    "docs": "https://pixijs.download/v7.3.3/docs/index.html",
+    "npm": "7.3.3",
     "prerelease": false,
     "latest": true,
     "isCurrent": false
   },
   {
-    "versionLabel": "prerelease-v8",
-    "version": "8.0.0-rc.3",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v8.0.0-rc.3",
-    "build": "https://pixijs.download/v8.0.0-rc.3/pixi.min.js",
-    "docs": "https://pixijs.download/v8.0.0-rc.3/docs/index.html",
-    "npm": "8.0.0-rc.3",
+    "versionLabel": "v8.x",
+    "version": "8.0.0-rc.4",
+    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v8.0.0-rc.4",
+    "build": "https://pixijs.download/v8.0.0-rc.4/pixi.min.js",
+    "docs": "https://pixijs.download/v8.0.0-rc.4/docs/index.html",
+    "npm": "8.0.0-rc.4",
     "prerelease": true,
     "latest": false,
     "isCurrent": true

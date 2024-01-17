@@ -1,9 +1,14 @@
-const { writeFileSync, readFileSync } = require('fs');
+const { writeFileSync, readFileSync, existsSync } = require('fs');
 const glob = require('glob');
 const recast = require('recast');
-const { resolve } = require('path');
+const { join, resolve } = require('path');
 
 const ROOT = resolve(__dirname, '..');
+
+function getGenericVersion(version)
+{
+    return version.replace(/(\d+)(\.\d+)?(\.\d+)?(-.*)?/, '$1.x');
+}
 
 console.log('Update docusaurus version config and pixi-versions.json...\n');
 
@@ -52,6 +57,16 @@ recast.visit(ast, {
                 {
                     prop.value.properties = versions.map((version) =>
                     {
+                        /**
+                         * Currently, the only way to know if a snapshot is of a generic version
+                         * is to check if the versioned_docs directory exists.
+                         * If it doesn't exist, then it's a generic snapshot. (eg. 7.x)
+                         * Otherwise, it's a specific snapshot. (eg. 7.3.2)
+                         */
+                        const versionedDocsDir = join(ROOT, `versioned_docs/version-${version}`);
+                        const isGenericSnapshot = !existsSync(versionedDocsDir);
+                        const key = isGenericSnapshot ? getGenericVersion(version.version) : version.version;
+
                         const versionProps = [
                             recast.types.builders.property(
                                 'init',
@@ -66,14 +81,27 @@ recast.visit(ast, {
                                 recast.types.builders.property(
                                     'init',
                                     recast.types.builders.identifier('path'),
-                                    recast.types.builders.literal(version.version),
+                                    recast.types.builders.literal(key),
                                 ),
                             );
                         }
 
+                        versionProps.push(
+                            recast.types.builders.property(
+                                'init',
+                                recast.types.builders.identifier('banner'),
+                                recast.types.builders.literal('none'),
+                            ),
+                            recast.types.builders.property(
+                                'init',
+                                recast.types.builders.identifier('badge'),
+                                recast.types.builders.literal(false),
+                            ),
+                        );
+
                         return recast.types.builders.property(
                             'init',
-                            recast.types.builders.identifier(version.isCurrent ? 'current' : `'${version.version}'`),
+                            recast.types.builders.identifier(version.isCurrent ? 'current' : `'${key}'`),
                             recast.types.builders.objectExpression(versionProps),
                         );
                     });

@@ -14,9 +14,9 @@ function Footer()
     const { pathname } = useLocation();
 
     // List the paths where you don't want to show the footer
-    const noFooterPaths = ['/tutorials', '/playground'];
+    const noFooterPaths = ['examples', 'tutorials', 'playground'];
 
-    if (!footer || noFooterPaths.includes(pathname))
+    if (!footer || noFooterPaths.some((path) => pathname.includes(path)))
     {
         return null;
     }
