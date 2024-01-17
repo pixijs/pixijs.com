@@ -19,21 +19,9 @@ type PlaygroundProps = {
 
 function Playground({ mode, onCodeChanged }: PlaygroundProps)
 {
-    const { code, updateCode } = useActiveCode();
     const { sandpack } = useSandpack();
     const [showOutput, setShowOutput] = useState(false);
     const { activeFile, bundlerState } = sandpack;
-
-    const handleCodeChange: CodeChangeCallbackType = useCallback(
-        (nextCode) =>
-        {
-            const nextCodeString = nextCode ?? '';
-
-            updateCode(nextCodeString);
-            onCodeChanged?.(nextCodeString);
-        },
-        [onCodeChanged, updateCode],
-    );
 
     const handleToggle = useCallback(() =>
     {
@@ -44,7 +32,7 @@ function Playground({ mode, onCodeChanged }: PlaygroundProps)
     return (
         <SandpackLayout className={classNames(styles[mode], showOutput && styles.showOutput)}>
             <div className={styles.editorWrapper}>
-                <MonacoEditor key={activeFile} code={code} onChange={handleCodeChange} />
+                <MonacoEditor key={activeFile} onChange={onCodeChanged} />
             </div>
 
             <div className={styles.previewWrapper}>
@@ -59,6 +47,7 @@ function Playground({ mode, onCodeChanged }: PlaygroundProps)
 
 type PixiPlaygroundProps = {
     code: string;
+    extraFiles?: Record<string, string>;
     isPixiWebWorkerVersion?: boolean;
     isPixiDevVersion?: boolean;
     pixiVersion?: string;
@@ -68,7 +57,7 @@ type PixiPlaygroundProps = {
 
 export default function PixiPlayground({
     code,
-    onCodeChanged,
+    extraFiles,
     isPixiWebWorkerVersion = false,
     isPixiDevVersion = false,
     pixiVersion = latestVersion,
@@ -79,6 +68,7 @@ export default function PixiPlayground({
 
     const { key, files, customSetup } = useSandpackConfiguration({
         code,
+        extraFiles,
         isPixiDevVersion,
         isPixiWebWorkerVersion,
         pixiVersion,
@@ -99,9 +89,11 @@ export default function PixiPlayground({
                     'sp-wrapper': mode === 'tutorial' ? styles.tpWrapper : styles.spWrapper,
                     'sp-layout': styles.spLayout,
                 },
+                // Only show .js file tabs
+                visibleFiles: Object.keys(files).filter((fileName) => fileName.endsWith('.js')) as any[],
             }}
         >
-            <Playground mode={mode} onCodeChanged={onCodeChanged} />
+            <Playground mode={mode} />
         </SandpackProvider>
     );
 }
