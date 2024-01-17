@@ -1,4 +1,4 @@
-import { Application, Assets, Geometry, Shader, Mesh } from 'js';
+import { Application, Assets, Geometry, Mesh, Shader } from 'pixi.js';
 
 (async () =>
 {
@@ -6,112 +6,101 @@ import { Application, Assets, Geometry, Shader, Mesh } from 'js';
     const app = new Application();
 
     // Initialize the application
-    await app.init({ resizeTo: window });
+    await app.init({
+        resizeTo: window,
+        preference: 'webgl',
+    });
 
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
 
-    // Load the texture
-    const texture = await Assets.load('https://pixijs.com/assets/bg_scene_rotate.jpg');
+    const quadGeometry = new Geometry({
+        attributes: {
+            aPosition: [
+                -100,
+                -100, // x, y
+                100,
+                -100, // x, y
+                100,
+                100, // x, y,
+                -100,
+                100, // x, y,
+            ],
+            aUV: [0, 0, 1, 0, 1, 1, 0, 1],
+        },
+        indexBuffer: [0, 1, 2, 0, 2, 3],
+    });
 
     const geometry = new Geometry({
         attributes: {
-            aVertexPosition: [-100, -100, 100, -100, 100, 100],
-            aUvs: [0, 0, 1, 0, 1, 1],
+            aPosition: [
+                -100,
+                -100, // x, y
+                100,
+                -100, // x, y
+                100,
+                100, // x, y,
+            ],
+            aUV: [0, 0, 1, 0, 1, 1],
         },
     });
 
-    const shader = Shader.from(
-        `
+    const shader = Shader.from({
+        gl: {
+            vertex: `
+                in vec2 aPosition;
+                in vec2 aUV;
+                
+                out vec2 vUV;
 
-    precision mediump float;
+                uniform mat3 projectionMatrix;
+                uniform mat3 worldTransformMatrix;
+        
+                uniform mat3 uTransformMatrix;
+                
+                
+                void main() {
+        
+                    mat3 mvp = projectionMatrix * worldTransformMatrix * uTransformMatrix;
+                    gl_Position = vec4((mvp * vec3(aPosition, 1.0)).xy, 0.0, 1.0);
 
-    attribute vec2 aVertexPosition;
-    attribute vec2 aUvs;
+                    vUV = aUV;
+                }
+            `,
+            fragment: ` 
+                in vec2 vUV;
 
-    uniform mat3 translationMatrix;
-    uniform mat3 projectionMatrix;
-
-    varying vec2 vUvs;
-
-    void main() {
-
-        vUvs = aUvs;
-        gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
-
-    }`,
-
-        `precision mediump float;
-
-    varying vec2 vUvs;
-
-    uniform sampler2D uSampler2;
-
-    void main() {
-
-        gl_FragColor = texture2D(uSampler2, vUvs);
-    }
-
-`,
-        {
-            uSampler2: texture,
+                uniform sampler2D uTexture;
+            
+                void main() {
+                    gl_FragColor = texture2D(uTexture, vUV).bgra;
+                }
+            `,
         },
-    );
-
-    const shader2 = Shader.from(
-        `
-
-    precision mediump float;
-
-    attribute vec2 aVertexPosition;
-    attribute vec2 aUvs;
-
-    uniform mat3 translationMatrix;
-    uniform mat3 projectionMatrix;
-
-    varying vec2 vUvs;
-
-    void main() {
-
-        vUvs = aUvs;
-        gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
-
-    }`,
-
-        `precision mediump float;
-
-    varying vec2 vUvs;
-
-    uniform sampler2D uSampler2;
-
-    void main() {
-
-        gl_FragColor = texture2D(uSampler2, vUvs);
-        gl_FragColor.r += (abs(sin(gl_FragCoord.x * 0.06)) * 0.5) * 2.;
-        gl_FragColor.g += (abs(cos(gl_FragCoord.y * 0.06)) * 0.5) * 2.;
-    }
-
-`,
-        {
-            uSampler2: texture,
+        resources: {
+            uTexture: (await Assets.load('https://pixijs.com/assets/bg_rotate.jpg')).source,
         },
-    );
+    });
 
-    const triangle = new Mesh(geometry, shader);
+    const quad = new Mesh({
+        geometry: quadGeometry,
+        shader,
+    });
 
-    const triangle2 = new Mesh(geometry, shader2);
+    const triangle = new Mesh({
+        geometry,
+        shader,
+    });
 
+    quad.position.set(400, 300);
     triangle.position.set(400, 300);
     triangle.scale.set(2);
 
-    triangle2.position.set(500, 400);
-    triangle2.scale.set(3);
+    app.stage.addChild(quad, triangle);
 
-    app.stage.addChild(triangle2, triangle);
-
-    app.ticker.add((delta) =>
+    app.ticker.add(() =>
     {
         triangle.rotation += 0.01;
-        triangle2.rotation -= 0.005;
+        quad.rotation -= 0.01;
     });
 })();

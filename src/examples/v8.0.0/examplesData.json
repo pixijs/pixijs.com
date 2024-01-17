@@ -74,13 +74,11 @@
     "triangle",
     "triangleColor",
     "triangleTextured",
-    "uniforms",
     "sharingGeometry",
     "sharedShader",
-    "mergingGeometry",
     "instancedGeometry",
     "shaderToyMesh",
-    "multiPassShaderGeneratedMesh"
+    "multipassMesh"
   ],
   "textures": [
     "textureRotate",

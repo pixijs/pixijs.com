@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, Filter } from 'js';
+import { Application, Assets, Sprite, Filter, GlProgram } from 'pixi.js';
 
 (async () =>
 {
@@ -6,7 +6,11 @@ import { Application, Assets, Sprite, Filter } from 'js';
     const app = new Application();
 
     // Initialize the application
-    await app.init({ resizeTo: window });
+    await app.init({
+        resizeTo: window,
+        hello: true,
+        preference: 'webgl',
+    });
 
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
@@ -21,38 +25,77 @@ import { Application, Assets, Sprite, Filter } from 'js';
     background.height = app.screen.height;
     app.stage.addChild(background);
 
-    // Stop application wait for load to finish
-    app.stop();
+    // Create the new filter, arguments: (vertexShader, framentSource)
+    const filter = new Filter({
+        glProgram: new GlProgram({
+            fragment: `
+            in vec2 vTextureCoord;
+            in vec4 vColor;
+            
+            uniform sampler2D uTexture;
+            uniform float uTime;
+            
+            void main(void)
+            {
+               vec2 uvs = vTextureCoord.xy;
+            
+               vec4 fg = texture2D(uTexture, vTextureCoord);
+            
+            
+               fg.r = uvs.y + sin(uTime);
+            
+   
+               gl_FragColor = fg;
+            
+            }`,
+            vertex: `
+            in vec2 aPosition;
+            out vec2 vTextureCoord;
+   
+            uniform vec4 uInputSize;
+            uniform vec4 uOutputFrame;
+            uniform vec4 uOutputTexture;
+   
+            vec4 filterVertexPosition( void )
+            {
+                vec2 position = aPosition * uOutputFrame.zw + uOutputFrame.xy;
+                
+                position.x = position.x * (2.0 / uOutputTexture.x) - 1.0;
+                position.y = position.y * (2.0*uOutputTexture.z / uOutputTexture.y) - uOutputTexture.z;
+   
+                return vec4(position, 0.0, 1.0);
+            }
+   
+            vec2 filterTextureCoord( void )
+            {
+                return aPosition * (uOutputFrame.zw * uInputSize.zw);
+            }
+   
+            void main(void)
+            {
+                gl_Position = filterVertexPosition();
+                vTextureCoord = filterTextureCoord();
+            }
+            `,
+        }),
+        resources: {
+            timeUniforms: {
+                uTime: { value: 0.0, type: 'f32' },
+            },
+        },
+    });
 
-    fetch('https://pixijs.com/assets/pixi-filters/shader.frag')
-        .then((res) => res.text())
-        .then(onLoaded);
+    // === WARNING ===
+    // specify uniforms in filter constructor
+    // or set them BEFORE first use
+    // filter.uniforms.customUniform = 0.0
 
-    let filter;
-
-    // Handle the load completed
-    function onLoaded(data)
-    {
-        // Create the new filter, arguments: (vertexShader, framentSource)
-        filter = new Filter(null, data, {
-            customUniform: 0.0,
-        });
-
-        // === WARNING ===
-        // specify uniforms in filter constructor
-        // or set them BEFORE first use
-        // filter.uniforms.customUniform = 0.0
-
-        // Add the filter
-        background.filters = [filter];
-
-        // Resume application update
-        app.start();
-    }
+    // Add the filter
+    background.filters = [filter];
 
     // Animate the filter
-    app.ticker.add((delta) =>
+    app.ticker.add((ticker) =>
     {
-        filter.uniforms.customUniform += 0.04 * delta;
+        filter.resources.timeUniforms.uniforms.uTime += 0.04 * ticker.deltaTime;
     });
 })();

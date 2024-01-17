@@ -1,4 +1,4 @@
-import { Application, Shader, Mesh, Geometry } from 'pixi.js';
+import { Application, Geometry, Mesh, Shader } from 'pixi.js';
 
 (async () =>
 {
@@ -6,50 +6,114 @@ import { Application, Shader, Mesh, Geometry } from 'pixi.js';
     const app = new Application();
 
     // Initialize the application
-    await app.init({ resizeTo: window });
+    await app.init({
+        resizeTo: window,
+        preference: 'webgpu',
+    });
 
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
 
     const geometry = new Geometry({
         attributes: {
-            aVertexPosition: [-100, -50, 100, -50, 0, 100],
+            aPosition: [-100, -50, 100, -50, 0, 100],
             aColor: [1, 0, 0, 0, 1, 0, 0, 0, 1],
         },
     });
 
-    const shader = Shader.from(
-        `
-    precision mediump float;
-    attribute vec2 aVertexPosition;
-    attribute vec3 aColor;
+    const gl = {
+        vertex: `
+            in vec2 aPosition;
+            in vec3 aColor;
+            
+            out vec3 vColor;
+            uniform mat3 projectionMatrix;
+            uniform mat3 worldTransformMatrix;
+    
+            uniform mat3 uTransformMatrix;
+            
+            
+            void main() {
+    
+                mat3 mvp = projectionMatrix * worldTransformMatrix * uTransformMatrix;
+                gl_Position = vec4((mvp * vec3(aPosition, 1.0)).xy, 0.0, 1.0);
 
-    uniform mat3 translationMatrix;
-    uniform mat3 projectionMatrix;
+                vColor = aColor;
+            }
+        `,
+        fragment: ` 
+            in vec3 vColor;
 
-    varying vec3 vColor;
+            void main() {
+                gl_FragColor = vec4(vColor, 1.0);
+            }
+        `,
+    };
 
-    void main() {
+    const gpuSource = /* wgsl */ `
+    struct GlobalUniforms {
+        projectionMatrix:mat3x3<f32>,
+        worldTransformMatrix:mat3x3<f32>,
+        worldColorAlpha: vec4<f32>,
+        uResolution: vec2<f32>,
+    }
 
-        vColor = aColor;
-        gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
+    struct LocalUniforms {
+        uTransformMatrix:mat3x3<f32>,
+        uColor:vec4<f32>,
+        uRound:f32,
+    }
 
-    }`,
-        `precision mediump float;
+    @group(0) @binding(0) var<uniform> globalUniforms : GlobalUniforms;
+    @group(1) @binding(0) var<uniform> localUniforms : LocalUniforms;
+    
+    struct VertexOutput {
+        @builtin(position) position : vec4<f32>,
+        @location(0) vColor : vec3<f32>,
+    }
 
-        varying vec3 vColor;
+    @vertex
+    fn mainVert(
+        @location(0) aPosition : vec2<f32>,
+        @location(1) aColor : vec3<f32>,
+    ) -> VertexOutput {     
+        var mvp = globalUniforms.projectionMatrix 
+            * globalUniforms.worldTransformMatrix 
+            * localUniforms.uTransformMatrix;
+    
+        return VertexOutput(
+            vec4<f32>(mvp * vec3<f32>(aPosition, 1.0), 1.0),
+            aColor,
+        );
+    };
 
-        void main() {
-            gl_FragColor = vec4(vColor, 1.0);
-        }
+    @fragment
+    fn mainFrag(input: VertexOutput) -> @location(0) vec4<f32>{
+        return vec4<f32>(input.vColor, 1.0);
+    }
+    `;
+    const gpu = {
+        vertex: {
+            entryPoint: 'mainVert',
+            source: gpuSource,
+        },
+        fragment: {
+            entryPoint: 'mainFrag',
+            source: gpuSource,
+        },
+    };
 
-    `,
-    );
+    const shader = Shader.from({
+        gl,
+        gpu,
+    });
 
-    const triangle = new Mesh(geometry, shader);
+    const triangle = new Mesh({
+        geometry,
+        shader,
+    });
 
     triangle.position.set(400, 300);
-    triangle.scale.set(2);
 
     app.stage.addChild(triangle);
 

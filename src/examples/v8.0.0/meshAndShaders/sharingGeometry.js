@@ -1,4 +1,4 @@
-import { Application, Assets, Geometry, Texture, Mesh, Shader, Program } from 'js';
+import { Application, Assets, Geometry, GlProgram, Mesh, Shader } from 'pixi.js';
 
 (async () =>
 {
@@ -6,78 +6,89 @@ import { Application, Assets, Geometry, Texture, Mesh, Shader, Program } from 'j
     const app = new Application();
 
     // Initialize the application
-    await app.init({ resizeTo: window });
+    await app.init({
+        resizeTo: window,
+        preference: 'webgl',
+    });
 
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
 
-    // Load the textures
-    await Assets.load([
-        'https://pixijs.com/assets/bg_scene_rotate.jpg',
-        'https://pixijs.com/assets/bg_rotate.jpg',
-        'https://pixijs.com/assets/bg_displacement.jpg',
-    ]);
-
     const geometry = new Geometry({
         attributes: {
-            aVertexPosition: [-100, -100, 100, -100, 100, 100],
-            aUvs: [0, 0, 1, 0, 1, 1],
+            aPosition: [
+                -100,
+                -100, // x, y
+                100,
+                -100, // x, y
+                100,
+                100, // x, y,
+            ],
+            aUV: [0, 0, 1, 0, 1, 1],
         },
     });
 
-    const program = Program.from(
-        `
-    precision mediump float;
+    const glProgram = GlProgram.from({
+        vertex: `
+            in vec2 aPosition;
+            in vec2 aUV;
+            
+            out vec2 vUV;
 
-    attribute vec2 aVertexPosition;
-    attribute vec2 aUvs;
+            uniform mat3 projectionMatrix;
+            uniform mat3 worldTransformMatrix;
+    
+            uniform mat3 uTransformMatrix;
+            
+            
+            void main() {
+    
+                mat3 mvp = projectionMatrix * worldTransformMatrix * uTransformMatrix;
+                gl_Position = vec4((mvp * vec3(aPosition, 1.0)).xy, 0.0, 1.0);
 
-    uniform mat3 translationMatrix;
-    uniform mat3 projectionMatrix;
+                vUV = aUV;
+            }
+        `,
+        fragment: ` 
+            in vec2 vUV;
 
-    varying vec2 vUvs;
+            uniform sampler2D uTexture;
+          
+            void main() {
+                gl_FragColor = texture2D(uTexture, vUV);
+            }
+        `,
+    });
 
-    void main() {
-
-        vUvs = aUvs;
-        gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
-
-    }`,
-
-        `precision mediump float;
-
-    varying vec2 vUvs;
-
-    uniform sampler2D uSamplerTexture;
-
-    void main() {
-
-        gl_FragColor = texture2D(uSamplerTexture, vUvs);
-    }
-
-`,
-    );
-
-    const triangle = new Mesh(
+    const triangle = new Mesh({
         geometry,
-        new Shader(program, {
-            uSamplerTexture: Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
+        shader: new Shader({
+            glProgram,
+            resources: {
+                uTexture: (await Assets.load('https://pixijs.com/assets/bg_scene_rotate.jpg')).source,
+            },
         }),
-    );
+    });
 
-    const triangle2 = new Mesh(
+    const triangle2 = new Mesh({
         geometry,
-        new Shader(program, {
-            uSamplerTexture: Texture.from('https://pixijs.com/assets/bg_rotate.jpg'),
+        shader: new Shader({
+            glProgram,
+            resources: {
+                uTexture: (await Assets.load('https://pixijs.com/assets/bg_rotate.jpg')).source,
+            },
         }),
-    );
+    });
 
-    const triangle3 = new Mesh(
+    const triangle3 = new Mesh({
         geometry,
-        new Shader(program, {
-            uSamplerTexture: Texture.from('https://pixijs.com/assets/bg_displacement.jpg'),
+        shader: new Shader({
+            glProgram,
+            resources: {
+                uTexture: (await Assets.load('https://pixijs.com/assets/bg_displacement.jpg')).source,
+            },
         }),
-    );
+    });
 
     triangle.position.set(400, 300);
     triangle.scale.set(2);
@@ -89,7 +100,7 @@ import { Application, Assets, Geometry, Texture, Mesh, Shader, Program } from 'j
 
     app.stage.addChild(triangle3, triangle2, triangle);
 
-    app.ticker.add((delta) =>
+    app.ticker.add(() =>
     {
         triangle.rotation += 0.01;
         triangle2.rotation -= 0.01;

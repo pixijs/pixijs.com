@@ -49,8 +49,7 @@ import graphics from '!!raw-loader!./masks/graphics.js';
 import sprite from '!!raw-loader!./masks/sprite.js';
 
 import instancedGeometry from '!!raw-loader!./meshAndShaders/instancedGeometry.js';
-import mergingGeometry from '!!raw-loader!./meshAndShaders/mergingGeometry.js';
-import multiPassShaderGeneratedMesh from '!!raw-loader!./meshAndShaders/multiPassShaderGeneratedMesh.js';
+import multipassMesh from '!!raw-loader!./meshAndShaders/multipassMesh.js';
 import shaderToyMesh from '!!raw-loader!./meshAndShaders/shaderToyMesh.js';
 import sharedShader from '!!raw-loader!./meshAndShaders/sharedShader.js';
 import sharingGeometry from '!!raw-loader!./meshAndShaders/sharingGeometry.js';
@@ -59,7 +58,6 @@ import texturedMeshBasic from '!!raw-loader!./meshAndShaders/texturedMeshBasic.j
 import triangleColor from '!!raw-loader!./meshAndShaders/triangleColor.js';
 import triangleTextured from '!!raw-loader!./meshAndShaders/triangleTextured.js';
 import triangle from '!!raw-loader!./meshAndShaders/triangle.js';
-import uniforms from '!!raw-loader!./meshAndShaders/uniforms.js';
 
 import offscreenCanvasBasic from '!!raw-loader!./offscreenCanvas/basic.js';
 import webWorker from '!!raw-loader!./offscreenCanvas/webWorker.js';
@@ -173,8 +171,7 @@ const examplesSource: ExamplesSourceType = {
     },
     meshAndShaders: {
         instancedGeometry,
-        mergingGeometry,
-        multiPassShaderGeneratedMesh,
+        multipassMesh,
         shaderToyMesh,
         sharedShader,
         sharingGeometry,
@@ -183,7 +180,6 @@ const examplesSource: ExamplesSourceType = {
         triangleColor,
         triangleTextured,
         triangle,
-        uniforms,
     },
 };
 
