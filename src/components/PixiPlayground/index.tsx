@@ -1,7 +1,7 @@
 import { useColorMode } from '@docusaurus/theme-common';
 import { useCallback, useState } from 'react';
 import classNames from 'classnames';
-import { SandpackLayout, SandpackPreview, SandpackProvider, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
+import { SandpackLayout, SandpackPreview, SandpackProvider, useSandpack } from '@codesandbox/sandpack-react';
 import { useContainerClassNameModifier } from '@site/src/hooks/useContainerClassNameModifier';
 import { latestVersion } from './usePixiVersions';
 import MonacoEditor from './MonacoEditor';
