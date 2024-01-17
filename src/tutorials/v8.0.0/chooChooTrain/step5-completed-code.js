@@ -16,7 +16,6 @@ const app = new Application();
     addMoon();
     addMountains();
     addTrees();
-    addGround();
 })();
 
 function addStars()
@@ -264,9 +263,4 @@ function createTree(width = 200, height = 250)
     }
 
     return graphics;
-}
-
-function addGround()
-{
-    /** -- INSERT CODE HERE -- */
 }
