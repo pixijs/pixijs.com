@@ -55,7 +55,12 @@ const sidebars = {
             type: 'category',
             label: 'Migrations',
             collapsed: true,
-            items: ['guides/migrations/upgrading', 'guides/migrations/v7', 'guides/migrations/v6', 'guides/migrations/v5'],
+            items: [
+                'guides/migrations/v8',
+                'guides/migrations/v7',
+                'guides/migrations/v6',
+                'guides/migrations/v5',
+            ],
         },
     ],
 
