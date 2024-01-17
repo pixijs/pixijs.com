@@ -6,6 +6,11 @@ const inquirer = require('inquirer');
 
 const ROOT = resolve(__dirname, '..');
 
+function getGenericVersion(version)
+{
+    return version.replace(/(\d+)(\.\d+)?(\.\d+)?(-.*)?/, '$1.x');
+}
+
 // Find all pixi-version.json files in the versioned docs directory
 const versionFiles = glob.sync(`${ROOT}/versioned_docs/**/pixi-version.json`);
 
@@ -50,12 +55,20 @@ console.log('Removing a version snapshot of the docs...');
 
     const config = versions.find((version) => version.versionLabel === choice.selected);
 
+    /**
+     * Use the docusaurus versions config to determine if the snapshot is of a generic version,
+     * so that correct directory and sidebar names can be referred to.
+     */
+    const snapshotVersions = JSON.parse(readFileSync(join(ROOT, 'versions.json'), 'utf8'));
+    const isGenericSnapshot = !snapshotVersions.includes(config.version);
+    const key = isGenericSnapshot ? getGenericVersion(config.version) : config.version;
+
     // 1st Confirmation
     const confirmation = await inquirer.prompt([
         {
             type: 'list',
             name: 'selected',
-            message: `Are you sure you want to remove ${config.versionLabel} (v${config.version}) snapshot?`,
+            message: `Are you sure you want to remove ${config.versionLabel} (v${key}) snapshot?`,
             choices: ['no', 'yes'],
             default: 'no',
             loop: false,
@@ -72,11 +85,11 @@ console.log('Removing a version snapshot of the docs...');
         {
             type: 'input',
             name: 'version',
-            message: `Please type version number '${config.version}' to remove the snapshot?`,
+            message: `Please type version number '${key}' to remove the snapshot?`,
         },
     ]);
 
-    if (input.version !== config.version)
+    if (input.version !== key)
     {
         shell.exit(0);
     }
@@ -86,11 +99,8 @@ console.log('Removing a version snapshot of the docs...');
     // Read versions.json
     const data = readFileSync(join(ROOT, 'versions.json'), 'utf8');
 
-    // Parse the JSON
-    let parsed = JSON.parse(data);
-
     // Remove the selected version
-    parsed = parsed.filter((version) => version !== config.version);
+    const parsed = snapshotVersions.filter((version) => version !== key);
 
     // If there are no versions left, delete versions.json
     if (!parsed.length)
@@ -104,12 +114,12 @@ console.log('Removing a version snapshot of the docs...');
     }
 
     // Delete the versioned directory
-    rmSync(join(ROOT, 'versioned_docs', `version-${config.version}`), { recursive: true, force: true });
+    rmSync(join(ROOT, 'versioned_docs', `version-${key}`), { recursive: true, force: true });
 
     // Delete the versioned sidebars
-    rmSync(join(ROOT, 'versioned_sidebars', `version-${config.version}-sidebars.json`), { recursive: true, force: true });
+    rmSync(join(ROOT, 'versioned_sidebars', `version-${key}-sidebars.json`), { recursive: true, force: true });
 
-    console.log(`Successfully removed ${config.versionLabel} (v${config.version}) snapshot!`);
+    console.log(`Successfully removed ${config.versionLabel} (v${key}) snapshot!`);
 
     // Then update the global version configs accordingly
     shell.exec('npm run update-global-version-configs');

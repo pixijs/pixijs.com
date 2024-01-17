@@ -172,6 +172,19 @@ async function doesVersionConfigExist(version)
         versionLabel = `v${version}`;
     }
 
+    // Prompt the user to confirm or customize the version label
+    versionLabel = (
+        await inquirer.prompt([
+            {
+                type: 'input',
+                name: 'versionLabel',
+                message: 'Confirm or customize the version label:',
+                default: versionLabel,
+                validate: (input) => input.trim().length > 0,
+            },
+        ])
+    ).versionLabel;
+
     config = {
         versionLabel,
         version,
