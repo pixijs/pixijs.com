@@ -27,7 +27,6 @@ import dragging from '!!raw-loader!./events/dragging.js';
 import hitTestingWithSpatialHash from '!!raw-loader!./events/hitTestingWithSpatialHash.js';
 import interactivity from '!!raw-loader!./events/interactivity.js';
 import logger from '!!raw-loader!./events/logger.js';
-import nestedBoundaryWithProjection from '!!raw-loader!./events/nestedBoundaryWithProjection.js';
 import pointerTracker from '!!raw-loader!./events/pointerTracker.js';
 import slider from '!!raw-loader!./events/slider.js';
 
@@ -124,7 +123,6 @@ const examplesSource: ExamplesSourceType = {
         hitTestingWithSpatialHash,
         interactivity,
         logger,
-        nestedBoundaryWithProjection,
         pointerTracker,
         slider,
     },

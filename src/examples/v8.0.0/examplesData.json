@@ -48,7 +48,6 @@
       "hide": true
     },
     "logger",
-    "nestedBoundaryWithProjection",
     "pointerTracker",
     "slider"
   ],
