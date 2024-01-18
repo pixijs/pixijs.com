@@ -1,6 +1,7 @@
 import { chooChooTrainTutorialSteps } from './chooChooTrain';
 import { fishPondTutorialSteps } from './fishPond';
 import { gettingStartedTutorialSteps } from './gettingStarted';
+import { spineBoyAdventureTutorialSteps } from './spineBoyAdventure';
 
 export default {
     gettingStarted: {
@@ -15,7 +16,12 @@ export default {
     },
     chooChooTrain: {
         description: 'Onboard the graphical Choo Choo Train!',
-        // thumbnail: 'thumb_.png',
+        thumbnail: 'thumb_choo_choo_train.png',
         steps: chooChooTrainTutorialSteps,
+    },
+    spineBoyAdventure: {
+        description: 'Behold the power of interactive Spine animation!',
+        // thumbnail: 'thumb_choo_choo_train.png',
+        steps: spineBoyAdventureTutorialSteps,
     },
 };
