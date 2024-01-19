@@ -115,7 +115,12 @@ export const useSandpackConfiguration = ({
     pixiVersion,
 }: UseSandpackConfigurationParams) =>
 {
-    const files = useFiles(code, extraFiles);
+    // We use '*' at the end of extra files' key that we don't want to show up on the editor tabs
+    // Therefore, we need to remove the '*' from these keys before passing it to useFiles
+    const processedExtraFiles = Object.fromEntries(
+        Object.entries(extraFiles ?? {}).map(([key, value]) => [key.replace('*', ''), value]),
+    );
+    const files = useFiles(code, processedExtraFiles);
 
     const { dependenciesKey, dependencies } = useDependencies({
         isPixiWebWorkerVersion,

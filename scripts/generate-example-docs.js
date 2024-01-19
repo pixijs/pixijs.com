@@ -73,15 +73,11 @@ async function go()
                         ({ name: exampleKey, usesWebWorkerLibrary = false, hide = false } = exampleData);
                     }
 
-                    const jsFile = `${exampleKey}.js`;
                     const mdFile = `${camelCaseToSnakeCase(exampleKey)}.md`;
-
-                    const jsPath = resolve(EXAMPLES_JS_PATH, directoryKey, jsFile);
                     const mdPath = join(EXAMPLES_MD_PATH, directoryName, mdFile);
 
                     return {
                         exampleKey: `${directoryKey}.${exampleKey}`,
-                        exampleSource: readFileSync(jsPath, 'utf8').trim(),
                         examplePath: mdPath,
                         exampleTitle: camelCaseToSentenceCase(exampleKey),
                         hide,
@@ -106,7 +102,7 @@ async function go()
 
             let sidebarPosition = 0;
 
-            examples.forEach(({ exampleKey, exampleSource, examplePath, exampleTitle, hide, usesWebWorkerLibrary }) =>
+            examples.forEach(({ exampleKey, examplePath, exampleTitle, hide, usesWebWorkerLibrary }) =>
             {
                 if (hide)
                 {

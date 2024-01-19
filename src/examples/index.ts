@@ -9,15 +9,15 @@ export type ExampleDataEntry = {
     usesWebWorkerLibrary?: boolean;
 };
 export type ExampleSourceEntry = {
-    source: string;
+    source: string | Record<string, string>;
     hide: boolean;
     usesWebWorkerLibrary: boolean;
 };
 
 // json data structure
 export type ExamplesJsonType = Record<string, (ExampleDataEntry | string)[]>;
-// sourcecode dictionary structure for below
-export type ExamplesSourceType = Record<string, Record<string, string>>;
+// Source code dictionary structure for below
+export type ExamplesSourceType = Record<string, Record<string, string | Record<string, string>>>;
 // normalized combination of the above
 export type CategoryDataType = Record<string, ExampleSourceEntry>;
 export type ExamplesDataType = Record<string, CategoryDataType>;

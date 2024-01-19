@@ -94,7 +94,12 @@ export default function PixiPlayground({
                     'sp-layout': styles.spLayout,
                 },
                 // Only show .js file tabs
-                visibleFiles: Object.keys(files).filter((fileName) => fileName.endsWith('.js')) as any[],
+                visibleFiles: [
+                    'src/index.js',
+                    // We will show the passed in extra files on the editor tabs by default
+                    // and will hide any of them that has a key (file name) end with a '*'
+                    ...(Object.keys(extraFiles ?? {}).filter((fileName) => !fileName.endsWith('*')) as any[]),
+                ],
             }}
         >
             <BasePlayground useTabs={!!extraFiles} mode={mode} />
