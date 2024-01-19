@@ -7,10 +7,11 @@ import { FileTabs, SandpackStack, useActiveCode, useSandpack } from '@codesandbo
 export type CodeChangeCallbackType = (code: string | undefined) => void;
 
 type MonacoEditorProps = {
+    useTabs: boolean;
     onChange?: CodeChangeCallbackType;
 };
 
-export default function MonacoEditor({ onChange }: MonacoEditorProps)
+export default function MonacoEditor({ useTabs, onChange }: MonacoEditorProps)
 {
     const editorRef = useRef(null);
 
@@ -55,7 +56,7 @@ export default function MonacoEditor({ onChange }: MonacoEditorProps)
 
     return (
         <SandpackStack style={{ height: '100%', margin: 0 }}>
-            <FileTabs />
+            {useTabs && <FileTabs />}
             <Editor
                 key={sandpack.activeFile}
                 defaultLanguage="javascript"

@@ -13,11 +13,12 @@ import styles from './index.module.scss';
 type BasePlaygroundMode = 'tutorial' | 'fullscreen' | 'example';
 
 type BasePlaygroundProps = {
+    useTabs: boolean;
     mode: BasePlaygroundMode;
     onCodeChanged?: CodeChangeCallbackType;
 };
 
-function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
+function BasePlayground({ useTabs, mode, onCodeChanged }: BasePlaygroundProps)
 {
     const { sandpack } = useSandpack();
     const [showOutput, setShowOutput] = useState(false);
@@ -32,7 +33,7 @@ function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
     return (
         <SandpackLayout className={classNames(styles[mode], showOutput && styles.showOutput)}>
             <div className={styles.editorWrapper}>
-                <MonacoEditor key={activeFile} onChange={onCodeChanged} />
+                <MonacoEditor key={activeFile} useTabs={useTabs} onChange={onCodeChanged} />
             </div>
 
             <div className={styles.previewWrapper}>
@@ -48,6 +49,7 @@ function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
 type PixiPlaygroundProps = {
     code: string;
     extraFiles?: Record<string, string>;
+    extraPackages?: Record<string, string>;
     isPixiWebWorkerVersion?: boolean;
     isPixiDevVersion?: boolean;
     pixiVersion?: string;
@@ -58,6 +60,7 @@ type PixiPlaygroundProps = {
 export default function PixiPlayground({
     code,
     extraFiles,
+    extraPackages,
     isPixiWebWorkerVersion = false,
     isPixiDevVersion = false,
     pixiVersion = latestVersion,
@@ -69,6 +72,7 @@ export default function PixiPlayground({
     const { key, files, customSetup } = useSandpackConfiguration({
         code,
         extraFiles,
+        extraPackages,
         isPixiDevVersion,
         isPixiWebWorkerVersion,
         pixiVersion,
@@ -93,7 +97,7 @@ export default function PixiPlayground({
                 visibleFiles: Object.keys(files).filter((fileName) => fileName.endsWith('.js')) as any[],
             }}
         >
-            <BasePlayground mode={mode} />
+            <BasePlayground useTabs={!!extraFiles} mode={mode} />
         </SandpackProvider>
     );
 }
