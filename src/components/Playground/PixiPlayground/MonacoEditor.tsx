@@ -54,12 +54,42 @@ export default function MonacoEditor({ useTabs, onChange }: MonacoEditorProps)
     const { code, updateCode } = useActiveCode();
     const { sandpack } = useSandpack();
 
+    const getFileExtension = (filename: string): string =>
+    {
+        const parts = filename.split('.');
+
+        return parts[parts.length - 1];
+    };
+
+    const getLanguage = (filename: string): string =>
+    {
+        const extension = getFileExtension(filename);
+
+        switch (extension)
+        {
+            case 'js':
+                return 'javascript';
+            case 'ts':
+                return 'typescript';
+            case 'html':
+                return 'html';
+            case 'css':
+                return 'css';
+            case 'wgsl':
+                return 'wgsl';
+            default:
+                return 'plaintext';
+        }
+    };
+
+    const language = getLanguage(sandpack.activeFile);
+
     return (
         <SandpackStack style={{ height: '100%', margin: 0 }}>
             {useTabs && <FileTabs />}
             <Editor
                 key={sandpack.activeFile}
-                defaultLanguage="javascript"
+                defaultLanguage={language}
                 defaultValue={code}
                 options={options}
                 onMount={handleEditorDidMount}
