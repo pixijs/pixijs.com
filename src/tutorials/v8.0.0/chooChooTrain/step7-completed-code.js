@@ -101,11 +101,11 @@ function addMountains()
         // Reposition the mountain groups when they move off screen.
         if (group1.x <= -app.screen.width)
         {
-            group1.x = app.screen.width;
+            group1.x += app.screen.width * 2;
         }
         if (group2.x <= -app.screen.width)
         {
-            group2.x = app.screen.width;
+            group2.x += app.screen.width * 2;
         }
     });
 }
@@ -174,7 +174,6 @@ function createMountainGroup()
         )
         .fill({ color: colorRight });
 
-    // Add the mountains to the stage.
     return graphics;
 }
 
@@ -232,7 +231,7 @@ function addTrees()
     });
 }
 
-function createTree(width = 200, height = 250)
+function createTree(width, height)
 {
     // Define the dimensions of the tree trunk.
     const trunkWidth = 30;
@@ -245,7 +244,7 @@ function createTree(width = 200, height = 250)
     const crownWidthIncrement = width / crownLevels;
 
     // Define the colors of the parts.
-    const treeColor = 0x264d3d;
+    const crownColor = 0x264d3d;
     const trunkColor = 0x563929;
 
     const graphics = new Graphics()
@@ -264,7 +263,7 @@ function createTree(width = 200, height = 250)
             .moveTo(-levelWidth / 2, y)
             .lineTo(0, y - crownLevelHeight - offset)
             .lineTo(levelWidth / 2, y)
-            .fill({ color: treeColor });
+            .fill({ color: crownColor });
     }
 
     return graphics;
@@ -369,9 +368,9 @@ function createTrainHead()
     const frontRadius = frontHeight / 2;
 
     // Define the dimensions of the cabin.
-    const containerHeight = 200;
-    const containerWidth = 150;
-    const containerRadius = 15;
+    const cabinHeight = 200;
+    const cabinWidth = 150;
+    const cabinRadius = 15;
 
     // Define the dimensions of the chimney.
     const chimneyBaseWidth = 30;
@@ -379,7 +378,7 @@ function createTrainHead()
     const chimneyHeight = 70;
     const chimneyDomeHeight = 25;
     const chimneyTopOffset = (chimneyTopWidth - chimneyBaseWidth) / 2;
-    const chimneyStartX = containerWidth + frontWidth - frontRadius - chimneyBaseWidth;
+    const chimneyStartX = cabinWidth + frontWidth - frontRadius - chimneyBaseWidth;
     const chimneyStartY = -frontHeight;
 
     // Define the dimensions of the roof.
@@ -387,10 +386,10 @@ function createTrainHead()
     const roofExcess = 20;
 
     // Define the dimensions of the door.
-    const doorWidth = containerWidth * 0.7;
-    const doorHeight = containerHeight * 0.7;
-    const doorStartX = (containerWidth - doorWidth) * 0.5;
-    const doorStartY = -(containerHeight - doorHeight) * 0.5 - doorHeight;
+    const doorWidth = cabinWidth * 0.7;
+    const doorHeight = cabinHeight * 0.7;
+    const doorStartX = (cabinWidth - doorWidth) * 0.5;
+    const doorStartY = -(cabinHeight - doorHeight) * 0.5 - doorHeight;
 
     // Define the dimensions of the window.
     const windowWidth = doorWidth * 0.8;
@@ -412,24 +411,24 @@ function createTrainHead()
 
         // Draw the head front
         .roundRect(
-            containerWidth - frontRadius - containerRadius,
+            cabinWidth - frontRadius - cabinRadius,
             -frontHeight,
-            frontWidth + frontRadius + containerRadius,
+            frontWidth + frontRadius + cabinRadius,
             frontHeight,
             frontRadius,
         )
         .fill({ color: 0x7f3333 })
 
         // Draw the cabin
-        .roundRect(0, -containerHeight, containerWidth, containerHeight, containerRadius)
+        .roundRect(0, -cabinHeight, cabinWidth, cabinHeight, cabinRadius)
         .fill({ color: 0x725f19 })
 
         // Draw the roof
-        .rect(-roofExcess / 2, containerRadius - containerHeight - roofHeight, containerWidth + roofExcess, roofHeight)
+        .rect(-roofExcess / 2, cabinRadius - cabinHeight - roofHeight, cabinWidth + roofExcess, roofHeight)
         .fill({ color: 0x52431c })
 
         // Draw the door
-        .roundRect(doorStartX, doorStartY, doorWidth, doorHeight, containerRadius)
+        .roundRect(doorStartX, doorStartY, doorWidth, doorHeight, cabinRadius)
         .stroke({ color: 0x52431c, width: 3 })
 
         // Draw the window

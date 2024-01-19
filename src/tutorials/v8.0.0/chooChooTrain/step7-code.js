@@ -101,11 +101,11 @@ function addMountains()
         // Reposition the mountain groups when they move off screen.
         if (group1.x <= -app.screen.width)
         {
-            group1.x = app.screen.width;
+            group1.x += app.screen.width * 2;
         }
         if (group2.x <= -app.screen.width)
         {
-            group2.x = app.screen.width;
+            group2.x += app.screen.width * 2;
         }
     });
 }
@@ -174,7 +174,6 @@ function createMountainGroup()
         )
         .fill({ color: colorRight });
 
-    // Add the mountains to the stage.
     return graphics;
 }
 
@@ -232,7 +231,7 @@ function addTrees()
     });
 }
 
-function createTree(width = 200, height = 250)
+function createTree(width, height)
 {
     // Define the dimensions of the tree trunk.
     const trunkWidth = 30;
@@ -245,7 +244,7 @@ function createTree(width = 200, height = 250)
     const crownWidthIncrement = width / crownLevels;
 
     // Define the colors of the parts.
-    const treeColor = 0x264d3d;
+    const crownColor = 0x264d3d;
     const trunkColor = 0x563929;
 
     const graphics = new Graphics()
@@ -264,7 +263,7 @@ function createTree(width = 200, height = 250)
             .moveTo(-levelWidth / 2, y)
             .lineTo(0, y - crownLevelHeight - offset)
             .lineTo(levelWidth / 2, y)
-            .fill({ color: treeColor });
+            .fill({ color: crownColor });
     }
 
     return graphics;

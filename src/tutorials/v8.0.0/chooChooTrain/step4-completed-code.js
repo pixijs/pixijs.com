@@ -95,11 +95,11 @@ function addMountains()
         // Reposition the mountain groups when they move off screen.
         if (group1.x <= -app.screen.width)
         {
-            group1.x = app.screen.width;
+            group1.x += app.screen.width * 2;
         }
         if (group2.x <= -app.screen.width)
         {
-            group2.x = app.screen.width;
+            group2.x += app.screen.width * 2;
         }
     });
 }
@@ -168,6 +168,5 @@ function createMountainGroup()
         )
         .fill({ color: colorRight });
 
-    // Add the mountains to the stage.
     return graphics;
 }
