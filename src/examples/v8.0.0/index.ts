@@ -56,7 +56,10 @@ import texturedMeshAdvanced from '!!raw-loader!./meshAndShaders/texturedMeshAdva
 import texturedMeshBasic from '!!raw-loader!./meshAndShaders/texturedMeshBasic.js';
 import triangleColor from '!!raw-loader!./meshAndShaders/triangleColor.js';
 import triangleTextured from '!!raw-loader!./meshAndShaders/triangleTextured.js';
-import triangle from '!!raw-loader!./meshAndShaders/triangle.js';
+import triangle from '!!raw-loader!./meshAndShaders/triangle/index.js';
+import triangleVert from '!!raw-loader!./meshAndShaders/triangle/triangle.vert';
+import triangleFrag from '!!raw-loader!./meshAndShaders/triangle/triangle.frag';
+import triangleWgsl from '!!raw-loader!./meshAndShaders/triangle/triangle.wgsl';
 
 import offscreenCanvasBasic from '!!raw-loader!./offscreenCanvas/basic.js';
 import webWorker from '!!raw-loader!./offscreenCanvas/webWorker.js';
@@ -177,7 +180,12 @@ const examplesSource: ExamplesSourceType = {
         texturedMeshBasic,
         triangleColor,
         triangleTextured,
-        triangle,
+        triangle: {
+            index: triangle,
+            'src/triangle.vert': triangleVert,
+            'src/triangle.frag': triangleFrag,
+            'src/triangle.wgsl': triangleWgsl,
+        },
     },
 };
 
