@@ -19,7 +19,7 @@ const indexHTML = `
 // babel configuration I could find (.browserslistrc isn't working and preset-env targets
 // are out of date, but it seems OK), while also allowing the best "open in sandbox"
 // functionality with all required dependencies
-export const useFiles = (code: string) =>
+export const useFiles = (code: string, extraFiles?: Record<string, string>) =>
     useMemo(
         () => ({
             '.babelrc': {
@@ -55,19 +55,21 @@ export const useFiles = (code: string) =>
                     2,
                 ),
             },
+            ...extraFiles,
         }),
-        [code],
+        [code, extraFiles],
     );
 
 type UseDependenciesParams = {
     isPixiWebWorkerVersion: boolean;
     isPixiDevVersion: boolean;
     pixiVersion: string;
+    extraPackages?: Record<string, string>;
 };
 
 const isPreV8 = (pixiVersion: string) => Number(pixiVersion.split('.')[0]) < 8;
 
-const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion }: UseDependenciesParams) =>
+const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion, extraPackages }: UseDependenciesParams) =>
     useMemo(() =>
     {
         const pixiPackageName = isPixiWebWorkerVersion ? '@pixi/webworker' : 'pixi.js';
@@ -81,34 +83,46 @@ const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion
             packages.push('@pixi/graphics-extras', '@pixi/math-extras');
         }
 
-        const dependencies = packages.reduce(
-            (deps, packageName) => ({
-                ...deps,
-                [packageName]: getPackageVersion(packageName),
-            }),
-            {},
-        );
+        const dependencies = {
+            ...packages.reduce(
+                (deps, packageName) => ({
+                    ...deps,
+                    [packageName]: getPackageVersion(packageName),
+                }),
+                {},
+            ),
+            ...extraPackages,
+        };
 
         return {
             dependenciesKey: `${pixiPackageName}-${pixiVersion}`,
             dependencies,
         };
-    }, [isPixiDevVersion, isPixiWebWorkerVersion, pixiVersion]);
+    }, [isPixiDevVersion, isPixiWebWorkerVersion, pixiVersion, extraPackages]);
 
 type UseSandpackConfigurationParams = UseDependenciesParams & {
     code: string;
+    extraFiles?: Record<string, string>;
+    extraPackages?: Record<string, string>;
 };
 
 export const useSandpackConfiguration = ({
     code,
+    extraFiles,
+    extraPackages,
     isPixiWebWorkerVersion,
     isPixiDevVersion,
     pixiVersion,
 }: UseSandpackConfigurationParams) =>
 {
-    const files = useFiles(code);
+    const files = useFiles(code, extraFiles);
 
-    const { dependenciesKey, dependencies } = useDependencies({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion });
+    const { dependenciesKey, dependencies } = useDependencies({
+        isPixiWebWorkerVersion,
+        isPixiDevVersion,
+        pixiVersion,
+        extraPackages,
+    });
 
     // TODO: adding code here is only necessary because of user edited code, otherwise we
     // could flip between examples easily, investigate why it bugs out during editing
