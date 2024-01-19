@@ -23,6 +23,12 @@ export default function Playground({ pixiVersion }: { pixiVersion: IVersion })
             pixiVersion,
         });
 
+    const isMultiFile = typeof sourceCode !== 'string';
+    const source = isMultiFile ? sourceCode.index : sourceCode;
+    const extraFiles = isMultiFile
+        ? Object.fromEntries(Object.entries(sourceCode).filter(([key]) => key !== 'index'))
+        : undefined;
+
     return (
         <div className={styles.wrapper}>
             <BrowserOnly>
@@ -38,7 +44,8 @@ export default function Playground({ pixiVersion }: { pixiVersion: IVersion })
                             />
                         </div>
                         <PixiPlayground
-                            code={sourceCode}
+                            code={source}
+                            extraFiles={extraFiles}
                             pixiVersion={pixiVersion.version}
                             isPixiDevVersion={pixiVersion.dev}
                             isPixiWebWorkerVersion={usesWebWorkerLibrary}
