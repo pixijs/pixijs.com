@@ -19,7 +19,7 @@ const indexHTML = `
 // babel configuration I could find (.browserslistrc isn't working and preset-env targets
 // are out of date, but it seems OK), while also allowing the best "open in sandbox"
 // functionality with all required dependencies
-export const useFiles = (code: string) =>
+export const useFiles = (code: string, extraFiles?: Record<string, string>) =>
     useMemo(
         () => ({
             '.babelrc': {
@@ -55,8 +55,9 @@ export const useFiles = (code: string) =>
                     2,
                 ),
             },
+            ...extraFiles,
         }),
-        [code],
+        [code, extraFiles],
     );
 
 type UseDependenciesParams = {
@@ -97,16 +98,18 @@ const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion
 
 type UseSandpackConfigurationParams = UseDependenciesParams & {
     code: string;
+    extraFiles?: Record<string, string>;
 };
 
 export const useSandpackConfiguration = ({
     code,
+    extraFiles,
     isPixiWebWorkerVersion,
     isPixiDevVersion,
     pixiVersion,
 }: UseSandpackConfigurationParams) =>
 {
-    const files = useFiles(code);
+    const files = useFiles(code, extraFiles);
 
     const { dependenciesKey, dependencies } = useDependencies({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion });
 

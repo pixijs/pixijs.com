@@ -1,7 +1,7 @@
 import { useColorMode } from '@docusaurus/theme-common';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import classNames from 'classnames';
-import { SandpackLayout, SandpackPreview, SandpackProvider, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
+import { SandpackLayout, SandpackPreview, SandpackProvider, useSandpack } from '@codesandbox/sandpack-react';
 import { useContainerClassNameModifier } from '@site/src/hooks/useContainerClassNameModifier';
 import { latestVersion } from './usePixiVersions';
 import MonacoEditor from './MonacoEditor';
@@ -19,36 +19,9 @@ type BasePlaygroundProps = {
 
 function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
 {
-    // Override main container styling when in coding mode
-    useEffect(() =>
-    {
-        const className = 'coding';
-        const container = document.querySelector('.container');
-
-        container?.classList.add(className);
-
-        // Cleanup function to remove the class when the component is unmounted
-        return () =>
-        {
-            container?.classList.remove(className);
-        };
-    }, []);
-
-    const { code, updateCode } = useActiveCode();
     const { sandpack } = useSandpack();
     const [showOutput, setShowOutput] = useState(false);
     const { activeFile, bundlerState } = sandpack;
-
-    const handleCodeChange: CodeChangeCallbackType = useCallback(
-        (nextCode) =>
-        {
-            const nextCodeString = nextCode ?? '';
-
-            updateCode(nextCodeString);
-            onCodeChanged?.(nextCodeString);
-        },
-        [onCodeChanged, updateCode],
-    );
 
     const handleToggle = useCallback(() =>
     {
@@ -59,7 +32,7 @@ function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
     return (
         <SandpackLayout className={classNames(styles[mode], showOutput && styles.showOutput)}>
             <div className={styles.editorWrapper}>
-                <MonacoEditor key={activeFile} code={code} onChange={handleCodeChange} />
+                <MonacoEditor key={activeFile} onChange={onCodeChanged} />
             </div>
 
             <div className={styles.previewWrapper}>
@@ -74,6 +47,7 @@ function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
 
 type PixiPlaygroundProps = {
     code: string;
+    extraFiles?: Record<string, string>;
     isPixiWebWorkerVersion?: boolean;
     isPixiDevVersion?: boolean;
     pixiVersion?: string;
@@ -83,7 +57,7 @@ type PixiPlaygroundProps = {
 
 export default function PixiPlayground({
     code,
-    onCodeChanged,
+    extraFiles,
     isPixiWebWorkerVersion = false,
     isPixiDevVersion = false,
     pixiVersion = latestVersion,
@@ -94,6 +68,7 @@ export default function PixiPlayground({
 
     const { key, files, customSetup } = useSandpackConfiguration({
         code,
+        extraFiles,
         isPixiDevVersion,
         isPixiWebWorkerVersion,
         pixiVersion,
@@ -114,9 +89,11 @@ export default function PixiPlayground({
                     'sp-wrapper': mode === 'tutorial' ? styles.tpWrapper : styles.spWrapper,
                     'sp-layout': styles.spLayout,
                 },
+                // Only show .js file tabs
+                visibleFiles: Object.keys(files).filter((fileName) => fileName.endsWith('.js')) as any[],
             }}
         >
-            <BasePlayground mode={mode} onCodeChanged={onCodeChanged} />
+            <BasePlayground mode={mode} />
         </SandpackProvider>
     );
 }
