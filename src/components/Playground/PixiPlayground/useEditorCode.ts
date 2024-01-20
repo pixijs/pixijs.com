@@ -24,7 +24,7 @@ export const useCodeExamples = ({ urlSourceCode, selectedOptionId, setURLState, 
         () => getExampleEntry(version, selectedOptionId),
         [version, selectedOptionId],
     );
-    const { source: sourceCode, usesWebWorkerLibrary } = useMemo<Omit<ExampleSourceEntry, 'hide'>>(
+    const { source, usesWebWorkerLibrary } = useMemo<Omit<ExampleSourceEntry, 'hide'>>(
         () =>
             (urlSourceCode
                 ? {
@@ -83,7 +83,7 @@ export const useCodeExamples = ({ urlSourceCode, selectedOptionId, setURLState, 
             // value prop, rather than just internal changes, so we need to check this
             // change is actually a user editing code. Maybe we could remount the editor
             // instead, but that feels a little brute force.
-            if (sourceCode === nextSourceCode)
+            if (source === nextSourceCode)
             {
                 return;
             }
@@ -97,14 +97,28 @@ export const useCodeExamples = ({ urlSourceCode, selectedOptionId, setURLState, 
                 !hasUrlHashedCode,
             );
         },
-        [hasUrlHashedCode, setURLState, sourceCode],
+        [hasUrlHashedCode, setURLState, source],
     );
 
     return {
-        sourceCode,
+        source,
         usesWebWorkerLibrary,
         exampleOptions,
         handleOptionSelected,
         handleEditorCodeChanged,
+    };
+};
+
+export const useCodeSource = (source: string | Record<string, string>) =>
+{
+    const isMultiFile = typeof source !== 'string';
+    const indexCode = isMultiFile ? source.index : source;
+    const extraFiles = isMultiFile
+        ? Object.fromEntries(Object.entries(source).filter(([key]) => key !== 'index'))
+        : undefined;
+
+    return {
+        indexCode,
+        extraFiles,
     };
 };
