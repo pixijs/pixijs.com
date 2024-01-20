@@ -80,11 +80,11 @@ export default function PixiPlayground({
 
     // We will show the passed in extra files on the editor tabs by default
     // and will hide any of them that has a key (file name) end with an '*'.
-    const visibleExtraFiles = Object.keys(extraFiles ?? {}).filter((fileName) => !fileName.endsWith('*')) as any[];
+    const visibleExtraFiles = Object.keys(extraFiles ?? {}).filter((fileName) => !fileName.endsWith('!')) as any[];
 
     // We will initially show 'index.js' by default, unless if there is an extra file that ends with an '$'
     // in which case we will show that file instead.
-    const activeFile = (Object.keys(extraFiles ?? {}).find((fileName) => fileName.endsWith('$')) as any) ?? 'src/index.js';
+    const activeFile = (Object.keys(extraFiles ?? {}).find((fileName) => fileName.endsWith('*')) as any) ?? 'src/index.js';
 
     // Hack to make the examples pages full width on wide screens
     useContainerClassNameModifier('example', mode === 'example');
@@ -101,7 +101,6 @@ export default function PixiPlayground({
                     'sp-wrapper': mode === 'tutorial' ? styles.tpWrapper : styles.spWrapper,
                     'sp-layout': styles.spLayout,
                 },
-                // Only show .js file tabs
                 visibleFiles: ['src/index.js', ...visibleExtraFiles],
                 activeFile,
             }}
