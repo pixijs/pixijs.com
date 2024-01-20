@@ -5,8 +5,9 @@ import v8x from './v8.0.0/index';
 export type TutorialStep = {
     header: string;
     Content: string;
-    code: string;
-    completedCode?: string;
+    code: string | Record<string, string>;
+    completedCode?: string | Record<string, string>;
+    activeFile?: string;
 };
 
 export type TutorialEntry = {

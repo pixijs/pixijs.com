@@ -1,16 +1,17 @@
-import { Application, Assets, Sprite } from 'pixi.js';
+import { Application, Assets } from 'pixi.js';
+import { addBackground } from './addBackground';
+import { addFishes, animateFishes } from './addFishes';
+import { addWaterOverlay, animateWaterOverlay } from './addWaterOverlay';
+import { addDisplacementEffect } from './addDisplacementEffect';
 
 // Create a PixiJS application.
 const app = new Application();
 
-// Asynchronous IIFE
-(async () =>
-{
-    await setup();
-    await preload();
+// Store an array of fish sprites for animation.
+const fishes = [];
 
-    addBackground();
-})();
+// Reference to the water overlay.
+let overlay;
 
 async function setup()
 {
@@ -39,7 +40,21 @@ async function preload()
     await Assets.load(assets);
 }
 
-function addBackground()
+// Asynchronous IIFE
+(async () =>
 {
-    /** -- INSERT CODE HERE -- */
-}
+    await setup();
+    await preload();
+
+    addBackground(app);
+    addFishes(app, fishes);
+    addWaterOverlay(app, overlay);
+    addDisplacementEffect(app);
+
+    // Add the animation callbacks to the application's ticker.
+    app.ticker.add((time) =>
+    {
+        animateFishes(app, fishes, time);
+        animateWaterOverlay(app, overlay, time);
+    });
+})();

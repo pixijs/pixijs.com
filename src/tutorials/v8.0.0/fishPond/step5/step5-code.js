@@ -1,16 +1,17 @@
-import { Application, Assets, Sprite } from 'pixi.js';
+import { Application, Assets } from 'pixi.js';
+import { addBackground } from './addBackground';
+import { addFishes, animateFishes } from './addFishes';
+import { addWaterOverlay, animateWaterOverlay } from './addWaterOverlay';
+import { addDisplacementEffect } from './addDisplacementEffect';
 
 // Create a PixiJS application.
 const app = new Application();
 
-// Asynchronous IIFE
-(async () =>
-{
-    await setup();
-    await preload();
+// Store an array of fish sprites for animation.
+const fishes = [];
 
-    addBackground();
-})();
+// Reference to the water overlay.
+let overlay;
 
 async function setup()
 {
@@ -39,37 +40,21 @@ async function preload()
     await Assets.load(assets);
 }
 
-function addBackground()
+// Asynchronous IIFE
+(async () =>
 {
-    // Create a background sprite.
-    const background = Sprite.from('background');
+    await setup();
+    await preload();
 
-    // Center background sprite anchor.
-    background.anchor.set(0.5);
+    addBackground(app);
+    addFishes(app, fishes);
+    addWaterOverlay(app, overlay);
+    addDisplacementEffect(app);
 
-    /**
-     * If the preview is landscape, fill the width of the screen
-     * and apply horizontal scale to the vertical scale for a uniform fit.
-     */
-    if (app.screen.width > app.screen.height)
+    // Add the animation callbacks to the application's ticker.
+    app.ticker.add((time) =>
     {
-        background.width = app.screen.width * 1.2;
-        background.scale.y = background.scale.x;
-    }
-    else
-    {
-        /**
-         * If the preview is square or portrait, then fill the height of the screen instead
-         * and apply the scaling to the horizontal scale accordingly.
-         */
-        background.height = app.screen.height * 1.2;
-        background.scale.x = background.scale.y;
-    }
-
-    // Position the background sprite in the center of the stage.
-    background.x = app.screen.width / 2;
-    background.y = app.screen.height / 2;
-
-    // Add the background to the stage.
-    app.stage.addChild(background);
-}
+        animateFishes(app, fishes, time);
+        animateWaterOverlay(app, overlay, time);
+    });
+})();
