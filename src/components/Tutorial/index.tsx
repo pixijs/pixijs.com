@@ -6,11 +6,16 @@ import PixiPlayground from '../Playground/PixiPlayground';
 import type { IVersion } from '../Playground/PixiPlayground/usePixiVersions';
 import type { TutorialStep } from '@site/src/tutorials';
 import { getTutorialEntry } from '@site/src/tutorials';
+import { useCodeSource } from '../Playground/PixiPlayground/useEditorCode';
 
-function BrowserTutorial({ data, pixiVersion, extraPackages }: {
+function BrowserTutorial({
+    data,
+    pixiVersion,
+    extraPackages,
+}: {
     data: TutorialStep[];
     pixiVersion: IVersion;
-    extraPackages?: Record<string, string>
+    extraPackages?: Record<string, string>;
 })
 {
     let step = Number(window.location.hash.replace('#', ''));
@@ -33,6 +38,9 @@ function BrowserTutorial({ data, pixiVersion, extraPackages }: {
     {
         setShowSolution(!showSolution);
     };
+
+    const { indexCode, extraFiles } = useCodeSource(code);
+    const { indexCode: indexCodeCompleted, extraFiles: extraFilesCompleted } = useCodeSource(completedCode ?? code);
 
     return (
         <>
@@ -68,13 +76,9 @@ function BrowserTutorial({ data, pixiVersion, extraPackages }: {
                 </div>
             </div>
             <PixiPlayground
-<<<<<<< Updated upstream
-                code={completedCode && showSolution ? completedCode : code}
-=======
                 code={completedCode && showSolution ? indexCodeCompleted : indexCode}
                 extraFiles={completedCode && showSolution ? extraFilesCompleted : extraFiles}
                 extraPackages={extraPackages}
->>>>>>> Stashed changes
                 pixiVersion={pixiVersion.version}
                 isPixiDevVersion={pixiVersion.dev}
                 mode="tutorial"
