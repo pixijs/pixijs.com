@@ -1,4 +1,6 @@
 import { Application, Assets, Container, Sprite, Rectangle, Filter, Point, GlProgram } from 'pixi.js';
+import vertex from './mouseBlending.vert';
+import fragment from './mouseBlending.frag';
 
 /**
  * https://github.com/pixijs/pixi.js/wiki/v5-Creating-Filters
@@ -28,56 +30,6 @@ import { Application, Assets, Container, Sprite, Rectangle, Filter, Point, GlPro
     // NOTE: this shader wont work on old devices where mediump precision is forced in fragment shader
     // because v5 default vertex shader uses `inputSize` in it. Same uniform in fragment and vertex shader
     // cant have different precision :(
-
-    const vertex = `
-    in vec2 aPosition;
-    out vec2 vTextureCoord;
-
-    uniform vec4 uInputSize;
-    uniform vec4 uOutputFrame;
-    uniform vec4 uOutputTexture;
-
-    vec4 filterVertexPosition( void )
-    {
-        vec2 position = aPosition * uOutputFrame.zw + uOutputFrame.xy;
-        
-        position.x = position.x * (2.0 / uOutputTexture.x) - 1.0;
-        position.y = position.y * (2.0*uOutputTexture.z / uOutputTexture.y) - uOutputTexture.z;
-
-        return vec4(position, 0.0, 1.0);
-    }
-
-    vec2 filterTextureCoord( void )
-    {
-        return aPosition * (uOutputFrame.zw * uInputSize.zw);
-    }
-
-    void main(void)
-    {
-        gl_Position = filterVertexPosition();
-        vTextureCoord = filterTextureCoord();
-    }
-    `;
-    const fragment = `
-    precision highp float;
-    in vec2 vTextureCoord;
-    out vec4 finalColor;
-
-    uniform vec2 uMouse;
-    uniform vec4 uInputSize;
-    uniform vec4 uOutputFrame;
-    uniform float uTime;
-
-    void main() {
-        vec2 screenPos = vTextureCoord * uInputSize.xy + uOutputFrame.xy;
-        if (length(uMouse - screenPos) < 25.0) {
-            finalColor = vec4(1.0, 1.0, 0.0, 1.0) * 0.7; //yellow circle, alpha=0.7
-        } else {
-            // blend with underlying image, alpha=0.5
-            finalColor = vec4( sin(uTime), (uMouse.xy - uOutputFrame.xy) / uOutputFrame.zw, 1.0) * 0.5;
-        }
-    }
-    `;
 
     const container = new Container();
 

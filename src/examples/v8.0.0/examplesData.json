@@ -73,7 +73,7 @@
     "triangle",
     "triangleColor",
     "triangleTextured",
-    "sharingGeometry",
+    "sharedGeometry",
     "sharedShader",
     "instancedGeometry",
     "shaderToyMesh",

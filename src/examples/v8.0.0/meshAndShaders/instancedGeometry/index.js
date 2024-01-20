@@ -1,4 +1,6 @@
-import { Application, Assets, Mesh, Geometry, Buffer, TYPES, Shader } from 'js';
+import { Application, Assets, Mesh, Geometry, Buffer, TYPES, Shader } from 'pixi.js';
+import vertex from './instancedGeometry.vert';
+import fragment from './instancedGeometry.frag';
 
 (async () =>
 {
@@ -42,34 +44,7 @@ import { Application, Assets, Mesh, Geometry, Buffer, TYPES, Shader } from 'js';
         buffer.data[instanceOffset + 4] = Math.random();
     }
 
-    const shader = Shader.from(
-        `
-    precision mediump float;
-    attribute vec2 aVPos;
-    attribute vec2 aIPos;
-    attribute vec3 aICol;
-
-    uniform mat3 translationMatrix;
-    uniform mat3 projectionMatrix;
-
-    varying vec3 vCol;
-
-    void main() {
-        vCol = aICol;
-
-        gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVPos + aIPos, 1.0)).xy, 0.0, 1.0);
-    }`,
-
-        `precision mediump float;
-
-    varying vec3 vCol;
-
-    void main() {
-        gl_FragColor = vec4(vCol, 1.0);
-    }
-
-`,
-    );
+    const shader = Shader.from(vertex, fragment);
 
     const triangles = new Mesh(geometry, shader);
 
