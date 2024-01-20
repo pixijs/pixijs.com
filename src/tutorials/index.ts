@@ -14,6 +14,7 @@ export type TutorialEntry = {
     description: string;
     thumbnail?: string;
     steps: TutorialStep[];
+    extraPackages?: Record<string, string>;
 };
 
 export type TutorialCardData = {
