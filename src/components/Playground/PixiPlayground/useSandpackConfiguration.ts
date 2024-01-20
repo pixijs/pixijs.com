@@ -35,6 +35,9 @@ export const useFiles = (code: string, extraFiles?: Record<string, string>) =>
                                 },
                             ],
                         ],
+                        plugins: [
+                            '@babel/plugin-proposal-class-properties',
+                        ],
                     },
                     null,
                     2,
@@ -139,6 +142,7 @@ export const useSandpackConfiguration = ({
         devDependencies: {
             'parcel-bundler': '^1.6.1',
             '@babel/core': '^7.21.3',
+            '@babel/plugin-proposal-class-properties': '^7.10.1',
         },
     };
 
