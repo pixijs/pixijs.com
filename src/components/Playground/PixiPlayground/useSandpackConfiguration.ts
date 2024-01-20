@@ -115,10 +115,10 @@ export const useSandpackConfiguration = ({
     pixiVersion,
 }: UseSandpackConfigurationParams) =>
 {
-    // We use '*' and '$ at the end of extra files' key for handling custom behaviours on the tabs
+    // We use '!' and '*' at the end of extra files' key for handling custom behaviours on the tabs
     // Therefore, we need to remove these marks from the file keys before passing it to useFiles
     const processedExtraFiles = Object.fromEntries(
-        Object.entries(extraFiles ?? {}).map(([key, value]) => [key.replace(/[*$]/g, ''), value]),
+        Object.entries(extraFiles ?? {}).map(([key, value]) => [key.replace(/[!*]/g, ''), value]),
     );
     const files = useFiles(code, processedExtraFiles);
 
@@ -131,7 +131,7 @@ export const useSandpackConfiguration = ({
 
     // TODO: adding code here is only necessary because of user edited code, otherwise we
     // could flip between examples easily, investigate why it bugs out during editing
-    const key = `${dependenciesKey}-${code}`;
+    const key = `${dependenciesKey}-${code}-${Object.values(extraFiles ?? {}).join('-')}`;
 
     const customSetup: Record<string, any> = {
         entry: 'index.html',
