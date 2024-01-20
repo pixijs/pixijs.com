@@ -1,8 +1,3 @@
-# Adding Moon
-
-For the moon crescent, we will cheat a little bit with an existing moon SVG code here:
-
-```svg
 <svg width="111" height="126" viewBox="0 0 111 126" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" clip-rule="evenodd"
         d="M9.99794 104.751C44.7207 104.751 72.869 76.6028 72.869 41.8801C72.869 25.9516 66.9455
@@ -15,17 +10,3 @@ For the moon crescent, we will cheat a little bit with an existing moon SVG code
         104.008C3.46679 104.497 6.70276 104.75 9.99794 104.75C44.7207 104.75 72.869 76.6018 72.869
         41.8791C72.869 26.1203 67.0711 11.7158 57.4922 0.682129Z" fill="#DEC61A"/>
 </svg>
-```
-
-Graphics API also has a built-in `svg(svgString)` method for drawing vector graphics using SVG data. Have a go at it on the set up `addMoon` function.
-
-```javascript
-const svg = `-- SVG DATA STRING --`
-const graphics = new Graphics().svg(svg);
-
-graphics.x = app.screen.width / 2 + 100;
-graphics.y = app.screen.height / 8;
-app.stage.addChild(graphics);
-```
-
-Think the sky is enough, let's us now proceed to add some landscape elements!

@@ -33,11 +33,11 @@ export const fishPondTutorialSteps: TutorialStep[] = [
         Content: content2,
         code: {
             index: code2,
-            'src/addBackground.js': addBackground,
+            'src/addBackground.js*': addBackground,
         },
         completedCode: {
             index: code2,
-            'src/addBackground.js$': addBackgroundCompleted,
+            'src/addBackground.js*': addBackgroundCompleted,
         },
     },
     {
@@ -45,13 +45,13 @@ export const fishPondTutorialSteps: TutorialStep[] = [
         Content: content3,
         code: {
             index: code3,
-            'src/addBackground.js*': addBackgroundCompleted,
-            'src/addFishes.js': addFishes,
+            'src/addBackground.js!': addBackgroundCompleted,
+            'src/addFishes.js*': addFishes,
         },
         completedCode: {
             index: code3,
-            'src/addBackground.js*': addBackgroundCompleted,
-            'src/addFishes.js$': addFishesCompleted,
+            'src/addBackground.js!': addBackgroundCompleted,
+            'src/addFishes.js*': addFishesCompleted,
         },
     },
     {
@@ -59,15 +59,15 @@ export const fishPondTutorialSteps: TutorialStep[] = [
         Content: content4,
         code: {
             index: code4,
-            'src/addBackground.js*': addBackgroundCompleted,
-            'src/addFishes.js*': addFishesCompleted,
-            'src/addWaterOverlay.js': addWaterOverlay,
+            'src/addBackground.js!': addBackgroundCompleted,
+            'src/addFishes.js!': addFishesCompleted,
+            'src/addWaterOverlay.js*': addWaterOverlay,
         },
         completedCode: {
             index: code4,
-            'src/addBackground.js*': addBackgroundCompleted,
-            'src/addFishes.js*': addFishesCompleted,
-            'src/addWaterOverlay.js$': addWaterOverlayCompleted,
+            'src/addBackground.js!': addBackgroundCompleted,
+            'src/addFishes.js!': addFishesCompleted,
+            'src/addWaterOverlay.js*': addWaterOverlayCompleted,
         },
     },
     {
@@ -75,17 +75,17 @@ export const fishPondTutorialSteps: TutorialStep[] = [
         Content: content5,
         code: {
             index: code5,
-            'src/addBackground.js*': addBackgroundCompleted,
-            'src/addFishes.js*': addFishesCompleted,
-            'src/addWaterOverlay.js*': addWaterOverlayCompleted,
-            'src/addDisplacementEffect.js': addDisplacementEffect,
+            'src/addBackground.js!': addBackgroundCompleted,
+            'src/addFishes.js!': addFishesCompleted,
+            'src/addWaterOverlay.js!': addWaterOverlayCompleted,
+            'src/addDisplacementEffect.js*': addDisplacementEffect,
         },
         completedCode: {
             index: code5,
-            'src/addBackground.js*': addBackgroundCompleted,
-            'src/addFishes.js*': addFishesCompleted,
-            'src/addWaterOverlay.js*': addWaterOverlayCompleted,
-            'src/addDisplacementEffect.js$': addDisplacementEffectCompleted,
+            'src/addBackground.js!': addBackgroundCompleted,
+            'src/addFishes.js!': addFishesCompleted,
+            'src/addWaterOverlay.js!': addWaterOverlayCompleted,
+            'src/addDisplacementEffect.js*': addDisplacementEffectCompleted,
         },
     },
     {

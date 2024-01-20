@@ -1,4 +1,7 @@
-import { Application, Container, Graphics } from 'pixi.js';
+import { Application } from 'pixi.js';
+import { addStars } from './addStars';
+import { addMoon } from './addMoon';
+import { addMountains } from './addMountains';
 
 // Create a PixiJS application.
 const app = new Application();
@@ -12,10 +15,7 @@ const app = new Application();
     // Then adding the application's canvas to the DOM body.
     document.body.appendChild(app.canvas);
 
-    addStars();
+    addStars(app);
+    addMoon(app);
+    addMountains(app);
 })();
-
-function addStars()
-{
-    /** -- INSERT CODE HERE -- */
-}

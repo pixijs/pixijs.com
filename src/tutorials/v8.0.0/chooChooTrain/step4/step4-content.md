@@ -10,7 +10,7 @@ Let start by filling in the logic for creating a mountain group in the `createMo
 
 Here, we are using a single Graphics instance for a group of mountains. Taking into account the screen dimension we can draw out 3 mountains with different heights and colors. In this case, we will imagine the Graphics instance as a pen and for each of the mountain we move the pen to the starting position using Graphics API's `moveTo(x, y)` method and then contour out the mountain arc using `bezierCurveTo(cx1, cy1, cx2, cy2, x, y)` method, where [`cx`, `cy`] positions are control point coordinates for the curve going from where it was to the [`x`, `y`] position. Again, we then need to fill the resulted shape with `fill(style)`.
 
-> _**TIPS:** In this case, we do not have to connect the end point to the starting point as the Graphics' context will automatically infer a closed shape by doing so for the fill.
+> _**TIPS:** In this case, we do not have to connect the end point to the starting point as the Graphics' context will automatically infer a closed shape by doing so for the fill._
 
 ```javascript
 const graphics = new Graphics();
