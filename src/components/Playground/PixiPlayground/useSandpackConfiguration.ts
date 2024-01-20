@@ -35,6 +35,9 @@ export const useFiles = (code: string, extraFiles?: Record<string, string>) =>
                                 },
                             ],
                         ],
+                        plugins: [
+                            '@babel/plugin-proposal-class-properties',
+                        ],
                     },
                     null,
                     2,
@@ -115,10 +118,10 @@ export const useSandpackConfiguration = ({
     pixiVersion,
 }: UseSandpackConfigurationParams) =>
 {
-    // We use '*' at the end of extra files' key that we don't want to show up on the editor tabs
-    // Therefore, we need to remove the '*' from these keys before passing it to useFiles
+    // We use '!' and '*' at the end of extra files' key for handling custom behaviours on the tabs
+    // Therefore, we need to remove these marks from the file keys before passing it to useFiles
     const processedExtraFiles = Object.fromEntries(
-        Object.entries(extraFiles ?? {}).map(([key, value]) => [key.replace('*', ''), value]),
+        Object.entries(extraFiles ?? {}).map(([key, value]) => [key.replace(/[!*]/g, ''), value]),
     );
     const files = useFiles(code, processedExtraFiles);
 
@@ -131,7 +134,7 @@ export const useSandpackConfiguration = ({
 
     // TODO: adding code here is only necessary because of user edited code, otherwise we
     // could flip between examples easily, investigate why it bugs out during editing
-    const key = `${dependenciesKey}-${code}`;
+    const key = `${dependenciesKey}-${code}-${Object.values(extraFiles ?? {}).join('-')}`;
 
     const customSetup: Record<string, any> = {
         entry: 'index.html',
@@ -139,6 +142,7 @@ export const useSandpackConfiguration = ({
         devDependencies: {
             'parcel-bundler': '^1.6.1',
             '@babel/core': '^7.21.3',
+            '@babel/plugin-proposal-class-properties': '^7.10.1',
         },
     };
 

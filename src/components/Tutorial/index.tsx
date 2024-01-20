@@ -6,8 +6,17 @@ import PixiPlayground from '../Playground/PixiPlayground';
 import type { IVersion } from '../Playground/PixiPlayground/usePixiVersions';
 import type { TutorialStep } from '@site/src/tutorials';
 import { getTutorialEntry } from '@site/src/tutorials';
+import { useCodeSource } from '../Playground/PixiPlayground/useEditorCode';
 
-function BrowserTutorial({ data, pixiVersion }: { data: TutorialStep[]; pixiVersion: IVersion })
+function BrowserTutorial({
+    data,
+    pixiVersion,
+    extraPackages,
+}: {
+    data: TutorialStep[];
+    pixiVersion: IVersion;
+    extraPackages?: Record<string, string>;
+})
 {
     let step = Number(window.location.hash.replace('#', ''));
 
@@ -29,6 +38,9 @@ function BrowserTutorial({ data, pixiVersion }: { data: TutorialStep[]; pixiVers
     {
         setShowSolution(!showSolution);
     };
+
+    const { indexCode, extraFiles } = useCodeSource(code);
+    const { indexCode: indexCodeCompleted, extraFiles: extraFilesCompleted } = useCodeSource(completedCode ?? code);
 
     return (
         <>
@@ -64,7 +76,9 @@ function BrowserTutorial({ data, pixiVersion }: { data: TutorialStep[]; pixiVers
                 </div>
             </div>
             <PixiPlayground
-                code={completedCode && showSolution ? completedCode : code}
+                code={completedCode && showSolution ? indexCodeCompleted : indexCode}
+                extraFiles={completedCode && showSolution ? extraFilesCompleted : extraFiles}
+                extraPackages={extraPackages}
                 pixiVersion={pixiVersion.version}
                 isPixiDevVersion={pixiVersion.dev}
                 mode="tutorial"
@@ -89,7 +103,7 @@ export default function Tutorial({ id, pixiVersion }: { id: string; pixiVersion:
                 {showEditor ? '<  To Instructions' : 'To Editor >'}
             </button>
             <BrowserOnly fallback={<h1 className={styles.loader}>LOADING...</h1>}>
-                {() => <BrowserTutorial data={entry.steps} pixiVersion={pixiVersion} />}
+                {() => <BrowserTutorial data={entry.steps} pixiVersion={pixiVersion} extraPackages={entry.extraPackages} />}
             </BrowserOnly>
         </div>
     );
