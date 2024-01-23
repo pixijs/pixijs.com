@@ -65,6 +65,7 @@ export default function PixiPlayground({
     isPixiDevVersion = false,
     pixiVersion = latestVersion,
     mode = 'example',
+    onCodeChanged,
 }: PixiPlaygroundProps)
 {
     const { colorMode } = useColorMode();
@@ -89,6 +90,9 @@ export default function PixiPlayground({
     // Hack to make the examples pages full width on wide screens
     useContainerClassNameModifier('example', mode === 'example');
 
+    // Hack to make the code editor pages full width on wide screens
+    useContainerClassNameModifier('coding', mode !== 'example');
+
     return (
         <SandpackProvider
             key={key}
@@ -105,7 +109,7 @@ export default function PixiPlayground({
                 activeFile,
             }}
         >
-            <BasePlayground useTabs={!!extraFiles} mode={mode} />
+            <BasePlayground useTabs={!!extraFiles} mode={mode} onCodeChanged={onCodeChanged} />
         </SandpackProvider>
     );
 }
