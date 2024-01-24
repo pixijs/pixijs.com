@@ -10,9 +10,6 @@ const app = new Application();
 // Store an array of fish sprites for animation.
 const fishes = [];
 
-// Reference to the water overlay.
-let overlay;
-
 async function setup()
 {
     // Intialize the application.
@@ -48,13 +45,13 @@ async function preload()
 
     addBackground(app);
     addFishes(app, fishes);
-    addWaterOverlay(app, overlay);
+    addWaterOverlay(app);
     addDisplacementEffect(app);
 
     // Add the animation callbacks to the application's ticker.
     app.ticker.add((time) =>
     {
         animateFishes(app, fishes, time);
-        animateWaterOverlay(app, overlay, time);
+        animateWaterOverlay(app, time);
     });
 })();

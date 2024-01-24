@@ -1,6 +1,6 @@
 import { Sprite } from 'pixi.js';
 
-function addBackground(app)
+export function addBackground(app)
 {
     // Create a background sprite.
     const background = Sprite.from('background');

@@ -1,6 +1,9 @@
 import { Texture, TilingSprite } from 'pixi.js';
 
-export function addWaterOverlay(app, overlay)
+// Reference to the water overlay.
+let overlay;
+
+export function addWaterOverlay(app)
 {
     // Create a water texture object.
     const texture = Texture.from('overlay');
@@ -16,7 +19,7 @@ export function addWaterOverlay(app, overlay)
     app.stage.addChild(overlay);
 }
 
-export function animateWaterOverlay(app, overlay, time)
+export function animateWaterOverlay(app, time)
 {
     // Extract the delta time from the Ticker object.
     const delta = time.deltaTime;
