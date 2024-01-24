@@ -1,10 +1,6 @@
 import PixiPlayground from '@site/src/components/Playground/PixiPlayground';
 import Select from '@site/src/components/Select';
-import {
-    defaultExampleId,
-    useCodeExamples,
-    useCodeSource,
-} from '@site/src/components/Playground/PixiPlayground/useEditorCode';
+import { defaultExampleId, useCodeExamples } from '@site/src/components/Playground/PixiPlayground/useEditorCode';
 import type { IVersion } from '@site/src/components/Playground/PixiPlayground/usePixiVersions';
 import { usePlaygroundURLState } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
 
@@ -17,22 +13,22 @@ export default function Playground({ pixiVersion }: { pixiVersion: IVersion })
         defaultExampleId,
         defaultPixiVersion: pixiVersion.version,
     });
-    const { source: urlSourceCode, exampleId: selectedOptionId } = urlState;
+    const { state, exampleId: selectedOptionId } = urlState;
 
     const {
-        source: codeSource,
+        indexCode,
+        extraFiles,
+        activeFile,
         usesWebWorkerLibrary,
         exampleOptions,
         handleOptionSelected,
         handleEditorCodeChanged,
     } = useCodeExamples({
-        urlSourceCode,
+        urlState: state,
         selectedOptionId,
         setURLState,
         pixiVersion,
     });
-
-    const { indexCode, extraFiles } = useCodeSource(codeSource);
 
     return (
         <div className={styles.wrapper}>
@@ -51,6 +47,7 @@ export default function Playground({ pixiVersion }: { pixiVersion: IVersion })
                         <PixiPlayground
                             code={indexCode}
                             extraFiles={extraFiles}
+                            activeFile={activeFile}
                             pixiVersion={pixiVersion.version}
                             isPixiDevVersion={pixiVersion.dev}
                             isPixiWebWorkerVersion={usesWebWorkerLibrary}
