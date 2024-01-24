@@ -4,7 +4,7 @@ import fragment from './triangleTextured.frag';
 
 (async () =>
 {
-    const texture = await Assets.load('assets/bg_scene_rotate@2x.jpg');
+    const texture = await Assets.load('https://pixijs.com/assets/bg_scene_rotate.jpg');
 
     // Create a new application
     const app = new Application();
