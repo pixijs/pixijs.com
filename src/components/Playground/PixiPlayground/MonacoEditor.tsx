@@ -2,9 +2,10 @@ import { useCallback, useEffect, useRef } from 'react';
 import type { editor } from 'monaco-editor';
 import { useColorMode } from '@docusaurus/theme-common';
 import Editor from '@monaco-editor/react';
+import type { SandpackState } from '@codesandbox/sandpack-react';
 import { FileTabs, SandpackStack, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
 
-export type CodeChangeCallbackType = (code: string | undefined) => void;
+export type CodeChangeCallbackType = (code: string | undefined, state: SandpackState) => void;
 
 type MonacoEditorProps = {
     useTabs: boolean;
@@ -96,7 +97,7 @@ export default function MonacoEditor({ useTabs, onChange }: MonacoEditorProps)
                 onChange={(value) =>
                 {
                     updateCode(value || '');
-                    onChange?.(value);
+                    onChange?.(value, sandpack);
                 }}
                 theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
             />

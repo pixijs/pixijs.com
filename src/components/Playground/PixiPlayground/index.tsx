@@ -50,6 +50,7 @@ type PixiPlaygroundProps = {
     code: string;
     extraFiles?: Record<string, string>;
     extraPackages?: Record<string, string>;
+    activeFile?: string;
     isPixiWebWorkerVersion?: boolean;
     isPixiDevVersion?: boolean;
     pixiVersion?: string;
@@ -61,10 +62,12 @@ export default function PixiPlayground({
     code,
     extraFiles,
     extraPackages,
+    activeFile,
     isPixiWebWorkerVersion = false,
     isPixiDevVersion = false,
     pixiVersion = latestVersion,
     mode = 'example',
+    onCodeChanged,
 }: PixiPlaygroundProps)
 {
     const { colorMode } = useColorMode();
@@ -79,15 +82,24 @@ export default function PixiPlayground({
     });
 
     // We will show the passed in extra files on the editor tabs by default
-    // and will hide any of them that has a key (file name) end with an '*'.
-    const visibleExtraFiles = Object.keys(extraFiles ?? {}).filter((fileName) => !fileName.endsWith('!')) as any[];
+    // and will hide any of them that has a key (file name) end with an '!'.
+    const visibleExtraFiles = Object.keys(extraFiles ?? {})
+        .filter((fileName) => !fileName.endsWith('!'))
+        .map((fileName) => fileName.replace('*', '')) as any[];
 
-    // We will initially show 'index.js' by default, unless if there is an extra file that ends with an '$'
+    // If there is no activeFile paramater passed in, we will initially show 'index.js' by default
+    // unless if there is an extra file that ends with an '*'
     // in which case we will show that file instead.
-    const activeFile = (Object.keys(extraFiles ?? {}).find((fileName) => fileName.endsWith('*')) as any) ?? 'src/index.js';
+    const active
+        = activeFile
+        ?? (Object.keys(extraFiles ?? {}).find((fileName) => fileName.endsWith('*')) as any)?.replace('*', '')
+        ?? 'src/index.js';
 
     // Hack to make the examples pages full width on wide screens
     useContainerClassNameModifier('example', mode === 'example');
+
+    // Hack to make the code editor pages full width on wide screens
+    useContainerClassNameModifier('coding', mode !== 'example');
 
     return (
         <SandpackProvider
@@ -102,10 +114,10 @@ export default function PixiPlayground({
                     'sp-layout': styles.spLayout,
                 },
                 visibleFiles: ['src/index.js', ...visibleExtraFiles],
-                activeFile,
+                activeFile: active,
             }}
         >
-            <BasePlayground useTabs={!!extraFiles} mode={mode} />
+            <BasePlayground useTabs={!!extraFiles} mode={mode} onCodeChanged={onCodeChanged} />
         </SandpackProvider>
     );
 }
