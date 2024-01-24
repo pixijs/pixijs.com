@@ -112,6 +112,8 @@ export default function PixiPlayground({
                 classes: {
                     'sp-wrapper': mode === 'tutorial' ? styles.tpWrapper : styles.spWrapper,
                     'sp-layout': styles.spLayout,
+                    'sp-tabs-scrollable-container': styles.spTabs,
+                    'sp-tab-button': styles.spTabButton,
                 },
                 visibleFiles: ['src/index.js', ...visibleExtraFiles],
                 activeFile: active,

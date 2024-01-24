@@ -55,6 +55,13 @@ export default function MonacoEditor({ useTabs, onChange }: MonacoEditorProps)
     const { code, updateCode } = useActiveCode();
     const { sandpack } = useSandpack();
 
+    useEffect(() =>
+    {
+        const tab = document.querySelector('.sp-tab-button[data-active=true]');
+
+        tab?.scrollIntoView();
+    }, [sandpack.activeFile]);
+
     const getFileExtension = (filename: string): string =>
     {
         const parts = filename.split('.');

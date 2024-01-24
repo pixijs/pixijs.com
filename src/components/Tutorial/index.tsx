@@ -6,7 +6,7 @@ import PixiPlayground from '../Playground/PixiPlayground';
 import type { IVersion } from '../Playground/PixiPlayground/usePixiVersions';
 import type { TutorialStep } from '@site/src/tutorials';
 import { getTutorialEntry } from '@site/src/tutorials';
-import { useCodeSource } from '../Playground/PixiPlayground/useEditorCode';
+import { extractSource } from '../Playground/PixiPlayground/useEditorCode';
 
 function BrowserTutorial({
     data,
@@ -39,8 +39,8 @@ function BrowserTutorial({
         setShowSolution(!showSolution);
     };
 
-    const { indexCode, extraFiles } = useCodeSource(code);
-    const { indexCode: indexCodeCompleted, extraFiles: extraFilesCompleted } = useCodeSource(completedCode ?? code);
+    const { indexCode, extraFiles } = extractSource(code);
+    const { indexCode: indexCodeCompleted, extraFiles: extraFilesCompleted } = extractSource(completedCode ?? code);
 
     return (
         <>
