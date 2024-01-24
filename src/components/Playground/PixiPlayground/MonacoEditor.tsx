@@ -59,7 +59,7 @@ export default function MonacoEditor({ useTabs, onChange }: MonacoEditorProps)
     {
         const tab = document.querySelector('.sp-tab-button[data-active=true]');
 
-        tab?.scrollIntoView();
+        tab?.scrollIntoView(false);
     }, [sandpack.activeFile]);
 
     const getFileExtension = (filename: string): string =>
