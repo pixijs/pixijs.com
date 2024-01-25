@@ -59,6 +59,7 @@ import sprite from '!!raw-loader!./masks/sprite.js';
 import instancedGeometry from '!!raw-loader!./meshAndShaders/instancedGeometry/index.js';
 import instancedGeometryVert from '!!raw-loader!./meshAndShaders/instancedGeometry/instancedGeometry.vert';
 import instancedGeometryFrag from '!!raw-loader!./meshAndShaders/instancedGeometry/instancedGeometry.frag';
+import instancedGeometryWgsl from '!!raw-loader!./meshAndShaders/instancedGeometry/instancedGeometry.wgsl';
 import multipassMesh from '!!raw-loader!./meshAndShaders/multipassMesh/index.js';
 import multipassMeshVert from '!!raw-loader!./meshAndShaders/multipassMesh/multipassMesh.vert';
 import multipassMeshGridFrag from '!!raw-loader!./meshAndShaders/multipassMesh/grid.frag';
@@ -218,6 +219,7 @@ const examplesSource: ExamplesSourceType = {
             index: instancedGeometry,
             'src/instancedGeometry.vert': instancedGeometryVert,
             'src/instancedGeometry.frag': instancedGeometryFrag,
+            'src/instancedGeometry.wgsl': instancedGeometryWgsl,
         },
         multipassMesh: {
             index: multipassMesh,

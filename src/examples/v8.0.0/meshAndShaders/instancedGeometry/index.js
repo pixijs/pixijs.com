@@ -1,6 +1,7 @@
-import { Application, Assets, Mesh, Geometry, Buffer, TYPES, Shader } from 'pixi.js';
+import { Application, Assets, Buffer, BufferUsage, Geometry, GlProgram, Mesh, Shader } from 'pixi.js';
 import vertex from './instancedGeometry.vert';
 import fragment from './instancedGeometry.frag';
+import source from './instancedGeometry.wgsl';
 
 (async () =>
 {
@@ -8,52 +9,114 @@ import fragment from './instancedGeometry.frag';
     const app = new Application();
 
     // Initialize the application
-    await app.init({ resizeTo: window });
+    await app.init({
+        resizeTo: window,
+        // preference: 'webgl'
+    });
 
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
 
-    const geometry = new Geometry().addAttribute('aVPos', [-100, 0, 100, 0, 0, -150]);
+    const spinnyBG = await Assets.load('https://pixijs.com/assets/bg_scene_rotate.jpg');
 
-    geometry.instanced = true;
-    geometry.instanceCount = 5;
+    const totalTriangles = 1000;
 
-    const positionSize = 2;
-    const colorSize = 3;
-    const buffer = new Buffer(new Float32Array(geometry.instanceCount * (positionSize + colorSize)));
+    // need a buffer big enough to store x, y of totalTriangles
+    const instancePositionBuffer = new Buffer({
+        data: new Float32Array(totalTriangles * 2),
+        usage: BufferUsage.VERTEX | BufferUsage.COPY_DST,
+    });
 
-    geometry.addAttribute('aIPos', buffer, positionSize, false, TYPES.FLOAT, 4 * (positionSize + colorSize), 0, true);
-    geometry.addAttribute(
-        'aICol',
-        buffer,
-        colorSize,
-        false,
-        TYPES.FLOAT,
-        4 * (positionSize + colorSize),
-        4 * positionSize,
-        true,
-    );
+    const triangles = [];
 
-    for (let i = 0; i < geometry.instanceCount; i++)
+    for (let i = 0; i < totalTriangles; i++)
     {
-        const instanceOffset = i * (positionSize + colorSize);
-
-        buffer.data[instanceOffset + 0] = i * 80;
-        buffer.data[instanceOffset + 2] = Math.random();
-        buffer.data[instanceOffset + 3] = Math.random();
-        buffer.data[instanceOffset + 4] = Math.random();
+        triangles[i] = {
+            x: 800 * Math.random(),
+            y: 600 * Math.random(),
+            speed: 1 + Math.random() * 2,
+        };
     }
 
-    const shader = Shader.from(vertex, fragment);
+    const geometry = new Geometry({
+        attributes: {
+            aPosition: [
+                -10,
+                -10, // x, y
+                10,
+                -20, // x, y
+                10,
+                10,
+            ],
+            aUV: [
+                0,
+                0, // u, v
+                1,
+                0, // u, v
+                1,
+                1,
+                0,
+                1,
+            ],
+            aPositionOffset: {
+                buffer: instancePositionBuffer,
+                instance: true,
+            },
+        },
+        instanceCount: totalTriangles,
+    });
 
-    const triangles = new Mesh(geometry, shader);
+    const gl = { vertex, fragment };
 
-    triangles.position.set(400, 300);
+    const gpu = {
+        vertex: {
+            entryPoint: 'mainVert',
+            source,
+        },
+        fragment: {
+            entryPoint: 'mainFrag',
+            source,
+        },
+    };
 
-    app.stage.addChild(triangles);
+    const shader = Shader.from({
+        gl,
+        gpu,
+        resources: {
+            uTexture: spinnyBG.source,
+            uSampler: spinnyBG.source.style,
+            waveUniforms: {
+                time: { value: 1, type: 'f32' },
+            },
+        },
+    });
+
+    const triangleMesh = new Mesh({
+        geometry,
+        shader,
+    });
+
+    // triangle.position.set(128 / 2, 128 / 2);
+
+    app.stage.addChild(triangleMesh);
 
     app.ticker.add(() =>
     {
-        triangles.rotation += 0.01;
+        const data = instancePositionBuffer.data;
+
+        let count = 0;
+
+        for (let i = 0; i < totalTriangles; i++)
+        {
+            const triangle = triangles[i];
+
+            triangle.x += triangle.speed;
+            triangle.x %= 800;
+
+            data[count++] = triangle.x;
+            data[count++] = triangle.y;
+        }
+
+        instancePositionBuffer.update();
     });
 })();
