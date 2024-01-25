@@ -42,11 +42,6 @@ import customFrag from '!!raw-loader!./filtersAdvanced/custom/custom.frag';
 import mouseBlending from '!!raw-loader!./filtersAdvanced/mouseBlending/index.js';
 import mouseBlendingVert from '!!raw-loader!./filtersAdvanced/mouseBlending/mouseBlending.vert';
 import mouseBlendingFrag from '!!raw-loader!./filtersAdvanced/mouseBlending/mouseBlending.frag';
-import shaderToyFilterRenderTexture from '!!raw-loader!./filtersAdvanced/shaderToyFilterRenderTexture/index.js';
-import shaderToyFilterRenderTextureVert
-    from '!!raw-loader!./filtersAdvanced/shaderToyFilterRenderTexture/shaderToyFilter.vert';
-import shaderToyFilterRenderTextureFrag
-    from '!!raw-loader!./filtersAdvanced/shaderToyFilterRenderTexture/shaderToyFilter.frag';
 
 import blur from '!!raw-loader!./filtersBasic/blur.js';
 import colorMatrix from '!!raw-loader!./filtersBasic/colorMatrix.js';
@@ -199,11 +194,6 @@ const examplesSource: ExamplesSourceType = {
             index: mouseBlending,
             'src/mouseBlending.vert': mouseBlendingVert,
             'src/mouseBlending.frag': mouseBlendingFrag,
-        },
-        shaderToyFilterRenderTexture: {
-            index: shaderToyFilterRenderTexture,
-            'src/shaderToyFilter.vert': shaderToyFilterRenderTextureVert,
-            'src/shaderToyFilter.frag': shaderToyFilterRenderTextureFrag,
         },
     },
     advanced: {

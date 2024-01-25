@@ -64,8 +64,7 @@
   ],
   "filtersAdvanced": [
     "mouseBlending",
-    "custom",
-    "shaderToyFilterRenderTexture"
+    "custom"
   ],
   "meshAndShaders": [
     "texturedMeshBasic",
