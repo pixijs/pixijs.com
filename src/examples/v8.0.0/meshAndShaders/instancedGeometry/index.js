@@ -11,7 +11,7 @@ import source from './instancedGeometry.wgsl';
     // Initialize the application
     await app.init({
         resizeTo: window,
-        // preference: 'webgl'
+        preference: 'webgl',
     });
 
     // Append the application canvas to the document body
