@@ -10,14 +10,11 @@ We will be using an asynchronous immediately invoked function expression ([IIFE]
 
 ## Application Setup
 
-Let's create the application outside of the IIFE just so that it can be referenced across other functions declared outside. The initialization and appending the application's canvas will be done from within the `setup` function which is called inside the IIFE.
+Let's create the application outside of the IIFE just so that it can be referenced across other functions declared outside. We can then initialize the application and appending its canvas to the DOM inside the IIFE.
 
 ```javascript
-async function setup()
-{
-    await app.init({ background: '#021f4b', resizeTo: window });
-    document.body.appendChild(app.canvas);
-}
+await app.init({ background: '#021f4b', resizeTo: window });
+document.body.appendChild(app.canvas);
 ```
 
 At this point, you should see the preview filled with an empty light blue background.
