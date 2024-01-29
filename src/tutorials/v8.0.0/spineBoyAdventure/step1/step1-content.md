@@ -36,27 +36,27 @@ Let's then preload all of our required assets upfront which includes:
 await Assets.load([
     {
         alias: 'spineSkeleton',
-        src: 'https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pro.skel',
+        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/spineboy.skel',
     },
     {
         alias: 'spineAtlas',
-        src: 'https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pma.atlas',
+        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/spineboy.atlas',
     },
     {
         alias: 'sky',
-        src: 'http://localhost:3000/assets/tutorials/spineboy-adventure/sky.png',
+        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/sky.png',
     },
     {
         alias: 'background',
-        src: 'http://localhost:3000/assets/tutorials/spineboy-adventure/background.png',
+        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/background.png',
     },
     {
         alias: 'midground',
-        src: 'http://localhost:3000/assets/tutorials/spineboy-adventure/midground.png',
+        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/midground.png',
     },
     {
         alias: 'platform',
-        src: 'http://localhost:3000/assets/tutorials/spineboy-adventure/platform.png',
+        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/platform.png',
     },
 ]);
 ```
