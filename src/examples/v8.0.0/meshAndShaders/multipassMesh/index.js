@@ -44,7 +44,7 @@ import combineFragment from './combine.frag';
         },
         resources: {
             gridUniforms: {
-                zoom: { type: 'float', value: 10 },
+                zoom: { type: 'f32', value: 10 },
             },
         },
     });
@@ -65,8 +65,8 @@ import combineFragment from './combine.frag';
         },
         resources: {
             rippleUniforms: {
-                amount: { type: 'float', value: 0.5 },
-                phase: { type: 'float', value: 0 },
+                amount: { type: 'f32', value: 0.5 },
+                phase: { type: 'f32', value: 0 },
             },
             texIn: gridTexture.source,
         },
@@ -86,7 +86,7 @@ import combineFragment from './combine.frag';
         },
         resources: {
             noiseUniforms: {
-                limit: { type: 'float', value: 0.5 },
+                limit: { type: 'f32', value: 0.5 },
             },
             noise: perlinTexture.source,
         },
@@ -106,8 +106,8 @@ import combineFragment from './combine.frag';
         },
         resources: {
             waveUniforms: {
-                amplitude: { type: 'float', value: 0.75 },
-                time: { type: 'float', value: 0 },
+                amplitude: { type: 'f32', value: 0.75 },
+                time: { type: 'f32', value: 0 },
             },
         },
     });
