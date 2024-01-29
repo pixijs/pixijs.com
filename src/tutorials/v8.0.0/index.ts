@@ -21,7 +21,7 @@ export default {
     },
     spineBoyAdventure: {
         description: 'Behold the power of interactive Spine animation!',
-        // thumbnail: 'thumb_choo_choo_train.png',
+        thumbnail: 'thumb_spineboy_adventure.png',
         steps: spineBoyAdventureTutorialSteps,
         extraPackages: {
             '@pixi/spine-pixi': '^1.0.4',
