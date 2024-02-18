@@ -6,7 +6,16 @@
     "build": "https://pixijs.download/dev/pixi.min.js",
     "docs": "https://pixijs.download/release/docs/index.html",
     "dev": true,
-    "npm": "https://pkg.csb.dev/pixijs/pixijs/commit/978ae574"
+    "npm": "https://pkg.csb.dev/pixijs/pixijs/commit/eb03e248"
+  },
+  {
+    "versionLabel": "v7.4.x",
+    "version": "7.4.0",
+    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v7.4.0",
+    "build": "https://pixijs.download/v7.4.0/pixi.min.js",
+    "docs": "https://pixijs.download/v7.4.0/docs/index.html",
+    "npm": "7.4.0",
+    "latest": true
   },
   {
     "versionLabel": "v7.3.x",
@@ -14,8 +23,7 @@
     "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v7.3.3",
     "build": "https://pixijs.download/v7.3.3/pixi.min.js",
     "docs": "https://pixijs.download/v7.3.3/docs/index.html",
-    "npm": "7.3.3",
-    "latest": true
+    "npm": "7.3.3"
   },
   {
     "versionLabel": "v7.2.x",
