@@ -48,11 +48,20 @@ export default function OpenCollective(): JSX.Element
             const data = (await response.json()) as OpenCollectiveSchema;
             const sponsorData = data
                 .filter((member) => member.tier === 'sponsor')
+                .sort((a, b) => b.totalAmountDonated - a.totalAmountDonated)
                 .map((member) => ({
                     name: member.name,
                     image: member.image,
                     website: member.website,
                 }));
+
+            const playco = {
+                name: 'Playco',
+                image: '/images/logo-playco.png',
+                website: 'https://www.play.co/',
+            };
+
+            sponsorData.unshift(playco);
 
             setSponsors(sponsorData as SponsorData[]);
         }

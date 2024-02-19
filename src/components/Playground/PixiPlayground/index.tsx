@@ -1,7 +1,7 @@
 import { useColorMode } from '@docusaurus/theme-common';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import classNames from 'classnames';
-import { SandpackLayout, SandpackPreview, SandpackProvider, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
+import { SandpackLayout, SandpackPreview, SandpackProvider, useSandpack } from '@codesandbox/sandpack-react';
 import { useContainerClassNameModifier } from '@site/src/hooks/useContainerClassNameModifier';
 import { latestVersion } from './usePixiVersions';
 import MonacoEditor from './MonacoEditor';
@@ -13,42 +13,16 @@ import styles from './index.module.scss';
 type BasePlaygroundMode = 'tutorial' | 'fullscreen' | 'example';
 
 type BasePlaygroundProps = {
+    useTabs: boolean;
     mode: BasePlaygroundMode;
     onCodeChanged?: CodeChangeCallbackType;
 };
 
-function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
+function BasePlayground({ useTabs, mode, onCodeChanged }: BasePlaygroundProps)
 {
-    // Override main container styling when in coding mode
-    useEffect(() =>
-    {
-        const className = 'coding';
-        const container = document.querySelector('.container');
-
-        container?.classList.add(className);
-
-        // Cleanup function to remove the class when the component is unmounted
-        return () =>
-        {
-            container?.classList.remove(className);
-        };
-    }, []);
-
-    const { code, updateCode } = useActiveCode();
     const { sandpack } = useSandpack();
     const [showOutput, setShowOutput] = useState(false);
     const { activeFile, bundlerState } = sandpack;
-
-    const handleCodeChange: CodeChangeCallbackType = useCallback(
-        (nextCode) =>
-        {
-            const nextCodeString = nextCode ?? '';
-
-            updateCode(nextCodeString);
-            onCodeChanged?.(nextCodeString);
-        },
-        [onCodeChanged, updateCode],
-    );
 
     const handleToggle = useCallback(() =>
     {
@@ -59,7 +33,7 @@ function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
     return (
         <SandpackLayout className={classNames(styles[mode], showOutput && styles.showOutput)}>
             <div className={styles.editorWrapper}>
-                <MonacoEditor key={activeFile} code={code} onChange={handleCodeChange} />
+                <MonacoEditor key={activeFile} useTabs={useTabs} onChange={onCodeChanged} />
             </div>
 
             <div className={styles.previewWrapper}>
@@ -74,6 +48,9 @@ function BasePlayground({ mode, onCodeChanged }: BasePlaygroundProps)
 
 type PixiPlaygroundProps = {
     code: string;
+    extraFiles?: Record<string, string>;
+    extraPackages?: Record<string, string>;
+    activeFile?: string;
     isPixiWebWorkerVersion?: boolean;
     isPixiDevVersion?: boolean;
     pixiVersion?: string;
@@ -83,24 +60,46 @@ type PixiPlaygroundProps = {
 
 export default function PixiPlayground({
     code,
-    onCodeChanged,
+    extraFiles,
+    extraPackages,
+    activeFile,
     isPixiWebWorkerVersion = false,
     isPixiDevVersion = false,
     pixiVersion = latestVersion,
     mode = 'example',
+    onCodeChanged,
 }: PixiPlaygroundProps)
 {
     const { colorMode } = useColorMode();
 
     const { key, files, customSetup } = useSandpackConfiguration({
         code,
+        extraFiles,
+        extraPackages,
         isPixiDevVersion,
         isPixiWebWorkerVersion,
         pixiVersion,
     });
 
+    // We will show the passed in extra files on the editor tabs by default
+    // and will hide any of them that has a key (file name) end with an '!'.
+    const visibleExtraFiles = Object.keys(extraFiles ?? {})
+        .filter((fileName) => !fileName.endsWith('!'))
+        .map((fileName) => fileName.replace('*', '')) as any[];
+
+    // If there is no activeFile paramater passed in, we will initially show 'index.js' by default
+    // unless if there is an extra file that ends with an '*'
+    // in which case we will show that file instead.
+    const active
+        = activeFile
+        ?? (Object.keys(extraFiles ?? {}).find((fileName) => fileName.endsWith('*')) as any)?.replace('*', '')
+        ?? 'src/index.js';
+
     // Hack to make the examples pages full width on wide screens
     useContainerClassNameModifier('example', mode === 'example');
+
+    // Hack to make the code editor pages full width on wide screens
+    useContainerClassNameModifier('coding', mode !== 'example');
 
     return (
         <SandpackProvider
@@ -113,10 +112,14 @@ export default function PixiPlayground({
                 classes: {
                     'sp-wrapper': mode === 'tutorial' ? styles.tpWrapper : styles.spWrapper,
                     'sp-layout': styles.spLayout,
+                    'sp-tabs-scrollable-container': styles.spTabs,
+                    'sp-tab-button': styles.spTabButton,
                 },
+                visibleFiles: ['src/index.js', ...visibleExtraFiles],
+                activeFile: active,
             }}
         >
-            <BasePlayground mode={mode} onCodeChanged={onCodeChanged} />
+            <BasePlayground useTabs={!!extraFiles} mode={mode} onCodeChanged={onCodeChanged} />
         </SandpackProvider>
     );
 }

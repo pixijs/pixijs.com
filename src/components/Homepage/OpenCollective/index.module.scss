@@ -31,23 +31,42 @@
     }
 
     .sponsorGrid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
-        gap: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        width: 90vw;
         max-width: 940px;
         margin: 0 auto;
         padding: 20px 0px;
+
+        @media screen and (max-width: 481px) {
+            gap: 1rem;
+        }
     }
 
     .sponsor {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
 
-    .sponsorImage {
-        max-width: 100px;
-        border-radius: 15%;
+        .sponsorImage {
+            max-width: 100px;
+            border-radius: 15px;
+        }
+
+        &:first-child {
+            padding: 0 calc(min(100vw, 940px) - min(90vw, 300px) / 2);
+
+            .sponsorImage {
+                max-width: 350px;
+
+                @media screen and (max-width: 481px) {
+                    width: 80vw;
+                }
+            }
+        }
     }
 }
 

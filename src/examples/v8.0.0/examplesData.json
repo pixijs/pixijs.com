@@ -6,7 +6,7 @@
     "particleContainer",
     "blendModes",
     "meshPlane",
-    "fillGradient"
+    "renderGroup"
   ],
   "advanced": [
     "slots",
@@ -35,7 +35,12 @@
   "graphics": [
     "simple",
     "advanced",
-    "dynamic"
+    "dynamic",
+    "svg",
+    "svg-load",
+    "texture",
+    "fillGradient",
+    "meshFromPath"
   ],
   "events": [
     "click",
@@ -48,7 +53,6 @@
       "hide": true
     },
     "logger",
-    "nestedBoundaryWithProjection",
     "pointerTracker",
     "slider"
   ],
@@ -65,8 +69,7 @@
   ],
   "filtersAdvanced": [
     "mouseBlending",
-    "custom",
-    "shaderToyFilterRenderTexture"
+    "custom"
   ],
   "meshAndShaders": [
     "texturedMeshBasic",
@@ -74,13 +77,11 @@
     "triangle",
     "triangleColor",
     "triangleTextured",
-    "uniforms",
-    "sharingGeometry",
+    "sharedGeometry",
     "sharedShader",
-    "mergingGeometry",
     "instancedGeometry",
     "shaderToyMesh",
-    "multiPassShaderGeneratedMesh"
+    "multipassMesh"
   ],
   "textures": [
     "textureRotate",

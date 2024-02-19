@@ -13,6 +13,7 @@ export type TutorialEntry = {
     description: string;
     thumbnail?: string;
     steps: TutorialStep[];
+    extraPackages?: Record<string, string>;
 };
 
 // TODO: Use await import to dynamically load versioned content on demand instead?

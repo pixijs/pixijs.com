@@ -2,17 +2,17 @@ import { useCallback, useEffect, useRef } from 'react';
 import type { editor } from 'monaco-editor';
 import { useColorMode } from '@docusaurus/theme-common';
 import Editor from '@monaco-editor/react';
+import type { SandpackState } from '@codesandbox/sandpack-react';
+import { FileTabs, SandpackStack, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
 
-const ROOT_DIR = 'inmemory://model/';
-
-export type CodeChangeCallbackType = (code: string | undefined) => void;
+export type CodeChangeCallbackType = (code: string | undefined, state: SandpackState) => void;
 
 type MonacoEditorProps = {
-    code: string;
-    onChange: CodeChangeCallbackType;
+    useTabs: boolean;
+    onChange?: CodeChangeCallbackType;
 };
 
-export default function MonacoEditor({ code, onChange }: MonacoEditorProps)
+export default function MonacoEditor({ useTabs, onChange }: MonacoEditorProps)
 {
     const editorRef = useRef(null);
 
@@ -52,16 +52,62 @@ export default function MonacoEditor({ code, onChange }: MonacoEditorProps)
     };
 
     const { colorMode } = useColorMode();
+    const { code, updateCode } = useActiveCode();
+    const { sandpack } = useSandpack();
+
+    useEffect(() =>
+    {
+        const tab = document.querySelector('.sp-tab-button[data-active=true]');
+
+        tab?.scrollIntoView(false);
+    }, [sandpack.activeFile]);
+
+    const getFileExtension = (filename: string): string =>
+    {
+        const parts = filename.split('.');
+
+        return parts[parts.length - 1];
+    };
+
+    const getLanguage = (filename: string): string =>
+    {
+        const extension = getFileExtension(filename);
+
+        switch (extension)
+        {
+            case 'js':
+                return 'javascript';
+            case 'ts':
+                return 'typescript';
+            case 'html':
+                return 'html';
+            case 'css':
+                return 'css';
+            case 'wgsl':
+                return 'wgsl';
+            default:
+                return 'plaintext';
+        }
+    };
+
+    const language = getLanguage(sandpack.activeFile);
 
     return (
-        <Editor
-            defaultLanguage="javascript"
-            value={code}
-            defaultPath={`${ROOT_DIR}/src/index.ts`}
-            onChange={onChange}
-            options={options}
-            onMount={handleEditorDidMount}
-            theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
-        />
+        <SandpackStack style={{ height: '100%', margin: 0 }}>
+            {useTabs && <FileTabs />}
+            <Editor
+                key={sandpack.activeFile}
+                defaultLanguage={language}
+                defaultValue={code}
+                options={options}
+                onMount={handleEditorDidMount}
+                onChange={(value) =>
+                {
+                    updateCode(value || '');
+                    onChange?.(value, sandpack);
+                }}
+                theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
+            />
+        </SandpackStack>
     );
 }

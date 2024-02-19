@@ -2,31 +2,31 @@ import { evolve, isNil, unless } from 'ramda';
 import type { DeserializeParamsType, SerializeParamsType, SetStateType } from '@site/src/hooks/useURLStateParams';
 import { useURLStateParams } from '@site/src/hooks/useURLStateParams';
 
-type URLStateParams = {
-    source?: string;
-    exampleId: string;
-    pixiVersion: string;
+export type URLSaveState = {
+    files: Record<string, { code: string }>;
+    visibleFiles: string[];
+    activeFile: string;
 };
 
-interface Payload
-{
-    code: string;
-}
+type URLStateParams = {
+    state?: URLSaveState;
+    exampleId: string;
+};
 
-function encodeSource(source: string)
+function encodeState(state: URLSaveState)
 {
-    const json = JSON.stringify({ code: source });
+    const json = JSON.stringify(state);
 
     return btoa(json);
 }
 
-function decodeSource(encodedSource: string)
+function decodeState(encodedState: string)
 {
     try
     {
-        const payload: Payload = JSON.parse(atob(encodedSource));
+        const state: URLSaveState = JSON.parse(atob(encodedState));
 
-        return payload.code;
+        return state;
     }
     catch
     {
@@ -34,15 +34,15 @@ function decodeSource(encodedSource: string)
     }
 }
 
-const safeEncodeSource = unless(isNil, encodeSource);
-const safeDecodeSource = unless(isNil, decodeSource);
+const safeEncodeState = unless(isNil, encodeState);
+const safeDecodeState = unless(isNil, decodeState);
 
 const serializeParams = evolve({
-    source: safeEncodeSource,
+    state: safeEncodeState,
 }) as SerializeParamsType<URLStateParams>;
 
 const deserializeParams = evolve({
-    source: safeDecodeSource,
+    state: safeDecodeState,
 }) as DeserializeParamsType<URLStateParams>;
 
 export type SetURLStateType = SetStateType<URLStateParams>;
@@ -52,16 +52,15 @@ type UsePlaygroundURLStateParams = {
     defaultPixiVersion: string;
 };
 
-export const usePlaygroundURLState = ({ defaultExampleId, defaultPixiVersion }: UsePlaygroundURLStateParams) =>
+export const usePlaygroundURLState = ({ defaultExampleId }: UsePlaygroundURLStateParams) =>
     useURLStateParams<URLStateParams>(
         (urlState) =>
         {
-            const { source, exampleId, pixiVersion } = urlState;
+            const { state, exampleId } = urlState;
 
             return {
-                source: source ?? undefined,
-                exampleId: source ? 'custom' : exampleId ?? defaultExampleId,
-                pixiVersion: pixiVersion ?? defaultPixiVersion,
+                state: state ?? undefined,
+                exampleId: state ? 'custom' : exampleId ?? defaultExampleId,
             };
         },
         serializeParams,

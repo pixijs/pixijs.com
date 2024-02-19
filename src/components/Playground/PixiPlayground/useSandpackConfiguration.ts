@@ -19,7 +19,7 @@ const indexHTML = `
 // babel configuration I could find (.browserslistrc isn't working and preset-env targets
 // are out of date, but it seems OK), while also allowing the best "open in sandbox"
 // functionality with all required dependencies
-export const useFiles = (code: string) =>
+export const useFiles = (code: string, extraFiles?: Record<string, string>) =>
     useMemo(
         () => ({
             '.babelrc': {
@@ -34,6 +34,9 @@ export const useFiles = (code: string) =>
                                     targets: 'last 2 chrome versions',
                                 },
                             ],
+                        ],
+                        plugins: [
+                            '@babel/plugin-proposal-class-properties',
                         ],
                     },
                     null,
@@ -55,19 +58,21 @@ export const useFiles = (code: string) =>
                     2,
                 ),
             },
+            ...extraFiles,
         }),
-        [code],
+        [code, extraFiles],
     );
 
 type UseDependenciesParams = {
     isPixiWebWorkerVersion: boolean;
     isPixiDevVersion: boolean;
     pixiVersion: string;
+    extraPackages?: Record<string, string>;
 };
 
 const isPreV8 = (pixiVersion: string) => Number(pixiVersion.split('.')[0]) < 8;
 
-const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion }: UseDependenciesParams) =>
+const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion, extraPackages }: UseDependenciesParams) =>
     useMemo(() =>
     {
         const pixiPackageName = isPixiWebWorkerVersion ? '@pixi/webworker' : 'pixi.js';
@@ -81,38 +86,55 @@ const useDependencies = ({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion
             packages.push('@pixi/graphics-extras', '@pixi/math-extras');
         }
 
-        const dependencies = packages.reduce(
-            (deps, packageName) => ({
-                ...deps,
-                [packageName]: getPackageVersion(packageName),
-            }),
-            {},
-        );
+        const dependencies = {
+            ...packages.reduce(
+                (deps, packageName) => ({
+                    ...deps,
+                    [packageName]: getPackageVersion(packageName),
+                }),
+                {},
+            ),
+            ...extraPackages,
+        };
 
         return {
             dependenciesKey: `${pixiPackageName}-${pixiVersion}`,
             dependencies,
         };
-    }, [isPixiDevVersion, isPixiWebWorkerVersion, pixiVersion]);
+    }, [isPixiDevVersion, isPixiWebWorkerVersion, pixiVersion, extraPackages]);
 
 type UseSandpackConfigurationParams = UseDependenciesParams & {
     code: string;
+    extraFiles?: Record<string, string>;
+    extraPackages?: Record<string, string>;
 };
 
 export const useSandpackConfiguration = ({
     code,
+    extraFiles,
+    extraPackages,
     isPixiWebWorkerVersion,
     isPixiDevVersion,
     pixiVersion,
 }: UseSandpackConfigurationParams) =>
 {
-    const files = useFiles(code);
+    // We use '!' and '*' at the end of extra files' key for handling custom behaviours on the tabs
+    // Therefore, we need to remove these marks from the file keys before passing it to useFiles
+    const processedExtraFiles = Object.fromEntries(
+        Object.entries(extraFiles ?? {}).map(([key, value]) => [key.replace(/[!*]/g, ''), value]),
+    );
+    const files = useFiles(code, processedExtraFiles);
 
-    const { dependenciesKey, dependencies } = useDependencies({ isPixiWebWorkerVersion, isPixiDevVersion, pixiVersion });
+    const { dependenciesKey, dependencies } = useDependencies({
+        isPixiWebWorkerVersion,
+        isPixiDevVersion,
+        pixiVersion,
+        extraPackages,
+    });
 
     // TODO: adding code here is only necessary because of user edited code, otherwise we
     // could flip between examples easily, investigate why it bugs out during editing
-    const key = `${dependenciesKey}-${code}`;
+    const key = `${dependenciesKey}-${code}-${Object.values(extraFiles ?? {}).join('-')}`;
 
     const customSetup: Record<string, any> = {
         entry: 'index.html',
@@ -120,6 +142,7 @@ export const useSandpackConfiguration = ({
         devDependencies: {
             'parcel-bundler': '^1.6.1',
             '@babel/core': '^7.21.3',
+            '@babel/plugin-proposal-class-properties': '^7.10.1',
         },
     };
 

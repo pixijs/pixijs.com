@@ -13,15 +13,22 @@ export default function Playground({ pixiVersion }: { pixiVersion: IVersion })
         defaultExampleId,
         defaultPixiVersion: pixiVersion.version,
     });
-    const { source: urlSourceCode, exampleId: selectedOptionId } = urlState;
+    const { state, exampleId: selectedOptionId } = urlState;
 
-    const { sourceCode, usesWebWorkerLibrary, exampleOptions, handleOptionSelected, handleEditorCodeChanged }
-        = useCodeExamples({
-            urlSourceCode,
-            selectedOptionId,
-            setURLState,
-            pixiVersion,
-        });
+    const {
+        indexCode,
+        extraFiles,
+        activeFile,
+        usesWebWorkerLibrary,
+        exampleOptions,
+        handleOptionSelected,
+        handleEditorCodeChanged,
+    } = useCodeExamples({
+        urlState: state,
+        selectedOptionId,
+        setURLState,
+        pixiVersion,
+    });
 
     return (
         <div className={styles.wrapper}>
@@ -38,7 +45,9 @@ export default function Playground({ pixiVersion }: { pixiVersion: IVersion })
                             />
                         </div>
                         <PixiPlayground
-                            code={sourceCode}
+                            code={indexCode}
+                            extraFiles={extraFiles}
+                            activeFile={activeFile}
                             pixiVersion={pixiVersion.version}
                             isPixiDevVersion={pixiVersion.dev}
                             isPixiWebWorkerVersion={usesWebWorkerLibrary}
