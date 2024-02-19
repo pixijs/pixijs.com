@@ -28,10 +28,10 @@ With PixiJS v8, our aim was to revisit and enhance the foundation of PixiJS, str
 
 Our vision for v8 was clear:
 - **Longevity:** We designed v8 to stand the test of time, anticipating it will remain relevant and robust for another decade.
-- **Innovation with WebGPU:** Embracing the latest in rendering technology, we've seamlessly integrated WebGPU, not as an add-on to our existing WebGL renderer but as a core paradigm, ensuring Pixi remains at the cutting edge as WebGL phases out.
+- **Innovation with WebGPU:** Embracing the latest in rendering technology, we've seamlessly integrated WebGPU, not as an add-on to our existing WebGL renderer but as a core paradigm, ensuring PixiJS remains at the cutting edge as WebGL phases out.
 - **Leveraging Modern JavaScript:** The advancements in JavaScript have significantly simplified development. We've utilized features like object destructuring and options to make v8 cleaner and more powerful.
 - **Correcting Past Oversights:** Every project has its lessons. With v8, we've addressed and rearchitected certain aspects of PixiJS, reducing complexity and enhancing functionality, particularly in areas we felt were overengineered in the past (looking at you, textures!).
-- **Boosting Performance:** Pixi.js is already renowned for its speed. With v8, we've unlocked even greater performance, making it faster across the board compared to v7.
+- **Boosting Performance:** PixiJS is already renowned for its speed. With v8, we've unlocked even greater performance, making it faster across the board compared to v7.
 
 We're incredibly proud of PixiJS v8 and eager to share the improvements and new features with you. While there are some breaking API changes, we've provided a migration guide and ensured compatibility with v7 wherever possible. Get ready to experience the next level of 2D rendering with PixiJS v8!
 
