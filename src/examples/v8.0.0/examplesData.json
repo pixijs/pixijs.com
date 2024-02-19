@@ -6,7 +6,7 @@
     "particleContainer",
     "blendModes",
     "meshPlane",
-    "fillGradient"
+    "renderGroup"
   ],
   "advanced": [
     "slots",
@@ -35,7 +35,12 @@
   "graphics": [
     "simple",
     "advanced",
-    "dynamic"
+    "dynamic",
+    "svg",
+    "svg-load",
+    "texture",
+    "fillGradient",
+    "meshFromPath"
   ],
   "events": [
     "click",

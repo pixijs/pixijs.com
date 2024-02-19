@@ -24,7 +24,7 @@ import particleContainer from '!!raw-loader!./basic/particleContainer.js';
 import meshPlane from '!!raw-loader!./basic/meshPlane.js';
 import tinting from '!!raw-loader!./basic/tinting.js';
 import transparentBackground from '!!raw-loader!./basic/transparentBackground.js';
-import fillGradient from '!!raw-loader!./basic/fillGradient.js';
+import renderGroup from '!!raw-loader!./basic/renderGroup.js';
 
 import click from '!!raw-loader!./events/click.js';
 import customHitarea from '!!raw-loader!./events/customHitarea.js';
@@ -51,6 +51,11 @@ import displacementMapFlag from '!!raw-loader!./filtersBasic/displacementMapFlag
 import advanced from '!!raw-loader!./graphics/advanced.js';
 import dynamic from '!!raw-loader!./graphics/dynamic.js';
 import simple from '!!raw-loader!./graphics/simple.js';
+import svg from '!!raw-loader!./graphics/svg.js';
+import svgLoad from '!!raw-loader!./graphics/svg-load.js';
+import texture from '!!raw-loader!./graphics/texture.js';
+import fillGradient from '!!raw-loader!./graphics/fillGradient.js';
+import meshFromPath from '!!raw-loader!./graphics/meshFromPath.js';
 
 import filter from '!!raw-loader!./masks/filter.js';
 import graphics from '!!raw-loader!./masks/graphics.js';
@@ -125,7 +130,7 @@ const examplesSource: ExamplesSourceType = {
         meshPlane,
         tinting,
         transparentBackground,
-        fillGradient,
+        renderGroup,
     },
     sprite: {
         animatedSpriteAnimationSpeed,
@@ -146,6 +151,11 @@ const examplesSource: ExamplesSourceType = {
         advanced,
         dynamic,
         simple,
+        svg,
+        svgLoad,
+        texture,
+        fillGradient,
+        meshFromPath,
     },
     events: {
         click,
