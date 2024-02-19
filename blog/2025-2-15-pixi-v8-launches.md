@@ -12,28 +12,28 @@ hide_table_of_contents: true
 keywords: ['PixiJS', 'pixi.js', 'webGL', 'webGPU', 'performance', '2d rendering', '2d webGL', 'javascript graphics', 'game development']
 ---
 
-Get ready to push the boundaries of what's possible on the web! Pixi v8 has landed, and it's a game-changer. Celebrating a decade of driving innovation, we've supercharged Pixi with the latest technological advancements, making it faster, more robust, and ridiculously powerful. From the seamless integration of WebGPU to leveraging modern JavaScript for smoother development, Pixi v8 is all about empowering you to create jaw-dropping web experiences with ease. It's not just an update; it's the future of 2D web graphics, today. Dive in and let Pixi v8 elevate your projects to unseen heights. Let's make the web a more beautiful place, one pixi(el) at a time.
+Get ready to push the boundaries of what's possible on the web! PixiJS v8 has landed, and it's a game-changer. Celebrating a decade of driving innovation, we've supercharged PixiJS with the latest technological advancements, making it faster, more robust, and ridiculously powerful. From the seamless integration of WebGPU to leveraging modern JavaScript for smoother development, PixiJS v8 is all about empowering you to create jaw-dropping web experiences with ease. It's not just an update; it's the future of 2D web graphics, today. Dive in and let PixiJS v8 elevate your projects to unseen heights. Let's make the web a more beautiful place, one pixi(el) at a time.
 
 <!--truncated-->
 
-## 🚀 Revolutionizing Web Graphics: Welcome to Pixi v8
+## 🚀 Revolutionizing Web Graphics: Welcome to PixiJS v8
 
 ![PixiJS logo](pixi.svg)
 
-It's hard to believe that Pixi.js has been part of the open-source community for a whopping ten years. In that time, the digital landscape has evolved tremendously, and so has Pixi. We've seen significant updates, like the transition to TypeScript, and we've overhauled major parts of the engine, such as asset loading and WebGL integration.
+It's hard to believe that PixiJS has been part of the open-source community for a whopping ten years. In that time, the digital landscape has evolved tremendously, and so has PixiJS. We've seen significant updates, like the transition to TypeScript, and we've overhauled major parts of the engine, such as asset loading and WebGL integration.
 
-Now, we're thrilled to unveil Pixi v8, arguably our most substantial update ever. This release is not just a reflection on the shortcomings of v7, which has served us well, but an acknowledgment that there's always room for improvement. Over time, we've all encountered aspects of our code we wished we could refine. Often, the best solutions and insights emerge only after we've stepped back from the problem, allowing us to see the bigger picture.
+Now, we're thrilled to unveil PixiJS v8, arguably our most substantial update ever. This release is not just a reflection on the shortcomings of v7, which has served us well, but an acknowledgment that there's always room for improvement. Over time, we've all encountered aspects of our code we wished we could refine. Often, the best solutions and insights emerge only after we've stepped back from the problem, allowing us to see the bigger picture.
 
-With Pixi v8, our aim was to revisit and enhance the foundation of Pixi, streamlining its core rather than just adding layers of code.
+With PixiJS v8, our aim was to revisit and enhance the foundation of PixiJS, streamlining its core rather than just adding layers of code.
 
 Our vision for v8 was clear:
 - **Longevity:** We designed v8 to stand the test of time, anticipating it will remain relevant and robust for another decade.
 - **Innovation with WebGPU:** Embracing the latest in rendering technology, we've seamlessly integrated WebGPU, not as an add-on to our existing WebGL renderer but as a core paradigm, ensuring Pixi remains at the cutting edge as WebGL phases out.
 - **Leveraging Modern JavaScript:** The advancements in JavaScript have significantly simplified development. We've utilized features like object destructuring and options to make v8 cleaner and more powerful.
-- **Correcting Past Oversights:** Every project has its lessons. With v8, we've addressed and rearchitected certain aspects of Pixi, reducing complexity and enhancing functionality, particularly in areas we felt were overengineered in the past (looking at you, textures!).
+- **Correcting Past Oversights:** Every project has its lessons. With v8, we've addressed and rearchitected certain aspects of PixiJS, reducing complexity and enhancing functionality, particularly in areas we felt were overengineered in the past (looking at you, textures!).
 - **Boosting Performance:** Pixi.js is already renowned for its speed. With v8, we've unlocked even greater performance, making it faster across the board compared to v7.
 
-We're incredibly proud of Pixi v8 and eager to share the improvements and new features with you. While there are some breaking API changes, we've provided a migration guide and ensured compatibility with v7 wherever possible. Get ready to experience the next level of 2D rendering with Pixi v8!
+We're incredibly proud of PixiJS v8 and eager to share the improvements and new features with you. While there are some breaking API changes, we've provided a migration guide and ensured compatibility with v7 wherever possible. Get ready to experience the next level of 2D rendering with PixiJS v8!
 
 ---
 
@@ -215,13 +215,13 @@ Text fills and strokes now conform to the same fills and strokes as graphics. Th
 
 ## 🤝 What now? Get involved!
 
-As Pixi v8 takes its first steps into the world, we're eager to see it grow with your feedback and contributions. Now we know things won't be perfect, but we're committed to quick responses on [GitHub](https://github.com/pixijs/pixijs) and [Discord](https://discord.gg/nrnDP9wtyX) to any issues that arise, valuing your input to make Pixi even better.
+As PixiJS v8 takes its first steps into the world, we're eager to see it grow with your feedback and contributions. Now we know things won't be perfect, but we're committed to quick responses on [GitHub](https://github.com/pixijs/pixijs) and [Discord](https://discord.gg/nrnDP9wtyX) to any issues that arise, valuing your input to make PixiJS even better.
 
 A heartfelt thanks to our early adopters (everyone in [here](https://discord.com/channels/734147990985375826/1143191340230914068)) for testing the limits of v8, to our dedicated contributors and team for their hard work. Your efforts and insights are invaluable to us. We could not have gotten here without you!
 
 A final big shout-out to PlayCo for their support in making this release a reality!
 
-Let's continue to innovate and push the boundaries of web graphics together. Your engagement is key to Pixi's evolution, and we're excited to see where we can go with your help.
+Let's continue to innovate and push the boundaries of web graphics together. Your engagement is key to PixiJS's evolution, and we're excited to see where we can go with your help.
 
 ## 📲 Keep in touch!
 
