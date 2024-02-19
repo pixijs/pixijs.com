@@ -46,8 +46,37 @@ We're incredibly proud of PixiJS v8 and eager to share the improvements and new 
 ---
 
 ## 🎁 Whats New?
+There are numerous updates to discuss, more than can be covered in a single post! Below are the key highlights. For a more detailed exploration of these changes, be sure to follow the links provided above.
 
-So many new things - more than we can easily cover in one post! Here's some head lines, but check out the links above for a more in depth details on the changes!
+#### 📈 New Performance Bar
+
+![bunnies](image.png)
+
+The performance of v8 is faster for **both** renderers. This means by using v8 and the WebGL renderer, all the speed improvements apply! This is mainly as we have taken great care to make a more reactive render loop that only updates what it needs to. Check out the numbers here:
+
+- **CPU** = time spent by the CPU rendering a single frame
+- **GPU** = time spent by the GPU rendering a single frame
+
+| Bunny Situation | V7 CPU  | V8 CPU |CPU Dif | V7 GPU | V8 GPU | GPU dif |
+|-----------------|------------|------------|--------------------|------------|------------|--------------------|
+| 100k sprites all moving | ~50ms | ~15ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>233%</div> | ~9ms | ~2ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>350%</div> |
+| 100k sprites not moving | ~21ms | ~0.12ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>17417%</div> | ~9ms | ~0.5ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>1700%</div> |
+| 100k sprites (changing scene structure) | ~50ms | ~24ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>108%</div> | ~9ms | ~2ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>350%</div> |
+
+These benchmark numbers are based on the Bunnymark test that you can try yourself.
+
+- [v7 Bunnymark](https://goodboydigital.github.io/pixi-bunnymark/dist/?version=v7&count=100000&renderer=webgpu)
+- [v8 Bunnymark - WebGPU](https://goodboydigital.github.io/pixi-bunnymark/dist/?version=v8&count=100000&renderer=webgpu)
+- [v8 Bunnymark - WebGL](https://goodboydigital.github.io/pixi-bunnymark/dist/?version=v8&count=100000&renderer=webgl)
+- [Repo](https://github.com/GoodBoyDigital/pixi-bunnymark)
+
+#### 🖥️ WebGPU Renderer
+
+![PixiJS + webGPU = love](image-1.png)
+
+We've implemented a WebGPU backend for rendering. Whilst this has created a better graphics paradigm under the hood and set us up for the future of rich web content, it's important to note that WebGPU does not automatically guarantee improved performance over WebGL in all scenarios, as PixiJS often encounters more limitations on the CPU side than the GPU. However, for scenes with numerous batch breaks, such as filters, masks, and blend modes, WebGPU may offer better performance due to its more modern to rendering. As WebGPU is relatively new, it's expected to enhance in speed over time, similar to the development of WebGL. It serves as a solid foundation for future advancements.
+
+
 #### 📦 New Package Structure
 
 No more "lerna." PixiJS is now just one package with one import root: `import {stuff} from ‘pixi.js’`. This change means we now have much better tree shaking during app compilation, reducing bundle size if not imported.
@@ -67,9 +96,7 @@ import { Sprite, Graphic } from "pixi.js";
 
 ### ✨ We *promise* the Renderer will work
 
-When initializing a renderer, this process is now asynchronous. This serves two purposes: firstly, identifying and loading the necessary renderer code to minimize what is loaded for your users. We only load the one backend that your user is using. There's no point in loading all the WebGL stuff if they are using WebGPU!
-
-Secondly, the initialization of WebGPU itself is an asynchronous process, so we need to have a promise in there somewhere :)
+When initializing a renderer, this process is now asynchronous. This serves two purposes: firstly, identifying and loading the necessary renderer code to minimize what is loaded for your users. We only load the one backend that your user is using. There's no point in loading all the WebGL stuff if they are using WebGPU. Secondly, the initialization of WebGPU itself is an asynchronous process, so we need to have a promise in there somewhere!
 
 ```ts
 import { Application, autoDetectRenderer } from "pixi.js";
@@ -88,68 +115,41 @@ const app = new Application();
 })();
 ```
 
-#### 🖥️ WebGPU Renderer
-
-![PixiJS + webGPU = love](image-1.png)
-
-The obvious one! We have a WebGPU backend to render things. It's worth noting that WebGPU is not inherently faster in all use cases than WebGL (nor is it slower). This is because we are generally more CPU-bound in PixiJS than GPU-bound. However, if you find that your scene has lots of batch breaks (e.g., filters, masks, blend modes), you may find WebGPU will perform faster - especially from the GPU side. WebGPU is still new, and I predict it will get faster with time, just as WebGL did! It's a great starting point!
-
-#### 📈 New Performance Bar
-
-![bunnies](image.png)
-
-The performance of v8 is faster for **both** renderers. This means by using v8 and the WebGL renderer, all the speed improvements apply! This is mainly as we have taken great care to make a more reactive render loop that only updates what it needs to. Check out the numbers here:
-
-- **CPU** = time spent by the CPU rendering a single frame
-- **GPU** = time spent by the GPU rendering a single frame
-
-| Bunny Situation | V7 CPU  | V8 CPU |CPU Dif | V7 GPU | V8 GPU | GPU dif |
-|-----------------|------------|------------|--------------------|------------|------------|--------------------|
-| 100k sprites all moving | ~50ms | ~15ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>233%</div> | ~9ms | ~2ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>350%</div> |
-| 100k sprites not moving | ~21ms | ~0.12ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>17417%</div> | ~9ms | ~0.5ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>1700%</div> |
-| 100k sprites (changing scene structure) | ~50ms | ~24ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>108%</div> | ~9ms | ~2ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>350%</div> |
-
-These benchmark numbers are based on the Bunnymark test that you can try yourself!
-
-- [v7 Bunnymark](https://goodboydigital.github.io/pixi-bunnymark/dist/?version=v7&count=100000&renderer=webgpu)
-- [v8 Bunnymark - WebGPU](https://goodboydigital.github.io/pixi-bunnymark/dist/?version=v8&count=100000&renderer=webgpu)
-- [v8 Bunnymark - WebGL](https://goodboydigital.github.io/pixi-bunnymark/dist/?version=v8&count=100000&renderer=webgl)
-- [Repo](https://github.com/GoodBoyDigital/pixi-bunnymark)
 
 #### 🌟 Scene Upgrades
 
 ![PixiJS logo](blend-modes.png)
 
-- We have introduced the concept of render groups, allowing containers to have their transform applied by the GPU. This means we can have a true 2D hardware-accelerated camera. Perfect for when you have a large static world that you want to pan and zoom around in! (much like in 3D - you move the Camera around the world, not the world around the camera). This can give really great speed boosts!
+- The concept of render groups has been introduced, enabling containers to utilize GPU for their transformations. This facilitates a true 2D hardware-accelerated camera, ideal for navigating large static worlds through panning and zooming, similar to how a camera moves in a 3D environment rather than moving the world itself. This approach can significantly enhance performance.
 
-```
+```ts
 const container = new Container({
   isRenderGroup:true // this containers transform is now handled on the GPU!
 }) 
 ```
 
-- Another cool new change is that now blend modes and tints are inherited, much like transforms and alpha. This means you can now easily tint a container, and all its children will have the tint applied - same for blend modes! its as easy as 
+- Another cool new change is that now blend modes and tints are inherited, much like transforms and alpha. This means you can now easily tint a container, and all its children will have the tint applied - same for blend modes, its as easy as:
   
 ```
-// will make all the children tinted red!
+// will make all the children tinted red
 container.tint = 'red'
 // will make all the children have the add blend mode
 container.blendMode = 'add'
 ``` 
 
-Rendering to a texture with antialiasing is now super easy; all you have to do is set the new antialiasing property to true when creating a render texture (or applying a filter) just as you do when creating your renderer! Easy peasy :D
+Rendering to a texture with antialiasing has been simplified; you only need to enable the new antialiasing property by setting it to true during the creation of a render texture or when applying a filter, similar to the process used for creating your renderer.
 
 ```
 const texture = RenderTexture.create({
     width:100,
     height:100,
-    antialias:true // easy as that!
+    antialias:true // easy as that
 })
 ```
 
 - We have also added support for a wide range of Photoshop-like filters, This allows you to take your rendering to the next level! We have including all the classics:
   - ColorBlend, ColorBurnBlend, ColorDodgeBlend, DarkenBlend, DifferenceBlend, DivideBlend, ExclusionBlend, HardLightBlend, HardMixBlend, LightenBlend, LinearBurnBlend, LinearDodgeBlend, LinearLightBlend, LuminosityBlend, NegationBlend, OverlayBlend, PinLightBlend, SaturationBlend, SoftLightBlend, SubtractBlend, VividLightBlend.
- - Its worth noting that they are essentially filters under the hood - so you know.. don't over use them or things might slow down! 
+ - It's important to mention that these are essentially filters at the core, so it's advisable not to overuse them to avoid potential slowdowns.
 
 ```ts
 import `pixi.js/advanced-blend-modes` // make sure to include them in you lib! (or cherry pick one!)
@@ -182,15 +182,22 @@ myContainer.blendMode = 'color-burn` // easy!
 - The new `GraphicsPath` class enables the drawing and sharing of shapes. This feature is particularly useful as it allows for the creation of paths that can then be transformed into Mesh geometry using the `buildGeometryFromPath` function, opening up new possibilities for intricate and detailed graphic designs.
 
 ```
+  const path = new GraphicsPath()
+      .rect(-50, -50, 100, 100)
 
-const path = 
+  // create geometry from the path:
+  const geometry = buildGeometryFromPath({
+      path,    
+  });
+
+  const mesh = new Mesh({
+      geometry, 
+      texture: Texture.WHITE,
+  });
 
 ```
 
-For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the migration guide, or why not jump in and play with some examples!.
-
-60% faster??
-< todo - BENCHMARK>
+For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](https://pixijs.com/guides/migrations/v8), or why not jump in and play with some [examples](https://pixijs.com/examples/graphics/simple).
 
 #### 📝 Text Upgrades
 
@@ -198,11 +205,11 @@ Text has been upgraded to allow for better performance and usability! We have al
 
 BitmapFonts can now be generated on the fly or installed upfront as you prefer. They dynamically add characters as the font's glyphs are required, saving on memory. The layout of bitmap text is almost identical to the layout of the default text now, making it easier to switch between the two depending on your needs.
 
-```typescript
+```ts
 
 const myText = new BitmapText({
   text: 'hello im a bitmap font!',
-  // font will be dynamically created!
+  // font will be dynamically created
   style:{ 
     fontFamily: 'Outfit', 
     fontSize: 12,
@@ -210,7 +217,20 @@ const myText = new BitmapText({
   }
 })
 ```
-Text fills and strokes now conform to the same fills and strokes as graphics. This means Gradients, textures, and all the fun ways you can fill and stroke graphics can now be applied to Text!
+Text fills and strokes now conform to the same fills and strokes as graphics. This means Gradients, textures, and all the fun ways you can fill and stroke graphics can now be applied to Text.
+
+```ts
+const myText = new Text({
+  text: 'hello im some fancy text',
+  // font will be dynamically created!
+  style:{ 
+    fontFamily: 'Outfit', 
+    fontSize: 12,
+    fill: { texture, color:'red'} // same as graphics api fills
+    stroke: { width:3, color:'blue' } // same as graphics api strokes
+  }
+})
+```
 
 
 ## 🤝 What now? Get involved!
@@ -223,6 +243,6 @@ A final big shout-out to PlayCo for their support in making this release a reali
 
 Let's continue to innovate and push the boundaries of web graphics together. Your engagement is key to PixiJS's evolution, and we're excited to see where we can go with your help.
 
-## 📲 Keep in touch!
+## 📲 Keep in touch
 
 To stay in the loop, we invite you to follow [Doormat23](https://twitter.com/Doormat23) and [PixiJS](https://twitter.com/PixiJS) on social media, where we'll be unveiling more exciting updates shortly. Alternatively, you can join our vibrant community on [Discord](https://discord.gg/nrnDP9wtyX) for direct engagement and real-time chit-chats.
