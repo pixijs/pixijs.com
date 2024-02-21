@@ -22,7 +22,7 @@ Blend modes change how pixel colors are added to the screen when rendering.  The
 
 ## Scale vs Width & Height
 
-One common area of confusion when working with sprites lies in scaling and dimensions.  The PIXI.DisplayObject class allows you to set the x and y scale for any object.  Sprites, being DisplayObjects, also support scaling.  In addition, however, Sprites support explicit `width` and `height` attributes that can be used to achieve the same effect, but are in pixels instead of a percentage.  This works because a Sprite object owns a Texture, which has an explicit width and height.  When you set a Sprite's width, internally PixiJS converts that width into a percentage of the underlying texture's width and updates the object's x-scale.  So width and height are really just convenience methods for changing scale, based on pixel dimensions rather than percentages.
+One common area of confusion when working with sprites lies in scaling and dimensions.  The Container class allows you to set the x and y scale for any object.  Sprites, being Containers, also support scaling.  In addition, however, Sprites support explicit `width` and `height` attributes that can be used to achieve the same effect, but are in pixels instead of a percentage.  This works because a Sprite object owns a Texture, which has an explicit width and height.  When you set a Sprite's width, internally PixiJS converts that width into a percentage of the underlying texture's width and updates the object's x-scale.  So width and height are really just convenience methods for changing scale, based on pixel dimensions rather than percentages.
 
 ## Pivot vs Anchor
 
@@ -30,7 +30,7 @@ If you add a sprite to your stage and rotate it, it will by default rotate aroun
 
 There are two ways to achieve this: *pivots* and *anchors*
 
-An object's __pivot__ is an offset, expressed in pixels, from the top-left corner of the Sprite.  It defaults to (0, 0).  If you have a Sprite whose texture is 100px x 50px, and want to set the pivot point to the center of the image, you'd set your pivot to (50, 25) - half the width, and half the height.  Note that pivots can be set *outside* of the image, meaning the pivot may be less than zero or greater than the width/height.  This can be useful in setting up complex animation hierarchies, for example.  Every DisplayObject has a pivot.
+An object's __pivot__ is an offset, expressed in pixels, from the top-left corner of the Sprite.  It defaults to (0, 0).  If you have a Sprite whose texture is 100px x 50px, and want to set the pivot point to the center of the image, you'd set your pivot to (50, 25) - half the width, and half the height.  Note that pivots can be set *outside* of the image, meaning the pivot may be less than zero or greater than the width/height.  This can be useful in setting up complex animation hierarchies, for example.  Every Container has a pivot.
 
 An __anchor__, in contrast, is only available for Sprites.  Anchors are specified in percentages, from 0.0 to 1.0, in each dimension.  To rotate around the center point of a texture using anchors, you'd set your Sprite's anchor to (0.5, 0.5) - 50% in width and height.  While less common, anchors can also be outside the standard 0.0 - 1.0 range.
 

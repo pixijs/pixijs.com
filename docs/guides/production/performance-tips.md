@@ -46,8 +46,8 @@
 
 ### Filters
 
-- Release memory: `displayObject.filters = null`
-- If you know the size of them: `displayObject.filterArea = new PIXI.Rectangle(x,y,w,h)`. This can speed things up as it means the object does not need to be measured
+- Release memory: `container.filters = null`
+- If you know the size of them: `container.filterArea = new PIXI.Rectangle(x,y,w,h)`. This can speed things up as it means the object does not need to be measured
 - Filters are expensive, using too many will start to slow things down!
 
 ### BlendModes

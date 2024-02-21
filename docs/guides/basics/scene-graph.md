@@ -101,7 +101,7 @@ function addLetter(letter, parent, color, pos) {
   bg.tint = color;
 
   const text = new Text({
-    text:letter, 
+    text:letter,
     style:{fill: "#ffffff"}
   });
 
@@ -139,7 +139,7 @@ If you'd like to re-order a child object, you can use `setChildIndex()`.  To add
 
 ## Culling
 
-If you're building a project where a large proportion of your DisplayObject's are off-screen (say, a side-scrolling game), you will want to *cull* those objects.  Culling is the process of evaluating if an object (or its children!) is on the screen, and if not, turning off rendering for it.  If you don't cull off-screen objects, the renderer will still draw them, even though none of their pixels end up on the screen.  
+If you're building a project where a large proportion of your scene objects are off-screen (say, a side-scrolling game), you will want to *cull* those objects.  Culling is the process of evaluating if an object (or its children!) is on the screen, and if not, turning off rendering for it.  If you don't cull off-screen objects, the renderer will still draw them, even though none of their pixels end up on the screen.
 
 PixiJS doesn't provide built-in support for viewport culling, but you can find 3rd party plugins that might fit your needs.  Alternately, if you'd like to build your own culling system, simply run your objects during each tick and set `renderable` to false on any object that doesn't need to be drawn.
 
@@ -162,7 +162,7 @@ This snippet will set `globalPos` to be the global coordinates for the child obj
 
 ## Global vs Screen Coordinates
 
-When your project is working with the host operating system or browser, there is a third coordinate system that comes into play - "screen" coordinates (aka "viewport" coordinates).  Screen coordinates represent position relative to the top-left of the canvas element that PixiJS is rendering into.  Things like the DOM and native mouse click events work in screen space.  
+When your project is working with the host operating system or browser, there is a third coordinate system that comes into play - "screen" coordinates (aka "viewport" coordinates).  Screen coordinates represent position relative to the top-left of the canvas element that PixiJS is rendering into.  Things like the DOM and native mouse click events work in screen space.
 
 Now, in many cases, screen space is equivalent to world space.  This is the case if the size of the canvas is the same as the size of the render view specified when you create you PIXI.Application.  By default, this will be the case - you'll create for example an 800x600 application window and add it to your HTML page, and it will stay that size.  100 pixels in world coordinates will equal 100 pixels in screen space.  BUT!  It is common to stretch the rendered view to have it fill the screen, or to render at a lower resolution and up-scale for speed.  In that case, the screen size of the canvas element will change (e.g. via CSS), but the underlying render view will *not*, resulting in a mis-match between world coordinates and screen coordinates.
 

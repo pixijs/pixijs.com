@@ -1,3 +1,4 @@
+# Render Groups
 
 ## Understanding RenderGroups in PixiJS
 
@@ -15,12 +16,12 @@ In practice, you're utilizing Render Groups even without explicit awareness. The
 
 This feature is particularly beneficial for:
 
-- **Static Content:** For content that doesn't change often, a Render Group can significantly reduce the computational load on the CPU. In this case static refers to the scene graph structure, not that actual values of the PixiJS elements inside it (eg position, scale of things). 
+- **Static Content:** For content that doesn't change often, a Render Group can significantly reduce the computational load on the CPU. In this case static refers to the scene graph structure, not that actual values of the PixiJS elements inside it (eg position, scale of things).
 - **Distinct Scene Parts:** You can separate your scene into logical parts, such as the game world and the HUD (Heads-Up Display). Each part can be optimized individually, leading to overall better performance.
 
 ### Examples
 
-```
+```ts
 const myGameWorld = new Container({
   isRenderGroup:true
 })
