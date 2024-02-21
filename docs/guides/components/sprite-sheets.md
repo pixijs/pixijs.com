@@ -36,7 +36,7 @@ You can use a 3rd party tool to assemble your sprite sheet files.  Here are two 
 
 Spritesheet data can also be created manually or programmatically, and supplied to a new AnimatedSprite. This may be an easier option if your sprites are already contained in a single image.
 
-```javascript
+```ts
 // Create object to store sprite sheet data
 const atlasData = {
 	frames: {
@@ -64,7 +64,7 @@ const atlasData = {
 
 
 // Create the SpriteSheet from data and image
-const spritesheet = new PIXI.Spritesheet(
+const spritesheet = new Spritesheet(
 	PIXI.BaseTexture.from(atlasData.meta.image),
 	atlasData
 );
@@ -73,7 +73,7 @@ const spritesheet = new PIXI.Spritesheet(
 await spritesheet.parse();
 
 // spritesheet is ready to use!
-const anim = new PIXI.AnimatedSprite(spritesheet.animations.enemy);
+const anim = new AnimatedSprite(spritesheet.animations.enemy);
 
 // set the animation speed
 anim.animationSpeed = 0.1666;

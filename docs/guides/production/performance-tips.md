@@ -56,15 +56,6 @@
 - SceenSprite / NormalSprite / SceenSprite / NormalSprite would be 4 draw calls
 - SceenSprite / SceenSprite / NormalSprite / NormalSprite would be 2 draw calls
 
-### CacheAsBitmap
-
-- Setting to `true` turns an object into a Sprite by caching it as a Texture
-- It has a one time cost when it is activated as it draws the object to a Texture
-- Avoid changing this on elements frequently
-- If you have a complicated item that has lots of sprites / filters AND does not move then this will speed up rendering!
-- Do not need apply to sprites as they are already Textures
-- Do not use if the object where its children are constantly changing as this will slow things down
-
 ### Events
 
 - If an object has no interactive children use `interactiveChildren = false`. The event system will then be able to avoid crawling through the object

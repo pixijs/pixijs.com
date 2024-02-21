@@ -11,10 +11,10 @@ Check out the [graphics example code](../../examples/graphics/simple).
 First-time users of the PIXI.Graphics class often struggle with how it works.  Let's look at an example snippet that creates a Graphics object and draws a rectangle:
 
 ```javascript
-// Create a Graphics object, set a fill color, draw a rectangle
-let obj = new PIXI.Graphics();
-obj.beginFill(0xff0000);
-obj.drawRect(0, 0, 200, 100);
+// Create a Graphics object, draw a rectangle and fill it
+let obj = new Graphics()
+  rect(0, 0, 200, 100)
+  fill(0xff0000);
 
 // Add it to the stage to render
 app.stage.addChild(obj);
@@ -24,7 +24,7 @@ That code will work - you'll end up with a red rectangle on the screen.  But it'
 
 The problem is that the function names are centered around *drawing*, which is an action that puts pixels on the screen.  But in spite of that, the Graphics object is really about *building*.
 
-Let's look a bit deeper at that `drawRect()` call.  When you call `drawRect()`, PixiJS doesn't actually draw anything.  Instead, it stores the rectangle you "drew" into a list of geometry for later use.  If you then add the Graphics object to the scene, the renderer will come along, and ask the Graphics object to render itself.  At that point, your rectangle actually gets drawn - along with any other shapes, lines, etc. that you've added to the geometry list.
+Let's look a bit deeper at that `rect()` call.  When you call `rect()`, PixiJS doesn't actually draw anything.  Instead, it stores the rectangle you "drew" into a list of geometry for later use.  If you then add the Graphics object to the scene, the renderer will come along, and ask the Graphics object to render itself.  At that point, your rectangle actually gets drawn - along with any other shapes, lines, etc. that you've added to the geometry list.
 
 Once you understand what's going on, things start to make a lot more sense.  When you use a Graphics object as a mask, for example, the masking system uses that list of graphics primitives in the geometry list to constrain which pixels make it to the screen.  There's no drawing involved.
 
@@ -42,7 +42,7 @@ There are a lot of functions in the PIXI.Graphics class, but as a quick orientat
 * Arc
 * Bezier and Quadratic Curve
 
-In addition, the Graphics Extras package (`@pixi/graphics-extras`) optionally includes the following complex primitives:
+In addition, you have access to the following complex primitives:
 
 * Torus
 * Chamfer Rect
@@ -51,33 +51,91 @@ In addition, the Graphics Extras package (`@pixi/graphics-extras`) optionally in
 * Star
 * Rounded Polygon
 
-## The Geometry List
+There is also support for svg. But due to the nature of how PixiJS renders holes (it favours performance) Some complex hole shapes may render incorrectly. But for the majority of shapes, this will do the trick!
 
-Inside every Graphics object is a GraphicsGeometry object.  The [GraphicsGeometry](https://pixijs.download/release/docs/PIXI.GraphicsGeometry.html) class manages the list of geometry primitives created by the Graphics parent object.  For the most part, you will not work directly with this object.  The owning Graphics object creates and manages it.  However, there are two related cases where you *do* work with the list.
+ ```ts
+  let mySvg = new Graphics()
+    .svg('M 100 350 q 150 -300 300 0'); 
+```
 
-First, you can re-use geometry from one Graphics object in another.  No matter whether you're re-drawing the same shape over and over, or re-using it as a mask over and over, it's more efficient to share identical GraphicsGeometry.  You can do this like so:
+## The GraphicsContext
 
-```javascript
-// Create a master graphics object
-let template = new PIXI.Graphics();
-// Add a circle
-template.drawCircle(100, 100, 50);
+Understanding the relationship between Sprites and their shared Texture can help grasp the concept of a GraphicsContext. Just as multiple Sprites can utilize a single Texture, saving memory by not duplicating pixel data, a GraphicsContext can be shared across multiple Graphics objects.
+
+This sharing of a GraphicsContext means that the intensive task of converting graphics instructions into GPU-ready geometry is done once, and the results are reused, much like textures. Consider the difference in efficiency between these approaches:
+
+Creating individual circles without sharing a context:
+```ts
+// Create 5 circles
+for (let i = 0; i < 5; i++) {
+  let circle = new Graphics()
+    .circle(100, 100, 50)
+    .fill('red');
+}
+```
+Versus sharing a GraphicsContext:
+```ts
+// Create a master Graphicscontext
+let circleContext = new GraphicsContext()
+.circle(100, 100, 50)
+.fill('red')
 
 // Create 5 duplicate objects
 for (let i = 0; i < 5; i++) {
-  // Initialize the duplicate using our template's pre-built geometry
-  let duplicate = new PIXI.Graphics(template.geometry);
+  // Initialize the duplicate using our circleContext
+  let duplicate = new Graphics(circleContext);
 }
 ```
 
-This leads to the second time you need to be aware of the underlying GraphicsGeometry object - avoiding memory leaks.  Because Graphics objects can share geometry, you *must* call `destroy()` when you no longer need them.  Failure to do so will prevent the GraphicsGeometry object it owns from being properly de-referenced, and will lead to memory leaks.
+Now, this might not be a huge deal for circles and squares, but when you are using SVGs, it becomes quite important to not have to rebuild each time and instead share a `GraphicsContext`. It's recommended for maximum performance to create your contexts upfront and reuse them, just like textures!
+
+```
+let circleContext = new GraphicsContext()
+.circle(100, 100, 50)
+.fill('red')
+
+let rectangleContext = new GraphicsContext()
+.rect(0, 0, 50, 50)
+.fill('red')
+
+let frames = [circleContext, rectangleContext];
+let frameIndex = 0;
+
+const graphics = new Graphics(frames[frameIndex]);
+
+// animate from square to circle:
+
+function update()
+{
+  // swap the context - this is a very cheap operation!
+  // much cheaper than clearing it each frame.
+  graphics.context = frames[frameIndex++%frames.length];
+}
+```
+
+If you don't explicitly pass a `GraphicsContext` when creating a `Graphics` object, then internally, it will have its own context, accessible via `myGraphics.context`. The [GraphicsContext](https://pixijs.download/release/docs/PIXI.GraphicsContext.html) class manages the list of geometry primitives created by the Graphics parent object. Graphics functions are literally passed through to the internal contexts:
+
+```ts
+let circleGraphics = new Graphics()
+  .circle(100, 100, 50)
+  .fill('red')
+```
+same as:
+```ts
+let circleGraphics = new Graphics()
+
+circleGraphics.context
+  .circle(100, 100, 50)
+  .fill('red')
+```
+
+Calling `Graphics.destroy()` will destroy the graphics. If a context was passed to it via the constructor then it will leave the destruction the that context to you. However if the context is internally created (the default), when destroyed the Graphics object will destroy its internal `GraphicsContext`.
 
 ## Graphics For Display
 
 OK, so now that we've covered how the PIXI.Graphics class works, let's look at how you use it.  The most obvious use of a Graphics object is to draw dynamically generated shapes to the screen.
 
 Doing so is simple.  Create the object, call the various builder functions to add your custom primitives, then add the object to the scene graph.  Each frame, the renderer will come along, ask the Graphics object to render itself, and each primitive, with associated line and fill styles, will be drawn to the screen.
-
 
 ## Graphics as a Mask
 
@@ -89,7 +147,7 @@ Check out the [masking example code](../../examples/graphics/simple).
 
 The Graphics class is a complex beast, and so there are a number of things to be aware of when using it.
 
-**Memory Leaks**: The first has already been mentioned - call `destroy()` on any Graphics object you no longer need to avoid memory leaks.
+**Memory Leaks**: Call `destroy()` on any Graphics object you no longer need to avoid memory leaks.
 
 **Holes**: Holes you create have to be completely contained in the shape or else it may not be able to triangulate correctly. <!--TODO: primitive shapes not working on canvas?-->
 

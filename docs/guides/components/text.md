@@ -34,36 +34,20 @@ To interactively test out feature of Text Style, [check out this tool](https://p
 
 ## Loading and Using Fonts
 
-In order for PixiJS to build a PIXI.Text object, you'll need to make sure that the font you want to use is loaded by the browser.  Unfortunately, at the time of writing, the PIXI.Loader system does not support loading font files, so you'll need to use a 3rd party font loader to ensure that any custom web fonts you want to use are pre-loaded.  It's not enough to add an @font-face declaration in your project's CSS because browsers will happily render text using a fallback font while your custom font loads.
+In order for PixiJS to build a PIXI.Text object, you'll need to make sure that the font you want to use is loaded by the browser. This can be easily accomplished with our good friends `Assets`
 
-Any javascript library that can load a web font will work, you just want something that will delay starting your project until the font has been fully loaded by the browser.
+```ts
+// load the fonts
+await Assets.load('short-stack.woff2');
 
-One such library is [FontFaceObserver](https://fontfaceobserver.com).  Here's a simple example that shows how to use it to ensure the web font "Short Stack" is loaded before your app starts.  First, we need a font-face declaration in CSS:
+// now they can be used!
 
-```css
-@font-face {
-  font-family: Short Stack;
-  src: url(short-stack.woff2) format('woff2'),
-       url(short-stack.woff) format('woff');
-}
-```
-
-Now that the browser knows what our font is and how to find the source files, it's time to use the library to load them:
-
-```javascript
-// Create the loader
-let font = new FontFaceObserver('Short Stack', {});
-// Start loading the font
-font.load().then(() => {
-  // Successful load, start up your PixiJS app as usual
-  let app = new PIXI.Application({ width: 640, height: 360 });
-  document.body.appendChild(app.view);
-  // ... etc ...
-
-}, () => {
-  // Failed load, log the error or display a message to the user
-  alert('Unable to load required font!');
-});
+const text = new Text({
+  text:'hello',
+  style:{
+    fontFamily:'short-stack'
+  }
+})
 ```
 
 ## Caveats and Gotchas
@@ -99,6 +83,10 @@ PIXI.BitmapText
 - Dynamic text
 - Large number of text objects
 - Lower memory
+
+PIXI.HTMLText
+- Static text
+- Need that HTML formatting
 
 <!--## Other options
 

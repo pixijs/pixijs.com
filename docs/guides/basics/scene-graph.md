@@ -8,6 +8,10 @@ The scene graph's root node is a container maintained by the application, and re
 
 (A helpful tool for exploring your project is the [Pixi.js devtools plugin](https://chrome.google.com/webstore/detail/pixijs-devtools/aamddddknhcagpehecnhphigffljadon) for Chrome, which allows you to view and manipulate the scene graph in real time as it's running!)
 
+## RenderGroups
+
+As you delve deeper into PixiJS, especially with version 8, you'll encounter a powerful feature known as Render Groups. Think of Render Groups as specialized containers within your scene graph that act like mini scene graphs themselves. Here's what you need to know to effectively use Render Groups in your projects. For more info check out the [RenderGroups overview](../advanced/render-groups)
+
 ## Parents and Children
 
 When a parent moves, its children move as well.  When a parent is rotated, its children are rotated too.  Hide a parent, and the children will also be hidden.  If you have a game object that's made up of multiple sprites, you can collect them under a container to treat them as a single object in the world, moving and rotating as one.
@@ -18,22 +22,27 @@ Each frame, PixiJS runs through the scene graph from the root down through all t
 
 Here's an example.  We'll create three sprites, each a child of the last, and animate their position, rotation, scale and alpha.  Even though each sprite's properties are set to the same values, the parent-child chain amplifies each change:
 
-```javascript
+```ts
 // Create the application helper and add its render target to the page
-const app = new PIXI.Application({ width: 640, height: 360 });
+const app = new Application({ width: 640, height: 360 });
 document.body.appendChild(app.view);
 
 // Add a container to center our sprite stack on the page
-const container = new PIXI.Container();
-container.x = app.screen.width / 2;
-container.y = app.screen.height / 2;
+const container = new Container({
+  x:app.screen.width / 2,
+  y:app.screen.height / 2;
+});
+
 app.stage.addChild(container);
+
+// load the texture
+await Assets.load('assets/images/sample.png');
 
 // Create the 3 sprites, each a child of the last
 const sprites = [];
 let parent = container;
 for (let i = 0; i < 3; i++) {
-  let sprite = PIXI.Sprite.from('assets/images/sample.png');
+  let sprite = Sprite.from('assets/images/sample.png');
   sprite.anchor.set(0.5);
   parent.addChild(sprite);
   sprites.push(sprite);
@@ -71,23 +80,31 @@ Check out this example, with two parent objects A & D, and two children B & C un
 
 ```javascript
 // Create the application helper and add its render target to the page
-const app = new PIXI.Application({ width: 640, height: 360 });
+const app = new Application({ width: 640, height: 360 });
 document.body.appendChild(app.view);
 
 // Label showing scene graph hierarchy
-const label = new PIXI.Text('Scene Graph:\n\napp.stage\n  ┗ A\n     ┗ B\n     ┗ C\n  ┗ D', {fill: '#ffffff'});
-label.position = {x: 300, y: 100};
+const label = new Text({
+  text:'Scene Graph:\n\napp.stage\n  ┗ A\n     ┗ B\n     ┗ C\n  ┗ D',
+  style:{fill: '#ffffff'},
+  position: {x: 300, y: 100}
+});
+
 app.stage.addChild(label);
 
 // Helper function to create a block of color with a letter
 const letters = [];
 function addLetter(letter, parent, color, pos) {
-  const bg = new PIXI.Sprite(PIXI.Texture.WHITE);
+  const bg = new Sprite(Texture.WHITE);
   bg.width = 100;
   bg.height = 100;
   bg.tint = color;
 
-  const text = new PIXI.Text(letter, {fill: "#ffffff"});
+  const text = new Text({
+    text:letter, 
+    style:{fill: "#ffffff"}
+  });
+
   text.anchor.set(0.5);
   text.position = {x: 50, y: 50};
 
@@ -138,7 +155,7 @@ To convert from local to global coordinates, you use the `toGlobal()` function. 
 
 ```javascript
 // Get the global position of an object, relative to the top-left of the screen
-let globalPos = obj.toGlobal(new PIXI.Point(0,0));
+let globalPos = obj.toGlobal(new Point(0,0));
 ```
 
 This snippet will set `globalPos` to be the global coordinates for the child object, relative to [0, 0] in the global coordinate system.

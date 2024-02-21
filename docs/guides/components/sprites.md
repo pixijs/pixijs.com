@@ -4,13 +4,13 @@ Sprites are the simplest and most common renderable object in PixiJS.  They repr
 
 ## Creating Sprites
 
-To create a Sprite, all you need is a Texture (check out the Texture guide).  Load a PNG's URL using the PIXI.Loader class, then call `PIXI.Sprite.from(url)` and you're all set.  As a convenience during prototyping, you can pass a non-loaded URL to `from()` and PixiJS will handle it, but your sprite will "pop in" after it loads if you don't pre-load your textures.
+To create a Sprite, all you need is a Texture (check out the Texture guide).  Load a PNG's URL using the `Assets` class, then call `PIXI.Sprite.from(url)` and you're all set. Unlike v7 you now must load your texture before using it, this is to ensure best practices.
 
 Check out the [sprite example code](../../examples/sprite/basic).
 
 ## Using Sprites
 
-In our [DisplayObject guide](display-object), we learned about the DisplayObject class and the various properties it defines.  Since Sprite objects are also display objects, you can move a sprite, rotate it, and update any other display property.
+In our [Container guide](container), we learned about the Container class and the various properties it defines.  Since Sprite objects are also containers, you can move a sprite, rotate it, and update any other display property.
 
 ## Alpha, Tint and Blend Modes
 
