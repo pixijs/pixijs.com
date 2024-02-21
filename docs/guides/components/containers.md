@@ -99,7 +99,7 @@ Sprite: Use the alpha channel from a [Sprite](https://pixijs.download/release/do
 
 ## Filtering
 
-Another common use for Container objects is as hosts for filtered content.  Filters are an advanced, WebGL-only feature that allows PixiJS to perform per-pixel effects like blurring and displacements.  By setting a filter on a Container, the area of the screen the Container encompasses will be processed by the filter after the Container's contents have been rendered.
+Another common use for Container objects is as hosts for filtered content.  Filters are an advanced, WebGL/WebGPU-only feature that allows PixiJS to perform per-pixel effects like blurring and displacements.  By setting a filter on a Container, the area of the screen the Container encompasses will be processed by the filter after the Container's contents have been rendered.
 
 Below are list of filters available by default in PixiJS. There is, however, a community repository with [many more filters](https://github.com/pixijs/filters).
 
@@ -110,5 +110,7 @@ Below are list of filters available by default in PixiJS. There is, however, a c
 | ColorMatrixFilter   | A color matrix is a flexible way to apply more complex tints or color transforms (e.g., sepia tone).          |
 | DisplacementFilter | Displacement maps create visual offset pixels, for instance creating a wavy water effect.                     |
 | NoiseFilter                      | Create random noise (e.g., grain effect).                                                                     |
+
+Under the hood, each Filter we offer out of the box is written in both glsl (for WebGL) and wgsl (for WebGPU). This means all filters should work on both renderers.
 
 _**Important:** Filters should be use somewhat sparingly. They can slow performance and increase memory if used too often in a scene._
