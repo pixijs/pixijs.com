@@ -47,7 +47,7 @@
 ### Filters
 
 - Release memory: `container.filters = null`
-- If you know the size of them: `container.filterArea = new PIXI.Rectangle(x,y,w,h)`. This can speed things up as it means the object does not need to be measured
+- If you know the size of them: `container.filterArea = new Rectangle(x,y,w,h)`. This can speed things up as it means the object does not need to be measured
 - Filters are expensive, using too many will start to slow things down!
 
 ### BlendModes
@@ -59,4 +59,4 @@
 ### Events
 
 - If an object has no interactive children use `interactiveChildren = false`. The event system will then be able to avoid crawling through the object
-- Setting `hitArea = new PIXI.Rectangle(x,y,w,h)` as above should stop the event system from crawling through the object
+- Setting `hitArea = new Rectangle(x,y,w,h)` as above should stop the event system from crawling through the object

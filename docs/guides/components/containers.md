@@ -1,6 +1,6 @@
 # Containers
 
-The [Container](https://pixijs.download/release/docs/PIXI.Container.html) class provides a simple display object that does what its name implies - collect a set of child objects together.  But beyond grouping objects, containers have a few uses that you should be aware of.
+The [Container](https://pixijs.download/release/docs/scene.Container.html) class provides a simple display object that does what its name implies - collect a set of child objects together.  But beyond grouping objects, containers have a few uses that you should be aware of.
 
 ## Commonly Used Attributes
 
@@ -93,9 +93,9 @@ app.ticker.add(({delta}) => {
 
 There are two types of masks supported by PixiJS:
 
-Use a [Graphics](https://pixijs.download/release/docs/PIXI.Graphics.html) object to create a mask with an arbitrary shape - powerful, but doesn't support anti-aliasing
+Use a [Graphics](https://pixijs.download/release/docs/scene.Graphics.html) object to create a mask with an arbitrary shape - powerful, but doesn't support anti-aliasing
 
-Sprite: Use the alpha channel from a [Sprite](https://pixijs.download/release/docs/PIXI.Sprite.html) as your mask, providing anti-aliased edging - _not_ supported on the Canvas renderer
+Sprite: Use the alpha channel from a [Sprite](https://pixijs.download/release/docs/scene.Sprite.html) as your mask, providing anti-aliased edging - _not_ supported on the Canvas renderer
 
 ## Filtering
 
@@ -105,10 +105,10 @@ Below are list of filters available by default in PixiJS. There is, however, a c
 
 | Filter                                                                                 | Description                                                                                                   |
 | ---                                                                                    | ---                                                                                                           |
-| AlphaFilter: `@pixi/filter-alpha`                      | Similar to setting `alpha` property, but flattens the Container instead of applying to children individually. |
-| BlurFilter: `@pixi/filter-blur`                         | Apply a blur effect                                                                                           |
-| ColorMatrixFilter: `@pixi/filter-color-matrix`   | A color matrix is a flexible way to apply more complex tints or color transforms (e.g., sepia tone).          |
-| DisplacementFilter: `@pixi/filter-displacement` | Displacement maps create visual offset pixels, for instance creating a wavy water effect.                     |
-| NoiseFilter: `@pixi/filter-noise`                      | Create random noise (e.g., grain effect).                                                                     |
+| AlphaFilter                      | Similar to setting `alpha` property, but flattens the Container instead of applying to children individually. |
+| BlurFilter                         | Apply a blur effect                                                                                           |
+| ColorMatrixFilter   | A color matrix is a flexible way to apply more complex tints or color transforms (e.g., sepia tone).          |
+| DisplacementFilter | Displacement maps create visual offset pixels, for instance creating a wavy water effect.                     |
+| NoiseFilter                      | Create random noise (e.g., grain effect).                                                                     |
 
 _**Important:** Filters should be use somewhat sparingly. They can slow performance and increase memory if used too often in a scene._

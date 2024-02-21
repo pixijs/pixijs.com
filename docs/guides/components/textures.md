@@ -21,7 +21,7 @@ To work with the image, the first step is to pull the image file from your webse
 ```ts
 const texture = await Assets.load('myTexture.png');
 
-// pass atexture explicitly
+// pass a texture explicitly
 const sprite = new Sprite(texture);
 // as options
 const sprite2 = new Sprite({texture});
@@ -33,13 +33,13 @@ const sprite3 = Sprite.from('myTexture.png')
 
 Once the texture has loaded, the loaded `<IMG>` element contains the pixel data we need.  But to use it to render something, PixiJS has to take that raw image file and upload it to the GPU.  This brings us to the real workhorse of the texture system - the [TextureSource](https://pixijs.download/release/docs/TextureSource.html) class.  Each TextureSource manages a single pixel source - usually an image, but can also be a Canvas or Video element.  TextureSources allow PixiJS to convert the image to pixels and use those pixels in rendering.  In addition, it also contains settings that control how the texture data is rendered, such as the wrap mode (for UV coordinates outside the 0.0-1.0 range) and scale mode (used when scaling a texture).
 
-TextureSource are automatically cached, so that calling `PIXI.Texture.from()` repeatedly for the same URL returns the same TextureSource each time.  Destroying a TextureSource frees the image data associated with it.
+TextureSource are automatically cached, so that calling `Texture.from()` repeatedly for the same URL returns the same TextureSource each time.  Destroying a TextureSource frees the image data associated with it.
 
 ### Textures are a View on BaseTextures
 
-So finally, we get to the PIXI.Texture class itself!  At this point, you may be wondering what the Texture object *does*.  After all, the BaseTexture manages the pixels and render settings.  And the answer is, it doesn't do very much.  Textures are light-weight views on an underlying BaseTexture.  Their main attribute is the source rectangle within the TextureSource from which to pull.
+So finally, we get to the `Texture` class itself!  At this point, you may be wondering what the `Texture` object *does*.  After all, the BaseTexture manages the pixels and render settings.  And the answer is, it doesn't do very much.  Textures are light-weight views on an underlying BaseTexture.  Their main attribute is the source rectangle within the TextureSource from which to pull.
 
-If all PixiJS drew were sprites, that would be pretty redundant.  But consider [SpriteSheets](./sprite-sheets).  A SpriteSheet is a single image that contains multiple sprite images arranged within.  In a [Spritesheet](https://pixijs.download/release/docs/PIXI.Spritesheet.html) object, a single TextureSource is referenced by a set of Textures, one for each source image in the original sprite sheet.  By sharing a single TextureSource, the browser only downloads one file, and our batching renderer can blaze through drawing sprites since they all share the same underlying pixel data.  The SpriteSheet's Textures pull out just the rectangle of pixels needed by each sprite.
+If all PixiJS drew were sprites, that would be pretty redundant.  But consider [SpriteSheets](./sprite-sheets).  A SpriteSheet is a single image that contains multiple sprite images arranged within.  In a [Spritesheet](https://pixijs.download/release/docs/assets.Spritesheet.html) object, a single TextureSource is referenced by a set of Textures, one for each source image in the original sprite sheet.  By sharing a single TextureSource, the browser only downloads one file, and our batching renderer can blaze through drawing sprites since they all share the same underlying pixel data.  The SpriteSheet's Textures pull out just the rectangle of pixels needed by each sprite.
 
 <!--TODO: Image showing sprite sheet base texture, plus each sprite's texture-->
 
@@ -60,7 +60,7 @@ here's a quick cheat sheet of one good solution:
 
 Using this workflow ensures that your textures are pre-loaded, to prevent pop-in, and is relatively easy to code.
 
-Regarding preparing textures: Even after you've loaded your textures, the images still need to be pushed to the GPU and decoded.  Doing this for a large number of source images can be slow and cause lag spikes when your project first loads.  To solve this, you can use the [Prepare](https://pixijs.download/release/docs/PIXI.Prepare.html) plugin, which allows you to pre-load textures in a final step before displaying your project.
+Regarding preparing textures: Even after you've loaded your textures, the images still need to be pushed to the GPU and decoded.  Doing this for a large number of source images can be slow and cause lag spikes when your project first loads.  To solve this, you can use the [Prepare](https://pixijs.download/release/docs/rendering.PrepareSystem.html) plugin, which allows you to pre-load textures in a final step before displaying your project.
 
 ## Unloading Textures
 

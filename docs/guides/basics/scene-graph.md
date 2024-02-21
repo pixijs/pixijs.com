@@ -4,13 +4,9 @@ Every frame, PixiJS is updating and then rendering the scene graph.  Let's talk 
 
 ## The Scene Graph Is a Tree
 
-The scene graph's root node is a container maintained by the application, and referenced with `app.stage`.  When you add a sprite or other renderable object as a child to the stage, it's added to the scene graph and will be rendered and interactable.  Most PixiJS objects can also have children, and so as you build more complex scenes, you will end up with a tree of parent-child relationships, rooted at the app's stage.
+The scene graph's root node is a container maintained by the application, and referenced with `app.stage`.  When you add a sprite or other renderable object as a child to the stage, it's added to the scene graph and will be rendered and interactable.  PixiJS `Containers` can also have children, and so as you build more complex scenes, you will end up with a tree of parent-child relationships, rooted at the app's stage.
 
 (A helpful tool for exploring your project is the [Pixi.js devtools plugin](https://chrome.google.com/webstore/detail/pixijs-devtools/aamddddknhcagpehecnhphigffljadon) for Chrome, which allows you to view and manipulate the scene graph in real time as it's running!)
-
-## RenderGroups
-
-As you delve deeper into PixiJS, especially with version 8, you'll encounter a powerful feature known as Render Groups. Think of Render Groups as specialized containers within your scene graph that act like mini scene graphs themselves. Here's what you need to know to effectively use Render Groups in your projects. For more info check out the [RenderGroups overview](../advanced/render-groups)
 
 ## Parents and Children
 
@@ -24,8 +20,9 @@ Here's an example.  We'll create three sprites, each a child of the last, and an
 
 ```ts
 // Create the application helper and add its render target to the page
-const app = new Application({ width: 640, height: 360 });
-document.body.appendChild(app.view);
+const app = new Application();
+await app.init({ width: 640, height: 360 })
+document.body.appendChild(app.canvas);
 
 // Add a container to center our sprite stack on the page
 const container = new Container({
@@ -42,11 +39,13 @@ await Assets.load('assets/images/sample.png');
 const sprites = [];
 let parent = container;
 for (let i = 0; i < 3; i++) {
+  let wrapper = new Container();
   let sprite = Sprite.from('assets/images/sample.png');
   sprite.anchor.set(0.5);
-  parent.addChild(sprite);
-  sprites.push(sprite);
-  parent = sprite;
+  wrapper.addChild(sprite);
+  parent.addChild(wrapper);
+  sprites.push(wrapper);
+  parent = wrapper;
 }
 
 // Set all sprite's properties to the same value, animated over time
@@ -80,8 +79,9 @@ Check out this example, with two parent objects A & D, and two children B & C un
 
 ```javascript
 // Create the application helper and add its render target to the page
-const app = new Application({ width: 640, height: 360 });
-document.body.appendChild(app.view);
+const app = new Application();
+await app.init({ width: 640, height: 360 })
+document.body.appendChild(app.canvas);
 
 // Label showing scene graph hierarchy
 const label = new Text({
@@ -108,7 +108,7 @@ function addLetter(letter, parent, color, pos) {
   text.anchor.set(0.5);
   text.position = {x: 50, y: 50};
 
-  const container = new PIXI.Container();
+  const container = new Container();
   container.position = pos;
   container.visible = false;
   container.addChild(bg, text);
@@ -137,6 +137,10 @@ app.ticker.add((delta) => {
 
 If you'd like to re-order a child object, you can use `setChildIndex()`.  To add a child at a given point in a parent's list, use `addChildAt()`.  Finally, you can enable automatic sorting of an object's children using the `sortableChildren` option combined with setting the `zIndex` property on each child.
 
+## RenderGroups
+
+As you delve deeper into PixiJS, you'll encounter a powerful feature known as Render Groups. Think of Render Groups as specialized containers within your scene graph that act like mini scene graphs themselves. Here's what you need to know to effectively use Render Groups in your projects. For more info check out the [RenderGroups overview](../advanced/render-groups)
+
 ## Culling
 
 If you're building a project where a large proportion of your scene objects are off-screen (say, a side-scrolling game), you will want to *cull* those objects.  Culling is the process of evaluating if an object (or its children!) is on the screen, and if not, turning off rendering for it.  If you don't cull off-screen objects, the renderer will still draw them, even though none of their pixels end up on the screen.
@@ -164,6 +168,6 @@ This snippet will set `globalPos` to be the global coordinates for the child obj
 
 When your project is working with the host operating system or browser, there is a third coordinate system that comes into play - "screen" coordinates (aka "viewport" coordinates).  Screen coordinates represent position relative to the top-left of the canvas element that PixiJS is rendering into.  Things like the DOM and native mouse click events work in screen space.
 
-Now, in many cases, screen space is equivalent to world space.  This is the case if the size of the canvas is the same as the size of the render view specified when you create you PIXI.Application.  By default, this will be the case - you'll create for example an 800x600 application window and add it to your HTML page, and it will stay that size.  100 pixels in world coordinates will equal 100 pixels in screen space.  BUT!  It is common to stretch the rendered view to have it fill the screen, or to render at a lower resolution and up-scale for speed.  In that case, the screen size of the canvas element will change (e.g. via CSS), but the underlying render view will *not*, resulting in a mis-match between world coordinates and screen coordinates.
+Now, in many cases, screen space is equivalent to world space.  This is the case if the size of the canvas is the same as the size of the render view specified when you create you `Application`.  By default, this will be the case - you'll create for example an 800x600 application window and add it to your HTML page, and it will stay that size.  100 pixels in world coordinates will equal 100 pixels in screen space.  BUT!  It is common to stretch the rendered view to have it fill the screen, or to render at a lower resolution and up-scale for speed.  In that case, the screen size of the canvas element will change (e.g. via CSS), but the underlying render view will *not*, resulting in a mis-match between world coordinates and screen coordinates.
 
 <!--TODO: best method to convert from world to screen coords?-->

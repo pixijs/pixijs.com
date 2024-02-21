@@ -1,10 +1,10 @@
 # Sprites
 
-Sprites are the simplest and most common renderable object in PixiJS.  They represent a single image to be displayed on the screen.  Each [Sprite](https://pixijs.download/release/docs/PIXI.Sprite.html) contains a [Texture](https://pixijs.download/release/docs/PIXI.Texture.html) to be drawn, along with all the transformation and display state required to function in the scene graph.
+Sprites are the simplest and most common renderable object in PixiJS.  They represent a single image to be displayed on the screen.  Each [Sprite](https://pixijs.download/release/docs/scene.Sprite.html) contains a [Texture](https://pixijs.download/release/docs/rendering.Texture.html) to be drawn, along with all the transformation and display state required to function in the scene graph.
 
 ## Creating Sprites
 
-To create a Sprite, all you need is a Texture (check out the Texture guide).  Load a PNG's URL using the `Assets` class, then call `PIXI.Sprite.from(url)` and you're all set. Unlike v7 you now must load your texture before using it, this is to ensure best practices.
+To create a Sprite, all you need is a Texture (check out the Texture guide).  Load a PNG's URL using the `Assets` class, then call `Sprite.from(url)` and you're all set. Unlike v7 you now must load your texture before using it, this is to ensure best practices.
 
 Check out the [sprite example code](../../examples/sprite/basic).
 
