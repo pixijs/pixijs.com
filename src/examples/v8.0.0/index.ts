@@ -3,7 +3,13 @@ import mouseTrail from '!!raw-loader!./advanced/mouseTrail.js';
 import scratchCard from '!!raw-loader!./advanced/scratchCard.js';
 import screenShot from '!!raw-loader!./advanced/screenShot.js';
 import slots from '!!raw-loader!./advanced/slots.js';
-import spinners from '!!raw-loader!./advanced/spinners.js';
+import spinners from '!!raw-loader!./advanced/spinners/index.js';
+import spinnersIntersect from '!!raw-loader!./advanced/spinners/intersect.js';
+import spinnerGenerator1 from '!!raw-loader!./advanced/spinners/spinner1.js';
+import spinnerGenerator2 from '!!raw-loader!./advanced/spinners/spinner2.js';
+import spinnerGenerator3 from '!!raw-loader!./advanced/spinners/spinner3.js';
+import spinnerGenerator4 from '!!raw-loader!./advanced/spinners/spinner4.js';
+import spinnerGenerator5 from '!!raw-loader!./advanced/spinners/spinner5.js';
 import starWarp from '!!raw-loader!./advanced/starWarp.js';
 
 import async from '!!raw-loader!./assets/async.js';
@@ -18,7 +24,7 @@ import particleContainer from '!!raw-loader!./basic/particleContainer.js';
 import meshPlane from '!!raw-loader!./basic/meshPlane.js';
 import tinting from '!!raw-loader!./basic/tinting.js';
 import transparentBackground from '!!raw-loader!./basic/transparentBackground.js';
-import fillGradient from '!!raw-loader!./basic/fillGradient.js';
+import renderGroup from '!!raw-loader!./basic/renderGroup.js';
 
 import click from '!!raw-loader!./events/click.js';
 import customHitarea from '!!raw-loader!./events/customHitarea.js';
@@ -27,13 +33,15 @@ import dragging from '!!raw-loader!./events/dragging.js';
 import hitTestingWithSpatialHash from '!!raw-loader!./events/hitTestingWithSpatialHash.js';
 import interactivity from '!!raw-loader!./events/interactivity.js';
 import logger from '!!raw-loader!./events/logger.js';
-import nestedBoundaryWithProjection from '!!raw-loader!./events/nestedBoundaryWithProjection.js';
 import pointerTracker from '!!raw-loader!./events/pointerTracker.js';
 import slider from '!!raw-loader!./events/slider.js';
 
-import custom from '!!raw-loader!./filtersAdvanced/custom.js';
-import mouseBlending from '!!raw-loader!./filtersAdvanced/mouseBlending.js';
-import shaderToyFilterRenderTexture from '!!raw-loader!./filtersAdvanced/shaderToyFilterRenderTexture.js';
+import custom from '!!raw-loader!./filtersAdvanced/custom/index.js';
+import customVert from '!!raw-loader!./filtersAdvanced/custom/custom.vert';
+import customFrag from '!!raw-loader!./filtersAdvanced/custom/custom.frag';
+import mouseBlending from '!!raw-loader!./filtersAdvanced/mouseBlending/index.js';
+import mouseBlendingVert from '!!raw-loader!./filtersAdvanced/mouseBlending/mouseBlending.vert';
+import mouseBlendingFrag from '!!raw-loader!./filtersAdvanced/mouseBlending/mouseBlending.frag';
 
 import blur from '!!raw-loader!./filtersBasic/blur.js';
 import colorMatrix from '!!raw-loader!./filtersBasic/colorMatrix.js';
@@ -43,23 +51,49 @@ import displacementMapFlag from '!!raw-loader!./filtersBasic/displacementMapFlag
 import advanced from '!!raw-loader!./graphics/advanced.js';
 import dynamic from '!!raw-loader!./graphics/dynamic.js';
 import simple from '!!raw-loader!./graphics/simple.js';
+import svg from '!!raw-loader!./graphics/svg.js';
+import svgLoad from '!!raw-loader!./graphics/svg-load.js';
+import texture from '!!raw-loader!./graphics/texture.js';
+import fillGradient from '!!raw-loader!./graphics/fillGradient.js';
+import meshFromPath from '!!raw-loader!./graphics/meshFromPath.js';
 
 import filter from '!!raw-loader!./masks/filter.js';
 import graphics from '!!raw-loader!./masks/graphics.js';
 import sprite from '!!raw-loader!./masks/sprite.js';
 
-import instancedGeometry from '!!raw-loader!./meshAndShaders/instancedGeometry.js';
-import mergingGeometry from '!!raw-loader!./meshAndShaders/mergingGeometry.js';
-import multiPassShaderGeneratedMesh from '!!raw-loader!./meshAndShaders/multiPassShaderGeneratedMesh.js';
-import shaderToyMesh from '!!raw-loader!./meshAndShaders/shaderToyMesh.js';
-import sharedShader from '!!raw-loader!./meshAndShaders/sharedShader.js';
-import sharingGeometry from '!!raw-loader!./meshAndShaders/sharingGeometry.js';
+import instancedGeometry from '!!raw-loader!./meshAndShaders/instancedGeometry/index.js';
+import instancedGeometryVert from '!!raw-loader!./meshAndShaders/instancedGeometry/instancedGeometry.vert';
+import instancedGeometryFrag from '!!raw-loader!./meshAndShaders/instancedGeometry/instancedGeometry.frag';
+import instancedGeometryWgsl from '!!raw-loader!./meshAndShaders/instancedGeometry/instancedGeometry.wgsl';
+import multipassMesh from '!!raw-loader!./meshAndShaders/multipassMesh/index.js';
+import multipassMeshVert from '!!raw-loader!./meshAndShaders/multipassMesh/multipassMesh.vert';
+import multipassMeshGridFrag from '!!raw-loader!./meshAndShaders/multipassMesh/grid.frag';
+import multipassMeshRippleFrag from '!!raw-loader!./meshAndShaders/multipassMesh/ripple.frag';
+import multipassMeshNoiseFrag from '!!raw-loader!./meshAndShaders/multipassMesh/noise.frag';
+import multipassMeshWaveFrag from '!!raw-loader!./meshAndShaders/multipassMesh/wave.frag';
+import multipassMeshCombineFrag from '!!raw-loader!./meshAndShaders/multipassMesh/combine.frag';
+import shaderToyMesh from '!!raw-loader!./meshAndShaders/shaderToyMesh/index.js';
+import shaderToyMeshVert from '!!raw-loader!./meshAndShaders/shaderToyMesh/shaderToy.vert';
+import shaderToyMeshFrag from '!!raw-loader!./meshAndShaders/shaderToyMesh/shaderToy.frag';
+import sharedShader from '!!raw-loader!./meshAndShaders/sharedShader/index.js';
+import sharedShaderVert from '!!raw-loader!./meshAndShaders/sharedShader/sharedShader.vert';
+import sharedShaderFrag from '!!raw-loader!./meshAndShaders/sharedShader/sharedShader.frag';
+import sharedGeometry from '!!raw-loader!./meshAndShaders/sharedGeometry/index.js';
+import sharedGeometryVert from '!!raw-loader!./meshAndShaders/sharedGeometry/sharedGeometry.vert';
+import sharedGeometryFrag from '!!raw-loader!./meshAndShaders/sharedGeometry/sharedGeometry.frag';
 import texturedMeshAdvanced from '!!raw-loader!./meshAndShaders/texturedMeshAdvanced.js';
 import texturedMeshBasic from '!!raw-loader!./meshAndShaders/texturedMeshBasic.js';
-import triangleColor from '!!raw-loader!./meshAndShaders/triangleColor.js';
-import triangleTextured from '!!raw-loader!./meshAndShaders/triangleTextured.js';
-import triangle from '!!raw-loader!./meshAndShaders/triangle.js';
-import uniforms from '!!raw-loader!./meshAndShaders/uniforms.js';
+import triangleColor from '!!raw-loader!./meshAndShaders/triangleColor/index.js';
+import triangleColorVert from '!!raw-loader!./meshAndShaders/triangleColor/triangleColor.vert';
+import triangleColorFrag from '!!raw-loader!./meshAndShaders/triangleColor/triangleColor.frag';
+import triangleColorWgsl from '!!raw-loader!./meshAndShaders/triangleColor/triangleColor.wgsl';
+import triangleTextured from '!!raw-loader!./meshAndShaders/triangleTextured/index.js';
+import triangleTexturedVert from '!!raw-loader!./meshAndShaders/triangleTextured/triangleTextured.vert';
+import triangleTexturedFrag from '!!raw-loader!./meshAndShaders/triangleTextured/triangleTextured.frag';
+import triangle from '!!raw-loader!./meshAndShaders/triangle/index.js';
+import triangleVert from '!!raw-loader!./meshAndShaders/triangle/triangle.vert';
+import triangleFrag from '!!raw-loader!./meshAndShaders/triangle/triangle.frag';
+import triangleWgsl from '!!raw-loader!./meshAndShaders/triangle/triangle.wgsl';
 
 import offscreenCanvasBasic from '!!raw-loader!./offscreenCanvas/basic.js';
 import webWorker from '!!raw-loader!./offscreenCanvas/webWorker.js';
@@ -96,7 +130,7 @@ const examplesSource: ExamplesSourceType = {
         meshPlane,
         tinting,
         transparentBackground,
-        fillGradient,
+        renderGroup,
     },
     sprite: {
         animatedSpriteAnimationSpeed,
@@ -117,6 +151,11 @@ const examplesSource: ExamplesSourceType = {
         advanced,
         dynamic,
         simple,
+        svg,
+        svgLoad,
+        texture,
+        fillGradient,
+        meshFromPath,
     },
     events: {
         click,
@@ -126,7 +165,6 @@ const examplesSource: ExamplesSourceType = {
         hitTestingWithSpatialHash,
         interactivity,
         logger,
-        nestedBoundaryWithProjection,
         pointerTracker,
         slider,
     },
@@ -158,9 +196,16 @@ const examplesSource: ExamplesSourceType = {
         displacementMapFlag,
     },
     filtersAdvanced: {
-        custom,
-        mouseBlending,
-        shaderToyFilterRenderTexture,
+        custom: {
+            index: custom,
+            'src/custom.vert': customVert,
+            'src/custom.frag': customFrag,
+        },
+        mouseBlending: {
+            index: mouseBlending,
+            'src/mouseBlending.vert': mouseBlendingVert,
+            'src/mouseBlending.frag': mouseBlendingFrag,
+        },
     },
     advanced: {
         collisionDetection,
@@ -168,22 +213,67 @@ const examplesSource: ExamplesSourceType = {
         scratchCard,
         screenShot,
         slots,
-        spinners,
+        spinners: {
+            index: spinners,
+            'src/spinner1.js': spinnerGenerator1,
+            'src/spinner2.js': spinnerGenerator2,
+            'src/spinner3.js': spinnerGenerator3,
+            'src/spinner4.js': spinnerGenerator4,
+            'src/spinner5.js': spinnerGenerator5,
+            'src/intersect.js': spinnersIntersect,
+        },
         starWarp,
     },
     meshAndShaders: {
-        instancedGeometry,
-        mergingGeometry,
-        multiPassShaderGeneratedMesh,
-        shaderToyMesh,
-        sharedShader,
-        sharingGeometry,
+        instancedGeometry: {
+            index: instancedGeometry,
+            'src/instancedGeometry.vert': instancedGeometryVert,
+            'src/instancedGeometry.frag': instancedGeometryFrag,
+            'src/instancedGeometry.wgsl': instancedGeometryWgsl,
+        },
+        multipassMesh: {
+            index: multipassMesh,
+            'src/multipassMesh.vert': multipassMeshVert,
+            'src/grid.frag': multipassMeshGridFrag,
+            'src/ripple.frag': multipassMeshRippleFrag,
+            'src/noise.frag': multipassMeshNoiseFrag,
+            'src/wave.frag': multipassMeshWaveFrag,
+            'src/combine.frag': multipassMeshCombineFrag,
+        },
+        shaderToyMesh: {
+            index: shaderToyMesh,
+            'src/shaderToy.vert': shaderToyMeshVert,
+            'src/shaderToy.frag': shaderToyMeshFrag,
+        },
+        sharedShader: {
+            index: sharedShader,
+            'src/sharedShader.vert': sharedShaderVert,
+            'src/sharedShader.frag': sharedShaderFrag,
+        },
+        sharedGeometry: {
+            index: sharedGeometry,
+            'src/sharedGeometry.vert': sharedGeometryVert,
+            'src/sharedGeometry.frag': sharedGeometryFrag,
+        },
         texturedMeshAdvanced,
         texturedMeshBasic,
-        triangleColor,
-        triangleTextured,
-        triangle,
-        uniforms,
+        triangleColor: {
+            index: triangleColor,
+            'src/triangleColor.vert': triangleColorVert,
+            'src/triangleColor.frag': triangleColorFrag,
+            'src/triangleColor.wgsl': triangleColorWgsl,
+        },
+        triangleTextured: {
+            index: triangleTextured,
+            'src/triangleTextured.vert': triangleTexturedVert,
+            'src/triangleTextured.frag': triangleTexturedFrag,
+        },
+        triangle: {
+            index: triangle,
+            'src/triangle.vert': triangleVert,
+            'src/triangle.frag': triangleFrag,
+            'src/triangle.wgsl': triangleWgsl,
+        },
     },
 };
 
