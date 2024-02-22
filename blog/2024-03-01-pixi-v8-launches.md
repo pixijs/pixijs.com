@@ -39,8 +39,8 @@ We're incredibly proud of PixiJS v8 and eager to share the improvements and new 
 
 ## 🔗 Quick links
 - The new Docs for v8 can be found here [LINK TO DOCS]
-- [Migration](https://pixijs.com/guides/migrations/v8)
-- [Examples](https://pixijs.com/examples)
+- [Migration](/next/guides/migrations/v8)
+- [Examples](/next/examples)
 - [Open Games](https://github.com/pixijs/open-games)
 
 ---
@@ -125,17 +125,17 @@ const app = new Application();
 ```ts
 const container = new Container({
   isRenderGroup:true // this containers transform is now handled on the GPU!
-}) 
+})
 ```
 
 - Another cool new change is that now blend modes and tints are inherited, much like transforms and alpha. This means you can now easily tint a container, and all its children will have the tint applied - same for blend modes, its as easy as:
-  
+
 ```
 // will make all the children tinted red
 container.tint = 'red'
 // will make all the children have the add blend mode
 container.blendMode = 'add'
-``` 
+```
 
 Rendering to a texture with antialiasing has been simplified; you only need to enable the new antialiasing property by setting it to true during the creation of a render texture or when applying a filter, similar to the process used for creating your renderer.
 
@@ -174,7 +174,7 @@ myContainer.blendMode = 'color-burn` // easy!
 - Support for SVG drawing has been added. For example:
 
   ```ts
-  graphics.svg('M 100 350 q 150 -300 300 0'); 
+  graphics.svg('M 100 350 q 150 -300 300 0');
   ```
 
 - Gradient fill support has been introduced, currently limited to linear gradients, allowing for more visually engaging designs.
@@ -187,17 +187,17 @@ myContainer.blendMode = 'color-burn` // easy!
 
   // create geometry from the path:
   const geometry = buildGeometryFromPath({
-      path,    
+      path,
   });
 
   const mesh = new Mesh({
-      geometry, 
+      geometry,
       texture: Texture.WHITE,
   });
 
 ```
 
-For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](https://pixijs.com/guides/migrations/v8), or why not jump in and play with some [examples](https://pixijs.com/examples/graphics/simple).
+For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](/next/guides/migrations/v8), or why not jump in and play with some [examples](next/examples/graphics/simple).
 
 #### 📝 Text Upgrades
 
@@ -210,8 +210,8 @@ BitmapFonts can now be generated on the fly or installed upfront as you prefer. 
 const myText = new BitmapText({
   text: 'hello im a bitmap font!',
   // font will be dynamically created
-  style:{ 
-    fontFamily: 'Outfit', 
+  style:{
+    fontFamily: 'Outfit',
     fontSize: 12,
     fill: 'red',
   }
@@ -223,8 +223,8 @@ Text fills and strokes now conform to the same fills and strokes as graphics. Th
 const myText = new Text({
   text: 'hello im some fancy text',
   // font will be dynamically created!
-  style:{ 
-    fontFamily: 'Outfit', 
+  style:{
+    fontFamily: 'Outfit',
     fontSize: 12,
     fill: { texture, color:'red'} // same as graphics api fills
     stroke: { width:3, color:'blue' } // same as graphics api strokes
