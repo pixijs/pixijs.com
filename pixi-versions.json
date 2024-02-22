@@ -12,11 +12,11 @@
   },
   {
     "versionLabel": "v8.x",
-    "version": "8.0.0-rc.9",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v8.0.0-rc.9",
-    "build": "https://pixijs.download/v8.0.0-rc.9/pixi.min.js",
-    "docs": "https://pixijs.download/v8.0.0-rc.9/docs/index.html",
-    "npm": "8.0.0-rc.9",
+    "version": "8.0.0-rc.10",
+    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v8.0.0-rc.10",
+    "build": "https://pixijs.download/v8.0.0-rc.10/pixi.min.js",
+    "docs": "https://pixijs.download/v8.0.0-rc.10/docs/index.html",
+    "npm": "8.0.0-rc.10",
     "prerelease": true,
     "latest": false,
     "isCurrent": true
