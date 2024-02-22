@@ -1,21 +1,30 @@
-import * as PIXI from 'pixi.js';
+import { Application, Assets, Sprite } from 'pixi.js';
 
-const app = new PIXI.Application({
-    background: '#1099bb',
-    resizeTo: window,
-});
+// Asynchronous IIFE
+(async () =>
+{
+    // Create a PixiJS application.
+    const app = new Application();
 
-document.body.appendChild(app.view);
+    // Intialize the application.
+    await app.init({ background: '#1099bb', resizeTo: window });
 
-// create a new Sprite from an image path
-const bunny = PIXI.Sprite.from('https://pixijs.com/assets/bunny.png');
+    // Then adding the application's canvas to the DOM body.
+    document.body.appendChild(app.canvas);
 
-// add to stage
-app.stage.addChild(bunny);
+    // Load the bunny texture.
+    const texture = await Assets.load('https://pixijs.com/assets/bunny.png');
 
-// center the sprite's anchor point
-bunny.anchor.set(0.5);
+    // Create a new Sprite from an image path
+    const bunny = new Sprite(texture);
 
-// move the sprite to the center of the screen
-bunny.x = app.screen.width / 2;
-bunny.y = app.screen.height / 2;
+    // Add to stage
+    app.stage.addChild(bunny);
+
+    // Center the sprite's anchor point
+    bunny.anchor.set(0.5);
+
+    // Move the sprite to the center of the screen
+    bunny.x = app.screen.width / 2;
+    bunny.y = app.screen.height / 2;
+})();

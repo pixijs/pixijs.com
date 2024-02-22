@@ -35,9 +35,7 @@ export const useFiles = (code: string, extraFiles?: Record<string, string>) =>
                                 },
                             ],
                         ],
-                        plugins: [
-                            '@babel/plugin-proposal-class-properties',
-                        ],
+                        plugins: ['@babel/plugin-proposal-class-properties'],
                     },
                     null,
                     2,
