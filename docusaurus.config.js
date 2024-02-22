@@ -52,6 +52,7 @@ const config = {
 
                         current: {
                             label: 'v8.x',
+                            path: '',
                             banner: 'none',
                             badge: false,
                         },
