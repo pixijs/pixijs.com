@@ -1,0 +1,18 @@
+[
+    {
+        "versionLabel": "dev",
+        "version": "dev",
+        "releaseNotes": "https://github.com/pixijs/pixijs/releases",
+        "build": "https://pixijs.download/dev/pixi.min.js",
+        "docs": "https://pixijs.download/dev/docs/index.html",
+        "dev": true
+    },
+    {
+        "versionLabel": "next-v8",
+        "version": "next-v8",
+        "releaseNotes": "https://github.com/pixijs/pixijs/releases",
+        "build": "https://pixijs.download/next-v8/pixi.min.js",
+        "docs": "https://pixijs.download/next-v8/docs/index.html",
+        "dev": true
+    }
+]

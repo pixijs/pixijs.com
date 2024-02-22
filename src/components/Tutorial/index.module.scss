@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     overflow: hidden;
     height: calc(100vh - var(--ifm-navbar-height));
+    width: 100vw;
 
     & > div {
         flex: 1;

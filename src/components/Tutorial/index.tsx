@@ -2,10 +2,21 @@ import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Link from '@docusaurus/Link';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import PixiPlayground from '../PixiPlayground';
-import type { TutorialStep } from '@site/src/data/tutorial/TutorialData';
+import PixiPlayground from '../Playground/PixiPlayground';
+import type { IVersion } from '../Playground/PixiPlayground/usePixiVersions';
+import type { TutorialStep } from '@site/src/tutorials';
+import { getTutorialEntry } from '@site/src/tutorials';
+import { extractSource } from '../Playground/PixiPlayground/useEditorCode';
 
-function BrowserTutorial({ data }: { data: TutorialStep[] })
+function BrowserTutorial({
+    data,
+    pixiVersion,
+    extraPackages,
+}: {
+    data: TutorialStep[];
+    pixiVersion: IVersion;
+    extraPackages?: Record<string, string>;
+})
 {
     let step = Number(window.location.hash.replace('#', ''));
 
@@ -28,6 +39,9 @@ function BrowserTutorial({ data }: { data: TutorialStep[] })
         setShowSolution(!showSolution);
     };
 
+    const { indexCode, extraFiles } = extractSource(code);
+    const { indexCode: indexCodeCompleted, extraFiles: extraFilesCompleted } = extractSource(completedCode ?? code);
+
     return (
         <>
             <div className={styles.content}>
@@ -39,7 +53,7 @@ function BrowserTutorial({ data }: { data: TutorialStep[] })
                             {data.map((datum, i) => (
                                 <Link key={i} onClick={resetSolutionShowed} to={`#${i + 1}`}>
                                     <div className={`${i === step - 1 ? styles.selected : ''}`}>{`${i + 1}.  ${
-                                        datum.title
+                                        datum.header
                                     }`}</div>
                                 </Link>
                             ))}
@@ -61,18 +75,27 @@ function BrowserTutorial({ data }: { data: TutorialStep[] })
                     </div>
                 </div>
             </div>
-            <PixiPlayground mode="tutorial" code={completedCode && showSolution ? completedCode : code} />
+            <PixiPlayground
+                code={completedCode && showSolution ? indexCodeCompleted : indexCode}
+                extraFiles={completedCode && showSolution ? extraFilesCompleted : extraFiles}
+                extraPackages={extraPackages}
+                pixiVersion={pixiVersion.version}
+                isPixiDevVersion={pixiVersion.dev}
+                mode="tutorial"
+            />
         </>
     );
 }
 
-export default function Tutorial({ data }: { data: TutorialStep[] }): JSX.Element
+export default function Tutorial({ id, pixiVersion }: { id: string; pixiVersion: IVersion }): JSX.Element
 {
+    const version = pixiVersion.version;
     const [showEditor, setShowEditor] = useState(false);
     const handleEditorToggle = (): void =>
     {
         setShowEditor(!showEditor);
     };
+    const entry = getTutorialEntry(version, id);
 
     return (
         <div className={`${styles.wrapper} ${showEditor ? styles.showEditor : ''}`}>
@@ -80,7 +103,7 @@ export default function Tutorial({ data }: { data: TutorialStep[] }): JSX.Elemen
                 {showEditor ? '<  To Instructions' : 'To Editor >'}
             </button>
             <BrowserOnly fallback={<h1 className={styles.loader}>LOADING...</h1>}>
-                {() => <BrowserTutorial data={data} />}
+                {() => <BrowserTutorial data={entry.steps} pixiVersion={pixiVersion} extraPackages={entry.extraPackages} />}
             </BrowserOnly>
         </div>
     );

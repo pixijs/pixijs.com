@@ -43,8 +43,17 @@ const config = {
                     editUrl: 'https://github.com/pixijs/pixijs.com/tree/main/',
                     routeBasePath: '/',
                     versions: {
+                        '7.x': {
+                            label: 'v7.x (Latest)',
+                            path: '7.x',
+                            banner: 'none',
+                            badge: false,
+                        },
+
                         current: {
-                            label: 'Latest',
+                            label: 'v8.x',
+                            banner: 'none',
+                            badge: false,
                         },
                     },
                 },
@@ -75,7 +84,7 @@ const config = {
                 highlightSearchTermsOnTargetPage: true,
                 docsRouteBasePath: '/',
                 explicitSearchResultPath: true,
-                searchContextByPaths: ['guides', 'examples', 'blog'],
+                searchContextByPaths: ['guides', 'examples', 'tutorials', 'blog'],
                 useAllContextsWithNoSearchContext: true,
             },
         ],
@@ -99,10 +108,10 @@ const config = {
                                 docId: 'guides/index',
                                 label: 'Guides',
                             },
-                            // TODO: add tutorial back in
                             {
-                                label: 'Tutorial',
-                                to: 'tutorial',
+                                type: 'doc',
+                                docId: 'tutorials/index',
+                                label: 'Tutorials',
                             },
                             {
                                 type: 'doc',
@@ -116,16 +125,10 @@ const config = {
                         position: 'left',
                         href: `https://pixijs.download/release/docs/index.html`,
                     },
-                    // TODO: add docs back in
-                    // {
-                    //     type: 'doc',
-                    //     docId: 'api/index',
-                    //     label: 'API',
-                    //     position: 'left',
-                    // },
                     {
-                        to: 'playground',
-                        label: 'Playground',
+                        type: 'doc',
+                        docId: 'playground/index',
+                        label: 'playground',
                         position: 'left',
                     },
                     {
