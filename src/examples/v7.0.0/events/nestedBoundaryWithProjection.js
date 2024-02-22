@@ -44,9 +44,6 @@ class Projector extends PIXI.DisplayObject
 
             // Then bring global coords into content's world
             this.worldTransform.applyInverse(to.global, to.global);
-            // TODO: Remove after https://github.com/pixijs/pixi.js/pull/7381
-            // is merged!
-            to.target = this.boundary.hitTest(to.global.x, to.global.y);
         };
 
         // Propagate these events down into the content's scene graph!
