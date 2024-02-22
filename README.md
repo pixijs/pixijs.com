@@ -84,6 +84,7 @@ Once satisfied with the state of the working docs and wanting to create a snapsh
 ```
 $ npm run create-docs-version-snapshot
 ```
+
 This will copy everything from the working docs into its own directory within the `versioned_docs` directory and named correspondingly to the version number from the encapsulated `pixi-version.json`, if chosen to be created as a specific version snapshot. If chosen to be snapshot as a generic version then the version key will be simplified to `{major}.x` (eg. `7.x`). Generic version snapshot is recommended over the specific one for maintaining major docs, but for a major version where multiple versions of docs are needed then the ability to create specific version snapshots can be handy. The command will also trigger `update-global-version-config` script which adds the pixi version config to the master `pixi-versions.json` on the root and alter the version config on the `docusaurus.config.js` accordingly. Docusaurus will also add the version to its `versions.json` file on the root.
 
 An existing docs snapshot can be removed using the following command:
