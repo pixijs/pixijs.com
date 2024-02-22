@@ -1,4 +1,6 @@
-import { Application, Assets, Sprite, Rectangle } from 'pixi.js';
+import 'pixi.js/advanced-blend-modes';
+
+import { Application, Assets, Container, Sprite } from 'pixi.js';
 
 (async () =>
 {
@@ -6,99 +8,86 @@ import { Application, Assets, Sprite, Rectangle } from 'pixi.js';
     const app = new Application();
 
     // Initialize the application
-    await app.init({ resizeTo: window });
+    await app.init({
+        antialias: true,
+        backgroundColor: 'white',
+        resizeTo: window,
+        // NEEDS TO BE TRUE FOR WEBGL!
+        useBackBuffer: true,
+    });
 
     // Append the application canvas to the document body
     document.body.appendChild(app.canvas);
 
-    // Load the textures
-    const bgTexture = await Assets.load('https://pixijs.com/assets/bg_rotate.jpg');
-    const alienTexture = await Assets.load('https://pixijs.com/assets/flowerTop.png');
+    const pandaTexture = await Assets.load(`https://pixijs.com/assets/panda.png`);
+    const rainbowGradient = await Assets.load(`https://pixijs.com/assets/rainbow-gradient.png`);
 
-    // Create a new background sprite
-    const background = new Sprite(bgTexture);
+    const allBlendModes = [
+        'normal',
+        'add',
+        'screen',
+        'darken',
+        'lighten',
+        'color-dodge',
+        'color-burn',
+        'linear-burn',
+        'linear-dodge',
+        'linear-light',
+        'hard-light',
+        'soft-light',
+        'pin-light',
+        'difference',
+        'exclusion',
+        'overlay',
+        'saturation',
+        'color',
+        'luminosity',
+        'add-npm',
+        'subtract',
+        'divide',
+        'vivid-light',
+        'hard-mix',
+        'negation',
+    ];
 
-    background.width = app.screen.width;
-    background.height = app.screen.height;
-    app.stage.addChild(background);
+    const size = 800 / 5;
 
-    // Create an array to store references to the dudes
-    const dudeArray = [];
+    const pandas = [];
 
-    const totaldudes = 20;
-
-    for (let i = 0; i < totaldudes; i++)
+    for (let i = 0; i < allBlendModes.length; i++)
     {
-        // Create a new alien Sprite
-        const dude = new Sprite(alienTexture);
+        const container = new Container();
 
-        dude.anchor.set(0.5);
+        const sprite = new Sprite({
+            texture: pandaTexture,
+            width: 100,
+            height: 100,
+            anchor: 0.5,
+            position: { x: size / 2, y: size / 2 },
+        });
 
-        // Set a random scale for the dude
-        dude.scale.set(0.8 + Math.random() * 0.3);
+        pandas.push(sprite);
 
-        // Finally let's set the dude to be at a random position...
-        dude.x = Math.floor(Math.random() * app.screen.width);
-        dude.y = Math.floor(Math.random() * app.screen.height);
+        const sprite2 = new Sprite({
+            texture: rainbowGradient,
+            width: size,
+            height: size,
+            blendMode: allBlendModes[i],
+        });
 
-        // The important bit of this example, this is how you change the default blend mode of the sprite
-        dude.blendMode = 'add';
+        container.addChild(sprite, sprite2);
 
-        // Create some extra properties that will control movement
-        dude.direction = Math.random() * Math.PI * 2;
+        app.stage.addChild(container);
 
-        // This number will be used to modify the direction of the dude over time
-        dude.turningSpeed = Math.random() - 0.8;
-
-        // Create a random speed for the dude between 0 - 2
-        dude.speed = 2 + Math.random() * 2;
-
-        // Finally we push the dude into the dudeArray so it it can be easily accessed later
-        dudeArray.push(dude);
-
-        app.stage.addChild(dude);
+        container.x = (i % 5) * size;
+        container.y = Math.floor(i / 5) * size;
     }
-
-    // Create a bounding box for the little dudes
-    const dudeBoundsPadding = 100;
-
-    const dudeBounds = new Rectangle(
-        -dudeBoundsPadding,
-        -dudeBoundsPadding,
-        app.screen.width + dudeBoundsPadding * 2,
-        app.screen.height + dudeBoundsPadding * 2,
-    );
 
     app.ticker.add(() =>
     {
-        // Iterate through the dudes and update the positions
-        for (let i = 0; i < dudeArray.length; i++)
+        pandas.forEach((panda, i) =>
         {
-            const dude = dudeArray[i];
-
-            dude.direction += dude.turningSpeed * 0.01;
-            dude.x += Math.sin(dude.direction) * dude.speed;
-            dude.y += Math.cos(dude.direction) * dude.speed;
-            dude.rotation = -dude.direction - Math.PI / 2;
-
-            // Constrain the dudes' position by testing their bounds...
-            if (dude.x < dudeBounds.x)
-            {
-                dude.x += dudeBounds.width;
-            }
-            else if (dude.x > dudeBounds.x + dudeBounds.width)
-            {
-                dude.x -= dudeBounds.width;
-            }
-
-            if (dude.y < dudeBounds.y)
-            {
-                dude.y += dudeBounds.height;
-            }
-            else if (dude.y > dudeBounds.y + dudeBounds.height)
-            {
-                dude.y -= dudeBounds.height;
-            }
-        }
+            panda.rotation += 0.01 * (i % 2 ? 1 : -1);
+        });
     });
 })();
