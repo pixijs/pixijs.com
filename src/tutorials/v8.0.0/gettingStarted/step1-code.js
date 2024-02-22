@@ -1,8 +1,14 @@
-import * as PIXI from 'pixi.js';
+import { Application } from 'pixi.js';
 
-const app = new PIXI.Application({
-    background: '#1099bb',
-    resizeTo: window,
-});
+// Asynchronous IIFE
+(async () =>
+{
+    // Create a PixiJS application.
+    const app = new Application();
 
-document.body.appendChild(app.view);
+    // Intialize the application.
+    await app.init({ background: '#1099bb', resizeTo: window });
+
+    // Then adding the application's canvas to the DOM body.
+    document.body.appendChild(app.canvas);
+})();

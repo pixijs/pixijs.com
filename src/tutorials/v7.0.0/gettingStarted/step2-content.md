@@ -6,20 +6,20 @@ There are a number of ways to draw images in PixiJS, but the simplest is by usin
 
 Before PixiJS can render an image, it needs to be loaded. Just like in any web page, image loading happens asynchronously. We'll talk a lot more about resource loading in later guides. For now, we can use a helper method on the PIXI.Sprite class to handle the image loading for us:
 
-```JavaScript
+```javascript
 // Magically load the PNG asynchronously
 const bunny = PIXI.Sprite.from('https://pixijs.com/assets/bunny.png')
 ```
 
 Then we need to add our new sprite to the stage. The stage is simply a [Container](https://pixijs.download/release/docs/PIXI.Container.html) that is the root of the scene graph. Every child of the stage container will be rendered every frame. By adding our sprite to the stage, we tell PixiJS's renderer we want to draw it.
 
-```JavaScript
+```javascript
 app.stage.addChild(bunny)
 ```
 
 Now let's set the Sprite's anchor and position it so that it's bang on at the center.
 
-```JavaScript
+```javascript
 // center the sprite's anchor point
 bunny.anchor.set(0.5)
 
