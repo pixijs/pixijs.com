@@ -12,7 +12,7 @@ The new event-based system that replaced InteractionManager from v6 has expanded
 |  `passive`  | Does not emit events and ignores hit testing on itself but does allow for events and hit testing only its interactive children. If you want to be compatible with v6, set this as your default `eventMode` (see options in Renderer, Application, etc) |
 |  `auto`  | Does not emit events and but is hit tested if parent is interactive. Same as `interactive = false` in v7 |
 |  `static`  | Emit events and is hit tested. Same as `interaction = true` in v7, useful for objects like buttons that do not move. |
-|  `dynamic` | Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving. This is useful for elements that independently moving or animating. |
+|  `dynamic` | Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving. This is useful for elements that are independently moving or animating. |
 
 ## Event Types
 
