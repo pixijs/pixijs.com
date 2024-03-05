@@ -4,12 +4,12 @@ PixiJS is primarily a rendering system, but it also includes support for interac
 
 ## Event Modes
 
-The new event-based system that replaced InteractionManager from v6 has expanded the definition of what a DisplayObject means to be interactive. With this we have introduced `eventMode` which allows you to control how an object responds to interaction events. This is similar to the `interactive` property in v6 but with more options.
+The new event-based system that replaced `InteractionManager` from v6 has expanded the definition of what a Container means to be interactive. With this we have introduced `eventMode` which allows you to control how an object responds to interaction events. This is similar to the `interactive` property in v6 but with more options.
 
 | eventMode | Description |
 |---|---|
 | `none` | Ignores all interaction events, similar to CSS's `pointer-events: none`, good optimization for non-interactive children |
-|  `passive`  | Does not emit events and ignores hit testing on itself but does allow for events and hit testing only its interactive children. If you want to be compatible with v6, set this as your default `eventMode` (see options in Renderer, Application, etc) |
+|  `passive`  | Does not emit events and ignores hit testing on itself but does allow for events and hit testing only its interactive children. This is default eventMode for all containers |
 |  `auto`  | Does not emit events and but is hit tested if parent is interactive. Same as `interactive = false` in v7 |
 |  `static`  | Emit events and is hit tested. Same as `interaction = true` in v7, useful for objects like buttons that do not move. |
 |  `dynamic` | Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving. This is useful for elements that independently moving or animating. |
@@ -57,19 +57,19 @@ PixiJS supports the following event types:
 
 ## Enabling Interaction
 
-Any DisplayObject-derived object (Sprite, Container, etc.) can become interactive simply by setting its `eventMode` property to any of the eventModes listed above. Doing so will cause the object to emit interaction events that can be responded to in order to drive your project's behavior.
+Any Container-derived object (Sprite, Container, etc.) can become interactive simply by setting its `eventMode` property to any of the eventModes listed above. Doing so will cause the object to emit interaction events that can be responded to in order to drive your project's behavior.
 
 Check out the [interaction example code](../../examples/events/click).
 
 To respond to clicks and taps, bind to the events fired on the object, like so:
 
 ```javascript
-let sprite = PIXI.Sprite.from('/some/texture.png');
+let sprite = Sprite.from('/some/texture.png');
 sprite.on('pointerdown', (event) => { alert('clicked!'); });
 sprite.eventMode = 'static';
 ```
 
-Check out the [DisplayObject](https://pixijs.download/release/docs/PIXI.DisplayObject.html) for the list of interaction events supported.
+Check out the [Container](https://pixijs.download/release/docs/scene.Container.html) for the list of interaction events supported.
 
 ### Checking if Object is Interactive
 
@@ -93,11 +93,7 @@ Hit testing requires walking the full object tree, which in complex projects can
 
 The `EventSystem` can also be customised to be more performant:
 ```js
-const app = new PIXI.Application({
-    /**
-     * by default we use `auto` for backwards compatibility.
-     * However `passive` is more performant and will be used by default in the future,
-     */
+const app = new Application({
     eventMode: 'passive',
     eventFeatures: {
         move: true,

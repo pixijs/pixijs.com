@@ -1,27 +1,55 @@
 # Assets
 ## The Assets package
 
-The Assets package is a modern replacement for the old `PIXI.Loader` class. It is a promise-based resource management solution that will download, cache and parse your assets into something you can use. The downloads can be simultaneous and in the background, meaning faster startup times for your app, the cache ensures that you never download the same asset twice and the extensible parser system allows you to easily extend and customize the process to your needs.
+The Assets package is a modern replacement for the old `Loader` class. It is a promise-based resource management solution that will download, cache and parse your assets into something you can use. The downloads can be simultaneous and in the background, meaning faster startup times for your app, the cache ensures that you never download the same asset twice and the extensible parser system allows you to easily extend and customize the process to your needs.
 
 
 ## Getting started
 
-The `@pixi/assets` package doesn't come bundled with PixiJS in version 6.x and must be added externally, however it will become integrated with version 7. The class that does all the heavy lifting is called `AssetsClass` but you don't need to create your own instance since you will find one ready to use in `PIXI.Assets`.
-This package relies heavily on JavaScript Promises that all modern browsers support, however, if your target browser [doesn't support promises](https://caniuse.com/promises) you should look into [polyfilling them](https://github.com/zloirock/core-js#ecmascript-promise).
+`Assets` relies heavily on JavaScript Promises that all modern browsers support, however, if your target browser [doesn't support promises](https://caniuse.com/promises) you should look into [polyfilling them](https://github.com/zloirock/core-js#ecmascript-promise).
 
 ## Making our first Assets Promise
-To quickly use the `PIXI.Assets` instance, you just need to call `PIXI.Assets.load` and pass in an asset. This will return a promise that when resolved will yield the value you seek.
+To quickly use the `Assets` instance, you just need to call `Assets.load` and pass in an asset. This will return a promise that when resolved will yield the value you seek.
 In this example, we will load a texture and then turn it into a sprite.
 
-<div class="responsive-4-3"><iframe src="https://pixijs.io/examples/?embed=1&showcode=1#/assets/promise.js"></iframe></div>
+```ts
+import { Application, Assets, Sprite } from 'pixi.js';
+
+// Create a new application
+const app = new Application();
+
+// Initialize the application
+await app.init({ background: '#1099bb', resizeTo: window });
+
+// Append the application canvas to the document body
+document.body.appendChild(app.canvas);
+
+// Start loading right away and create a promise
+const texturePromise = Assets.load('https://pixijs.com/assets/bunny.png');
+
+// When the promise resolves, we have the texture!
+texturePromise.then((resolvedTexture) =>
+{
+    // create a new Sprite from the resolved loaded Texture
+    const bunny = Sprite.from(resolvedTexture);
+
+    // center the sprite's anchor point
+    bunny.anchor.set(0.5);
+
+    // move the sprite to the center of the screen
+    bunny.x = app.screen.width / 2;
+    bunny.y = app.screen.height / 2;
+
+    app.stage.addChild(bunny);
+});
+```
 
 One very important thing to keep in mind while using `Assets` is that all requests are cached and if the URL is the same, the promise returned will also be the same.
 To show it in code:
 ```js
-promise1 = PIXI.Assets.load('bunny.png')
-promise2 = PIXI.Assets.load('bunny.png')
-
-//promise1 === promise2
+promise1 = Assets.load('bunny.png')
+promise2 = Assets.load('bunny.png')
+// promise1 === promise2
 ```
 
 Out of the box, the following assets types can be loaded without the need for external plugins:
@@ -71,37 +99,76 @@ This function now wraps the return value in a promise and allows us to use the `
 
 See this example:
 
-<div class="responsive-4-3"><iframe src="https://pixijs.io/examples/?embed=1&showcode=1#/assets/async.js"></iframe></div>
+```ts
+// Create a new application
+const app = new Application();
+// Initialize the application
+await app.init({ background: '#1099bb', resizeTo: window });
+// Append the application canvas to the document body
+document.body.appendChild(app.canvas);
+const texture = await Assets.load('https://pixijs.com/assets/bunny.png');
+// Create a new Sprite from the awaited loaded Texture
+const bunny = Sprite.from(texture);
+// Center the sprite's anchor point
+bunny.anchor.set(0.5);
+// Move the sprite to the center of the screen
+bunny.x = app.screen.width / 2;
+bunny.y = app.screen.height / 2;
+app.stage.addChild(bunny);
+```
 
 The `texture` variable now is not a promise but the resolved texture that resulted after waiting for this promise to resolve.
 
 ```js
-const texture = await PIXI.Assets.load('examples/assets/bunny.png');
+const texture = await Assets.load('examples/assets/bunny.png');
 ```
 
 This allows us to write more readable code without falling into callback hell and to better think when our program halts and yields.
 
 ## Loading multiple assets
 
-We can add assets to the cache and then load them all simultaneously by using `PIXI.Assets.add(...)` and then calling `PIXI.Assets.load(...)` with all the keys you want to have loaded.
+We can add assets to the cache and then load them all simultaneously by using `Assets.add(...)` and then calling `Assets.load(...)` with all the keys you want to have loaded.
 See the following example:
 
-<div class="responsive-4-3"><iframe src="https://pixijs.io/examples/?embed=1&showcode=1#/assets/multiple.js"></iframe></div>
+```ts
+// Append the application canvas to the document body
+document.body.appendChild(app.canvas);
+// Add the assets to load
+Assets.add({ alias: 'flowerTop', src: 'https://pixijs.com/assets/flowerTop.png' });
+Assets.add({ alias: 'eggHead', src: 'https://pixijs.com/assets/eggHead.png' });
+// Load the assets and get a resolved promise once both are loaded
+const texturesPromise = Assets.load(['flowerTop', 'eggHead']); // => Promise<{flowerTop: Texture, eggHead: Texture}>
+// When the promise resolves, we have the texture!
+texturesPromise.then((textures) =>
+{
+    // Create a new Sprite from the resolved loaded Textures
+    const flower = Sprite.from(textures.flowerTop);
+    flower.anchor.set(0.5);
+    flower.x = app.screen.width * 0.25;
+    flower.y = app.screen.height / 2;
+    app.stage.addChild(flower);
+    const egg = Sprite.from(textures.eggHead);
+    egg.anchor.set(0.5);
+    egg.x = app.screen.width * 0.75;
+    egg.y = app.screen.height / 2;
+    app.stage.addChild(egg);
+});
+```
 
 However, if you want to take full advantage of `@pixi/Assets` you should use bundles.
-Bundles are just a way to group assets together and can be added manually by calling `PIXI.Assets.addBundle(...)`/`PIXI.Assets.loadBundle(...)`.
+Bundles are just a way to group assets together and can be added manually by calling `Assets.addBundle(...)`/`Assets.loadBundle(...)`.
 
 ```js
-  PIXI.Assets.addBundle('animals', {
+  Assets.addBundle('animals', {
     bunny: 'bunny.png',
     chicken: 'chicken.png',
     thumper: 'thumper.png',
   });
 
- const assets = await PIXI.Assets.loadBundle('animals');
+ const assets = await Assets.loadBundle('animals');
 ```
 
-However, the best way to handle bundles is to use a manifest and call `PIXI.Assets.init({manifest})` with said manifest (or even better, an URL pointing to it).
+However, the best way to handle bundles is to use a manifest and call `Assets.init({manifest})` with said manifest (or even better, an URL pointing to it).
 Splitting our assets into bundles that correspond to screens or stages of our app will come in handy for loading in the background while the user is using the app instead of locking them in a single monolithic loading screen.
 
 ```json
@@ -111,12 +178,12 @@ Splitting our assets into bundles that correspond to screens or stages of our ap
          "name":"load-screen",
          "assets":[
             {
-               "name":"background",
-               "srcs":"sunset.png"
+               "alias":"background",
+               "src":"sunset.png"
             },
             {
-               "name":"bar",
-               "srcs":"load-bar.{png,webp}"
+               "alias":"bar",
+               "src":"load-bar.{png,webp}"
             }
          ]
       },
@@ -124,12 +191,12 @@ Splitting our assets into bundles that correspond to screens or stages of our ap
          "name":"game-screen",
          "assets":[
             {
-               "name":"character",
-               "srcs":"robot.png"
+               "alias":"character",
+               "src":"robot.png"
             },
             {
-               "name":"enemy",
-               "srcs":"bad-guy.png"
+               "alias":"enemy",
+               "src":"bad-guy.png"
             }
          ]
       }
@@ -137,7 +204,7 @@ Splitting our assets into bundles that correspond to screens or stages of our ap
 }
 ```
 ```js
-PIXI.Assets.init({manifest: "path/manifest.json"});
+Assets.init({manifest: "path/manifest.json"});
 ```
 
 Beware that **you can only call `init` once**.
@@ -146,16 +213,61 @@ Remember there is no downside in repeating URLs since they will all be cached, s
 
 ## Background loading
 
-The old approach to loading was to use `PIXI.Loader` to load all your assets at the beginning of your app, but users are less patient now and want content to be instantly available so the practices are moving towards loading the bare minimum needed to show the user some content and, while they are interacting with that, we keep loading the following content in the background.
+The old approach to loading was to use `Loader` to load all your assets at the beginning of your app, but users are less patient now and want content to be instantly available so the practices are moving towards loading the bare minimum needed to show the user some content and, while they are interacting with that, we keep loading the following content in the background.
 
-Luckily, `@pixi/assets` has us covered with a system that allows us to load everything in the background and in case we need some assets right now, bump them to the top of the queue so we can minimize loading times.
+Luckily, `Assets` has us covered with a system that allows us to load everything in the background and in case we need some assets right now, bump them to the top of the queue so we can minimize loading times.
 
-To achieve this, we have the methods `PIXI.Assets.backgroundLoad(...)` and `PIXI.Assets.backgroundLoadBundle(...)` that will passively begin to load these assets in the background. So when you finally come to loading them you will get a promise that resolves to the loaded assets immediately.
+To achieve this, we have the methods `Assets.backgroundLoad(...)` and `Assets.backgroundLoadBundle(...)` that will passively begin to load these assets in the background. So when you finally come to loading them you will get a promise that resolves to the loaded assets immediately.
 
-When you finally need the assets to show, you call the usual `PIXI.Assets.load(...)` or `PIXI.Assets.loadBundle(...)` and you will get the corresponding promise.
+When you finally need the assets to show, you call the usual `Assets.load(...)` or `Assets.loadBundle(...)` and you will get the corresponding promise.
 
 The best way to do this is using bundles, see the following example:
 
-<div class="responsive-4-3"><iframe src="https://pixijs.io/examples/?embed=1&showcode=1#/assets/bundle.js"></iframe></div>
+```ts
+import { Application, Assets, Sprite } from 'pixi.js';
+
+// Create a new application
+const app = new Application();
+
+async function init()
+{
+    // Initialize the application
+    await app.init({ background: '#1099bb', resizeTo: window });
+
+    // Append the application canvas to the document body
+    document.body.appendChild(app.canvas);
+
+    // Manifest example
+    const manifestExample = {
+        bundles: [
+            {
+                name: 'load-screen',
+                assets: [
+                    {
+                        alias: 'flowerTop',
+                        src: 'https://pixijs.com/assets/flowerTop.png',
+                    },
+                ],
+            },
+            {
+                name: 'game-screen',
+                assets: [
+                    {
+                        alias: 'eggHead',
+                        src: 'https://pixijs.com/assets/eggHead.png',
+                    },
+                ],
+            },
+        ],
+    };
+
+    await Assets.init({ manifest: manifestExample });
+
+    // Bundles can be loaded in the background too!
+    Assets.backgroundLoadBundle(['load-screen', 'game-screen']);
+}
+
+init();
+```
 
 We create one bundle for each screen our game will have and set them all to start downloading at the beginning of our app. If the user progresses slowly enough in our app then they should never get to see a loading screen after the first one!

@@ -8,18 +8,16 @@ Before we get into how the code is layed out, let's talk about where it lives.  
 
 ## The Components
 
-PixiJS is a modular rendering engine.  Each task required for generating, updating and displaying content is broken out into its own component.  Not only does this make the code cleaner, it allows for greater extensibility.  Additionally, with the use of the [PixiJS Customize tool](https://pixijs.io/customize/), it's possible to build a custom PixiJS file containing only the subset of features your project needs, saving download size.
-
 Here's a list of the major components that make up PixiJS.  Note that this list isn't exhaustive.  Additionally, don't worry too much about how each component works.  The goal here is to give you a feel for what's under the hood as we start exploring the engine.
 
 ### Major Components
 
 | Component                                  | Description                                                                                                                                                                                            |
 | ---                                        | ---                                                                                                                                                                                                    |
-| **Renderer** `@pixi/core`                  | The core of the PixiJS system is the renderer, which displays the scene graph and draws it to the screen.  The default renderer for PixiJS is based on WebGL under the hood.                           |
-| **Container** `@pixi/display`              | Main display object which creates a scene graph: the tree of renderable objects to be displayed, such as sprites, graphics and text. See [Scene Graph](scene-graph) for more details.             |
-| **Loader** `@pixi/loader`                  | The loader system provides tools for asynchronously loading resources such as images and audio files.                                                                                                  |
-| **Ticker** `@pixi/ticker`                  | Tickers provide periodic callbacks based on a clock.  Your game update logic will generally be run in response to a tick once per frame.  You can have multiple tickers in use at one time.            |
-| **Application** `@pixi/app`                | The Application is a simple helper that wraps a Loader, Ticker and Renderer into a single, convenient easy-to-use object. Great for getting started quickly, prototyping and building simple projects. |
-| **Interaction** `@pixi/interaction`        | PixiJS supports both touch and mouse-based interaction - making objects clickable, firing hover events, etc.                                                                                           |
-| **Accessibility** `@pixi/accessibility`    | Woven through our display system is a rich set of tools for enabling keyboard and screen-reader accessibility.                                                                                         |
+| **Renderer**                  | The core of the PixiJS system is the renderer, which displays the scene graph and draws it to the screen. PixiJS will automatically determine whether to provide you the WebGPU or WebGL renderer under the hood.                           |
+| **Container**             | Main scene object which creates a scene graph: the tree of renderable objects to be displayed, such as sprites, graphics and text. See [Scene Graph](scene-graph) for more details.             |
+| **Assets**                 | The Asset system provides tools for asynchronously loading resources such as images and audio files.                                                                                                  |
+| **Ticker**                  | Tickers provide periodic callbacks based on a clock.  Your game update logic will generally be run in response to a tick once per frame.  You can have multiple tickers in use at one time.            |
+| **Application**                | The Application is a simple helper that wraps a Loader, Ticker and Renderer into a single, convenient easy-to-use object. Great for getting started quickly, prototyping and building simple projects. |
+| **Events**         | PixiJS supports pointer-based interaction - making objects clickable, firing hover events, etc.                                                                                           |
+| **Accessibility**   | Woven through our display system is a rich set of tools for enabling keyboard and screen-reader accessibility.                                                                                         |

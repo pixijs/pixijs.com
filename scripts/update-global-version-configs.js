@@ -75,18 +75,12 @@ recast.visit(ast, {
                             ),
                         ];
 
-                        if (!version.isCurrent)
-                        {
-                            versionProps.push(
-                                recast.types.builders.property(
-                                    'init',
-                                    recast.types.builders.identifier('path'),
-                                    recast.types.builders.literal(key),
-                                ),
-                            );
-                        }
-
                         versionProps.push(
+                            recast.types.builders.property(
+                                'init',
+                                recast.types.builders.identifier('path'),
+                                recast.types.builders.literal(version.isCurrent ? '' : key),
+                            ),
                             recast.types.builders.property(
                                 'init',
                                 recast.types.builders.identifier('banner'),

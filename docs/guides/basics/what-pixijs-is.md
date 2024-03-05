@@ -8,15 +8,15 @@ Here's what else you get with PixiJS:
 
 ## PixiJS Is ... Fast
 
-One of the major features that distinguishes PixiJS from other web-based rendering solutions is *speed*.  From the ground up, the render pipeline has been built to get the most performance possible out of your users' browsers.  Automatic sprite and geometry batching, careful use of WebGL resources, a tight scene graph - no matter your application, speed is valuable, and PixiJS has it to spare.
+One of the major features that distinguishes PixiJS from other web-based rendering solutions is *speed*.  From the ground up, the render pipeline has been built to get the most performance possible out of your users' browsers.  Automatic sprite and geometry batching, careful use of GPU resources, a tight scene graph - no matter your application, speed is valuable, and PixiJS has it to spare.
 
 ## ... More Than Just Sprites
 
-Drawing images on a page can be handled with HTML5 and the DOM, so why use PixiJS?  Beyond performance, the answer is that PixiJS goes well beyond simple images.  Draw trails and tracks with [SimpleRope](https://pixijs.download/release/docs/PIXI.SimpleRope.html).  Draw polygons, lines, circles and other primitives with [Graphics](https://pixijs.download/release/docs/PIXI.Graphics.html). [Text](https://pixijs.download/release/docs/PIXI.Text.html) provides full text rendering support that's just as performant as sprites.  And even when drawing simple images, PixiJS natively supports spritesheets for efficient loading and ease of development.
+Drawing images on a page can be handled with HTML5 and the DOM, so why use PixiJS?  Beyond performance, the answer is that PixiJS goes well beyond simple images.  Draw trails and tracks with [MeshRope](https://pixijs.download/release/docs/scene.MeshRope.html).  Draw polygons, lines, circles and other primitives with [Graphics](https://pixijs.download/release/docs/scene.Graphics.html). [Text](https://pixijs.download/release/docs/scene.Text.html) provides full text rendering support that's just as performant as sprites.  And even when drawing simple images, PixiJS natively supports spritesheets for efficient loading and ease of development.
 
-## ... WebGL Native
+## ... Hardware accelerated
 
-WebGL is the JavaScript API for accessing users' GPUs for fast rendering and advanced effects.  PixiJS leverages WebGL to display thousands of moving sprites efficiently even on mobile devices.  But using WebGL offers more than just speed.  By using the [Filter](https://pixijs.download/release/docs/PIXI.Filter.html) class, you can write shader programs (or use pre-built ones!) to achieve displacement maps, blurring, and other advanced visual effects that cannot be accomplished with just the DOM or Canvas APIs.
+JavaScript has two APIs for handling hardware acceleration for graphical rendering: WebGL and the more modern WebGPU. Both essentially offer a JavaScript API for accessing users' GPUs for fast rendering and advanced effects. PixiJS leverages them to efficiently display thousands of moving sprites, even on mobile devices. However, using WebGL and WebGPU offers more than just speed.  By using the [Filter](https://pixijs.download/release/docs/filters.Filter.html) class, you can write shader programs (or use pre-built ones!) to achieve displacement maps, blurring, and other advanced visual effects that cannot be accomplished with just the DOM or Canvas APIs.
 
 ## ... Open Source
 

@@ -1,6 +1,6 @@
 # Spritesheets
 
-Now that you understand basic sprites, it's time to talk about a better way to create them - the [Spritesheet](https://pixijs.download/release/docs/PIXI.Spritesheet.html) class.
+Now that you understand basic sprites, it's time to talk about a better way to create them - the [Spritesheet](https://pixijs.download/release/docs/assets.Spritesheet.html) class.
 
 A Spritesheet is a media format for more efficiently downloading and rendering Sprites.  While somewhat more complex to create and use, they are a key tool in optimizing your project.
 
@@ -36,7 +36,7 @@ You can use a 3rd party tool to assemble your sprite sheet files.  Here are two 
 
 Spritesheet data can also be created manually or programmatically, and supplied to a new AnimatedSprite. This may be an easier option if your sprites are already contained in a single image.
 
-```javascript
+```ts
 // Create object to store sprite sheet data
 const atlasData = {
 	frames: {
@@ -64,8 +64,8 @@ const atlasData = {
 
 
 // Create the SpriteSheet from data and image
-const spritesheet = new PIXI.Spritesheet(
-	PIXI.BaseTexture.from(atlasData.meta.image),
+const spritesheet = new Spritesheet(
+	Texture.from(atlasData.meta.image),
 	atlasData
 );
 
@@ -73,7 +73,7 @@ const spritesheet = new PIXI.Spritesheet(
 await spritesheet.parse();
 
 // spritesheet is ready to use!
-const anim = new PIXI.AnimatedSprite(spritesheet.animations.enemy);
+const anim = new AnimatedSprite(spritesheet.animations.enemy);
 
 // set the animation speed
 anim.animationSpeed = 0.1666;
