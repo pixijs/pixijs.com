@@ -44,14 +44,14 @@ const config = {
                     routeBasePath: '/',
                     versions: {
                         '7.x': {
-                            label: 'v7.x (Latest)',
+                            label: 'v7.x',
                             path: '7.x',
                             banner: 'none',
                             badge: false,
                         },
 
                         current: {
-                            label: 'v8.x',
+                            label: 'v8.x (Latest)',
                             path: '',
                             banner: 'none',
                             badge: false,

@@ -1,22 +1,22 @@
 [
   {
-    "versionLabel": "v7.x (Latest)",
+    "versionLabel": "v7.x",
     "version": "7.4.0",
     "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v7.4.0",
     "build": "https://pixijs.download/v7.4.0/pixi.min.js",
     "docs": "https://pixijs.download/v7.4.0/docs/index.html",
     "npm": "7.4.0",
     "prerelease": false,
-    "latest": true,
+    "latest": false,
     "isCurrent": false
   },
   {
     "versionLabel": "v8.x",
-    "version": "8.0.0-rc.10",
-    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v8.0.0-rc.10",
-    "build": "https://pixijs.download/v8.0.0-rc.10/pixi.min.js",
-    "docs": "https://pixijs.download/v8.0.0-rc.10/docs/index.html",
-    "npm": "8.0.0-rc.10",
+    "version": "8.0.0",
+    "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v8.0.0",
+    "build": "https://pixijs.download/v8.0.0/pixi.min.js",
+    "docs": "https://pixijs.download/v8.0.0/docs/index.html",
+    "npm": "8.0.0",
     "prerelease": true,
     "latest": false,
     "isCurrent": true
