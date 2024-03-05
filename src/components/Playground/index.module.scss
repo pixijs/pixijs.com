@@ -1,0 +1,17 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    height: calc(100vh - var(--ifm-navbar-height));
+    width: 100vw;
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        margin: 16px 18px;
+
+        .select {
+            margin: 0 8px;
+        }
+    }
+}

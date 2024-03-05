@@ -51,19 +51,22 @@ export default function NavbarContent()
     const socialItems = [];
 
     const isBrowser = useIsBrowser();
+    const socialsThreshold = 1423;
+    const searchThreshold = 1479;
+    const mobileThreshold = 996;
 
     const [navbar, setNavbar] = useState({
-        socials: isBrowser ? window.innerWidth > 1423 : true,
-        search: isBrowser ? window.innerWidth > 1479 : true,
-        mobile: isBrowser ? window.innerWidth < 996 : false,
+        socials: isBrowser ? window.innerWidth > socialsThreshold : true,
+        search: isBrowser ? window.innerWidth > searchThreshold : true,
+        mobile: isBrowser ? window.innerWidth < mobileThreshold : false,
     });
 
     const resetEditorLayout = () =>
     {
         setNavbar({
-            socials: window.innerWidth > 1423,
-            search: window.innerWidth > 1479,
-            mobile: window.innerWidth < 996,
+            socials: window.innerWidth > socialsThreshold,
+            search: window.innerWidth > searchThreshold,
+            mobile: window.innerWidth < mobileThreshold,
         });
     };
 

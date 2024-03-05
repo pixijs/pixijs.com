@@ -31,7 +31,7 @@ OK!  With those notes out of the way, let's get started.  There are only a few s
 * Create an HTML file
 * Serve the file with a web server
 * Load the PixiJS library
-* Create an [Application](https://pixijs.download/release/docs/PIXI.Application.html)
+* Create an [Application](https://pixijs.download/release/docs/app.Application.html)
 * Add the generated view to the DOM
 * Add an image to the stage
 * Write an update loop
@@ -81,31 +81,32 @@ Loading the library doesn't do much good if we don't *use* it, so the next step 
 
 ```html
 <script>
-  let app = new PIXI.Application({ width: 640, height: 360 });
+  const app = new PIXI.Application();
+  await app.init({ width: 640, height: 360 })
 </script>
 ```
 
-What we're doing here is adding a JavaScript code block, and in that block creating a new PIXI.Application instance. [Application](https://pixijs.download/release/docs/PIXI.Application.html) is a helper class that simplifies working with PixiJS.  It creates the renderer, creates the stage, and starts a ticker for updating.  In production, you'll almost certainly want to do these steps yourself for added customization and control - we'll cover doing so in a later guide.  For now, the Application class is a perfect way to start playing with PixiJS without worrying about the details.
+What we're doing here is adding a JavaScript code block, and in that block creating a new PIXI.Application instance. [Application](https://pixijs.download/release/docs/app.Application.html) is a helper class that simplifies working with PixiJS.  It creates the renderer, creates the stage, and starts a ticker for updating.  In production, you'll almost certainly want to do these steps yourself for added customization and control - we'll cover doing so in a later guide.  For now, the Application class is a perfect way to start playing with PixiJS without worrying about the details. The `Application` class also has a method `init` that will initialize the application with the given options. This method is asynchronous, so we use the `await` keyword to wait for it to complete. This is because PixiJS uses WebGPU or WebGL under the hood, and the former API asynchronous.
 
-### Adding the View to the DOM
+### Adding the Canvas to the DOM
 
 When the PIXI.Application class creates the renderer, it builds a Canvas element that it will render *to*.  In order to see what we draw with PixiJS, we need to add this Canvas element to the web page's DOM.  Append the following line to your page's script block:
 
-```JavaScript
-  document.body.appendChild(app.view);
+```javascript
+  document.body.appendChild(app.canvas);
 ```
 
-This takes the view created by the application (the Canvas element) and adds it to the body of your page.
+This takes the canvas created by the application (the Canvas element) and adds it to the body of your page.
 
 ### Creating a Sprite
 
 So far all we've been doing is prep work.  We haven't actually told PixiJS to draw anything.  Let's fix that by adding an image to be displayed.
 
-There are a number of ways to draw images in PixiJS, but the simplest is by using a [Sprite](https://pixijs.download/release/docs/PIXI.Sprite.html).  We'll get into the details of how the scene graph works in a later guide, but for now all you need to know is that PixiJS renders a hierarchy of [DisplayObjects](https://pixijs.download/release/docs/PIXI.DisplayObject.html).  A Sprite is a type of DisplayObject that wraps a loaded image resource to allow drawing it, scaling it, rotating it, and so forth.
+There are a number of ways to draw images in PixiJS, but the simplest is by using a [Sprite](https://pixijs.download/release/docs/scene.Sprite.html).  We'll get into the details of how the scene graph works in a later guide, but for now all you need to know is that PixiJS renders a hierarchy of [Containers](https://pixijs.download/release/docs/scene.Container.html).  A Sprite is a type of Container that wraps a loaded image resource to allow drawing it, scaling it, rotating it, and so forth.
 
 Before PixiJS can render an image, it needs to be loaded.  Just like in any web page, image loading happens asynchronously.  We'll talk a lot more about resource loading in later guides.  For now, we can use a helper method on the PIXI.Sprite class to handle the image loading for us:
 
-```JavaScript
+```javascript
   // Magically load the PNG asynchronously
   let sprite = PIXI.Sprite.from('sample.png');
 ```
@@ -114,9 +115,9 @@ Before PixiJS can render an image, it needs to be loaded.  Just like in any web 
 
 ### Adding the Sprite to the Stage
 
-Finally, we need to add our new sprite to the stage.  The stage is simply a [Container](https://pixijs.download/release/docs/PIXI.Container.html) that is the root of the scene graph.  Every child of the stage container will be rendered every frame.  By adding our sprite to the stage, we tell PixiJS's renderer we want to draw it.
+Finally, we need to add our new sprite to the stage.  The stage is simply a [Container](https://pixijs.download/release/docs/scene.Container.html) that is the root of the scene graph.  Every child of the stage container will be rendered every frame.  By adding our sprite to the stage, we tell PixiJS's renderer we want to draw it.
 
-```JavaScript
+```javascript
   app.stage.addChild(sprite);
 ```
 
@@ -129,9 +130,9 @@ While you _can_ use PixiJS for static content, for most projects you'll want to 
   let elapsed = 0.0;
   // Tell our application's ticker to run a new callback every frame, passing
   // in the amount of time that has passed since the last tick
-  app.ticker.add((delta) => {
+  app.ticker.add((ticker) => {
     // Add the time to our total elapsed time
-    elapsed += delta;
+    elapsed += ticker.deltaTime;
     // Update the sprite's X position based on the cosine of our elapsed time.  We divide
     // by 50 to slow the animation down a bit...
     sprite.x = 100.0 + Math.cos(elapsed/50.0) * 100.0;
@@ -155,8 +156,9 @@ Here's the whole thing in one place.  Check your file and make sure it matches i
   <body>
     <script>
       // Create the application helper and add its render target to the page
-      let app = new PIXI.Application({ width: 640, height: 360 });
-      document.body.appendChild(app.view);
+      const app = new PIXI.Application();
+      await app.init({ width: 640, height: 360 })
+      document.body.appendChild(app.canvas);
 
       // Create the sprite and add it to the stage
       let sprite = PIXI.Sprite.from('sample.png');
@@ -164,8 +166,8 @@ Here's the whole thing in one place.  Check your file and make sure it matches i
 
       // Add a ticker callback to move the sprite back and forth
       let elapsed = 0.0;
-      app.ticker.add((delta) => {
-        elapsed += delta;
+      app.ticker.add((ticker) => {
+        elapsed += ticker.deltaTime;
         sprite.x = 100.0 + Math.cos(elapsed/50.0) * 100.0;
       });
     </script>

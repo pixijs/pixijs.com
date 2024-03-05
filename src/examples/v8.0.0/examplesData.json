@@ -1,0 +1,106 @@
+{
+  "basic": [
+    "container",
+    "transparentBackground",
+    "tinting",
+    "particleContainer",
+    "blendModes",
+    "meshPlane",
+    "renderGroup"
+  ],
+  "advanced": [
+    "slots",
+    "scratchCard",
+    "starWarp",
+    "mouseTrail",
+    "screenShot",
+    "collisionDetection",
+    "spinners"
+  ],
+  "sprite": [
+    "basic",
+    "textureSwap",
+    "animatedSpriteExplosion",
+    "animatedSpriteJet",
+    "animatedSpriteAnimationSpeed",
+    "tilingSprite",
+    "video"
+  ],
+  "text": [
+    "pixiText",
+    "bitmapText",
+    "fromFont",
+    "webFont"
+  ],
+  "graphics": [
+    "simple",
+    "advanced",
+    "dynamic",
+    "svg",
+    "svg-load",
+    "texture",
+    "fillGradient",
+    "meshFromPath"
+  ],
+  "events": [
+    "click",
+    "interactivity",
+    "dragging",
+    "customMouseIcon",
+    "customHitarea",
+    {
+      "name": "hitTestingWithSpatialHash",
+      "hide": true
+    },
+    "logger",
+    "pointerTracker",
+    "slider"
+  ],
+  "masks": [
+    "graphics",
+    "sprite",
+    "filter"
+  ],
+  "filtersBasic": [
+    "blur",
+    "colorMatrix",
+    "displacementMapCrawlies",
+    "displacementMapFlag"
+  ],
+  "filtersAdvanced": [
+    "mouseBlending",
+    "custom"
+  ],
+  "meshAndShaders": [
+    "texturedMeshBasic",
+    "texturedMeshAdvanced",
+    "triangle",
+    "triangleColor",
+    "triangleTextured",
+    "sharedGeometry",
+    "sharedShader",
+    "instancedGeometry",
+    "shaderToyMesh",
+    "multipassMesh"
+  ],
+  "textures": [
+    "textureRotate",
+    "renderTextureBasic",
+    "renderTextureAdvanced"
+  ],
+  "assets": [
+    "promise",
+    "async",
+    "multiple",
+    "background",
+    "bundle"
+  ],
+  "offscreenCanvas": [
+    "basic",
+    {
+      "name": "webWorker",
+      "hide": true,
+      "usesWebWorkerLibrary": true
+    }
+  ]
+}

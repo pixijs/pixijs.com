@@ -46,8 +46,8 @@
 
 ### Filters
 
-- Release memory: `displayObject.filters = null`
-- If you know the size of them: `displayObject.filterArea = new PIXI.Rectangle(x,y,w,h)`. This can speed things up as it means the object does not need to be measured
+- Release memory: `container.filters = null`
+- If you know the size of them: `container.filterArea = new Rectangle(x,y,w,h)`. This can speed things up as it means the object does not need to be measured
 - Filters are expensive, using too many will start to slow things down!
 
 ### BlendModes
@@ -56,16 +56,7 @@
 - SceenSprite / NormalSprite / SceenSprite / NormalSprite would be 4 draw calls
 - SceenSprite / SceenSprite / NormalSprite / NormalSprite would be 2 draw calls
 
-### CacheAsBitmap
-
-- Setting to `true` turns an object into a Sprite by caching it as a Texture
-- It has a one time cost when it is activated as it draws the object to a Texture
-- Avoid changing this on elements frequently
-- If you have a complicated item that has lots of sprites / filters AND does not move then this will speed up rendering!
-- Do not need apply to sprites as they are already Textures
-- Do not use if the object where its children are constantly changing as this will slow things down
-
 ### Events
 
 - If an object has no interactive children use `interactiveChildren = false`. The event system will then be able to avoid crawling through the object
-- Setting `hitArea = new PIXI.Rectangle(x,y,w,h)` as above should stop the event system from crawling through the object
+- Setting `hitArea = new Rectangle(x,y,w,h)` as above should stop the event system from crawling through the object

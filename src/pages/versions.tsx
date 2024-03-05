@@ -8,9 +8,11 @@
 import Link from '@docusaurus/Link';
 import Translate from '@docusaurus/Translate';
 import Versions from '@site/pixi-versions.json';
+import LegacyVersions from '@site/pixi-legacy-versions.json';
+import DevVersions from '@site/pixi-dev-versions.json';
 import Heading from '@theme/Heading';
 import Layout from '@theme/Layout';
-import type { IVersion } from '@site/src/components/PixiPlayground/usePixiVersions';
+import type { IVersion } from '@site/src/components/Playground/PixiPlayground/usePixiVersions';
 
 function DocumentationLabel()
 {
@@ -29,11 +31,15 @@ function ReleaseNotesLabel()
 
 export default function Version(): JSX.Element
 {
+    // TODO: Make it an adaptive version listing instead
     const versions = Versions as IVersion[];
-    const devVersion: IVersion = versions[0];
-    const latestVersion: IVersion = versions[1].prerelease ? versions[2] : versions[1];
+    const legacyVersions = LegacyVersions as IVersion[];
+    const devVersions = DevVersions as IVersion[];
+    const latestVersion = versions.find((version) => version.latest);
     const preReleaseVersion = versions.find((version) => version.prerelease);
-    const pastVersions = versions.slice(2);
+    const pastVersions = [...versions, ...legacyVersions].filter(
+        (version) => !version.latest && !version.prerelease && !version.dev,
+    );
 
     return (
         <Layout title="Versions" description="PixiJS Versions page listing all API documentation versions">
@@ -42,38 +48,40 @@ export default function Version(): JSX.Element
                     <Translate id="versionsPage.title">PixiJS API documentation versions</Translate>
                 </Heading>
 
-                <div className="margin-bottom--lg">
-                    <Heading as="h3" id="next">
-                        <Translate id="versionsPage.current.title">Current version (Stable)</Translate>
-                    </Heading>
-                    <p>
-                        <Translate id="versionsPage.current.description">
-                            Here you can find the documentation for current released version.
-                        </Translate>
-                    </p>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>{latestVersion.version}</th>
-                                <td>
-                                    <Link to={latestVersion.docs}>
-                                        <DocumentationLabel />
-                                    </Link>
-                                </td>
-                                <td>
-                                    <Link to={latestVersion.build}>
-                                        <BuildLabel />
-                                    </Link>
-                                </td>
-                                <td>
-                                    <Link to={latestVersion.releaseNotes}>
-                                        <ReleaseNotesLabel />
-                                    </Link>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                {latestVersion && (
+                    <div className="margin-bottom--lg">
+                        <Heading as="h3" id="next">
+                            <Translate id="versionsPage.current.title">Current version (Stable)</Translate>
+                        </Heading>
+                        <p>
+                            <Translate id="versionsPage.current.description">
+                                Here you can find the documentation for current released version.
+                            </Translate>
+                        </p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>{latestVersion.version}</th>
+                                    <td>
+                                        <Link to={latestVersion.docs}>
+                                            <DocumentationLabel />
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link to={latestVersion.build}>
+                                            <BuildLabel />
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link to={latestVersion.releaseNotes}>
+                                            <ReleaseNotesLabel />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                )}
 
                 <div className="margin-bottom--lg">
                     <Heading as="h3" id="latest">
@@ -86,19 +94,21 @@ export default function Version(): JSX.Element
                     </p>
                     <table>
                         <tbody>
-                            <tr>
-                                <th>{devVersion.version}</th>
-                                <td>
-                                    <Link to={devVersion.docs}>
-                                        <DocumentationLabel />
-                                    </Link>
-                                </td>
-                                <td>
-                                    <Link to={devVersion.build}>
-                                        <BuildLabel />
-                                    </Link>
-                                </td>
-                            </tr>
+                            {devVersions.map((version) => (
+                                <tr key={version.version}>
+                                    <th>{version.version}</th>
+                                    <td>
+                                        <Link to={version.docs}>
+                                            <DocumentationLabel />
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link href={version.build}>
+                                            <BuildLabel />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

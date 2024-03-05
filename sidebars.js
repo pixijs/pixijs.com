@@ -31,12 +31,17 @@ const sidebars = {
         },
         {
             type: 'category',
+            label: 'Advanced',
+            collapsed: true,
+            items: ['guides/advanced/render-groups'],
+        },
+        {
+            type: 'category',
             label: 'Components',
             collapsed: true,
             items: [
                 'guides/components/assets',
                 'guides/components/containers',
-                'guides/components/display-object',
                 'guides/components/graphics',
                 'guides/components/interaction',
                 'guides/components/sprites',
@@ -55,7 +60,7 @@ const sidebars = {
             type: 'category',
             label: 'Migrations',
             collapsed: true,
-            items: ['guides/migrations/upgrading', 'guides/migrations/v7', 'guides/migrations/v6', 'guides/migrations/v5'],
+            items: ['guides/migrations/v8', 'guides/migrations/v7', 'guides/migrations/v6', 'guides/migrations/v5'],
         },
     ],
 

@@ -28,7 +28,7 @@ A note about frame rates.  The render loop can't be run infinitely fast - drawin
 
 <!--For most projects, you can use the default settings for the Ticker object, which will ... (TODO: The docs are a bit unclear on what happens if you don't set a min/max FPS - confirm)-->
 
-In cases where you want to adjust that behavior, you can set the `minFPS` and `maxFPS` attributes on a Ticker to give PixiJS hints as to the range of tick speeds you want to support.  Just be aware that due to the complex environment, your project cannot _guarantee_ a given FPS.  Use the passed `delta` value in your ticker callbacks to scale any animations to ensure smooth playback.
+In cases where you want to adjust that behavior, you can set the `minFPS` and `maxFPS` attributes on a Ticker to give PixiJS hints as to the range of tick speeds you want to support.  Just be aware that due to the complex environment, your project cannot _guarantee_ a given FPS.  Use the passed `ticker.deltaTime` value in your ticker callbacks to scale any animations to ensure smooth playback.
 
 ## Custom Render Loops
 

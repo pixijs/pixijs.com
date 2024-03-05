@@ -1,7 +1,7 @@
 import useIsBrowser from '@docusaurus/useIsBrowser';
 
 import CodeBlock from '@theme-original/CodeBlock';
-import PixiPlayground from '@site/src/components/PixiPlayground';
+import PixiPlayground from '@site/src/components/Playground/PixiPlayground';
 
 import styles from './index.module.css';
 

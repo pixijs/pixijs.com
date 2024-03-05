@@ -1,0 +1,44 @@
+.tutorialCard {
+    background: var(--ifm-navbar-background-color);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    width: 45%;
+    max-width: 360px;
+    transition: all 0.1s ease-in-out;
+
+    div {
+        width: 100%;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 1rem 1rem 0 0;
+    }
+
+    h2 {
+        padding: 1.5rem;
+        color: var(--ifm-color-primary);
+        padding-bottom: 0.5rem;
+        margin-bottom: 0;
+    }
+
+    p {
+        padding: 1rem 1.5rem;
+        padding-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    &:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        transform: scale(1.02);
+    }
+
+    &:active {
+        transition: all 0.025s ease-in-out;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+        transform: scale(0.98);
+    }
+
+    @media only screen and (max-width: 540px) {
+        width: 100%;
+    }
+}
