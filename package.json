@@ -6,7 +6,7 @@
         "prebuild": "npm run update-pixi-version-configs && npm run generate-content",
         "build": "docusaurus build",
         "clear": "docusaurus clear",
-        "predeploy": "npm run update-pixi-version-configs && npm run generate-content",
+        "predeploy": "npm run generate-content",
         "deploy": "docusaurus deploy",
         "docusaurus": "docusaurus",
         "lint": "eslint . --ext .js,.mjs,.jsx,.ts,.tsx --max-warnings=0",

@@ -17,8 +17,8 @@
     "build": "https://pixijs.download/v8.0.0/pixi.min.js",
     "docs": "https://pixijs.download/v8.0.0/docs/index.html",
     "npm": "8.0.0",
-    "prerelease": true,
-    "latest": false,
+    "prerelease": false,
+    "latest": true,
     "isCurrent": true
   }
 ]

@@ -10,7 +10,7 @@ Check out the [sprite example code](../../examples/sprite/basic).
 
 ## Using Sprites
 
-In our [Container guide](container), we learned about the Container class and the various properties it defines.  Since Sprite objects are also containers, you can move a sprite, rotate it, and update any other display property.
+In our [Container guide](./containers), we learned about the Container class and the various properties it defines.  Since Sprite objects are also containers, you can move a sprite, rotate it, and update any other display property.
 
 ## Alpha, Tint and Blend Modes
 
