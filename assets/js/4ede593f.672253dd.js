@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([[9639],{6102:s=>{s.exports=JSON.parse('{"label":"WebGPU","permalink":"/blog/tags/web-gpu","allTagsPath":"/blog/tags","count":1}')}}]);
