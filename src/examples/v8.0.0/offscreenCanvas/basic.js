@@ -14,7 +14,7 @@ const view = canvas.transferControlToOffscreen();
     await app.init({ view, background: '#1099bb', resizeTo: window });
 
     // Append the application canvas to the document body
-    document.body.appendChild(app.canvas);
+    document.body.appendChild(canvas);
 
     const container = new Container();
 
