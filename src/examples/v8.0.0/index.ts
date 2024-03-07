@@ -52,7 +52,7 @@ import advanced from '!!raw-loader!./graphics/advanced.js';
 import dynamic from '!!raw-loader!./graphics/dynamic.js';
 import simple from '!!raw-loader!./graphics/simple.js';
 import svg from '!!raw-loader!./graphics/svg.js';
-import svgLoad from '!!raw-loader!./graphics/svg-load.js';
+import svgLoad from '!!raw-loader!./graphics/svgLoad.js';
 import texture from '!!raw-loader!./graphics/texture.js';
 import fillGradient from '!!raw-loader!./graphics/fillGradient.js';
 import meshFromPath from '!!raw-loader!./graphics/meshFromPath.js';
