@@ -5,19 +5,39 @@ const app = new PIXI.Application({ backgroundColor: '#111', resizeTo: window });
 document.body.appendChild(app.view);
 
 const texture = PIXI.Texture.from('https://pixijs.com/assets/bunny.png');
+const containerFrame = new PIXI.Container();
 const bunnyContainer = new PIXI.Container();
 
+let screenshot;
+
+// Take the screenshot and download it
 async function takeScreenshot()
 {
-    app.stop();
-    const url = await app.renderer.extract.base64(bunnyContainer);
-    const a = document.createElement('a');
+    if (screenshot !== undefined)
+    {
+        screenshot.remove();
+    }
 
-    document.body.append(a);
-    a.download = 'screenshot';
-    a.href = url;
-    a.click();
-    a.remove();
+    app.stop();
+    const url = await app.renderer.extract.base64(containerFrame);
+
+    screenshot = document.createElement('a');
+
+    document.body.append(screenshot);
+
+    screenshot.style.position = 'fixed';
+    screenshot.style.top = '20px';
+    screenshot.style.right = '20px';
+    screenshot.download = 'screenshot';
+    screenshot.href = url;
+
+    const image = new Image();
+
+    image.width = app.screen.width / 5;
+    image.src = url;
+
+    screenshot.innerHTML = image.outerHTML;
+
     app.start();
 }
 
@@ -55,4 +75,5 @@ const screenshotText = new PIXI.Text('Click To Take Screenshot', style);
 screenshotText.x = Math.round((app.screen.width - screenshotText.width) / 2);
 screenshotText.y = Math.round(screenshotText.height / 2);
 
-app.stage.addChild(screenshotText, bunnyContainer);
+containerFrame.addChild(bunnyContainer);
+app.stage.addChild(screenshotText, containerFrame);
