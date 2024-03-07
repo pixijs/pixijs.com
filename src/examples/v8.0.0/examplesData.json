@@ -37,7 +37,7 @@
     "advanced",
     "dynamic",
     "svg",
-    "svg-load",
+    "svgLoad",
     "texture",
     "fillGradient",
     "meshFromPath"
