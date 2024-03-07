@@ -1,4 +1,4 @@
-import { Application, Assets, Point, Sprite, MeshRope } from 'pixi.js';
+import { Application, Assets, Point, MeshRope } from 'pixi.js';
 
 (async () =>
 {
@@ -94,10 +94,8 @@ import { Application, Assets, Point, Sprite, MeshRope } from 'pixi.js';
         return (factor * (clipInput(k + 1, array) - clipInput(k - 1, array))) / 2;
     }
 
-    function cubicInterpolation(array, t, tangentFactor)
+    function cubicInterpolation(array, t, tangentFactor = 1)
     {
-        if (tangentFactor === null) tangentFactor = 1;
-
         const k = Math.floor(t);
         const m = [getTangent(k, tangentFactor, array), getTangent(k + 1, tangentFactor, array)];
         const p = [clipInput(k, array), clipInput(k + 1, array)];
