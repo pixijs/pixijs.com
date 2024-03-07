@@ -44,6 +44,9 @@ export const useFiles = (code: string, extraFiles?: Record<string, string>) =>
             'src/styles.css': `body { margin: 0; overflow: hidden; }`,
             'src/index.js': code,
             'index.html': indexHTML,
+            'sandbox.config.json': `{
+                "infiniteLoopProtection": false
+            }`,
             'package.json': {
                 code: JSON.stringify(
                     {
