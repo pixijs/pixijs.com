@@ -39,8 +39,8 @@ We're incredibly proud of PixiJS v8 and eager to share the improvements and new 
 
 ## 🔗 Quick links
 - The new Docs for v8 can be found [here](https://pixijs.download/v8.0.0/docs/index.html)
-- [Migration](/guides/migrations/v8)
-- [Examples](/examples)
+- [Migration](8.x/guides/migrations/v8)
+- [Examples](8.x/examples)
 - [Open Games](https://github.com/pixijs/open-games)
 
 ---
@@ -197,7 +197,7 @@ myContainer.blendMode = 'color-burn` // easy!
 
 ```
 
-For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](/guides/migrations/v8), or why not jump in and play with some [examples](examples/graphics/simple).
+For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](8.x/guides/migrations/v8), or why not jump in and play with some [examples](8.x/examples/graphics/simple).
 
 #### 📝 Text Upgrades
 
