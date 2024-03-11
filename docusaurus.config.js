@@ -48,14 +48,12 @@ const config = {
                             label: 'v7.x',
                             path: '7.x',
                             banner: 'none',
-                            badge: true,
                         },
 
                         current: {
                             label: 'v8.x',
                             path: '8.x',
                             banner: 'none',
-                            badge: true,
                         },
                     },
                 },

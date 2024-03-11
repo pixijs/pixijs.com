@@ -11,6 +11,7 @@ shell.exec('npm view pixi.js --json > scripts/pixiVersions.json');
 // Import the compiled list of versions
 const pixiVersions = require('./pixiVersions.json');
 const tags = pixiVersions['dist-tags'];
+const allVersions = pixiVersions.versions;
 
 const ROOT = resolve(__dirname, '..');
 
@@ -29,18 +30,37 @@ console.log('Updating any outdated pixi version configs...');
 versionFiles.forEach((file) =>
 {
     const config = JSON.parse(readFileSync(file, 'utf8'));
-    const { version } = config;
+    const { version, versionLabel: label, prerelease } = config;
 
     console.log(`Checking ${config.versionLabel} (v${version}) config`);
 
-    const tag = Object.entries(tags).find(([k, v]) => v === version)?.[0];
+    const isGeneric = label.includes('.x');
+    let newVersion = version;
 
-    const parts = version.split('.');
+    // For generic versions, we also want to update the config to the latest version within the specified major version
+    if (isGeneric)
+    {
+        // Get the major version number
+        const majorVersion = parseInt(version.split('.')[0]);
+
+        // Get all versions within the same major version
+        const sameMajorVersions = allVersions
+            .filter((v) => parseInt(v.split('.')[0]) === majorVersion)
+            // Exclude meta-releases if config is not marked as pre-release
+            .filter((v) => prerelease || !v.includes('-'));
+
+        // Find the maximum version within the same major version
+        newVersion = sameMajorVersions.reduce((a, b) => (compareVersions(a, b) >= 0 ? a : b));
+    }
+
+    const tag = Object.entries(tags).find(([k, v]) => v === newVersion)?.[0];
+
+    const parts = newVersion.split('.');
     const major = parts[0];
     const minor = parts[1];
     const patch = parts[2].split('-')[0];
     const isPrelease = parts[2].includes('-rc');
-    const isLatest = version === tags.latest;
+    const isLatest = newVersion === tags.latest;
     let versionLabel;
 
     if (isLatest)
@@ -53,18 +73,22 @@ versionFiles.forEach((file) =>
 
         versionLabel = extracted.match(/^\d/) ? `v${extracted}` : extracted;
     }
+    else if (isGeneric)
+    {
+        versionLabel = `v${[major, 'x'].join('.')}`;
+    }
     else
     {
-        versionLabel = `v${version}`;
+        versionLabel = `v${newVersion}`;
     }
 
     const newConfig = {
         versionLabel,
-        version,
-        releaseNotes: `https://github.com/pixijs/pixijs/releases/tag/v${version}`,
-        build: `https://pixijs.download/v${version}/pixi.min.js`,
-        docs: `https://pixijs.download/v${version}/docs/index.html`,
-        npm: version,
+        version: newVersion,
+        releaseNotes: `https://github.com/pixijs/pixijs/releases/tag/v${newVersion}`,
+        build: `https://pixijs.download/v${newVersion}/pixi.min.js`,
+        docs: `https://pixijs.download/v${newVersion}/docs/index.html`,
+        npm: newVersion,
         prerelease: isPrelease,
         latest: isLatest,
     };
