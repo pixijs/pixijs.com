@@ -42,6 +42,7 @@ const config = {
                     // Remove this to remove the "edit this page" links.
                     editUrl: 'https://github.com/pixijs/pixijs.com/tree/main/',
                     routeBasePath: '/',
+                    lastVersion: 'current',
                     versions: {
                         '7.x': {
                             label: 'v7.x',
@@ -74,7 +75,31 @@ const config = {
         ],
     ],
 
-    plugins: ['docusaurus-plugin-sass'],
+    plugins: [
+        'docusaurus-plugin-sass',
+        [
+            '@docusaurus/plugin-client-redirects',
+            {
+                // eslint-disable-next-line consistent-return
+                createRedirects(existingPath)
+                {
+                    if (existingPath.includes('/v7.x')) return undefined;
+
+                    const pathsToRedirect = ['guides', 'examples', 'tutorials', 'playground'];
+
+                    for (let i = 0; i < pathsToRedirect.length; i++)
+                    {
+                        const path = pathsToRedirect[i];
+
+                        if (existingPath.includes(`/${path}`))
+                        {
+                            return [existingPath.replace(`/v8.x/${path}`, `/${path}`)];
+                        }
+                    }
+                },
+            },
+        ],
+    ],
 
     themes: [
         [
@@ -122,9 +147,19 @@ const config = {
                         ],
                     },
                     {
+                        type: 'dropdown',
                         label: 'API',
                         position: 'left',
-                        href: `https://pixijs.download/release/docs/index.html`,
+                        items: [
+                            {
+                                label: 'v8.x',
+                                href: 'https://pixijs.download/release/docs/index.html',
+                            },
+                            {
+                                label: 'v7.x',
+                                href: 'https://pixijs.download/v7.x/docs/index.html',
+                            },
+                        ],
                     },
                     {
                         type: 'doc',

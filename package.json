@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "prebuild": "npm run update-pixi-version-configs && npm run generate-content",
+        "prebuild": "npm run generate-content",
         "build": "docusaurus build",
         "clear": "docusaurus clear",
         "predeploy": "npm run generate-content",
@@ -61,7 +61,7 @@
         "@docusaurus/plugin-content-blog": "~2.3.1",
         "@docusaurus/plugin-google-analytics": "~2.3.1",
         "@docusaurus/preset-classic": "~2.3.1",
-        "@docusaurus/theme-search-algolia": "~2.3.1",
+        "@docusaurus/plugin-client-redirects": "~2.3.1",
         "@easyops-cn/docusaurus-search-local": "^0.35.0",
         "@mdx-js/react": "^1.6.22",
         "@monaco-editor/react": "^4.4.6",
