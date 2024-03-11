@@ -83,7 +83,7 @@ const config = {
                 // eslint-disable-next-line consistent-return
                 createRedirects(existingPath)
                 {
-                    if (existingPath.includes('/v7.x')) return undefined;
+                    if (existingPath.includes('/7.x')) return undefined;
 
                     const pathsToRedirect = ['guides', 'examples', 'tutorials', 'playground'];
 
