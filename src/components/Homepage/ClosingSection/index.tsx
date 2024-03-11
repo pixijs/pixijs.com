@@ -37,7 +37,7 @@ export default function ClosingSection(): JSX.Element
                                 anim="short-up-anim"
                                 style={animShortUp(0.3, 0.7)}
                                 label="Get Started"
-                                link="/tutorials"
+                                link="8.x/tutorials"
                                 outline={true}
                             />
                         </div>

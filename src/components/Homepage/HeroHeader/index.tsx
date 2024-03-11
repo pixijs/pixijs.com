@@ -16,7 +16,7 @@ export default function HeroHeader(): JSX.Element
                 <div className="buttonRow">
                     <HomeCTA label="Download" link="https://github.com/pixijs/pixijs/releases" />
                     &nbsp;
-                    <HomeCTA label="Get Started" link="/tutorials" white={true} outline={true} />
+                    <HomeCTA label="Get Started" link="8.x/tutorials" white={true} outline={true} />
                 </div>
             </div>
         </header>

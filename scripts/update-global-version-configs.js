@@ -79,7 +79,7 @@ recast.visit(ast, {
                             recast.types.builders.property(
                                 'init',
                                 recast.types.builders.identifier('path'),
-                                recast.types.builders.literal(version.isCurrent ? '' : key),
+                                recast.types.builders.literal(key),
                             ),
                             recast.types.builders.property(
                                 'init',

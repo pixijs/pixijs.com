@@ -16,7 +16,7 @@
         "strict": true,
         "target": "ESNext"
     },
-    "exclude": ["build", "node_modules"],
+    "exclude": ["build", "node_modules", "*.js"],
     "ts-node": {
         "files": true,
         "compilerOptions": {
