@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 const { resolve } = require('path');
 const { readFileSync, existsSync } = require('fs');
 const shell = require('shelljs');
