@@ -331,12 +331,6 @@ const config = {
                 disableSwitch: false,
                 respectPrefersColorScheme: true,
             },
-            // algolia: {
-            //     appId: 'JX6EBQCAGQ',
-            //     apiKey: '2ac1220b913a281bcfeccdf628fa6e99',
-            //     indexName: 'beta_pixijs',
-            //     contextualSearch: false,
-            // },
         }),
 };
 
