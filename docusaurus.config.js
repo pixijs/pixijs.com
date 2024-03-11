@@ -93,7 +93,7 @@ const config = {
 
                         if (existingPath.includes(`/${path}`))
                         {
-                            return [existingPath.replace(`/v8.x/${path}`, `/${path}`)];
+                            return [existingPath.replace(`/8.x/${path}`, `/${path}`)];
                         }
                     }
                 },
