@@ -119,6 +119,12 @@ html {
     }
 }
 
+.badge {
+    color: #ffffff;
+    --ifm-badge-background-color: #1099bc;
+    --ifm-badge-border-color: #1099bc;
+}
+
 html[data-theme='dark'] {
     .header-discord-link::before,
     .header-github-link::before,
