@@ -23,6 +23,7 @@
         "generate-content": "npm run generate-example-docs && npm run generate-tutorial-docs",
         "generate-example-docs": "node ./scripts/generate-example-docs.js",
         "generate-tutorial-docs": "node ./scripts/generate-tutorial-docs.js",
+        "update-version": "node ./scripts/update-version.js",
         "prepare": "husky install"
     },
     "husky": {
