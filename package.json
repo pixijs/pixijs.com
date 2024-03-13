@@ -23,12 +23,6 @@
         "generate-content": "npm run generate-example-docs && npm run generate-tutorial-docs",
         "generate-example-docs": "node ./scripts/generate-example-docs.js",
         "generate-tutorial-docs": "node ./scripts/generate-tutorial-docs.js",
-        "generate-pixi-version-config": "node ./scripts/generate-pixi-version-config.js",
-        "create-docs-version-snapshot": "npm run generate-content && node ./scripts/create-docs-version-snapshot.js",
-        "remove-docs-version-snapshot": "node ./scripts/remove-docs-version-snapshot.js",
-        "switch-snapshot-pixi-version-config": "node ./scripts/switch-snapshot-pixi-version-config.js",
-        "update-global-version-configs": "node ./scripts/update-global-version-configs.js",
-        "update-pixi-version-configs": "node ./scripts/update-pixi-version-configs.js",
         "prepare": "husky install"
     },
     "husky": {
