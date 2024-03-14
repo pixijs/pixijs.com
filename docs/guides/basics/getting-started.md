@@ -80,13 +80,13 @@ This will include a *non-minified* version of the latest version of PixiJS when 
 Loading the library doesn't do much good if we don't *use* it, so the next step is to start up PixiJS.  Start by replacing the line `<h1>Hello PixiJS</h1>` with a script tag like so:
 
 ```html
-<script>
+<script type="module">
   const app = new PIXI.Application();
-  app.init({ width: 640, height: 360 }).then(()=>{})
+  await app.init({ width: 640, height: 360 });
 </script>
 ```
 
-What we're doing here is adding a JavaScript code block, and in that block creating a new PIXI.Application instance. [Application](https://pixijs.download/release/docs/app.Application.html) is a helper class that simplifies working with PixiJS.  It creates the renderer, creates the stage, and starts a ticker for updating.  In production, you'll almost certainly want to do these steps yourself for added customization and control - we'll cover doing so in a later guide.  For now, the Application class is a perfect way to start playing with PixiJS without worrying about the details. The `Application` class also has a method `init` that will initialize the application with the given options. This method is asynchronous, so we use the `then` keyword to start our logic after the promise has completed. This is because PixiJS uses WebGPU or WebGL under the hood, and the former API asynchronous.
+What we're doing here is adding a JavaScript code block, and in that block creating a new PIXI.Application instance. [Application](https://pixijs.download/release/docs/app.Application.html) is a helper class that simplifies working with PixiJS.  It creates the renderer, creates the stage, and starts a ticker for updating.  In production, you'll almost certainly want to do these steps yourself for added customization and control - we'll cover doing so in a later guide.  For now, the Application class is a perfect way to start playing with PixiJS without worrying about the details. The `Application` class also has a method `init` that will initialize the application with the given options. This method is asynchronous, so we use the `await` keyword to start our logic after the promise has completed. This is because PixiJS uses WebGPU or WebGL under the hood, and the former API asynchronous.
 
 ### Adding the Canvas to the DOM
 
@@ -107,7 +107,8 @@ There are a number of ways to draw images in PixiJS, but the simplest is by usin
 Before PixiJS can render an image, it needs to be loaded.  Just like in any web page, image loading happens asynchronously.  We'll talk a lot more about resource loading in later guides.  For now, we can use a helper method on the PIXI.Sprite class to handle the image loading for us:
 
 ```javascript
-  // Magically load the PNG asynchronously
+  // load the PNG asynchronously
+  await PIXI.Assets.load('sample.png');
   let sprite = PIXI.Sprite.from('sample.png');
 ```
 
@@ -154,23 +155,23 @@ Here's the whole thing in one place.  Check your file and make sure it matches i
     <script src="https://pixijs.download/release/pixi.min.js"></script>
   </head>
   <body>
-    <script>
+    <script type="module">
       // Create the application helper and add its render target to the page
       const app = new PIXI.Application();
-      app.init({ width: 640, height: 360 }).then(()=>{
-        document.body.appendChild(app.canvas);
+      await app.init({ width: 640, height: 360 })
+      document.body.appendChild(app.canvas);
 
-        // Create the sprite and add it to the stage
-        let sprite = PIXI.Sprite.from('sample.png');
-        app.stage.addChild(sprite);
+      // Create the sprite and add it to the stage
+      await PIXI.Assets.load('sample.png');
+      let sprite = PIXI.Sprite.from('sample.png');
+      app.stage.addChild(sprite);
 
-        // Add a ticker callback to move the sprite back and forth
-        let elapsed = 0.0;
-        app.ticker.add((ticker) => {
-          elapsed += ticker.deltaTime;
-          sprite.x = 100.0 + Math.cos(elapsed/50.0) * 100.0;
-        });
-      })
+      // Add a ticker callback to move the sprite back and forth
+      let elapsed = 0.0;
+      app.ticker.add((ticker) => {
+        elapsed += ticker.deltaTime;
+        sprite.x = 100.0 + Math.cos(elapsed/50.0) * 100.0;
+      });
     </script>
   </body>
 </html>
