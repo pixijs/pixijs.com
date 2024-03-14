@@ -1,4 +1,4 @@
-import { Application, Assets, Text } from 'pixi.js';
+import { Application, Assets, BitmapText } from 'pixi.js';
 
 (async () =>
 {
@@ -14,14 +14,13 @@ import { Application, Assets, Text } from 'pixi.js';
     // Load bitmap font
     await Assets.load('https://pixijs.com/assets/bitmap-font/desyrel.xml');
 
-    const bitmapFontText = new Text({
+    const bitmapFontText = new BitmapText({
         text: 'bitmap fonts are supported!\nWoo yay!',
         style: {
             fontFamily: 'Desyrel',
             fontSize: 55,
             align: 'left',
         },
-        renderMode: 'bitmap',
     });
 
     bitmapFontText.x = 50;
