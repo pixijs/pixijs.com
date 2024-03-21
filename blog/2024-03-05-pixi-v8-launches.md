@@ -197,7 +197,7 @@ myContainer.blendMode = 'color-burn` // easy!
 
 ```
 
-For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](8.x/guides/migrations/v8), or why not jump in and play with some [examples](8.x/examples/graphics/simple).
+For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](/8.x/guides/migrations/v8), or why not jump in and play with some [examples](8.x/examples/graphics/simple).
 
 #### 📝 Text Upgrades
 
