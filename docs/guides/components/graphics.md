@@ -54,8 +54,11 @@ In addition, you have access to the following complex primitives:
 There is also support for svg. But due to the nature of how PixiJS renders holes (it favours performance) Some complex hole shapes may render incorrectly. But for the majority of shapes, this will do the trick!
 
  ```ts
-  let mySvg = new Graphics()
-    .svg('M 100 350 q 150 -300 300 0');
+  let mySvg = new Graphics().svg(`
+    <svg>
+      <path d="M 100 350 q 150 -300 300 0" stroke="blue" />
+    </svg>
+   `);
 ```
 
 ## The GraphicsContext
