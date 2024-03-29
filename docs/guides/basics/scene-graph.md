@@ -126,8 +126,8 @@ let d = addLetter('D', app.stage, 0xff8800, {x: 140, y: 100});
 
 // Display them over time, in order
 let elapsed = 0.0;
-app.ticker.add((delta) => {
-  elapsed += delta / 60.0;
+app.ticker.add((ticker) => {
+  elapsed += ticker.deltaTime / 60.0;
   if (elapsed >= letters.length) { elapsed = 0.0; }
   for (let i = 0; i < letters.length; i ++) {
     letters[i].visible = elapsed >= i;
