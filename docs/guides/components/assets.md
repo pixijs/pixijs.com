@@ -63,6 +63,26 @@ Out of the box, the following assets types can be loaded without the need for ex
 
 More types can be added fairly easily by creating additional loader parsers.
 
+## Working with unrecognizable URLs
+
+With the basic syntax, asset types are recognized by their file extension - for instance `https://pixijs.com/assets/bunny.png` ends with `.png` so `Assets.load` can figure it should use the texture loader.
+
+In some cases you may not have control over the URLs and you have to work with ambiguous URLs without recognizable extensions. In this situation, you can specify an explicit loader:
+
+```js
+promise = Assets.load({
+  src: 'https://example.com/ambiguous-file-name',
+  loader: 'loadTextures'
+})
+```
+
+Here are some of the `loader` values you can use:
+
+- Textures: `loadTextures`
+- Web fonts: `loadWebFont`
+- Json files: `loadJson`
+- Text files: `loadTxt`
+
 ## Warning about solved promises
 
 When an asset is downloaded, it is cached as a promise inside the `Assets` instance and if you try to download it again you will get a reference to the already resolved promise.
