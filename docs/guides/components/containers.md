@@ -84,9 +84,9 @@ maskContainer.addChild(text);
 
 // Add a ticker callback to scroll the text up and down
 let elapsed = 0.0;
-app.ticker.add(({delta}) => {
+app.ticker.add((ticker) => {
   // Update the text's y coordinate to scroll it
-  elapsed += delta;
+  elapsed += ticker.deltaTime;
   text.y = 10 + -100.0 + Math.cos(elapsed/50.0) * 100.0;
 });
 ```
