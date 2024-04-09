@@ -53,8 +53,8 @@
 ### BlendModes
 
 - Different blend modes will cause batches to break (de-optimize)
-- SceenSprite / NormalSprite / SceenSprite / NormalSprite would be 4 draw calls
-- SceenSprite / SceenSprite / NormalSprite / NormalSprite would be 2 draw calls
+- ScreenSprite / NormalSprite / ScreenSprite / NormalSprite would be 4 draw calls
+- ScreenSprite / ScreenSprite / NormalSprite / NormalSprite would be 2 draw calls
 
 ### Events
 
