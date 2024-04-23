@@ -6,9 +6,6 @@ import { addWaterOverlay, animateWaterOverlay } from './addWaterOverlay';
 // Create a PixiJS application.
 const app = new Application();
 
-// Store an array of fish sprites for animation.
-const fishes = [];
-
 async function setup()
 {
     // Intialize the application.
@@ -43,13 +40,14 @@ async function preload()
     await preload();
 
     addBackground(app);
-    addFishes(app, fishes);
-    addWaterOverlay(app);
+
+    const fishes = addFishes(app);
+    const overlay = addWaterOverlay(app);
 
     // Add the animation callbacks to the application's ticker.
     app.ticker.add((time) =>
     {
         animateFishes(app, fishes, time);
-        animateWaterOverlay(app, time);
+        animateWaterOverlay(overlay, time);
     });
 })();

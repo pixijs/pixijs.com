@@ -1,6 +1,6 @@
 import { Container, Sprite } from 'pixi.js';
 
-export function addFishes(app, fishes)
+export function addFishes(app)
 {
     // Create a container to hold all the fish sprites.
     const fishContainer = new Container();
@@ -10,9 +10,10 @@ export function addFishes(app, fishes)
 
     const fishCount = 20;
     const fishAssets = ['fish1', 'fish2', 'fish3', 'fish4', 'fish5'];
+    const fishes = [];
 
     // Create a fish sprite for each fish.
-    for (let i = 0; i < fishCount; i++)
+    for (let i = 0; i < fishCount; i++) 
     {
         // Cycle through the fish assets for each sprite.
         const fishAsset = fishAssets[i % fishAssets.length];
@@ -41,6 +42,9 @@ export function addFishes(app, fishes)
         // Add the fish sprite to the fish array.
         fishes.push(fish);
     }
+
+    // Return the fish array.
+    return fishes;
 }
 
 export function animateFishes(app, fishes, time)
@@ -57,29 +61,29 @@ export function animateFishes(app, fishes, time)
     fishes.forEach((fish) =>
     {
         // Animate the fish movement direction according to the turn speed.
-        fish.direction += fish.turnSpeed * 0.01;
+        fish.direction += fish.turnSpeed * 0.01 * delta;
 
         // Animate the fish position according to the direction and speed.
-        fish.x += Math.sin(fish.direction) * fish.speed;
-        fish.y += Math.cos(fish.direction) * fish.speed;
+        fish.x += Math.sin(fish.direction) * fish.speed * delta;
+        fish.y += Math.cos(fish.direction) * fish.speed * delta;
 
         // Apply the fish rotation according to the direction.
         fish.rotation = -fish.direction - Math.PI / 2;
 
         // Wrap the fish position when it goes out of bounds.
-        if (fish.x < -stagePadding)
+        if (fish.x < -stagePadding) 
         {
             fish.x += boundWidth;
         }
-        if (fish.x > app.screen.width + stagePadding)
+        if (fish.x > app.screen.width + stagePadding) 
         {
             fish.x -= boundWidth;
         }
-        if (fish.y < -stagePadding)
+        if (fish.y < -stagePadding) 
         {
             fish.y += boundHeight;
         }
-        if (fish.y > app.screen.height + stagePadding)
+        if (fish.y > app.screen.height + stagePadding) 
         {
             fish.y -= boundHeight;
         }
