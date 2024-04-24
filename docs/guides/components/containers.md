@@ -113,4 +113,4 @@ Below are list of filters available by default in PixiJS. There is, however, a c
 
 Under the hood, each Filter we offer out of the box is written in both glsl (for WebGL) and wgsl (for WebGPU). This means all filters should work on both renderers.
 
-_**Important:** Filters should be use somewhat sparingly. They can slow performance and increase memory if used too often in a scene._
+_**Important:** Filters should be used somewhat sparingly. They can slow performance and increase memory usage if used too often in a scene._
