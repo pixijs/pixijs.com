@@ -9,22 +9,26 @@ Here we create a tiling sprite, supplying a texture and dimensions as an option 
 ```javascript
 const texture = Texture.from('overlay');
 
-overlay = new TilingSprite({
+const overlay = new TilingSprite({
     texture,
     width: app.screen.width,
     height: app.screen.height,
 });
+
 app.stage.addChild(overlay);
+
+return overlay;
 ```
 
 ## Animate Overlay
 
-Similar to the previous step, we will now animate the water overlay using the application's ticker. The code has been modify to call both animation functions for the fish and this overlay so we only need to add the animation logic inside the `animateWaterOverlay` function.
+Similar to the previous step, we will now animate the water overlay using the application's ticker. The code has been modified to call both animation functions for the fish and overlay, so now we only need to add the animation logic inside the `animateWaterOverlay` function.
 
 ```javascript
-elapsed += time.deltaTime;
-overlay.tilePosition.x = elapsed * -1;
-overlay.tilePosition.y = elapsed * -1;
+const delta = time.deltaTime;
+
+overlay.tilePosition.x -= delta;
+overlay.tilePosition.y -= delta;
 ```
 
 Congratulations, we have now completed a beautiful pond! But we can take it a step further. Let's proceed to the final touch!
