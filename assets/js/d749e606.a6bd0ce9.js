@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([[8698],{6690:s=>{s.exports=JSON.parse('{"label":"WebGL","permalink":"/blog/tags/web-gl","allTagsPath":"/blog/tags","count":2}')}}]);
