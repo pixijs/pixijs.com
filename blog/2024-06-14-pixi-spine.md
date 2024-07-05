@@ -18,7 +18,7 @@ We have exciting news for all animation enthusiasts and game developers! The Spi
 
 For those unfamiliar, Spine is the standard for creating stunning 2D animations. It offers an intuitive editor and a multitude of runtimes to ensure that your animations can be utilized across various platforms. PixiJS has supported Spine for almost as long as both have existed (around 10 years)! Personally, we have been shipping games with Spine for about that long as well.
 
-Initially, we maintained our own player. This worked well, but as Spine evolved and new releases were introduced, we had to invest considerable time and energy to modify our custom player. In the past year, the Esoteric team has been managing the v7 version of the player after PixiJS made the initial implementation on top of their excellent HTML5 runtime. This means that as these incredible updates are released, the PixiJS community can use them almost immediately!
+Initially, we maintained our own player. This worked well, but as Spine evolved and new releases were introduced, we had to invest considerable time and energy to modify our custom player. In the past year, the Esoteric team has been managing the v7 version of the player after PixiJS's [elementalcode](https://x.com/miltoncandelero) made the initial implementation on top of their excellent HTML5 runtime. This means that as these incredible updates are released, the PixiJS community can use them almost immediately!
 
 Here are a few of the exciting new features:
 
