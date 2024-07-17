@@ -14,7 +14,7 @@ keywords: ['PixiJS', 'Spine', 'webGL', 'webGPU', '2D animation', 'JavaScript gra
 
 We have exciting news for all animation enthusiasts and game developers! The Spine team has just smashed it out of the park with the release of [Spine 4.2](https://en.esotericsoftware.com/blog/Spine-4.2-The-physics-revolution), which includes some truly great new features. The best part for us PixiJS users? We can start leveraging these remarkable features today in both v7 and v8!
 
-<!--truncated-->
+<!--truncate-->
 
 For those unfamiliar, Spine is the standard for creating stunning 2D animations. It offers an intuitive editor and a multitude of runtimes to ensure that your animations can be utilized across various platforms. PixiJS has supported Spine for almost as long as both have existed (around 10 years)! Personally, we have been shipping games with Spine for about that long as well.
 
@@ -54,7 +54,7 @@ We are proud to say that this is one of if not *the* fastest way to render Spine
 
 We plan on handing this implementation back over to the Spine team once we have dotted all the i's and crossed the t's. The last missing feature is the dark-tint property, which is not currently taken into account when rendering in v8. Other than that, all other features are present. If you are not using dark-tint, then this version will work great on v8; we are already using it in production for our games!
 
-We included all the examples in the repo for you to play with [here](https://github.com/pixijs/spine-v8/tree/main/examples). 
+We included all the examples in the repo for you to play with [here](https://github.com/pixijs/spine-v8/tree/main/examples).
 
 You can also check out the live v8 examples [here](https://pixijs.io/spine-v8/examples/)
 

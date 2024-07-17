@@ -14,7 +14,7 @@ keywords: ['PixiJS', 'pixi.js', 'webGL', 'webGPU', 'performance', '2d rendering'
 
 Get ready to push the boundaries of what's possible on the web! PixiJS v8 has landed, and it's a game-changer. Celebrating a decade of driving innovation, we've supercharged PixiJS with the latest technological advancements, making it faster, more robust, and ridiculously powerful. From the seamless integration of WebGPU to leveraging modern JavaScript for smoother development, PixiJS v8 is all about empowering you to create jaw-dropping web experiences with ease. It's not just an update; it's the future of 2D web graphics, today. Dive in and let PixiJS v8 elevate your projects to unseen heights. Let's make the web a more beautiful place, one pixi(el) at a time.
 
-<!--truncated-->
+<!--truncate-->
 
 ## 🚀 Revolutionizing Web Graphics: Welcome to PixiJS v8
 
