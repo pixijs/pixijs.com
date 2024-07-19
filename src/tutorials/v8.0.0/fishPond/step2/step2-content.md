@@ -4,12 +4,12 @@ Now lets fill the pond with some rocks and pebbles, shall we? Let's work inside 
 
 ## Create and Setup Background Sprite
 
-We already preloaded the pond background asset as the alias 'background' so we can just simply create a sprite
+We already preloaded the pond background asset as the alias 'background' so we can just simply create a sprite and add it to the stage.
 
 ```javascript
 const background = Sprite.from('background');
 
-background.anchor.set(0.5);
+app.stage.addChild(background);
 ```
 
 ## Fit and Position Sprite
@@ -36,6 +36,7 @@ When we manually set the width or height on a sprite, it will apply a scale on t
 Then we simply position it at the center of the preview.
 
 ```javascript
+background.anchor.set(0.5);
 background.x = app.screen.width / 2;
 background.y = app.screen.height / 2;
 ```

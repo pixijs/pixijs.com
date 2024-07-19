@@ -5,8 +5,8 @@ export function addBackground(app)
     // Create a background sprite.
     const background = Sprite.from('background');
 
-    // Center background sprite anchor.
-    background.anchor.set(0.5);
+    // Add the background to the stage.
+    app.stage.addChild(background);
 
     /**
      * If the preview is landscape, fill the width of the screen
@@ -28,9 +28,7 @@ export function addBackground(app)
     }
 
     // Position the background sprite in the center of the stage.
+    background.anchor.set(0.5);
     background.x = app.screen.width / 2;
     background.y = app.screen.height / 2;
-
-    // Add the background to the stage.
-    app.stage.addChild(background);
 }
