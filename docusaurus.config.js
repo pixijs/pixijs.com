@@ -211,8 +211,12 @@ const config = {
                                 className: 'nav-section-heading',
                             },
                             {
+                                label: 'DevTools',
+                                href: 'https://pixijs.io/devtools/',
+                            },
+                            {
                                 label: 'AssetPack',
-                                href: 'https://github.com/pixijs/assetpack',
+                                href: 'https://pixijs.io/assetpack/',
                             },
                             {
                                 label: 'Storybook',
@@ -221,10 +225,6 @@ const config = {
                             {
                                 label: 'Text Style Editor',
                                 href: 'https://pixijs.io/pixi-text-style/#',
-                            },
-                            {
-                                label: 'Customise v6',
-                                href: 'https://pixijs.io/customize/',
                             },
                             {
                                 type: 'html',
