@@ -16,7 +16,7 @@ PixiJS v8 has taken speed to the next level with the release of its new `Particl
 
 <!--truncate-->
 
-## New ParticleContainer Design
+## 🚀 New ParticleContainer Design
 
 The key difference in PixiJS v8 is that the `ParticleContainer` doesn’t deal with sprites any more, it works with lightweight **particles**. While particles share many properties with sprites (like texture, position, anchor, scale, rotation, alpha and color), they cut out unnecessary overhead. The result is **speed**, pure and simple. 
 
@@ -30,6 +30,8 @@ Yes, that’s a _million_ bunnies on-screen, and honestly the main bottleneck at
 <iframe src="https://goodboydigital.github.io/pixi-bunnymark/dist/?asParticles=true&count=1000&renderer=webgl" width="700" height="500" frameborder="0"></iframe>
 
 The key takeaway is that you can now render **huge volumes of elements** absurdly fast, making PixiJS v8 a perfect choice for high-performance games or visually intensive projects. And yes this is faster than the v7 particle container by **over 3x**!
+
+Please checkout the [migration guide](../8.x/guides/migrations/v8#particlecontainer) for more information on how to migrate your code to the new particle container.
 
 ### Speed Secret: Static vs. Dynamic Properties
 
@@ -89,7 +91,7 @@ This is ideal for projects where frame rate and rendering volume matter—such a
 
 The new `ParticleContainer` is a game-changer, but there are still some areas for improvement! For one, there is room to optimise further the static uploading of properties (you may notice the example above is slower when adding bunnys - but then speeds up once stable). We plan to expose how the particles are batched so that developers can add / remove attributes from the batch to make it even faster or add more flexibility and customization. But for now, this is a great starting point and we hope you enjoy the new `ParticleContainer`!
 
-## Conclusion
+## 🎉 Conclusion
 
 PixiJS v8’s `ParticleContainer` is a game-changer when it comes to rendering at scale. Its ability to push **millions** of particles at full speed opens up a world of possibilities for game developers, animators, and creative coders. Get in, experiment with the new API, and see just how fast your visuals can fly!
 
