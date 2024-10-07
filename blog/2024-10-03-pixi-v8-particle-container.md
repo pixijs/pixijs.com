@@ -31,7 +31,7 @@ Yes, that’s a _million_ bunnies on-screen, and honestly the main bottleneck at
 
 The key takeaway is that you can now render **huge volumes of elements** absurdly fast, making PixiJS v8 a perfect choice for high-performance games or visually intensive projects. And yes this is faster than the v7 particle container by **over 3x**!
 
-### Static vs. Dynamic Properties: The Speed Secret
+### Speed Secret: Static vs. Dynamic Properties
 
 To get the most out of this performance beast, it’s essential to understand **static** vs. **dynamic** properties. PixiJS gives you full control over which properties update every frame (dynamic) and which don’t need constant updates (static). Here’s how they work:
 
