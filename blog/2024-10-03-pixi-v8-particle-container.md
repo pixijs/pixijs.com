@@ -77,7 +77,7 @@ app.stage.addChild(container);
 
 In this example, we create a `ParticleContainer`, set properties to static where possible, and generate a million particles. By using a shared texture (hello, sprite sheets!), we ensure that all particles share the same graphical assets, making rendering even more efficient.
 
-### Why Use the ParticleContainer?
+### Reasons to Use ParticleContainer
 
 The `ParticleContainer` shines when you need **insane numbers** of visual elements on-screen, especially when you want them moving and interacting in real time. Whether you're building particle effects, swarms of characters, or abstract art installations, PixiJS v8 has you covered. The static vs. dynamic property system gives you granular control over performance, allowing you to fine-tune the balance between flexibility and speed.
 
