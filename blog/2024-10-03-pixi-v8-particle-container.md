@@ -77,7 +77,7 @@ for (let i = 0; i < 100000; ++i) {
 app.stage.addChild(container);
 ```
 
-In this example, we create a `ParticleContainer`, set properties to static where possible, and generate a million particles. By using a shared texture (hello, sprite sheets!), we ensure that all particles share the same graphical assets, making rendering even more efficient.
+In this example, we create a `ParticleContainer`, set properties to static where possible, and generate a 100k particles. By using a shared texture (hello, sprite sheets!), we ensure that all particles share the same graphical assets, making rendering even more efficient.
 
 ### Reasons to Use ParticleContainer
 
