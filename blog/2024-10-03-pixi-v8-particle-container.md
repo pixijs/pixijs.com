@@ -16,7 +16,7 @@ PixiJS v8 has taken speed to the next level with the release of its new `Particl
 
 <!--truncate-->
 
-## What Makes the New ParticleContainer So Special?
+## New ParticleContainer Design
 
 The key difference in PixiJS v8 is that the `ParticleContainer` doesn’t deal with sprites any more, it works with lightweight **particles**. While particles share many properties with sprites (like texture, position, anchor, scale, rotation, alpha and color), they cut out unnecessary overhead. The result is **speed**, pure and simple. 
 
