@@ -85,7 +85,7 @@ This is basically the fastest we could make it by still keeping allowing for dif
 
 This is ideal for projects where frame rate and rendering volume matter—such as games, interactive apps, and high-volume data visualization. By controlling the dynamic properties of your particles, you can optimize your application’s performance to fit your needs.
 
-### Next steps
+### Next Steps
 
 The new `ParticleContainer` is a game-changer, but there are still some areas for improvement! For one, there is room to optimise further the static uploading of properties (you may notice the example above is slower when adding bunnys - but then speeds up once stable). We plan to expose how the particles are batched so that developers can add / remove attributes from the batch to make it even faster or add more flexibility and customization. But for now, this is a great starting point and we hope you enjoy the new `ParticleContainer`!
 
