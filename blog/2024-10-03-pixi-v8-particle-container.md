@@ -40,7 +40,7 @@ To get the most out of this performance beast, it’s essential to understand **
 
 By default, **only the position** is dynamic, but you can configure others if needed. The fewer dynamic properties you have, the faster the rendering will be!
 
-### How to Use the ParticleContainer in PixiJS v8
+### PixiJS v8 Particle Container Usage
 
 Let’s walk through a simple example of how to get started:
 
