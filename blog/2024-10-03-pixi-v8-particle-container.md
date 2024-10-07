@@ -12,7 +12,7 @@ hide_table_of_contents: true
 keywords: ['PixiJS', 'ParticleContainer', 'game development', 'web graphics', 'optimization', 'WebGL']  
 ---
 
-PixiJS v8 has taken speed to the next level with the release of its new `ParticleContainer`. This new feature brings a jaw-dropping performance boost, capable of rendering in the 100000s without breaking a sweat. If you’ve got tons of elements to throw on the screen, you’re in for a treat!
+PixiJS v8 has taken speed to the next level with the release of its new `ParticleContainer`. This new feature brings a jaw-dropping performance boost, capable of rendering 100K+ without breaking a sweat. If you’ve got tons of elements to throw on the screen, you’re in for a treat!
 
 <!--truncate-->
 
