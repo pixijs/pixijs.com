@@ -5,9 +5,6 @@ import { addFishes, animateFishes } from './addFishes';
 // Create a PixiJS application.
 const app = new Application();
 
-// Store an array of fish sprites for animation.
-const fishes = [];
-
 async function setup()
 {
     // Intialize the application.
@@ -42,7 +39,8 @@ async function preload()
     await preload();
 
     addBackground(app);
-    addFishes(app, fishes);
+
+    const fishes = addFishes(app);
 
     // Add the fish animation callback to the application's ticker.
     app.ticker.add((time) => animateFishes(app, fishes, time));
