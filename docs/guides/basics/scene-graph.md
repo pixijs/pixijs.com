@@ -27,7 +27,7 @@ document.body.appendChild(app.canvas);
 // Add a container to center our sprite stack on the page
 const container = new Container({
   x:app.screen.width / 2,
-  y:app.screen.height / 2;
+  y:app.screen.height / 2
 });
 
 app.stage.addChild(container);
