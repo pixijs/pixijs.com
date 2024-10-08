@@ -144,7 +144,7 @@ Doing so is simple.  Create the object, call the various builder functions to ad
 
 You can also use a Graphics object as a complex mask.  To do so, build your object and primitives as usual.  Next create a `Container` object that will contain the masked content, and set its `mask` property to your Graphics object.  The children of the container will now be clipped to only show through inside the geometry you've created.  This technique works for both WebGL and Canvas-based rendering.
 
-Check out the [masking example code](../../examples/graphics/simple).
+Check out the [masking example code](../../examples/masks/graphics).
 
 ## Caveats and Gotchas
 
