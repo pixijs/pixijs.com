@@ -36,11 +36,11 @@ Let's then preload all of our required assets upfront which includes:
 await Assets.load([
     {
         alias: 'spineSkeleton',
-        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/spineboy.skel',
+        src: 'https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pro.skel',
     },
     {
         alias: 'spineAtlas',
-        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/spineboy.atlas',
+        src: 'https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pma.atlas',
     },
     {
         alias: 'sky',
