@@ -13,7 +13,7 @@ export function addFishes(app)
     const fishes = [];
 
     // Create a fish sprite for each fish.
-    for (let i = 0; i < fishCount; i++) 
+    for (let i = 0; i < fishCount; i++)
     {
         // Cycle through the fish assets for each sprite.
         const fishAsset = fishAssets[i % fishAssets.length];
@@ -71,19 +71,19 @@ export function animateFishes(app, fishes, time)
         fish.rotation = -fish.direction - Math.PI / 2;
 
         // Wrap the fish position when it goes out of bounds.
-        if (fish.x < -stagePadding) 
+        if (fish.x < -stagePadding)
         {
             fish.x += boundWidth;
         }
-        if (fish.x > app.screen.width + stagePadding) 
+        if (fish.x > app.screen.width + stagePadding)
         {
             fish.x -= boundWidth;
         }
-        if (fish.y < -stagePadding) 
+        if (fish.y < -stagePadding)
         {
             fish.y += boundHeight;
         }
-        if (fish.y > app.screen.height + stagePadding) 
+        if (fish.y > app.screen.height + stagePadding)
         {
             fish.y -= boundHeight;
         }

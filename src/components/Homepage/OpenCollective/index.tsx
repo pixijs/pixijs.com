@@ -47,7 +47,7 @@ export default function OpenCollective(): JSX.Element
             const response = await fetch('https://opencollective.com/pixijs/members/all.json');
             const data = (await response.json()) as OpenCollectiveSchema;
             const sponsorData = data
-                .filter((member) => member.tier === 'sponsor')
+                .filter((member) => member.tier === 'sponsor' && member.isActive)
                 .sort((a, b) => b.totalAmountDonated - a.totalAmountDonated)
                 .map((member) => ({
                     name: member.name,

@@ -27,7 +27,7 @@ document.body.appendChild(app.canvas);
 // Add a container to center our sprite stack on the page
 const container = new Container({
   x:app.screen.width / 2,
-  y:app.screen.height / 2;
+  y:app.screen.height / 2
 });
 
 app.stage.addChild(container);
@@ -51,7 +51,7 @@ for (let i = 0; i < 3; i++) {
 // Set all sprite's properties to the same value, animated over time
 let elapsed = 0.0;
 app.ticker.add((delta) => {
-  elapsed += delta / 60;
+  elapsed += delta.deltaTime / 60;
   const amount = Math.sin(elapsed);
   const scale = 1.0 + 0.25 * amount;
   const alpha = 0.75 + 0.25 * amount;
