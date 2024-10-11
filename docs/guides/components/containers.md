@@ -71,7 +71,7 @@ frame.addChild(maskContainer);
 let text = new Text({
   text:'This text will scroll up and be masked, so you can see how masking works.  Lorem ipsum and all that.\n\n' +
   'You can put anything in the container and it will be masked!',
-  style{
+  style:{
     fontSize: 24,
     fill: 0x1010ff,
     wordWrap: true,
