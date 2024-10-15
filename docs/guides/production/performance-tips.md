@@ -40,7 +40,7 @@
 ### Masks
 
 - Masks can be expensive if too many are used: e.g., 100s of masks will really slow things down
-- Axis-aligned Rectangle masks are the fastest (as the use scissor rect)
+- Axis-aligned Rectangle masks are the fastest (as they use scissor rect)
 - Graphics masks are second fastest (as they use the stencil buffer)
 - Sprite masks are the third fastest (they use filters). They are really expensive. Do not use too many in your scene!
 
