@@ -1,6 +1,6 @@
 import { Container, Sprite } from 'pixi.js';
 
-export function addFishes(app, fishes)
+export function addFishes(app)
 {
     // Create a container to hold all the fish sprites.
     const fishContainer = new Container();
@@ -10,6 +10,7 @@ export function addFishes(app, fishes)
 
     const fishCount = 20;
     const fishAssets = ['fish1', 'fish2', 'fish3', 'fish4', 'fish5'];
+    const fishes = [];
 
     // Create a fish sprite for each fish.
     for (let i = 0; i < fishCount; i++)
@@ -41,6 +42,9 @@ export function addFishes(app, fishes)
         // Add the fish sprite to the fish array.
         fishes.push(fish);
     }
+
+    // Return the fish array.
+    return fishes;
 }
 
 export function animateFishes(app, fishes, time)
@@ -57,11 +61,11 @@ export function animateFishes(app, fishes, time)
     fishes.forEach((fish) =>
     {
         // Animate the fish movement direction according to the turn speed.
-        fish.direction += fish.turnSpeed * 0.01;
+        fish.direction += fish.turnSpeed * 0.01 * delta;
 
         // Animate the fish position according to the direction and speed.
-        fish.x += Math.sin(fish.direction) * fish.speed;
-        fish.y += Math.cos(fish.direction) * fish.speed;
+        fish.x += Math.sin(fish.direction) * fish.speed * delta;
+        fish.y += Math.cos(fish.direction) * fish.speed * delta;
 
         // Apply the fish rotation according to the direction.
         fish.rotation = -fish.direction - Math.PI / 2;

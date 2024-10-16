@@ -12,16 +12,18 @@ const fishContainer = new Container();
 app.stage.addChild(fishContainer);
 ```
 
-Then we declare some reference variables like how many fishes should there be in the pond and what are the fish types available. For the types, we refer to the 5 different fish assets we have preloaded earlier and made them into an array of aliases.
+Then we declare some reference variables like how many fishes should be there in the pond and what are the fish types available. For the types, we refer to the 5 different fish assets we have preloaded earlier and made them into an array of aliases.
 
 ```javascript
 const fishCount = 20;
 const fishAssets = ['fish1', 'fish2', 'fish3', 'fish4', 'fish5'];
 ```
 
-Instead of creating each of the fish individually, which will be super tedious, we will use a simple `for` loop to create each of the fish until it reaches our desire count, also cycling through the fish asset aliases array. In addition to the basic setup and applying initial transforms, we also assign them with custom properties like `direction`, `speed` and `turnSpeed` which will be used during the animation. We will store the fishes in a reference array defined outside of the IIFE.
+Instead of creating every fish individually, which would be super tedious, we will use a simple `for` loop to create each of the fishes and store them in an array until it reaches our desired count. In addition to the basic setup and applying initial transforms, we also assign them with custom properties like `direction`, `speed` and `turnSpeed` which will be used during the animation.
 
 ```javascript
+const fishes = [];
+
 for (let i = 0; i < fishCount; i++)
 {
     const fishAsset = fishAssets[i % fishAssets.length];
@@ -40,13 +42,15 @@ for (let i = 0; i < fishCount; i++)
     fishContainer.addChild(fish);
     fishes.push(fish);
 }
+
+return fishes;
 ```
 
 ## Animate Fishes
 
-It's time to give the fishes some movements! Another function `animateFishes` has been prepared and connected to the application's ticker which will be continuously called. It is supplied with a Ticker object which we can use to infer the amount of time passed between the calls.
+It's time to give the fishes some movements! Another function `animateFishes` has been prepared and connected to the application's ticker which will be continuously called. 
 
-We will declare a few variables to help us with the animation. We extract `deltaTime` from the Ticker object which tells us the amount of time passed since last call, in seconds. We also define an imaginary bound that is larger than the stage itself to wrap the position of the fishes when they go off the screen. We use this bound instead of the actual screen size to avoid having the fishes disappear before they actually go off the edges, since the fish sprites' anchor is in the center so, eg. when a `fish.x = 0`, half of the fish's width is still apparent on the screen.
+We will declare a few variables to help us with the animation. We extract `deltaTime` from the Ticker object which tells us the amount of time passed since last call. Using it guarantees consistent movement, regardless of the frame rate. We also define an imaginary bound that is larger than the stage itself to wrap the position of the fishes when they go off the screen. We use this bound instead of the actual screen size to avoid having the fishes disappear before they actually go off the edges, since the fish sprites' anchor is in the center so, eg. when a `fish.x = 0`, half of the fish's width is still apparent on the screen.
 
 ```javascript
 const delta = time.deltaTime;
@@ -61,9 +65,9 @@ We can then simply loop through individual fishes array and update them one by o
 ```javascript
 fishes.forEach((fish) =>
 {
-    fish.direction += fish.turnSpeed * 0.01;
-    fish.x += Math.sin(fish.direction) * fish.speed;
-    fish.y += Math.cos(fish.direction) * fish.speed;
+    fish.direction += fish.turnSpeed * 0.01 * delta;
+    fish.x += Math.sin(fish.direction) * fish.speed * delta;
+    fish.y += Math.cos(fish.direction) * fish.speed * delta;
     fish.rotation = -fish.direction - Math.PI / 2;
 
     if (fish.x < -stagePadding)
