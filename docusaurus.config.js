@@ -120,6 +120,7 @@ const config = {
         ({
             announcementBar: {
                 id: 'survey',
+                // eslint-disable-next-line max-len
                 content: `<a style="font-weight: bold"target="_blank" rel="noopener noreferrer" href="https://app.formbricks.com/s/cm2vojaba0003mqjcwdvxxztj">Help shape the future of PixiJS – Take our first-ever community survey!</a>`,
                 backgroundColor: '#E72264',
                 textColor: '#fff',
