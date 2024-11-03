@@ -72,7 +72,9 @@ maskContainer.position.set(4,4);
 frame.addChild(maskContainer);
 
 // Create contents for the masked container
-let text = new Text({
+//
+// First, create a text texture
+let textTexture = app.renderer.canvasText.getTexture({
   text:'This text will scroll up and be masked, so you can see how masking works.  Lorem ipsum and all that.\n\n' +
   'You can put anything in the container and it will be masked!',
   style:{
@@ -83,6 +85,9 @@ let text = new Text({
   },
   x:10
 });
+
+// Then, create a Sprite from the text texture
+const text = new Sprite(textTexture);
 
 maskContainer.addChild(text);
 
