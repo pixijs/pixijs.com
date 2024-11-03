@@ -23,41 +23,41 @@ If you're familiar with the former `Interaction` system, the `eventMode` is simi
 
 PixiJS supports the following event types:
 
-| Event Type | Description |
-|---|---|
-| `pointercancel` | Fired when a pointer device button is released outside the display object that initially registered a pointerdown. |
-| `pointerdown` | Fired when a pointer device button is pressed on the display object. |
-| `pointerenter` | Fired when a pointer device enters the display object. |
-| `pointerleave` | Fired when a pointer device leaves the display object. |
-| `pointermove` | Fired when a pointer device is moved while over the display object. |
-| `globalpointermove` | Fired when a pointer device is moved, regardless of hit-testing the current object. |
-| `pointerout` | Fired when a pointer device is moved off the display object. |
-| `pointerover` | Fired when a pointer device is moved onto the display object. |
-| `pointertap` | Fired when a pointer device is tapped twice on the display object. |
-| `pointerup` | Fired when a pointer device button is released over the display object. |
-| `pointerupoutside` | Fired when a pointer device button is released outside the display object that initially registered a pointerdown. |
-| `mousedown ` | Fired when a mouse button is pressed on the display object. |
-| `mouseenter` | Fired when the mouse cursor enters the display object. |
-| `mouseleave` | Fired when the mouse cursor leaves the display object. |
-| `mousemove ` | Fired when the mouse cursor is moved while over the display object. |
-| `globalmousemove` | Fired when a mouse is moved, regardless of hit-testing the current object. |
-| `mouseout ` | Fired when the mouse cursor is moved off the display object. |
-| `mouseover ` | Fired when the mouse cursor is moved onto the display object. |
-| `mouseup ` | Fired when a mouse button is released over the display object. |
-| `mouseupoutside ` | Fired when a mouse button is released outside the display object that initially registered a mousedown. |
-| `click ` | Fired when a mouse button is clicked (pressed and released) over the display object. |
-| `touchcancel ` | Fired when a touch point is removed outside of the display object that initially registered a touchstart. |
-| `touchend ` | Fired when a touch point is removed from the display object. |
-| `touchendoutside ` | Fired when a touch point is removed outside of the display object that initially registered a touchstart. |
-| `touchmove ` | Fired when a touch point is moved along the display object. |
-| `globaltouchmove` | Fired when a touch point is moved, regardless of hit-testing the current object. |
-| `touchstart ` | Fired when a touch point is placed on the display object. |
-| `tap ` | Fired when a touch point is tapped twice on the display object. |
-| `wheel ` | Fired when a mouse wheel is spun over the display object. |
-| `rightclick ` | Fired when a right mouse button is clicked (pressed and released) over the display object. |
-| `rightdown ` | Fired when a right mouse button is pressed on the display object. |
-| `rightup ` | Fired when a right mouse button is released over the display object. |
-| `rightupoutside ` | Fired when a right mouse button is released outside the display object that initially registered a rightdown. |
+| Event Type          | Description                                                                                                        |
+|---------------------|--------------------------------------------------------------------------------------------------------------------|
+| `pointercancel`     | Fired when a pointer device button is released outside the display object that initially registered a pointerdown. |
+| `pointerdown`       | Fired when a pointer device button is pressed on the display object.                                               |
+| `pointerenter`      | Fired when a pointer device enters the display object.                                                             |
+| `pointerleave`      | Fired when a pointer device leaves the display object.                                                             |
+| `pointermove`       | Fired when a pointer device is moved while over the display object.                                                |
+| `globalpointermove` | Fired when a pointer device is moved, regardless of hit-testing the current object.                                |
+| `pointerout`        | Fired when a pointer device is moved off the display object.                                                       |
+| `pointerover`       | Fired when a pointer device is moved onto the display object.                                                      |
+| `pointertap`        | Fired when a pointer device is tapped twice on the display object.                                                 |
+| `pointerup`         | Fired when a pointer device button is released over the display object.                                            |
+| `pointerupoutside`  | Fired when a pointer device button is released outside the display object that initially registered a pointerdown. |
+| `mousedown `        | Fired when a mouse button is pressed on the display object.                                                        |
+| `mouseenter`        | Fired when the mouse cursor enters the display object.                                                             |
+| `mouseleave`        | Fired when the mouse cursor leaves the display object.                                                             |
+| `mousemove `        | Fired when the mouse cursor is moved while over the display object.                                                |
+| `globalmousemove`   | Fired when a mouse is moved, regardless of hit-testing the current object.                                         |
+| `mouseout `         | Fired when the mouse cursor is moved off the display object.                                                       |
+| `mouseover `        | Fired when the mouse cursor is moved onto the display object.                                                      |
+| `mouseup `          | Fired when a mouse button is released over the display object.                                                     |
+| `mouseupoutside `   | Fired when a mouse button is released outside the display object that initially registered a mousedown.            |
+| `click `            | Fired when a mouse button is clicked (pressed and released) over the display object.                               |
+| `touchcancel `      | Fired when a touch point is removed outside of the display object that initially registered a touchstart.          |
+| `touchend `         | Fired when a touch point is removed from the display object.                                                       |
+| `touchendoutside `  | Fired when a touch point is removed outside of the display object that initially registered a touchstart.          |
+| `touchmove `        | Fired when a touch point is moved along the display object.                                                        |
+| `globaltouchmove`   | Fired when a touch point is moved, regardless of hit-testing the current object.                                   |
+| `touchstart `       | Fired when a touch point is placed on the display object.                                                          |
+| `tap `              | Fired when a touch point is tapped twice on the display object.                                                    |
+| `wheel `            | Fired when a mouse wheel is spun over the display object.                                                          |
+| `rightclick `       | Fired when a right mouse button is clicked (pressed and released) over the display object.                         |
+| `rightdown `        | Fired when a right mouse button is pressed on the display object.                                                  |
+| `rightup `          | Fired when a right mouse button is released over the display object.                                               |
+| `rightupoutside `   | Fired when a right mouse button is released outside the display object that initially registered a rightdown.      |
 
 
 ## Enabling Interaction
