@@ -40,6 +40,12 @@ background.x = app.screen.width / 2;
 background.y = app.screen.height / 2;
 ```
 
+Finally, we'll add our new background to the [Scene Graph](/8.x/guides/basics/scene-graph) of our application:
+
+```javascript
+app.stage.addChild(background);
+```
+
 We got a beautiful pond! Now let's proceed to add some fishes!
 
 
