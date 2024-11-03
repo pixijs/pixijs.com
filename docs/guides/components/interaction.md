@@ -13,11 +13,11 @@ If you're familiar with the former `Interaction` system, the `eventMode` is simi
 
 | eventMode | Description |
 |---|---|
-| `none` | Ignores all interaction events, similar to CSS's `pointer-events: none`, good optimization for non-interactive children |
-|  `passive`  | Does not emit events and ignores hit testing on itself but does allow for events and hit testing only its interactive children. This is default eventMode for all containers |
-|  `auto`  | Does not emit events but is hit tested if parent is interactive. Same as `interactive = false` in v7 |
-|  `static`  | Emit events and is hit tested. Same as `interaction = true` in v7, useful for objects like buttons that do not move. |
-|  `dynamic` | Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving. This is useful for elements that are independently moving or animating. |
+| `none` | Ignores all interaction events, similar to CSS's `pointer-events: none`. Good optimization for non-interactive children. |
+|  `passive`  | The **default** `eventMode` for all containers. Does not emit events and ignores hit testing on itself, but *does* allow for events and hit testing on its interactive children. |
+|  `auto`  | Does not emit events, but is hit tested if parent is interactive. Same as `interactive = false` in v7. |
+|  `static`  | Emits events and is hit tested. Same as `interaction = true` in v7. Useful for objects like buttons that do not move. |
+|  `dynamic` | Emits events and is hit tested, but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving. Useful for elements that are independently moving or animating. |
 
 ## Event Types
 
