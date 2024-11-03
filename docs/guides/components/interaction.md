@@ -4,7 +4,12 @@ PixiJS is primarily a rendering system, but it also includes support for interac
 
 ## Event Modes
 
-The new event-based system that replaced `InteractionManager` from v6 has expanded the definition of what a Container means to be interactive. With this we have introduced `eventMode` which allows you to control how an object responds to interaction events. This is similar to the `interactive` property in v6 but with more options.
+Prior to v7, interaction was defined and managed by the `Interaction` package and its `InteractionManager`.
+Beginning with v7, however, a new event-based system has replaced the previous `Interaction` package, and
+expanded the definition of what it means for a Container to be interactive.
+
+With this, we have introduced `eventMode` which allows you to control how an object responds to interaction events.
+If you're familiar with the former `Interaction` system, the `eventMode` is similar to the `interactive` property, but with more options.
 
 | eventMode | Description |
 |---|---|
