@@ -37,6 +37,10 @@ Think of a pop-up window.  It has a frame made of one or more Sprites, then has 
 ```ts
 // Create the application helper and add its render target to the page
 let app = new Application({ width: 640, height: 360 });
+
+// Initialize the application
+await app.init({ resizeTo: window });
+
 document.body.appendChild(app.view);
 
 // Create window frame
