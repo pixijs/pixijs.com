@@ -6,7 +6,10 @@ Please go through the tutorial steps at your own pace and challenge yourself usi
 
 ```javascript
 // Create a PixiJS application of type canvas with specify background color and make it resize to the iframe window
-const app = new PIXI.Application() < HTMLCanvasElement > { background: '#1099bb', resizeTo: window };
+const app = new PIXI.Application({
+  background: '#1099bb',
+  resizeTo: window,
+});
 
 // Adding the application's view to the DOM
 document.body.appendChild(app.view);
