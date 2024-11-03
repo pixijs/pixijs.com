@@ -23,7 +23,7 @@ app.stage.addChild(overlay);
 
 ## Animate Overlay
 
-Similar to the previous step, we will now animate the water overlay using the application's ticker. The code has been modify to call both animation functions for the fish and this overlay so we only need to add the animation logic inside the `animateWaterOverlay` function.
+Similar to the previous step, we will now animate the water overlay using the application's ticker. The code has been modified to call both animation functions for the fish and this overlay so we only need to add the animation logic inside the `animateWaterOverlay` function:
 
 ```javascript
 // Extract the delta time from the Ticker object.
