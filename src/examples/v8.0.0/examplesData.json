@@ -6,7 +6,9 @@
     "particleContainer",
     "blendModes",
     "meshPlane",
-    "renderGroup"
+    "renderGroup",
+    "cacheAsTexture",
+  
   ],
   "advanced": [
     "slots",
