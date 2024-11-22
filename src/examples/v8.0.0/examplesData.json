@@ -7,8 +7,7 @@
     "blendModes",
     "meshPlane",
     "renderGroup",
-    "cacheAsTexture",
-  
+    "cacheAsTexture"
   ],
   "advanced": [
     "slots",
