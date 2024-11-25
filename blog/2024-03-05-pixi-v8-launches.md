@@ -39,8 +39,8 @@ We're incredibly proud of PixiJS v8 and eager to share the improvements and new 
 
 ## 🔗 Quick links
 - The new Docs for v8 can be found [here](https://pixijs.download/v8.0.0/docs/index.html)
-- [Migration](8.x/guides/migrations/v8)
-- [Examples](8.x/examples)
+- [Migration](https://pixijs.com/8.x/guides/migrations/v8)
+- [Examples](https://pixijs.com/8.x/examples)
 - [Open Games](https://github.com/pixijs/open-games)
 
 ---
