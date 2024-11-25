@@ -1,6 +1,6 @@
 import { Container, Sprite } from 'pixi.js';
 
-export function addFishes(app, fishes)
+export function addFishes(app)
 {
     /** -- INSERT CODE HERE -- */
 }
