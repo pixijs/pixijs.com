@@ -21,8 +21,8 @@ app.stage.addChild(bunny);
 Now let's set the Sprite's anchor and position it so that it's bang on at the center.
 
 ```javascript
-bunny.anchor.set(0.5)
+bunny.anchor.set(0.5);
 
-bunny.x = app.screen.width / 2
-bunny.y = app.screen.height / 2
+bunny.x = app.screen.width / 2;
+bunny.y = app.screen.height / 2;
 ```

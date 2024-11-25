@@ -8,7 +8,7 @@ We will be using an asynchronous immediately invoked function expression ([IIFE]
 
 ## Application Setup
 
-Let's create the application and initialize it within the the IIFE before appending the its canvas to the DOM. If you came from PixiJS v7 or below, the key differences to pay attention to is that application options are now passed in as an object parameter to the `init` call, and that it is asynchronous which should be awaited before proceeding to use the application.
+Let's create the application and initialize it within the IIFE before appending its canvas to the DOM. If you came from PixiJS v7 or below, the key differences to pay attention to is that application options are now passed in as an object parameter to the `init` call, and that it is asynchronous which should be awaited before proceeding to use the application.
 
 ```javascript
 const app = new Application();
