@@ -35,7 +35,7 @@ scene.addChild(myGameWorld, myHud)
 renderer.render(scene) // this action will actually convert the scene to a render group under the hood
 ```
 
-Check out the [container example] (../../examples/basic/container).
+Check out the [container example](../../examples/basic/container).
 
 ### Best Practices
 
