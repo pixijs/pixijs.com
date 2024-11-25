@@ -66,7 +66,7 @@
         "social": {
             "github": "https://github.com/andrewstart"
         },
-        "active": true
+        "active": false
     },
     {
         "name": "Yevhenii Huselietov",
@@ -106,7 +106,7 @@
             "github": "https://github.com/SuperSodaSea",
             "twitter": "https://twitter.com/super_soda"
         },
-        "active": true
+        "active": false
     },
     {
         "name": "Viktor Persson",
@@ -115,7 +115,7 @@
         "social": {
             "github": "https://github.com/vikpe"
         },
-        "active": true
+        "active": false
     },
     {
       "name": "Dmytro Soldatov",

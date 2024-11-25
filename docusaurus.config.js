@@ -55,9 +55,10 @@ const config = {
                             label: 'v8.x',
                             path: '8.x',
                             banner: 'none',
-                            badge: true,
+                            badge: false,
                         },
                     },
+                    breadcrumbs: false,
                 },
                 blog: {
                     blogTitle: 'PixiJS News',
@@ -171,7 +172,7 @@ const config = {
                     {
                         type: 'doc',
                         docId: 'playground/index',
-                        label: 'playground',
+                        label: 'Playground',
                         position: 'left',
                     },
                     {
@@ -190,7 +191,7 @@ const config = {
                             },
                             {
                                 label: 'Spine',
-                                href: 'https://github.com/pixijs/spine',
+                                href: 'https://esotericsoftware.com/spine-pixi',
                             },
                             {
                                 label: 'Filters',
@@ -199,14 +200,6 @@ const config = {
                             {
                                 label: 'Sound',
                                 href: 'https://github.com/pixijs/sound',
-                            },
-                            {
-                                label: 'Animate',
-                                href: 'https://github.com/pixijs/animate',
-                            },
-                            {
-                                label: 'Lights',
-                                href: 'https://github.com/pixijs/lights',
                             },
                             {
                                 label: 'UI',
