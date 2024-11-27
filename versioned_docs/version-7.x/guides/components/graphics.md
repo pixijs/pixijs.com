@@ -1,6 +1,6 @@
 # Graphics
 
-[Graphics](https://pixijs.download/release/docs/PIXI.Graphics.html) is a complex and much misunderstood tool in the PixiJS toolbox.  At first glance, it looks like a tool for drawing shapes.  And it is!  But it can also be used to generate masks.  How does that work?
+[Graphics](https://pixijs.download/v7.4.2/docs/PIXI.Graphics.html) is a complex and much misunderstood tool in the PixiJS toolbox.  At first glance, it looks like a tool for drawing shapes.  And it is!  But it can also be used to generate masks.  How does that work?
 
 In this guide, we're going to de-mystify the Graphics object, starting with how to think about what it does.
 
@@ -53,7 +53,7 @@ In addition, the Graphics Extras package (`@pixi/graphics-extras`) optionally in
 
 ## The Geometry List
 
-Inside every Graphics object is a GraphicsGeometry object.  The [GraphicsGeometry](https://pixijs.download/release/docs/PIXI.GraphicsGeometry.html) class manages the list of geometry primitives created by the Graphics parent object.  For the most part, you will not work directly with this object.  The owning Graphics object creates and manages it.  However, there are two related cases where you *do* work with the list.
+Inside every Graphics object is a GraphicsGeometry object.  The [GraphicsGeometry](https://pixijs.download/v7.4.2/docs/PIXI.GraphicsGeometry.html) class manages the list of geometry primitives created by the Graphics parent object.  For the most part, you will not work directly with this object.  The owning Graphics object creates and manages it.  However, there are two related cases where you *do* work with the list.
 
 First, you can re-use geometry from one Graphics object in another.  No matter whether you're re-drawing the same shape over and over, or re-using it as a mask over and over, it's more efficient to share identical GraphicsGeometry.  You can do this like so:
 

@@ -1,4 +1,4 @@
-import { Spine } from '@pixi/spine-pixi';
+import { Spine } from '@esotericsoftware/spine-pixi-v8';
 import { Container } from 'pixi.js';
 
 // Class for handling the character Spine and its animations.

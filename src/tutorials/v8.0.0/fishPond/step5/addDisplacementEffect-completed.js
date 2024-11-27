@@ -12,8 +12,6 @@ export function addDisplacementEffect(app)
     const filter = new DisplacementFilter({
         sprite,
         scale: 50,
-        width: app.screen.width,
-        height: app.screen.height,
     });
 
     // Add the filter to the stage.

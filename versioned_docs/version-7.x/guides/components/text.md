@@ -10,7 +10,7 @@ Because of the challenges of working with text in WebGL, PixiJS provides two ver
 
 ## The Text Object
 
-In order to draw text to the screen, you use a [Text](https://pixijs.download/release/docs/PIXI.Text.html) object.  Under the hood, this class draws text to an off-screen buffer using the browser's normal text rendering, then uses that offscreen buffer as the source for drawing the text object.  Effectively what this means is that whenever you create or change text, PixiJS creates a new rasterized image of that text, and then treats it like a sprite.  This approach allows truly rich text display while keeping rendering speed high.
+In order to draw text to the screen, you use a [Text](https://pixijs.download/v7.4.2/docs/PIXI.Text.html) object.  Under the hood, this class draws text to an off-screen buffer using the browser's normal text rendering, then uses that offscreen buffer as the source for drawing the text object.  Effectively what this means is that whenever you create or change text, PixiJS creates a new rasterized image of that text, and then treats it like a sprite.  This approach allows truly rich text display while keeping rendering speed high.
 
 So when working with PIXI.Text objects, there are two sets of options - standard display object options like position, rotation, etc that work *after* the text is rasterized internally, and text style options that are used *while* rasterizing.  Because text once rendered is basically just a sprite, there's no need to review the standard options.  Instead, let's focus on how text is styled.
 
@@ -18,7 +18,7 @@ Check out the [text example code](../../examples/text/pixi-text).
 
 ## Text Styles
 
-There are a lot of text style options available (see [TextStyle](https://pixijs.download/release/docs/PIXI.TextStyle.html)), but they break down into 5 main groups:
+There are a lot of text style options available (see [TextStyle](https://pixijs.download/v7.4.2/docs/PIXI.TextStyle.html)), but they break down into 5 main groups:
 
 **Font**: `fontFamily` to select the webfont to use, `fontSize` to specify the size of the text to draw, along with options for font weight, style and variant.
 

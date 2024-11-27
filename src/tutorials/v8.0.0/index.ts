@@ -24,7 +24,7 @@ export default {
         thumbnail: 'thumb_spineboy_adventure.png',
         steps: spineBoyAdventureTutorialSteps,
         extraPackages: {
-            '@pixi/spine-pixi': '^1.0.4',
+            '@esotericsoftware/spine-pixi-v8': '^4.2.66',
         },
     },
 };

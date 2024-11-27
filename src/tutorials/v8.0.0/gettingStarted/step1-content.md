@@ -2,7 +2,7 @@
 
 Welcome to the PixiJS tutorial!
 
-Please go through the tutorial steps at your own pace and challenge yourself using the editor on the right hand side. Here PixiJS has already been included as guided under the [Getting Started](/guides/basics/getting-started#loading-pixijs) section. Let's start with the creation of a PixiJS canvas application and add its view to the DOM.
+Please go through the tutorial steps at your own pace and challenge yourself using the editor on the right hand side. Here PixiJS has already been included as guided under the [Getting Started](/8.x/guides/basics/getting-started#loading-pixijs) section. Let's start with the creation of a PixiJS canvas application and add its view to the DOM.
 
 We will be using an asynchronous immediately invoked function expression ([IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)), but you are free to switch to use promises instead.
 

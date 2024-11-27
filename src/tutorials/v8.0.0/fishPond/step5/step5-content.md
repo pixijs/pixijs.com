@@ -18,8 +18,6 @@ From here, we can simply create the displacement filter and add it to the stage 
 const filter = new DisplacementFilter({
     sprite,
     scale: 50,
-    width: app.screen.width,
-    height: app.screen.height,
 });
 
 app.stage.filters = [filter];

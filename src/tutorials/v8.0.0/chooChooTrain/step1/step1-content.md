@@ -2,9 +2,9 @@
 
 Welcome to the Choo Choo Train workshop!
 
-We are going to handcraft a cute little scene of a train moving through a landscape at night. We will solely be using the [Graphics](https://pixijs.com/guides/components/graphics) API to draw out the whole scene. In this tutorial, we will be exploring a handful of methods it provides to draw a variety of shapes. For the full list of methods, please check out the Graphics [documentation](https://pixijs.download/release/docs/PIXI.Graphics.html).
+We are going to handcraft a cute little scene of a train moving through a landscape at night. We will solely be using the [Graphics](https://pixijs.com/guides/components/graphics) API to draw out the whole scene. In this tutorial, we will be exploring a handful of methods it provides to draw a variety of shapes. For the full list of methods, please check out the Graphics [documentation](https://pixijs.download/release/docs/scene.Graphics.html).
 
-Please go through the tutorial steps at your own pace and challenge yourself using the editor on the right hand side. Here PixiJS has already been included as guided under the [Getting Started](/guides/basics/getting-started#loading-pixijs) section. Let's start off by creation a PixiJS application, initialize it, add its canvas to the DOM, and preload the required assets ahead of the subsequent steps.
+Please go through the tutorial steps at your own pace and challenge yourself using the editor on the right hand side. Here PixiJS has already been included as guided under the [Getting Started](/8.x/guides/basics/getting-started#loading-pixijs) section. Let's start off by creation a PixiJS application, initialize it, add its canvas to the DOM, and preload the required assets ahead of the subsequent steps.
 
 We will be using an asynchronous immediately invoked function expression ([IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)), but you are free to switch to use promises instead.
 
