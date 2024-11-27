@@ -25,6 +25,7 @@ import meshPlane from '!!raw-loader!./basic/meshPlane.js';
 import tinting from '!!raw-loader!./basic/tinting.js';
 import transparentBackground from '!!raw-loader!./basic/transparentBackground.js';
 import renderGroup from '!!raw-loader!./basic/renderGroup.js';
+import cacheAsTexture from '!!raw-loader!./basic/cacheAsTexture.js';
 
 import click from '!!raw-loader!./events/click.js';
 import customHitarea from '!!raw-loader!./events/customHitarea.js';
@@ -131,6 +132,7 @@ const examplesSource: ExamplesSourceType = {
         tinting,
         transparentBackground,
         renderGroup,
+        cacheAsTexture,
     },
     sprite: {
         animatedSpriteAnimationSpeed,

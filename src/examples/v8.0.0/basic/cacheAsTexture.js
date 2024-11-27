@@ -1,6 +1,6 @@
 import { Application, Assets, Container, Sprite } from 'pixi.js';
 
-async () =>
+(async () =>
 {
     // Create a new application
     const app = new Application();
@@ -72,4 +72,4 @@ async () =>
         alienContainer.scale.y = Math.sin(count);
         alienContainer.rotation += 0.01;
     });
-};
+})();
