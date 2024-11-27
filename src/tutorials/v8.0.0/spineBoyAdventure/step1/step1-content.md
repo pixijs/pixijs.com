@@ -2,7 +2,7 @@
 
 Welcome to the SpineBoy Adventure workshop!
 
-Let's venture into the world of the PixiJS ecosystem. We are going to explore one of the official plugins; [Spine plugin (`@pixi/spine-pixi`)](https://github.com/pixijs/spine-v8) which allow us to render and manipulate Spine animations on our PixiJS.
+Let's venture into the world of the PixiJS ecosystem. We are going to explore one of the official plugins; [Spine plugin (`@esotericsoftware/spine-pixi-v8`)](https://github.com/EsotericSoftware/spine-runtimes/tree/4.2/spine-ts) which allow us to render and manipulate Spine animations on our PixiJS.
 
 We will be creating a mini interactive side-scroller experience using the famous SpineBoy which will be controlled by the keyboard. For the sake of simplicity, we will be focusing on just the movement around the scene.
 

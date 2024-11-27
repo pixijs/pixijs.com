@@ -2,7 +2,7 @@
 
 So far all we've been doing is prep work. We haven't actually told PixiJS to draw anything. Let's fix that by adding an image to be displayed.
 
-There are a number of ways to draw images in PixiJS, but the simplest is by using a [Sprite](https://pixijs.download/release/docs/PIXI.Sprite.html). We'll get into the details of how the scene graph works in a later guide, but for now all you need to know is that PixiJS renders a hierarchy of [Containers](https://pixijs.download/release/docs/PIXI.Container.html). A Sprite is an extension of Container that wraps a loaded image resource to allow drawing it, scaling it, rotating it, and so forth.
+There are a number of ways to draw images in PixiJS, but the simplest is by using a [Sprite](https://pixijs.download/release/docs/scene.Sprite.html). We'll get into the details of how the scene graph works in a later guide, but for now all you need to know is that PixiJS renders a hierarchy of [Containers](https://pixijs.download/release/docs/scene.Container.html). A Sprite is an extension of Container that wraps a loaded image resource to allow drawing it, scaling it, rotating it, and so forth.
 
 Before PixiJS can render an image, it needs to be loaded. Just like in any web page, image loading happens asynchronously. For now, we will simply load a single texture up on the spot with the `Assets` utility class.
 

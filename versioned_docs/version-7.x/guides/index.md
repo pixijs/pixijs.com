@@ -1,6 +1,6 @@
 # Welcome
 
-PixiJS is an open source, web-based rendering system that provides blazing fast performance for games, data visualization, and other graphics intensive projects. These guides are designed to be a companion to the [API documentation](https://pixijs.download/release/docs/index.html), providing a structured introduction to using the API to solve problems and build projects.
+PixiJS is an open source, web-based rendering system that provides blazing fast performance for games, data visualization, and other graphics intensive projects. These guides are designed to be a companion to the [API documentation](https://pixijs.download/v7.4.2/docs/index.html), providing a structured introduction to using the API to solve problems and build projects.
 
 ## About The Guides
 
@@ -10,5 +10,5 @@ If you're new to PixiJS, we suggest you start with the Basics and read through t
 
 As you explore the guides, you may find these resources valuable:
 
-* [PixiJS API documentation](https://pixijs.download/release/docs)
+* [PixiJS API documentation](https://pixijs.download/v7.4.2/docs)
 * [PixiJS Github repo](https://github.com/pixijs/pixijs)

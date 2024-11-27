@@ -15,7 +15,10 @@ export default function Team(): JSX.Element
     });
 
     return (
-        <Layout title={'Meet the Team'} description="Description will go into a meta tag in <head />">
+        <Layout
+            title={'Meet the Team'}
+            description="The handful of dedicated individuals who volunteer their time to make PixiJS better."
+        >
             <main>
                 <div className={`${styles.header} padding-horiz--lg text--center margin-vert--xl`}>
                     <h1 className="underline">Meet the Team</h1>

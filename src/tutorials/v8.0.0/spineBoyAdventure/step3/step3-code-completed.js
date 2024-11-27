@@ -1,4 +1,4 @@
-import '@pixi/spine-pixi';
+import '@esotericsoftware/spine-pixi-v8';
 
 import { Application, Assets } from 'pixi.js';
 import { SpineBoy } from './SpineBoy';

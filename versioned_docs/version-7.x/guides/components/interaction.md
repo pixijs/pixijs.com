@@ -28,7 +28,7 @@ PixiJS supports the following event types:
 | `globalpointermove` | Fired when a pointer device is moved, regardless of hit-testing the current object. |
 | `pointerout` | Fired when a pointer device is moved off the display object. |
 | `pointerover` | Fired when a pointer device is moved onto the display object. |
-| `pointertap` | Fired when a pointer device is tapped twice on the display object. |
+| `pointertap` | Fired when a pointer device is tapped on the display object. |
 | `pointerup` | Fired when a pointer device button is released over the display object. |
 | `pointerupoutside` | Fired when a pointer device button is released outside the display object that initially registered a pointerdown. |
 | `mousedown ` | Fired when a mouse button is pressed on the display object. |
@@ -47,7 +47,7 @@ PixiJS supports the following event types:
 | `touchmove ` | Fired when a touch point is moved along the display object. |
 | `globaltouchmove` | Fired when a touch point is moved, regardless of hit-testing the current object. |
 | `touchstart ` | Fired when a touch point is placed on the display object. |
-| `tap ` | Fired when a touch point is tapped twice on the display object. |
+| `tap ` | Fired when a touch point is tapped on the display object. |
 | `wheel ` | Fired when a mouse wheel is spun over the display object. |
 | `rightclick ` | Fired when a right mouse button is clicked (pressed and released) over the display object. |
 | `rightdown ` | Fired when a right mouse button is pressed on the display object. |
@@ -69,7 +69,7 @@ sprite.on('pointerdown', (event) => { alert('clicked!'); });
 sprite.eventMode = 'static';
 ```
 
-Check out the [DisplayObject](https://pixijs.download/release/docs/PIXI.DisplayObject.html) for the list of interaction events supported.
+Check out the [DisplayObject](https://pixijs.download/v7.4.2/docs/PIXI.DisplayObject.html) for the list of interaction events supported.
 
 ### Checking if Object is Interactive
 
