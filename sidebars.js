@@ -42,7 +42,12 @@ const sidebars = {
             items: [
                 'guides/components/assets',
                 'guides/components/containers',
-                'guides/components/graphics',
+                {
+                    type: 'category',
+                    label: 'Graphics',
+                    collapsed: true,
+                    items: ['guides/components/graphics', 'guides/components/graphics-pixel-line'],
+                },
                 'guides/components/interaction',
                 'guides/components/sprites',
                 'guides/components/sprite-sheets',

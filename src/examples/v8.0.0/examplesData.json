@@ -41,7 +41,8 @@
     "svgLoad",
     "texture",
     "fillGradient",
-    "meshFromPath"
+    "meshFromPath",
+    "pixelLine"
   ],
   "events": [
     "click",
