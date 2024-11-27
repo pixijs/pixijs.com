@@ -33,7 +33,7 @@ const sidebars = {
             type: 'category',
             label: 'Advanced',
             collapsed: true,
-            items: ['guides/advanced/render-groups'],
+            items: ['guides/advanced/render-groups', 'guides/advanced/cache-as-texture'],
         },
         {
             type: 'category',
