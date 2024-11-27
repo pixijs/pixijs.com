@@ -5,7 +5,7 @@ import { Application, Container, Graphics, Text } from 'pixi.js';
  * @param graphics - The Graphics object to draw on
  * @returns The Graphics object with the grid drawn
  */
-function buildGrid(graphics: Graphics)
+function buildGrid(graphics)
 {
     // Draw 10 vertical lines spaced 10 pixels apart
     for (let i = 0; i < 11; i++)

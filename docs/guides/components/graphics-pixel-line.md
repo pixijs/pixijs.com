@@ -47,7 +47,7 @@ const grid = new Graphics();
 for (let i = 0; i < 10; i++) {
     // Move to top of each line (x = i*10, y = 0)
     grid.moveTo(i * 10, 0)
-        // Draw down to bottom (x = i*10, y = 100) 
+        // Draw down to bottom (x = i*10, y = 100)
         .lineTo(i * 10, 100);
 }
 
@@ -102,7 +102,7 @@ const graphicsBox = new Graphics()
 function drawDebugBounds(obj) {
     // Get the bounds of the object
     let bounds = obj.getBounds().rectangle;
-    
+
     // Position and scale the debug box to match the bounds
     // this is faster than using `moveTo` and `lineTo` each frame!
     graphicsBox.position.set(bounds.x, bounds.y);
@@ -114,7 +114,7 @@ function drawDebugBounds(obj) {
 
 ## How it works
 
-This is achieved under the hood using WebGL or WebGPU's native line rendering methods when `pixelLine` is set to `true`. 
+This is achieved under the hood using WebGL or WebGPU's native line rendering methods when `pixelLine` is set to `true`.
 
 Fun fact its actually faster to draw a pixel line than a regular line. This is because of two main factors:
 
@@ -134,7 +134,7 @@ While the `pixelLine` property is incredibly useful, there are some limitations 
 
 ### 2. **Hardware may render differently**
 
-- Different GPUs and graphics hardware may render the line slightly differently due to variations in how they handle line rasterization. For example, some GPUs may position the line slightly differently or apply different anti-aliasing techniques. This is an inherent limitation of GPU line rendering and is beyond PixiJS's control. 
+- Different GPUs and graphics hardware may render the line slightly differently due to variations in how they handle line rasterization. For example, some GPUs may position the line slightly differently or apply different anti-aliasing techniques. This is an inherent limitation of GPU line rendering and is beyond PixiJS's control.
 
 ### 4. **Scaling Behavior**
 
@@ -154,7 +154,7 @@ let box = new Graphics()
 // Add it to the stage
 app.stage.addChild(box);
 
-// Scale the box 
+// Scale the box
 box.scale.set(2);
 ```
 
@@ -173,5 +173,5 @@ In this example, the blue box grows as it scales, but the red stroke remains at 
 
 The `pixelLine` property is a super useful to have in the PixiJS toolbox for developers looking to create sharp, pixel-perfect lines that remain consistent under transformation. By understanding its strengths and limitations, you can incorporate it into your projects for clean, professional results in both visual and functional elements.
 
-Check out the [line styling example code](../../examples/graphics/lines) to see `pixelLine` in action!
+Check out the [line styling example code](../../examples/graphics/pixel-line) to see `pixelLine` in action!
 

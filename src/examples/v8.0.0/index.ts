@@ -57,6 +57,7 @@ import svgLoad from '!!raw-loader!./graphics/svgLoad.js';
 import texture from '!!raw-loader!./graphics/texture.js';
 import fillGradient from '!!raw-loader!./graphics/fillGradient.js';
 import meshFromPath from '!!raw-loader!./graphics/meshFromPath.js';
+import pixelLine from '!!raw-loader!./graphics/pixelLine.js';
 
 import filter from '!!raw-loader!./masks/filter.js';
 import graphics from '!!raw-loader!./masks/graphics.js';
@@ -158,6 +159,7 @@ const examplesSource: ExamplesSourceType = {
         texture,
         fillGradient,
         meshFromPath,
+        pixelLine,
     },
     events: {
         click,
