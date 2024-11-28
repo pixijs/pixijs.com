@@ -72,7 +72,7 @@ In some cases you may not have control over the URLs and you have to work with a
 ```js
 promise = Assets.load({
   src: 'https://example.com/ambiguous-file-name',
-  loader: 'loadTextures'
+  loadParser: 'loadTextures'
 })
 ```
 
