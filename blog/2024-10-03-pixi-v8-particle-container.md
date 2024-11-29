@@ -1,15 +1,15 @@
 ---
-title: ParticleContainer - The New Speed Demon in PixiJS v8  
-description: Introducing the new ParticleContainer in PixiJS v8—faster than ever, optimized for rendering millions of particles effortlessly.  
-slug: particlecontainer-v8  
-authors:  
-  - name: Mat Groves  
-    title: PixiJS 
-    url: https://github.com/GoodboyDigital  
-    image_url: https://github.com/GoodboyDigital.png  
-tags: [PixiJS, ParticleContainer, WebGL, Games, Performance, Optimization]  
-hide_table_of_contents: true  
-keywords: ['PixiJS', 'ParticleContainer', 'game development', 'web graphics', 'optimization', 'WebGL']  
+title: ParticleContainer - The New Speed Demon in PixiJS v8
+description: Introducing the new ParticleContainer in PixiJS v8—faster than ever, optimized for rendering millions of particles effortlessly.
+slug: particlecontainer-v8
+authors:
+  - name: Mat Groves
+    title: PixiJS
+    url: https://github.com/GoodboyDigital
+    image_url: https://github.com/GoodboyDigital.png
+tags: [PixiJS, ParticleContainer, WebGL, Games, Performance, Optimization]
+hide_table_of_contents: true
+keywords: ['PixiJS', 'ParticleContainer', 'game development', 'web graphics', 'optimization', 'WebGL']
 ---
 
 PixiJS v8 has taken speed to the next level with the release of its new `ParticleContainer`. This new feature brings a jaw-dropping performance boost, capable of rendering 100K+ without breaking a sweat. If you’ve got tons of elements to throw on the screen, you’re in for a treat!
@@ -18,7 +18,7 @@ PixiJS v8 has taken speed to the next level with the release of its new `Particl
 
 ## 🚀 New ParticleContainer Design
 
-The key difference in PixiJS v8 is that the `ParticleContainer` doesn’t deal with sprites any more, it works with lightweight **particles**. While particles share many properties with sprites (like texture, position, anchor, scale, rotation, alpha and color), they cut out unnecessary overhead. The result is **speed**, pure and simple. 
+The key difference in PixiJS v8 is that the `ParticleContainer` doesn’t deal with sprites any more, it works with lightweight **particles**. While particles share many properties with sprites (like texture, position, anchor, scale, rotation, alpha and color), they cut out unnecessary overhead. The result is **speed**, pure and simple.
 
 How fast, you ask? Well, take a look on my machine (Macbook Pro M3):
 
@@ -100,4 +100,4 @@ Ready to give it a spin? Try out the new `ParticleContainer` in PixiJS v8, and p
 
 ## 🌐 Stay Connected
 
-Follow [Doormat23](https://twitter.com/Doormat23) and [PixiJS](https://twitter.com/PixiJS) on social media for the latest updates. Join our vibrant community on [Discord](https://discord.gg/nrnDP9wtyX) for real-time discussions and support.
+Follow [Doormat23](https://twitter.com/Doormat23) and [PixiJS](https://bsky.app/profile/pixijs.com) on social media for the latest updates. Join our vibrant community on [Discord](https://discord.gg/nrnDP9wtyX) for real-time discussions and support.

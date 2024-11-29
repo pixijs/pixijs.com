@@ -23,8 +23,8 @@ import { Application, Assets, Container, Sprite } from 'pixi.js';
     // create an empty container
     const alienContainer = new Container();
 
-    alienContainer.x = 400;
-    alienContainer.y = 300;
+    alienContainer.x = app.screen.width / 2;
+    alienContainer.y = app.screen.height / 2;
 
     // make the stage interactive
     app.stage.eventMode = 'static';
@@ -40,8 +40,8 @@ import { Application, Assets, Container, Sprite } from 'pixi.js';
 
         alien.tint = Math.random() * 0xffffff;
 
-        alien.x = Math.random() * 800 - 400;
-        alien.y = Math.random() * 600 - 300;
+        alien.x = Math.random() * app.screen.width - app.screen.width / 2;
+        alien.y = Math.random() * app.screen.height - app.screen.height / 2;
         alien.anchor.x = 0.5;
         alien.anchor.y = 0.5;
         aliens.push(alien);

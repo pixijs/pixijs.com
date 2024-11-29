@@ -178,16 +178,15 @@
     right: 0;
     background: url(/static/images/logo-p.svg) center center no-repeat;
     z-index: 100;
-    animation: 1s infinite alternate loadingPulse;
+    animation: loadingPulse 1s infinite alternate ease-in-out;
+    background-size: 20%;
 }
 
 @keyframes loadingPulse {
     from {
-        background-size: 20%;
         opacity: 0.7;
     }
     to {
-        background-size: 23%;
         opacity: 1;
     }
 }

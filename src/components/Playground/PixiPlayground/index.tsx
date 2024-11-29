@@ -10,7 +10,7 @@ import type { CodeChangeCallbackType } from './MonacoEditor';
 
 import styles from './index.module.scss';
 
-type BasePlaygroundMode = 'tutorial' | 'fullscreen' | 'example';
+type BasePlaygroundMode = 'tutorial' | 'fullscreen' | 'example' | 'embedded';
 
 type BasePlaygroundProps = {
     useTabs: boolean;
@@ -32,9 +32,11 @@ function BasePlayground({ useTabs, mode, onCodeChanged }: BasePlaygroundProps)
     // TODO: we don't change the value of activeFile so why the key?
     return (
         <SandpackLayout className={classNames(styles[mode], showOutput && styles.showOutput)}>
-            <div className={styles.editorWrapper}>
-                <MonacoEditor key={activeFile} useTabs={useTabs} onChange={onCodeChanged} />
-            </div>
+            {mode !== 'embedded' && (
+                <div className={styles.editorWrapper}>
+                    <MonacoEditor key={activeFile} useTabs={useTabs} onChange={onCodeChanged} />
+                </div>
+            )}
 
             <div className={styles.previewWrapper}>
                 <SandpackPreview showOpenInCodeSandbox={true} />

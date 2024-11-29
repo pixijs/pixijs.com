@@ -60,4 +60,4 @@ You can also check out the live v8 examples [here](https://pixijs.io/spine-v8/ex
 
 ## 📲 Stay Connected
 
-Follow [Doormat23](https://twitter.com/Doormat23) and [PixiJS](https://twitter.com/PixiJS) on social media for the latest updates. Join our vibrant community on [Discord](https://discord.gg/nrnDP9wtyX) for real-time discussions and support.
+Follow [Doormat23](https://twitter.com/Doormat23) and [PixiJS](https://bsky.app/profile/pixijs.com) on social media for the latest updates. Join our vibrant community on [Discord](https://discord.gg/nrnDP9wtyX) for real-time discussions and support.
