@@ -5,15 +5,16 @@ import styles from './index.module.scss';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { getExampleEntry } from '@site/src/examples';
 import { extractSource } from '../Playground/PixiPlayground/useEditorCode';
+import classNames from 'classnames';
 
-export default function Example({ id, pixiVersion }: { id: string; pixiVersion: IVersion })
+export default function Example({ id, pixiVersion, mode }: { id: string; pixiVersion: IVersion; mode?: any })
 {
     const entry = getExampleEntry(pixiVersion.version, id);
     const source = (entry?.source ?? entry) as string | Record<string, string>;
     const { indexCode, extraFiles } = extractSource(source);
 
     return (
-        <div className={styles.wrapper}>
+        <div className={classNames(styles.wrapper, mode === 'embedded' && styles.embedded)}>
             <BrowserOnly>
                 {() => (
                     <PixiPlayground
@@ -22,7 +23,7 @@ export default function Example({ id, pixiVersion }: { id: string; pixiVersion: 
                         pixiVersion={pixiVersion.version}
                         isPixiDevVersion={pixiVersion.dev}
                         isPixiWebWorkerVersion={entry?.usesWebWorkerLibrary}
-                        mode="example"
+                        mode={mode ?? 'example'}
                     />
                 )}
             </BrowserOnly>

@@ -245,4 +245,4 @@ Let's continue to innovate and push the boundaries of web graphics together. You
 
 ## 📲 Keep in touch
 
-To stay in the loop, we invite you to follow [Doormat23](https://twitter.com/Doormat23) and [PixiJS](https://twitter.com/PixiJS) on social media, where we'll be unveiling more exciting updates shortly. Alternatively, you can join our vibrant community on [Discord](https://discord.gg/nrnDP9wtyX) for direct engagement and real-time chit-chats.
+To stay in the loop, we invite you to follow [Doormat23](https://twitter.com/Doormat23) and [PixiJS](https://bsky.app/profile/pixijs.com) on social media, where we'll be unveiling more exciting updates shortly. Alternatively, you can join our vibrant community on [Discord](https://discord.gg/nrnDP9wtyX) for direct engagement and real-time chit-chats.

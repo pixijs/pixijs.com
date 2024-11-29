@@ -62,6 +62,7 @@ import pixelLine from '!!raw-loader!./graphics/pixelLine.js';
 import filter from '!!raw-loader!./masks/filter.js';
 import graphics from '!!raw-loader!./masks/graphics.js';
 import sprite from '!!raw-loader!./masks/sprite.js';
+import inverseMask from '!!raw-loader!./masks/inverseMask.js';
 
 import instancedGeometry from '!!raw-loader!./meshAndShaders/instancedGeometry/index.js';
 import instancedGeometryVert from '!!raw-loader!./meshAndShaders/instancedGeometry/instancedGeometry.vert';
@@ -96,6 +97,7 @@ import triangle from '!!raw-loader!./meshAndShaders/triangle/index.js';
 import triangleVert from '!!raw-loader!./meshAndShaders/triangle/triangle.vert';
 import triangleFrag from '!!raw-loader!./meshAndShaders/triangle/triangle.frag';
 import triangleWgsl from '!!raw-loader!./meshAndShaders/triangle/triangle.wgsl';
+import perspectiveMesh from '!!raw-loader!./meshAndShaders/perspectiveMesh.js';
 
 import offscreenCanvasBasic from '!!raw-loader!./offscreenCanvas/basic.js';
 import webWorker from '!!raw-loader!./offscreenCanvas/webWorker.js';
@@ -153,13 +155,13 @@ const examplesSource: ExamplesSourceType = {
     graphics: {
         advanced,
         dynamic,
+        fillGradient,
+        meshFromPath,
+        pixelLine,
         simple,
         svg,
         svgLoad,
         texture,
-        fillGradient,
-        meshFromPath,
-        pixelLine,
     },
     events: {
         click,
@@ -175,6 +177,7 @@ const examplesSource: ExamplesSourceType = {
     masks: {
         filter,
         graphics,
+        inverseMask,
         sprite,
     },
     textures: {
@@ -229,6 +232,7 @@ const examplesSource: ExamplesSourceType = {
         starWarp,
     },
     meshAndShaders: {
+        perspectiveMesh,
         instancedGeometry: {
             index: instancedGeometry,
             'src/instancedGeometry.vert': instancedGeometryVert,

@@ -75,7 +75,8 @@ function buildGrid(graphics)
     });
 
     // Position label in top-left corner
-    label.x = 20;
-    label.y = 20;
+    label.position.set(20, 20);
+    label.width = app.screen.width - 40;
+    label.scale.y = label.scale.x;
     app.stage.addChild(label);
 })();
