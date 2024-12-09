@@ -16,7 +16,8 @@
     "mouseTrail",
     "screenShot",
     "collisionDetection",
-    "spinners"
+    "spinners",
+    "threeAndPixi"
   ],
   "sprite": [
     "basic",
