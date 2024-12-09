@@ -14,6 +14,8 @@ import spinnerGenerator3 from '!!raw-loader!./advanced/spinners/spinner3.js';
 import spinnerGenerator4 from '!!raw-loader!./advanced/spinners/spinner4.js';
 import spinnerGenerator5 from '!!raw-loader!./advanced/spinners/spinner5.js';
 import starWarp from '!!raw-loader!./advanced/starWarp.js';
+import threeAndPixi from '!!raw-loader!./advanced/threeAndPixi.js';
+
 import async from '!!raw-loader!./assets/async.js';
 import background from '!!raw-loader!./assets/background.js';
 import bundle from '!!raw-loader!./assets/bundle.js';
@@ -218,6 +220,7 @@ const examplesSource: ExamplesSourceType = {
             'src/intersect.js': spinnersIntersect,
         },
         starWarp,
+        threeAndPixi,
     },
     meshAndShaders: {
         perspectiveMesh,
