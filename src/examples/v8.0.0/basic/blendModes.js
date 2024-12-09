@@ -1,6 +1,6 @@
 import 'pixi.js/advanced-blend-modes';
 
-import { Application, Assets, Container, Sprite } from 'pixi.js';
+import { Application, Assets, Container, Sprite, Text, Texture } from 'pixi.js';
 
 (async () =>
 {
@@ -76,6 +76,25 @@ import { Application, Assets, Container, Sprite } from 'pixi.js';
         });
 
         container.addChild(sprite, sprite2);
+
+        const text = new Text({
+            text: allBlendModes[i],
+            style: {
+                fontSize: 16,
+                fontFamily: 'short-stack',
+            },
+        });
+
+        // Add blend mode text labels
+        text.x = size / 2 - text.width / 2;
+        text.y = size - text.height;
+        const textBackground = new Sprite(Texture.WHITE);
+
+        textBackground.x = text.x - 2;
+        textBackground.y = text.y;
+        textBackground.width = text.width + 4;
+        textBackground.height = text.height + 4;
+        container.addChild(textBackground, text);
 
         app.stage.addChild(container);
 
