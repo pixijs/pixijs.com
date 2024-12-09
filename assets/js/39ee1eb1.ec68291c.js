@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([[8857],{97386:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/web-gl","page":1,"postsPerPage":4,"totalPages":1,"totalCount":4,"blogDescription":"Latest news from the PixiJS team","blogTitle":"PixiJS News"}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([[1115],{69757:s=>{s.exports=JSON.parse('{"label":"QoL","permalink":"/blog/tags/qo-l","allTagsPath":"/blog/tags","count":1}')}}]);
