@@ -1,6 +1,6 @@
 import { Application, Assets, Geometry, GlProgram, Mesh, Shader } from 'pixi.js';
-import vertex from './sharedGeometry.vert';
 import fragment from './sharedGeometry.frag';
+import vertex from './sharedGeometry.vert';
 
 (async () =>
 {

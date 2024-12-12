@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, WRAP_MODES, DisplacementFilter } from 'pixi.js';
+import { Application, Assets, Container, DisplacementFilter, Sprite, WRAP_MODES } from 'pixi.js';
 
 (async () =>
 {

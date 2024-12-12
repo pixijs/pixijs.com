@@ -1,15 +1,15 @@
 import {
     Application,
     Assets,
+    BlurFilter,
     Color,
     Container,
-    Texture,
-    Sprite,
+    FillGradient,
     Graphics,
+    Sprite,
     Text,
     TextStyle,
-    BlurFilter,
-    FillGradient,
+    Texture,
 } from 'pixi.js';
 
 (async () =>

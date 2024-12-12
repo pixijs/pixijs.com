@@ -1,7 +1,7 @@
 import { Application } from 'pixi.js';
-import { addStars } from './addStars';
 import { addMoon } from './addMoon';
 import { addMountains } from './addMountains';
+import { addStars } from './addStars';
 
 // Create a PixiJS application.
 const app = new Application();

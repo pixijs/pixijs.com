@@ -1,6 +1,6 @@
 import { Application, Assets, Buffer, BufferUsage, Geometry, GlProgram, Mesh, Shader } from 'pixi.js';
-import vertex from './instancedGeometry.vert';
 import fragment from './instancedGeometry.frag';
+import vertex from './instancedGeometry.vert';
 import source from './instancedGeometry.wgsl';
 
 (async () =>

@@ -1,6 +1,5 @@
-import 'pixi.js/advanced-blend-modes';
-
 import { Application, Assets, Container, Sprite, Text, Texture } from 'pixi.js';
+import 'pixi.js/advanced-blend-modes';
 
 (async () =>
 {

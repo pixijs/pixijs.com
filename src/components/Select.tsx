@@ -1,7 +1,5 @@
-import type { ChangeEvent, HTMLAttributes } from 'react';
-import { useCallback } from 'react';
 import classNames from 'classnames';
-
+import { type ChangeEvent, type HTMLAttributes, useCallback } from 'react';
 import styles from './Select.module.scss';
 
 export type Option = {

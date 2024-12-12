@@ -1,5 +1,5 @@
-import { useHistory } from '@docusaurus/router';
 import { useMemo, useRef } from 'react';
+import { useHistory } from '@docusaurus/router';
 
 type InitialStateInit<T> = (stateFromURL: Partial<T>) => T;
 type StateUpdaterType<T> = (state: T) => T;

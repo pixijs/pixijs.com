@@ -1,10 +1,10 @@
 import { Application, Container } from 'pixi.js';
-import { addStars } from './addStars';
+import { addGround } from './addGround';
 import { addMoon } from './addMoon';
 import { addMountains } from './addMountains';
-import { addTrees } from './addTrees';
-import { addGround } from './addGround';
+import { addStars } from './addStars';
 import { addTrain } from './addTrain';
+import { addTrees } from './addTrees';
 
 // Create a PixiJS application.
 const app = new Application();

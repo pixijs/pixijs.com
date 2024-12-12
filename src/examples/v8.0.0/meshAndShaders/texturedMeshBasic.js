@@ -1,4 +1,4 @@
-import { Application, Assets, Point, Container, MeshRope } from 'pixi.js';
+import { Application, Assets, Container, MeshRope, Point } from 'pixi.js';
 
 (async () =>
 {

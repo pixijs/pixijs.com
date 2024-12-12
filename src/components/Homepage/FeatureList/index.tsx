@@ -1,6 +1,6 @@
-import styles from './index.module.scss';
-import features from './features.json';
 import { useInView } from 'react-intersection-observer';
+import features from './features.json';
+import styles from './index.module.scss';
 
 export default function FeatureList(): JSX.Element
 {

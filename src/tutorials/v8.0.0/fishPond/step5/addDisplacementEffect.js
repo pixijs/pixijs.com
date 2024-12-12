@@ -1,4 +1,4 @@
-import { Sprite, DisplacementFilter } from 'pixi.js';
+import { DisplacementFilter, Sprite } from 'pixi.js';
 
 export function addDisplacementEffect(app)
 {

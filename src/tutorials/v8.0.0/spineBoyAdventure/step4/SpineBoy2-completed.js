@@ -1,5 +1,5 @@
-import { Spine } from '@esotericsoftware/spine-pixi-v8';
 import { Container } from 'pixi.js';
+import { Spine } from '@esotericsoftware/spine-pixi-v8';
 
 // Define the Spine animation map for the character.
 // name: animation track key.

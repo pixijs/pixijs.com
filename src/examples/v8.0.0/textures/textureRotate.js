@@ -1,4 +1,4 @@
-import { Application, Assets, Texture, Rectangle, Sprite, Text, groupD8 } from 'pixi.js';
+import { Application, Assets, groupD8, Rectangle, Sprite, Text, Texture } from 'pixi.js';
 
 (async () =>
 {

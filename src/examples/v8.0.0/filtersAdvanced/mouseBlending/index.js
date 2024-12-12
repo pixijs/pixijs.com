@@ -1,6 +1,6 @@
-import { Application, Assets, Container, Sprite, Rectangle, Filter, Point, GlProgram } from 'pixi.js';
-import vertex from './mouseBlending.vert';
+import { Application, Assets, Container, Filter, GlProgram, Point, Rectangle, Sprite } from 'pixi.js';
 import fragment from './mouseBlending.frag';
+import vertex from './mouseBlending.vert';
 
 /**
  * https://github.com/pixijs/pixi.js/wiki/v5-Creating-Filters
