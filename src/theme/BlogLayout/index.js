@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import Layout from '@theme/Layout';
 import BlogSidebar from '@theme/BlogSidebar';
+import Layout from '@theme/Layout';
 
 export default function BlogLayout(props)
 {

@@ -1,7 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const { themes } = require('prism-react-renderer');
+
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -29,6 +31,11 @@ const config = {
     i18n: {
         defaultLocale: 'en',
         locales: ['en'],
+    },
+
+    future: {
+        // eslint-disable-next-line camelcase
+        experimental_faster: true,
     },
 
     presets: [
@@ -65,6 +72,7 @@ const config = {
                     blogDescription: 'Latest news from the PixiJS team',
                     postsPerPage: 'ALL',
                     blogSidebarTitle: 'All posts',
+                    blogSidebarCount: 'ALL',
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.scss'),
@@ -111,8 +119,14 @@ const config = {
                 highlightSearchTermsOnTargetPage: true,
                 docsRouteBasePath: '/',
                 explicitSearchResultPath: true,
-                searchContextByPaths: ['guides', 'examples', 'tutorials', 'blog'],
+                searchContextByPaths: [
+                    { label: 'Guides', path: '8.x/guides' },
+                    { label: 'Examples', path: '8.x/examples' },
+                    { label: 'Tutorials', path: '8.x/tutorials' },
+                    { label: 'Blog', path: 'blog' },
+                ],
                 useAllContextsWithNoSearchContext: true,
+                docsPluginIdForPreferredVersion: 'current',
             },
         ],
     ],
@@ -318,6 +332,7 @@ const config = {
             prism: {
                 theme: lightCodeTheme,
                 darkTheme: darkCodeTheme,
+                additionalLanguages: ['bash', 'diff', 'json'],
             },
             colorMode: {
                 defaultMode: 'light',
