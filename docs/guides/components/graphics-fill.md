@@ -1,6 +1,6 @@
 # Graphics Fill
 
-Graphics in PixiJS are incredibly versatile, allowing developers to achieve stunning visual effects. The `fill()` method is particularly powerful, enabling you to fill shapes with colors, textures, or gradients. Whether you're designing games, UI components, or creative tools, mastering the `fill()` method is essential for creating visually appealing and dynamic graphics. This guide explores the different ways to use the `fill()` method to achieve stunning visual effects.
+If you are new to graphics, please check out the [graphics guide](./graphics) here. This guide dives a bit deeper into a specific aspect of graphics: how to fill them! The `fill()` method in PixiJS is particularly powerful, enabling you to fill shapes with colors, textures, or gradients. Whether you're designing games, UI components, or creative tools, mastering the `fill()` method is essential for creating visually appealing and dynamic graphics. This guide explores the different ways to use the `fill()` method to achieve stunning visual effects.
 
 :::info Note
 The `fillStyles` discussed here can also be applied to Text objects!
@@ -63,9 +63,7 @@ Filling shapes with textures is just as simple:
 ```ts
 let texture = await Assets.load('assets/image.png');
 let obj = new Graphics().rect(0, 0, 100, 100)
-  .fill({
-    texture: texture,
-  });
+  .fill(texture);
 ```
 
 ![alt text](image-2.png)
@@ -113,9 +111,7 @@ let spriteSheetTexture = Texture.from('assets/my-sprite-sheet.png');
 let newTexture = renderer.generateTexture(Sprite.from(spriteSheetTexture));
 
 let obj = new Graphics().rect(0, 0, 100, 100)
-  .fill({
-    texture: newTexture,
-  });
+  .fill(newTexture);
 ```
 
 2. **Power of Two Textures**: Textures should be power-of-two dimensions for proper tiling in WebGL.
@@ -138,9 +134,7 @@ let gradient = new FillGradient({
 });
 
 let obj = new Graphics().rect(0, 0, 100, 100)
-  .fill({
-    fill: gradient,
-  });
+  .fill(gradient);
 ```
 
 ![alt text](image-5.png)
@@ -178,6 +172,9 @@ let gradient = new FillGradient({
     { offset: 1, color: 'green' },
   ],
 });
+
+let obj = new Graphics().rect(0, 0, 100, 100)
+  .fill(gradient);
 ```
 
 ![alt text](image-7.png)
@@ -204,6 +201,9 @@ let radialGradient = new FillGradient({
     { offset: 1, color: 'red' },
   ],
 });
+
+let obj = new Graphics().rect(0, 0, 100, 100)
+  .fill(gradient);
 ```
 
 ![alt text](image-8.png)
@@ -216,8 +216,30 @@ let radialGradient = new FillGradient({
 
 3. **Custom Shaders**: For complex animations, custom shaders may be more efficient.
 
+4. **Texture and Matrix Limitations**: Under the hood, gradient fills set both the texture and matrix properties internally. This means you cannot use a texture fill or matrix transformation at the same time as a gradient fill.
+
 ### Combining Textures and Colors
 You can combine a texture or gradients with a color tint and alpha to achieve more complex and visually appealing effects. This allows you to overlay a color on top of the texture or gradient, adjusting its transparency with the alpha value. 
+
+```ts
+
+let gradient = new FillGradient({
+    colorStops: [
+        { offset: 0, color: 'blue' },
+        { offset: 1, color: 'red' },
+    ]
+});
+
+let obj = new Graphics().rect(0, 0, 100, 100)
+  .fill({
+    fill: gradient,
+    color: 'yellow',
+    alpha: 0.5,
+  });
+
+```
+
+![alt text](image-10.png)
 
 ```ts
 let obj = new Graphics().rect(0, 0, 100, 100)
@@ -226,11 +248,12 @@ let obj = new Graphics().rect(0, 0, 100, 100)
     color: 'yellow',
     alpha: 0.5,
   });
+
 ```
 
 ![alt text](image-9.png)
 
 ---
 
-By mastering the `fill()` method, you can unlock endless possibilities for creating visually dynamic and engaging graphics in PixiJS. Have fun!
+Hopefully, this guide has shown you how easy and powerful fills can be when working with graphics (and text!). By mastering the `fill()` method, you can unlock endless possibilities for creating visually dynamic and engaging graphics in PixiJS. Have fun!
 
