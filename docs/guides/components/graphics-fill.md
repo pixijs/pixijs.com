@@ -11,7 +11,7 @@ The `fillStyles` discussed here can also be applied to Text objects!
 When creating a `Graphics` object, you can easily fill it with a color using the `fill()` method. Here's a simple example:
 
 ```ts
-let obj = new Graphics()
+const obj = new Graphics()
   .rect(0, 0, 200, 100) // Create a rectangle with dimensions 200x100
   .fill('red'); // Fill the rectangle with a red color
 ```
@@ -30,17 +30,17 @@ This creates a red rectangle. PixiJS supports multiple color formats for the `fi
 
 ```ts
 // Using a number
-let obj1 = new Graphics().rect(0, 0, 100, 100).fill(0xff0000);
+const obj1 = new Graphics().rect(0, 0, 100, 100).fill(0xff0000);
 
 // Using a hex string
-let obj2 = new Graphics().rect(0, 0, 100, 100).fill('#ff0000');
+const obj2 = new Graphics().rect(0, 0, 100, 100).fill('#ff0000');
 
 // Using an array
-let obj3 = new Graphics().rect(0, 0, 100, 100).fill([255, 0, 0]);
+const obj3 = new Graphics().rect(0, 0, 100, 100).fill([255, 0, 0]);
 
 // Using a Color object
-let color = new Color();
-let obj4 = new Graphics().rect(0, 0, 100, 100).fill(color);
+const color = new Color();
+const obj4 = new Graphics().rect(0, 0, 100, 100).fill(color);
 ```
 
 ## Fill with a Style Object
@@ -48,7 +48,7 @@ let obj4 = new Graphics().rect(0, 0, 100, 100).fill(color);
 For more advanced fills, you can use a `FillStyle` object. This allows for additional customization, such as setting opacity:
 
 ```ts
-let obj = new Graphics().rect(0, 0, 100, 100)
+const obj = new Graphics().rect(0, 0, 100, 100)
   .fill({
     color: 'red',
     alpha: 0.5, // 50% opacity
@@ -61,8 +61,8 @@ let obj = new Graphics().rect(0, 0, 100, 100)
 Filling shapes with textures is just as simple:
 
 ```ts
-let texture = await Assets.load('assets/image.png');
-let obj = new Graphics().rect(0, 0, 100, 100)
+const texture = await Assets.load('assets/image.png');
+const obj = new Graphics().rect(0, 0, 100, 100)
   .fill(texture);
 ```
 
@@ -77,7 +77,7 @@ Textures can be applied in two coordinate spaces:
 - **Global Space**: Set `textureSpace: 'global'` to make the texture position and scale relative to the Graphics object's coordinate system. Despite the name, this isn't truly "global" - the texture remains fixed relative to the Graphics object itself, maintaining its position even when the object moves or scales.
 
 ```ts
-let obj = new Graphics().rect(0, 0, 100, 100)
+const obj = new Graphics().rect(0, 0, 100, 100)
   .fill({
     texture: texture,
     textureSpace: 'global',
@@ -93,7 +93,7 @@ To modify texture coordinates, you can apply a transformation matrix, which is a
 ```ts
 const matrix = new Matrix().scale(0.5, 0.5);
 
-let obj = new Graphics().rect(0, 0, 100, 100)
+const obj = new Graphics().rect(0, 0, 100, 100)
   .fill({
     texture: texture,
     matrix: matrix, // scale the texture down by 2
@@ -107,10 +107,10 @@ let obj = new Graphics().rect(0, 0, 100, 100)
 1. **Sprite Sheets**: If using a texture from a sprite sheet, the entire source texture will be used. To use a specific frame, create a new texture:
 
 ```ts
-let spriteSheetTexture = Texture.from('assets/my-sprite-sheet.png');
-let newTexture = renderer.generateTexture(Sprite.from(spriteSheetTexture));
+const spriteSheetTexture = Texture.from('assets/my-sprite-sheet.png');
+const newTexture = renderer.generateTexture(Sprite.from(spriteSheetTexture));
 
-let obj = new Graphics().rect(0, 0, 100, 100)
+const obj = new Graphics().rect(0, 0, 100, 100)
   .fill(newTexture);
 ```
 
@@ -125,7 +125,7 @@ PixiJS supports both linear and radial gradients, which can be created using the
 Linear gradients create a smooth color transition along a straight line. Here is an example of a simple linear gradient:
 
 ```ts
-let gradient = new FillGradient({
+const gradient = new FillGradient({
   type: 'linear',
   colorStops: [
     { offset: 0, color: 'yellow' },
@@ -133,7 +133,7 @@ let gradient = new FillGradient({
   ],
 });
 
-let obj = new Graphics().rect(0, 0, 100, 100)
+const obj = new Graphics().rect(0, 0, 100, 100)
   .fill(gradient);
 ```
 
@@ -148,7 +148,7 @@ You can control the gradient direction with the following properties:
 Using these properties, you can create various gradient effects, such as horizontal, vertical, or diagonal transitions. For example, setting `x0` to `0`, `y0` to `0`, `x1` to `1`, and `y1` to `1` would result in a diagonal gradient from the top-left to the bottom-right of the shape.
 
 ```ts
-let diagonalGradient = new FillGradient({
+const diagonalGradient = new FillGradient({
   type: 'linear',
   x0: 0, y0: 0, x1: 1, y1: 1,
   colorStops: [
@@ -165,7 +165,7 @@ let diagonalGradient = new FillGradient({
 Radial gradients create a smooth color transition in a circular pattern. Unlike linear gradients, they blend colors from one circle to another. Here is an example of a simple radial gradient:
 
 ```ts
-let gradient = new FillGradient({
+const gradient = new FillGradient({
   type: 'radial',
   colorStops: [
     { offset: 0, color: 'yellow' },
@@ -173,7 +173,7 @@ let gradient = new FillGradient({
   ],
 });
 
-let obj = new Graphics().rect(0, 0, 100, 100)
+const obj = new Graphics().rect(0, 0, 100, 100)
   .fill(gradient);
 ```
 
@@ -192,7 +192,7 @@ You can control the gradient's shape and size using the following properties:
 By adjusting these properties, you can create a variety of effects, such as small, concentrated gradients or large, expansive ones. For example, setting a small `r0` and a larger `r1` will create a gradient that starts does not start to transition until the inner circle radius is reached.
 
 ```ts
-let radialGradient = new FillGradient({
+const radialGradient = new FillGradient({
   type: 'radial',
   x0: 0.5, y0: 0.5, r0: 0.25,
   x1: 0.5, y1: 0.5, r1: 0.5,
@@ -202,7 +202,7 @@ let radialGradient = new FillGradient({
   ],
 });
 
-let obj = new Graphics().rect(0, 0, 100, 100)
+const obj = new Graphics().rect(0, 0, 100, 100)
   .fill(gradient);
 ```
 
@@ -223,14 +223,14 @@ You can combine a texture or gradients with a color tint and alpha to achieve mo
 
 ```ts
 
-let gradient = new FillGradient({
+const gradient = new FillGradient({
     colorStops: [
         { offset: 0, color: 'blue' },
         { offset: 1, color: 'red' },
     ]
 });
 
-let obj = new Graphics().rect(0, 0, 100, 100)
+const obj = new Graphics().rect(0, 0, 100, 100)
   .fill({
     fill: gradient,
     color: 'yellow',
@@ -242,7 +242,7 @@ let obj = new Graphics().rect(0, 0, 100, 100)
 ![alt text](image-10.png)
 
 ```ts
-let obj = new Graphics().rect(0, 0, 100, 100)
+const obj = new Graphics().rect(0, 0, 100, 100)
   .fill({
     texture: texture,
     color: 'yellow',
