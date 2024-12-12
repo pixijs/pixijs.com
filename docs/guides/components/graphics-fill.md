@@ -73,23 +73,36 @@ const obj = new Graphics().rect(0, 0, 100, 100)
 Textures can be applied in two coordinate spaces:
 
 - **Local Space** (Default): The texture coordinates are mapped relative to the shape's dimensions and position. The texture coordinates use a normalized coordinate system where (0,0) is the top-left and (1,1) is the bottom-right of the shape, regardless of its actual pixel dimensions. For example, if you have a 300x200 pixel texture filling a 100x100 shape, the texture will be scaled to fit exactly within those 100x100 pixels. The texture's top-left corner (0,0) will align with the shape's top-left corner, and the texture's bottom-right corner (1,1) will align with the shape's bottom-right corner, stretching or compressing the texture as needed.
+  
+```ts
+const shapes = new PIXI.Graphics()
+    .rect(50,50,100, 100)
+    .circle(250,100,50)
+    .star(400,100,6,60,40)
+    .roundRect(500,50,100,100,10)
+    .fill({
+        texture,
+        textureSpace:'local' // default!
+    });
+```
 
 ![alt text](image-13.png)
 
 - **Global Space**: Set `textureSpace: 'global'` to make the texture position and scale relative to the Graphics object's coordinate system. Despite the name, this isn't truly "global" - the texture remains fixed relative to the Graphics object itself, maintaining its position even when the object moves or scales. See how the image goes across all the shapes (in the same graphics) below:
 
-![alt text](image-11.png)
-
-To set the texture space, you can use the `textureSpace` property on the `fill()` method:
 ```ts
-const obj = new Graphics().rect(0, 0, 100, 100)
-  .fill({
-    texture: texture,
-    textureSpace: 'global',
-  });
+const shapes = new PIXI.Graphics()
+    .rect(50,50,100, 100)
+    .circle(250,100,50)
+    .star(400,100,6,60,40)
+    .roundRect(500,50,100,100,10)
+    .fill({
+        texture,
+        textureSpace:'global'
+    });
 ```
 
-![alt text](image-3.png)
+![alt text](image-11.png)
 
 ### Using Matrices with Textures
 
