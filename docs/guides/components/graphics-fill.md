@@ -74,8 +74,13 @@ Textures can be applied in two coordinate spaces:
 
 - **Local Space** (Default): The texture coordinates are mapped relative to the shape's dimensions and position. The texture coordinates use a normalized coordinate system where (0,0) is the top-left and (1,1) is the bottom-right of the shape, regardless of its actual pixel dimensions. For example, if you have a 300x200 pixel texture filling a 100x100 shape, the texture will be scaled to fit exactly within those 100x100 pixels. The texture's top-left corner (0,0) will align with the shape's top-left corner, and the texture's bottom-right corner (1,1) will align with the shape's bottom-right corner, stretching or compressing the texture as needed.
 
+![alt text](image-13.png)
+
 - **Global Space**: Set `textureSpace: 'global'` to make the texture position and scale relative to the Graphics object's coordinate system. Despite the name, this isn't truly "global" - the texture remains fixed relative to the Graphics object itself, maintaining its position even when the object moves or scales.
 
+![alt text](image-12.png)
+
+To set the texture space, you can use the `textureSpace` property on the `fill()` method:
 ```ts
 const obj = new Graphics().rect(0, 0, 100, 100)
   .fill({
