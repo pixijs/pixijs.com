@@ -76,9 +76,9 @@ Textures can be applied in two coordinate spaces:
 
 ![alt text](image-13.png)
 
-- **Global Space**: Set `textureSpace: 'global'` to make the texture position and scale relative to the Graphics object's coordinate system. Despite the name, this isn't truly "global" - the texture remains fixed relative to the Graphics object itself, maintaining its position even when the object moves or scales.
+- **Global Space**: Set `textureSpace: 'global'` to make the texture position and scale relative to the Graphics object's coordinate system. Despite the name, this isn't truly "global" - the texture remains fixed relative to the Graphics object itself, maintaining its position even when the object moves or scales. See how the image goes across all the shapes (in the same graphics) below:
 
-![alt text](image-12.png)
+![alt text](image-11.png)
 
 To set the texture space, you can use the `textureSpace` property on the `fill()` method:
 ```ts
