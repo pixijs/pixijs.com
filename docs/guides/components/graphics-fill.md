@@ -132,7 +132,7 @@ const obj = new Graphics().rect(0, 0, 100, 100)
   .fill(newTexture);
 ```
 
-2. **Power of Two Textures**: Textures should be power-of-two dimensions for proper tiling in WebGL.
+2. **Power of Two Textures**: Textures should be power-of-two dimensions for proper tiling in WebGL1 (WebGL2 and WebGPU are fine).
 
 ## Fill with Gradients
 
