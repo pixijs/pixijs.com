@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([[8654],{33777:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/asset-management","page":1,"postsPerPage":1,"totalPages":1,"totalCount":1,"blogDescription":"Latest news from the PixiJS team","blogTitle":"PixiJS News"}')}}]);
