@@ -133,6 +133,8 @@ export const useSandpackConfiguration = ({
         extraPackages,
     });
 
+    (dependencies as any).three = '^0.171.0';
+
     // TODO: adding code here is only necessary because of user edited code, otherwise we
     // could flip between examples easily, investigate why it bugs out during editing
     const key = `${dependenciesKey}-${code}-${Object.values(extraFiles ?? {}).join('-')}`;
