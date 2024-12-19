@@ -46,7 +46,11 @@ const sidebars = {
                     type: 'category',
                     label: 'Graphics',
                     collapsed: true,
-                    items: ['guides/components/graphics', 'guides/components/graphics-pixel-line'],
+                    items: [
+                        'guides/components/graphics',
+                        'guides/components/graphics-pixel-line',
+                        'guides/components/graphics-fill',
+                    ],
                 },
                 'guides/components/interaction',
                 'guides/components/sprites',
