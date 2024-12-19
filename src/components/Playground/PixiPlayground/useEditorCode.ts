@@ -1,10 +1,11 @@
 import { useCallback, useMemo } from 'react';
-import type { OptionGroup } from '@site/src/components/Select';
-import type { SetURLStateType, URLSaveState } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
-import type { ExampleSourceEntry } from '@site/src/examples';
 import { getExampleEntry, getExampleOptions } from '@site/src/examples';
+
 import type { IVersion } from './usePixiVersions';
 import type { SandpackState } from '@codesandbox/sandpack-react';
+import type { SetURLStateType, URLSaveState } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
+import type { OptionGroup } from '@site/src/components/Select';
+import type { ExampleSourceEntry } from '@site/src/examples';
 
 export const defaultExampleId = 'sprite.basic';
 
@@ -56,16 +57,19 @@ export const useCodeExamples = ({ urlState, selectedOptionId, setURLState, pixiV
 
         const extraFiles = Object.entries(files)
             .filter(([key]) => (/^\/src\/(?!index\.js$|styles\.css$)/).test(key))
-            .reduce((acc, [key, value]) =>
-            {
-                let suffix = '';
+            .reduce(
+                (acc, [key, value]) =>
+                {
+                    let suffix = '';
 
-                if (activeFile === key) suffix = '*';
-                if (!visibleFiles.includes(key)) suffix = '!';
-                acc[key.substring(1) + suffix] = value.code;
+                    if (activeFile === key) suffix = '*';
+                    if (!visibleFiles.includes(key)) suffix = '!';
+                    acc[key.substring(1) + suffix] = value.code;
 
-                return acc;
-            }, {} as Record<string, string>);
+                    return acc;
+                },
+                {} as Record<string, string>,
+            );
 
         return {
             indexCode: files['/src/index.js'].code,

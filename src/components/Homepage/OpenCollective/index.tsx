@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import styles from './index.module.scss';
 import { useInView } from 'react-intersection-observer';
+import styles from './index.module.scss';
 
 interface OpenCollectiveData {
     MemberId: number;

@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, Graphics, Polygon, Text, TextStyle } from 'pixi.js';
+import { Application, Assets, Graphics, Polygon, Sprite, Text, TextStyle } from 'pixi.js';
 
 (async () =>
 {

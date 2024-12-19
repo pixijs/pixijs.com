@@ -1,6 +1,5 @@
-import '@esotericsoftware/spine-pixi-v8';
-
 import { Application, Assets } from 'pixi.js';
+import '@esotericsoftware/spine-pixi-v8';
 
 // Asynchronous IIFE
 (async () =>

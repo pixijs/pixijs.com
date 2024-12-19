@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, RenderTexture } from 'pixi.js';
+import { Application, Assets, Container, RenderTexture, Sprite } from 'pixi.js';
 
 (async () =>
 {

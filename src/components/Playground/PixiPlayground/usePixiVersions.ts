@@ -1,5 +1,5 @@
-import versions from '@site/pixi-versions.json';
 import { gt } from 'semver';
+import versions from '@site/pixi-versions.json';
 
 export type IVersion = {
     version: string;

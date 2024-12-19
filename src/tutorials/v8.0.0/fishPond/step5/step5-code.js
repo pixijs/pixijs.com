@@ -1,8 +1,8 @@
 import { Application, Assets } from 'pixi.js';
 import { addBackground } from './addBackground';
+import { addDisplacementEffect } from './addDisplacementEffect';
 import { addFishes, animateFishes } from './addFishes';
 import { addWaterOverlay, animateWaterOverlay } from './addWaterOverlay';
-import { addDisplacementEffect } from './addDisplacementEffect';
 
 // Create a PixiJS application.
 const app = new Application();
