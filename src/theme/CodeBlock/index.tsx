@@ -1,9 +1,7 @@
-import useIsBrowser from '@docusaurus/useIsBrowser';
-
-import CodeBlock from '@theme-original/CodeBlock';
-import PixiPlayground from '@site/src/components/Playground/PixiPlayground';
-
 import styles from './index.module.css';
+import useIsBrowser from '@docusaurus/useIsBrowser';
+import PixiPlayground from '@site/src/components/Playground/PixiPlayground';
+import CodeBlock from '@theme-original/CodeBlock';
 
 type CodeBlockWrapperProps = { [key: string]: any } & {
     playground?: boolean;

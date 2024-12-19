@@ -1,4 +1,4 @@
-import { Application, Shader, Mesh, Geometry } from 'pixi.js';
+import { Application, Geometry, Mesh, Shader } from 'pixi.js';
 
 (async () =>
 {

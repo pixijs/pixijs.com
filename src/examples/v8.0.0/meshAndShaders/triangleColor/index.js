@@ -1,6 +1,6 @@
 import { Application, Geometry, Mesh, Shader } from 'pixi.js';
-import vertex from './triangleColor.vert';
 import fragment from './triangleColor.frag';
+import vertex from './triangleColor.vert';
 import source from './triangleColor.wgsl';
 
 (async () =>

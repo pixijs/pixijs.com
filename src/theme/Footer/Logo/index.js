@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
 import clsx from 'clsx';
+import React from 'react';
+import styles from './styles.module.css';
 import Link from '@docusaurus/Link';
 import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
 import ThemedImage from '@theme/ThemedImage';
-import styles from './styles.module.css';
 
 function LogoImage({ logo })
 {

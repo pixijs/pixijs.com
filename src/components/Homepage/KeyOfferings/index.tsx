@@ -1,7 +1,7 @@
-import styles from './index.module.scss';
+import { useInView } from 'react-intersection-observer';
 import content from './content.json';
 import graphics from './graphics.json';
-import { useInView } from 'react-intersection-observer';
+import styles from './index.module.scss';
 
 const Offerings = (): JSX.Element =>
 {

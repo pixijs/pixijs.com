@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, Text, ColorMatrixFilter } from 'pixi.js';
+import { Application, Assets, ColorMatrixFilter, Container, Sprite, Text } from 'pixi.js';
 
 (async () =>
 {

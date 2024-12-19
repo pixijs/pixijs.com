@@ -2,11 +2,7 @@
 title: Introducing the PixiJS Universe!
 description: PixiJS v2 Website Brief Description
 slug: pixi-universe
-authors:
-  - name: Zyie
-    title: PixiJS Maintainer
-    url: https://github.com/zyie
-    image_url: https://github.com/zyie.png
+authors: zyie
 tags: [PixiJS, PixiJS Universe]
 hide_table_of_contents: true
 keywords: ['keyword', 'for', 'search', 'engines']

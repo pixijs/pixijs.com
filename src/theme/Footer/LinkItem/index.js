@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import isInternalUrl from '@docusaurus/isInternalUrl';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import isInternalUrl from '@docusaurus/isInternalUrl';
 import IconExternalLink from '@theme/Icon/ExternalLink';
 
 export default function FooterLinkItem({ item })

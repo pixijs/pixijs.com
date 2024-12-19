@@ -1,4 +1,4 @@
-import { Application, Assets, Text, Filter, WRAP_MODES } from 'js';
+import { Application, Assets, Filter, Text, WRAP_MODES } from 'js';
 
 /**
  * Please note that this is not the most optimal way of doing pure shader generated rendering and should be used when the

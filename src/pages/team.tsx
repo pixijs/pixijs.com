@@ -1,8 +1,7 @@
-import Layout from '@theme/Layout';
-import type { MemberData } from '../components/MemberCard';
-import MemberCard from '../components/MemberCard';
+import MemberCard, { type MemberData } from '../components/MemberCard';
 import team from './team.json';
 import styles from './team.module.scss';
+import Layout from '@theme/Layout';
 
 export default function Team(): JSX.Element
 {

@@ -1,4 +1,3 @@
-import type { TutorialStep } from '../..';
 import content1 from './step1/step1-content.md';
 import content2 from './step2/step2-content.md';
 import content3 from './step3/step3-content.md';
@@ -10,32 +9,34 @@ import content8 from './step8/step8-content.md';
 import content9 from './step9/step9-content.md';
 import content10 from './step10/step10-content.md';
 import code1 from '!!raw-loader!./step1/step1-code';
-import code2 from '!!raw-loader!./step2/step2-code';
-import code3 from '!!raw-loader!./step3/step3-code';
-import code4 from '!!raw-loader!./step4/step4-code';
-import code5 from '!!raw-loader!./step5/step5-code';
-import code6 from '!!raw-loader!./step6/step6-code';
-import code7 from '!!raw-loader!./step7/step7-code';
-import code8 from '!!raw-loader!./step8/step8-code';
-import code9 from '!!raw-loader!./step9/step9-code';
-import code10 from '!!raw-loader!./step10/step10-code';
 import addStars from '!!raw-loader!./step2/addStars';
 import addStarsCompleted from '!!raw-loader!./step2/addStars-completed';
-import moonSvg from '!!raw-loader!./step3/moon.svg';
+import code2 from '!!raw-loader!./step2/step2-code';
 import addMoon from '!!raw-loader!./step3/addMoon';
 import addMoonCompleted from '!!raw-loader!./step3/addMoon-completed';
+import moonSvg from '!!raw-loader!./step3/moon.svg';
+import code3 from '!!raw-loader!./step3/step3-code';
 import addMountains from '!!raw-loader!./step4/addMountains';
 import addMountainsCompleted from '!!raw-loader!./step4/addMountains-completed';
+import code4 from '!!raw-loader!./step4/step4-code';
 import addTrees from '!!raw-loader!./step5/addTrees';
 import addTreesCompleted from '!!raw-loader!./step5/addTrees-completed';
+import code5 from '!!raw-loader!./step5/step5-code';
 import addGround from '!!raw-loader!./step6/addGround';
 import addGroundCompleted from '!!raw-loader!./step6/addGround-completed';
+import code6 from '!!raw-loader!./step6/step6-code';
 import addTrain from '!!raw-loader!./step7/addTrain';
 import addTrainCompleted from '!!raw-loader!./step7/addTrain-completed';
+import code7 from '!!raw-loader!./step7/step7-code';
 import addTrain2 from '!!raw-loader!./step8/addTrain';
 import addTrainCompleted2 from '!!raw-loader!./step8/addTrain-completed';
+import code8 from '!!raw-loader!./step8/step8-code';
 import addSmokes from '!!raw-loader!./step9/addSmokes';
 import addSmokesCompleted from '!!raw-loader!./step9/addSmokes-completed';
+import code9 from '!!raw-loader!./step9/step9-code';
+import code10 from '!!raw-loader!./step10/step10-code';
+
+import type { TutorialStep } from '../..';
 
 export const chooChooTrainTutorialSteps: TutorialStep[] = [
     {

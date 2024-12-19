@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import styles from './index.module.scss';
-import Link from '@docusaurus/Link';
-import BrowserOnly from '@docusaurus/BrowserOnly';
 import PixiPlayground from '../Playground/PixiPlayground';
-import type { IVersion } from '../Playground/PixiPlayground/usePixiVersions';
-import type { TutorialStep } from '@site/src/tutorials';
-import { getTutorialEntry } from '@site/src/tutorials';
 import { extractSource } from '../Playground/PixiPlayground/useEditorCode';
+import styles from './index.module.scss';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Link from '@docusaurus/Link';
+import { type TutorialStep, getTutorialEntry } from '@site/src/tutorials';
+
+import type { IVersion } from '../Playground/PixiPlayground/usePixiVersions';
 
 function BrowserTutorial({
     data,
