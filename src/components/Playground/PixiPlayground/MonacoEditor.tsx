@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { type SandpackState, FileTabs, SandpackStack, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
 import { useColorMode } from '@docusaurus/theme-common';
-import Editor from '@monaco-editor/react';
+import Editor, { useMonaco } from '@monaco-editor/react';
 
 import type { editor } from 'monaco-editor';
+import type { Monaco } from '@monaco-editor/react';
 
 export type CodeChangeCallbackType = (code: string | undefined, state: SandpackState) => void;
 
@@ -76,7 +77,7 @@ export default function MonacoEditor({ useTabs, onChange }: MonacoEditorProps)
         switch (extension)
         {
             case 'js':
-                return 'javascript';
+                return 'typescript';
             case 'ts':
                 return 'typescript';
             case 'html':
@@ -91,6 +92,60 @@ export default function MonacoEditor({ useTabs, onChange }: MonacoEditorProps)
     };
 
     const language = getLanguage(sandpack.activeFile);
+
+    const monaco = useMonaco();
+
+    function handleEditorWillMount(monaco: Monaco, version: string)
+    {
+        const urlCdn = `https://cdn.jsdelivr.net/npm/pixi.js@${version}/dist/pixi.js.d.ts`;
+
+        fetch(urlCdn)
+            .then((response) => response.text())
+            .then((pixiTypes) =>
+            {
+                monaco.languages.typescript.typescriptDefaults.addExtraLib(
+                    `declare module 'pixi.js' { ${pixiTypes} }`,
+                    `file:///node_modules/pixi.js/index.d.ts`,
+                );
+                console.log('Added pixi.js types to monaco:', pixiTypes);
+                monaco.languages.typescript.typescriptDefaults.addExtraLib(
+                    `declare module '*.wgsl'
+    {
+        const shader: 'string';
+
+        export default shader;
+    }
+
+    declare module '*.vert'
+    {
+        const shader: 'string';
+
+        export default shader;
+    }
+
+    declare module '*.frag'
+    {
+        const shader: 'string';
+
+        export default shader;
+    }`,
+                );
+            })
+            .catch((error) =>
+            {
+                console.error('Failed to fetch pixi.js types:', error);
+            });
+    }
+
+    useEffect(() =>
+    {
+        const version = '8.6.6'; // specify the version you need
+
+        if (monaco)
+        {
+            handleEditorWillMount(monaco, version);
+        }
+    }, [monaco]);
 
     return (
         <SandpackStack style={{ height: '100%', margin: 0 }}>
