@@ -20,7 +20,7 @@
         "types": "tsc --noEmit",
         "write-heading-ids": "docusaurus write-heading-ids",
         "write-translations": "docusaurus write-translations",
-        "generate-content": "npm run generate-tutorial-docs",
+        "generate-content": "",
         "generate-tutorial-docs": "node ./scripts/generate-tutorial-docs.js",
         "update-version": "node ./scripts/update-version.js",
         "prepare": "husky install"

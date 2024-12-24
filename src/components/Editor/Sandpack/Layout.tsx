@@ -7,10 +7,13 @@ import { SandpackConsole, SandpackLayout, SandpackPreview, SandpackStack } from 
 import type { EditorProps } from '../Editor';
 
 export function EditorLayout(
-    props: Required<Pick<EditorProps, 'showCode' | 'showPreview' | 'showConsole' | 'fontSize' | 'fullSizePreview'>>,
+    props: Required<Pick<EditorProps, 'showCode' | 'showPreview' | 'showConsole' | 'fontSize' | 'fullSizePreview'>> & {
+        pixiVersion: string;
+        handleEditorCodeChanged?: (nextSourceCode: string | undefined) => void;
+    },
 )
 {
-    const { showCode, showPreview, showConsole, fontSize, fullSizePreview } = props;
+    const { showCode, showPreview, showConsole, fontSize, fullSizePreview, pixiVersion } = props;
     const [consoleVisibility, setConsoleVisibility] = useState(showConsole);
     const [codeVisibility, setCodeVisibility] = useState(showCode);
 
@@ -21,8 +24,10 @@ export function EditorLayout(
         </>
     );
 
+    console.log(showPreview);
+
     return (
-        <SandpackLayout style={{ height: '100%' }}>
+        <SandpackLayout style={{ height: '100%', overflow: 'auto' }}>
             <MonacoView
                 fontSize={fontSize}
                 style={{
@@ -34,6 +39,8 @@ export function EditorLayout(
                     width: '100%',
                     overflow: 'hidden',
                 }}
+                pixiVersion={pixiVersion}
+                handleEditorCodeChanged={props.handleEditorCodeChanged}
             />
             {showPreview && (
                 <SandpackStack style={{ height: '100%', width: '100%' }}>

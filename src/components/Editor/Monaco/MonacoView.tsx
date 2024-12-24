@@ -9,8 +9,10 @@ import type { CSSProperties } from 'react';
 interface MonacoViewProps {
     fontSize?: number;
     style?: CSSProperties;
+    pixiVersion: string;
+    handleEditorCodeChanged?: (nextSourceCode: string | undefined) => void;
 }
-export function MonacoView({ fontSize = 12, style }: MonacoViewProps)
+export function MonacoView({ fontSize = 12, style, pixiVersion, handleEditorCodeChanged }: MonacoViewProps)
 {
     const { code, updateCode } = useActiveCode();
     const { sandpack } = useSandpack();
@@ -18,7 +20,7 @@ export function MonacoView({ fontSize = 12, style }: MonacoViewProps)
     const language = useFileLanguage(sandpack.activeFile);
     const { colorMode } = useColorMode();
 
-    usePixiMonaco(monaco);
+    usePixiMonaco(monaco, pixiVersion);
 
     return (
         <SandpackStack style={{ height: '100%', margin: 0, ...style }}>
@@ -31,7 +33,11 @@ export function MonacoView({ fontSize = 12, style }: MonacoViewProps)
                     theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
                     key={sandpack.activeFile}
                     defaultValue={code}
-                    onChange={(value) => updateCode(value || '')}
+                    onChange={(value) =>
+                    {
+                        updateCode(value || '');
+                        handleEditorCodeChanged?.(value);
+                    }}
                     options={{
                         minimap: { enabled: false },
                         scrollBeyondLastLine: false,

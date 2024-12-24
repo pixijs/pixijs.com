@@ -17,6 +17,7 @@ export interface EditorProps {
     dependencies?: Record<string, string>;
     files?: Record<string, { code: string; hidden?: boolean; active?: boolean } | string>;
     fontSize?: number;
+    handleEditorCodeChanged?: (nextSourceCode: string | undefined) => void;
 }
 
 export function Editor({
@@ -29,6 +30,7 @@ export function Editor({
     dependencies = { 'pixi.js': 'latest' },
     files = { 'index.js': '// Your code here' },
     fontSize = 12,
+    handleEditorCodeChanged,
 }: EditorProps)
 {
     const { colorMode } = useColorMode();
@@ -53,12 +55,22 @@ export function Editor({
             theme={colorMode === 'dark' ? dracula : githubLight}
             files={filesState}
             customSetup={{ dependencies, entry: 'index.html' }}
-            style={{ height, width, margin: '0 auto' }}
+            style={{ height, width, margin: '0 auto', maxWidth: '100%' }}
             options={{
                 recompileDelay: 500,
             }}
         >
-            <EditorLayout {...{ showCode, showPreview, showConsole, fontSize, fullSizePreview }} />
+            <EditorLayout
+                {...{
+                    handleEditorCodeChanged,
+                    showCode,
+                    showPreview,
+                    showConsole,
+                    fontSize,
+                    fullSizePreview,
+                    pixiVersion: dependencies['pixi.js'],
+                }}
+            />
         </SandpackProvider>
     );
 }
