@@ -1,8 +1,6 @@
 import { useCallback, useMemo } from 'react';
-// @ts-expect-error - Ignore TS error
-import V7IndexFile from '!!raw-loader!@site/src/examples/v7.0.0/basic/container';
-// @ts-expect-error - Ignore TS error
-import V8IndexFile from '!!raw-loader!@site/src/examples/v8.0.0/container';
+import V7IndexFile from '!!raw-loader!../v7.0.0/container';
+import V8IndexFile from '!!raw-loader!../v8.0.0/container';
 
 import type { IVersion } from './usePixiVersions';
 import type { SetURLStateType } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';

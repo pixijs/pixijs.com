@@ -8,10 +8,8 @@ import { githubLight } from '@codesandbox/sandpack-themes';
 import { useColorMode } from '@docusaurus/theme-common';
 
 export interface EditorProps {
-    showCode?: boolean;
-    showPreview?: boolean;
+    viewType?: 'both' | 'editor' | 'preview';
     showConsole?: boolean;
-    fullSizePreview?: boolean;
     width?: number | string;
     height?: number | string;
     dependencies?: Record<string, string>;
@@ -21,10 +19,8 @@ export interface EditorProps {
 }
 
 export function Editor({
-    showCode = true,
-    showPreview = true,
+    viewType = 'both',
     showConsole = false,
-    fullSizePreview = false,
     width = '100%',
     height = '100%',
     dependencies = { 'pixi.js': 'latest' },
@@ -63,11 +59,9 @@ export function Editor({
             <EditorLayout
                 {...{
                     handleEditorCodeChanged,
-                    showCode,
-                    showPreview,
+                    viewType,
                     showConsole,
                     fontSize,
-                    fullSizePreview,
                     pixiVersion: dependencies['pixi.js'],
                 }}
             />

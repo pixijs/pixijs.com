@@ -1,0 +1,12 @@
+---
+hide_table_of_contents: true
+hide_edit_this_page: true
+sidebar_position: 5
+custom_edit_url: null
+title: Logger
+---
+import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+import IndexFile from '!!raw-loader!./logger';
+import version from '../../pixi-version.json';
+
+<ExampleEditor files={{"index.js": IndexFile}} dependencies={{"pixi.js": version.npm}} />

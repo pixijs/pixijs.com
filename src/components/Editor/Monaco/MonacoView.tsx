@@ -25,7 +25,7 @@ export function MonacoView({ fontSize = 12, style, pixiVersion, handleEditorCode
     return (
         <SandpackStack style={{ height: '100%', margin: 0, ...style }}>
             <FileTabs />
-            <div style={{ flex: 1, paddingTop: 8, background: '#1e1e1e' }}>
+            <div style={{ flex: 1, paddingTop: 8, background: colorMode === 'dark' ? '#1e1e1e' : '#FFFFFE' }}>
                 <Editor
                     width="100%"
                     height="100%"

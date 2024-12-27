@@ -14,7 +14,6 @@
 !/docs/examples/index.md
 /versioned_docs/version-*/tutorials/*
 !/versioned_docs/version-*/tutorials/index.md
-/versioned_docs/version-*/examples/*
 !/versioned_docs/version-*/examples/index.md
 
 # Misc

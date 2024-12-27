@@ -1,54 +1,67 @@
 import { useState } from 'react';
 import { MonacoView } from '../Monaco/MonacoView';
 import { ConsoleCounterButton } from './ConsoleCounterButton';
-import { ToggleCodeButton } from './ToggleCodeButton';
+import { ToggleGroup } from './ToggleGroup';
 import { SandpackConsole, SandpackLayout, SandpackPreview, SandpackStack } from '@codesandbox/sandpack-react';
 
 import type { EditorProps } from '../Editor';
 
 export function EditorLayout(
-    props: Required<Pick<EditorProps, 'showCode' | 'showPreview' | 'showConsole' | 'fontSize' | 'fullSizePreview'>> & {
+    props: Required<Pick<EditorProps, 'viewType' | 'showConsole' | 'fontSize'>> & {
         pixiVersion: string;
         handleEditorCodeChanged?: (nextSourceCode: string | undefined) => void;
     },
 )
 {
-    const { showCode, showPreview, showConsole, fontSize, fullSizePreview, pixiVersion } = props;
+    const { viewType, showConsole, fontSize, pixiVersion } = props;
     const [consoleVisibility, setConsoleVisibility] = useState(showConsole);
-    const [codeVisibility, setCodeVisibility] = useState(showCode);
+    const [viewSelection, setViewSelection] = useState<string>(viewType);
 
     const actionsChildren = (
         <>
-            <ToggleCodeButton onClick={() => setCodeVisibility((prev) => !prev)} visible={codeVisibility} />
+            {/* <ToggleCodeButton onClick={() => setCodeVisibility((prev) => !prev)} visible={codeVisibility} /> */}
             <ConsoleCounterButton onClick={() => setConsoleVisibility((prev) => !prev)} />
         </>
     );
 
-    console.log(showPreview);
+    const handleSelectionChange = (selected: string) =>
+    {
+        setViewSelection(selected);
+    };
+
+    console.log('viewSelection', viewSelection);
 
     return (
-        <SandpackLayout style={{ height: '100%', overflow: 'auto' }}>
-            <MonacoView
-                fontSize={fontSize}
+        <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
+            <SandpackLayout
                 style={{
-                    // eslint-disable-next-line no-nested-ternary
-                    flexGrow: codeVisibility ? (fullSizePreview ? 4 : 1) : 0,
-                    // eslint-disable-next-line no-nested-ternary
-                    flexShrink: codeVisibility ? (fullSizePreview ? 4 : 1) : 0,
-                    flexBasis: 0,
-                    width: '100%',
+                    height: '100%',
                     overflow: 'hidden',
+                    borderBottomLeftRadius: 0,
+                    borderBottomRightRadius: 0,
+                    flexWrap: 'nowrap',
+                    // TODO: change to column when screen is small
+                    // flexDirection: 'column'
                 }}
-                pixiVersion={pixiVersion}
-                handleEditorCodeChanged={props.handleEditorCodeChanged}
-            />
-            {showPreview && (
+            >
+                <MonacoView
+                    fontSize={fontSize}
+                    style={{
+                        flexGrow: viewSelection !== 'preview' ? 1 : 0,
+                        flexShrink: viewSelection !== 'preview' ? 1 : 0,
+                        flexBasis: viewSelection === 'editor' ? '100%' : 0,
+                        width: '100%',
+                        overflow: 'hidden',
+                    }}
+                    pixiVersion={pixiVersion}
+                    handleEditorCodeChanged={props.handleEditorCodeChanged}
+                />
                 <SandpackStack style={{ height: '100%', width: '100%' }}>
                     <SandpackPreview
                         style={{
-                            flexGrow: 100,
-                            flexShrink: 100,
-                            flexBasis: 0,
+                            flexGrow: viewSelection !== 'editor' ? 100 : 0,
+                            flexShrink: viewSelection !== 'editor' ? 100 : 0,
+                            flexBasis: viewSelection !== 'editor' ? '100%' : 0,
                             overflow: 'hidden',
                         }}
                         showOpenInCodeSandbox={false}
@@ -59,7 +72,7 @@ export function EditorLayout(
                             style={{
                                 flexGrow: consoleVisibility ? 35 : 0,
                                 flexShrink: consoleVisibility ? 35 : 0,
-                                flexBasis: 0,
+                                flexBasis: consoleVisibility ? '35%' : 0,
                                 width: '100%',
                                 overflow: 'hidden',
                             }}
@@ -68,7 +81,8 @@ export function EditorLayout(
                         </div>
                     )}
                 </SandpackStack>
-            )}
-        </SandpackLayout>
+            </SandpackLayout>
+            <ToggleGroup onSelectionChange={handleSelectionChange} defaultSelection={viewSelection} />
+        </div>
     );
 }
