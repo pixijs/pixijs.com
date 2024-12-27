@@ -1,0 +1,17 @@
+---
+hide_table_of_contents: true
+hide_edit_this_page: true
+sidebar_position: 9
+custom_edit_url: null
+title: Shader Toy Mesh
+---
+import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+import IndexFile from '!!raw-loader!./shader-toy-mesh/index';
+import shaderToyMeshVert from '!!raw-loader!./shader-toy-mesh/shaderToy.vert';
+import shaderToyMeshFrag from '!!raw-loader!./shader-toy-mesh/shaderToy.frag';
+
+<ExampleEditor files={{
+    "index.js": IndexFile,
+    'shaderToy.vert': shaderToyMeshVert,
+    'shaderToy.frag': shaderToyMeshFrag,
+}} />

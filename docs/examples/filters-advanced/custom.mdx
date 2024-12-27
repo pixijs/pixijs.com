@@ -1,0 +1,17 @@
+---
+hide_table_of_contents: true
+hide_edit_this_page: true
+sidebar_position: 1
+custom_edit_url: null
+title: Custom
+---
+import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+import IndexFile from '!!raw-loader!./custom/index';
+import customVert from '!!raw-loader!./custom/custom.vert';
+import customFrag from '!!raw-loader!./custom/custom.frag';
+
+<ExampleEditor files={{
+    "index.js": IndexFile,
+    'custom.vert': customVert,
+    'custom.frag': customFrag,
+}} />

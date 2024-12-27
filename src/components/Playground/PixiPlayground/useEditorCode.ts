@@ -1,139 +1,51 @@
 import { useCallback, useMemo } from 'react';
-import { getExampleEntry, getExampleOptions } from '@site/src/examples';
+import V7IndexFile from '!!raw-loader!../v7.0.0/container';
+import V8IndexFile from '!!raw-loader!../v8.0.0/container';
 
 import type { IVersion } from './usePixiVersions';
-import type { SandpackState } from '@codesandbox/sandpack-react';
-import type { SetURLStateType, URLSaveState } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
-import type { OptionGroup } from '@site/src/components/Select';
-import type { ExampleSourceEntry } from '@site/src/examples';
+import type { SetURLStateType } from '@site/src/components/Playground/PixiPlayground/usePlaygroundURLState';
 
 export const defaultExampleId = 'sprite.basic';
 
 type UseCodeExamplesParams = {
-    urlState: URLSaveState | undefined;
-    selectedOptionId: string;
+    urlState: string | undefined;
     setURLState: SetURLStateType;
     pixiVersion: IVersion;
 };
 
-export const useCodeExamples = ({ urlState, selectedOptionId, setURLState, pixiVersion }: UseCodeExamplesParams) =>
+export const useCodeExamples = ({ urlState, setURLState, pixiVersion }: UseCodeExamplesParams) =>
 {
-    const version = pixiVersion.version;
-    const defaultExampleOptions = getExampleOptions(version);
+    const version = pixiVersion.versionLabel;
     const hasUrlHashed = Boolean(urlState);
 
-    const exampleEntry = useMemo<ExampleSourceEntry | undefined>(
-        () => getExampleEntry(version, selectedOptionId),
-        [version, selectedOptionId],
-    );
-    const { indexCode, extraFiles, activeFile, usesWebWorkerLibrary } = useMemo<{
+    const { indexCode } = useMemo<{
         indexCode: string;
-        extraFiles?: Record<string, string>;
-        activeFile?: string;
-        usesWebWorkerLibrary: boolean;
     }>(() =>
     {
         if (!urlState)
         {
-            const { indexCode, extraFiles } = extractSource(exampleEntry?.source ?? '');
+            // versionLabel
+            const indexCode = version === 'v7.x' ? V7IndexFile : V8IndexFile;
 
             return {
                 indexCode,
-                extraFiles,
-                usesWebWorkerLibrary: !!exampleEntry?.usesWebWorkerLibrary,
             };
         }
-
-        const { files, visibleFiles, activeFile } = urlState;
-
-        if (!visibleFiles.length)
-        {
-            return {
-                indexCode: files['/src/index.js'].code,
-                activeFile,
-                usesWebWorkerLibrary: false,
-            };
-        }
-
-        const extraFiles = Object.entries(files)
-            .filter(([key]) => (/^\/src\/(?!index\.js$|styles\.css$)/).test(key))
-            .reduce(
-                (acc, [key, value]) =>
-                {
-                    let suffix = '';
-
-                    if (activeFile === key) suffix = '*';
-                    if (!visibleFiles.includes(key)) suffix = '!';
-                    acc[key.substring(1) + suffix] = value.code;
-
-                    return acc;
-                },
-                {} as Record<string, string>,
-            );
 
         return {
-            indexCode: files['/src/index.js'].code,
-            extraFiles,
-            usesWebWorkerLibrary: false,
+            indexCode: urlState,
         };
-    }, [urlState, exampleEntry]);
-
-    const exampleOptions = useMemo<OptionGroup[]>(
-        () =>
-            // Slightly hacky solution if user edits code, changes the example select to
-            // a custom option, so the Select still works as expected. It would probably
-            // be nicer to store the last loaded example somehow and put an edited star
-            // against it or something.
-            // Only show custom select option when user has edited code
-            (!hasUrlHashed
-                ? defaultExampleOptions
-                : defaultExampleOptions.concat({
-                    label: 'Custom Code',
-                    options: [
-                        {
-                            label: 'User Edited Code',
-                            value: 'custom',
-                        },
-                    ],
-                })),
-        [defaultExampleOptions, hasUrlHashed],
-    );
-
-    const handleOptionSelected = useCallback(
-        (nextSelectedId: string) =>
-        {
-            if (nextSelectedId === selectedOptionId)
-            {
-                return;
-            }
-
-            setURLState(
-                {
-                    state: undefined,
-                    exampleId: nextSelectedId,
-                },
-                true,
-                true,
-            );
-        },
-        [selectedOptionId, setURLState],
-    );
+    }, [version, urlState]);
 
     const handleEditorCodeChanged = useCallback(
-        (nextSourceCode: string | undefined, state: SandpackState) =>
+        (nextSourceCode: string | undefined) =>
         {
             if (!nextSourceCode) return;
-
-            const { files, visibleFiles, activeFile } = state;
-
-            // Hacky solution to get the active file's code up-to-date
-            files[activeFile].code = nextSourceCode;
 
             // pushState only when editing code for the first time
             setURLState(
                 {
-                    state: { files, visibleFiles, activeFile },
-                    exampleId: 'custom',
+                    state: nextSourceCode,
                 },
                 !hasUrlHashed,
             );
@@ -143,11 +55,6 @@ export const useCodeExamples = ({ urlState, selectedOptionId, setURLState, pixiV
 
     return {
         indexCode,
-        extraFiles,
-        activeFile,
-        usesWebWorkerLibrary,
-        exampleOptions,
-        handleOptionSelected,
         handleEditorCodeChanged,
     };
 };
