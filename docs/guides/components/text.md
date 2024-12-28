@@ -30,7 +30,7 @@ There are a lot of text style options available (see [TextStyle](https://pixijs.
 
 **Utilities**: Add `padding` or `trim` extra space to deal with funky font families if needed.
 
-To interactively test out feature of Text Style, [check out this tool](https://pixijs.io/pixi-text-style/).
+To interactively test out feature of Text Style, [check out this tool](https://text-style.pixijs.io/).
 
 ## Loading and Using Fonts
 
