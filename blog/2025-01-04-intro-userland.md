@@ -33,7 +33,7 @@ Userland is an ideal place for projects that could eventually be part of the mai
 
 ### Out-of-Scope Projects
 
-These projects fall just outside the main goals of PixiJS. They are useful but may be more specialized or opinionated, not fitting the broader PixiJS community. Examples include:
+These projects fall just outside the main goals of PixiJS. They are useful but may be more specialized or opinionated, not fitting for the broader PixiJS community. Examples include:
 
 * [Tilemap Kit](https://github.com/pixijs-userland/tilemap)
 * [Particle Emitter](https://github.com/pixijs-userland/particle-emitter)
