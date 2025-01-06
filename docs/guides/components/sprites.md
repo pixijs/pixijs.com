@@ -16,7 +16,7 @@ In our [Container guide](./containers), we learned about the Container class and
 
 Alpha is a standard display object property.  You can use it to fade sprites into the scene by animating each sprite's alpha from 0.0 to 1.0 over a period of time.
 
-Tinting allows you multiply the color value of every pixel by a single color.  For example, if you had a dungeon game, you might show a character's poison status by setting `obj.tint = 0x00FF00`, which would give a green tint to the character.
+Tinting allows you to multiply the color value of every pixel by a single color.  For example, if you had a dungeon game, you might show a character's poison status by setting `obj.tint = 0x00FF00`, which would give a green tint to the character.
 
 Blend modes change how pixel colors are added to the screen when rendering.  The three main modes are __add__, which adds each pixel's RGB channels to whatever is under your sprite (useful for glows and lighting), __multiply__ which works like `tint`, but on a per-pixel basis, and __screen__, which overlays the pixels, brightening whatever is underneath them.
 
