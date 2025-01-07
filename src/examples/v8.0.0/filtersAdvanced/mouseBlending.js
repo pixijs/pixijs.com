@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, Rectangle, Filter, Point } from 'pixi.js';
+import { Application, Assets, Container, Filter, Point, Rectangle, Sprite } from 'pixi.js';
 
 /**
  * https://github.com/pixijs/pixi.js/wiki/v5-Creating-Filters

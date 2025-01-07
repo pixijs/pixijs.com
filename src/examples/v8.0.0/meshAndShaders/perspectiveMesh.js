@@ -1,4 +1,4 @@
-import { Application, PerspectiveMesh, Assets } from 'pixi.js';
+import { Application, Assets, PerspectiveMesh } from 'pixi.js';
 
 (async () =>
 {

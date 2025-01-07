@@ -1,6 +1,6 @@
 import { Application, Geometry, Mesh, Shader } from 'pixi.js';
-import vertex from './shaderToy.vert';
 import fragment from './shaderToy.frag';
+import vertex from './shaderToy.vert';
 
 (async () =>
 {

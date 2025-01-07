@@ -1,6 +1,6 @@
+import { useInView } from 'react-intersection-observer';
 import HomeCTA from '../HomeCTA';
 import styles from './index.module.scss';
-import { useInView } from 'react-intersection-observer';
 
 const animShortUp = (duration: number, delay: number) => ({
     opacity: 0,

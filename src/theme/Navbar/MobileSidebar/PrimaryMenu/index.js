@@ -1,7 +1,7 @@
+import styles from './styles.module.scss';
 import { useThemeConfig } from '@docusaurus/theme-common';
 import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal';
 import NavbarItem from '@theme/NavbarItem';
-import styles from './styles.module.scss';
 
 function useNavbarItems()
 {

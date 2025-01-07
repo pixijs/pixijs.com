@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, Filter } from 'js';
+import { Application, Assets, Filter, Sprite } from 'js';
 
 (async () =>
 {

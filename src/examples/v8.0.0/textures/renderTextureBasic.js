@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, RenderTexture, SCALE_MODES } from 'pixi.js';
+import { Application, Assets, Container, RenderTexture, SCALE_MODES, Sprite } from 'pixi.js';
 
 (async () =>
 {

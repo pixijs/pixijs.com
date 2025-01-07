@@ -1,4 +1,4 @@
-import { Application, Assets, Container, Sprite, Point, Graphics } from 'pixi.js';
+import { Application, Assets, Container, Graphics, Point, Sprite } from 'pixi.js';
 import { generateSpinner1 } from './spinner1';
 import { generateSpinner2 } from './spinner2';
 import { generateSpinner3 } from './spinner3';

@@ -1,14 +1,14 @@
+import { useEffect, useState } from 'react';
+import styles from './styles.module.scss';
 import { useThemeConfig } from '@docusaurus/theme-common';
 import { splitNavbarItems } from '@docusaurus/theme-common/internal';
-import NavbarItem from '@theme/NavbarItem';
-import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
-import SearchBar from '@theme/SearchBar';
-import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
-import NavbarLogo from '@theme/Navbar/Logo';
-import NavbarSearch from '@theme/Navbar/Search';
-import styles from './styles.module.scss';
-import { useEffect, useState } from 'react';
 import useIsBrowser from '@docusaurus/useIsBrowser';
+import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
+import NavbarLogo from '@theme/Navbar/Logo';
+import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
+import NavbarSearch from '@theme/Navbar/Search';
+import NavbarItem from '@theme/NavbarItem';
+import SearchBar from '@theme/SearchBar';
 
 function useNavbarItems()
 {

@@ -2,11 +2,7 @@
 title: PixiJS v8 Launches! 🎉
 description: PixiJS v8 The Future of 2D Web Graphics is Here!
 slug: pixi-v8-launches
-authors:
-  - name: GoodBoyDigital
-    title: PixiJS Creator
-    url: https://github.com/GoodBoyDigital
-    image_url: https://github.com/GoodBoyDigital.png
+authors: [mat, zyie]
 tags: [PixiJS, WebGPU, WebGL]
 hide_table_of_contents: true
 keywords: ['PixiJS', 'pixi.js', 'webGL', 'webGPU', 'performance', '2d rendering', '2d webGL', 'javascript graphics', 'game development']
@@ -197,7 +193,7 @@ myContainer.blendMode = 'color-burn` // easy!
 
 ```
 
-For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](/8.x/guides/migrations/v8), or why not jump in and play with some [examples](8.x/examples/graphics/simple).
+For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](/8.x/guides/migrations/v8), or why not jump in and play with some [examples](/8.x/examples/graphics/simple).
 
 #### 📝 Text Upgrades
 

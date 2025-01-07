@@ -1,11 +1,11 @@
-import PixiPlayground from '@site/src/components/Playground/PixiPlayground';
-import type { IVersion } from '@site/src/components/Playground/PixiPlayground/usePixiVersions';
-
+import classNames from 'classnames';
+import { extractSource } from '../Playground/PixiPlayground/useEditorCode';
 import styles from './index.module.scss';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import PixiPlayground from '@site/src/components/Playground/PixiPlayground';
 import { getExampleEntry } from '@site/src/examples';
-import { extractSource } from '../Playground/PixiPlayground/useEditorCode';
-import classNames from 'classnames';
+
+import type { IVersion } from '@site/src/components/Playground/PixiPlayground/usePixiVersions';
 
 export default function Example({ id, pixiVersion, mode }: { id: string; pixiVersion: IVersion; mode?: any })
 {

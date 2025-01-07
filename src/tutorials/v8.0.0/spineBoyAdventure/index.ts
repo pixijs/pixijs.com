@@ -1,25 +1,3 @@
-import code1 from '!!raw-loader!./step1/step1-code';
-import code2 from '!!raw-loader!./step2/step2-code';
-import code2Completed from '!!raw-loader!./step2/step2-code-completed';
-import code3 from '!!raw-loader!./step3/step3-code';
-import code3Completed from '!!raw-loader!./step3/step3-code-completed';
-import code4 from '!!raw-loader!./step4/step4-code';
-import code4Completed from '!!raw-loader!./step4/step4-code-completed';
-import code5 from '!!raw-loader!./step5/step5-code';
-import code6 from '!!raw-loader!./step6/step6-code';
-import code6Completed from '!!raw-loader!./step6/step6-code-completed';
-import code7 from '!!raw-loader!./step7/step7-code';
-import SpineBoy1 from '!!raw-loader!./step2/SpineBoy1';
-import SpineBoy1Completed from '!!raw-loader!./step2/SpineBoy1-completed';
-import SpineBoy2 from '!!raw-loader!./step4/SpineBoy2';
-import SpineBoy2Completed from '!!raw-loader!./step4/SpineBoy2-completed';
-import Controller from '!!raw-loader!./step3/Controller';
-import ControllerCompleted from '!!raw-loader!./step3/Controller-completed';
-import Scene1 from '!!raw-loader!./step5/Scene1';
-import Scene1Completed from '!!raw-loader!./step5/Scene1-completed';
-import Scene2 from '!!raw-loader!./step6/Scene2';
-import Scene2Completed from '!!raw-loader!./step6/Scene2-completed';
-import type { TutorialStep } from '../..';
 import content1 from './step1/step1-content.md';
 import content2 from './step2/step2-content.md';
 import content3 from './step3/step3-content.md';
@@ -27,6 +5,29 @@ import content4 from './step4/step4-content.md';
 import content5 from './step5/step5-content.md';
 import content6 from './step6/step6-content.md';
 import content7 from './step7/step7-content.md';
+import code1 from '!!raw-loader!./step1/step1-code';
+import SpineBoy1 from '!!raw-loader!./step2/SpineBoy1';
+import SpineBoy1Completed from '!!raw-loader!./step2/SpineBoy1-completed';
+import code2 from '!!raw-loader!./step2/step2-code';
+import code2Completed from '!!raw-loader!./step2/step2-code-completed';
+import Controller from '!!raw-loader!./step3/Controller';
+import ControllerCompleted from '!!raw-loader!./step3/Controller-completed';
+import code3 from '!!raw-loader!./step3/step3-code';
+import code3Completed from '!!raw-loader!./step3/step3-code-completed';
+import SpineBoy2 from '!!raw-loader!./step4/SpineBoy2';
+import SpineBoy2Completed from '!!raw-loader!./step4/SpineBoy2-completed';
+import code4 from '!!raw-loader!./step4/step4-code';
+import code4Completed from '!!raw-loader!./step4/step4-code-completed';
+import Scene1 from '!!raw-loader!./step5/Scene1';
+import Scene1Completed from '!!raw-loader!./step5/Scene1-completed';
+import code5 from '!!raw-loader!./step5/step5-code';
+import Scene2 from '!!raw-loader!./step6/Scene2';
+import Scene2Completed from '!!raw-loader!./step6/Scene2-completed';
+import code6 from '!!raw-loader!./step6/step6-code';
+import code6Completed from '!!raw-loader!./step6/step6-code-completed';
+import code7 from '!!raw-loader!./step7/step7-code';
+
+import type { TutorialStep } from '../..';
 
 export const spineBoyAdventureTutorialSteps: TutorialStep[] = [
     {

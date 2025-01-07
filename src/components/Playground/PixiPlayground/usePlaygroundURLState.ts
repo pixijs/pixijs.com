@@ -1,6 +1,7 @@
 import { evolve, isNil, unless } from 'ramda';
-import type { DeserializeParamsType, SerializeParamsType, SetStateType } from '@site/src/hooks/useURLStateParams';
 import { useURLStateParams } from '@site/src/hooks/useURLStateParams';
+
+import type { DeserializeParamsType, SerializeParamsType, SetStateType } from '@site/src/hooks/useURLStateParams';
 
 export type URLSaveState = {
     files: Record<string, { code: string }>;
@@ -60,7 +61,7 @@ export const usePlaygroundURLState = ({ defaultExampleId }: UsePlaygroundURLStat
 
             return {
                 state: state ?? undefined,
-                exampleId: state ? 'custom' : exampleId ?? defaultExampleId,
+                exampleId: state ? 'custom' : (exampleId ?? defaultExampleId),
             };
         },
         serializeParams,

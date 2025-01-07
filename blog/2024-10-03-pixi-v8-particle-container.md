@@ -2,11 +2,7 @@
 title: ParticleContainer - The New Speed Demon in PixiJS v8
 description: Introducing the new ParticleContainer in PixiJS v8—faster than ever, optimized for rendering millions of particles effortlessly.
 slug: particlecontainer-v8
-authors:
-  - name: Mat Groves
-    title: PixiJS
-    url: https://github.com/GoodboyDigital
-    image_url: https://github.com/GoodboyDigital.png
+authors: mat
 tags: [PixiJS, ParticleContainer, WebGL, Games, Performance, Optimization]
 hide_table_of_contents: true
 keywords: ['PixiJS', 'ParticleContainer', 'game development', 'web graphics', 'optimization', 'WebGL']

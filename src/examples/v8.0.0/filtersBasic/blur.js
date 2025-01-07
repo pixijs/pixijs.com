@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, BlurFilter } from 'pixi.js';
+import { Application, Assets, BlurFilter, Sprite } from 'pixi.js';
 
 (async () =>
 {

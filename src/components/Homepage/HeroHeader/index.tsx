@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import styles from './index.module.scss';
 import HomeCTA from '../HomeCTA';
+import styles from './index.module.scss';
 
 export default function HeroHeader(): JSX.Element
 {
