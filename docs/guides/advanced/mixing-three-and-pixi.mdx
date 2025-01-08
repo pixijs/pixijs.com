@@ -1,5 +1,5 @@
-import Example from '@site/src/components/Example/index';
-import version from '@site/docs/pixi-version.json';
+import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
+import ThreePixiIndexFile from '!!raw-loader!../../examples/advanced/three-and-pixi.js';
 
 # Mixing PixiJS and Three.js
 
@@ -23,14 +23,14 @@ This guide assumes PixiJS will be used as the top layer to deliver UI over a 3D 
 
 #### Step 1: Initialize Three.js Renderer and Scene
 
-Three.js will handle the 3D rendering the creation of the dom element and context. 
+Three.js will handle the 3D rendering the creation of the dom element and context.
 
 ```javascript
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
 
-const threeRenderer = new THREE.WebGLRenderer({ 
-    antialias: true, 
+const threeRenderer = new THREE.WebGLRenderer({
+    antialias: true,
     stencil: true // so masks work in pixijs
 });
 
@@ -107,7 +107,8 @@ requestAnimationFrame(render);
 
 Here’s the complete example integrating PixiJS and Three.js:
 
-<Example id="advanced.threeAndPixi" pixiVersion={version} mode={"embedded"} />
+<EmbeddedEditor files={{"index.js": ThreePixiIndexFile}} dependencies={{ "three": "latest", "pixi.js": "dev" }} />
+<br/>
 
 ---
 
@@ -127,13 +128,13 @@ Here’s the complete example integrating PixiJS and Three.js:
 
 - **Disable Clear Before Render:**
 
-  - Set `clearBeforeRender: false` when initializing the PixiJS renderer. This prevents PixiJS from clearing the Three.js content that was rendered before it. 
+  - Set `clearBeforeRender: false` when initializing the PixiJS renderer. This prevents PixiJS from clearing the Three.js content that was rendered before it.
   - Alternatively you can set `clear: false` in the `pixiRenderer.render()` call. eg `pixiRenderer.render({ container: stage, clear: false });`.
 
 - **Manage Render Order:**
 
   - In this example, Three.js is rendered first, followed by PixiJS for UI layers. However, this order is flexible. You can render pixi -> three -> pixi is you want, just make sure you reset the state when switching renderer.
-  
+
 - **Separate Resources:**
 
   - Remember that resources like textures are not shared between PixiJS and Three.js. A PixiJS texture cannot be directly used as a Three.js texture and vice versa.
