@@ -32,6 +32,9 @@ export function Editor({
     const { colorMode } = useColorMode();
 
     // useResizeHandler(showPreview, setCodeVisibility);
+    const filesWithoutIndexJs = { ...files };
+
+    delete filesWithoutIndexJs['index.js'];
 
     const [filesState] = useState({
         '/index.html': { code: HTMLFile, hidden: true },
@@ -43,6 +46,7 @@ export function Editor({
             hidden: false,
             active: true,
         },
+        ...filesWithoutIndexJs,
     });
 
     return (
