@@ -43,7 +43,6 @@ These projects fall just outside the main goals of PixiJS. They are useful but m
 
 Sometimes PixiJS developers need to integrate with third-party tools that aren't widely used enough to be officially supported by PixiJS. Examples include:
 
-* [Spine](https://github.com/pixijs-userland/spine) _runtime for Spine animations_
 * [Animate](https://github.com/pixijs-userland/animate) _Adobe Animate Publishing Extension_
 * [Node.js PixiJS Renderer](https://github.com/pixijs-userland/node) _Node.js Rendering_
 
@@ -83,6 +82,10 @@ References, documentation, or resources for developers.
 * [Storybook](https://github.com/pixijs/storybook)
 * [Open Games](https://github.com/pixijs/open-games)
 * [PixiJS.com](https://github.com/pixijs/pixijs.com)
+
+## Userland Open For Business
+
+Do you have a PixiJS project that you can no longer maintain or would like to re-home it in a place where the PixiJS community can contribute? Well, we'd love to have it join Userland. Please reach out to [@Zyie](https://github.com/Zyie) or [@bigtimebuddy](https://github.com/bigtimebuddy) about transferring your project today.
 
 ## Summary
 
