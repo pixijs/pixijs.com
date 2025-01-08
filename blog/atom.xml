@@ -16,7 +16,7 @@
         <content type="html"><![CDATA[<p>As we mentioned in our previous <a href="https://pixijs.com/blog/better-docs-v8">PixiJS Update post</a>, we are focusing on making PixiJS easier to use and understand.
 Today we're pushing the project one step closer to that goal and we’re excited to introduce <a href="https://github.com/pixijs/create-pixi" target="_blank" rel="noopener noreferrer">PixiJS Create</a>.</p>
 <p>An easy to use CLI that provides templates for using PixiJS with your favourite bundler, as well as a new "Creation Template" to get you started with PixiJS and its ecosystem.</p>
-<div style="display:flex;justify-content:center;padding:2rem 4rem;padding-top:1rem"><img src="https://pixijs.com/images/blog/pixi-create-demo.gif" alt="PixiJS Create CLI Demo" style="max-width:600px;width:100%;border-radius:0.5rem;border:1px solid #676767"></div>
+<div style="display:flex;justify-content:center;padding:2rem 4rem;padding-top:1rem"><img src="https://pixijs.io/create-pixi/img/demo.gif" alt="PixiJS Create CLI" style="max-width:600px;width:100%;border-radius:0.5rem;border:1px solid #676767"></div>
 <!-- -->
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="-getting-started">🚀 Getting Started<a href="https://pixijs.com/blog/create-cli#-getting-started" class="hash-link" aria-label="Direct link to 🚀 Getting Started" title="Direct link to 🚀 Getting Started">​</a></h2>
 <p><a href="https://github.com/pixijs/create-pixi" target="_blank" rel="noopener noreferrer">PixiJS Create</a> is a new CLI tool that simplifies the process of setting up a PixiJS project. It provides a quick and easy way to create a new PixiJS project
