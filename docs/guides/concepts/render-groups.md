@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Render Groups
 
 ## Understanding RenderGroups in PixiJS

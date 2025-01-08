@@ -1,7 +1,7 @@
 ---
-sidebar_position: 3
+sidebar_position: 6
 ---
 
-# Textures
+# Events / Interaction
 
 The `Application` class is the main entry point for a PIXI application. It is a container for the rendering surface and all the other components that make up the application.
