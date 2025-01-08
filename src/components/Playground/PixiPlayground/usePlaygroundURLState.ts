@@ -3,18 +3,11 @@ import { useURLStateParams } from '@site/src/hooks/useURLStateParams';
 
 import type { DeserializeParamsType, SerializeParamsType, SetStateType } from '@site/src/hooks/useURLStateParams';
 
-export type URLSaveState = {
-    files: Record<string, { code: string }>;
-    visibleFiles: string[];
-    activeFile: string;
-};
-
 type URLStateParams = {
-    state?: URLSaveState;
-    exampleId: string;
+    state?: string;
 };
 
-function encodeState(state: URLSaveState)
+function encodeState(state: string)
 {
     const json = JSON.stringify(state);
 
@@ -25,7 +18,7 @@ function decodeState(encodedState: string)
 {
     try
     {
-        const state: URLSaveState = JSON.parse(atob(encodedState));
+        const state: string = JSON.parse(atob(encodedState));
 
         return state;
     }
@@ -48,20 +41,14 @@ const deserializeParams = evolve({
 
 export type SetURLStateType = SetStateType<URLStateParams>;
 
-type UsePlaygroundURLStateParams = {
-    defaultExampleId: string;
-    defaultPixiVersion: string;
-};
-
-export const usePlaygroundURLState = ({ defaultExampleId }: UsePlaygroundURLStateParams) =>
+export const usePlaygroundURLState = () =>
     useURLStateParams<URLStateParams>(
         (urlState) =>
         {
-            const { state, exampleId } = urlState;
+            const { state } = urlState;
 
             return {
                 state: state ?? undefined,
-                exampleId: state ? 'custom' : (exampleId ?? defaultExampleId),
             };
         },
         serializeParams,

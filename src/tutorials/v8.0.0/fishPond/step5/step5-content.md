@@ -2,7 +2,7 @@
 
 Let's be a bit extra and simulate distortion effect from the water.
 
-PixiJS comes with a handful of filters built-in and many dozens of fancy ones on the (PixiJS Filters package)[https://github.com/pixijs/filters]. Here, we will be using the displacement filter for the distortion, which is built-in to the native PixiJS so we do not have to install any additional filter packages.
+PixiJS comes with a handful of filters built-in and many dozens of fancy ones on the [PixiJS Filters package](https://github.com/pixijs/filters). Here, we will be using the displacement filter for the distortion, which is built-in to the native PixiJS so we do not have to install any additional filter packages.
 
 Displacement filter requires a sprite as a parameter for its options object. We will need to create a sprite from the displacement map asset and set its base texture's wrap mode to be 'repeat' so that the shader can tile and repeated it.
 
