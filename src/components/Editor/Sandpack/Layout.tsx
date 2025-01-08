@@ -29,8 +29,6 @@ export function EditorLayout(
         setViewSelection(selected);
     };
 
-    console.log('viewSelection', viewSelection);
-
     return (
         <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
             <SandpackLayout
