@@ -16,7 +16,7 @@ To start with, you have the image you want to display.  The first step is to mak
 
 ### Loading the Image
 
-To work with the image, the first step is to pull the image file from your webserver into the user's web browser.  To do this, we can use `Assets.load('myTexture.png')`.  `Assets` wraps and deals with telling the browser to fetch the image, convert it and then let you when that has been completed.  This process is *asynchronous* - you request the load, then time passes, then a promise completes to let you know the load is completed.  We'll go into the loader in a lot more depth in a later guide.
+To work with the image, the first step is to pull the image file from your webserver into the user's web browser.  To do this, we can use `Assets.load('myTexture.png')`.  `Assets` wraps and deals with telling the browser to fetch the image, convert it and then let you know when that has been completed.  This process is *asynchronous* - you request the load, then time passes, then a promise completes to let you know the load is completed.  We'll go into the loader in a lot more depth in a later guide.
 
 ```ts
 const texture = await Assets.load('myTexture.png');
