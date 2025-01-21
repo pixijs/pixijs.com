@@ -37,6 +37,7 @@ const sidebars = {
                 'guides/advanced/render-groups',
                 'guides/advanced/cache-as-texture',
                 'guides/advanced/mixing-three-and-pixi',
+                'guides/advanced/render-layers'
             ],
         },
         {
