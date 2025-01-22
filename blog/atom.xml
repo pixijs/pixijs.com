@@ -2,11 +2,90 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pixijs.com/blog</id>
     <title>PixiJS Blog</title>
-    <updated>2024-12-06T00:00:00.000Z</updated>
+    <updated>2025-01-04T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pixijs.com/blog"/>
     <subtitle>PixiJS Blog</subtitle>
     <icon>https://pixijs.com/images/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[Introducing PixiJS Userland]]></title>
+        <id>https://pixijs.com/blog/intro-userland</id>
+        <link href="https://pixijs.com/blog/intro-userland"/>
+        <updated>2025-01-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Announcing a new GitHub organization for community projects.]]></summary>
+        <content type="html"><![CDATA[<p>We have launched a new GitHub organization called <a href="https://github.com/pixijs-userland" target="_blank" rel="noopener noreferrer">PixiJS Userland</a> to host many of our popular community-driven extensions. This initiative aims to help PixiJS developers easily identify which projects are officially supported and which are community-driven, while also giving developers more freedom to manage their projects independently.</p>
+<p>In the past, the main PixiJS organization included a wide range of projects. Some were stable and widely used, while others were experimental with a small user base. This diversity led to the misconception that all projects on <a href="https://github.com/pixijs" target="_blank" rel="noopener noreferrer">github.com/pixijs</a> received equal support from the core team, such as bug fixes and major updates. In reality, the core team found it challenging to communicate different priorities, especially since some side projects were maintained independently by core team members.</p>
+<p>Welcome to PixiJS Userland!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="userland-project-types">Userland Project Types<a href="https://pixijs.com/blog/intro-userland#userland-project-types" class="hash-link" aria-label="Direct link to Userland Project Types" title="Direct link to Userland Project Types">​</a></h2>
+<p>We have identified several common use-cases for projects that are best suited for Userland. Many projects have already been migrated to this new organization.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="in-scope-experiments">In-Scope Experiments<a href="https://pixijs.com/blog/intro-userland#in-scope-experiments" class="hash-link" aria-label="Direct link to In-Scope Experiments" title="Direct link to In-Scope Experiments">​</a></h3>
+<p>Userland is an ideal place for projects that could eventually be part of the main PixiJS repo but need more time for development and stabilization. Examples include:</p>
+<ul>
+<li><a href="https://github.com/pixijs-userland/pixi-compressed-textures" target="_blank" rel="noopener noreferrer">Compressed Textures</a> (similar features in PixiJS v7+)</li>
+<li><a href="https://github.com/pixijs-userland/html-text" target="_blank" rel="noopener noreferrer">HTMLText</a> (added in PixiJS v7+)</li>
+<li><a href="https://github.com/pixijs-userland/projection" target="_blank" rel="noopener noreferrer">Projection</a> (similar features in PixiJS v8+)</li>
+<li><a href="https://github.com/pixijs-userland/gif" target="_blank" rel="noopener noreferrer">GIF</a> (candidate for PixiJS v8+)</li>
+<li><a href="https://github.com/pixijs-userland/layers" target="_blank" rel="noopener noreferrer">Layers</a> (candidate for similar features in PixiJS v8+)</li>
+<li><a href="https://github.com/pixijs-userland/lights" target="_blank" rel="noopener noreferrer">Lights</a> (candidate for similar features in PixiJS v8+)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="out-of-scope-projects">Out-of-Scope Projects<a href="https://pixijs.com/blog/intro-userland#out-of-scope-projects" class="hash-link" aria-label="Direct link to Out-of-Scope Projects" title="Direct link to Out-of-Scope Projects">​</a></h3>
+<p>These projects fall just outside the main goals of PixiJS. They are useful but may be more specialized or opinionated, not fitting for the broader PixiJS community. Examples include:</p>
+<ul>
+<li><a href="https://github.com/pixijs-userland/tilemap" target="_blank" rel="noopener noreferrer">Tilemap Kit</a></li>
+<li><a href="https://github.com/pixijs-userland/particle-emitter" target="_blank" rel="noopener noreferrer">Particle Emitter</a></li>
+<li><a href="https://github.com/pixijs-userland/graphics-smooth" target="_blank" rel="noopener noreferrer">Graphics Smooth</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="third-party-integrations">Third-Party Integrations<a href="https://pixijs.com/blog/intro-userland#third-party-integrations" class="hash-link" aria-label="Direct link to Third-Party Integrations" title="Direct link to Third-Party Integrations">​</a></h3>
+<p>Sometimes PixiJS developers need to integrate with third-party tools that aren't widely used enough to be officially supported by PixiJS. Examples include:</p>
+<ul>
+<li><a href="https://github.com/pixijs-userland/animate" target="_blank" rel="noopener noreferrer">Animate</a> <em>Adobe Animate Publishing Extension</em></li>
+<li><a href="https://github.com/pixijs-userland/node" target="_blank" rel="noopener noreferrer">Node.js PixiJS Renderer</a> <em>Node.js Rendering</em></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="main-project-types">Main Project Types<a href="https://pixijs.com/blog/intro-userland#main-project-types" class="hash-link" aria-label="Direct link to Main Project Types" title="Direct link to Main Project Types">​</a></h2>
+<p>Several projects will continue to be supported on the main PixiJS GitHub organization. These projects will receive updates to stay compatible with the latest PixiJS releases. While this list may change, it currently includes projects that offer the greatest general benefit to PixiJS developers.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="general-extensions">General Extensions<a href="https://pixijs.com/blog/intro-userland#general-extensions" class="hash-link" aria-label="Direct link to General Extensions" title="Direct link to General Extensions">​</a></h3>
+<p>These are runtime extensions that integrate with PixiJS and provide general benefits for all developers.</p>
+<ul>
+<li><a href="https://github.com/pixijs/sound" target="_blank" rel="noopener noreferrer">Sound</a></li>
+<li><a href="https://github.com/pixijs/ui" target="_blank" rel="noopener noreferrer">UI</a></li>
+<li><a href="https://github.com/pixijs/layout" target="_blank" rel="noopener noreferrer">Layout</a></li>
+<li><a href="https://github.com/pixijs/filters" target="_blank" rel="noopener noreferrer">Filters</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="popular-runtimes">Popular Runtimes<a href="https://pixijs.com/blog/intro-userland#popular-runtimes" class="hash-link" aria-label="Direct link to Popular Runtimes" title="Direct link to Popular Runtimes">​</a></h3>
+<p>Support for popular web frameworks or integration with other renderers.</p>
+<ul>
+<li><a href="https://github.com/pixijs/pixi-react" target="_blank" rel="noopener noreferrer">Pixi React</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="developer-tools">Developer Tools<a href="https://pixijs.com/blog/intro-userland#developer-tools" class="hash-link" aria-label="Direct link to Developer Tools" title="Direct link to Developer Tools">​</a></h3>
+<p>Tools that help developers build, package, or develop projects with PixiJS.</p>
+<ul>
+<li><a href="https://github.com/pixijs/devtools" target="_blank" rel="noopener noreferrer">DevTools</a></li>
+<li><a href="https://github.com/pixijs/eslint-config" target="_blank" rel="noopener noreferrer">ESLint Configuration</a></li>
+<li><a href="https://github.com/pixijs/create-pixi" target="_blank" rel="noopener noreferrer">Create</a></li>
+<li><a href="https://github.com/pixijs/assetpack" target="_blank" rel="noopener noreferrer">AssetPack</a></li>
+<li><a href="https://github.com/pixijs/extension-scripts" target="_blank" rel="noopener noreferrer">Extension Scripts</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="resources">Resources<a href="https://pixijs.com/blog/intro-userland#resources" class="hash-link" aria-label="Direct link to Resources" title="Direct link to Resources">​</a></h3>
+<p>References, documentation, or resources for developers.</p>
+<ul>
+<li><a href="https://github.com/pixijs/storybook" target="_blank" rel="noopener noreferrer">Storybook</a></li>
+<li><a href="https://github.com/pixijs/open-games" target="_blank" rel="noopener noreferrer">Open Games</a></li>
+<li><a href="https://github.com/pixijs/pixijs.com" target="_blank" rel="noopener noreferrer">PixiJS.com</a></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="userland-open-for-business">Userland Open For Business<a href="https://pixijs.com/blog/intro-userland#userland-open-for-business" class="hash-link" aria-label="Direct link to Userland Open For Business" title="Direct link to Userland Open For Business">​</a></h2>
+<p>Do you have a PixiJS project that you can no longer maintain or would like to re-home it in a place where the PixiJS community can contribute? Well, we'd love to have it join Userland. Please reach out to <a href="https://github.com/Zyie" target="_blank" rel="noopener noreferrer">@Zyie</a> or <a href="https://github.com/bigtimebuddy" target="_blank" rel="noopener noreferrer">@bigtimebuddy</a> about transferring your project today.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary">Summary<a href="https://pixijs.com/blog/intro-userland#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary">​</a></h2>
+<p>We hope that introducing Userland will help clarify the level of support among the growing number of PixiJS projects and initiatives. If you have any feedback, please reach out on <a href="https://discord.gg/QrnxmQUPGV" target="_blank" rel="noopener noreferrer">Discord</a> or start a <a href="https://github.com/pixijs/pixijs/discussions/new/choose" target="_blank" rel="noopener noreferrer">discussion</a>.</p>]]></content>
+        <author>
+            <name>Matt Karl</name>
+            <uri>https://github.com/bigtimebuddy</uri>
+        </author>
+        <category label="PixiJS" term="PixiJS"/>
+        <category label="Plugins" term="Plugins"/>
+        <category label="GitHub" term="GitHub"/>
+        <category label="Extensions" term="Extensions"/>
+        <category label="Community" term="Community"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[PixiJS Update - Start building with PixiJS in just one command! 🚀]]></title>
         <id>https://pixijs.com/blog/create-cli</id>
