@@ -132,7 +132,7 @@ circleGraphics.context
   .fill('red')
 ```
 
-Calling `Graphics.destroy()` will destroy the graphics. If a context was passed to it via the constructor then it will leave the destruction the that context to you. However if the context is internally created (the default), when destroyed the Graphics object will destroy its internal `GraphicsContext`.
+Calling `Graphics.destroy()` will destroy the graphics. If a context was passed to it via the constructor then it will leave the destruction of that context to you. However if the context is internally created (the default), when destroyed the Graphics object will destroy its internal `GraphicsContext`.
 
 ## Graphics For Display
 
