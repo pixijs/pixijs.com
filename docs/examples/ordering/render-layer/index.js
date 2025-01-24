@@ -1,6 +1,5 @@
 import { Application, Assets, Container, DisplacementFilter, RenderLayer, Sprite, TilingSprite } from 'pixi.js';
 import { Fish } from './Fish';
-import { Pond } from './Pond';
 
 (async () =>
 {
@@ -32,7 +31,7 @@ import { Pond } from './Pond';
 
     pondContainer.addChild(background);
 
-    app.stage.addChild(new Pond());
+    app.stage.addChild(pondContainer);
 
     const displacementMap = Assets.get('https://pixijs.com/assets/pond/displacement_map.png');
 
