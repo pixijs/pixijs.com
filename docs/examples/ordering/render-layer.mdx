@@ -6,6 +6,12 @@ custom_edit_url: null
 title: Render Layer
 ---
 import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
-import IndexFile from '!!raw-loader!./render-layer';
+import IndexFile from '!!raw-loader!./render-layer/index';
+import Fish from '!!raw-loader!./render-layer/Fish';
+import CharacterUI from '!!raw-loader!./render-layer/CharacterUI';
 
-<ExampleEditor files={{"index.js": IndexFile}} />
+<ExampleEditor files={{
+    "index.js": IndexFile,
+    'Fish.js': Fish,
+    'CharacterUI.js': CharacterUI,
+}} />
