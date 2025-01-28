@@ -4,10 +4,61 @@
         <title>PixiJS Blog</title>
         <link>https://pixijs.com/blog</link>
         <description>PixiJS Blog</description>
-        <lastBuildDate>Sat, 04 Jan 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 24 Jan 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[PixiJS Update - v8.7.0]]></title>
+            <link>https://pixijs.com/blog/8.7.0</link>
+            <guid>https://pixijs.com/blog/8.7.0</guid>
+            <pubDate>Fri, 24 Jan 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[A look at the 8.7.0 release of PixiJS.]]></description>
+            <content:encoded><![CDATA[<p>We're happy to announce the release of PixiJS v8.7.0, featuring a number of new features and improvements that you have been asking for. This version includes:</p>
+<ul>
+<li><strong>Render Layers</strong>: Control the rendering order of objects independently of their scene graph hierarchy.</li>
+<li><strong>GIF Support</strong>: Load and manipulate animated GIFs with playback controls.</li>
+<li><strong>Three.js Integration</strong>: Simplify the use of PixiJS and Three.js (and other WebGL projects) in the same project.</li>
+</ul>
+<p>Here's a closer look at these features and what they offer.</p>
+<!-- -->
+<p>Let's take a closer look at these new features and improvements.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="render-layers">Render Layers<a href="https://pixijs.com/blog/8.7.0#render-layers" class="hash-link" aria-label="Direct link to Render Layers" title="Direct link to Render Layers">​</a></h2>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>NOTE</div><div class="admonitionContent_BuS1"><p>The Render Layers API is experimental and may change in future releases.</p></div></div>
+<p>Render Layers give you more control over the rendering order of objects, without requiring changes to their logical hierarchy.</p>
+<p>This feature is useful for:</p>
+<ul>
+<li>Keeping UI elements like health bars or score counters on top of other objects.</li>
+<li>Managing object rendering in complex scenes.</li>
+<li>Highlighting elements in tutorials or overlays.</li>
+</ul>
+<p>For example, you can use Render Layers to ensure a UI health bar stays on top of a moving character, regardless of the scene graph hierarchy.</p>
+<p>More details are available in the <a href="https://pixijs.com/8.x/guides/advanced/render-layers">Render Layers guide</a>.</p>
+<p>Older users of PixiJS may remember the <a href="https://github.com/pixijs-userland/layers" target="_blank" rel="noopener noreferrer">layers</a> plugin, which provided similar functionality. Render Layers are a more integrated and performant solution that is built directly into the core of PixiJS.</p>
+<!-- -->
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="gif-support">GIF Support<a href="https://pixijs.com/blog/8.7.0#gif-support" class="hash-link" aria-label="Direct link to GIF Support" title="Direct link to GIF Support">​</a></h2>
+<p>PixiJS now supports animated GIFs, offering developers the ability to:</p>
+<ul>
+<li>Play, stop, or loop GIFs.</li>
+<li>Adjust playback speed.</li>
+<li>Jump to specific frames programmatically.</li>
+</ul>
+<p>This feature is ideal for adding dynamic animated elements to your projects.</p>
+<p>You can find the full API details in the <a href="https://pixijs.download/v8.7.0/docs/gif.html" target="_blank" rel="noopener noreferrer">GIF API Documentation</a>.</p>
+<!-- -->
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="integrating-with-threejs-and-other-webgl-projects">Integrating with three.js (and other WebGL projects)<a href="https://pixijs.com/blog/8.7.0#integrating-with-threejs-and-other-webgl-projects" class="hash-link" aria-label="Direct link to Integrating with three.js (and other WebGL projects)" title="Direct link to Integrating with three.js (and other WebGL projects)">​</a></h2>
+<p>Integrating PixiJS with Three.js (and other WebGL projects) is now easier, thanks to improvements in shared WebGL context support. This makes it more straightforward to combine PixiJS's 2D capabilities with Three.js's 3D rendering.</p>
+<p>A detailed guide is available <a href="https://pixijs.com/8.x/guides/advanced/mixing-three-and-pixi">here</a>.</p>
+<!-- -->
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="additional-updates">Additional Updates<a href="https://pixijs.com/blog/8.7.0#additional-updates" class="hash-link" aria-label="Direct link to Additional Updates" title="Direct link to Additional Updates">​</a></h2>
+<p>This release also includes various improvements and bug fixes. For a complete list of changes, check out the <a href="https://github.com/pixijs/pixijs/releases/tag/v8.7.0" target="_blank" rel="noopener noreferrer">changelog</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://pixijs.com/blog/8.7.0#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
+<p>We encourage you to try out these new features and share your feedback. You can connect with us on <a href="https://discord.gg/QrnxmQUPGV" target="_blank" rel="noopener noreferrer">Discord</a> or start a <a href="https://github.com/pixijs/pixijs/discussions/new/choose" target="_blank" rel="noopener noreferrer">discussion</a>.</p>
+<p>Thank you for using PixiJS, and we look forward to seeing what you create with v8.7.0.</p>]]></content:encoded>
+            <category>PixiJS</category>
+            <category>Updates</category>
+            <category>Improvements</category>
+        </item>
         <item>
             <title><![CDATA[Introducing PixiJS Userland]]></title>
             <link>https://pixijs.com/blog/intro-userland</link>
