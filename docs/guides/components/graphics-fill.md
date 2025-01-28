@@ -157,17 +157,17 @@ const obj = new Graphics().rect(0, 0, 100, 100)
 ![alt text](/assets/guides/components/image-5.png)
 
 You can control the gradient direction with the following properties:
+- `start {x, y}`: These define the starting point of the gradient. For example, in a linear gradient, this is where the first color stop is positioned. These values are typically expressed in relative coordinates (0 to 1), where `0` represents the left/top edge and `1` represents the right/bottom edge of the shape.
 
-- `x0`, `y0`: These define the starting point of the gradient. For example, in a linear gradient, this is where the first color stop is positioned. These values are typically expressed in relative coordinates (0 to 1), where `0` represents the left/top edge and `1` represents the right/bottom edge of the shape.
+- `end {x, y}`: These define the ending point of the gradient. Similar to `start {x, y}`, these values specify where the last color stop is positioned in the shape's local coordinate system.
 
-- `x1`, `y1`: These define the ending point of the gradient. Similar to `x0` and `y0`, these values specify where the last color stop is positioned in the shape's local coordinate system.
-
-Using these properties, you can create various gradient effects, such as horizontal, vertical, or diagonal transitions. For example, setting `x0` to `0`, `y0` to `0`, `x1` to `1`, and `y1` to `1` would result in a diagonal gradient from the top-left to the bottom-right of the shape.
+Using these properties, you can create various gradient effects, such as horizontal, vertical, or diagonal transitions. For example, setting `start` to `{x: 0, y: 0}` and `end` to `{x: 1, y: 1}` would result in a diagonal gradient from the top-left to the bottom-right of the shape.
 
 ```ts
 const diagonalGradient = new FillGradient({
   type: 'linear',
-  x0: 0, y0: 0, x1: 1, y1: 1,
+  start: { x: 0, y: 0 },
+  end: { x: 1, y: 1 },
   colorStops: [
     { offset: 0, color: 'yellow' },
     { offset: 1, color: 'green' },
@@ -197,22 +197,23 @@ const obj = new Graphics().rect(0, 0, 100, 100)
 ![alt text](/assets/guides/components/image-7.png)
 
 You can control the gradient's shape and size using the following properties:
+- `center {x, y}`: These define the center of the inner circle where the gradient starts. Typically, these values are expressed in relative coordinates (0 to 1), where `0.5` represents the center of the shape.
 
-- `x0`, `y0`: These define the center of the inner circle where the gradient starts. Typically, these values are expressed in relative coordinates (0 to 1), where `0.5` represents the center of the shape.
+- `innerRadius`: The radius of the inner circle. This determines the size of the gradient's starting point.
 
-- `r0`: The radius of the inner circle. This determines the size of the gradient's starting point.
+- `outerCenter {x, y}`: These define the center of the outer circle where the gradient ends. Like `center {x, y}`, these values are also relative coordinates.
 
-- `x1`, `y1`: These define the center of the outer circle where the gradient ends. Like `x0` and `y0`, these values are also relative coordinates.
-
-- `r1`: The radius of the outer circle. This determines the size of the gradient's ending point.
+- `outerRadius`: The radius of the outer circle. This determines the size of the gradient's ending point.
 
 By adjusting these properties, you can create a variety of effects, such as small, concentrated gradients or large, expansive ones. For example, setting a small `r0` and a larger `r1` will create a gradient that starts does not start to transition until the inner circle radius is reached.
 
 ```ts
 const radialGradient = new FillGradient({
   type: 'radial',
-  x0: 0.5, y0: 0.5, r0: 0.25,
-  x1: 0.5, y1: 0.5, r1: 0.5,
+  center: { x: 0.5, y: 0.5 },
+  innerRadius: 0.25,
+  outerCenter: { x: 0.5, y: 0.5 },
+  outerRadius: 0.5,
   colorStops: [
     { offset: 0, color: 'blue' },
     { offset: 1, color: 'red' },
