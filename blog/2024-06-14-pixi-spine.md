@@ -2,11 +2,7 @@
 title: PixiJS Joins the Spine 4.2 Physics Revolution! 🚀
 description: Elevate your animations with Spine 1.1.0 and the revolutionary physics features of Spine 4.2, now fully integrated with PixiJS v8.
 slug: pixi-js-hearts-spine
-authors:
-  - name: GoodBoyDigital
-    title: PixiJS Creator
-    url: https://github.com/GoodBoyDigital
-    image_url: https://github.com/GoodBoyDigital.png
+authors: mat
 tags: [PixiJS, Spine, WebGL, WebGPU, Animation]
 hide_table_of_contents: true
 keywords: ['PixiJS', 'Spine', 'webGL', 'webGPU', '2D animation', 'JavaScript graphics', 'game development']

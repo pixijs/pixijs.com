@@ -1,5 +1,6 @@
-import Link from '@docusaurus/Link';
 import styles from './index.module.scss';
+import Link from '@docusaurus/Link';
+
 import type React from 'react';
 
 export interface HomeCTAOptions {

@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef } from 'react';
-import type { editor } from 'monaco-editor';
+import { type SandpackState, FileTabs, SandpackStack, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
 import { useColorMode } from '@docusaurus/theme-common';
 import Editor from '@monaco-editor/react';
-import type { SandpackState } from '@codesandbox/sandpack-react';
-import { FileTabs, SandpackStack, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
+
+import type { editor } from 'monaco-editor';
 
 export type CodeChangeCallbackType = (code: string | undefined, state: SandpackState) => void;
 

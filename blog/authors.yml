@@ -1,0 +1,17 @@
+zyie:
+  name: Zyie
+  title: PixiJS Admin
+  url: https://github.com/zyie
+  image_url: https://github.com/zyie.png
+  socials:
+    github: zyie
+    x: _Zyie_
+    bluesky: https://bsky.app/profile/zyie.bsky.social
+mat:
+  name: Mat Groves
+  title: PixiJS Creator
+  url: https://github.com/GoodboyDigital
+  image_url: https://github.com/GoodboyDigital.png
+  socials:
+    github: GoodboyDigital
+    x: Doormat23

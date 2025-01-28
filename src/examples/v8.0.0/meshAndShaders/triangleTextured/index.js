@@ -1,6 +1,6 @@
 import { Application, Assets, Geometry, Mesh, Shader } from 'pixi.js';
-import vertex from './triangleTextured.vert';
 import fragment from './triangleTextured.frag';
+import vertex from './triangleTextured.vert';
 
 (async () =>
 {

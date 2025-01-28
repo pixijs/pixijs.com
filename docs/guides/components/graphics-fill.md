@@ -16,7 +16,7 @@ const obj = new Graphics()
   .fill('red'); // Fill the rectangle with a red color
 ```
 
-![alt text](image.png)
+![alt text](/assets/guides/components/image.png)
 
 This creates a red rectangle. PixiJS supports multiple color formats for the `fill()` method. Developers can choose a format based on their needs. For example, CSS color strings are user-friendly and readable, hexadecimal strings are compact and widely used in design tools, and numbers are efficient for programmatic use. Arrays and Color objects offer precise control, making them ideal for advanced graphics.
 
@@ -54,7 +54,7 @@ const obj = new Graphics().rect(0, 0, 100, 100)
     alpha: 0.5, // 50% opacity
   });
 ```
-![alt text](image-1.png)
+![alt text](/assets/guides/components/image-1.png)
 
 ## Fill with Textures
 
@@ -66,14 +66,13 @@ const obj = new Graphics().rect(0, 0, 100, 100)
   .fill(texture);
 ```
 
-![alt text](image-2.png)
+![alt text](/assets/guides/components/image-2.png)
 
 ### Local vs. Global Texture Space
 
 Textures can be applied in two coordinate spaces:
 
 - **Local Space** (Default): The texture coordinates are mapped relative to the shape's dimensions and position. The texture coordinates use a normalized coordinate system where (0,0) is the top-left and (1,1) is the bottom-right of the shape, regardless of its actual pixel dimensions. For example, if you have a 300x200 pixel texture filling a 100x100 shape, the texture will be scaled to fit exactly within those 100x100 pixels. The texture's top-left corner (0,0) will align with the shape's top-left corner, and the texture's bottom-right corner (1,1) will align with the shape's bottom-right corner, stretching or compressing the texture as needed.
-  
 ```ts
 const shapes = new PIXI.Graphics()
     .rect(50,50,100, 100)
@@ -86,7 +85,7 @@ const shapes = new PIXI.Graphics()
     });
 ```
 
-![alt text](image-13.png)
+![alt text](/assets/guides/components/image-13.png)
 
 - **Global Space**: Set `textureSpace: 'global'` to make the texture position and scale relative to the Graphics object's coordinate system. Despite the name, this isn't truly "global" - the texture remains fixed relative to the Graphics object itself, maintaining its position even when the object moves or scales. See how the image goes across all the shapes (in the same graphics) below:
 
@@ -102,7 +101,7 @@ const shapes = new PIXI.Graphics()
     });
 ```
 
-![alt text](image-11.png)
+![alt text](/assets/guides/components/image-11.png)
 
 ### Using Matrices with Textures
 
@@ -118,7 +117,7 @@ const obj = new Graphics().rect(0, 0, 100, 100)
   });
 ```
 
-![alt text](image-4.png)
+![alt text](/assets/guides/components/image-4.png)
 
 ### Texture Gotcha's
 
@@ -155,7 +154,7 @@ const obj = new Graphics().rect(0, 0, 100, 100)
   .fill(gradient);
 ```
 
-![alt text](image-5.png)
+![alt text](/assets/guides/components/image-5.png)
 
 You can control the gradient direction with the following properties:
 
@@ -176,7 +175,7 @@ const diagonalGradient = new FillGradient({
 });
 ```
 
-![alt text](image-6.png)
+![alt text](/assets/guides/components/image-6.png)
 
 ### Radial Gradients
 
@@ -195,7 +194,7 @@ const obj = new Graphics().rect(0, 0, 100, 100)
   .fill(gradient);
 ```
 
-![alt text](image-7.png)
+![alt text](/assets/guides/components/image-7.png)
 
 You can control the gradient's shape and size using the following properties:
 
@@ -224,7 +223,7 @@ const obj = new Graphics().rect(0, 0, 100, 100)
   .fill(gradient);
 ```
 
-![alt text](image-8.png)
+![alt text](/assets/guides/components/image-8.png)
 
 ### Gradient Gotcha's
 
@@ -237,7 +236,7 @@ const obj = new Graphics().rect(0, 0, 100, 100)
 4. **Texture and Matrix Limitations**: Under the hood, gradient fills set both the texture and matrix properties internally. This means you cannot use a texture fill or matrix transformation at the same time as a gradient fill.
 
 ### Combining Textures and Colors
-You can combine a texture or gradients with a color tint and alpha to achieve more complex and visually appealing effects. This allows you to overlay a color on top of the texture or gradient, adjusting its transparency with the alpha value. 
+You can combine a texture or gradients with a color tint and alpha to achieve more complex and visually appealing effects. This allows you to overlay a color on top of the texture or gradient, adjusting its transparency with the alpha value.
 
 ```ts
 
@@ -257,7 +256,7 @@ const obj = new Graphics().rect(0, 0, 100, 100)
 
 ```
 
-![alt text](image-10.png)
+![alt text](/assets/guides/components/image-10.png)
 
 ```ts
 const obj = new Graphics().rect(0, 0, 100, 100)
@@ -269,7 +268,7 @@ const obj = new Graphics().rect(0, 0, 100, 100)
 
 ```
 
-![alt text](image-9.png)
+![alt text](/assets/guides/components/image-9.png)
 
 ---
 

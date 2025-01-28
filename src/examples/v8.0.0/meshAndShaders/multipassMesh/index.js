@@ -1,10 +1,10 @@
 import { Application, Assets, Container, Geometry, Mesh, RenderTexture, Shader } from 'pixi.js';
-import vertex from './multipassMesh.vert';
-import gridFragment from './grid.frag';
-import rippleFragment from './ripple.frag';
-import noiseFragment from './noise.frag';
-import waveFragment from './wave.frag';
 import combineFragment from './combine.frag';
+import gridFragment from './grid.frag';
+import vertex from './multipassMesh.vert';
+import noiseFragment from './noise.frag';
+import rippleFragment from './ripple.frag';
+import waveFragment from './wave.frag';
 
 (async () =>
 {

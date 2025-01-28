@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite, Graphics, SCALE_MODES, Rectangle, BlurFilter } from 'pixi.js';
+import { Application, Assets, BlurFilter, Graphics, Rectangle, SCALE_MODES, Sprite } from 'pixi.js';
 
 (async () =>
 {

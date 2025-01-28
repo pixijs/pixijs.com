@@ -1,4 +1,4 @@
-import { Application, Container, Sprite, Matrix, EventBoundary, Graphics, Rectangle, Text } from 'pixi.js';
+import { Application, Container, EventBoundary, Graphics, Matrix, Rectangle, Sprite, Text } from 'pixi.js';
 
 // This example shows how you can setup a nested boundary to propagate events
 // into a disjoint scene graph. Here, a camera is used to project an different

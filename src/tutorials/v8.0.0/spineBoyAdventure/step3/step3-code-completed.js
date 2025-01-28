@@ -1,8 +1,7 @@
-import '@esotericsoftware/spine-pixi-v8';
-
 import { Application, Assets } from 'pixi.js';
-import { SpineBoy } from './SpineBoy';
+import '@esotericsoftware/spine-pixi-v8';
 import { Controller } from './Controller';
+import { SpineBoy } from './SpineBoy';
 
 // Asynchronous IIFE
 (async () =>

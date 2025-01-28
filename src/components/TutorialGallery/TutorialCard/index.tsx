@@ -1,5 +1,6 @@
-import { useHistory } from '@docusaurus/router';
 import styles from './index.module.scss';
+import { useHistory } from '@docusaurus/router';
+
 import type { TutorialCardData } from '@site/src/tutorials';
 
 export default function TutorialCard({ data }: { data: TutorialCardData }): JSX.Element

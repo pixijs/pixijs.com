@@ -1,11 +1,11 @@
+import ClosingSection from './ClosingSection';
+import FeatureList from './FeatureList';
+import HeroHeader from './HeroHeader';
+import KeyOfferings from './KeyOfferings';
+import OpenCollective from './OpenCollective';
+import TestimonialCarousel from './TestimonialCarousel';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HeroHeader from './HeroHeader';
-import TestimonialCarousel from './TestimonialCarousel';
-import KeyOfferings from './KeyOfferings';
-import FeatureList from './FeatureList';
-import ClosingSection from './ClosingSection';
-import OpenCollective from './OpenCollective';
 
 export default function Homepage(): JSX.Element
 {

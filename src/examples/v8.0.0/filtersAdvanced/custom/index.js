@@ -1,6 +1,6 @@
-import { Application, Assets, Sprite, Filter, GlProgram } from 'pixi.js';
-import vertex from './custom.vert';
+import { Application, Assets, Filter, GlProgram, Sprite } from 'pixi.js';
 import fragment from './custom.frag';
+import vertex from './custom.vert';
 
 (async () =>
 {

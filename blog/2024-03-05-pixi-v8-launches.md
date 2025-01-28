@@ -2,11 +2,7 @@
 title: PixiJS v8 Launches! 🎉
 description: PixiJS v8 The Future of 2D Web Graphics is Here!
 slug: pixi-v8-launches
-authors:
-  - name: GoodBoyDigital
-    title: PixiJS Creator
-    url: https://github.com/GoodBoyDigital
-    image_url: https://github.com/GoodBoyDigital.png
+authors: [mat, zyie]
 tags: [PixiJS, WebGPU, WebGL]
 hide_table_of_contents: true
 keywords: ['PixiJS', 'pixi.js', 'webGL', 'webGPU', 'performance', '2d rendering', '2d webGL', 'javascript graphics', 'game development']
@@ -50,7 +46,7 @@ There are numerous updates to discuss, more than can be covered in a single post
 
 #### 📈 New Performance Bar
 
-![bunnies](image.png)
+![bunnies](/assets/blog/image.png)
 
 The performance of v8 is faster for **both** renderers. This means by using v8 and the WebGL renderer, all the speed improvements apply! This is mainly as we have taken great care to make a more reactive render loop that only updates what it needs to. Check out the numbers here:
 
@@ -72,7 +68,7 @@ These benchmark numbers are based on the Bunnymark test that you can try yoursel
 
 #### 🖥️ WebGPU Renderer
 
-![PixiJS + webGPU = love](image-1.png)
+![PixiJS + webGPU = love](/assets/blog/image-1.png)
 
 We've implemented a WebGPU backend for rendering. Whilst this has created a better graphics paradigm under the hood and set us up for the future of rich web content, it's important to note that WebGPU does not automatically guarantee improved performance over WebGL in all scenarios, as PixiJS often encounters more limitations on the CPU side than the GPU. However, for scenes with numerous batch breaks, such as filters, masks, and blend modes, WebGPU may offer better performance due to its more modern to rendering. As WebGPU is relatively new, it's expected to enhance in speed over time, similar to the development of WebGL. It serves as a solid foundation for future advancements.
 
@@ -118,7 +114,7 @@ const app = new Application();
 
 #### 🌟 Scene Upgrades
 
-![PixiJS logo](blend-modes.png)
+![PixiJS logo](/assets/blog/blend-modes.png)
 
 - The concept of render groups has been introduced, enabling containers to utilize GPU for their transformations. This facilitates a true 2D hardware-accelerated camera, ideal for navigating large static worlds through panning and zooming, similar to how a camera moves in a 3D environment rather than moving the world itself. This approach can significantly enhance performance.
 
@@ -159,7 +155,7 @@ myContainer.blendMode = 'color-burn` // easy!
 
 #### 🎨 Graphics Upgrades
 
-![alt text](image-4.png)
+![alt text](/assets/blog/image-4.png)
 
 - The Graphics API has undergone changes to become more intuitive and user-friendly, closely resembling the HTML Canvas 2D context API. For instance, drawing and filling a rectangle is simplified as follows:
 
@@ -197,7 +193,7 @@ myContainer.blendMode = 'color-burn` // easy!
 
 ```
 
-For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](/8.x/guides/migrations/v8), or why not jump in and play with some [examples](8.x/examples/graphics/simple).
+For more information on these graphics upgrades and guidance on how to adapt to the enhanced Graphics API, please refer to the [migration guide](/8.x/guides/migrations/v8), or why not jump in and play with some [examples](/8.x/examples/graphics/simple).
 
 #### 📝 Text Upgrades
 
