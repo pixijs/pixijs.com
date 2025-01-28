@@ -1,0 +1,19 @@
+---
+hide_table_of_contents: true
+hide_edit_this_page: true
+sidebar_position: 8
+custom_edit_url: null
+title: Instanced Geometry
+---
+import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+import IndexFile from '!!raw-loader!./instanced-geometry/index';
+import instancedGeometryVert from '!!raw-loader!./instanced-geometry/instancedGeometry.vert';
+import instancedGeometryFrag from '!!raw-loader!./instanced-geometry/instancedGeometry.frag';
+import instancedGeometryWgsl from '!!raw-loader!./instanced-geometry/instancedGeometry.wgsl';
+
+<ExampleEditor files={{
+    "index.js": IndexFile,
+    'instancedGeometry.vert': instancedGeometryVert,
+    'instancedGeometry.frag': instancedGeometryFrag,
+    'instancedGeometry.wgsl': instancedGeometryWgsl,
+}} />

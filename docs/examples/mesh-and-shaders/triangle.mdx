@@ -1,0 +1,19 @@
+---
+hide_table_of_contents: true
+hide_edit_this_page: true
+sidebar_position: 3
+custom_edit_url: null
+title: Triangle
+---
+import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+import IndexFile from '!!raw-loader!./triangle/index';
+import triangleVert from '!!raw-loader!./triangle/triangle.vert';
+import triangleFrag from '!!raw-loader!./triangle/triangle.frag';
+import triangleWgsl from '!!raw-loader!./triangle/triangle.wgsl';
+
+<ExampleEditor files={{
+    "index.js": IndexFile,
+    'triangle.vert': triangleVert,
+    'triangle.frag': triangleFrag,
+    'triangle.wgsl': triangleWgsl,
+}} />
