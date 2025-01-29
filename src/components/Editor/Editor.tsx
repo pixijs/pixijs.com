@@ -5,6 +5,7 @@ import HTMLFile from '!!raw-loader!./defaults/index.html';
 import StylesFile from '!!raw-loader!./defaults/styles.css';
 import { SandpackProvider } from '@codesandbox/sandpack-react';
 import { githubLight } from '@codesandbox/sandpack-themes';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import { useColorMode } from '@docusaurus/theme-common';
 
 export interface EditorProps {
@@ -50,25 +51,29 @@ export function Editor({
     });
 
     return (
-        <SandpackProvider
-            template="vanilla-ts"
-            theme={colorMode === 'dark' ? dracula : githubLight}
-            files={filesState}
-            customSetup={{ dependencies, entry: 'index.html' }}
-            style={{ height, width, margin: '0 auto', maxWidth: '100%' }}
-            options={{
-                recompileDelay: 500,
-            }}
-        >
-            <EditorLayout
-                {...{
-                    handleEditorCodeChanged,
-                    viewType,
-                    showConsole,
-                    fontSize,
-                    pixiVersion: dependencies['pixi.js'],
-                }}
-            />
-        </SandpackProvider>
+        <BrowserOnly>
+            {() => (
+                <SandpackProvider
+                    template="vanilla-ts"
+                    theme={colorMode === 'dark' ? dracula : githubLight}
+                    files={filesState}
+                    customSetup={{ dependencies, entry: 'index.html' }}
+                    style={{ height, width, margin: '0 auto', maxWidth: '100%' }}
+                    options={{
+                        recompileDelay: 500,
+                    }}
+                >
+                    <EditorLayout
+                        {...{
+                            handleEditorCodeChanged,
+                            viewType,
+                            showConsole,
+                            fontSize,
+                            pixiVersion: dependencies['pixi.js'],
+                        }}
+                    />
+                </SandpackProvider>
+            )}
+        </BrowserOnly>
     );
 }

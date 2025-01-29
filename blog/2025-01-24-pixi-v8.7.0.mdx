@@ -1,0 +1,84 @@
+---
+title: PixiJS Update - v8.7.0
+description: A look at the 8.7.0 release of PixiJS.
+slug: 8.7.0
+authors: zyie
+tags: [PixiJS, Updates, Improvements]
+hide_table_of_contents: true
+keywords: ['PixiJS', 'Updates', 'Improvements', 'QoL']
+---
+import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
+import RenderLayerIndexFile from '!!raw-loader!../docs/examples/ordering/render-layer/index';
+import RenderLayerFish from '!!raw-loader!../docs/examples/ordering/render-layer/Fish';
+import RenderLayerCharacterUI from '!!raw-loader!../docs/examples/ordering/render-layer/CharacterUI';
+import GifIndexFile from '!!raw-loader!../docs/examples/sprite/gif';
+import ThreeIndexFile from '!!raw-loader!../docs/examples/advanced/three-and-pixi';
+
+We're happy to announce the release of PixiJS v8.7.0, featuring a number of new features and improvements that you have been asking for. This version includes:
+
+- **Render Layers**: Control the rendering order of objects independently of their scene graph hierarchy.
+- **GIF Support**: Load and manipulate animated GIFs with playback controls.
+- **Three.js Integration**: Simplify the use of PixiJS and Three.js (and other WebGL projects) in the same project.
+
+Here's a closer look at these features and what they offer.
+
+{/* truncate */}
+
+Let's take a closer look at these new features and improvements.
+
+## Render Layers
+
+:::info[NOTE]
+The Render Layers API is experimental and may change in future releases.
+:::
+
+Render Layers give you more control over the rendering order of objects, without requiring changes to their logical hierarchy.
+
+This feature is useful for:
+
+- Keeping UI elements like health bars or score counters on top of other objects.
+- Managing object rendering in complex scenes.
+- Highlighting elements in tutorials or overlays.
+
+For example, you can use Render Layers to ensure a UI health bar stays on top of a moving character, regardless of the scene graph hierarchy.
+
+More details are available in the [Render Layers guide](/8.x/guides/advanced/render-layers).
+
+Older users of PixiJS may remember the [layers](https://github.com/pixijs-userland/layers) plugin, which provided similar functionality. Render Layers are a more integrated and performant solution that is built directly into the core of PixiJS.
+
+<EmbeddedEditor files={{
+    "index.js": RenderLayerIndexFile,
+    'Fish.js': RenderLayerFish,
+    'CharacterUI.js': RenderLayerCharacterUI,
+}} />
+
+## GIF Support
+
+PixiJS now supports animated GIFs, offering developers the ability to:
+
+- Play, stop, or loop GIFs.
+- Adjust playback speed.
+- Jump to specific frames programmatically.
+
+This feature is ideal for adding dynamic animated elements to your projects.
+
+You can find the full API details in the [GIF API Documentation](https://pixijs.download/v8.7.0/docs/gif.html).
+
+<EmbeddedEditor files={{"index.js": GifIndexFile}}/>
+
+## Integrating with three.js (and other WebGL projects)
+
+Integrating PixiJS with Three.js (and other WebGL projects) is now easier, thanks to improvements in shared WebGL context support. This makes it more straightforward to combine PixiJS's 2D capabilities with Three.js's 3D rendering.
+
+A detailed guide is available [here](/8.x/guides/advanced/mixing-three-and-pixi).
+
+<EmbeddedEditor files={{"index.js": ThreeIndexFile}} dependencies={{ "three": "latest", "pixi.js": "latest" }}/>
+
+## Additional Updates
+This release also includes various improvements and bug fixes. For a complete list of changes, check out the [changelog](https://github.com/pixijs/pixijs/releases/tag/v8.7.0).
+
+## Conclusion
+
+We encourage you to try out these new features and share your feedback. You can connect with us on [Discord](https://discord.gg/QrnxmQUPGV) or start a [discussion](https://github.com/pixijs/pixijs/discussions/new/choose).
+
+Thank you for using PixiJS, and we look forward to seeing what you create with v8.7.0.
