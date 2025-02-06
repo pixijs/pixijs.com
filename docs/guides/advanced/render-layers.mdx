@@ -38,7 +38,7 @@ This guide explains the key concepts, provides practical examples, and highlight
 
 4. **Dynamic Sorting**:
 
-   - Within layers, objects can be dynamically reordered using layerZIndex and sortChildren for fine-grained control of rendering order.
+   - Within layers, objects can be dynamically reordered using `zIndex` and `sortChildren` for fine-grained control of rendering order.
 
 
 
@@ -60,7 +60,7 @@ stage.addChild(redGuy, blueGuy);
 
 ![alt text](render-layers/image-1.png)
 
-Now  we know that red guy will be rendered first, then blue guy. Now in this simple example you could get away with just sorting the `zIndex` of the red guy and blue guy to help reorder.
+Now we know that red guy will be rendered first, then blue guy. Now in this simple example you could get away with just sorting the `zIndex` of the red guy and blue guy to help reorder.
 
 But this is a guide about render layers, so lets create one of those.
 
@@ -175,11 +175,12 @@ Here’s a real-world example that shows how to use RenderLayers to set ap playe
    - If you remove a parent container, all its children are automatically removed from layers. Be cautious with complex hierarchies.
 
 3. **Sorting Within Layers**:
-   - Objects in a layer can be sorted dynamically using their `layerZIndex` property. This is useful for fine-grained control of render order.
+   - Objects in a layer can be sorted dynamically using their `zIndex` property. This is useful for fine-grained control of render order.
 
    ```javascript
-   rect.layerZIndex = 10; // Higher values render later
-   layer.sortChildren(); // Apply the sorting
+   rect.zIndex = 10; // Higher values render later
+   layer.sortableChildren = true; // Enable sorting
+   layer.sortRenderLayerChildren(); // Apply the sorting
    ```
 
 4. **Layer Overlap**:
