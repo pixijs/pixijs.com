@@ -22,7 +22,8 @@ There are a lot of text style options available (see [TextStyle](https://pixijs.
 
 **Font**: `fontFamily` to select the webfont to use, `fontSize` to specify the size of the text to draw, along with options for font weight, style and variant.
 
-**Appearance**: Set the color with `fill` or add a `stroke` outline, including options for gradient fills.
+**Appearance**: Set the color with `fill` or add a `stroke` outline, including options for gradient fills. For more information on the `fill` property, see the [Graphics Fill](./graphics-fill) guide.
+
 
 **Drop-Shadows**: Set a drop-shadow with `dropShadow`, with a host of related options to specify offset, blur, opacity, etc.
 
