@@ -90,7 +90,7 @@ import {
     const bottom = new Graphics().rect(0, SYMBOL_SIZE * 3 + margin, app.screen.width, margin).fill({ color: 0x0 });
 
     // Create gradient fill
-    const fill = new FillGradient(0, 0, 0, 36 * 1.7);
+    const fill = new FillGradient(0, 0, 0, 2);
 
     const colors = [0xffffff, 0x00ff99].map((color) => Color.shared.setValue(color).toNumber());
 

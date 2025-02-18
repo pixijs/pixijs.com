@@ -1,10 +1,10 @@
 {
   "versionLabel": "v8.x",
-  "version": "8.7.1",
-  "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v8.7.1",
-  "build": "https://pixijs.download/v8.7.1/pixi.min.js",
-  "docs": "https://pixijs.download/v8.7.1/docs/index.html",
-  "npm": "8.7.1",
+  "version": "8.8.0",
+  "releaseNotes": "https://github.com/pixijs/pixijs/releases/tag/v8.8.0",
+  "build": "https://pixijs.download/v8.8.0/pixi.min.js",
+  "docs": "https://pixijs.download/v8.8.0/docs/index.html",
+  "npm": "8.8.0",
   "prerelease": false,
   "latest": true
 }

@@ -5,8 +5,12 @@ sidebar_position: 6
 custom_edit_url: null
 title: Nested Boundary With Projection
 ---
-import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+
+import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 import IndexFile from '!!raw-loader!./nested-boundary-with-projection';
 import version from '../../pixi-version.json';
 
-<ExampleEditor files={{"index.js": IndexFile}} dependencies={{"pixi.js": version.npm}} />
+<ExampleEditor
+    files={{ 'index.js': IndexFile }}
+    dependencies={{ 'pixi.js': version.npm, '@pixi/graphics-extras': version.npm }}
+/>

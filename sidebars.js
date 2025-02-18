@@ -27,6 +27,7 @@ const sidebars = {
                 'guides/basics/architecture-overview',
                 'guides/basics/render-loop',
                 'guides/basics/scene-graph',
+                'guides/basics/svg',
             ],
         },
         {
@@ -37,7 +38,7 @@ const sidebars = {
                 'guides/advanced/render-groups',
                 'guides/advanced/cache-as-texture',
                 'guides/advanced/mixing-three-and-pixi',
-                'guides/advanced/render-layers'
+                'guides/advanced/render-layers',
             ],
         },
         {
