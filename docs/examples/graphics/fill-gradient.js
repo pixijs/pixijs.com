@@ -15,7 +15,7 @@ import { Application, FillGradient, Graphics } from 'pixi.js';
     const colorStops = [0xffffff, 0xff0000, 0x00ff00, 0x0000ff, 0x000000];
 
     // Create a fill gradient
-    const gradientFill = new FillGradient(0, 0, 150, 150);
+    const gradientFill = new FillGradient(0, 0, 1, 1);
 
     // Add the color stops to the fill gradient
     colorStops.forEach((number, index) =>

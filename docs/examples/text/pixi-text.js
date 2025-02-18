@@ -19,7 +19,7 @@ import { Application, Color, FillGradient, Text, TextStyle } from 'pixi.js';
     app.stage.addChild(basicText);
 
     // Create gradient fill
-    const fill = new FillGradient(0, 0, 0, 36 * 1.7 * 7);
+    const fill = new FillGradient(0, 0, 0, 10);
 
     const colors = [0xffffff, 0x00ff99].map((color) => Color.shared.setValue(color).toNumber());
 
