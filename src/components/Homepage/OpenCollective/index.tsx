@@ -51,6 +51,7 @@ export default function OpenCollective(): JSX.Element
             // .filter((member) => member.isActive)
             const sponsorData = data
                 .filter((member) => member.tier === 'sponsor')
+                .filter((member) => member.isActive)
                 .sort((a, b) => b.totalAmountDonated - a.totalAmountDonated)
                 .map((member) => ({
                     name: member.name,
