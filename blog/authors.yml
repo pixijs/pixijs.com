@@ -24,3 +24,11 @@ bigtimebuddy:
     github: bigtimebuddy
     x: bigtimebuddy
     bluesky: https://bsky.app/profile/bigtimebuddy.com
+trezy:
+  name: Trezy
+  title: Pixi React Maintainer
+  url: https://github.com/trezy
+  image_url: https://github.com/trezy.png
+  socials:
+    github: trezy
+    bluesky: https://bsky.app/profile/trezy.codes
