@@ -71,8 +71,8 @@ return graphics;
 With the `createMountainGroup()` helper function, we can then create 2 instances of the mountain group and offset one of them off the screen to the right.
 
 ```javascript
-const group1 = createMountainGroup();
-const group2 = createMountainGroup();
+const group1 = createMountainGroup(app);
+const group2 = createMountainGroup(app);
 
 group2.x = app.screen.width;
 app.stage.addChild(group1, group2);

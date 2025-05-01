@@ -197,6 +197,10 @@ const config = {
                                 href: 'https://github.com/pixijs/pixi-react',
                             },
                             {
+                                label: 'Layout',
+                                href: 'https://github.com/pixijs/layout',
+                            },
+                            {
                                 label: 'Spine',
                                 href: 'https://esotericsoftware.com/spine-pixi',
                             },
