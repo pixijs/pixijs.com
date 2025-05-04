@@ -4,36 +4,73 @@ sidebar_position: 2
 
 # Render Loop
 
-Now that you understand the major parts of the system, let's look at how these parts work together to get your project onto the screen.  Unlike a web page, PixiJS is constantly updating and re-drawing itself, over and over.  You update your objects, then PixiJS renders them to the screen, then the process repeats.  We call this cycle the render loop.
+At the core of PixiJS lies its **render loop**, a repeating cycle that updates and redraws your scene every frame. Unlike traditional web development where rendering is event-based (e.g. on user input), PixiJS uses a continuous animation loop that provides full control over real-time rendering.
 
-The majority of any PixiJS project is contained in this update + render cycle.  You code the updates, PixiJS handles the rendering.
+This guide provides a deep dive into how PixiJS structures this loop internally, from the moment a frame begins to when it is rendered to the screen. Understanding this will help you write more performant, well-structured applications.
 
-Let's walk through what happens each frame of the render loop.  There are three main steps.
+## Overview
 
-<!--(TODO: This guide is half baked.  I need feedback from the core team about what would be helpful to put here, and clarification on what's really going on under the hood.)-->
+Each frame, PixiJS performs the following sequence:
 
-## Running Ticker Callbacks
+1. **Tickers are executed** (user logic)
+2. **Scene graph is updated** (transforms and culling)
+3. **Rendering occurs** (GPU draw calls)
 
-The first step is to calculate how much time has elapsed since the last frame, and then call the Application object's ticker callbacks with that time delta.  This allows your project's code to animate and update the sprites, etc. on the stage in preparation for rendering.
+This cycle repeats as long as your application is running and its ticker is active.
 
-## Updating the Scene Graph
+## Step 1: Running Ticker Callbacks
 
-We'll talk a *lot* more about what a scene graph is and what it's made of in the next guide, but for now, all you need to know is that it contains the things you're drawing - sprites, text, etc. - and that these objects are in a tree-like hierarchy.  After you've updated your game objects by moving, rotating and so forth, PixiJS needs to calculate the new positions and state of every object in the scene, before it can start drawing.
+The render loop is driven by the `Ticker` class, which uses `requestAnimationFrame` to schedule work. Each tick:
 
-<!--(TODO: Is this true?  My understanding was that there is a transform/state update before the render pass, but I couldn't find it in the code.)-->
+- Measures elapsed time since the previous frame
+- Caps it based on `minFPS` and `maxFPS`
+- Calls every listener registered with `ticker.add()` or `app.ticker.add()`
 
-## Rendering the Scene Graph
+### Example
 
-Now that our game's state has been updated, it's time to draw it to the screen.  The rendering system starts with the root of the scene graph (`app.stage`), and starts rendering each object and its children, until all objects have been drawn.  No culling or other cleverness is built into this process.  If you have lots of objects outside of the visible portion of the stage, you'll want to investigate disabling them as an optimization.
+```ts
+app.ticker.add((ticker) => {
+    bunny.rotation += ticker.deltaTime * 0.1;
+});
+```
 
-## Frame Rates
+Every callback receives the current `Ticker` instance. You can access `ticker.deltaTime` (scaled frame delta) and `ticker.elapsedMS` (unscaled delta in ms) to time animations.
 
-A note about frame rates.  The render loop can't be run infinitely fast - drawing things to the screen takes time.  In addition, it's not generally useful to have a frame updated more than once per screen update (commonly 60fps, but newer monitors can support 144fps and up).  Finally, PixiJS runs in the context of a web browser like Chrome or Firefox.  The browser itself has to balance the needs of various internal operations with servicing any open tabs.  All this to say, determining when to draw a frame is a complex issue.
+## Step 2: Updating the Scene Graph
 
-<!--For most projects, you can use the default settings for the Ticker object, which will ... (TODO: The docs are a bit unclear on what happens if you don't set a min/max FPS - confirm)-->
+PixiJS uses a hierarchical **scene graph** to represent all visual objects. Before rendering, the graph needs to be traversed to:
 
-In cases where you want to adjust that behavior, you can set the `minFPS` and `maxFPS` attributes on a Ticker to give PixiJS hints as to the range of tick speeds you want to support.  Just be aware that due to the complex environment, your project cannot _guarantee_ a given FPS.  Use the passed `ticker.deltaTime` value in your ticker callbacks to scale any animations to ensure smooth playback.
+- Recalculate transforms (world matrix updates)
+- Apply custom logic via `onRender` handlers
+- Apply culling if enabled
 
-## Custom Render Loops
+## Step 3: Rendering the Scene
 
-What we've just covered is the default render loop provided out of the box by the Application helper class.  There are many other ways of creating a render loop that may be helpful for advanced users looking to solve a given problem.  <!--You can read more about that in the [Custom Render Loop guide](TODO: link here).-->  While you're prototyping and learning PixiJS, sticking with the Application's provided system is the recommended approach.
+Once the scene graph is ready, the renderer walks the display list starting at `app.stage`:
+
+1. Applies global and local transformations
+2. Batches draw calls when possible
+3. Uploads geometry, textures, and uniforms
+4. Issues GPU commands
+
+All rendering is **retained mode**: objects persist across frames unless explicitly removed.
+
+Rendering is done via either WebGL or WebGPU, depending on your environment. The renderer abstracts away the differences behind a common API.
+
+## Full Frame Lifecycle Diagram
+
+```plaintext
+requestAnimationFrame
+        │
+    [Ticker._tick()]
+        │
+    ├─ Compute elapsed time
+    ├─ Call user listeners
+    │   └─ sprite.onRender
+    ├─ Cull display objects (if enabled)
+    ├─ Update world transforms
+    └─ Render stage
+            ├─ Traverse display list
+            ├─ Upload data to GPU
+            └─ Draw
+```

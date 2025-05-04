@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: Garbage Collection
 ---
 
@@ -22,59 +22,6 @@ sprite.destroy();
 ```
 
 Calling `destroy` ensures that the object’s GPU resources are freed immediately, reducing the likelihood of memory leaks and improving performance.
-
-## Automatic Garbage Collection with `RenderableGCSystem`
-
-PixiJS includes a system called `RenderableGCSystem`, which periodically checks for unused GPU resources and releases them. By default:
-
-- **Runs every 30 seconds** to check for unused resources.
-- **Cleans up resources not used for over 1 minute.**
-- Operates independently of active rendering, ensuring idle resource management.
-
-While this system acts as a safety net, it’s not a replacement for explicit cleanup. For critical applications, use `destroy` to ensure timely resource deallocation.
-
-### Customizing `RenderableGCSystem`
-
-You can adjust the behavior of `RenderableGCSystem` through its configuration options:
-
-- **`renderableGCActive`**: Enable or disable garbage collection. Default: `true`.
-- **`renderableGCMaxUnusedTime`**: Maximum idle time (in milliseconds) before resource cleanup. Default: `60000` ms (1 minute).
-- **`renderableGCFrequency`**: Frequency (in milliseconds) of garbage collection checks. Default: `30000` ms (30 seconds).
-
-Example configuration:
-
-```javascript
-import { Application } from 'pixi.js';
-
-const app = new Application();
-
-await app.init({
-    renderableGCActive: true,       // Enable garbage collection
-    renderableGCMaxUnusedTime: 120000, // 2 minutes idle time
-    renderableGCFrequency: 60000,  // Check every minute
-})
-```
-
-## Pooling for Efficient Resource Reuse
-
-To reduce the overhead of creating and destroying objects repeatedly, consider using pooling. PixiJS includes a basic pooling utility that you can use to manage reusable resources. By reusing objects, you minimize allocation and deallocation costs.
-
-Example of pooling:
-
-```javascript
-import { Pool } from 'pixi.js';
-
-
-const pool = new Pool(() => new Sprite());
-
-// Retrieve an object from the pool
-const sprite = pool.get();
-
-// Use the sprite
-
-// Return it to the pool
-pool.return(sprite);
-```
 
 ## Managing Textures with `texture.unload`
 
@@ -127,7 +74,6 @@ await app.init({
 1. **Explicitly Destroy Objects:** Always call `destroy` on objects you no longer need to ensure GPU resources are promptly released.
 2. **Use Pooling:** Reuse objects with a pooling system to reduce allocation and deallocation overhead.
 3. **Proactively Manage Textures:** Use `texture.unload()` for manual memory management when necessary.
-4. **Leverage Built-in Systems:** Use `RenderableGCSystem` and `TextureGCSystem` as background tools but don’t rely solely on them for critical memory management.
 
 By following these practices and understanding PixiJS’s garbage collection mechanisms, you can create high-performance applications that efficiently utilize system resources.
 
