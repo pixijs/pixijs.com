@@ -146,7 +146,7 @@ const config = {
                         items: [
                             {
                                 type: 'doc',
-                                docId: 'guides/index',
+                                docId: 'guides/getting-started/intro',
                                 label: 'Guides',
                             },
                             {

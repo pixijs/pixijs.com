@@ -74,11 +74,11 @@ This ensures the texture appears at the correct size and resolution.
 
 ### Pros & Cons
 
-✅ **Fast to render** (rendered as a quad, not geometry)  
-✅ **Good for static images**  
-✅ **Supports resolution scaling for precise sizing**  
-✅ **Ideal for complex SVGs that do not need crisp vector scaling** (e.g., UI components with fixed dimensions)  
-❌ **Does not scale cleanly** (scaling may result in pixelation)  
+✅ **Fast to render** (rendered as a quad, not geometry)
+✅ **Good for static images**
+✅ **Supports resolution scaling for precise sizing**
+✅ **Ideal for complex SVGs that do not need crisp vector scaling** (e.g., UI components with fixed dimensions)
+❌ **Does not scale cleanly** (scaling may result in pixelation)
 ❌ **Less flexibility** (cannot modify the shape dynamically)
 ❌ **Texture Size Limit** A texture can only be up to 4096x4096 pixels, so if you need to render a larger SVG, you will need to use the Graphics method.
 
@@ -135,11 +135,11 @@ Since it's loaded via `Assets.load`, it will be cached and reused, much like a t
 
 ### Pros & Cons
 
-✅ **Retains vector scalability** (no pixelation when zooming)  
-✅ **Modifiable after rendering** (change colors, strokes, etc.)  
+✅ **Retains vector scalability** (no pixelation when zooming)
+✅ **Modifiable after rendering** (change colors, strokes, etc.)
 ✅ **Efficient for simple graphics**
-✅ **fast rendering if SVG structure does not change** (no need to reparse) 
-❌ **More expensive to parse** (complex SVGs can be slow to render)  
+✅ **fast rendering if SVG structure does not change** (no need to reparse)
+❌ **More expensive to parse** (complex SVGs can be slow to render)
 ❌ **Not ideal for static images**
 
 ### Best Use Cases
@@ -179,15 +179,15 @@ PixiJS supports most SVG features that can be rendered in a Canvas 2D context. B
 
 ### Best Practices
 
-✅ **Use Graphics for scalable and dynamic SVGs**  
-✅ **Use Textures for performance-sensitive applications**  
-✅ **Use `GraphicsContext` to avoid redundant parsing**  
+✅ **Use Graphics for scalable and dynamic SVGs**
+✅ **Use Textures for performance-sensitive applications**
+✅ **Use `GraphicsContext` to avoid redundant parsing**
 ✅ **Consider `resolution` when using textures to balance quality and memory**
 
 ### Gotchas
 
-⚠ **Large SVGs can be slow to parse** – Optimize SVGs before using them in PixiJS.  
-⚠ **Texture-based SVGs do not scale cleanly** – Use higher resolution if necessary.  
+⚠ **Large SVGs can be slow to parse** – Optimize SVGs before using them in PixiJS.
+⚠ **Texture-based SVGs do not scale cleanly** – Use higher resolution if necessary.
 ⚠ **Not all SVG features are supported** – Complex filters and text elements may not work as expected.
 
 ---
