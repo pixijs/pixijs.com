@@ -162,3 +162,54 @@ if (sprite.isInteractive()) {
     // true if eventMode is static or dynamic
 }
 ```
+
+## Custom Cursors
+PixiJS allows you to set a custom cursor for interactive objects using the `cursor` property. This property accepts a string representing the CSS cursor type.
+
+```ts
+const sprite = new Sprite(texture);
+sprite.eventMode = 'static';
+sprite.cursor = 'pointer'; // Set the cursor to a pointer when hovering over the sprite
+```
+```ts
+const sprite = new Sprite(texture);
+sprite.eventMode = 'static';
+sprite.cursor = 'url(my-cursor.png), auto'; // Set a custom cursor image
+```
+
+### Default Custom Cursors
+
+You can also set default values to be used for all interactive objects.
+```ts
+// CSS style for icons
+const defaultIcon = 'url(\'https://pixijs.com/assets/bunny.png\'),auto';
+const hoverIcon = 'url(\'https://pixijs.com/assets/bunny_saturated.png\'),auto';
+
+// Add custom cursor styles
+app.renderer.events.cursorStyles.default = defaultIcon;
+app.renderer.events.cursorStyles.hover = hoverIcon;
+
+const sprite = new Sprite(texture);
+sprite.eventMode = 'static';
+sprite.cursor = 'hover';
+```
+
+---
+
+## API Reference
+
+### Container Properties
+
+| Property / Method     | Type / Signature                               | Description                                                |
+| --------------------- | ---------------------------------------------- | -----------------------------------------------------------|
+| `eventMode`           | `'none','passive','auto','static','dynamic'`   | Controls how an object responds to input events            |
+| `interactive`         | `boolean`                                      | Alias for setting `eventMode` to `'static'` or `'passive'` |
+| `interactiveChildren` | `boolean`                                      | Whether to hit test children                               |
+| `hitArea`             | `IHitArea`                                     | Custom hit area                                            |
+| `cursor`              | `string`                                       | CSS cursor when hovered                                    |
+| `addEventListener`    | `(type, listener, options?)`                   | Adds a DOM-style event listener                            |
+| `removeEventListener` | `(type, listener, options?)`                   | Removes a DOM-style event listener                         |
+| `dispatchEvent`       | `(event: FederatedEvent)`                      | Dispatches a federated event                               |
+| `on`                  | `(event, callback)`                            | Adds an EventEmitter-style listener                        |
+| `off`                 | `(event, callback)`                            | Removes an EventEmitter-style listener                     |
+| `isInteractive()`     | `(): boolean`                                  | Returns `true` if `eventMode` is `static` or `dynamic`     |
