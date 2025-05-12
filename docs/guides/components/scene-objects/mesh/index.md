@@ -142,6 +142,8 @@ const mesh = new PerspectiveMesh({
 - Set corner coordinates via `setCorners(...)`.
 - Ideal for emulating 3D projection in 2D.
 
+---
+
 ## **API Reference**
 
 ### `Mesh`

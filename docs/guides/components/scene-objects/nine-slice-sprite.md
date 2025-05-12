@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # NineSlice Sprite
 
 `NineSliceSprite` is a specialized type of `Sprite` that allows textures to be resized while preserving the corners and edges. It is particularly useful for building scalable UI elements like buttons, panels, or windows with rounded or decorated borders.
@@ -78,9 +82,9 @@ nineSlice.topHeight = 25;
 
 Each setter triggers a geometry update to reflect the changes.
 
-## **API Reference**
+---
 
-### `NineSliceSprite`
+## **API Reference**
 
 | Property / Method  | Description                                                             |
 | ------------------ | ----------------------------------------------------------------------- |

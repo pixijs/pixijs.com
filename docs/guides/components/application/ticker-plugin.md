@@ -1,3 +1,7 @@
+---
+sidebar_position: 0
+---
+
 # Ticker Plugin
 
 The `TickerPlugin` provides a built-in update loop for your PixiJS `Application`. This loop calls `.render()` at a regular cadence—by default, once per animation frame—and integrates with PixiJS's `Ticker` system for precise control over frame-based updates.
@@ -76,7 +80,7 @@ This is useful for:
 
 ---
 
-## 🧪 API Reference
+## API Reference
 
 ### Properties
 

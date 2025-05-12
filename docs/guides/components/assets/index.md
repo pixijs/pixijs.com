@@ -6,6 +6,14 @@ sidebar_position: -1
 
 PixiJS has the `Assets` singleton which is used to streamline resource loading. It’s modern, Promise-based, cache-aware, and highly extensible—making it the one stop shop for all PixiJS resource management!
 
+```ts
+import { Assets } from 'pixi.js';
+
+await Assets.init({ ... });
+
+const texture = await Assets.load('path/to/hero.png');
+```
+
 ## Key Capabilities
 
 - **Asynchronous loading** of assets via Promises or async/await.
@@ -28,6 +36,8 @@ PixiJS has the `Assets` singleton which is used to streamline resource loading. 
 | Compressed Textures | `.basis`, `.dds`, `.ktx`, `.ktx2`                                | `loadBasis`, `loadDDS`, `loadKTX` |
 
 > Need more? Add custom parsers!
+
+---
 
 ## Getting started
 
@@ -132,6 +142,8 @@ await Assets.init({...});
 | `preferences`         | `AssetPreferences`        | Specifies preferences for each loader                         |
 | `bundleIdentifier`    | `BundleIdentifierOptions` | **Advanced** - Override how bundlesIds are generated.         |
 
+---
+
 ## Advanced Usage
 
 There are several advanced features available in the `Assets` API that can help you manage your assets more effectively.
@@ -142,14 +154,16 @@ You can read more about these features in the rest of the documentation:
 - [Background Loading](./background-loader.md)
 - [Compressed Textures](./compressed-textures.md)
 
+---
+
 ## API Reference
 
-| Name                  | Type                              | Description                                                                 |
-| --------------------- | --------------------------------- | --------------------------------------------------------------------------- |
-| `Assets.init`         | `AssetsInitOptions`               | Initializes the asset manager with the specified options.                   |
-| `Assets.load`         | `ArrayOr<string/UnresolvedAsset>` | Loads an asset from the specified URL.                                      |
-| `Assets.loadBundle`   | `ArrayOr<string>`                 | Loads a bundle of assets with the specified name.                           |
-| `Assets.get`          | `ArrayOr<string>`                 | Retrieves a loaded asset by its URL. Returns the loaded asset.              |
-| `Assets.getBundle`    | `ArrayOr<string>`                 | Retrieves a loaded bundle of assets by its name. Returns the loaded assets. |
-| `Assets.unload`       | `ArrayOr<string>`                 | Unloads an asset by its URL.                                                |
-| `Assets.unloadBundle` | `ArrayOr<string>`                 | Unloads a bundle of assets by its name.                                     |
+| Name                  | Type                              | Description                                                                 | Example                                                                     |
+| --------------------- | --------------------------------- | --------------------------------------------------------------------------- |---------------------------------------------------------------------- |
+| `Assets.init`         | `AssetsInitOptions`               | Initializes the asset manager with the specified options.                   | |
+| `Assets.load`         | `ArrayOr<string/UnresolvedAsset>` | Loads an asset from the specified URL.                                      | |
+| `Assets.loadBundle`   | `ArrayOr<string>`                 | Loads a bundle of assets with the specified name.                           | |
+| `Assets.get`          | `ArrayOr<string>`                 | Retrieves a loaded asset by its URL. Returns the loaded asset.              | |
+| `Assets.getBundle`    | `ArrayOr<string>`                 | Retrieves a loaded bundle of assets by its name. Returns the loaded assets. | |
+| `Assets.unload`       | `ArrayOr<string>`                 | Unloads an asset by its URL.                                                | |
+| `Assets.unloadBundle` | `ArrayOr<string>`                 | Unloads a bundle of assets by its name.                                     | |

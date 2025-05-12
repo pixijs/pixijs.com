@@ -98,7 +98,7 @@ function render() {
 requestAnimationFrame(render);
 ```
 
-See our full guide on [mixing PixiJS with Three.js](../../extra-topics/mixing-three-and-pixi.mdx) for more details.
+See our full guide on [mixing PixiJS with Three.js](../../third-party/mixing-three-and-pixi.mdx) for more details.
 
 ## API Reference
 
