@@ -79,6 +79,6 @@ To use `BitmapText`, you must first register a bitmap font via:
 
 Each text type has a corresponding guide that covers setup, font loading, style options, and limitations in more detail:
 
-- [Text Guide →](./text)
-- [BitmapText Guide →](./bitmap-text)
-- [HTMLText Guide →](./html-text)
+- [Text Guide →](./canvas.md)
+- [BitmapText Guide →](./bitmap.md)
+- [HTMLText Guide →](./html.md)
