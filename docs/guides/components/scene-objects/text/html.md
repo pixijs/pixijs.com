@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # HTML Text
 
 `HTMLText` enables styled, formatted HTML strings to be rendered as part of the PixiJS scene graph. It uses an SVG `<foreignObject>` to embed browser-native HTML inside your WebGL canvas.

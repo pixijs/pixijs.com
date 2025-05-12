@@ -96,7 +96,7 @@ Use this feature sparingly, as sorting can be expensive for large numbers of chi
 Containers can be promoted to **render groups** by setting `isRenderGroup = true` or calling `enableRenderGroup()`.
 
 Use render groups for UI layers, particle systems, or large moving subtrees.
-See the [Render Groups guide](../../concepts/render-groups.md) for more details.
+See the [Render Groups guide](../../../concepts/render-groups.md) for more details.
 
 ```ts
 const uiLayer = new Container({ isRenderGroup: true });
@@ -127,7 +127,7 @@ container.updateCacheTexture();
 container.cacheAsTexture(false);
 ```
 
-For more advanced usage, including setting cache options and handling dynamic content, refer to the [Cache as Texture guide](../../extra-topics/cache-as-texture.md).
+For more advanced usage, including setting cache options and handling dynamic content, refer to the [Cache as Texture guide](./cache-as-texture.md).
 
 ---
 

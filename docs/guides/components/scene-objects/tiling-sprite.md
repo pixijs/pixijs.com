@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Tiling Sprite
 
 A `TilingSprite` is a high-performance way to render a repeating texture across a rectangular area. Instead of stretching the texture, it repeats (tiles) it to fill the given space, making it ideal for backgrounds, parallax effects, terrain, and UI panels.

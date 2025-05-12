@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Resize Plugin
 
 The `ResizePlugin` provides automatic resizing functionality for PixiJS applications. When enabled, it listens to window or element resize events and resizes the application's renderer accordingly.

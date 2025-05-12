@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Bitmap Text
 
 `BitmapText` is a high-performance text rendering solution in PixiJS. Unlike the `Text` class, which rasterizes each string into a new texture, `BitmapText` draws characters from a pre-generated texture atlas. This design allows you to render tens of thousands of text objects with minimal overhead.

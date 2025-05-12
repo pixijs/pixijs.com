@@ -236,7 +236,7 @@ Blend modes determine how colors of overlapping objects are combined. PixiJS sup
 - `multiply`: Multiplies the colors of the source and destination pixels.
 - `screen`: Inverts the colors, multiplies them, and inverts again.
 
-We also support may more advanced blend modes, such as `subtract`, `difference`, and `overlay`. You can find the full list of blend modes in the [Blend Modes documentation](../filters.md#blend-modes).
+We also support may more advanced blend modes, such as `subtract`, `difference`, and `overlay`. You can find the full list of blend modes in the [Blend Modes documentation](../filters.md#advanced-blend-modes).
 
 ```ts
 const sprite = new Sprite(texture);

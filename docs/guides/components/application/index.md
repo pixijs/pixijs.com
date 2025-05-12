@@ -92,13 +92,6 @@ PixiJS includes:
 - ✅ **Resize Plugin** — Resizes renderer/canvas → [Guide](./resize-plugin.md)
 - ➕ **Optional: Culler Plugin** - Culls objects that are out of frame → [Guide](./culler-plugin.md)
 
-Enable the culler plugin with:
-
-```ts
-import { extensions, CullerPlugin } from 'pixi.js';
-extensions.add(CullerPlugin);
-```
-
 ---
 
 ## Creating a Custom Application Plugin
@@ -153,8 +146,6 @@ await app.init({
 ---
 
 ## API Reference
-
-Below are all public properties and methods of the `Application` class:
 
 ### Properties
 

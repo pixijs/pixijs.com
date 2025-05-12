@@ -20,6 +20,8 @@ const point = new Point(5, 5);
 const result = matrix.apply(point); // result is (20, 30)
 ```
 
+---
+
 ## Point and ObservablePoint
 
 ### `Point`
@@ -48,6 +50,8 @@ const observer = {
 const reactive = new ObservablePoint(observer, 1, 2);
 reactive.set(3, 4); // triggers call to _onUpdate
 ```
+
+---
 
 ## Shapes
 
@@ -118,6 +122,8 @@ import { Triangle } from 'pixi.js';
 const triangle = new Triangle(0, 0, 100, 0, 50, 100);
 triangle.contains(50, 50); // true
 ```
+
+---
 
 ## Optional: `math-extras`
 

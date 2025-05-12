@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Sprite
 
 Sprites are the foundational visual elements in PixiJS. They represent a single image to be displayed on the screen. Each [Sprite](https://pixijs.download/release/docs/scene.Sprite.html) contains a [Texture](https://pixijs.download/release/docs/rendering.Texture.html) to be drawn, along with all the transformation and display state required to function in the scene graph.
@@ -41,6 +45,8 @@ Sprites also have `width` and `height` properties that act as _convenience sette
 sprite.width = 100; // Automatically updates scale.x
 // sets: sprite.scale.x = 100 / sprite.texture.orig.width;
 ```
+
+---
 
 ## API Reference
 

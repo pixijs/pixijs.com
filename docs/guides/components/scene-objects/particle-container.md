@@ -1,3 +1,7 @@
+---
+sidebar_position: 7
+---
+
 # Particle Container
 
 ixiJS v8 introduces a high-performance particle system via the `ParticleContainer` and `Particle` classes. Designed for rendering vast numbers of lightweight visuals—like sparks, bubbles, bunnies, or explosions—this system provides raw speed by stripping away all non-essential overhead.

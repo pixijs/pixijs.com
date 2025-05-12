@@ -1,3 +1,7 @@
+---
+sidebar_position: 0
+---
+
 # Text (Canvas)
 
 The `Text` class in PixiJS allows you to render styled, dynamic strings as display objects in your scene. Under the hood, PixiJS rasterizes the text using the browser’s canvas text API, then converts that into a texture. This makes `Text` objects behave like sprites: they can be moved, rotated, scaled, masked, and rendered efficiently.
@@ -102,8 +106,6 @@ Below is a list of properties you can pass in the `data` object when loading a f
 ---
 
 ## API Reference
-
-### `Text`
 
 | Name           | Description                                                         |
 | -------------- | ------------------------------------------------------------------- |

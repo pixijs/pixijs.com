@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Text Style
 
 The `TextStyle` class encapsulates all visual styling properties for text. You can define colors, font families, stroke, shadows, alignment, line spacing, word wrapping, and more.

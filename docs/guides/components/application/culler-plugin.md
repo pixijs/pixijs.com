@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Culler Plugin
 
 The `CullerPlugin` automatically skips rendering for offscreen objects in your scene. It does this by using the renderer's screen bounds to determine whether containers (and optionally their children) intersect the view. If they don't, they are **culled**, reducing rendering and update overhead.
@@ -93,9 +97,9 @@ renderer.render({ container: stage });
 
 ---
 
-## 📘 API Reference
+## API Reference
 
-### Container Culling Properties
+### Container Properties
 
 These are available on any `Container`:
 
