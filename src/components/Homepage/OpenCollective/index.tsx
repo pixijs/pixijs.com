@@ -46,9 +46,6 @@ export default function OpenCollective(): JSX.Element
         {
             const response = await fetch('https://opencollective.com/pixijs/members/all.json');
             const data = (await response.json()) as OpenCollectiveSchema;
-            // NOTE: the open collective data is currently reporting all subscriptions are inactive,
-            // so we are removing this filter for now
-            // .filter((member) => member.isActive)
             const sponsorData = data
                 .filter((member) => member.tier === 'sponsor')
                 .filter((member) => member.isActive)

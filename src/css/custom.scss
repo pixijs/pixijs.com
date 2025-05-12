@@ -21,6 +21,10 @@
 
     --ifm-breadcrumb-color-active: var(--ifm-text-color);
     --ifm-breadcrumb-spacing: 2px;
+
+    --doc-sidebar-width: 275px !important;
+
+    --sidebar-category-color: #000000;
 }
 
 html {
@@ -310,4 +314,12 @@ html[data-theme='dark'] {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+[data-theme='light'] {
+    --sidebar-category-color: #000000;
+}
+
+[data-theme='dark'] {
+    --sidebar-category-color: #ffffff;
 }
