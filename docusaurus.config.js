@@ -89,12 +89,99 @@ const config = {
         [
             '@docusaurus/plugin-client-redirects',
             {
+                redirects: [
+                    {
+                        to: '/8.x/guides/getting-started/intro',
+                        from: '/8.x/guides',
+                    },
+                    {
+                        to: '/8.x/guides/getting-started/intro#what-is-pixijs',
+                        from: '/8.x/guides/basics/what-pixijs-is',
+                    },
+                    {
+                        to: '/8.x/guides/getting-started/intro#what-is-not-pixijs',
+                        from: '/8.x/guides/basics/basics/what-pixijs-is-not',
+                    },
+                    {
+                        to: '/8.x/guides/getting-started/quick-start',
+                        from: '/8.x/guides/basics/getting-started',
+                    },
+                    {
+                        to: '/8.x/guides/concepts/architecture',
+                        from: '/8.x/guides/basics/architecture-overview',
+                    },
+                    {
+                        to: '/8.x/guides/concepts/render-loop',
+                        from: '/8.x/guides/basics/render-loop',
+                    },
+                    {
+                        to: '/8.x/guides/concepts/scene-graph',
+                        from: '/8.x/guides/basics/scene-graph',
+                    },
+                    {
+                        to: '/8.x/guides/concepts/render-groups',
+                        from: '/8.x/guides/advanced/render-groups',
+                    },
+                    {
+                        to: '/8.x/guides/concepts/render-layers',
+                        from: '/8.x/guides/advanced/render-layers',
+                    },
+                    {
+                        to: '/8.x/guides/components/assets/svg',
+                        from: '/8.x/guides/basics/svg',
+                    },
+                    {
+                        to: '/8.x/guides/components/scene-objects/container/cache-as-texture',
+                        from: '/8.x/guides/advanced/cache-as-texture',
+                    },
+                    {
+                        to: '/8.x/guides/third-party/mixing-three-and-pixi',
+                        from: '/8.x/guides/advanced/mixing-three-and-pixi',
+                    },
+                    {
+                        to: '/8.x/guides/components/scene-objects/container',
+                        from: '/8.x/guides/components/containers',
+                    },
+                    {
+                        to: '/8.x/guides/components/scene-objects/graphics',
+                        from: '/8.x/guides/components/graphics',
+                    },
+                    {
+                        to: '/8.x/guides/components/scene-objects/graphics/graphics-pixel-line',
+                        from: '/8.x/guides/components/graphics-pixel-line',
+                    },
+                    {
+                        to: '/8.x/guides/components/scene-objects/graphics/graphics-fill',
+                        from: '/8.x/guides/components/graphics-fill',
+                    },
+                    {
+                        to: '/8.x/guides/components/events',
+                        from: '/8.x/guides/components/interaction',
+                    },
+                    {
+                        to: '/8.x/guides/components/scene-objects/sprite',
+                        from: '/8.x/guides/components/sprites',
+                    },
+                    {
+                        to: '/8.x/guides/components/scene-objects/text',
+                        from: '/8.x/guides/components/text',
+                    },
+                    {
+                        to: '/8.x/guides/components/assets',
+                        from: '/8.x/guides/components/sprite-sheets',
+                    },
+                    {
+                        to: '/8.x/guides/concepts/performance-tips',
+                        from: '/8.x/guides/production/performance-tips',
+                    },
+                ],
                 // eslint-disable-next-line consistent-return
                 createRedirects(existingPath)
                 {
                     if (existingPath.includes('/7.x')) return undefined;
 
                     const pathsToRedirect = ['guides', 'examples', 'tutorials', 'playground'];
+                    const res = existingPath;
 
                     for (let i = 0; i < pathsToRedirect.length; i++)
                     {
