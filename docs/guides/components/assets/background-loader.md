@@ -48,3 +48,8 @@ You can also load individual assets in the background using the `Assets.backgrou
     // Load another asset in the background
     Assets.backgroundLoad({ alias: 'eggHead', src: 'https://pixijs.com/assets/eggHead.png' });
 ```
+
+## API Reference
+
+- [Assets](https://pixijs.download/release/docs/assets.Assets.html)
+- [BackgroundLoader](https://pixijs.download/release/docs/assets.BackgroundLoader.html)

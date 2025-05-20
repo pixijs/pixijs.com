@@ -82,15 +82,5 @@ This is useful for:
 
 ## API Reference
 
-### Properties
-
-| Property     | Type     | Description                                                                                   |
-| ------------ | -------- | --------------------------------------------------------------------------------------------- |
-| `app.ticker` | `Ticker` | The `Ticker` instance used for driving updates. May be shared or private depending on config. |
-
-### Methods
-
-| Method        | Returns | Description                                  |
-| ------------- | ------- | -------------------------------------------- |
-| `app.start()` | `void`  | Starts the render loop via `ticker.start()`. |
-| `app.stop()`  | `void`  | Stops the render loop via `ticker.stop()`.   |
+- [TickerPlugin](https://pixijs.download/release/docs/app.TickerPlugin.html)
+- [Ticker](https://pixijs.download/release/docs/ticker.Ticker.html)

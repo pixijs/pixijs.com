@@ -159,3 +159,18 @@ import 'pixi.js/math-extras';
 | `equals(other)`              | Checks if all properties are equal.                   |
 | `intersection(other[, out])` | Returns a new rectangle representing the overlap.     |
 | `union(other[, out])`        | Returns a rectangle that encompasses both rectangles. |
+
+---
+
+## API Reference
+
+- [Overview](https://pixijs.download/release/docs/maths.html)
+- [Matrix](https://pixijs.download/release/docs/maths.Matrix.html)
+- [Point](https://pixijs.download/release/docs/maths.Point.html)
+- [ObservablePoint](https://pixijs.download/release/docs/maths.ObservablePoint.html)
+- [Rectangle](https://pixijs.download/release/docs/maths.Rectangle.html)
+- [Circle](https://pixijs.download/release/docs/maths.Circle.html)
+- [Ellipse](https://pixijs.download/release/docs/maths.Ellipse.html)
+- [Polygon](https://pixijs.download/release/docs/maths.Polygon.html)
+- [RoundedRectangle](https://pixijs.download/release/docs/maths.RoundedRectangle.html)
+- [Triangle](https://pixijs.download/release/docs/maths.Triangle.html)

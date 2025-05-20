@@ -275,3 +275,19 @@ To remove the callback:
 ```ts
 container.onRender = null;
 ```
+
+---
+
+## API Reference
+
+- [Overview](https://pixijs.download/release/docs/scene.html)
+- [Container](https://pixijs.download/release/docs/scene.Container.html)
+- [ParticleContainer](https://pixijs.download/release/docs/scene.ParticleContainer.html)
+- [Sprite](https://pixijs.download/release/docs/scene.Sprite.html)
+- [TilingSprite](https://pixijs.download/release/docs/scene.TilingSprite.html)
+- [NineSliceSprite](https://pixijs.download/release/docs/scene.NineSliceSprite.html)
+- [Graphics](https://pixijs.download/release/docs/scene.Graphics.html)
+- [Mesh](https://pixijs.download/release/docs/scene.Mesh.html)
+- [Text](https://pixijs.download/release/docs/scene.Text.html)
+- [Bitmap Text](https://pixijs.download/release/docs/scene.BitmapText.html)
+- [HTMLText](https://pixijs.download/release/docs/scene.HTMLText.html)

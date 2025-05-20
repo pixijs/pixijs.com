@@ -96,69 +96,9 @@ style.dropShadow.color = '#ff0000'; // Change shadow color
 
 ## **API Reference**
 
-### **Font Settings**
-
-| Property      | Description                                                      |
-| ------------- | ---------------------------------------------------------------- |
-| `fontFamily`  | Preferred font(s), e.g. `'Arial'` or `['Verdana', 'sans-serif']` |
-| `fontSize`    | Size in pixels                                                   |
-| `fontStyle`   | `'normal'`, `'italic'`, `'oblique'`                              |
-| `fontVariant` | `'normal'`, `'small-caps'`                                       |
-| `fontWeight`  | `'normal'`, `'bold'`, `'400'`, etc.                              |
-
----
-
-### **Fill and Stroke**
-
-| Property | Description                                                         |
-| -------- | ------------------------------------------------------------------- |
-| `fill`   | Solid color, gradient (`FillGradient`), or pattern (`FillPattern`)  |
-| `stroke` | Stroke color or style object; requires `stroke.width` to be visible |
-
----
-
-### **Drop Shadow**
-
-| Property              | Description                 |
-| --------------------- | --------------------------- |
-| `dropShadow.color`    | Shadow color                |
-| `dropShadow.alpha`    | Opacity from `0.0` to `1.0` |
-| `dropShadow.angle`    | Direction in radians        |
-| `dropShadow.blur`     | Shadow blur radius          |
-| `dropShadow.distance` | Distance from text          |
-
----
-
-### **Layout and Alignment**
-
-| Property        | Description                                  |
-| --------------- | -------------------------------------------- |
-| `align`         | `'left'`, `'center'`, `'right'`, `'justify'` |
-| `lineHeight`    | Distance between baselines                   |
-| `leading`       | Extra space between lines                    |
-| `letterSpacing` | Space between characters                     |
-| `padding`       | Padding around the text block                |
-
----
-
-### **Wrapping and Spacing**
-
-| Property        | Description                            |
-| --------------- | -------------------------------------- |
-| `wordWrap`      | Enables auto line wrapping             |
-| `wordWrapWidth` | Width in pixels before wrapping        |
-| `breakWords`    | Allow breaks inside long words         |
-| `whiteSpace`    | `'normal'`, `'pre'`, `'pre-line'`      |
-| `textBaseline`  | Canvas text baseline alignment         |
-| `trim`          | Remove transparent padding (expensive) |
-
----
-
-## **TextStyle Methods**
-
-| Method             | Description                                     |
-| ------------------ | ----------------------------------------------- |
-| `update()`         | Marks the style as dirty and notifies listeners |
-| `clone()`          | Returns a new copy of the style                 |
-| `destroy(options)` | Cleans up fill/stroke textures                  |
-| `reset()`          | Resets the style to default values              |
+- [TextStyle](https://pixijs.download/release/docs/text.TextStyle.html)
+- [Text](https://pixijs.download/release/docs/scene.Text.html)
+- [BitmapText](https://pixijs.download/release/docs/scene.BitmapText.html)
+- [HTMLText](https://pixijs.download/release/docs/scene.HTMLText.html)
+- [FillStyle](https://pixijs.download/release/docs/scene.FillStyle.html)
+- [StrokeStyle](https://pixijs.download/release/docs/scene.StrokeStyle.html)

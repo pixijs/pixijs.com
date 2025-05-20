@@ -133,58 +133,6 @@ For more advanced usage, including setting cache options and handling dynamic co
 
 ## API Reference
 
-### Common Properties
-
-| Property           | Description                                                         |
-| ------------------ | ------------------------------------------------------------------- |
-| `position`         | Local position (`.x`, `.y`)                                         |
-| `x`                | X position in pixels                                                |
-| `y`                | Y position in pixels                                                |
-| `width`            | Width in pixels                                                     |
-| `height`           | Height in pixels                                                    |
-| `rotation`         | Rotation in radians                                                 |
-| `angle`            | Rotation in degrees (alias for `rotation`)                          |
-| `scale`            | `.x` and `.y` scale factors                                         |
-| `pivot`            | Transform origin for scaling/rotation                               |
-| `skew`             | Skew values in radians                                              |
-| `alpha`            | Opacity (0 to 1)                                                    |
-| `visible`          | Whether the container and its subtree is rendered                   |
-| `tint`             | Tint color                                                          |
-| `renderable`       | Whether the container itself is renderable (still updates children) |
-| `children`         | Array of children                                                   |
-| `parent`           | Reference to parent container                                       |
-| `isRenderGroup`    | Whether the container is rendered as its own group                  |
-| `mask`             | Mask object (Graphics or Sprite)                                    |
-| `label`            | Optional string label used for searching                            |
-| `zIndex`           | Sorting value used if `sortableChildren` is true                    |
-| `sortableChildren` | Whether children are sorted by `zIndex`                             |
-
-### Common Methods
-
-| Method                                   | Description                                       |
-| ---------------------------------------- | ------------------------------------------------- |
-| `addChild(...children)`                  | Add one or more children                          |
-| `addChildAt(child, index)`               | Add a child at a specific index                   |
-| `removeChild(...children)`               | Remove one or more children                       |
-| `removeChildAt(index)`                   | Remove a child by index                           |
-| `removeChildren(begin, end)`             | Remove a range of children                        |
-| `getChildAt(index)`                      | Get child by index                                |
-| `getChildIndex(child)`                   | Get index of a child                              |
-| `setChildIndex(child, index)`            | Change a child's index position                   |
-| `swapChildren(child1, child2)`           | Swap two children                                 |
-| `removeFromParent()`                     | Remove the container from its parent              |
-| `reparentChild(child)`                   | Move child while preserving world transform       |
-| `reparentChildAt(child, index)`          | Reparent at specific index                        |
-| `getChildByLabel(label, deep?)`          | Find the first child with a matching label        |
-| `getChildrenByLabel(label, deep?, out?)` | Find all children with a matching label           |
-| `sortChildren()`                         | Sort children by zIndex                           |
-| `getGlobalPosition()`                    | Get global position of container                  |
-| `toGlobal(localPos)`                     | Convert a local position to global space          |
-| `toLocal(globalPos, from)`               | Convert a global position to local space          |
-| `getLocalBounds()`                       | Return local bounds as a `Bounds` object          |
-| `getBounds()`                            | Return global bounds as a `Bounds` object         |
-| `getSize()`                              | Get size as width/height in pixels                |
-| `setSize(width, height)`                 | Resize container by adjusting scale               |
-| `enableRenderGroup()`                    | Promote container to a render group               |
-| `disableRenderGroup()`                   | Disable render group mode                         |
-| `destroy(options)`                       | Destroy the container and optionally its children |
+- [Container](https://pixijs.download/release/docs/scene.Container.html)
+- [ContainerOptions](https://pixijs.download/release/docs/scene.ContainerOptions.html)
+- [RenderContainer](https://pixijs.download/release/docs/scene.RenderContainer.html)

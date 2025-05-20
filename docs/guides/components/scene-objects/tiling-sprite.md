@@ -67,24 +67,5 @@ tilingSprite.tileScale.set(2, 2);
 
 ## API Reference
 
-| Member                   | Description                                                         |
-| ------------------------ | ------------------------------------------------------------------- |
-| **TilingSprite.from()**  | Static constructor for quick setup                                  |
-| **texture**              | Texture being tiled                                                 |
-| **width**, **height**    | Dimensions of the visible tiling area                               |
-| **tilePosition**         | Offset of the tile pattern                                          |
-| **tileScale**            | Scaling of the tile pattern                                         |
-| **tileRotation**         | Rotation of the tile pattern                                        |
-| **anchor**               | Pivot point of the container                                        |
-| **applyAnchorToTexture** | Whether anchor affects tiling origin                                |
-| **clampMargin**          | Adjustment to fix texture bleeding                                  |
-| **position**             | Local position (`.x`, `.y`)                                         |
-| **rotation**             | Rotation in radians                                                 |
-| **angle**                | Rotation in degrees (alias for `rotation`)                          |
-| **scale**                | `.x` and `.y` scale factors                                         |
-| **pivot**                | Transform origin for scaling/rotation                               |
-| **skew**                 | Skew values in radians                                              |
-| **alpha**                | Opacity (0 to 1)                                                    |
-| **visible**              | Whether the container and its subtree is rendered                   |
-| **tint**                 | Tint color                                                          |
-| **renderable**           | Whether the container itself is renderable (still updates children) |
+- [TilingSprite](https://pixijs.download/release/docs/scene.TilingSprite.html)
+- [Texture](https://pixijs.download/release/docs/rendering.Texture.html)

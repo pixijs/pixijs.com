@@ -100,49 +100,12 @@ requestAnimationFrame(render);
 
 See our full guide on [mixing PixiJS with Three.js](../../third-party/mixing-three-and-pixi.mdx) for more details.
 
+---
+
 ## API Reference
 
-All renderers provide these common features:
-
-### Core Methods
-
-| Method                               | Description                                                                         |
-| ------------------------------------ | ----------------------------------------------------------------------------------- |
-| `init(options)`                      | Asynchronously initializes the renderer and its systems.                            |
-| `render(container)`                  | Renders a container to screen or texture.                                           |
-| `resize(width, height, resolution?)` | Resizes canvas and updates resolution.                                              |
-| `clear(options?)`                    | Clears the screen or target texture with a color.                                   |
-| `destroy(options?)`                  | Cleans up all GPU and system resources.                                             |
-| `resetState()`                       | Resets render state (useful after mixing PixiJS with other Libraries like ThreeJS). |
-| `generateTexture(options)`           | Generates a texture from a container.                                               |
-
-### Properties
-
-| Property             | Description                                                                                   |
-| -------------------- | --------------------------------------------------------------------------------------------- |
-| `canvas`             | The canvas element used for rendering.                                                        |
-| `screen`             | The screen bounds (0,0,width,height).                                                         |
-| `resolution`         | The resolution of the renderer.                                                               |
-| `width`, `height`    | Current canvas size in physical pixels.                                                       |
-| `renderingToScreen`  | Flag if we are rendering to the screen vs renderTexture                                       |
-| `roundPixels`        | `true` if pixel rounding is enabled.                                                          |
-| `lastObjectRendered` | The last object rendered by the renderer. Useful for other plugins like interaction managers. |
-
-## Lifecycle Hooks
-
-Each renderer emits a set of **lifecycle events**, called "runners", to manage and coordinate internal systems:
-
-| Hook               | Description                                                   |
-| ------------------ | ------------------------------------------------------------- |
-| `init`             | Called when the renderer is initialized.                      |
-| `destroy`          | Called before destroying the renderer.                        |
-| `contextChange`    | Fired when the rendering context changes (e.g. context loss). |
-| `resolutionChange` | Fired when resolution is updated.                             |
-| `resetState`       | Invoked to reset the WebGL/WebGPU state.                      |
-| `renderStart`      | Before any rendering starts.                                  |
-| `prerender`        | Before the main render logic begins.                          |
-| `render`           | The main render call.                                         |
-| `renderEnd`        | After rendering finishes.                                     |
-| `postrender`       | Cleanup or finalization after rendering.                      |
-
-These hooks allow renderer systems (e.g. shader managers, geometry uploaders) to synchronize automatically around key rendering moments.
+- [Overview](https://pixijs.download/release/docs/rendering.html)
+- [AbstractRenderer](https://pixijs.download/release/docs/rendering.AbstractRenderer.html)
+- [WebGLRenderer](https://pixijs.download/release/docs/rendering.WebGLRenderer.html)
+- [WebGPURenderer](https://pixijs.download/release/docs/rendering.WebGPURenderer.html)
+- [AutoDetectRenderer](https://pixijs.download/release/docs/rendering.html#autoDetectRenderer)

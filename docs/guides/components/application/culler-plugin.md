@@ -99,21 +99,4 @@ renderer.render({ container: stage });
 
 ## API Reference
 
-### Container Properties
-
-These are available on any `Container`:
-
-| Property           | Type                | Default | Description                                                        |
-| ------------------ | ------------------- | ------- | ------------------------------------------------------------------ |
-| `cullable`         | `boolean`           | `false` | Whether the container can be culled.                               |
-| `cullableChildren` | `boolean`           | `true`  | Whether children of this container should be culled recursively.   |
-| `cullArea`         | `Rectangle \| null` | `null`  | Custom bounds used for culling instead of automatic global bounds. |
-
----
-
-### `Culler` Class
-
-| Method                                              | Description                                                    |
-| --------------------------------------------------- | -------------------------------------------------------------- |
-| `cull(container, view, skipUpdateTransform = true)` | Recursively culls containers that are outside the view bounds. |
-| `Culler.shared`                                     | A singleton instance for shared usage.                         |
+- [CullerPlugin](https://pixijs.download/release/docs/app.CullerPlugin.html)

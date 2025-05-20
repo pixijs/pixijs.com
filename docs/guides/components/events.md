@@ -198,18 +198,12 @@ sprite.cursor = 'hover';
 
 ## API Reference
 
-### Container Properties
-
-| Property / Method     | Type / Signature                               | Description                                                |
-| --------------------- | ---------------------------------------------- | -----------------------------------------------------------|
-| `eventMode`           | `'none','passive','auto','static','dynamic'`   | Controls how an object responds to input events            |
-| `interactive`         | `boolean`                                      | Alias for setting `eventMode` to `'static'` or `'passive'` |
-| `interactiveChildren` | `boolean`                                      | Whether to hit test children                               |
-| `hitArea`             | `IHitArea`                                     | Custom hit area                                            |
-| `cursor`              | `string`                                       | CSS cursor when hovered                                    |
-| `addEventListener`    | `(type, listener, options?)`                   | Adds a DOM-style event listener                            |
-| `removeEventListener` | `(type, listener, options?)`                   | Removes a DOM-style event listener                         |
-| `dispatchEvent`       | `(event: FederatedEvent)`                      | Dispatches a federated event                               |
-| `on`                  | `(event, callback)`                            | Adds an EventEmitter-style listener                        |
-| `off`                 | `(event, callback)`                            | Removes an EventEmitter-style listener                     |
-| `isInteractive()`     | `(): boolean`                                  | Returns `true` if `eventMode` is `static` or `dynamic`     |
+- [Overview](https://pixijs.download/release/docs/events.html)
+- [EventSystem](https://pixijs.download/release/docs/events.EventSystem.html)
+- [Cursor](https://pixijs.download/release/docs/events.html#Cursor)
+- [EventMode](https://pixijs.download/release/docs/events.html#EventMode)
+- [Container](https://pixijs.download/release/docs/scene.Container.html)
+- [FederatedEvent](https://pixijs.download/release/docs/events.FederatedEvent.html)
+- [FederatedMouseEvent](https://pixijs.download/release/docs/events.FederatedMouseEvent.html)
+- [FederatedWheelEvent](https://pixijs.download/release/docs/events.FederatedWheelEvent.html)
+- [FederatedPointerEvent](https://pixijs.download/release/docs/events.FederatedPointerEvent.html)

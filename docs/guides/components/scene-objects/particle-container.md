@@ -116,40 +116,5 @@ const particle = new Particle(Texture.from('spark.png'));
 
 ## **API Reference**
 
-### `Particle`
-
-| Property        | Description                              |
-| --------------- | ---------------------------------------- |
-| **x / y**       | Particle's position                      |
-| **scaleX / Y**  | Independent scale values                 |
-| **rotation**    | Rotation in radians                      |
-| **anchorX / Y** | Anchor point offset (0 by default)       |
-| **alpha**       | Opacity value (0 to 1)                   |
-| **tint**        | Tint color in hex                        |
-| **color**       | Combined tint/alpha value (internal use) |
-| **texture**     | Texture to display                       |
-
-### `ParticleContainer`
-
-| Property / Method        | Description                                                            |
-| ------------------------ | ---------------------------------------------------------------------- |
-| **particleChildren**     | Array of `Particle` instances                                          |
-| **dynamicProperties**    | Object specifying which properties update each frame                   |
-| **addParticle(...)**     | Adds one or more particles                                             |
-| **removeParticle(...)**  | Removes one or more particles                                          |
-| **removeParticles(...)** | Removes particles from index range                                     |
-| **addParticleAt(p, i)**  | Adds a particle at a specific index                                    |
-| **removeParticleAt(i)**  | Removes a particle at a specific index                                 |
-| **update()**             | Recomputes GPU buffers for static properties or particle order changes |
-| **shader**               | Optional custom shader for particle rendering                          |
-| **texture**              | Optional shared texture (overridden per-particle if set individually)  |
-| **position**             | Local position (`.x`, `.y`)                                            |
-| **rotation**             | Rotation in radians                                                    |
-| **angle**                | Rotation in degrees (alias for `rotation`)                             |
-| **scale**                | `.x` and `.y` scale factors                                            |
-| **pivot**                | Transform origin for scaling/rotation                                  |
-| **skew**                 | Skew values in radians                                                 |
-| **alpha**                | Opacity (0 to 1)                                                       |
-| **visible**              | Whether the container and its subtree is rendered                      |
-| **tint**                 | Tint color                                                             |
-| **renderable**           | Whether the container itself is renderable (still updates children)    |
+- [ParticleContainer](https://pixijs.download/release/docs/scene.ParticleContainer.html)
+- [Particle](https://pixijs.download/release/docs/scene.Particle.html)

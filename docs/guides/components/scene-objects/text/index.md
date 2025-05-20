@@ -82,3 +82,15 @@ Each text type has a corresponding guide that covers setup, font loading, style 
 - [Text Guide →](./canvas.md)
 - [BitmapText Guide →](./bitmap.md)
 - [HTMLText Guide →](./html.md)
+
+---
+
+## API Reference
+
+- [Text](https://pixijs.download/release/docs/scene.Text.html)
+- [BitmapText](https://pixijs.download/release/docs/scene.BitmapText.html)
+- [HTMLText](https://pixijs.download/release/docs/scene.HTMLText.html)
+- [TextStyle](https://pixijs.download/release/docs/text.TextStyle.html)
+- [BitmapFont](https://pixijs.download/release/docs/text.BitmapFont.html)
+- [FillStyle](https://pixijs.download/release/docs/scene.FillStyle.html)
+- [StrokeStyle](https://pixijs.download/release/docs/scene.StrokeStyle.html)

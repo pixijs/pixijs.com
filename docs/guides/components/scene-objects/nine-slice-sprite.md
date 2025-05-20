@@ -86,29 +86,4 @@ Each setter triggers a geometry update to reflect the changes.
 
 ## **API Reference**
 
-| Property / Method  | Description                                                             |
-| ------------------ | ----------------------------------------------------------------------- |
-| **width**          | The rendered width. Adjusts geometry vertices.                          |
-| **height**         | The rendered height. Adjusts geometry vertices.                         |
-| **originalWidth**  | The original pixel width of the source texture.                         |
-| **originalHeight** | The original pixel height of the source texture.                        |
-| **texture**        | The texture being used.                                                 |
-| **anchor**         | Anchor point (normalized). Changes object position and rotation center. |
-| **leftWidth**      | Width of the left (A) column, in pixels.                                |
-| **rightWidth**     | Width of the right (B) column, in pixels.                               |
-| **topHeight**      | Height of the top (C) row, in pixels.                                   |
-| **bottomHeight**   | Height of the bottom (D) row, in pixels.                                |
-| **setSize(w, h)**  | Updates width and height together efficiently.                          |
-| **getSize(out?)**  | Returns current width and height as a `{ width, height }` object.       |
-| **position**       | Local position (`.x`, `.y`)                                             |
-| **x**              | X position in pixels                                                    |
-| **y**              | Y position in pixels                                                    |
-| **rotation**       | Rotation in radians                                                     |
-| **angle**          | Rotation in degrees (alias for `rotation`)                              |
-| **scale**          | `.x` and `.y` scale factors                                             |
-| **pivot**          | Transform origin for scaling/rotation                                   |
-| **skew**           | Skew values in radians                                                  |
-| **alpha**          | Opacity (0 to 1)                                                        |
-| **visible**        | Whether the container and its subtree is rendered                       |
-| **tint**           | Tint color                                                              |
-| **renderable**     | Whether the container itself is renderable (still updates children)     |
+- [NineSliceSprite](https://pixijs.download/release/docs/scene.NineSliceSprite.html)
