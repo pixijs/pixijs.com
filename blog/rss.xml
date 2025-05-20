@@ -148,7 +148,7 @@ It also means you can use layout in existing projects without needing to refacto
 <li>Highlighting elements in tutorials or overlays.</li>
 </ul>
 <p>For example, you can use Render Layers to ensure a UI health bar stays on top of a moving character, regardless of the scene graph hierarchy.</p>
-<p>More details are available in the <a href="https://pixijs.com/8.x/guides/advanced/render-layers">Render Layers guide</a>.</p>
+<p>More details are available in the <a href="https://pixijs.com/8.x/guides/concepts/render-layers">Render Layers guide</a>.</p>
 <p>Older users of PixiJS may remember the <a href="https://github.com/pixijs-userland/layers" target="_blank" rel="noopener noreferrer">layers</a> plugin, which provided similar functionality. Render Layers are a more integrated and performant solution that is built directly into the core of PixiJS.</p>
 <!-- -->
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="gif-support">GIF Support<a href="https://pixijs.com/blog/8.7.0#gif-support" class="hash-link" aria-label="Direct link to GIF Support" title="Direct link to GIF Support">​</a></h2>
@@ -163,7 +163,7 @@ It also means you can use layout in existing projects without needing to refacto
 <!-- -->
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="integrating-with-threejs-and-other-webgl-projects">Integrating with three.js (and other WebGL projects)<a href="https://pixijs.com/blog/8.7.0#integrating-with-threejs-and-other-webgl-projects" class="hash-link" aria-label="Direct link to Integrating with three.js (and other WebGL projects)" title="Direct link to Integrating with three.js (and other WebGL projects)">​</a></h2>
 <p>Integrating PixiJS with Three.js (and other WebGL projects) is now easier, thanks to improvements in shared WebGL context support. This makes it more straightforward to combine PixiJS's 2D capabilities with Three.js's 3D rendering.</p>
-<p>A detailed guide is available <a href="https://pixijs.com/8.x/guides/advanced/mixing-three-and-pixi">here</a>.</p>
+<p>A detailed guide is available <a href="https://pixijs.com/8.x/guides/third-party/mixing-three-and-pixi">here</a>.</p>
 <!-- -->
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="additional-updates">Additional Updates<a href="https://pixijs.com/blog/8.7.0#additional-updates" class="hash-link" aria-label="Direct link to Additional Updates" title="Direct link to Additional Updates">​</a></h2>
 <p>This release also includes various improvements and bug fixes. For a complete list of changes, check out the <a href="https://github.com/pixijs/pixijs/releases/tag/v8.7.0" target="_blank" rel="noopener noreferrer">changelog</a>.</p>
@@ -382,12 +382,12 @@ community on <a href="https://discord.gg/nrnDP9wtyX" target="_blank" rel="noopen
 <p><strong>cacheAsTexture</strong>: Containers now have a <code>cacheAsTexture()</code> function. It behaves similarly to <code>cacheAsBitmap</code> from v7 and will render the container to a texture instead of rendering the container itself.</p>
 <p>This can be great for performance if the container is static, as instead of rendering all the children etc., it will just render a single texture.
 As well as this the process of caching is also relatively low cost, with the trade-off being memory usage as the use of a texture does increase memory (for the texture itself).</p>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Guide</div><div class="admonitionContent_BuS1"><p>We have a full guide on this feature <a href="https://pixijs.com/8.x/guides/advanced/cache-as-texture">here</a>.</p></div></div>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Guide</div><div class="admonitionContent_BuS1"><p>We have a full guide on this feature <a href="https://pixijs.com/8.x/guides/components/scene-objects/container/cache-as-texture">here</a>.</p></div></div>
 <!-- -->
 </li>
 <li>
 <p><strong>pixelLine</strong>: The <code>pixelLine</code> property is a neat feature of the PixiJS Graphics API that allows you to create lines that remain 1 pixel thick, regardless of scaling or zoom level. This feature is especially useful for achieving crisp, pixel-perfect visuals, particularly in retro-style or grid-based games, technical drawing, or UI rendering.</p>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Guide</div><div class="admonitionContent_BuS1"><p>We have a full guide on this feature <a href="https://pixijs.com/8.x/guides/components/graphics-pixel-line">here</a>.</p></div></div>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Guide</div><div class="admonitionContent_BuS1"><p>We have a full guide on this feature <a href="https://pixijs.com/8.x/guides/components/scene-objects/graphics/graphics-pixel-line">here</a>.</p></div></div>
 <!-- -->
 </li>
 <li>
