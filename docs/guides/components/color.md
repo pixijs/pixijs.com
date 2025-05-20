@@ -51,21 +51,4 @@ graphics.fill({ color: '#00ff00' }); // Also converted internally
 
 ## API Reference
 
-| Property/Method              | Description                                                 |
-| ---------------------------- | ----------------------------------------------------------- |
-| `value`                      | The current color source, can be set with any `ColorSource` |
-| `setValue()`                 | Sets the color from a `ColorSource`                         |
-| `setAlpha()`                 | Sets the alpha component (0.0–1.0)                          |
-| `red/green/blue/alpha`       | Individual channels as floats (0.0–1.0)                     |
-| `toRgb()` / `toRgba()`       | Converts to color object `{ r, g, b, [a] }`                 |
-| `toRgbArray()` / `toArray()` | Converts to float arrays `[r, g, b, a]`                     |
-| `toUint8RgbArray()`          | Converts to integer RGB values `[255, 0, 0]`                |
-| `toHex()` / `toHexa()`       | Returns a hex string with or without alpha                  |
-| `toNumber()`                 | Returns RGB as integer (`0xff0000`)                         |
-| `toBgrNumber()`              | Returns color in BGR order                                  |
-| `multiply()`                 | Multiplies color channels with another color                |
-| `premultiply()`              | Premultiplies color with alpha                              |
-| `toPremultiplied()`          | Returns premultiplied RGBA as a single int                  |
-| `clone()`                    | Creates a deep copy                                         |
-| `Color.shared`               | A globally reusable instance                                |
-| `Color.isColorLike(value)`   | Static helper to validate any `ColorSource`                 |
+- [Color](https://pixijs.download/release/docs/color.Color.html)

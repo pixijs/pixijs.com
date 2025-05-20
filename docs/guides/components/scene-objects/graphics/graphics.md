@@ -151,60 +151,7 @@ You can think of `Graphics` as a blueprint builder: it defines what to draw, but
 
 ## **API Reference**
 
-### `Graphics`
-
-| Property / Method         | Description                                                         |
-| ------------------------- | ------------------------------------------------------------------- |
-| **constructor(context?)** | Creates a new `Graphics` object with an optional `GraphicsContext`. |
-| **context**               | The `GraphicsContext` used to build shape geometry.                 |
-| **position**              | Local position (`.x`, `.y`)                                         |
-| **x**                     | X position in pixels                                                |
-| **y**                     | Y position in pixels                                                |
-| **width**                 | Width in pixels                                                     |
-| **height**                | Height in pixels                                                    |
-| **rotation**              | Rotation in radians                                                 |
-| **angle**                 | Rotation in degrees (alias for `rotation`)                          |
-| **scale**                 | `.x` and `.y` scale factors                                         |
-| **pivot**                 | Transform origin for scaling/rotation                               |
-| **skew**                  | Skew values in radians                                              |
-| **alpha**                 | Opacity (0 to 1)                                                    |
-| **visible**               | Whether the container and its subtree is rendered                   |
-| **tint**                  | Tint color                                                          |
-| **renderable**            | Whether the container itself is renderable (still updates children) |
-
----
-
-### `GraphicsContext`
-
-:::info
-All drawing methods are available on the `Graphics` object itself, as well as on the `GraphicsContext`.
-:::
-
-| Method                    | Description                                                                           |
-| ------------------------- | ------------------------------------------------------------------------------------- |
-| **rect(x, y, w, h)**      | Draw a rectangle.                                                                     |
-| **roundRect(...)**        | Draw a rounded rectangle.                                                             |
-| **chamferRect(...)**      | Draw a chamfered rectangle.                                                           |
-| **filletRect(...)**       | Draw a rectangle with fillet corners.                                                 |
-| **circle(x, y, r)**       | Draw a circle.                                                                        |
-| **ellipse(x, y, w, h)**   | Draw an ellipse.                                                                      |
-| **poly(points)**          | Draw a polygon from an array of points.                                               |
-| **regularPoly(...)**      | Draw a regular polygon with N sides.                                                  |
-| **roundPoly(...)**        | Draw a rounded polygon.                                                               |
-| **roundShape(...)**       | Draw a custom rounded shape.                                                          |
-| **star(...)**             | Draw a star.                                                                          |
-| **svg(string)**           | Add SVG path data to the context.                                                     |
-| **moveTo(x, y)**          | Move the current point to a new location.                                             |
-| **lineTo(x, y)**          | Draw a line to a new point.                                                           |
-| **arc(...)**              | Draw an arc.                                                                          |
-| **arcTo(...)**            | Draw an arc to a point.                                                               |
-| **arcToSvg(...)**         | Draw an SVG-style arc to the path, allowing for elliptical arcs based on the SVG spec |
-| **bezierCurveTo(...)**    | Draw a cubic Bezier curve.                                                            |
-| **quadraticCurveTo(...)** | Draw a quadratic Bezier curve.                                                        |
-| **fill(styleOrColor)**    | Apply a fill to the previous shape using a color or fill style.                       |
-| **stroke(styleOrColor)**  | Apply a stroke to the previous shape using a color or stroke style.                   |
-| **cut()**                 | Cut a hole using the most recently defined shape.                                     |
-| **texture(texture)**      | Set a texture for the next shape.                                                     |
-| **closePath()**           | Close the current path.                                                               |
-| **path(...)**             | Add a path to the context.                                                            |
-| **clear()**               | Removes all shapes and styles from the context.                                       |
+- [Graphics](https://pixijs.download/release/docs/scene.Graphics.html)
+- [GraphicsContext](https://pixijs.download/release/docs/scene.GraphicsContext.html)
+- [FillStyle](https://pixijs.download/release/docs/scene.FillStyle.html)
+- [StrokeStyle](https://pixijs.download/release/docs/scene.StrokeStyle.html)

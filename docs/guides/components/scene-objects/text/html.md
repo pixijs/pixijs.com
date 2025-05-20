@@ -68,35 +68,9 @@ You can apply CSS styles to the text using the `cssOverrides` property. This all
 fancy.style.addOverride('text-shadow: 2px 2px 4px rgba(0,0,0,0.5)');
 ```
 
+---
+
 ## **API Reference**
 
-### `HTMLText` Properties
-
-| Property         | Description                                                         |
-| ---------------- | ------------------------------------------------------------------- |
-| `text`           | The HTML string to display                                          |
-| `style`          | An instance of `HTMLTextStyle` or compatible object                 |
-| `anchor`         | Sets origin for alignment and rotation (0–1 normalized)             |
-| `width`/`height` | Sets object size by adjusting scale                                 |
-| `resolution`     | Read-only; resolution is set automatically                          |
-| **position**     | Local position (`.x`, `.y`)                                         |
-| **rotation**     | Rotation in radians                                                 |
-| **angle**        | Rotation in degrees (alias for `rotation`)                          |
-| **scale**        | `.x` and `.y` scale factors                                         |
-| **pivot**        | Transform origin for scaling/rotation                               |
-| **skew**         | Skew values in radians                                              |
-| **alpha**        | Opacity (0 to 1)                                                    |
-| **visible**      | Whether the container and its subtree is rendered                   |
-| **tint**         | Tint color                                                          |
-| **renderable**   | Whether the container itself is renderable (still updates children) |
-
-### `HTMLTextStyle` Properties
-
-| Property              | Description                                                  |
-| --------------------- | ------------------------------------------------------------ |
-| `tagStyles`           | Per-tag style rules (`{ red: { fill: 'red' } }`)             |
-| `cssOverrides`        | Array of raw CSS strings (e.g. `["background-color: blue"]`) |
-| `fill`                | Must be a solid color (not texture or gradient)              |
-| `stroke`              | Must be a solid color (not pattern or gradient)              |
-| `addOverride(...)`    | Adds custom CSS rule(s) to override default style            |
-| `removeOverride(...)` | Removes previously added override rules                      |
+- [HTMLText](https://pixijs.download/release/docs/scene.HTMLText.html)
+- [HTMLTextStyle](https://pixijs.download/release/docs/text.HTMLTextStyle.html)

@@ -87,21 +87,7 @@ ticker.maxFPS = 0;
 
 ---
 
-## API Reference Table
+## API Reference
 
-| Property/Method                    | Description                               |
-| ---------------------------------- | ----------------------------------------- |
-| `add(fn, context?, priority?)`     | Adds a persistent listener                |
-| `addOnce(fn, context?, priority?)` | Adds a one-time listener                  |
-| `remove(fn, context?)`             | Removes listener(s)                       |
-| `start()` / `stop()`               | Starts or stops the ticker                |
-| `destroy()`                        | Cleans up the ticker                      |
-| `autoStart`                        | Auto-starts ticker on listener addition   |
-| `speed`                            | Scalar multiplier for `deltaTime`         |
-| `deltaTime`                        | Scaled time since last frame (in frames)  |
-| `deltaMS`                          | Scaled time since last frame (in ms)      |
-| `elapsedMS`                        | Raw elapsed time since last frame (in ms) |
-| `minFPS`                           | Minimum allowed FPS (caps `deltaTime`)    |
-| `maxFPS`                           | Maximum allowed FPS (limits update rate)  |
-| `count`                            | Number of active listeners                |
-| `FPS`                              | Computed frames per second                |
+- [Ticker](https://pixijs.download/release/docs/ticker.Ticker.html)
+- [Application](https://pixijs.download/release/docs/app.Application.html)

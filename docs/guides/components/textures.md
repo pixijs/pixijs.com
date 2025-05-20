@@ -119,58 +119,7 @@ texture.source.wrapMode = 'repeat';
 
 ## API Reference
 
-### Static Properties
-
-| Property        | Type                         | Description                                                     |
-| --------------- | ---------------------------- | --------------------------------------------------------------- |
-| `Texture.EMPTY` | `Texture`                    | A permanently blank texture used internally.                    |
-| `Texture.WHITE` | `Texture<BufferImageSource>` | A 1×1 white texture used internally for fills and placeholders. |
-
-### Static Methods
-
-| Method                         | Returns   | Description                                                         |
-| ------------------------------ | --------- | ------------------------------------------------------------------- |
-| `Texture.from(id, skipCache?)` | `Texture` | Creates a texture from a loaded asset, source, or resource options. |
-
----
-
-### Instance Properties
-
-| Property         | Type                       | Description                                                      |
-| ---------------- | -------------------------- | ---------------------------------------------------------------- |
-| `uid`            | `number`                   | Unique identifier for the texture.                               |
-| `label`          | `string`                   | Optional label used for debugging.                               |
-| `source`         | `TextureSource`            | The underlying resource for the texture. Replaces `baseTexture`. |
-| `rotate`         | `number`                   | Rotation value from texture packer. Uses `groupD8` constants.    |
-| `frame`          | `Rectangle`                | The rectangular area of the source to render.                    |
-| `orig`           | `Rectangle`                | Original full rectangle before trimming or framing.              |
-| `trim`           | `Rectangle`                | Trimmed area from original texture.                              |
-| `uvs`            | `UVs`                      | Calculated UV coordinates based on frame.                        |
-| `defaultAnchor`  | `{ x: number, y: number }` | Default anchor point used in Sprites.                            |
-| `defaultBorders` | `TextureBorders`           | Borders used for 9-slice scaling.                                |
-| `destroyed`      | `boolean`                  | Whether the texture has been destroyed.                          |
-| `dynamic`        | `boolean`                  | Set `true` if modifying frame or UVs at runtime.                 |
-| `noFrame`        | `boolean`                  | Whether this texture was created without a defined frame.        |
-| `textureMatrix`  | `TextureMatrix`            | Lazily computed matrix for mapping texture coordinates.          |
-| `width`          | `number`                   | Width of the texture in pixels.                                  |
-| `height`         | `number`                   | Height of the texture in pixels.                                 |
-| `isTexture`      | `true`                     | Used for type checking.                                          |
-
----
-
-### Instance Methods
-
-| Method                             | Returns | Description                                                                            |
-| ---------------------------------- | ------- | -------------------------------------------------------------------------------------- |
-| `update()`                         | `void`  | Recalculates UVs and emits an update event. Call after modifying frame or source.      |
-| `updateUvs()`                      | `void`  | Recalculates the UV mapping for the texture. Called internally during setup or update. |
-| `destroy(destroySource?: boolean)` | `void`  | Disposes the texture and optionally destroys its source.                               |
-
----
-
-### Events
-
-| Event       | Payload   | Description                          |
-| ----------- | --------- | ------------------------------------ |
-| `'update'`  | `Texture` | Fired when UVs or dimensions change. |
-| `'destroy'` | `Texture` | Fired when the texture is destroyed. |
+- [Texture](https://pixijs.download/release/docs/rendering.Texture.html)
+- [TextureSource](https://pixijs.download/release/docs/rendering.TextureSource.html)
+- [TextureStyle](https://pixijs.download/release/docs/rendering.TextureStyle.html)
+- [RenderTexture](https://pixijs.download/release/docs/rendering.RenderTexture.html)

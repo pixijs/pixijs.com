@@ -147,23 +147,13 @@ await app.init({
 
 ## API Reference
 
-### Properties
-
-| Name        | Type                        | Description                                                     |
-| ----------- | --------------------------- | --------------------------------------------------------------- |
-| `canvas`    | `ICanvas`                   | The canvas being rendered to.                                   |
-| `renderer`  | `Renderer`                  | The rendering engine (WebGL or WebGPU).                         |
-| `stage`     | `Container`                 | The root container to render.                                   |
-| `ticker`    | `Ticker \| undefined`       | The application's update loop handler (if using ticker plugin). |
-| `resize`    | `ResizePlugin \| undefined` | Resize controller (if using resize plugin).                     |
-| `destroyed` | `boolean`                   | Whether the application has been destroyed.                     |
-
-### Methods
-
-| Method                                             | Returns         | Description                                                           |
-| -------------------------------------------------- | --------------- | --------------------------------------------------------------------- |
-| `init(options: ApplicationOptions): Promise<void>` | `Promise<void>` | Asynchronously initializes the application with renderer and plugins. |
-| `render()`                                         | `void`          | Manually triggers a single render pass.                               |
-| `destroy(removeView?: boolean)`                    | `void`          | Cleans up all resources. Optionally removes the canvas from the DOM.  |
-
----
+- [Overview](https://pixijs.download/release/docs/app.html)
+- [Application](https://pixijs.download/release/docs/app.Application.html)
+- [ApplicationOptions](https://pixijs.download/release/docs/app.ApplicationOptions.html)
+  - [AutoDetectOptions](https://pixijs.download/release/docs/rendering.AutoDetectOptions.html)
+  - [WebGLOptions](https://pixijs.download/release/docs/rendering.WebGLOptions.html)
+  - [WebGPUOptions](https://pixijs.download/release/docs/rendering.WebGPUOptions.html)
+  - [SharedRendererOptions](https://pixijs.download/release/docs/rendering.SharedRendererOptions.html)
+- [TickerPlugin](https://pixijs.download/release/docs/app.TickerPlugin.html)
+- [ResizePlugin](https://pixijs.download/release/docs/app.ResizePlugin.html)
+- [CullerPlugin](https://pixijs.download/release/docs/app.CullerPlugin.html)

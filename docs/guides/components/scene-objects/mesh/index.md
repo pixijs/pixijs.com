@@ -146,37 +146,11 @@ const mesh = new PerspectiveMesh({
 
 ## **API Reference**
 
-### `Mesh`
-
-| Property / Method | Description                                                            |
-| ----------------- | ---------------------------------------------------------------------- |
-| **geometry**      | `MeshGeometry` holding positions, uvs, indices, topology.              |
-| **shader**        | Represents the vertex and fragment shaders that processes the geometry |
-| **texture**       | Bound texture used by the shader (if applicable).                      |
-| **state**         | GPU state object defining WebGL/WebGPU settings.                       |
-| **batched**       | Whether mesh can be batched for performance (read-only).               |
-| **position**      | Local position (`.x`, `.y`)                                            |
-| **x**             | X position in pixels                                                   |
-| **y**             | Y position in pixels                                                   |
-| **width**         | Width in pixels                                                        |
-| **height**        | Height in pixels                                                       |
-| **rotation**      | Rotation in radians                                                    |
-| **angle**         | Rotation in degrees (alias for `rotation`)                             |
-| **scale**         | `.x` and `.y` scale factors                                            |
-| **pivot**         | Transform origin for scaling/rotation                                  |
-| **skew**          | Skew values in radians                                                 |
-| **alpha**         | Opacity (0 to 1)                                                       |
-| **visible**       | Whether the container and its subtree is rendered                      |
-| **tint**          | Tint color                                                             |
-| **renderable**    | Whether the container itself is renderable (still updates children)    |
-
----
-
-### `MeshGeometry`
-
-| Property / Method | Description                                                |
-| ----------------- | ---------------------------------------------------------- |
-| **positions**     | Float32Array of vertex positions.                          |
-| **uvs**           | Float32Array of UV coordinates.                            |
-| **indices**       | Uint32Array defining triangle indices.                     |
-| **topology**      | Mesh topology: `'triangle-list'`, `'triangle-strip'`, etc. |
+- [Mesh](https://pixijs.download/release/docs/scene.Mesh.html)
+- [MeshGeometry](https://pixijs.download/release/docs/scene.MeshGeometry.html)
+- [MeshSimple](https://pixijs.download/release/docs/scene.MeshSimple.html)
+- [MeshRope](https://pixijs.download/release/docs/scene.MeshRope.html)
+- [MeshPlane](https://pixijs.download/release/docs/scene.MeshPlane.html)
+- [PerspectiveMesh](https://pixijs.download/release/docs/scene.PerspectiveMesh.html)
+- [Shader](https://pixijs.download/release/docs/rendering.Shader.html)
+- [Texture](https://pixijs.download/release/docs/rendering.Texture.html)

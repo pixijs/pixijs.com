@@ -167,3 +167,10 @@ app.ticker.add((ticker) => {
 :::info **Tip**
 Shaders must be WebGL- or WebGPU-compatible. For dual-renderer support, include a `gpuProgram`.
 :::
+
+---
+
+## API Reference
+
+- [Overview](https://pixijs.download/release/docs/filters.html)
+- [Filter](https://pixijs.download/release/docs/filters.Filter.html)

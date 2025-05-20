@@ -158,12 +158,5 @@ You can read more about these features in the rest of the documentation:
 
 ## API Reference
 
-| Name                  | Type                              | Description                                                                 | Example                                                                     |
-| --------------------- | --------------------------------- | --------------------------------------------------------------------------- |---------------------------------------------------------------------- |
-| `Assets.init`         | `AssetsInitOptions`               | Initializes the asset manager with the specified options.                   | |
-| `Assets.load`         | `ArrayOr<string/UnresolvedAsset>` | Loads an asset from the specified URL.                                      | |
-| `Assets.loadBundle`   | `ArrayOr<string>`                 | Loads a bundle of assets with the specified name.                           | |
-| `Assets.get`          | `ArrayOr<string>`                 | Retrieves a loaded asset by its URL. Returns the loaded asset.              | |
-| `Assets.getBundle`    | `ArrayOr<string>`                 | Retrieves a loaded bundle of assets by its name. Returns the loaded assets. | |
-| `Assets.unload`       | `ArrayOr<string>`                 | Unloads an asset by its URL.                                                | |
-| `Assets.unloadBundle` | `ArrayOr<string>`                 | Unloads a bundle of assets by its name.                                     | |
+- [Overview](https://pixijs.download/release/docs/assets.html)
+- [Assets](https://pixijs.download/release/docs/assets.Assets.html)

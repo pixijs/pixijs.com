@@ -107,21 +107,7 @@ Below is a list of properties you can pass in the `data` object when loading a f
 
 ## API Reference
 
-| Name           | Description                                                         |
-| -------------- | ------------------------------------------------------------------- |
-| **text**       | The content string                                                  |
-| **style**      | Styling info                                                        |
-| **anchor**     | Sets the transform origin                                           |
-| **resolution** | Rendering resolution                                                |
-| **position**   | Local position (`.x`, `.y`)                                         |
-| **width**      | Width in pixels                                                     |
-| **height**     | Height in pixels                                                    |
-| **rotation**   | Rotation in radians                                                 |
-| **angle**      | Rotation in degrees (alias for `rotation`)                          |
-| **scale**      | `.x` and `.y` scale factors                                         |
-| **pivot**      | Transform origin for scaling/rotation                               |
-| **skew**       | Skew values in radians                                              |
-| **alpha**      | Opacity (0 to 1)                                                    |
-| **visible**    | Whether the container and its subtree is rendered                   |
-| **tint**       | Tint color                                                          |
-| **renderable** | Whether the container itself is renderable (still updates children) |
+- [Text](https://pixijs.download/release/docs/scene.Text.html)
+- [TextStyle](https://pixijs.download/release/docs/text.TextStyle.html)
+- [FillStyle](https://pixijs.download/release/docs/scene.FillStyle.html)
+- [StrokeStyle](https://pixijs.download/release/docs/scene.StrokeStyle.html)

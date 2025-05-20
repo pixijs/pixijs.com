@@ -61,23 +61,4 @@ await app.init({
 
 ## API Reference
 
-### Properties
-
-| Property   | Type                            | Description                                                                       |
-| ---------- | ------------------------------- | --------------------------------------------------------------------------------- |
-| `resizeTo` | `Window \| HTMLElement \| null` | Element to resize against. When set, event listeners are added to track its size. |
-
-### Methods
-
-| Method           | Returns | Description                                                                                        |
-| ---------------- | ------- | -------------------------------------------------------------------------------------------------- |
-| `resize()`       | `void`  | Immediately resizes the renderer to match the dimensions of `resizeTo`. Not throttled.             |
-| `queueResize()`  | `void`  | Throttles the resize request to the next animation frame. Called automatically on `resize` events. |
-| `cancelResize()` | `void`  | Cancels any pending resize request scheduled via `queueResize()`.                                  |
-
-### Plugin Lifecycle
-
-| Static Method                        | Description                                                                                |
-| ------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `init(options: ResizePluginOptions)` | Initializes the plugin with the application. Called automatically by the extension system. |
-| `destroy()`                          | Cleans up event listeners and internal state. Called when the application is destroyed.    |
+- [`ResizePlugin`](https://pixijs.download/release/docs/app.ResizePlugin.html)

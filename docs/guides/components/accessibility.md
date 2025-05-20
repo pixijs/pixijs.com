@@ -88,9 +88,6 @@ There are several properties you can set on accessible containers to customize t
 
 ## **API Reference**
 
-| Property / Method                  | Description                                          |
-| ---------------------------------- | ---------------------------------------------------- |
-| `renderer.accessibility`           | Instance of `AccessibilitySystem`                    |
-| `setAccessibilityEnabled(boolean)` | Manually enable/disable the accessibility system     |
-| `isActive`                         | Whether the accessibility system is currently active |
-| `isMobileAccessibility`            | Whether touch device accessibility is active         |
+- [Overview](https://pixijs.download/release/docs/accessibility.html)
+- [AccessibilitySystem](https://pixijs.download/release/docs/accessibility.AccessibilitySystem.html)
+- [AccessibleOptions](https://pixijs.download/release/docs/accessibility.AccessibleOptions.html)

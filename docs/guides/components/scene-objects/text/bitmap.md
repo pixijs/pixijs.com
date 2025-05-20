@@ -97,22 +97,9 @@ Bitmap fonts are limited by texture size. CJK or emoji-rich sets may require too
 
 ## **API Reference**
 
-### Properties
-
-| Property             | Description                                                         |
-| -------------------- | ------------------------------------------------------------------- |
-| **text**             | The text string to display (supports `\n` for newlines)             |
-| **style**            | Style object compatible with `TextStyle`                            |
-| **anchor**           | Normalized anchor point (0–1) for origin                            |
-| **width**/**height** | Visual dimensions (updates scale, not font size)                    |
-| **roundPixels**      | Rounds pixel positions (optional for sharper rendering)             |
-| **position**         | Local position (`.x`, `.y`)                                         |
-| **rotation**         | Rotation in radians                                                 |
-| **angle**            | Rotation in degrees (alias for `rotation`)                          |
-| **scale**            | `.x` and `.y` scale factors                                         |
-| **pivot**            | Transform origin for scaling/rotation                               |
-| **skew**             | Skew values in radians                                              |
-| **alpha**            | Opacity (0 to 1)                                                    |
-| **visible**          | Whether the container and its subtree is rendered                   |
-| **tint**             | Tint color                                                          |
-| **renderable**       | Whether the container itself is renderable (still updates children) |
+- [BitmapText](https://pixijs.download/release/docs/scene.BitmapText.html)
+- [BitmapFont](https://pixijs.download/release/docs/text.BitmapFont.html)
+- [Assets](https://pixijs.download/release/docs/assets.Assets.html)
+- [TextStyle](https://pixijs.download/release/docs/text.TextStyle.html)
+- [FillStyle](https://pixijs.download/release/docs/scene.FillStyle.html)
+- [StrokeStyle](https://pixijs.download/release/docs/scene.StrokeStyle.html)

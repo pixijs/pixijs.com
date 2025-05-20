@@ -50,22 +50,6 @@ sprite.width = 100; // Automatically updates scale.x
 
 ## API Reference
 
-| Property / Method    | Description                                                           |
-| -------------------- | --------------------------------------------------------------------- |
-| **Sprite.from(...)** | Static method to create a sprite from a texture, URL, or HTML source. |
-| **texture**          | The current `Texture` displayed by the sprite.                        |
-| **anchor**           | Normalized origin point (0.0–1.0). Affects position and rotation.     |
-| **visualBounds**     | Texture bounds including trimming and anchor.                         |
-| **roundPixels**      | Rounds the sprite's position to the nearest whole pixel.              |
-| **position**         | Local position (`.x`, `.y`)                                           |
-| **width**            | Width in pixels                                                       |
-| **height**           | Height in pixels                                                      |
-| **rotation**         | Rotation in radians                                                   |
-| **angle**            | Rotation in degrees (alias for `rotation`)                            |
-| **scale**            | `.x` and `.y` scale factors                                           |
-| **pivot**            | Transform origin for scaling/rotation                                 |
-| **skew**             | Skew values in radians                                                |
-| **alpha**            | Opacity (0 to 1)                                                      |
-| **visible**          | Whether the container and its subtree is rendered                     |
-| **tint**             | Tint color                                                            |
-| **renderable**       | Whether the container itself is renderable (still updates children)   |
+- [Sprite](https://pixijs.download/release/docs/scene.Sprite.html)
+- [Texture](https://pixijs.download/release/docs/rendering.Texture.html)
+- [Assets](https://pixijs.download/release/docs/assets.Assets.html)
