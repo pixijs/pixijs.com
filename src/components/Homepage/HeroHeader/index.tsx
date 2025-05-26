@@ -14,9 +14,9 @@ export default function HeroHeader(): JSX.Element
                     Create beautiful digital content with the fastest, most flexible 2D WebGL renderer.
                 </h4>
                 <div className="buttonRow">
-                    <HomeCTA label="Download" link="https://github.com/pixijs/pixijs/releases" />
+                    <HomeCTA label="Getting Started" link="8.x/guides/getting-started/intro" />
                     &nbsp;
-                    <HomeCTA label="Get Started" link="8.x/guides/getting-started/intro" white={true} outline={true} />
+                    <HomeCTA label="Tutorials" link="8.x/tutorials" white={true} outline={true} />
                 </div>
             </div>
         </header>
