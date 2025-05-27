@@ -2,7 +2,7 @@
 
 Welcome to the PixiJS tutorial!
 
-Please go through the tutorial steps at your own pace and challenge yourself using the editor on the right hand side. Here PixiJS has already been included as guided under the [Getting Started](/guides/basics/getting-started#loading-pixijs) section. Let's start with the creation of a PixiJS canvas application and add its view to the DOM.
+Please go through the tutorial steps at your own pace and challenge yourself using the editor on the right hand side. Here PixiJS has already been included as guided under the [Getting Started](/7.x/guides/basics/getting-started) section. Let's start with the creation of a PixiJS canvas application and add its view to the DOM.
 
 ```javascript
 // Create a PixiJS application of type canvas with specify background color and make it resize to the iframe window

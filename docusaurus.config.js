@@ -92,87 +92,87 @@ const config = {
                 redirects: [
                     {
                         to: '/8.x/guides/getting-started/intro',
-                        from: '/8.x/guides',
+                        from: ['/8.x/guides', '/guides'],
                     },
                     {
                         to: '/8.x/guides/getting-started/intro#what-is-pixijs',
-                        from: '/8.x/guides/basics/what-pixijs-is',
+                        from: ['/8.x/guides/basics/what-pixijs-is', '/guides/basics/what-pixijs-is'],
                     },
                     {
                         to: '/8.x/guides/getting-started/intro#what-is-not-pixijs',
-                        from: '/8.x/guides/basics/basics/what-pixijs-is-not',
+                        from: ['/8.x/guides/basics/basics/what-pixijs-is-not', '/guides/basics/basics/what-pixijs-is-not'],
                     },
                     {
                         to: '/8.x/guides/getting-started/quick-start',
-                        from: '/8.x/guides/basics/getting-started',
+                        from: ['/8.x/guides/basics/getting-started', '/guides/basics/getting-started'],
                     },
                     {
                         to: '/8.x/guides/concepts/architecture',
-                        from: '/8.x/guides/basics/architecture-overview',
+                        from: ['/8.x/guides/basics/architecture-overview', '/guides/basics/architecture-overview'],
                     },
                     {
                         to: '/8.x/guides/concepts/render-loop',
-                        from: '/8.x/guides/basics/render-loop',
+                        from: ['/8.x/guides/basics/render-loop', '/guides/basics/render-loop'],
                     },
                     {
                         to: '/8.x/guides/concepts/scene-graph',
-                        from: '/8.x/guides/basics/scene-graph',
+                        from: ['/8.x/guides/basics/scene-graph', '/guides/basics/scene-graph'],
                     },
                     {
                         to: '/8.x/guides/concepts/render-groups',
-                        from: '/8.x/guides/advanced/render-groups',
+                        from: ['/8.x/guides/advanced/render-groups', '/guides/advanced/render-groups'],
                     },
                     {
                         to: '/8.x/guides/concepts/render-layers',
-                        from: '/8.x/guides/advanced/render-layers',
+                        from: ['/8.x/guides/advanced/render-layers', '/guides/advanced/render-layers'],
                     },
                     {
                         to: '/8.x/guides/components/assets/svg',
-                        from: '/8.x/guides/basics/svg',
+                        from: ['/8.x/guides/basics/svg', '/guides/basics/svg'],
                     },
                     {
                         to: '/8.x/guides/components/scene-objects/container/cache-as-texture',
-                        from: '/8.x/guides/advanced/cache-as-texture',
+                        from: ['/8.x/guides/advanced/cache-as-texture', '/guides/advanced/cache-as-texture'],
                     },
                     {
                         to: '/8.x/guides/third-party/mixing-three-and-pixi',
-                        from: '/8.x/guides/advanced/mixing-three-and-pixi',
+                        from: ['/8.x/guides/advanced/mixing-three-and-pixi', '/guides/advanced/mixing-three-and-pixi'],
                     },
                     {
                         to: '/8.x/guides/components/scene-objects/container',
-                        from: '/8.x/guides/components/containers',
+                        from: ['/8.x/guides/components/containers', '/guides/components/containers'],
                     },
                     {
                         to: '/8.x/guides/components/scene-objects/graphics',
-                        from: '/8.x/guides/components/graphics',
+                        from: ['/8.x/guides/components/graphics', '/guides/components/graphics'],
                     },
                     {
                         to: '/8.x/guides/components/scene-objects/graphics/graphics-pixel-line',
-                        from: '/8.x/guides/components/graphics-pixel-line',
+                        from: ['/8.x/guides/components/graphics-pixel-line', '/guides/components/graphics-pixel-line'],
                     },
                     {
                         to: '/8.x/guides/components/scene-objects/graphics/graphics-fill',
-                        from: '/8.x/guides/components/graphics-fill',
+                        from: ['/8.x/guides/components/graphics-fill', '/guides/components/graphics-fill'],
                     },
                     {
                         to: '/8.x/guides/components/events',
-                        from: '/8.x/guides/components/interaction',
+                        from: ['/8.x/guides/components/interaction', '/guides/components/interaction'],
                     },
                     {
                         to: '/8.x/guides/components/scene-objects/sprite',
-                        from: '/8.x/guides/components/sprites',
+                        from: ['/8.x/guides/components/sprites', '/guides/components/sprites'],
                     },
                     {
                         to: '/8.x/guides/components/scene-objects/text',
-                        from: '/8.x/guides/components/text',
+                        from: ['/8.x/guides/components/text', '/guides/components/text'],
                     },
                     {
                         to: '/8.x/guides/components/assets',
-                        from: '/8.x/guides/components/sprite-sheets',
+                        from: ['/8.x/guides/components/sprite-sheets', '/guides/components/sprite-sheets'],
                     },
                     {
                         to: '/8.x/guides/concepts/performance-tips',
-                        from: '/8.x/guides/production/performance-tips',
+                        from: ['/8.x/guides/production/performance-tips', '/guides/production/performance-tips'],
                     },
                 ],
                 // eslint-disable-next-line consistent-return

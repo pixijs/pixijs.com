@@ -2,9 +2,9 @@
 
 Welcome to the Fish Pond workshop!
 
-We are going to build a virtual pond and fill them with a number of colorful fishes. In the process, we will be learning about basic manipulation of [Sprites](/8.x/guides/components/sprites), [TilingSprite](https://pixijs.download/release/docs/scene.TilingSprite.html) and Filter, specifically the [Displacement Filter](https://pixijs.download/release/docs/filters.DisplacementFilter.html).
+We are going to build a virtual pond and fill them with a number of colorful fishes. In the process, we will be learning about basic manipulation of [Sprites](/8.x/guides/components/scene-objects/sprite), [TilingSprite](https://pixijs.download/release/docs/scene.TilingSprite.html) and Filter, specifically the [Displacement Filter](https://pixijs.download/release/docs/filters.DisplacementFilter.html).
 
-Please go through the tutorial steps at your own pace and challenge yourself using the editor on the right hand side. Here PixiJS has already been included as guided under the [Getting Started](/8.x/guides/basics/getting-started#loading-pixijs) section. Let's start off by creation a PixiJS application, initialize it, add its canvas to the DOM, and preload the required assets ahead of the subsequent steps.
+Please go through the tutorial steps at your own pace and challenge yourself using the editor on the right hand side. Here PixiJS has already been included as guided under the [Getting Started](/8.x/guides/getting-started/quick-start) section. Let's start off by creation a PixiJS application, initialize it, add its canvas to the DOM, and preload the required assets ahead of the subsequent steps.
 
 We will be using an asynchronous immediately invoked function expression ([IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)), but you are free to switch to use promises instead.
 
