@@ -37,7 +37,7 @@ const sidebars = {
                 'guides/advanced/render-groups',
                 'guides/advanced/cache-as-texture',
                 'guides/advanced/mixing-three-and-pixi',
-                'guides/advanced/render-layers'
+                'guides/advanced/render-layers',
             ],
         },
         {
@@ -60,7 +60,12 @@ const sidebars = {
                 'guides/components/interaction',
                 'guides/components/sprites',
                 'guides/components/sprite-sheets',
-                'guides/components/text',
+                {
+                    type: 'category',
+                    label: 'Text',
+                    collapsed: true,
+                    items: ['guides/components/text', 'guides/components/text-style'],
+                },
                 'guides/components/textures',
             ],
         },
