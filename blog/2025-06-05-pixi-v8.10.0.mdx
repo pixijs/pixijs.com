@@ -77,6 +77,18 @@ Now that we've covered the documentation overhaul, let's dive into the new featu
 ### Baked Text Filters
 Text filters can now be applied at creation time, baking the effect directly into the texture. This avoids runtime filter costs and allows more expressive styles, such as outlines and drop shadows, without performance penalties.
 
+To use this feature, you can now specify filters directly in the `TextStyle` configuration:
+
+```js
+const style = new TextStyle({
+  fontFamily: 'Arial',
+  fontSize: 36,
+  fill: '#ffffff',
+  filters: [new BlurFilter()],
+});
+const text = new PIXI.Text({ text: 'Hello, PixiJS!', style });
+```
+
 <EmbeddedEditor files={{
     "index.js": FiltersIndexFile,
     'CartoonTextFilter.js': CartoonFile,
@@ -84,6 +96,7 @@ Text filters can now be applied at creation time, baking the effect directly int
     'cartoonText.frag': frag,
     'cartoonText.wgsl': wgsl
 }} />
+
 
 Additionally, a new `generateFilteredTexture` method has been added to `filterSystem`:
 
@@ -103,6 +116,18 @@ This is a costly operation as it requires scanning pixel alpha values.
 Avoid using `trim: true` for dynamic text, as it could significantly impact performance.
 :::
 
+To enable text trimming, simply set the `trim` property in the `TextStyle`:
+
+```js
+const style = new TextStyle({
+  fontFamily: 'Arial',
+  fontSize: 36,
+  fill: '#ffffff',
+  trim: true, // Enable text trimming
+});
+const text = new Text({ text: '   Hello, PixiJS!   ', style });
+```
+
 <EmbeddedEditor files={{
     "index.js": TrimIndexFile,
 }} />
@@ -111,6 +136,20 @@ This method applies one or more filters to a texture and returns a new, filtered
 
 ### Texture Scale Modes
 You can now explicitly set texture filtering for text, useful when rendering pixel fonts or when you need control over how the texture is sampled.
+
+To adjust the texture scale mode, use the `textureStyle` property in the `TextStyle`:
+
+```js
+const style = new TextStyle({
+  fontFamily: 'Arial',
+  fontSize: 36,
+  fill: '#ffffff',
+  textureStyle: {
+    scaleMode: 'nearest', // Set the texture scale mode
+  },
+});
+const text = new Text({ text: 'Hello, PixiJS!', style });
+```
 
 <EmbeddedEditor files={{
     "index.js": TextureStyleIndexFile,
