@@ -9,7 +9,11 @@ keywords: ['PixiJS', 'Updates', 'Documentation', 'Text Features']
 ---
 import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
 import TrimIndexFile from '!!raw-loader!../docs/examples/text/text-trim';
-import FiltersIndexFile from '!!raw-loader!../docs/examples/filters-basic/text-filters';
+import FiltersIndexFile from '!!raw-loader!../docs/examples/text/text-filters';
+import CartoonFile from '!!raw-loader!../docs/examples/text/text-filters/CartoonTextFilter';
+import vert from '!!raw-loader!../docs/examples/text/text-filters/cartoonText.vert';
+import frag from '!!raw-loader!../docs/examples/text/text-filters/cartoonText.frag';
+import wgsl from '!!raw-loader!../docs/examples/text/text-filters/cartoonText.wgsl';
 import TextureStyleIndexFile from '!!raw-loader!../docs/examples/text/text-texture-style';
 import NineSliceIndexFile from '!!raw-loader!../docs/examples/sprite/nine-slice-sprite-anchor';
 import DomContainerIndexFile from '!!raw-loader!../docs/examples/basic/dom-container';
@@ -29,9 +33,13 @@ With this release, we are making a significant investment in our documentation t
 
 This change is driven by the survey results we gathered last year, which highlighted the need for clearer, more organized documentation. We want to ensure that developers can quickly find the information they need, whether they are just starting out or looking to deepen their understanding of PixiJS. With that in mind, we have completely revamped our documentation structure and content.
 
+- [New Guides](/8.x/guides/getting-started/intro)
+- [New API Documentation](https://pixijs.download/release/docs/index.html)
+
 :::info Note
 As with any major change, there are areas that need refinement. We welcome your feedback as we continue to improve the documentation.
 :::
+
 
 ### New Website Documentation
 We've expanded and restructured our [guides](/8.x/guides/getting-started/intro) to now cover all core areas of PixiJS with improved getting started. The goal is to provide clearer entry points for new users and more comprehensive resources for experienced developers.
@@ -40,7 +48,7 @@ We've expanded and restructured our [guides](/8.x/guides/getting-started/intro) 
 
 We've transitioned from WebDoc to **TypeDoc** for our API generation. This change brings improved support for TypeScript and allows us to provide more detailed and accurate information throughout the documentation.
 
-Alongside this technical shift, we've also rethought how the API documentation is organized. Rather than presenting everything in a single, monolithic reference, we've categorized the APIs into two sections: **Standard** and **Advanced**.
+Alongside this technical shift, we've also rethought how the [API Documentation](https://pixijs.download/release/docs/index.html) is organized. Rather than presenting everything in a single, monolithic reference, we've categorized the APIs into two sections: **Standard** and **Advanced**.
 
 - **Standard** APIs cover the most commonly used features—these are the essentials for building most PixiJS applications.
 - **Advanced** APIs include more complex or specialized tools that are valuable for specific use cases, but not necessary for all users.
@@ -66,23 +74,15 @@ To help define a clearer boundary between what developers should rely on and wha
 
 Now that we've covered the documentation overhaul, let's dive into the new features introduced in PixiJS v8.10.0:
 
-### Text Trimming
-Automatically remove unnecessary whitespace around text.
-
-:::warning PERFORMANCE WARNING
-This is a costly operation as it requires scanning pixel alpha values.
-Avoid using `trim: true` for dynamic text, as it could significantly impact performance.
-:::
-
-<EmbeddedEditor files={{
-    "index.js": TrimIndexFile,
-}} />
-
 ### Baked Text Filters
 Text filters can now be applied at creation time, baking the effect directly into the texture. This avoids runtime filter costs and allows more expressive styles, such as outlines and drop shadows, without performance penalties.
 
 <EmbeddedEditor files={{
     "index.js": FiltersIndexFile,
+    'CartoonTextFilter.js': CartoonFile,
+    'cartoonText.vert': vert,
+    'cartoonText.frag': frag,
+    'cartoonText.wgsl': wgsl
 }} />
 
 Additionally, a new `generateFilteredTexture` method has been added to `filterSystem`:
@@ -94,6 +94,18 @@ const filteredTexture = renderer.filters.generateFilteredTexture({
   filters: [blurFilter],
 });
 ```
+
+### Text Trimming
+Automatically remove unnecessary whitespace around text.
+
+:::warning PERFORMANCE WARNING
+This is a costly operation as it requires scanning pixel alpha values.
+Avoid using `trim: true` for dynamic text, as it could significantly impact performance.
+:::
+
+<EmbeddedEditor files={{
+    "index.js": TrimIndexFile,
+}} />
 
 This method applies one or more filters to a texture and returns a new, filtered result.
 

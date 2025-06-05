@@ -1,0 +1,22 @@
+---
+hide_table_of_contents: true
+hide_edit_this_page: true
+custom_edit_url: null
+title: Text Filterss
+---
+import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+import IndexFile from '!!raw-loader!./text-filters/index';
+import CartoonFile from '!!raw-loader!./text-filters/CartoonTextFilter';
+import vert from '!!raw-loader!./text-filters/cartoonText.vert';
+import frag from '!!raw-loader!./text-filters/cartoonText.frag';
+import wgsl from '!!raw-loader!./text-filters/cartoonText.wgsl';
+
+import { useEffect } from 'react';
+
+<ExampleEditor files={{
+    "index.js": IndexFile,
+    'CartoonTextFilter.js': CartoonFile,
+    'cartoonText.vert': vert,
+    'cartoonText.frag': frag,
+    'cartoonText.wgsl': wgsl
+}} />
