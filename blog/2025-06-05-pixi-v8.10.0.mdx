@@ -1,0 +1,184 @@
+---
+title: PixiJS Update - v8.10.0
+description: A look at the 8.10.0 release of PixiJS.
+slug: 8.10.0
+authors: zyie
+tags: [PixiJS, Updates, Documentation]
+hide_table_of_contents: true
+keywords: ['PixiJS', 'Updates', 'Documentation', 'Text Features']
+---
+import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
+import TrimIndexFile from '!!raw-loader!../docs/examples/text/text-trim';
+import FiltersIndexFile from '!!raw-loader!../docs/examples/text/text-filters';
+import CartoonFile from '!!raw-loader!../docs/examples/text/text-filters/CartoonTextFilter';
+import vert from '!!raw-loader!../docs/examples/text/text-filters/cartoonText.vert';
+import frag from '!!raw-loader!../docs/examples/text/text-filters/cartoonText.frag';
+import wgsl from '!!raw-loader!../docs/examples/text/text-filters/cartoonText.wgsl';
+import TextureStyleIndexFile from '!!raw-loader!../docs/examples/text/text-texture-style';
+import NineSliceIndexFile from '!!raw-loader!../docs/examples/sprite/nine-slice-sprite-anchor';
+import DomContainerIndexFile from '!!raw-loader!../docs/examples/basic/dom-container';
+
+PixiJS v8.10.0 introduces a major overhaul of our documentation along with several updates that enhance text rendering and developer control. Here's what's new:
+
+- **Complete Documentation Overhaul**: Improved guides, API docs, and better organization
+- **Text Trimming**: Optimize text rendering with automatic whitespace trimming
+- **Text Filters**: Apply filters directly in text style configuration
+- **Adjustable TextureStyle For Text**: Fine-tune how a text's texture is rendered with new texture style options
+
+{/* truncate */}
+
+## Documentation Overhaul
+
+With this release, we are making a significant investment in our documentation to make PixiJS more accessible and easier to use for both new and experienced developers.
+
+This change is driven by the survey results we gathered last year, which highlighted the need for clearer, more organized documentation. We want to ensure that developers can quickly find the information they need, whether they are just starting out or looking to deepen their understanding of PixiJS. With that in mind, we have completely revamped our documentation structure and content.
+
+- [New Guides](/8.x/guides/getting-started/intro)
+- [New API Documentation](https://pixijs.download/release/docs/index.html)
+
+:::info Note
+As with any major change, there are areas that need refinement. We welcome your feedback as we continue to improve the documentation.
+:::
+
+
+### New Website Documentation
+We've expanded and restructured our [guides](/8.x/guides/getting-started/intro) to now cover all core areas of PixiJS with improved getting started. The goal is to provide clearer entry points for new users and more comprehensive resources for experienced developers.
+
+### Enhanced API Documentation
+
+We've transitioned from WebDoc to **TypeDoc** for our API generation. This change brings improved support for TypeScript and allows us to provide more detailed and accurate information throughout the documentation.
+
+Alongside this technical shift, we've also rethought how the [API Documentation](https://pixijs.download/release/docs/index.html) is organized. Rather than presenting everything in a single, monolithic reference, we've categorized the APIs into two sections: **Standard** and **Advanced**.
+
+- **Standard** APIs cover the most commonly used features—these are the essentials for building most PixiJS applications.
+- **Advanced** APIs include more complex or specialized tools that are valuable for specific use cases, but not necessary for all users.
+
+This new structure is designed to reduce cognitive load for newcomers. Developers can focus on the most relevant APIs without being overwhelmed by the full scope of the library.
+
+For those who need access to more advanced features, there's a simple toggle in the top-right corner of the API documentation labeled **"Advanced"**. Enabling it reveals the full API surface when needed.
+
+![API Documentation Screenshot](/images/blog/typedoc-advanced.png)
+
+We've also taken this opportunity to improve the clarity of the documentation itself. For each **Standard** API, we aim to provide:
+
+- A clear explanation of its purpose
+- Practical usage examples
+- Links to related APIs for easier exploration
+
+These improvements are intended to help developers better understand how to use PixiJS effectively—whether they're just getting started or looking to dig deeper.
+
+### Public vs Internal APIs
+To help define a clearer boundary between what developers should rely on and what is meant for internal use, we've audited the entire codebase and marked APIs accordingly. Internal methods are now excluded from the API docs. This makes the public API surface more stable and reduces the risk of unintentional dependency on internal behaviors.
+
+## New Features  🎉
+
+Now that we've covered the documentation overhaul, let's dive into the new features introduced in PixiJS v8.10.0:
+
+### Baked Text Filters
+Text filters can now be applied at creation time, baking the effect directly into the texture. This avoids runtime filter costs and allows more expressive styles, such as outlines and drop shadows, without performance penalties.
+
+To use this feature, you can now specify filters directly in the `TextStyle` configuration:
+
+```js
+const style = new TextStyle({
+  fontFamily: 'Arial',
+  fontSize: 36,
+  fill: '#ffffff',
+  filters: [new BlurFilter()],
+});
+const text = new PIXI.Text({ text: 'Hello, PixiJS!', style });
+```
+
+<EmbeddedEditor files={{
+    "index.js": FiltersIndexFile,
+    'CartoonTextFilter.js': CartoonFile,
+    'cartoonText.vert': vert,
+    'cartoonText.frag': frag,
+    'cartoonText.wgsl': wgsl
+}} />
+
+
+Additionally, a new `generateFilteredTexture` method has been added to `filterSystem`:
+
+```ts
+const blurFilter = new BlurFilter();
+const filteredTexture = renderer.filters.generateFilteredTexture({
+  texture,
+  filters: [blurFilter],
+});
+```
+
+### Text Trimming
+Automatically remove unnecessary whitespace around text.
+
+:::warning PERFORMANCE WARNING
+This is a costly operation as it requires scanning pixel alpha values.
+Avoid using `trim: true` for dynamic text, as it could significantly impact performance.
+:::
+
+To enable text trimming, simply set the `trim` property in the `TextStyle`:
+
+```js
+const style = new TextStyle({
+  fontFamily: 'Arial',
+  fontSize: 36,
+  fill: '#ffffff',
+  trim: true, // Enable text trimming
+});
+const text = new Text({ text: '   Hello, PixiJS!   ', style });
+```
+
+<EmbeddedEditor files={{
+    "index.js": TrimIndexFile,
+}} />
+
+This method applies one or more filters to a texture and returns a new, filtered result.
+
+### Texture Scale Modes
+You can now explicitly set texture filtering for text, useful when rendering pixel fonts or when you need control over how the texture is sampled.
+
+To adjust the texture scale mode, use the `textureStyle` property in the `TextStyle`:
+
+```js
+const style = new TextStyle({
+  fontFamily: 'Arial',
+  fontSize: 36,
+  fill: '#ffffff',
+  textureStyle: {
+    scaleMode: 'nearest', // Set the texture scale mode
+  },
+});
+const text = new Text({ text: 'Hello, PixiJS!', style });
+```
+
+<EmbeddedEditor files={{
+    "index.js": TextureStyleIndexFile,
+}} />
+
+## Highlights from v8.9.0 and v8.8.0
+
+We missed highlighting the previous two releases, so here are some key features from v8.9.0 and v8.8.0:
+
+### DOM Container
+The `DOMContainer` lets developers transform and animate DOM elements in sync with PixiJS scenes. This is useful for overlaying native inputs, textareas, or other HTML controls while retaining control over their positioning and rotation.
+
+<EmbeddedEditor files={{
+    "index.js": DomContainerIndexFile,
+}} />
+
+### NineSlice Sprite Anchor
+
+`NineSliceSprite` now supports the `anchor` property, allowing rotation and scaling behaviors to work as they do for other sprites.
+
+<EmbeddedEditor files={{
+    "index.js": NineSliceIndexFile,
+}} />
+
+## Looking Ahead
+Starting with v8.10.0, we're moving to a monthly release cadence for PixiJS. This will allow us to ship improvements, bug fixes, and new features more predictably and keep the project evolving at a steady pace.
+
+While the size and scope of each release may vary, the goal is to provide incremental updates that are easier to adopt and integrate into projects.
+
+You can review the complete changelog [here](https://github.com/pixijs/pixijs/releases/tag/v8.10.0), or join the discussion on [Discord](https://discord.gg/QrnxmQUPGV) or [GitHub](https://github.com/pixijs/pixijs/discussions/new/choose).
+
+Thank you for using PixiJS, and we look forward to seeing what you create with these new features!
