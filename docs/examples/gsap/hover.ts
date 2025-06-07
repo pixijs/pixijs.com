@@ -15,10 +15,7 @@ import { Application, Container, Graphics, Text } from 'pixi.js';
 
     // create a rectangle button with a label
     const buttonContainer = new Container();
-    const button = new Graphics()
-        .roundRect(-100, -50, 200, 100, 20)
-        .fill(0xed427c)
-        .stroke({ color: 'white', width: 4 });
+    const button = new Graphics().roundRect(-100, -50, 200, 100, 20).fill(0xed427c).stroke({ color: 'white', width: 4 });
     const label = new Text({
         text: 'Hover me',
         style: {
@@ -58,9 +55,7 @@ import { Application, Container, Graphics, Text } from 'pixi.js';
     {
         if (rotationTween) rotationTween.kill();
     }
-    const cursorPt = new Graphics()
-        .circle(0, 0, CURSOR_PT_WIDTH)
-        .fill(0xffffff);
+    const cursorPt = new Graphics().circle(0, 0, CURSOR_PT_WIDTH).fill(0xffffff);
 
     app.stage.addChild(cursorPt);
 
@@ -69,9 +64,7 @@ import { Application, Container, Graphics, Text } from 'pixi.js';
     function updateCursor(width, height)
     {
         cursor.clear(); // Clear existing graphics
-        cursor
-            .rect(0, 0, width, height)
-            .stroke(0xffffff);
+        cursor.rect(0, 0, width, height).stroke(0xffffff);
     }
 
     // Initial cursor draw
@@ -90,14 +83,14 @@ import { Application, Container, Graphics, Text } from 'pixi.js';
                 x: e.clientX - CURSOR_WIDTH / 2,
                 y: e.clientY - CURSOR_WIDTH / 2,
                 duration: 0.1,
-                ease: 'expo.out'
+                ease: 'expo.out',
             });
         }
         gsap.to(cursorPt, {
             x: e.clientX - CURSOR_PT_WIDTH / 2,
             y: e.clientY - CURSOR_PT_WIDTH / 2,
             duration: 0.1,
-            ease: 'expo.out'
+            ease: 'expo.out',
         });
     });
 
@@ -116,7 +109,7 @@ import { Application, Container, Graphics, Text } from 'pixi.js';
             height: buttonContainer.height,
             angle: 360,
             duration: 0.2,
-            ease: 'easeOut'
+            ease: 'easeOut',
         });
     });
 
@@ -141,22 +134,20 @@ import { Application, Container, Graphics, Text } from 'pixi.js';
             y: topLeft.y + dy * 0.09,
             // scale: 1.1,
             duration: 0.1,
-            ease: 'power2.out'
+            ease: 'power2.out',
         });
     });
 
     buttonContainer.on('pointerout', () =>
     {
-        // isOverTarget = false;
-
-        // exitTween = gsap.to(cursor, {
-        //     width: 30,
-        //     height: 30,
-        //     duration: 0.5,
-        //     ease: 'elastic.out(1, .9)'
-        // });
-
-        // startRotation();
+    // isOverTarget = false;
+    // exitTween = gsap.to(cursor, {
+    //     width: 30,
+    //     height: 30,
+    //     duration: 0.5,
+    //     ease: 'elastic.out(1, .9)'
+    // });
+    // startRotation();
     });
 
     // Start the rotation animation

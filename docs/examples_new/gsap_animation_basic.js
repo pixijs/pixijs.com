@@ -1,3 +1,4 @@
+// dependencies: { "pixi.js": "latest", "gsap": "latest", "pixi-filters": "latest" }
 import { gsap } from 'gsap';
 import { Application, Assets, Container, Graphics, Text } from 'pixi.js';
 import { DropShadowFilter } from 'pixi-filters';

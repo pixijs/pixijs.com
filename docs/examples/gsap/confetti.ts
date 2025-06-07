@@ -23,7 +23,7 @@ gsap.registerPlugin(Physics2DPlugin);
 
     app.stage.addEventListener('click', (event) =>
     {
-        // Generate a random number of dots
+    // Generate a random number of dots
         const dotCount = gsap.utils.random(15, 30, 1);
         const colors = ['white'];
 
@@ -35,12 +35,14 @@ gsap.registerPlugin(Physics2DPlugin);
                 .fill('white') // Pick a random color
                 .stroke({ color: 'white', width: 2 }); // Add a white stroke
 
-            dot.filters = [new DropShadowFilter({
-                color: 'black',
-                alpha: 0.5,
-                blur: 4,
-                offset: { x: 0, y: 5 },
-            })];
+            dot.filters = [
+                new DropShadowFilter({
+                    color: 'black',
+                    alpha: 0.5,
+                    blur: 4,
+                    offset: { x: 0, y: 5 },
+                }),
+            ];
 
             app.stage.addChild(dot);
 
@@ -49,31 +51,28 @@ gsap.registerPlugin(Physics2DPlugin);
                 tint: gsap.utils.random(colors), // Pick a random color
                 y: event.clientY, // position dot at coordinates of the click
                 x: event.clientX,
-                scale: 0 // Start at scale 0
+                scale: 0, // Start at scale 0
             });
 
             // Animate the dot with physics2D
             gsap
                 .timeline({
-                    onComplete: () => dot.destroy() // Clean up the dot after animation
+                    onComplete: () => dot.destroy(), // Clean up the dot after animation
                 })
                 .to(dot, {
                     scale: gsap.utils.random(0.3, 1), // Random scale for the pop-in effect
                     duration: 0.2, // Quick pop-in effect
-                    ease: 'power3.out'
+                    ease: 'power3.out',
                 })
-                .to(
-                    dot,
-                    {
-                        duration: 2,
-                        physics2D: {
-                            velocity: gsap.utils.random(500, 1000), // Random velocity
-                            angle: gsap.utils.random(0, 360), // Random direction
-                            gravity: 1500 // Gravity effect
-                        },
-                        ease: 'none'
+                .to(dot, {
+                    duration: 2,
+                    physics2D: {
+                        velocity: gsap.utils.random(500, 1000), // Random velocity
+                        angle: gsap.utils.random(0, 360), // Random direction
+                        gravity: 1500, // Gravity effect
                     },
-                ); // Start together with the previous tween
+                    ease: 'none',
+                }); // Start together with the previous tween
         }
     });
 
@@ -88,15 +87,17 @@ gsap.registerPlugin(Physics2DPlugin);
         },
         anchor: 0.5,
         x: app.screen.width / 2,
-        y: app.screen.height / 2 - 50
+        y: app.screen.height / 2 - 50,
     });
 
-    text.filters = [new DropShadowFilter({
-        color: 'black',
-        alpha: 0.5,
-        blur: 4,
-        offset: { x: 0, y: 5 },
-    })];
+    text.filters = [
+        new DropShadowFilter({
+            color: 'black',
+            alpha: 0.5,
+            blur: 4,
+            offset: { x: 0, y: 5 },
+        }),
+    ];
 
     app.stage.addChild(text);
 })();

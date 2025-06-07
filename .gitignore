@@ -33,3 +33,6 @@ yarn-error.log*
 scripts/pixiVersions.json
 
 .ghtoken
+
+static/examples/source
+src/pages/examples/config.ts
