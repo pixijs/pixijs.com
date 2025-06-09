@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Learn how to use compressed textures in PixiJS for efficient memory usage and GPU performance.
 ---
 
 # Compressed Textures

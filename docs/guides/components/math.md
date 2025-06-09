@@ -1,5 +1,6 @@
 ---
 sidebar_position: 8
+description: Learn how to use PixiJS math utilities for 2D transformations, geometry, and shape manipulation, including optional advanced methods.
 ---
 
 # Math

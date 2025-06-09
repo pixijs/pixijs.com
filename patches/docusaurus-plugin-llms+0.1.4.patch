@@ -1,0 +1,30 @@
+diff --git a/node_modules/docusaurus-plugin-llms/lib/processor.js b/node_modules/docusaurus-plugin-llms/lib/processor.js
+index 295b08b..9c0eba7 100644
+--- a/node_modules/docusaurus-plugin-llms/lib/processor.js
++++ b/node_modules/docusaurus-plugin-llms/lib/processor.js
+@@ -133,10 +133,24 @@ async function processMarkdownFile(filePath, baseDir, siteUrl, pathPrefix = 'doc
+     }
+     // Clean and process content
+     const cleanedContent = (0, utils_1.cleanMarkdownContent)(markdownContent);
++
++    // write the cleaned content to a file
++    const basePath = path.join(process.cwd(), 'build', '8.x')
++    const replacedExt = normalizedPath.replace(/\.mdx?$/, '.md');
++    let cleanedContentPath = path.join(basePath, replacedExt);
++    if (cleanedContentPath.endsWith('index.md')) {
++        cleanedContentPath = path.join(
++            path.dirname(cleanedContentPath),
++            '..',
++            path.basename(path.dirname(cleanedContentPath)) + '.md'
++        );
++    }
++    await (0, utils_1.writeFile)(cleanedContentPath, cleanedContent);
++
+     return {
+         title,
+         path: normalizedPath,
+-        url: fullUrl,
++        url: `${fullUrl}.md`,
+         content: cleanedContent,
+         description: description || '',
+     };

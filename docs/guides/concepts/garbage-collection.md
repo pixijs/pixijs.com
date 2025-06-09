@@ -1,6 +1,7 @@
 ---
 sidebar_position: 5
 title: Garbage Collection
+description: Managing GPU resources and garbage collection in PixiJS for optimal performance.
 ---
 
 # Managing Garbage Collection in PixiJS

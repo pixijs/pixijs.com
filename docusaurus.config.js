@@ -85,6 +85,46 @@ const config = {
     ],
 
     plugins: [
+        [
+            './scripts/docusaurus-plugin-llms-txt-replace.ts',
+            {
+                // Options here
+                generateLLMsTxt: true,
+                generateLLMsFullTxt: true,
+                docsDir: 'docs',
+                ignoreFiles: [
+                    '7.x/*',
+                    '**/examples/*',
+                    '**/tutorials/*',
+                    '**/playground/*',
+                    'docs/guides/getting-started/intro.mdx',
+                    'docs/branding.md',
+                    'docs/guides/migrations/v5.md',
+                    'docs/guides/migrations/v6.md',
+                    'docs/guides/migrations/v7.md',
+                ],
+                title: 'PixiJS Documentation for LLMs',
+                description:
+                    // eslint-disable-next-line max-len
+                    'PixiJS is the fastest, most lightweight 2D library available for the web, working across all devices and allowing you to create rich, interactive graphics and cross-platform applications using WebGL and WebGPU.',
+                includeBlog: false,
+                includeOrder: [
+                    '**/getting-started/*',
+                    '**/concepts/*',
+                    '**/components/*',
+                    '**/third-party/*',
+                    '**/migrations/*',
+                ],
+                includeUnmatchedLast: true,
+                // Path transformation options
+                pathTransformation: {
+                    // Paths to ignore when constructing URLs (will be removed if found)
+                    ignorePaths: ['docs'],
+                    // Paths to add when constructing URLs (will be prepended if not already present)
+                    addPaths: ['8.x'],
+                },
+            },
+        ],
         'docusaurus-plugin-sass',
         [
             '@docusaurus/plugin-client-redirects',

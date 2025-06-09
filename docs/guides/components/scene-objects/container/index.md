@@ -1,3 +1,7 @@
+---
+description: Learn how to create and manage Containers in PixiJS, including adding/removing children, sorting, and caching as textures.
+---
+
 # Container
 
 The `Container` class is the foundation of PixiJS's scene graph system. Containers act as groups of scene objects, allowing you to build complex hierarchies, organize rendering layers, and apply transforms or effects to groups of objects.

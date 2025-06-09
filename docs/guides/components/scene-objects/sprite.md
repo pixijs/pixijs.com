@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Learn how to create and manipulate Sprites in PixiJS, including texture updates, scaling, and transformations.
 ---
 
 # Sprite

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 6
+description: Learn how to use PixiJS's event system for handling user interactions, including mouse and touch events, and how to customize event behavior.
 ---
 
 # Events / Interaction

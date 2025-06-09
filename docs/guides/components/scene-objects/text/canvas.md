@@ -1,5 +1,6 @@
 ---
 sidebar_position: 0
+description: Learn how to use the Text class in PixiJS to render styled text as display objects, including dynamic updates and font loading.
 ---
 
 # Text (Canvas)

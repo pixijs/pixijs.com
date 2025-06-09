@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Learn how to use HTMLText in PixiJS to render styled HTML strings within your WebGL canvas, enabling complex typography and inline formatting.
 ---
 
 # HTML Text

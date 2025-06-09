@@ -1,5 +1,6 @@
 ---
 sidebar_position: 6
+description: Performance tips for optimizing PixiJS applications, covering general practices and specific techniques for maximizing rendering efficiency.
 ---
 
 # Performance Tips

@@ -1,3 +1,6 @@
+---
+description: Learn how to use the `fill()` method in PixiJS to fill shapes with colors, textures, and gradients, enhancing your graphics and text rendering.
+---
 # Graphics Fill
 
 If you are new to graphics, please check out the [graphics guide](../graphics) here. This guide dives a bit deeper into a specific aspect of graphics: how to fill them! The `fill()` method in PixiJS is particularly powerful, enabling you to fill shapes with colors, textures, or gradients. Whether you're designing games, UI components, or creative tools, mastering the `fill()` method is essential for creating visually appealing and dynamic graphics. This guide explores the different ways to use the `fill()` method to achieve stunning visual effects.

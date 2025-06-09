@@ -1,3 +1,6 @@
+---
+description: Learn how to use PixiJS Graphics to create shapes, manage graphics contexts, and optimize performance in your projects.
+---
 # Graphics
 
 [Graphics](https://pixijs.download/release/docs/scene.Graphics.html) is a powerful and flexible tool for rendering shapes such as rectangles, circles, stars, and custom polygons. It can also be used to create complex shapes by combining multiple primitives, and it supports advanced features like gradients, textures, and masks.

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 7
+description: Learn how to use the ParticleContainer and Particle classes in PixiJS for high-performance particle systems.
 ---
 
 # Particle Container

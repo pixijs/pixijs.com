@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+description: Learn how to use scene objects in PixiJS, including containers, sprites, transforms, and more. This guide covers the basics of building your scene graph.
 ---
 
 # Scene Objects

@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
+        "postinstall": "patch-package",
         "prebuild": "npm run generate-content",
         "build": "docusaurus build",
         "clear": "docusaurus clear",
@@ -63,6 +64,7 @@
         "@pixi/webdoc-docusaurus-template": "^1.0.1",
         "classnames": "^2.5.1",
         "clsx": "^2.1.1",
+        "docusaurus-plugin-llms": "^0.1.4",
         "docusaurus-plugin-sass": "^0.2.6",
         "pixi.js": "^8.10.0",
         "prism-react-renderer": "^2.4.1",
@@ -91,6 +93,7 @@
         "husky": "^8.0.3",
         "inquirer": "^8.2.6",
         "lint-staged": "^13.3.0",
+        "patch-package": "^8.0.0",
         "prettier": "^3.4.2",
         "recast": "^0.23.9",
         "semver": "^7.6.3",

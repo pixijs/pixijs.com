@@ -1,17 +1,20 @@
+---
+description: Frequently Asked Questions about PixiJS
+---
 # FAQ
 
 ## What is PixiJS for?
 
-Everything! Pixi.js is a rendering library that will allow you to create rich, 
-interactive graphic experiences, cross-platform applications, and games without 
-having to dive into the WebGL API or grapple with the intricacies of browser and 
-device compatibility. Killer performance with a clean API, means not only will 
+Everything! Pixi.js is a rendering library that will allow you to create rich,
+interactive graphic experiences, cross-platform applications, and games without
+having to dive into the WebGL API or grapple with the intricacies of browser and
+device compatibility. Killer performance with a clean API, means not only will
 your content be better - but also faster to build!
 
 ## Is PixiJS free?
 
-PixiJS is and always will be free and Open Source. That said, financial contributions 
-are what make it possible to push PixiJS further, faster. Contributions allow us to 
+PixiJS is and always will be free and Open Source. That said, financial contributions
+are what make it possible to push PixiJS further, faster. Contributions allow us to
 commission the PixiJS developer community to accelerate feature development and create
 more in-depth documentation. <a href="https://opencollective.com/pixijs" target="_blank">Support Us</a> by making a contribution via <a href="https://opencollective.com/pixijs" target="_blank">Open Collective</a>. Go on! It will be a massive help AND make you feel good about yourself, win win ;)
 
@@ -33,7 +36,13 @@ No. PixiJS is what we've come to think of as a "creation engine". Whilst it is e
 
 ## Who makes PixiJS?
 
-Outside of the highly active PixiJS community, it is primarily maintained by Mat Groves, Technical Partner of our creative agency Goodboy Digital. One of the huge advantages of creating PixiJS within the framework of a working agency is that it means its features are always driven by genuine industry demands and critically are always trialled "in anger" in our cutting-edge games, sites and apps.
+PixiJS is maintained by three core developers who work on the project part-time:
+
+- Mat Groves ([@GoodBoyDigital](https://github.com/GoodBoyDigital))
+- Sean Burns ([@Zyie](https://github.com/Zyie))
+- Matt Karl ([@bigtimebuddy](https://github.com/bigtimebuddy))
+
+The project thrives thanks to our highly active community of contributors and sponsors. As part-time maintainers, your sponsorship directly supports our ability to improve PixiJS, fix bugs, and create better documentation. Consider supporting our work through [GitHub Sponsors](https://github.com/sponsors/pixijs) or [Open Collective](https://opencollective.com/pixijs).
 
 ## I found a bug. What should I do?
 

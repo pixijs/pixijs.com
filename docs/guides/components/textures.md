@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Learn how PixiJS handles textures, their lifecycle, creation, and types, including how to manage GPU resources effectively.
 ---
 
 # Textures

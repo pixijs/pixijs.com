@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Learn how to use Render Groups in PixiJS to optimize rendering performance by grouping scene elements for efficient GPU processing.
 ---
 
 # Render Groups

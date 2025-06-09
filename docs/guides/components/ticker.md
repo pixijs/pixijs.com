@@ -1,5 +1,6 @@
 ---
 sidebar_position: 11
+description: Learn how to use the Ticker class in PixiJS for managing game loops, animations, and time-based updates.
 ---
 
 # Ticker

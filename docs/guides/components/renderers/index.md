@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Learn how to use PixiJS renderers for high-performance GPU-accelerated rendering in your applications.
 ---
 
 # Renderers

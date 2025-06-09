@@ -1,5 +1,6 @@
 ---
 sidebar_position: 0
+description: Learn how to use PixiJS's asset resolver for dynamic, multi-format asset loading with platform-aware optimizations.
 ---
 
 # Resolver

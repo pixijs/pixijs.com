@@ -1,5 +1,6 @@
 ---
 sidebar_position: 10
+description: Learn how to use the Color class in PixiJS for color manipulation, including various formats like hex, RGB, and named colors.
 ---
 
 # Color

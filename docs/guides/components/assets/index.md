@@ -1,5 +1,6 @@
 ---
 sidebar_position: -1
+description: Learn how to manage and load assets in PixiJS using the Assets API.
 ---
 
 # Assets

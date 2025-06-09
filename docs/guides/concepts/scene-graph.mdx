@@ -1,5 +1,6 @@
 ---
 sidebar_position: 0
+description: Understanding the PixiJS scene graph, its structure, and how to manage parent-child relationships, render order, and culling for optimal performance.
 ---
 import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
 import ParentIndexFile from '!!raw-loader!./scene-graph-parent';
@@ -23,6 +24,7 @@ Each frame, PixiJS runs through the scene graph from the root down through all t
 
 Here's an example.  We'll create three sprites, each a child of the last, and animate their position, rotation, scale and alpha.  Even though each sprite's properties are set to the same values, the parent-child chain amplifies each change:
 
+{/* embedded:@site/docs/guides/concepts/scene-graph-parent.js */}
 <EmbeddedEditor files={{"index.js": ParentIndexFile}} />
 
 <br/>
@@ -36,6 +38,7 @@ PixiJS renders the tree from the root down.  At each level, the current object i
 
 Check out this example, with two parent objects A & D, and two children B & C under A:
 
+{/* embedded:@site/docs/guides/concepts/scene-graph-order.js */}
 <EmbeddedEditor files={{"index.js": OrderIndexFile}} />
 <br/>
 

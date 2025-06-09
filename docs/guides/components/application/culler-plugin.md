@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Learn how to use the CullerPlugin in PixiJS to optimize rendering by skipping offscreen objects.
 ---
 
 # Culler Plugin

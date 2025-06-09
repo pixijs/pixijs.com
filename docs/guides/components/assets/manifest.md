@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Learn how to manage assets in PixiJS using Manifests and Bundles, and how to automate this process with AssetPack.
 ---
 
 # Manifests & Bundles

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+description: Learn how to render SVGs in PixiJS, including using them as textures or graphics, and understand their advantages and limitations.
 ---
 
 import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
@@ -56,6 +57,10 @@ const svgTexture = await Assets.load('tiger.svg');
 const mySprite = new Sprite(svgTexture);
 ```
 
+{/* embedded:@site/docs/examples/graphics/svg.js */}
+{/* embedded:@site/docs/examples/graphics/svg-load.js */}
+{/* embedded:@site/docs/examples/graphics/svg-texture.js */}
+{/* embedded:@site/docs/examples/graphics/svg-texture-large.js */}
 <EmbeddedEditor files={{"index.js": SvgIndexFileTexture}} dependencies={{ "pixi.js": "latest" }} />
 <br/>
 

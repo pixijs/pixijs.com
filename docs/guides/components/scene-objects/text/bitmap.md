@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Learn how to use BitmapText in PixiJS for high-performance text rendering with pre-generated texture atlases.
 ---
 
 # Bitmap Text

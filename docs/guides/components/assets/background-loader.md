@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Learn how to use the PixiJS background loader to load assets in the background, improving application responsiveness and reducing initial loading times.
 ---
 
 # Background Loader

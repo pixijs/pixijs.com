@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Learn how to use the TilingSprite class in PixiJS for rendering repeating textures efficiently across a defined area.
 ---
 
 # Tiling Sprite

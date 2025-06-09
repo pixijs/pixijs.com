@@ -1,5 +1,6 @@
 ---
 sidebar_position: 7
+description: Learn how to use PixiJS filters and blend modes to apply post-processing effects and advanced compositing in your PixiJS applications.
 ---
 
 # Filters / Blend Modes

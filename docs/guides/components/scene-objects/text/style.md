@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Learn how to use the TextStyle class in PixiJS to style text objects, including fills, strokes, shadows, and more.
 ---
 
 # Text Style

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 0
+description: Learn how to create and configure a PixiJS Application, including options for WebGL/WebGPU rendering, built-in plugins, and custom application plugins.
 ---
 
 # Application

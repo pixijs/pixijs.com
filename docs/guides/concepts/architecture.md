@@ -1,5 +1,6 @@
 ---
 sidebar_position: -1
+description: A comprehensive guide to the architecture of PixiJS, including its major components and extension system.
 ---
 
 # Architecture

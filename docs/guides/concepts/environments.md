@@ -1,6 +1,7 @@
 ---
 sidebar_position: 5
 title: Environments
+description: Learn how PixiJS adapts to different environments like browsers, Web Workers, and custom execution contexts, and how to configure it for your needs.
 ---
 
 # Using PixiJS in Different Environments

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Learn how to use the Resize Plugin in PixiJS to make your application responsive to window or element size changes.
 ---
 
 # Resize Plugin

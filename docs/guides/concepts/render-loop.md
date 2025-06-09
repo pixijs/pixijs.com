@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Understanding the PixiJS render loop, including how it updates the scene graph and renders frames efficiently.
 ---
 
 # Render Loop

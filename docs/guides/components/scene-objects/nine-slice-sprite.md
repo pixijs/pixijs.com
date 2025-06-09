@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Learn how to use the NineSliceSprite class in PixiJS for creating scalable UI elements with preserved corners and edges.
 ---
 
 # NineSlice Sprite

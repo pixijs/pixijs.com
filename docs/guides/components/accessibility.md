@@ -1,5 +1,6 @@
 ---
 sidebar_position: 9
+description: Learn how to use PixiJS's built-in accessibility features to make your applications more inclusive for users with disabilities.
 ---
 
 # Accessibility

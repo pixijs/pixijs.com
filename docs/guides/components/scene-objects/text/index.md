@@ -1,3 +1,7 @@
+---
+description: Learn how to use PixiJS's text rendering classes `Text`, `BitmapText`, and `HTMLText`.
+---
+
 # Text
 
 Text is essential in games and applications, and PixiJS provides three different systems to cover different needs:

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 0
+description: Learn how to use the TickerPlugin in PixiJS for efficient rendering and updates in your application.
 ---
 
 # Ticker Plugin

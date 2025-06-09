@@ -1,3 +1,7 @@
+---
+description: Learn how to use cacheAsTexture in PixiJS to optimize rendering performance by caching containers as textures. Understand its benefits, usage, and best practices.
+---
+
 # Cache As Texture
 
 ### Using `cacheAsTexture` in PixiJS
