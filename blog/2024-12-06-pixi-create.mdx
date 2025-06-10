@@ -7,10 +7,15 @@ tags: [PixiJS, Updates, Improvements, QoL, Templates, CLI]
 hide_table_of_contents: true
 keywords: ['PixiJS', 'Updates', 'Improvements', 'QoL', 'Templates', 'CLI']
 ---
+
 export const Gif = ({ src, alt }) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem 4rem', paddingTop: '1rem' }}>
-      <img src={src} alt={alt} style={{ maxWidth: '600px', width: '100%', borderRadius: '0.5rem', border: '1px solid #676767' }} />
+      <img
+        src={src}
+        alt={alt}
+        style={{ maxWidth: '600px', width: '100%', borderRadius: '0.5rem', border: '1px solid #676767' }}
+      />
     </div>
   );
 };
@@ -61,25 +66,28 @@ Then just follow the prompts to select your desired template and you're good to 
 When running the tool, you will be presented with an option of either a **Bundler Template** or a **Creation Template**. Let's take a closer look at each of these options.
 
 ## 🛠️ Bundler Templates: Simple and Barebones
+
 Bundler Templates are stripped-down starting points for setting up PixiJS projects with popular build tools. These templates focus solely on the essentials,
 giving you a no-frills environment to start your project without any added complexity.
 
 ### What’s Included?
+
 - Out-of-the-box integration with major bundlers, including:
-    - **[Vite v6](https://vite.dev)** + PixiJS (Recommended)
-    - **[Webpack v5](https://webpack.js.org/)** + PixiJS
-    - **[esbuild](https://esbuild.github.io/)** + PixiJS
-    - PixiJS imported via **[import maps](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap)**
+  - **[Vite v6](https://vite.dev)** + PixiJS (Recommended)
+  - **[Webpack v5](https://webpack.js.org/)** + PixiJS
+  - **[esbuild](https://esbuild.github.io/)** + PixiJS
+  - PixiJS imported via **[import maps](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap)**
 
 Bundler Templates are ideal if you want complete control over your project’s setup while skipping the hassle of setting up an entire project.
 They’re lightweight, efficient, and perfect for custom workflows.
 
-
 ## 🎨 Creation Templates: Feature-Rich Starting Points
+
 Creation Templates go beyond the basics, offering a fully-featured foundation for building applications with PixiJS. These templates address common challenges
 developers face when starting a new project, providing tools that simplify screen management, asset handling, audio and more.
 
 ### What’s Included?
+
 - **Screen Management**: Handle transitions and organize application states with ease.
 - **Asset Loading**: Built-in support for PixiJS AssetPack, making asset management effortless.
 - **Audio Playback**: Leverage PixiJS Sound for modern WebAudio API features.
@@ -91,6 +99,7 @@ Creation Templates are perfect for developers who want to hit the ground running
 than worrying about setup.
 
 ### 🌍 Creation Templates for Every Platform
+
 For the creation templates we’re starting with support for general web-based applications but are planning to expand the template ecosystem to other platforms soon:
 
 - Web Template: A general-purpose creation template (available now).

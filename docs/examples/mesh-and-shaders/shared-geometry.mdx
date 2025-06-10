@@ -5,13 +5,16 @@ sidebar_position: 6
 custom_edit_url: null
 title: Shared Geometry
 ---
-import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+
+import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 import IndexFile from '!!raw-loader!./shared-geometry/index';
 import sharedGeometryVert from '!!raw-loader!./shared-geometry/sharedGeometry.vert';
 import sharedGeometryFrag from '!!raw-loader!./shared-geometry/sharedGeometry.frag';
 
-<ExampleEditor files={{
-    "index.js": IndexFile,
+<ExampleEditor
+  files={{
+    'index.js': IndexFile,
     'sharedGeometry.vert': sharedGeometryVert,
     'sharedGeometry.frag': sharedGeometryFrag,
-}} />
+  }}
+/>

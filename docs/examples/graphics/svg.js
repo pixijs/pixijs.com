@@ -1,21 +1,20 @@
-import { Application, Assets, Graphics } from 'pixi.js';
+import { Application, Graphics } from 'pixi.js';
 
-(async () =>
-{
-    // Create a new application
-    const app = new Application();
+(async () => {
+  // Create a new application
+  const app = new Application();
 
-    // Initialize the application
-    await app.init({
-        antialias: true,
-        backgroundColor: 'white',
-        resizeTo: window,
-    });
+  // Initialize the application
+  await app.init({
+    antialias: true,
+    backgroundColor: 'white',
+    resizeTo: window,
+  });
 
-    // Append the application canvas to the document body
-    document.body.appendChild(app.canvas);
+  // Append the application canvas to the document body
+  document.body.appendChild(app.canvas);
 
-    const graphics = new Graphics().svg(`
+  const graphics = new Graphics().svg(`
             <svg height="400" width="450" xmlns="http://www.w3.org/2000/svg">
                 <!-- Draw the paths -->
                 <path id="lineAB" d="M 100 350 l 150 -300" stroke="red" stroke-width="4"/>
@@ -32,5 +31,5 @@ import { Application, Assets, Graphics } from 'pixi.js';
             </svg>
         `);
 
-    app.stage.addChild(graphics);
+  app.stage.addChild(graphics);
 })();

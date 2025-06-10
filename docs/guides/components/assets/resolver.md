@@ -44,8 +44,8 @@ An `UnresolvedAsset` is the primary structure used to define assets in PixiJS. I
 import { Assets } from 'pixi.js';
 
 await Assets.load({
-    alias: 'bunny',
-    src: 'images/bunny.png',
+  alias: 'bunny',
+  src: 'images/bunny.png',
 });
 ```
 
@@ -53,12 +53,12 @@ await Assets.load({
 
 ```ts
 await Assets.load({
-    alias: 'bunny',
-    src: 'images/bunny.png',
-    loadParser: 'loadTextures',
-    data: {
-        alphaMode: 'no-premultiply-alpha',
-    },
+  alias: 'bunny',
+  src: 'images/bunny.png',
+  loadParser: 'loadTextures',
+  data: {
+    alphaMode: 'no-premultiply-alpha',
+  },
 });
 ```
 
@@ -66,8 +66,8 @@ await Assets.load({
 
 ```ts
 await Assets.load({
-    alias: 'bunny',
-    src: 'images/bunny@{0.5,1,2}x.{png,webp}',
+  alias: 'bunny',
+  src: 'images/bunny@{0.5,1,2}x.{png,webp}',
 });
 ```
 
@@ -75,12 +75,12 @@ This pattern expands internally to:
 
 ```ts
 [
-    'images/bunny@0.5x.png',
-    'images/bunny@0.5x.webp',
-    'images/bunny@1x.png',
-    'images/bunny@1x.webp',
-    'images/bunny@2x.png',
-    'images/bunny@2x.webp',
+  'images/bunny@0.5x.png',
+  'images/bunny@0.5x.webp',
+  'images/bunny@1x.png',
+  'images/bunny@1x.webp',
+  'images/bunny@2x.png',
+  'images/bunny@2x.webp',
 ];
 ```
 

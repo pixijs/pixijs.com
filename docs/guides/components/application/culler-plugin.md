@@ -23,9 +23,9 @@ Culling is ideal for:
 const app = new Application();
 
 await app.init({
-    width: 800,
-    height: 600,
-    backgroundColor: 0x222222,
+  width: 800,
+  height: 600,
+  backgroundColor: 0x222222,
 });
 
 extensions.add(CullerPlugin);

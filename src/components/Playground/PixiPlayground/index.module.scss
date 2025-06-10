@@ -1,192 +1,192 @@
 .spWrapper {
-    display: flex !important;
-    flex: 1 0 100% !important;
+  display: flex !important;
+  flex: 1 0 100% !important;
 }
 
 .tpWrapper {
-    display: flex !important;
-    flex: 1 0 100%;
+  display: flex !important;
+  flex: 1 0 100%;
 }
 
 .spLayout {
-    display: flex;
-    width: 100%;
-    flex: 1 0 100%;
+  display: flex;
+  width: 100%;
+  flex: 1 0 100%;
 
-    & > button {
+  & > button {
+    display: none;
+    height: 3rem;
+    color: #fff;
+    background: var(--ifm-color-primary);
+    border: none;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: var(--ifm-font-family-base);
+    transition: background-color 0.12s ease-out;
+
+    &:hover {
+      background: #e96e97;
+    }
+
+    &:active {
+      background: #c52359;
+    }
+  }
+
+  &.tutorial {
+    @media only screen and (max-width: 920px), (max-aspect-ratio: 5/4) {
+      button {
+        display: unset;
+      }
+
+      .editorWrapper {
+        display: unset;
+      }
+
+      .previewWrapper {
         display: none;
-        height: 3rem;
-        color: #fff;
-        background: var(--ifm-color-primary);
-        border: none;
-        border-radius: 0.5rem;
-        text-transform: uppercase;
-        font-weight: 700;
-        font-family: var(--ifm-font-family-base);
-        transition: background-color 0.12s ease-out;
+      }
 
-        &:hover {
-            background: #e96e97;
+      &.showOutput {
+        .editorWrapper {
+          display: none;
         }
 
-        &:active {
-            background: #c52359;
+        .previewWrapper {
+          display: flex;
         }
+      }
     }
 
-    &.tutorial {
-        @media only screen and (max-width: 920px), (max-aspect-ratio: 5/4) {
-            button {
-                display: unset;
-            }
+    @media only screen and (max-width: 1440px) {
+      flex-direction: column;
+    }
+  }
 
-            .editorWrapper {
-                display: unset;
-            }
+  &.fullscreen {
+    @media only screen and (max-width: 375px) {
+      button {
+        display: unset;
+      }
 
-            .previewWrapper {
-                display: none;
-            }
+      .editorWrapper {
+        display: unset;
+      }
 
-            &.showOutput {
-                .editorWrapper {
-                    display: none;
-                }
+      .previewWrapper {
+        display: none;
+      }
 
-                .previewWrapper {
-                    display: flex;
-                }
-            }
+      &.showOutput {
+        .editorWrapper {
+          display: none;
         }
 
-        @media only screen and (max-width: 1440px) {
-            flex-direction: column;
+        .previewWrapper {
+          display: flex;
         }
+      }
     }
 
-    &.fullscreen {
-        @media only screen and (max-width: 375px) {
-            button {
-                display: unset;
-            }
+    @media only screen and (max-aspect-ratio: 1/1) {
+      flex-direction: column;
+    }
+  }
 
-            .editorWrapper {
-                display: unset;
-            }
+  &.example {
+    @media only screen and (max-width: 1280px) {
+      flex-direction: column;
+    }
+  }
 
-            .previewWrapper {
-                display: none;
-            }
+  .editorWrapper {
+    flex: 1 1 !important;
+    width: 100%;
+    overflow: auto;
 
-            &.showOutput {
-                .editorWrapper {
-                    display: none;
-                }
-
-                .previewWrapper {
-                    display: flex;
-                }
-            }
-        }
-
-        @media only screen and (max-aspect-ratio: 1/1) {
-            flex-direction: column;
-        }
+    // Hide scrollbar
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    ::-webkit-scrollbar {
+      display: none;
     }
 
-    &.example {
-        @media only screen and (max-width: 1280px) {
-            flex-direction: column;
-        }
-    }
+    .spTabs {
+      padding: 0;
 
-    .editorWrapper {
-        flex: 1 1 !important;
-        width: 100%;
-        overflow: auto;
-
-        // Hide scrollbar
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        ::-webkit-scrollbar {
-            display: none;
-        }
-
-        .spTabs {
-            padding: 0;
-
-            .spTabButton {
-                position: relative;
-                padding: 0 1rem;
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(255, 255, 255, 0.1);
-                    opacity: 0;
-                    transition: opacity 0.1s ease-in-out;
-                }
-
-                &::after {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 0.25rem;
-                    background: var(--ifm-color-primary);
-                    opacity: 0;
-                }
-
-                &[data-active='true'] {
-                    color: var(--ifm-color-primary);
-                    cursor: default;
-                    pointer-events: none;
-
-                    &::after {
-                        opacity: 1;
-                    }
-                }
-
-                &[data-active='false'] {
-                    &:hover {
-                        &::before {
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .previewWrapper {
+      .spTabButton {
         position: relative;
-        display: flex;
-        flex: 1 1 !important;
+        padding: 0 1rem;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.1);
+          opacity: 0;
+          transition: opacity 0.1s ease-in-out;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 0.25rem;
+          background: var(--ifm-color-primary);
+          opacity: 0;
+        }
+
+        &[data-active='true'] {
+          color: var(--ifm-color-primary);
+          cursor: default;
+          pointer-events: none;
+
+          &::after {
+            opacity: 1;
+          }
+        }
+
+        &[data-active='false'] {
+          &:hover {
+            &::before {
+              opacity: 1;
+            }
+          }
+        }
+      }
     }
+  }
+
+  .previewWrapper {
+    position: relative;
+    display: flex;
+    flex: 1 1 !important;
+  }
 }
 
 .sandpackLoadingOverlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: url(/static/images/logo-p.svg) center center no-repeat;
-    z-index: 100;
-    animation: loadingPulse 1s infinite alternate ease-in-out;
-    background-size: 20%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: url(/static/images/logo-p.svg) center center no-repeat;
+  z-index: 100;
+  animation: loadingPulse 1s infinite alternate ease-in-out;
+  background-size: 20%;
 }
 
 @keyframes loadingPulse {
-    from {
-        opacity: 0.7;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
 }

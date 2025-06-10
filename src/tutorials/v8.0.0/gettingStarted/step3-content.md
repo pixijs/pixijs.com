@@ -4,7 +4,7 @@ While you _can_ use PixiJS for static content, for most projects you'll want to 
 
 ```javascript
 app.ticker.add((time) => {
-    bunny.rotation += 0.1 * time.deltaTime;
+  bunny.rotation += 0.1 * time.deltaTime;
 });
 ```
 

@@ -1,8 +1,8 @@
 import * as PIXI from 'pixi.js';
 
 const app = new PIXI.Application({
-    background: '#1099bb',
-    resizeTo: window,
+  background: '#1099bb',
+  resizeTo: window,
 });
 
 document.body.appendChild(app.view);
@@ -20,10 +20,9 @@ bunny.y = app.screen.height / 2;
 app.stage.addChild(bunny);
 
 // Listen for animate update
-app.ticker.add((delta) =>
-{
-    // just for fun, let's rotate mr rabbit a little
-    // delta is 1 if running at 100% performance
-    // creates frame-independent transformation
-    bunny.rotation += 0.1 * delta;
+app.ticker.add((delta) => {
+  // just for fun, let's rotate mr rabbit a little
+  // delta is 1 if running at 100% performance
+  // creates frame-independent transformation
+  bunny.rotation += 0.1 * delta;
 });

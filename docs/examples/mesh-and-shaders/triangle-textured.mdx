@@ -5,13 +5,16 @@ sidebar_position: 5
 custom_edit_url: null
 title: Triangle Textured
 ---
-import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+
+import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 import IndexFile from '!!raw-loader!./triangle-textured/index';
 import triangleTexturedVert from '!!raw-loader!./triangle-textured/triangleTextured.vert';
 import triangleTexturedFrag from '!!raw-loader!./triangle-textured/triangleTextured.frag';
 
-<ExampleEditor files={{
-    "index.js": IndexFile,
+<ExampleEditor
+  files={{
+    'index.js': IndexFile,
     'triangleTextured.vert': triangleTexturedVert,
-    'triangleTextured.frag': triangleTexturedFrag
-}} />
+    'triangleTextured.frag': triangleTexturedFrag,
+  }}
+/>

@@ -5,7 +5,18 @@ slug: pixi-v8-launches
 authors: [mat, zyie]
 tags: [PixiJS, WebGPU, WebGL]
 hide_table_of_contents: true
-keywords: ['PixiJS', 'pixi.js', 'webGL', 'webGPU', 'performance', '2d rendering', '2d webGL', 'javascript graphics', 'game development']
+keywords:
+  [
+    'PixiJS',
+    'pixi.js',
+    'webGL',
+    'webGPU',
+    'performance',
+    '2d rendering',
+    '2d webGL',
+    'javascript graphics',
+    'game development',
+  ]
 ---
 
 Get ready to push the boundaries of what's possible on the web! PixiJS v8 has landed, and it's a game-changer. Celebrating a decade of driving innovation, we've supercharged PixiJS with the latest technological advancements, making it faster, more robust, and ridiculously powerful. From the seamless integration of WebGPU to leveraging modern JavaScript for smoother development, PixiJS v8 is all about empowering you to create jaw-dropping web experiences with ease. It's not just an update; it's the future of 2D web graphics, today. Dive in and let PixiJS v8 elevate your projects to unseen heights. Let's make the web a more beautiful place, one pixi(el) at a time.
@@ -23,6 +34,7 @@ Now, we're thrilled to unveil PixiJS v8, arguably our most substantial update ev
 With PixiJS v8, our aim was to revisit and enhance the foundation of PixiJS, streamlining its core rather than just adding layers of code.
 
 Our vision for v8 was clear:
+
 - **Longevity:** We designed v8 to stand the test of time, anticipating it will remain relevant and robust for another decade.
 - **Innovation with WebGPU:** Embracing the latest in rendering technology, we've seamlessly integrated WebGPU, not as an add-on to our existing WebGL renderer but as a core paradigm, ensuring PixiJS remains at the cutting edge as WebGL phases out.
 - **Leveraging Modern JavaScript:** The advancements in JavaScript have significantly simplified development. We've utilized features like object destructuring and options to make v8 cleaner and more powerful.
@@ -34,6 +46,7 @@ We're incredibly proud of PixiJS v8 and eager to share the improvements and new 
 ---
 
 ## 🔗 Quick links
+
 - The new Docs for v8 can be found [here](https://pixijs.download/v8.0.0/docs/index.html)
 - [Migration](https://pixijs.com/8.x/guides/migrations/v8)
 - [Examples](https://pixijs.com/8.x/examples)
@@ -42,6 +55,7 @@ We're incredibly proud of PixiJS v8 and eager to share the improvements and new 
 ---
 
 ## 🎁 Whats New?
+
 There are numerous updates to discuss, more than can be covered in a single post! Below are the key highlights. For a more detailed exploration of these changes, be sure to follow the links provided above.
 
 #### 📈 New Performance Bar
@@ -53,11 +67,11 @@ The performance of v8 is faster for **both** renderers. This means by using v8 a
 - **CPU** = time spent by the CPU rendering a single frame
 - **GPU** = time spent by the GPU rendering a single frame
 
-| Bunny Situation | V7 CPU  | V8 CPU |CPU Dif | V7 GPU | V8 GPU | GPU dif |
-|-----------------|------------|------------|--------------------|------------|------------|--------------------|
-| 100k sprites all moving | ~50ms | ~15ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>233%</div> | ~9ms | ~2ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>350%</div> |
-| 100k sprites not moving | ~21ms | ~0.12ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>17417%</div> | ~9ms | ~0.5ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>1700%</div> |
-| 100k sprites (changing scene structure) | ~50ms | ~24ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>108%</div> | ~9ms | ~2ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>350%</div> |
+| Bunny Situation                         | V7 CPU | V8 CPU  | CPU Dif                                                                 | V7 GPU | V8 GPU | GPU dif                                                                |
+| --------------------------------------- | ------ | ------- | ----------------------------------------------------------------------- | ------ | ------ | ---------------------------------------------------------------------- |
+| 100k sprites all moving                 | ~50ms  | ~15ms   | <div style={{backgroundColor:'lightgreen', color:'black'}}>233%</div>   | ~9ms   | ~2ms   | <div style={{backgroundColor:'lightgreen', color:'black'}}>350%</div>  |
+| 100k sprites not moving                 | ~21ms  | ~0.12ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>17417%</div> | ~9ms   | ~0.5ms | <div style={{backgroundColor:'lightgreen', color:'black'}}>1700%</div> |
+| 100k sprites (changing scene structure) | ~50ms  | ~24ms   | <div style={{backgroundColor:'lightgreen', color:'black'}}>108%</div>   | ~9ms   | ~2ms   | <div style={{backgroundColor:'lightgreen', color:'black'}}>350%</div>  |
 
 These benchmark numbers are based on the Bunnymark test that you can try yourself.
 
@@ -72,7 +86,6 @@ These benchmark numbers are based on the Bunnymark test that you can try yoursel
 
 We've implemented a WebGPU backend for rendering. Whilst this has created a better graphics paradigm under the hood and set us up for the future of rich web content, it's important to note that WebGPU does not automatically guarantee improved performance over WebGL in all scenarios, as PixiJS often encounters more limitations on the CPU side than the GPU. However, for scenes with numerous batch breaks, such as filters, masks, and blend modes, WebGPU may offer better performance due to its more modern to rendering. As WebGPU is relatively new, it's expected to enhance in speed over time, similar to the development of WebGL. It serves as a solid foundation for future advancements.
 
-
 #### 📦 New Package Structure
 
 No more "lerna." PixiJS is now just one package with one import root: `import {stuff} from ‘pixi.js’`. This change means we now have much better tree shaking during app compilation, reducing bundle size if not imported.
@@ -80,22 +93,22 @@ No more "lerna." PixiJS is now just one package with one import root: `import {s
 Old:
 
 ```ts
-import { Sprite } from "@pixi/sprite";
-import { Graphic } from "@pixi/graphics";
+import { Sprite } from '@pixi/sprite';
+import { Graphic } from '@pixi/graphics';
 ```
 
 New:
 
 ```ts
-import { Sprite, Graphic } from "pixi.js";
+import { Sprite, Graphic } from 'pixi.js';
 ```
 
-### ✨ We *promise* the Renderer will work
+### ✨ We _promise_ the Renderer will work
 
 When initializing a renderer, this process is now asynchronous. This serves two purposes: firstly, identifying and loading the necessary renderer code to minimize what is loaded for your users. We only load the one backend that your user is using. There's no point in loading all the WebGL stuff if they are using WebGPU. Secondly, the initialization of WebGPU itself is an asynchronous process, so we need to have a promise in there somewhere!
 
 ```ts
-import { Application, autoDetectRenderer } from "pixi.js";
+import { Application, autoDetectRenderer } from 'pixi.js';
 
 const app = new Application();
 
@@ -111,7 +124,6 @@ const app = new Application();
 })();
 ```
 
-
 #### 🌟 Scene Upgrades
 
 ![PixiJS logo](/assets/blog/blend-modes.png)
@@ -120,8 +132,8 @@ const app = new Application();
 
 ```ts
 const container = new Container({
-  isRenderGroup:true // this containers transform is now handled on the GPU!
-})
+  isRenderGroup: true, // this containers transform is now handled on the GPU!
+});
 ```
 
 - Another cool new change is that now blend modes and tints are inherited, much like transforms and alpha. This means you can now easily tint a container, and all its children will have the tint applied - same for blend modes, its as easy as:
@@ -145,7 +157,7 @@ const texture = RenderTexture.create({
 
 - We have also added support for a wide range of Photoshop-like filters, This allows you to take your rendering to the next level! We have including all the classics:
   - ColorBlend, ColorBurnBlend, ColorDodgeBlend, DarkenBlend, DifferenceBlend, DivideBlend, ExclusionBlend, HardLightBlend, HardMixBlend, LightenBlend, LinearBurnBlend, LinearDodgeBlend, LinearLightBlend, LuminosityBlend, NegationBlend, OverlayBlend, PinLightBlend, SaturationBlend, SoftLightBlend, SubtractBlend, VividLightBlend.
- - It's important to mention that these are essentially filters at the core, so it's advisable not to overuse them to avoid potential slowdowns.
+- It's important to mention that these are essentially filters at the core, so it's advisable not to overuse them to avoid potential slowdowns.
 
 ```ts
 import `pixi.js/advanced-blend-modes` // make sure to include them in you lib! (or cherry pick one!)
@@ -160,9 +172,7 @@ myContainer.blendMode = 'color-burn` // easy!
 - The Graphics API has undergone changes to become more intuitive and user-friendly, closely resembling the HTML Canvas 2D context API. For instance, drawing and filling a rectangle is simplified as follows:
 
   ```ts
-  graphics
-      .rect(50, 50, 100, 100)
-      .fill('blue');
+  graphics.rect(50, 50, 100, 100).fill('blue');
   ```
 
 - A `GraphicsContext` has been introduced, powering all graphics operations. Similar to how one texture can be used across many sprites, a single GraphicsContext can now be utilized by multiple Graphics objects, enhancing efficiency and flexibility.
@@ -202,17 +212,17 @@ Text has been upgraded to allow for better performance and usability! We have al
 BitmapFonts can now be generated on the fly or installed upfront as you prefer. They dynamically add characters as the font's glyphs are required, saving on memory. The layout of bitmap text is almost identical to the layout of the default text now, making it easier to switch between the two depending on your needs.
 
 ```ts
-
 const myText = new BitmapText({
   text: 'hello im a bitmap font!',
   // font will be dynamically created
-  style:{
+  style: {
     fontFamily: 'Outfit',
     fontSize: 12,
     fill: 'red',
-  }
-})
+  },
+});
 ```
+
 Text fills and strokes now conform to the same fills and strokes as graphics. This means Gradients, textures, and all the fun ways you can fill and stroke graphics can now be applied to Text.
 
 ```ts
@@ -227,7 +237,6 @@ const myText = new Text({
   }
 })
 ```
-
 
 ## 🤝 What now? Get involved!
 

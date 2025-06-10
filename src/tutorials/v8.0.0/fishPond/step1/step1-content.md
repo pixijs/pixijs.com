@@ -13,10 +13,9 @@ We will be using an asynchronous immediately invoked function expression ([IIFE]
 Let's create the application outside of the IIFE just so that it can be referenced across other functions declared outside. The initialization and appending the application's canvas will be done from within the `setup` function which is called inside the IIFE.
 
 ```javascript
-async function setup()
-{
-    await app.init({ background: '#1099bb', resizeTo: window });
-    document.body.appendChild(app.canvas);
+async function setup() {
+  await app.init({ background: '#1099bb', resizeTo: window });
+  document.body.appendChild(app.canvas);
 }
 ```
 
@@ -25,19 +24,18 @@ async function setup()
 After the application setup, we will then preload all the textures required for the rest of the tutorial. Here we also provide aliases so that they can be intuitively referred to later on. This will be done inside the `preload` function which is also called inside the IIFE after the setup.
 
 ```javascript
-async function preload()
-{
-    const assets = [
-        { alias: 'background', src: 'https://pixijs.com/assets/tutorials/fish-pond/pond_background.jpg' },
-        { alias: 'fish1', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish1.png' },
-        { alias: 'fish2', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish2.png' },
-        { alias: 'fish3', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish3.png' },
-        { alias: 'fish4', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish4.png' },
-        { alias: 'fish5', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish5.png' },
-        { alias: 'overlay', src: 'https://pixijs.com/assets/tutorials/fish-pond/wave_overlay.png' },
-        { alias: 'displacement', src: 'https://pixijs.com/assets/tutorials/fish-pond/displacement_map.png' },
-    ];
-    await Assets.load(assets);
+async function preload() {
+  const assets = [
+    { alias: 'background', src: 'https://pixijs.com/assets/tutorials/fish-pond/pond_background.jpg' },
+    { alias: 'fish1', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish1.png' },
+    { alias: 'fish2', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish2.png' },
+    { alias: 'fish3', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish3.png' },
+    { alias: 'fish4', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish4.png' },
+    { alias: 'fish5', src: 'https://pixijs.com/assets/tutorials/fish-pond/fish5.png' },
+    { alias: 'overlay', src: 'https://pixijs.com/assets/tutorials/fish-pond/wave_overlay.png' },
+    { alias: 'displacement', src: 'https://pixijs.com/assets/tutorials/fish-pond/displacement_map.png' },
+  ];
+  await Assets.load(assets);
 }
 ```
 

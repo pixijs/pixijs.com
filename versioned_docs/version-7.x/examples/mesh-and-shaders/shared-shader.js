@@ -5,32 +5,32 @@ const app = new PIXI.Application({ resizeTo: window });
 document.body.appendChild(app.view);
 
 const geometry = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100,
-            -100, // x, y
-            100,
-            -100, // x, y
-            100,
-            100,
-        ],
-    ) // x, y
+  .addAttribute(
+    'aVertexPosition', // the attribute name
+    [
+      -100,
+      -100, // x, y
+      100,
+      -100, // x, y
+      100,
+      100,
+    ],
+  ) // x, y
 
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-        ],
-    ); // u, v
+  .addAttribute(
+    'aUvs', // the attribute name
+    [
+      0,
+      0, // u, v
+      1,
+      0, // u, v
+      1,
+      1,
+    ],
+  ); // u, v
 
 const shader = PIXI.Shader.from(
-    `
+  `
 
     precision mediump float;
 
@@ -49,7 +49,7 @@ const shader = PIXI.Shader.from(
 
     }`,
 
-    `precision mediump float;
+  `precision mediump float;
 
     varying vec2 vUvs;
 
@@ -61,13 +61,13 @@ const shader = PIXI.Shader.from(
     }
 
 `,
-    {
-        uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
-    },
+  {
+    uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
+  },
 );
 
 const shader2 = PIXI.Shader.from(
-    `
+  `
 
     precision mediump float;
 
@@ -86,7 +86,7 @@ const shader2 = PIXI.Shader.from(
 
     }`,
 
-    `precision mediump float;
+  `precision mediump float;
 
     varying vec2 vUvs;
 
@@ -100,9 +100,9 @@ const shader2 = PIXI.Shader.from(
     }
 
 `,
-    {
-        uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
-    },
+  {
+    uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
+  },
 );
 
 const triangle = new PIXI.Mesh(geometry, shader);
@@ -117,8 +117,7 @@ triangle2.scale.set(3);
 
 app.stage.addChild(triangle2, triangle);
 
-app.ticker.add((delta) =>
-{
-    triangle.rotation += 0.01;
-    triangle2.rotation -= 0.005;
+app.ticker.add(() => {
+  triangle.rotation += 0.01;
+  triangle2.rotation -= 0.005;
 });

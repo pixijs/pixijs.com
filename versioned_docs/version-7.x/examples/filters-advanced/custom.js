@@ -15,33 +15,31 @@ app.stage.addChild(background);
 app.stop();
 
 fetch('https://pixijs.com/assets/pixi-filters/shader.frag')
-    .then((res) => res.text())
-    .then(onLoaded);
+  .then((res) => res.text())
+  .then(onLoaded);
 
 let filter;
 
 // Handle the load completed
-function onLoaded(data)
-{
-    // Create the new filter, arguments: (vertexShader, framentSource)
-    filter = new PIXI.Filter(null, data, {
-        customUniform: 0.0,
-    });
+function onLoaded(data) {
+  // Create the new filter, arguments: (vertexShader, framentSource)
+  filter = new PIXI.Filter(null, data, {
+    customUniform: 0.0,
+  });
 
-    // === WARNING ===
-    // specify uniforms in filter constructor
-    // or set them BEFORE first use
-    // filter.uniforms.customUniform = 0.0
+  // === WARNING ===
+  // specify uniforms in filter constructor
+  // or set them BEFORE first use
+  // filter.uniforms.customUniform = 0.0
 
-    // Add the filter
-    background.filters = [filter];
+  // Add the filter
+  background.filters = [filter];
 
-    // Resume application update
-    app.start();
+  // Resume application update
+  app.start();
 }
 
 // Animate the filter
-app.ticker.add((delta) =>
-{
-    filter.uniforms.customUniform += 0.04 * delta;
+app.ticker.add((delta) => {
+  filter.uniforms.customUniform += 0.04 * delta;
 });

@@ -73,16 +73,16 @@ The `extensions` object in PixiJS is a global registry for managing extensions. 
 import { extensions, ExtensionType } from 'pixi.js';
 
 const myLoader = {
-    extension: {
-        type: ExtensionType.LoadParser,
-        name: 'my-loader',
-    },
-    test(url) {
-        /* logic */
-    },
-    load(url) {
-        /* logic */
-    },
+  extension: {
+    type: ExtensionType.LoadParser,
+    name: 'my-loader',
+  },
+  test(url) {
+    /* logic */
+  },
+  load(url) {
+    /* logic */
+  },
 };
 
 extensions.add(myLoader);

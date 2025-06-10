@@ -3,7 +3,7 @@ sidebar_position: 4
 description: Learn how to render SVGs in PixiJS, including using them as textures or graphics, and understand their advantages and limitations.
 ---
 
-import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
+import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
 import SvgIndexFile from '!!raw-loader!../../../examples/graphics/svg.js';
 import SvgIndexFileLoad from '!!raw-loader!../../../examples/graphics/svg-load.js';
 import SvgIndexFileTexture from '!!raw-loader!../../../examples/graphics/svg-texture.js';
@@ -71,13 +71,13 @@ This does increase memory usage, but it be of a higher fidelity.
 
 ```ts
 const svgTexture = await Assets.load('path/to.svg', {
-    resolution: 4 // will be 4 times as big!
+  resolution: 4, // will be 4 times as big!
 });
 const mySprite = new Sprite(svgTexture);
 ```
 
-<EmbeddedEditor files={{"index.js": SvgIndexFileTextureLarge}} dependencies={{ "pixi.js": "latest" }} />
-<br/>
+<EmbeddedEditor files={{ 'index.js': SvgIndexFileTextureLarge }} dependencies={{ 'pixi.js': 'latest' }} />
+<br />
 
 This ensures the texture appears at the correct size and resolution.
 
@@ -109,22 +109,22 @@ PixiJS can render SVGs as real scalable vector graphics using the `Graphics` cla
 ### Example
 
 ```ts
-const graphics = new Graphics()
-   .svg('<svg width="100" height="100"><rect width="100" height="100" fill="red"/></svg>');
+const graphics = new Graphics().svg('<svg width="100" height="100"><rect width="100" height="100" fill="red"/></svg>');
 ```
 
-<EmbeddedEditor files={{"index.js": SvgIndexFile}} dependencies={{ "pixi.js": "latest" }} />
-<br/>
+<EmbeddedEditor files={{ 'index.js': SvgIndexFile }} dependencies={{ 'pixi.js': 'latest' }} />
+<br />
 
 If you want to use the same SVG multiple times, you can use `GraphicsContext` to share the parsed SVG data across multiple graphics objects, improving performance by parsing it once and reusing it.
 
 ```ts
-const context = new GraphicsContext().svg('<svg width="100" height="100"><rect width="100" height="100" fill="red"/></svg>');
+const context = new GraphicsContext().svg(
+  '<svg width="100" height="100"><rect width="100" height="100" fill="red"/></svg>',
+);
 
 const graphics1 = new Graphics(context);
 const graphics2 = new Graphics(context);
 ```
-
 
 ### Loading SVGs as Graphics
 
@@ -132,15 +132,15 @@ Instead of passing an SVG string directly, you can load an SVG file using PixiJS
 
 ```ts
 const svgContext = await Assets.load('path/to.svg', {
-    parseAsGraphicsContext: true // If false, it returns a texture instead.
+  parseAsGraphicsContext: true, // If false, it returns a texture instead.
 });
 const myGraphics = new Graphics(svgContext);
 ```
 
 Since it's loaded via `Assets.load`, it will be cached and reused, much like a texture.
 
-<EmbeddedEditor files={{"index.js": SvgIndexFileLoad}} dependencies={{ "pixi.js": "latest" }} />
-<br/>
+<EmbeddedEditor files={{ 'index.js': SvgIndexFileLoad }} dependencies={{ 'pixi.js': 'latest' }} />
+<br />
 
 ### Pros & Cons
 
@@ -167,14 +167,14 @@ PixiJS supports most SVG features that can be rendered in a Canvas 2D context. B
 
 | Feature                                 | Supported |
 | --------------------------------------- | --------- |
-| Basic Shapes (rect, circle, path, etc.) | ✅         |
-| Gradients                               | ✅         |
-| Stroke & Fill Styles                    | ✅         |
-| Text Elements                           | ❌         |
-| Filters (Blur, Drop Shadow, etc.)       | ❌         |
-| Clipping Paths                          | ✅         |
-| Patterns                                | ❌         |
-| Complex Paths & Curves                  | ✅         |
+| Basic Shapes (rect, circle, path, etc.) | ✅        |
+| Gradients                               | ✅        |
+| Stroke & Fill Styles                    | ✅        |
+| Text Elements                           | ❌        |
+| Filters (Blur, Drop Shadow, etc.)       | ❌        |
+| Clipping Paths                          | ✅        |
+| Patterns                                | ❌        |
+| Complex Paths & Curves                  | ✅        |
 
 ### Performance Considerations
 

@@ -12,31 +12,32 @@ This lists out all the available animations to be included in our character, eac
 
 ```javascript
 const animationMap = {
-    idle: {
-        name: 'idle',
-        loop: true,
-    },
-    walk: {
-        name: 'walk',
-        loop: true,
-    },
-    run: {
-        name: 'run',
-        loop: true,
-    },
-    jump: {
-        name: 'jump',
-        timeScale: 1.5,
-    },
-    hover: {
-        name: 'hoverboard',
-        loop: true,
-    },
-    spawn: {
-        name: 'portal',
-    },
+  idle: {
+    name: 'idle',
+    loop: true,
+  },
+  walk: {
+    name: 'walk',
+    loop: true,
+  },
+  run: {
+    name: 'run',
+    loop: true,
+  },
+  jump: {
+    name: 'jump',
+    timeScale: 1.5,
+  },
+  hover: {
+    name: 'hoverboard',
+    loop: true,
+  },
+  spawn: {
+    name: 'portal',
+  },
 };
 ```
+
 ### Helper Methods
 
 #### `playAnimation(animation)`
@@ -101,19 +102,18 @@ On the callback, we should skip updating the character state and calling its loc
 ```javascript
 spineBoy.spawn();
 
-app.ticker.add(() =>
-{
-    if (spineBoy.isSpawning()) return;
+app.ticker.add(() => {
+  if (spineBoy.isSpawning()) return;
 
-    spineBoy.state.walk = controller.keys.left.pressed || controller.keys.right.pressed;
-    if (spineBoy.state.run && spineBoy.state.walk) spineBoy.state.run = true;
-    else spineBoy.state.run = controller.keys.left.doubleTap || controller.keys.right.doubleTap;
-    spineBoy.state.hover = controller.keys.down.pressed;
-    if (controller.keys.left.pressed) spineBoy.direction = -1;
-    else if (controller.keys.right.pressed) spineBoy.direction = 1;
-    spineBoy.state.jump = controller.keys.space.pressed;
+  spineBoy.state.walk = controller.keys.left.pressed || controller.keys.right.pressed;
+  if (spineBoy.state.run && spineBoy.state.walk) spineBoy.state.run = true;
+  else spineBoy.state.run = controller.keys.left.doubleTap || controller.keys.right.doubleTap;
+  spineBoy.state.hover = controller.keys.down.pressed;
+  if (controller.keys.left.pressed) spineBoy.direction = -1;
+  else if (controller.keys.right.pressed) spineBoy.direction = 1;
+  spineBoy.state.jump = controller.keys.space.pressed;
 
-    spineBoy.update();
+  spineBoy.update();
 });
 ```
 

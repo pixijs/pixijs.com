@@ -59,17 +59,15 @@ Then we can try connecting the controller state to the character's walk animatio
 ```javascript
 let currentAnimation;
 
-app.ticker.add((time) =>
-{
-    const rightPressed = controller.keys.right.pressed;
-    const animationName = rightPressed ? 'walk' : 'idle';
-    const loop = true;
+app.ticker.add((time) => {
+  const rightPressed = controller.keys.right.pressed;
+  const animationName = rightPressed ? 'walk' : 'idle';
+  const loop = true;
 
-    if (currentAnimation !== animationName)
-    {
-        currentAnimation = animationName;
-        spineBoy.spine.state.setAnimation(0, animationName, loop);
-    }
+  if (currentAnimation !== animationName) {
+    currentAnimation = animationName;
+    spineBoy.spine.state.setAnimation(0, animationName, loop);
+  }
 });
 ```
 

@@ -13,13 +13,13 @@ This makes it ideal for rendering complex typography, inline formatting, emojis,
 import { HTMLText } from 'pixi.js';
 
 const html = new HTMLText({
-    text: '<strong>Hello</strong> <em>PixiJS</em>!',
-    style: {
-        fontFamily: 'Arial',
-        fontSize: 24,
-        fill: '#ff1010',
-        align: 'center',
-    },
+  text: '<strong>Hello</strong> <em>PixiJS</em>!',
+  style: {
+    fontFamily: 'Arial',
+    fontSize: 24,
+    fill: '#ff1010',
+    align: 'center',
+  },
 });
 
 app.stage.addChild(html);
@@ -48,16 +48,16 @@ HTML text uses SVG `<foreignObject>` to draw HTML inside the canvas. As a result
 
 ```ts
 const fancy = new HTMLText({
-    text: '<red>Red</red>, <blue>Blue</blue>',
-    style: {
-        fontFamily: 'DM Sans',
-        fontSize: 32,
-        fill: '#ffffff',
-        tagStyles: {
-            red: { fill: 'red' },
-            blue: { fill: 'blue' },
-        },
+  text: '<red>Red</red>, <blue>Blue</blue>',
+  style: {
+    fontFamily: 'DM Sans',
+    fontSize: 32,
+    fill: '#ffffff',
+    tagStyles: {
+      red: { fill: 'red' },
+      blue: { fill: 'blue' },
     },
+  },
 });
 ```
 

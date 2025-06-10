@@ -7,7 +7,8 @@ tags: [PixiJS, Updates, Documentation]
 hide_table_of_contents: true
 keywords: ['PixiJS', 'Updates', 'Documentation', 'Text Features']
 ---
-import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
+
+import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
 import TrimIndexFile from '!!raw-loader!../docs/examples/text/text-trim';
 import FiltersIndexFile from '!!raw-loader!../docs/examples/text/text-filters';
 import CartoonFile from '!!raw-loader!../docs/examples/text/text-filters/CartoonTextFilter';
@@ -40,8 +41,8 @@ This change is driven by the survey results we gathered last year, which highlig
 As with any major change, there are areas that need refinement. We welcome your feedback as we continue to improve the documentation.
 :::
 
-
 ### New Website Documentation
+
 We've expanded and restructured our [guides](/8.x/guides/getting-started/intro) to now cover all core areas of PixiJS with improved getting started. The goal is to provide clearer entry points for new users and more comprehensive resources for experienced developers.
 
 ### Enhanced API Documentation
@@ -68,13 +69,15 @@ We've also taken this opportunity to improve the clarity of the documentation it
 These improvements are intended to help developers better understand how to use PixiJS effectively—whether they're just getting started or looking to dig deeper.
 
 ### Public vs Internal APIs
+
 To help define a clearer boundary between what developers should rely on and what is meant for internal use, we've audited the entire codebase and marked APIs accordingly. Internal methods are now excluded from the API docs. This makes the public API surface more stable and reduces the risk of unintentional dependency on internal behaviors.
 
-## New Features  🎉
+## New Features 🎉
 
 Now that we've covered the documentation overhaul, let's dive into the new features introduced in PixiJS v8.10.0:
 
 ### Baked Text Filters
+
 Text filters can now be applied at creation time, baking the effect directly into the texture. This avoids runtime filter costs and allows more expressive styles, such as outlines and drop shadows, without performance penalties.
 
 To use this feature, you can now specify filters directly in the `TextStyle` configuration:
@@ -89,14 +92,15 @@ const style = new TextStyle({
 const text = new PIXI.Text({ text: 'Hello, PixiJS!', style });
 ```
 
-<EmbeddedEditor files={{
-    "index.js": FiltersIndexFile,
+<EmbeddedEditor
+  files={{
+    'index.js': FiltersIndexFile,
     'CartoonTextFilter.js': CartoonFile,
     'cartoonText.vert': vert,
     'cartoonText.frag': frag,
-    'cartoonText.wgsl': wgsl
-}} />
-
+    'cartoonText.wgsl': wgsl,
+  }}
+/>
 
 Additionally, a new `generateFilteredTexture` method has been added to `filterSystem`:
 
@@ -109,6 +113,7 @@ const filteredTexture = renderer.filters.generateFilteredTexture({
 ```
 
 ### Text Trimming
+
 Automatically remove unnecessary whitespace around text.
 
 :::warning PERFORMANCE WARNING
@@ -128,13 +133,16 @@ const style = new TextStyle({
 const text = new Text({ text: '   Hello, PixiJS!   ', style });
 ```
 
-<EmbeddedEditor files={{
-    "index.js": TrimIndexFile,
-}} />
+<EmbeddedEditor
+  files={{
+    'index.js': TrimIndexFile,
+  }}
+/>
 
 This method applies one or more filters to a texture and returns a new, filtered result.
 
 ### Texture Scale Modes
+
 You can now explicitly set texture filtering for text, useful when rendering pixel fonts or when you need control over how the texture is sampled.
 
 To adjust the texture scale mode, use the `textureStyle` property in the `TextStyle`:
@@ -151,30 +159,38 @@ const style = new TextStyle({
 const text = new Text({ text: 'Hello, PixiJS!', style });
 ```
 
-<EmbeddedEditor files={{
-    "index.js": TextureStyleIndexFile,
-}} />
+<EmbeddedEditor
+  files={{
+    'index.js': TextureStyleIndexFile,
+  }}
+/>
 
 ## Highlights from v8.9.0 and v8.8.0
 
 We missed highlighting the previous two releases, so here are some key features from v8.9.0 and v8.8.0:
 
 ### DOM Container
+
 The `DOMContainer` lets developers transform and animate DOM elements in sync with PixiJS scenes. This is useful for overlaying native inputs, textareas, or other HTML controls while retaining control over their positioning and rotation.
 
-<EmbeddedEditor files={{
-    "index.js": DomContainerIndexFile,
-}} />
+<EmbeddedEditor
+  files={{
+    'index.js': DomContainerIndexFile,
+  }}
+/>
 
 ### NineSlice Sprite Anchor
 
 `NineSliceSprite` now supports the `anchor` property, allowing rotation and scaling behaviors to work as they do for other sprites.
 
-<EmbeddedEditor files={{
-    "index.js": NineSliceIndexFile,
-}} />
+<EmbeddedEditor
+  files={{
+    'index.js': NineSliceIndexFile,
+  }}
+/>
 
 ## Looking Ahead
+
 Starting with v8.10.0, we're moving to a monthly release cadence for PixiJS. This will allow us to ship improvements, bug fixes, and new features more predictably and keep the project evolving at a steady pace.
 
 While the size and scope of each release may vary, the goal is to provide incremental updates that are easier to adopt and integrate into projects.

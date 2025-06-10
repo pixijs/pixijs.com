@@ -26,11 +26,9 @@ import { BlurFilter, NoiseFilter } from 'pixi.js';
 
 sprite.filters = new BlurFilter({ strength: 5 });
 
-sprite.filters = [
-    new BlurFilter({ strength: 4 }),
-    new NoiseFilter({ noise: 0.2 }),
-];
+sprite.filters = [new BlurFilter({ strength: 4 }), new NoiseFilter({ noise: 0.2 })];
 ```
+
 :::info
 Order matters — filters are applied in sequence.
 :::
@@ -55,13 +53,13 @@ sprite.filters = [new HardMixBlend()];
 
 PixiJS v8 provides a variety of filters out of the box:
 
-| Filter Class         | Description                                        |
-| -------------------- | -------------------------------------------------- |
-| `AlphaFilter`        | Applies transparency to an object.                 |
-| `BlurFilter`         | Gaussian blur.                                     |
-| `ColorMatrixFilter`  | Applies color transformations via a matrix.        |
-| `DisplacementFilter` | Distorts an object using another texture.          |
-| `NoiseFilter`        | Adds random noise for a grainy effect.             |
+| Filter Class         | Description                                 |
+| -------------------- | ------------------------------------------- |
+| `AlphaFilter`        | Applies transparency to an object.          |
+| `BlurFilter`         | Gaussian blur.                              |
+| `ColorMatrixFilter`  | Applies color transformations via a matrix. |
+| `DisplacementFilter` | Distorts an object using another texture.   |
+| `NoiseFilter`        | Adds random noise for a grainy effect.      |
 
 :::info
 To explore more community filters, see [pixi-filters](https://pixijs.io/filters/docs/).
@@ -69,18 +67,18 @@ To explore more community filters, see [pixi-filters](https://pixijs.io/filters/
 
 **Blend Filters**: Used for custom compositing modes
 
-| Filter Class         | Description                                        |
-| -------------------- | -------------------------------------------------- |
-| `ColorBurnBlend`     | Darkens the base color to reflect the blend color. |
-| `ColorDodgeBlend`    | Brightens the base color.                          |
-| `DarkenBlend`        | Retains the darkest color components.              |
-| `DivideBlend`        | Divides the base color by the blend color.         |
-| `HardMixBlend`       | High-contrast blend.                               |
-| `LinearBurnBlend`    | Darkens using linear formula.                      |
-| `LinearDodgeBlend`   | Lightens using linear formula.                     |
-| `LinearLightBlend`   | Combination of linear dodge and burn.              |
-| `PinLightBlend`      | Selective replacement of colors.                   |
-| `SubtractBlend`      | Subtracts the blend color from base.               |
+| Filter Class       | Description                                        |
+| ------------------ | -------------------------------------------------- |
+| `ColorBurnBlend`   | Darkens the base color to reflect the blend color. |
+| `ColorDodgeBlend`  | Brightens the base color.                          |
+| `DarkenBlend`      | Retains the darkest color components.              |
+| `DivideBlend`      | Divides the base color by the blend color.         |
+| `HardMixBlend`     | High-contrast blend.                               |
+| `LinearBurnBlend`  | Darkens using linear formula.                      |
+| `LinearDodgeBlend` | Lightens using linear formula.                     |
+| `LinearLightBlend` | Combination of linear dodge and burn.              |
+| `PinLightBlend`    | Selective replacement of colors.                   |
+| `SubtractBlend`    | Subtracts the blend color from base.               |
 
 ---
 
@@ -144,24 +142,23 @@ const fragment = `
 `;
 
 const customFilter = new Filter({
-    glProgram: new GlProgram({
-        fragment,
-        vertex,
-    }),
-    resources: {
-        timeUniforms: {
-            uTime: { value: 0.0, type: 'f32' },
-        },
+  glProgram: new GlProgram({
+    fragment,
+    vertex,
+  }),
+  resources: {
+    timeUniforms: {
+      uTime: { value: 0.0, type: 'f32' },
     },
+  },
 });
-
 
 // Apply the filter
 sprite.filters = [customFilter];
 
 // Update uniform
 app.ticker.add((ticker) => {
-    filter.resources.timeUniforms.uniforms.uTime += 0.04 * ticker.deltaTime;
+  filter.resources.timeUniforms.uniforms.uTime += 0.04 * ticker.deltaTime;
 });
 ```
 

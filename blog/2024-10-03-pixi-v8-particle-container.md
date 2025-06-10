@@ -47,26 +47,26 @@ import { ParticleContainer, Particle, Texture } from 'pixi.js';
 
 // Create a particle container with default options
 const container = new ParticleContainer({
-    // this is the default, but we show it here for clarity
-    dynamicProperties: {
-        position: true,  // Allow dynamic position changes (default)
-        scale: false,    // Static scale for extra performance
-        rotation: false, // Static rotation
-        color: false     // Static color
-    }
+  // this is the default, but we show it here for clarity
+  dynamicProperties: {
+    position: true, // Allow dynamic position changes (default)
+    scale: false, // Static scale for extra performance
+    rotation: false, // Static rotation
+    color: false, // Static color
+  },
 });
 
 // Add particles
 const texture = Texture.from('path/to/bunny.png');
 
 for (let i = 0; i < 100000; ++i) {
-    let particle = new Particle({
-        texture,
-        x: Math.random() * 800,
-        y: Math.random() * 600,
-    });
+  let particle = new Particle({
+    texture,
+    x: Math.random() * 800,
+    y: Math.random() * 600,
+  });
 
-    container.addParticle(particle);
+  container.addParticle(particle);
 }
 
 // Add container to the Pixi stage
@@ -92,7 +92,6 @@ The new `ParticleContainer` is a game-changer, but there are still some areas fo
 PixiJS v8’s `ParticleContainer` is a game-changer when it comes to rendering at scale. Its ability to push **millions** of particles at full speed opens up a world of possibilities for game developers, animators, and creative coders. Get in, experiment with the new API, and see just how fast your visuals can fly!
 
 Ready to give it a spin? Try out the new `ParticleContainer` in PixiJS v8, and push the limits of performance in your projects!
-
 
 ## 🌐 Stay Connected
 

@@ -5,67 +5,67 @@ const app = new PIXI.Application({ resizeTo: window });
 document.body.appendChild(app.view);
 
 const geometry = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100,
-            -100, // x, y
-            100,
-            -100, // x, y
-            100,
-            100,
-            -100,
-            100,
-        ], // x, y
-        2,
-    ) // the size of the attribute
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-            0,
-            1,
-        ], // u, v
-        2,
-    ) // the size of the attribute
-    .addIndex([0, 1, 2, 0, 2, 3]);
+  .addAttribute(
+    'aVertexPosition', // the attribute name
+    [
+      -100,
+      -100, // x, y
+      100,
+      -100, // x, y
+      100,
+      100,
+      -100,
+      100,
+    ], // x, y
+    2,
+  ) // the size of the attribute
+  .addAttribute(
+    'aUvs', // the attribute name
+    [
+      0,
+      0, // u, v
+      1,
+      0, // u, v
+      1,
+      1,
+      0,
+      1,
+    ], // u, v
+    2,
+  ) // the size of the attribute
+  .addIndex([0, 1, 2, 0, 2, 3]);
 
 const geometry2 = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100 + 100,
-            -100, // x, y
-            100 + 100,
-            -100, // x, y
-            100 + 100,
-            100,
-        ], // x, y
-        2,
-    ) // the size of the attribute
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-        ], // u, v
-        2,
-    ) // the size of the attribute
-    .addIndex([0, 1, 2]);
+  .addAttribute(
+    'aVertexPosition', // the attribute name
+    [
+      -100 + 100,
+      -100, // x, y
+      100 + 100,
+      -100, // x, y
+      100 + 100,
+      100,
+    ], // x, y
+    2,
+  ) // the size of the attribute
+  .addAttribute(
+    'aUvs', // the attribute name
+    [
+      0,
+      0, // u, v
+      1,
+      0, // u, v
+      1,
+      1,
+    ], // u, v
+    2,
+  ) // the size of the attribute
+  .addIndex([0, 1, 2]);
 
 const geometry3 = PIXI.Geometry.merge([geometry, geometry2]);
 
 const shader = PIXI.Shader.from(
-    `
+  `
 
     precision mediump float;
 
@@ -84,7 +84,7 @@ const shader = PIXI.Shader.from(
 
     }`,
 
-    `precision mediump float;
+  `precision mediump float;
 
     varying vec2 vUvs;
 
@@ -96,9 +96,9 @@ const shader = PIXI.Shader.from(
     }
 
 `,
-    {
-        uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
-    },
+  {
+    uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
+  },
 );
 
 const quad = new PIXI.Mesh(geometry3, shader);
@@ -108,7 +108,6 @@ quad.scale.set(2);
 
 app.stage.addChild(quad);
 
-app.ticker.add((delta) =>
-{
-    quad.rotation += 0.01;
+app.ticker.add(() => {
+  quad.rotation += 0.01;
 });

@@ -1,8 +1,8 @@
 # Assets
+
 ## The Assets package
 
 The Assets package is a modern replacement for the old `PIXI.Loader` class. It is a promise-based resource management solution that will download, cache and parse your assets into something you can use. The downloads can be simultaneous and in the background, meaning faster startup times for your app, the cache ensures that you never download the same asset twice and the extensible parser system allows you to easily extend and customize the process to your needs.
-
 
 ## Getting started
 
@@ -10,6 +10,7 @@ The `@pixi/assets` package doesn't come bundled with PixiJS in version 6.x and m
 This package relies heavily on JavaScript Promises that all modern browsers support, however, if your target browser [doesn't support promises](https://caniuse.com/promises) you should look into [polyfilling them](https://github.com/zloirock/core-js#ecmascript-promise).
 
 ## Making our first Assets Promise
+
 To quickly use the `PIXI.Assets` instance, you just need to call `PIXI.Assets.load` and pass in an asset. This will return a promise that when resolved will yield the value you seek.
 In this example, we will load a texture and then turn it into a sprite.
 
@@ -17,9 +18,10 @@ In this example, we will load a texture and then turn it into a sprite.
 
 One very important thing to keep in mind while using `Assets` is that all requests are cached and if the URL is the same, the promise returned will also be the same.
 To show it in code:
+
 ```js
-promise1 = PIXI.Assets.load('bunny.png')
-promise2 = PIXI.Assets.load('bunny.png')
+promise1 = PIXI.Assets.load('bunny.png');
+promise2 = PIXI.Assets.load('bunny.png');
 
 //promise1 === promise2
 ```
@@ -54,7 +56,6 @@ console.log(3);
 
 To learn more about why this happens you will need to learn about [Microtasks](https://javascript.info/microtask-queue), however, using async functions should mitigate this problem.
 
-
 ## Using Async/Await
 
 There is a way to work with promises that is more intuitive and easier to read: `async`/`await`.
@@ -63,7 +64,7 @@ To use it we first need to create a function/method and mark it as `async`.
 
 ```js
 async function test() {
-    // ...
+  // ...
 }
 ```
 
@@ -92,13 +93,13 @@ However, if you want to take full advantage of `@pixi/Assets` you should use bun
 Bundles are just a way to group assets together and can be added manually by calling `PIXI.Assets.addBundle(...)`/`PIXI.Assets.loadBundle(...)`.
 
 ```js
-  PIXI.Assets.addBundle('animals', {
-    bunny: 'bunny.png',
-    chicken: 'chicken.png',
-    thumper: 'thumper.png',
-  });
+PIXI.Assets.addBundle('animals', {
+  bunny: 'bunny.png',
+  chicken: 'chicken.png',
+  thumper: 'thumper.png',
+});
 
- const assets = await PIXI.Assets.loadBundle('animals');
+const assets = await PIXI.Assets.loadBundle('animals');
 ```
 
 However, the best way to handle bundles is to use a manifest and call `PIXI.Assets.init({manifest})` with said manifest (or even better, an URL pointing to it).
@@ -106,38 +107,39 @@ Splitting our assets into bundles that correspond to screens or stages of our ap
 
 ```json
 {
-   "bundles":[
-      {
-         "name":"load-screen",
-         "assets":[
-            {
-               "name":"background",
-               "srcs":"sunset.png"
-            },
-            {
-               "name":"bar",
-               "srcs":"load-bar.{png,webp}"
-            }
-         ]
-      },
-      {
-         "name":"game-screen",
-         "assets":[
-            {
-               "name":"character",
-               "srcs":"robot.png"
-            },
-            {
-               "name":"enemy",
-               "srcs":"bad-guy.png"
-            }
-         ]
-      }
-   ]
+  "bundles": [
+    {
+      "name": "load-screen",
+      "assets": [
+        {
+          "name": "background",
+          "srcs": "sunset.png"
+        },
+        {
+          "name": "bar",
+          "srcs": "load-bar.{png,webp}"
+        }
+      ]
+    },
+    {
+      "name": "game-screen",
+      "assets": [
+        {
+          "name": "character",
+          "srcs": "robot.png"
+        },
+        {
+          "name": "enemy",
+          "srcs": "bad-guy.png"
+        }
+      ]
+    }
+  ]
 }
 ```
+
 ```js
-PIXI.Assets.init({manifest: "path/manifest.json"});
+PIXI.Assets.init({ manifest: 'path/manifest.json' });
 ```
 
 Beware that **you can only call `init` once**.

@@ -13,23 +13,23 @@ A `TextStyle` instance can be reused across multiple `Text` objects, making your
 import { TextStyle } from 'pixi.js';
 
 const style = new TextStyle({
-    fontFamily: 'Arial',
-    fontSize: 30,
-    fill: '#ffffff',
-    stroke: '#000000',
-    strokeThickness: 3,
-    dropShadow: {
-        color: '#000000',
-        blur: 5,
-        distance: 4,
-        angle: Math.PI / 4,
-        alpha: 0.5,
-    },
+  fontFamily: 'Arial',
+  fontSize: 30,
+  fill: '#ffffff',
+  stroke: '#000000',
+  strokeThickness: 3,
+  dropShadow: {
+    color: '#000000',
+    blur: 5,
+    distance: 4,
+    angle: Math.PI / 4,
+    alpha: 0.5,
+  },
 });
 
 const label = new Text({
-    text: 'Score: 1234',
-    style,
+  text: 'Score: 1234',
+  style,
 });
 ```
 
@@ -53,11 +53,11 @@ const obj4 = color;
 
 // Using a gradient
 const fill = new FillGradient({
-    type: 'linear',
-    colorStops: [
-        { offset: 0, color: 'yellow' },
-        { offset: 1, color: 'green' },
-    ],
+  type: 'linear',
+  colorStops: [
+    { offset: 0, color: 'yellow' },
+    { offset: 1, color: 'green' },
+  ],
 });
 
 // Using a pattern
@@ -66,12 +66,12 @@ const fill = new FillPattern(txt, 'repeat');
 
 // Use the fill in a TextStyle
 const style = new TextStyle({
-    fontSize: 48,
-    fill: fill,
-    stroke: {
-        fill,
-        width: 4,
-    },
+  fontSize: 48,
+  fill: fill,
+  stroke: {
+    fill,
+    width: 4,
+  },
 });
 ```
 
@@ -81,13 +81,13 @@ In v8 `dropShadow` and its properties are now objects. To update a drop shadow, 
 
 ```ts
 const style = new TextStyle({
-    dropShadow: {
-        color: '#000000',
-        alpha: 0.5,
-        angle: Math.PI / 4,
-        blur: 5,
-        distance: 4,
-    },
+  dropShadow: {
+    color: '#000000',
+    alpha: 0.5,
+    angle: Math.PI / 4,
+    blur: 5,
+    distance: 4,
+  },
 });
 
 style.dropShadow.color = '#ff0000'; // Change shadow color

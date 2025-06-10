@@ -12,21 +12,20 @@ PIXI.Assets.add('eggHead', 'https://pixijs.com/assets/eggHead.png');
 const texturesPromise = PIXI.Assets.load(['flowerTop', 'eggHead']); // => Promise<{flowerTop: Texture, eggHead: Texture}>
 
 // When the promise resolves, we have the texture!
-texturesPromise.then((textures) =>
-{
-    // create a new Sprite from the resolved loaded Textures
+texturesPromise.then((textures) => {
+  // create a new Sprite from the resolved loaded Textures
 
-    const flower = PIXI.Sprite.from(textures.flowerTop);
+  const flower = PIXI.Sprite.from(textures.flowerTop);
 
-    flower.anchor.set(0.5);
-    flower.x = app.screen.width * 0.25;
-    flower.y = app.screen.height / 2;
-    app.stage.addChild(flower);
+  flower.anchor.set(0.5);
+  flower.x = app.screen.width * 0.25;
+  flower.y = app.screen.height / 2;
+  app.stage.addChild(flower);
 
-    const egg = PIXI.Sprite.from(textures.eggHead);
+  const egg = PIXI.Sprite.from(textures.eggHead);
 
-    egg.anchor.set(0.5);
-    egg.x = app.screen.width * 0.75;
-    egg.y = app.screen.height / 2;
-    app.stage.addChild(egg);
+  egg.anchor.set(0.5);
+  egg.x = app.screen.width * 0.75;
+  egg.y = app.screen.height / 2;
+  app.stage.addChild(egg);
 });

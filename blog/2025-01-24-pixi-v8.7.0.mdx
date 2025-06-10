@@ -7,7 +7,8 @@ tags: [PixiJS, Updates, Improvements]
 hide_table_of_contents: true
 keywords: ['PixiJS', 'Updates', 'Improvements', 'QoL']
 ---
-import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
+
+import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
 import RenderLayerIndexFile from '!!raw-loader!../docs/examples/ordering/render-layer/index';
 import RenderLayerFish from '!!raw-loader!../docs/examples/ordering/render-layer/Fish';
 import RenderLayerCharacterUI from '!!raw-loader!../docs/examples/ordering/render-layer/CharacterUI';
@@ -46,11 +47,13 @@ More details are available in the [Render Layers guide](/8.x/guides/concepts/ren
 
 Older users of PixiJS may remember the [layers](https://github.com/pixijs-userland/layers) plugin, which provided similar functionality. Render Layers are a more integrated and performant solution that is built directly into the core of PixiJS.
 
-<EmbeddedEditor files={{
-    "index.js": RenderLayerIndexFile,
+<EmbeddedEditor
+  files={{
+    'index.js': RenderLayerIndexFile,
     'Fish.js': RenderLayerFish,
     'CharacterUI.js': RenderLayerCharacterUI,
-}} />
+  }}
+/>
 
 ## GIF Support
 
@@ -64,7 +67,7 @@ This feature is ideal for adding dynamic animated elements to your projects.
 
 You can find the full API details in the [GIF API Documentation](https://pixijs.download/v8.7.0/docs/gif.html).
 
-<EmbeddedEditor files={{"index.js": GifIndexFile}}/>
+<EmbeddedEditor files={{ 'index.js': GifIndexFile }} />
 
 ## Integrating with three.js (and other WebGL projects)
 
@@ -72,9 +75,10 @@ Integrating PixiJS with Three.js (and other WebGL projects) is now easier, thank
 
 A detailed guide is available [here](/8.x/guides/third-party/mixing-three-and-pixi).
 
-<EmbeddedEditor files={{"index.js": ThreeIndexFile}} dependencies={{ "three": "latest", "pixi.js": "latest" }}/>
+<EmbeddedEditor files={{ 'index.js': ThreeIndexFile }} dependencies={{ three: 'latest', 'pixi.js': 'latest' }} />
 
 ## Additional Updates
+
 This release also includes various improvements and bug fixes. For a complete list of changes, check out the [changelog](https://github.com/pixijs/pixijs/releases/tag/v8.7.0).
 
 ## Conclusion

@@ -6,35 +6,35 @@ document.body.appendChild(app.view);
 
 // Build geometry.
 const geometry = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            0,
-            0, // x, y
-            200,
-            0, // x, y
-            200,
-            200,
-            0,
-            200,
-        ], // x, y
-        2,
-    ) // the size of the attribute
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-            0,
-            1,
-        ], // u, v
-        2,
-    ) // the size of the attribute
-    .addIndex([0, 1, 2, 0, 2, 3]);
+  .addAttribute(
+    'aVertexPosition', // the attribute name
+    [
+      0,
+      0, // x, y
+      200,
+      0, // x, y
+      200,
+      200,
+      0,
+      200,
+    ], // x, y
+    2,
+  ) // the size of the attribute
+  .addAttribute(
+    'aUvs', // the attribute name
+    [
+      0,
+      0, // u, v
+      1,
+      0, // u, v
+      1,
+      1,
+      0,
+      1,
+    ], // u, v
+    2,
+  ) // the size of the attribute
+  .addIndex([0, 1, 2, 0, 2, 3]);
 
 // Vertex shader. Use same shader for all passes.
 const vertexSrc = `
@@ -79,7 +79,7 @@ void main()
 }`;
 
 const gridUniforms = {
-    zoom: 10,
+  zoom: 10,
 };
 const gridShader = PIXI.Shader.from(vertexSrc, fragmentGridSrc, gridUniforms);
 // Sharing textures and meshes is possible.
@@ -109,9 +109,9 @@ void main()
     gl_FragColor = color;
 }`;
 const rippleUniforms = {
-    amount: 0.5,
-    phase: 0,
-    texIn: gridTexture,
+  amount: 0.5,
+  phase: 0,
+  texIn: gridTexture,
 };
 const rippleShader = PIXI.Shader.from(vertexSrc, fragmentRippleSrc, rippleUniforms);
 const rippleTexture = PIXI.RenderTexture.create({ width: 200, height: 200 });
@@ -134,8 +134,8 @@ void main()
     gl_FragColor = vec4(color);
 }`;
 const noiseUniforms = {
-    limit: 0.5,
-    noise: perlinTexture,
+  limit: 0.5,
+  noise: perlinTexture,
 };
 const noiseShader = PIXI.Shader.from(vertexSrc, fragmentNoiseSrc, noiseUniforms);
 const noiseTexture = PIXI.RenderTexture.create({ width: 200, height: 200 });
@@ -167,8 +167,8 @@ void main()
     gl_FragColor = vec4(outColor,1.0);
 }`;
 const waveUniforms = {
-    amplitude: 0.75,
-    time: 0,
+  amplitude: 0.75,
+  time: 0,
 };
 const waveShader = PIXI.Shader.from(vertexSrc, fragmentWaveSrc, waveUniforms);
 const waveTexture = PIXI.RenderTexture.create({ width: 200, height: 200 });
@@ -196,9 +196,9 @@ void main()
     gl_FragColor = mix(ripple, wave,noise.r);
 }`;
 const combineUniforms = {
-    texRipple: rippleTexture,
-    texNoise: noiseTexture,
-    texWave: waveTexture,
+  texRipple: rippleTexture,
+  texNoise: noiseTexture,
+  texWave: waveTexture,
 };
 const combineShader = PIXI.Shader.from(vertexSrc, fragmentCombineSrc, combineUniforms);
 const combineQuad = new PIXI.Mesh(geometry, combineShader);
@@ -219,17 +219,16 @@ app.stage.addChild(combineQuad);
 // start the animation..
 let time = 0;
 
-app.ticker.add((delta) =>
-{
-    time += 1 / 60;
-    // gridQuad.shader.uniforms.zoom = Math.sin(time)*5+10;
-    rippleQuad.shader.uniforms.phase = -time;
-    waveQuad.shader.uniforms.time = time;
-    noiseQuad.shader.uniforms.limit = Math.sin(time * 0.5) * 0.35 + 0.5;
+app.ticker.add(() => {
+  time += 1 / 60;
+  // gridQuad.shader.uniforms.zoom = Math.sin(time)*5+10;
+  rippleQuad.shader.uniforms.phase = -time;
+  waveQuad.shader.uniforms.time = time;
+  noiseQuad.shader.uniforms.limit = Math.sin(time * 0.5) * 0.35 + 0.5;
 
-    // Render the passes to get textures.
-    app.renderer.render(gridQuad, { renderTexture: gridTexture });
-    app.renderer.render(rippleQuad, { renderTexture: rippleTexture });
-    app.renderer.render(noiseQuad, { renderTexture: noiseTexture });
-    app.renderer.render(waveQuad, { renderTexture: waveTexture });
+  // Render the passes to get textures.
+  app.renderer.render(gridQuad, { renderTexture: gridTexture });
+  app.renderer.render(rippleQuad, { renderTexture: rippleTexture });
+  app.renderer.render(noiseQuad, { renderTexture: noiseTexture });
+  app.renderer.render(waveQuad, { renderTexture: waveTexture });
 });

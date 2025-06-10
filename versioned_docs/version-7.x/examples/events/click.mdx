@@ -5,8 +5,9 @@ sidebar_position: 0
 custom_edit_url: null
 title: Click
 ---
-import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+
+import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 import IndexFile from '!!raw-loader!./click';
 import version from '../../pixi-version.json';
 
-<ExampleEditor files={{"index.js": IndexFile}} dependencies={{"pixi.js": version.npm}} />
+<ExampleEditor files={{ 'index.js': IndexFile }} dependencies={{ 'pixi.js': version.npm }} />

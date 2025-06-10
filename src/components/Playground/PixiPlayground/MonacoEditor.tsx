@@ -8,106 +8,96 @@ import type { editor } from 'monaco-editor';
 export type CodeChangeCallbackType = (code: string | undefined, state: SandpackState) => void;
 
 type MonacoEditorProps = {
-    useTabs: boolean;
-    onChange?: CodeChangeCallbackType;
+  useTabs: boolean;
+  onChange?: CodeChangeCallbackType;
 };
 
-export default function MonacoEditor({ useTabs, onChange }: MonacoEditorProps)
-{
-    const editorRef = useRef(null);
+export default function MonacoEditor({ useTabs, onChange }: MonacoEditorProps) {
+  const editorRef = useRef(null);
 
-    const handleEditorDidMount = useCallback((editor: any) =>
-    {
-        editorRef.current = editor;
-    }, []);
+  const handleEditorDidMount = useCallback((editor: any) => {
+    editorRef.current = editor;
+  }, []);
 
-    useEffect(() =>
-    {
-        const resetEditorLayout = (): void =>
-        {
-            if (editorRef.current !== null) (editorRef.current as any).layout({});
-        };
-
-        window.addEventListener('resize', resetEditorLayout);
-
-        return () =>
-        {
-            window.removeEventListener('resize', resetEditorLayout);
-        };
-    }, []);
-
-    const options: editor.IStandaloneEditorConstructionOptions = {
-        lineNumbers: 'off',
-        padding: {
-            top: 24,
-        },
-        minimap: {
-            enabled: false,
-        },
-        fontSize: 14,
-        scrollBeyondLastLine: false,
-        scrollbar: {
-            alwaysConsumeMouseWheel: false,
-        },
+  useEffect(() => {
+    const resetEditorLayout = (): void => {
+      if (editorRef.current !== null) (editorRef.current as any).layout({});
     };
 
-    const { colorMode } = useColorMode();
-    const { code, updateCode } = useActiveCode();
-    const { sandpack } = useSandpack();
+    window.addEventListener('resize', resetEditorLayout);
 
-    useEffect(() =>
-    {
-        const tab = document.querySelector('.sp-tab-button[data-active=true]');
-
-        tab?.scrollIntoView(false);
-    }, [sandpack.activeFile]);
-
-    const getFileExtension = (filename: string): string =>
-    {
-        const parts = filename.split('.');
-
-        return parts[parts.length - 1];
+    return () => {
+      window.removeEventListener('resize', resetEditorLayout);
     };
+  }, []);
 
-    const getLanguage = (filename: string): string =>
-    {
-        const extension = getFileExtension(filename);
+  const options: editor.IStandaloneEditorConstructionOptions = {
+    lineNumbers: 'off',
+    padding: {
+      top: 24,
+    },
+    minimap: {
+      enabled: false,
+    },
+    fontSize: 14,
+    scrollBeyondLastLine: false,
+    scrollbar: {
+      alwaysConsumeMouseWheel: false,
+    },
+  };
 
-        switch (extension)
-        {
-            case 'js':
-                return 'javascript';
-            case 'ts':
-                return 'typescript';
-            case 'html':
-                return 'html';
-            case 'css':
-                return 'css';
-            case 'wgsl':
-                return 'wgsl';
-            default:
-                return 'plaintext';
-        }
-    };
+  const { colorMode } = useColorMode();
+  const { code, updateCode } = useActiveCode();
+  const { sandpack } = useSandpack();
 
-    const language = getLanguage(sandpack.activeFile);
+  useEffect(() => {
+    const tab = document.querySelector('.sp-tab-button[data-active=true]');
 
-    return (
-        <SandpackStack style={{ height: '100%', margin: 0 }}>
-            {useTabs && <FileTabs />}
-            <Editor
-                key={sandpack.activeFile}
-                defaultLanguage={language}
-                defaultValue={code}
-                options={options}
-                onMount={handleEditorDidMount}
-                onChange={(value) =>
-                {
-                    updateCode(value || '');
-                    onChange?.(value, sandpack);
-                }}
-                theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
-            />
-        </SandpackStack>
-    );
+    tab?.scrollIntoView(false);
+  }, [sandpack.activeFile]);
+
+  const getFileExtension = (filename: string): string => {
+    const parts = filename.split('.');
+
+    return parts[parts.length - 1];
+  };
+
+  const getLanguage = (filename: string): string => {
+    const extension = getFileExtension(filename);
+
+    switch (extension) {
+      case 'js':
+        return 'javascript';
+      case 'ts':
+        return 'typescript';
+      case 'html':
+        return 'html';
+      case 'css':
+        return 'css';
+      case 'wgsl':
+        return 'wgsl';
+      default:
+        return 'plaintext';
+    }
+  };
+
+  const language = getLanguage(sandpack.activeFile);
+
+  return (
+    <SandpackStack style={{ height: '100%', margin: 0 }}>
+      {useTabs && <FileTabs />}
+      <Editor
+        key={sandpack.activeFile}
+        defaultLanguage={language}
+        defaultValue={code}
+        options={options}
+        onMount={handleEditorDidMount}
+        onChange={(value) => {
+          updateCode(value || '');
+          onChange?.(value, sandpack);
+        }}
+        theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
+      />
+    </SandpackStack>
+  );
 }

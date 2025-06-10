@@ -5,7 +5,8 @@ sidebar_position: 10
 custom_edit_url: null
 title: Multipass Mesh
 ---
-import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+
+import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 import IndexFile from '!!raw-loader!./multipass-mesh/index';
 import multipassMeshVert from '!!raw-loader!./multipass-mesh/multipassMesh.vert';
 import multipassMeshGridFrag from '!!raw-loader!./multipass-mesh/grid.frag';
@@ -14,12 +15,14 @@ import multipassMeshNoiseFrag from '!!raw-loader!./multipass-mesh/noise.frag';
 import multipassMeshWaveFrag from '!!raw-loader!./multipass-mesh/wave.frag';
 import multipassMeshCombineFrag from '!!raw-loader!./multipass-mesh/combine.frag';
 
-<ExampleEditor files={{
-    "index.js": IndexFile,
+<ExampleEditor
+  files={{
+    'index.js': IndexFile,
     'multipassMesh.vert': multipassMeshVert,
     'grid.frag': multipassMeshGridFrag,
     'ripple.frag': multipassMeshRippleFrag,
     'noise.frag': multipassMeshNoiseFrag,
     'wave.frag': multipassMeshWaveFrag,
     'combine.frag': multipassMeshCombineFrag,
-}} />
+  }}
+/>

@@ -1,69 +1,67 @@
 import { Application, Container, Sprite, Text, Texture } from 'pixi.js';
 
-(async () =>
-{
-    // Create the application helper and add its render target to the page
-    const app = new Application();
+(async () => {
+  // Create the application helper and add its render target to the page
+  const app = new Application();
 
-    await app.init({ resizeTo: window });
-    document.body.appendChild(app.canvas);
+  await app.init({ resizeTo: window });
+  document.body.appendChild(app.canvas);
 
-    // Label showing scene graph hierarchy
-    const label = new Text({
-        text: 'Scene Graph:\n\napp.stage\n  ┗ A\n     ┗ B\n     ┗ C\n  ┗ D',
-        style: { fill: '#ffffff' },
-        position: { x: 300, y: 100 }
+  // Label showing scene graph hierarchy
+  const label = new Text({
+    text: 'Scene Graph:\n\napp.stage\n  ┗ A\n     ┗ B\n     ┗ C\n  ┗ D',
+    style: { fill: '#ffffff' },
+    position: { x: 300, y: 100 },
+  });
+
+  app.stage.addChild(label);
+
+  // Helper function to create a block of color with a letter
+  const letters = [];
+
+  function addLetter(letter, parent, color, pos) {
+    const bg = new Sprite(Texture.WHITE);
+
+    bg.width = 100;
+    bg.height = 100;
+    bg.tint = color;
+
+    const text = new Text({
+      text: letter,
+      style: { fill: '#ffffff' },
     });
 
-    app.stage.addChild(label);
+    text.anchor.set(0.5);
+    text.position = { x: 50, y: 50 };
 
-    // Helper function to create a block of color with a letter
-    const letters = [];
+    const container = new Container();
 
-    function addLetter(letter, parent, color, pos)
-    {
-        const bg = new Sprite(Texture.WHITE);
+    container.position = pos;
+    container.visible = false;
+    container.addChild(bg, text);
+    parent.addChild(container);
 
-        bg.width = 100;
-        bg.height = 100;
-        bg.tint = color;
+    letters.push(container);
 
-        const text = new Text({
-            text: letter,
-            style: { fill: '#ffffff' }
-        });
+    return container;
+  }
 
-        text.anchor.set(0.5);
-        text.position = { x: 50, y: 50 };
+  // Define 4 letters
+  const a = addLetter('A', app.stage, 0xff0000, { x: 100, y: 100 });
+  const b = addLetter('B', a, 0x00ff00, { x: 20, y: 20 });
+  const c = addLetter('C', a, 0x0000ff, { x: 20, y: 40 });
+  const d = addLetter('D', app.stage, 0xff8800, { x: 140, y: 100 });
 
-        const container = new Container();
+  // Display them over time, in order
+  let elapsed = 0.0;
 
-        container.position = pos;
-        container.visible = false;
-        container.addChild(bg, text);
-        parent.addChild(container);
-
-        letters.push(container);
-
-        return container;
+  app.ticker.add((ticker) => {
+    elapsed += ticker.deltaTime / 60.0;
+    if (elapsed >= letters.length) {
+      elapsed = 0.0;
     }
-
-    // Define 4 letters
-    const a = addLetter('A', app.stage, 0xff0000, { x: 100, y: 100 });
-    const b = addLetter('B', a, 0x00ff00, { x: 20, y: 20 });
-    const c = addLetter('C', a, 0x0000ff, { x: 20, y: 40 });
-    const d = addLetter('D', app.stage, 0xff8800, { x: 140, y: 100 });
-
-    // Display them over time, in order
-    let elapsed = 0.0;
-
-    app.ticker.add((ticker) =>
-    {
-        elapsed += ticker.deltaTime / 60.0;
-        if (elapsed >= letters.length) { elapsed = 0.0; }
-        for (let i = 0; i < letters.length; i++)
-        {
-            letters[i].visible = elapsed >= i;
-        }
-    });
+    for (let i = 0; i < letters.length; i++) {
+      letters[i].visible = elapsed >= i;
+    }
+  });
 })();

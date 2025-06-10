@@ -19,15 +19,12 @@ Now we want the background sprite to fill the whole screen without any distortio
 _(Note: x1.2 scaling to the dimension is to overflow the screen slightly to compensate for the last's step distortion from post-processing)_
 
 ```javascript
-if (app.screen.width > app.screen.height)
-{
-    background.width = app.screen.width * 1.2;
-    background.scale.y = background.scale.x;
-}
-else
-{
-    background.height = app.screen.height  * 1.2;
-    background.scale.x = background.scale.y;
+if (app.screen.width > app.screen.height) {
+  background.width = app.screen.width * 1.2;
+  background.scale.y = background.scale.x;
+} else {
+  background.height = app.screen.height * 1.2;
+  background.scale.x = background.scale.y;
 }
 ```
 
@@ -47,5 +44,3 @@ app.stage.addChild(background);
 ```
 
 We got a beautiful pond! Now let's proceed to add some fishes!
-
-

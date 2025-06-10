@@ -8,9 +8,7 @@ description: Learn how to use PixiJS Graphics to create shapes, manage graphics 
 ```ts
 import { Graphics } from 'pixi.js';
 
-const graphics = new Graphics()
-  .rect(50, 50, 100, 100)
-  .fill(0xff0000);
+const graphics = new Graphics().rect(50, 50, 100, 100).fill(0xff0000);
 ```
 
 ## **Available Shapes**
@@ -47,13 +45,13 @@ PixiJS v8 supports a variety of shape primitives:
 
 ```ts
 const graphics = new Graphics()
-    .rect(50, 50, 100, 100)
-    .fill(0xff0000)
-    .circle(200, 200, 50)
-    .stroke(0x00ff00)
-    .lineStyle(5)
-    .moveTo(300, 300)
-    .lineTo(400, 400);
+  .rect(50, 50, 100, 100)
+  .fill(0xff0000)
+  .circle(200, 200, 50)
+  .stroke(0x00ff00)
+  .lineStyle(5)
+  .moveTo(300, 300)
+  .lineTo(400, 400);
 ```
 
 ### SVG Support
@@ -83,14 +81,14 @@ This pattern is particularly effective when rendering repeated or animated shape
 
 ```ts
 let frames = [
-    new GraphicsContext().circle(100, 100, 50).fill('red'),
-    new GraphicsContext().rect(0, 0, 100, 100).fill('red'),
+  new GraphicsContext().circle(100, 100, 50).fill('red'),
+  new GraphicsContext().rect(0, 0, 100, 100).fill('red'),
 ];
 
 let graphic = new Graphics(frames[0]);
 
 function update() {
-    graphic.context = frames[1]; // Very cheap operation
+  graphic.context = frames[1]; // Very cheap operation
 }
 ```
 
@@ -115,11 +113,7 @@ shapeA.destroy({ context: true }); // Destroys both shapeA and shapeB
 Use `.cut()` to remove a shape from the previous one:
 
 ```ts
-const g = new Graphics()
-  .rect(0, 0, 100, 100)
-  .fill(0x00ff00)
-  .circle(50, 50, 20)
-  .cut(); // Creates a hole in the green rectangle
+const g = new Graphics().rect(0, 0, 100, 100).fill(0x00ff00).circle(50, 50, 20).cut(); // Creates a hole in the green rectangle
 ```
 
 Ensure the hole is fully enclosed within the shape to avoid triangulation errors.

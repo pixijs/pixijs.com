@@ -29,6 +29,7 @@ and to turn it off, call:
 ```javascript
 container.cacheAsTexture(false);
 ```
+
 ---
 
 ### Basic Usage
@@ -38,55 +39,53 @@ Here's an example that demonstrates how to use `cacheAsTexture`:
 ```javascript
 import * as PIXI from 'pixi.js';
 
-(async () =>
-{
-    // Create a new application
-    const app = new Application();
+(async () => {
+  // Create a new application
+  const app = new Application();
 
-    // Initialize the application
-    await app.init({ background: '#1099bb', resizeTo: window });
+  // Initialize the application
+  await app.init({ background: '#1099bb', resizeTo: window });
 
-    // Append the application canvas to the document body
-    document.body.appendChild(app.canvas);
+  // Append the application canvas to the document body
+  document.body.appendChild(app.canvas);
 
-    // load sprite sheet..
-    await Assets.load('https://pixijs.com/assets/spritesheet/monsters.json');
+  // load sprite sheet..
+  await Assets.load('https://pixijs.com/assets/spritesheet/monsters.json');
 
-    // holder to store aliens
-    const aliens = [];
-    const alienFrames = ['eggHead.png', 'flowerTop.png', 'helmlok.png', 'skully.png'];
+  // holder to store aliens
+  const aliens = [];
+  const alienFrames = ['eggHead.png', 'flowerTop.png', 'helmlok.png', 'skully.png'];
 
-    let count = 0;
+  let count = 0;
 
-    // create an empty container
-    const alienContainer = new Container();
+  // create an empty container
+  const alienContainer = new Container();
 
-    alienContainer.x = 400;
-    alienContainer.y = 300;
+  alienContainer.x = 400;
+  alienContainer.y = 300;
 
-    app.stage.addChild(alienContainer);
+  app.stage.addChild(alienContainer);
 
-    // add a bunch of aliens with textures from image paths
-    for (let i = 0; i < 100; i++)
-    {
-        const frameName = alienFrames[i % 4];
+  // add a bunch of aliens with textures from image paths
+  for (let i = 0; i < 100; i++) {
+    const frameName = alienFrames[i % 4];
 
-        // create an alien using the frame name..
-        const alien = Sprite.from(frameName);
+    // create an alien using the frame name..
+    const alien = Sprite.from(frameName);
 
-        alien.tint = Math.random() * 0xffffff;
+    alien.tint = Math.random() * 0xffffff;
 
-        alien.x = Math.random() * 800 - 400;
-        alien.y = Math.random() * 600 - 300;
-        alien.anchor.x = 0.5;
-        alien.anchor.y = 0.5;
-        aliens.push(alien);
-        alienContainer.addChild(alien);
-    }
+    alien.x = Math.random() * 800 - 400;
+    alien.y = Math.random() * 600 - 300;
+    alien.anchor.x = 0.5;
+    alien.anchor.y = 0.5;
+    aliens.push(alien);
+    alienContainer.addChild(alien);
+  }
 
-    // this will cache the container and its children as a single texture
-    // so instead of drawing 100 sprites, it will draw a single texture!
-    alienContainer.cacheAsTexture()
+  // this will cache the container and its children as a single texture
+  // so instead of drawing 100 sprites, it will draw a single texture!
+  alienContainer.cacheAsTexture();
 })();
 ```
 
@@ -100,8 +99,8 @@ Instead of enabling cacheAsTexture with true, you can pass a configuration objec
 
 ```typescript
 container.cacheAsTexture({
-    resolution: 2,
-    antialias: true,
+  resolution: 2,
+  antialias: true,
 });
 ```
 
@@ -122,7 +121,6 @@ container.cacheAsTexture({
 - **Memory Tradeoff**: Each cached texture requires GPU memory. Using `cacheAsTexture` trades rendering speed for increased memory usage.
 - **GPU Limitations**: If your container is too large (e.g., over 4096x4096 pixels), the texture may fail to cache, depending on GPU limitations.
 
-
 ---
 
 ### How It Works Internally
@@ -141,12 +139,14 @@ Once the texture is cached, updating it via `updateCacheTexture()` is efficient 
 ### Best Practices
 
 #### **DO**:
+
 - **Use for Static Content**: Apply `cacheAsTexture` to containers with elements that don't change frequently, such as a UI panel with static decorations.
 - **Leverage for Performance**: Use `cacheAsTexture` to render complex containers as a single texture, reducing the overhead of processing each child element individually every frame. This is especially useful for containers that contain expensive effects eg filters.
 - **Switch of Antialiasing**: setting antialiasing to false can give a small performance boost, but the texture may look a bit more pixelated around its children's edges.
 - **Resolution**: Do adjust the resolution based on your situation, if something is scaled down, you can use a lower resolution.If something is scaled up, you may want to use a higher resolution. But be aware that the higher the resolution the larger the texture and memory footprint.
 
 #### **DON'T**:
+
 - **Apply to Very Large Containers**: Avoid using `cacheAsTexture` on containers that are too large (e.g., over 4096x4096 pixels), as they may fail to cache due to GPU limitations. Instead, split them into smaller containers.
 - **Overuse for Dynamic Content**: Flick `cacheAsTexture` on / off frequently on containers, as this results in constant re-caching, negating its benefits. Its better to Cache as texture when you once, and then use `updateCacheTexture` to update it.
 - **Apply to Sparse Content**: Do not use `cacheAsTexture` for containers with very few elements or sparse content, as the performance improvement will be negligible.

@@ -11,7 +11,7 @@ PixiJS is primarily a rendering library, but it provides a flexible and performa
 const sprite = new Sprite(texture);
 sprite.eventMode = 'static';
 sprite.on('pointerdown', () => {
-    console.log('Sprite clicked!');
+  console.log('Sprite clicked!');
 });
 ```
 
@@ -81,7 +81,6 @@ PixiJS supports a rich set of DOM-like event types across mouse, touch, and poin
 | `tap`             | Fired when a touch point taps the display object.                                     |
 | `globaltouchmove` | Fired on every touch move, regardless of whether a display object is under the touch. |
 
-
 ### Global Events
 
 In previous versions of PixiJS, events such as `pointermove`, `mousemove`, and `touchmove` were fired when any move event was captured by the canvas, even if the pointer was not over a display object. This behavior changed in v8 and now these events are fired only when the pointer is over a display object.
@@ -92,7 +91,7 @@ To maintain the old behavior, you can use the `globalpointermove`, `globalmousem
 const sprite = new Sprite(texture);
 sprite.eventMode = 'static';
 sprite.on('globalpointermove', (event) => {
-    console.log('Pointer moved globally!', event);
+  console.log('Pointer moved globally!', event);
 });
 ```
 
@@ -100,9 +99,9 @@ sprite.on('globalpointermove', (event) => {
 
 When an input event occurs (mouse move, click, etc.), PixiJS walks the display tree to find the top-most interactive element under the pointer:
 
--   If `interactiveChildren` is `false` on a `Container`, its children will be skipped.
--   If a `hitArea` is set, it overrides bounds-based hit testing.
--   If `eventMode` is `'none'`, the element and its children are skipped.
+- If `interactiveChildren` is `false` on a `Container`, its children will be skipped.
+- If a `hitArea` is set, it overrides bounds-based hit testing.
+- If `eventMode` is `'none'`, the element and its children are skipped.
 
 Once the top-most interactive element is found, the event is dispatched to it. If the event bubbles, it will propagate up the display tree.
 If the event is not handled, it will continue to bubble up to parent containers until it reaches the root.
@@ -138,11 +137,11 @@ sprite.off('pointerdown', eventFn);
 
 ```ts
 sprite.addEventListener(
-    'click',
-    (event) => {
-        console.log('Clicked!', event.detail);
-    },
-    { once: true },
+  'click',
+  (event) => {
+    console.log('Clicked!', event.detail);
+  },
+  { once: true },
 );
 ```
 
@@ -150,7 +149,7 @@ sprite.addEventListener(
 
 ```ts
 sprite.onclick = (event) => {
-    console.log('Clicked!', event.detail);
+  console.log('Clicked!', event.detail);
 };
 ```
 
@@ -160,11 +159,12 @@ You can check if a `Sprite` or `Container` is interactive by using the `isIntera
 
 ```ts
 if (sprite.isInteractive()) {
-    // true if eventMode is static or dynamic
+  // true if eventMode is static or dynamic
 }
 ```
 
 ## Custom Cursors
+
 PixiJS allows you to set a custom cursor for interactive objects using the `cursor` property. This property accepts a string representing the CSS cursor type.
 
 ```ts
@@ -172,6 +172,7 @@ const sprite = new Sprite(texture);
 sprite.eventMode = 'static';
 sprite.cursor = 'pointer'; // Set the cursor to a pointer when hovering over the sprite
 ```
+
 ```ts
 const sprite = new Sprite(texture);
 sprite.eventMode = 'static';
@@ -181,10 +182,11 @@ sprite.cursor = 'url(my-cursor.png), auto'; // Set a custom cursor image
 ### Default Custom Cursors
 
 You can also set default values to be used for all interactive objects.
+
 ```ts
 // CSS style for icons
-const defaultIcon = 'url(\'https://pixijs.com/assets/bunny.png\'),auto';
-const hoverIcon = 'url(\'https://pixijs.com/assets/bunny_saturated.png\'),auto';
+const defaultIcon = "url('https://pixijs.com/assets/bunny.png'),auto";
+const hoverIcon = "url('https://pixijs.com/assets/bunny_saturated.png'),auto";
 
 // Add custom cursor styles
 app.renderer.events.cursorStyles.default = defaultIcon;

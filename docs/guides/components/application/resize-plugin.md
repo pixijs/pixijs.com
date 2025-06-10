@@ -25,9 +25,9 @@ import { Application } from 'pixi.js';
 const app = new Application();
 
 await app.init({
-    width: 800,
-    height: 600,
-    resizeTo: window,
+  width: 800,
+  height: 600,
+  resizeTo: window,
 });
 ```
 
@@ -54,7 +54,7 @@ You can specify a custom target for resizing. This is useful if you want to resi
 
 ```ts
 await app.init({
-    resizeTo: document.getElementById('game-container'),
+  resizeTo: document.getElementById('game-container'),
 });
 ```
 

@@ -5,7 +5,18 @@ slug: pixi-react-v8-live
 authors: [trezy]
 tags: [PixiJS, React]
 hide_table_of_contents: true
-keywords: ['PixiJS', 'pixi.js', 'React', 'JSX', 'Typescript', 'performance', '2d rendering', 'javascript graphics', 'game development']
+keywords:
+  [
+    'PixiJS',
+    'pixi.js',
+    'React',
+    'JSX',
+    'Typescript',
+    'performance',
+    '2d rendering',
+    'javascript graphics',
+    'game development',
+  ]
 ---
 
 The wait is over! We're thrilled to announce the release of **PixiJS React v8**, a complete reimagining of how React and PixiJS work together. This update represents a major shift in how you'll build interactive graphics in React applications.
@@ -18,9 +29,9 @@ Built from the ground up to harness the power of PixiJS v8 and designed exclusiv
 
 The decision to completely rebuild @pixi/react was driven by several key factors:
 
-* PixiJS v8 itself underwent a significant rewrite, which would have required major rework in the PixiJS React v7 codebase regardless
-* Updating to the latest version of react-reconciler needed for React 19 support would have broken most of the existing implementation
-* A fresh start gave us the opportunity to reimagine the library's ergonomics, allowing the implementation of a new pragma and eliminating the wrapper components of previous versions in favor of directly exposing PixiJS components through JSX proxies
+- PixiJS v8 itself underwent a significant rewrite, which would have required major rework in the PixiJS React v7 codebase regardless
+- Updating to the latest version of react-reconciler needed for React 19 support would have broken most of the existing implementation
+- A fresh start gave us the opportunity to reimagine the library's ergonomics, allowing the implementation of a new pragma and eliminating the wrapper components of previous versions in favor of directly exposing PixiJS components through JSX proxies
 
 This complete rewrite is heavily inspired by [`@react-three/fiber`](https://github.com/pmndrs/react-three-fiber/tree/master), and would not have been possible without the significant contributions from the R3F maintainers and community.
 
@@ -31,26 +42,30 @@ This complete rewrite is heavily inspired by [`@react-three/fiber`](https://gith
 At the heart of PixiJS React v8 lies a new JSX pragma that greatly simplifies the ergonomics of using the library. Now, all PixiJS components are directly reflected as JSX components with the `pixi` prefix:
 
 ```jsx
-import { Application } from '@pixi/react'
-import { Sprite } from 'pixi.js'
+import { Application } from '@pixi/react';
+import { Sprite } from 'pixi.js';
 
 function MyComponent() {
-  const draw = useCallback(graphics => {
-    graphics.setFillStyle({ color: 'red' })
-    graphics.rect(0, 0, 25, 25)
-  }, [])
+  const draw = useCallback((graphics) => {
+    graphics.setFillStyle({ color: 'red' });
+    graphics.rect(0, 0, 25, 25);
+  }, []);
 
-  const texture = useMemo(() => Assets.get('bunny.png'), [])
+  const texture = useMemo(() => Assets.get('bunny.png'), []);
 
   return (
     <Application>
       <pixiSprite x={100} y={100} texture={texture} />
-      <pixiGraphics x={0} y={0} draw={graphics => {
-        graphics.setFillStyle({ color: 'red' })
-        graphics.rect(0, 0, 25, 25)
-      }} />
+      <pixiGraphics
+        x={0}
+        y={0}
+        draw={(graphics) => {
+          graphics.setFillStyle({ color: 'red' });
+          graphics.rect(0, 0, 25, 25);
+        }}
+      />
     </Application>
-  )
+  );
 }
 ```
 

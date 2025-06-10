@@ -28,16 +28,16 @@ This feature is particularly beneficial for:
 
 ```ts
 const myGameWorld = new Container({
-  isRenderGroup:true
-})
+  isRenderGroup: true,
+});
 
 const myHud = new Container({
-  isRenderGroup:true
-})
+  isRenderGroup: true,
+});
 
-scene.addChild(myGameWorld, myHud)
+scene.addChild(myGameWorld, myHud);
 
-renderer.render(scene) // this action will actually convert the scene to a render group under the hood
+renderer.render(scene); // this action will actually convert the scene to a render group under the hood
 ```
 
 Check out the [container example](../../examples/basic/container).

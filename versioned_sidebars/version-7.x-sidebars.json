@@ -34,20 +34,13 @@
       "type": "category",
       "label": "Production",
       "collapsed": true,
-      "items": [
-        "guides/production/performance-tips"
-      ]
+      "items": ["guides/production/performance-tips"]
     },
     {
       "type": "category",
       "label": "Migrations",
       "collapsed": true,
-      "items": [
-        "guides/migrations/upgrading",
-        "guides/migrations/v7",
-        "guides/migrations/v6",
-        "guides/migrations/v5"
-      ]
+      "items": ["guides/migrations/upgrading", "guides/migrations/v7", "guides/migrations/v6", "guides/migrations/v5"]
     }
   ],
   "examplesSidebar": [

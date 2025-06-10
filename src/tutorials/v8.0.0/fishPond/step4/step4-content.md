@@ -12,9 +12,9 @@ const texture = Texture.from('overlay');
 
 // Create a tiling sprite with the water texture and specify the dimensions.
 overlay = new TilingSprite({
-    texture,
-    width: app.screen.width,
-    height: app.screen.height,
+  texture,
+  width: app.screen.width,
+  height: app.screen.height,
 });
 
 // Add the overlay to the stage.

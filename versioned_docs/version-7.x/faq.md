@@ -2,16 +2,16 @@
 
 ## What is PixiJS for?
 
-Everything! Pixi.js is a rendering library that will allow you to create rich, 
-interactive graphic experiences, cross-platform applications, and games without 
-having to dive into the WebGL API or grapple with the intricacies of browser and 
-device compatibility. Killer performance with a clean API, means not only will 
+Everything! Pixi.js is a rendering library that will allow you to create rich,
+interactive graphic experiences, cross-platform applications, and games without
+having to dive into the WebGL API or grapple with the intricacies of browser and
+device compatibility. Killer performance with a clean API, means not only will
 your content be better - but also faster to build!
 
 ## Is PixiJS free?
 
-PixiJS is and always will be free and Open Source. That said, financial contributions 
-are what make it possible to push PixiJS further, faster. Contributions allow us to 
+PixiJS is and always will be free and Open Source. That said, financial contributions
+are what make it possible to push PixiJS further, faster. Contributions allow us to
 commission the PixiJS developer community to accelerate feature development and create
 more in-depth documentation. <a href="https://opencollective.com/pixijs" target="_blank">Support Us</a> by making a contribution via <a href="https://opencollective.com/pixijs" target="_blank">Open Collective</a>. Go on! It will be a massive help AND make you feel good about yourself, win win ;)
 

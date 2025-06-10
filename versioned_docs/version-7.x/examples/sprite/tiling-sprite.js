@@ -17,13 +17,12 @@ app.stage.addChild(tilingSprite);
 
 let count = 0;
 
-app.ticker.add(() =>
-{
-    count += 0.005;
+app.ticker.add(() => {
+  count += 0.005;
 
-    tilingSprite.tileScale.x = 2 + Math.sin(count);
-    tilingSprite.tileScale.y = 2 + Math.cos(count);
+  tilingSprite.tileScale.x = 2 + Math.sin(count);
+  tilingSprite.tileScale.y = 2 + Math.cos(count);
 
-    tilingSprite.tilePosition.x += 1;
-    tilingSprite.tilePosition.y += 1;
+  tilingSprite.tilePosition.x += 1;
+  tilingSprite.tilePosition.y += 1;
 });

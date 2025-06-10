@@ -25,49 +25,44 @@ alienContainer.y = 300;
 app.stage.eventMode = 'static';
 app.stage.addChild(alienContainer);
 
-function onAssetsLoaded()
-{
-    // add a bunch of aliens with textures from image paths
-    for (let i = 0; i < 100; i++)
-    {
-        const frameName = alienFrames[i % 4];
+function onAssetsLoaded() {
+  // add a bunch of aliens with textures from image paths
+  for (let i = 0; i < 100; i++) {
+    const frameName = alienFrames[i % 4];
 
-        // create an alien using the frame name..
-        const alien = PIXI.Sprite.from(frameName);
+    // create an alien using the frame name..
+    const alien = PIXI.Sprite.from(frameName);
 
-        alien.tint = Math.random() * 0xffffff;
+    alien.tint = Math.random() * 0xffffff;
 
-        alien.x = Math.random() * 800 - 400;
-        alien.y = Math.random() * 600 - 300;
-        alien.anchor.x = 0.5;
-        alien.anchor.y = 0.5;
-        aliens.push(alien);
-        alienContainer.addChild(alien);
-    }
-    app.start();
+    alien.x = Math.random() * 800 - 400;
+    alien.y = Math.random() * 600 - 300;
+    alien.anchor.x = 0.5;
+    alien.anchor.y = 0.5;
+    aliens.push(alien);
+    alienContainer.addChild(alien);
+  }
+  app.start();
 }
 
 // Combines both mouse click + touch tap
 app.stage.on('pointertap', onClick);
 
-function onClick()
-{
-    alienContainer.cacheAsBitmap = !alienContainer.cacheAsBitmap;
+function onClick() {
+  alienContainer.cacheAsBitmap = !alienContainer.cacheAsBitmap;
 }
 
-app.ticker.add(() =>
-{
-    // let's rotate the aliens a little bit
-    for (let i = 0; i < 100; i++)
-    {
-        const alien = aliens[i];
+app.ticker.add(() => {
+  // let's rotate the aliens a little bit
+  for (let i = 0; i < 100; i++) {
+    const alien = aliens[i];
 
-        alien.rotation += 0.1;
-    }
+    alien.rotation += 0.1;
+  }
 
-    count += 0.01;
+  count += 0.01;
 
-    alienContainer.scale.x = Math.sin(count);
-    alienContainer.scale.y = Math.sin(count);
-    alienContainer.rotation += 0.01;
+  alienContainer.scale.x = Math.sin(count);
+  alienContainer.scale.y = Math.sin(count);
+  alienContainer.rotation += 0.01;
 });

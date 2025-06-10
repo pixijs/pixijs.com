@@ -8,22 +8,22 @@ Before PixiJS can render an image, it needs to be loaded. Just like in any web p
 
 ```javascript
 // Magically load the PNG asynchronously
-const bunny = PIXI.Sprite.from('https://pixijs.com/assets/bunny.png')
+const bunny = PIXI.Sprite.from('https://pixijs.com/assets/bunny.png');
 ```
 
 Then we need to add our new sprite to the stage. The stage is simply a [Container](https://pixijs.download/v7.4.2/docs/PIXI.Container.html) that is the root of the scene graph. Every child of the stage container will be rendered every frame. By adding our sprite to the stage, we tell PixiJS's renderer we want to draw it.
 
 ```javascript
-app.stage.addChild(bunny)
+app.stage.addChild(bunny);
 ```
 
 Now let's set the Sprite's anchor and position it so that it's bang on at the center.
 
 ```javascript
 // center the sprite's anchor point
-bunny.anchor.set(0.5)
+bunny.anchor.set(0.5);
 
 // move the sprite to the center of the screen
-bunny.x = app.screen.width / 2
-bunny.y = app.screen.height / 2
+bunny.x = app.screen.width / 2;
+bunny.y = app.screen.height / 2;
 ```

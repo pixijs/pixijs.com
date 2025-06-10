@@ -13,26 +13,24 @@ const groups = [];
 const baseX = trainContainer.x + 170;
 const baseY = trainContainer.y - 120;
 
-for (let index = 0; index < groupCount; index++)
-{
-    const smokeGroup = new Graphics();
+for (let index = 0; index < groupCount; index++) {
+  const smokeGroup = new Graphics();
 
-    for (let i = 0; i < particleCount; i++)
-    {
-        const radius = 20 + Math.random() * 20;
-        const x = (Math.random() * 2 - 1) * 40;
-        const y = (Math.random() * 2 - 1) * 40;
+  for (let i = 0; i < particleCount; i++) {
+    const radius = 20 + Math.random() * 20;
+    const x = (Math.random() * 2 - 1) * 40;
+    const y = (Math.random() * 2 - 1) * 40;
 
-        smokeGroup.circle(x, y, radius);
-    }
+    smokeGroup.circle(x, y, radius);
+  }
 
-    smokeGroup.fill({ color: 0xc9c9c9, alpha: 0.5 });
+  smokeGroup.fill({ color: 0xc9c9c9, alpha: 0.5 });
 
-    smokeGroup.x = baseX;
-    smokeGroup.y = baseY;
-    smokeGroup.tick = index * (1 / groupCount);
+  smokeGroup.x = baseX;
+  smokeGroup.y = baseY;
+  smokeGroup.tick = index * (1 / groupCount);
 
-    groups.push(smokeGroup);
+  groups.push(smokeGroup);
 }
 ```
 
@@ -41,17 +39,15 @@ for (let index = 0; index < groupCount; index++)
 As you can see, we previously offset the `tick` value on each group initially to distribute them out so that it illustrates the constant line of smokes coming out from the chimney. We then use the same technique of using the application's ticker for the animation, incrementing the `tick` value on all groups which is then used to calculate the position and scale of each. The value is modulated so that it goes back to the starting point when it finishes at the disappearing point, ie. the value will loop infinitely from 0 -> 1.
 
 ```javascript
-app.ticker.add((time) =>
-{
-    const dt = time.deltaTime * 0.01;
+app.ticker.add((time) => {
+  const dt = time.deltaTime * 0.01;
 
-    groups.forEach((group) =>
-    {
-        group.tick = (group.tick + dt) % 1;
-        group.x = baseX - Math.pow(group.tick, 2) * 400;
-        group.y = baseY - group.tick * 200;
-        group.scale.set(Math.pow(group.tick, 0.75));
-    });
+  groups.forEach((group) => {
+    group.tick = (group.tick + dt) % 1;
+    group.x = baseX - Math.pow(group.tick, 2) * 400;
+    group.y = baseY - group.tick * 200;
+    group.scale.set(Math.pow(group.tick, 0.75));
+  });
 });
 ```
 

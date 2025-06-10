@@ -5,34 +5,34 @@ const app = new PIXI.Application({ resizeTo: window });
 document.body.appendChild(app.view);
 
 const geometry = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100,
-            -100, // x, y
-            100,
-            -100, // x, y
-            100,
-            100,
-        ], // x, y
-        2,
-    ) // the size of the attribute
+  .addAttribute(
+    'aVertexPosition', // the attribute name
+    [
+      -100,
+      -100, // x, y
+      100,
+      -100, // x, y
+      100,
+      100,
+    ], // x, y
+    2,
+  ) // the size of the attribute
 
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-        ], // u, v
-        2,
-    ); // the size of the attribute
+  .addAttribute(
+    'aUvs', // the attribute name
+    [
+      0,
+      0, // u, v
+      1,
+      0, // u, v
+      1,
+      1,
+    ], // u, v
+    2,
+  ); // the size of the attribute
 
 const program = PIXI.Program.from(
-    `
+  `
 
     precision mediump float;
 
@@ -51,7 +51,7 @@ const program = PIXI.Program.from(
 
     }`,
 
-    `precision mediump float;
+  `precision mediump float;
 
     varying vec2 vUvs;
 
@@ -66,24 +66,24 @@ const program = PIXI.Program.from(
 );
 
 const triangle = new PIXI.Mesh(
-    geometry,
-    new PIXI.Shader(program, {
-        uSamplerTexture: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
-    }),
+  geometry,
+  new PIXI.Shader(program, {
+    uSamplerTexture: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
+  }),
 );
 
 const triangle2 = new PIXI.Mesh(
-    geometry,
-    new PIXI.Shader(program, {
-        uSamplerTexture: PIXI.Texture.from('https://pixijs.com/assets/bg_rotate.jpg'),
-    }),
+  geometry,
+  new PIXI.Shader(program, {
+    uSamplerTexture: PIXI.Texture.from('https://pixijs.com/assets/bg_rotate.jpg'),
+  }),
 );
 
 const triangle3 = new PIXI.Mesh(
-    geometry,
-    new PIXI.Shader(program, {
-        uSamplerTexture: PIXI.Texture.from('https://pixijs.com/assets/bg_displacement.jpg'),
-    }),
+  geometry,
+  new PIXI.Shader(program, {
+    uSamplerTexture: PIXI.Texture.from('https://pixijs.com/assets/bg_displacement.jpg'),
+  }),
 );
 
 triangle.position.set(400, 300);
@@ -96,9 +96,8 @@ triangle3.scale.set(3);
 
 app.stage.addChild(triangle3, triangle2, triangle);
 
-app.ticker.add((delta) =>
-{
-    triangle.rotation += 0.01;
-    triangle2.rotation -= 0.01;
-    triangle3.rotation -= 0.005;
+app.ticker.add(() => {
+  triangle.rotation += 0.01;
+  triangle2.rotation -= 0.01;
+  triangle3.rotation -= 0.005;
 });

@@ -51,12 +51,12 @@ const obj4 = new Graphics().rect(0, 0, 100, 100).fill(color);
 For more advanced fills, you can use a `FillStyle` object. This allows for additional customization, such as setting opacity:
 
 ```ts
-const obj = new Graphics().rect(0, 0, 100, 100)
-  .fill({
-    color: 'red',
-    alpha: 0.5, // 50% opacity
-  });
+const obj = new Graphics().rect(0, 0, 100, 100).fill({
+  color: 'red',
+  alpha: 0.5, // 50% opacity
+});
 ```
+
 ![alt text](/assets/guides/components/image-1.png)
 
 ## Fill with Textures
@@ -65,8 +65,7 @@ Filling shapes with textures is just as simple:
 
 ```ts
 const texture = await Assets.load('assets/image.png');
-const obj = new Graphics().rect(0, 0, 100, 100)
-  .fill(texture);
+const obj = new Graphics().rect(0, 0, 100, 100).fill(texture);
 ```
 
 ![alt text](/assets/guides/components/image-2.png)
@@ -76,16 +75,17 @@ const obj = new Graphics().rect(0, 0, 100, 100)
 Textures can be applied in two coordinate spaces:
 
 - **Local Space** (Default): The texture coordinates are mapped relative to the shape's dimensions and position. The texture coordinates use a normalized coordinate system where (0,0) is the top-left and (1,1) is the bottom-right of the shape, regardless of its actual pixel dimensions. For example, if you have a 300x200 pixel texture filling a 100x100 shape, the texture will be scaled to fit exactly within those 100x100 pixels. The texture's top-left corner (0,0) will align with the shape's top-left corner, and the texture's bottom-right corner (1,1) will align with the shape's bottom-right corner, stretching or compressing the texture as needed.
+
 ```ts
 const shapes = new PIXI.Graphics()
-    .rect(50,50,100, 100)
-    .circle(250,100,50)
-    .star(400,100,6,60,40)
-    .roundRect(500,50,100,100,10)
-    .fill({
-        texture,
-        textureSpace:'local' // default!
-    });
+  .rect(50, 50, 100, 100)
+  .circle(250, 100, 50)
+  .star(400, 100, 6, 60, 40)
+  .roundRect(500, 50, 100, 100, 10)
+  .fill({
+    texture,
+    textureSpace: 'local', // default!
+  });
 ```
 
 ![alt text](/assets/guides/components/image-13.png)
@@ -94,14 +94,14 @@ const shapes = new PIXI.Graphics()
 
 ```ts
 const shapes = new PIXI.Graphics()
-    .rect(50,50,100, 100)
-    .circle(250,100,50)
-    .star(400,100,6,60,40)
-    .roundRect(500,50,100,100,10)
-    .fill({
-        texture,
-        textureSpace:'global'
-    });
+  .rect(50, 50, 100, 100)
+  .circle(250, 100, 50)
+  .star(400, 100, 6, 60, 40)
+  .roundRect(500, 50, 100, 100, 10)
+  .fill({
+    texture,
+    textureSpace: 'global',
+  });
 ```
 
 ![alt text](/assets/guides/components/image-11.png)
@@ -113,11 +113,10 @@ To modify texture coordinates, you can apply a transformation matrix, which is a
 ```ts
 const matrix = new Matrix().scale(0.5, 0.5);
 
-const obj = new Graphics().rect(0, 0, 100, 100)
-  .fill({
-    texture: texture,
-    matrix: matrix, // scale the texture down by 2
-  });
+const obj = new Graphics().rect(0, 0, 100, 100).fill({
+  texture: texture,
+  matrix: matrix, // scale the texture down by 2
+});
 ```
 
 ![alt text](/assets/guides/components/image-4.png)
@@ -130,8 +129,7 @@ const obj = new Graphics().rect(0, 0, 100, 100)
 const spriteSheetTexture = Texture.from('assets/my-sprite-sheet.png');
 const newTexture = renderer.generateTexture(Sprite.from(spriteSheetTexture));
 
-const obj = new Graphics().rect(0, 0, 100, 100)
-  .fill(newTexture);
+const obj = new Graphics().rect(0, 0, 100, 100).fill(newTexture);
 ```
 
 2. **Power of Two Textures**: Textures should be power-of-two dimensions for proper tiling in WebGL1 (WebGL2 and WebGPU are fine).
@@ -153,13 +151,13 @@ const gradient = new FillGradient({
   ],
 });
 
-const obj = new Graphics().rect(0, 0, 100, 100)
-  .fill(gradient);
+const obj = new Graphics().rect(0, 0, 100, 100).fill(gradient);
 ```
 
 ![alt text](/assets/guides/components/image-5.png)
 
 You can control the gradient direction with the following properties:
+
 - `start {x, y}`: These define the starting point of the gradient. For example, in a linear gradient, this is where the first color stop is positioned. These values are typically expressed in relative coordinates (0 to 1), where `0` represents the left/top edge and `1` represents the right/bottom edge of the shape.
 
 - `end {x, y}`: These define the ending point of the gradient. Similar to `start {x, y}`, these values specify where the last color stop is positioned in the shape's local coordinate system.
@@ -193,13 +191,13 @@ const gradient = new FillGradient({
   ],
 });
 
-const obj = new Graphics().rect(0, 0, 100, 100)
-  .fill(gradient);
+const obj = new Graphics().rect(0, 0, 100, 100).fill(gradient);
 ```
 
 ![alt text](/assets/guides/components/image-7.png)
 
 You can control the gradient's shape and size using the following properties:
+
 - `center {x, y}`: These define the center of the inner circle where the gradient starts. Typically, these values are expressed in relative coordinates (0 to 1), where `0.5` represents the center of the shape.
 
 - `innerRadius`: The radius of the inner circle. This determines the size of the gradient's starting point.
@@ -223,8 +221,7 @@ const radialGradient = new FillGradient({
   ],
 });
 
-const obj = new Graphics().rect(0, 0, 100, 100)
-  .fill(gradient);
+const obj = new Graphics().rect(0, 0, 100, 100).fill(gradient);
 ```
 
 ![alt text](/assets/guides/components/image-8.png)
@@ -240,36 +237,32 @@ const obj = new Graphics().rect(0, 0, 100, 100)
 4. **Texture and Matrix Limitations**: Under the hood, gradient fills set both the texture and matrix properties internally. This means you cannot use a texture fill or matrix transformation at the same time as a gradient fill.
 
 ### Combining Textures and Colors
+
 You can combine a texture or gradients with a color tint and alpha to achieve more complex and visually appealing effects. This allows you to overlay a color on top of the texture or gradient, adjusting its transparency with the alpha value.
 
 ```ts
-
 const gradient = new FillGradient({
-    colorStops: [
-        { offset: 0, color: 'blue' },
-        { offset: 1, color: 'red' },
-    ]
+  colorStops: [
+    { offset: 0, color: 'blue' },
+    { offset: 1, color: 'red' },
+  ],
 });
 
-const obj = new Graphics().rect(0, 0, 100, 100)
-  .fill({
-    fill: gradient,
-    color: 'yellow',
-    alpha: 0.5,
-  });
-
+const obj = new Graphics().rect(0, 0, 100, 100).fill({
+  fill: gradient,
+  color: 'yellow',
+  alpha: 0.5,
+});
 ```
 
 ![alt text](/assets/guides/components/image-10.png)
 
 ```ts
-const obj = new Graphics().rect(0, 0, 100, 100)
-  .fill({
-    texture: texture,
-    color: 'yellow',
-    alpha: 0.5,
-  });
-
+const obj = new Graphics().rect(0, 0, 100, 100).fill({
+  texture: texture,
+  color: 'yellow',
+  alpha: 0.5,
+});
 ```
 
 ![alt text](/assets/guides/components/image-9.png)
@@ -277,4 +270,3 @@ const obj = new Graphics().rect(0, 0, 100, 100)
 ---
 
 Hopefully, this guide has shown you how easy and powerful fills can be when working with graphics (and text!). By mastering the `fill()` method, you can unlock endless possibilities for creating visually dynamic and engaging graphics in PixiJS. Have fun!
-

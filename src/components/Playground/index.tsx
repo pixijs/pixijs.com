@@ -6,26 +6,25 @@ import { usePlaygroundURLState } from '@site/src/components/Playground/PixiPlayg
 
 import type { IVersion } from '@site/src/components/Playground/PixiPlayground/usePixiVersions';
 
-export default function Playground({ pixiVersion }: { pixiVersion: IVersion })
-{
-    const [urlState, setURLState] = usePlaygroundURLState();
-    const { state } = urlState;
+export default function Playground({ pixiVersion }: { pixiVersion: IVersion }) {
+  const [urlState, setURLState] = usePlaygroundURLState();
+  const { state } = urlState;
 
-    const { indexCode, handleEditorCodeChanged } = useCodeExamples({ urlState: state, setURLState, pixiVersion });
+  const { indexCode, handleEditorCodeChanged } = useCodeExamples({ urlState: state, setURLState, pixiVersion });
 
-    return (
-        <div className={styles.wrapper}>
-            <BrowserOnly>
-                {() => (
-                    <PlaygroundEditor
-                        files={{
-                            'index.js': indexCode,
-                        }}
-                        dependencies={{ 'pixi.js': pixiVersion.version }}
-                        handleEditorCodeChanged={handleEditorCodeChanged}
-                    />
-                )}
-            </BrowserOnly>
-        </div>
-    );
+  return (
+    <div className={styles.wrapper}>
+      <BrowserOnly>
+        {() => (
+          <PlaygroundEditor
+            files={{
+              'index.js': indexCode,
+            }}
+            dependencies={{ 'pixi.js': pixiVersion.version }}
+            handleEditorCodeChanged={handleEditorCodeChanged}
+          />
+        )}
+      </BrowserOnly>
+    </div>
+  );
 }

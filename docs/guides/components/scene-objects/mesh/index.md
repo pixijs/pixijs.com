@@ -9,14 +9,14 @@ PixiJS v8 offers a powerful `Mesh` system that provides full control over geomet
 import { Texture, Mesh, MeshGeometry, Shader } from 'pixi.js';
 
 const geometry = new MeshGeometry({
-    positions: new Float32Array([0, 0, 100, 0, 100, 100, 0, 100]),
-    uvs: new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]),
-    indices: new Uint32Array([0, 1, 2, 0, 2, 3]),
+  positions: new Float32Array([0, 0, 100, 0, 100, 100, 0, 100]),
+  uvs: new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]),
+  indices: new Uint32Array([0, 1, 2, 0, 2, 3]),
 });
 
 const shader = Shader.from({
-    gl: {
-        vertex: `
+  gl: {
+    vertex: `
             attribute vec2 aPosition;
             attribute vec2 aUV;
             varying vec2 vUV;
@@ -25,7 +25,7 @@ const shader = Shader.from({
                 vUV = aUV;
             }
         `,
-        fragment: `
+    fragment: `
             precision mediump float;
             varying vec2 vUV;
             uniform sampler2D uSampler;
@@ -33,10 +33,10 @@ const shader = Shader.from({
                 gl_FragColor = texture2D(uSampler, vUV);
             }
         `,
-    },
-    resources: {
-        uSampler: Texture.from('image.png').source,
-    },
+  },
+  resources: {
+    uSampler: Texture.from('image.png').source,
+  },
 });
 
 const mesh = new Mesh({ geometry, shader });
@@ -59,10 +59,10 @@ All meshes in PixiJS are built using the `MeshGeometry` class. This class allows
 
 ```ts
 const geometry = new MeshGeometry({
-    positions: Float32Array, // 2 floats per vertex
-    uvs: Float32Array, // matching number of floats
-    indices: Uint32Array, // 3 indices per triangle
-    topology: 'triangle-list',
+  positions: Float32Array, // 2 floats per vertex
+  uvs: Float32Array, // matching number of floats
+  indices: Uint32Array, // 3 indices per triangle
+  topology: 'triangle-list',
 });
 ```
 
@@ -82,10 +82,10 @@ A minimal wrapper over `Mesh` that accepts vertex, UV, and index arrays directly
 
 ```ts
 const mesh = new MeshSimple({
-    texture: Texture.from('image.png'),
-    vertices: new Float32Array([0, 0, 100, 0, 100, 100, 0, 100]),
-    uvs: new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]),
-    indices: new Uint32Array([0, 1, 2, 0, 2, 3]),
+  texture: Texture.from('image.png'),
+  vertices: new Float32Array([0, 0, 100, 0, 100, 100, 0, 100]),
+  uvs: new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]),
+  indices: new Uint32Array([0, 1, 2, 0, 2, 3]),
 });
 ```
 
@@ -99,9 +99,9 @@ Bends a texture along a series of control points, often used for trails, snakes,
 ```ts
 const points = [new Point(0, 0), new Point(100, 0), new Point(200, 50)];
 const rope = new MeshRope({
-    texture: Texture.from('snake.png'),
-    points,
-    textureScale: 1, // optional
+  texture: Texture.from('snake.png'),
+  points,
+  textureScale: 1, // optional
 });
 ```
 
@@ -114,9 +114,9 @@ A flexible subdivided quad mesh, suitable for distortion or grid-based warping.
 
 ```ts
 const plane = new MeshPlane({
-    texture: Texture.from('image.png'),
-    verticesX: 10,
-    verticesY: 10,
+  texture: Texture.from('image.png'),
+  verticesX: 10,
+  verticesY: 10,
 });
 ```
 
@@ -128,17 +128,17 @@ A special subclass of `MeshPlane` that applies perspective correction by transfo
 
 ```ts
 const mesh = new PerspectiveMesh({
-    texture: Texture.from('image.png'),
-    verticesX: 20,
-    verticesY: 20,
-    x0: 0,
-    y0: 0,
-    x1: 300,
-    y1: 30,
-    x2: 280,
-    y2: 300,
-    x3: 20,
-    y3: 280,
+  texture: Texture.from('image.png'),
+  verticesX: 20,
+  verticesY: 20,
+  x0: 0,
+  y0: 0,
+  x1: 300,
+  y1: 30,
+  x2: 280,
+  y2: 300,
+  x3: 20,
+  y3: 280,
 });
 ```
 

@@ -2,48 +2,49 @@ import { useInView } from 'react-intersection-observer';
 import HomeCTA from '../HomeCTA';
 import styles from './index.module.scss';
 
+import type React from 'react';
+
 const animShortUp = (duration: number, delay: number) => ({
-    opacity: 0,
-    animationDuration: `${duration}s`,
-    animationDelay: `${delay}s`,
+  opacity: 0,
+  animationDuration: `${duration}s`,
+  animationDelay: `${delay}s`,
 });
 
-export default function ClosingSection(): JSX.Element
-{
-    const [ref, inView] = useInView({
-        triggerOnce: true,
-    });
+export default function ClosingSection(): React.JSX.Element {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+  });
 
-    return (
-        <div className={`${styles.closing}`}>
-            <div ref={ref}>
-                {inView && (
-                    <>
-                        <h3 className="short-up-anim" style={animShortUp(0.3, 0.25)}>
-                            Elevate your Traditional HTML5 Techniques
-                        </h3>
-                        <h5 className="short-up-anim" style={animShortUp(0.3, 0.4)}>
-                            Unbeatable performance, intuitive API, globally used and battle tested.
-                        </h5>
-                        <div className="buttonRow">
-                            <HomeCTA
-                                anim="short-up-anim"
-                                style={animShortUp(0.3, 0.55)}
-                                label="Download"
-                                link="https://github.com/pixijs/pixijs/releases"
-                            />
-                            &nbsp;
-                            <HomeCTA
-                                anim="short-up-anim"
-                                style={animShortUp(0.3, 0.7)}
-                                label="Get Started"
-                                link="8.x/tutorials"
-                                outline={true}
-                            />
-                        </div>
-                    </>
-                )}
+  return (
+    <div className={`${styles.closing}`}>
+      <div ref={ref}>
+        {inView && (
+          <>
+            <h3 className="short-up-anim" style={animShortUp(0.3, 0.25)}>
+              Elevate your Traditional HTML5 Techniques
+            </h3>
+            <h5 className="short-up-anim" style={animShortUp(0.3, 0.4)}>
+              Unbeatable performance, intuitive API, globally used and battle tested.
+            </h5>
+            <div className="buttonRow">
+              <HomeCTA
+                anim="short-up-anim"
+                style={animShortUp(0.3, 0.55)}
+                label="Download"
+                link="https://github.com/pixijs/pixijs/releases"
+              />
+              &nbsp;
+              <HomeCTA
+                anim="short-up-anim"
+                style={animShortUp(0.3, 0.7)}
+                label="Get Started"
+                link="8.x/tutorials"
+                outline={true}
+              />
             </div>
-        </div>
-    );
+          </>
+        )}
+      </div>
+    </div>
+  );
 }

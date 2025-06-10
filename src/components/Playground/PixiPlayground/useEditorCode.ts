@@ -8,67 +8,62 @@ import type { SetURLStateType } from '@site/src/components/Playground/PixiPlaygr
 export const defaultExampleId = 'sprite.basic';
 
 type UseCodeExamplesParams = {
-    urlState: string | undefined;
-    setURLState: SetURLStateType;
-    pixiVersion: IVersion;
+  urlState: string | undefined;
+  setURLState: SetURLStateType;
+  pixiVersion: IVersion;
 };
 
-export const useCodeExamples = ({ urlState, setURLState, pixiVersion }: UseCodeExamplesParams) =>
-{
-    const version = pixiVersion.versionLabel;
-    const hasUrlHashed = Boolean(urlState);
+export const useCodeExamples = ({ urlState, setURLState, pixiVersion }: UseCodeExamplesParams) => {
+  const version = pixiVersion.versionLabel;
+  const hasUrlHashed = Boolean(urlState);
 
-    const { indexCode } = useMemo<{
-        indexCode: string;
-    }>(() =>
-    {
-        if (!urlState)
+  const { indexCode } = useMemo<{
+    indexCode: string;
+  }>(() => {
+    if (!urlState) {
+      // versionLabel
+      const indexCode = version === 'v7.x' ? V7IndexFile : V8IndexFile;
+
+      return {
+        indexCode,
+      };
+    }
+
+    return {
+      indexCode: urlState,
+    };
+  }, [version, urlState]);
+
+  const handleEditorCodeChanged = useCallback(
+    (nextSourceCode: string | undefined) => {
+      if (!nextSourceCode) return;
+
+      // pushState only when editing code for the first time
+      setURLState(
         {
-            // versionLabel
-            const indexCode = version === 'v7.x' ? V7IndexFile : V8IndexFile;
-
-            return {
-                indexCode,
-            };
-        }
-
-        return {
-            indexCode: urlState,
-        };
-    }, [version, urlState]);
-
-    const handleEditorCodeChanged = useCallback(
-        (nextSourceCode: string | undefined) =>
-        {
-            if (!nextSourceCode) return;
-
-            // pushState only when editing code for the first time
-            setURLState(
-                {
-                    state: nextSourceCode,
-                },
-                !hasUrlHashed,
-            );
+          state: nextSourceCode,
         },
-        [hasUrlHashed, setURLState],
-    );
+        !hasUrlHashed,
+      );
+    },
+    [hasUrlHashed, setURLState],
+  );
 
-    return {
-        indexCode,
-        handleEditorCodeChanged,
-    };
+  return {
+    indexCode,
+    handleEditorCodeChanged,
+  };
 };
 
-export function extractSource(source: string | Record<string, string>)
-{
-    const isMultiFile = typeof source !== 'string';
-    const indexCode = isMultiFile ? source.index : source;
-    const extraFiles = isMultiFile
-        ? Object.fromEntries(Object.entries(source).filter(([key]) => key !== 'index'))
-        : undefined;
+export function extractSource(source: string | Record<string, string>) {
+  const isMultiFile = typeof source !== 'string';
+  const indexCode = isMultiFile ? source.index : source;
+  const extraFiles = isMultiFile
+    ? Object.fromEntries(Object.entries(source).filter(([key]) => key !== 'index'))
+    : undefined;
 
-    return {
-        indexCode,
-        extraFiles,
-    };
+  return {
+    indexCode,
+    extraFiles,
+  };
 }

@@ -11,13 +11,13 @@ description: Learn how to use the NineSliceSprite class in PixiJS for creating s
 import { NineSliceSprite, Texture } from 'pixi.js';
 
 const nineSlice = new NineSliceSprite({
-    texture: Texture.from('button.png'),
-    leftWidth: 15,
-    topHeight: 15,
-    rightWidth: 15,
-    bottomHeight: 15,
-    width: 200,
-    height: 80,
+  texture: Texture.from('button.png'),
+  leftWidth: 15,
+  topHeight: 15,
+  rightWidth: 15,
+  bottomHeight: 15,
+  width: 200,
+  height: 80,
 });
 
 app.stage.addChild(nineSlice);

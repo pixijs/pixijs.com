@@ -7,29 +7,28 @@ const app = new PIXI.Application({ antialias: true, resizeTo: window });
 
 document.body.appendChild(app.view);
 
-function createGradTexture()
-{
-    // adjust it if somehow you need better quality for very very big images
-    const quality = 256;
-    const canvas = document.createElement('canvas');
+function createGradTexture() {
+  // adjust it if somehow you need better quality for very very big images
+  const quality = 256;
+  const canvas = document.createElement('canvas');
 
-    canvas.width = quality;
-    canvas.height = 1;
+  canvas.width = quality;
+  canvas.height = 1;
 
-    const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d');
 
-    // use canvas2d API to create gradient
-    const grd = ctx.createLinearGradient(0, 0, quality, 0);
+  // use canvas2d API to create gradient
+  const grd = ctx.createLinearGradient(0, 0, quality, 0);
 
-    grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
-    grd.addColorStop(0.3, 'cyan');
-    grd.addColorStop(0.7, 'red');
-    grd.addColorStop(1, 'green');
+  grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
+  grd.addColorStop(0.3, 'cyan');
+  grd.addColorStop(0.7, 'red');
+  grd.addColorStop(1, 'green');
 
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, quality, 1);
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, quality, 1);
 
-    return PIXI.Texture.from(canvas);
+  return PIXI.Texture.from(canvas);
 }
 
 const gradTexture = createGradTexture();

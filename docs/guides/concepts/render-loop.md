@@ -31,7 +31,7 @@ The render loop is driven by the `Ticker` class, which uses `requestAnimationFra
 
 ```ts
 app.ticker.add((ticker) => {
-    bunny.rotation += ticker.deltaTime * 0.1;
+  bunny.rotation += ticker.deltaTime * 0.1;
 });
 ```
 

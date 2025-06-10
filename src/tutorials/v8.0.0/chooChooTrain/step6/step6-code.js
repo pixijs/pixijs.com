@@ -9,17 +9,16 @@ import { addTrees } from './addTrees';
 const app = new Application();
 
 // Asynchronous IIFE
-(async () =>
-{
-    // Intialize the application.
-    await app.init({ background: '#021f4b', resizeTo: window });
+(async () => {
+  // Intialize the application.
+  await app.init({ background: '#021f4b', resizeTo: window });
 
-    // Then adding the application's canvas to the DOM body.
-    document.body.appendChild(app.canvas);
+  // Then adding the application's canvas to the DOM body.
+  document.body.appendChild(app.canvas);
 
-    addStars(app);
-    addMoon(app);
-    addMountains(app);
-    addTrees(app);
-    addGround(app);
+  addStars(app);
+  addMoon(app);
+  addMountains(app);
+  addTrees(app);
+  addGround(app);
 })();

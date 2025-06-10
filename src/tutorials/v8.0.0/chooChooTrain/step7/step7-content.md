@@ -46,43 +46,43 @@ const windowHeight = doorHeight * 0.4;
 const offset = (doorWidth - windowWidth) / 2;
 
 const graphics = new Graphics()
-    // Draw the chimney
-    .moveTo(chimneyStartX, chimneyStartY)
-    .lineTo(chimneyStartX - chimneyTopOffset, chimneyStartY - chimneyHeight + chimneyDomeHeight)
-    .quadraticCurveTo(
-        chimneyStartX + chimneyBaseWidth / 2,
-        chimneyStartY - chimneyHeight - chimneyDomeHeight,
-        chimneyStartX + chimneyBaseWidth + chimneyTopOffset,
-        chimneyStartY - chimneyHeight + chimneyDomeHeight,
-    )
-    .lineTo(chimneyStartX + chimneyBaseWidth, chimneyStartY)
-    .fill({ color: 0x121212 })
+  // Draw the chimney
+  .moveTo(chimneyStartX, chimneyStartY)
+  .lineTo(chimneyStartX - chimneyTopOffset, chimneyStartY - chimneyHeight + chimneyDomeHeight)
+  .quadraticCurveTo(
+    chimneyStartX + chimneyBaseWidth / 2,
+    chimneyStartY - chimneyHeight - chimneyDomeHeight,
+    chimneyStartX + chimneyBaseWidth + chimneyTopOffset,
+    chimneyStartY - chimneyHeight + chimneyDomeHeight,
+  )
+  .lineTo(chimneyStartX + chimneyBaseWidth, chimneyStartY)
+  .fill({ color: 0x121212 })
 
-    // Draw the head front
-    .roundRect(
-        cabinWidth - frontRadius - cabinRadius,
-        -frontHeight,
-        frontWidth + frontRadius + cabinRadius,
-        frontHeight,
-        frontRadius,
-    )
-    .fill({ color: 0x7f3333 })
+  // Draw the head front
+  .roundRect(
+    cabinWidth - frontRadius - cabinRadius,
+    -frontHeight,
+    frontWidth + frontRadius + cabinRadius,
+    frontHeight,
+    frontRadius,
+  )
+  .fill({ color: 0x7f3333 })
 
-    // Draw the cabin
-    .roundRect(0, -cabinHeight, cabinWidth, cabinHeight, cabinRadius)
-    .fill({ color: 0x725f19 })
+  // Draw the cabin
+  .roundRect(0, -cabinHeight, cabinWidth, cabinHeight, cabinRadius)
+  .fill({ color: 0x725f19 })
 
-    // Draw the roof
-    .rect(-roofExcess / 2, cabinRadius - cabinHeight - roofHeight, cabinWidth + roofExcess, roofHeight)
-    .fill({ color: 0x52431c })
+  // Draw the roof
+  .rect(-roofExcess / 2, cabinRadius - cabinHeight - roofHeight, cabinWidth + roofExcess, roofHeight)
+  .fill({ color: 0x52431c })
 
-    // Draw the door
-    .roundRect(doorStartX, doorStartY, doorWidth, doorHeight, cabinRadius)
-    .stroke({ color: 0x52431c, width: 3 })
+  // Draw the door
+  .roundRect(doorStartX, doorStartY, doorWidth, doorHeight, cabinRadius)
+  .stroke({ color: 0x52431c, width: 3 })
 
-    // Draw the window
-    .roundRect(doorStartX + offset, doorStartY + offset, windowWidth, windowHeight, 10)
-    .fill({ color: 0x848484 });
+  // Draw the window
+  .roundRect(doorStartX + offset, doorStartY + offset, windowWidth, windowHeight, 10)
+  .fill({ color: 0x848484 });
 ```
 
 ## Wheels
@@ -100,16 +100,16 @@ const strokeThickness = radius / 3;
 const innerRadius = radius - strokeThickness;
 
 return (
-    new Graphics()
-        .circle(0, 0, radius)
-        // Draw the wheel
-        .fill({ color: 0x848484 })
-        // Draw the tyre
-        .stroke({ color: 0x121212, width: strokeThickness, alignment: 1 })
-        // Draw the spokes
-        .rect(-strokeThickness / 2, -innerRadius, strokeThickness, innerRadius * 2)
-        .rect(-innerRadius, -strokeThickness / 2, innerRadius * 2, strokeThickness)
-        .fill({ color: 0x4f4f4f })
+  new Graphics()
+    .circle(0, 0, radius)
+    // Draw the wheel
+    .fill({ color: 0x848484 })
+    // Draw the tyre
+    .stroke({ color: 0x121212, width: strokeThickness, alignment: 1 })
+    // Draw the spokes
+    .rect(-strokeThickness / 2, -innerRadius, strokeThickness, innerRadius * 2)
+    .rect(-innerRadius, -strokeThickness / 2, innerRadius * 2, strokeThickness)
+    .fill({ color: 0x4f4f4f })
 );
 ```
 
@@ -142,13 +142,12 @@ const container = new Container();
 
 container.addChild(graphics, backWheel, midWheel, frontWheel);
 
-app.ticker.add((time) =>
-{
-    const dr = time.deltaTime * 0.15;
+app.ticker.add((time) => {
+  const dr = time.deltaTime * 0.15;
 
-    backWheel.rotation += dr * (smallWheelRadius / bigWheelRadius);
-    midWheel.rotation += dr;
-    frontWheel.rotation += dr;
+  backWheel.rotation += dr * (smallWheelRadius / bigWheelRadius);
+  midWheel.rotation += dr;
+  frontWheel.rotation += dr;
 });
 
 return container;

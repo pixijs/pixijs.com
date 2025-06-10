@@ -11,9 +11,9 @@ A `TilingSprite` is a high-performance way to render a repeating texture across 
 import { TilingSprite, Texture } from 'pixi.js';
 
 const tilingSprite = new TilingSprite({
-    texture: Texture.from('assets/tile.png'),
-    width: 400,
-    height: 300,
+  texture: Texture.from('assets/tile.png'),
+  width: 400,
+  height: 300,
 });
 
 app.stage.addChild(tilingSprite);

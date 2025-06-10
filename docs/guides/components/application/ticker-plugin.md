@@ -15,13 +15,13 @@ PixiJS includes this plugin automatically when you initialize an `Application`, 
 const app = new Application();
 
 await app.init({
-    sharedTicker: false,
-    autoStart: true,
+  sharedTicker: false,
+  autoStart: true,
 });
 
 app.ticker.add((ticker) => {
-    // Custom update logic here
-    bunny.rotation += 1 * ticker.deltaTime;
+  // Custom update logic here
+  bunny.rotation += 1 * ticker.deltaTime;
 });
 ```
 
@@ -33,8 +33,8 @@ The `TickerPlugin` is included automatically unless disabled:
 const app = new Application();
 
 await app.init({
-    autoStart: true, // Automatically starts the render loop
-    sharedTicker: false, // Use a dedicated ticker
+  autoStart: true, // Automatically starts the render loop
+  sharedTicker: false, // Use a dedicated ticker
 });
 ```
 

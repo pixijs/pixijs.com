@@ -5,13 +5,16 @@ sidebar_position: 1
 custom_edit_url: null
 title: Custom
 ---
-import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+
+import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 import IndexFile from '!!raw-loader!./custom/index';
 import customVert from '!!raw-loader!./custom/custom.vert';
 import customFrag from '!!raw-loader!./custom/custom.frag';
 
-<ExampleEditor files={{
-    "index.js": IndexFile,
+<ExampleEditor
+  files={{
+    'index.js': IndexFile,
     'custom.vert': customVert,
     'custom.frag': customFrag,
-}} />
+  }}
+/>

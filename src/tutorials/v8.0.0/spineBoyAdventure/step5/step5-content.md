@@ -32,35 +32,35 @@ We then calculate the ideal platform height which is 40% of the scene height but
 ```javascript
 const maxPlatformHeight = platformTexture.height;
 const platformHeight = Math.min(maxPlatformHeight, height * 0.4);
-const scale = this.scale = platformHeight / maxPlatformHeight;
+const scale = (this.scale = platformHeight / maxPlatformHeight);
 ```
 
 Now we can create the `TilingSprite` objects from the defined textures and parameters.
 
 ```javascript
 const baseOptions = {
-    tileScale: { x: scale, y: scale },
-    anchor: { x: 0, y: 1 },
-    applyAnchorToTexture: true,
+  tileScale: { x: scale, y: scale },
+  anchor: { x: 0, y: 1 },
+  applyAnchorToTexture: true,
 };
 
 this.background = new TilingSprite({
-    texture: backgroundTexture,
-    width,
-    height: backgroundTexture.height * scale,
-    ...baseOptions,
+  texture: backgroundTexture,
+  width,
+  height: backgroundTexture.height * scale,
+  ...baseOptions,
 });
 this.midground = new TilingSprite({
-    texture: midgroundTexture,
-    width,
-    height: midgroundTexture.height * scale,
-    ...baseOptions,
+  texture: midgroundTexture,
+  width,
+  height: midgroundTexture.height * scale,
+  ...baseOptions,
 });
 this.platform = new TilingSprite({
-    texture: platformTexture,
-    width,
-    height: platformHeight,
-    ...baseOptions,
+  texture: platformTexture,
+  width,
+  height: platformHeight,
+  ...baseOptions,
 });
 ```
 

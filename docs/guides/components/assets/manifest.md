@@ -15,22 +15,22 @@ A **Manifest** is a descriptor object that defines your asset loading strategy. 
 
 ```js
 const manifest = {
-    bundles: [
-        {
-            name: 'load-screen',
-            assets: [
-                { alias: 'background', src: 'sunset.png' },
-                { alias: 'bar', src: 'load-bar.{png,webp}' },
-            ],
-        },
-        {
-            name: 'game-screen',
-            assets: [
-                { alias: 'character', src: 'robot.png' },
-                { alias: 'enemy', src: 'bad-guy.png' },
-            ],
-        },
-    ],
+  bundles: [
+    {
+      name: 'load-screen',
+      assets: [
+        { alias: 'background', src: 'sunset.png' },
+        { alias: 'bar', src: 'load-bar.{png,webp}' },
+      ],
+    },
+    {
+      name: 'game-screen',
+      assets: [
+        { alias: 'character', src: 'robot.png' },
+        { alias: 'enemy', src: 'bad-guy.png' },
+      ],
+    },
+  ],
 };
 ```
 
@@ -73,9 +73,9 @@ This approach is helpful for scenarios where you want to define bundles on the f
 import { Assets } from 'pixi.js';
 
 Assets.addBundle('animals', [
-    { alias: 'bunny', src: 'bunny.png' },
-    { alias: 'chicken', src: 'chicken.png' },
-    { alias: 'thumper', src: 'thumper.png' },
+  { alias: 'bunny', src: 'bunny.png' },
+  { alias: 'chicken', src: 'chicken.png' },
+  { alias: 'thumper', src: 'thumper.png' },
 ]);
 
 const assets = await Assets.loadBundle('animals');

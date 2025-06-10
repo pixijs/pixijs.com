@@ -29,7 +29,7 @@ You can use `autoDetectRenderer()` to create the best renderer for the environme
 import { autoDetectRenderer } from 'pixi.js';
 
 const renderer = await autoDetectRenderer({
-    preference: 'webgpu', // or 'webgl'
+  preference: 'webgpu', // or 'webgl'
 });
 ```
 
@@ -54,9 +54,9 @@ renderer.render(container);
 
 // or provide a complete set of options
 renderer.render({
-    target: container,
-    clear: true, // clear the screen before rendering
-    transform: new Matrix(), // optional transform to apply to the container
+  target: container,
+  clear: true, // clear the screen before rendering
+  transform: new Matrix(), // optional transform to apply to the container
 });
 ```
 
@@ -85,15 +85,15 @@ To reset the renderer's state, use the `resetState()` method. This is useful whe
 
 ```ts
 function render() {
-    // Render the Three.js scene
-    threeRenderer.resetState();
-    threeRenderer.render(scene, camera);
+  // Render the Three.js scene
+  threeRenderer.resetState();
+  threeRenderer.render(scene, camera);
 
-    // Render the PixiJS stage
-    pixiRenderer.resetState();
-    pixiRenderer.render({ container: stage });
+  // Render the PixiJS stage
+  pixiRenderer.resetState();
+  pixiRenderer.render({ container: stage });
 
-    requestAnimationFrame(render);
+  requestAnimationFrame(render);
 }
 
 requestAnimationFrame(render);

@@ -30,13 +30,12 @@ littleRobot.filters = [blurFilter2];
 
 let count = 0;
 
-app.ticker.add(() =>
-{
-    count += 0.005;
+app.ticker.add(() => {
+  count += 0.005;
 
-    const blurAmount = Math.cos(count);
-    const blurAmount2 = Math.sin(count);
+  const blurAmount = Math.cos(count);
+  const blurAmount2 = Math.sin(count);
 
-    blurFilter1.blur = 20 * blurAmount;
-    blurFilter2.blur = 20 * blurAmount2;
+  blurFilter1.blur = 20 * blurAmount;
+  blurFilter2.blur = 20 * blurAmount2;
 });

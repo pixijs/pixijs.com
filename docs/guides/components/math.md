@@ -44,9 +44,9 @@ Extends `Point` and triggers a callback when its values change. Used internally 
 import { Point, ObservablePoint } from 'pixi.js';
 
 const observer = {
-    _onUpdate: (point) => {
-        console.log(`Point updated to: (${point.x}, ${point.y})`);
-    },
+  _onUpdate: (point) => {
+    console.log(`Point updated to: (${point.x}, ${point.y})`);
+  },
 };
 const reactive = new ObservablePoint(observer, 1, 2);
 reactive.set(3, 4); // triggers call to _onUpdate

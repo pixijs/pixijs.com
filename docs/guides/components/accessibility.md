@@ -44,12 +44,12 @@ You can customize when and how the accessibility system activates by passing opt
 
 ```ts
 const app = new Application({
-    accessibilityOptions: {
-        enabledByDefault: true, // Enable on startup
-        activateOnTab: false, // Disable auto-activation via tab
-        deactivateOnMouseMove: false, // Keep system active with mouse use
-        debug: true, // Show div overlays for debugging
-    },
+  accessibilityOptions: {
+    enabledByDefault: true, // Enable on startup
+    activateOnTab: false, // Disable auto-activation via tab
+    deactivateOnMouseMove: false, // Keep system active with mouse use
+    debug: true, // Show div overlays for debugging
+  },
 });
 ```
 

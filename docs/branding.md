@@ -10,7 +10,7 @@ This is the banner that is displayed at the top of our [README](https://github.c
 
 ## Logo
 
-We recommend using the Logo in places where the audience may not be familiar with PixiJS. 
+We recommend using the Logo in places where the audience may not be familiar with PixiJS.
 
 ### Logo (Dark)
 
@@ -46,7 +46,7 @@ We recommend using the Mark in places where the audience is someone familiar wit
 
 ### Mark (Pink, Large)
 
-512px x 512px 
+512px x 512px
 
 Download: [SVG](https://files.pixijs.download/branding/pixijs-logo.svg)
 [PNG](https://files.pixijs.download/branding/pixijs-logo.png)

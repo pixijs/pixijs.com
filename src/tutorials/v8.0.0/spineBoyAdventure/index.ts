@@ -30,91 +30,91 @@ import code7 from '!!raw-loader!./step7/step7-code';
 import type { TutorialStep } from '../..';
 
 export const spineBoyAdventureTutorialSteps: TutorialStep[] = [
-    {
-        header: 'Introduction',
-        Content: content1,
-        code: code1,
+  {
+    header: 'Introduction',
+    Content: content1,
+    code: code1,
+  },
+  {
+    header: 'Setting Up Character',
+    Content: content2,
+    code: {
+      index: code2,
+      'src/SpineBoy.js*': SpineBoy1,
     },
-    {
-        header: 'Setting Up Character',
-        Content: content2,
-        code: {
-            index: code2,
-            'src/SpineBoy.js*': SpineBoy1,
-        },
-        completedCode: {
-            index: code2Completed,
-            'src/SpineBoy.js*': SpineBoy1Completed,
-        },
+    completedCode: {
+      index: code2Completed,
+      'src/SpineBoy.js*': SpineBoy1Completed,
     },
-    {
-        header: 'Adding Keyboard Controller',
-        Content: content3,
-        code: {
-            index: code3,
-            'src/SpineBoy.js': SpineBoy1Completed,
-            'src/Controller.js*': Controller,
-        },
-        completedCode: {
-            index: code3Completed,
-            'src/SpineBoy.js': SpineBoy1Completed,
-            'src/Controller.js*': ControllerCompleted,
-        },
+  },
+  {
+    header: 'Adding Keyboard Controller',
+    Content: content3,
+    code: {
+      index: code3,
+      'src/SpineBoy.js': SpineBoy1Completed,
+      'src/Controller.js*': Controller,
     },
-    {
-        header: 'Animating Character',
-        Content: content4,
-        code: {
-            index: code4,
-            'src/SpineBoy.js*': SpineBoy2,
-            'src/Controller.js': ControllerCompleted,
-        },
-        completedCode: {
-            index: code4Completed,
-            'src/SpineBoy.js*': SpineBoy2Completed,
-            'src/Controller.js': ControllerCompleted,
-        },
+    completedCode: {
+      index: code3Completed,
+      'src/SpineBoy.js': SpineBoy1Completed,
+      'src/Controller.js*': ControllerCompleted,
     },
-    {
-        header: 'Setting Up Scene',
-        Content: content5,
-        code: {
-            index: code5,
-            'src/SpineBoy.js': SpineBoy2Completed,
-            'src/Controller.js': ControllerCompleted,
-            'src/Scene.js*': Scene1,
-        },
-        completedCode: {
-            index: code5,
-            'src/SpineBoy.js': SpineBoy2Completed,
-            'src/Controller.js': ControllerCompleted,
-            'src/Scene.js*': Scene1Completed,
-        },
+  },
+  {
+    header: 'Animating Character',
+    Content: content4,
+    code: {
+      index: code4,
+      'src/SpineBoy.js*': SpineBoy2,
+      'src/Controller.js': ControllerCompleted,
     },
-    {
-        header: 'Animating Scene',
-        Content: content6,
-        code: {
-            index: code6,
-            'src/SpineBoy.js': SpineBoy2Completed,
-            'src/Controller.js': ControllerCompleted,
-            'src/Scene.js': Scene2,
-        },
-        completedCode: {
-            index: code6Completed,
-            'src/SpineBoy.js': SpineBoy2Completed,
-            'src/Controller.js': ControllerCompleted,
-            'src/Scene.js': Scene2Completed,
-        },
+    completedCode: {
+      index: code4Completed,
+      'src/SpineBoy.js*': SpineBoy2Completed,
+      'src/Controller.js': ControllerCompleted,
     },
-    {
-        header: 'You did it!',
-        Content: content7,
-        code: {
-            index: code7,
-            'src/SpineBoy.js': SpineBoy2Completed,
-            'src/Controller.js': ControllerCompleted,
-            'src/Scene.js': Scene2Completed,
-        },
+  },
+  {
+    header: 'Setting Up Scene',
+    Content: content5,
+    code: {
+      index: code5,
+      'src/SpineBoy.js': SpineBoy2Completed,
+      'src/Controller.js': ControllerCompleted,
+      'src/Scene.js*': Scene1,
     },
+    completedCode: {
+      index: code5,
+      'src/SpineBoy.js': SpineBoy2Completed,
+      'src/Controller.js': ControllerCompleted,
+      'src/Scene.js*': Scene1Completed,
+    },
+  },
+  {
+    header: 'Animating Scene',
+    Content: content6,
+    code: {
+      index: code6,
+      'src/SpineBoy.js': SpineBoy2Completed,
+      'src/Controller.js': ControllerCompleted,
+      'src/Scene.js': Scene2,
+    },
+    completedCode: {
+      index: code6Completed,
+      'src/SpineBoy.js': SpineBoy2Completed,
+      'src/Controller.js': ControllerCompleted,
+      'src/Scene.js': Scene2Completed,
+    },
+  },
+  {
+    header: 'You did it!',
+    Content: content7,
+    code: {
+      index: code7,
+      'src/SpineBoy.js': SpineBoy2Completed,
+      'src/Controller.js': ControllerCompleted,
+      'src/Scene.js': Scene2Completed,
+    },
+  },
 ];

@@ -12,26 +12,26 @@ import code4 from '!!raw-loader!./step4-code';
 import type { TutorialStep } from '../..';
 
 export const gettingStartedTutorialSteps: TutorialStep[] = [
-    {
-        header: 'Getting Started',
-        Content: content1,
-        code: code1,
-    },
-    {
-        header: 'Set up something',
-        Content: content2,
-        code: code2,
-        completedCode: completedCode2,
-    },
-    {
-        header: 'Do something',
-        Content: content3,
-        code: code3,
-        completedCode: completedCode3,
-    },
-    {
-        header: 'You did it!',
-        Content: content4,
-        code: code4,
-    },
+  {
+    header: 'Getting Started',
+    Content: content1,
+    code: code1,
+  },
+  {
+    header: 'Set up something',
+    Content: content2,
+    code: code2,
+    completedCode: completedCode2,
+  },
+  {
+    header: 'Do something',
+    Content: content3,
+    code: code3,
+    completedCode: completedCode3,
+  },
+  {
+    header: 'You did it!',
+    Content: content4,
+    code: code4,
+  },
 ];

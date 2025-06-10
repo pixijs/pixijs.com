@@ -28,19 +28,16 @@ const target = new PIXI.Point();
 
 reset();
 
-function reset()
-{
-    target.x = Math.floor(Math.random() * 550);
-    target.y = Math.floor(Math.random() * 300);
+function reset() {
+  target.x = Math.floor(Math.random() * 550);
+  target.y = Math.floor(Math.random() * 300);
 }
 
-app.ticker.add(() =>
-{
-    mask.x += (target.x - mask.x) * 0.1;
-    mask.y += (target.y - mask.y) * 0.1;
+app.ticker.add(() => {
+  mask.x += (target.x - mask.x) * 0.1;
+  mask.y += (target.y - mask.y) * 0.1;
 
-    if (Math.abs(mask.x - target.x) < 1)
-    {
-        reset();
-    }
+  if (Math.abs(mask.x - target.x) < 1) {
+    reset();
+  }
 });

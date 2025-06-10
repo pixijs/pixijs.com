@@ -5,7 +5,8 @@ sidebar_position: 6
 custom_edit_url: null
 title: Spinners
 ---
-import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+
+import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 import IndexFile from '!!raw-loader!./spinners/index';
 import SpinnerGenerator1 from '!!raw-loader!./spinners/spinner1';
 import SpinnerGenerator2 from '!!raw-loader!./spinners/spinner2';
@@ -14,13 +15,14 @@ import SpinnerGenerator4 from '!!raw-loader!./spinners/spinner4';
 import SpinnerGenerator5 from '!!raw-loader!./spinners/spinner5';
 import SpinnersIntersect from '!!raw-loader!./spinners/intersect';
 
-<ExampleEditor files={{
-    "index.js": IndexFile,
+<ExampleEditor
+  files={{
+    'index.js': IndexFile,
     './spinner1.js': SpinnerGenerator1,
     './spinner2.js': SpinnerGenerator2,
     './spinner3.js': SpinnerGenerator3,
     './spinner4.js': SpinnerGenerator4,
     './spinner5.js': SpinnerGenerator5,
     './intersect.js': SpinnersIntersect,
-}} />
-
+  }}
+/>

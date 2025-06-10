@@ -64,10 +64,10 @@ import { Application } from 'pixi.js';
 const app = new Application();
 
 await app.init({
-    textureGCActive: true,         // Enable texture garbage collection
-    textureGCMaxIdle: 7200,       // 2 hours idle time
-    textureGCCheckCountMax: 1200, // Check every 20 seconds at 60 FPS
-})
+  textureGCActive: true, // Enable texture garbage collection
+  textureGCMaxIdle: 7200, // 2 hours idle time
+  textureGCCheckCountMax: 1200, // Check every 20 seconds at 60 FPS
+});
 ```
 
 ## Best Practices for Garbage Collection in PixiJS
@@ -77,4 +77,3 @@ await app.init({
 3. **Proactively Manage Textures:** Use `texture.unload()` for manual memory management when necessary.
 
 By following these practices and understanding PixiJS’s garbage collection mechanisms, you can create high-performance applications that efficiently utilize system resources.
-

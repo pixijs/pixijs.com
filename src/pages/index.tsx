@@ -1,6 +1,7 @@
 import Homepage from '../components/Homepage';
 
-export default function Home(): JSX.Element
-{
-    return <Homepage />;
+import type React from 'react';
+
+export default function Home(): React.JSX.Element {
+  return <Homepage />;
 }

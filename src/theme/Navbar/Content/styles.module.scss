@@ -1,25 +1,25 @@
 .separator {
-    margin: 0 0.75rem;
-    height: 2rem;
-    width: 0.05rem;
-    background: var(--ifm-font-color-base);
-    opacity: 0.25;
+  margin: 0 0.75rem;
+  height: 2rem;
+  width: 0.05rem;
+  background: var(--ifm-font-color-base);
+  opacity: 0.25;
 }
 
 .short-search input {
-    // width: var(--search-local-modal-width-sm, 340px);
-    max-width: 150px;
+  // width: var(--search-local-modal-width-sm, 340px);
+  max-width: 150px;
 }
 
 @media (max-width: 996px) {
-    .separator {
-        display: none;
-    }
+  .separator {
+    display: none;
+  }
 
-    /*
+  /*
     Hide color mode toggle in small viewports
   */
-    .colorModeToggle {
-        display: none;
-    }
+  .colorModeToggle {
+    display: none;
+  }
 }

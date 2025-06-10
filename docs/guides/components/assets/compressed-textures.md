@@ -62,21 +62,17 @@ Your manifest might include:
 
 ```json
 {
-    "bundles": [
+  "bundles": [
+    {
+      "name": "scene",
+      "assets": [
         {
-            "name": "scene",
-            "assets": [
-                {
-                    "alias": "bg",
-                    "src": [
-                      "assets/bg.ktx2",
-                      "assets/bg.basis",
-                      "assets/bg.png"
-                    ]
-                }
-            ]
+          "alias": "bg",
+          "src": ["assets/bg.ktx2", "assets/bg.basis", "assets/bg.png"]
         }
-    ]
+      ]
+    }
+  ]
 }
 ```
 

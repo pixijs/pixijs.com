@@ -2,30 +2,30 @@ import * as PIXI from 'pixi.js';
 
 // This example logs the order of events hover-related events in the scene.
 const app = new PIXI.Application({
-    antialias: true,
-    background: '#1099bb',
+  antialias: true,
+  background: '#1099bb',
 });
 
 document.body.appendChild(app.view);
 
 const title = app.stage.addChild(
-    new PIXI.Text(
-        `Move your mouse slowly over the boxes to
+  new PIXI.Text(
+    `Move your mouse slowly over the boxes to
     see the order of pointerenter, pointerleave,
     pointerover, pointerout events on each target!`,
-        {
-            fontSize: 16,
-        },
-    ),
+    {
+      fontSize: 16,
+    },
+  ),
 );
 
 title.x = 2;
 
 const logs = [];
 const logText = app.stage.addChild(
-    new PIXI.Text('', {
-        fontSize: 14,
-    }),
+  new PIXI.Text('', {
+    fontSize: 14,
+  }),
 );
 
 logText.y = 80;
@@ -50,37 +50,32 @@ app.stage.hitArea = app.screen;
 whiteBox.eventMode = 'static';
 blackBox.eventMode = 'static';
 
-function onEvent(e)
-{
-    const type = e.type;
-    const targetName = e.target.name;
-    const currentTargetName = e.currentTarget.name;
+function onEvent(e) {
+  const type = e.type;
+  const targetName = e.target.name;
+  const currentTargetName = e.currentTarget.name;
 
-    // Add event to top of logs
-    logs.push(`${currentTargetName} received ${type} event (target is ${targetName})`);
+  // Add event to top of logs
+  logs.push(`${currentTargetName} received ${type} event (target is ${targetName})`);
 
-    if (currentTargetName === 'stage' || type === 'pointerenter' || type === 'pointerleave')
-    {
-        logs.push('-----------------------------------------', '');
+  if (currentTargetName === 'stage' || type === 'pointerenter' || type === 'pointerleave') {
+    logs.push('-----------------------------------------', '');
+  }
+
+  // Prevent logs from growing too long
+  if (logs.length > 30) {
+    while (logs.length > 30) {
+      logs.shift();
     }
+  }
 
-    // Prevent logs from growing too long
-    if (logs.length > 30)
-    {
-        while (logs.length > 30)
-        {
-            logs.shift();
-        }
-    }
-
-    // Update logText
-    logText.text = logs.join('\n');
+  // Update logText
+  logText.text = logs.join('\n');
 }
 
-[app.stage, whiteBox, blackBox].forEach((object) =>
-{
-    object.addEventListener('pointerenter', onEvent);
-    object.addEventListener('pointerleave', onEvent);
-    object.addEventListener('pointerover', onEvent);
-    object.addEventListener('pointerout', onEvent);
+[app.stage, whiteBox, blackBox].forEach((object) => {
+  object.addEventListener('pointerenter', onEvent);
+  object.addEventListener('pointerleave', onEvent);
+  object.addEventListener('pointerover', onEvent);
+  object.addEventListener('pointerout', onEvent);
 });

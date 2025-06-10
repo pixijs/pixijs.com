@@ -29,8 +29,7 @@ sprite.on('pointerdown', onClick);
 
 app.stage.addChild(sprite);
 
-function onClick()
-{
-    sprite.scale.x *= 1.25;
-    sprite.scale.y *= 1.25;
+function onClick() {
+  sprite.scale.x *= 1.25;
+  sprite.scale.y *= 1.25;
 }

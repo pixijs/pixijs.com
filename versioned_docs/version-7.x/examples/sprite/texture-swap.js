@@ -25,14 +25,12 @@ app.stage.addChild(character);
 character.eventMode = 'static';
 character.cursor = 'pointer';
 
-character.on('pointertap', () =>
-{
-    isFlower = !isFlower;
-    // Dynamically swap the texture
-    character.texture = isFlower ? texture : secondTexture;
+character.on('pointertap', () => {
+  isFlower = !isFlower;
+  // Dynamically swap the texture
+  character.texture = isFlower ? texture : secondTexture;
 });
 
-app.ticker.add(() =>
-{
-    character.rotation += 0.02;
+app.ticker.add(() => {
+  character.rotation += 0.02;
 });

@@ -66,7 +66,7 @@ However, you can set text resolution independently from the renderer for sharper
 
 ```ts
 const myText = new Text('Hello', {
-    resolution: 2, // Higher resolution for sharper text
+  resolution: 2, // Higher resolution for sharper text
 });
 
 // change resolution
@@ -86,8 +86,8 @@ It is recommended to use `woff2` for the best performance and compression.
 
 ```js
 await Assets.load({
-    src: 'my-font.woff2',
-    data: {}
+  src: 'my-font.woff2',
+  data: {},
 });
 ```
 

@@ -6,35 +6,35 @@ document.body.appendChild(app.view);
 
 // Build geometry.
 const geometry = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100,
-            -100, // x, y
-            100,
-            -100, // x, y
-            100,
-            100,
-            -100,
-            100,
-        ], // x, y
-        2,
-    ) // the size of the attribute
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-            0,
-            1,
-        ], // u, v
-        2,
-    ) // the size of the attribute
-    .addIndex([0, 1, 2, 0, 2, 3]);
+  .addAttribute(
+    'aVertexPosition', // the attribute name
+    [
+      -100,
+      -100, // x, y
+      100,
+      -100, // x, y
+      100,
+      100,
+      -100,
+      100,
+    ], // x, y
+    2,
+  ) // the size of the attribute
+  .addAttribute(
+    'aUvs', // the attribute name
+    [
+      0,
+      0, // u, v
+      1,
+      0, // u, v
+      1,
+      1,
+      0,
+      1,
+    ], // u, v
+    2,
+  ) // the size of the attribute
+  .addIndex([0, 1, 2, 0, 2, 3]);
 
 const vertexSrc = `
 
@@ -127,8 +127,8 @@ void main()
 }`;
 
 const uniforms = {
-    noise: PIXI.Texture.from('https://pixijs.com/assets/perlin.jpg'),
-    time: 0,
+  noise: PIXI.Texture.from('https://pixijs.com/assets/perlin.jpg'),
+  time: 0,
 };
 // Make sure repeat wrap is used and no mipmapping.
 
@@ -147,9 +147,8 @@ app.stage.addChild(quad);
 // start the animation..
 let time = 0;
 
-app.ticker.add((delta) =>
-{
-    time += 1 / 60;
-    quad.shader.uniforms.time = time;
-    quad.scale.set(Number(Math.cos(time)) + 2, Number(Math.sin(time * 0.7)) + 2);
+app.ticker.add(() => {
+  time += 1 / 60;
+  quad.shader.uniforms.time = time;
+  quad.scale.set(Number(Math.cos(time)) + 2, Number(Math.sin(time * 0.7)) + 2);
 });

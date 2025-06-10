@@ -45,14 +45,13 @@ const container = new PIXI.Container();
 container.filterArea = new PIXI.Rectangle(100, 100, app.screen.width - 200, app.screen.height - 200);
 app.stage.addChild(container);
 const filter = new PIXI.Filter(null, shaderFrag, {
-    mouse: new PIXI.Point(),
+  mouse: new PIXI.Point(),
 });
 
 container.filters = [filter];
 
 app.stage.hitArea = app.screen;
 app.stage.eventMode = 'static';
-app.stage.on('pointermove', (event) =>
-{
-    filter.uniforms.mouse.copyFrom(event.global);
+app.stage.on('pointermove', (event) => {
+  filter.uniforms.mouse.copyFrom(event.global);
 });

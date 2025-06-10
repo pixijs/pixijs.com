@@ -24,10 +24,7 @@ Here’s a simple example:
 
 ```ts
 // Create a Graphics object and draw a pixel-perfect line
-let graphics = new Graphics()
-  .moveTo(0, 0)
-  .lineTo(100, 100)
-  .stroke({ color: 0xff0000, pixelLine: true });
+let graphics = new Graphics().moveTo(0, 0).lineTo(100, 100).stroke({ color: 0xff0000, pixelLine: true });
 
 // Add it to the stage
 app.stage.addChild(graphics);
@@ -50,25 +47,26 @@ Pixel-perfect lines can be incredibly useful in a variety of scenarios. Here are
 - Example: Drawing pixel-perfect grids for tile-based maps.
 
 ```ts
-
 // Create a grid of vertical and horizontal lines
 const grid = new Graphics();
 
 // Draw 10 vertical lines spaced 10 pixels apart
 // Draw vertical lines
 for (let i = 0; i < 10; i++) {
-    // Move to top of each line (x = i*10, y = 0)
-    grid.moveTo(i * 10, 0)
-        // Draw down to bottom (x = i*10, y = 100)
-        .lineTo(i * 10, 100);
+  // Move to top of each line (x = i*10, y = 0)
+  grid
+    .moveTo(i * 10, 0)
+    // Draw down to bottom (x = i*10, y = 100)
+    .lineTo(i * 10, 100);
 }
 
 // Draw horizontal lines
 for (let i = 0; i < 10; i++) {
-    // Move to start of each line (x = 0, y = i*10)
-    grid.moveTo(0, i * 10)
-        // Draw across to end (x = 100, y = i*10)
-        .lineTo(100, i * 10);
+  // Move to start of each line (x = 0, y = i*10)
+  grid
+    .moveTo(0, i * 10)
+    // Draw across to end (x = 100, y = i*10)
+    .lineTo(100, i * 10);
 }
 
 // Stroke all lines in white with pixel-perfect width
@@ -85,12 +83,12 @@ grid.stroke({ color: 0xffffff, pixelLine: true });
 ```ts
 // Create a separator line that will always be 1 pixel thick
 const separator = new Graphics()
-    // Start at x=0, y=50
-    .moveTo(0, 50)
-    // Draw a horizontal line 200 pixels to the right
-    .lineTo(200, 50)
-    // Stroke in green with pixel-perfect 1px width
-    .stroke({ color: 0x00ff00, pixelLine: true });
+  // Start at x=0, y=50
+  .moveTo(0, 50)
+  // Draw a horizontal line 200 pixels to the right
+  .lineTo(200, 50)
+  // Stroke in green with pixel-perfect 1px width
+  .stroke({ color: 0x00ff00, pixelLine: true });
 ```
 
 ---
@@ -101,24 +99,21 @@ const separator = new Graphics()
 - Example: Displaying collision boundaries in a physics-based game.
 
 ```ts
-
 // Create a debug box with pixel-perfect stroke
-const graphicsBox = new Graphics()
-    .rect(0, 0, 100, 100)
-  .stroke({ color: 0xff00ff, pixelLine: true });
+const graphicsBox = new Graphics().rect(0, 0, 100, 100).stroke({ color: 0xff00ff, pixelLine: true });
 
 /**
  * Updates the debug box to match the bounds of a given object
  * @param {Container} obj - The object to draw bounds for
  */
 function drawDebugBounds(obj) {
-    // Get the bounds of the object
-    let bounds = obj.getBounds().rectangle;
+  // Get the bounds of the object
+  let bounds = obj.getBounds().rectangle;
 
-    // Position and scale the debug box to match the bounds
-    // this is faster than using `moveTo` and `lineTo` each frame!
-    graphicsBox.position.set(bounds.x, bounds.y);
-    graphicsBox.scale.set(bounds.width / 100, bounds.height / 100);
+  // Position and scale the debug box to match the bounds
+  // this is faster than using `moveTo` and `lineTo` each frame!
+  graphicsBox.position.set(bounds.x, bounds.y);
+  graphicsBox.scale.set(bounds.width / 100, bounds.height / 100);
 }
 ```
 
@@ -158,10 +153,7 @@ Here's an example of a filled box with a pixel-perfect stroke. The box itself sc
 
 ```ts
 // Create a Graphics object and draw a filled box with a pixel-perfect stroke
-let box = new Graphics()
-    .rect(0, 0, 100, 100)
-    .fill('white')
-    .stroke({ color: 0xff0000, pixelLine: true });
+let box = new Graphics().rect(0, 0, 100, 100).fill('white').stroke({ color: 0xff0000, pixelLine: true });
 
 // Add it to the stage
 app.stage.addChild(box);
@@ -184,4 +176,3 @@ In this example, the blue box grows as it scales, but the red stroke remains at 
 ## Conclusion
 
 The `pixelLine` property is a super useful to have in the PixiJS toolbox for developers looking to create sharp, pixel-perfect lines that remain consistent under transformation. By understanding its strengths and limitations, you can incorporate it into your projects for clean, professional results in both visual and functional elements.
-

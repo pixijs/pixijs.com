@@ -24,27 +24,27 @@ We have identified several common use-cases for projects that are best suited fo
 
 Userland is an ideal place for projects that could eventually be part of the main PixiJS repo but need more time for development and stabilization. Examples include:
 
-* [Compressed Textures](https://github.com/pixijs-userland/pixi-compressed-textures) (similar features in PixiJS v7+)
-* [HTMLText](https://github.com/pixijs-userland/html-text) (added in PixiJS v7+)
-* [Projection](https://github.com/pixijs-userland/projection) (similar features in PixiJS v8+)
-* [GIF](https://github.com/pixijs-userland/gif) (candidate for PixiJS v8+)
-* [Layers](https://github.com/pixijs-userland/layers) (candidate for similar features in PixiJS v8+)
-* [Lights](https://github.com/pixijs-userland/lights) (candidate for similar features in PixiJS v8+)
+- [Compressed Textures](https://github.com/pixijs-userland/pixi-compressed-textures) (similar features in PixiJS v7+)
+- [HTMLText](https://github.com/pixijs-userland/html-text) (added in PixiJS v7+)
+- [Projection](https://github.com/pixijs-userland/projection) (similar features in PixiJS v8+)
+- [GIF](https://github.com/pixijs-userland/gif) (candidate for PixiJS v8+)
+- [Layers](https://github.com/pixijs-userland/layers) (candidate for similar features in PixiJS v8+)
+- [Lights](https://github.com/pixijs-userland/lights) (candidate for similar features in PixiJS v8+)
 
 ### Out-of-Scope Projects
 
 These projects fall just outside the main goals of PixiJS. They are useful but may be more specialized or opinionated, not fitting for the broader PixiJS community. Examples include:
 
-* [Tilemap Kit](https://github.com/pixijs-userland/tilemap)
-* [Particle Emitter](https://github.com/pixijs-userland/particle-emitter)
-* [Graphics Smooth](https://github.com/pixijs-userland/graphics-smooth)
+- [Tilemap Kit](https://github.com/pixijs-userland/tilemap)
+- [Particle Emitter](https://github.com/pixijs-userland/particle-emitter)
+- [Graphics Smooth](https://github.com/pixijs-userland/graphics-smooth)
 
 ### Third-Party Integrations
 
 Sometimes PixiJS developers need to integrate with third-party tools that aren't widely used enough to be officially supported by PixiJS. Examples include:
 
-* [Animate](https://github.com/pixijs-userland/animate) _Adobe Animate Publishing Extension_
-* [Node.js PixiJS Renderer](https://github.com/pixijs-userland/node) _Node.js Rendering_
+- [Animate](https://github.com/pixijs-userland/animate) _Adobe Animate Publishing Extension_
+- [Node.js PixiJS Renderer](https://github.com/pixijs-userland/node) _Node.js Rendering_
 
 ## Main Project Types
 
@@ -54,34 +54,34 @@ Several projects will continue to be supported on the main PixiJS GitHub organiz
 
 These are runtime extensions that integrate with PixiJS and provide general benefits for all developers.
 
-* [Sound](https://github.com/pixijs/sound)
-* [UI](https://github.com/pixijs/ui)
-* [Layout](https://github.com/pixijs/layout)
-* [Filters](https://github.com/pixijs/filters)
+- [Sound](https://github.com/pixijs/sound)
+- [UI](https://github.com/pixijs/ui)
+- [Layout](https://github.com/pixijs/layout)
+- [Filters](https://github.com/pixijs/filters)
 
 ### Popular Runtimes
 
 Support for popular web frameworks or integration with other renderers.
 
-* [Pixi React](https://github.com/pixijs/pixi-react)
+- [Pixi React](https://github.com/pixijs/pixi-react)
 
 ### Developer Tools
 
 Tools that help developers build, package, or develop projects with PixiJS.
 
-* [DevTools](https://github.com/pixijs/devtools)
-* [ESLint Configuration](https://github.com/pixijs/eslint-config)
-* [Create](https://github.com/pixijs/create-pixi)
-* [AssetPack](https://github.com/pixijs/assetpack)
-* [Extension Scripts](https://github.com/pixijs/extension-scripts)
+- [DevTools](https://github.com/pixijs/devtools)
+- [ESLint Configuration](https://github.com/pixijs/eslint-config)
+- [Create](https://github.com/pixijs/create-pixi)
+- [AssetPack](https://github.com/pixijs/assetpack)
+- [Extension Scripts](https://github.com/pixijs/extension-scripts)
 
 ### Resources
 
 References, documentation, or resources for developers.
 
-* [Storybook](https://github.com/pixijs/storybook)
-* [Open Games](https://github.com/pixijs/open-games)
-* [PixiJS.com](https://github.com/pixijs/pixijs.com)
+- [Storybook](https://github.com/pixijs/storybook)
+- [Open Games](https://github.com/pixijs/open-games)
+- [PixiJS.com](https://github.com/pixijs/pixijs.com)
 
 ## Userland Open For Business
 

@@ -17,14 +17,13 @@ app.stage.addChild(container);
 const texture = PIXI.Texture.from('https://pixijs.com/assets/bunny.png');
 
 // Create a 5x5 grid of bunnies
-for (let i = 0; i < 25; i++)
-{
-    const bunny = new PIXI.Sprite(texture);
+for (let i = 0; i < 25; i++) {
+  const bunny = new PIXI.Sprite(texture);
 
-    bunny.anchor.set(0.5);
-    bunny.x = (i % 5) * 40;
-    bunny.y = Math.floor(i / 5) * 40;
-    container.addChild(bunny);
+  bunny.anchor.set(0.5);
+  bunny.x = (i % 5) * 40;
+  bunny.y = Math.floor(i / 5) * 40;
+  container.addChild(bunny);
 }
 
 // Move container to the center
@@ -36,9 +35,8 @@ container.pivot.x = container.width / 2;
 container.pivot.y = container.height / 2;
 
 // Listen for animate update
-app.ticker.add((delta) =>
-{
-    // rotate the container!
-    // use delta to create frame-independent transform
-    container.rotation -= 0.01 * delta;
+app.ticker.add((delta) => {
+  // rotate the container!
+  // use delta to create frame-independent transform
+  container.rotation -= 0.01 * delta;
 });

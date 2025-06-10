@@ -93,24 +93,22 @@ void main()
 }
 `;
 
-function onAssetsLoaded(perlin)
-{
-    // Add perlin noise for filter, make sure it's wrapping and does not have mipmap.
-    perlin.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-    perlin.baseTexture.mipmap = false;
+function onAssetsLoaded(perlin) {
+  // Add perlin noise for filter, make sure it's wrapping and does not have mipmap.
+  perlin.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+  perlin.baseTexture.mipmap = false;
 
-    // Build the filter
-    filter = new PIXI.Filter(null, fragment, {
-        time: 0.0,
-        noise: perlin,
-    });
-    app.stage.filterArea = app.renderer.screen;
-    app.stage.filters = [filter];
+  // Build the filter
+  filter = new PIXI.Filter(null, fragment, {
+    time: 0.0,
+    noise: perlin,
+  });
+  app.stage.filterArea = app.renderer.screen;
+  app.stage.filters = [filter];
 
-    // Listen for animate update.
-    app.ticker.add((delta) =>
-    {
-        filter.uniforms.time = totalTime;
-        totalTime += delta / 60;
-    });
+  // Listen for animate update.
+  app.ticker.add((delta) => {
+    filter.uniforms.time = totalTime;
+    totalTime += delta / 60;
+  });
 }

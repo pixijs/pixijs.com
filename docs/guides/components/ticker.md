@@ -13,7 +13,7 @@ import { Ticker } from 'pixi.js';
 const ticker = new Ticker();
 
 ticker.add((ticker) => {
-    console.log(`Delta Time: ${ticker.deltaTime}`);
+  console.log(`Delta Time: ${ticker.deltaTime}`);
 });
 
 // Start the ticker

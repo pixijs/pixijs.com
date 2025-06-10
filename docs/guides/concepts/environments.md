@@ -20,8 +20,8 @@ import { Application } from 'pixi.js';
 const app = new Application();
 
 await app.init({
-    width: 800,
-    height: 600,
+  width: 800,
+  height: 600,
 });
 
 document.body.appendChild(app.canvas);
@@ -42,11 +42,11 @@ DOMAdapter.set(WebWorkerAdapter);
 const app = new Application();
 
 await app.init({
-    width: 800,
-    height: 600,
+  width: 800,
+  height: 600,
 });
 
-app.canvas // OffscreenCanvas
+app.canvas; // OffscreenCanvas
 ```
 
 ## Custom Environments
@@ -59,15 +59,24 @@ For non-standard environments, you can create a custom adapter by implementing t
 import { DOMAdapter } from 'pixi.js';
 
 const CustomAdapter = {
-    createCanvas: (width, height) => {/* custom implementation */},
-    getCanvasRenderingContext2D: () => {/* custom implementation */},
-    getWebGLRenderingContext: () => {/* custom implementation */},
-    getNavigator: () => ({ userAgent: 'Custom', gpu: null }),
-    getBaseUrl: () => 'custom://',
-    fetch: async (url, options) => {/* custom fetch */},
-    parseXML: (xml) => {/* custom XML parser */},
+  createCanvas: (width, height) => {
+    /* custom implementation */
+  },
+  getCanvasRenderingContext2D: () => {
+    /* custom implementation */
+  },
+  getWebGLRenderingContext: () => {
+    /* custom implementation */
+  },
+  getNavigator: () => ({ userAgent: 'Custom', gpu: null }),
+  getBaseUrl: () => 'custom://',
+  fetch: async (url, options) => {
+    /* custom fetch */
+  },
+  parseXML: (xml) => {
+    /* custom XML parser */
+  },
 };
 
 DOMAdapter.set(CustomAdapter);
 ```
-

@@ -24,40 +24,40 @@ document.body.appendChild(app.canvas);
 Let's then preload all of our required assets upfront which includes:
 
 1. Spine Assets
-    - Skeleton data file.
-    - Accompanying ATLAS.
+   - Skeleton data file.
+   - Accompanying ATLAS.
 2. Scene Images
-    - Static sky gradient image.
-    - Tiled image of the massive buildings in the distance.
-    - Tiled image of the city skyline.
-    - Tiled image of the platform that the character will be moving on.
+   - Static sky gradient image.
+   - Tiled image of the massive buildings in the distance.
+   - Tiled image of the city skyline.
+   - Tiled image of the platform that the character will be moving on.
 
 ```javascript
 await Assets.load([
-    {
-        alias: 'spineSkeleton',
-        src: 'https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pro.skel',
-    },
-    {
-        alias: 'spineAtlas',
-        src: 'https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pma.atlas',
-    },
-    {
-        alias: 'sky',
-        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/sky.png',
-    },
-    {
-        alias: 'background',
-        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/background.png',
-    },
-    {
-        alias: 'midground',
-        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/midground.png',
-    },
-    {
-        alias: 'platform',
-        src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/platform.png',
-    },
+  {
+    alias: 'spineSkeleton',
+    src: 'https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pro.skel',
+  },
+  {
+    alias: 'spineAtlas',
+    src: 'https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pma.atlas',
+  },
+  {
+    alias: 'sky',
+    src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/sky.png',
+  },
+  {
+    alias: 'background',
+    src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/background.png',
+  },
+  {
+    alias: 'midground',
+    src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/midground.png',
+  },
+  {
+    alias: 'platform',
+    src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/platform.png',
+  },
 ]);
 ```
 

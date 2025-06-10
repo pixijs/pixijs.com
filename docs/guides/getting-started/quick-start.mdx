@@ -4,12 +4,14 @@ hide_title: true
 sidebar_position: 1
 description: A step-by-step guide to quickly set up a PixiJS project and start creating graphics and animations.
 ---
-import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
+
+import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
 import IndexFile from '!!raw-loader!@site/docs/examples/basic/container';
 
 # Quick Start
 
 ---
+
 ## Try PixiJS Online
 
 - To quickly get a taste of PixiJS, you can try it directly in our [PixiJS Playground](/8.x/playground).
@@ -19,9 +21,10 @@ import IndexFile from '!!raw-loader!@site/docs/examples/basic/container';
 ## Creating a New Project
 
 :::info[Prerequisites]
+
 - Familiarity with the command line and a basic understanding of JavaScript.
 - Install [Node.js](https://nodejs.org/en/) v20.0 or higher.
-:::
+  :::
 
 In this section, we will introduce how to scaffold a PixiJS application on your local machine. The created project will use a pre-configured build setup, allowing you to quickly get started with PixiJS development.
 
@@ -47,6 +50,7 @@ This command will install and execute the [PixiJS Create](https://pixijs.io/crea
 Creation templates are tailored for specific platforms and include additional configurations and dependencies to streamline development for a particular use case. These templates are more opinionated and are perfect for beginners or those looking for a ready-to-go setup.
 
 #### Bundler Templates
+
 Bundler templates are general templates designed to scaffold a PixiJS project with a specific bundler. They include the necessary configurations and dependencies but leave the project structure flexible, making them ideal for experienced developers who prefer more control.
 
 We recommended using the Vite + PixiJS template for most projects when using bundler templates, as it provides a modern and fast setup for PixiJS applications with minimal configuration.
@@ -74,7 +78,7 @@ Once you've set up your project, here's a simple example to get started with Pix
 {/* embedded:@site/docs/examples/basic/container.js */}
 <EmbeddedEditor fontSize={14} width={"100%"} viewType={"editor"} height={700} files={{"index.js": IndexFile}} />
 
-<br/>
+<br />
 
 :::warning
 If using Vite you still need to wrap your code in an async function. There is an issue when using top level await with PixiJS when building for production.

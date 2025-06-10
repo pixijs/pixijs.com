@@ -10,21 +10,20 @@ app.stage.addChild(container);
 
 const texture = PIXI.Texture.from('https://pixijs.com/assets/bunny.png');
 
-for (let i = 0; i < 25; i++)
-{
-    const bunny = new PIXI.Sprite(texture);
+for (let i = 0; i < 25; i++) {
+  const bunny = new PIXI.Sprite(texture);
 
-    bunny.x = (i % 5) * 30;
-    bunny.y = Math.floor(i / 5) * 30;
-    bunny.rotation = Math.random() * (Math.PI * 2);
-    container.addChild(bunny);
+  bunny.x = (i % 5) * 30;
+  bunny.y = Math.floor(i / 5) * 30;
+  bunny.rotation = Math.random() * (Math.PI * 2);
+  container.addChild(bunny);
 }
 
 const rt = PIXI.RenderTexture.create({
-    width: 300,
-    height: 300,
-    scaleMode: PIXI.SCALE_MODES.LINEAR,
-    resolution: 1,
+  width: 300,
+  height: 300,
+  scaleMode: PIXI.SCALE_MODES.LINEAR,
+  resolution: 1,
 });
 
 const sprite = new PIXI.Sprite(rt);
@@ -42,7 +41,6 @@ app.stage.addChild(sprite);
 container.x = 100;
 container.y = 60;
 
-app.ticker.add(() =>
-{
-    app.renderer.render(container, { renderTexture: rt });
+app.ticker.add(() => {
+  app.renderer.render(container, { renderTexture: rt });
 });

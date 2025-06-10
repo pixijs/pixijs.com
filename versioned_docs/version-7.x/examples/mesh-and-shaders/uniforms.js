@@ -5,35 +5,35 @@ const app = new PIXI.Application({ resizeTo: window });
 document.body.appendChild(app.view);
 
 const geometry = new PIXI.Geometry()
-    .addAttribute(
-        'aVertexPosition', // the attribute name
-        [
-            -100,
-            -100, // x, y
-            100,
-            -100, // x, y
-            100,
-            100,
-            -100,
-            100,
-        ], // x, y
-        2,
-    ) // the size of the attribute
-    .addAttribute(
-        'aUvs', // the attribute name
-        [
-            0,
-            0, // u, v
-            1,
-            0, // u, v
-            1,
-            1,
-            0,
-            1,
-        ], // u, v
-        2,
-    ) // the size of the attribute
-    .addIndex([0, 1, 2, 0, 2, 3]);
+  .addAttribute(
+    'aVertexPosition', // the attribute name
+    [
+      -100,
+      -100, // x, y
+      100,
+      -100, // x, y
+      100,
+      100,
+      -100,
+      100,
+    ], // x, y
+    2,
+  ) // the size of the attribute
+  .addAttribute(
+    'aUvs', // the attribute name
+    [
+      0,
+      0, // u, v
+      1,
+      0, // u, v
+      1,
+      1,
+      0,
+      1,
+    ], // u, v
+    2,
+  ) // the size of the attribute
+  .addIndex([0, 1, 2, 0, 2, 3]);
 
 const vertexSrc = `
 
@@ -69,8 +69,8 @@ const fragmentSrc = `
     }`;
 
 const uniforms = {
-    uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
-    time: 0,
+  uSampler2: PIXI.Texture.from('https://pixijs.com/assets/bg_scene_rotate.jpg'),
+  time: 0,
 };
 
 const shader = PIXI.Shader.from(vertexSrc, fragmentSrc, uniforms);
@@ -85,8 +85,7 @@ app.stage.addChild(quad);
 // start the animation..
 // requestAnimationFrame(animate);
 
-app.ticker.add((delta) =>
-{
-    quad.rotation += 0.01;
-    quad.shader.uniforms.time += 0.1;
+app.ticker.add(() => {
+  quad.rotation += 0.01;
+  quad.shader.uniforms.time += 0.1;
 });

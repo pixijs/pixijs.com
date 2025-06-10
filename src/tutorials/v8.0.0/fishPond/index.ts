@@ -23,81 +23,81 @@ import code6 from '!!raw-loader!./step6/step6-code';
 import type { TutorialStep } from '../..';
 
 export const fishPondTutorialSteps: TutorialStep[] = [
-    {
-        header: 'Introduction',
-        Content: content1,
-        code: code1,
-        completedCode: code1Completed,
+  {
+    header: 'Introduction',
+    Content: content1,
+    code: code1,
+    completedCode: code1Completed,
+  },
+  {
+    header: 'Adding Background',
+    Content: content2,
+    code: {
+      index: code2,
+      'src/addBackground.js*': addBackground,
     },
-    {
-        header: 'Adding Background',
-        Content: content2,
-        code: {
-            index: code2,
-            'src/addBackground.js*': addBackground,
-        },
-        completedCode: {
-            index: code2,
-            'src/addBackground.js*': addBackgroundCompleted,
-        },
+    completedCode: {
+      index: code2,
+      'src/addBackground.js*': addBackgroundCompleted,
     },
-    {
-        header: 'Adding Fishes',
-        Content: content3,
-        code: {
-            index: code3,
-            'src/addBackground.js!': addBackgroundCompleted,
-            'src/addFishes.js*': addFishes,
-        },
-        completedCode: {
-            index: code3,
-            'src/addBackground.js!': addBackgroundCompleted,
-            'src/addFishes.js*': addFishesCompleted,
-        },
+  },
+  {
+    header: 'Adding Fishes',
+    Content: content3,
+    code: {
+      index: code3,
+      'src/addBackground.js!': addBackgroundCompleted,
+      'src/addFishes.js*': addFishes,
     },
-    {
-        header: 'Adding Water Overlay',
-        Content: content4,
-        code: {
-            index: code4,
-            'src/addBackground.js!': addBackgroundCompleted,
-            'src/addFishes.js!': addFishesCompleted,
-            'src/addWaterOverlay.js*': addWaterOverlay,
-        },
-        completedCode: {
-            index: code4,
-            'src/addBackground.js!': addBackgroundCompleted,
-            'src/addFishes.js!': addFishesCompleted,
-            'src/addWaterOverlay.js*': addWaterOverlayCompleted,
-        },
+    completedCode: {
+      index: code3,
+      'src/addBackground.js!': addBackgroundCompleted,
+      'src/addFishes.js*': addFishesCompleted,
     },
-    {
-        header: 'Adding Displacement Effect',
-        Content: content5,
-        code: {
-            index: code5,
-            'src/addBackground.js!': addBackgroundCompleted,
-            'src/addFishes.js!': addFishesCompleted,
-            'src/addWaterOverlay.js!': addWaterOverlayCompleted,
-            'src/addDisplacementEffect.js*': addDisplacementEffect,
-        },
-        completedCode: {
-            index: code5,
-            'src/addBackground.js!': addBackgroundCompleted,
-            'src/addFishes.js!': addFishesCompleted,
-            'src/addWaterOverlay.js!': addWaterOverlayCompleted,
-            'src/addDisplacementEffect.js*': addDisplacementEffectCompleted,
-        },
+  },
+  {
+    header: 'Adding Water Overlay',
+    Content: content4,
+    code: {
+      index: code4,
+      'src/addBackground.js!': addBackgroundCompleted,
+      'src/addFishes.js!': addFishesCompleted,
+      'src/addWaterOverlay.js*': addWaterOverlay,
     },
-    {
-        header: 'You did it!',
-        Content: content6,
-        code: {
-            index: code6,
-            'src/addBackground.js': addBackgroundCompleted,
-            'src/addFishes.js': addFishesCompleted,
-            'src/addWaterOverlay.js': addWaterOverlayCompleted,
-            'src/addDisplacementEffect.js': addDisplacementEffectCompleted,
-        },
+    completedCode: {
+      index: code4,
+      'src/addBackground.js!': addBackgroundCompleted,
+      'src/addFishes.js!': addFishesCompleted,
+      'src/addWaterOverlay.js*': addWaterOverlayCompleted,
     },
+  },
+  {
+    header: 'Adding Displacement Effect',
+    Content: content5,
+    code: {
+      index: code5,
+      'src/addBackground.js!': addBackgroundCompleted,
+      'src/addFishes.js!': addFishesCompleted,
+      'src/addWaterOverlay.js!': addWaterOverlayCompleted,
+      'src/addDisplacementEffect.js*': addDisplacementEffect,
+    },
+    completedCode: {
+      index: code5,
+      'src/addBackground.js!': addBackgroundCompleted,
+      'src/addFishes.js!': addFishesCompleted,
+      'src/addWaterOverlay.js!': addWaterOverlayCompleted,
+      'src/addDisplacementEffect.js*': addDisplacementEffectCompleted,
+    },
+  },
+  {
+    header: 'You did it!',
+    Content: content6,
+    code: {
+      index: code6,
+      'src/addBackground.js': addBackgroundCompleted,
+      'src/addFishes.js': addFishesCompleted,
+      'src/addWaterOverlay.js': addWaterOverlayCompleted,
+      'src/addDisplacementEffect.js': addDisplacementEffectCompleted,
+    },
+  },
 ];

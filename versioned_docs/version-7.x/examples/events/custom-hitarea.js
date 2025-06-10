@@ -14,9 +14,9 @@ starButton1.cursor = 'pointer';
 starButton1.eventMode = 'static';
 
 starButton1
-    .on('pointerdown', onClick, starButton1)
-    .on('pointerover', onPointerOver, starButton1)
-    .on('pointerout', onPointerOut, starButton1);
+  .on('pointerdown', onClick, starButton1)
+  .on('pointerover', onPointerOver, starButton1)
+  .on('pointerout', onPointerOut, starButton1);
 
 // Custom Hitarea Button
 const starButton2 = new PIXI.Sprite(yellowStar);
@@ -26,15 +26,15 @@ starButton2.position.set(250, 200);
 // Create a hitarea that matches the sprite, which will be used for point
 // intersection
 starButton2.hitArea = new PIXI.Polygon([
-    80, 0, 100, 50, 160, 55, 115, 95, 130, 150, 80, 120, 30, 150, 45, 95, 0, 55, 60, 50,
+  80, 0, 100, 50, 160, 55, 115, 95, 130, 150, 80, 120, 30, 150, 45, 95, 0, 55, 60, 50,
 ]);
 starButton2.cursor = 'pointer';
 starButton2.eventMode = 'static';
 
 starButton2
-    .on('pointerdown', onClick, starButton2)
-    .on('pointerover', onPointerOver, starButton2)
-    .on('pointerout', onPointerOut, starButton2);
+  .on('pointerdown', onClick, starButton2)
+  .on('pointerover', onPointerOver, starButton2)
+  .on('pointerout', onPointerOut, starButton2);
 
 // With Mask, No Hit Area
 const starButton3 = new PIXI.Sprite(yellowStar);
@@ -48,9 +48,9 @@ const squareMask = new PIXI.Graphics().beginFill(0xffffff).drawRect(starButton3.
 starButton3.mask = squareMask;
 
 starButton3
-    .on('pointerdown', onClick, starButton3)
-    .on('pointerover', onPointerOver, starButton3)
-    .on('pointerout', onPointerOut, starButton3);
+  .on('pointerdown', onClick, starButton3)
+  .on('pointerover', onPointerOver, starButton3)
+  .on('pointerout', onPointerOut, starButton3);
 
 // With a Mask and Hit Area
 // Hitareas ignore masks. You can still click on a button made in this way,
@@ -65,15 +65,15 @@ starButton4.mask = squareMask2;
 
 // Again, hitarea for intersection checks
 starButton4.hitArea = new PIXI.Polygon([
-    80, 0, 100, 50, 160, 55, 115, 95, 130, 150, 80, 120, 30, 150, 45, 95, 0, 55, 60, 50,
+  80, 0, 100, 50, 160, 55, 115, 95, 130, 150, 80, 120, 30, 150, 45, 95, 0, 55, 60, 50,
 ]);
 starButton4.cursor = 'pointer';
 starButton4.eventMode = 'static';
 
 starButton4
-    .on('pointerdown', onClick, starButton4)
-    .on('pointerover', onPointerOver, starButton4)
-    .on('pointerout', onPointerOut, starButton4);
+  .on('pointerdown', onClick, starButton4)
+  .on('pointerover', onPointerOver, starButton4)
+  .on('pointerout', onPointerOut, starButton4);
 
 const style = new PIXI.TextStyle({ fill: '#ffffff' });
 
@@ -98,19 +98,27 @@ text4.x = starButton4.x - 10;
 text4.y = starButton4.y + 170;
 
 // Add to stage
-app.stage.addChild(starButton2, starButton1, starButton3, starButton4, squareMask, squareMask2, text1, text2, text3, text4);
+app.stage.addChild(
+  starButton2,
+  starButton1,
+  starButton3,
+  starButton4,
+  squareMask,
+  squareMask2,
+  text1,
+  text2,
+  text3,
+  text4,
+);
 
-function onClick()
-{
-    this.tint = 0x333333;
+function onClick() {
+  this.tint = 0x333333;
 }
 
-function onPointerOver()
-{
-    this.tint = 0x666666;
+function onPointerOver() {
+  this.tint = 0x666666;
 }
 
-function onPointerOut()
-{
-    this.tint = 0xffffff;
+function onPointerOut() {
+  this.tint = 0xffffff;
 }

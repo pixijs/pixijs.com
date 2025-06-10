@@ -8,8 +8,8 @@ We can use the `Spine.from(options)` method to instantiate our SpineBoy using th
 
 ```javascript
 this.spine = Spine.from({
-    skeleton: 'spineSkeleton',
-    atlas: 'spineAtlas',
+  skeleton: 'spineSkeleton',
+  atlas: 'spineAtlas',
 });
 this.view.addChild(this.spine);
 ```

@@ -1,138 +1,138 @@
 [
-    {
-        "name": "Mat Groves",
-        "badges": ["Owner", "Creator"],
-        "country": "🇬🇧",
-        "social": {
-            "github": "https://github.com/GoodBoyDigital",
-            "twitter": "https://twitter.com/doormat23"
-        },
-        "active": true
+  {
+    "name": "Mat Groves",
+    "badges": ["Owner", "Creator"],
+    "country": "🇬🇧",
+    "social": {
+      "github": "https://github.com/GoodBoyDigital",
+      "twitter": "https://twitter.com/doormat23"
     },
-    {
-        "name": "Chad Engler",
-        "badges": ["Owner"],
-        "country": "🇺🇸",
-        "social": {
-            "github": "https://github.com/englercj",
-            "twitter": "https://twitter.com/rolnaaba"
-        },
-        "active": false
-    },
-    {
-        "name": "Matt Karl",
-        "badges": ["Owner"],
-        "country": "🇺🇸",
-        "social": {
-            "github": "https://github.com/bigtimebuddy",
-            "twitter": "https://twitter.com/bigtimebuddy"
-        },
-        "active": true
-    },
-    {
-        "name": "Sean Burns",
-        "badges": ["Owner"],
-        "country": "🇬🇧",
-        "social": {
-            "github": "https://github.com/Zyie",
-            "twitter": "https://twitter.com/_Zyie_"
-        },
-        "active": true
-    },
-    {
-        "name": "Ivan Popelyshev",
-        "badges": ["Member"],
-        "country": "🇷🇺",
-        "social": {
-            "github": "https://github.com/ivanpopelyshev",
-            "twitter": "https://twitter.com/ivanpopelyshev"
-        },
-        "active": false
-    },
-    {
-        "name": "Dave Moore",
-        "badges": ["Member"],
-        "country": "🇬🇧",
-        "social": {
-            "github": "https://github.com/themoonrat",
-            "twitter": "https://twitter.com/themoonrat"
-        },
-        "active": false
-    },
-    {
-        "name": "Andrew Start",
-        "badges": ["Member"],
-        "country": "🇺🇸",
-        "social": {
-            "github": "https://github.com/andrewstart"
-        },
-        "active": false
-    },
-    {
-        "name": "Yevhenii Huselietov",
-        "badges": ["Member"],
-        "country": "🇺🇦",
-        "social": {
-            "github": "https://github.com/cursedcoder",
-            "twitter": "https://twitter.com/cursedcoder"
-        },
-        "active": false
-    },
-    {
-        "name": "Shukant Kumar Pal",
-        "badges": ["Member"],
-        "country": "🇺🇸",
-        "social": {
-            "github": "https://github.com/ShukantPal",
-            "twitter": "https://twitter.com/ShukantP"
-        },
-        "active": true
-    },
-    {
-        "name": "Milton Candelero",
-        "badges": ["Member"],
-        "country": "🇦🇷",
-        "social": {
-            "github": "https://github.com/miltoncandelero",
-            "twitter": "https://twitter.com/miltoncandelero"
-        },
-        "active": true
-    },
-    {
-        "name": "Tianlan Zhou",
-        "badges": ["Member"],
-        "country": "🇨🇳",
-        "social": {
-            "github": "https://github.com/SuperSodaSea",
-            "twitter": "https://twitter.com/super_soda"
-        },
-        "active": false
-    },
-    {
-        "name": "Viktor Persson",
-        "badges": ["Member"],
-        "country": "🇸🇪",
-        "social": {
-            "github": "https://github.com/vikpe"
-        },
-        "active": false
-    },
-    {
-      "name": "Dmytro Soldatov",
-      "badges": ["Member"],
-      "country": "🇺🇦",
-      "social": {
-          "github": "https://github.com/CyberDex"
-      },
-      "active": true
+    "active": true
   },
   {
-      "name": "Alex Prokop",
-      "badges": ["Member"],
-      "country": "🇬🇧",
-      "social": {
-          "github": "https://github.com/baseten"
-      },
-      "active": false
+    "name": "Chad Engler",
+    "badges": ["Owner"],
+    "country": "🇺🇸",
+    "social": {
+      "github": "https://github.com/englercj",
+      "twitter": "https://twitter.com/rolnaaba"
+    },
+    "active": false
+  },
+  {
+    "name": "Matt Karl",
+    "badges": ["Owner"],
+    "country": "🇺🇸",
+    "social": {
+      "github": "https://github.com/bigtimebuddy",
+      "twitter": "https://twitter.com/bigtimebuddy"
+    },
+    "active": true
+  },
+  {
+    "name": "Sean Burns",
+    "badges": ["Owner"],
+    "country": "🇬🇧",
+    "social": {
+      "github": "https://github.com/Zyie",
+      "twitter": "https://twitter.com/_Zyie_"
+    },
+    "active": true
+  },
+  {
+    "name": "Ivan Popelyshev",
+    "badges": ["Member"],
+    "country": "🇷🇺",
+    "social": {
+      "github": "https://github.com/ivanpopelyshev",
+      "twitter": "https://twitter.com/ivanpopelyshev"
+    },
+    "active": false
+  },
+  {
+    "name": "Dave Moore",
+    "badges": ["Member"],
+    "country": "🇬🇧",
+    "social": {
+      "github": "https://github.com/themoonrat",
+      "twitter": "https://twitter.com/themoonrat"
+    },
+    "active": false
+  },
+  {
+    "name": "Andrew Start",
+    "badges": ["Member"],
+    "country": "🇺🇸",
+    "social": {
+      "github": "https://github.com/andrewstart"
+    },
+    "active": false
+  },
+  {
+    "name": "Yevhenii Huselietov",
+    "badges": ["Member"],
+    "country": "🇺🇦",
+    "social": {
+      "github": "https://github.com/cursedcoder",
+      "twitter": "https://twitter.com/cursedcoder"
+    },
+    "active": false
+  },
+  {
+    "name": "Shukant Kumar Pal",
+    "badges": ["Member"],
+    "country": "🇺🇸",
+    "social": {
+      "github": "https://github.com/ShukantPal",
+      "twitter": "https://twitter.com/ShukantP"
+    },
+    "active": true
+  },
+  {
+    "name": "Milton Candelero",
+    "badges": ["Member"],
+    "country": "🇦🇷",
+    "social": {
+      "github": "https://github.com/miltoncandelero",
+      "twitter": "https://twitter.com/miltoncandelero"
+    },
+    "active": true
+  },
+  {
+    "name": "Tianlan Zhou",
+    "badges": ["Member"],
+    "country": "🇨🇳",
+    "social": {
+      "github": "https://github.com/SuperSodaSea",
+      "twitter": "https://twitter.com/super_soda"
+    },
+    "active": false
+  },
+  {
+    "name": "Viktor Persson",
+    "badges": ["Member"],
+    "country": "🇸🇪",
+    "social": {
+      "github": "https://github.com/vikpe"
+    },
+    "active": false
+  },
+  {
+    "name": "Dmytro Soldatov",
+    "badges": ["Member"],
+    "country": "🇺🇦",
+    "social": {
+      "github": "https://github.com/CyberDex"
+    },
+    "active": true
+  },
+  {
+    "name": "Alex Prokop",
+    "badges": ["Member"],
+    "country": "🇬🇧",
+    "social": {
+      "github": "https://github.com/baseten"
+    },
+    "active": false
   }
 ]

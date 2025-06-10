@@ -13,12 +13,12 @@ import { Assets, BitmapText } from 'pixi.js';
 await Assets.load('fonts/MyFont.fnt');
 
 const text = new BitmapText({
-    text: 'Loaded font!',
-    style: {
-        fontFamily: 'MyFont',
-        fontSize: 32,
-        fill: '#ffcc00',
-    },
+  text: 'Loaded font!',
+  style: {
+    fontFamily: 'MyFont',
+    fontSize: 32,
+    fill: '#ffcc00',
+  },
 });
 ```
 
@@ -49,12 +49,12 @@ import { Assets, BitmapText } from 'pixi.js';
 await Assets.load('fonts/MyFont.fnt');
 
 const text = new BitmapText({
-    text: 'Loaded font!',
-    style: {
-        fontFamily: 'MyFont',
-        fontSize: 32,
-        fill: '#ffcc00',
-    },
+  text: 'Loaded font!',
+  style: {
+    fontFamily: 'MyFont',
+    fontSize: 32,
+    fill: '#ffcc00',
+  },
 });
 ```
 
@@ -72,10 +72,10 @@ import { Assets, BitmapText } from 'pixi.js';
 await Assets.load('fonts/MyMSDFFont.fnt');
 
 const text = new BitmapText({
-    text: 'Loaded MSDF font!',
-    style: {
-        fontFamily: 'MyMSDFFont',
-    },
+  text: 'Loaded MSDF font!',
+  style: {
+    fontFamily: 'MyMSDFFont',
+  },
 });
 ```
 

@@ -17,22 +17,22 @@ import { ParticleContainer, Particle, Texture } from 'pixi.js';
 const texture = Texture.from('bunny.png');
 
 const container = new ParticleContainer({
-    dynamicProperties: {
-        position: true, // default
-        scale: false,
-        rotation: false,
-        color: false,
-    },
+  dynamicProperties: {
+    position: true, // default
+    scale: false,
+    rotation: false,
+    color: false,
+  },
 });
 
 for (let i = 0; i < 100000; i++) {
-    const particle = new Particle({
-        texture,
-        x: Math.random() * 800,
-        y: Math.random() * 600,
-    });
+  const particle = new Particle({
+    texture,
+    x: Math.random() * 800,
+    y: Math.random() * 600,
+  });
 
-    container.addParticle(particle);
+  container.addParticle(particle);
 }
 
 app.stage.addChild(container);
@@ -53,12 +53,12 @@ Declare your needs explicitly:
 
 ```ts
 const container = new ParticleContainer({
-    dynamicProperties: {
-        position: true,
-        rotation: true,
-        scale: false,
-        color: false,
-    },
+  dynamicProperties: {
+    position: true,
+    rotation: true,
+    scale: false,
+    color: false,
+  },
 });
 ```
 
@@ -96,14 +96,14 @@ A `Particle` supports key display properties, and is far more efficient than `Sp
 
 ```ts
 const particle = new Particle({
-    texture: Texture.from('spark.png'),
-    x: 200,
-    y: 100,
-    scaleX: 0.8,
-    scaleY: 0.8,
-    rotation: Math.PI / 4,
-    tint: 0xff0000,
-    alpha: 0.5,
+  texture: Texture.from('spark.png'),
+  x: 200,
+  y: 100,
+  scaleX: 0.8,
+  scaleY: 0.8,
+  rotation: Math.PI / 4,
+  tint: 0xff0000,
+  alpha: 0.5,
 });
 ```
 

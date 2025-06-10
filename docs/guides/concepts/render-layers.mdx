@@ -3,7 +3,7 @@ sidebar_position: 4
 description: Understanding PixiJS Render Layers for controlling rendering order independently of logical hierarchy.
 ---
 
-import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
+import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
 import RenderLayerIndexFile from '!!raw-loader!../../examples/ordering/render-layer/index';
 import RenderLayerFish from '!!raw-loader!../../examples/ordering/render-layer/Fish';
 import RenderLayerCharacterUI from '!!raw-loader!../../examples/ordering/render-layer/CharacterUI';
@@ -26,7 +26,6 @@ This guide explains the key concepts, provides practical examples, and highlight
 
 ### **Key Concepts**
 
-
 1. **Independent Rendering Order**:
 
    - RenderLayers allow control of the draw order independently of the logical hierarchy, ensuring objects are rendered in the desired order.
@@ -42,8 +41,6 @@ This guide explains the key concepts, provides practical examples, and highlight
 4. **Dynamic Sorting**:
 
    - Within layers, objects can be dynamically reordered using `zIndex` and `sortChildren` for fine-grained control of rendering order.
-
-
 
 ---
 
@@ -69,13 +66,13 @@ But this is a guide about render layers, so lets create one of those.
 
 Use `renderLayer.attach` to assign an object to a layer. This overrides the object’s default render order defined by its logical parent.
 
-
 ```typescript
 // a layer..
 const layer = new RenderLayer();
 stage.addChild(layer);
 layer.attach(redGuy);
 ```
+
 ![alt text](render-layers/image-2.png)
 
 So now our scene graph order is:
@@ -86,6 +83,7 @@ So now our scene graph order is:
     |-- blueGuy
     |-- layer
 ```
+
 And our render order is:
 
 ```
@@ -103,42 +101,34 @@ This happens because the layer is now the last child in the stage. Since the red
 Now let's remove the red guy from the layer. To stop an object from being rendered in a layer, use `removeFromLayer`. Once removed from the layer, its still going to be in the scene graph, and will be rendered in its scene graph order.
 
 ```typescript
-
 layer.detach(redGuy); //  Stop rendering the rect via the layer
-
 ```
 
 ![alt text](render-layers/image-1.png)
 
-
 Removing an object from its logical parent (`removeChild`) automatically removes it from the layer.
 
-
-
 ```typescript
-
 stage.removeChild(redGuy); // if the red guy was removed from the stage, it will also be removed from the layer
-
 ```
-![alt text](render-layers/image-3.png)
 
+![alt text](render-layers/image-3.png)
 
 However, if you remove the red guy from the stage and then add it back to the stage, it will not be added to the layer again.
 
 ```typescript
 // add red guy to his original position
 stage.addChildAt(redGuy, 0);
-
 ```
+
 ![alt text](render-layers/image-1.png)
 
 You will need to reattach it to the layer yourself.
 
 ```typescript
-
 layer.attach(redGuy); // re attach it to the layer again!
-
 ```
+
 ![alt text](render-layers/image-2.png)
 
 This may seem like a pain, but it's actually a good thing. It means that you have full control over the render order of the object, and you can change it at any time. It also means you can't accidentally add an object to a container and have it automatically re-attach to a layer that may or may not still be around - it would be quite confusing and lead to some very hard to debug bugs!
@@ -148,13 +138,11 @@ This may seem like a pain, but it's actually a good thing. It means that you hav
 The layer’s position in the scene graph determines its render priority relative to other layers and objects.
 
 ```typescript
-
 // reparent the layer to render first in the stage
 stage.addChildAt(layer, 0);
-
 ```
-![alt text](render-layers/image-1.png)
----
+
+## ![alt text](render-layers/image-1.png)
 
 ### **Complete Example**
 
@@ -167,20 +155,24 @@ Here’s a real-world example that shows how to use RenderLayers to set ap playe
     "index.js": RenderLayerIndexFile,
     'Fish.js': RenderLayerFish,
     'CharacterUI.js': RenderLayerCharacterUI,
-}} />
-<br/>
+  }}
+/>
+<br />
 
 ---
 
 ### **Gotchas and Things to Watch Out For**
 
 1. **Manual Reassignment**:
+
    - When an object is re-added to a logical parent, it does not automatically reassociate with its previous layer. Always reassign the object to the layer explicitly.
 
 2. **Nested Children**:
+
    - If you remove a parent container, all its children are automatically removed from layers. Be cautious with complex hierarchies.
 
 3. **Sorting Within Layers**:
+
    - Objects in a layer can be sorted dynamically using their `zIndex` property. This is useful for fine-grained control of render order.
 
    ```javascript
@@ -201,4 +193,3 @@ Here’s a real-world example that shows how to use RenderLayers to set ap playe
 3. **Test Dynamic Changes**: Verify that adding, removing, or reassigning objects to layers behaves as expected in your specific scene setup.
 
 By understanding and leveraging RenderLayers effectively, you can achieve precise control over your scene's visual presentation while maintaining a clean and logical hierarchy.
-

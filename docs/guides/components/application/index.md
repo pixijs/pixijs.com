@@ -17,9 +17,9 @@ import { Application } from 'pixi.js';
 const app = new Application();
 
 await app.init({
-    width: 800,
-    height: 600,
-    backgroundColor: 0x1099bb,
+  width: 800,
+  height: 600,
+  backgroundColor: 0x1099bb,
 });
 
 document.body.appendChild(app.canvas);
@@ -70,15 +70,15 @@ import { Application } from 'pixi.js';
 
 const app = new Application();
 await app.init({
-    width: 800,
-    height: 600,
-    backgroundColor: 0x1099bb,
-    webgl: {
-        antialias: true,
-    },
-    webgpu: {
-        antialias: false,
-    },
+  width: 800,
+  height: 600,
+  backgroundColor: 0x1099bb,
+  webgl: {
+    antialias: true,
+  },
+  webgpu: {
+    antialias: false,
+  },
 });
 document.body.appendChild(app.canvas);
 ```
@@ -130,17 +130,17 @@ If you are using TypeScript, or are providing a plugin for others to use, you ca
 
 ```ts
 declare global {
-    namespace PixiMixins {
-        interface ApplicationOptions {
-            myPlugin?: import('./myPlugin').PluginOptions | null;
-        }
+  namespace PixiMixins {
+    interface ApplicationOptions {
+      myPlugin?: import('./myPlugin').PluginOptions | null;
     }
+  }
 }
 
 await app.init({
-    myPlugin: {
-        customOption: true, // Now TypeScript will know about this option
-    },
+  myPlugin: {
+    customOption: true, // Now TypeScript will know about this option
+  },
 });
 ```
 

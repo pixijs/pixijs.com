@@ -27,41 +27,41 @@ const colorMiddle = 0x7e818f;
 const colorRight = 0x8c919f;
 
 graphics
-    // Draw the middle mountain
-    .moveTo(startXMiddle, startY)
-    .bezierCurveTo(
-        startXMiddle + width / 2,
-        startY - heightMiddle,
-        startXMiddle + width / 2,
-        startY - heightMiddle,
-        startXMiddle + width,
-        startY,
-    )
-    .fill({ color: colorMiddle })
+  // Draw the middle mountain
+  .moveTo(startXMiddle, startY)
+  .bezierCurveTo(
+    startXMiddle + width / 2,
+    startY - heightMiddle,
+    startXMiddle + width / 2,
+    startY - heightMiddle,
+    startXMiddle + width,
+    startY,
+  )
+  .fill({ color: colorMiddle })
 
-    // Draw the left mountain
-    .moveTo(startXLeft, startY)
-    .bezierCurveTo(
-        startXLeft + width / 2,
-        startY - heightLeft,
-        startXLeft + width / 2,
-        startY - heightLeft,
-        startXLeft + width,
-        startY,
-    )
-    .fill({ color: colorLeft })
+  // Draw the left mountain
+  .moveTo(startXLeft, startY)
+  .bezierCurveTo(
+    startXLeft + width / 2,
+    startY - heightLeft,
+    startXLeft + width / 2,
+    startY - heightLeft,
+    startXLeft + width,
+    startY,
+  )
+  .fill({ color: colorLeft })
 
-    // Draw the right mountain
-    .moveTo(startXRight, startY)
-    .bezierCurveTo(
-        startXRight + width / 2,
-        startY - heightRight,
-        startXRight + width / 2,
-        startY - heightRight,
-        startXRight + width,
-        startY,
-    )
-    .fill({ color: colorRight });
+  // Draw the right mountain
+  .moveTo(startXRight, startY)
+  .bezierCurveTo(
+    startXRight + width / 2,
+    startY - heightRight,
+    startXRight + width / 2,
+    startY - heightRight,
+    startXRight + width,
+    startY,
+  )
+  .fill({ color: colorRight });
 
 return graphics;
 ```
@@ -82,23 +82,20 @@ You should now see a single group of mountains covering the whole scene.
 
 ## Animate Mountains
 
-Using the application's ticker, we can add a callback function which will reposition the mountain groups every ticker update, creating a continuous animation. The callback function will be supplied with the Ticker object in which time-related data can be inferred like the `deltaTime` that we will be using to calculate the distance for the mountain to move consistently. Remember to reposition the groups when they moved completely off the screen. 
+Using the application's ticker, we can add a callback function which will reposition the mountain groups every ticker update, creating a continuous animation. The callback function will be supplied with the Ticker object in which time-related data can be inferred like the `deltaTime` that we will be using to calculate the distance for the mountain to move consistently. Remember to reposition the groups when they moved completely off the screen.
 
 ```javascript
-app.ticker.add((time) =>
-{
-    const dx = time.deltaTime * 0.5;
+app.ticker.add((time) => {
+  const dx = time.deltaTime * 0.5;
 
-    group1.x -= dx;
-    group2.x -= dx;
+  group1.x -= dx;
+  group2.x -= dx;
 
-    if (group1.x <= -app.screen.width)
-    {
-        group1.x += app.screen.width * 2;
-    }
-    if (group2.x <= -app.screen.width)
-    {
-        group2.x += app.screen.width * 2;
-    }
+  if (group1.x <= -app.screen.width) {
+    group1.x += app.screen.width * 2;
+  }
+  if (group2.x <= -app.screen.width) {
+    group2.x += app.screen.width * 2;
+  }
 });
 ```

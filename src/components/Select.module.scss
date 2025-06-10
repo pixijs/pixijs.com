@@ -1,16 +1,16 @@
 .select {
-    font: var(--ifm-font-size-base) / var(--ifm-line-height-base) var(--ifm-font-family-base);
-    padding: 4px;
-    border-radius: 4px;
+  font: var(--ifm-font-size-base) / var(--ifm-line-height-base) var(--ifm-font-family-base);
+  padding: 4px;
+  border-radius: 4px;
 }
 
 .label {
-    display: flex;
-    justify-content: flex-start;
-    align-items: baseline;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
 }
 
 .labelText {
-    display: inline-block;
-    margin-right: 8px;
+  display: inline-block;
+  margin-right: 8px;
 }

@@ -70,7 +70,7 @@ You will often use these properties to position and animate objects in your scen
 | **alpha**    | Opacity from 0.0 (fully transparent) to 1.0 (fully opaque), inherited by children                                                                       |
 | **scale**    | Scale is specified as a percent with 1.0 being 100% or actual-size, and can be set independently for the x and y axis                                   |
 | **skew**     | Skew transforms the object in x and y similar to the CSS skew() function, and is specified in radians                                                   |
-| **anchor?**   | Anchor is a percentage-based offset for the sprite's position and rotation. This is different from the `pivot` property, which is a pixel-based offset. |
+| **anchor?**  | Anchor is a percentage-based offset for the sprite's position and rotation. This is different from the `pivot` property, which is a pixel-based offset. |
 
 ### **Anchor vs Pivot**
 
@@ -252,7 +252,7 @@ PixiJS provides a powerful interaction system that allows you to handle user inp
 const sprite = new Sprite(texture);
 sprite.interactive = true;
 sprite.on('click', (event) => {
-    console.log('Sprite clicked!', event);
+  console.log('Sprite clicked!', event);
 });
 ```
 
@@ -265,7 +265,7 @@ The `onRender` callback allows you to run logic every frame when a scene object 
 ```ts
 const container = new Container();
 container.onRender = () => {
-    container.rotation += 0.01;
+  container.rotation += 0.01;
 };
 ```
 

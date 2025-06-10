@@ -5,13 +5,16 @@ sidebar_position: 7
 custom_edit_url: null
 title: Shared Shader
 ---
-import { ExampleEditor } from "@site/src/components/Editor/ExampleEditor";
+
+import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 import IndexFile from '!!raw-loader!./shared-shader/index';
 import sharedShaderVert from '!!raw-loader!./shared-shader/sharedShader.vert';
 import sharedShaderFrag from '!!raw-loader!./shared-shader/sharedShader.frag';
 
-<ExampleEditor files={{
-    "index.js": IndexFile,
+<ExampleEditor
+  files={{
+    'index.js': IndexFile,
     'sharedShader.vert': sharedShaderVert,
     'sharedShader.frag': sharedShaderFrag,
-}} />
+  }}
+/>

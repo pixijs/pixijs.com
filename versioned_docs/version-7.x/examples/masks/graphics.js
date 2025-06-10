@@ -53,48 +53,43 @@ container.mask = thing;
 
 let count = 0;
 
-app.stage.on('pointertap', () =>
-{
-    if (!container.mask)
-    {
-        container.mask = thing;
-    }
-    else
-    {
-        container.mask = null;
-    }
+app.stage.on('pointertap', () => {
+  if (!container.mask) {
+    container.mask = thing;
+  } else {
+    container.mask = null;
+  }
 });
 
 const help = new PIXI.Text('Click or tap to turn masking on / off.', {
-    fontFamily: 'Arial',
-    fontSize: 12,
-    fontWeight: 'bold',
-    fill: 'white',
+  fontFamily: 'Arial',
+  fontSize: 12,
+  fontWeight: 'bold',
+  fill: 'white',
 });
 
 help.y = app.screen.height - 26;
 help.x = 10;
 app.stage.addChild(help);
 
-app.ticker.add(() =>
-{
-    bg.rotation += 0.01;
-    bgFront.rotation -= 0.01;
+app.ticker.add(() => {
+  bg.rotation += 0.01;
+  bgFront.rotation -= 0.01;
 
-    light1.rotation += 0.02;
-    light2.rotation += 0.01;
+  light1.rotation += 0.02;
+  light2.rotation += 0.01;
 
-    panda.scale.x = 1 + Math.sin(count) * 0.04;
-    panda.scale.y = 1 + Math.cos(count) * 0.04;
+  panda.scale.x = 1 + Math.sin(count) * 0.04;
+  panda.scale.y = 1 + Math.cos(count) * 0.04;
 
-    count += 0.1;
+  count += 0.1;
 
-    thing.clear();
+  thing.clear();
 
-    thing.beginFill(0x8bc5ff, 0.4);
-    thing.moveTo(-120 + Math.sin(count) * 20, -100 + Math.cos(count) * 20);
-    thing.lineTo(120 + Math.cos(count) * 20, -100 + Math.sin(count) * 20);
-    thing.lineTo(120 + Math.sin(count) * 20, 100 + Math.cos(count) * 20);
-    thing.lineTo(-120 + Math.cos(count) * 20, 100 + Math.sin(count) * 20);
-    thing.rotation = count * 0.1;
+  thing.beginFill(0x8bc5ff, 0.4);
+  thing.moveTo(-120 + Math.sin(count) * 20, -100 + Math.cos(count) * 20);
+  thing.lineTo(120 + Math.cos(count) * 20, -100 + Math.sin(count) * 20);
+  thing.lineTo(120 + Math.sin(count) * 20, 100 + Math.cos(count) * 20);
+  thing.lineTo(-120 + Math.cos(count) * 20, 100 + Math.sin(count) * 20);
+  thing.rotation = count * 0.1;
 });

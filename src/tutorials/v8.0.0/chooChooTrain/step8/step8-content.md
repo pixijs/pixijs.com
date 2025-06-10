@@ -23,23 +23,23 @@ const connectorGap = 10;
 const connectorOffsetY = 20;
 
 const graphics = new Graphics()
-    // Draw the body
-    .roundRect(edgeExcess / 2, -containerHeight, containerWidth, containerHeight, containerRadius)
-    .fill({ color: 0x725f19 })
+  // Draw the body
+  .roundRect(edgeExcess / 2, -containerHeight, containerWidth, containerHeight, containerRadius)
+  .fill({ color: 0x725f19 })
 
-    // Draw the top edge
-    .rect(0, containerRadius - containerHeight - edgeHeight, containerWidth + edgeExcess, edgeHeight)
-    .fill({ color: 0x52431c })
+  // Draw the top edge
+  .rect(0, containerRadius - containerHeight - edgeHeight, containerWidth + edgeExcess, edgeHeight)
+  .fill({ color: 0x52431c })
 
-    // Draw the connectors
-    .rect(containerWidth + edgeExcess / 2, -connectorOffsetY - connectorHeight, connectorWidth, connectorHeight)
-    .rect(
-        containerWidth + edgeExcess / 2,
-        -connectorOffsetY - connectorHeight * 2 - connectorGap,
-        connectorWidth,
-        connectorHeight,
-    )
-    .fill({ color: 0x121212 });
+  // Draw the connectors
+  .rect(containerWidth + edgeExcess / 2, -connectorOffsetY - connectorHeight, connectorWidth, connectorHeight)
+  .rect(
+    containerWidth + edgeExcess / 2,
+    -connectorOffsetY - connectorHeight * 2 - connectorGap,
+    connectorWidth,
+    connectorHeight,
+  )
+  .fill({ color: 0x121212 });
 
 const wheelRadius = 35;
 const wheelGap = 40;
@@ -55,12 +55,11 @@ frontWheel.y = backWheel.y = 25;
 
 container.addChild(graphics, backWheel, frontWheel);
 
-app.ticker.add((time) =>
-{
-    const dr = time.deltaTime * 0.15;
+app.ticker.add((time) => {
+  const dr = time.deltaTime * 0.15;
 
-    backWheel.rotation += dr;
-    frontWheel.rotation += dr;
+  backWheel.rotation += dr;
+  frontWheel.rotation += dr;
 });
 
 return container;
@@ -91,12 +90,11 @@ const speed = 0.5;
 
 trainContainer.y = baseY;
 
-app.ticker.add((time) =>
-{
-    elapsed += time.deltaTime;
-    const offset = (Math.sin(elapsed * 0.5 * speed) * 0.5 + 0.5) * shakeDistance;
+app.ticker.add((time) => {
+  elapsed += time.deltaTime;
+  const offset = (Math.sin(elapsed * 0.5 * speed) * 0.5 + 0.5) * shakeDistance;
 
-    trainContainer.y = baseY + offset;
+  trainContainer.y = baseY + offset;
 });
 ```
 

@@ -7,29 +7,30 @@ import TestimonialCarousel from './TestimonialCarousel';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 
-export default function Homepage(): JSX.Element
-{
-    const { siteConfig } = useDocusaurusContext();
+import type React from 'react';
 
-    return (
-        <Layout
-            title={`${siteConfig.title} | The HTML5 Creation Engine`}
-            description={
-                'PixiJS - The HTML5 Creation Engine. '
-                + 'Create beautiful digital content with the fastest, '
-                + 'most flexible 2D WebGL renderer.'
-            }
-        >
-            <main>
-                <div className="text--center">
-                    <HeroHeader />
-                    <TestimonialCarousel />
-                    <KeyOfferings />
-                    <FeatureList />
-                    <ClosingSection />
-                    <OpenCollective />
-                </div>
-            </main>
-        </Layout>
-    );
+export default function Homepage(): React.JSX.Element {
+  const { siteConfig } = useDocusaurusContext();
+
+  return (
+    <Layout
+      title={`${siteConfig.title} | The HTML5 Creation Engine`}
+      description={
+        'PixiJS - The HTML5 Creation Engine. ' +
+        'Create beautiful digital content with the fastest, ' +
+        'most flexible 2D WebGL renderer.'
+      }
+    >
+      <main>
+        <div className="text--center">
+          <HeroHeader />
+          <TestimonialCarousel />
+          <KeyOfferings />
+          <FeatureList />
+          <ClosingSection />
+          <OpenCollective />
+        </div>
+      </main>
+    </Layout>
+  );
 }

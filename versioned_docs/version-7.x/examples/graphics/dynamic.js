@@ -65,34 +65,32 @@ let count = 0;
 
 // Just click on the stage to draw random lines
 window.app = app;
-app.stage.on('pointerdown', () =>
-{
-    graphics.lineStyle(Math.random() * 30, Math.random() * 0xffffff, 1);
-    graphics.moveTo(Math.random() * 800, Math.random() * 600);
-    graphics.bezierCurveTo(
-        Math.random() * 800,
-        Math.random() * 600,
-        Math.random() * 800,
-        Math.random() * 600,
-        Math.random() * 800,
-        Math.random() * 600,
-    );
+app.stage.on('pointerdown', () => {
+  graphics.lineStyle(Math.random() * 30, Math.random() * 0xffffff, 1);
+  graphics.moveTo(Math.random() * 800, Math.random() * 600);
+  graphics.bezierCurveTo(
+    Math.random() * 800,
+    Math.random() * 600,
+    Math.random() * 800,
+    Math.random() * 600,
+    Math.random() * 800,
+    Math.random() * 600,
+  );
 });
 
-app.ticker.add(() =>
-{
-    count += 0.1;
+app.ticker.add(() => {
+  count += 0.1;
 
-    thing.clear();
-    thing.lineStyle(10, 0xff0000, 1);
-    thing.beginFill(0xffff00, 0.5);
+  thing.clear();
+  thing.lineStyle(10, 0xff0000, 1);
+  thing.beginFill(0xffff00, 0.5);
 
-    thing.moveTo(-120 + Math.sin(count) * 20, -100 + Math.cos(count) * 20);
-    thing.lineTo(120 + Math.cos(count) * 20, -100 + Math.sin(count) * 20);
-    thing.lineTo(120 + Math.sin(count) * 20, 100 + Math.cos(count) * 20);
-    thing.lineTo(-120 + Math.cos(count) * 20, 100 + Math.sin(count) * 20);
-    thing.lineTo(-120 + Math.sin(count) * 20, -100 + Math.cos(count) * 20);
-    thing.closePath();
+  thing.moveTo(-120 + Math.sin(count) * 20, -100 + Math.cos(count) * 20);
+  thing.lineTo(120 + Math.cos(count) * 20, -100 + Math.sin(count) * 20);
+  thing.lineTo(120 + Math.sin(count) * 20, 100 + Math.cos(count) * 20);
+  thing.lineTo(-120 + Math.cos(count) * 20, 100 + Math.sin(count) * 20);
+  thing.lineTo(-120 + Math.sin(count) * 20, -100 + Math.cos(count) * 20);
+  thing.closePath();
 
-    thing.rotation = count * 0.1;
+  thing.rotation = count * 0.1;
 });

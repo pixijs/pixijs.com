@@ -6,8 +6,8 @@ import '@pixi/graphics-extras';
 // world onto the canvas.
 
 const app = new PIXI.Application({
-    antialias: true,
-    background: '#1099bb',
+  antialias: true,
+  background: '#1099bb',
 });
 
 document.body.appendChild(app.view);
@@ -19,104 +19,93 @@ document.body.appendChild(app.view);
 //
 // To solve this, we nest our own EventBoundary, and connect it using
 // addEventListener!
-class Projector extends PIXI.DisplayObject
-{
-    constructor()
-    {
-        super();
+class Projector extends PIXI.DisplayObject {
+  constructor() {
+    super();
 
-        // The content root to be rendered by this camera.
-        this.content = new PIXI.Container();
+    // The content root to be rendered by this camera.
+    this.content = new PIXI.Container();
 
-        // Temporary matrix to store the original projection transform.
-        this.originalTransform = new PIXI.Matrix();
+    // Temporary matrix to store the original projection transform.
+    this.originalTransform = new PIXI.Matrix();
 
-        // The event boundary that'll map events downstream into the content
-        // scene.
-        this.boundary = new PIXI.EventBoundary(this.content);
+    // The event boundary that'll map events downstream into the content
+    // scene.
+    this.boundary = new PIXI.EventBoundary(this.content);
 
-        // Override copyMouseData to apply inverse worldTransform on
-        // global coords
-        this.boundary.copyMouseData = (from, to) =>
-        {
-            // Apply default implementation first
-            PIXI.EventBoundary.prototype.copyMouseData.call(this.boundary, from, to);
+    // Override copyMouseData to apply inverse worldTransform on
+    // global coords
+    this.boundary.copyMouseData = (from, to) => {
+      // Apply default implementation first
+      PIXI.EventBoundary.prototype.copyMouseData.call(this.boundary, from, to);
 
-            // Then bring global coords into content's world
-            this.worldTransform.applyInverse(to.global, to.global);
-        };
+      // Then bring global coords into content's world
+      this.worldTransform.applyInverse(to.global, to.global);
+    };
 
-        // Propagate these events down into the content's scene graph!
-        ['pointerdown', 'pointerup', 'pointermove', 'pointerover', 'pointerout', 'wheel'].forEach((event) =>
-        {
-            this.addEventListener(event, (e) => this.boundary.mapEvent(e));
-        });
+    // Propagate these events down into the content's scene graph!
+    ['pointerdown', 'pointerup', 'pointermove', 'pointerover', 'pointerout', 'wheel'].forEach((event) => {
+      this.addEventListener(event, (e) => this.boundary.mapEvent(e));
+    });
 
-        this.eventMode = 'static';
-    }
+    this.eventMode = 'static';
+  }
 
-    // Pass through cursor
-    get cursor()
-    {
-        return this.boundary.cursor;
-    }
+  // Pass through cursor
+  get cursor() {
+    return this.boundary.cursor;
+  }
 
-    // eslint-disable-next-line class-methods-use-this
-    set cursor(value)
-    {
-        throw new Error('The camera\'s cursor is derived from its content!');
-    }
+  set cursor(value) {
+    throw new Error("The camera's cursor is derived from its content!");
+  }
 
-    // Pass through calculateBounds
-    calculateBounds()
-    {
-        const contentBounds = this.content.getBounds();
+  // Pass through calculateBounds
+  calculateBounds() {
+    const contentBounds = this.content.getBounds();
 
-        this._bounds.addFrameMatrix(
-            this.worldTransform,
-            contentBounds.x,
-            contentBounds.y,
-            contentBounds.width,
-            contentBounds.height,
-        );
-    }
+    this._bounds.addFrameMatrix(
+      this.worldTransform,
+      contentBounds.x,
+      contentBounds.y,
+      contentBounds.width,
+      contentBounds.height,
+    );
+  }
 
-    // Pass through containsPoint
-    containsPoint(point)
-    {
-        return !!this.boundary.hitTest(point.x, point.y);
-    }
+  // Pass through containsPoint
+  containsPoint(point) {
+    return !!this.boundary.hitTest(point.x, point.y);
+  }
 
-    // Render content with projection
-    render(renderer)
-    {
-        renderer.batch.flush();
+  // Render content with projection
+  render(renderer) {
+    renderer.batch.flush();
 
-        const projectionSystem = renderer.projection;
-        const renderTextureSystem = renderer.renderTexture;
+    const projectionSystem = renderer.projection;
+    const renderTextureSystem = renderer.renderTexture;
 
-        projectionSystem.transform = projectionSystem.transform || new PIXI.Matrix();
-        projectionSystem.transform.copyTo(this.originalTransform);
-        projectionSystem.transform.append(this.worldTransform);
-        projectionSystem.update(null, null, 1, !renderTextureSystem.current);
+    projectionSystem.transform = projectionSystem.transform || new PIXI.Matrix();
+    projectionSystem.transform.copyTo(this.originalTransform);
+    projectionSystem.transform.append(this.worldTransform);
+    projectionSystem.update(null, null, 1, !renderTextureSystem.current);
 
-        this.content.render(renderer);
+    this.content.render(renderer);
 
-        renderer.batch.flush();
+    renderer.batch.flush();
 
-        projectionSystem.transform.copyFrom(this.originalTransform);
-        projectionSystem.update(null, null, 1, !renderTextureSystem.current);
-    }
+    projectionSystem.transform.copyFrom(this.originalTransform);
+    projectionSystem.update(null, null, 1, !renderTextureSystem.current);
+  }
 
-    // updateTransform also updates content's transform
-    updateTransform()
-    {
-        super.updateTransform();
+  // updateTransform also updates content's transform
+  updateTransform() {
+    super.updateTransform();
 
-        this.content.enableTempParent();
-        this.content.updateTransform();
-        this.content.disableTempParent(null);
-    }
+    this.content.enableTempParent();
+    this.content.updateTransform();
+    this.content.disableTempParent(null);
+  }
 }
 
 // The projector
@@ -124,12 +113,12 @@ const projector = app.stage.addChild(new Projector());
 
 // Add coordinate axes!
 projector.content.addChild(
-    new PIXI.Graphics()
-        .lineStyle({ color: 0, alpha: 0.2, width: 2 })
-        .moveTo(0, -300)
-        .lineTo(0, 600)
-        .moveTo(-100, 0)
-        .lineTo(700, 0),
+  new PIXI.Graphics()
+    .lineStyle({ color: 0, alpha: 0.2, width: 2 })
+    .moveTo(0, -300)
+    .lineTo(0, 600)
+    .moveTo(-100, 0)
+    .lineTo(700, 0),
 );
 
 // Construct the star Graphics
@@ -153,50 +142,44 @@ projector.hitArea = projector.content.hitArea;
 projector.content.eventMode = 'static';
 
 // Make stars interactive & add wheel handlers
-stars.forEach((star) =>
-{
-    // Make star interactive
-    star.eventMode = 'static';
+stars.forEach((star) => {
+  // Make star interactive
+  star.eventMode = 'static';
 
-    // Set initial cursor
-    star.cursor = 'zoom-in';
+  // Set initial cursor
+  star.cursor = 'zoom-in';
 
-    // Add wheel rotation feedback
-    star.addEventListener('wheel', (e) =>
-    {
-        const scroll = Math.sign(e.deltaY) * Math.min(15, Math.abs(e.deltaY));
+  // Add wheel rotation feedback
+  star.addEventListener('wheel', (e) => {
+    const scroll = Math.sign(e.deltaY) * Math.min(15, Math.abs(e.deltaY));
 
-        star.rotation += scroll / 100;
-    });
+    star.rotation += scroll / 100;
+  });
 
-    // Add click zoom-in/zoom-out handler
-    star.addEventListener('click', (e) =>
-    {
-        if (star.scale.x === 1)
-        {
-            star.scale.set(1.33);
-            star.cursor = 'zoom-out';
-        }
-        else
-        {
-            star.scale.set(1);
-            star.cursor = 'zoom-in';
-        }
-    });
+  // Add click zoom-in/zoom-out handler
+  star.addEventListener('click', () => {
+    if (star.scale.x === 1) {
+      star.scale.set(1.33);
+      star.cursor = 'zoom-out';
+    } else {
+      star.scale.set(1);
+      star.cursor = 'zoom-in';
+    }
+  });
 });
 
 PIXI.BitmapFont.from(
-    'coordinates',
-    {
-        fontFamily: 'Roboto',
-        fontSize: 16,
-        fill: '#272d37',
-    },
-    { chars: ['Global:() Screen-.,', ['0', '9']] },
+  'coordinates',
+  {
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    fill: '#272d37',
+  },
+  { chars: ['Global:() Screen-.,', ['0', '9']] },
 );
 
 const coordinates = new PIXI.BitmapText('Global: (0, 0)\nScreen: (0, 0)', {
-    fontName: 'coordinates',
+  fontName: 'coordinates',
 });
 
 coordinates.x = 110;
@@ -204,23 +187,22 @@ coordinates.y = 550;
 
 app.stage.addChild(coordinates);
 
-projector.content.addEventListener('pointermove', (e) =>
-{
-    const global = `(${e.global.x | 0}, ${e.global.y | 0})`;
-    const screen = `(${e.screen.x | 0}, ${e.screen.y | 0})`;
+projector.content.addEventListener('pointermove', (e) => {
+  const global = `(${e.global.x | 0}, ${e.global.y | 0})`;
+  const screen = `(${e.screen.x | 0}, ${e.screen.y | 0})`;
 
-    coordinates.text = `Global: ${global}\nScreen: ${screen}`;
+  coordinates.text = `Global: ${global}\nScreen: ${screen}`;
 });
 
 const description = new PIXI.Text(
-    'The (0, 0) world coordinates for the content is located at the center of the first star!'
-        + '\n  * Mouse wheel over stars to rotate them'
-        + '\n  * Click to zoom in or out',
-    {
-        fontSize: 16,
-        fontFamily: 'Roboto',
-        fill: '#272d37',
-    },
+  'The (0, 0) world coordinates for the content is located at the center of the first star!' +
+    '\n  * Mouse wheel over stars to rotate them' +
+    '\n  * Click to zoom in or out',
+  {
+    fontSize: 16,
+    fontFamily: 'Roboto',
+    fill: '#272d37',
+  },
 );
 
 description.position.set(110, 12);

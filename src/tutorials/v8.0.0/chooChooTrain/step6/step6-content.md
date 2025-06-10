@@ -12,9 +12,7 @@ For this, we can simply draw a long rectangle strip across the screen and fill i
 const width = app.screen.width;
 const groundHeight = 20;
 const groundY = app.screen.height;
-const ground = new Graphics()
-    .rect(0, groundY - groundHeight, width, groundHeight)
-    .fill({ color: 0xdddddd });
+const ground = new Graphics().rect(0, groundY - groundHeight, width, groundHeight).fill({ color: 0xdddddd });
 
 app.stage.addChild(ground);
 ```
@@ -32,34 +30,28 @@ const plankCount = width / (plankWidth + plankGap) + 1;
 const plankY = groundY - groundHeight;
 const planks = [];
 
-for (let index = 0; index < plankCount; index++)
-{
-    const plank = new Graphics()
-        .rect(0, plankY - plankHeight, plankWidth, plankHeight)
-        .fill({ color: 0x241811 });
+for (let index = 0; index < plankCount; index++) {
+  const plank = new Graphics().rect(0, plankY - plankHeight, plankWidth, plankHeight).fill({ color: 0x241811 });
 
-    plank.x = index * (plankWidth + plankGap);
-    app.stage.addChild(plank);
-    planks.push(plank);
+  plank.x = index * (plankWidth + plankGap);
+  app.stage.addChild(plank);
+  planks.push(plank);
 }
 ```
 
 Then add the animation to the planks in the similar manner to the trees animation. Again, making the rate of change (`dx`) even faster than the trees to simulate the track being closer to the camera, and hence travel faster across the screen (Parallax Effect).
 
 ```javascript
-app.ticker.add((time) =>
-{
-    const dx = time.deltaTime * 6;
+app.ticker.add((time) => {
+  const dx = time.deltaTime * 6;
 
-    planks.forEach((plank) =>
-    {
-        plank.x -= dx;
+  planks.forEach((plank) => {
+    plank.x -= dx;
 
-        if (plank.x <= -(plankWidth + plankGap))
-        {
-            plank.x += plankCount * (plankWidth + plankGap) + plankGap * 1.5;
-        }
-    });
+    if (plank.x <= -(plankWidth + plankGap)) {
+      plank.x += plankCount * (plankWidth + plankGap) + plankGap * 1.5;
+    }
+  });
 });
 ```
 
@@ -70,9 +62,7 @@ For the metal rail for the train's wheels to go onto, it will be another simple 
 ```javascript
 const railHeight = trackHeight / 2;
 const railY = plankY - plankHeight;
-const rail = new Graphics()
-    .rect(0, railY - railHeight, width, railHeight)
-    .fill({ color: 0x5c5c5c });
+const rail = new Graphics().rect(0, railY - railHeight, width, railHeight).fill({ color: 0x5c5c5c });
 
 app.stage.addChild(rail);
 ```

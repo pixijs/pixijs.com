@@ -1,8 +1,8 @@
 import * as PIXI from 'pixi.js';
 
 const app = new PIXI.Application({
-    antialias: true,
-    background: '#1099bb',
+  antialias: true,
+  background: '#1099bb',
 });
 
 document.body.appendChild(app.view);
@@ -44,10 +44,10 @@ bunny.y = stageHeight / 2;
 
 // Add title
 const title = new PIXI.Text('Drag the handle to change the scale of bunny.', {
-    fill: '#272d37',
-    fontFamily: 'Roboto',
-    fontSize: 20,
-    align: 'center',
+  fill: '#272d37',
+  fontFamily: 'Roboto',
+  fontSize: 20,
+  align: 'center',
 });
 
 title.roundPixels = true;
@@ -57,28 +57,25 @@ title.anchor.set(0.5, 0);
 app.stage.addChild(title);
 
 // Listen to pointermove on stage once handle is pressed.
-function onDragStart()
-{
-    app.stage.eventMode = 'static';
-    app.stage.addEventListener('pointermove', onDrag);
+function onDragStart() {
+  app.stage.eventMode = 'static';
+  app.stage.addEventListener('pointermove', onDrag);
 }
 
 // Stop dragging feedback once the handle is released.
-function onDragEnd(e)
-{
-    app.stage.eventMode = 'auto';
-    app.stage.removeEventListener('pointermove', onDrag);
+function onDragEnd() {
+  app.stage.eventMode = 'auto';
+  app.stage.removeEventListener('pointermove', onDrag);
 }
 
 // Update the handle's position & bunny's scale when the handle is moved.
-function onDrag(e)
-{
-    const halfHandleWidth = handle.width / 2;
-    // Set handle y-position to match pointer, clamped to (4, screen.height - 4).
+function onDrag(e) {
+  const halfHandleWidth = handle.width / 2;
+  // Set handle y-position to match pointer, clamped to (4, screen.height - 4).
 
-    handle.x = Math.max(halfHandleWidth, Math.min(slider.toLocal(e.global).x, sliderWidth - halfHandleWidth));
-    // Normalize handle position between -1 and 1.
-    const t = 2 * (handle.x / sliderWidth - 0.5);
+  handle.x = Math.max(halfHandleWidth, Math.min(slider.toLocal(e.global).x, sliderWidth - halfHandleWidth));
+  // Normalize handle position between -1 and 1.
+  const t = 2 * (handle.x / sliderWidth - 0.5);
 
-    bunny.scale.set(3 * (1.1 + t));
+  bunny.scale.set(3 * (1.1 + t));
 }
