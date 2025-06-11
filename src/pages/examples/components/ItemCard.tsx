@@ -14,148 +14,145 @@ interface ItemCardProps {
   onClick?: () => void;
 }
 
-const ItemCard: React.FC<ItemCardProps> = ({ item, searchTerm, showGif, compact = false, hideImages = false, onClick }) =>
-{
-    const [imageLoading, setImageLoading] = useState(true);
-    const [imageError, setImageError] = useState(false);
-    const [gifError, setGifError] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
-    const [tooltipVisible, setTooltipVisible] = useState(false);
-    const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-    const cardRef = useRef<HTMLDivElement>(null);
-    const tooltipTimeoutRef = useRef<NodeJS.Timeout>();
+const ItemCard: React.FC<ItemCardProps> = ({
+  item,
+  searchTerm,
+  showGif,
+  compact = false,
+  hideImages = false,
+  onClick,
+}) => {
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+  const [gifError, setGifError] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+  const tooltipTimeoutRef = useRef<NodeJS.Timeout>(null);
 
-    const handleImageLoad = () =>
-    {
-        setImageLoading(false);
-    };
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
 
-    const handleImageError = () =>
-    {
-        setImageLoading(false);
-        setImageError(true);
-    };
+  const handleImageError = () => {
+    setImageLoading(false);
+    setImageError(true);
+  };
 
-    const handleGifError = () =>
-    {
-        setGifError(true);
-    };
+  const handleGifError = () => {
+    setGifError(true);
+  };
 
-    const handleMouseEnter = () =>
-    {
-        setIsHovered(true);
-        // Reset GIF error state when hovering again
-        setGifError(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    // Reset GIF error state when hovering again
+    setGifError(false);
 
-        // Clear any existing timeout
-        if (tooltipTimeoutRef.current)
-        {
-            clearTimeout(tooltipTimeoutRef.current);
-        }
+    // Clear any existing timeout
+    if (tooltipTimeoutRef.current) {
+      clearTimeout(tooltipTimeoutRef.current);
+    }
 
-        // Show tooltip after a short delay
-        tooltipTimeoutRef.current = setTimeout(() =>
-        {
-            if (cardRef.current)
-            {
-                const rect = cardRef.current.getBoundingClientRect();
+    // Show tooltip after a short delay
+    tooltipTimeoutRef.current = setTimeout(() => {
+      if (cardRef.current) {
+        const rect = cardRef.current.getBoundingClientRect();
 
-                setTooltipPosition({
-                    x: rect.right + 16,
-                    y: rect.top,
-                });
-                setTooltipVisible(true);
-            }
-        }, 300);
-    };
+        setTooltipPosition({
+          x: rect.right + 16,
+          y: rect.top,
+        });
+        setTooltipVisible(true);
+      }
+    }, 300);
+  };
 
-    const handleMouseLeave = () =>
-    {
-        setIsHovered(false);
+  const handleMouseLeave = () => {
+    setIsHovered(false);
 
-        // Clear timeout and hide tooltip
-        if (tooltipTimeoutRef.current)
-        {
-            clearTimeout(tooltipTimeoutRef.current);
-        }
-        setTooltipVisible(false);
-    };
+    // Clear timeout and hide tooltip
+    if (tooltipTimeoutRef.current) {
+      clearTimeout(tooltipTimeoutRef.current);
+    }
+    setTooltipVisible(false);
+  };
 
-    // Clean up timeout on unmount
-    useEffect(() =>
-        () =>
-        {
-            if (tooltipTimeoutRef.current)
-            {
-                clearTimeout(tooltipTimeoutRef.current);
-            }
-        }, []);
+  // Clean up timeout on unmount
+  useEffect(
+    () => () => {
+      if (tooltipTimeoutRef.current) {
+        clearTimeout(tooltipTimeoutRef.current);
+      }
+    },
+    [],
+  );
 
-    // Show GIF only when hovering, GIF toggle is enabled, and GIF hasn't failed
-    const shouldShowGif = showGif && isHovered && !gifError;
-    const url = `/examples/previews/${item.name}`;
-    const imageUrl = shouldShowGif ? `${url}.gif` : `${url}.png`;
-    const titleParts = item.name.split('_');
-    const category = titleParts.shift();
-    const title = titleParts.map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' / ');
+  // Show GIF only when hovering, GIF toggle is enabled, and GIF hasn't failed
+  const shouldShowGif = showGif && isHovered && !gifError;
+  const url = `/examples/previews/${item.name}`;
+  const imageUrl = shouldShowGif ? `${url}.gif` : `${url}.png`;
+  const titleParts = item.name.split('_');
+  const category = titleParts.shift();
+  const title = titleParts.map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' / ');
 
-    return (
-        <div
-            ref={cardRef}
-            className={`${styles['item-card']} ${compact ? styles['item-card--compact'] : ''} ${hideImages ? styles['item-card--no-image'] : ''}`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onClick={onClick}
-        >
-            {!hideImages && (
-                <div className={styles['item-card__image-container']}>
-                    {imageLoading && (
-                        <div className={styles['item-card__skeleton']}>
-                            <div className={styles['skeleton-pulse']}></div>
-                        </div>
-                    )}
-                    {!imageError ? (
-                        <img
-                            src={imageUrl}
-                            alt={item.name}
-                            className={`${styles['item-card__image']} ${imageLoading ? styles['item-card__image--loading'] : ''}`}
-                            onLoad={handleImageLoad}
-                            onError={shouldShowGif ? handleGifError : handleImageError}
-                            loading="lazy"
-                        />
-                    ) : (
-                        <div className={styles['item-card__placeholder']}>
-                            <span>No image</span>
-                        </div>
-                    )}
-                    {shouldShowGif && <div className={styles['item-card__gif-indicator']}>PREVIEW</div>}
-                </div>
-            )}
-            <div className={styles['item-card__content']}>
-                <h3 className={styles['item-card__category']}>{category}</h3>
-                <h3 className={styles['item-card__title']}>{highlightText(title, searchTerm)}</h3>
+  return (
+    <div
+      ref={cardRef}
+      className={`${styles['item-card']} ${compact ? styles['item-card--compact'] : ''} ${hideImages ? styles['item-card--no-image'] : ''}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+    >
+      {!hideImages && (
+        <div className={styles['item-card__image-container']}>
+          {imageLoading && (
+            <div className={styles['item-card__skeleton']}>
+              <div className={styles['skeleton-pulse']}></div>
             </div>
-            {/* Tooltip */}
-            {tooltipVisible && (
-                <div
-                    className={styles['item-card__tooltip']}
-                    style={{
-                        position: 'fixed',
-                        left: `${tooltipPosition.x}px`,
-                        top: `${tooltipPosition.y}px`,
-                        transform: 'translateY(-50%)',
-                        zIndex: 9999,
-                    }}
-                >
-                    <div className={styles['item-card__tooltip-content']}>
-                        <h4 className={styles['item-card__tooltip-title']}>{title}</h4>
-                        <div className={`${styles['item-card__tooltip-description']} .thin-scrollbar`}>{item.description}</div>
-                        <span className={styles['item-card__tooltip-category']}>{category}</span>
-                    </div>
-                </div>
-            )}
+          )}
+          {!imageError ? (
+            <img
+              src={imageUrl}
+              alt={item.name}
+              className={`${styles['item-card__image']} ${imageLoading ? styles['item-card__image--loading'] : ''}`}
+              onLoad={handleImageLoad}
+              onError={shouldShowGif ? handleGifError : handleImageError}
+              loading="lazy"
+            />
+          ) : (
+            <div className={styles['item-card__placeholder']}>
+              <span>No image</span>
+            </div>
+          )}
+          {shouldShowGif && <div className={styles['item-card__gif-indicator']}>PREVIEW</div>}
         </div>
-    );
+      )}
+      <div className={styles['item-card__content']}>
+        <h3 className={styles['item-card__category']}>{category}</h3>
+        <h3 className={styles['item-card__title']}>{highlightText(title, searchTerm)}</h3>
+      </div>
+      {/* Tooltip */}
+      {tooltipVisible && (
+        <div
+          className={styles['item-card__tooltip']}
+          style={{
+            position: 'fixed',
+            left: `${tooltipPosition.x}px`,
+            top: `${tooltipPosition.y}px`,
+            transform: 'translateY(-50%)',
+            zIndex: 9999,
+          }}
+        >
+          <div className={styles['item-card__tooltip-content']}>
+            <h4 className={styles['item-card__tooltip-title']}>{title}</h4>
+            <div className={`${styles['item-card__tooltip-description']} .thin-scrollbar`}>{item.description}</div>
+            <span className={styles['item-card__tooltip-category']}>{category}</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default ItemCard;
