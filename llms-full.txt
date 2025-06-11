@@ -866,7 +866,7 @@ export class Fish extends Container {
 import { Container, Graphics, Text } from 'pixi.js';
 
 export class CharacterUI extends Container {
-  constructor(name, age) {
+  constructor(name) {
     super();
 
     const label = new Text({
@@ -1089,7 +1089,8 @@ import { Application, Assets, Container, Sprite } from 'pixi.js';
 })();
 ```
 
-The cumulative translation, rotation, scale and skew of any given node in the scene graph is stored in the object's `worldTransform` property. Similarly, the cumulative alpha value is stored in the `worldAlpha` property.
+The cumulative translation, rotation, scale and skew of any given node in the scene graph is stored in the object's
+`worldTransform` property. Similarly, the cumulative alpha value is stored in the `worldAlpha` property.
 
 ## Render Order
 
@@ -2882,7 +2883,9 @@ Another optimization is that `ParticleContainer` does not calculate its own boun
 ```ts
 const container = new ParticleContainer();
 
-for (let i = 0; i {sprite.onViewUpdate});
+for (let i = 0; i  {
+  sprite.onViewUpdate;
+});
 ```
 
 The act of adding and removing the event when a sprite's texture was changed led to an unacceptable performance drop, especially when swapping many textures (imagine shooting games with lots of keyframe textures swapping). This is why we now leave that responsibility to the user.
@@ -4283,7 +4286,7 @@ const mySprite = new Sprite(svgTexture);
 ```
 
 ```ts
-import { Application, Assets, Graphics } from 'pixi.js';
+import { Application, Graphics } from 'pixi.js';
 
 (async () => {
   // Create a new application
@@ -4354,7 +4357,7 @@ import { Application, Assets, Graphics } from 'pixi.js';
 
   app.stage.addChild(graphics);
 
-  app.ticker.add((time) => {
+  app.ticker.add(() => {
     graphics.rotation += 0.01;
     graphics.scale.set(2 + Math.sin(graphics.rotation));
   });
@@ -4362,7 +4365,7 @@ import { Application, Assets, Graphics } from 'pixi.js';
 ```
 
 ```ts
-import { Application, Assets, Graphics, Sprite } from 'pixi.js';
+import { Application, Assets, Sprite } from 'pixi.js';
 
 (async () => {
   // Create a new application
@@ -4392,7 +4395,7 @@ import { Application, Assets, Graphics, Sprite } from 'pixi.js';
 
   app.stage.addChild(sprite);
 
-  app.ticker.add((time) => {
+  app.ticker.add(() => {
     sprite.rotation += 0.01;
     sprite.scale.set(2 + Math.sin(sprite.rotation));
   });
@@ -4400,7 +4403,7 @@ import { Application, Assets, Graphics, Sprite } from 'pixi.js';
 ```
 
 ```ts
-import { Application, Assets, Graphics, Sprite } from 'pixi.js';
+import { Application, Assets, Sprite } from 'pixi.js';
 
 (async () => {
   // Create a new application
@@ -4433,7 +4436,7 @@ import { Application, Assets, Graphics, Sprite } from 'pixi.js';
 
   app.stage.addChild(sprite);
 
-  app.ticker.add((time) => {
+  app.ticker.add(() => {
     sprite.rotation += 0.01;
     sprite.scale.set(2 + Math.sin(sprite.rotation));
   });
