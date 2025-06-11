@@ -1,3 +1,4 @@
+// description: Example of using baked in filters on a Text object to create a cartoon-style text effect.
 import { Application, Assets, Text } from 'pixi.js';
 import { CartoonTextFilter } from './CartoonTextFilter';
 

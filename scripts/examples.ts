@@ -12,6 +12,7 @@ interface ExampleFile
 interface Example
 {
     name: string;
+    description: string;
     dependencies: Record<string, string>;
     files: ExampleFile[];
 }
@@ -35,6 +36,27 @@ async function getDependenciesFromFile(filePath: string): Promise<Record<string,
     }
 
     return {};
+}
+
+async function getDescriptionFromFile(filePath: string): Promise<string>
+{
+    try
+    {
+        const content = await fs.readFile(filePath, 'utf-8');
+        const descriptionMatch = content.match(/\/\/\s*description:\s*(.*)/);
+
+        if (descriptionMatch)
+        {
+            // Return the description after stripping leading/trailing whitespace
+            return descriptionMatch[1].trim();
+        }
+    }
+    catch (error)
+    {
+        console.warn(`Warning: Could not read description from ${filePath}`);
+    }
+
+    return '';
 }
 
 async function generateExampleConfig(basePath: string): Promise<Example[]>
@@ -66,10 +88,15 @@ async function generateExampleConfig(basePath: string): Promise<Example[]>
         = (await getDependenciesFromFile(path.join(fullPath, 'index.ts')))
         || (await getDependenciesFromFile(path.join(fullPath, 'index.js')))
         || {};
+            const description
+        = (await getDescriptionFromFile(path.join(fullPath, 'index.ts')))
+        || (await getDescriptionFromFile(path.join(fullPath, 'index.js')))
+        || '';
 
             examples.push({
                 name: entry,
                 dependencies,
+                description,
                 files: exampleFiles,
             });
         }
@@ -78,9 +105,11 @@ async function generateExampleConfig(basePath: string): Promise<Example[]>
             // Handle single file case
             const name = path.parse(entry).name;
             const dependencies = await getDependenciesFromFile(fullPath);
+            const description = await getDescriptionFromFile(fullPath);
 
             examples.push({
                 name,
+                description,
                 dependencies,
                 files: [
                     {
@@ -163,7 +192,12 @@ async function formatFile(filePath: string): Promise<void>
 
         // Extract dependencies comment if it exists
         const dependencyMatch = content.match(/^\/\/\s*dependencies:\s*({[^}]+})\n/);
-        const codeContent = dependencyMatch ? content.slice(dependencyMatch[0].length) : content;
+        let codeContent = dependencyMatch ? content.slice(dependencyMatch[0].length) : content;
+
+        // Extract description comment if it exists
+        const descriptionMatch = codeContent.match(/^\/\/\s*description:\s*(.*)\n/);
+
+        codeContent = descriptionMatch ? codeContent.slice(descriptionMatch[0].length) : codeContent;
 
         // Format the code content
         const formatted = await prettier.format(codeContent, {

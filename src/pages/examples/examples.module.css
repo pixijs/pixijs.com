@@ -453,3 +453,60 @@ input:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Tooltip styles */
+.item-card__tooltip {
+  pointer-events: none;
+  animation: tooltipFadeIn 0.2s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+.item-card__tooltip-content {
+  /* background: linear-gradient(135deg, #2a2a2b 0%, #3a3a3b 100%); */
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-table-border-color);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.4),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  min-width: 250px;
+}
+
+.item-card__tooltip-title {
+  color: var(--ifm-color-content);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.item-card__tooltip-description {
+  color: var(--ifm-color-content);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.item-card__tooltip-category {
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: rgba(233, 30, 99, 0.9);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+}

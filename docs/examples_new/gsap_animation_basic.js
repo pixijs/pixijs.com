@@ -1,4 +1,5 @@
 // dependencies: { "pixi.js": "latest", "gsap": "latest", "pixi-filters": "latest" }
+// description: This example demonstrates how to create a simple GSAP animation with PixiJS, featuring text elements that animate in a staggered fashion.
 import { gsap } from 'gsap';
 import { Application, Assets, Container, Graphics, Text } from 'pixi.js';
 import { DropShadowFilter } from 'pixi-filters';

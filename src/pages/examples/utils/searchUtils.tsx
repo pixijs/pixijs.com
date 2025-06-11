@@ -13,6 +13,7 @@ export function filterItems(items: Item[], searchTerm: string): Item[]
     return items.filter(
         (item) =>
             item.name.toLowerCase().includes(lowercaseSearch)
+      || item.description.toLowerCase().includes(lowercaseSearch)
       || JSON.stringify(item.dependencies).toLowerCase().includes(lowercaseSearch),
     );
 }

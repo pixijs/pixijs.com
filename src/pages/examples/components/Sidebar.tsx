@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         <div className={`${styles.sidebar__content}`}>
-            <div className={`${styles.sidebar__search}`}>
+            <div>
                 <SearchInput value={searchTerm} onChange={onSearchChange} placeholder="Search examples..." />
             </div>
 
