@@ -81,7 +81,3 @@ export class CartoonTextFilter extends Filter {
     uniforms.uThickness = value;
   }
 }
-
-function getAngleStep(quality) {
-  return parseFloat(((Math.PI * 2) / Math.max(quality * 100, 1)).toFixed(7));
-}

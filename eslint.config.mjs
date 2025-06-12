@@ -26,33 +26,12 @@ export default tseslint.config(
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: {
-        ...globals.browser,
-        ...globals.es2023,
-        ...globals.node,
-      },
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
+      globals: { ...globals.browser, ...globals.es2023, ...globals.node },
+      parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname },
     },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
+    settings: { react: { version: 'detect' } },
   },
-  {
-    plugins: { '@stylistic': stylistic },
-    rules: {
-      'prettier/prettier': [
-        'error',
-        {
-          usePrettierrc: true,
-        },
-      ],
-    },
-  },
+  { plugins: { '@stylistic': stylistic }, rules: { 'prettier/prettier': ['error', { usePrettierrc: true }] } },
   {
     files: ['**/*.js', '**/*.mjs', '**/*.jsx'],
     extends: [tseslint.configs.disableTypeChecked],
@@ -68,32 +47,18 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-expressions': [
         'error',
-        {
-          allowShortCircuit: true,
-          allowTernary: true,
-          allowTaggedTemplates: true,
-        },
+        { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true },
       ],
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          caughtErrorsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-        },
-      ],
+      '@typescript-eslint/no-unused-vars': ['error', { caughtErrorsIgnorePattern: '^_', ignoreRestSiblings: true }],
     },
   },
   // Disable some rules for specific files based on legacy code or examples
   {
     files: ['docs/examples/**/*/*.js', 'versioned_docs/version-7.x/examples/**/*/*.js'],
-    rules: {
-      '@typescript-eslint/no-this-alias': 'off',
-    },
+    rules: { '@typescript-eslint/no-this-alias': 'off' },
   },
   {
     files: ['src/tutorials/**/*/*.js', 'docs/guides/concepts/scene-graph-order.js'],
-    rules: {
-      '@typescript-eslint/no-unused-vars': 'off',
-    },
+    rules: { '@typescript-eslint/no-unused-vars': 'off' },
   },
 );
