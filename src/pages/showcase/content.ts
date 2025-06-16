@@ -33,4 +33,10 @@ export const showcaseItems: ShowcaseItem[] = [
     imageUrl: '/showcase/uix.webp',
     link: 'https://www.uix.me/',
   },
+  {
+    title: 'Kinda Hard Golf',
+    author: `James O'Halloran (Mighty Pebble Games)`,
+    imageUrl: '/showcase/kinda-hard-golf.webp',
+    link: 'https://kindahardgolf.com/',
+  },
 ];
