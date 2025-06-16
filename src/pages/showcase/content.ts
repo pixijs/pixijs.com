@@ -33,4 +33,11 @@ export const showcaseItems: ShowcaseItem[] = [
     imageUrl: '/showcase/uix.webp',
     link: 'https://www.uix.me/',
   },
+  {
+    title: 'Genshin/Sky Music',
+    author: 'Specy',
+    imageUrl: '/showcase/genshin-music.webp',
+    link: 'https://genshin-music.specy.app',
+    openSourceLink: 'https://github.com/Specy/genshin-music',
+  },
 ];
