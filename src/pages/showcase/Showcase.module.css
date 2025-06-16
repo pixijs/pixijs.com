@@ -340,11 +340,11 @@ html[data-theme='dark'] {
 }
 
 .panelDescription {
+  text-box: auto;
   font-size: 16px;
   line-height: 24px;
   color: rgb(207, 212, 219);
   flex: 1;
-  overflow-y: auto; /* Make description scrollable */
   padding-right: 8px; /* Add some space for scrollbar */
   max-height: 100%; /* Constrain to container height */
 }
