@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
-import { ArrowUpRight, Image as ImageIcon, AlertCircle, Search } from 'lucide-react';
+import { ArrowUpRight, Image as ImageIcon, AlertCircle, Search, Plus } from 'lucide-react';
 import Fuse from 'fuse.js';
 import type { IFuseOptions } from 'fuse.js';
 import styles from './Showcase.module.css';
@@ -184,6 +184,10 @@ const Showcase: React.FC<ShowcaseProps> = ({ title, subtitle, items, animationDe
     return fuse.search(searchTerm).map(({ item }) => item);
   }, [fuse, searchTerm, randomizedItems]);
 
+  const handleSubmitProject = useCallback(() => {
+    window.open('https://github.com/pixijs/pixijs.com/tree/main/.github/SHOWCASE.md', '_blank', 'noopener,noreferrer');
+  }, []);
+
   return (
     <section ref={showcaseRef} className={`${styles.showcase} ${className}`} aria-labelledby="showcase-title">
       <div className={styles.container}>
@@ -196,7 +200,28 @@ const Showcase: React.FC<ShowcaseProps> = ({ title, subtitle, items, animationDe
 
         {/* Search and Filter Controls */}
         <div className={styles.controls}>
-          <div className={styles.searchContainer}>
+          <div className={styles.searchAndSubmit}>
+            <div className={styles.searchContainer}>
+              <Search className={styles.searchIcon} size={20} />
+              <input
+                type="text"
+                placeholder="Search projects..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={styles.searchInput}
+              />
+            </div>
+
+            <button
+              onClick={handleSubmitProject}
+              className={styles.submitButton}
+              aria-label="Submit your project to the showcase"
+            >
+              <Plus size={18} />
+              Submit Project
+            </button>
+          </div>
+          {/* <div className={styles.searchContainer}>
             <Search className={styles.searchIcon} size={20} />
             <input
               type="text"
@@ -205,7 +230,7 @@ const Showcase: React.FC<ShowcaseProps> = ({ title, subtitle, items, animationDe
               onChange={(e) => setSearchTerm(e.target.value)}
               className={styles.searchInput}
             />
-          </div>
+          </div> */}
         </div>
 
         <div className={styles.grid} role="grid" aria-label="Showcase items">
