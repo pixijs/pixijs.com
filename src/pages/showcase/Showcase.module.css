@@ -316,7 +316,14 @@ html[data-theme='dark'] {
   color: white;
   border: 1px solid rgba(233, 30, 99, 0.3);
 }
-
+.sponsoredBadge:hover {
+  background: rgba(233, 30, 99, 0.9);
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+}
+.openSourceBadge:hover {
+  background: rgba(34, 197, 94, 0.9);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+}
 .openSourceBadge {
   background: rgba(34, 197, 94, 1);
   color: white;

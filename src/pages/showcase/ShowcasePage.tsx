@@ -9,10 +9,10 @@ export interface ShowcaseItem {
   title: string;
   author: string;
   imageUrl: string;
-  link?: string;
+  link: string;
   alt?: string;
-  isSponsored?: boolean;
-  isOpenSource?: boolean;
+  openSourceLink?: string;
+  sponsoredLink?: string;
 }
 
 export interface ShowcaseProps {
@@ -83,10 +83,18 @@ const Panel: React.FC<PanelProps> = ({ item, index, animationDelay }) => {
     [handleClick],
   );
 
+  const handleBadgeClick = useCallback(
+    (e: React.MouseEvent<HTMLSpanElement>, type: 'openSource' | 'sponsored') => {
+      e.stopPropagation();
+      window.open(type === 'openSource' ? item.openSourceLink : item.sponsoredLink, '_blank', 'noopener,noreferrer');
+    },
+    [item.openSourceLink, item.sponsoredLink],
+  );
+
   return (
     <div
       ref={panelRef}
-      className={`${styles.panel} ${isVisible ? styles.visible : styles.hidden} ${item.isSponsored ? styles.sponsored : ''}`}
+      className={`${styles.panel} ${isVisible ? styles.visible : styles.hidden} ${item.sponsoredLink ? styles.sponsored : ''}`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       tabIndex={item.link ? 0 : -1}
@@ -127,8 +135,16 @@ const Panel: React.FC<PanelProps> = ({ item, index, animationDelay }) => {
           <div className={styles.titleContainer}>
             <h3 className={styles.panelTitle}>{item.title}</h3>
             <div className={styles.badges}>
-              {item.isSponsored && <span className={styles.sponsoredBadge}>Sponsored</span>}
-              {item.isOpenSource && <span className={styles.openSourceBadge}>Open Source</span>}
+              {item.sponsoredLink && (
+                <span onClick={(e) => handleBadgeClick(e, 'sponsored')} className={styles.sponsoredBadge}>
+                  Sponsored
+                </span>
+              )}
+              {item.openSourceLink && (
+                <span onClick={(e) => handleBadgeClick(e, 'openSource')} className={styles.openSourceBadge}>
+                  Open Source
+                </span>
+              )}
             </div>
           </div>
           <div className={styles.descriptionContainer}>
@@ -157,8 +173,8 @@ const Showcase: React.FC<ShowcaseProps> = ({ title, subtitle, items, animationDe
       return shuffled;
     };
 
-    const sponsored = items.filter((item) => item.isSponsored);
-    const nonSponsored = items.filter((item) => !item.isSponsored);
+    const sponsored = items.filter((item) => item.sponsoredLink);
+    const nonSponsored = items.filter((item) => !item.sponsoredLink);
 
     return [...shuffleArray(sponsored), ...shuffleArray(nonSponsored)];
   }, [items]);
