@@ -33,4 +33,11 @@ export const showcaseItems: ShowcaseItem[] = [
     imageUrl: '/showcase/uix.webp',
     link: 'https://www.uix.me/',
   },
+  {
+    title: 'Sorcerers',
+    author: 'Lorgan3',
+    imageUrl: '/showcase/sorcerers.webp',
+    link: 'https://lorgan3.itch.io/sorcerers',
+    openSourceLink: 'https://github.com/lorgan3/sorcerers',
+  },
 ];
