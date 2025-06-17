@@ -33,4 +33,10 @@ export const showcaseItems: ShowcaseItem[] = [
     imageUrl: '/showcase/uix.webp',
     link: 'https://www.uix.me/',
   },
+  {
+    title: 'Party 32: Version 1',
+    author: 'Matt / Stopdoor',
+    imageUrl: '/showcase/party32version1.png',
+    link: 'https://party32.com',
+  },
 ];
