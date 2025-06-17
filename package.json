@@ -20,7 +20,8 @@
     "types": "tsc --noEmit",
     "update-version": "node ./scripts/update-version.mjs",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "write-translations": "docusaurus write-translations"
+    "write-translations": "docusaurus write-translations",
+    "generate:definitions": "node ./scripts/generate-definitions.ts --experimental-strip-types"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mjs}": [

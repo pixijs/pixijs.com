@@ -283,6 +283,11 @@ const config: Config = {
                 docId: 'examples/index',
                 label: 'Examples',
               },
+              {
+                type: 'doc',
+                docId: 'llms/index',
+                label: 'LLM Docs',
+              },
             ],
           },
           {
