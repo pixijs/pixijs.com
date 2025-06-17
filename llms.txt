@@ -53,3 +53,4 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Text](https://pixijs.com/8.x/guides/components/scene-objects/text): Learn how to use PixiJS's text rendering classes `Text`, `BitmapText`, and `HTMLText`.
 - [Text Style](https://pixijs.com/8.x/guides/components/scene-objects/text/style): Learn how to use the TextStyle class in PixiJS to style text objects, including fills, strokes, shadows, and more.
 - [Tiling Sprite](https://pixijs.com/8.x/guides/components/scene-objects/tiling-sprite): Learn how to use the TilingSprite class in PixiJS for rendering repeating textures efficiently across a defined area.
+- [Documentation for LLMs](https://pixijs.com/8.x/llms): PixiJS supports the [`llms.txt`](https://llmstxt.org/) convention for making documentation accessible to large language models (LLMs) and the appli...
