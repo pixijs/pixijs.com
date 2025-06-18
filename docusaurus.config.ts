@@ -416,9 +416,9 @@ const config: Config = {
             position: 'left',
           },
           {
+            type: 'doc',
             label: 'Sponsor',
-            position: 'left',
-            href: 'https://opencollective.com/pixijs',
+            docId: 'sponsor/index',
           },
           {
             type: 'docsVersionDropdown',

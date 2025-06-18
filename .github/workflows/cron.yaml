@@ -29,6 +29,9 @@ jobs:
       - name: Run generate script
         run: npm run generate:definitions
 
+      - name: Run sponsor script
+        run: npm run generate:sponsors
+
       - name: Check for changes
         id: check-changes
         run: |

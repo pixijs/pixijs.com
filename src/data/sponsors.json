@@ -1,0 +1,19 @@
+[
+  {
+    "sponsor": {
+      "name": "Test",
+      "type": "Organization",
+      "login": "test",
+      "avatarUrl": "/images/logo-playco.png",
+      "websiteUrl": "https://test.com",
+      "linkUrl": "https://opencollective.com/test",
+      "socialLogins": {
+        "opencollective": "test"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "sponsor"
+  }
+]

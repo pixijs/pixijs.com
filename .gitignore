@@ -33,3 +33,5 @@ yarn-error.log*
 scripts/pixiVersions.json
 
 .ghtoken
+.env
+src/data/sponsors.json
