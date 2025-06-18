@@ -149,6 +149,29 @@ html[data-theme='dark'] {
   }
 }
 
+@media (max-width: 1120px) {
+  a.navbar__item.navbar__link > svg {
+    display: none !important;
+  }
+
+  .navbar__search div:last-child {
+    display: none !important;
+  }
+
+  .navbar__search {
+    margin: 0 !important;
+  }
+}
+@media (max-width: 996px) {
+  a.navbar__item.navbar__link > svg {
+    display: inline-block !important; // Reset to default display
+  }
+
+  .navbar__search div:last-child {
+    display: flex !important; // Reset to default display
+  }
+}
+
 @media only screen and (max-width: 1020px) {
   .navbar__brand {
     margin-right: 0;

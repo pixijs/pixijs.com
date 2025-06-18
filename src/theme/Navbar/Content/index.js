@@ -47,8 +47,8 @@ export default function NavbarContent() {
   const socialItems = [];
 
   const isBrowser = useIsBrowser();
-  const socialsThreshold = 1423;
-  const searchThreshold = 1479;
+  const socialsThreshold = 1396;
+  const searchThreshold = 1450;
   const mobileThreshold = 996;
 
   const [navbar, setNavbar] = useState({
