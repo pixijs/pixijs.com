@@ -67,31 +67,4 @@ async function main() {
 // @ts-expect-error - top level await does work
 await main().catch((err) => {
   console.error('Error fetching sponsors:', err);
-  // write a simple sponsor.json file with an error message
-  fs.writeFileSync(
-    'src/data/sponsors.json',
-    JSON.stringify(
-      [
-        {
-          sponsor: {
-            name: 'Test',
-            type: 'Organization',
-            login: 'test',
-            avatarUrl: '/images/logo-playco.png',
-            websiteUrl: 'https://test.com',
-            linkUrl: 'https://opencollective.com/test',
-            socialLogins: {
-              opencollective: 'test',
-            },
-          },
-          isOneTime: false,
-          monthlyDollars: 100,
-          privacyLevel: 'PUBLIC',
-          tierName: 'sponsor',
-        },
-      ],
-      null,
-      2,
-    ),
-  );
 });
