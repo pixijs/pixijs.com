@@ -31,6 +31,11 @@ jobs:
 
       - name: Run sponsor script
         run: npm run generate:sponsors
+        env:
+          SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORKIT_GITHUB_TOKEN }}
+          SPONSORKIT_GITHUB_LOGIN: ${{ secrets.SPONSORKIT_GITHUB_LOGIN }}
+          SPONSORKIT_OPENCOLLECTIVE_SLUG: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_SLUG }}
+          SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_KEY }}
 
       - name: Check for changes
         id: check-changes
