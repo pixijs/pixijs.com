@@ -55,6 +55,11 @@ async function main() {
     // Filter out sponsors with less than $100 monthly contribution
     return sponsor.monthlyDollars >= 100;
   });
+  // delete raw data
+  sponsors = sponsors.map((sponsor) => {
+    const { raw, ...rest } = sponsor;
+    return rest;
+  });
 
   fs.writeFileSync('src/data/sponsors.json', JSON.stringify(sponsors, null, 2));
 }
