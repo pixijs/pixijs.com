@@ -364,7 +364,7 @@ const config: Config = {
               },
               {
                 label: 'Text Style Editor',
-                href: 'https://pixijs.io/pixi-text-style/#',
+                href: 'https://text-style.pixijs.io/',
               },
               {
                 type: 'html',
