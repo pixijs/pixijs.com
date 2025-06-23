@@ -33,4 +33,10 @@ export const showcaseItems: ShowcaseItem[] = [
     imageUrl: '/showcase/uix.webp',
     link: 'https://www.uix.me/',
   },
+  {
+    title: 'Tailrmade - Your Visual App Builder',
+    author: 'Tailrmade.app',
+    imageUrl: '/showcase/tailrmadeapp.jpg',
+    link: 'https://tailrmade.app/',
+  },
 ];
