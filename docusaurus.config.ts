@@ -461,7 +461,7 @@ const config: Config = {
 
         copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labour of love built by the <a href="/team">PixiJS team</a>.`,
       },
-      image: 'images/ogimage.png',
+      image: 'images/ogimage.jpg',
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
