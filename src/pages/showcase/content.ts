@@ -2,6 +2,12 @@ import { ShowcaseItem } from './ShowcasePage';
 
 export const showcaseItems: ShowcaseItem[] = [
   {
+    title: 'Emerald Woods',
+    author: `Slashware Interactive`,
+    imageUrl: '/showcase/emerald-woods.png',
+    link: 'https://slash.itch.io/emerald-woods',
+  },
+  {
     title: 'Bubbo Bubbo',
     author: `PixiJS Open Games: Ash Cook`,
     imageUrl: '/showcase/bubbo-bubbo.webp',
