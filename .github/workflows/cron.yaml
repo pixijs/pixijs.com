@@ -10,12 +10,12 @@ on:
 jobs:
   clean:
     runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          # Full git history for commits
-          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -37,30 +37,7 @@ jobs:
           SPONSORKIT_OPENCOLLECTIVE_SLUG: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_SLUG }}
           SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_KEY }}
 
-      - name: Check for changes
-        id: check-changes
-        run: |
-          echo "Current working directory:"
-          pwd
-          echo "Files in current directory:"
-          ls -la
-          echo "Git status output:"
-          git status --porcelain
-          echo "All git status (including untracked):"
-          git status --porcelain --untracked-files=all
-          if [[ -n "$(git status --porcelain --untracked-files=all)" ]]; then
-            echo "changes=true" >> $GITHUB_OUTPUT
-            echo "Changes detected!"
-          else
-            echo "changes=false" >> $GITHUB_OUTPUT
-            echo "No changes detected"
-          fi
-
-      - name: Commit and push if changed
-        if: steps.check-changes.outputs.changes == 'true'
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git commit -m "chore: generate definition file [skip ci]"
-          git push
+      - name: Git Auto Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "chore: update generated files"
