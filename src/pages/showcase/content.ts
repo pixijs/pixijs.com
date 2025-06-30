@@ -46,4 +46,10 @@ export const showcaseItems: ShowcaseItem[] = [
     link: 'https://genshin-music.specy.app',
     openSourceLink: 'https://github.com/Specy/genshin-music',
   },
+  {
+    title: 'Tailrmade - Your Visual App Builder',
+    author: 'Tailrmade.app',
+    imageUrl: '/showcase/tailrmadeapp.jpg',
+    link: 'https://tailrmade.app/',
+  },
 ];
