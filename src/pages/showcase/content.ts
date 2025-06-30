@@ -46,6 +46,12 @@ export const showcaseItems: ShowcaseItem[] = [
     link: 'https://www.uix.me/',
   },
   {
+    title: 'Kinda Hard Golf',
+    author: `James O'Halloran (Mighty Pebble Games)`,
+    imageUrl: '/showcase/kinda-hard-golf.webp',
+    link: 'https://kindahardgolf.com/',
+  },
+  {
     title: 'Genshin/Sky Music',
     author: 'Specy',
     imageUrl: '/showcase/genshin-music.webp',
