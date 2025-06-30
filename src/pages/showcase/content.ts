@@ -34,6 +34,12 @@ export const showcaseItems: ShowcaseItem[] = [
     link: 'https://research.google.com/semantris',
   },
   {
+    title: 'Party 32: Version 1',
+    author: 'Matt / Stopdoor',
+    imageUrl: '/showcase/party32version1.png',
+    link: 'https://party32.com',
+  },
+  {
     title: 'UIX',
     author: 'Kadir Inan',
     imageUrl: '/showcase/uix.webp',
