@@ -2,6 +2,12 @@ import { ShowcaseItem } from './ShowcasePage';
 
 export const showcaseItems: ShowcaseItem[] = [
   {
+    title: 'Emerald Woods',
+    author: `Slashware Interactive`,
+    imageUrl: '/showcase/emerald-woods.png',
+    link: 'https://slash.itch.io/emerald-woods',
+  },
+  {
     title: 'Bubbo Bubbo',
     author: `PixiJS Open Games: Ash Cook`,
     imageUrl: '/showcase/bubbo-bubbo.webp',
@@ -34,9 +40,16 @@ export const showcaseItems: ShowcaseItem[] = [
     link: 'https://www.uix.me/',
   },
   {
+    title: 'Genshin/Sky Music',
+    author: 'Specy',
+    imageUrl: '/showcase/genshin-music.webp',
+    link: 'https://genshin-music.specy.app',
+    openSourceLink: 'https://github.com/Specy/genshin-music',
+  },
+  {
     title: 'Tailrmade - Your Visual App Builder',
     author: 'Tailrmade.app',
     imageUrl: '/showcase/tailrmadeapp.jpg',
     link: 'https://tailrmade.app/',
-  },
+  }
 ];
