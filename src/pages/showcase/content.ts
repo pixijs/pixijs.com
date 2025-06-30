@@ -47,6 +47,13 @@ export const showcaseItems: ShowcaseItem[] = [
     openSourceLink: 'https://github.com/Specy/genshin-music',
   },
   {
+    title: 'Sorcerers',
+    author: 'Lorgan3',
+    imageUrl: '/showcase/sorcerers.webp',
+    link: 'https://lorgan3.itch.io/sorcerers',
+    openSourceLink: 'https://github.com/lorgan3/sorcerers',
+  },
+  {
     title: 'Tailrmade - Your Visual App Builder',
     author: 'Tailrmade.app',
     imageUrl: '/showcase/tailrmadeapp.jpg',
