@@ -4,7 +4,7 @@ export const showcaseItems: ShowcaseItem[] = [
   {
     title: 'Emerald Woods',
     author: `Slashware Interactive`,
-    imageUrl: '/showcase/emerald-woods.png',
+    imageUrl: '/showcase/emerald-woods.webp',
     link: 'https://slash.itch.io/emerald-woods',
   },
   {
@@ -36,7 +36,7 @@ export const showcaseItems: ShowcaseItem[] = [
   {
     title: 'Party 32: Version 1',
     author: 'Matt / Stopdoor',
-    imageUrl: '/showcase/party32version1.png',
+    imageUrl: '/showcase/party32version1.webp',
     link: 'https://party32.com',
   },
   {
@@ -48,7 +48,7 @@ export const showcaseItems: ShowcaseItem[] = [
   {
     title: 'Kinda Hard Golf',
     author: `James O'Halloran (Mighty Pebble Games)`,
-    imageUrl: '/showcase/kinda-hard-golf.webp',
+    imageUrl: '/showcase/kinda-hard-golf.jpg',
     link: 'https://kindahardgolf.com/',
   },
   {
@@ -68,7 +68,97 @@ export const showcaseItems: ShowcaseItem[] = [
   {
     title: 'Tailrmade - Your Visual App Builder',
     author: 'Tailrmade.app',
-    imageUrl: '/showcase/tailrmadeapp.jpg',
+    imageUrl: '/showcase/tailrmadeapp.webp',
     link: 'https://tailrmade.app/',
+  },
+  {
+    title: 'Mergic Pets',
+    author: 'Rockstone',
+    imageUrl: '/showcase/mergic-pets.webp',
+    link: 'https://mergicpets.com/',
+  },
+  {
+    title: 'Benoît Wimart - web design & graphisme',
+    author: 'Benoît Wimart',
+    imageUrl: '/showcase/jaiunsite-pixijs.webp',
+    link: 'https://jaiunsite.com',
+  },
+  {
+    title: 'Suroi',
+    author: 'Henry Sanger',
+    imageUrl: '/showcase/suroi.webp',
+    link: 'https://suroi.io',
+  },
+  {
+    title: 'Happy Wheels',
+    author: 'Jim Bonacci / Goodboy Digital',
+    imageUrl: '/showcase/happy-wheels.webp',
+    link: 'https://totaljerkface.com/happy_wheels.tjf',
+  },
+  {
+    title: 'LEGO City Adventures Build and Protect',
+    author: 'Goodboy Digital',
+    imageUrl: '/showcase/lego-city-adventures.jpg',
+    link: 'https://plays.org/game/lego-city-adventures-build-and-protect/',
+  },
+  {
+    title: 'Subway Surfers',
+    author: 'SYBO',
+    imageUrl: '/showcase/subway-surfers.webp',
+    link: 'https://poki.com/en/g/subway-surfers',
+  },
+  {
+    title: 'Cartoon Network GameBox',
+    author: 'Cartoon Network EMEA',
+    imageUrl: '/showcase/cartoon-network-gamebox.webp',
+    link: 'https://play.google.com/store/apps/details?id=com.turner.cartoonnetworkgames',
+  },
+  {
+    title: 'Right Runner',
+    author: 'UNICEF',
+    imageUrl: '/showcase/right-runner.webp',
+    link: 'https://www.unicef.org/lac/en/right-runner',
+  },
+  {
+    title: 'Defenders of Mathematica',
+    author: 'playerthree',
+    imageUrl: '/showcase/guardians_defenders_of_mathematica.jpg',
+    link: 'https://www.bbc.co.uk/bitesize/articles/zn2y7nb',
+  },
+  {
+    title: 'GDevelop',
+    author: 'GDevelop',
+    imageUrl: '/showcase/gdevelop.webp',
+    link: 'https://gdevelop.io/',
+  },
+  {
+    title: 'Toon Cup - Football Game',
+    author: 'Cartoon Network EMEA',
+    imageUrl: '/showcase/toon-cup.webp',
+    link: 'https://play.google.com/store/apps/details?id=com.turner.tooncup',
+  },
+  {
+    title: 'Adventure Time Elemental',
+    author: 'Cartoon Network EMEA',
+    imageUrl: '/showcase/adventure-time-elemental.webp',
+    link: 'https://plays.org/game/adventure-time-elemental/',
+  },
+  {
+    title: 'Sprite Fusion',
+    author: 'Hugo Duprez',
+    imageUrl: '/showcase/sprite-fusion.jpg',
+    link: 'https://www.spritefusion.com/',
+  },
+  {
+    title: 'Ember',
+    author: 'Ember',
+    imageUrl: '/showcase/ember.webp',
+    link: 'https://emberdesign.net/',
+  },
+  {
+    title: 'Rendley SDK',
+    author: 'Onix Technologies',
+    imageUrl: '/showcase/rendley.webp',
+    link: 'https://rendley.com/sdk',
   },
 ];
