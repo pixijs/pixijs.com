@@ -62,6 +62,7 @@
     "docusaurus-plugin-llms": "^0.1.4",
     "docusaurus-plugin-sass": "^0.2.6",
     "fuse.js": "^7.1.0",
+    "lucide-react": "^0.525.0",
     "pixi.js": "^8.10.0",
     "prism-react-renderer": "^2.4.1",
     "ramda": "^0.30.1",
