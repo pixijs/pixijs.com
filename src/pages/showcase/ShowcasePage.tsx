@@ -201,7 +201,7 @@ const Showcase: React.FC<ShowcaseProps> = ({ title, subtitle, items, animationDe
   }, [fuse, searchTerm, randomizedItems]);
 
   const handleSubmitProject = useCallback(() => {
-    window.open('https://github.com/pixijs/pixijs.com/tree/main/.github/SHOWCASE.md', '_blank', 'noopener,noreferrer');
+    window.open('https://form.jotform.com/251755678972071', '_blank', 'noopener,noreferrer');
   }, []);
 
   return (
