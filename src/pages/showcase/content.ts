@@ -51,5 +51,5 @@ export const showcaseItems: ShowcaseItem[] = [
     author: 'Tailrmade.app',
     imageUrl: '/showcase/tailrmadeapp.jpg',
     link: 'https://tailrmade.app/',
-  }
+  },
 ];
