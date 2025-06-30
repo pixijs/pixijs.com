@@ -4,16 +4,27 @@ We love seeing what the community creates with PixiJS! If you’ve built somethi
 
 ---
 
+## Easy Submission
+
+If you want to quickly add your project to the PixiJS showcase, without going through the process of forking and creating a pull request, you can use the super simple form we have set up. Just fill out the form with your project details, and we’ll take care of the rest!
+
+[Submit your project here!](https://form.jotform.com/251755678972071)
+
+The image requirements and project information format are the same as below, so please ensure you have a suitable image ready to upload.
+
+---
+
 ## Image Requirements
 
 To keep the showcase looking clean and consistent, please follow these image guidelines:
 
-- **Dimensions**: \~460×260 pixels (landscape orientation)
+- **Dimensions**: \~720×405 pixels (landscape orientation)
 - **Formats accepted**: `.avif`, `.webp`, `.png`, `.jpg`, `.jpeg`
 - **Max file size**: 200 KB
 - **Quality**: High-resolution, crisp screenshot that best represents your project
 
 Add your image to the [`static/showcase/`](/static/showcase/) directory in the repository.
+
 
 ---
 
