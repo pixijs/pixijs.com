@@ -45,7 +45,7 @@ const Panel: React.FC<PanelProps> = ({ item, index, animationDelay }) => {
             // Add staggered delay for each panel
             setTimeout(() => {
               setIsVisible(true);
-            }, index * animationDelay);
+            }, animationDelay);
             observer.unobserve(entry.target);
           }
         });
@@ -237,16 +237,6 @@ const Showcase: React.FC<ShowcaseProps> = ({ title, subtitle, items, animationDe
               Submit Project
             </button>
           </div>
-          {/* <div className={styles.searchContainer}>
-            <Search className={styles.searchIcon} size={20} />
-            <input
-              type="text"
-              placeholder="Search projects..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className={styles.searchInput}
-            />
-          </div> */}
         </div>
 
         <div className={styles.grid} role="grid" aria-label="Showcase items">

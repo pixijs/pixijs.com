@@ -167,6 +167,8 @@ html[data-theme='dark'] {
   gap: 2rem;
   padding: 0;
   justify-items: center;
+  max-width: 2000px;
+  margin: 0 auto;
 }
 
 @media (min-width: 768px) {
