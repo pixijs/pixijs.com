@@ -35,6 +35,8 @@ const Panel: React.FC<PanelProps> = ({ item, index, animationDelay }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [transform, setTransform] = useState('');
+  const [isHovered, setIsHovered] = useState(false);
 
   // Intersection Observer for scroll-triggered animations
   useEffect(() => {
@@ -67,6 +69,35 @@ const Panel: React.FC<PanelProps> = ({ item, index, animationDelay }) => {
     };
   }, [index, animationDelay]);
 
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!panelRef.current) return;
+
+    const rect = panelRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const mouseX = e.clientX - centerX;
+    const mouseY = e.clientY - centerY;
+
+    // Calculate rotation values (adjust multiplier for intensity)
+    const rotateY = (mouseX / rect.width) * 8; // Max 20 degrees
+    const rotateX = -(mouseY / rect.height) * 8; // Max 20 degrees, inverted
+    const rotateZ = (mouseX / rect.width) * 1; // Subtle Z rotation
+
+    setTransform(
+      `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale3d(1.02, 1.02, 1.02)`,
+    );
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
+    setTransform('');
+  }, []);
+
   const handleClick = useCallback(() => {
     if (item.link) {
       window.open(item.link, '_blank', 'noopener,noreferrer');
@@ -97,9 +128,17 @@ const Panel: React.FC<PanelProps> = ({ item, index, animationDelay }) => {
       className={`${styles.panel} ${isVisible ? styles.visible : styles.hidden} ${item.sponsoredLink ? styles.sponsored : ''}`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       tabIndex={item.link ? 0 : -1}
       role={item.link ? 'button' : 'article'}
       aria-label={item.link ? `View ${item.title}` : item.title}
+      style={{
+        transform: transform,
+        transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.3s ease-out',
+        transformStyle: 'preserve-3d',
+      }}
     >
       <div className={styles.panelContent}>
         <div className={styles.imageContainer}>
@@ -127,8 +166,6 @@ const Panel: React.FC<PanelProps> = ({ item, index, animationDelay }) => {
               display: imageLoaded && !imageError ? 'block' : 'none',
             }}
           />
-
-          <div className={styles.overlay} />
         </div>
 
         <div className={styles.textContent}>
