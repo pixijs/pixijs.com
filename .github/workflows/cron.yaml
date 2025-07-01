@@ -38,6 +38,12 @@ jobs:
           SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_KEY }}
         continue-on-error: true
 
+      - name: Check git status
+        run: |
+          git status
+          git diff --name-only
+          ls -la src/data/
+
       - name: Git Auto Commit
         uses: EndBug/add-and-commit@v9
         with:
