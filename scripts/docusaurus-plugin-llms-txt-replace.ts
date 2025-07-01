@@ -83,6 +83,15 @@ export default function pluginEmbeddedCode(context: LoadContext, options: Plugin
         ) {
           console.log('Processing llms-full.txt...');
           await processFile(llmsPath);
+
+          // copy and rename llms-full.txt to llms-medium.txt
+          const llmsMedium = path.join(context.outDir, 'llms-medium.txt');
+          await fs.copyFile(llmsPath, llmsMedium);
+
+          // add src/data/pixi.js.md to llms-full.txt
+          const pixiFilePath = path.join(process.cwd(), 'src', 'data', 'pixi.js.md');
+          const pixiContent = await fs.readFile(pixiFilePath, 'utf-8');
+          await fs.appendFile(llmsPath, `\n\n# Full API Reference\n\n${pixiContent}\n`);
         }
 
         // Process all .md files in 8.x directory

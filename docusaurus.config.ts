@@ -283,6 +283,11 @@ const config: Config = {
                 docId: 'examples/index',
                 label: 'Examples',
               },
+              {
+                type: 'doc',
+                docId: 'llms/index',
+                label: 'LLM Docs',
+              },
             ],
           },
           {
@@ -359,7 +364,7 @@ const config: Config = {
               },
               {
                 label: 'Text Style Editor',
-                href: 'https://pixijs.io/pixi-text-style/#',
+                href: 'https://text-style.pixijs.io/',
               },
               {
                 type: 'html',
@@ -411,9 +416,9 @@ const config: Config = {
             position: 'left',
           },
           {
+            type: 'doc',
             label: 'Sponsor',
-            position: 'left',
-            href: 'https://opencollective.com/pixijs',
+            docId: 'sponsor/index',
           },
           {
             type: 'docsVersionDropdown',
@@ -456,7 +461,7 @@ const config: Config = {
 
         copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labour of love built by the <a href="/team">PixiJS team</a>.`,
       },
-      image: 'images/ogimage.png',
+      image: 'images/ogimage.jpg',
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,

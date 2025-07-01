@@ -9,6 +9,7 @@
     font-size: 28px;
     line-height: 40px;
     word-wrap: normal;
+    text-align: center;
 
     @media screen and (min-width: 481px) {
       font-size: 54px;
@@ -23,10 +24,69 @@
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0;
+    text-align: center;
 
     @media screen and (min-width: 481px) {
       font-size: 21px;
       line-height: 30px;
+    }
+  }
+
+  .sponsorsContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .tierTitle h2 {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .arrow {
+    width: 18px;
+    height: 18px;
+    color: #555;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    transform: translateX(0);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .tierSection {
+    // margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .tierTitle {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    width: max-content;
+    align-self: center;
+    margin-bottom: 0;
+    margin-top: 3rem;
+
+    &:hover {
+      color: black;
+      .arrow {
+        color: #000;
+      }
     }
   }
 
@@ -36,8 +96,6 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    width: 90vw;
-    max-width: 940px;
     margin: 0 auto;
     padding: 20px 0px;
 
@@ -50,21 +108,41 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
 
     .sponsorImage {
-      max-width: 100px;
       border-radius: 15px;
     }
 
-    &:first-child {
-      padding: 0 calc(min(100vw, 940px) - min(90vw, 300px) / 2);
-
+    // Platinum tier
+    &.platinum-sponsor {
       .sponsorImage {
-        max-width: 350px;
+        max-height: 180px;
+      }
+    }
 
-        @media screen and (max-width: 481px) {
-          width: 80vw;
-        }
+    // Gold tier
+    &.gold-sponsor {
+      .sponsorImage {
+        max-height: 150px;
+      }
+    }
+
+    // Silver tier
+    &.silver-sponsor {
+      .sponsorImage {
+        max-height: 90px;
+      }
+    }
+
+    // Bronze tier
+    &.bronze-sponsor {
+      .sponsorImage {
+        max-height: 75px;
       }
     }
   }
@@ -74,5 +152,18 @@ html[data-theme='dark'] {
   .wrapper {
     background: #1f2022;
     color: #fff;
+
+    .arrow {
+      color: #ccc;
+    }
+    .tierTitle {
+      color: #ccc;
+      &:hover {
+        color: white;
+        .arrow {
+          color: #fff;
+        }
+      }
+    }
   }
 }

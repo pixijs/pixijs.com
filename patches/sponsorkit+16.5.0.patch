@@ -1,0 +1,29 @@
+diff --git a/node_modules/sponsorkit/dist/shared/sponsorkit.CLJpd96P.mjs b/node_modules/sponsorkit/dist/shared/sponsorkit.CLJpd96P.mjs
+index 6624e20..8b2fee8 100644
+--- a/node_modules/sponsorkit/dist/shared/sponsorkit.CLJpd96P.mjs
++++ b/node_modules/sponsorkit/dist/shared/sponsorkit.CLJpd96P.mjs
+@@ -1109,7 +1109,7 @@ function createSponsorFromOrder(order) {
+       type: getAccountType(order.fromAccount.type),
+       login: slug,
+       avatarUrl: order.fromAccount.imageUrl,
+-      websiteUrl: normalizeUrl(getBestUrl(order.fromAccount.socialLinks)),
++      websiteUrl: normalizeUrl(getBestUrl(order.fromAccount.socialLinks) || order.fromAccount.website),
+       linkUrl: `https://opencollective.com/${slug}`,
+       socialLogins: getSocialLogins(order.fromAccount.socialLinks, slug)
+     },
+@@ -1208,6 +1208,7 @@ function makeTransactionsQuery(id, slug, githubHandle, offset, dateFrom, dateTo)
+             }
+             isIncognito
+             imageUrl(height: 460, format: png)
++            website
+           }
+         }
+       }
+@@ -1245,6 +1246,7 @@ function makeSubscriptionsQuery(id, slug, githubHandle, offset, activeOnly) {
+             }
+             isIncognito
+             imageUrl(height: 460, format: png)
++            website
+           }
+         }
+       }
