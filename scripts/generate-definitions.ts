@@ -3,11 +3,12 @@ import path from 'path';
 import * as ts from 'typescript';
 
 async function generateDefinitionFile() {
-  const url = 'https://pixijs.download/release/pixi.js.d.ts';
+  const baseUrl = 'https://pixijs.download/release/pixi.js.d.ts';
+  const url = `${baseUrl}?t=${Date.now()}`; // Add timestamp to bust cache
 
   try {
     // Fetch the definition file
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: 'no-cache' });
     if (!response.ok) {
       throw new Error(`Failed to fetch definition file: ${response.statusText}`);
     }
