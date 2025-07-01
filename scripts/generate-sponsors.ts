@@ -61,6 +61,8 @@ async function main() {
     return rest;
   });
 
+  console.log(`Found ${sponsors.length} sponsors with monthly contributions of at least $100.`);
+
   fs.writeFileSync('src/data/sponsors.json', JSON.stringify(sponsors, null, 2));
 }
 

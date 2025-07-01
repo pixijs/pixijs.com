@@ -36,8 +36,10 @@ jobs:
           SPONSORKIT_GITHUB_LOGIN: ${{ secrets.SPONSORKIT_GITHUB_LOGIN }}
           SPONSORKIT_OPENCOLLECTIVE_SLUG: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_SLUG }}
           SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_KEY }}
+        continue-on-error: true
 
       - name: Git Auto Commit
         uses: EndBug/add-and-commit@v9
         with:
           message: "chore: update generated files"
+          add: '.'
