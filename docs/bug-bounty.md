@@ -41,7 +41,6 @@ PixiJS is committed to delivering a reliable, high-performance rendering engine 
 - The bounty amount is fixed and non-negotiable.
 - Abuse, spamming, or low-quality submissions may result in exclusion from the program.
 
-Here’s a polished version of that section with consistent tone, formatting, and improved clarity:
 
 ## Sponsoring Bounties
 
