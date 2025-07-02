@@ -6,7 +6,7 @@ PixiJS is committed to delivering a reliable, high-performance rendering engine 
 
 1. **Bounty Tag Assignment**
    The PixiJS team will identify eligible issues and apply the **`bounty`** label along with a specific **dollar amount**.
-   Example: `bounty: $100`
+   These issues can be found [here](https://github.com/pixijs/pixijs/issues?q=is%3Aissue%20state%3Aopen%20label%3A%F0%9F%92%B0Bounty).
 
    Only issues labeled with the `bounty` tag and a dollar amount are eligible for this program.
 
@@ -51,6 +51,7 @@ We believe in the power of open source and community collaboration. Our bug boun
 
 - Encourage contributors to tackle important, impactful issues.
 - Recognize the hard work involved in debugging and fixing complex problems.
+- Acknowledge that the PixiJS core team is small and often focused on other critical tasks, your contributions help get issues resolved faster.
 - Make PixiJS even better for everyone.
 
 ## Questions?
