@@ -3,6 +3,7 @@ import { ArrowUpRight, Image as ImageIcon, AlertCircle, Search, Plus } from 'luc
 import Fuse from 'fuse.js';
 import type { IFuseOptions } from 'fuse.js';
 import styles from './Showcase.module.css';
+import { showcaseItems } from '../../data/showcase';
 
 // TypeScript Interfaces
 export interface ShowcaseItem {
@@ -18,7 +19,6 @@ export interface ShowcaseItem {
 export interface ShowcaseProps {
   title: string;
   subtitle: string;
-  items: ShowcaseItem[];
   animationDelay?: number;
   className?: string;
 }
@@ -195,7 +195,8 @@ const Panel: React.FC<PanelProps> = ({ item, index, animationDelay }) => {
 };
 
 // Main Showcase Component
-const Showcase: React.FC<ShowcaseProps> = ({ title, subtitle, items, animationDelay = 100, className = '' }) => {
+const Showcase: React.FC<ShowcaseProps> = ({ title, subtitle, animationDelay = 100, className = '' }) => {
+  const items = showcaseItems;
   const showcaseRef = useRef<HTMLElement>(null);
   const [searchTerm, setSearchTerm] = useState('');
 

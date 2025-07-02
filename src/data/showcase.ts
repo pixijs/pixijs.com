@@ -1,4 +1,4 @@
-import { ShowcaseItem } from './ShowcasePage';
+import { type ShowcaseItem } from '../pages/showcase/ShowcasePage';
 
 export const showcaseItems: ShowcaseItem[] = [
   {

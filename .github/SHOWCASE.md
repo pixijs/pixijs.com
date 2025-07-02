@@ -56,7 +56,7 @@ Example entry:
 }
 ```
 
-Add this object to the `showcaseItems` array in [`src/pages/showcase/content.ts`](/src/pages/showcase/content.ts).
+Add this object to the `showcaseItems` array in [`src/data/showcase.ts`](/src/data/showcase.ts).
 
 ---
 
@@ -76,7 +76,7 @@ Add this object to the `showcaseItems` array in [`src/pages/showcase/content.ts`
    cp your-image.png static/showcase/
    ```
 
-4. **Update** the `showcaseItems` array in [`src/pages/showcase/content.ts`](/src/pages/showcase/content.ts) with your project.
+4. **Update** the `showcaseItems` array in [`src/data/showcase.ts`](/src/data/showcase.ts) with your project.
 
 5. **Test** the site locally to make sure everything renders properly:
 
