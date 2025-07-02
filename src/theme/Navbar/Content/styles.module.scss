@@ -6,20 +6,33 @@
   opacity: 0.25;
 }
 
-.short-search input {
-  // width: var(--search-local-modal-width-sm, 340px);
-  max-width: 150px;
-}
-
-@media (max-width: 996px) {
+@media (max-width: 1568px) {
   .separator {
     display: none;
   }
+}
+@media (max-width: 1486px) {
+  .short-search input {
+    max-width: 150px;
+  }
 
-  /*
-    Hide color mode toggle in small viewports
-  */
   .colorModeToggle {
     display: none;
+  }
+}
+
+@media (max-width: 1085px) {
+  .short-search input {
+    max-width: 100px;
+  }
+
+  .short-search {
+    padding: 0;
+  }
+}
+
+@media (max-width: 996px) {
+  .short-search input {
+    max-width: 100%;
   }
 }

@@ -312,6 +312,11 @@ const config: Config = {
             position: 'left',
           },
           {
+            to: 'showcase',
+            label: 'Showcase',
+            position: 'left',
+          },
+          {
             type: 'dropdown',
             label: 'Ecosystem',
             position: 'left',
