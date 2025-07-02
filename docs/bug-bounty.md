@@ -16,7 +16,7 @@ PixiJS is committed to delivering a reliable, high-performance rendering engine 
    - Submit a **Pull Request (PR)** that fixes the issue.
    - Link the issue in your PR description.
    - Include a clear **example or test case** demonstrating that the bug is resolved.
-   - Follow our standard contribution guidelines.
+   - Follow our standard [contribution guidelines](https://github.com/pixijs/pixijs/blob/dev/.github/CONTRIBUTING.md).
 
 3. **Approval Process**
 
