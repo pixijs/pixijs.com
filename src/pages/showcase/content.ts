@@ -121,7 +121,7 @@ export const showcaseItems: ShowcaseItem[] = [
   },
   {
     title: 'Defenders of Mathematica',
-    author: 'playerthree',
+    author: 'Playerthree',
     imageUrl: '/showcase/guardians_defenders_of_mathematica.jpg',
     link: 'https://www.bbc.co.uk/bitesize/articles/zn2y7nb',
   },
