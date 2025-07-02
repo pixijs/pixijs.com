@@ -401,6 +401,11 @@ const config: Config = {
                 docId: 'faq',
               },
               {
+                type: 'doc',
+                label: 'Bug Bounty',
+                docId: 'bug-bounty',
+              },
+              {
                 label: 'Community Guide',
                 href: 'https://github.com/pixijs/pixijs/blob/dev/.github/CONTRIBUTING.md',
               },
