@@ -41,6 +41,16 @@ PixiJS is committed to delivering a reliable, high-performance rendering engine 
 - The bounty amount is fixed and non-negotiable.
 - Abuse, spamming, or low-quality submissions may result in exclusion from the program.
 
+Here’s a polished version of that section with consistent tone, formatting, and improved clarity:
+
+## Sponsoring Bounties
+
+If you are a developer or company working on a project and would like to sponsor a one-off bounty, please contact **Matt Karl** [@bigtimebuddy](https://github.com/bigtimebuddy) at **[hello@mattkarl.com](mailto:hello@mattkarl.com)** to arrange the details.
+
+Sponsors can make one-time donations directly to our [Open Collective](https://opencollective.com/pixijs) to fund the bounty.
+
+We kindly request that sponsors add an additional **10%** to the bounty amount to cover Open Collective's processing fees.
+
 ## **Finding Bounty Issues**
 
 You can easily find [eligible bounty issues](https://github.com/pixijs/pixijs/issues?q=is%3Aissue%20state%3Aopen%20label%3A%F0%9F%92%B0Bounty) on our GitHub repository.
