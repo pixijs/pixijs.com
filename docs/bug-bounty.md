@@ -6,9 +6,11 @@ PixiJS is committed to delivering a reliable, high-performance rendering engine 
 
 1. **Bounty Tag Assignment**
    The PixiJS team will identify eligible issues and apply the **`bounty`** label along with a specific **dollar amount**.
-   These issues can be found [here](https://github.com/pixijs/pixijs/issues?q=is%3Aissue%20state%3Aopen%20label%3A%F0%9F%92%B0Bounty).
 
    Only issues labeled with the `bounty` tag and a dollar amount are eligible for this program.
+
+   You can find all current bounty-tagged issues [here](https://github.com/pixijs/pixijs/issues?q=is%3Aissue%20state%3Aopen%20label%3A%F0%9F%92%B0Bounty).
+
 
 2. **Submission Requirements**
    To claim a bounty, you must:
@@ -41,7 +43,7 @@ PixiJS is committed to delivering a reliable, high-performance rendering engine 
 
 ## **Finding Bounty Issues**
 
-You can easily find [eligible bounty issues](https://github.com/pixijs/pixijs/issues?q=is%3Aissue%20state%3Aopen%20label%3A%F0%9F%92%B0Bounty) by on our GitHub repository.
+You can easily find [eligible bounty issues](https://github.com/pixijs/pixijs/issues?q=is%3Aissue%20state%3Aopen%20label%3A%F0%9F%92%B0Bounty) on our GitHub repository.
 
 This allows you to focus your contributions on tasks that have a financial reward.
 
