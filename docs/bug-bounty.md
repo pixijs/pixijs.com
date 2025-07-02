@@ -41,13 +41,7 @@ PixiJS is committed to delivering a reliable, high-performance rendering engine 
 
 ## **Finding Bounty Issues**
 
-You can easily find eligible bounty issues by filtering them on our GitHub repository:
-
-![Bounty Issues](/images/misc/bug-bounty-label.png)
-
-- Go to the [PixiJS Issues](https://github.com/pixijs/pixijs/issues) page.
-- Click the **Labels** dropdown menu at the top of the issues list (as shown below).
-- Select the `bounty` label to view only bounty-tagged issues.
+You can easily find [eligible bounty issues](https://github.com/pixijs/pixijs/issues?q=is%3Aissue%20state%3Aopen%20label%3A%F0%9F%92%B0Bounty) by on our GitHub repository.
 
 This allows you to focus your contributions on tasks that have a financial reward.
 
