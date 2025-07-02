@@ -1,25 +1,17 @@
-# Website
-
-This website is built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
+# PixiJS Website
 
 ### Installation
 
-```
+```bash
 $ npm i
 ```
 
 ### Local Development
 
-```
+```bash
 $ npm start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+## Contributing to the Showcase
 
-### Build
-
-```
-$ npm build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+We love seeing what the community creates with PixiJS! If you’ve built something cool and want to share it with the world, you can add your project to our showcase by following the [contribution guidelines](.github/SHOWCASE.md).

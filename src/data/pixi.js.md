@@ -7462,7 +7462,7 @@ export interface DOMContainerOptions extends ViewContainerOptions {
  * app.stage.addChild(textArea);
  * ```
  */
-export declare class DOMContainer extends ViewContainer<null> {
+export declare class DOMContainer extends ViewContainer<never> {
 	/**
 	 * @param options - The options for creating the DOM container.
 	 */
