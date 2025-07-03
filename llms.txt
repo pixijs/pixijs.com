@@ -52,6 +52,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Text (Canvas)](https://pixijs.com/8.x/guides/components/scene-objects/text/canvas.md): Learn how to use the Text class in PixiJS to render styled text as display objects, including dynamic updates and font loading.
 - [HTML Text](https://pixijs.com/8.x/guides/components/scene-objects/text/html.md): Learn how to use HTMLText in PixiJS to render styled HTML strings within your WebGL canvas, enabling complex typography and inline formatting.
 - [Text](https://pixijs.com/8.x/guides/components/scene-objects/text.md): Learn how to use PixiJS's text rendering classes `Text`, `BitmapText`, and `HTMLText`.
+- [SplitText & SplitBitmapText](https://pixijs.com/8.x/guides/components/scene-objects/text/split-text.md): The `SplitText` and `SplitBitmapText` classes let you break a string into individual lines, words, and characters—each as its own display object—un...
 - [Text Style](https://pixijs.com/8.x/guides/components/scene-objects/text/style.md): Learn how to use the TextStyle class in PixiJS to style text objects, including fills, strokes, shadows, and more.
 - [Tiling Sprite](https://pixijs.com/8.x/guides/components/scene-objects/tiling-sprite.md): Learn how to use the TilingSprite class in PixiJS for rendering repeating textures efficiently across a defined area.
 - [Documentation for LLMs](https://pixijs.com/8.x/llms.md): PixiJS supports the [`llms.txt`](https://llmstxt.org/) convention for making documentation accessible to large language models (LLMs) and the appli...
