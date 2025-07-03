@@ -25,6 +25,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Ticker](https://pixijs.com/8.x/guides/components/ticker.md): Learn how to use the Ticker class in PixiJS for managing game loops, animations, and time-based updates.
 - [Mixing PixiJS and Three.js](https://pixijs.com/8.x/guides/third-party/mixing-three-and-pixi.md): Learn how to combine PixiJS and Three.js to create dynamic applications that leverage both 2D and 3D graphics.
 - [v8 Migration Guide](https://pixijs.com/8.x/guides/migrations/v8.md): PixiJS v8 Migration Guide - Transitioning from PixiJS v7 to v8
+- [Bug Bounty Program](https://pixijs.com/8.x/bug-bounty.md): PixiJS is committed to delivering a reliable, high-performance rendering engine for the web. To support that mission, we’re launching a **Bug Bount...
 - [FAQ](https://pixijs.com/8.x/faq.md): Frequently Asked Questions about PixiJS
 - [Culler Plugin](https://pixijs.com/8.x/guides/components/application/culler-plugin.md): Learn how to use the CullerPlugin in PixiJS to optimize rendering by skipping offscreen objects.
 - [Application](https://pixijs.com/8.x/guides/components/application.md): Learn how to create and configure a PixiJS Application, including options for WebGL/WebGPU rendering, built-in plugins, and custom application plug...
