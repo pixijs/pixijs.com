@@ -10123,14 +10123,14 @@ export declare class Rectangle implements ShapePrimitive {
 	 * const isOnStroke = rect.strokeContains(150, 100, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = rect.strokeContains(150, 100, 4, 0);   // Inside
+	 * const innerStroke = rect.strokeContains(150, 100, 4, 1);   // Inside
 	 * const centerStroke = rect.strokeContains(150, 100, 4, 0.5); // Centered
-	 * const outerStroke = rect.strokeContains(150, 100, 4, 1);   // Outside
+	 * const outerStroke = rect.strokeContains(150, 100, 4, 0);   // Outside
 	 * ```
 	 * @param x - The X coordinate of the point to test
 	 * @param y - The Y coordinate of the point to test
 	 * @param strokeWidth - The width of the line to check
-	 * @param alignment - The alignment of the stroke (0 = inner, 0.5 = centered, 1 = outer)
+	 * @param alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
 	 * @returns Whether the x/y coordinates are within this rectangle's stroke
 	 */
 	strokeContains(x: number, y: number, strokeWidth: number, alignment?: number): boolean;
@@ -11996,9 +11996,6 @@ export type WebGLSystems = ExtractSystemTypes<typeof DefaultWebGLSystems> & Pixi
  */
 export interface WebGLOptions extends SharedRendererOptions, ExtractRendererOptions<typeof DefaultWebGLSystems>, PixiMixins.WebGLOptions {
 }
-/**
- * The default WebGL renderer, uses WebGL2 contexts.
- */
 export interface WebGLRenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<WebGLPipes, WebGLOptions, T>, WebGLSystems {
 }
 /**
@@ -12542,6 +12539,8 @@ export interface UpdateTransformOptions {
 	skewY: number;
 	pivotX: number;
 	pivotY: number;
+	originX: number;
+	originY: number;
 }
 /**
  * Constructor options used for `Container` instances.
@@ -12677,6 +12676,17 @@ export interface ContainerOptions<C extends ContainerChild = ContainerChild> ext
 	 * ```
 	 */
 	pivot?: PointData | number;
+	/**
+	 * The origin point around which the container rotates and scales.
+	 * Unlike pivot, changing origin will not move the container's position.
+	 * @example
+	 * ```ts
+	 * new Container({ origin: new Point(100, 100) }); // Rotate around point (100,100)
+	 * new Container({ origin: 50 }); // Rotate around point (50, 50)
+	 * new Container({ origin: { x: 150, y: 150 } }); // Rotate around point (150, 150)
+	 * ```
+	 */
+	origin?: PointData | number;
 	/**
 	 * The coordinate of the object relative to the local coordinates of the parent.
 	 * @example
@@ -13118,6 +13128,10 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * // Rotate around center
 	 * container.pivot.set(container.width / 2, container.height / 2);
 	 * container.rotation = Math.PI; // 180 degrees
+	 *
+	 * // Rotate around center with origin
+	 * container.origin.set(container.width / 2, container.height / 2);
+	 * container.rotation = Math.PI; // 180 degrees
 	 * ```
 	 */
 	get rotation(): number;
@@ -13134,6 +13148,10 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 *
 	 * // Rotate around center
 	 * sprite.pivot.set(sprite.width / 2, sprite.height / 2);
+	 * sprite.angle = 180; // Half rotation
+	 *
+	 * // Rotate around center with origin
+	 * sprite.origin.set(sprite.width / 2, sprite.height / 2);
 	 * sprite.angle = 180; // Half rotation
 	 *
 	 * // Reset rotation
@@ -13204,7 +13222,23 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * @since 4.0.0
 	 */
 	get scale(): ObservablePoint;
-	set scale(value: PointData | number);
+	set scale(value: PointData | number | string);
+	/**
+	 * @experimental
+	 * The origin point around which the container rotates and scales without affecting its position.
+	 * Unlike pivot, changing the origin will not move the container's position.
+	 * @example
+	 * ```ts
+	 * // Rotate around center point
+	 * container.origin.set(container.width / 2, container.height / 2);
+	 * container.rotation = Math.PI; // Rotates around center
+	 *
+	 * // Reset origin
+	 * container.origin.set(0, 0);
+	 * ```
+	 */
+	get origin(): ObservablePoint;
+	set origin(value: PointData | number);
 	/**
 	 * The width of the Container, setting this will actually modify the scale to achieve the value set.
 	 * > [!NOTE] Changing the width will adjust the scale.x property of the container while maintaining its aspect ratio.
@@ -17557,7 +17591,7 @@ export interface FillStyle {
  *     color: 0x0000ff, // Or use a Color object
  *     join: 'miter',
  *     miterLimit: 3,   // Limit how far miter extends
- *     alignment: 1     // Outside alignment
+ *     alignment: 0     // Outside alignment
  * });
  *
  * // Pixel-perfect line
@@ -17580,17 +17614,17 @@ export interface StrokeAttributes {
 	width?: number;
 	/**
 	 * The alignment of the stroke relative to the path.
-	 * - 0: Inside the shape
+	 * - 1: Inside the shape
 	 * - 0.5: Centered on the path (default)
-	 * - 1: Outside the shape
+	 * - 0: Outside the shape
 	 * @example
 	 * ```ts
 	 * // Inside alignment
-	 * const stroke = { alignment: 0 };
+	 * const stroke = { alignment: 1 };
 	 * // Centered alignment
 	 * const stroke = { alignment: 0.5 };
 	 * // Outside alignment
-	 * const stroke = { alignment: 1 };
+	 * const stroke = { alignment: 0 };
 	 * ```
 	 * @default 0.5
 	 */
@@ -17694,7 +17728,7 @@ export interface StrokeAttributes {
  *     stroke: {
  *         width: 4,
  *         color: 0x000000,
- *         alignment: 1  // Outside stroke
+ *         alignment: 0  // Outside stroke
  *     }
  * });
  *
@@ -19413,7 +19447,6 @@ interface Text$1 extends PixiMixins.Text, AbstractText<TextStyle, TextStyleOptio
  *     },
  *     textureStyle: {
  *         scaleMode: 'nearest',
- *         resolution: 2
  *     }
  * });
  * ```
@@ -19473,8 +19506,6 @@ export interface CanvasTextOptions extends TextOptions {
  *     },
  *     textureStyle: {
  *         scaleMode: 'nearest',
- *         resolution: 2,
- *         format: 'rgba',
  *     }
  * });
  *
@@ -21326,9 +21357,9 @@ export declare class Circle implements ShapePrimitive {
 	 * const isOnStroke = circle.strokeContains(150, 100, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = circle.strokeContains(150, 100, 4, 0);   // Inside
+	 * const innerStroke = circle.strokeContains(150, 100, 4, 1);   // Inside
 	 * const centerStroke = circle.strokeContains(150, 100, 4, 0.5); // Centered
-	 * const outerStroke = circle.strokeContains(150, 100, 4, 1);   // Outside
+	 * const outerStroke = circle.strokeContains(150, 100, 4, 0);   // Outside
 	 * ```
 	 * @param x - The X coordinate of the point to test
 	 * @param y - The Y coordinate of the point to test
@@ -21518,9 +21549,9 @@ export declare class Ellipse implements ShapePrimitive {
 	 * const isOnStroke = ellipse.strokeContains(150, 100, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = ellipse.strokeContains(150, 100, 4, 0);   // Inside
+	 * const innerStroke = ellipse.strokeContains(150, 100, 4, 1);   // Inside
 	 * const centerStroke = ellipse.strokeContains(150, 100, 4, 0.5); // Centered
-	 * const outerStroke = ellipse.strokeContains(150, 100, 4, 1);   // Outside
+	 * const outerStroke = ellipse.strokeContains(150, 100, 4, 0);   // Outside
 	 * ```
 	 * @remarks
 	 * - Uses normalized ellipse equations
@@ -21529,7 +21560,7 @@ export declare class Ellipse implements ShapePrimitive {
 	 * @param x - The X coordinate of the point to test
 	 * @param y - The Y coordinate of the point to test
 	 * @param strokeWidth - The width of the line to check
-	 * @param alignment - The alignment of the stroke (0 = inner, 0.5 = centered, 1 = outer)
+	 * @param alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
 	 * @returns Whether the x/y coords are within this ellipse's stroke
 	 */
 	strokeContains(x: number, y: number, strokeWidth: number, alignment?: number): boolean;
@@ -21795,14 +21826,14 @@ export declare class RoundedRectangle implements ShapePrimitive {
 	 * const isOnStroke = rect.strokeContains(150, 100, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = rect.strokeContains(150, 100, 4, 0);   // Inside
+	 * const innerStroke = rect.strokeContains(150, 100, 4, 1);   // Inside
 	 * const centerStroke = rect.strokeContains(150, 100, 4, 0.5); // Centered
-	 * const outerStroke = rect.strokeContains(150, 100, 4, 1);   // Outside
+	 * const outerStroke = rect.strokeContains(150, 100, 4, 0);   // Outside
 	 * ```
 	 * @param pX - The X coordinate of the point to test
 	 * @param pY - The Y coordinate of the point to test
 	 * @param strokeWidth - The width of the line to check
-	 * @param alignment - The alignment of the stroke (0 = inner, 0.5 = centered, 1 = outer)
+	 * @param alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
 	 * @returns Whether the x/y coordinates are within this rectangle's stroke
 	 */
 	strokeContains(pX: number, pY: number, strokeWidth: number, alignment?: number): boolean;
@@ -21978,14 +22009,14 @@ export declare class Polygon implements ShapePrimitive {
 	 * const isOnStroke = polygon.strokeContains(25, 25, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = polygon.strokeContains(25, 25, 4, 0);   // Inside
+	 * const innerStroke = polygon.strokeContains(25, 25, 4, 1);   // Inside
 	 * const centerStroke = polygon.strokeContains(25, 25, 4, 0.5); // Centered
-	 * const outerStroke = polygon.strokeContains(25, 25, 4, 1);   // Outside
+	 * const outerStroke = polygon.strokeContains(25, 25, 4, 0);   // Outside
 	 * ```
 	 * @param x - The X coordinate of the point to test
 	 * @param y - The Y coordinate of the point to test
 	 * @param strokeWidth - The width of the line to check
-	 * @param alignment - The alignment of the stroke (0 = inner, 0.5 = centered, 1 = outer)
+	 * @param alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
 	 * @returns Whether the x/y coordinates are within this polygon's stroke
 	 */
 	strokeContains(x: number, y: number, strokeWidth: number, alignment?: number): boolean;
@@ -22056,13 +22087,37 @@ export declare class Polygon implements ShapePrimitive {
 	 */
 	get lastY(): number;
 	/**
-	 * Get the first X coordinate of the polygon
+	 * Get the last X coordinate of the polygon.
+	 * @deprecated since 8.11.0, use {@link Polygon.lastX} instead.
 	 */
 	get x(): number;
 	/**
-	 * Get the first Y coordinate of the polygon
+	 * Get the last Y coordinate of the polygon.
+	 * @deprecated since 8.11.0, use {@link Polygon.lastY} instead.
 	 */
 	get y(): number;
+	/**
+	 * Get the first X coordinate of the polygon.
+	 * @example
+	 * ```ts
+	 * // Basic coordinate access
+	 * const polygon = new Polygon([0, 0, 100, 200, 300, 400]);
+	 * console.log(polygon.x); // 0
+	 * ```
+	 * @returns The x-coordinate of the first vertex
+	 */
+	get startX(): number;
+	/**
+	 * Get the first Y coordinate of the polygon.
+	 * @example
+	 * ```ts
+	 * // Basic coordinate access
+	 * const polygon = new Polygon([0, 0, 100, 200, 300, 400]);
+	 * console.log(polygon.y); // 0
+	 * ```
+	 * @returns The y-coordinate of the first vertex
+	 */
+	get startY(): number;
 }
 /**
  * A class to define a shape of a triangle via user defined coordinates.
@@ -22200,14 +22255,14 @@ export declare class Triangle implements ShapePrimitive {
 	 * const isOnStroke = triangle.strokeContains(25, 25, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = triangle.strokeContains(25, 25, 4, 0);   // Inside
+	 * const innerStroke = triangle.strokeContains(25, 25, 4, 1);   // Inside
 	 * const centerStroke = triangle.strokeContains(25, 25, 4, 0.5); // Centered
-	 * const outerStroke = triangle.strokeContains(25, 25, 4, 1);   // Outside
+	 * const outerStroke = triangle.strokeContains(25, 25, 4, 0);   // Outside
 	 * ```
 	 * @param pointX - The X coordinate of the point to test
 	 * @param pointY - The Y coordinate of the point to test
 	 * @param strokeWidth - The width of the line to check
-	 * @param _alignment - The alignment of the stroke (0 = inner, 0.5 = centered, 1 = outer)
+	 * @param _alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
 	 * @returns Whether the x/y coordinates are within this triangle's stroke
 	 */
 	strokeContains(pointX: number, pointY: number, strokeWidth: number, _alignment?: number): boolean;
@@ -25261,7 +25316,6 @@ export interface AssetsManifest {
  *     skipKerning: false,      // Enable kerning
  *     textureStyle: {
  *         scaleMode: 'linear',
- *         premultiplyAlpha: true
  *     }
  * });
  *
@@ -25378,8 +25432,6 @@ export interface BitmapFontInstallOptions {
 	 *     name: 'CrispFont',
 	 *     textureStyle: {
 	 *         scaleMode: 'nearest',
-	 *         resolution: 2,
-	 *         format: 'rgba8unorm'
 	 *     }
 	 * });
 	 * ```
@@ -25783,6 +25835,562 @@ export declare class BitmapText extends AbstractText<TextStyle, TextStyleOptions
 	get resolution(): number;
 }
 /**
+ * Contains the output elements from a text split operation.
+ * Provides access to the hierarchical structure of split text elements.
+ * @example
+ * ```ts
+ * const splitResult = Text.split(myText);
+ *
+ * // Access individual characters
+ * splitResult.chars.forEach(char => {
+ *     char.alpha = 0;
+ *     gsap.to(char, { alpha: 1, duration: 0.5 });
+ * });
+ *
+ * // Access words (groups of characters)
+ * splitResult.words.forEach(word => {
+ *     word.scale.set(0);
+ *     gsap.to(word.scale, { x: 1, y: 1, duration: 0.5 });
+ * });
+ *
+ * // Access lines (groups of words)
+ * splitResult.lines.forEach(line => {
+ *     line.x = -200;
+ *     gsap.to(line, { x: 0, duration: 0.5 });
+ * });
+ * ```
+ */
+export interface TextSplitOutput<T extends SplitableTextObject> {
+	/** Array of individual character Text objects */
+	chars: T[];
+	/** Array of word containers, each containing character objects */
+	words: Container[];
+	/** Array of line containers, each containing word containers */
+	lines: Container[];
+}
+/**
+ * Configuration options for text splitting.
+ */
+export interface AbstractSplitOptions {
+	/** Text content to be split */
+	text: string;
+	/** Text styling - accepts TextStyle instance or style object */
+	style: TextStyle | Partial<TextStyleOptions>;
+	/**
+	 * Enables automatic splitting on text/style changes
+	 * @default true
+	 */
+	autoSplit?: boolean;
+	/**
+	 * Transform origin for line segments. Range: [0-1]
+	 * @example
+	 * ```ts
+	 * lineAnchor: 0.5        // Center horizontally and vertically
+	 * lineAnchor: { x: 0, y: 0.5 }  // Left-center alignment
+	 *
+	 * ```
+	 * @default 0
+	 */
+	lineAnchor?: number | PointData;
+	/**
+	 * Transform origin for word segments. Range: [0-1]
+	 * @example
+	 * ```ts
+	 * wordAnchor: { x: 1, y: 0 }  // Top-right alignment
+	 * wordAnchor: 0.5  // Center alignment
+	 * ```
+	 * @default 0
+	 */
+	wordAnchor?: number | PointData;
+	/**
+	 * Transform origin for character segments. Range: [0-1]
+	 * @example
+	 * ```ts
+	 * charAnchor: { x: 0.5, y: 1 }  // Bottom-center alignment
+	 * charAnchor: 0.5  // Center alignment
+	 * ```
+	 * @default 0
+	 */
+	charAnchor?: number | PointData;
+}
+/**
+ * Configuration options for SplitText, combining container properties with text splitting settings.
+ * @example Basic Usage
+ * ```ts
+ * const options: SplitTextOptions = {
+ *   text: 'Hello World',
+ *   style: { fontSize: 32, fill: 0xffffff },
+ *   // Transform origins
+ *   lineAnchor: 0.5,                // Center each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center each char
+ * };
+ * ```
+ * @example Advanced Configuration
+ * ```ts
+ * const options: SplitTextOptions = {
+ *   // Text content and style
+ *   text: 'Multi\nLine Text',
+ *   style: new TextStyle({
+ *     fontSize: 24,
+ *     fill: ['#FF0000', '#00FF00'], // Gradient
+ *     strokeThickness: 2,
+ *   }),
+ *
+ *   // Container properties
+ *   x: 100,
+ *   y: 100,
+ *   alpha: 0.8,
+ *
+ *   // Splitting settings
+ *   autoSplit: true,
+ *
+ *   // Transform origins (normalized 0-1)
+ *   lineAnchor: { x: 1, y: 0 },    // Top-right
+ *   wordAnchor: 0.5,               // Center
+ *   charAnchor: { x: 0, y: 1 },    // Bottom-left
+ * };
+ * ```
+ *
+ * Properties:
+ * - Container options from {@link ContainerOptions}
+ * - Text split options from {@link AbstractSplitOptions}
+ */
+export interface AbstractSplitTextOptions extends ContainerOptions, AbstractSplitOptions {
+}
+/**
+ * @experimental
+ * A container that splits text into individually manipulatable segments (lines, words, and characters)
+ * for advanced text effects and animations.
+ * @example Basic Usage
+ * ```ts
+ * const text = new SplitText({
+ *   text: "Hello World",
+ *   style: { fontSize: 24 },
+ *   // Origin points for transformations (0-1 range)
+ *   lineAnchor: 0.5,  // Center of each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center of each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center of each character
+ *   autoSplit: true  // Auto-update segments on text/style changes
+ * });
+ * ```
+ *
+ * Features:
+ * - Hierarchical text splitting (lines → words → characters)
+ * - Independent transformation origins for each segment level
+ * - Automatic or manual segment updates
+ * - Support for both canvas text and bitmap text
+ * @example Animation Example
+ * ```ts
+ * // Character fade-in sequence
+ * text.chars.forEach((char, i) => {
+ *   gsap.from(char, {
+ *     alpha: 0,
+ *     delay: i * 0.1
+ *   });
+ * });
+ *
+ * // Word scale animation
+ * text.words.forEach((word, i) => {
+ *   gsap.to(word.scale, {
+ *     x: 1.2, y: 1.2,
+ *     yoyo: true,
+ *     repeat: -1,
+ *     delay: i * 0.2
+ *   });
+ * });
+ *
+ * // Line slide-in effect
+ * text.lines.forEach((line, i) => {
+ *   gsap.from(line, {
+ *     x: -200,
+ *     delay: i * 0.3
+ *   });
+ * });
+ * ```
+ *
+ * Configuration Options:
+ * - `text`: The string to render and segment
+ * - `style`: TextStyle instance or configuration object
+ * - `autoSplit`: Automatically update segments on changes (default: true)
+ * - `lineAnchor`: Transform origin for lines (default: 0)
+ * - `wordAnchor`: Transform origin for words (default: 0)
+ * - `charAnchor`: Transform origin for characters (default: 0)
+ *
+ * > [!NOTE] Anchor points are normalized (0-1):
+ * > - 0,0: Top-left
+ * > - 0.5,0.5: Center
+ * > - 1,1: Bottom-right
+ *
+ * > [!WARNING] Limitations
+ * > - Character spacing may differ slightly from standard text due to browser
+ * >   kerning being lost when characters are separated
+ */
+export declare abstract class AbstractSplitText<T extends SplitableTextObject> extends Container {
+	/**
+	 * Individual character segments of the text.
+	 * @example
+	 * ```ts
+	 * // Fade in characters sequentially
+	 * text.chars.forEach((char, i) => {
+	 *   char.alpha = 0;
+	 *   gsap.to(char, {
+	 *     alpha: 1,
+	 *     delay: i * 0.1
+	 *   });
+	 * });
+	 * ```
+	 */
+	chars: T[];
+	/**
+	 * Word segments of the text, each containing one or more characters.
+	 * @example
+	 * ```ts
+	 * // Scale words on hover
+	 * text.words.forEach(word => {
+	 *   word.interactive = true;
+	 *   word.on('pointerover', () => {
+	 *     gsap.to(word.scale, { x: 1.2, y: 1.2 });
+	 *   });
+	 *   word.on('pointerout', () => {
+	 *     gsap.to(word.scale, { x: 1, y: 1 });
+	 *   });
+	 * });
+	 * ```
+	 */
+	words: Container[];
+	/**
+	 * Line segments of the text, each containing one or more words.
+	 * @example
+	 * ```ts
+	 * // Stagger line entrance animations
+	 * text.lines.forEach((line, i) => {
+	 *   line.x = -200;
+	 *   gsap.to(line, {
+	 *     x: 0,
+	 *     duration: 0.5,
+	 *     delay: i * 0.2,
+	 *     ease: 'back.out'
+	 *   });
+	 * });
+	 * ```
+	 */
+	lines: Container[];
+	constructor(config: AbstractSplitTextOptions);
+	/**
+	 * Splits the text into lines, words, and characters.
+	 * Call this manually when autoSplit is false.
+	 * @example Manual Splitting
+	 * ```ts
+	 * const text = new SplitText({
+	 *   text: 'Manual Update',
+	 *   autoSplit: false
+	 * });
+	 *
+	 * text.text = 'New Content';
+	 * text.style = { fontSize: 32 };
+	 * text.split(); // Apply changes
+	 * ```
+	 */
+	split(): void;
+	get text(): string;
+	/**
+	 * Gets or sets the text content.
+	 * Setting new text triggers splitting if autoSplit is true.
+	 * > [!NOTE] Setting this frequently can have a performance impact, especially with large texts and canvas text.
+	 * @example Dynamic Text Updates
+	 * ```ts
+	 * const text = new SplitText({
+	 *   text: 'Original',
+	 *   autoSplit: true
+	 * });
+	 *
+	 * // Auto-splits on change
+	 * text.text = 'Updated Content';
+	 *
+	 * // Manual update
+	 * text.autoSplit = false;
+	 * text.text = 'Manual Update';
+	 * text.split();
+	 * ```
+	 */
+	set text(value: string);
+	/**
+	 * Gets or sets the transform anchor for line segments.
+	 * The anchor point determines the center of rotation and scaling for each line.
+	 * @example Setting Line Anchors
+	 * ```ts
+	 * // Center rotation/scaling
+	 * text.lineAnchor = 0.5;
+	 *
+	 * // Rotate/scale from top-right corner
+	 * text.lineAnchor = { x: 1, y: 0 };
+	 *
+	 * // Custom anchor point
+	 * text.lineAnchor = {
+	 *   x: 0.2, // 20% from left
+	 *   y: 0.8  // 80% from top
+	 * };
+	 * ```
+	 */
+	get lineAnchor(): number | PointData;
+	set lineAnchor(value: number | PointData);
+	/**
+	 * Gets or sets the transform anchor for word segments.
+	 * The anchor point determines the center of rotation and scaling for each word.
+	 * @example
+	 * ```ts
+	 * // Center each word
+	 * text.wordAnchor = 0.5;
+	 *
+	 * // Scale from bottom-left
+	 * text.wordAnchor = { x: 0, y: 1 };
+	 *
+	 * // Rotate around custom point
+	 * text.wordAnchor = {
+	 *   x: 0.75,  // 75% from left
+	 *   y: 0.5    // Middle vertically
+	 * };
+	 * ```
+	 */
+	get wordAnchor(): number | PointData;
+	set wordAnchor(value: number | PointData);
+	/**
+	 * Gets or sets the transform anchor for character segments.
+	 * The anchor point determines the center of rotation and scaling for each character.
+	 * @example Setting Character Anchors
+	 * ```ts
+	 * // Center each character
+	 * text.charAnchor = 0.5;
+	 *
+	 * // Rotate from top-center
+	 * text.charAnchor = { x: 0.5, y: 0 };
+	 *
+	 * // Scale from bottom-right
+	 * text.charAnchor = { x: 1, y: 1 };
+	 * ```
+	 * @example Animation with Anchors
+	 * ```ts
+	 * // Rotate characters around their centers
+	 * text.charAnchor = 0.5;
+	 * text.chars.forEach((char, i) => {
+	 *   gsap.to(char, {
+	 *     rotation: Math.PI * 2,
+	 *     duration: 1,
+	 *     delay: i * 0.1,
+	 *     repeat: -1
+	 *   });
+	 * });
+	 * ```
+	 */
+	get charAnchor(): number | PointData;
+	set charAnchor(value: number | PointData);
+	get style(): TextStyle;
+	/**
+	 * The style configuration for the text.
+	 * Can be a TextStyle instance or a configuration object.
+	 * @example
+	 * ```ts
+	 * const text = new Text({
+	 *     text: 'Styled Text',
+	 *     style: {
+	 *         fontSize: 24,
+	 *         fill: 0xff1010, // Red color
+	 *         fontFamily: 'Arial',
+	 *         align: 'center', // Center alignment
+	 *         stroke: { color: '#4a1850', width: 5 }, // Purple stroke
+	 *         dropShadow: {
+	 *             color: '#000000', // Black shadow
+	 *             blur: 4, // Shadow blur
+	 *             distance: 6 // Shadow distance
+	 *         }
+	 *     }
+	 * });
+	 * // Update style dynamically
+	 * text.style = {
+	 *     fontSize: 30, // Change font size
+	 *     fill: 0x00ff00, // Change color to green
+	 *     align: 'right', // Change alignment to right
+	 *     stroke: { color: '#000000', width: 2 }, // Add black stroke
+	 * }
+	 */
+	set style(style: TextStyle | Partial<TextStyle> | TextStyleOptions);
+	/**
+	 * Destroys the SplitText instance and all its resources.
+	 * Cleans up all segment arrays, event listeners, and optionally the text style.
+	 * @param options - Destroy configuration options
+	 * @example
+	 * ```ts
+	 * // Clean up everything
+	 * text.destroy({ children: true, texture: true, style: true });
+	 *
+	 * // Remove from parent but keep style
+	 * text.destroy({ children: true, style: false });
+	 * ```
+	 */
+	destroy(options?: DestroyOptions): void;
+}
+/**
+ * Configuration options for Text splitting.
+ */
+export interface SplitOptions extends AbstractSplitOptions {
+}
+/**
+ * Configuration options for SplitText, combining container properties with text splitting settings.
+ * @example Basic Usage
+ * ```ts
+ * const options: SplitTextOptions = {
+ *   text: 'Hello World',
+ *   style: { fontSize: 32, fill: 0xffffff },
+ *   // Transform origins
+ *   lineAnchor: 0.5,                // Center each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center each char
+ * };
+ * ```
+ * @example Advanced Configuration
+ * ```ts
+ * const options: SplitTextOptions = {
+ *   // Text content and style
+ *   text: 'Multi\nLine Text',
+ *   style: new TextStyle({
+ *     fontSize: 24,
+ *     fill: ['#FF0000', '#00FF00'], // Gradient
+ *     strokeThickness: 2,
+ *   }),
+ *
+ *   // Container properties
+ *   x: 100,
+ *   y: 100,
+ *   alpha: 0.8,
+ *
+ *   // Splitting settings
+ *   autoSplit: true,
+ *
+ *   // Transform origins (normalized 0-1)
+ *   lineAnchor: { x: 1, y: 0 },    // Top-right
+ *   wordAnchor: 0.5,               // Center
+ *   charAnchor: { x: 0, y: 1 },    // Bottom-left
+ * };
+ * ```
+ *
+ * Properties:
+ * - Container options from {@link ContainerOptions}
+ * - Text splitting options from {@link SplitOptions}
+ * - Additional PixiJS-specific options from PixiMixins.SplitText
+ */
+export interface SplitTextOptions extends PixiMixins.SplitText, ContainerOptions, SplitOptions {
+}
+/**
+ * @experimental
+ * A container that splits text into individually manipulatable segments (lines, words, and characters)
+ * for advanced text effects and animations.
+ * Converts each segment into a separate Text object.
+ * @example Basic Usage
+ * ```ts
+ * const text = new SplitText({
+ *   text: "Hello World",
+ *   style: { fontSize: 24 },
+ *   // Origin points for transformations (0-1 range)
+ *   lineAnchor: 0.5,  // Center of each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center of each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center of each character
+ *   autoSplit: true  // Auto-update segments on text/style changes
+ * });
+ * ```
+ *
+ * Features:
+ * - Hierarchical text segmentation (lines → words → characters)
+ * - Independent transformation origins for each segment level
+ * - Automatic or manual segment updates
+ * @example Animation Example
+ * ```ts
+ * // Character fade-in sequence
+ * text.chars.forEach((char, i) => {
+ *   gsap.from(char, {
+ *     alpha: 0,
+ *     delay: i * 0.1
+ *   });
+ * });
+ *
+ * // Word scale animation
+ * text.words.forEach((word, i) => {
+ *   gsap.to(word.scale, {
+ *     x: 1.2, y: 1.2,
+ *     yoyo: true,
+ *     repeat: -1,
+ *     delay: i * 0.2
+ *   });
+ * });
+ *
+ * // Line slide-in effect
+ * text.lines.forEach((line, i) => {
+ *   gsap.from(line, {
+ *     x: -200,
+ *     delay: i * 0.3
+ *   });
+ * });
+ * ```
+ *
+ * Configuration Options:
+ * - `text`: The string to render and segment
+ * - `style`: TextStyle instance or configuration object
+ * - `autoSplit`: Automatically update segments on changes (default: true)
+ * - `lineAnchor`: Transform origin for lines (default: 0)
+ * - `wordAnchor`: Transform origin for words (default: 0)
+ * - `charAnchor`: Transform origin for characters (default: 0)
+ *
+ * > [!NOTE] Anchor points are normalized (0-1):
+ * > - 0,0: Top-left
+ * > - 0.5,0.5: Center
+ * > - 1,1: Bottom-right
+ *
+ * > [!WARNING] Limitations
+ * > - Character spacing may differ slightly from standard text due to browser
+ * >   kerning being lost when characters are separated
+ */
+export declare class SplitText extends AbstractSplitText<Text$1> {
+	/**
+	 * Default configuration options for SplitText instances.
+	 * @example
+	 * ```ts
+	 * // Override defaults globally
+	 * SplitText.defaultOptions = {
+	 *   autoSplit: false,
+	 *   lineAnchor: 0.5,  // Center alignment
+	 *   wordAnchor: { x: 0, y: 0.5 },  // Left-center
+	 *   charAnchor: { x: 0.5, y: 1 }   // Bottom-center
+	 * };
+	 * ```
+	 */
+	static defaultOptions: Partial<SplitTextOptions>;
+	constructor(config: SplitTextOptions);
+	/**
+	 * Creates a SplitText instance from an existing text object.
+	 * Useful for converting standard Text or Text objects into segmented versions.
+	 * @param text - The source text object to convert
+	 * @param options - Additional splitting options
+	 * @returns A new SplitText instance
+	 * @example
+	 * ```ts
+	 * const text = new Text({
+	 *   text: 'Bitmap Text',
+	 *   style: { fontFamily: 'Arial' }
+	 * });
+	 *
+	 * const segmented = SplitText.from(text);
+	 *
+	 * // with additional options
+	 * const segmentedWithOptions = SplitText.from(text, {
+	 *   autoSplit: false,
+	 *   lineAnchor: 0.5,
+	 *   wordAnchor: { x: 0, y: 0.5 },
+	 * })
+	 * ```
+	 */
+	static from(text: Text$1, options?: Omit<SplitTextOptions, "text" | "style">): SplitText;
+}
+/**
  * Constructor options used for `HTMLText` instances. Extends the base text options
  * with HTML-specific features and texture styling capabilities.
  * @example
@@ -25814,7 +26422,6 @@ export declare class BitmapText extends AbstractText<TextStyle, TextStyleOptions
  *     }
  *     textureStyle: {
  *         scaleMode: 'linear',
- *         resolution: 2
  *     }
  * });
  * ```
@@ -25882,7 +26489,6 @@ export interface HTMLText extends PixiMixins.HTMLText, AbstractText<HTMLTextStyl
  *     },
  *     textureStyle: {
  *         scaleMode: 'nearest',
- *         resolution: 2,
  *     }
  * });
  * ```
@@ -25900,6 +26506,166 @@ export declare class HTMLText extends AbstractText<HTMLTextStyle, HTMLTextStyleO
 	constructor(options?: HTMLTextOptions);
 	/** @deprecated since 8.0.0 */
 	constructor(text?: TextString, options?: Partial<HTMLTextStyle>);
+}
+/**
+ * Configuration options for BitmapText splitting.
+ */
+export interface SplitBitmapOptions extends AbstractSplitOptions {
+}
+/**
+ * Configuration options for SplitBitmapText, combining container properties with text splitting settings.
+ * @example Basic Usage
+ * ```ts
+ * const options: SplitBitmapTextOptions = {
+ *   text: 'Hello World',
+ *   style: { fontSize: 32, fill: 0xffffff },
+ *   // Transform origins
+ *   lineAnchor: 0.5,                // Center each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center each char
+ * };
+ * ```
+ * @example Advanced Configuration
+ * ```ts
+ * const options: SplitBitmapTextOptions = {
+ *   // Text content and style
+ *   text: 'Multi\nLine Text',
+ *   style: new TextStyle({
+ *     fontSize: 24,
+ *     fill: ['#FF0000', '#00FF00'], // Gradient
+ *     strokeThickness: 2,
+ *   }),
+ *
+ *   // Container properties
+ *   x: 100,
+ *   y: 100,
+ *   alpha: 0.8,
+ *
+ *   // Splitting settings
+ *   autoSplit: true,
+ *
+ *   // Transform origins (normalized 0-1)
+ *   lineAnchor: { x: 1, y: 0 },    // Top-right
+ *   wordAnchor: 0.5,               // Center
+ *   charAnchor: { x: 0, y: 1 },    // Bottom-left
+ * };
+ * ```
+ *
+ * Properties:
+ * - Container options from {@link ContainerOptions}
+ * - Text splitting options from {@link SplitBitmapOptions}
+ * - Additional PixiJS-specific options from PixiMixins.SplitBitmapText
+ */
+export interface SplitBitmapTextOptions extends PixiMixins.SplitBitmapText, ContainerOptions, SplitBitmapOptions {
+}
+/**
+ * @experimental
+ * A container that splits text into individually manipulatable segments (lines, words, and characters)
+ * for advanced text effects and animations.
+ * Converts each segment into a separate BitmapText object.
+ * @example Basic Usage
+ * ```ts
+ * const text = new SplitBitmapText({
+ *   text: "Hello World",
+ *   style: { fontSize: 24 },
+ *   // Origin points for transformations (0-1 range)
+ *   lineAnchor: 0.5,  // Center of each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center of each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center of each character
+ *   autoSplit: true  // Auto-update segments on text/style changes
+ * });
+ * ```
+ *
+ * Features:
+ * - Hierarchical text segmentation (lines → words → characters)
+ * - Independent transformation origins for each segment level
+ * - Automatic or manual segment updates
+ * @example Animation Example
+ * ```ts
+ * // Character fade-in sequence
+ * text.chars.forEach((char, i) => {
+ *   gsap.from(char, {
+ *     alpha: 0,
+ *     delay: i * 0.1
+ *   });
+ * });
+ *
+ * // Word scale animation
+ * text.words.forEach((word, i) => {
+ *   gsap.to(word.scale, {
+ *     x: 1.2, y: 1.2,
+ *     yoyo: true,
+ *     repeat: -1,
+ *     delay: i * 0.2
+ *   });
+ * });
+ *
+ * // Line slide-in effect
+ * text.lines.forEach((line, i) => {
+ *   gsap.from(line, {
+ *     x: -200,
+ *     delay: i * 0.3
+ *   });
+ * });
+ * ```
+ *
+ * Configuration Options:
+ * - `text`: The string to render and segment
+ * - `style`: TextStyle instance or configuration object
+ * - `autoSplit`: Automatically update segments on changes (default: true)
+ * - `lineAnchor`: Transform origin for lines (default: 0)
+ * - `wordAnchor`: Transform origin for words (default: 0)
+ * - `charAnchor`: Transform origin for characters (default: 0)
+ *
+ * > [!NOTE] Anchor points are normalized (0-1):
+ * > - 0,0: Top-left
+ * > - 0.5,0.5: Center
+ * > - 1,1: Bottom-right
+ *
+ * > [!WARNING] Limitations
+ * > - Character spacing may differ slightly from standard text due to browser
+ * >   kerning being lost when characters are separated
+ */
+export declare class SplitBitmapText extends AbstractSplitText<BitmapText> {
+	/**
+	 * Default configuration options for SplitBitmapText instances.
+	 * @example
+	 * ```ts
+	 * // Override defaults globally
+	 * SplitBitmapText.defaultOptions = {
+	 *   autoSplit: false,
+	 *   lineAnchor: 0.5,  // Center alignment
+	 *   wordAnchor: { x: 0, y: 0.5 },  // Left-center
+	 *   charAnchor: { x: 0.5, y: 1 }   // Bottom-center
+	 * };
+	 * ```
+	 */
+	static defaultOptions: Partial<SplitBitmapTextOptions>;
+	constructor(config: SplitBitmapTextOptions);
+	/**
+	 * Creates a SplitBitmapText instance from an existing text object.
+	 * Useful for converting standard Text or BitmapText objects into segmented versions.
+	 * @param text - The source text object to convert
+	 * @param options - Additional splitting options
+	 * @returns A new SplitBitmapText instance
+	 * @example
+	 * ```ts
+	 * const bitmapText = new BitmapText({
+	 *   text: 'Bitmap Text',
+	 *   style: { fontFamily: 'Arial' }
+	 * });
+	 *
+	 * const segmented = SplitBitmapText.from(bitmapText);
+	 *
+	 * // with additional options
+	 * const segmentedWithOptions = SplitBitmapText.from(bitmapText, {
+	 *   autoSplit: false,
+	 *   lineAnchor: 0.5,
+	 *   wordAnchor: { x: 0, y: 0.5 },
+	 * })
+	 * ```
+	 */
+	static from(text: BitmapText, options?: Omit<SplitBitmapTextOptions, "text" | "style">): SplitBitmapText;
 }
 declare class CanvasTextGeneratorClass {
 	/**
@@ -26006,6 +26772,14 @@ declare global {
 		interface HTMLText {
 		}
 		interface HTMLTextOptions {
+		}
+		interface SplitText {
+		}
+		interface SplitTextOptions {
+		}
+		interface SplitBitmapText {
+		}
+		interface SplitBitmapTextOptions {
 		}
 	}
 }
