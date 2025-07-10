@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import sponsorData from '../../../data/sponsors.json';
+import manualSponsors from '../../../data/manualSponsors.json';
 import styles from './index.module.scss';
 
 import { ArrowUpRight } from 'lucide-react';
@@ -38,7 +39,7 @@ const getSponsorTier = (monthlyDollars: number): SponsorTier => {
 };
 
 export default function OpenCollective(): React.JSX.Element {
-  const [sponsors, setSponsors] = useState<Sponsorship[]>(sponsorData as Sponsorship[]);
+  const [sponsors, setSponsors] = useState<Sponsorship[]>([...sponsorData, ...manualSponsors] as Sponsorship[]);
 
   useEffect(() => {
     const sponsorData = sponsors.map((sponsor) => ({
@@ -46,19 +47,6 @@ export default function OpenCollective(): React.JSX.Element {
       tierName: getSponsorTier(sponsor.monthlyDollars),
     })) as Sponsorship[];
 
-    const playco: Sponsorship = {
-      monthlyDollars: 2500,
-      tierName: SPONSOR_TIERS.PLATINUM,
-      sponsor: {
-        name: 'Playco',
-        login: 'playco',
-        type: 'Organization',
-        websiteUrl: 'https://www.play.co/',
-        avatarUrl: '/images/logo-playco.png',
-      },
-    };
-
-    sponsorData.unshift(playco);
     setSponsors(sponsorData);
   }, []);
 

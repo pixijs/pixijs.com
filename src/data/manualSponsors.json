@@ -1,0 +1,30 @@
+[
+  {
+    "monthlyDollars": 2500,
+    "tierName": "Platinum Sponsor",
+    "sponsor": {
+      "name": "Playco",
+      "login": "playco",
+      "type": "Organization",
+      "websiteUrl": "https://www.play.co/",
+      "avatarUrl": "/images/logo-playco.png"
+    }
+  },
+  {
+    "sponsor": {
+      "name": "Buy Instagram Likes Views4You",
+      "type": "Organization",
+      "login": "buy-instagram-likes-views4you",
+      "avatarUrl": "https://images.opencollective.com/buy-instagram-likes-views4you/6364714/logo/460.png",
+      "websiteUrl": "https://views4you.com/buy-instagram-likes",
+      "linkUrl": "https://opencollective.com/buy-instagram-likes-views4you",
+      "socialLogins": {
+        "opencollective": "buy-instagram-likes-views4you"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  }
+]
