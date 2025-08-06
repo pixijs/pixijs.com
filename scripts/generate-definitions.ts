@@ -3,7 +3,7 @@ import path from 'path';
 import * as ts from 'typescript';
 
 async function generateDefinitionFile() {
-  const url = 'https://cdn.jsdelivr.net/npm/pixi.js@8.11.0/dist/pixi.js.d.ts';
+  const url = 'https://cdn.jsdelivr.net/npm/pixi.js@latest/dist/pixi.js.d.ts';
 
   try {
     // Fetch the definition file

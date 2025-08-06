@@ -2864,6 +2864,25 @@ export declare class Rectangle implements ShapePrimitive {
 	 */
 	ceil(resolution?: number, eps?: number): this;
 	/**
+	 * Scales the rectangle's dimensions and position by the specified factors.
+	 * @example
+	 * ```ts
+	 * const rect = new Rectangle(50, 50, 100, 100);
+	 *
+	 * // Scale uniformly
+	 * rect.scale(0.5, 0.5);
+	 * // rect is now: x=25, y=25, width=50, height=50
+	 *
+	 * // non-uniformly
+	 * rect.scale(0.5, 1);
+	 * // rect is now: x=25, y=50, width=50, height=100
+	 * ```
+	 * @param x - The factor by which to scale the horizontal properties (x, width).
+	 * @param y - The factor by which to scale the vertical properties (y, height).
+	 * @returns Returns itself
+	 */
+	scale(x: number, y?: number): this;
+	/**
 	 * Enlarges this rectangle to include the passed rectangle.
 	 * @example
 	 * ```ts
@@ -3276,7 +3295,7 @@ export interface TextureOptions<TextureSourceType extends TextureSource = Textur
  * // once Assets has loaded the image it will be available via the from method
  * const sameTexture = Texture.from('assets/image.png');
  * // another way to access the texture once loaded
- * const sameAgainTexture = Asset.get('assets/image.png');
+ * const sameAgainTexture = Assets.get('assets/image.png');
  *
  * const sprite1 = new Sprite(texture);
  *
@@ -3939,7 +3958,7 @@ type Formats = keyof typeof imageTypes;
  *     .fill(0xFF0000);
  *
  * // Basic extraction examples
- * const image = await app.renderer.extract.image(graphics);    // As HTMLImageElement
+ * const image = await app.renderer.extract.image(graphics);    // As IImage (HTMLImageElement)
  * const canvas = app.renderer.extract.canvas(graphics);        // As Canvas
  * const pixels = app.renderer.extract.pixels(graphics);        // As pixel data
  * const base64 = await app.renderer.extract.base64(graphics); // As base64 string
@@ -4000,9 +4019,9 @@ export declare class ExtractSystem implements System {
 	/** @param renderer - The renderer this System works for. */
 	constructor(renderer: Renderer);
 	/**
-	 * Creates an HTMLImageElement from a display object or texture.
+	 * Creates an IImage from a display object or texture.
 	 * @param options - Options for creating the image, or the target to extract
-	 * @returns Promise that resolves with the generated HTMLImageElement
+	 * @returns Promise that resolves with the generated IImage
 	 * @example
 	 * ```ts
 	 * // Basic usage with a sprite
@@ -4026,7 +4045,7 @@ export declare class ExtractSystem implements System {
 	 * const image = await renderer.extract.image(texture);
 	 * ```
 	 */
-	image(options: ExtractImageOptions | Container | Texture): Promise<HTMLImageElement>;
+	image(options: ExtractImageOptions | Container | Texture): Promise<ImageLike>;
 	/**
 	 * Converts the target into a base64 encoded string.
 	 *
@@ -4211,7 +4230,7 @@ interface UniformParserDefinition {
 	uboStd40?: string;
 	uniform?: string;
 }
-declare const DefaultWebGPUSystems: (typeof BackgroundSystem | typeof GenerateTextureSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof TextureGCSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GpuUboSystem | typeof GpuEncoderSystem | typeof GpuDeviceSystem | typeof GpuLimitsSystem | typeof GpuBufferSystem | typeof GpuTextureSystem | typeof GpuRenderTargetSystem | typeof GpuShaderSystem | typeof GpuStateSystem | typeof PipelineSystem | typeof GpuColorMaskSystem | typeof GpuStencilSystem | typeof BindGroupSystem)[];
+declare const DefaultWebGPUSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GpuUboSystem | typeof GpuEncoderSystem | typeof GpuDeviceSystem | typeof GpuLimitsSystem | typeof GpuBufferSystem | typeof GpuTextureSystem | typeof GpuRenderTargetSystem | typeof GpuShaderSystem | typeof GpuStateSystem | typeof PipelineSystem | typeof GpuColorMaskSystem | typeof GpuStencilSystem | typeof BindGroupSystem)[];
 declare const DefaultWebGPUPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof StencilMaskPipe | typeof ColorMaskPipe | typeof CustomRenderPipe | typeof GpuUniformBatchPipe)[];
 /**
  * The default WebGPU systems. These are the systems that are added by default to the WebGPURenderer.
@@ -4616,7 +4635,7 @@ type Runners = {
 } & {
 	[K: ({} & string) | ({} & symbol)]: SystemRunner;
 };
-declare const DefaultWebGLSystems: (typeof BackgroundSystem | typeof GenerateTextureSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof TextureGCSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GlUboSystem | typeof GlBackBufferSystem | typeof GlContextSystem | typeof GlLimitsSystem | typeof GlBufferSystem | typeof GlTextureSystem | typeof GlRenderTargetSystem | typeof GlGeometrySystem | typeof GlUniformGroupSystem | typeof GlShaderSystem | typeof GlEncoderSystem | typeof GlStateSystem | typeof GlStencilSystem | typeof GlColorMaskSystem)[];
+declare const DefaultWebGLSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GlUboSystem | typeof GlBackBufferSystem | typeof GlContextSystem | typeof GlLimitsSystem | typeof GlBufferSystem | typeof GlTextureSystem | typeof GlRenderTargetSystem | typeof GlGeometrySystem | typeof GlUniformGroupSystem | typeof GlShaderSystem | typeof GlEncoderSystem | typeof GlStateSystem | typeof GlStencilSystem | typeof GlColorMaskSystem)[];
 declare const DefaultWebGLPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof StencilMaskPipe | typeof ColorMaskPipe | typeof CustomRenderPipe)[];
 /**
  * The default WebGL renderer, uses WebGL2 contexts.
@@ -5232,7 +5251,7 @@ export interface ContainerOptions<C extends ContainerChild = ContainerChild> ext
 	 *
 	 * > [!NOTE] 'rotation' and 'angle' have the same effect on a display object;
 	 * > rotation is in radians, angle is in degrees.
-	 @example
+	 * @example
 	 * ```ts
 	 * new Container({ angle: 45 }); // Rotate 45 degrees
 	 * new Container({ angle: 90 }); // Rotate 90 degrees
@@ -5613,7 +5632,7 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * }
 	 * ```
 	 */
-	parent: Container;
+	parent: Container | null;
 	/**
 	 * Current transform of the object based on local factors: position, scale, other stuff.
 	 * This matrix represents the local transformation without any parent influence.
@@ -5772,7 +5791,7 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 *
 	 * > [!NOTE] 'rotation' and 'angle' have the same effect on a display object;
 	 * > rotation is in radians, angle is in degrees.
-	 @example
+	 * @example
 	 * ```ts
 	 * // Basic angle rotation
 	 * sprite.angle = 45; // 45 degrees
@@ -5875,7 +5894,7 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * > [!NOTE] Changing the width will adjust the scale.x property of the container while maintaining its aspect ratio.
 	 * > [!NOTE] If you want to set both width and height at the same time, use {@link Container#setSize}
 	 * as it is more optimized by not recalculating the local bounds twice.
-	 *  @example
+	 * @example
 	 * ```ts
 	 * // Basic width setting
 	 * container.width = 100;
@@ -5915,7 +5934,7 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * container.getSize(reuseSize);
 	 * ```
 	 * @param out - Optional object to store the size in.
-	 * @returns - The size of the container.
+	 * @returns The size of the container.
 	 */
 	getSize(out?: Size): Size;
 	/**
@@ -7412,6 +7431,110 @@ export interface CullingMixinConstructor {
 	 */
 	cullableChildren: boolean;
 }
+/**
+ * Application options for the {@link CullerPlugin}.
+ * These options control how your application handles culling of display objects.
+ * @example
+ * ```ts
+ * import { Application } from 'pixi.js';
+ *
+ * // Create application
+ * const app = new Application();
+ * await app.init({
+ *     culler: {
+ *         updateTransform: false // Skip updating transforms for culled objects
+ *     }
+ * });
+ * ```
+ */
+export interface CullerPluginOptions {
+	/**
+	 * Options for the culler behavior.
+	 * @example
+	 * ```ts
+	 * // Basic culling options
+	 * const app = new Application();
+	 * await app.init({
+	 *     culler: {...}
+	 * });
+	 * ```
+	 */
+	culler?: {
+		/**
+		 * Update the transform of culled objects.
+		 *
+		 * > [!IMPORTANT] Keeping this as `false` can improve performance by avoiding unnecessary calculations,
+		 * > however, the transform used for culling may not be up-to-date if the object has moved since the last render.
+		 * @default true
+		 * @example
+		 * ```ts
+		 * const app = new Application();
+		 * await app.init({
+		 *     culler: {
+		 *         updateTransform: false // Skip updating transforms for culled objects
+		 *     }
+		 * });
+		 * ```
+		 */
+		updateTransform?: boolean;
+	};
+}
+/**
+ * An {@link Application} plugin that automatically culls (hides) display objects that are outside
+ * the visible screen area. This improves performance by not rendering objects that aren't visible.
+ *
+ * Key Features:
+ * - Automatic culling based on screen boundaries
+ * - Configurable culling areas and behavior per container
+ * - Can improve rendering performance
+ * @example
+ * ```ts
+ * import { Application, CullerPlugin, Container, Rectangle } from 'pixi.js';
+ *
+ * // Register the plugin
+ * extensions.add(CullerPlugin);
+ *
+ * // Create application
+ * const app = new Application();
+ * await app.init({...});
+ *
+ * // Create a container with culling enabled
+ * const container = new Container();
+ * container.cullable = true;         // Enable culling for this container
+ * container.cullableChildren = true; // Enable culling for children (default)
+ * app.stage.addChild(container);
+ *
+ * // Optional: Set custom cull area to avoid expensive bounds calculations
+ * container.cullArea = new Rectangle(0, 0, app.screen.width, app.screen.height);
+ *
+ * // Add many sprites to the group
+ * for (let j = 0; j < 100; j++) {
+ *     const sprite = Sprite.from('texture.png');
+ *     sprite.x = Math.random() * 2000;
+ *     sprite.y = Math.random() * 2000;
+ *
+ *     sprite.cullable = true; // Enable culling for each sprite
+ *
+ *     // Set cullArea if needed
+ *     // sprite.cullArea = new Rectangle(0, 0, 100, 100); // Optional
+ *
+ *     // Add to container
+ *     container.addChild(sprite);
+ * }
+ * ```
+ * @remarks
+ * To enable culling, you must set the following properties on your containers:
+ * - `cullable`: Set to `true` to enable culling for the container
+ * - `cullableChildren`: Set to `true` to enable culling for children (default)
+ * - `cullArea`: Optional custom Rectangle for culling bounds
+ *
+ * Performance Tips:
+ * - Group objects that are spatially related
+ * - Use `cullArea` for containers with many children to avoid bounds calculations
+ * - Set `cullableChildren = false` for containers that are always fully visible
+ */
+export declare class CullerPlugin {
+}
 declare global {
 	namespace PixiMixins {
 		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -7419,6 +7542,9 @@ declare global {
 		}
 		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 		interface ContainerOptions extends Partial<CullingMixinConstructor> {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface ApplicationOptions extends Partial<CullerPluginOptions> {
 		}
 	}
 }
@@ -10006,6 +10132,7 @@ export declare class FillGradient implements CanvasGradient {
 	 * @returns Unique string key
 	 */
 	get styleKey(): number;
+	/** Destroys the gradient, releasing resources. This will also destroy the internal texture. */
 	destroy(): void;
 }
 /**
@@ -10053,6 +10180,8 @@ export declare class FillPattern implements CanvasPattern {
 	 * @returns Unique string key
 	 */
 	get styleKey(): string;
+	/** Destroys the fill pattern, releasing resources. This will also destroy the internal texture. */
+	destroy(): void;
 }
 /**
  * Defines the style properties used for filling shapes in graphics and text operations.
@@ -11439,7 +11568,7 @@ export interface TextStyleOptions {
  * const richStyle = new TextStyle({
  *     fontFamily: 'Arial',
  *     fontSize: 32,
- *     fill: ['#FF0000', '#00FF00'], // Gradient fill
+ *     fill: 'white',
  *     stroke: {
  *         color: '#4a1850',
  *         width: 5
@@ -16512,13 +16641,18 @@ export declare class AnimatedSprite extends Sprite {
 	update(ticker: Ticker): void;
 	/**
 	 * Stops the AnimatedSprite and destroys it.
+	 * This method stops the animation playback, removes it from the ticker,
+	 * and cleans up any resources associated with the sprite.
+	 * @param options - Options for destroying the sprite, such as whether to remove from parent
 	 * @example
 	 * ```ts
 	 * // Destroy the sprite when done
 	 * sprite.destroy();
+	 * // Or with options
+	 * sprite.destroy({ children: true, texture: true, textureSource: true });
 	 * ```
 	 */
-	destroy(): void;
+	destroy(options?: DestroyOptions): void;
 	/**
 	 * A short hand way of creating an AnimatedSprite from an array of frame ids.
 	 * Uses texture frames from the cache to create an animation sequence.
@@ -17713,7 +17847,7 @@ interface BitmapFontEvents<Type> {
  *     alias: ['config'],
  *     src: 'data.txt',
  *     format: 'txt',
- *     loadParser: 'loadTxt'
+ *     parser: 'text'
  * };
  * ```
  */
@@ -17729,8 +17863,12 @@ export interface ResolvedAsset<T = any> {
 	data?: T;
 	/** File format of the asset, usually the file extension. Used to determine which loader parser to use. */
 	format?: string;
-	/** Override to specify which parser should load this asset. Useful when file extensions don't match the content type. */
+	/**
+	 * @deprecated Use `parser` instead.
+	 */
 	loadParser?: LoadParserName;
+	/** Override to specify which parser should load this asset. Useful when file extensions don't match the content type. */
+	parser?: AssetParser;
 }
 /**
  * A valid asset source specification. This can be a URL string, a {@link ResolvedSrc},
@@ -17750,7 +17888,7 @@ export interface ResolvedAsset<T = any> {
  * const src: AssetSrc = {
  *     src: 'sprite.png',
  *     format: 'png',
- *     loadParser: 'loadTextures',
+ *     parser: 'texture',
  *     data: {
  *         scaleMode: 'nearest',
  *     }
@@ -17812,7 +17950,7 @@ export type AssetSrc = ArrayOr<string> | (ArrayOr<ResolvedSrc> & {
  * const asset: UnresolvedAsset = {
  *     alias: 'config',
  *     src: 'data.txt',
- *     loadParser: 'loadTxt'
+ *     parser: 'text'
  * };
  * ```
  * @remarks
@@ -17821,7 +17959,7 @@ export type AssetSrc = ArrayOr<string> | (ArrayOr<ResolvedSrc> & {
  * - Supports format patterns for browser compatibility
  * - Can include loader-specific data and options
  */
-export type UnresolvedAsset<T = any> = Pick<ResolvedAsset<T>, "data" | "format" | "loadParser"> & {
+export type UnresolvedAsset<T = any> = Pick<ResolvedAsset<T>, "data" | "format" | "loadParser" | "parser"> & {
 	/** Aliases associated with asset */
 	alias?: ArrayOr<string>;
 	/** The URL or relative path to the asset */
@@ -18042,7 +18180,7 @@ export interface BitmapFontInstallOptions {
 	 *     style: {
 	 *         fontFamily: 'Arial',
 	 *         fontSize: 32,
-	 *         fill: ['#ff0000', '#00ff00'], // Gradient
+	 *         fill: 'white',
 	 *         stroke: { color: '#000000', width: 2 },
 	 *         dropShadow: {
 	 *             color: '#000000',
@@ -18068,6 +18206,79 @@ export interface BitmapFontInstallOptions {
 	 * ```
 	 */
 	textureStyle?: TextureStyle | TextureStyleOptions;
+	/**
+	 * Whether to allow overriding the fill color with a tint at runtime.
+	 *
+	 * When enabled, the font can be dynamically tinted using the `tint` property of BitmapText,
+	 * allowing a single font to display multiple colors without creating separate font textures.
+	 * This is memory efficient but requires the font to be rendered with white fill color.
+	 *
+	 * When disabled, the fill color is permanently baked into the font texture. This allows
+	 * any fill color but prevents runtime tinting - each color variation requires a separate font.
+	 * @default false (automatically determined based on style)
+	 *
+	 * **Requirements for tinting:**
+	 * - Fill color must be white (`0xFFFFFF` or `'#ffffff'`)
+	 * - No stroke effects
+	 * - No drop shadows (or only black shadows)
+	 * - No gradient or pattern fills
+	 *
+	 * **Performance considerations:**
+	 * - ✅ Enabled: One font texture, multiple colors via tinting (memory efficient)
+	 * - ❌ Disabled: Separate font texture per color (higher memory usage)
+	 * @example
+	 * ```ts
+	 * // Correct usage - white fill with tinting enabled
+	 * BitmapFont.install({
+	 *     name: 'TintableFont',
+	 *     style: {
+	 *         fontFamily: 'Arial',
+	 *         fontSize: 24,
+	 *         fill: 0xFFFFFF  // Must be white for tinting
+	 *     },
+	 *     dynamicFill: true
+	 * });
+	 *
+	 * // Use the font with different colors via tinting
+	 * const redText = new BitmapText({
+	 *     text: 'Red Text',
+	 *     style: { fontFamily: 'TintableFont', fill: 'red }, // Red tint
+	 * });
+	 *
+	 * const blueText = new BitmapText({
+	 *     text: 'Blue Text',
+	 *     style: { fontFamily: 'TintableFont', fill: 'blue' }, // Blue tint
+	 * });
+	 * ```
+	 * @example
+	 * ```ts
+	 * // Incorrect usage - colored fill with tinting enabled
+	 * BitmapFont.install({
+	 *     name: 'BadTintFont',
+	 *     style: {
+	 *         fontFamily: 'Arial',
+	 *         fontSize: 24,
+	 *         fill: 0xFF0000  // ❌ Red fill won't tint properly
+	 *     },
+	 *     dynamicFill: true  // ❌ Will not work as expected
+	 * });
+	 * ```
+	 * @example
+	 * ```ts
+	 * // Alternative - baked colors (no tinting)
+	 * BitmapFont.install({
+	 *     name: 'BakedColorFont',
+	 *     style: {
+	 *         fontFamily: 'Arial',
+	 *         fontSize: 24,
+	 *         fill: 0xFF0000,  // Any color works
+	 *         stroke: { color: 0x000000, width: 2 }  // Strokes allowed
+	 *     },
+	 *     dynamicFill: false  // Color is baked in
+	 * });
+	 * ```
+	 */
+	dynamicFill?: boolean;
 }
 declare class BitmapFontManagerClass {
 	/**
@@ -18564,7 +18775,7 @@ export interface AbstractSplitOptions {
  *   text: 'Multi\nLine Text',
  *   style: new TextStyle({
  *     fontSize: 24,
- *     fill: ['#FF0000', '#00FF00'], // Gradient
+ *     fill: 'white',
  *     strokeThickness: 2,
  *   }),
  *
@@ -18886,7 +19097,7 @@ export interface SplitOptions extends AbstractSplitOptions {
  *   text: 'Multi\nLine Text',
  *   style: new TextStyle({
  *     fontSize: 24,
- *     fill: ['#FF0000', '#00FF00'], // Gradient
+ *     fill: 'white',
  *     strokeThickness: 2,
  *   }),
  *
@@ -19137,6 +19348,35 @@ export declare class HTMLText extends AbstractText<HTMLTextStyle, HTMLTextStyleO
 	constructor(options?: HTMLTextOptions);
 	/** @deprecated since 8.0.0 */
 	constructor(text?: TextString, options?: Partial<HTMLTextStyle>);
+	get text(): string;
+	/**
+	 * The text content to display. Use '\n' for line breaks.
+	 * Accepts strings, numbers, or objects with toString() method.
+	 * @example
+	 * ```ts
+	 * const text = new HTMLText({
+	 *     text: 'Hello Pixi!',
+	 * });
+	 * const multilineText = new HTMLText({
+	 *     text: 'Line 1\nLine 2\nLine 3',
+	 * });
+	 * const numberText = new HTMLText({
+	 *     text: 12345, // Will be converted to '12345'
+	 * });
+	 * const objectText = new HTMLText({
+	 *     text: { toString: () => 'Object Text' }, // Custom toString
+	 * });
+	 *
+	 * // Update text dynamically
+	 * text.text = 'Updated Text'; // Re-renders with new text
+	 * text.text = 67890; // Updates to '67890'
+	 * text.text = { toString: () => 'Dynamic Text' }; // Uses custom toString method
+	 * // Clear text
+	 * text.text = ''; // Clears the text
+	 * ```
+	 * @default ''
+	 */
+	set text(text: TextString);
 }
 /**
  * Configuration options for BitmapText splitting.
@@ -19163,7 +19403,7 @@ export interface SplitBitmapOptions extends AbstractSplitOptions {
  *   text: 'Multi\nLine Text',
  *   style: new TextStyle({
  *     fontSize: 24,
- *     fill: ['#FF0000', '#00FF00'], // Gradient
+ *     fill: 'white',
  *     strokeThickness: 2,
  *   }),
  *
@@ -19798,7 +20038,7 @@ declare class CacheClass {
 	 * @param key - The key or keys to set
 	 * @param value - The value to store in the cache or from which cacheable assets will be derived.
 	 */
-	set(key: any | any[], value: unknown): void;
+	set<T = any>(key: any | any[], value: T): void;
 	/**
 	 * Remove entry by key
 	 *
@@ -20014,11 +20254,49 @@ export interface AssetInitOptions {
  * > in your application to prevent missing texture references.
  */
 export declare const Assets: AssetsClass;
+type LoadVideoData = VideoSourceOptions & {
+	mime?: string;
+};
 declare class WorkerManagerClass {
-	worker: Worker;
 	constructor();
+	/**
+	 * Checks if ImageBitmap is supported in the current environment.
+	 *
+	 * This method uses a dedicated worker to test ImageBitmap support
+	 * and caches the result for subsequent calls.
+	 * @returns Promise that resolves to true if ImageBitmap is supported, false otherwise
+	 */
 	isImageBitmapSupported(): Promise<boolean>;
+	/**
+	 * Loads an image as an ImageBitmap using a web worker.
+	 * @param src - The source URL or path of the image to load
+	 * @param asset - Optional resolved asset containing additional texture source options
+	 * @returns Promise that resolves to the loaded ImageBitmap
+	 * @example
+	 * ```typescript
+	 * const bitmap = await WorkerManager.loadImageBitmap('image.png');
+	 * const bitmapWithOptions = await WorkerManager.loadImageBitmap('image.png', asset);
+	 * ```
+	 */
 	loadImageBitmap(src: string, asset?: ResolvedAsset<TextureSourceOptions<any>>): Promise<ImageBitmap>;
+	/**
+	 * Resets the worker manager, terminating all workers and clearing the queue.
+	 *
+	 * This method:
+	 * - Terminates all active workers
+	 * - Rejects all pending promises with an error
+	 * - Clears all internal state
+	 * - Resets initialization flags
+	 *
+	 * This should be called when the worker manager is no longer needed
+	 * to prevent memory leaks and ensure proper cleanup.
+	 * @example
+	 * ```typescript
+	 * // Clean up when shutting down
+	 * WorkerManager.reset();
+	 * ```
+	 */
+	reset(): void;
 }
 /**
  * The Culler class is responsible for managing and culling containers.
@@ -20101,62 +20379,6 @@ export declare class Culler {
 	 * ```
 	 */
 	static shared: Culler;
-}
-/**
- * An {@link Application} plugin that automatically culls (hides) display objects that are outside
- * the visible screen area. This improves performance by not rendering objects that aren't visible.
- *
- * Key Features:
- * - Automatic culling based on screen boundaries
- * - Configurable culling areas and behavior per container
- * - Can improve rendering performance
- * @example
- * ```ts
- * import { Application, CullerPlugin, Container, Rectangle } from 'pixi.js';
- *
- * // Register the plugin
- * extensions.add(CullerPlugin);
- *
- * // Create application
- * const app = new Application();
- * await app.init({...});
- *
- * // Create a container with culling enabled
- * const container = new Container();
- * container.cullable = true;         // Enable culling for this container
- * container.cullableChildren = true; // Enable culling for children (default)
- * app.stage.addChild(container);
- *
- * // Optional: Set custom cull area to avoid expensive bounds calculations
- * container.cullArea = new Rectangle(0, 0, app.screen.width, app.screen.height);
- *
- * // Add many sprites to the group
- * for (let j = 0; j < 100; j++) {
- *     const sprite = Sprite.from('texture.png');
- *     sprite.x = Math.random() * 2000;
- *     sprite.y = Math.random() * 2000;
- *
- *     sprite.cullable = true; // Enable culling for each sprite
- *
- *     // Set cullArea if needed
- *     // sprite.cullArea = new Rectangle(0, 0, 100, 100); // Optional
- *
- *     // Add to container
- *     container.addChild(sprite);
- * }
- * ```
- * @remarks
- * To enable culling, you must set the following properties on your containers:
- * - `cullable`: Set to `true` to enable culling for the container
- * - `cullableChildren`: Set to `true` to enable culling for children (default)
- * - `cullArea`: Optional custom Rectangle for culling bounds
- *
- * Performance Tips:
- * - Group objects that are spatially related
- * - Use `cullArea` for containers with many children to avoid bounds calculations
- * - Set `cullableChildren = false` for containers that are always fully visible
- */
-export declare class CullerPlugin {
 }
 declare class EventsTickerClass {
 	/** The event system. */
