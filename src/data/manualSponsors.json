@@ -12,14 +12,14 @@
   },
   {
     "sponsor": {
-      "name": "Buy Instagram Likes Views4You",
-      "type": "Organization",
-      "login": "buy-instagram-likes-views4you",
-      "avatarUrl": "https://images.opencollective.com/buy-instagram-likes-views4you/6364714/logo/460.png",
-      "websiteUrl": "https://views4you.com/buy-instagram-likes",
-      "linkUrl": "https://opencollective.com/buy-instagram-likes-views4you",
+      "name": "Guidebook.BetWinner",
+      "type": "User",
+      "login": "guidebook_betwinner_com",
+      "avatarUrl": "https://images.opencollective.com/guidebook_betwinner_com/6babe60/avatar/460.png",
+      "websiteUrl": "https://guidebook.betwinner.com",
+      "linkUrl": "https://opencollective.com/guidebook_betwinner_com",
       "socialLogins": {
-        "opencollective": "buy-instagram-likes-views4you"
+        "opencollective": "guidebook_betwinner_com"
       }
     },
     "isOneTime": false,
