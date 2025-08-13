@@ -426,10 +426,15 @@ const config: Config = {
             position: 'left',
           },
           {
-            type: 'doc',
+            to: 'sponsor',
             label: 'Sponsor',
-            docId: 'sponsor/index',
+            position: 'left',
           },
+          // {
+          //   type: 'doc',
+          //   label: 'Sponsor',
+          //   docId: 'sponsor/index',
+          // },
           {
             type: 'docsVersionDropdown',
             position: 'right',

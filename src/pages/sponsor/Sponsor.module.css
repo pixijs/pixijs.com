@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+.sponsor {
+  min-height: 100vh;
+  color: white;
+}
+
+/* Hero Section */
+.heroSection {
+  padding: 5rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .heroSection {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroSection {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.mxAuto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.maxWidth7xl {
+  max-width: 80rem;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: 45px;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+.textPixiPrimary {
+  color: var(--ifm-color-primary);
+}
+
+.heroDescription {
+  font-size: 1rem;
+  color: #d1d5db;
+  margin-bottom: 3rem;
+  max-width: 56rem;
+  line-height: 1.625;
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: 54px;
+  }
+  .heroDescription {
+    font-size: 1.25rem;
+  }
+}
+
+/* Statistics Grid */
+.statisticsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 64rem;
+  padding-bottom: 3rem;
+}
+
+.statCard {
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  min-width: 222px;
+}
+
+.statNumber {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@media (max-width: 768px) {
+  .statCard {
+    padding: 1rem;
+    min-width: 175px;
+  }
+  .statNumber {
+    font-size: 2rem;
+  }
+  .statLabel {
+    font-size: 0.875rem;
+  }
+}
+
+.greenBlue {
+  /* background-image: linear-gradient(to right, #4ade80, #3b82f6);
+  background-image: linear-gradient(to right, #6dffff, #1099bb);
+  background-image: linear-gradient(to right, #c084fc, #e91e63); */
+  background-image: linear-gradient(to right, #f8718c, #e91e63);
+}
+
+.yellowOrange {
+  /* background-image: linear-gradient(to right, #facc15, #f97316); */
+  /* background-image: linear-gradient(to right, #f06695, #e91e63);
+  background-image: linear-gradient(to right, #6dffff, #1099bb);
+  background-image: linear-gradient(to right, #f87171, #e91e63); */
+  background-image: linear-gradient(to right, #f8718c, #e91e63);
+}
+
+.purplePink {
+  /* background-image: linear-gradient(to right, #c084fc, #ec4899); */
+  /* background-image: linear-gradient(to right, #c084fc, #e91e63);
+  background-image: linear-gradient(to right, #6dffff, #1099bb);
+  background-image: linear-gradient(to right, #f87171, #e91e63); */
+  background-image: linear-gradient(to right, #f8718c, #e91e63);
+}
+
+.redRose {
+  /* background-image: linear-gradient(to right, #f87171, #f43f5e); */
+  /* background-image: linear-gradient(to right, #f87171, #e91e63); */
+  /* background-image: linear-gradient(to right, #6dffff, #1099bb); */
+  background-image: linear-gradient(to right, #f8718c, #e91e63);
+}
+
+.statLabel {
+  font-size: 1rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+}
+
+html[data-theme='light'] {
+  .sponsor {
+    color: var(--ifm-font-color-base);
+    background-color: #f8fafc;
+  }
+  .heroDescription {
+    color: #4a586b;
+  }
+  .statCard {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: white;
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+  .statLabel {
+    color: #6e7d92;
+  }
+}
