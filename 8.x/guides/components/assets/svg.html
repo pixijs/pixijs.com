@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXHQVRJ694"></script>
 <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-YXHQVRJ694",{})</script><link rel="stylesheet" href="/assets/css/styles.039f9c92.css">
-<script src="/assets/js/runtime~main.58fc03a5.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7ab93b29.js" defer="defer"></script>
 <script src="/assets/js/main.52f4a829.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -23,10 +23,12 @@
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="why-use-svgs">Why Use SVGs?<a href="#why-use-svgs" class="hash-link" aria-label="Direct link to Why Use SVGs?" title="Direct link to Why Use SVGs?">​</a></h3>
 <p>SVGs have several advantages over raster images like PNGs:</p>
-<p>✅ <strong>Smaller File Sizes</strong> – SVGs can be significantly smaller than PNGs, especially for large but simple shapes. A high-resolution PNG may be several megabytes, while an equivalent SVG could be just a few kilobytes.</p>
-<p>✅ <strong>Scalability</strong> – SVGs scale without losing quality, making them perfect for responsive applications and UI elements.</p>
-<p>✅ <strong>Editable After Rendering</strong> – Unlike textures, SVGs rendered via Graphics can be modified dynamically (e.g., changing stroke colors, modifying shapes).</p>
-<p>✅ <strong>Efficient for Simple Graphics</strong> – If the graphic consists of basic shapes and paths, SVGs can be rendered efficiently as vector graphics.</p>
+<ul>
+<li>✅ <strong>Smaller File Sizes</strong> – SVGs can be significantly smaller than PNGs, especially for large but simple shapes. A high-resolution PNG may be several megabytes, while an equivalent SVG could be just a few kilobytes.</li>
+<li>✅ <strong>Scalability</strong> – SVGs scale without losing quality, making them perfect for responsive applications and UI elements.</li>
+<li>✅ <strong>Editable After Rendering</strong> – Unlike textures, SVGs rendered via Graphics can be modified dynamically (e.g., changing stroke colors, modifying shapes).</li>
+<li>✅ <strong>Efficient for Simple Graphics</strong> – If the graphic consists of basic shapes and paths, SVGs can be rendered efficiently as vector graphics.</li>
+</ul>
 <p>However, SVGs can also be computationally expensive to parse, particularly for intricate illustrations with many paths or effects.</p>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="ways-to-render-svgs-in-pixijs">Ways to Render SVGs in PixiJS<a href="#ways-to-render-svgs-in-pixijs" class="hash-link" aria-label="Direct link to Ways to Render SVGs in PixiJS" title="Direct link to Ways to Render SVGs in PixiJS">​</a></h3>
@@ -56,13 +58,15 @@ This does increase memory usage, but it be of a higher fidelity.</p>
 <br>
 <p>This ensures the texture appears at the correct size and resolution.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="pros--cons">Pros &amp; Cons<a href="#pros--cons" class="hash-link" aria-label="Direct link to Pros &amp; Cons" title="Direct link to Pros &amp; Cons">​</a></h3>
-<p>✅ <strong>Fast to render</strong> (rendered as a quad, not geometry)
-✅ <strong>Good for static images</strong>
-✅ <strong>Supports resolution scaling for precise sizing</strong>
-✅ <strong>Ideal for complex SVGs that do not need crisp vector scaling</strong> (e.g., UI components with fixed dimensions)
-❌ <strong>Does not scale cleanly</strong> (scaling may result in pixelation)
-❌ <strong>Less flexibility</strong> (cannot modify the shape dynamically)
-❌ <strong>Texture Size Limit</strong> A texture can only be up to 4096x4096 pixels, so if you need to render a larger SVG, you will need to use the Graphics method.</p>
+<ul>
+<li>✅ <strong>Fast to render</strong> (rendered as a quad, not geometry)</li>
+<li>✅ <strong>Good for static images</strong></li>
+<li>✅ <strong>Supports resolution scaling for precise sizing</strong></li>
+<li>✅ <strong>Ideal for complex SVGs that do not need crisp vector scaling</strong> (e.g., UI components with fixed dimensions)</li>
+<li>❌ <strong>Does not scale cleanly</strong> (scaling may result in pixelation)</li>
+<li>❌ <strong>Less flexibility</strong> (cannot modify the shape dynamically)</li>
+<li>❌ <strong>Texture Size Limit</strong> A texture can only be up to 4096x4096 pixels, so if you need to render a larger SVG, you will need to use the Graphics method.</li>
+</ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="best-use-cases">Best Use Cases<a href="#best-use-cases" class="hash-link" aria-label="Direct link to Best Use Cases" title="Direct link to Best Use Cases">​</a></h3>
 <ul>
 <li>Background images</li>
@@ -87,12 +91,14 @@ This does increase memory usage, but it be of a higher fidelity.</p>
 <!-- -->
 <br>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="pros--cons-1">Pros &amp; Cons<a href="#pros--cons-1" class="hash-link" aria-label="Direct link to Pros &amp; Cons" title="Direct link to Pros &amp; Cons">​</a></h3>
-<p>✅ <strong>Retains vector scalability</strong> (no pixelation when zooming)
-✅ <strong>Modifiable after rendering</strong> (change colors, strokes, etc.)
-✅ <strong>Efficient for simple graphics</strong>
-✅ <strong>fast rendering if SVG structure does not change</strong> (no need to reparse)
-❌ <strong>More expensive to parse</strong> (complex SVGs can be slow to render)
-❌ <strong>Not ideal for static images</strong></p>
+<ul>
+<li>✅ <strong>Retains vector scalability</strong> (no pixelation when zooming)</li>
+<li>✅ <strong>Modifiable after rendering</strong> (change colors, strokes, etc.)</li>
+<li>✅ <strong>Efficient for simple graphics</strong></li>
+<li>✅ <strong>fast rendering if SVG structure does not change</strong> (no need to reparse)</li>
+<li>❌ <strong>More expensive to parse</strong> (complex SVGs can be slow to render)</li>
+<li>❌ <strong>Not ideal for static images</strong></li>
+</ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="best-use-cases-1">Best Use Cases<a href="#best-use-cases-1" class="hash-link" aria-label="Direct link to Best Use Cases" title="Direct link to Best Use Cases">​</a></h3>
 <ul>
 <li>Icons and UI elements that need resizing</li>
@@ -113,14 +119,18 @@ This does increase memory usage, but it be of a higher fidelity.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="best-practices--gotchas">Best Practices &amp; Gotchas<a href="#best-practices--gotchas" class="hash-link" aria-label="Direct link to Best Practices &amp; Gotchas" title="Direct link to Best Practices &amp; Gotchas">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="best-practices">Best Practices<a href="#best-practices" class="hash-link" aria-label="Direct link to Best Practices" title="Direct link to Best Practices">​</a></h3>
-<p>✅ <strong>Use Graphics for scalable and dynamic SVGs</strong>
-✅ <strong>Use Textures for performance-sensitive applications</strong>
-✅ <strong>Use <code>GraphicsContext</code> to avoid redundant parsing</strong>
-✅ <strong>Consider <code>resolution</code> when using textures to balance quality and memory</strong></p>
+<ul>
+<li>✅ <strong>Use Graphics for scalable and dynamic SVGs</strong></li>
+<li>✅ <strong>Use Textures for performance-sensitive applications</strong></li>
+<li>✅ <strong>Use <code>GraphicsContext</code> to avoid redundant parsing</strong></li>
+<li>✅ <strong>Consider <code>resolution</code> when using textures to balance quality and memory</strong></li>
+</ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="gotchas">Gotchas<a href="#gotchas" class="hash-link" aria-label="Direct link to Gotchas" title="Direct link to Gotchas">​</a></h3>
-<p>⚠ <strong>Large SVGs can be slow to parse</strong> – Optimize SVGs before using them in PixiJS.
-⚠ <strong>Texture-based SVGs do not scale cleanly</strong> – Use higher resolution if necessary.
-⚠ <strong>Not all SVG features are supported</strong> – Complex filters and text elements may not work as expected.</p>
+<ul>
+<li>⚠ <strong>Large SVGs can be slow to parse</strong> – Optimize SVGs before using them in PixiJS.</li>
+<li>⚠ <strong>Texture-based SVGs do not scale cleanly</strong> – Use higher resolution if necessary.</li>
+<li>⚠ <strong>Not all SVG features are supported</strong> – Complex filters and text elements may not work as expected.</li>
+</ul>
 <hr>
 <p>By understanding how PixiJS processes SVGs, developers can make informed decisions on when to use <code>Graphics.svg()</code>, <code>GraphicsContext</code>, or SVG textures, balancing quality and performance for their specific use case.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/pixijs/pixijs.com/tree/main/docs/guides/components/assets/svg.mdx" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/8.x/guides/components/assets/compressed-textures"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Compressed Textures</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/8.x/guides/components/application"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Application</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#overview" class="table-of-contents__link toc-highlight">Overview</a></li><li><a href="#why-use-svgs" class="table-of-contents__link toc-highlight">Why Use SVGs?</a></li><li><a href="#ways-to-render-svgs-in-pixijs" class="table-of-contents__link toc-highlight">Ways to Render SVGs in PixiJS</a></li><li><a href="#1-rendering-svgs-as-textures" class="table-of-contents__link toc-highlight">1. Rendering SVGs as Textures</a><ul><li><a href="#overview-1" class="table-of-contents__link toc-highlight">Overview</a></li><li><a href="#example" class="table-of-contents__link toc-highlight">Example</a></li><li><a href="#scaling-textures" class="table-of-contents__link toc-highlight">Scaling Textures</a></li><li><a href="#pros--cons" class="table-of-contents__link toc-highlight">Pros &amp; Cons</a></li><li><a href="#best-use-cases" class="table-of-contents__link toc-highlight">Best Use Cases</a></li></ul></li><li><a href="#2-rendering-svgs-as-graphics" class="table-of-contents__link toc-highlight">2. Rendering SVGs as Graphics</a><ul><li><a href="#overview-2" class="table-of-contents__link toc-highlight">Overview</a></li><li><a href="#example-1" class="table-of-contents__link toc-highlight">Example</a></li><li><a href="#loading-svgs-as-graphics" class="table-of-contents__link toc-highlight">Loading SVGs as Graphics</a></li><li><a href="#pros--cons-1" class="table-of-contents__link toc-highlight">Pros &amp; Cons</a></li><li><a href="#best-use-cases-1" class="table-of-contents__link toc-highlight">Best Use Cases</a></li></ul></li><li><a href="#svg-rendering-considerations" class="table-of-contents__link toc-highlight">SVG Rendering Considerations</a><ul><li><a href="#supported-features" class="table-of-contents__link toc-highlight">Supported Features</a></li><li><a href="#performance-considerations" class="table-of-contents__link toc-highlight">Performance Considerations</a></li></ul></li><li><a href="#best-practices--gotchas" class="table-of-contents__link toc-highlight">Best Practices &amp; Gotchas</a><ul><li><a href="#best-practices" class="table-of-contents__link toc-highlight">Best Practices</a></li><li><a href="#gotchas" class="table-of-contents__link toc-highlight">Gotchas</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="margin-bottom--sm"><img src="/images/logo.svg" alt="PixiJS" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE" width="100"><img src="/images/logo.svg" alt="PixiJS" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU" width="100"></div><div class="footer__copyright">© 2025 PixiJS.<br>A labour of love built by the <a href="/team">PixiJS team</a>.</div></div></div></footer></div>
 </body>
