@@ -136,6 +136,10 @@ const config: Config = {
             from: ['/8.x/guides', '/guides'],
           },
           {
+            to: '/sponsor',
+            from: ['/8.x/sponsor'],
+          },
+          {
             to: '/8.x/guides/getting-started/intro#what-is-pixijs',
             from: ['/8.x/guides/basics/what-pixijs-is', '/guides/basics/what-pixijs-is'],
           },
