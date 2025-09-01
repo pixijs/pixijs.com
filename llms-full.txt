@@ -407,7 +407,7 @@ This is particularly useful for applications that dynamically load large numbers
 
 PixiJS also includes the `TextureGCSystem`, a system that manages GPU texture memory. By default:
 
-- **Removes textures unused for 3600 frames** (approximately 1 hour at 60 FPS).
+- **Removes textures unused for 3600 frames** (approximately 1 minute at 60 FPS).
 - **Checks every 600 frames** for unused textures.
 
 ### Customizing `TextureGCSystem`
