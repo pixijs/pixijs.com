@@ -1,6 +1,23 @@
 [
   {
     "sponsor": {
+      "name": "Casino Online C19",
+      "type": "User",
+      "login": "casino-online-chile",
+      "avatarUrl": "https://images.opencollective.com/casino-online-chile/91f1057/avatar/460.png",
+      "websiteUrl": "https://c19.cl",
+      "linkUrl": "https://opencollective.com/casino-online-chile",
+      "socialLogins": {
+        "opencollective": "casino-online-chile"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Webisoft",
       "type": "Organization",
       "login": "webisoft",
@@ -26,6 +43,23 @@
       "linkUrl": "https://opencollective.com/buy-instagram-likes-views4you",
       "socialLogins": {
         "opencollective": "buy-instagram-likes-views4you"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
+      "name": "LITSLINK",
+      "type": "Organization",
+      "login": "litslink",
+      "avatarUrl": "https://images.opencollective.com/litslink/18dd55f/logo/460.png",
+      "websiteUrl": "https://litslink.com",
+      "linkUrl": "https://opencollective.com/litslink",
+      "socialLogins": {
+        "opencollective": "litslink"
       }
     },
     "isOneTime": false,
