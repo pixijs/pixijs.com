@@ -11931,7 +11931,10 @@ export interface RenderOptions extends ClearOptions {
  * Options for destroying the renderer.
  * This can be a boolean or an object.
  */
-export type RendererDestroyOptions = TypeOrBool<ViewSystemDestroyOptions>;
+export type RendererDestroyOptions = TypeOrBool<ViewSystemDestroyOptions & {
+	/** Whether to clean up global resource pools/caches */
+	releaseGlobalResources?: boolean;
+}>;
 declare const defaultRunners: readonly [
 	"init",
 	"destroy",
@@ -13828,9 +13831,15 @@ declare global {
 }
 /**
  * A callback which can be added to a ticker.
- * ```js
- * ticker.add(() => {
- *    // do something every frame
+ * The callback receives the Ticker instance as its parameter, providing access to timing properties.
+ * @example
+ * ```ts
+ * ticker.add((ticker) => {
+ *    // Access deltaTime (dimensionless scalar ~1.0 at 60fps)
+ *    sprite.rotation += 0.1 * ticker.deltaTime;
+ *
+ *    // Access deltaMS (milliseconds elapsed)
+ *    const progress = ticker.deltaMS / animationDuration;
  * });
  * ```
  */
@@ -13842,15 +13851,24 @@ export type TickerCallback<T> = (this: T, ticker: Ticker) => any;
  * It provides a way to add listeners that will be called on each frame,
  * allowing for smooth animations and updates.
  *
+ * ## Time Units
+ * - `deltaTime`: Dimensionless scalar (typically ~1.0 at 60 FPS) for frame-independent animations
+ * - `deltaMS`: Milliseconds elapsed (capped and speed-scaled) for time-based calculations
+ * - `elapsedMS`: Raw milliseconds elapsed (uncapped, unscaled) for measurements
+ * - `lastTime`: Timestamp in milliseconds since epoch (performance.now() format)
+ *
  * Animation frames are requested
  * only when necessary, e.g., when the ticker is started and the emitter has listeners.
  * @example
  * ```ts
- * // Basic ticker usage
+ * // Basic ticker usage with different time units
  * const ticker = new Ticker();
  * ticker.add((ticker) => {
- *     // Update every frame
+ *     // Frame-independent animation using dimensionless deltaTime
  *     sprite.rotation += 0.1 * ticker.deltaTime;
+ *
+ *     // Time-based animation using deltaMS (milliseconds)
+ *     sprite.x += (100 / 1000) * ticker.deltaMS; // 100 pixels per second
  * });
  * ticker.start();
  *
@@ -13915,15 +13933,16 @@ export declare class Ticker {
 	 */
 	autoStart: boolean;
 	/**
-	 * Scalar time value from last frame to this frame.
-	 * Used for frame-based animations and updates.
+	 * Scalar representing the delta time factor.
+	 * This is a dimensionless value representing the fraction of a frame at the target framerate.
+	 * At 60 FPS, this value is typically around 1.0.
 	 *
-	 * This value is capped by setting {@link Ticker#minFPS|minFPS}
-	 * and is scaled with {@link Ticker#speed|speed}.
-	 * > [!NOTE] The cap may be exceeded by scaling.
+	 * This is NOT in milliseconds - it's a scalar multiplier for frame-independent animations.
+	 * For actual milliseconds, use {@link Ticker#deltaMS}.
+	 * @member {number}
 	 * @example
 	 * ```ts
-	 * // Basic animation
+	 * // Frame-independent animation using deltaTime scalar
 	 * ticker.add((ticker) => {
 	 *     // Rotate sprite by 0.1 radians per frame, scaled by deltaTime
 	 *     sprite.rotation += 0.1 * ticker.deltaTime;
@@ -13957,41 +13976,31 @@ export declare class Ticker {
 	 */
 	deltaMS: number;
 	/**
-	 * Time elapsed in milliseconds from last frame to this frame.
-	 * Provides raw timing information without modifications.
+	 * Time elapsed in milliseconds from the last frame to this frame.
+	 * This value is not capped or scaled and provides raw timing information.
 	 *
-	 * Opposed to what the scalar {@link Ticker#deltaTime|deltaTime}
-	 * is based, this value is neither capped nor scaled.
-	 *
-	 * If the platform supports DOMHighResTimeStamp,
-	 * this value will have a precision of 1 µs.
-	 *
-	 * Defaults to target frame time
+	 * Unlike {@link Ticker#deltaMS}, this value is unmodified by speed scaling or FPS capping.
+	 * @member {number}
 	 * @example
 	 * ```ts
-	 * // Basic timing information
 	 * ticker.add((ticker) => {
 	 *     console.log(`Raw frame time: ${ticker.elapsedMS}ms`);
 	 * });
 	 * ```
-	 * @default 16.66
 	 */
 	elapsedMS: number;
 	/**
-	 * The last time {@link Ticker#update|update} was invoked.
-	 * Used for calculating time deltas between frames.
+	 * The last time update was invoked, in milliseconds since epoch.
+	 * Similar to performance.now() timestamp format.
 	 *
-	 * This value is also reset internally outside of invoking
-	 * update, but only when a new animation frame is requested.
-	 *
-	 * If the platform supports DOMHighResTimeStamp,
-	 * this value will have a precision of 1 µs.
+	 * Used internally for calculating time deltas between frames.
+	 * @member {number}
 	 * @example
 	 * ```ts
-	 * // Basic timing check
-	 * ticker.add(() => {
-	 *     const timeSinceStart = performance.now() - ticker.lastTime;
-	 *     console.log(`Time running: ${timeSinceStart}ms`);
+	 * ticker.add((ticker) => {
+	 *     const currentTime = performance.now();
+	 *     const timeSinceLastFrame = currentTime - ticker.lastTime;
+	 *     console.log(`Time since last frame: ${timeSinceLastFrame}ms`);
 	 * });
 	 * ```
 	 */
@@ -14039,38 +14048,24 @@ export declare class Ticker {
 	started: boolean;
 	constructor();
 	/**
-	 * Register a handler for tick events. Calls continuously unless
-	 * it is removed or the ticker is stopped.
+	 * Register a handler for tick events.
+	 * @param fn - The listener function to add. Receives the Ticker instance as parameter
+	 * @param context - The context for the listener
+	 * @param priority - The priority of the listener
 	 * @example
 	 * ```ts
-	 * // Basic update handler
+	 * // Access time properties through the ticker parameter
 	 * ticker.add((ticker) => {
-	 *     // Update every frame
+	 *     // Use deltaTime (dimensionless scalar) for frame-independent animations
 	 *     sprite.rotation += 0.1 * ticker.deltaTime;
+	 *
+	 *     // Use deltaMS (milliseconds) for time-based calculations
+	 *     const progress = ticker.deltaMS / animationDuration;
+	 *
+	 *     // Use elapsedMS for raw timing measurements
+	 *     console.log(`Raw frame time: ${ticker.elapsedMS}ms`);
 	 * });
-	 *
-	 * // With specific context
-	 * const game = {
-	 *     update(ticker) {
-	 *         this.physics.update(ticker.deltaTime);
-	 *     }
-	 * };
-	 * ticker.add(game.update, game);
-	 *
-	 * // With priority
-	 * ticker.add(
-	 *     (ticker) => {
-	 *         // Runs before normal priority updates
-	 *         physics.update(ticker.deltaTime);
-	 *     },
-	 *     undefined,
-	 *     UPDATE_PRIORITY.HIGH
-	 * );
 	 * ```
-	 * @param fn - The listener function to be added for updates
-	 * @param context - The listener context
-	 * @param priority - The priority for emitting (default: UPDATE_PRIORITY.NORMAL)
-	 * @returns This instance of a ticker
 	 */
 	add<T = any>(fn: TickerCallback<T>, context?: T, priority?: number): this;
 	/**
@@ -17442,14 +17437,14 @@ export declare class FillGradient implements CanvasGradient {
 	 * @returns This gradient instance for chaining
 	 */
 	addColorStop(offset: number, color: ColorSource): this;
-	/**
-	 * Gets a unique key representing the current state of the gradient.
-	 * Used internally for caching.
-	 * @returns Unique string key
-	 */
-	get styleKey(): number;
 	/** Destroys the gradient, releasing resources. This will also destroy the internal texture. */
 	destroy(): void;
+	/**
+	 * Returns a unique key for this gradient instance.
+	 * This key is used for caching and texture management.
+	 * @returns {string} Unique key for the gradient
+	 */
+	get styleKey(): string;
 }
 /**
  * Defines the repetition modes for fill patterns.
@@ -17479,8 +17474,6 @@ export type PatternRepetition = "repeat" | "repeat-x" | "repeat-y" | "no-repeat"
  * textPattern.y = (textGradient.height);
  */
 export declare class FillPattern implements CanvasPattern {
-	/** Internal texture used to render the gradient */
-	texture: Texture;
 	/** The transform matrix applied to the pattern */
 	transform: Matrix;
 	constructor(texture: Texture, repetition?: PatternRepetition);
@@ -17490,10 +17483,13 @@ export declare class FillPattern implements CanvasPattern {
 	 * If not provided, the pattern will use the default transform.
 	 */
 	setTransform(transform?: Matrix): void;
+	/** Internal texture used to render the gradient */
+	get texture(): Texture;
+	set texture(value: Texture);
 	/**
-	 * Gets a unique key representing the current state of the pattern.
-	 * Used internally for caching.
-	 * @returns Unique string key
+	 * Returns a unique key for this instance.
+	 * This key is used for caching.
+	 * @returns {string} Unique key for the instance
 	 */
 	get styleKey(): string;
 	/** Destroys the fill pattern, releasing resources. This will also destroy the internal texture. */
@@ -18865,7 +18861,7 @@ export interface TextStyleOptions {
 	 * compared to applying the filter directly to the text object (which would be applied at run time).
 	 * @default undefined
 	 */
-	filters?: Filter[];
+	filters?: Filter[] | readonly Filter[];
 }
 /**
  * A TextStyle Object contains information to decorate Text objects.
@@ -19011,7 +19007,7 @@ export declare class TextStyle extends EventEmitter<{
 	 * compared to applying the filter directly to the text object (which would be applied at run time).
 	 * @default null
 	 */
-	get filters(): Filter[];
+	get filters(): readonly Filter[];
 	set filters(value: Filter[]);
 	/**
 	 * Trim transparent borders from the text texture.
@@ -19079,6 +19075,12 @@ export declare class TextStyle extends EventEmitter<{
 	update(): void;
 	/** Resets all properties to the default values */
 	reset(): void;
+	/**
+	 * Returns a unique key for this instance.
+	 * This key is used for caching.
+	 * @returns {string} Unique key for the instance
+	 */
+	get styleKey(): string;
 	/**
 	 * Creates a new TextStyle object with the same values as this one.
 	 * @returns New cloned TextStyle object
@@ -25623,6 +25625,8 @@ declare class BitmapFontManagerClass {
 	readonly ASCII: string[][];
 	/** Default options for installing a new BitmapFont. */
 	defaultOptions: Omit<BitmapFontInstallOptions, "style">;
+	/** Cache for measured text layouts to avoid recalculating them multiple times. */
+	readonly measureCache: import("tiny-lru").LRU<BitmapTextLayoutData>;
 	/**
 	 * Get a font for the specified text and style.
 	 * @param text - The text to get the font for
@@ -27717,6 +27721,8 @@ declare class EventsTickerClass {
 	removeTickerListener(): void;
 	/** Sets flag to not fire extra events when the user has already moved there mouse */
 	pointerMoved(): void;
+	/** Destroys the event ticker. */
+	destroy(): void;
 }
 /**
  * Options for AlphaFilter
@@ -29058,6 +29064,20 @@ export declare function isWebGLSupported(failIfMajorPerformanceCaveat?: boolean)
  * @returns Promise that resolves to true if WebGPU is supported
  */
 export declare function isWebGPUSupported(options?: GPURequestAdapterOptions): Promise<boolean>;
+interface DeprecationOptions {
+	/**
+	 * When set to true, all deprecation warning messages will be hidden.
+	 * Use this if you want to silence deprecation notifications.
+	 * @default false
+	 */
+	quiet: boolean;
+	/**
+	 * When set to true, deprecation messages will be displayed as plain text without color formatting.
+	 * Use this if you want to disable colored console output for deprecation warnings.
+	 * @default false
+	 */
+	noColor: boolean;
+}
 /**
  * Path utilities for working with URLs and file paths in a cross-platform way.
  * All paths that are passed in will become normalized to have posix separators.
@@ -29084,6 +29104,9 @@ export declare function isWebGPUSupported(options?: GPURequestAdapterOptions): P
  * - Common in asset loading and URL management
  */
 export declare const path: Path;
+interface Cleanable {
+	clear(): void;
+}
 
 export {
 	Buffer$1 as Buffer,
