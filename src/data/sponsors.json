@@ -1,6 +1,22 @@
 [
   {
     "sponsor": {
+      "name": "swiss eta watches",
+      "type": "User",
+      "login": "watchindiaa",
+      "avatarUrl": "https://images.opencollective.com/watchindiaa/avatar/460.png",
+      "linkUrl": "https://opencollective.com/watchindiaa",
+      "socialLogins": {
+        "opencollective": "watchindiaa"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Casino Online C19",
       "type": "User",
       "login": "casino-online-chile",
