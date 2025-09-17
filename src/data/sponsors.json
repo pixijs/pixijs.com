@@ -1,6 +1,23 @@
 [
   {
     "sponsor": {
+      "name": "CryptoCasino Guide - No KYC",
+      "type": "Organization",
+      "login": "cryptocasino-guide-no-kyc",
+      "avatarUrl": "https://images.opencollective.com/cryptocasino-guide-no-kyc/80594b3/logo/460.png",
+      "websiteUrl": "https://cryptocasino-guide.com/casino-sans-kyc",
+      "linkUrl": "https://opencollective.com/cryptocasino-guide-no-kyc",
+      "socialLogins": {
+        "opencollective": "cryptocasino-guide-no-kyc"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "swiss eta watches",
       "type": "User",
       "login": "watchindiaa",
