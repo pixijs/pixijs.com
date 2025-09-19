@@ -18,7 +18,7 @@ const texture = Texture.from('bunny.png');
 
 const container = new ParticleContainer({
   dynamicProperties: {
-    position: true,  // default
+    position: true, // default
     vertex: false,
     rotation: false,
     color: false,
