@@ -1,6 +1,23 @@
 [
   {
     "sponsor": {
+      "name": "Yarn",
+      "type": "Organization",
+      "login": "yarn1",
+      "avatarUrl": "https://images.opencollective.com/yarn1/logo/460.png",
+      "websiteUrl": "https://yarn.so",
+      "linkUrl": "https://opencollective.com/yarn1",
+      "socialLogins": {
+        "opencollective": "yarn1"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 1000,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Gold++ Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "CryptoCasino Guide - No KYC",
       "type": "Organization",
       "login": "cryptocasino-guide-no-kyc",
