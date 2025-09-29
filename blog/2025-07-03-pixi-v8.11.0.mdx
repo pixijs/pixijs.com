@@ -1,0 +1,233 @@
+---
+title: PixiJS Update - v8.11.0
+description: A look at the 8.11.0 release of PixiJS.
+slug: 8.11.0
+authors: zyie
+tags:
+  [
+    PixiJS,
+    Updates,
+    SplitText,
+    SplitBitmapText,
+    Container Origin,
+    replaceChild,
+    llms.txt,
+    PixiJS Showcase,
+    Sponsorship Updates,
+  ]
+hide_table_of_contents: true
+keywords:
+  [
+    'PixiJS',
+    'Updates',
+    'SplitText',
+    'SplitBitmapText',
+    'Container Origin',
+    'replaceChild',
+    'llms.txt',
+    'PixiJS Showcase',
+    'Sponsorship Updates',
+  ]
+---
+
+import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
+import OriginIndexFile from '!!raw-loader!../docs/examples/basic/container-origin';
+import BitmapBreakIndexFile from '!!raw-loader!../docs/examples/text/bitmap-text-break';
+import BitmapOverlapIndexFile from '!!raw-loader!../docs/examples/text/text-split-bitmap-overlap';
+
+PixiJS v8.11.0 introduces powerful new text tools for creating advanced animations and several quality-of-life improvements. Here's what's new:
+
+- **SplitText & SplitBitmapText:** Split text into lines, words, and characters for fine-grained control and advanced animations
+- **New `origin` Property for Containers:** Rotate and scale around a defined point without affecting position
+- **`replaceChild` Method:** Seamlessly swap display objects while preserving transforms
+- **BitmapText Word Breaking:** `breakWords` now works with `BitmapText` for better layout control
+- **llms.txt Support:** We've added official support for the `llms.txt` standard to help AI tools discover and respect PixiJS v8 content.
+- **PixiJS Showcase:** Submit your project and get featured on our new community gallery
+- **Sponsorship Updates:** We're now live on [GitHub Sponsors](https://github.com/sponsors/pixijs) with new and improved sponsorship tiers
+
+Let's dive into the details.
+
+{/* truncate */}
+
+## **SplitText & SplitBitmapText**
+
+:::warning
+This feature is experimental and may change in future releases.
+If you encounter any issues, please report them on our [GitHub Issues page](https://github.com/pixijs/pixijs/issues).
+:::
+
+We all love animated text, but until now, breaking text into individual characters, words, or lines was a pain. With the new `SplitText` and `SplitBitmapText` classes, you can control text at any level with ease.
+
+You can:
+
+- Animate each segment independently using tweening libraries like GSAP.
+- Define independent "anchor" points for characters, words, and lines.
+- Dynamically update text or style at runtime.
+- Split existing `Text` or `BitmapText`.
+
+```ts
+import { SplitText } from 'pixi.js';
+
+// Create new SplitText instance
+const newSplitText = new SplitText({ text: 'Hello Pixi', style: { fontSize: 36 } });
+
+// Split existing Text object
+const myText = new Text('Hello Pixi', { fontSize: 36 });
+const splitText = SplitText.from(myText);
+```
+
+<EmbeddedEditor
+  files={{
+    'index.js': BitmapOverlapIndexFile,
+  }}
+  dependencies={{ gsap: 'latest', 'pixi.js': 'latest' }}
+/>
+
+<br/>
+See full examples and usage guide [here](/8.x/guides/components/scene-objects/text/split-text).
+
+:::warning
+Heads-up: When splitting characters, browser kerning is lost, so spacing may differ slightly compared to standard text. This trade-off gives you creative flexibility, but it's something to be aware of for pixel-perfect layouts.
+:::
+
+---
+
+## **New `container.origin` Property**
+
+The new `origin` property allows you to control where a container rotates or scales from, without shifting its position in the scene.
+
+```ts
+new Container({ origin: { x: 100, y: 100 } });
+new Container({ origin: 50 }); // Same as { x: 50, y: 50 }
+```
+
+<EmbeddedEditor
+  files={{
+    'index.js': OriginIndexFile,
+  }}
+/>
+
+**Why not use `pivot`?**
+
+While `pivot` changes the transform origin, it also modifies the container’s position, making layout and animation logic more complex.
+
+The `origin` property provides a predictable, position-stable alternative for transform control.
+
+---
+
+## **New `container.replaceChild` Method**
+
+This new method allows you to swap out one display object for another within a container and the new child inherits the local transform of the old one. This means you can replace objects without losing their index, position, scale, rotation, or any other local transforms.
+
+```ts
+container.replaceChild(oldChild, newChild);
+```
+
+This is perfect for use cases like swapping static text with a `SplitText` version for dynamic effects.
+
+```ts
+const myText = new BitmapText({
+  text: 'Hello Pixi',
+  style: {...},
+  scale: 2,
+  skew: { x: 0.1, y: 0.2 },
+  anchor: { x: 0.5, y: 0.5 },
+});
+const segmented = SplitBitmapText.from(myText);
+
+// Use the new replaceChild method to swap text
+container.replaceChild(myText, segmented);
+```
+
+---
+
+## **Better Word Breaking for BitmapText**
+
+The `breakWords` option now works with `BitmapText`. This improves layout control for projects using bitmap fonts, making it easier to manage dynamic text, labels, and UI elements.
+
+<EmbeddedEditor
+  files={{
+    'index.js': BitmapBreakIndexFile,
+  }}
+/>
+
+---
+
+## `llms.txt` Support
+
+We now officially support the `llms.txt` convention to help AI tools access accurate PixiJS documentation.
+We provide several documentation files for different context window sizes:
+
+| File                                                     | Description                                                                       |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [`/llms.txt`](https://pixijs.com/llms.txt)               | Index of available documentation files                                            |
+| [`/llms-full.txt`](https://pixijs.com/llms-full.txt)     | Complete API documentation including all classes, methods, and examples           |
+| [`/llms-medium.txt`](https://pixijs.com/llms-medium.txt) | Compressed documentation optimized for AI tools with medium-sized context windows |
+
+These files are generated automatically from our TypeScript definitions and documentation sources. They update daily to ensure LLMs and AI-powered tools can reference the most accurate, up-to-date PixiJS information.
+
+This helps coding assistants, search tools, and documentation bots provide correct suggestions and avoids outdated or incorrect information being used.
+
+---
+
+## **PixiJS Showcase is Live**
+
+We love seeing what you build with PixiJS. The new [PixiJS Showcase](https://pixijs.com/showcase) highlights games, websites, apps, tools, and experiments created by the community.
+
+<div
+  style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: '24px',
+    maxWidth: 700,
+    margin: '0 auto',
+  }}
+>
+  <img
+    src={'/images/blog/showcase.webp'}
+    alt="Tags Example"
+    style={{
+      borderRadius: '12px',
+      boxShadow: '0 0 20px hsla(340, 82%, 52%, 0.15)',
+    }}
+  />
+</div>
+
+If you've made something cool, we'd love to show it off. Just fill out the submission form on the page. We're always amazed by the creativity of the Pixi community!
+
+---
+
+## **Sponsorship Updates**
+
+PixiJS is now live on [Github Sponsors](https://github.com/sponsors/pixijs) and we've revamped our sponsorship tiers to provide more value and visibility for our supporters.
+
+We rely on sponsorships to keep PixiJS development sustainable, and your support helps us continue improving the library, fixing bugs, and adding new features.
+
+### Sponsorship Tiers
+
+| Tier         | Monthly | Benefits                                                                                          |
+| ------------ | ------- | ------------------------------------------------------------------------------------------------- |
+| **Bronze**   | \$100   | Logo on our website with a link to your site                                                      |
+| **Silver**   | \$250   | Bronze benefits plus logo in release blog posts and a sponsored link in the showcase              |
+| **Gold**     | \$500   | Silver benefits plus logo on all documentation pages and in the GitHub README                     |
+| **Gold++**   | \$1000  | Gold benefits plus two sponsored links in the showcase and priority bug fixes                     |
+| **Platinum** | \$2000  | Gold++ benefits plus the most prominent logo placement, highest priority bug fixes, roadmap input |
+
+You can find all the details on our [Sponsors page](/sponsor).
+
+---
+
+## **Conclusion**
+
+PixiJS 8.11.0 adds subtle but powerful improvements for building interactive content, including segmented text animations, better layout tools, and improved ecosystem support.
+
+We're excited to see what you build next, and even more excited to build PixiJS with all of you.
+
+- [See the full release notes on GitHub](https://github.com/pixijs/pixijs/releases)
+- [Sponsor PixiJS on GitHub](https://github.com/sponsors/pixijs)
+- [Submit your project to the Showcase](https://pixijs.com/showcase)
+- join the discussion on [Discord](https://discord.gg/QrnxmQUPGV)
+
+Happy creating!
+**The PixiJS Team**

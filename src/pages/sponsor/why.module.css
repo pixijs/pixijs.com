@@ -1,0 +1,133 @@
+.section {
+  padding-top: 2rem; /* py-20 */
+  padding-bottom: 2rem;
+  padding-left: 2rem; /* px-4 */
+  padding-right: 2rem;
+  background-color: var(--ifm-navbar-background-color);
+
+  max-width: 987px;
+  margin: auto;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding-left: 1.5rem; /* sm:px-6 */
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-left: 2rem; /* lg:px-8 */
+    padding-right: 2rem;
+  }
+}
+
+.container {
+  max-width: 80rem; /* max-w-7xl */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem; /* mb-16 */
+}
+
+.title {
+  font-size: 2.25rem; /* text-4xl */
+  font-weight: bold;
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem; /* md:text-5xl */
+  }
+}
+
+.description {
+  font-size: 1.25rem; /* text-xl */
+  color: #d1d5db; /* text-gray-300 */
+  max-width: 48rem; /* max-w-3xl */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.featuresGrid {
+  display: grid;
+  gap: 2rem; /* gap-8 */
+}
+
+@media (min-width: 768px) {
+  .featuresGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  text-align: center;
+  padding: 2rem; /* p-8 */
+  background-color: var(--ifm-background-color);
+  border: 1px solid var(--ifm-table-border-color);
+}
+
+.cardContent {
+  padding-top: 1.5rem; /* pt-6 */
+}
+
+.iconWrapper {
+  width: 4rem; /* w-16 */
+  height: 4rem; /* h-16 */
+  background-color: var(--ifm-color-primary);
+  border-radius: 9999px; /* rounded-full */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.icon {
+  color: white;
+  font-size: 1.5rem; /* text-2xl */
+}
+
+.featureTitle {
+  font-size: 1.25rem; /* text-2xl */
+  font-weight: bold;
+  margin-bottom: 1rem; /* mb-4 */
+  color: white;
+}
+
+.featureDescription {
+  color: #d1d5db; /* text-gray-300 */
+  line-height: 1.625; /* leading-relaxed */
+}
+
+html[data-theme='light'] {
+  .section {
+    color: var(--ifm-font-color-base);
+    background-color: #ecedf1;
+    background-color: #f1f5f9;
+  }
+  .description {
+    color: #4a586b;
+  }
+  .card {
+    background-color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+  .featureTitle {
+    color: var(--ifm-font-color-base);
+  }
+  .featureDescription {
+    color: #4a586b;
+  }
+}

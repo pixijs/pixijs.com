@@ -1,6 +1,73 @@
 [
   {
     "sponsor": {
+      "name": "Yarn",
+      "type": "Organization",
+      "login": "yarn1",
+      "avatarUrl": "https://images.opencollective.com/yarn1/logo/460.png",
+      "websiteUrl": "https://yarn.so",
+      "linkUrl": "https://opencollective.com/yarn1",
+      "socialLogins": {
+        "opencollective": "yarn1"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 1000,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Gold++ Sponsor"
+  },
+  {
+    "sponsor": {
+      "name": "CryptoCasino Guide - No KYC",
+      "type": "Organization",
+      "login": "cryptocasino-guide-no-kyc",
+      "avatarUrl": "https://images.opencollective.com/cryptocasino-guide-no-kyc/80594b3/logo/460.png",
+      "websiteUrl": "https://cryptocasino-guide.com/casino-sans-kyc",
+      "linkUrl": "https://opencollective.com/cryptocasino-guide-no-kyc",
+      "socialLogins": {
+        "opencollective": "cryptocasino-guide-no-kyc"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
+      "name": "swiss eta watches",
+      "type": "User",
+      "login": "watchindiaa",
+      "avatarUrl": "https://images.opencollective.com/watchindiaa/avatar/460.png",
+      "linkUrl": "https://opencollective.com/watchindiaa",
+      "socialLogins": {
+        "opencollective": "watchindiaa"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
+      "name": "Casino Online C19",
+      "type": "User",
+      "login": "casino-online-chile",
+      "avatarUrl": "https://images.opencollective.com/casino-online-chile/91f1057/avatar/460.png",
+      "websiteUrl": "https://c19.cl",
+      "linkUrl": "https://opencollective.com/casino-online-chile",
+      "socialLogins": {
+        "opencollective": "casino-online-chile"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Webisoft",
       "type": "Organization",
       "login": "webisoft",
@@ -35,14 +102,31 @@
   },
   {
     "sponsor": {
-      "name": "Casino Online C19",
-      "type": "User",
-      "login": "casino-online-chile",
-      "avatarUrl": "https://images.opencollective.com/casino-online-chile/91f1057/avatar/460.png",
-      "websiteUrl": "https://c19.cl",
-      "linkUrl": "https://opencollective.com/casino-online-chile",
+      "name": "LITSLINK",
+      "type": "Organization",
+      "login": "litslink",
+      "avatarUrl": "https://images.opencollective.com/litslink/18dd55f/logo/460.png",
+      "websiteUrl": "https://litslink.com",
+      "linkUrl": "https://opencollective.com/litslink",
       "socialLogins": {
-        "opencollective": "casino-online-chile"
+        "opencollective": "litslink"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
+      "name": "Guidebook.BetWinner",
+      "type": "User",
+      "login": "guidebook_betwinner_com",
+      "avatarUrl": "https://images.opencollective.com/guidebook_betwinner_com/6babe60/avatar/460.png",
+      "websiteUrl": "https://guidebook.betwinner.com",
+      "linkUrl": "https://opencollective.com/guidebook_betwinner_com",
+      "socialLogins": {
+        "opencollective": "guidebook_betwinner_com"
       }
     },
     "isOneTime": false,

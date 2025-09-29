@@ -2754,14 +2754,14 @@ export declare class Rectangle implements ShapePrimitive {
 	 * const isOnStroke = rect.strokeContains(150, 100, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = rect.strokeContains(150, 100, 4, 0);   // Inside
+	 * const innerStroke = rect.strokeContains(150, 100, 4, 1);   // Inside
 	 * const centerStroke = rect.strokeContains(150, 100, 4, 0.5); // Centered
-	 * const outerStroke = rect.strokeContains(150, 100, 4, 1);   // Outside
+	 * const outerStroke = rect.strokeContains(150, 100, 4, 0);   // Outside
 	 * ```
 	 * @param x - The X coordinate of the point to test
 	 * @param y - The Y coordinate of the point to test
 	 * @param strokeWidth - The width of the line to check
-	 * @param alignment - The alignment of the stroke (0 = inner, 0.5 = centered, 1 = outer)
+	 * @param alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
 	 * @returns Whether the x/y coordinates are within this rectangle's stroke
 	 */
 	strokeContains(x: number, y: number, strokeWidth: number, alignment?: number): boolean;
@@ -2863,6 +2863,25 @@ export declare class Rectangle implements ShapePrimitive {
 	 * @returns Returns itself
 	 */
 	ceil(resolution?: number, eps?: number): this;
+	/**
+	 * Scales the rectangle's dimensions and position by the specified factors.
+	 * @example
+	 * ```ts
+	 * const rect = new Rectangle(50, 50, 100, 100);
+	 *
+	 * // Scale uniformly
+	 * rect.scale(0.5, 0.5);
+	 * // rect is now: x=25, y=25, width=50, height=50
+	 *
+	 * // non-uniformly
+	 * rect.scale(0.5, 1);
+	 * // rect is now: x=25, y=50, width=50, height=100
+	 * ```
+	 * @param x - The factor by which to scale the horizontal properties (x, width).
+	 * @param y - The factor by which to scale the vertical properties (y, height).
+	 * @returns Returns itself
+	 */
+	scale(x: number, y?: number): this;
 	/**
 	 * Enlarges this rectangle to include the passed rectangle.
 	 * @example
@@ -3276,7 +3295,7 @@ export interface TextureOptions<TextureSourceType extends TextureSource = Textur
  * // once Assets has loaded the image it will be available via the from method
  * const sameTexture = Texture.from('assets/image.png');
  * // another way to access the texture once loaded
- * const sameAgainTexture = Asset.get('assets/image.png');
+ * const sameAgainTexture = Assets.get('assets/image.png');
  *
  * const sprite1 = new Sprite(texture);
  *
@@ -3939,7 +3958,7 @@ type Formats = keyof typeof imageTypes;
  *     .fill(0xFF0000);
  *
  * // Basic extraction examples
- * const image = await app.renderer.extract.image(graphics);    // As HTMLImageElement
+ * const image = await app.renderer.extract.image(graphics);    // As IImage (HTMLImageElement)
  * const canvas = app.renderer.extract.canvas(graphics);        // As Canvas
  * const pixels = app.renderer.extract.pixels(graphics);        // As pixel data
  * const base64 = await app.renderer.extract.base64(graphics); // As base64 string
@@ -4000,9 +4019,9 @@ export declare class ExtractSystem implements System {
 	/** @param renderer - The renderer this System works for. */
 	constructor(renderer: Renderer);
 	/**
-	 * Creates an HTMLImageElement from a display object or texture.
+	 * Creates an IImage from a display object or texture.
 	 * @param options - Options for creating the image, or the target to extract
-	 * @returns Promise that resolves with the generated HTMLImageElement
+	 * @returns Promise that resolves with the generated IImage
 	 * @example
 	 * ```ts
 	 * // Basic usage with a sprite
@@ -4026,7 +4045,7 @@ export declare class ExtractSystem implements System {
 	 * const image = await renderer.extract.image(texture);
 	 * ```
 	 */
-	image(options: ExtractImageOptions | Container | Texture): Promise<HTMLImageElement>;
+	image(options: ExtractImageOptions | Container | Texture): Promise<ImageLike>;
 	/**
 	 * Converts the target into a base64 encoded string.
 	 *
@@ -4211,7 +4230,7 @@ interface UniformParserDefinition {
 	uboStd40?: string;
 	uniform?: string;
 }
-declare const DefaultWebGPUSystems: (typeof BackgroundSystem | typeof GenerateTextureSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof TextureGCSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GpuUboSystem | typeof GpuEncoderSystem | typeof GpuDeviceSystem | typeof GpuLimitsSystem | typeof GpuBufferSystem | typeof GpuTextureSystem | typeof GpuRenderTargetSystem | typeof GpuShaderSystem | typeof GpuStateSystem | typeof PipelineSystem | typeof GpuColorMaskSystem | typeof GpuStencilSystem | typeof BindGroupSystem)[];
+declare const DefaultWebGPUSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GpuUboSystem | typeof GpuEncoderSystem | typeof GpuDeviceSystem | typeof GpuLimitsSystem | typeof GpuBufferSystem | typeof GpuTextureSystem | typeof GpuRenderTargetSystem | typeof GpuShaderSystem | typeof GpuStateSystem | typeof PipelineSystem | typeof GpuColorMaskSystem | typeof GpuStencilSystem | typeof BindGroupSystem)[];
 declare const DefaultWebGPUPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof StencilMaskPipe | typeof ColorMaskPipe | typeof CustomRenderPipe | typeof GpuUniformBatchPipe)[];
 /**
  * The default WebGPU systems. These are the systems that are added by default to the WebGPURenderer.
@@ -4596,7 +4615,10 @@ export interface RenderOptions extends ClearOptions {
  * Options for destroying the renderer.
  * This can be a boolean or an object.
  */
-export type RendererDestroyOptions = TypeOrBool<ViewSystemDestroyOptions>;
+export type RendererDestroyOptions = TypeOrBool<ViewSystemDestroyOptions & {
+	/** Whether to clean up global resource pools/caches */
+	releaseGlobalResources?: boolean;
+}>;
 declare const defaultRunners: readonly [
 	"init",
 	"destroy",
@@ -4616,7 +4638,7 @@ type Runners = {
 } & {
 	[K: ({} & string) | ({} & symbol)]: SystemRunner;
 };
-declare const DefaultWebGLSystems: (typeof BackgroundSystem | typeof GenerateTextureSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof TextureGCSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GlUboSystem | typeof GlBackBufferSystem | typeof GlContextSystem | typeof GlLimitsSystem | typeof GlBufferSystem | typeof GlTextureSystem | typeof GlRenderTargetSystem | typeof GlGeometrySystem | typeof GlUniformGroupSystem | typeof GlShaderSystem | typeof GlEncoderSystem | typeof GlStateSystem | typeof GlStencilSystem | typeof GlColorMaskSystem)[];
+declare const DefaultWebGLSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GlUboSystem | typeof GlBackBufferSystem | typeof GlContextSystem | typeof GlLimitsSystem | typeof GlBufferSystem | typeof GlTextureSystem | typeof GlRenderTargetSystem | typeof GlGeometrySystem | typeof GlUniformGroupSystem | typeof GlShaderSystem | typeof GlEncoderSystem | typeof GlStateSystem | typeof GlStencilSystem | typeof GlColorMaskSystem)[];
 declare const DefaultWebGLPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof StencilMaskPipe | typeof ColorMaskPipe | typeof CustomRenderPipe)[];
 /**
  * The default WebGL renderer, uses WebGL2 contexts.
@@ -4627,9 +4649,6 @@ export type WebGLSystems = ExtractSystemTypes<typeof DefaultWebGLSystems> & Pixi
  */
 export interface WebGLOptions extends SharedRendererOptions, ExtractRendererOptions<typeof DefaultWebGLSystems>, PixiMixins.WebGLOptions {
 }
-/**
- * The default WebGL renderer, uses WebGL2 contexts.
- */
 export interface WebGLRenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<WebGLPipes, WebGLOptions, T>, WebGLSystems {
 }
 /**
@@ -5173,6 +5192,8 @@ export interface UpdateTransformOptions {
 	skewY: number;
 	pivotX: number;
 	pivotY: number;
+	originX: number;
+	originY: number;
 }
 /**
  * Constructor options used for `Container` instances.
@@ -5233,7 +5254,7 @@ export interface ContainerOptions<C extends ContainerChild = ContainerChild> ext
 	 *
 	 * > [!NOTE] 'rotation' and 'angle' have the same effect on a display object;
 	 * > rotation is in radians, angle is in degrees.
-	 @example
+	 * @example
 	 * ```ts
 	 * new Container({ angle: 45 }); // Rotate 45 degrees
 	 * new Container({ angle: 90 }); // Rotate 90 degrees
@@ -5308,6 +5329,17 @@ export interface ContainerOptions<C extends ContainerChild = ContainerChild> ext
 	 * ```
 	 */
 	pivot?: PointData | number;
+	/**
+	 * The origin point around which the container rotates and scales.
+	 * Unlike pivot, changing origin will not move the container's position.
+	 * @example
+	 * ```ts
+	 * new Container({ origin: new Point(100, 100) }); // Rotate around point (100,100)
+	 * new Container({ origin: 50 }); // Rotate around point (50, 50)
+	 * new Container({ origin: { x: 150, y: 150 } }); // Rotate around point (150, 150)
+	 * ```
+	 */
+	origin?: PointData | number;
 	/**
 	 * The coordinate of the object relative to the local coordinates of the parent.
 	 * @example
@@ -5603,7 +5635,7 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * }
 	 * ```
 	 */
-	parent: Container;
+	parent: Container | null;
 	/**
 	 * Current transform of the object based on local factors: position, scale, other stuff.
 	 * This matrix represents the local transformation without any parent influence.
@@ -5749,6 +5781,10 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * // Rotate around center
 	 * container.pivot.set(container.width / 2, container.height / 2);
 	 * container.rotation = Math.PI; // 180 degrees
+	 *
+	 * // Rotate around center with origin
+	 * container.origin.set(container.width / 2, container.height / 2);
+	 * container.rotation = Math.PI; // 180 degrees
 	 * ```
 	 */
 	get rotation(): number;
@@ -5758,13 +5794,17 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 *
 	 * > [!NOTE] 'rotation' and 'angle' have the same effect on a display object;
 	 * > rotation is in radians, angle is in degrees.
-	 @example
+	 * @example
 	 * ```ts
 	 * // Basic angle rotation
 	 * sprite.angle = 45; // 45 degrees
 	 *
 	 * // Rotate around center
 	 * sprite.pivot.set(sprite.width / 2, sprite.height / 2);
+	 * sprite.angle = 180; // Half rotation
+	 *
+	 * // Rotate around center with origin
+	 * sprite.origin.set(sprite.width / 2, sprite.height / 2);
 	 * sprite.angle = 180; // Half rotation
 	 *
 	 * // Reset rotation
@@ -5835,13 +5875,29 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * @since 4.0.0
 	 */
 	get scale(): ObservablePoint;
-	set scale(value: PointData | number);
+	set scale(value: PointData | number | string);
+	/**
+	 * @experimental
+	 * The origin point around which the container rotates and scales without affecting its position.
+	 * Unlike pivot, changing the origin will not move the container's position.
+	 * @example
+	 * ```ts
+	 * // Rotate around center point
+	 * container.origin.set(container.width / 2, container.height / 2);
+	 * container.rotation = Math.PI; // Rotates around center
+	 *
+	 * // Reset origin
+	 * container.origin.set(0, 0);
+	 * ```
+	 */
+	get origin(): ObservablePoint;
+	set origin(value: PointData | number);
 	/**
 	 * The width of the Container, setting this will actually modify the scale to achieve the value set.
 	 * > [!NOTE] Changing the width will adjust the scale.x property of the container while maintaining its aspect ratio.
 	 * > [!NOTE] If you want to set both width and height at the same time, use {@link Container#setSize}
 	 * as it is more optimized by not recalculating the local bounds twice.
-	 *  @example
+	 * @example
 	 * ```ts
 	 * // Basic width setting
 	 * container.width = 100;
@@ -5881,7 +5937,7 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * container.getSize(reuseSize);
 	 * ```
 	 * @param out - Optional object to store the size in.
-	 * @returns - The size of the container.
+	 * @returns The size of the container.
 	 */
 	getSize(out?: Size): Size;
 	/**
@@ -6459,9 +6515,15 @@ declare global {
 }
 /**
  * A callback which can be added to a ticker.
- * ```js
- * ticker.add(() => {
- *    // do something every frame
+ * The callback receives the Ticker instance as its parameter, providing access to timing properties.
+ * @example
+ * ```ts
+ * ticker.add((ticker) => {
+ *    // Access deltaTime (dimensionless scalar ~1.0 at 60fps)
+ *    sprite.rotation += 0.1 * ticker.deltaTime;
+ *
+ *    // Access deltaMS (milliseconds elapsed)
+ *    const progress = ticker.deltaMS / animationDuration;
  * });
  * ```
  */
@@ -6473,15 +6535,24 @@ export type TickerCallback<T> = (this: T, ticker: Ticker) => any;
  * It provides a way to add listeners that will be called on each frame,
  * allowing for smooth animations and updates.
  *
+ * ## Time Units
+ * - `deltaTime`: Dimensionless scalar (typically ~1.0 at 60 FPS) for frame-independent animations
+ * - `deltaMS`: Milliseconds elapsed (capped and speed-scaled) for time-based calculations
+ * - `elapsedMS`: Raw milliseconds elapsed (uncapped, unscaled) for measurements
+ * - `lastTime`: Timestamp in milliseconds since epoch (performance.now() format)
+ *
  * Animation frames are requested
  * only when necessary, e.g., when the ticker is started and the emitter has listeners.
  * @example
  * ```ts
- * // Basic ticker usage
+ * // Basic ticker usage with different time units
  * const ticker = new Ticker();
  * ticker.add((ticker) => {
- *     // Update every frame
+ *     // Frame-independent animation using dimensionless deltaTime
  *     sprite.rotation += 0.1 * ticker.deltaTime;
+ *
+ *     // Time-based animation using deltaMS (milliseconds)
+ *     sprite.x += (100 / 1000) * ticker.deltaMS; // 100 pixels per second
  * });
  * ticker.start();
  *
@@ -6546,15 +6617,16 @@ export declare class Ticker {
 	 */
 	autoStart: boolean;
 	/**
-	 * Scalar time value from last frame to this frame.
-	 * Used for frame-based animations and updates.
+	 * Scalar representing the delta time factor.
+	 * This is a dimensionless value representing the fraction of a frame at the target framerate.
+	 * At 60 FPS, this value is typically around 1.0.
 	 *
-	 * This value is capped by setting {@link Ticker#minFPS|minFPS}
-	 * and is scaled with {@link Ticker#speed|speed}.
-	 * > [!NOTE] The cap may be exceeded by scaling.
+	 * This is NOT in milliseconds - it's a scalar multiplier for frame-independent animations.
+	 * For actual milliseconds, use {@link Ticker#deltaMS}.
+	 * @member {number}
 	 * @example
 	 * ```ts
-	 * // Basic animation
+	 * // Frame-independent animation using deltaTime scalar
 	 * ticker.add((ticker) => {
 	 *     // Rotate sprite by 0.1 radians per frame, scaled by deltaTime
 	 *     sprite.rotation += 0.1 * ticker.deltaTime;
@@ -6588,41 +6660,31 @@ export declare class Ticker {
 	 */
 	deltaMS: number;
 	/**
-	 * Time elapsed in milliseconds from last frame to this frame.
-	 * Provides raw timing information without modifications.
+	 * Time elapsed in milliseconds from the last frame to this frame.
+	 * This value is not capped or scaled and provides raw timing information.
 	 *
-	 * Opposed to what the scalar {@link Ticker#deltaTime|deltaTime}
-	 * is based, this value is neither capped nor scaled.
-	 *
-	 * If the platform supports DOMHighResTimeStamp,
-	 * this value will have a precision of 1 µs.
-	 *
-	 * Defaults to target frame time
+	 * Unlike {@link Ticker#deltaMS}, this value is unmodified by speed scaling or FPS capping.
+	 * @member {number}
 	 * @example
 	 * ```ts
-	 * // Basic timing information
 	 * ticker.add((ticker) => {
 	 *     console.log(`Raw frame time: ${ticker.elapsedMS}ms`);
 	 * });
 	 * ```
-	 * @default 16.66
 	 */
 	elapsedMS: number;
 	/**
-	 * The last time {@link Ticker#update|update} was invoked.
-	 * Used for calculating time deltas between frames.
+	 * The last time update was invoked, in milliseconds since epoch.
+	 * Similar to performance.now() timestamp format.
 	 *
-	 * This value is also reset internally outside of invoking
-	 * update, but only when a new animation frame is requested.
-	 *
-	 * If the platform supports DOMHighResTimeStamp,
-	 * this value will have a precision of 1 µs.
+	 * Used internally for calculating time deltas between frames.
+	 * @member {number}
 	 * @example
 	 * ```ts
-	 * // Basic timing check
-	 * ticker.add(() => {
-	 *     const timeSinceStart = performance.now() - ticker.lastTime;
-	 *     console.log(`Time running: ${timeSinceStart}ms`);
+	 * ticker.add((ticker) => {
+	 *     const currentTime = performance.now();
+	 *     const timeSinceLastFrame = currentTime - ticker.lastTime;
+	 *     console.log(`Time since last frame: ${timeSinceLastFrame}ms`);
 	 * });
 	 * ```
 	 */
@@ -6670,38 +6732,24 @@ export declare class Ticker {
 	started: boolean;
 	constructor();
 	/**
-	 * Register a handler for tick events. Calls continuously unless
-	 * it is removed or the ticker is stopped.
+	 * Register a handler for tick events.
+	 * @param fn - The listener function to add. Receives the Ticker instance as parameter
+	 * @param context - The context for the listener
+	 * @param priority - The priority of the listener
 	 * @example
 	 * ```ts
-	 * // Basic update handler
+	 * // Access time properties through the ticker parameter
 	 * ticker.add((ticker) => {
-	 *     // Update every frame
+	 *     // Use deltaTime (dimensionless scalar) for frame-independent animations
 	 *     sprite.rotation += 0.1 * ticker.deltaTime;
+	 *
+	 *     // Use deltaMS (milliseconds) for time-based calculations
+	 *     const progress = ticker.deltaMS / animationDuration;
+	 *
+	 *     // Use elapsedMS for raw timing measurements
+	 *     console.log(`Raw frame time: ${ticker.elapsedMS}ms`);
 	 * });
-	 *
-	 * // With specific context
-	 * const game = {
-	 *     update(ticker) {
-	 *         this.physics.update(ticker.deltaTime);
-	 *     }
-	 * };
-	 * ticker.add(game.update, game);
-	 *
-	 * // With priority
-	 * ticker.add(
-	 *     (ticker) => {
-	 *         // Runs before normal priority updates
-	 *         physics.update(ticker.deltaTime);
-	 *     },
-	 *     undefined,
-	 *     UPDATE_PRIORITY.HIGH
-	 * );
 	 * ```
-	 * @param fn - The listener function to be added for updates
-	 * @param context - The listener context
-	 * @param priority - The priority for emitting (default: UPDATE_PRIORITY.NORMAL)
-	 * @returns This instance of a ticker
 	 */
 	add<T = any>(fn: TickerCallback<T>, context?: T, priority?: number): this;
 	/**
@@ -7378,6 +7426,110 @@ export interface CullingMixinConstructor {
 	 */
 	cullableChildren: boolean;
 }
+/**
+ * Application options for the {@link CullerPlugin}.
+ * These options control how your application handles culling of display objects.
+ * @example
+ * ```ts
+ * import { Application } from 'pixi.js';
+ *
+ * // Create application
+ * const app = new Application();
+ * await app.init({
+ *     culler: {
+ *         updateTransform: false // Skip updating transforms for culled objects
+ *     }
+ * });
+ * ```
+ */
+export interface CullerPluginOptions {
+	/**
+	 * Options for the culler behavior.
+	 * @example
+	 * ```ts
+	 * // Basic culling options
+	 * const app = new Application();
+	 * await app.init({
+	 *     culler: {...}
+	 * });
+	 * ```
+	 */
+	culler?: {
+		/**
+		 * Update the transform of culled objects.
+		 *
+		 * > [!IMPORTANT] Keeping this as `false` can improve performance by avoiding unnecessary calculations,
+		 * > however, the transform used for culling may not be up-to-date if the object has moved since the last render.
+		 * @default true
+		 * @example
+		 * ```ts
+		 * const app = new Application();
+		 * await app.init({
+		 *     culler: {
+		 *         updateTransform: false // Skip updating transforms for culled objects
+		 *     }
+		 * });
+		 * ```
+		 */
+		updateTransform?: boolean;
+	};
+}
+/**
+ * An {@link Application} plugin that automatically culls (hides) display objects that are outside
+ * the visible screen area. This improves performance by not rendering objects that aren't visible.
+ *
+ * Key Features:
+ * - Automatic culling based on screen boundaries
+ * - Configurable culling areas and behavior per container
+ * - Can improve rendering performance
+ * @example
+ * ```ts
+ * import { Application, CullerPlugin, Container, Rectangle } from 'pixi.js';
+ *
+ * // Register the plugin
+ * extensions.add(CullerPlugin);
+ *
+ * // Create application
+ * const app = new Application();
+ * await app.init({...});
+ *
+ * // Create a container with culling enabled
+ * const container = new Container();
+ * container.cullable = true;         // Enable culling for this container
+ * container.cullableChildren = true; // Enable culling for children (default)
+ * app.stage.addChild(container);
+ *
+ * // Optional: Set custom cull area to avoid expensive bounds calculations
+ * container.cullArea = new Rectangle(0, 0, app.screen.width, app.screen.height);
+ *
+ * // Add many sprites to the group
+ * for (let j = 0; j < 100; j++) {
+ *     const sprite = Sprite.from('texture.png');
+ *     sprite.x = Math.random() * 2000;
+ *     sprite.y = Math.random() * 2000;
+ *
+ *     sprite.cullable = true; // Enable culling for each sprite
+ *
+ *     // Set cullArea if needed
+ *     // sprite.cullArea = new Rectangle(0, 0, 100, 100); // Optional
+ *
+ *     // Add to container
+ *     container.addChild(sprite);
+ * }
+ * ```
+ * @remarks
+ * To enable culling, you must set the following properties on your containers:
+ * - `cullable`: Set to `true` to enable culling for the container
+ * - `cullableChildren`: Set to `true` to enable culling for children (default)
+ * - `cullArea`: Optional custom Rectangle for culling bounds
+ *
+ * Performance Tips:
+ * - Group objects that are spatially related
+ * - Use `cullArea` for containers with many children to avoid bounds calculations
+ * - Set `cullableChildren = false` for containers that are always fully visible
+ */
+export declare class CullerPlugin {
+}
 declare global {
 	namespace PixiMixins {
 		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -7385,6 +7537,9 @@ declare global {
 		}
 		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 		interface ContainerOptions extends Partial<CullingMixinConstructor> {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface ApplicationOptions extends Partial<CullerPluginOptions> {
 		}
 	}
 }
@@ -9966,13 +10121,14 @@ export declare class FillGradient implements CanvasGradient {
 	 * @returns This gradient instance for chaining
 	 */
 	addColorStop(offset: number, color: ColorSource): this;
-	/**
-	 * Gets a unique key representing the current state of the gradient.
-	 * Used internally for caching.
-	 * @returns Unique string key
-	 */
-	get styleKey(): number;
+	/** Destroys the gradient, releasing resources. This will also destroy the internal texture. */
 	destroy(): void;
+	/**
+	 * Returns a unique key for this gradient instance.
+	 * This key is used for caching and texture management.
+	 * @returns {string} Unique key for the gradient
+	 */
+	get styleKey(): string;
 }
 /**
  * Defines the repetition modes for fill patterns.
@@ -10002,8 +10158,6 @@ export type PatternRepetition = "repeat" | "repeat-x" | "repeat-y" | "no-repeat"
  * textPattern.y = (textGradient.height);
  */
 export declare class FillPattern implements CanvasPattern {
-	/** Internal texture used to render the gradient */
-	texture: Texture;
 	/** The transform matrix applied to the pattern */
 	transform: Matrix;
 	constructor(texture: Texture, repetition?: PatternRepetition);
@@ -10013,12 +10167,17 @@ export declare class FillPattern implements CanvasPattern {
 	 * If not provided, the pattern will use the default transform.
 	 */
 	setTransform(transform?: Matrix): void;
+	/** Internal texture used to render the gradient */
+	get texture(): Texture;
+	set texture(value: Texture);
 	/**
-	 * Gets a unique key representing the current state of the pattern.
-	 * Used internally for caching.
-	 * @returns Unique string key
+	 * Returns a unique key for this instance.
+	 * This key is used for caching.
+	 * @returns {string} Unique key for the instance
 	 */
 	get styleKey(): string;
+	/** Destroys the fill pattern, releasing resources. This will also destroy the internal texture. */
+	destroy(): void;
 }
 /**
  * Defines the style properties used for filling shapes in graphics and text operations.
@@ -10188,7 +10347,7 @@ export interface FillStyle {
  *     color: 0x0000ff, // Or use a Color object
  *     join: 'miter',
  *     miterLimit: 3,   // Limit how far miter extends
- *     alignment: 1     // Outside alignment
+ *     alignment: 0     // Outside alignment
  * });
  *
  * // Pixel-perfect line
@@ -10211,17 +10370,17 @@ export interface StrokeAttributes {
 	width?: number;
 	/**
 	 * The alignment of the stroke relative to the path.
-	 * - 0: Inside the shape
+	 * - 1: Inside the shape
 	 * - 0.5: Centered on the path (default)
-	 * - 1: Outside the shape
+	 * - 0: Outside the shape
 	 * @example
 	 * ```ts
 	 * // Inside alignment
-	 * const stroke = { alignment: 0 };
+	 * const stroke = { alignment: 1 };
 	 * // Centered alignment
 	 * const stroke = { alignment: 0.5 };
 	 * // Outside alignment
-	 * const stroke = { alignment: 1 };
+	 * const stroke = { alignment: 0 };
 	 * ```
 	 * @default 0.5
 	 */
@@ -10325,7 +10484,7 @@ export interface StrokeAttributes {
  *     stroke: {
  *         width: 4,
  *         color: 0x000000,
- *         alignment: 1  // Outside stroke
+ *         alignment: 0  // Outside stroke
  *     }
  * });
  *
@@ -11386,7 +11545,7 @@ export interface TextStyleOptions {
 	 * compared to applying the filter directly to the text object (which would be applied at run time).
 	 * @default undefined
 	 */
-	filters?: Filter[];
+	filters?: Filter[] | readonly Filter[];
 }
 /**
  * A TextStyle Object contains information to decorate Text objects.
@@ -11405,7 +11564,7 @@ export interface TextStyleOptions {
  * const richStyle = new TextStyle({
  *     fontFamily: 'Arial',
  *     fontSize: 32,
- *     fill: ['#FF0000', '#00FF00'], // Gradient fill
+ *     fill: 'white',
  *     stroke: {
  *         color: '#4a1850',
  *         width: 5
@@ -11532,7 +11691,7 @@ export declare class TextStyle extends EventEmitter<{
 	 * compared to applying the filter directly to the text object (which would be applied at run time).
 	 * @default null
 	 */
-	get filters(): Filter[];
+	get filters(): readonly Filter[];
 	set filters(value: Filter[]);
 	/**
 	 * Trim transparent borders from the text texture.
@@ -11600,6 +11759,12 @@ export declare class TextStyle extends EventEmitter<{
 	update(): void;
 	/** Resets all properties to the default values */
 	reset(): void;
+	/**
+	 * Returns a unique key for this instance.
+	 * This key is used for caching.
+	 * @returns {string} Unique key for the instance
+	 */
+	get styleKey(): string;
 	/**
 	 * Creates a new TextStyle object with the same values as this one.
 	 * @returns New cloned TextStyle object
@@ -12044,7 +12209,6 @@ interface Text$1 extends PixiMixins.Text, AbstractText<TextStyle, TextStyleOptio
  *     },
  *     textureStyle: {
  *         scaleMode: 'nearest',
- *         resolution: 2
  *     }
  * });
  * ```
@@ -12104,8 +12268,6 @@ export interface CanvasTextOptions extends TextOptions {
  *     },
  *     textureStyle: {
  *         scaleMode: 'nearest',
- *         resolution: 2,
- *         format: 'rgba',
  *     }
  * });
  *
@@ -13957,9 +14119,9 @@ export declare class Circle implements ShapePrimitive {
 	 * const isOnStroke = circle.strokeContains(150, 100, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = circle.strokeContains(150, 100, 4, 0);   // Inside
+	 * const innerStroke = circle.strokeContains(150, 100, 4, 1);   // Inside
 	 * const centerStroke = circle.strokeContains(150, 100, 4, 0.5); // Centered
-	 * const outerStroke = circle.strokeContains(150, 100, 4, 1);   // Outside
+	 * const outerStroke = circle.strokeContains(150, 100, 4, 0);   // Outside
 	 * ```
 	 * @param x - The X coordinate of the point to test
 	 * @param y - The Y coordinate of the point to test
@@ -14149,9 +14311,9 @@ export declare class Ellipse implements ShapePrimitive {
 	 * const isOnStroke = ellipse.strokeContains(150, 100, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = ellipse.strokeContains(150, 100, 4, 0);   // Inside
+	 * const innerStroke = ellipse.strokeContains(150, 100, 4, 1);   // Inside
 	 * const centerStroke = ellipse.strokeContains(150, 100, 4, 0.5); // Centered
-	 * const outerStroke = ellipse.strokeContains(150, 100, 4, 1);   // Outside
+	 * const outerStroke = ellipse.strokeContains(150, 100, 4, 0);   // Outside
 	 * ```
 	 * @remarks
 	 * - Uses normalized ellipse equations
@@ -14160,7 +14322,7 @@ export declare class Ellipse implements ShapePrimitive {
 	 * @param x - The X coordinate of the point to test
 	 * @param y - The Y coordinate of the point to test
 	 * @param strokeWidth - The width of the line to check
-	 * @param alignment - The alignment of the stroke (0 = inner, 0.5 = centered, 1 = outer)
+	 * @param alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
 	 * @returns Whether the x/y coords are within this ellipse's stroke
 	 */
 	strokeContains(x: number, y: number, strokeWidth: number, alignment?: number): boolean;
@@ -14426,14 +14588,14 @@ export declare class RoundedRectangle implements ShapePrimitive {
 	 * const isOnStroke = rect.strokeContains(150, 100, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = rect.strokeContains(150, 100, 4, 0);   // Inside
+	 * const innerStroke = rect.strokeContains(150, 100, 4, 1);   // Inside
 	 * const centerStroke = rect.strokeContains(150, 100, 4, 0.5); // Centered
-	 * const outerStroke = rect.strokeContains(150, 100, 4, 1);   // Outside
+	 * const outerStroke = rect.strokeContains(150, 100, 4, 0);   // Outside
 	 * ```
 	 * @param pX - The X coordinate of the point to test
 	 * @param pY - The Y coordinate of the point to test
 	 * @param strokeWidth - The width of the line to check
-	 * @param alignment - The alignment of the stroke (0 = inner, 0.5 = centered, 1 = outer)
+	 * @param alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
 	 * @returns Whether the x/y coordinates are within this rectangle's stroke
 	 */
 	strokeContains(pX: number, pY: number, strokeWidth: number, alignment?: number): boolean;
@@ -14609,14 +14771,14 @@ export declare class Polygon implements ShapePrimitive {
 	 * const isOnStroke = polygon.strokeContains(25, 25, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = polygon.strokeContains(25, 25, 4, 0);   // Inside
+	 * const innerStroke = polygon.strokeContains(25, 25, 4, 1);   // Inside
 	 * const centerStroke = polygon.strokeContains(25, 25, 4, 0.5); // Centered
-	 * const outerStroke = polygon.strokeContains(25, 25, 4, 1);   // Outside
+	 * const outerStroke = polygon.strokeContains(25, 25, 4, 0);   // Outside
 	 * ```
 	 * @param x - The X coordinate of the point to test
 	 * @param y - The Y coordinate of the point to test
 	 * @param strokeWidth - The width of the line to check
-	 * @param alignment - The alignment of the stroke (0 = inner, 0.5 = centered, 1 = outer)
+	 * @param alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
 	 * @returns Whether the x/y coordinates are within this polygon's stroke
 	 */
 	strokeContains(x: number, y: number, strokeWidth: number, alignment?: number): boolean;
@@ -14687,13 +14849,37 @@ export declare class Polygon implements ShapePrimitive {
 	 */
 	get lastY(): number;
 	/**
-	 * Get the first X coordinate of the polygon
+	 * Get the last X coordinate of the polygon.
+	 * @deprecated since 8.11.0, use {@link Polygon.lastX} instead.
 	 */
 	get x(): number;
 	/**
-	 * Get the first Y coordinate of the polygon
+	 * Get the last Y coordinate of the polygon.
+	 * @deprecated since 8.11.0, use {@link Polygon.lastY} instead.
 	 */
 	get y(): number;
+	/**
+	 * Get the first X coordinate of the polygon.
+	 * @example
+	 * ```ts
+	 * // Basic coordinate access
+	 * const polygon = new Polygon([0, 0, 100, 200, 300, 400]);
+	 * console.log(polygon.x); // 0
+	 * ```
+	 * @returns The x-coordinate of the first vertex
+	 */
+	get startX(): number;
+	/**
+	 * Get the first Y coordinate of the polygon.
+	 * @example
+	 * ```ts
+	 * // Basic coordinate access
+	 * const polygon = new Polygon([0, 0, 100, 200, 300, 400]);
+	 * console.log(polygon.y); // 0
+	 * ```
+	 * @returns The y-coordinate of the first vertex
+	 */
+	get startY(): number;
 }
 /**
  * A class to define a shape of a triangle via user defined coordinates.
@@ -14831,14 +15017,14 @@ export declare class Triangle implements ShapePrimitive {
 	 * const isOnStroke = triangle.strokeContains(25, 25, 4); // 4px line width
 	 *
 	 * // Check with different alignments
-	 * const innerStroke = triangle.strokeContains(25, 25, 4, 0);   // Inside
+	 * const innerStroke = triangle.strokeContains(25, 25, 4, 1);   // Inside
 	 * const centerStroke = triangle.strokeContains(25, 25, 4, 0.5); // Centered
-	 * const outerStroke = triangle.strokeContains(25, 25, 4, 1);   // Outside
+	 * const outerStroke = triangle.strokeContains(25, 25, 4, 0);   // Outside
 	 * ```
 	 * @param pointX - The X coordinate of the point to test
 	 * @param pointY - The Y coordinate of the point to test
 	 * @param strokeWidth - The width of the line to check
-	 * @param _alignment - The alignment of the stroke (0 = inner, 0.5 = centered, 1 = outer)
+	 * @param _alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
 	 * @returns Whether the x/y coordinates are within this triangle's stroke
 	 */
 	strokeContains(pointX: number, pointY: number, strokeWidth: number, _alignment?: number): boolean;
@@ -16457,13 +16643,18 @@ export declare class AnimatedSprite extends Sprite {
 	update(ticker: Ticker): void;
 	/**
 	 * Stops the AnimatedSprite and destroys it.
+	 * This method stops the animation playback, removes it from the ticker,
+	 * and cleans up any resources associated with the sprite.
+	 * @param options - Options for destroying the sprite, such as whether to remove from parent
 	 * @example
 	 * ```ts
 	 * // Destroy the sprite when done
 	 * sprite.destroy();
+	 * // Or with options
+	 * sprite.destroy({ children: true, texture: true, textureSource: true });
 	 * ```
 	 */
-	destroy(): void;
+	destroy(options?: DestroyOptions): void;
 	/**
 	 * A short hand way of creating an AnimatedSprite from an array of frame ids.
 	 * Uses texture frames from the cache to create an animation sequence.
@@ -17658,7 +17849,7 @@ interface BitmapFontEvents<Type> {
  *     alias: ['config'],
  *     src: 'data.txt',
  *     format: 'txt',
- *     loadParser: 'loadTxt'
+ *     parser: 'text'
  * };
  * ```
  */
@@ -17674,8 +17865,12 @@ export interface ResolvedAsset<T = any> {
 	data?: T;
 	/** File format of the asset, usually the file extension. Used to determine which loader parser to use. */
 	format?: string;
-	/** Override to specify which parser should load this asset. Useful when file extensions don't match the content type. */
+	/**
+	 * @deprecated Use `parser` instead.
+	 */
 	loadParser?: LoadParserName;
+	/** Override to specify which parser should load this asset. Useful when file extensions don't match the content type. */
+	parser?: AssetParser;
 }
 /**
  * A valid asset source specification. This can be a URL string, a {@link ResolvedSrc},
@@ -17695,7 +17890,7 @@ export interface ResolvedAsset<T = any> {
  * const src: AssetSrc = {
  *     src: 'sprite.png',
  *     format: 'png',
- *     loadParser: 'loadTextures',
+ *     parser: 'texture',
  *     data: {
  *         scaleMode: 'nearest',
  *     }
@@ -17757,7 +17952,7 @@ export type AssetSrc = ArrayOr<string> | (ArrayOr<ResolvedSrc> & {
  * const asset: UnresolvedAsset = {
  *     alias: 'config',
  *     src: 'data.txt',
- *     loadParser: 'loadTxt'
+ *     parser: 'text'
  * };
  * ```
  * @remarks
@@ -17766,7 +17961,7 @@ export type AssetSrc = ArrayOr<string> | (ArrayOr<ResolvedSrc> & {
  * - Supports format patterns for browser compatibility
  * - Can include loader-specific data and options
  */
-export type UnresolvedAsset<T = any> = Pick<ResolvedAsset<T>, "data" | "format" | "loadParser"> & {
+export type UnresolvedAsset<T = any> = Pick<ResolvedAsset<T>, "data" | "format" | "loadParser" | "parser"> & {
 	/** Aliases associated with asset */
 	alias?: ArrayOr<string>;
 	/** The URL or relative path to the asset */
@@ -17892,7 +18087,6 @@ export interface AssetsManifest {
  *     skipKerning: false,      // Enable kerning
  *     textureStyle: {
  *         scaleMode: 'linear',
- *         premultiplyAlpha: true
  *     }
  * });
  *
@@ -17988,7 +18182,7 @@ export interface BitmapFontInstallOptions {
 	 *     style: {
 	 *         fontFamily: 'Arial',
 	 *         fontSize: 32,
-	 *         fill: ['#ff0000', '#00ff00'], // Gradient
+	 *         fill: 'white',
 	 *         stroke: { color: '#000000', width: 2 },
 	 *         dropShadow: {
 	 *             color: '#000000',
@@ -18009,13 +18203,84 @@ export interface BitmapFontInstallOptions {
 	 *     name: 'CrispFont',
 	 *     textureStyle: {
 	 *         scaleMode: 'nearest',
-	 *         resolution: 2,
-	 *         format: 'rgba8unorm'
 	 *     }
 	 * });
 	 * ```
 	 */
 	textureStyle?: TextureStyle | TextureStyleOptions;
+	/**
+	 * Whether to allow overriding the fill color with a tint at runtime.
+	 *
+	 * When enabled, the font can be dynamically tinted using the `tint` property of BitmapText,
+	 * allowing a single font to display multiple colors without creating separate font textures.
+	 * This is memory efficient but requires the font to be rendered with white fill color.
+	 *
+	 * When disabled, the fill color is permanently baked into the font texture. This allows
+	 * any fill color but prevents runtime tinting - each color variation requires a separate font.
+	 * @default false (automatically determined based on style)
+	 *
+	 * **Requirements for tinting:**
+	 * - Fill color must be white (`0xFFFFFF` or `'#ffffff'`)
+	 * - No stroke effects
+	 * - No drop shadows (or only black shadows)
+	 * - No gradient or pattern fills
+	 *
+	 * **Performance considerations:**
+	 * - ✅ Enabled: One font texture, multiple colors via tinting (memory efficient)
+	 * - ❌ Disabled: Separate font texture per color (higher memory usage)
+	 * @example
+	 * ```ts
+	 * // Correct usage - white fill with tinting enabled
+	 * BitmapFont.install({
+	 *     name: 'TintableFont',
+	 *     style: {
+	 *         fontFamily: 'Arial',
+	 *         fontSize: 24,
+	 *         fill: 0xFFFFFF  // Must be white for tinting
+	 *     },
+	 *     dynamicFill: true
+	 * });
+	 *
+	 * // Use the font with different colors via tinting
+	 * const redText = new BitmapText({
+	 *     text: 'Red Text',
+	 *     style: { fontFamily: 'TintableFont', fill: 'red }, // Red tint
+	 * });
+	 *
+	 * const blueText = new BitmapText({
+	 *     text: 'Blue Text',
+	 *     style: { fontFamily: 'TintableFont', fill: 'blue' }, // Blue tint
+	 * });
+	 * ```
+	 * @example
+	 * ```ts
+	 * // Incorrect usage - colored fill with tinting enabled
+	 * BitmapFont.install({
+	 *     name: 'BadTintFont',
+	 *     style: {
+	 *         fontFamily: 'Arial',
+	 *         fontSize: 24,
+	 *         fill: 0xFF0000  // ❌ Red fill won't tint properly
+	 *     },
+	 *     dynamicFill: true  // ❌ Will not work as expected
+	 * });
+	 * ```
+	 * @example
+	 * ```ts
+	 * // Alternative - baked colors (no tinting)
+	 * BitmapFont.install({
+	 *     name: 'BakedColorFont',
+	 *     style: {
+	 *         fontFamily: 'Arial',
+	 *         fontSize: 24,
+	 *         fill: 0xFF0000,  // Any color works
+	 *         stroke: { color: 0x000000, width: 2 }  // Strokes allowed
+	 *     },
+	 *     dynamicFill: false  // Color is baked in
+	 * });
+	 * ```
+	 */
+	dynamicFill?: boolean;
 }
 declare class BitmapFontManagerClass {
 	/**
@@ -18044,6 +18309,8 @@ declare class BitmapFontManagerClass {
 	readonly ASCII: string[][];
 	/** Default options for installing a new BitmapFont. */
 	defaultOptions: Omit<BitmapFontInstallOptions, "style">;
+	/** Cache for measured text layouts to avoid recalculating them multiple times. */
+	readonly measureCache: import("tiny-lru").LRU<BitmapTextLayoutData>;
 	/**
 	 * Get a font for the specified text and style.
 	 * @param text - The text to get the font for
@@ -18414,6 +18681,562 @@ export declare class BitmapText extends AbstractText<TextStyle, TextStyleOptions
 	get resolution(): number;
 }
 /**
+ * Contains the output elements from a text split operation.
+ * Provides access to the hierarchical structure of split text elements.
+ * @example
+ * ```ts
+ * const splitResult = Text.split(myText);
+ *
+ * // Access individual characters
+ * splitResult.chars.forEach(char => {
+ *     char.alpha = 0;
+ *     gsap.to(char, { alpha: 1, duration: 0.5 });
+ * });
+ *
+ * // Access words (groups of characters)
+ * splitResult.words.forEach(word => {
+ *     word.scale.set(0);
+ *     gsap.to(word.scale, { x: 1, y: 1, duration: 0.5 });
+ * });
+ *
+ * // Access lines (groups of words)
+ * splitResult.lines.forEach(line => {
+ *     line.x = -200;
+ *     gsap.to(line, { x: 0, duration: 0.5 });
+ * });
+ * ```
+ */
+export interface TextSplitOutput<T extends SplitableTextObject> {
+	/** Array of individual character Text objects */
+	chars: T[];
+	/** Array of word containers, each containing character objects */
+	words: Container[];
+	/** Array of line containers, each containing word containers */
+	lines: Container[];
+}
+/**
+ * Configuration options for text splitting.
+ */
+export interface AbstractSplitOptions {
+	/** Text content to be split */
+	text: string;
+	/** Text styling - accepts TextStyle instance or style object */
+	style: TextStyle | Partial<TextStyleOptions>;
+	/**
+	 * Enables automatic splitting on text/style changes
+	 * @default true
+	 */
+	autoSplit?: boolean;
+	/**
+	 * Transform origin for line segments. Range: [0-1]
+	 * @example
+	 * ```ts
+	 * lineAnchor: 0.5        // Center horizontally and vertically
+	 * lineAnchor: { x: 0, y: 0.5 }  // Left-center alignment
+	 *
+	 * ```
+	 * @default 0
+	 */
+	lineAnchor?: number | PointData;
+	/**
+	 * Transform origin for word segments. Range: [0-1]
+	 * @example
+	 * ```ts
+	 * wordAnchor: { x: 1, y: 0 }  // Top-right alignment
+	 * wordAnchor: 0.5  // Center alignment
+	 * ```
+	 * @default 0
+	 */
+	wordAnchor?: number | PointData;
+	/**
+	 * Transform origin for character segments. Range: [0-1]
+	 * @example
+	 * ```ts
+	 * charAnchor: { x: 0.5, y: 1 }  // Bottom-center alignment
+	 * charAnchor: 0.5  // Center alignment
+	 * ```
+	 * @default 0
+	 */
+	charAnchor?: number | PointData;
+}
+/**
+ * Configuration options for SplitText, combining container properties with text splitting settings.
+ * @example Basic Usage
+ * ```ts
+ * const options: SplitTextOptions = {
+ *   text: 'Hello World',
+ *   style: { fontSize: 32, fill: 0xffffff },
+ *   // Transform origins
+ *   lineAnchor: 0.5,                // Center each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center each char
+ * };
+ * ```
+ * @example Advanced Configuration
+ * ```ts
+ * const options: SplitTextOptions = {
+ *   // Text content and style
+ *   text: 'Multi\nLine Text',
+ *   style: new TextStyle({
+ *     fontSize: 24,
+ *     fill: 'white',
+ *     strokeThickness: 2,
+ *   }),
+ *
+ *   // Container properties
+ *   x: 100,
+ *   y: 100,
+ *   alpha: 0.8,
+ *
+ *   // Splitting settings
+ *   autoSplit: true,
+ *
+ *   // Transform origins (normalized 0-1)
+ *   lineAnchor: { x: 1, y: 0 },    // Top-right
+ *   wordAnchor: 0.5,               // Center
+ *   charAnchor: { x: 0, y: 1 },    // Bottom-left
+ * };
+ * ```
+ *
+ * Properties:
+ * - Container options from {@link ContainerOptions}
+ * - Text split options from {@link AbstractSplitOptions}
+ */
+export interface AbstractSplitTextOptions extends ContainerOptions, AbstractSplitOptions {
+}
+/**
+ * @experimental
+ * A container that splits text into individually manipulatable segments (lines, words, and characters)
+ * for advanced text effects and animations.
+ * @example Basic Usage
+ * ```ts
+ * const text = new SplitText({
+ *   text: "Hello World",
+ *   style: { fontSize: 24 },
+ *   // Origin points for transformations (0-1 range)
+ *   lineAnchor: 0.5,  // Center of each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center of each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center of each character
+ *   autoSplit: true  // Auto-update segments on text/style changes
+ * });
+ * ```
+ *
+ * Features:
+ * - Hierarchical text splitting (lines → words → characters)
+ * - Independent transformation origins for each segment level
+ * - Automatic or manual segment updates
+ * - Support for both canvas text and bitmap text
+ * @example Animation Example
+ * ```ts
+ * // Character fade-in sequence
+ * text.chars.forEach((char, i) => {
+ *   gsap.from(char, {
+ *     alpha: 0,
+ *     delay: i * 0.1
+ *   });
+ * });
+ *
+ * // Word scale animation
+ * text.words.forEach((word, i) => {
+ *   gsap.to(word.scale, {
+ *     x: 1.2, y: 1.2,
+ *     yoyo: true,
+ *     repeat: -1,
+ *     delay: i * 0.2
+ *   });
+ * });
+ *
+ * // Line slide-in effect
+ * text.lines.forEach((line, i) => {
+ *   gsap.from(line, {
+ *     x: -200,
+ *     delay: i * 0.3
+ *   });
+ * });
+ * ```
+ *
+ * Configuration Options:
+ * - `text`: The string to render and segment
+ * - `style`: TextStyle instance or configuration object
+ * - `autoSplit`: Automatically update segments on changes (default: true)
+ * - `lineAnchor`: Transform origin for lines (default: 0)
+ * - `wordAnchor`: Transform origin for words (default: 0)
+ * - `charAnchor`: Transform origin for characters (default: 0)
+ *
+ * > [!NOTE] Anchor points are normalized (0-1):
+ * > - 0,0: Top-left
+ * > - 0.5,0.5: Center
+ * > - 1,1: Bottom-right
+ *
+ * > [!WARNING] Limitations
+ * > - Character spacing may differ slightly from standard text due to browser
+ * >   kerning being lost when characters are separated
+ */
+export declare abstract class AbstractSplitText<T extends SplitableTextObject> extends Container {
+	/**
+	 * Individual character segments of the text.
+	 * @example
+	 * ```ts
+	 * // Fade in characters sequentially
+	 * text.chars.forEach((char, i) => {
+	 *   char.alpha = 0;
+	 *   gsap.to(char, {
+	 *     alpha: 1,
+	 *     delay: i * 0.1
+	 *   });
+	 * });
+	 * ```
+	 */
+	chars: T[];
+	/**
+	 * Word segments of the text, each containing one or more characters.
+	 * @example
+	 * ```ts
+	 * // Scale words on hover
+	 * text.words.forEach(word => {
+	 *   word.interactive = true;
+	 *   word.on('pointerover', () => {
+	 *     gsap.to(word.scale, { x: 1.2, y: 1.2 });
+	 *   });
+	 *   word.on('pointerout', () => {
+	 *     gsap.to(word.scale, { x: 1, y: 1 });
+	 *   });
+	 * });
+	 * ```
+	 */
+	words: Container[];
+	/**
+	 * Line segments of the text, each containing one or more words.
+	 * @example
+	 * ```ts
+	 * // Stagger line entrance animations
+	 * text.lines.forEach((line, i) => {
+	 *   line.x = -200;
+	 *   gsap.to(line, {
+	 *     x: 0,
+	 *     duration: 0.5,
+	 *     delay: i * 0.2,
+	 *     ease: 'back.out'
+	 *   });
+	 * });
+	 * ```
+	 */
+	lines: Container[];
+	constructor(config: AbstractSplitTextOptions);
+	/**
+	 * Splits the text into lines, words, and characters.
+	 * Call this manually when autoSplit is false.
+	 * @example Manual Splitting
+	 * ```ts
+	 * const text = new SplitText({
+	 *   text: 'Manual Update',
+	 *   autoSplit: false
+	 * });
+	 *
+	 * text.text = 'New Content';
+	 * text.style = { fontSize: 32 };
+	 * text.split(); // Apply changes
+	 * ```
+	 */
+	split(): void;
+	get text(): string;
+	/**
+	 * Gets or sets the text content.
+	 * Setting new text triggers splitting if autoSplit is true.
+	 * > [!NOTE] Setting this frequently can have a performance impact, especially with large texts and canvas text.
+	 * @example Dynamic Text Updates
+	 * ```ts
+	 * const text = new SplitText({
+	 *   text: 'Original',
+	 *   autoSplit: true
+	 * });
+	 *
+	 * // Auto-splits on change
+	 * text.text = 'Updated Content';
+	 *
+	 * // Manual update
+	 * text.autoSplit = false;
+	 * text.text = 'Manual Update';
+	 * text.split();
+	 * ```
+	 */
+	set text(value: string);
+	/**
+	 * Gets or sets the transform anchor for line segments.
+	 * The anchor point determines the center of rotation and scaling for each line.
+	 * @example Setting Line Anchors
+	 * ```ts
+	 * // Center rotation/scaling
+	 * text.lineAnchor = 0.5;
+	 *
+	 * // Rotate/scale from top-right corner
+	 * text.lineAnchor = { x: 1, y: 0 };
+	 *
+	 * // Custom anchor point
+	 * text.lineAnchor = {
+	 *   x: 0.2, // 20% from left
+	 *   y: 0.8  // 80% from top
+	 * };
+	 * ```
+	 */
+	get lineAnchor(): number | PointData;
+	set lineAnchor(value: number | PointData);
+	/**
+	 * Gets or sets the transform anchor for word segments.
+	 * The anchor point determines the center of rotation and scaling for each word.
+	 * @example
+	 * ```ts
+	 * // Center each word
+	 * text.wordAnchor = 0.5;
+	 *
+	 * // Scale from bottom-left
+	 * text.wordAnchor = { x: 0, y: 1 };
+	 *
+	 * // Rotate around custom point
+	 * text.wordAnchor = {
+	 *   x: 0.75,  // 75% from left
+	 *   y: 0.5    // Middle vertically
+	 * };
+	 * ```
+	 */
+	get wordAnchor(): number | PointData;
+	set wordAnchor(value: number | PointData);
+	/**
+	 * Gets or sets the transform anchor for character segments.
+	 * The anchor point determines the center of rotation and scaling for each character.
+	 * @example Setting Character Anchors
+	 * ```ts
+	 * // Center each character
+	 * text.charAnchor = 0.5;
+	 *
+	 * // Rotate from top-center
+	 * text.charAnchor = { x: 0.5, y: 0 };
+	 *
+	 * // Scale from bottom-right
+	 * text.charAnchor = { x: 1, y: 1 };
+	 * ```
+	 * @example Animation with Anchors
+	 * ```ts
+	 * // Rotate characters around their centers
+	 * text.charAnchor = 0.5;
+	 * text.chars.forEach((char, i) => {
+	 *   gsap.to(char, {
+	 *     rotation: Math.PI * 2,
+	 *     duration: 1,
+	 *     delay: i * 0.1,
+	 *     repeat: -1
+	 *   });
+	 * });
+	 * ```
+	 */
+	get charAnchor(): number | PointData;
+	set charAnchor(value: number | PointData);
+	get style(): TextStyle;
+	/**
+	 * The style configuration for the text.
+	 * Can be a TextStyle instance or a configuration object.
+	 * @example
+	 * ```ts
+	 * const text = new Text({
+	 *     text: 'Styled Text',
+	 *     style: {
+	 *         fontSize: 24,
+	 *         fill: 0xff1010, // Red color
+	 *         fontFamily: 'Arial',
+	 *         align: 'center', // Center alignment
+	 *         stroke: { color: '#4a1850', width: 5 }, // Purple stroke
+	 *         dropShadow: {
+	 *             color: '#000000', // Black shadow
+	 *             blur: 4, // Shadow blur
+	 *             distance: 6 // Shadow distance
+	 *         }
+	 *     }
+	 * });
+	 * // Update style dynamically
+	 * text.style = {
+	 *     fontSize: 30, // Change font size
+	 *     fill: 0x00ff00, // Change color to green
+	 *     align: 'right', // Change alignment to right
+	 *     stroke: { color: '#000000', width: 2 }, // Add black stroke
+	 * }
+	 */
+	set style(style: TextStyle | Partial<TextStyle> | TextStyleOptions);
+	/**
+	 * Destroys the SplitText instance and all its resources.
+	 * Cleans up all segment arrays, event listeners, and optionally the text style.
+	 * @param options - Destroy configuration options
+	 * @example
+	 * ```ts
+	 * // Clean up everything
+	 * text.destroy({ children: true, texture: true, style: true });
+	 *
+	 * // Remove from parent but keep style
+	 * text.destroy({ children: true, style: false });
+	 * ```
+	 */
+	destroy(options?: DestroyOptions): void;
+}
+/**
+ * Configuration options for Text splitting.
+ */
+export interface SplitOptions extends AbstractSplitOptions {
+}
+/**
+ * Configuration options for SplitText, combining container properties with text splitting settings.
+ * @example Basic Usage
+ * ```ts
+ * const options: SplitTextOptions = {
+ *   text: 'Hello World',
+ *   style: { fontSize: 32, fill: 0xffffff },
+ *   // Transform origins
+ *   lineAnchor: 0.5,                // Center each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center each char
+ * };
+ * ```
+ * @example Advanced Configuration
+ * ```ts
+ * const options: SplitTextOptions = {
+ *   // Text content and style
+ *   text: 'Multi\nLine Text',
+ *   style: new TextStyle({
+ *     fontSize: 24,
+ *     fill: 'white',
+ *     strokeThickness: 2,
+ *   }),
+ *
+ *   // Container properties
+ *   x: 100,
+ *   y: 100,
+ *   alpha: 0.8,
+ *
+ *   // Splitting settings
+ *   autoSplit: true,
+ *
+ *   // Transform origins (normalized 0-1)
+ *   lineAnchor: { x: 1, y: 0 },    // Top-right
+ *   wordAnchor: 0.5,               // Center
+ *   charAnchor: { x: 0, y: 1 },    // Bottom-left
+ * };
+ * ```
+ *
+ * Properties:
+ * - Container options from {@link ContainerOptions}
+ * - Text splitting options from {@link SplitOptions}
+ * - Additional PixiJS-specific options from PixiMixins.SplitText
+ */
+export interface SplitTextOptions extends PixiMixins.SplitText, ContainerOptions, SplitOptions {
+}
+/**
+ * @experimental
+ * A container that splits text into individually manipulatable segments (lines, words, and characters)
+ * for advanced text effects and animations.
+ * Converts each segment into a separate Text object.
+ * @example Basic Usage
+ * ```ts
+ * const text = new SplitText({
+ *   text: "Hello World",
+ *   style: { fontSize: 24 },
+ *   // Origin points for transformations (0-1 range)
+ *   lineAnchor: 0.5,  // Center of each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center of each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center of each character
+ *   autoSplit: true  // Auto-update segments on text/style changes
+ * });
+ * ```
+ *
+ * Features:
+ * - Hierarchical text segmentation (lines → words → characters)
+ * - Independent transformation origins for each segment level
+ * - Automatic or manual segment updates
+ * @example Animation Example
+ * ```ts
+ * // Character fade-in sequence
+ * text.chars.forEach((char, i) => {
+ *   gsap.from(char, {
+ *     alpha: 0,
+ *     delay: i * 0.1
+ *   });
+ * });
+ *
+ * // Word scale animation
+ * text.words.forEach((word, i) => {
+ *   gsap.to(word.scale, {
+ *     x: 1.2, y: 1.2,
+ *     yoyo: true,
+ *     repeat: -1,
+ *     delay: i * 0.2
+ *   });
+ * });
+ *
+ * // Line slide-in effect
+ * text.lines.forEach((line, i) => {
+ *   gsap.from(line, {
+ *     x: -200,
+ *     delay: i * 0.3
+ *   });
+ * });
+ * ```
+ *
+ * Configuration Options:
+ * - `text`: The string to render and segment
+ * - `style`: TextStyle instance or configuration object
+ * - `autoSplit`: Automatically update segments on changes (default: true)
+ * - `lineAnchor`: Transform origin for lines (default: 0)
+ * - `wordAnchor`: Transform origin for words (default: 0)
+ * - `charAnchor`: Transform origin for characters (default: 0)
+ *
+ * > [!NOTE] Anchor points are normalized (0-1):
+ * > - 0,0: Top-left
+ * > - 0.5,0.5: Center
+ * > - 1,1: Bottom-right
+ *
+ * > [!WARNING] Limitations
+ * > - Character spacing may differ slightly from standard text due to browser
+ * >   kerning being lost when characters are separated
+ */
+export declare class SplitText extends AbstractSplitText<Text$1> {
+	/**
+	 * Default configuration options for SplitText instances.
+	 * @example
+	 * ```ts
+	 * // Override defaults globally
+	 * SplitText.defaultOptions = {
+	 *   autoSplit: false,
+	 *   lineAnchor: 0.5,  // Center alignment
+	 *   wordAnchor: { x: 0, y: 0.5 },  // Left-center
+	 *   charAnchor: { x: 0.5, y: 1 }   // Bottom-center
+	 * };
+	 * ```
+	 */
+	static defaultOptions: Partial<SplitTextOptions>;
+	constructor(config: SplitTextOptions);
+	/**
+	 * Creates a SplitText instance from an existing text object.
+	 * Useful for converting standard Text or Text objects into segmented versions.
+	 * @param text - The source text object to convert
+	 * @param options - Additional splitting options
+	 * @returns A new SplitText instance
+	 * @example
+	 * ```ts
+	 * const text = new Text({
+	 *   text: 'Bitmap Text',
+	 *   style: { fontFamily: 'Arial' }
+	 * });
+	 *
+	 * const segmented = SplitText.from(text);
+	 *
+	 * // with additional options
+	 * const segmentedWithOptions = SplitText.from(text, {
+	 *   autoSplit: false,
+	 *   lineAnchor: 0.5,
+	 *   wordAnchor: { x: 0, y: 0.5 },
+	 * })
+	 * ```
+	 */
+	static from(text: Text$1, options?: Omit<SplitTextOptions, "text" | "style">): SplitText;
+}
+/**
  * Constructor options used for `HTMLText` instances. Extends the base text options
  * with HTML-specific features and texture styling capabilities.
  * @example
@@ -18445,7 +19268,6 @@ export declare class BitmapText extends AbstractText<TextStyle, TextStyleOptions
  *     }
  *     textureStyle: {
  *         scaleMode: 'linear',
- *         resolution: 2
  *     }
  * });
  * ```
@@ -18513,7 +19335,6 @@ export interface HTMLText extends PixiMixins.HTMLText, AbstractText<HTMLTextStyl
  *     },
  *     textureStyle: {
  *         scaleMode: 'nearest',
- *         resolution: 2,
  *     }
  * });
  * ```
@@ -18531,6 +19352,195 @@ export declare class HTMLText extends AbstractText<HTMLTextStyle, HTMLTextStyleO
 	constructor(options?: HTMLTextOptions);
 	/** @deprecated since 8.0.0 */
 	constructor(text?: TextString, options?: Partial<HTMLTextStyle>);
+	get text(): string;
+	/**
+	 * The text content to display. Use '\n' for line breaks.
+	 * Accepts strings, numbers, or objects with toString() method.
+	 * @example
+	 * ```ts
+	 * const text = new HTMLText({
+	 *     text: 'Hello Pixi!',
+	 * });
+	 * const multilineText = new HTMLText({
+	 *     text: 'Line 1\nLine 2\nLine 3',
+	 * });
+	 * const numberText = new HTMLText({
+	 *     text: 12345, // Will be converted to '12345'
+	 * });
+	 * const objectText = new HTMLText({
+	 *     text: { toString: () => 'Object Text' }, // Custom toString
+	 * });
+	 *
+	 * // Update text dynamically
+	 * text.text = 'Updated Text'; // Re-renders with new text
+	 * text.text = 67890; // Updates to '67890'
+	 * text.text = { toString: () => 'Dynamic Text' }; // Uses custom toString method
+	 * // Clear text
+	 * text.text = ''; // Clears the text
+	 * ```
+	 * @default ''
+	 */
+	set text(text: TextString);
+}
+/**
+ * Configuration options for BitmapText splitting.
+ */
+export interface SplitBitmapOptions extends AbstractSplitOptions {
+}
+/**
+ * Configuration options for SplitBitmapText, combining container properties with text splitting settings.
+ * @example Basic Usage
+ * ```ts
+ * const options: SplitBitmapTextOptions = {
+ *   text: 'Hello World',
+ *   style: { fontSize: 32, fill: 0xffffff },
+ *   // Transform origins
+ *   lineAnchor: 0.5,                // Center each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center each char
+ * };
+ * ```
+ * @example Advanced Configuration
+ * ```ts
+ * const options: SplitBitmapTextOptions = {
+ *   // Text content and style
+ *   text: 'Multi\nLine Text',
+ *   style: new TextStyle({
+ *     fontSize: 24,
+ *     fill: 'white',
+ *     strokeThickness: 2,
+ *   }),
+ *
+ *   // Container properties
+ *   x: 100,
+ *   y: 100,
+ *   alpha: 0.8,
+ *
+ *   // Splitting settings
+ *   autoSplit: true,
+ *
+ *   // Transform origins (normalized 0-1)
+ *   lineAnchor: { x: 1, y: 0 },    // Top-right
+ *   wordAnchor: 0.5,               // Center
+ *   charAnchor: { x: 0, y: 1 },    // Bottom-left
+ * };
+ * ```
+ *
+ * Properties:
+ * - Container options from {@link ContainerOptions}
+ * - Text splitting options from {@link SplitBitmapOptions}
+ * - Additional PixiJS-specific options from PixiMixins.SplitBitmapText
+ */
+export interface SplitBitmapTextOptions extends PixiMixins.SplitBitmapText, ContainerOptions, SplitBitmapOptions {
+}
+/**
+ * @experimental
+ * A container that splits text into individually manipulatable segments (lines, words, and characters)
+ * for advanced text effects and animations.
+ * Converts each segment into a separate BitmapText object.
+ * @example Basic Usage
+ * ```ts
+ * const text = new SplitBitmapText({
+ *   text: "Hello World",
+ *   style: { fontSize: 24 },
+ *   // Origin points for transformations (0-1 range)
+ *   lineAnchor: 0.5,  // Center of each line
+ *   wordAnchor: { x: 0, y: 0.5 },  // Left-center of each word
+ *   charAnchor: { x: 0.5, y: 1 },  // Bottom-center of each character
+ *   autoSplit: true  // Auto-update segments on text/style changes
+ * });
+ * ```
+ *
+ * Features:
+ * - Hierarchical text segmentation (lines → words → characters)
+ * - Independent transformation origins for each segment level
+ * - Automatic or manual segment updates
+ * @example Animation Example
+ * ```ts
+ * // Character fade-in sequence
+ * text.chars.forEach((char, i) => {
+ *   gsap.from(char, {
+ *     alpha: 0,
+ *     delay: i * 0.1
+ *   });
+ * });
+ *
+ * // Word scale animation
+ * text.words.forEach((word, i) => {
+ *   gsap.to(word.scale, {
+ *     x: 1.2, y: 1.2,
+ *     yoyo: true,
+ *     repeat: -1,
+ *     delay: i * 0.2
+ *   });
+ * });
+ *
+ * // Line slide-in effect
+ * text.lines.forEach((line, i) => {
+ *   gsap.from(line, {
+ *     x: -200,
+ *     delay: i * 0.3
+ *   });
+ * });
+ * ```
+ *
+ * Configuration Options:
+ * - `text`: The string to render and segment
+ * - `style`: TextStyle instance or configuration object
+ * - `autoSplit`: Automatically update segments on changes (default: true)
+ * - `lineAnchor`: Transform origin for lines (default: 0)
+ * - `wordAnchor`: Transform origin for words (default: 0)
+ * - `charAnchor`: Transform origin for characters (default: 0)
+ *
+ * > [!NOTE] Anchor points are normalized (0-1):
+ * > - 0,0: Top-left
+ * > - 0.5,0.5: Center
+ * > - 1,1: Bottom-right
+ *
+ * > [!WARNING] Limitations
+ * > - Character spacing may differ slightly from standard text due to browser
+ * >   kerning being lost when characters are separated
+ */
+export declare class SplitBitmapText extends AbstractSplitText<BitmapText> {
+	/**
+	 * Default configuration options for SplitBitmapText instances.
+	 * @example
+	 * ```ts
+	 * // Override defaults globally
+	 * SplitBitmapText.defaultOptions = {
+	 *   autoSplit: false,
+	 *   lineAnchor: 0.5,  // Center alignment
+	 *   wordAnchor: { x: 0, y: 0.5 },  // Left-center
+	 *   charAnchor: { x: 0.5, y: 1 }   // Bottom-center
+	 * };
+	 * ```
+	 */
+	static defaultOptions: Partial<SplitBitmapTextOptions>;
+	constructor(config: SplitBitmapTextOptions);
+	/**
+	 * Creates a SplitBitmapText instance from an existing text object.
+	 * Useful for converting standard Text or BitmapText objects into segmented versions.
+	 * @param text - The source text object to convert
+	 * @param options - Additional splitting options
+	 * @returns A new SplitBitmapText instance
+	 * @example
+	 * ```ts
+	 * const bitmapText = new BitmapText({
+	 *   text: 'Bitmap Text',
+	 *   style: { fontFamily: 'Arial' }
+	 * });
+	 *
+	 * const segmented = SplitBitmapText.from(bitmapText);
+	 *
+	 * // with additional options
+	 * const segmentedWithOptions = SplitBitmapText.from(bitmapText, {
+	 *   autoSplit: false,
+	 *   lineAnchor: 0.5,
+	 *   wordAnchor: { x: 0, y: 0.5 },
+	 * })
+	 * ```
+	 */
+	static from(text: BitmapText, options?: Omit<SplitBitmapTextOptions, "text" | "style">): SplitBitmapText;
 }
 declare class CanvasTextGeneratorClass {
 	/**
@@ -18637,6 +19647,14 @@ declare global {
 		interface HTMLText {
 		}
 		interface HTMLTextOptions {
+		}
+		interface SplitText {
+		}
+		interface SplitTextOptions {
+		}
+		interface SplitBitmapText {
+		}
+		interface SplitBitmapTextOptions {
 		}
 	}
 }
@@ -19024,7 +20042,7 @@ declare class CacheClass {
 	 * @param key - The key or keys to set
 	 * @param value - The value to store in the cache or from which cacheable assets will be derived.
 	 */
-	set(key: any | any[], value: unknown): void;
+	set<T = any>(key: any | any[], value: T): void;
 	/**
 	 * Remove entry by key
 	 *
@@ -19240,11 +20258,49 @@ export interface AssetInitOptions {
  * > in your application to prevent missing texture references.
  */
 export declare const Assets: AssetsClass;
+type LoadVideoData = VideoSourceOptions & {
+	mime?: string;
+};
 declare class WorkerManagerClass {
-	worker: Worker;
 	constructor();
+	/**
+	 * Checks if ImageBitmap is supported in the current environment.
+	 *
+	 * This method uses a dedicated worker to test ImageBitmap support
+	 * and caches the result for subsequent calls.
+	 * @returns Promise that resolves to true if ImageBitmap is supported, false otherwise
+	 */
 	isImageBitmapSupported(): Promise<boolean>;
+	/**
+	 * Loads an image as an ImageBitmap using a web worker.
+	 * @param src - The source URL or path of the image to load
+	 * @param asset - Optional resolved asset containing additional texture source options
+	 * @returns Promise that resolves to the loaded ImageBitmap
+	 * @example
+	 * ```typescript
+	 * const bitmap = await WorkerManager.loadImageBitmap('image.png');
+	 * const bitmapWithOptions = await WorkerManager.loadImageBitmap('image.png', asset);
+	 * ```
+	 */
 	loadImageBitmap(src: string, asset?: ResolvedAsset<TextureSourceOptions<any>>): Promise<ImageBitmap>;
+	/**
+	 * Resets the worker manager, terminating all workers and clearing the queue.
+	 *
+	 * This method:
+	 * - Terminates all active workers
+	 * - Rejects all pending promises with an error
+	 * - Clears all internal state
+	 * - Resets initialization flags
+	 *
+	 * This should be called when the worker manager is no longer needed
+	 * to prevent memory leaks and ensure proper cleanup.
+	 * @example
+	 * ```typescript
+	 * // Clean up when shutting down
+	 * WorkerManager.reset();
+	 * ```
+	 */
+	reset(): void;
 }
 /**
  * The Culler class is responsible for managing and culling containers.
@@ -19328,62 +20384,6 @@ export declare class Culler {
 	 */
 	static shared: Culler;
 }
-/**
- * An {@link Application} plugin that automatically culls (hides) display objects that are outside
- * the visible screen area. This improves performance by not rendering objects that aren't visible.
- *
- * Key Features:
- * - Automatic culling based on screen boundaries
- * - Configurable culling areas and behavior per container
- * - Can improve rendering performance
- * @example
- * ```ts
- * import { Application, CullerPlugin, Container, Rectangle } from 'pixi.js';
- *
- * // Register the plugin
- * extensions.add(CullerPlugin);
- *
- * // Create application
- * const app = new Application();
- * await app.init({...});
- *
- * // Create a container with culling enabled
- * const container = new Container();
- * container.cullable = true;         // Enable culling for this container
- * container.cullableChildren = true; // Enable culling for children (default)
- * app.stage.addChild(container);
- *
- * // Optional: Set custom cull area to avoid expensive bounds calculations
- * container.cullArea = new Rectangle(0, 0, app.screen.width, app.screen.height);
- *
- * // Add many sprites to the group
- * for (let j = 0; j < 100; j++) {
- *     const sprite = Sprite.from('texture.png');
- *     sprite.x = Math.random() * 2000;
- *     sprite.y = Math.random() * 2000;
- *
- *     sprite.cullable = true; // Enable culling for each sprite
- *
- *     // Set cullArea if needed
- *     // sprite.cullArea = new Rectangle(0, 0, 100, 100); // Optional
- *
- *     // Add to container
- *     container.addChild(sprite);
- * }
- * ```
- * @remarks
- * To enable culling, you must set the following properties on your containers:
- * - `cullable`: Set to `true` to enable culling for the container
- * - `cullableChildren`: Set to `true` to enable culling for children (default)
- * - `cullArea`: Optional custom Rectangle for culling bounds
- *
- * Performance Tips:
- * - Group objects that are spatially related
- * - Use `cullArea` for containers with many children to avoid bounds calculations
- * - Set `cullableChildren = false` for containers that are always fully visible
- */
-export declare class CullerPlugin {
-}
 declare class EventsTickerClass {
 	/** The event system. */
 	events: EventSystem;
@@ -19405,6 +20405,8 @@ declare class EventsTickerClass {
 	removeTickerListener(): void;
 	/** Sets flag to not fire extra events when the user has already moved there mouse */
 	pointerMoved(): void;
+	/** Destroys the event ticker. */
+	destroy(): void;
 }
 /**
  * Options for AlphaFilter
@@ -20746,6 +21748,20 @@ export declare function isWebGLSupported(failIfMajorPerformanceCaveat?: boolean)
  * @returns Promise that resolves to true if WebGPU is supported
  */
 export declare function isWebGPUSupported(options?: GPURequestAdapterOptions): Promise<boolean>;
+interface DeprecationOptions {
+	/**
+	 * When set to true, all deprecation warning messages will be hidden.
+	 * Use this if you want to silence deprecation notifications.
+	 * @default false
+	 */
+	quiet: boolean;
+	/**
+	 * When set to true, deprecation messages will be displayed as plain text without color formatting.
+	 * Use this if you want to disable colored console output for deprecation warnings.
+	 * @default false
+	 */
+	noColor: boolean;
+}
 /**
  * Path utilities for working with URLs and file paths in a cross-platform way.
  * All paths that are passed in will become normalized to have posix separators.
@@ -20772,6 +21788,9 @@ export declare function isWebGPUSupported(options?: GPURequestAdapterOptions): P
  * - Common in asset loading and URL management
  */
 export declare const path: Path;
+interface Cleanable {
+	clear(): void;
+}
 
 export {
 	Buffer$1 as Buffer,

@@ -28,7 +28,7 @@ async function main() {
     tiers: [
       // Default tier
       {
-        title: 'Sponsors ahhhh',
+        title: 'Bronze Sponsors',
         monthlyDollars: 100,
         preset: tierPresets.xl,
       },

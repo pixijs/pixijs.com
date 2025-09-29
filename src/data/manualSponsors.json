@@ -1,0 +1,13 @@
+[
+  {
+    "monthlyDollars": 2500,
+    "tierName": "Platinum Sponsor",
+    "sponsor": {
+      "name": "Playco",
+      "login": "playco",
+      "type": "Organization",
+      "websiteUrl": "https://www.play.co/",
+      "avatarUrl": "/images/logo-playco.png"
+    }
+  }
+]

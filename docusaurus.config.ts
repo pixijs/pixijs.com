@@ -136,6 +136,10 @@ const config: Config = {
             from: ['/8.x/guides', '/guides'],
           },
           {
+            to: '/sponsor',
+            from: ['/8.x/sponsor'],
+          },
+          {
             to: '/8.x/guides/getting-started/intro#what-is-pixijs',
             from: ['/8.x/guides/basics/what-pixijs-is', '/guides/basics/what-pixijs-is'],
           },
@@ -401,6 +405,11 @@ const config: Config = {
                 docId: 'faq',
               },
               {
+                type: 'doc',
+                label: 'Bug Bounty',
+                docId: 'bug-bounty',
+              },
+              {
                 label: 'Community Guide',
                 href: 'https://github.com/pixijs/pixijs/blob/dev/.github/CONTRIBUTING.md',
               },
@@ -421,10 +430,15 @@ const config: Config = {
             position: 'left',
           },
           {
-            type: 'doc',
+            to: 'sponsor',
             label: 'Sponsor',
-            docId: 'sponsor/index',
+            position: 'left',
           },
+          // {
+          //   type: 'doc',
+          //   label: 'Sponsor',
+          //   docId: 'sponsor/index',
+          // },
           {
             type: 'docsVersionDropdown',
             position: 'right',

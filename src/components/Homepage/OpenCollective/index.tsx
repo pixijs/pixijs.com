@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import sponsorData from '../../../data/sponsors.json';
+import sponsorOverrides from '../../../data/sponsor-overrides.json';
+import manualSponsors from '../../../data/manualSponsors.json';
 import styles from './index.module.scss';
 
 import { ArrowUpRight } from 'lucide-react';
@@ -38,7 +40,16 @@ const getSponsorTier = (monthlyDollars: number): SponsorTier => {
 };
 
 export default function OpenCollective(): React.JSX.Element {
-  const [sponsors, setSponsors] = useState<Sponsorship[]>(sponsorData as Sponsorship[]);
+  const [sponsors, setSponsors] = useState<Sponsorship[]>([...sponsorData, ...manualSponsors] as Sponsorship[]);
+  const overridesByLogin = new Map<string, { avatarUrl?: string; linkUrl?: string }>(
+    (sponsorOverrides as Array<{ login: string; avatarUrl?: string; linkUrl?: string }>).map((o) => [
+      o.login,
+      {
+        avatarUrl: o.avatarUrl,
+        linkUrl: o.linkUrl,
+      },
+    ]),
+  );
 
   useEffect(() => {
     const sponsorData = sponsors.map((sponsor) => ({
@@ -46,19 +57,6 @@ export default function OpenCollective(): React.JSX.Element {
       tierName: getSponsorTier(sponsor.monthlyDollars),
     })) as Sponsorship[];
 
-    const playco: Sponsorship = {
-      monthlyDollars: 2500,
-      tierName: SPONSOR_TIERS.PLATINUM,
-      sponsor: {
-        name: 'Playco',
-        login: 'playco',
-        type: 'Organization',
-        websiteUrl: 'https://www.play.co/',
-        avatarUrl: '/images/logo-playco.png',
-      },
-    };
-
-    sponsorData.unshift(playco);
     setSponsors(sponsorData);
   }, []);
 
@@ -97,20 +95,22 @@ export default function OpenCollective(): React.JSX.Element {
           <ArrowUpRight className={styles.arrow} size={18} aria-hidden="true" />
         </div>
         <div className={styles.sponsorGrid}>
-          {sponsors.map((sponsor) => (
-            <div
-              key={sponsor.sponsor.name}
-              className={`${styles.sponsor} ${styles[tier.toLowerCase().replace(' ', '-')]}`}
-            >
-              <a href={sponsor.sponsor.websiteUrl}>
-                <img
-                  src={sponsor.sponsor.avatarUrl}
-                  alt={`${sponsor.sponsor.name} logo`}
-                  className={styles.sponsorImage}
-                />
-              </a>
-            </div>
-          ))}
+          {sponsors.map((sponsor) => {
+            const override = sponsor.sponsor.login ? overridesByLogin.get(sponsor.sponsor.login) : undefined;
+            const href = override?.linkUrl || sponsor.sponsor.websiteUrl || sponsor.sponsor.linkUrl;
+            const imgSrc = override?.avatarUrl || sponsor.sponsor.avatarUrl;
+
+            return (
+              <div
+                key={sponsor.sponsor.name}
+                className={`${styles.sponsor} ${styles[tier.toLowerCase().replace(' ', '-')]}`}
+              >
+                <a href={href}>
+                  <img src={imgSrc} alt={`${sponsor.sponsor.name} logo`} className={styles.sponsorImage} />
+                </a>
+              </div>
+            );
+          })}
         </div>
       </div>
     );

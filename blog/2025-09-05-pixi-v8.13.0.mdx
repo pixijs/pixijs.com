@@ -1,0 +1,179 @@
+---
+title: PixiJS Update - v8.13.0
+description: A look at the 8.13.0 release of PixiJS and what's coming next
+slug: 8.13.0
+authors: zyie
+tags: [PixiJS, Updates, 3D, Figma, UI, gl2D]
+hide_table_of_contents: true
+keywords: [PixiJS, Updates, 3D, Figma, UI, gl2D]
+---
+
+import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
+import OriginIndexFile from '!!raw-loader!../docs/examples/basic/container-origin';
+
+This release delivers several new features, performance improvements, and over **20 bug fixes** to keep PixiJS running smoothly.
+
+Let's take a look at what's changed in this release and look ahead to what's coming next, with some exciting announcements to share!
+
+{/* truncate */}
+
+## What's New in v8.13.0
+
+Some highlights from this release include:
+
+- **SVG Fill Rule Support** - The engine can now render SVG subpath fill rules, improving compatibility with vector assets (thanks [@creativoma](https://github.com/creativoma)).
+
+- **Text Caching** - Text texture caching (temporarily removed in 8.10.0) is back. Now, textures are shared only when Text objects use the same `TextStyle` instance (not just equivalent settings). This makes caching more stable, less error-prone, and can significantly boost performance when rendering many same-styled text elements.
+
+  ```ts
+  const textStyle = new TextStyle({ fontSize: 24, fontFamily: 'Verdana', fill: 0xffffff });
+  const COUNT = 25000;
+
+  for (let i = 0; i < COUNT; i++) {
+    const bunny = new Text({ text: 'hello', style: textStyle });
+    bunny.x = (i % 100) * 105;
+    bunny.y = Math.floor(i / 100) * 25;
+    container.addChild(bunny);
+  }
+  ```
+
+- **LRU Cache for Text Measuring** - Repeated strings now reuse prior measurements via an LRU (Least Recently Used) cache, reducing redundant work and improving performance.
+
+- **Deprecation Message Controls** - You can now suppress deprecation warnings or remove their color formatting for environments that don't support it (thanks [@mayakwd](https://github.com/mayakwd)).
+
+  ```ts
+  import { deprecation } from 'pixi.js';
+  deprecation.quiet = true; // Suppresses warnings
+  deprecation.noColor = true; // Removes color formatting
+  ```
+
+- **20+ Bug Fixes** - Improvements across text, rendering, interaction and more. A big thank you to everyone who contributed fixes and reported issues!
+
+You can see the [full release notes on GitHub](https://github.com/pixijs/pixijs/releases/tag/v8.13.0).
+
+---
+
+## What's Next for PixiJS
+
+Next up, we're excited to share some of the bigger initiatives we're working on for future releases.
+
+### gl2D File Format
+
+We're currently working on a new open format for 2D scenes called **gl2D**.
+
+gl2D is a **JSON-based scene description format**, inspired by glTF but designed specifically for 2D rendering. It provides a structured way to describe:
+
+- **Scenes** - collections of nodes (e.g. menus, gameplay, credits).
+- **Nodes** - containers, sprites, text, etc.
+- **Resources** - textures, spritesheets, videos, fonts, gradients, etc.
+
+#### Why gl2D?
+
+Right now, there's no standard way to describe a 2D scene. Every engine or tool uses its own format, which means assets and layouts can't be shared easily. This fragmentation leads to duplicated work, manual conversions, and limited interoperability.
+
+gl2D is designed to address this by:
+
+- **Providing a common foundation** - so 2D scenes can be shared across tools and engines.
+- **Reducing duplication** - developers and designers won't need to rebuild the same scene in multiple tools.
+- **Efficient resource management** - resources like textures, fonts, or gradients are defined once and can be reused across multiple nodes, keeping files smaller and making rendering more efficient.
+- **Web-first design** - gl2D is designed with interoperability in mind, so it can work not only with PixiJS but also with engines like Phaser and others in the ecosystem.
+- **Enabling new workflows** - exporting from design tools or building editors on top of Pixi becomes much simpler.
+
+#### Example
+
+```json
+{
+  "asset": {
+    "version": "1.0",
+    "generator": "PixiJS"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "MainScene",
+      "nodes": [0]
+    }
+  ],
+  "nodes": [
+    {
+      "type": "container",
+      "name": "Root",
+      "children": [1],
+      "translation": [100, 100]
+    },
+    {
+      "type": "sprite",
+      "name": "Hero",
+      "texture": 0,
+      "translation": [50, 0]
+    }
+  ],
+  "resources": [
+    { "type": "texture", "source": 0 },
+    { "type": "image_source", "uri": "/textures/hero.png" }
+  ],
+  "extensionsUsed": []
+}
+```
+
+---
+
+### Figma Plugin Integration
+
+Alongside gl2D, we're building a **Figma plugin** that will let you sync designs directly into PixiJS.
+
+This means:
+
+- No more manually recreating layouts from design files.
+- Scenes created in Figma can be exported as gl2D and loaded into PixiJS with minimal setup.
+- Scenes can be created as fully responsive layouts that adapt to different screen sizes by using Figma's auto-layout features and PixiJS Layout.
+- Designers and developers can work in parallel, changes made in Figma can flow into your PixiJS project without extra steps.
+
+<br />
+
+Our aim is to make the handoff between design and implementation seamless, so teams can focus more on iteration and
+less on translation.
+
+---
+
+## Get the Latest PixiJS
+
+Install via npm:
+
+```bash
+npm install pixi.js@8.13.0
+```
+
+Or use via CDN:
+
+**Development builds:**
+
+- https://cdn.jsdelivr.net/npm/pixi.js@8.13.0/dist/pixi.js
+- https://cdn.jsdelivr.net/npm/pixi.js@8.13.0/dist/pixi.mjs
+
+**Production builds:**
+
+- https://cdn.jsdelivr.net/npm/pixi.js@8.13.0/dist/pixi.min.js
+- https://cdn.jsdelivr.net/npm/pixi.js@8.13.0/dist/pixi.min.mjs
+
+**Documentation:** [https://pixijs.download/v8.13.0/docs/index.html](https://pixijs.download/v8.13.0/docs/index.html)
+
+---
+
+## **Wrapping Up**
+
+That wraps up our August update. If you're interested in contributing, we're always looking for help on open issues.
+
+Thanks again to everyone who contributed to this release! We can't wait to see what you create with PixiJS.
+
+- [See the full release notes on GitHub](https://github.com/pixijs/pixijs/releases/v8.13.0)
+- [Sponsor PixiJS on GitHub](https://github.com/sponsors/pixijs)
+- [Submit your project to the Showcase](https://pixijs.com/showcase)
+- Join the discussion on [Discord](https://discord.gg/QrnxmQUPGV)
+- Follow us on [Twitter](https://x.com/PixiJS) / [Bluesky](https://bsky.app/profile/pixijs.com)
+
+<br />
+
+Happy creating!
+
+**The PixiJS Team**
