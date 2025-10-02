@@ -4,10 +4,10 @@ description: Learn how to render SVGs in PixiJS, including using them as texture
 ---
 
 import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
-import SvgIndexFile from '!!raw-loader!../../../examples/scene_graphics_svg-string.js';
-import SvgIndexFileLoad from '!!raw-loader!../../../examples/scene_graphics_svg.js';
-import SvgIndexFileTexture from '!!raw-loader!../../../examples/scene_sprite_svg.js';
-import SvgIndexFileTextureLarge from '!!raw-loader!../../../examples/scene_sprite_svg_custom-data.js';
+import SvgIndexFile from '!!raw-loader!../../../examples/graphics_svg_string-parsing.js';
+import SvgIndexFileLoad from '!!raw-loader!../../../examples/graphics_svg_file.js';
+import SvgIndexFileTexture from '!!raw-loader!../../../examples/sprite_svg.js';
+import SvgIndexFileTextureLarge from '!!raw-loader!../../../examples/sprite_svg_custom-data.js';
 
 # SVG's
 
@@ -54,10 +54,10 @@ const svgTexture = await Assets.load('tiger.svg');
 const mySprite = new Sprite(svgTexture);
 ```
 
-{/* embedded:@site/docs/examples/scene_graphics_svg.js */}
-{/* embedded:@site/docs/examples/scene_graphics_svg-string.js */}
-{/* embedded:@site/docs/examples/scene_sprite_svg.js */}
-{/* embedded:@site/docs/examples/scene_sprite_svg_custom-data.js */}
+{/* embedded:@site/docs/examples/graphics_svg_file.js */}
+{/* embedded:@site/docs/examples/graphics_svg_string-parsing.js */}
+{/* embedded:@site/docs/examples/sprite_svg.js */}
+{/* embedded:@site/docs/examples/sprite_svg_custom-data.js */}
 <EmbeddedEditor files={{"index.js": SvgIndexFileTexture}} dependencies={{ "pixi.js": "latest" }} />
 <br/>
 

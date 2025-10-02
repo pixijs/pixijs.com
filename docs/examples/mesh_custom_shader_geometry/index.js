@@ -1,4 +1,4 @@
-// description: This example demonstrates how to create a custom mesh using PixiJS.
+// description: This example demonstrates how to create a custom mesh using PixiJS
 import { Application, Geometry, Mesh, Shader } from 'pixi.js';
 import fragment from './triangle.frag';
 import vertex from './triangle.vert';
