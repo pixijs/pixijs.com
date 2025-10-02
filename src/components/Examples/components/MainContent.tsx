@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from 'react';
-import styles from '../examples.module.css';
+import styles from '../../../pages/examples/examples.module.css';
 import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 
 import type React from 'react';

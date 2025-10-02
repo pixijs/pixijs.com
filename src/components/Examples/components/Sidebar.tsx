@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-import styles from '../examples.module.css';
+import styles from '../../../pages/examples/examples.module.css';
 import ItemList from './ItemList';
 import SearchInput from './SearchInput';
 import ToggleSwitch from './ToggleSwitch';

@@ -4,20 +4,6 @@
   font-family: var(--ifm-font-family-base);
 }
 
-/* [class*='pagination-nav'] {
-  margin: 0 !important;
-  display: none !important;
-  background-color: red;
-} */
-/* [class*='container'] {
-  max-width: 100% !important;
-  padding: 0 !important;
-} */
-/* [class^='docMainContainer'] {
-  max-width: 100% !important;
-  min-width: 100% !important;
-} */
-
 /* Overlay for mobile */
 .overlay {
   position: fixed;

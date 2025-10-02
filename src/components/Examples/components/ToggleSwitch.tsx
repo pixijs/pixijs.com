@@ -1,4 +1,4 @@
-import styles from '../examples.module.css';
+import styles from '../../../pages/examples/examples.module.css';
 
 import type React from 'react';
 

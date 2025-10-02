@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from '../examples.module.css';
+import styles from '../../../pages/examples/examples.module.css';
 import { highlightText } from '../utils/searchUtils';
 
 import type React from 'react';

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import MainContent from './components/MainContent';
-import Sidebar from './components/Sidebar';
+import MainContent from '../../components/Examples/components/MainContent';
+import Sidebar from '../../components/Examples/components/Sidebar';
 import examples from '../../data/examples.json';
 import styles from './examples.module.css';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import { filterItems } from './utils/searchUtils';
+import { useLocalStorage } from '../../components/Examples/hooks/useLocalStorage';
+import { filterItems } from '../../components/Examples/utils/searchUtils';
 import { useHistory, useLocation } from '@docusaurus/router';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import type { Item } from '../../components/Examples/types';
 
-import type { Item } from './types';
-
-export default function Examples(): React.JSX.Element {
+function ExamplesContent(): React.JSX.Element {
   const location = useLocation();
   const history = useHistory();
 
@@ -146,4 +146,8 @@ export default function Examples(): React.JSX.Element {
       </div>
     </>
   );
+}
+
+export default function Examples(): React.JSX.Element {
+  return <BrowserOnly>{() => <ExamplesContent />}</BrowserOnly>;
 }

@@ -40,7 +40,7 @@ scene.addChild(myGameWorld, myHud);
 renderer.render(scene); // this action will actually convert the scene to a render group under the hood
 ```
 
-Check out the [container example](../../examples/basic/container).
+Check out the [container example](/8.x/examples/?example=container_transform_pivot_basic).
 
 ### Best Practices
 

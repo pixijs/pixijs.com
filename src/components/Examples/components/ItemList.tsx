@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import styles from '../examples.module.css';
+import styles from '../../../pages/examples/examples.module.css';
 import ItemCard from './ItemCard';
 
 import type React from 'react';
