@@ -23,7 +23,7 @@ const SPONSOR_TIERS = {
 } as const;
 
 const SPONSOR_TIER_AMOUNTS = {
-  [SPONSOR_TIERS.PLATINUM]: 1000,
+  [SPONSOR_TIERS.PLATINUM]: 2000,
   [SPONSOR_TIERS.GOLD]: 500,
   [SPONSOR_TIERS.SILVER]: 250,
   [SPONSOR_TIERS.BRONZE]: 100,
@@ -33,9 +33,15 @@ type SponsorTier = (typeof SPONSOR_TIERS)[keyof typeof SPONSOR_TIERS];
 
 // Helper function to get sponsor tier based on monthly contribution
 const getSponsorTier = (monthlyDollars: number): SponsorTier => {
-  if (monthlyDollars >= 1000) return SPONSOR_TIERS.PLATINUM;
-  if (monthlyDollars >= 500) return SPONSOR_TIERS.GOLD;
-  if (monthlyDollars >= 250) return SPONSOR_TIERS.SILVER;
+  if (monthlyDollars >= SPONSOR_TIER_AMOUNTS[SPONSOR_TIERS.PLATINUM]) {
+    return SPONSOR_TIERS.PLATINUM;
+  }
+  if (monthlyDollars >= SPONSOR_TIER_AMOUNTS[SPONSOR_TIERS.GOLD]) {
+    return SPONSOR_TIERS.GOLD;
+  }
+  if (monthlyDollars >= SPONSOR_TIER_AMOUNTS[SPONSOR_TIERS.SILVER]) {
+    return SPONSOR_TIERS.SILVER;
+  }
   return SPONSOR_TIERS.BRONZE;
 };
 

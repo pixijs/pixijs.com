@@ -3,5 +3,10 @@
     "login": "watchindiaa",
     "avatarUrl": "/images/sponsors/watchindiaa.jpg",
     "linkUrl": "https://etawatchesindia.in/"
+  },
+  {
+    "login": "yarn1",
+    "avatarUrl": "/images/sponsors/yarn.webp",
+    "linkUrl": "https://www.yarn.so/"
   }
 ]
