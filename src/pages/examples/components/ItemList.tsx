@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 import styles from '../examples.module.css';
 import ItemCard from './ItemCard';
 
@@ -12,6 +13,7 @@ interface ItemListProps {
   compactView: boolean;
   onSelectExample?: (item: Item) => void;
   selectedItem?: Item | null;
+  expandAll?: boolean;
 }
 
 const ItemList: React.FC<ItemListProps> = ({
@@ -21,18 +23,79 @@ const ItemList: React.FC<ItemListProps> = ({
   compactView,
   onSelectExample,
   selectedItem,
+  expandAll,
 }) => {
   const selectedCardRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+
+  // Group items by category
+  const itemsByCategory = items.reduce(
+    (acc, item) => {
+      const category = item.name.split('_')[0].replaceAll('-', ' ');
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(item);
+      return acc;
+    },
+    {} as Record<string, Item[]>,
+  );
+
+  const categories = Object.keys(itemsByCategory).sort();
+
+  // Initialize expanded categories based on selected item or expand all
+  useEffect(() => {
+    if (selectedItem) {
+      const selectedCategory = selectedItem.name.split('_')[0].replaceAll('-', ' ');
+      setExpandedCategories((prev) => {
+        const newSet = new Set(prev);
+        newSet.add(selectedCategory);
+        return newSet;
+      });
+    }
+  }, [selectedItem]);
+
+  // Handle expand all toggle
+  useEffect(() => {
+    if (expandAll !== undefined) {
+      if (expandAll) {
+        setExpandedCategories(new Set(categories));
+      } else {
+        // Keep selected category expanded
+        if (selectedItem) {
+          const selectedCategory = selectedItem.name.split('_')[0].replaceAll('-', ' ');
+          setExpandedCategories(new Set([selectedCategory]));
+        } else {
+          setExpandedCategories(new Set());
+        }
+      }
+    }
+  }, [expandAll]);
 
   // Scroll to selected item when it changes
   useEffect(() => {
     if (selectedItem && selectedCardRef.current[selectedItem.name]) {
-      selectedCardRef.current[selectedItem.name]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      });
+      // Small delay to ensure the section is expanded first
+      setTimeout(() => {
+        selectedCardRef.current[selectedItem.name]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }, 100);
     }
   }, [selectedItem]);
+
+  const toggleCategory = (category: string) => {
+    setExpandedCategories((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(category)) {
+        newSet.delete(category);
+      } else {
+        newSet.add(category);
+      }
+      return newSet;
+    });
+  };
 
   if (items.length === 0) {
     return (
@@ -45,26 +108,52 @@ const ItemList: React.FC<ItemListProps> = ({
 
   return (
     <div className="item-list">
-      {items.map((item) => {
-        const isSelected = selectedItem?.name === item.name;
+      {categories.map((category) => {
+        const isExpanded = expandedCategories.has(category);
+        const categoryItems = itemsByCategory[category];
+        const categoryItemCount = categoryItems.length;
+
         return (
-          <div
-            key={item.name}
-            ref={(el) => {
-              if (isSelected) {
-                selectedCardRef.current[item.name] = el;
-              }
-            }}
-          >
-            <ItemCard
-              item={item}
-              searchTerm={searchTerm}
-              showGif={showGifs}
-              compact={compactView}
-              hideImages={compactView}
-              onClick={() => onSelectExample && onSelectExample(item)}
-              isSelected={isSelected}
-            />
+          <div key={category} className={styles['category-section']}>
+            <button
+              className={styles['category-header']}
+              onClick={() => toggleCategory(category)}
+              aria-expanded={isExpanded}
+            >
+              <ChevronDown
+                size={16}
+                className={`${styles['category-chevron']} ${isExpanded ? styles['category-chevron--expanded'] : ''}`}
+              />
+              <span className={styles['category-title']}>{category}</span>
+              <span className={styles['category-count']}>({categoryItemCount})</span>
+            </button>
+            {isExpanded && (
+              <div className={styles['category-items']}>
+                {categoryItems.map((item) => {
+                  const isSelected = selectedItem?.name === item.name;
+                  return (
+                    <div
+                      key={item.name}
+                      ref={(el) => {
+                        if (isSelected) {
+                          selectedCardRef.current[item.name] = el;
+                        }
+                      }}
+                    >
+                      <ItemCard
+                        item={item}
+                        searchTerm={searchTerm}
+                        showGif={showGifs}
+                        compact={compactView}
+                        hideImages={compactView}
+                        onClick={() => onSelectExample && onSelectExample(item)}
+                        isSelected={isSelected}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         );
       })}

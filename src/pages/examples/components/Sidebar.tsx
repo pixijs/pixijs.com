@@ -19,6 +19,8 @@ interface SidebarProps {
   filteredItems: Item[];
   onSelectExample: (item: Item) => void;
   selectedItem?: Item | null;
+  expandAll: boolean;
+  onExpandAllToggle: (value: boolean) => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -33,6 +35,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   filteredItems,
   onSelectExample,
   selectedItem,
+  expandAll,
+  onExpandAllToggle,
 }) => (
   <aside className={`${styles.sidebar} ${isOpen ? `${styles['sidebar--open']}` : ''}`}>
     <div className={`${styles.sidebar__header}`}>
@@ -52,6 +56,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div className={`${styles.sidebar__controls}`}>
         <ToggleSwitch checked={showGifs} onChange={onGifToggle} label="PREVIEW" />
         <ToggleSwitch checked={compactView} onChange={onCompactToggle} label="Compact" />
+        <ToggleSwitch checked={expandAll} onChange={onExpandAllToggle} label="Expand All" />
       </div>
 
       <div className={`${styles.sidebar__list} .thin-scrollbar`}>
@@ -62,6 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           compactView={compactView}
           onSelectExample={onSelectExample}
           selectedItem={selectedItem}
+          expandAll={expandAll}
         />
       </div>
     </div>

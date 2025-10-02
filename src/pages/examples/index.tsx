@@ -16,6 +16,7 @@ export default function Examples(): React.JSX.Element {
   const [searchTerm, setSearchTerm] = useState('');
   const [showGifs, setShowGifs] = useLocalStorage('showGifs', false);
   const [compactView, setCompactView] = useLocalStorage('compactView', false);
+  const [expandAll, setExpandAll] = useLocalStorage('expandAll', false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [filteredItems, setFilteredItems] = useState<Item[]>(examples as Item[]);
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
@@ -114,6 +115,10 @@ export default function Examples(): React.JSX.Element {
     setCompactView(value);
   };
 
+  const handleExpandAllToggle = (value: boolean) => {
+    setExpandAll(value);
+  };
+
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -133,6 +138,8 @@ export default function Examples(): React.JSX.Element {
           filteredItems={filteredItems}
           onSelectExample={handleSelectExample}
           selectedItem={selectedItem}
+          expandAll={expandAll}
+          onExpandAllToggle={handleExpandAllToggle}
         />
         <MainContent selectedItem={selectedItem} />
         {sidebarOpen && <div className={`${styles.overlay}`} onClick={toggleSidebar} />}
