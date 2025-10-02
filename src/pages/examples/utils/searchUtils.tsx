@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js';
-import { examples } from '../config';
+import examples from '../../../data/examples.json';
 
 import type React from 'react';
 import type { Item } from '../types';

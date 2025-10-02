@@ -68,14 +68,12 @@ async function generateExampleConfig(basePath: string): Promise<Example[]> {
       }
 
       // Try to get dependencies from index file if it exists
-      const dependencies =
-        (await getDependenciesFromFile(path.join(fullPath, 'index.ts'))) ||
-        (await getDependenciesFromFile(path.join(fullPath, 'index.js'))) ||
-        {};
-      const description =
-        (await getDescriptionFromFile(path.join(fullPath, 'index.ts'))) ||
-        (await getDescriptionFromFile(path.join(fullPath, 'index.js'))) ||
-        '';
+      const dependencies = fullPath.endsWith('.ts')
+        ? await getDependenciesFromFile(path.join(fullPath, 'index.ts'))
+        : (await getDependenciesFromFile(path.join(fullPath, 'index.js'))) || {};
+      const description = fullPath.endsWith('.ts')
+        ? await getDescriptionFromFile(path.join(fullPath, 'index.ts'))
+        : (await getDescriptionFromFile(path.join(fullPath, 'index.js'))) || '';
 
       examples.push({
         name: entry,
@@ -203,7 +201,7 @@ async function formatDirectory(dirPath: string): Promise<void> {
 
 async function main() {
   try {
-    const sourcePath = path.resolve(process.cwd(), './docs/examples_new');
+    const sourcePath = path.resolve(process.cwd(), './docs/examples');
     const compiledPath = path.resolve(process.cwd(), './static/examples/source');
 
     // Clean the compiled directory
@@ -222,13 +220,9 @@ async function main() {
     console.log('Formatting compiled files...');
     await formatDirectory(compiledPath);
 
-    const output = `// This file is auto-generated. Do not edit manually.
-export const examples = ${JSON.stringify(examples, null, 2)};
-`;
+    const outputPath = path.resolve(process.cwd(), './src/data/examples.json');
 
-    const outputPath = path.resolve(process.cwd(), './src/pages/examples/config.ts');
-
-    await fs.writeFile(outputPath, output, 'utf-8');
+    await fs.writeFile(outputPath, JSON.stringify(examples, null, 2), 'utf-8');
 
     console.log('Examples configuration generated successfully!');
   } catch (error) {

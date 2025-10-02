@@ -91,10 +91,10 @@ const ItemCard: React.FC<ItemCardProps> = ({
   // Show GIF only when hovering, GIF toggle is enabled, and GIF hasn't failed
   const shouldShowGif = showGif && isHovered && !gifError;
   const url = `/examples/previews/${item.name}`;
-  const imageUrl = shouldShowGif ? `${url}.gif` : `${url}.png`;
+  const imageUrl = shouldShowGif ? `${url}.webp` : `${url}_thumbnail.webp`;
   const titleParts = item.name.split('_');
-  const category = titleParts.shift();
-  const title = titleParts.map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' / ');
+  const category = titleParts.shift()!.replaceAll('-', ' ');
+  const title = titleParts.map((part) => part.charAt(0).toUpperCase() + part.replaceAll('-', ' ').slice(1)).join(' / ');
 
   return (
     <div
@@ -129,7 +129,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
         </div>
       )}
       <div className={styles['item-card__content']}>
-        <h3 className={styles['item-card__category']}>{category}</h3>
+        <h3 className={styles['item-card__category']}>{category}: </h3>
         <h3 className={styles['item-card__title']}>{highlightText(title, searchTerm)}</h3>
       </div>
       {/* Tooltip */}

@@ -15,8 +15,8 @@ import { DropShadowFilter } from 'pixi-filters';
   // Append the application canvas to the document body
   document.body.appendChild(app.canvas);
 
-  // create several text words: #I love #PixiJS #GSAP
-  const words = ['#We', 'love', 'PixiJS', '&', 'GSAP'];
+  // create several text words
+  const words = ['PixiJS', '&', 'GSAP', '💚'];
   let spacing = 0;
   const wrapper = new Container();
 

@@ -54,7 +54,7 @@ export default tseslint.config(
   },
   // Disable some rules for specific files based on legacy code or examples
   {
-    files: ['docs/examples/**/*/*.js', 'versioned_docs/version-7.x/examples/**/*/*.js'],
+    files: ['docs/examples/**/*.js', 'versioned_docs/version-7.x/examples/**/*/*.js'],
     rules: { '@typescript-eslint/no-this-alias': 'off' },
   },
   {

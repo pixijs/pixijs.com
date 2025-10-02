@@ -78,8 +78,6 @@ const MainContent: React.FC<MainContentProps> = ({ selectedItem }) => {
   // if dependencies is an empty object, we can set it to undefined
   const dependencies = Object.keys(selectedItem.dependencies).length === 0 ? undefined : selectedItem.dependencies;
 
-  console.log('rendering MainContent with selectedItem:', selectedItem);
-
   return (
     <main className={`${styles['main-content']}`}>
       {/* <header className={`${styles['main-content__header']}`}>
