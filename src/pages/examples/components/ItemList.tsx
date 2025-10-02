@@ -27,6 +27,7 @@ const ItemList: React.FC<ItemListProps> = ({
 }) => {
   const selectedCardRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+  const hasScrolledRef = useRef(false);
 
   // Group items by category
   const itemsByCategory = items.reduce(
@@ -52,6 +53,8 @@ const ItemList: React.FC<ItemListProps> = ({
         newSet.add(selectedCategory);
         return newSet;
       });
+      // Reset scroll flag when selected item changes to allow scrolling to new selection
+      hasScrolledRef.current = false;
     }
   }, [selectedItem]);
 
@@ -74,16 +77,28 @@ const ItemList: React.FC<ItemListProps> = ({
 
   // Scroll to selected item when it changes
   useEffect(() => {
-    if (selectedItem && selectedCardRef.current[selectedItem.name]) {
-      // Small delay to ensure the section is expanded first
-      setTimeout(() => {
-        selectedCardRef.current[selectedItem.name]?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      }, 100);
+    if (selectedItem && !hasScrolledRef.current) {
+      const selectedCategory = selectedItem.name.split('_')[0].replaceAll('-', ' ');
+      const isCategoryExpanded = expandedCategories.has(selectedCategory);
+
+      // Only scroll if the category is expanded and we haven't scrolled yet
+      if (isCategoryExpanded) {
+        // Delay to ensure DOM is updated after expansion
+        const timeoutId = setTimeout(() => {
+          const element = selectedCardRef.current[selectedItem.name];
+          if (element) {
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+            });
+            hasScrolledRef.current = true;
+          }
+        }, 150);
+
+        return () => clearTimeout(timeoutId);
+      }
     }
-  }, [selectedItem]);
+  }, [selectedItem, expandedCategories]);
 
   const toggleCategory = (category: string) => {
     setExpandedCategories((prev) => {

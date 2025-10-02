@@ -55,8 +55,8 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       <div className={`${styles.sidebar__controls}`}>
         <ToggleSwitch checked={showGifs} onChange={onGifToggle} label="PREVIEW" />
-        <ToggleSwitch checked={compactView} onChange={onCompactToggle} label="Compact" />
-        <ToggleSwitch checked={expandAll} onChange={onExpandAllToggle} label="Expand All" />
+        <ToggleSwitch checked={compactView} onChange={onCompactToggle} label="COMPACT" />
+        <ToggleSwitch checked={expandAll} onChange={onExpandAllToggle} label="EXPAND ALL" />
       </div>
 
       <div className={`${styles.sidebar__list} .thin-scrollbar`}>
