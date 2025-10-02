@@ -18,6 +18,7 @@ interface SidebarProps {
   onToggle: () => void;
   filteredItems: Item[];
   onSelectExample: (item: Item) => void;
+  selectedItem?: Item | null;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -31,6 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   onToggle,
   filteredItems,
   onSelectExample,
+  selectedItem,
 }) => (
   <aside className={`${styles.sidebar} ${isOpen ? `${styles['sidebar--open']}` : ''}`}>
     <div className={`${styles.sidebar__header}`}>
@@ -59,6 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           showGifs={showGifs}
           compactView={compactView}
           onSelectExample={onSelectExample}
+          selectedItem={selectedItem}
         />
       </div>
     </div>

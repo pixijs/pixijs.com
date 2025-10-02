@@ -132,6 +132,7 @@ export default function Examples(): React.JSX.Element {
           onToggle={toggleSidebar}
           filteredItems={filteredItems}
           onSelectExample={handleSelectExample}
+          selectedItem={selectedItem}
         />
         <MainContent selectedItem={selectedItem} />
         {sidebarOpen && <div className={`${styles.overlay}`} onClick={toggleSidebar} />}

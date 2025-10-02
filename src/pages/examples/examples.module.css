@@ -283,6 +283,11 @@
   border-color: #e91e63;
 }
 
+.item-card--selected {
+  border-color: #e91e63;
+  background-color: var(--ifm-menu-color-background-active);
+}
+
 .item-card--compact {
   margin-bottom: 0.5rem;
   padding: 0;

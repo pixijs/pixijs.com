@@ -12,6 +12,7 @@ interface ItemCardProps {
   compact?: boolean;
   hideImages?: boolean;
   onClick?: () => void;
+  isSelected?: boolean;
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({
@@ -21,6 +22,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   compact = false,
   hideImages = false,
   onClick,
+  isSelected = false,
 }) => {
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
@@ -99,7 +101,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   return (
     <div
       ref={cardRef}
-      className={`${styles['item-card']} ${compact ? styles['item-card--compact'] : ''} ${hideImages ? styles['item-card--no-image'] : ''}`}
+      className={`${styles['item-card']} ${compact ? styles['item-card--compact'] : ''} ${hideImages ? styles['item-card--no-image'] : ''} ${isSelected ? styles['item-card--selected'] : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
