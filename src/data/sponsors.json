@@ -35,6 +35,23 @@
   },
   {
     "sponsor": {
+      "name": "Casino Online C19",
+      "type": "User",
+      "login": "casino-online-chile",
+      "avatarUrl": "https://images.opencollective.com/casino-online-chile/91f1057/avatar/460.png",
+      "websiteUrl": "https://c19.cl",
+      "linkUrl": "https://opencollective.com/casino-online-chile",
+      "socialLogins": {
+        "opencollective": "casino-online-chile"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Webisoft",
       "type": "Organization",
       "login": "webisoft",
