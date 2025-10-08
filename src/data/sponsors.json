@@ -35,22 +35,6 @@
   },
   {
     "sponsor": {
-      "name": "swiss eta watches",
-      "type": "User",
-      "login": "watchindiaa",
-      "avatarUrl": "https://images.opencollective.com/watchindiaa/avatar/460.png",
-      "linkUrl": "https://opencollective.com/watchindiaa",
-      "socialLogins": {
-        "opencollective": "watchindiaa"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
-  },
-  {
-    "sponsor": {
       "name": "Casino Online C19",
       "type": "User",
       "login": "casino-online-chile",
@@ -102,14 +86,14 @@
   },
   {
     "sponsor": {
-      "name": "LITSLINK",
-      "type": "Organization",
-      "login": "litslink",
-      "avatarUrl": "https://images.opencollective.com/litslink/18dd55f/logo/460.png",
-      "websiteUrl": "https://litslink.com",
-      "linkUrl": "https://opencollective.com/litslink",
+      "name": "Guidebook.BetWinner",
+      "type": "User",
+      "login": "guidebook_betwinner_com",
+      "avatarUrl": "https://images.opencollective.com/guidebook_betwinner_com/6babe60/avatar/460.png",
+      "websiteUrl": "https://guidebook.betwinner.com",
+      "linkUrl": "https://opencollective.com/guidebook_betwinner_com",
       "socialLogins": {
-        "opencollective": "litslink"
+        "opencollective": "guidebook_betwinner_com"
       }
     },
     "isOneTime": false,
