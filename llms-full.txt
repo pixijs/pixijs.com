@@ -140,6 +140,7 @@ npm install pixi.js
 Once you've set up your project, here's a simple example to get started with PixiJS:
 
 ```ts
+// description: This example demonstrates how to use a Container to group and manipulate multiple sprites
 import { Application, Assets, Container, Sprite } from 'pixi.js';
 
 (async () => {
@@ -548,7 +549,7 @@ scene.addChild(myGameWorld, myHud);
 renderer.render(scene); // this action will actually convert the scene to a render group under the hood
 ```
 
-Check out the [container example](../../examples/basic/container).
+Check out the [container example](/8.x/examples/?example=container_transform_pivot_basic).
 
 ### Best Practices
 
@@ -702,6 +703,7 @@ stage.addChildAt(layer, 0);
 Here’s a real-world example that shows how to use RenderLayers to set ap player ui on top of the world.
 
 ```ts
+// description: This example demonstrates the use of RenderLayer to manage the rendering order of UI elements in a scene with multiple sprites and filters using PixiJS.
 import {
   Application,
   Assets,
@@ -2249,6 +2251,8 @@ requestAnimationFrame(render);
 Here’s the complete example integrating PixiJS and Three.js:
 
 ```ts
+// dependencies: { "three": "latest", "pixi.js": "latest" }
+// description: A basic integration of PixiJS and Three.js sharing the same WebGL context
 // Import required classes from PixiJS and Three.js
 import { Container, Graphics, Text, WebGLRenderer } from 'pixi.js';
 import * as THREE from 'three';
@@ -4356,44 +4360,7 @@ const mySprite = new Sprite(svgTexture);
 ```
 
 ```ts
-import { Application, Graphics } from 'pixi.js';
-
-(async () => {
-  // Create a new application
-  const app = new Application();
-
-  // Initialize the application
-  await app.init({
-    antialias: true,
-    backgroundColor: 'white',
-    resizeTo: window,
-  });
-
-  // Append the application canvas to the document body
-  document.body.appendChild(app.canvas);
-
-  const graphics = new Graphics().svg(`
-            <svg height="400" width="450" xmlns="http://www.w3.org/2000/svg">
-                <!-- Draw the paths -->
-                <path id="lineAB" d="M 100 350 l 150 -300" stroke="red" stroke-width="4"/>
-                <path id="lineBC" d="M 250 50 l 150 300" stroke="red" stroke-width="4"/>
-                <path id="lineMID" d="M 175 200 l 150 0" stroke="green" stroke-width="4"/>
-                <path id="lineAC" d="M 100 350 q 150 -300 300 0" stroke="blue" fill="none" stroke-width="4"/>
-
-                <!-- Mark relevant points -->
-                <g stroke="black" stroke-width="3" fill="black">
-                    <circle id="pointA" cx="100" cy="350" r="4" />
-                    <circle id="pointB" cx="250" cy="50" r="4" />
-                    <circle id="pointC" cx="400" cy="350" r="4" />
-                </g>
-            </svg>
-        `);
-
-  app.stage.addChild(graphics);
-})();
-```
-
-```ts
+// description: This example demonstrates loading and displaying SVG graphics using the Graphics class
 import { Application, Assets, Graphics } from 'pixi.js';
 
 (async () => {
@@ -4435,6 +4402,46 @@ import { Application, Assets, Graphics } from 'pixi.js';
 ```
 
 ```ts
+// description: This example demonstrates how to create and display SVG graphics using the Graphics class
+import { Application, Graphics } from 'pixi.js';
+
+(async () => {
+  // Create a new application
+  const app = new Application();
+
+  // Initialize the application
+  await app.init({
+    antialias: true,
+    backgroundColor: 'white',
+    resizeTo: window,
+  });
+
+  // Append the application canvas to the document body
+  document.body.appendChild(app.canvas);
+
+  const graphics = new Graphics().svg(`
+            <svg height="400" width="450" xmlns="http://www.w3.org/2000/svg">
+                <!-- Draw the paths -->
+                <path id="lineAB" d="M 100 350 l 150 -300" stroke="red" stroke-width="4"/>
+                <path id="lineBC" d="M 250 50 l 150 300" stroke="red" stroke-width="4"/>
+                <path id="lineMID" d="M 175 200 l 150 0" stroke="green" stroke-width="4"/>
+                <path id="lineAC" d="M 100 350 q 150 -300 300 0" stroke="blue" fill="none" stroke-width="4"/>
+
+                <!-- Mark relevant points -->
+                <g stroke="black" stroke-width="3" fill="black">
+                    <circle id="pointA" cx="100" cy="350" r="4" />
+                    <circle id="pointB" cx="250" cy="50" r="4" />
+                    <circle id="pointC" cx="400" cy="350" r="4" />
+                </g>
+            </svg>
+        `);
+
+  app.stage.addChild(graphics);
+})();
+```
+
+```ts
+// description: This example demonstrates loading a large SVG texture and displaying it as a sprite
 import { Application, Assets, Sprite } from 'pixi.js';
 
 (async () => {
@@ -4473,6 +4480,7 @@ import { Application, Assets, Sprite } from 'pixi.js';
 ```
 
 ```ts
+// description: This example demonstrates loading a large SVG texture and displaying it as a sprite
 import { Application, Assets, Sprite } from 'pixi.js';
 
 (async () => {
@@ -4850,8 +4858,6 @@ import * as PIXI from 'pixi.js';
 ```
 
 In this example, the `container` and its children are rendered to a single texture, reducing the rendering overhead when the scene is drawn.
-
-Play around with the example [here](../../../../examples/basic/cache-as-texture.mdx).
 
 ### Advanced Usage
 
@@ -12109,9 +12115,82 @@ export interface RenderLayerOptions {
 	 */
 	sortFunction?: (a: Container, b: Container) => number;
 }
-type ContainerKeys = keyof Container;
-type PartialContainerKeys = Exclude<ContainerKeys, "parent" | "didChange" | "_updateFlags" | keyof EventEmitter | "parentRenderLayer" | "destroyed" | "layerParentId" | "sortableChildren" | "getFastGlobalBounds">;
-declare class RenderLayerClass extends Container {
+/**
+ * The RenderLayer API provides a way to control the rendering order of objects independently
+ * of their logical parent-child relationships in the scene graph.
+ * This allows developers to decouple how objects are transformed
+ * (via their logical parent) from how they are rendered on the screen.
+ *
+ * ### Key Concepts
+ *
+ * #### RenderLayers Control Rendering Order:
+ * - RenderLayers define where in the render stack objects are drawn,
+ * but they do not affect an object's transformations (e.g., position, scale, rotation) or logical hierarchy.
+ * - RenderLayers can be added anywhere in the scene graph.
+ *
+ * #### Logical Parenting Remains Unchanged:
+ * - Objects still have a logical parent for transformations via addChild.
+ * - Assigning an object to a layer does not reparent it.
+ *
+ * #### Explicit Control:
+ * - Developers assign objects to layers using renderLayer.add and remove them using renderLayer.remove.
+ * ---
+ * ### API Details
+ *
+ * #### 1. Creating a RenderLayer
+ * A RenderLayer is a lightweight object responsible for controlling render order.
+ * It has no children or transformations of its own
+ * but can be inserted anywhere in the scene graph to define its render position.
+ * ```js
+ * const layer = new RenderLayer();
+ * app.stage.addChild(layer); // Insert the layer into the scene graph
+ * ```
+ *
+ * #### 2. Adding Objects to a Layer
+ * Use renderLayer.add to assign an object to a layer.
+ * This overrides the object's default render order defined by its logical parent.
+ * ```js
+ * const rect = new Graphics();
+ * container.addChild(rect);    // Add to logical parent
+ * layer.attach(rect);      // Control render order via the layer
+ * ```
+ *
+ * #### 3. Removing Objects from a Layer
+ * To stop an object from being rendered in the layer, use remove.
+ * ```js
+ * layer.remove(rect); // Stop rendering rect via the layer
+ * ```
+ * When an object is removed from its logical parent (removeChild), it is automatically removed from the layer.
+ *
+ * #### 4. Re-Adding Objects to Layers
+ * If an object is re-added to a logical parent, it does not automatically reassign itself to the layer.
+ * Developers must explicitly reassign it.
+ * ```js
+ * container.addChild(rect);    // Logical parent
+ * layer.attach(rect);      // Explicitly reassign to the layer
+ * ```
+ *
+ * #### 5. Layer Position in Scene Graph
+ * A layer's position in the scene graph determines its render priority relative to other layers and objects.
+ * Layers can be inserted anywhere in the scene graph.
+ * ```js
+ * const backgroundLayer = new RenderLayer();
+ * const uiLayer = new RenderLayer();
+ *
+ * app.stage.addChild(backgroundLayer);
+ * app.stage.addChild(world);
+ * app.stage.addChild(uiLayer);
+ * ```
+ * This is a new API and therefore considered experimental at this stage.
+ * While the core is pretty robust, there are still a few tricky issues we need to tackle.
+ * However, even with the known issues below, we believe this API is incredibly useful!
+ *
+ * Known issues:
+ *  - Interaction may not work as expected since hit testing does not account for the visual render order created by layers.
+ *    For example, if an object is visually moved to the front via a layer, hit testing will still use its original position.
+ *  - RenderLayers and their children must all belong to the same renderGroup to work correctly
+ */
+export declare class RenderLayer extends Container {
 	/**
 	 * Default options for RenderLayer instances. These options control the sorting behavior
 	 * of objects within the render layer.
@@ -12289,82 +12368,6 @@ declare class RenderLayerClass extends Container {
 	 */
 	sortRenderLayerChildren(): void;
 }
-/**
- * The RenderLayer API provides a way to control the rendering order of objects independently
- * of their logical parent-child relationships in the scene graph.
- * This allows developers to decouple how objects are transformed
- * (via their logical parent) from how they are rendered on the screen.
- *
- * ### Key Concepts
- *
- * #### RenderLayers Control Rendering Order:
- * - RenderLayers define where in the render stack objects are drawn,
- * but they do not affect an object's transformations (e.g., position, scale, rotation) or logical hierarchy.
- * - RenderLayers can be added anywhere in the scene graph.
- *
- * #### Logical Parenting Remains Unchanged:
- * - Objects still have a logical parent for transformations via addChild.
- * - Assigning an object to a layer does not reparent it.
- *
- * #### Explicit Control:
- * - Developers assign objects to layers using renderLayer.add and remove them using renderLayer.remove.
- * ---
- * ### API Details
- *
- * #### 1. Creating a RenderLayer
- * A RenderLayer is a lightweight object responsible for controlling render order.
- * It has no children or transformations of its own
- * but can be inserted anywhere in the scene graph to define its render position.
- * ```js
- * const layer = new RenderLayer();
- * app.stage.addChild(layer); // Insert the layer into the scene graph
- * ```
- *
- * #### 2. Adding Objects to a Layer
- * Use renderLayer.add to assign an object to a layer.
- * This overrides the object's default render order defined by its logical parent.
- * ```js
- * const rect = new Graphics();
- * container.addChild(rect);    // Add to logical parent
- * layer.attach(rect);      // Control render order via the layer
- * ```
- *
- * #### 3. Removing Objects from a Layer
- * To stop an object from being rendered in the layer, use remove.
- * ```js
- * layer.remove(rect); // Stop rendering rect via the layer
- * ```
- * When an object is removed from its logical parent (removeChild), it is automatically removed from the layer.
- *
- * #### 4. Re-Adding Objects to Layers
- * If an object is re-added to a logical parent, it does not automatically reassign itself to the layer.
- * Developers must explicitly reassign it.
- * ```js
- * container.addChild(rect);    // Logical parent
- * layer.attach(rect);      // Explicitly reassign to the layer
- * ```
- *
- * #### 5. Layer Position in Scene Graph
- * A layer's position in the scene graph determines its render priority relative to other layers and objects.
- * Layers can be inserted anywhere in the scene graph.
- * ```js
- * const backgroundLayer = new RenderLayer();
- * const uiLayer = new RenderLayer();
- *
- * app.stage.addChild(backgroundLayer);
- * app.stage.addChild(world);
- * app.stage.addChild(uiLayer);
- * ```
- * This is a new API and therefore considered experimental at this stage.
- * While the core is pretty robust, there are still a few tricky issues we need to tackle.
- * However, even with the known issues below, we believe this API is incredibly useful!
- *
- * Known issues:
- *  - Interaction may not work as expected since hit testing does not account for the visual render order created by layers.
- *    For example, if an object is visually moved to the front via a layer, hit testing will still use its original position.
- *  - RenderLayers and their children must all belong to the same renderGroup to work correctly
- */
-export declare const RenderLayer: new (options?: RenderLayerOptions) => IRenderLayer;
 /**
  * The type of child that can be added to a {@link Container}.
  * This is a generic type that extends the {@link Container} class.
@@ -13009,7 +13012,7 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * @param children - The Container(s) to add to the container
 	 * @returns The first child that was added
 	 */
-	addChild<U extends (C | IRenderLayer)[]>(...children: U): U[0];
+	addChild<U extends C[]>(...children: U): U[0];
 	/**
 	 * Removes one or more children from the container.
 	 * When removing multiple children, events will be triggered for each child in sequence.
@@ -13028,7 +13031,7 @@ export declare class Container<C extends ContainerChild = ContainerChild> extend
 	 * @param children - The Container(s) to remove
 	 * @returns The first child that was removed
 	 */
-	removeChild<U extends (C | IRenderLayer)[]>(...children: U): U[0];
+	removeChild<U extends C[]>(...children: U): U[0];
 	set isRenderGroup(value: boolean);
 	/**
 	 * Current transform of the object based on world (parent) factors.
@@ -13796,9 +13799,13 @@ export declare class AccessibilitySystem implements System<AccessibilitySystemOp
 	 */
 	get isMobileAccessibility(): boolean;
 	/**
-	 * The DOM element that will sit over the PixiJS element. This is where the div overlays will go.
+	 * Button element for handling touch hooks.
 	 */
 	get hookDiv(): HTMLElement;
+	/**
+	 * The DOM element that will sit over the PixiJS element. This is where the div overlays will go.
+	 */
+	get div(): HTMLElement;
 	/**
 	 * Destroys the accessibility system. Removes all elements and listeners.
 	 * > [!IMPORTANT] This is typically called automatically when the {@link Application} is destroyed.
@@ -17200,6 +17207,38 @@ declare global {
 		 * @returns The reflection of `this` off the plane
 		 */
 		reflect<T extends PointData = Point>(normal: PointData, outPoint?: T): T;
+		/**
+		 * Rotates `this` vector.
+		 *
+		 * Like a light ray bouncing off a mirror surface.
+		 * `this` vector is the light and `normal` is a vector perpendicular to the mirror.
+		 * `this.reflect(normal)` is the reflection of `this` on that mirror.
+		 *
+		 * > [!IMPORTANT] Only available with **pixi.js/math-extras**.
+		 * @example
+		 * ```ts
+		 * // Basic point rotation
+		 * const point = new Point(10, 20);
+		 * const degrees = 45
+		 * const radians = degrees * (Math.PI / 180)
+		 * const result = point.rotate(radians);
+		 * console.log(result); // {x: -7.071067811865474, y: 21.213203435596427}
+		 *
+		 * // Using output point for efficiency
+		 * const output = new Point(10, 20);
+		 * point.rotate(90 * (Math.PI / 180), output);
+		 * console.log(result); // {x: -7.071067811865474, y: 21.213203435596427}
+		 *
+		 * // Chain multiple additions
+		 * const final = point.rotate(radians).rotate(radians2);
+		 * ```
+		 * @remarks
+		 * convert degrees to radians with const radians = degrees * (Math.PI / 180)
+		 * @param {PointData} radians - The rotation angle in radians
+		 * @param {PointData} outPoint - Optional Point-like object to store result
+		 * @returns The outPoint or a new Point with rotated result
+		 */
+		rotate<T extends PointData = Point>(radians: number, outPoint?: T): T;
 	}
 }
 /**
@@ -25187,6 +25226,12 @@ export interface ResolvedAsset<T = any> {
 	loadParser?: LoadParserName;
 	/** Override to specify which parser should load this asset. Useful when file extensions don't match the content type. */
 	parser?: AssetParser;
+	/**
+	 * The amount of progress an asset will contribute to the onProgress event when loading.
+	 * This can be any arbitrary value but typically represents the file size.
+	 * @default 1
+	 */
+	progressSize?: number;
 }
 /**
  * A valid asset source specification. This can be a URL string, a {@link ResolvedSrc},
@@ -25364,6 +25409,357 @@ export interface AssetsBundle {
 export interface AssetsManifest {
 	/** Array of asset bundles that make up the manifest */
 	bundles: AssetsBundle[];
+}
+declare class CacheClass {
+	/** Clear all entries. */
+	reset(): void;
+	/**
+	 * Check if the key exists
+	 * @param key - The key to check
+	 */
+	has(key: any): boolean;
+	/**
+	 * Fetch entry by key
+	 * @param key - The key of the entry to get
+	 */
+	get<T = any>(key: any): T;
+	/**
+	 * Set a value by key or keys name
+	 * @param key - The key or keys to set
+	 * @param value - The value to store in the cache or from which cacheable assets will be derived.
+	 */
+	set<T = any>(key: any | any[], value: T): void;
+	/**
+	 * Remove entry by key
+	 *
+	 * This function will also remove any associated alias from the cache also.
+	 * @param key - The key of the entry to remove
+	 */
+	remove(key: any): void;
+}
+/**
+ * A prefer order lets the resolver know which assets to prefer depending on the various parameters passed to it.
+ */
+export interface PreferOrder {
+	/** the importance order of the params */
+	priority?: string[];
+	params: {
+		[key: string]: any;
+	};
+}
+/**
+ * Callback function for tracking asset loading progress. The function is called repeatedly
+ * during the loading process with a progress value between 0.0 and 1.0.
+ * @param progress - The loading progress from 0.0 (started) to 1.0 (complete)
+ * @returns void
+ * @example
+ * ```ts
+ * // Basic progress logging
+ * const onProgress = (progress: number) => {
+ *     console.log(`Loading: ${Math.round(progress * 100)}%`);
+ * };
+ *
+ * // Update loading bar
+ * const onProgress = (progress: number) => {
+ *     loadingBar.width = progress * 100;
+ *     loadingText.text = `${Math.round(progress * 100)}%`;
+ * };
+ *
+ * // Load assets with progress tracking
+ * await Assets.load(['sprite1.png', 'sprite2.png'], onProgress);
+ *
+ * // Load bundle with progress tracking
+ * await Assets.loadBundle('levelAssets', (progress) => {
+ *     // Progress is normalized (0.0 - 1.0)
+ *     updateLoadingScreen(progress);
+ * });
+ * ```
+ * > [!IMPORTANT] Do not rely on the progress callback to determine when all assets are loaded.
+ * > Use the returned promise from `Assets.load()` or `Assets.loadBundle()` to know when loading is complete.
+ */
+export type ProgressCallback = (progress: number) => void;
+/**
+ * Options for initializing the Assets class. These options configure how assets are loaded,
+ * resolved, and managed in your PixiJS application.
+ */
+export interface AssetInitOptions {
+	/**
+	 * Base path prepended to all asset URLs. Useful for CDN hosting.
+	 * @example
+	 * ```ts
+	 * await Assets.init({
+	 *     basePath: 'https://my-cdn.com/assets/'
+	 * });
+	 *
+	 * // Now you can load assets like this:
+	 * // Will load from: https://my-cdn.com/assets/images/sprite.png
+	 * const texture = await Assets.load('images/sprite.png');
+	 * ```
+	 */
+	basePath?: string;
+	/**
+	 * A manifest defining all your application's assets.
+	 * Can be a URL to a JSON file or a manifest object.
+	 * @example
+	 * ```ts
+	 * // Using a manifest object
+	 * await Assets.init({
+	 *     manifest: {
+	 *         bundles: [{
+	 *             name: 'game-screen',
+	 *             assets: [
+	 *                 {
+	 *                     alias: 'hero',
+	 *                     src: 'hero.{png,webp}'
+	 *                 },
+	 *                 {
+	 *                     alias: 'map',
+	 *                     src: 'map.json'
+	 *                 }
+	 *             ]
+	 *         }]
+	 *     }
+	 * });
+	 *
+	 * // Using a URL to manifest
+	 * await Assets.init({
+	 *     manifest: 'assets/manifest.json'
+	 * });
+	 *
+	 * // loading a bundle from the manifest
+	 * await Assets.loadBundle('game-screen');
+	 *
+	 * // load individual assets from the manifest
+	 * const heroTexture = await Assets.load('hero');
+	 * ```
+	 */
+	manifest?: string | AssetsManifest;
+	/**
+	 * Configure texture loading preferences.
+	 * Useful for optimizing asset delivery based on device capabilities.
+	 * @example
+	 * ```ts
+	 * await Assets.init({
+	 *     texturePreference: {
+	 *         // Prefer high-res textures on retina displays
+	 *         resolution: window.devicePixelRatio,
+	 *
+	 *         // Prefer modern formats, fallback to traditional
+	 *         format: ['avif', 'webp', 'png']
+	 *     }
+	 * });
+	 * ```
+	 */
+	texturePreference?: {
+		/** Preferred texture resolution(s). Can be a single number or array of resolutions in order of preference. */
+		resolution?: number | number[];
+		/** Preferred texture formats in order of preference. Default: ['avif', 'webp', 'png', 'jpg', 'jpeg'] */
+		format?: ArrayOr<string>;
+	};
+	/**
+	 * Optional preferences for asset loading behavior.
+	 * @example
+	 * ```ts
+	 * await Assets.init({
+	 *     preferences: {
+	 *         crossOrigin: 'anonymous',
+	 *         parseAsGraphicsContext: false
+	 *     }
+	 * });
+	 * ```
+	 */
+	preferences?: Partial<AssetsPreferences>;
+	/**
+	 * Options for defining the loading behavior of assets.
+	 * @example
+	 * ```ts
+	 * await Assets.init({
+	 *    loadOptions: {
+	 *       onProgress: (progress) => console.log(`Loading: ${Math.round(progress * 100)}%`),
+	 *       onError: (error, asset) => console.error(`Error loading ${asset.src}: ${error.message}`),
+	 *       strategy: 'retry',
+	 *       retryCount: 5,
+	 *       retryDelay: 500,
+	 *   }
+	 * });
+	 * ```
+	 * @remarks
+	 * - `onProgress` callback receives values from 0.0 to 1.0
+	 * - `onError` callback is invoked for individual asset load failures
+	 * - `strategy` can be 'throw' (default), 'retry', or 'skip'
+	 * - `retryCount` sets how many times to retry failed assets (default 3)
+	 * - `retryDelay` sets the delay between retries in milliseconds (default 250ms)
+	 */
+	loadOptions?: Partial<LoadOptions>;
+}
+/**
+ * The global Assets class is a singleton that manages loading, caching, and unloading of all resources
+ * in your PixiJS application.
+ *
+ * Key responsibilities:
+ * - **URL Resolution**: Maps URLs/keys to browser-compatible resources
+ * - **Resource Loading**: Handles loading and transformation of assets
+ * - **Asset Caching**: Manages a global cache to prevent duplicate loads
+ * - **Memory Management**: Provides unloading capabilities to free memory
+ *
+ * Advanced Features:
+ * - **Asset Bundles**: Group and manage related assets together
+ * - **Background Loading**: Load assets before they're needed over time
+ * - **Format Detection**: Automatically select optimal asset formats
+ *
+ * Supported Asset Types:
+ * | Type                | Extensions                                                       | Loaders                                                               |
+ * | ------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------- |
+ * | Textures            | `.png`, `.jpg`, `.gif`, `.webp`, `.avif`, `.svg`                 | {@link loadTextures}, {@link loadSvg}                                 |
+ * | Video Textures      | `.mp4`, `.m4v`, `.webm`, `.ogg`, `.ogv`, `.h264`, `.avi`, `.mov` | {@link loadVideoTextures}                                             |
+ * | Sprite Sheets       | `.json`                                                          | {@link spritesheetAsset}                                              |
+ * | Bitmap Fonts        | `.fnt`, `.xml`, `.txt`                                           | {@link loadBitmapFont}                                                |
+ * | Web Fonts           | `.ttf`, `.otf`, `.woff`, `.woff2`                                | {@link loadWebFont}                                                   |
+ * | JSON                | `.json`                                                          | {@link loadJson}                                                      |
+ * | Text                | `.txt`                                                           | {@link loadTxt}                                                       |
+ * | Compressed Textures | `.basis`, `.dds`, `.ktx`, `.ktx2`                                | {@link loadBasis}, {@link loadDDS}, {@link loadKTX}, {@link loadKTX2} |
+ * > [!NOTE] Some loaders allow for custom configuration, please refer to the specific loader documentation for details.
+ * @example
+ * ```typescript
+ * import { Assets } from 'pixi.js';
+ *
+ * // Initialize with options (optional). You can call Assets.load directly without init.
+ * await Assets.init({
+ *     // Base path for all asset URLs
+ *     basePath: 'https://my-cdn.com/assets/',
+ *     // Manifest object that defines all assets
+ *     manifest: {
+ *        bundles: [{ name: 'gameAssets', assets: [] }, ...],
+ *     }, *
+ *     // Preferred texture settings
+ *     texturePreference: {
+ *         resolution: window.devicePixelRatio,
+ *         format: ['avif', 'webp', 'png']
+ *     }
+ * });
+ *
+ * // Basic loading
+ * const texture = await Assets.load('images/sprite.png');
+ *
+ * // Load multiple assets
+ * const assets = await Assets.load([
+ *     'images/bg.png',
+ *     'images/character.png',
+ *     'fonts/game.fnt'
+ * ]);
+ *
+ * // Using aliases + multiple formats
+ * await Assets.load({ alias: 'hero', src: 'images/hero.{webp,png}' });
+ * const sprite = Sprite.from('hero'); // Uses the best available format
+ *
+ * // background loading
+ * Assets.backgroundLoad(['images/level1.json', 'images/level2.json']); // Loads in the background one at a time
+ *
+ * // Load a bundle of assets from the manifest
+ * const levelAssets = await Assets.loadBundle('gameAssets');
+ * // Background loading of a bundle. This will load assets in the background one at a time.
+ * // Can be interrupted at any time by calling Assets.loadBundle('gameAssets') again.
+ * Assets.backgroundLoadBundle('resultsAssets');
+ *
+ * // Memory management
+ * await Assets.unload('hero');
+ * await Assets.unloadBundle('levelOne');
+ * ```
+ * @remarks
+ * - Assets are cached automatically and only loaded once
+ * - Background loading helps eliminate loading screens
+ * - Format detection ensures optimal asset delivery
+ * - Bundle management simplifies resource organization
+ *
+ * > [!IMPORTANT]
+ * > When unloading assets, ensure they aren't being used elsewhere
+ * > in your application to prevent missing texture references.
+ */
+export declare const Assets: AssetsClass;
+/**
+ * Options for loading assets with the Loader
+ * @example
+ * ```ts
+ * await Assets.load(['file1.png', 'file2.png'], {
+ *   onProgress: (progress) => console.log(`Progress: ${progress * 100}%`),
+ *   onError: (error, url) => console.error(`Error loading ${url}: ${error.message}`),
+ *   strategy: 'retry', // 'throw' | 'skip' | 'retry'
+ *   retryCount: 5, // Number of retry attempts if strategy is 'retry'
+ *   retryDelay: 500, // Delay in ms between retries
+ * });
+ * ```
+ */
+export interface LoadOptions {
+	/**
+	 * Callback for progress updates during loading
+	 * @param progress - A number between 0 and 1 indicating the load progress
+	 * @example
+	 * ```ts
+	 * const options: LoadOptions = {
+	 *   onProgress: (progress) => {
+	 *     console.log(`Loading progress: ${progress * 100}%`);
+	 *   },
+	 * };
+	 * await Assets.load('image.png', options);
+	 * ```
+	 */
+	onProgress?: (progress: number) => void;
+	/**
+	 * Callback for handling errors during loading
+	 * @param error - The error that occurred
+	 * @param url - The URL of the asset that failed to load
+	 * @example
+	 * ```ts
+	 * const options: LoadOptions = {
+	 *   onError: (error, url) => {
+	 *     console.error(`Failed to load ${url}: ${error.message}`);
+	 *   },
+	 * };
+	 * await Assets.load('missing-file.png', options);
+	 * ```
+	 */
+	onError?: (error: Error, url: string | ResolvedAsset) => void;
+	/**
+	 * Strategy to handle load failures
+	 * - 'throw': Immediately throw an error and stop loading (default)
+	 * - 'skip': Skip the failed asset and continue loading others
+	 * - 'retry': Retry loading the asset a specified number of times
+	 * @default 'throw'
+	 * @example
+	 * ```ts
+	 * const options: LoadOptions = {
+	 *   strategy: 'skip',
+	 * };
+	 * await Assets.load('sometimes-fails.png', options);
+	 * ```
+	 */
+	strategy?: "throw" | "skip" | "retry";
+	/**
+	 * Number of retry attempts if strategy is 'retry'
+	 * @default 3
+	 * @example
+	 * ```ts
+	 * const options: LoadOptions = {
+	 *   strategy: 'retry',
+	 *   retryCount: 5, // Retry up to 5 times
+	 * };
+	 * await Assets.load('unstable-asset.png', options);
+	 * ```
+	 */
+	retryCount?: number;
+	/**
+	 * Delay in milliseconds between retry attempts
+	 * @default 250
+	 * @example
+	 * ```ts
+	 * const options: LoadOptions = {
+	 *   strategy: 'retry',
+	 *   retryDelay: 1000, // Wait 1 second between retries
+	 * };
+	 * await Assets.load('sometimes-fails.png', options);
+	 * ```
+	 */
+	retryDelay?: number;
 }
 /**
  * The options for installing a new BitmapFont. Once installed, the font will be available
@@ -27330,250 +27726,6 @@ export declare class SubtractBlend extends BlendModeFilter {
 export declare class VividLightBlend extends BlendModeFilter {
 	constructor();
 }
-/**
- * A prefer order lets the resolver know which assets to prefer depending on the various parameters passed to it.
- */
-export interface PreferOrder {
-	/** the importance order of the params */
-	priority?: string[];
-	params: {
-		[key: string]: any;
-	};
-}
-declare class CacheClass {
-	/** Clear all entries. */
-	reset(): void;
-	/**
-	 * Check if the key exists
-	 * @param key - The key to check
-	 */
-	has(key: any): boolean;
-	/**
-	 * Fetch entry by key
-	 * @param key - The key of the entry to get
-	 */
-	get<T = any>(key: any): T;
-	/**
-	 * Set a value by key or keys name
-	 * @param key - The key or keys to set
-	 * @param value - The value to store in the cache or from which cacheable assets will be derived.
-	 */
-	set<T = any>(key: any | any[], value: T): void;
-	/**
-	 * Remove entry by key
-	 *
-	 * This function will also remove any associated alias from the cache also.
-	 * @param key - The key of the entry to remove
-	 */
-	remove(key: any): void;
-}
-/**
- * Callback function for tracking asset loading progress. The function is called repeatedly
- * during the loading process with a progress value between 0.0 and 1.0.
- * @param progress - The loading progress from 0.0 (started) to 1.0 (complete)
- * @returns void
- * @example
- * ```ts
- * // Basic progress logging
- * const onProgress = (progress: number) => {
- *     console.log(`Loading: ${Math.round(progress * 100)}%`);
- * };
- *
- * // Update loading bar
- * const onProgress = (progress: number) => {
- *     loadingBar.width = progress * 100;
- *     loadingText.text = `${Math.round(progress * 100)}%`;
- * };
- *
- * // Load assets with progress tracking
- * await Assets.load(['sprite1.png', 'sprite2.png'], onProgress);
- *
- * // Load bundle with progress tracking
- * await Assets.loadBundle('levelAssets', (progress) => {
- *     // Progress is normalized (0.0 - 1.0)
- *     updateLoadingScreen(progress);
- * });
- * ```
- * > [!IMPORTANT] Do not rely on the progress callback to determine when all assets are loaded.
- * > Use the returned promise from `Assets.load()` or `Assets.loadBundle()` to know when loading is complete.
- */
-export type ProgressCallback = (progress: number) => void;
-/**
- * Options for initializing the Assets class. These options configure how assets are loaded,
- * resolved, and managed in your PixiJS application.
- */
-export interface AssetInitOptions {
-	/**
-	 * Base path prepended to all asset URLs. Useful for CDN hosting.
-	 * @example
-	 * ```ts
-	 * await Assets.init({
-	 *     basePath: 'https://my-cdn.com/assets/'
-	 * });
-	 *
-	 * // Now you can load assets like this:
-	 * // Will load from: https://my-cdn.com/assets/images/sprite.png
-	 * const texture = await Assets.load('images/sprite.png');
-	 * ```
-	 */
-	basePath?: string;
-	/**
-	 * A manifest defining all your application's assets.
-	 * Can be a URL to a JSON file or a manifest object.
-	 * @example
-	 * ```ts
-	 * // Using a manifest object
-	 * await Assets.init({
-	 *     manifest: {
-	 *         bundles: [{
-	 *             name: 'game-screen',
-	 *             assets: [
-	 *                 {
-	 *                     alias: 'hero',
-	 *                     src: 'hero.{png,webp}'
-	 *                 },
-	 *                 {
-	 *                     alias: 'map',
-	 *                     src: 'map.json'
-	 *                 }
-	 *             ]
-	 *         }]
-	 *     }
-	 * });
-	 *
-	 * // Using a URL to manifest
-	 * await Assets.init({
-	 *     manifest: 'assets/manifest.json'
-	 * });
-	 *
-	 * // loading a bundle from the manifest
-	 * await Assets.loadBundle('game-screen');
-	 *
-	 * // load individual assets from the manifest
-	 * const heroTexture = await Assets.load('hero');
-	 * ```
-	 */
-	manifest?: string | AssetsManifest;
-	/**
-	 * Configure texture loading preferences.
-	 * Useful for optimizing asset delivery based on device capabilities.
-	 * @example
-	 * ```ts
-	 * await Assets.init({
-	 *     texturePreference: {
-	 *         // Prefer high-res textures on retina displays
-	 *         resolution: window.devicePixelRatio,
-	 *
-	 *         // Prefer modern formats, fallback to traditional
-	 *         format: ['avif', 'webp', 'png']
-	 *     }
-	 * });
-	 * ```
-	 */
-	texturePreference?: {
-		/** Preferred texture resolution(s). Can be a single number or array of resolutions in order of preference. */
-		resolution?: number | number[];
-		/** Preferred texture formats in order of preference. Default: ['avif', 'webp', 'png', 'jpg', 'jpeg'] */
-		format?: ArrayOr<string>;
-	};
-	/**
-	 * Optional preferences for asset loading behavior.
-	 * @example
-	 * ```ts
-	 * await Assets.init({
-	 *     preferences: {
-	 *         crossOrigin: 'anonymous',
-	 *         parseAsGraphicsContext: false
-	 *     }
-	 * });
-	 * ```
-	 */
-	preferences?: Partial<AssetsPreferences>;
-}
-/**
- * The global Assets class is a singleton that manages loading, caching, and unloading of all resources
- * in your PixiJS application.
- *
- * Key responsibilities:
- * - **URL Resolution**: Maps URLs/keys to browser-compatible resources
- * - **Resource Loading**: Handles loading and transformation of assets
- * - **Asset Caching**: Manages a global cache to prevent duplicate loads
- * - **Memory Management**: Provides unloading capabilities to free memory
- *
- * Advanced Features:
- * - **Asset Bundles**: Group and manage related assets together
- * - **Background Loading**: Load assets before they're needed over time
- * - **Format Detection**: Automatically select optimal asset formats
- *
- * Supported Asset Types:
- * | Type                | Extensions                                                       | Loaders                                                               |
- * | ------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------- |
- * | Textures            | `.png`, `.jpg`, `.gif`, `.webp`, `.avif`, `.svg`                 | {@link loadTextures}, {@link loadSvg}                                 |
- * | Video Textures      | `.mp4`, `.m4v`, `.webm`, `.ogg`, `.ogv`, `.h264`, `.avi`, `.mov` | {@link loadVideoTextures}                                             |
- * | Sprite Sheets       | `.json`                                                          | {@link spritesheetAsset}                                              |
- * | Bitmap Fonts        | `.fnt`, `.xml`, `.txt`                                           | {@link loadBitmapFont}                                                |
- * | Web Fonts           | `.ttf`, `.otf`, `.woff`, `.woff2`                                | {@link loadWebFont}                                                   |
- * | JSON                | `.json`                                                          | {@link loadJson}                                                      |
- * | Text                | `.txt`                                                           | {@link loadTxt}                                                       |
- * | Compressed Textures | `.basis`, `.dds`, `.ktx`, `.ktx2`                                | {@link loadBasis}, {@link loadDDS}, {@link loadKTX}, {@link loadKTX2} |
- * > [!NOTE] Some loaders allow for custom configuration, please refer to the specific loader documentation for details.
- * @example
- * ```typescript
- * import { Assets } from 'pixi.js';
- *
- * // Initialize with options (optional). You can call Assets.load directly without init.
- * await Assets.init({
- *     // Base path for all asset URLs
- *     basePath: 'https://my-cdn.com/assets/',
- *     // Manifest object that defines all assets
- *     manifest: {
- *        bundles: [{ name: 'gameAssets', assets: [] }, ...],
- *     }, *
- *     // Preferred texture settings
- *     texturePreference: {
- *         resolution: window.devicePixelRatio,
- *         format: ['avif', 'webp', 'png']
- *     }
- * });
- *
- * // Basic loading
- * const texture = await Assets.load('images/sprite.png');
- *
- * // Load multiple assets
- * const assets = await Assets.load([
- *     'images/bg.png',
- *     'images/character.png',
- *     'fonts/game.fnt'
- * ]);
- *
- * // Using aliases + multiple formats
- * await Assets.load({ alias: 'hero', src: 'images/hero.{webp,png}' });
- * const sprite = Sprite.from('hero'); // Uses the best available format
- *
- * // background loading
- * Assets.backgroundLoad(['images/level1.json', 'images/level2.json']); // Loads in the background one at a time
- *
- * // Load a bundle of assets from the manifest
- * const levelAssets = await Assets.loadBundle('gameAssets');
- * // Background loading of a bundle. This will load assets in the background one at a time.
- * // Can be interrupted at any time by calling Assets.loadBundle('gameAssets') again.
- * Assets.backgroundLoadBundle('resultsAssets');
- *
- * // Memory management
- * await Assets.unload('hero');
- * await Assets.unloadBundle('levelOne');
- * ```
- * @remarks
- * - Assets are cached automatically and only loaded once
- * - Background loading helps eliminate loading screens
- * - Format detection ensures optimal asset delivery
- * - Bundle management simplifies resource organization
- *
- * > [!IMPORTANT]
- * > When unloading assets, ensure they aren't being used elsewhere
- * > in your application to prevent missing texture references.
- */
-export declare const Assets: AssetsClass;
 type LoadVideoData = VideoSourceOptions & {
 	mime?: string;
 };

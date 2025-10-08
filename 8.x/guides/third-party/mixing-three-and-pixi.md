@@ -105,6 +105,8 @@ requestAnimationFrame(render);
 Here’s the complete example integrating PixiJS and Three.js:
 
 ```ts
+// dependencies: { "three": "latest", "pixi.js": "latest" }
+// description: A basic integration of PixiJS and Three.js sharing the same WebGL context
 // Import required classes from PixiJS and Three.js
 import { Container, Graphics, Text, WebGLRenderer } from 'pixi.js';
 import * as THREE from 'three';

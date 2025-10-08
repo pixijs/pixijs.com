@@ -55,6 +55,7 @@ npm install pixi.js
 Once you've set up your project, here's a simple example to get started with PixiJS:
 
 ```ts
+// description: This example demonstrates how to use a Container to group and manipulate multiple sprites
 import { Application, Assets, Container, Sprite } from 'pixi.js';
 
 (async () => {

@@ -140,6 +140,7 @@ npm install pixi.js
 Once you've set up your project, here's a simple example to get started with PixiJS:
 
 ```ts
+// description: This example demonstrates how to use a Container to group and manipulate multiple sprites
 import { Application, Assets, Container, Sprite } from 'pixi.js';
 
 (async () => {
@@ -548,7 +549,7 @@ scene.addChild(myGameWorld, myHud);
 renderer.render(scene); // this action will actually convert the scene to a render group under the hood
 ```
 
-Check out the [container example](../../examples/basic/container).
+Check out the [container example](/8.x/examples/?example=container_transform_pivot_basic).
 
 ### Best Practices
 
@@ -702,6 +703,7 @@ stage.addChildAt(layer, 0);
 Here’s a real-world example that shows how to use RenderLayers to set ap player ui on top of the world.
 
 ```ts
+// description: This example demonstrates the use of RenderLayer to manage the rendering order of UI elements in a scene with multiple sprites and filters using PixiJS.
 import {
   Application,
   Assets,
@@ -2249,6 +2251,8 @@ requestAnimationFrame(render);
 Here’s the complete example integrating PixiJS and Three.js:
 
 ```ts
+// dependencies: { "three": "latest", "pixi.js": "latest" }
+// description: A basic integration of PixiJS and Three.js sharing the same WebGL context
 // Import required classes from PixiJS and Three.js
 import { Container, Graphics, Text, WebGLRenderer } from 'pixi.js';
 import * as THREE from 'three';
@@ -4356,44 +4360,7 @@ const mySprite = new Sprite(svgTexture);
 ```
 
 ```ts
-import { Application, Graphics } from 'pixi.js';
-
-(async () => {
-  // Create a new application
-  const app = new Application();
-
-  // Initialize the application
-  await app.init({
-    antialias: true,
-    backgroundColor: 'white',
-    resizeTo: window,
-  });
-
-  // Append the application canvas to the document body
-  document.body.appendChild(app.canvas);
-
-  const graphics = new Graphics().svg(`
-            <svg height="400" width="450" xmlns="http://www.w3.org/2000/svg">
-                <!-- Draw the paths -->
-                <path id="lineAB" d="M 100 350 l 150 -300" stroke="red" stroke-width="4"/>
-                <path id="lineBC" d="M 250 50 l 150 300" stroke="red" stroke-width="4"/>
-                <path id="lineMID" d="M 175 200 l 150 0" stroke="green" stroke-width="4"/>
-                <path id="lineAC" d="M 100 350 q 150 -300 300 0" stroke="blue" fill="none" stroke-width="4"/>
-
-                <!-- Mark relevant points -->
-                <g stroke="black" stroke-width="3" fill="black">
-                    <circle id="pointA" cx="100" cy="350" r="4" />
-                    <circle id="pointB" cx="250" cy="50" r="4" />
-                    <circle id="pointC" cx="400" cy="350" r="4" />
-                </g>
-            </svg>
-        `);
-
-  app.stage.addChild(graphics);
-})();
-```
-
-```ts
+// description: This example demonstrates loading and displaying SVG graphics using the Graphics class
 import { Application, Assets, Graphics } from 'pixi.js';
 
 (async () => {
@@ -4435,6 +4402,46 @@ import { Application, Assets, Graphics } from 'pixi.js';
 ```
 
 ```ts
+// description: This example demonstrates how to create and display SVG graphics using the Graphics class
+import { Application, Graphics } from 'pixi.js';
+
+(async () => {
+  // Create a new application
+  const app = new Application();
+
+  // Initialize the application
+  await app.init({
+    antialias: true,
+    backgroundColor: 'white',
+    resizeTo: window,
+  });
+
+  // Append the application canvas to the document body
+  document.body.appendChild(app.canvas);
+
+  const graphics = new Graphics().svg(`
+            <svg height="400" width="450" xmlns="http://www.w3.org/2000/svg">
+                <!-- Draw the paths -->
+                <path id="lineAB" d="M 100 350 l 150 -300" stroke="red" stroke-width="4"/>
+                <path id="lineBC" d="M 250 50 l 150 300" stroke="red" stroke-width="4"/>
+                <path id="lineMID" d="M 175 200 l 150 0" stroke="green" stroke-width="4"/>
+                <path id="lineAC" d="M 100 350 q 150 -300 300 0" stroke="blue" fill="none" stroke-width="4"/>
+
+                <!-- Mark relevant points -->
+                <g stroke="black" stroke-width="3" fill="black">
+                    <circle id="pointA" cx="100" cy="350" r="4" />
+                    <circle id="pointB" cx="250" cy="50" r="4" />
+                    <circle id="pointC" cx="400" cy="350" r="4" />
+                </g>
+            </svg>
+        `);
+
+  app.stage.addChild(graphics);
+})();
+```
+
+```ts
+// description: This example demonstrates loading a large SVG texture and displaying it as a sprite
 import { Application, Assets, Sprite } from 'pixi.js';
 
 (async () => {
@@ -4473,6 +4480,7 @@ import { Application, Assets, Sprite } from 'pixi.js';
 ```
 
 ```ts
+// description: This example demonstrates loading a large SVG texture and displaying it as a sprite
 import { Application, Assets, Sprite } from 'pixi.js';
 
 (async () => {
@@ -4850,8 +4858,6 @@ import * as PIXI from 'pixi.js';
 ```
 
 In this example, the `container` and its children are rendered to a single texture, reducing the rendering overhead when the scene is drawn.
-
-Play around with the example [here](../../../../examples/basic/cache-as-texture.mdx).
 
 ### Advanced Usage
 

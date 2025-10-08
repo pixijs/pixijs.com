@@ -139,6 +139,7 @@ stage.addChildAt(layer, 0);
 Here’s a real-world example that shows how to use RenderLayers to set ap player ui on top of the world.
 
 ```ts
+// description: This example demonstrates the use of RenderLayer to manage the rendering order of UI elements in a scene with multiple sprites and filters using PixiJS.
 import {
   Application,
   Assets,
