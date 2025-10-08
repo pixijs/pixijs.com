@@ -1,10 +1,60 @@
+// hooks/useCustomMonaco.ts
+import { useEffect, useRef, useState } from 'react';
 import { useFileLanguage } from './useFileLanguage';
 import { usePixiMonaco } from './usePixiDefinitions';
 import { FileTabs, SandpackStack, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
 import { useColorMode } from '@docusaurus/theme-common';
-import { Editor, useMonaco } from '@monaco-editor/react';
+import { Editor } from '@monaco-editor/react';
+import { loader } from '@monaco-editor/react';
 
+import type * as monaco from 'monaco-editor';
 import type { CSSProperties } from 'react';
+
+export function useMonaco() {
+  const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(null);
+  const mountedRef = useRef(true);
+  const loaderRef = useRef<any>(null);
+
+  useEffect(() => {
+    const instance = loader.__getMonacoInstance();
+
+    if (instance) {
+      setMonacoInstance(instance);
+
+      return;
+    }
+
+    if (!loaderRef.current) {
+      loader.config({
+        'vs/nls': { availableLanguages: {} },
+      });
+
+      try {
+        loaderRef.current = loader.init();
+
+        loaderRef.current
+          .then((monacoApi: typeof monaco) => {
+            if (mountedRef.current) {
+              setMonacoInstance(monacoApi);
+            }
+          })
+          .catch((error: any) => {
+            if (mountedRef.current && error.type !== 'cancelation') {
+              console.error('Monaco initialization error:', error);
+            }
+          });
+      } catch (err) {
+        console.error('Failed to initialize Monaco:', err);
+      }
+    }
+
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  return monacoInstance;
+}
 
 interface MonacoViewProps {
   fontSize?: number;

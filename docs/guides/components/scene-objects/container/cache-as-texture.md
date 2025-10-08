@@ -91,8 +91,6 @@ import * as PIXI from 'pixi.js';
 
 In this example, the `container` and its children are rendered to a single texture, reducing the rendering overhead when the scene is drawn.
 
-Play around with the example [here](../../../../examples/basic/cache-as-texture.mdx).
-
 ### Advanced Usage
 
 Instead of enabling cacheAsTexture with true, you can pass a configuration object which is very similar to texture source options.

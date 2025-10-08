@@ -1,0 +1,1228 @@
+[
+  {
+    "name": "animated-sprite_animation",
+    "description": "This example demonstrates how to create and display animated sprites with different animation speeds using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "animated-sprite_animation.js"
+      }
+    ]
+  },
+  {
+    "name": "animated-sprite_particles",
+    "description": "This example demonstrates how to create and display animated sprites using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "animated-sprite_particles.js"
+      }
+    ]
+  },
+  {
+    "name": "animated-sprite_spritesheet",
+    "description": "This example demonstrates how to create and display animated sprites using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "animated-sprite_spritesheet.js"
+      }
+    ]
+  },
+  {
+    "name": "app_transparent-background",
+    "description": "This example demonstrates how to create a PixiJS application with a transparent background",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "app_transparent-background.js"
+      }
+    ]
+  },
+  {
+    "name": "assets_async",
+    "description": "This example demonstrates how to use async/await with PixiJS to load assets",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "assets_async.js"
+      }
+    ]
+  },
+  {
+    "name": "assets_background_loading",
+    "description": "This example demonstrates how to load assets in the background using PixiJS's Assets module",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "assets_background_loading.js"
+      }
+    ]
+  },
+  {
+    "name": "assets_manifest_bundles",
+    "description": "This example demonstrates how to use asset bundles with PixiJS to manage and load groups of assets",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "assets_manifest_bundles.js"
+      }
+    ]
+  },
+  {
+    "name": "assets_multi-loading",
+    "description": "This example demonstrates how to load and use multiple assets with PixiJS",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "assets_multi-loading.js"
+      }
+    ]
+  },
+  {
+    "name": "assets_promises",
+    "description": "This example demonstrates how to load assets using Promises with PixiJS",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "assets_promises.js"
+      }
+    ]
+  },
+  {
+    "name": "container_blend-modes_comparison",
+    "description": "This example demonstrates various blend modes",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "container_blend-modes_comparison.js"
+      }
+    ]
+  },
+  {
+    "name": "container_cache-as-texture_optimization",
+    "description": "This example demonstrates how to use cacheAsTexture to optimize rendering performance",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "container_cache-as-texture_optimization.js"
+      }
+    ]
+  },
+  {
+    "name": "container_inverse-mask",
+    "description": "This example demonstrates how to create an inverse mask using the Graphics class",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "container_inverse-mask.js"
+      }
+    ]
+  },
+  {
+    "name": "container_mask_filters_blur",
+    "description": "This example demonstrates how to create a spotlight effect using a blurred circular mask that follows the mouse pointer, revealing a grass background using PixiJS",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "container_mask_filters_blur.js"
+      }
+    ]
+  },
+  {
+    "name": "container_tinting",
+    "description": "This example demonstrates how to apply tinting to sprites",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "container_tinting.js"
+      }
+    ]
+  },
+  {
+    "name": "container_transform_origin",
+    "description": "This example demonstrates how to manipulate the origin and pivot of a container",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "container_transform_origin.js"
+      }
+    ]
+  },
+  {
+    "name": "container_transform_pivot_basic",
+    "description": "This example demonstrates how to use a Container to group and manipulate multiple sprites",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "container_transform_pivot_basic.js"
+      }
+    ]
+  },
+  {
+    "name": "dom-container_html_text-area",
+    "description": "This example demonstrates how to integrate a DOM element into a PixiJS application using DOMContainer",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "dom-container_html_text-area.js"
+      }
+    ]
+  },
+  {
+    "name": "events_buttons",
+    "description": "This example demonstrates how to create interactive buttons with different states (normal, hover, pressed)",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "events_buttons.js"
+      }
+    ]
+  },
+  {
+    "name": "events_click",
+    "description": "This example demonstrates how to handle click events on a sprite",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "events_click.js"
+      }
+    ]
+  },
+  {
+    "name": "events_custom-hitarea",
+    "description": "This example demonstrates how to create interactive buttons with custom hit areas and masks",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "events_custom-hitarea.js"
+      }
+    ]
+  },
+  {
+    "name": "events_custom-pointer",
+    "description": "This example demonstrates how to use custom mouse cursor icons when hovering over interactive buttons",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "events_custom-pointer.js"
+      }
+    ]
+  },
+  {
+    "name": "events_dragging",
+    "description": "This example demonstrates how to implement dragging functionality for sprites using pointer events",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "events_dragging.js"
+      }
+    ]
+  },
+  {
+    "name": "events_move",
+    "description": "This example demonstrates moving a sprite to follow the pointer position",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "events_move.js"
+      }
+    ]
+  },
+  {
+    "name": "events_order",
+    "description": "This example demonstrates the order of pointer events (pointerenter, pointerleave, pointerover, pointerout) on nested interactive objects",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "events_order.js"
+      }
+    ]
+  },
+  {
+    "name": "events_slider",
+    "description": "This example demonstrates how to create a slider to control the scale of a sprite",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "events_slider.js"
+      }
+    ]
+  },
+  {
+    "name": "filters_blur",
+    "description": "This example demonstrates the use of BlurFilter to create dynamic blur effects on sprites",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "filters_blur.js"
+      }
+    ]
+  },
+  {
+    "name": "filters_color-matrix",
+    "description": "This example demonstrates the use of ColorMatrixFilter to create dynamic color effects on a container of sprites",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "filters_color-matrix.js"
+      }
+    ]
+  },
+  {
+    "name": "filters_custom-shader_glsl",
+    "dependencies": {},
+    "description": "This example demonstrates how to create and apply a custom shader filter",
+    "files": [
+      {
+        "name": "custom.frag",
+        "location": "filters_custom-shader_glsl/custom.frag"
+      },
+      {
+        "name": "custom.vert",
+        "location": "filters_custom-shader_glsl/custom.vert"
+      },
+      {
+        "name": "index.js",
+        "location": "filters_custom-shader_glsl/index.js"
+      }
+    ]
+  },
+  {
+    "name": "filters_custom_interactive_blending",
+    "dependencies": {},
+    "description": "This example demonstrates mouse interaction with a custom shader filter that blends based on mouse position",
+    "files": [
+      {
+        "name": "index.js",
+        "location": "filters_custom_interactive_blending/index.js"
+      },
+      {
+        "name": "mouseBlending.frag",
+        "location": "filters_custom_interactive_blending/mouseBlending.frag"
+      },
+      {
+        "name": "mouseBlending.vert",
+        "location": "filters_custom_interactive_blending/mouseBlending.vert"
+      }
+    ]
+  },
+  {
+    "name": "filters_displacement",
+    "description": "This example demonstrates the use of DisplacementFilter with a repeating texture to create a waving flag effect",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "filters_displacement.js"
+      }
+    ]
+  },
+  {
+    "name": "filters_displacement_interactive",
+    "description": "This example demonstrates the use of DisplacementFilter to create a dynamic displacement effect on moving sprites",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "filters_displacement_interactive.js"
+      }
+    ]
+  },
+  {
+    "name": "graphics_basic_shapes",
+    "description": "This example demonstrates basic shape drawing using the Graphics class",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "graphics_basic_shapes.js"
+      }
+    ]
+  },
+  {
+    "name": "graphics_curves_arcs_holes_textures",
+    "description": "This example demonstrates advanced graphics features, including Bezier curves, arcs, holes, and textured strokes.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "graphics_curves_arcs_holes_textures.js"
+      }
+    ]
+  },
+  {
+    "name": "graphics_dynamic",
+    "description": "This example demonstrates dynamic drawing using the Graphics class",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "graphics_dynamic.js"
+      }
+    ]
+  },
+  {
+    "name": "graphics_fill_stroke_graident",
+    "description": "This example demonstrates how to create and animate shapes with gradient fills and strokes using the Graphics and FillGradient classes",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "graphics_fill_stroke_graident.js"
+      }
+    ]
+  },
+  {
+    "name": "graphics_mask_animation",
+    "description": "This example demonstrates how to use Graphics as a mask in a PixiJS application",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "graphics_mask_animation.js"
+      }
+    ]
+  },
+  {
+    "name": "graphics_pixel-line_antialiasing",
+    "description": "This example compares standard lines vs pixel-perfect lines using the Graphics class",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "graphics_pixel-line_antialiasing.js"
+      }
+    ]
+  },
+  {
+    "name": "graphics_svg_file",
+    "description": "This example demonstrates loading and displaying SVG graphics using the Graphics class",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "graphics_svg_file.js"
+      }
+    ]
+  },
+  {
+    "name": "graphics_svg_string-parsing",
+    "description": "This example demonstrates how to create and display SVG graphics using the Graphics class",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "graphics_svg_string-parsing.js"
+      }
+    ]
+  },
+  {
+    "name": "graphics_texture-fill",
+    "description": "This example demonstrates how to use textures within shapes using the Graphics and GraphicsContext classes",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "graphics_texture-fill.js"
+      }
+    ]
+  },
+  {
+    "name": "gsap_animation_basic",
+    "description": "This example demonstrates how to create a simple GSAP animation with PixiJS, featuring text elements that animate in a staggered fashion.",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "gsap_animation_basic.js"
+      }
+    ]
+  },
+  {
+    "name": "gsap_animation_confetti",
+    "description": "This example demonstrates how to create a GSAP confetti animation with PixiJS, triggered by user clicks.",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "gsap_animation_confetti.js"
+      }
+    ]
+  },
+  {
+    "name": "gsap_animation_keyframe",
+    "description": "This example demonstrates how to create a GSAP keyframe animation with PixiJS, animating multiple boxes with staggered timing.",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "gsap_animation_keyframe.js"
+      }
+    ]
+  },
+  {
+    "name": "gsap_animation_physics_particles",
+    "description": "This example demonstrates how to create a GSAP animation with PixiJS, featuring particles that animate with physics.",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "gsap_animation_physics_particles.js"
+      }
+    ]
+  },
+  {
+    "name": "gsap_animation_timeline",
+    "description": "This example demonstrates how to create a sequenced GSAP animation timeline with PixiJS, animating multiple boxes in a coordinated manner.",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "gsap_animation_timeline.js"
+      }
+    ]
+  },
+  {
+    "name": "gsap_interaction_inertia",
+    "description": "This example demonstrates how to create a GSAP interaction inertia effect with PixiJS, where sprites react to mouse movement with inertia.",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "gsap_interaction_inertia.js"
+      }
+    ]
+  },
+  {
+    "name": "gsap_interaction_moveTo",
+    "description": "This example demonstrates how to use GSAP's quickTo method to create smooth, performant interactions with PixiJS, allowing a sprite to follow the user's pointer movements.",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "gsap_interaction_moveTo.js"
+      }
+    ]
+  },
+  {
+    "name": "gsap_physics",
+    "description": "This example demonstrates how to create a GSAP physics-based cannon animation with PixiJS, where bullets are fired from a cannon on user clicks.",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "gsap_physics.js"
+      }
+    ]
+  },
+  {
+    "name": "mesh_custom_color_attributes",
+    "dependencies": {},
+    "description": "This example demonstrates how to create a custom mesh with colored triangle using custom shaders.",
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_custom_color_attributes/index.js"
+      },
+      {
+        "name": "triangleColor.frag",
+        "location": "mesh_custom_color_attributes/triangleColor.frag"
+      },
+      {
+        "name": "triangleColor.vert",
+        "location": "mesh_custom_color_attributes/triangleColor.vert"
+      },
+      {
+        "name": "triangleColor.wgsl",
+        "location": "mesh_custom_color_attributes/triangleColor.wgsl"
+      }
+    ]
+  },
+  {
+    "name": "mesh_custom_instanced_geometry",
+    "dependencies": {},
+    "description": "This example demonstrates how to create and animate instanced geometry using custom shaders.",
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_custom_instanced_geometry/index.js"
+      },
+      {
+        "name": "instancedGeometry.frag",
+        "location": "mesh_custom_instanced_geometry/instancedGeometry.frag"
+      },
+      {
+        "name": "instancedGeometry.vert",
+        "location": "mesh_custom_instanced_geometry/instancedGeometry.vert"
+      },
+      {
+        "name": "instancedGeometry.wgsl",
+        "location": "mesh_custom_instanced_geometry/instancedGeometry.wgsl"
+      }
+    ]
+  },
+  {
+    "name": "mesh_custom_shader_geometry",
+    "dependencies": {},
+    "description": "This example demonstrates how to create a custom mesh using PixiJS",
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_custom_shader_geometry/index.js"
+      },
+      {
+        "name": "triangle.frag",
+        "location": "mesh_custom_shader_geometry/triangle.frag"
+      },
+      {
+        "name": "triangle.vert",
+        "location": "mesh_custom_shader_geometry/triangle.vert"
+      },
+      {
+        "name": "triangle.wgsl",
+        "location": "mesh_custom_shader_geometry/triangle.wgsl"
+      }
+    ]
+  },
+  {
+    "name": "mesh_custom_texture_uv",
+    "dependencies": {},
+    "description": "This example demonstrates how to create a textured custom mesh using PixiJS.",
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_custom_texture_uv/index.js"
+      },
+      {
+        "name": "triangleTextured.frag",
+        "location": "mesh_custom_texture_uv/triangleTextured.frag"
+      },
+      {
+        "name": "triangleTextured.vert",
+        "location": "mesh_custom_texture_uv/triangleTextured.vert"
+      }
+    ]
+  },
+  {
+    "name": "mesh_mouse-trail",
+    "description": "This example creates a trail that follows the mouse pointer using a rope mesh and cubic interpolation.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_mouse-trail.js"
+      }
+    ]
+  },
+  {
+    "name": "mesh_multipass_shader_effects",
+    "dependencies": {},
+    "description": "This example demonstrates a multi-pass rendering technique using custom shaders and meshes.",
+    "files": [
+      {
+        "name": "combine.frag",
+        "location": "mesh_multipass_shader_effects/combine.frag"
+      },
+      {
+        "name": "grid.frag",
+        "location": "mesh_multipass_shader_effects/grid.frag"
+      },
+      {
+        "name": "index.js",
+        "location": "mesh_multipass_shader_effects/index.js"
+      },
+      {
+        "name": "multipassMesh.vert",
+        "location": "mesh_multipass_shader_effects/multipassMesh.vert"
+      },
+      {
+        "name": "noise.frag",
+        "location": "mesh_multipass_shader_effects/noise.frag"
+      },
+      {
+        "name": "ripple.frag",
+        "location": "mesh_multipass_shader_effects/ripple.frag"
+      },
+      {
+        "name": "wave.frag",
+        "location": "mesh_multipass_shader_effects/wave.frag"
+      }
+    ]
+  },
+  {
+    "name": "mesh_perspective_3d",
+    "description": "This example demonstrates how to create a perspective mesh that responds to mouse movement, simulating 3D rotation using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_perspective_3d.js"
+      }
+    ]
+  },
+  {
+    "name": "mesh_plane",
+    "description": "This example demonstrates how to use a MeshPlane to create a dynamic plane mesh, animated with vertex manipulation",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_plane.js"
+      }
+    ]
+  },
+  {
+    "name": "mesh_rope_texture_vertices",
+    "description": "This example demonstrates how to create and animate a textured MeshRope to simulate a snake-like movement using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_rope_texture_vertices.js"
+      }
+    ]
+  },
+  {
+    "name": "mesh_rope_textured",
+    "description": "This example demonstrates how to create and animate a basic textured MeshRope using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_rope_textured.js"
+      }
+    ]
+  },
+  {
+    "name": "mesh_shader-toy",
+    "dependencies": {},
+    "description": "This example demonstrates how to create a full-screen quad mesh with a ShaderToy-like shader using PixiJS.",
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_shader-toy/index.js"
+      },
+      {
+        "name": "shaderToy.frag",
+        "location": "mesh_shader-toy/shaderToy.frag"
+      },
+      {
+        "name": "shaderToy.vert",
+        "location": "mesh_shader-toy/shaderToy.vert"
+      }
+    ]
+  },
+  {
+    "name": "mesh_shared-geometry",
+    "dependencies": {},
+    "description": "This example demonstrates how to use shared geometry across multiple meshes with different textures using PixiJS.",
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_shared-geometry/index.js"
+      },
+      {
+        "name": "sharedGeometry.frag",
+        "location": "mesh_shared-geometry/sharedGeometry.frag"
+      },
+      {
+        "name": "sharedGeometry.vert",
+        "location": "mesh_shared-geometry/sharedGeometry.vert"
+      }
+    ]
+  },
+  {
+    "name": "mesh_shared-shader",
+    "dependencies": {},
+    "description": "This example demonstrates how to use shared shaders across multiple meshes using PixiJS.",
+    "files": [
+      {
+        "name": "index.js",
+        "location": "mesh_shared-shader/index.js"
+      },
+      {
+        "name": "sharedShader.frag",
+        "location": "mesh_shared-shader/sharedShader.frag"
+      },
+      {
+        "name": "sharedShader.vert",
+        "location": "mesh_shared-shader/sharedShader.vert"
+      }
+    ]
+  },
+  {
+    "name": "misc_physics_aabb",
+    "description": "An example of simple collision detection and response between two squares.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "misc_physics_aabb.js"
+      }
+    ]
+  },
+  {
+    "name": "misc_screen-shot",
+    "description": "Take a screenshot of the rotating bunnies and download it",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "misc_screen-shot.js"
+      }
+    ]
+  },
+  {
+    "name": "misc_slots",
+    "description": "A simple slot machine using animation and blur filters",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "misc_slots.js"
+      }
+    ]
+  },
+  {
+    "name": "misc_spinners",
+    "dependencies": {},
+    "description": "Various loading spinners using masks and graphics",
+    "files": [
+      {
+        "name": "index.js",
+        "location": "misc_spinners/index.js"
+      },
+      {
+        "name": "intersect.js",
+        "location": "misc_spinners/intersect.js"
+      },
+      {
+        "name": "spinner1.js",
+        "location": "misc_spinners/spinner1.js"
+      },
+      {
+        "name": "spinner2.js",
+        "location": "misc_spinners/spinner2.js"
+      },
+      {
+        "name": "spinner3.js",
+        "location": "misc_spinners/spinner3.js"
+      },
+      {
+        "name": "spinner4.js",
+        "location": "misc_spinners/spinner4.js"
+      },
+      {
+        "name": "spinner5.js",
+        "location": "misc_spinners/spinner5.js"
+      }
+    ]
+  },
+  {
+    "name": "misc_star-warp",
+    "description": "Star warp effect using 3D to 2D projection",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "misc_star-warp.js"
+      }
+    ]
+  },
+  {
+    "name": "nine-slice-sprite_basic",
+    "description": "This example demonstrates how to create and display a resizable NineSliceSprite, maintaining the integrity of its corners and edges while stretching the center.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "nine-slice-sprite_basic.js"
+      }
+    ]
+  },
+  {
+    "name": "nine-slice-sprite_transform_anchor",
+    "description": "This example demonstrates how to create and display a NineSliceSprite with a centered anchor point and rotation.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "nine-slice-sprite_transform_anchor.js"
+      }
+    ]
+  },
+  {
+    "name": "offscreen-canvas",
+    "description": "This example demonstrates how to use OffscreenCanvas with PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "offscreen-canvas.js"
+      }
+    ]
+  },
+  {
+    "name": "particle-container_basic",
+    "description": "This example demonstrates how to create a particle system using a Container to manage multiple sprites",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "particle-container_basic.js"
+      }
+    ]
+  },
+  {
+    "name": "rendering_render-group",
+    "description": "This example demonstrates how to use a render group for efficient rendering of a large number of sprites",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "rendering_render-group.js"
+      }
+    ]
+  },
+  {
+    "name": "rendering_render-layer",
+    "dependencies": {},
+    "description": "This example demonstrates the use of RenderLayer to manage the rendering order of UI elements in a scene with multiple sprites and filters using PixiJS.",
+    "files": [
+      {
+        "name": "CharacterUI.js",
+        "location": "rendering_render-layer/CharacterUI.js"
+      },
+      {
+        "name": "Fish.js",
+        "location": "rendering_render-layer/Fish.js"
+      },
+      {
+        "name": "index.js",
+        "location": "rendering_render-layer/index.js"
+      }
+    ]
+  },
+  {
+    "name": "rendering_render-texture_basic",
+    "description": "This example demonstrates how to create a basic render texture and render multiple sprites into it.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "rendering_render-texture_basic.js"
+      }
+    ]
+  },
+  {
+    "name": "rendering_render-texture_buffer",
+    "description": "This example shows how to create an advanced render texture setup where the scene is rendered into itself with some transformations.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "rendering_render-texture_buffer.js"
+      }
+    ]
+  },
+  {
+    "name": "rendering_render-texture_scratch-card",
+    "description": "Scratch card effect using RenderTexture and masking",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "rendering_render-texture_scratch-card.js"
+      }
+    ]
+  },
+  {
+    "name": "rendering_texture_rotation",
+    "description": "This example demonstrates how to create and display textures with various rotations using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "rendering_texture_rotation.js"
+      }
+    ]
+  },
+  {
+    "name": "sprite_gif_animation_loading",
+    "description": "This example demonstrates how to load and display a GIF image using the GifSprite class.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "sprite_gif_animation_loading.js"
+      }
+    ]
+  },
+  {
+    "name": "sprite_mask_animation",
+    "description": "This example shows how to use a sprite as a mask.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "sprite_mask_animation.js"
+      }
+    ]
+  },
+  {
+    "name": "sprite_svg",
+    "description": "This example demonstrates loading a large SVG texture and displaying it as a sprite",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "sprite_svg.js"
+      }
+    ]
+  },
+  {
+    "name": "sprite_svg_custom-data",
+    "description": "This example demonstrates loading a large SVG texture and displaying it as a sprite",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "sprite_svg_custom-data.js"
+      }
+    ]
+  },
+  {
+    "name": "sprite_texture-swap",
+    "description": "This example demonstrates how to create and display a basic sprite and swap its texture on click using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "sprite_texture-swap.js"
+      }
+    ]
+  },
+  {
+    "name": "sprite_transform_rotation",
+    "description": "This example demonstrates how to create and display a basic sprite using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "sprite_transform_rotation.js"
+      }
+    ]
+  },
+  {
+    "name": "sprite_video_texture",
+    "description": "This example demonstrates how to load and display a video as a texture on a sprite using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "sprite_video_texture.js"
+      }
+    ]
+  },
+  {
+    "name": "text_bitmap_split-text",
+    "description": "This example demonstrates how to split bitmap text into characters for individual animation using SplitBitmapText.",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "text_bitmap_split-text.js"
+      }
+    ]
+  },
+  {
+    "name": "text_bitmap_web-font_loading",
+    "description": "This example demonstrates how to create and display bitmap text using a loaded bitmap font.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "text_bitmap_web-font_loading.js"
+      }
+    ]
+  },
+  {
+    "name": "text_bitmap_word-wrap_break-words",
+    "description": "This example demonstrates how to use the breakWords option in BitmapText to wrap long, unbroken strings.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "text_bitmap_word-wrap_break-words.js"
+      }
+    ]
+  },
+  {
+    "name": "text_bitmap_xml",
+    "description": "This example demonstrates how to create and display bitmap text using a loaded bitmap font.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "text_bitmap_xml.js"
+      }
+    ]
+  },
+  {
+    "name": "text_fill_graident",
+    "description": "This example demonstrates how to create and style text using the Text and TextStyle classes.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "text_fill_graident.js"
+      }
+    ]
+  },
+  {
+    "name": "text_filters_cartoon",
+    "dependencies": {},
+    "description": "Example of using baked in filters on a Text object to create a cartoon-style text effect.",
+    "files": [
+      {
+        "name": "CartoonTextFilter.js",
+        "location": "text_filters_cartoon/CartoonTextFilter.js"
+      },
+      {
+        "name": "cartoonText.frag",
+        "location": "text_filters_cartoon/cartoonText.frag"
+      },
+      {
+        "name": "cartoonText.vert",
+        "location": "text_filters_cartoon/cartoonText.vert"
+      },
+      {
+        "name": "cartoonText.wgsl",
+        "location": "text_filters_cartoon/cartoonText.wgsl"
+      },
+      {
+        "name": "index.js",
+        "location": "text_filters_cartoon/index.js"
+      }
+    ]
+  },
+  {
+    "name": "text_texture-style_scale-mode",
+    "description": "This example demonstrates how to create and display bitmap text and regular text with different texture scaling modes through TextureStyle.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "text_texture-style_scale-mode.js"
+      }
+    ]
+  },
+  {
+    "name": "text_trim_bounds",
+    "description": "This example demonstrates the difference between trimmed and untrimmed text using the trim option.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "text_trim_bounds.js"
+      }
+    ]
+  },
+  {
+    "name": "text_web-font_google",
+    "description": "This example demonstrates how to load and use a custom web font text rendering.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "text_web-font_google.js"
+      }
+    ]
+  },
+  {
+    "name": "three_basic-integration",
+    "description": "A basic integration of PixiJS and Three.js sharing the same WebGL context",
+    "dependencies": {
+      "three": "latest",
+      "pixi.js": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "three_basic-integration.js"
+      }
+    ]
+  },
+  {
+    "name": "tiling-sprite_transform_animation",
+    "description": "This example demonstrates how to create and animate a tiling sprite using PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "tiling-sprite_transform_animation.js"
+      }
+    ]
+  }
+]

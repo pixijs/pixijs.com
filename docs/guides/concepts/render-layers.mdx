@@ -4,9 +4,9 @@ description: Understanding PixiJS Render Layers for controlling rendering order 
 ---
 
 import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
-import RenderLayerIndexFile from '!!raw-loader!../../examples/ordering/render-layer/index';
-import RenderLayerFish from '!!raw-loader!../../examples/ordering/render-layer/Fish';
-import RenderLayerCharacterUI from '!!raw-loader!../../examples/ordering/render-layer/CharacterUI';
+import RenderLayerIndexFile from '!!raw-loader!../../examples/rendering_render-layer/index';
+import RenderLayerFish from '!!raw-loader!../../examples/rendering_render-layer/Fish';
+import RenderLayerCharacterUI from '!!raw-loader!../../examples/rendering_render-layer/CharacterUI';
 
 # Render Layers
 
@@ -148,9 +148,9 @@ stage.addChildAt(layer, 0);
 
 Here’s a real-world example that shows how to use RenderLayers to set ap player ui on top of the world.
 
-{/* embedded:@site/docs/examples/ordering/render-layer/index.js */}
-{/* embedded:@site/docs/examples/ordering/render-layer/Fish.js */}
-{/* embedded:@site/docs/examples/ordering/render-layer/CharacterUI.js */}
+{/* embedded:@site/docs/examples/rendering_render-layer/index.js */}
+{/* embedded:@site/docs/examples/rendering_render-layer/Fish.js */}
+{/* embedded:@site/docs/examples/rendering_render-layer/CharacterUI.js */}
 <EmbeddedEditor files={{
     "index.js": RenderLayerIndexFile,
     'Fish.js': RenderLayerFish,

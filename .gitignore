@@ -34,3 +34,6 @@ scripts/pixiVersions.json
 
 .ghtoken
 .env
+
+static/examples/source
+src/pages/examples/config.ts
