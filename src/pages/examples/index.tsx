@@ -14,7 +14,7 @@ function ExamplesContent(): React.JSX.Element {
   const history = useHistory();
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [showGifs, setShowGifs] = useLocalStorage('showGifs', false);
+  const [showGifs, setShowGifs] = useLocalStorage('showGifs', true);
   const [compactView, setCompactView] = useLocalStorage('compactView', false);
   const [expandAll, setExpandAll] = useLocalStorage('expandAll', false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
