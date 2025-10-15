@@ -55,13 +55,13 @@
     ]
   },
   {
-    "name": "assets_background_loading",
+    "name": "assets_background-loading",
     "description": "This example demonstrates how to load assets in the background using PixiJS's Assets module",
     "dependencies": {},
     "files": [
       {
         "name": "index.js",
-        "location": "assets_background_loading.js"
+        "location": "assets_background-loading.js"
       }
     ]
   },
@@ -390,13 +390,13 @@
     ]
   },
   {
-    "name": "graphics_fill_stroke_graident",
+    "name": "graphics_fill_stroke_gradient",
     "description": "This example demonstrates how to create and animate shapes with gradient fills and strokes using the Graphics and FillGradient classes",
     "dependencies": {},
     "files": [
       {
         "name": "index.js",
-        "location": "graphics_fill_stroke_graident.js"
+        "location": "graphics_fill_stroke_gradient.js"
       }
     ]
   },
@@ -1130,13 +1130,13 @@
     ]
   },
   {
-    "name": "text_fill_graident",
+    "name": "text_fill_gradient",
     "description": "This example demonstrates how to create and style text using the Text and TextStyle classes.",
     "dependencies": {},
     "files": [
       {
         "name": "index.js",
-        "location": "text_fill_graident.js"
+        "location": "text_fill_gradient.js"
       }
     ]
   },
