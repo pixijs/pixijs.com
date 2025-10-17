@@ -1,6 +1,23 @@
 [
   {
     "sponsor": {
+      "name": "SEO for igaming sites",
+      "type": "User",
+      "login": "seo-for-igaming-sites",
+      "avatarUrl": "https://images.opencollective.com/seo-for-igaming-sites/473305a/avatar/460.png",
+      "websiteUrl": "https://seoigaming.com",
+      "linkUrl": "https://opencollective.com/seo-for-igaming-sites",
+      "socialLogins": {
+        "opencollective": "seo-for-igaming-sites"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Casinos Online C19",
       "type": "User",
       "login": "casino-online-chile",
