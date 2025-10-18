@@ -16373,13 +16373,13 @@ define('com/fido/app/Fallback', ['require', 'exports', 'module'], function (t, e
       (a.prototype = Object.create(r.DisplayObjectContainer.prototype)),
         (a.prototype.onShow = function () {}),
         (a.prototype.onShown = function () {}),
-        (a.prototype.update = function () {
+              (a.prototype.update = function (deltaTime) {
           for (var t = 0; t < this.clouds.length; t++) {
             var e = this.clouds[t];
-            (e.position3d.z += this.speed),
+            (e.position3d.z += (this.speed * deltaTime)),
               e.position3d.z < 300 ? (e.alpha = e.position3d.z / 300) : (e.alpha += 0.01 * (1 - e.alpha)),
               e.position3d.z < 0 &&
-                ((e.scaleRatio = 5),
+              ((e.scaleRatio = 5),
                 (e.position3d.z += this.range),
                 (e.position3d.x = s.random(-4500, 4500)),
                 (e.position3d.y = 1200 - Math.abs(0.2 * e.position3d.x) + s.random(0, 200)),
@@ -16390,7 +16390,7 @@ define('com/fido/app/Fallback', ['require', 'exports', 'module'], function (t, e
                 Math.random() < 0.5 && (e.scaleOffset.x *= -1));
           }
           this.mini3d.update(),
-            this.count++,
+            this.count += deltaTime,
             (this.mini3d.view.rotation = 0.08 * Math.cos(0.02 * this.count)),
             (this.mini3d.position3d.y = 200 * Math.sin(0.03 * this.count)),
             (this.mini3d.position3d.y -= 50),
@@ -16449,10 +16449,10 @@ define('com/fido/app/Fallback', ['require', 'exports', 'module'], function (t, e
       (a.prototype = Object.create(r.DisplayObjectContainer.prototype)),
         (a.prototype.onShow = function () {}),
         (a.prototype.onShown = function () {}),
-        (a.prototype.update = function () {
+        (a.prototype.update = function (deltaTime) {
           for (var t = 0; t < this.clouds.length; t++) {
             var e = this.clouds[t];
-            (e.position3d.z += this.speed),
+            (e.position3d.z += this.speed * deltaTime),
               e.position3d.z < 300 ? (e.alpha = e.position3d.z / 300) : (e.alpha += 0.01 * (1 - e.alpha)),
               (e.rotation += e.rotSpeed),
               e.position3d.z < 0 &&
@@ -16563,11 +16563,11 @@ define('com/fido/app/Fallback', ['require', 'exports', 'module'], function (t, e
           (this.isOpen = !1), (this.count = 0), this.anchor.set(0.5), (this.target = new r.Point());
         };
       (s.prototype = Object.create(r.Sprite.prototype)),
-        (s.prototype.update = function () {
+        (s.prototype.update = function (deltaTime) {
           this.count += 0.01;
           for (var t = 0; t < this.blobs.length; t++) {
             var e = this.blobs[t];
-            e.count += 0.1;
+            e.count += 0.1 * deltaTime;
             var i = Math.sin(0.5 * e.count);
             if (
               (e.spring.update(),
@@ -16925,10 +16925,10 @@ define('com/fido/app/Fallback', ['require', 'exports', 'module'], function (t, e
           h.instance.add(this.update, this);
         }),
         (c.prototype.onShown = function () {}),
-        (c.prototype.update = function () {
+        (c.prototype.update = function (deltaTime) {
           this.autoCount++,
             this.autoCount > 60
-              ? ((this.count += 0.01),
+              ? ((this.count += 0.01 * deltaTime),
                 (this.posy.x = 1900 * Math.sin(this.count) * 0.25),
                 (this.posy.y = 1200 * Math.cos(2 * this.count) * 0.05),
                 (this.ratio += 0.1 * (1 - this.ratio)))
@@ -16937,9 +16937,9 @@ define('com/fido/app/Fallback', ['require', 'exports', 'module'], function (t, e
             e = this.userposy.y + (this.posy.y - this.userposy.y) * this.ratio;
           (this.maskyMask.target.x = t),
             (this.maskyMask.target.y = e),
-            this.clouds.update(),
-            this.stars.update(),
-            this.maskyMask.update();
+            this.clouds.update(deltaTime),
+            this.stars.update(deltaTime),
+            this.maskyMask.update(deltaTime);
         }),
         (c.prototype.resize = function (t, e) {
           this.clouds.resize(t, e), this.stars.resize(t, e), this.maskyMask.resize(t, e);
