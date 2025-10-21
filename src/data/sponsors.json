@@ -103,6 +103,23 @@
   },
   {
     "sponsor": {
+      "name": "LITSLINK",
+      "type": "Organization",
+      "login": "litslink",
+      "avatarUrl": "https://images.opencollective.com/litslink/18dd55f/logo/460.png",
+      "websiteUrl": "https://litslink.com",
+      "linkUrl": "https://opencollective.com/litslink",
+      "socialLogins": {
+        "opencollective": "litslink"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Guidebook.BetWinner",
       "type": "User",
       "login": "guidebook_betwinner_com",
