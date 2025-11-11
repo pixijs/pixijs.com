@@ -578,6 +578,10 @@ const config: Config = {
             to: '/8.x/examples?example=offscreen-canvas',
             from: ['/8.x/examples/offscreen-canvas/basic', '/examples/offscreen-canvas/basic'],
           },
+          {
+            to: '/8.x/examples',
+            from: ['/examples/'],
+          },
         ],
 
         createRedirects(existingPath: string) {
@@ -591,6 +595,11 @@ const config: Config = {
             if (existingPath.includes(`/${path}`)) {
               return [existingPath.replace(`/8.x/${path}`, `/${path}`)];
             }
+          }
+
+          if (existingPath.includes('/examples?example=')) {
+            // send to /8.x/examples
+            return [existingPath.replace('/examples?example=', '/8.x/examples?example=')];
           }
         },
       },
