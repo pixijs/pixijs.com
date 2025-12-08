@@ -1,7 +1,7 @@
-diff --git a/node_modules/sponsorkit/dist/shared/sponsorkit.CLJpd96P.mjs b/node_modules/sponsorkit/dist/shared/sponsorkit.CLJpd96P.mjs
-index 6624e20..8b2fee8 100644
---- a/node_modules/sponsorkit/dist/shared/sponsorkit.CLJpd96P.mjs
-+++ b/node_modules/sponsorkit/dist/shared/sponsorkit.CLJpd96P.mjs
+diff --git a/node_modules/sponsorkit/dist/shared/sponsorkit.D7ijwnCH.mjs b/node_modules/sponsorkit/dist/shared/sponsorkit.D7ijwnCH.mjs
+index a55b2f8..34a96a0 100644
+--- a/node_modules/sponsorkit/dist/shared/sponsorkit.D7ijwnCH.mjs
++++ b/node_modules/sponsorkit/dist/shared/sponsorkit.D7ijwnCH.mjs
 @@ -1109,7 +1109,7 @@ function createSponsorFromOrder(order) {
        type: getAccountType(order.fromAccount.type),
        login: slug,

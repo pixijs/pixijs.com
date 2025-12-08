@@ -73,6 +73,7 @@
       "type": "Organization",
       "login": "yarn1",
       "avatarUrl": "https://images.opencollective.com/yarn1/logo/460.png",
+      "websiteUrl": "https://yarn.so",
       "linkUrl": "https://opencollective.com/yarn1",
       "socialLogins": {
         "opencollective": "yarn1"
@@ -89,6 +90,7 @@
       "type": "Organization",
       "login": "cryptocasino-guide-no-kyc",
       "avatarUrl": "https://images.opencollective.com/cryptocasino-guide-no-kyc/80594b3/logo/460.png",
+      "websiteUrl": "https://cryptocasino-guide.com/casino-sans-kyc",
       "linkUrl": "https://opencollective.com/cryptocasino-guide-no-kyc",
       "socialLogins": {
         "opencollective": "cryptocasino-guide-no-kyc"
@@ -105,6 +107,7 @@
       "type": "Organization",
       "login": "buy-instagram-likes-views4you",
       "avatarUrl": "https://images.opencollective.com/buy-instagram-likes-views4you/7668673/logo/460.png",
+      "websiteUrl": "https://views4you.com/buy-instagram-likes",
       "linkUrl": "https://opencollective.com/buy-instagram-likes-views4you",
       "socialLogins": {
         "opencollective": "buy-instagram-likes-views4you"
