@@ -1,10 +1,61 @@
-@use '@pixi/webdoc-docusaurus-template/docusaurus/custom';
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600&family=Roboto+Mono&family=Roboto:wght@400;500;700&display=swap');
 /**
 * Any CSS included here will be global. The classic template
 * bundles Infima by default. Infima is a CSS framework designed to
 * work well for content-centric websites.
 */
+
+.markdown p code {
+  font-weight: bold;
+  color: var(--ifm-color-primary-lightest);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.markdown h4 code {
+  font-weight: bold;
+  color: var(--ifm-color-primary-lightest);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.deprecated-tag {
+  background-color: #e91e63;
+  color: white;
+  font-weight: 700;
+  border-radius: 3px;
+  font-size: 0.7em;
+  margin-left: 5px;
+  padding: 2px 5px;
+}
+
+.package-name {
+  font-weight: 700;
+  border-radius: 6px;
+  border: 2px solid #e91e63;
+  padding: 5px 20px;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+.package-name p {
+  margin-bottom: 0px;
+}
+
+.markdown article p {
+  margin-bottom: 10px;
+}
+
+:root {
+  --ifm-color-primary: #e91e63;
+  --ifm-color-primary-dark: #d81557;
+  --ifm-color-primary-darker: #cc1452;
+  --ifm-color-primary-darkest: #a81044;
+  --ifm-color-primary-light: #eb3674;
+  --ifm-color-primary-lighter: #ed427c;
+  --ifm-color-primary-lightest: #f06695;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
 
 /* You can override the default Infima variables here. */
 :root {

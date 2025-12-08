@@ -10,9 +10,14 @@ const config: Config = {
   url: 'https://pixijs.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
   onBrokenAnchors: 'throw',
   favicon: 'images/favicon.png',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+      onBrokenMarkdownImages: 'throw',
+    },
+  },
 
   customFields: {
     PIXI_VERSION: process.env.PIXI_VERSION || 'dev',
