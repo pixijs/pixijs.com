@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([["6431"],{29328:function(e){e.exports=JSON.parse('{"metadata":{"permalink":"/blog","page":1,"postsPerPage":16,"totalPages":1,"totalCount":16,"blogDescription":"Latest news from the PixiJS team","blogTitle":"PixiJS News"}}')}}]);

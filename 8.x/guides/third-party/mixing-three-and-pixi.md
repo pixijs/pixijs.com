@@ -218,28 +218,22 @@ import * as THREE from 'three';
 ### Gotchas
 
 - **Enable Stencil Buffers:**
-
   - When creating the Three.js renderer, ensure `stencil` is set to `true`. This allows PixiJS masks to work correctly.
 
 - **Keep Dimensions in Sync:**
-
   - Ensure both renderers use the same `width` and `height` to avoid visual mismatches—so be careful when resizing one, you need to resize the other!
 
 - **Pass the WebGL Context:**
-
   - Pass the WebGL context from Three.js to PixiJS during initialization using `pixiRenderer.init({ context: threeRenderer.getContext() });`.
 
 - **Disable Clear Before Render:**
-
   - Set `clearBeforeRender: false` when initializing the PixiJS renderer. This prevents PixiJS from clearing the Three.js content that was rendered before it.
   - Alternatively you can set `clear: false` in the `pixiRenderer.render()` call. eg `pixiRenderer.render({ container: stage, clear: false });`.
 
 - **Manage Render Order:**
-
   - In this example, Three.js is rendered first, followed by PixiJS for UI layers. However, this order is flexible. You can render pixi -> three -> pixi is you want, just make sure you reset the state when switching renderer.
 
 - **Separate Resources:**
-
   - Remember that resources like textures are not shared between PixiJS and Three.js. A PixiJS texture cannot be directly used as a Three.js texture and vice versa.
 
 ---

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([["7627"],{47548:function(s){s.exports=JSON.parse('{"blogBasePath":"/blog","blogTitle":"PixiJS News","authorsListPath":"/blog/authors"}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([["7048"],{63381:function(u,s,c){c.d(s,{Z:()=>e});var i=c(95330),n=c(85893);function e({children:u,...s}){return(0,n.jsx)(i.Z,{...s,children:u})}}}]);

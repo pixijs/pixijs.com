@@ -13,20 +13,17 @@ PixiJS is committed to delivering a reliable, high-performance rendering engine 
 
 2. **Submission Requirements**
    To claim a bounty, you must:
-
    - Submit a **Pull Request (PR)** that fixes the issue.
    - Link the issue in your PR description.
    - Include a clear **example or test case** demonstrating that the bug is resolved.
    - Follow our standard [contribution guidelines](https://github.com/pixijs/pixijs/blob/dev/.github/CONTRIBUTING.md).
 
 3. **Approval Process**
-
    - The PixiJS team will review your PR.
    - If your fix is accepted and merged into the main branch, your bounty is approved.
 
 4. **Requesting Payment**
    Once your PR is merged:
-
    - You can submit a payout request via our [Open Collective](https://opencollective.com/pixijs) page.
    - Include a link to the merged PR and the bounty issue in your request.
    - Payments will be processed through Open Collective.

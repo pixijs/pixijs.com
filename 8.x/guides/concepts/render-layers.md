@@ -17,19 +17,15 @@ This guide explains the key concepts, provides practical examples, and highlight
 ### **Key Concepts**
 
 1. **Independent Rendering Order**:
-
    - RenderLayers allow control of the draw order independently of the logical hierarchy, ensuring objects are rendered in the desired order.
 
 2. **Logical Parenting Stays Intact**:
-
    - Objects maintain transformations (e.g., position, scale, rotation) from their logical parent, even when attached to RenderLayers.
 
 3. **Explicit Object Management**:
-
    - Objects must be manually reassigned to a layer after being removed from the scene graph or layer, ensuring deliberate control over rendering.
 
 4. **Dynamic Sorting**:
-
    - Within layers, objects can be dynamically reordered using `zIndex` and `sortChildren` for fine-grained control of rendering order.
 
 ---
@@ -339,15 +335,12 @@ export class CharacterUI extends Container {
 ### **Gotchas and Things to Watch Out For**
 
 1. **Manual Reassignment**:
-
    - When an object is re-added to a logical parent, it does not automatically reassociate with its previous layer. Always reassign the object to the layer explicitly.
 
 2. **Nested Children**:
-
    - If you remove a parent container, all its children are automatically removed from layers. Be cautious with complex hierarchies.
 
 3. **Sorting Within Layers**:
-
    - Objects in a layer can be sorted dynamically using their `zIndex` property. This is useful for fine-grained control of render order.
 
    ```javascript
