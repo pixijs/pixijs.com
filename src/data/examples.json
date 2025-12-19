@@ -166,12 +166,20 @@
   },
   {
     "name": "container_transform_pivot_basic",
+    "dependencies": {
+      "pixi.js": "latest",
+      "pixi-filters": "latest",
+      "tweakpane": "latest"
+    },
     "description": "This example demonstrates how to use a Container to group and manipulate multiple sprites",
-    "dependencies": {},
     "files": [
       {
+        "name": "helper.js",
+        "location": "container_transform_pivot_basic/helper.js"
+      },
+      {
         "name": "index.js",
-        "location": "container_transform_pivot_basic.js"
+        "location": "container_transform_pivot_basic/index.js"
       }
     ]
   },
