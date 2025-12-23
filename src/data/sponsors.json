@@ -1,6 +1,23 @@
 [
   {
     "sponsor": {
+      "name": "Releaf Medical Cannabis Glossary",
+      "type": "Organization",
+      "login": "medical-cannabis-glossary",
+      "avatarUrl": "https://images.opencollective.com/medical-cannabis-glossary/logo/460.png",
+      "websiteUrl": "https://releaf.co.uk/medical-cannabis-glossary",
+      "linkUrl": "https://opencollective.com/medical-cannabis-glossary",
+      "socialLogins": {
+        "opencollective": "medical-cannabis-glossary"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Guidebook.BetWinner",
       "type": "User",
       "login": "guidebook_betwinner_com",

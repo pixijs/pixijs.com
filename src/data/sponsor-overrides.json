@@ -8,5 +8,9 @@
     "login": "yarn1",
     "avatarUrl": "/images/sponsors/yarn.webp",
     "linkUrl": "https://www.yarn.so/"
+  },
+  {
+    "login": "medical-cannabis-glossary",
+    "avatarUrl": "/images/sponsors/releaf.webp"
   }
 ]
