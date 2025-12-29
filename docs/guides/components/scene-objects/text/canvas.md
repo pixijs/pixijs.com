@@ -25,7 +25,7 @@ const myText = new Text({
       fill: '#ffffff',
       fontSize: 36,
       fontFamily: 'MyFont',
-    }
+    },
     anchor: 0.5
 });
 
