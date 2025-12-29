@@ -7,20 +7,20 @@ import { Text, TextStyle, Assets } from 'pixi.js';
 
 // Load font before use
 await Assets.load({
-    src: 'my-font.woff2',
-    data: {
-        family: 'MyFont', // optional
-    }
+  src: 'my-font.woff2',
+  data: {
+    family: 'MyFont', // optional
+  },
 });
 
 const myText = new Text({
-    text: 'Hello PixiJS!',
-    style: {
-      fill: '#ffffff',
-      fontSize: 36,
-      fontFamily: 'MyFont',
-    }
-    anchor: 0.5
+  text: 'Hello PixiJS!',
+  style: {
+    fill: '#ffffff',
+    fontSize: 36,
+    fontFamily: 'MyFont',
+  },
+  anchor: 0.5,
 });
 
 app.stage.addChild(myText);
