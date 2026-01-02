@@ -137,23 +137,6 @@
   },
   {
     "sponsor": {
-      "name": "LITSLINK",
-      "type": "Organization",
-      "login": "litslink",
-      "avatarUrl": "https://images.opencollective.com/litslink/c82ffb5/logo/460.png",
-      "websiteUrl": "https://litslink.com",
-      "linkUrl": "https://opencollective.com/litslink",
-      "socialLogins": {
-        "opencollective": "litslink"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
-  },
-  {
-    "sponsor": {
       "name": "Route4Me Route Planner",
       "type": "User",
       "login": "route4me",
