@@ -18,40 +18,6 @@
   },
   {
     "sponsor": {
-      "name": "Guidebook.BetWinner",
-      "type": "User",
-      "login": "guidebook_betwinner_com",
-      "avatarUrl": "https://images.opencollective.com/guidebook_betwinner_com/6babe60/avatar/460.png",
-      "websiteUrl": "https://guidebook.betwinner.com",
-      "linkUrl": "https://opencollective.com/guidebook_betwinner_com",
-      "socialLogins": {
-        "opencollective": "guidebook_betwinner_com"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
-  },
-  {
-    "sponsor": {
-      "name": "Ставки на спорт",
-      "type": "Organization",
-      "login": "stavki-na-sport-ua",
-      "avatarUrl": "https://images.opencollective.com/stavki-na-sport-ua/ecee984/logo/460.png",
-      "websiteUrl": "https://betking.com.ua/sports-book",
-      "linkUrl": "https://opencollective.com/stavki-na-sport-ua",
-      "socialLogins": {
-        "opencollective": "stavki-na-sport-ua"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
-  },
-  {
-    "sponsor": {
       "name": "SEO for igaming sites",
       "type": "User",
       "login": "seo-for-igaming-sites",
@@ -100,23 +66,6 @@
     "monthlyDollars": 1000,
     "privacyLevel": "PUBLIC",
     "tierName": "Gold++ Sponsor"
-  },
-  {
-    "sponsor": {
-      "name": "CryptoCasino Guide - No KYC",
-      "type": "Organization",
-      "login": "cryptocasino-guide-no-kyc",
-      "avatarUrl": "https://images.opencollective.com/cryptocasino-guide-no-kyc/80594b3/logo/460.png",
-      "websiteUrl": "https://cryptocasino-guide.com/casino-sans-kyc",
-      "linkUrl": "https://opencollective.com/cryptocasino-guide-no-kyc",
-      "socialLogins": {
-        "opencollective": "cryptocasino-guide-no-kyc"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
   },
   {
     "sponsor": {
