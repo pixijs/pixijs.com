@@ -137,6 +137,10 @@ const config: Config = {
       {
         redirects: [
           {
+            to: '/llms',
+            from: ['/8.x/llms', '/docs/llms', '/llms/index'],
+          },
+          {
             to: '/8.x/guides/getting-started/intro',
             from: ['/8.x/guides', '/guides'],
           },
@@ -661,8 +665,7 @@ const config: Config = {
                 label: 'Examples',
               },
               {
-                type: 'doc',
-                docId: 'llms/index',
+                to: '/llms',
                 label: 'LLM Docs',
               },
             ],

@@ -1,0 +1,291 @@
+.llmsPage {
+    min-height: 100vh;
+    padding-bottom: 4rem;
+}
+
+/* Hero Section */
+.heroSection {
+    padding: 4rem 1.5rem 2rem;
+    text-align: center;
+}
+
+.heroContent {
+    max-width: 56rem;
+    margin: 0 auto;
+}
+
+.titleRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+    }
+}
+
+.sparklesIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--ifm-color-primary);
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: #6b7280;
+    line-height: 1.75;
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+/* Cards Section */
+.cardsSection {
+    padding: 0 1.5rem 2rem;
+    max-width: 80rem;
+    margin: 0 auto;
+}
+
+.cardsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .cardsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .titleRow h1 {
+        font-size: 3rem;
+    }
+}
+
+.fileCard {
+    display: flex;
+    flex-direction: column;
+}
+
+.cardHeader {
+    padding: 1.5rem 1.5rem 1rem;
+}
+
+.cardTitleRow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.fileName {
+    font-size: 1.25rem;
+    font-weight: 600;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.fileSize {
+    font-size: 0.875rem;
+    color: var(--ifm-color-primary);
+    font-weight: 500;
+}
+
+.cardContent {
+    padding: 0 1.5rem 1.5rem;
+    margin-top: auto;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.downloadButton,
+.viewButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.downloadButton {
+    background: linear-gradient(135deg, var(--ifm-color-primary-lighter) 0%, var(--ifm-color-primary) 100%);
+    color: white;
+
+    &:hover {
+        opacity: 0.9;
+        color: white;
+        text-decoration: none;
+    }
+}
+
+.viewButton {
+    background: transparent;
+    border: 1px solid var(--ifm-table-border-color);
+    color: var(--ifm-font-color-base);
+
+    &:hover {
+        background: var(--ifm-hover-overlay);
+        text-decoration: none;
+    }
+}
+
+.updatedTimestamp {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin-top: 1rem;
+}
+
+/* Explainer Section */
+.explainerSection {
+    padding: 1rem 1.5rem 4rem;
+    max-width: 56rem;
+    margin: 0 auto;
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+}
+
+.explainerText {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #6b7280;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.inlineCode {
+    background: rgba(233, 30, 99, 0.1);
+    color: var(--ifm-color-primary);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875em;
+}
+
+.standardLink {
+    color: var(--ifm-color-primary);
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.fileComparison {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--ifm-hover-overlay);
+    border-radius: 0.75rem;
+    border: 1px solid var(--ifm-table-border-color);
+}
+
+.fileRow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    @media (min-width: 640px) {
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+.fileRowHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+
+    @media (min-width: 640px) {
+        min-width: 10rem;
+    }
+}
+
+.fileRowIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--ifm-color-primary);
+    flex-shrink: 0;
+}
+
+.fileRowName {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ifm-color-primary);
+}
+
+.fileRowDescription {
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Light mode overrides */
+html[data-theme='light'] {
+    .subtitle,
+    .explainerText,
+    .fileRowDescription {
+        color: #4a586b;
+    }
+
+    .fileCard {
+        background-color: white;
+        box-shadow:
+            0 4px 6px -1px rgb(0 0 0 / 0.1),
+            0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+
+    .viewButton {
+        background: white;
+
+        &:hover {
+            background: #f9fafb;
+        }
+    }
+
+    .fileComparison {
+        background: #f9fafb;
+        border-color: #e5e7eb;
+    }
+}
+
+/* Dark mode overrides */
+html[data-theme='dark'] {
+    .subtitle,
+    .explainerText,
+    .fileRowDescription {
+        color: #9ca3af;
+    }
+
+    .updatedTimestamp {
+        color: #6b7280;
+    }
+
+    .fileComparison {
+        background: rgba(255, 255, 255, 0.03);
+    }
+}
