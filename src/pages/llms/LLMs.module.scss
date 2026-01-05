@@ -1,291 +1,518 @@
 .llmsPage {
-    min-height: 100vh;
-    padding-bottom: 4rem;
+  min-height: 100vh;
+  padding-bottom: 4rem;
 }
 
 /* Hero Section */
 .heroSection {
-    padding: 4rem 1.5rem 2rem;
-    text-align: center;
+  padding: 4rem 1.5rem 2rem;
+  text-align: center;
 }
 
 .heroContent {
-    max-width: 56rem;
-    margin: 0 auto;
+  max-width: 56rem;
+  margin: 0 auto;
 }
 
 .titleRow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 
-    h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin: 0;
-    }
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
 }
 
 .sparklesIcon {
-    width: 2.5rem;
-    height: 2.5rem;
-    color: var(--ifm-color-primary);
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--ifm-color-primary);
 }
 
 .subtitle {
-    font-size: 1.125rem;
-    color: #6b7280;
-    line-height: 1.75;
-    max-width: 48rem;
-    margin: 0 auto;
+  font-size: 1.125rem;
+  color: #6b7280;
+  line-height: 1.75;
+  max-width: 48rem;
+  margin: 0 auto;
 }
 
 /* Cards Section */
 .cardsSection {
-    padding: 0 1.5rem 2rem;
-    max-width: 80rem;
-    margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+  max-width: 80rem;
+  margin: 0 auto;
 }
 
 .cardsGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 @media (min-width: 768px) {
-    .cardsGrid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-    .titleRow h1 {
-        font-size: 3rem;
-    }
+  .titleRow h1 {
+    font-size: 3rem;
+  }
 }
 
 .fileCard {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .cardHeader {
-    padding: 1.5rem 1.5rem 1rem;
+  padding: 1.5rem 1.5rem 1rem;
 }
 
 .cardTitleRow {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .fileName {
-    font-size: 1.25rem;
-    font-weight: 600;
-    font-family: 'Roboto Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .fileSize {
-    font-size: 0.875rem;
-    color: var(--ifm-color-primary);
-    font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--ifm-color-primary);
+  font-weight: 500;
 }
 
 .cardContent {
-    padding: 0 1.5rem 1.5rem;
-    margin-top: auto;
+  padding: 0 1.5rem 1.5rem;
+  margin-top: auto;
 }
 
 .buttonGroup {
-    display: flex;
-    gap: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
 }
 
 .downloadButton,
 .viewButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  flex: 1;
 }
 
 .downloadButton {
-    background: linear-gradient(135deg, var(--ifm-color-primary-lighter) 0%, var(--ifm-color-primary) 100%);
-    color: white;
+  background: linear-gradient(135deg, var(--ifm-color-primary-lighter) 0%, var(--ifm-color-primary) 100%);
+  color: white;
 
-    &:hover {
-        opacity: 0.9;
-        color: white;
-        text-decoration: none;
-    }
+  &:hover {
+    opacity: 0.9;
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .viewButton {
-    background: transparent;
-    border: 1px solid var(--ifm-table-border-color);
-    color: var(--ifm-font-color-base);
+  background: transparent;
+  border: 1px solid var(--ifm-table-border-color);
+  color: var(--ifm-font-color-base);
 
-    &:hover {
-        background: var(--ifm-hover-overlay);
-        text-decoration: none;
-    }
+  &:hover {
+    background: var(--ifm-hover-overlay);
+    text-decoration: none;
+  }
 }
 
 .updatedTimestamp {
-    text-align: center;
-    font-size: 0.875rem;
-    color: #9ca3af;
-    margin-top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin-top: 1rem;
 }
 
 /* Explainer Section */
 .explainerSection {
-    padding: 1rem 1.5rem 4rem;
-    max-width: 56rem;
-    margin: 0 auto;
+  padding: 1rem 1.5rem 2rem;
+  max-width: 56rem;
+  margin: 0 auto;
 
-    h2 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        text-align: center;
-    }
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
 }
 
 .explainerText {
-    font-size: 1rem;
-    line-height: 1.75;
-    color: #6b7280;
-    text-align: center;
-    margin-bottom: 2rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .inlineCode {
-    background: rgba(233, 30, 99, 0.1);
-    color: var(--ifm-color-primary);
-    padding: 0.125rem 0.375rem;
-    border-radius: 0.25rem;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 0.875em;
+  background: rgba(233, 30, 99, 0.1);
+  color: var(--ifm-color-primary);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.875em;
 }
 
 .standardLink {
-    color: var(--ifm-color-primary);
-    font-weight: 500;
-    text-decoration: none;
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+  text-decoration: none;
 
-    &:hover {
-        text-decoration: underline;
-    }
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .fileComparison {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: var(--ifm-hover-overlay);
-    border-radius: 0.75rem;
-    border: 1px solid var(--ifm-table-border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--ifm-hover-overlay);
+  border-radius: 0.75rem;
+  border: 1px solid var(--ifm-table-border-color);
 }
 
 .fileRow {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 
-    @media (min-width: 640px) {
-        flex-direction: row;
-        align-items: center;
-        gap: 1rem;
-    }
+  @media (min-width: 640px) {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
 .fileRowHeader {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
 
-    @media (min-width: 640px) {
-        min-width: 10rem;
-    }
+  @media (min-width: 640px) {
+    min-width: 10rem;
+  }
 }
 
 .fileRowIcon {
-    width: 1.25rem;
-    height: 1.25rem;
-    color: var(--ifm-color-primary);
-    flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--ifm-color-primary);
+  flex-shrink: 0;
 }
 
 .fileRowName {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--ifm-color-primary);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
 }
 
 .fileRowDescription {
-    font-size: 0.875rem;
-    color: #6b7280;
-    line-height: 1.5;
-    margin: 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* IDE Integration Section */
+.ideSection {
+  padding: 2rem 1.5rem 4rem;
+  max-width: 80rem;
+  margin: 0 auto;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+}
+
+.ideGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ideCard {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--ifm-table-border-color);
+  background: var(--ifm-hover-overlay);
+}
+
+.ideCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.ideLogo {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.ideCardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.ideCardSection {
+  margin-bottom: 1.25rem;
+
+  &:last-of-type {
+    margin-bottom: 1rem;
+  }
+}
+
+.sectionLabel {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.sectionDescription {
+  font-size: 0.8rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0 0 0.75rem;
+
+  @media (min-width: 768px) {
+    min-height: 2.4rem;
+  }
+}
+
+.filePath {
+  margin-bottom: 0.5rem;
+
+  code {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ifm-color-primary);
+    background: rgba(233, 30, 99, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+}
+
+.codeFallback {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--ifm-code-background);
+  color: var(--ifm-font-color-base);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.codeBlockWrapper {
+  position: relative;
+
+  // Override Docusaurus code block styles
+  :global {
+    .prism-code {
+      font-size: 0.75rem !important;
+      padding: 0.75rem !important;
+      border-radius: 0.5rem !important;
+    }
+
+    pre {
+      margin: 0 !important;
+    }
+
+    .codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module {
+      margin: 0 !important;
+      box-shadow: none !important;
+    }
+
+    [class*='codeBlockContainer'] {
+      margin: 0 !important;
+      box-shadow: none !important;
+    }
+
+    [class*='codeBlockTitle'] {
+      display: none;
+    }
+
+    [class*='copyButton'] {
+      display: none;
+    }
+  }
+}
+
+.copyButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  border-radius: 0.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+
+  &.copied {
+    background: var(--ifm-color-primary);
+    color: white;
+  }
+}
+
+.manualDownloadLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  margin-top: 0.5rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.docsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-decoration: none;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--ifm-table-border-color);
+
+  &:hover {
+    color: var(--ifm-color-primary);
+  }
 }
 
 /* Light mode overrides */
 html[data-theme='light'] {
-    .subtitle,
-    .explainerText,
-    .fileRowDescription {
-        color: #4a586b;
-    }
+  .subtitle,
+  .explainerText,
+  .fileRowDescription,
+  .sectionDescription {
+    color: #4a586b;
+  }
 
-    .fileCard {
-        background-color: white;
-        box-shadow:
-            0 4px 6px -1px rgb(0 0 0 / 0.1),
-            0 2px 4px -2px rgb(0 0 0 / 0.1);
-    }
+  .fileCard {
+    background-color: white;
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
 
-    .viewButton {
-        background: white;
+  .viewButton {
+    background: white;
 
-        &:hover {
-            background: #f9fafb;
-        }
+    &:hover {
+      background: #f9fafb;
     }
+  }
 
-    .fileComparison {
-        background: #f9fafb;
-        border-color: #e5e7eb;
+  .fileComparison {
+    background: #f9fafb;
+    border-color: #e5e7eb;
+  }
+
+  .ideCard {
+    background: white;
+    border-color: #e5e7eb;
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  .copyButton {
+    background: rgba(0, 0, 0, 0.05);
+    color: #6b7280;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+      color: #374151;
     }
+  }
+
+  .docsLink {
+    color: #6b7280;
+  }
 }
 
 /* Dark mode overrides */
 html[data-theme='dark'] {
-    .subtitle,
-    .explainerText,
-    .fileRowDescription {
-        color: #9ca3af;
-    }
+  .subtitle,
+  .explainerText,
+  .fileRowDescription,
+  .sectionDescription {
+    color: #9ca3af;
+  }
 
-    .updatedTimestamp {
-        color: #6b7280;
-    }
+  .updatedTimestamp {
+    color: #6b7280;
+  }
 
-    .fileComparison {
-        background: rgba(255, 255, 255, 0.03);
-    }
+  .fileComparison {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .ideCard {
+    background: rgba(255, 255, 255, 0.03);
+  }
 }

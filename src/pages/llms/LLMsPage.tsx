@@ -1,7 +1,12 @@
-import { Sparkles, Download, ExternalLink, FileText, BookOpen, Code } from 'lucide-react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import CodeBlock from '@theme/CodeBlock';
+import { Sparkles, Download, ExternalLink, FileText, BookOpen, Code, Copy, Check } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import styles from './LLMs.module.scss';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/Sponsor/card/Card';
+import CursorLogo from '@site/static/images/ide-logos/cursor.svg';
+import VSCodeLogo from '@site/static/images/ide-logos/vscode.svg';
+import WindsurfLogo from '@site/static/images/ide-logos/windsurf.svg';
 
 interface FileInfo {
   name: string;
@@ -16,6 +21,86 @@ interface FileMetadata {
   size: number | null;
   lastModified: Date | null;
 }
+
+interface IDESection {
+  title: string;
+  description?: string;
+  filePath?: string;
+  code?: string;
+  language?: string;
+}
+
+interface IDEConfig {
+  name: string;
+  logo: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  docsUrl: string;
+  sections: IDESection[];
+}
+
+const ideConfigs: IDEConfig[] = [
+  {
+    name: 'Cursor',
+    logo: CursorLogo,
+    docsUrl: 'https://docs.cursor.com/context/rules',
+    sections: [
+      {
+        title: 'OPTION 1: PROJECT RULES',
+        description: "Add the documentation to your project's context for AI-assisted coding.",
+        filePath: '.cursor/rules/pixijs.mdc',
+        language: 'yaml',
+        code: `---
+description: PixiJS API
+globs: **/*.{js,ts,jsx,tsx}
+alwaysApply: true
+---
+
+@https://pixijs.com/llms.txt`,
+      },
+      {
+        title: 'OPTION 2: MANUAL CONTEXT',
+        description: 'Download llms.txt and add it to your project, then reference it with @llms.txt in chat.',
+      },
+    ],
+  },
+  {
+    name: 'VS Code + Copilot',
+    logo: VSCodeLogo,
+    docsUrl: 'https://code.visualstudio.com/docs/copilot/customization/custom-instructions',
+    sections: [
+      {
+        title: 'INSTRUCTIONS FILE',
+        description: 'Add custom instructions for GitHub Copilot Chat.',
+        filePath: '.github/copilot-instructions.md',
+        language: 'markdown',
+        code: `# PixiJS Context
+
+When working with PixiJS,
+refer to the API documentation at:
+https://pixijs.com/llms.txt`,
+      },
+    ],
+  },
+  {
+    name: 'Windsurf',
+    logo: WindsurfLogo,
+    docsUrl: 'https://docs.windsurf.com/windsurf/cascade/memories',
+    sections: [
+      {
+        title: 'GLOBAL RULES',
+        description: 'Configure Cascade with PixiJS documentation context.',
+        filePath: '.windsurf/rules/pixijs.md',
+        language: 'markdown',
+        code: `When working with PixiJS, use the
+API reference from:
+https://pixijs.com/llms.txt`,
+      },
+      {
+        title: 'MEMORY',
+        description: "Add llms.txt to Windsurf's Memories for persistent context within sessions.",
+      },
+    ],
+  },
+];
 
 const files: FileInfo[] = [
   {
@@ -69,6 +154,25 @@ function formatDate(date: Date): string {
 const LLMsPage: React.FC = () => {
   const [metadata, setMetadata] = useState<Record<string, FileMetadata>>({});
   const [latestUpdate, setLatestUpdate] = useState<Date | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleCopy = async (id: string, text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    }
+  };
 
   useEffect(() => {
     const fetchMetadata = async () => {
@@ -180,6 +284,60 @@ const LLMsPage: React.FC = () => {
                   <span className={styles.fileRowName}>{file.name}</span>
                 </div>
                 <p className={styles.fileRowDescription}>{file.detailedDescription}</p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* IDE Integration Section */}
+      <section className={styles.ideSection}>
+        <h2>IDE Integration</h2>
+        <div className={styles.ideGrid}>
+          {ideConfigs.map((ide) => {
+            const Logo = ide.logo;
+
+            return (
+              <div key={ide.name} className={styles.ideCard}>
+                <div className={styles.ideCardHeader}>
+                  <Logo className={styles.ideLogo} />
+                  <h3 className={styles.ideCardTitle}>{ide.name}</h3>
+                </div>
+
+                {ide.sections.map((section, sectionIndex) => {
+                  const sectionId = `${ide.name}-${sectionIndex}`;
+
+                  return (
+                    <div key={sectionId} className={styles.ideCardSection}>
+                      <span className={styles.sectionLabel}>{section.title}</span>
+                      {section.description && <p className={styles.sectionDescription}>{section.description}</p>}
+                      {section.filePath && (
+                        <div className={styles.filePath}>
+                          <code>{section.filePath}</code>
+                        </div>
+                      )}
+                      {section.code && (
+                        <div className={styles.codeBlockWrapper}>
+                          <BrowserOnly fallback={<pre className={styles.codeFallback}>{section.code}</pre>}>
+                            {() => <CodeBlock language={section.language}>{section.code}</CodeBlock>}
+                          </BrowserOnly>
+                          <button
+                            className={`${styles.copyButton} ${copiedId === sectionId ? styles.copied : ''}`}
+                            onClick={() => handleCopy(sectionId, section.code!)}
+                            aria-label="Copy code"
+                          >
+                            {copiedId === sectionId ? <Check size={14} /> : <Copy size={14} />}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+
+                <a href={ide.docsUrl} target="_blank" rel="noopener noreferrer" className={styles.docsLink}>
+                  <ExternalLink size={14} />
+                  Learn more
+                </a>
               </div>
             );
           })}
