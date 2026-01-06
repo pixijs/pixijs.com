@@ -1,13 +1,22 @@
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import CodeBlock from '@theme/CodeBlock';
 import { Download, ExternalLink, FileText, BookOpen, Code } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './LLMs.module.scss';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/Sponsor/card/Card';
 import CursorLogo from '@site/static/images/ide-logos/cursor.svg';
 import VSCodeLogo from '@site/static/images/ide-logos/vscode.svg';
 import WindsurfLogo from '@site/static/images/ide-logos/windsurf.svg';
 import ClaudeLogo from '@site/static/images/ide-logos/claude.svg';
+import {
+  cursorProjectRules,
+  vscodeInstructions,
+  windsurfGlobalRules,
+  claudeCodeExample,
+  claudeSlashCommand,
+  claudeInlineContext,
+  chatGptQuickContext,
+} from './constants';
 
 interface FileInfo {
   name: string;
@@ -16,11 +25,6 @@ interface FileInfo {
   detailedDescription: string;
   features: string[];
   icon: React.ElementType;
-}
-
-interface FileMetadata {
-  size: number | null;
-  lastModified: Date | null;
 }
 
 interface IDESection {
@@ -49,13 +53,7 @@ const ideConfigs: IDEConfig[] = [
         description: "Add the documentation to your project's context for AI-assisted coding.",
         filePath: '.cursor/rules/pixijs.mdc',
         language: 'yaml',
-        code: `---
-description: PixiJS API
-globs: **/*.{js,ts,jsx,tsx}
-alwaysApply: true
----
-
-@https://pixijs.com/llms.txt`,
+        code: cursorProjectRules,
       },
       {
         title: 'OPTION 2: MANUAL CONTEXT',
@@ -73,11 +71,7 @@ alwaysApply: true
         description: 'Add custom instructions for GitHub Copilot Chat.',
         filePath: '.github/copilot-instructions.md',
         language: 'markdown',
-        code: `# PixiJS Context
-
-When working with PixiJS,
-refer to the API documentation at:
-https://pixijs.com/llms.txt`,
+        code: vscodeInstructions,
       },
     ],
   },
@@ -91,9 +85,7 @@ https://pixijs.com/llms.txt`,
         description: 'Configure Cascade with PixiJS documentation context.',
         filePath: '.windsurf/rules/pixijs.md',
         language: 'markdown',
-        code: `When working with PixiJS, use the
-API reference from:
-https://pixijs.com/llms.txt`,
+        code: windsurfGlobalRules,
       },
       {
         title: 'MEMORY',
@@ -138,88 +130,7 @@ const files: FileInfo[] = [
   },
 ];
 
-const claudeCodeExample = `# PixiJS Project
-
-## Documentation
-For PixiJS API reference, fetch:
-https://pixijs.com/llms.txt
-
-## Key Patterns
-- Use \`Application\` for quick setup
-- Import from \`pixi.js\`
-- WebGPU renderer available via preference`;
-
-const claudeSlashCommand = `Fetch the PixiJS API documentation from:
-https://pixijs.com/llms.txt
-
-Use this documentation to answer questions
-about PixiJS APIs, patterns, and best practices.`;
-
-const claudeInlineContext = `Using the PixiJS documentation from
-https://pixijs.com/llms-full.txt,
-help me implement a particle system
-with thousands of sprites.`;
-
-const chatGptQuickContext = `Read the PixiJS API docs from
-https://pixijs.com/llms.txt
-and help me create a sprite animation
-with custom easing.`;
-
-function formatFileSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes}B`;
-  if (bytes < 1024 * 1024) return `~${Math.round(bytes / 1024)}KB`;
-  return `~${(bytes / (1024 * 1024)).toFixed(1)}MB`;
-}
-
-function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-}
-
 const LLMsPage: React.FC = () => {
-  const [metadata, setMetadata] = useState<Record<string, FileMetadata>>({});
-  const [latestUpdate, setLatestUpdate] = useState<Date | null>(null);
-
-  useEffect(() => {
-    const fetchMetadata = async () => {
-      const results: Record<string, FileMetadata> = {};
-      let mostRecent: Date | null = null;
-
-      await Promise.all(
-        files.map(async (file) => {
-          try {
-            const response = await fetch(file.path, { method: 'HEAD' });
-            const contentType = response.headers.get('Content-Type') || '';
-            // Only use metadata if we got an actual text file, not an HTML fallback page
-            if (response.ok && contentType.includes('text/plain')) {
-              const size = parseInt(response.headers.get('Content-Length') || '0', 10);
-              const lastModifiedHeader = response.headers.get('Last-Modified');
-              const lastModified = lastModifiedHeader ? new Date(lastModifiedHeader) : null;
-
-              results[file.name] = { size: size || null, lastModified };
-
-              if (lastModified && (!mostRecent || lastModified > mostRecent)) {
-                mostRecent = lastModified;
-              }
-            } else {
-              results[file.name] = { size: null, lastModified: null };
-            }
-          } catch {
-            results[file.name] = { size: null, lastModified: null };
-          }
-        }),
-      );
-
-      setMetadata(results);
-      setLatestUpdate(mostRecent);
-    };
-
-    fetchMetadata();
-  }, []);
-
   return (
     <main className={styles.llmsPage}>
       {/* Hero Section */}
@@ -237,7 +148,6 @@ const LLMsPage: React.FC = () => {
       <section className={styles.cardsSection}>
         <div className={styles.cardsGrid}>
           {files.map((file) => {
-            const meta = metadata[file.name];
             const Icon = file.icon;
 
             return (
@@ -248,7 +158,6 @@ const LLMsPage: React.FC = () => {
                       <Icon className={styles.fileIcon} />
                       <CardTitle className={styles.fileName}>{file.name}</CardTitle>
                     </div>
-                    {meta?.size && <span className={styles.fileSize}>{formatFileSize(meta.size)}</span>}
                   </div>
                   <CardDescription>{file.detailedDescription}</CardDescription>
                 </CardHeader>
@@ -259,7 +168,7 @@ const LLMsPage: React.FC = () => {
                     ))}
                   </ul>
                   <div className={styles.buttonGroup}>
-                    <a href={file.path} download className={styles.downloadButton}>
+                    <a href={file.path} download={file.name} className={styles.downloadButton}>
                       <Download size={16} />
                       Download
                     </a>
@@ -273,7 +182,6 @@ const LLMsPage: React.FC = () => {
             );
           })}
         </div>
-        {latestUpdate && <p className={styles.updatedTimestamp}>Updated: {formatDate(latestUpdate)}</p>}
         <p className={styles.explainerText}>
           <code className={styles.inlineCode}>llms.txt</code> is a{' '}
           <a href="https://llmstxt.org/" target="_blank" rel="noopener noreferrer" className={styles.standardLink}>
