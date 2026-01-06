@@ -1,12 +1,13 @@
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import CodeBlock from '@theme/CodeBlock';
-import { Download, ExternalLink, FileText, BookOpen, Code, Copy, Check } from 'lucide-react';
+import { Download, ExternalLink, FileText, BookOpen, Code } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import styles from './LLMs.module.scss';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/Sponsor/card/Card';
 import CursorLogo from '@site/static/images/ide-logos/cursor.svg';
 import VSCodeLogo from '@site/static/images/ide-logos/vscode.svg';
 import WindsurfLogo from '@site/static/images/ide-logos/windsurf.svg';
+import ClaudeLogo from '@site/static/images/ide-logos/claude.svg';
 
 interface FileInfo {
   name: string;
@@ -137,6 +138,33 @@ const files: FileInfo[] = [
   },
 ];
 
+const claudeCodeExample = `# PixiJS Project
+
+## Documentation
+For PixiJS API reference, fetch:
+https://pixijs.com/llms.txt
+
+## Key Patterns
+- Use \`Application\` for quick setup
+- Import from \`pixi.js\`
+- WebGPU renderer available via preference`;
+
+const claudeSlashCommand = `Fetch the PixiJS API documentation from:
+https://pixijs.com/llms.txt
+
+Use this documentation to answer questions
+about PixiJS APIs, patterns, and best practices.`;
+
+const claudeInlineContext = `Using the PixiJS documentation from
+https://pixijs.com/llms-full.txt,
+help me implement a particle system
+with thousands of sprites.`;
+
+const chatGptQuickContext = `Read the PixiJS API docs from
+https://pixijs.com/llms.txt
+and help me create a sprite animation
+with custom easing.`;
+
 function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes}B`;
   if (bytes < 1024 * 1024) return `~${Math.round(bytes / 1024)}KB`;
@@ -154,25 +182,6 @@ function formatDate(date: Date): string {
 const LLMsPage: React.FC = () => {
   const [metadata, setMetadata] = useState<Record<string, FileMetadata>>({});
   const [latestUpdate, setLatestUpdate] = useState<Date | null>(null);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-
-  const handleCopy = async (id: string, text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopiedId(id);
-      setTimeout(() => setCopiedId(null), 2000);
-    } catch {
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      setCopiedId(id);
-      setTimeout(() => setCopiedId(null), 2000);
-    }
-  };
 
   useEffect(() => {
     const fetchMetadata = async () => {
@@ -289,35 +298,24 @@ const LLMsPage: React.FC = () => {
                   <h3 className={styles.ideCardTitle}>{ide.name}</h3>
                 </div>
 
-                {ide.sections.map((section, sectionIndex) => {
-                  const sectionId = `${ide.name}-${sectionIndex}`;
-
-                  return (
-                    <div key={sectionId} className={styles.ideCardSection}>
-                      <span className={styles.sectionLabel}>{section.title}</span>
-                      {section.description && <p className={styles.sectionDescription}>{section.description}</p>}
-                      {section.filePath && (
-                        <div className={styles.filePath}>
-                          <code>{section.filePath}</code>
-                        </div>
-                      )}
-                      {section.code && (
-                        <div className={styles.codeBlockWrapper}>
-                          <BrowserOnly fallback={<pre className={styles.codeFallback}>{section.code}</pre>}>
-                            {() => <CodeBlock language={section.language}>{section.code}</CodeBlock>}
-                          </BrowserOnly>
-                          <button
-                            className={`${styles.copyButton} ${copiedId === sectionId ? styles.copied : ''}`}
-                            onClick={() => handleCopy(sectionId, section.code!)}
-                            aria-label="Copy code"
-                          >
-                            {copiedId === sectionId ? <Check size={14} /> : <Copy size={14} />}
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                {ide.sections.map((section, sectionIndex) => (
+                  <div key={`${ide.name}-${sectionIndex}`} className={styles.ideCardSection}>
+                    <span className={styles.sectionLabel}>{section.title}</span>
+                    {section.description && <p className={styles.sectionDescription}>{section.description}</p>}
+                    {section.filePath && (
+                      <div className={styles.filePath}>
+                        <code>{section.filePath}</code>
+                      </div>
+                    )}
+                    {section.code && (
+                      <div className={styles.codeBlockWrapper}>
+                        <BrowserOnly fallback={<pre className={styles.codeFallback}>{section.code}</pre>}>
+                          {() => <CodeBlock language={section.language}>{section.code}</CodeBlock>}
+                        </BrowserOnly>
+                      </div>
+                    )}
+                  </div>
+                ))}
 
                 <a href={ide.docsUrl} target="_blank" rel="noopener noreferrer" className={styles.docsLink}>
                   <ExternalLink size={14} />
@@ -326,6 +324,133 @@ const LLMsPage: React.FC = () => {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Claude Code & CLI Tools Section */}
+      <section className={styles.aiSection}>
+        <div className={styles.aiSectionHeader}>
+          <ClaudeLogo className={styles.aiLogo} />
+          <h2>Claude Code / Anthropic CLI</h2>
+        </div>
+        <div className={styles.aiGrid}>
+          <div className={styles.aiCard}>
+            <span className={styles.sectionLabel}>PROJECT INSTRUCTIONS</span>
+            <p className={styles.sectionDescription}>
+              Create <code className={styles.inlineCode}>CLAUDE.md</code> in your project root.
+            </p>
+            <div className={styles.codeBlockWrapper}>
+              <BrowserOnly fallback={<pre className={styles.codeFallback}>{claudeCodeExample}</pre>}>
+                {() => <CodeBlock language="markdown">{claudeCodeExample}</CodeBlock>}
+              </BrowserOnly>
+            </div>
+            <a
+              href="https://docs.anthropic.com/en/docs/claude-code/memory"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.docsLink}
+            >
+              <ExternalLink size={14} />
+              Learn more
+            </a>
+          </div>
+
+          <div className={styles.aiCard}>
+            <span className={styles.sectionLabel}>SLASH COMMAND</span>
+            <p className={styles.sectionDescription}>
+              Create <code className={styles.inlineCode}>.claude/commands/pixi.md</code> for reusable context.
+            </p>
+            <div className={styles.codeBlockWrapper}>
+              <BrowserOnly fallback={<pre className={styles.codeFallback}>{claudeSlashCommand}</pre>}>
+                {() => <CodeBlock language="markdown">{claudeSlashCommand}</CodeBlock>}
+              </BrowserOnly>
+            </div>
+            <p className={styles.noteText}>
+              Invoke with <code className={styles.inlineCode}>/pixi</code> in chat.
+            </p>
+            <a
+              href="https://docs.anthropic.com/en/docs/claude-code/slash-commands"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.docsLink}
+            >
+              <ExternalLink size={14} />
+              Learn more
+            </a>
+          </div>
+
+          <div className={styles.aiCard}>
+            <span className={styles.sectionLabel}>INLINE CONTEXT</span>
+            <p className={styles.sectionDescription}>Fetch docs directly in your prompt.</p>
+            <div className={styles.codeBlockWrapper}>
+              <BrowserOnly fallback={<pre className={styles.codeFallback}>{claudeInlineContext}</pre>}>
+                {() => <CodeBlock language="markdown">{claudeInlineContext}</CodeBlock>}
+              </BrowserOnly>
+            </div>
+            <p className={styles.noteText}>
+              Use <code className={styles.inlineCode}>llms.txt</code> for overview or{' '}
+              <code className={styles.inlineCode}>llms-full.txt</code> for complete API details.
+            </p>
+            <a
+              href="https://docs.anthropic.com/en/docs/claude-code/overview"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.docsLink}
+            >
+              <ExternalLink size={14} />
+              Learn more
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ChatGPT & Web Interfaces Section */}
+      <section className={styles.aiSection}>
+        <h2 className={styles.aiSectionTitle}>ChatGPT & Web Interfaces</h2>
+        <div className={styles.aiGrid}>
+          <div className={styles.aiCard}>
+            <span className={styles.sectionLabel}>Custom GPT</span>
+            <p className={styles.sectionDescription}>Create a custom GPT with PixiJS knowledge:</p>
+            <ol className={styles.stepsList}>
+              <li>
+                Download <code className={styles.inlineCode}>llms.txt</code> from above
+              </li>
+              <li>Go to ChatGPT → Explore GPTs → Create</li>
+              <li>
+                Upload <code className={styles.inlineCode}>llms.txt</code> as a Knowledge file
+              </li>
+              <li>Add instructions to reference the documentation</li>
+            </ol>
+            <a
+              href="https://help.openai.com/en/articles/8554397-creating-a-gpt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.docsLink}
+            >
+              <ExternalLink size={14} />
+              Learn more
+            </a>
+          </div>
+
+          <div className={styles.aiCard}>
+            <span className={styles.sectionLabel}>Quick Context</span>
+            <p className={styles.sectionDescription}>For one-off questions, paste the URL in your prompt.</p>
+            <div className={styles.codeBlockWrapper}>
+              <BrowserOnly fallback={<pre className={styles.codeFallback}>{chatGptQuickContext}</pre>}>
+                {() => <CodeBlock language="markdown">{chatGptQuickContext}</CodeBlock>}
+              </BrowserOnly>
+            </div>
+            <p className={styles.noteText}>Most AI assistants will fetch and parse the documentation automatically.</p>
+            <a
+              href="https://help.openai.com/en/articles/8843948-knowledge-in-gpts"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.docsLink}
+            >
+              <ExternalLink size={14} />
+              Learn more
+            </a>
+          </div>
         </div>
       </section>
     </main>

@@ -7,6 +7,10 @@
   overflow-x: hidden;
 }
 
+.codeBlockWrapper code {
+  white-space: pre-wrap;
+}
+
 /* Hero Section */
 .heroSection {
   padding: 5rem 1.5rem 3rem;
@@ -300,7 +304,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
-  align-items: start;
+  align-items: stretch;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
@@ -434,53 +438,6 @@
     [class*='codeBlockTitle'] {
       display: none;
     }
-
-    [class*='copyButton'] {
-      display: none;
-    }
-  }
-}
-
-.copyButton {
-  position: absolute;
-  top: 0.625rem;
-  right: 0.625rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
-  border: none;
-  border-radius: 0.375rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: #9ca3af;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
-  z-index: 1;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    transform: scale(1.05);
-  }
-
-  &.copied {
-    background: var(--ifm-color-primary);
-    color: white;
-    animation: copy-success 0.3s ease;
-  }
-}
-
-@keyframes copy-success {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.15);
-  }
-  100% {
-    transform: scale(1);
   }
 }
 
@@ -522,12 +479,148 @@
   }
 }
 
+/* AI Integration Sections (Claude Code, ChatGPT) */
+.aiSection {
+  padding: 2rem 1.5rem 3rem;
+  max-width: 76rem;
+  margin: 0 auto;
+  position: relative;
+
+  h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+}
+
+.aiSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+  margin-bottom: 2rem;
+}
+
+.aiSectionTitle {
+  text-align: center;
+  margin-bottom: 2rem !important;
+}
+
+.aiLogo {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+}
+
+.aiGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 380px));
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 380px));
+  }
+}
+
+.aiCard {
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--ifm-table-border-color);
+  background: var(--ifm-hover-overlay);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    border-color: rgba(233, 30, 99, 0.3);
+  }
+
+  // Make code blocks fill available space
+  .codeBlockWrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    :global([class*='codeBlockContainer']),
+    :global(pre) {
+      flex-grow: 1;
+    }
+  }
+
+  // Push note text to bottom
+  .noteText {
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+
+  // Push docsLink to bottom of card with proper border spacing
+  .docsLink {
+    margin-top: auto;
+    padding-top: 2.5rem;
+    position: relative;
+
+    // Pseudo-element creates the border line with space above it
+    &::before {
+      content: '';
+      position: absolute;
+      top: 1.25rem;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--ifm-table-border-color);
+    }
+
+    border-top: none;
+  }
+}
+
+.stepsList {
+  margin: 0;
+  padding-left: 1.5rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.8;
+
+  li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &::marker {
+      color: var(--ifm-color-primary);
+      font-weight: 600;
+    }
+  }
+}
+
+.noteText {
+  font-size: 0.8rem;
+  color: #919bac;
+  margin: 0;
+  line-height: 1.6;
+}
+
 /* Light mode overrides */
 html[data-theme='light'] {
   .subtitle,
   .explainerText,
   .featureList,
-  .sectionDescription {
+  .sectionDescription,
+  .stepsList,
+  .noteText {
     color: #4a586b;
   }
 
@@ -552,7 +645,8 @@ html[data-theme='light'] {
     }
   }
 
-  .ideCard {
+  .ideCard,
+  .aiCard {
     background: white;
     border-color: #e5e7eb;
     box-shadow:
@@ -563,16 +657,6 @@ html[data-theme='light'] {
       box-shadow:
         0 4px 8px rgba(0, 0, 0, 0.08),
         0 12px 24px rgba(0, 0, 0, 0.06);
-    }
-  }
-
-  .copyButton {
-    background: rgba(0, 0, 0, 0.05);
-    color: #6b7280;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.1);
-      color: #374151;
     }
   }
 
@@ -590,15 +674,18 @@ html[data-theme='dark'] {
   .subtitle,
   .explainerText,
   .featureList,
-  .sectionDescription {
+  .sectionDescription,
+  .stepsList {
     color: #9ca3af;
   }
 
-  .updatedTimestamp {
+  .updatedTimestamp,
+  .noteText {
     color: #6b7280;
   }
 
-  .ideCard {
+  .ideCard,
+  .aiCard {
     background: rgba(255, 255, 255, 0.02);
 
     &:hover {
