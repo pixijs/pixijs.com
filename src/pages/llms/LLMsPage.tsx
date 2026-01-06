@@ -1,6 +1,6 @@
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import CodeBlock from '@theme/CodeBlock';
-import { Sparkles, Download, ExternalLink, FileText, BookOpen, Code, Copy, Check } from 'lucide-react';
+import { Download, ExternalLink, FileText, BookOpen, Code, Copy, Check } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import styles from './LLMs.module.scss';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/Sponsor/card/Card';
@@ -216,10 +216,7 @@ const LLMsPage: React.FC = () => {
       {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.heroContent}>
-          <div className={styles.titleRow}>
-            <Sparkles className={styles.sparklesIcon} />
-            <h1 className="underline">LLM Documentation</h1>
-          </div>
+          <h1 className="underline">LLM Documentation</h1>
           <p className={styles.subtitle}>
             Machine-readable API documentation optimized for AI assistants. Use this file to give Claude, ChatGPT,
             Cursor, or other AI tools accurate knowledge about PixiJS.
@@ -229,14 +226,6 @@ const LLMsPage: React.FC = () => {
 
       {/* Download Cards */}
       <section className={styles.cardsSection}>
-        <p className={styles.explainerText}>
-          <code className={styles.inlineCode}>llms.txt</code> is a{' '}
-          <a href="https://llmstxt.org/" target="_blank" rel="noopener noreferrer" className={styles.standardLink}>
-            standardized format
-          </a>{' '}
-          (similar to <code className={styles.inlineCode}>robots.txt</code>) that provides AI assistants with structured
-          documentation about a project.
-        </p>
         <div className={styles.cardsGrid}>
           {files.map((file) => {
             const meta = metadata[file.name];
@@ -276,6 +265,14 @@ const LLMsPage: React.FC = () => {
           })}
         </div>
         {latestUpdate && <p className={styles.updatedTimestamp}>Updated: {formatDate(latestUpdate)}</p>}
+        <p className={styles.explainerText}>
+          <code className={styles.inlineCode}>llms.txt</code> is a{' '}
+          <a href="https://llmstxt.org/" target="_blank" rel="noopener noreferrer" className={styles.standardLink}>
+            standardized format
+          </a>{' '}
+          (similar to <code className={styles.inlineCode}>robots.txt</code>) that provides AI assistants with structured
+          documentation about a project.
+        </p>
       </section>
 
       {/* IDE Integration Section */}
