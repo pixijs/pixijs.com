@@ -1860,6 +1860,132 @@ export declare class ObservablePoint implements PointLike {
 	get y(): number;
 	set y(value: number);
 }
+/**
+ * Global registration system for all PixiJS extensions. Provides a centralized way to add, remove,
+ * and manage functionality across the engine.
+ *
+ * Features:
+ * - Register custom extensions and plugins
+ * - Handle multiple extension types
+ * - Priority-based ordering
+ * @example
+ * ```ts
+ * import { extensions, ExtensionType } from 'pixi.js';
+ *
+ * // Register a simple object extension
+ * extensions.add({
+ *   extension: {
+ *       type: ExtensionType.LoadParser,
+ *       name: 'my-loader',
+ *       priority: 100, // Optional priority for ordering
+ *   },
+ *   // add load parser functions
+ * });
+ *
+ * // Register a class-based extension
+ * class MyRendererPlugin {
+ *     static extension = {
+ *         type: [ExtensionType.WebGLSystem, ExtensionType.WebGPUSystem],
+ *         name: 'myRendererPlugin'
+ *     };
+ *
+ *    // add renderer plugin methods
+ * }
+ * extensions.add(MyRendererPlugin);
+ *
+ * // Remove extensions
+ * extensions.remove(MyRendererPlugin);
+ * ```
+ * @remarks
+ * - Extensions must have a type from {@link ExtensionType}
+ * - Can be registered before or after their handlers
+ * - Supports priority-based ordering
+ * - Automatically normalizes extension formats
+ */
+export declare const extensions: {
+	/**
+	 * Remove extensions from PixiJS.
+	 * @param extensions - Extensions to be removed. Can be:
+	 * - Extension class with static `extension` property
+	 * - Extension format object with `type` and `ref`
+	 * - Multiple extensions as separate arguments
+	 * @returns {extensions} this for chaining
+	 * @example
+	 * ```ts
+	 * // Remove a single extension
+	 * extensions.remove(MyRendererPlugin);
+	 *
+	 * // Remove multiple extensions
+	 * extensions.remove(
+	 *     MyRendererPlugin,
+	 *     MySystemPlugin
+	 * );
+	 * ```
+	 */
+	remove(...extensions: Array<ExtensionFormat | any>): any;
+	/**
+	 * Register new extensions with PixiJS. Extensions can be registered in multiple formats:
+	 * - As a class with a static `extension` property
+	 * - As an extension format object
+	 * - As multiple extensions passed as separate arguments
+	 * @param extensions - Extensions to add to PixiJS. Each can be:
+	 * - A class with static `extension` property
+	 * - An extension format object with `type` and `ref`
+	 * - Multiple extensions as separate arguments
+	 * @returns This extensions instance for chaining
+	 * @example
+	 * ```ts
+	 * // Register a simple extension
+	 * extensions.add(MyRendererPlugin);
+	 *
+	 * // Register multiple extensions
+	 * extensions.add(
+	 *     MyRendererPlugin,
+	 *     MySystemPlugin,
+	 * });
+	 * ```
+	 */
+	add(...extensions: Array<ExtensionFormat | any>): any;
+	/**
+	 * Mixin the source object(s) properties into the target class's prototype.
+	 * Copies all property descriptors from source objects to the target's prototype.
+	 * @param Target - The target class to mix properties into
+	 * @param sources - One or more source objects containing properties to mix in
+	 * @example
+	 * ```ts
+	 * // Create a mixin with shared properties
+	 * const moveable = {
+	 *     x: 0,
+	 *     y: 0,
+	 *     move(x: number, y: number) {
+	 *         this.x += x;
+	 *         this.y += y;
+	 *     }
+	 * };
+	 *
+	 * // Create a mixin with computed properties
+	 * const scalable = {
+	 *     scale: 1,
+	 *     get scaled() {
+	 *         return this.scale > 1;
+	 *     }
+	 * };
+	 *
+	 * // Apply mixins to a class
+	 * extensions.mixin(Sprite, moveable, scalable);
+	 *
+	 * // Use mixed-in properties
+	 * const sprite = new Sprite();
+	 * sprite.move(10, 20);
+	 * console.log(sprite.x, sprite.y); // 10, 20
+	 * ```
+	 * @remarks
+	 * - Copies all properties including getters/setters
+	 * - Does not modify source objects
+	 * - Preserves property descriptors
+	 */
+	mixin(Target: any, ...sources: Parameters<typeof Object.getOwnPropertyDescriptors>[0][]): void;
+};
 declare function earcut(vertices: ArrayLike<number>, holes?: ArrayLike<number>, dimensions?: number): number[];
 /**
  * A simple axis-aligned bounding box (AABB) data structure used to define rectangular boundaries.
@@ -3100,132 +3226,6 @@ export interface TextDestroyOptions {
  */
 export type DestroyOptions = TypeOrBool<BaseDestroyOptions & ContextDestroyOptions & TextureDestroyOptions & TextDestroyOptions>;
 /**
- * Global registration system for all PixiJS extensions. Provides a centralized way to add, remove,
- * and manage functionality across the engine.
- *
- * Features:
- * - Register custom extensions and plugins
- * - Handle multiple extension types
- * - Priority-based ordering
- * @example
- * ```ts
- * import { extensions, ExtensionType } from 'pixi.js';
- *
- * // Register a simple object extension
- * extensions.add({
- *   extension: {
- *       type: ExtensionType.LoadParser,
- *       name: 'my-loader',
- *       priority: 100, // Optional priority for ordering
- *   },
- *   // add load parser functions
- * });
- *
- * // Register a class-based extension
- * class MyRendererPlugin {
- *     static extension = {
- *         type: [ExtensionType.WebGLSystem, ExtensionType.WebGPUSystem],
- *         name: 'myRendererPlugin'
- *     };
- *
- *    // add renderer plugin methods
- * }
- * extensions.add(MyRendererPlugin);
- *
- * // Remove extensions
- * extensions.remove(MyRendererPlugin);
- * ```
- * @remarks
- * - Extensions must have a type from {@link ExtensionType}
- * - Can be registered before or after their handlers
- * - Supports priority-based ordering
- * - Automatically normalizes extension formats
- */
-export declare const extensions: {
-	/**
-	 * Remove extensions from PixiJS.
-	 * @param extensions - Extensions to be removed. Can be:
-	 * - Extension class with static `extension` property
-	 * - Extension format object with `type` and `ref`
-	 * - Multiple extensions as separate arguments
-	 * @returns {extensions} this for chaining
-	 * @example
-	 * ```ts
-	 * // Remove a single extension
-	 * extensions.remove(MyRendererPlugin);
-	 *
-	 * // Remove multiple extensions
-	 * extensions.remove(
-	 *     MyRendererPlugin,
-	 *     MySystemPlugin
-	 * );
-	 * ```
-	 */
-	remove(...extensions: Array<ExtensionFormat | any>): any;
-	/**
-	 * Register new extensions with PixiJS. Extensions can be registered in multiple formats:
-	 * - As a class with a static `extension` property
-	 * - As an extension format object
-	 * - As multiple extensions passed as separate arguments
-	 * @param extensions - Extensions to add to PixiJS. Each can be:
-	 * - A class with static `extension` property
-	 * - An extension format object with `type` and `ref`
-	 * - Multiple extensions as separate arguments
-	 * @returns This extensions instance for chaining
-	 * @example
-	 * ```ts
-	 * // Register a simple extension
-	 * extensions.add(MyRendererPlugin);
-	 *
-	 * // Register multiple extensions
-	 * extensions.add(
-	 *     MyRendererPlugin,
-	 *     MySystemPlugin,
-	 * });
-	 * ```
-	 */
-	add(...extensions: Array<ExtensionFormat | any>): any;
-	/**
-	 * Mixin the source object(s) properties into the target class's prototype.
-	 * Copies all property descriptors from source objects to the target's prototype.
-	 * @param Target - The target class to mix properties into
-	 * @param sources - One or more source objects containing properties to mix in
-	 * @example
-	 * ```ts
-	 * // Create a mixin with shared properties
-	 * const moveable = {
-	 *     x: 0,
-	 *     y: 0,
-	 *     move(x: number, y: number) {
-	 *         this.x += x;
-	 *         this.y += y;
-	 *     }
-	 * };
-	 *
-	 * // Create a mixin with computed properties
-	 * const scalable = {
-	 *     scale: 1,
-	 *     get scaled() {
-	 *         return this.scale > 1;
-	 *     }
-	 * };
-	 *
-	 * // Apply mixins to a class
-	 * extensions.mixin(Sprite, moveable, scalable);
-	 *
-	 * // Use mixed-in properties
-	 * const sprite = new Sprite();
-	 * sprite.move(10, 20);
-	 * console.log(sprite.x, sprite.y); // 10, 20
-	 * ```
-	 * @remarks
-	 * - Copies all properties including getters/setters
-	 * - Does not modify source objects
-	 * - Preserves property descriptors
-	 */
-	mixin(Target: any, ...sources: Parameters<typeof Object.getOwnPropertyDescriptors>[0][]): void;
-};
-/**
  * The wrap modes that are supported by pixi.
  *
  * The wrap mode affects the default wrapping mode of future operations.
@@ -3244,288 +3244,6 @@ export type WRAP_MODE = "clamp-to-edge" | "repeat" | "mirror-repeat";
  * - `linear` is a smooth scaling mode, which interpolates pixels for smoother results.
  */
 export type SCALE_MODE = "nearest" | "linear";
-/**
- * The options that can be passed to a new Texture
- */
-export interface TextureOptions<TextureSourceType extends TextureSource = TextureSource> {
-	/** the underlying texture data that this texture will use  */
-	source?: TextureSourceType;
-	/** optional label, for debugging */
-	label?: string;
-	/** The rectangle frame of the texture to show */
-	frame?: Rectangle;
-	/** The area of original texture */
-	orig?: Rectangle;
-	/** Trimmed rectangle of original texture */
-	trim?: Rectangle;
-	/** Default anchor point used for sprite placement / rotation */
-	defaultAnchor?: {
-		x: number;
-		y: number;
-	};
-	/** Default borders used for 9-slice scaling {@link NineSlicePlane}*/
-	defaultBorders?: TextureBorders;
-	/** indicates how the texture was rotated by texture packer. See {@link groupD8} */
-	rotate?: number;
-	/**
-	 * Set to true if you plan on modifying this texture's frame, UVs, or swapping its source at runtime.
-	 * This is false by default as it improves performance. Generally, it's recommended to create new
-	 * textures and swap those rather than modifying an existing texture's properties unless you are
-	 * working with a dynamic frames.
-	 * Not setting this to true when modifying the texture can lead to visual artifacts.
-	 *
-	 * If this is false and you modify the texture, you can manually update the sprite's texture by calling
-	 * `sprite.onViewUpdate()`.
-	 */
-	dynamic?: boolean;
-}
-/**
- * A texture stores the information that represents an image or part of an image.
- *
- * A texture must have a loaded resource passed to it to work. It does not contain any
- * loading mechanisms.
- *
- * The Assets class can be used to load a texture from a file. This is the recommended
- * way as it will handle the loading and caching for you.
- *
- * ```js
- *
- * const texture = await Assets.load('assets/image.png');
- *
- * // once Assets has loaded the image it will be available via the from method
- * const sameTexture = Texture.from('assets/image.png');
- * // another way to access the texture once loaded
- * const sameAgainTexture = Assets.get('assets/image.png');
- *
- * const sprite1 = new Sprite(texture);
- *
- * ```
- *
- * It cannot be added to the display list directly; instead use it as the texture for a Sprite.
- * If no frame is provided for a texture, then the whole image is used.
- *
- * You can directly create a texture from an image and then reuse it multiple times like this :
- *
- * ```js
- * import { Sprite, Texture } from 'pixi.js';
- *
- * const texture = await Assets.load('assets/image.png');
- * const sprite1 = new Sprite(texture);
- * const sprite2 = new Sprite(texture);
- * ```
- *
- * If you didn't pass the texture frame to constructor, it enables `noFrame` mode:
- * it subscribes on baseTexture events, it automatically resizes at the same time as baseTexture.
- */
-export declare class Texture<TextureSourceType extends TextureSource = TextureSource> extends EventEmitter<{
-	update: Texture;
-	destroy: Texture;
-}> implements BindableTexture {
-	/**
-	 * Helper function that creates a returns Texture based on the source you provide.
-	 * The source should be loaded and ready to go. If not its best to grab the asset using Assets.
-	 * @param id - String or Source to create texture from
-	 * @param skipCache - Skip adding the texture to the cache
-	 * @returns The texture based on the Id provided
-	 */
-	static from: (id: TextureSourceLike, skipCache?: boolean) => Texture;
-	/** label used for debugging */
-	label?: string;
-	/** unique id for this texture */
-	readonly uid: number;
-	/**
-	 * Has the texture been destroyed?
-	 */
-	destroyed: boolean;
-	/**
-	 * Indicates whether the texture is rotated inside the atlas
-	 * set to 2 to compensate for texture packer rotation
-	 * set to 6 to compensate for spine packer rotation
-	 * can be used to rotate or mirror sprites
-	 * See {@link groupD8} for explanation
-	 */
-	readonly rotate: number;
-	/** A uvs object based on the given frame and the texture source */
-	readonly uvs: UVs;
-	/**
-	 * Anchor point that is used as default if sprite is created with this texture.
-	 * Changing the `defaultAnchor` at a later point of time will not update Sprite's anchor point.
-	 * @default {0,0}
-	 */
-	readonly defaultAnchor?: {
-		x: number;
-		y: number;
-	};
-	/**
-	 * Default width of the non-scalable border that is used if 9-slice plane is created with this texture.
-	 * @since 7.2.0
-	 */
-	readonly defaultBorders?: TextureBorders;
-	/**
-	 * This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
-	 * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
-	 */
-	readonly frame: Rectangle;
-	/** This is the area of original texture, before it was put in atlas. */
-	readonly orig: Rectangle;
-	/**
-	 * This is the trimmed area of original texture, before it was put in atlas
-	 * Please call `updateUvs()` after you change coordinates of `trim` manually.
-	 */
-	readonly trim: Rectangle;
-	/**
-	 * Does this Texture have any frame data assigned to it?
-	 *
-	 * This mode is enabled automatically if no frame was passed inside constructor.
-	 *
-	 * In this mode texture is subscribed to baseTexture events, and fires `update` on any change.
-	 *
-	 * Beware, after loading or resize of baseTexture event can fired two times!
-	 * If you want more control, subscribe on baseTexture itself.
-	 * @example
-	 * texture.on('update', () => {});
-	 */
-	noFrame: boolean;
-	/**
-	 * Set to true if you plan on modifying the uvs of this texture.
-	 * When this is the case, sprites and other objects using the texture will
-	 * make sure to listen for changes to the uvs and update their vertices accordingly.
-	 */
-	dynamic: boolean;
-	/** is it a texture? yes! used for type checking */
-	readonly isTexture = true;
-	/**
-	 * @param {TextureOptions} options - Options for the texture
-	 */
-	constructor({ source, label, frame, orig, trim, defaultAnchor, defaultBorders, rotate, dynamic }?: TextureOptions<TextureSourceType>);
-	set source(value: TextureSourceType);
-	/** the underlying source of the texture (equivalent of baseTexture in v7) */
-	get source(): TextureSourceType;
-	/** returns a TextureMatrix instance for this texture. By default, that object is not created because its heavy. */
-	get textureMatrix(): TextureMatrix;
-	/** The width of the Texture in pixels. */
-	get width(): number;
-	/** The height of the Texture in pixels. */
-	get height(): number;
-	/** Call this function when you have modified the frame of this texture. */
-	updateUvs(): void;
-	/**
-	 * Destroys this texture
-	 * @param destroySource - Destroy the source when the texture is destroyed.
-	 */
-	destroy(destroySource?: boolean): void;
-	/**
-	 * Call this if you have modified the `texture outside` of the constructor.
-	 *
-	 * If you have modified this texture's source, you must separately call `texture.source.update()` to see those changes.
-	 */
-	update(): void;
-	/** @deprecated since 8.0.0 */
-	get baseTexture(): TextureSource;
-	/** an Empty Texture used internally by the engine */
-	static EMPTY: Texture;
-	/** a White texture used internally by the engine */
-	static WHITE: Texture<BufferImageSource>;
-}
-/**
- * System that manages the generation of textures from display objects in the renderer.
- * This system is responsible for creating reusable textures from containers, sprites, and other display objects.
- * Available through `renderer.textureGenerator`.
- * @example
- * ```ts
- * import { Application, Sprite, Graphics } from 'pixi.js';
- *
- * const app = new Application();
- * await app.init();
- *
- * // Create a complex display object
- * const container = new Container();
- *
- * const graphics = new Graphics()
- *     .circle(0, 0, 50)
- *     .fill('red');
- *
- * const sprite = new Sprite(texture);
- * sprite.x = 100;
- *
- * container.addChild(graphics, sprite);
- *
- * // Generate a texture from the container
- * const generatedTexture = app.renderer.textureGenerator.generateTexture({
- *     target: container,
- *     resolution: 2,
- *     antialias: true
- * });
- *
- * // Use the generated texture
- * const newSprite = new Sprite(generatedTexture);
- * app.stage.addChild(newSprite);
- *
- * // Clean up when done
- * generatedTexture.destroy(true);
- * ```
- *
- * Features:
- * - Convert any display object to a texture
- * - Support for custom regions and resolutions
- * - Anti-aliasing support
- * - Background color configuration
- * - Texture source options customization
- *
- * Common Use Cases:
- * - Creating texture atlases dynamically
- * - Caching complex container content
- * - Generating thumbnails
- * - Creating reusable textures from rendered content
- *
- * Performance Considerations:
- * - Generating textures is relatively expensive
- * - Cache results when possible
- * - Be mindful of resolution and size
- * - Clean up unused textures
- */
-export declare class GenerateTextureSystem implements System {
-	constructor(renderer: Renderer);
-	/**
-	 * Creates a texture from a display object that can be used for creating sprites and other textures.
-	 * This is particularly useful for optimizing performance when a complex container needs to be reused.
-	 * @param options - Generate texture options or a container to convert to texture
-	 * @returns A new RenderTexture containing the rendered display object
-	 * @example
-	 * ```ts
-	 * // Basic usage with a container
-	 * const container = new Container();
-	 * container.addChild(
-	 *     new Graphics()
-	 *         .circle(0, 0, 50)
-	 *         .fill('red')
-	 * );
-	 *
-	 * const texture = renderer.textureGenerator.generateTexture(container);
-	 *
-	 * // Advanced usage with options
-	 * const texture = renderer.textureGenerator.generateTexture({
-	 *     target: container,
-	 *     frame: new Rectangle(0, 0, 100, 100), // Specific region
-	 *     resolution: 2,                        // High DPI
-	 *     clearColor: '#ff0000',               // Red background
-	 *     antialias: true                      // Smooth edges
-	 * });
-	 *
-	 * // Create a sprite from the generated texture
-	 * const sprite = new Sprite(texture);
-	 *
-	 * // Clean up when done
-	 * texture.destroy(true);
-	 * ```
-	 */
-	generateTexture(options: GenerateTextureOptions | Container): RenderTexture;
-	destroy(): void;
-}
-/**
- * Various blend modes supported by Pixi
- */
-export type BLEND_MODES = "inherit" | "normal" | "add" | "multiply" | "screen" | "darken" | "lighten" | "erase" | "color-dodge" | "color-burn" | "linear-burn" | "linear-dodge" | "linear-light" | "hard-light" | "soft-light" | "pin-light" | "difference" | "exclusion" | "overlay" | "saturation" | "color" | "luminosity" | "normal-npm" | "add-npm" | "screen-npm" | "none" | "subtract" | "divide" | "vivid-light" | "hard-mix" | "negation" | "min" | "max";
 interface ShaderBase {
 	/** The WebGL program used by the WebGL renderer. */
 	glProgram?: GlProgram;
@@ -3557,6 +3275,14 @@ type GpuShaderFromWith = {
 	gpu: GpuProgramOptions;
 	gl?: GlProgramOptions;
 };
+/**
+ * Various blend modes supported by Pixi
+ */
+export type BLEND_MODES = "inherit" | "normal" | "add" | "multiply" | "screen" | "darken" | "lighten" | "erase" | "color-dodge" | "color-burn" | "linear-burn" | "linear-dodge" | "linear-light" | "hard-light" | "soft-light" | "pin-light" | "difference" | "exclusion" | "overlay" | "saturation" | "color" | "luminosity" | "normal-npm" | "add-npm" | "screen-npm" | "none" | "subtract" | "divide" | "vivid-light" | "hard-mix" | "negation" | "min" | "max";
+type OPTIONAL_SPACE = " " | "";
+type FLOPS<T = UniformData> = T extends {
+	value: infer V;
+} ? V : never;
 /**
  * Defines a size with a width and a height.
  */
@@ -3879,432 +3605,6 @@ export declare class Sprite extends ViewContainer<BatchableSprite> {
 	 */
 	setSize(value: number | Optional<Size, "height">, height?: number): void;
 }
-type OPTIONAL_SPACE = " " | "";
-type FLOPS<T = UniformData> = T extends {
-	value: infer V;
-} ? V : never;
-interface System$1 {
-	extension: {
-		name: string;
-	};
-	defaultOptions?: any;
-	new (...args: any): any;
-}
-type SystemsWithExtensionList = System$1[];
-type InstanceType$1<T extends new (...args: any) => any> = T extends new (...args: any) => infer R ? R : any;
-type NameType<T extends SystemsWithExtensionList> = T[number]["extension"]["name"];
-type NotUnknown<T> = T extends unknown ? keyof T extends never ? never : T : T;
-type KnownProperties<T> = {
-	[K in keyof T as NotUnknown<T[K]> extends never ? never : K]: T[K];
-};
-type FlattenOptions<T> = T extends {
-	[K: string]: infer U;
-} ? U : never;
-type OptionsUnion<T extends SystemsWithExtensionList> = FlattenOptions<SeparateOptions<T>>;
-type DefaultOptionsTypes<T extends SystemsWithExtensionList> = {
-	[K in NameType<T>]: Extract<T[number], {
-		extension: {
-			name: K;
-		};
-	}>["defaultOptions"];
-};
-type SeparateOptions<T extends SystemsWithExtensionList> = KnownProperties<DefaultOptionsTypes<T>>;
-type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
-type MaskMode = "pushMaskBegin" | "pushMaskEnd" | "popMaskBegin" | "popMaskEnd";
-declare class AlphaMaskEffect extends FilterEffect implements PoolItem {
-	constructor();
-	get sprite(): Sprite;
-	set sprite(value: Sprite);
-	get inverse(): boolean;
-	set inverse(value: boolean);
-	init: () => void;
-}
-interface MaskConversionTest {
-	test: (item: any) => boolean;
-	maskClass: new (item: any) => Effect & PoolItem;
-}
-type MaskMode$1 = "pushMaskBegin" | "pushMaskEnd" | "popMaskBegin" | "popMaskEnd";
-interface EnsurePrecisionOptions {
-	requestedVertexPrecision: PRECISION;
-	requestedFragmentPrecision: PRECISION;
-	maxSupportedVertexPrecision: PRECISION;
-	maxSupportedFragmentPrecision: PRECISION;
-}
-interface AdvancedBlendInstruction extends Instruction {
-	renderPipeId: "blendMode";
-	blendMode: BLEND_MODES;
-	activeBlend: Renderable[];
-}
-declare const imageTypes: {
-	png: string;
-	jpg: string;
-	webp: string;
-};
-type Formats = keyof typeof imageTypes;
-/**
- * System for exporting content from a renderer. It provides methods to extract content as images,
- * canvases, or raw pixel data. Available through `renderer.extract`.
- * @example
- * ```ts
- * import { Application, Graphics } from 'pixi.js';
- *
- * // Create a new application
- * const app = new Application();
- * await app.init();
- *
- * // Draw something to extract
- * const graphics = new Graphics()
- *     .circle(0, 0, 50)
- *     .fill(0xFF0000);
- *
- * // Basic extraction examples
- * const image = await app.renderer.extract.image(graphics);    // As IImage (HTMLImageElement)
- * const canvas = app.renderer.extract.canvas(graphics);        // As Canvas
- * const pixels = app.renderer.extract.pixels(graphics);        // As pixel data
- * const base64 = await app.renderer.extract.base64(graphics); // As base64 string
- *
- * // Advanced extraction with options
- * const customImage = await app.renderer.extract.image({
- *     target: graphics,
- *     format: 'png',
- *     resolution: 2,
- *     frame: new Rectangle(0, 0, 100, 100),
- *     clearColor: '#00000000'
- * });
- *
- * // Download content
- * app.renderer.extract.download({
- *     target: graphics,
- *     filename: 'my-image.png'
- * });
- *
- * // Debug visualization
- * app.renderer.extract.log(graphics);
- * ```
- *
- * Features:
- * - Extract as various formats (PNG, JPEG, WebP)
- * - Control output quality and resolution
- * - Extract specific regions
- * - Download extracted content
- * - Debug visualization
- *
- * Common Use Cases:
- * - Creating thumbnails
- * - Saving game screenshots
- * - Processing visual content
- * - Debugging renders
- * - Creating textures from rendered content
- *
- * Performance Considerations:
- * - Extraction operations are relatively expensive
- * - Consider caching results for frequently used content
- * - Be mindful of resolution and format choices
- * - Large extractions may impact performance
- */
-export declare class ExtractSystem implements System {
-	/**
-	 * Default options for image extraction.
-	 * @example
-	 * ```ts
-	 * // Customize default options
-	 * ExtractSystem.defaultImageOptions.format = 'webp';
-	 * ExtractSystem.defaultImageOptions.quality = 0.8;
-	 *
-	 * // Use defaults
-	 * const image = await renderer.extract.image(sprite);
-	 * ```
-	 */
-	static defaultImageOptions: ImageOptions;
-	/** @param renderer - The renderer this System works for. */
-	constructor(renderer: Renderer);
-	/**
-	 * Creates an IImage from a display object or texture.
-	 * @param options - Options for creating the image, or the target to extract
-	 * @returns Promise that resolves with the generated IImage
-	 * @example
-	 * ```ts
-	 * // Basic usage with a sprite
-	 * const sprite = new Sprite(texture);
-	 * const image = await renderer.extract.image(sprite);
-	 * document.body.appendChild(image);
-	 *
-	 * // Advanced usage with options
-	 * const image = await renderer.extract.image({
-	 *     target: container,
-	 *     format: 'webp',
-	 *     quality: 0.8,
-	 *     frame: new Rectangle(0, 0, 100, 100),
-	 *     resolution: 2,
-	 *     clearColor: '#ff0000',
-	 *     antialias: true
-	 * });
-	 *
-	 * // Extract directly from a texture
-	 * const texture = Texture.from('myTexture.png');
-	 * const image = await renderer.extract.image(texture);
-	 * ```
-	 */
-	image(options: ExtractImageOptions | Container | Texture): Promise<ImageLike>;
-	/**
-	 * Converts the target into a base64 encoded string.
-	 *
-	 * This method works by first creating
-	 * a canvas using `Extract.canvas` and then converting it to a base64 string.
-	 * @param options - The options for creating the base64 string, or the target to extract
-	 * @returns Promise that resolves with the base64 encoded string
-	 * @example
-	 * ```ts
-	 * // Basic usage with a sprite
-	 * const sprite = new Sprite(texture);
-	 * const base64 = await renderer.extract.base64(sprite);
-	 * console.log(base64); // data:image/png;base64,...
-	 *
-	 * // Advanced usage with options
-	 * const base64 = await renderer.extract.base64({
-	 *     target: container,
-	 *     format: 'webp',
-	 *     quality: 0.8,
-	 *     frame: new Rectangle(0, 0, 100, 100),
-	 *     resolution: 2
-	 * });
-	 * ```
-	 * @throws Will throw an error if the platform doesn't support any of:
-	 * - ICanvas.toDataURL
-	 * - ICanvas.toBlob
-	 * - ICanvas.convertToBlob
-	 */
-	base64(options: ExtractImageOptions | Container | Texture): Promise<string>;
-	/**
-	 * Creates a Canvas element, renders the target to it and returns it.
-	 * This method is useful for creating static images or when you need direct canvas access.
-	 * @param options - The options for creating the canvas, or the target to extract
-	 * @returns A Canvas element with the texture rendered on
-	 * @example
-	 * ```ts
-	 * // Basic canvas extraction from a sprite
-	 * const sprite = new Sprite(texture);
-	 * const canvas = renderer.extract.canvas(sprite);
-	 * document.body.appendChild(canvas);
-	 *
-	 * // Extract with custom region
-	 * const canvas = renderer.extract.canvas({
-	 *     target: container,
-	 *     frame: new Rectangle(0, 0, 100, 100)
-	 * });
-	 *
-	 * // Extract with high resolution
-	 * const canvas = renderer.extract.canvas({
-	 *     target: sprite,
-	 *     resolution: 2,
-	 *     clearColor: '#ff0000'
-	 * });
-	 *
-	 * // Extract directly from a texture
-	 * const texture = Texture.from('myTexture.png');
-	 * const canvas = renderer.extract.canvas(texture);
-	 *
-	 * // Extract with anti-aliasing
-	 * const canvas = renderer.extract.canvas({
-	 *     target: graphics,
-	 *     antialias: true
-	 * });
-	 * ```
-	 */
-	canvas(options: ExtractOptions | Container | Texture): ICanvas;
-	/**
-	 * Returns a one-dimensional array containing the pixel data of the entire texture in RGBA order,
-	 * with integer values between 0 and 255 (inclusive).
-	 * > [!NOE] The returned array is a flat Uint8Array where every 4 values represent RGBA
-	 * @param options - The options for extracting the image, or the target to extract
-	 * @returns One-dimensional Uint8Array containing the pixel data in RGBA format
-	 * @example
-	 * ```ts
-	 * // Basic pixel extraction
-	 * const sprite = new Sprite(texture);
-	 * const pixels = renderer.extract.pixels(sprite);
-	 * console.log(pixels[0], pixels[1], pixels[2], pixels[3]); // R,G,B,A values
-	 *
-	 * // Extract with custom region
-	 * const pixels = renderer.extract.pixels({
-	 *     target: sprite,
-	 *     frame: new Rectangle(0, 0, 100, 100)
-	 * });
-	 *
-	 * // Extract with high resolution
-	 * const pixels = renderer.extract.pixels({
-	 *     target: sprite,
-	 *     resolution: 2
-	 * });
-	 * ```
-	 */
-	pixels(options: ExtractOptions | Container | Texture): GetPixelsOutput;
-	/**
-	 * Creates a texture from a display object or existing texture.
-	 *
-	 * This is useful for creating
-	 * reusable textures from rendered content or making copies of existing textures.
-	 * > [!NOTE] The returned texture should be destroyed when no longer needed
-	 * @param options - The options for creating the texture, or the target to extract
-	 * @returns A new texture containing the extracted content
-	 * @example
-	 * ```ts
-	 * // Basic texture extraction from a sprite
-	 * const sprite = new Sprite(texture);
-	 * const extractedTexture = renderer.extract.texture(sprite);
-	 *
-	 * // Extract with custom region
-	 * const regionTexture = renderer.extract.texture({
-	 *     target: container,
-	 *     frame: new Rectangle(0, 0, 100, 100)
-	 * });
-	 *
-	 * // Extract with high resolution
-	 * const hiResTexture = renderer.extract.texture({
-	 *     target: sprite,
-	 *     resolution: 2,
-	 *     clearColor: '#ff0000'
-	 * });
-	 *
-	 * // Create a new sprite from extracted texture
-	 * const newSprite = new Sprite(
-	 *     renderer.extract.texture({
-	 *         target: graphics,
-	 *         antialias: true
-	 *     })
-	 * );
-	 *
-	 * // Clean up when done
-	 * extractedTexture.destroy(true);
-	 * ```
-	 */
-	texture(options: ExtractOptions | Container | Texture): Texture;
-	/**
-	 * Extracts and downloads content from the renderer as an image file.
-	 * This is a convenient way to save screenshots or export rendered content.
-	 * > [!NOTE] The download will use PNG format regardless of the filename extension
-	 * @param options - The options for downloading and extracting the image, or the target to extract
-	 * @example
-	 * ```ts
-	 * // Basic download with default filename
-	 * const sprite = new Sprite(texture);
-	 * renderer.extract.download(sprite); // Downloads as 'image.png'
-	 *
-	 * // Download with custom filename
-	 * renderer.extract.download({
-	 *     target: sprite,
-	 *     filename: 'screenshot.png'
-	 * });
-	 *
-	 * // Download with custom region
-	 * renderer.extract.download({
-	 *     target: container,
-	 *     filename: 'region.png',
-	 *     frame: new Rectangle(0, 0, 100, 100)
-	 * });
-	 *
-	 * // Download with high resolution and background
-	 * renderer.extract.download({
-	 *     target: stage,
-	 *     filename: 'hd-screenshot.png',
-	 *     resolution: 2,
-	 *     clearColor: '#ff0000'
-	 * });
-	 *
-	 * // Download with anti-aliasing
-	 * renderer.extract.download({
-	 *     target: graphics,
-	 *     filename: 'smooth.png',
-	 *     antialias: true
-	 * });
-	 * ```
-	 */
-	download(options: ExtractDownloadOptions | Container | Texture): void;
-	destroy(): void;
-}
-interface UniformParserDefinition {
-	type: UNIFORM_TYPES;
-	test(data: UniformData): boolean;
-	ubo?: string;
-	uboWgsl?: string;
-	uboStd40?: string;
-	uniform?: string;
-}
-declare const DefaultWebGPUSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GpuUboSystem | typeof GpuEncoderSystem | typeof GpuDeviceSystem | typeof GpuLimitsSystem | typeof GpuBufferSystem | typeof GpuTextureSystem | typeof GpuRenderTargetSystem | typeof GpuShaderSystem | typeof GpuStateSystem | typeof PipelineSystem | typeof GpuColorMaskSystem | typeof GpuStencilSystem | typeof BindGroupSystem)[];
-declare const DefaultWebGPUPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof StencilMaskPipe | typeof ColorMaskPipe | typeof CustomRenderPipe | typeof GpuUniformBatchPipe)[];
-/**
- * The default WebGPU systems. These are the systems that are added by default to the WebGPURenderer.
- */
-export type WebGPUSystems = ExtractSystemTypes<typeof DefaultWebGPUSystems> & PixiMixins.RendererSystems & PixiMixins.WebGPUSystems;
-/**
- * Options for WebGPURenderer.
- */
-export interface WebGPUOptions extends SharedRendererOptions, ExtractRendererOptions<typeof DefaultWebGPUSystems>, PixiMixins.WebGPUOptions {
-}
-export interface WebGPURenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<WebGPUPipes, WebGPUOptions, T>, WebGPUSystems {
-}
-/**
- * The WebGPU PixiJS Renderer. This renderer allows you to use the next-generation graphics API, WebGPU.
- * ```ts
- * // Create a new renderer
- * const renderer = new WebGPURenderer();
- * await renderer.init();
- *
- * // Add the renderer to the stage
- * document.body.appendChild(renderer.canvas);
- *
- * // Create a new stage
- * const stage = new Container();
- *
- * // Render the stage
- * renderer.render(stage);
- * ```
- *
- * You can use {@link autoDetectRenderer} to create a renderer that will automatically detect the best
- * renderer for the environment.
- * ```ts
- * import { autoDetectRenderer } from 'pixi.js';
- * // Create a new renderer
- * const renderer = await autoDetectRenderer();
- * ```
- *
- * The renderer is composed of systems that manage specific tasks. The following systems are added by default
- * whenever you create a WebGPU renderer:
- *
- * | WebGPU Core Systems                      | Systems that are specific to the WebGL renderer                               |
- * | ---------------------------------------- | ----------------------------------------------------------------------------- |
- * | {@link GpuUboSystem}           | This manages WebGPU uniform buffer objects feature for shaders                |
- * | {@link GpuEncoderSystem}       | This manages the WebGPU command encoder                                       |
- * | {@link GpuDeviceSystem}        | This manages the WebGPU Device and its extensions                             |
- * | {@link GpuBufferSystem}        | This manages buffers and their GPU resources, keeps everything in sync        |
- * | {@link GpuTextureSystem}       | This manages textures and their GPU resources, keeps everything in sync       |
- * | {@link GpuRenderTargetSystem}  | This manages what we render too. For example the screen, or another texture   |
- * | {@link GpuShaderSystem}        | This manages shaders, programs that run on the GPU to output lovely pixels    |
- * | {@link GpuStateSystem}         | This manages the state of the WebGPU Pipelines. eg the various flags that can be set blend modes / depthTesting etc |
- * | {@link PipelineSystem}         | This manages the WebGPU pipelines, used for rendering                         |
- * | {@link GpuColorMaskSystem}     | This manages the color mask. Used for color masking                           |
- * | {@link GpuStencilSystem}       | This manages the stencil buffer. Used primarily for masking                   |
- * | {@link BindGroupSystem}        | This manages the WebGPU bind groups. this is how data is bound to a shader when rendering |
- *
- * The breadth of the API surface provided by the renderer is contained within these systems.
- * @property {GpuUboSystem} ubo - UboSystem instance.
- * @property {GpuEncoderSystem} encoder - EncoderSystem instance.
- * @property {GpuDeviceSystem} device - DeviceSystem instance.
- * @property {GpuBufferSystem} buffer - BufferSystem instance.
- * @property {GpuTextureSystem} texture - TextureSystem instance.
- * @property {GpuRenderTargetSystem} renderTarget - RenderTargetSystem instance.
- * @property {GpuShaderSystem} shader - ShaderSystem instance.
- * @property {GpuStateSystem} state - StateSystem instance.
- * @property {PipelineSystem} pipeline - PipelineSystem instance.
- * @property {GpuColorMaskSystem} colorMask - ColorMaskSystem instance.
- * @property {GpuStencilSystem} stencil - StencilSystem instance.
- * @property {BindGroupSystem} bindGroup - BindGroupSystem instance.
- */
-export declare class WebGPURenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<WebGPUPipes, WebGPUOptions, T> implements WebGPUSystems {
-	/** The WebGPU Device. */
-	gpu: GPU$1;
-	constructor();
-}
 /**
  * Automatically determines the most appropriate renderer for the current environment.
  *
@@ -4602,6 +3902,706 @@ declare global {
 	var __PIXI_APP_INIT__: undefined | ((arg: Application | Renderer, version: string) => void);
 	var __PIXI_RENDERER_INIT__: undefined | ((arg: Application | Renderer, version: string) => void);
 }
+type MaskMode = "pushMaskBegin" | "pushMaskEnd" | "popMaskBegin" | "popMaskEnd";
+declare class AlphaMaskEffect extends FilterEffect implements PoolItem {
+	constructor();
+	get sprite(): Sprite;
+	set sprite(value: Sprite);
+	get inverse(): boolean;
+	set inverse(value: boolean);
+	init: () => void;
+}
+type MaskMode$1 = "pushMaskBegin" | "pushMaskEnd" | "popMaskBegin" | "popMaskEnd";
+interface AdvancedBlendInstruction extends Instruction {
+	renderPipeId: "blendMode";
+	blendMode: BLEND_MODES;
+	activeBlend: Renderable[];
+}
+declare const imageTypes: {
+	png: string;
+	jpg: string;
+	webp: string;
+};
+type Formats = keyof typeof imageTypes;
+/**
+ * System for exporting content from a renderer. It provides methods to extract content as images,
+ * canvases, or raw pixel data. Available through `renderer.extract`.
+ * @example
+ * ```ts
+ * import { Application, Graphics } from 'pixi.js';
+ *
+ * // Create a new application
+ * const app = new Application();
+ * await app.init();
+ *
+ * // Draw something to extract
+ * const graphics = new Graphics()
+ *     .circle(0, 0, 50)
+ *     .fill(0xFF0000);
+ *
+ * // Basic extraction examples
+ * const image = await app.renderer.extract.image(graphics);    // As IImage (HTMLImageElement)
+ * const canvas = app.renderer.extract.canvas(graphics);        // As Canvas
+ * const pixels = app.renderer.extract.pixels(graphics);        // As pixel data
+ * const base64 = await app.renderer.extract.base64(graphics); // As base64 string
+ *
+ * // Advanced extraction with options
+ * const customImage = await app.renderer.extract.image({
+ *     target: graphics,
+ *     format: 'png',
+ *     resolution: 2,
+ *     frame: new Rectangle(0, 0, 100, 100),
+ *     clearColor: '#00000000'
+ * });
+ *
+ * // Download content
+ * app.renderer.extract.download({
+ *     target: graphics,
+ *     filename: 'my-image.png'
+ * });
+ *
+ * // Debug visualization
+ * app.renderer.extract.log(graphics);
+ * ```
+ *
+ * Features:
+ * - Extract as various formats (PNG, JPEG, WebP)
+ * - Control output quality and resolution
+ * - Extract specific regions
+ * - Download extracted content
+ * - Debug visualization
+ *
+ * Common Use Cases:
+ * - Creating thumbnails
+ * - Saving game screenshots
+ * - Processing visual content
+ * - Debugging renders
+ * - Creating textures from rendered content
+ *
+ * Performance Considerations:
+ * - Extraction operations are relatively expensive
+ * - Consider caching results for frequently used content
+ * - Be mindful of resolution and format choices
+ * - Large extractions may impact performance
+ */
+export declare class ExtractSystem implements System {
+	/**
+	 * Default options for image extraction.
+	 * @example
+	 * ```ts
+	 * // Customize default options
+	 * ExtractSystem.defaultImageOptions.format = 'webp';
+	 * ExtractSystem.defaultImageOptions.quality = 0.8;
+	 *
+	 * // Use defaults
+	 * const image = await renderer.extract.image(sprite);
+	 * ```
+	 */
+	static defaultImageOptions: ImageOptions;
+	/** @param renderer - The renderer this System works for. */
+	constructor(renderer: Renderer);
+	/**
+	 * Creates an IImage from a display object or texture.
+	 * @param options - Options for creating the image, or the target to extract
+	 * @returns Promise that resolves with the generated IImage
+	 * @example
+	 * ```ts
+	 * // Basic usage with a sprite
+	 * const sprite = new Sprite(texture);
+	 * const image = await renderer.extract.image(sprite);
+	 * document.body.appendChild(image);
+	 *
+	 * // Advanced usage with options
+	 * const image = await renderer.extract.image({
+	 *     target: container,
+	 *     format: 'webp',
+	 *     quality: 0.8,
+	 *     frame: new Rectangle(0, 0, 100, 100),
+	 *     resolution: 2,
+	 *     clearColor: '#ff0000',
+	 *     antialias: true
+	 * });
+	 *
+	 * // Extract directly from a texture
+	 * const texture = Texture.from('myTexture.png');
+	 * const image = await renderer.extract.image(texture);
+	 * ```
+	 */
+	image(options: ExtractImageOptions | Container | Texture): Promise<ImageLike>;
+	/**
+	 * Converts the target into a base64 encoded string.
+	 *
+	 * This method works by first creating
+	 * a canvas using `Extract.canvas` and then converting it to a base64 string.
+	 * @param options - The options for creating the base64 string, or the target to extract
+	 * @returns Promise that resolves with the base64 encoded string
+	 * @example
+	 * ```ts
+	 * // Basic usage with a sprite
+	 * const sprite = new Sprite(texture);
+	 * const base64 = await renderer.extract.base64(sprite);
+	 * console.log(base64); // data:image/png;base64,...
+	 *
+	 * // Advanced usage with options
+	 * const base64 = await renderer.extract.base64({
+	 *     target: container,
+	 *     format: 'webp',
+	 *     quality: 0.8,
+	 *     frame: new Rectangle(0, 0, 100, 100),
+	 *     resolution: 2
+	 * });
+	 * ```
+	 * @throws Will throw an error if the platform doesn't support any of:
+	 * - ICanvas.toDataURL
+	 * - ICanvas.toBlob
+	 * - ICanvas.convertToBlob
+	 */
+	base64(options: ExtractImageOptions | Container | Texture): Promise<string>;
+	/**
+	 * Creates a Canvas element, renders the target to it and returns it.
+	 * This method is useful for creating static images or when you need direct canvas access.
+	 * @param options - The options for creating the canvas, or the target to extract
+	 * @returns A Canvas element with the texture rendered on
+	 * @example
+	 * ```ts
+	 * // Basic canvas extraction from a sprite
+	 * const sprite = new Sprite(texture);
+	 * const canvas = renderer.extract.canvas(sprite);
+	 * document.body.appendChild(canvas);
+	 *
+	 * // Extract with custom region
+	 * const canvas = renderer.extract.canvas({
+	 *     target: container,
+	 *     frame: new Rectangle(0, 0, 100, 100)
+	 * });
+	 *
+	 * // Extract with high resolution
+	 * const canvas = renderer.extract.canvas({
+	 *     target: sprite,
+	 *     resolution: 2,
+	 *     clearColor: '#ff0000'
+	 * });
+	 *
+	 * // Extract directly from a texture
+	 * const texture = Texture.from('myTexture.png');
+	 * const canvas = renderer.extract.canvas(texture);
+	 *
+	 * // Extract with anti-aliasing
+	 * const canvas = renderer.extract.canvas({
+	 *     target: graphics,
+	 *     antialias: true
+	 * });
+	 * ```
+	 */
+	canvas(options: ExtractOptions | Container | Texture): ICanvas;
+	/**
+	 * Returns a one-dimensional array containing the pixel data of the entire texture in RGBA order,
+	 * with integer values between 0 and 255 (inclusive).
+	 * > [!NOE] The returned array is a flat Uint8Array where every 4 values represent RGBA
+	 * @param options - The options for extracting the image, or the target to extract
+	 * @returns One-dimensional Uint8Array containing the pixel data in RGBA format
+	 * @example
+	 * ```ts
+	 * // Basic pixel extraction
+	 * const sprite = new Sprite(texture);
+	 * const pixels = renderer.extract.pixels(sprite);
+	 * console.log(pixels[0], pixels[1], pixels[2], pixels[3]); // R,G,B,A values
+	 *
+	 * // Extract with custom region
+	 * const pixels = renderer.extract.pixels({
+	 *     target: sprite,
+	 *     frame: new Rectangle(0, 0, 100, 100)
+	 * });
+	 *
+	 * // Extract with high resolution
+	 * const pixels = renderer.extract.pixels({
+	 *     target: sprite,
+	 *     resolution: 2
+	 * });
+	 * ```
+	 */
+	pixels(options: ExtractOptions | Container | Texture): GetPixelsOutput;
+	/**
+	 * Creates a texture from a display object or existing texture.
+	 *
+	 * This is useful for creating
+	 * reusable textures from rendered content or making copies of existing textures.
+	 * > [!NOTE] The returned texture should be destroyed when no longer needed
+	 * @param options - The options for creating the texture, or the target to extract
+	 * @returns A new texture containing the extracted content
+	 * @example
+	 * ```ts
+	 * // Basic texture extraction from a sprite
+	 * const sprite = new Sprite(texture);
+	 * const extractedTexture = renderer.extract.texture(sprite);
+	 *
+	 * // Extract with custom region
+	 * const regionTexture = renderer.extract.texture({
+	 *     target: container,
+	 *     frame: new Rectangle(0, 0, 100, 100)
+	 * });
+	 *
+	 * // Extract with high resolution
+	 * const hiResTexture = renderer.extract.texture({
+	 *     target: sprite,
+	 *     resolution: 2,
+	 *     clearColor: '#ff0000'
+	 * });
+	 *
+	 * // Create a new sprite from extracted texture
+	 * const newSprite = new Sprite(
+	 *     renderer.extract.texture({
+	 *         target: graphics,
+	 *         antialias: true
+	 *     })
+	 * );
+	 *
+	 * // Clean up when done
+	 * extractedTexture.destroy(true);
+	 * ```
+	 */
+	texture(options: ExtractOptions | Container | Texture): Texture;
+	/**
+	 * Extracts and downloads content from the renderer as an image file.
+	 * This is a convenient way to save screenshots or export rendered content.
+	 * > [!NOTE] The download will use PNG format regardless of the filename extension
+	 * @param options - The options for downloading and extracting the image, or the target to extract
+	 * @example
+	 * ```ts
+	 * // Basic download with default filename
+	 * const sprite = new Sprite(texture);
+	 * renderer.extract.download(sprite); // Downloads as 'image.png'
+	 *
+	 * // Download with custom filename
+	 * renderer.extract.download({
+	 *     target: sprite,
+	 *     filename: 'screenshot.png'
+	 * });
+	 *
+	 * // Download with custom region
+	 * renderer.extract.download({
+	 *     target: container,
+	 *     filename: 'region.png',
+	 *     frame: new Rectangle(0, 0, 100, 100)
+	 * });
+	 *
+	 * // Download with high resolution and background
+	 * renderer.extract.download({
+	 *     target: stage,
+	 *     filename: 'hd-screenshot.png',
+	 *     resolution: 2,
+	 *     clearColor: '#ff0000'
+	 * });
+	 *
+	 * // Download with anti-aliasing
+	 * renderer.extract.download({
+	 *     target: graphics,
+	 *     filename: 'smooth.png',
+	 *     antialias: true
+	 * });
+	 * ```
+	 */
+	download(options: ExtractDownloadOptions | Container | Texture): void;
+	destroy(): void;
+}
+interface MaskConversionTest {
+	test: (item: any) => boolean;
+	maskClass: new (item: any) => Effect & PoolItem;
+}
+interface EnsurePrecisionOptions {
+	requestedVertexPrecision: PRECISION;
+	requestedFragmentPrecision: PRECISION;
+	maxSupportedVertexPrecision: PRECISION;
+	maxSupportedFragmentPrecision: PRECISION;
+}
+interface UniformParserDefinition {
+	type: UNIFORM_TYPES;
+	test(data: UniformData): boolean;
+	ubo?: string;
+	uboWgsl?: string;
+	uboStd40?: string;
+	uniform?: string;
+}
+interface System$1 {
+	extension: {
+		name: string;
+	};
+	defaultOptions?: any;
+	new (...args: any): any;
+}
+type SystemsWithExtensionList = System$1[];
+type InstanceType$1<T extends new (...args: any) => any> = T extends new (...args: any) => infer R ? R : any;
+type NameType<T extends SystemsWithExtensionList> = T[number]["extension"]["name"];
+type NotUnknown<T> = T extends unknown ? keyof T extends never ? never : T : T;
+type KnownProperties<T> = {
+	[K in keyof T as NotUnknown<T[K]> extends never ? never : K]: T[K];
+};
+type FlattenOptions<T> = T extends {
+	[K: string]: infer U;
+} ? U : never;
+type OptionsUnion<T extends SystemsWithExtensionList> = FlattenOptions<SeparateOptions<T>>;
+type DefaultOptionsTypes<T extends SystemsWithExtensionList> = {
+	[K in NameType<T>]: Extract<T[number], {
+		extension: {
+			name: K;
+		};
+	}>["defaultOptions"];
+};
+type SeparateOptions<T extends SystemsWithExtensionList> = KnownProperties<DefaultOptionsTypes<T>>;
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
+declare const DefaultWebGPUSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof GCSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GpuUboSystem | typeof GpuEncoderSystem | typeof GpuDeviceSystem | typeof GpuLimitsSystem | typeof GpuBufferSystem | typeof GpuTextureSystem | typeof GpuRenderTargetSystem | typeof GpuShaderSystem | typeof GpuStateSystem | typeof PipelineSystem | typeof GpuColorMaskSystem | typeof GpuStencilSystem | typeof BindGroupSystem)[];
+declare const DefaultWebGPUPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof StencilMaskPipe | typeof ColorMaskPipe | typeof CustomRenderPipe | typeof GpuUniformBatchPipe)[];
+/**
+ * The default WebGPU systems. These are the systems that are added by default to the WebGPURenderer.
+ */
+export type WebGPUSystems = ExtractSystemTypes<typeof DefaultWebGPUSystems> & PixiMixins.RendererSystems & PixiMixins.WebGPUSystems;
+/**
+ * Options for WebGPURenderer.
+ */
+export interface WebGPUOptions extends SharedRendererOptions, ExtractRendererOptions<typeof DefaultWebGPUSystems>, PixiMixins.WebGPUOptions {
+}
+export interface WebGPURenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<WebGPUPipes, WebGPUOptions, T>, WebGPUSystems {
+}
+/**
+ * The WebGPU PixiJS Renderer. This renderer allows you to use the next-generation graphics API, WebGPU.
+ * ```ts
+ * // Create a new renderer
+ * const renderer = new WebGPURenderer();
+ * await renderer.init();
+ *
+ * // Add the renderer to the stage
+ * document.body.appendChild(renderer.canvas);
+ *
+ * // Create a new stage
+ * const stage = new Container();
+ *
+ * // Render the stage
+ * renderer.render(stage);
+ * ```
+ *
+ * You can use {@link autoDetectRenderer} to create a renderer that will automatically detect the best
+ * renderer for the environment.
+ * ```ts
+ * import { autoDetectRenderer } from 'pixi.js';
+ * // Create a new renderer
+ * const renderer = await autoDetectRenderer();
+ * ```
+ *
+ * The renderer is composed of systems that manage specific tasks. The following systems are added by default
+ * whenever you create a WebGPU renderer:
+ *
+ * | WebGPU Core Systems                      | Systems that are specific to the WebGL renderer                               |
+ * | ---------------------------------------- | ----------------------------------------------------------------------------- |
+ * | {@link GpuUboSystem}           | This manages WebGPU uniform buffer objects feature for shaders                |
+ * | {@link GpuEncoderSystem}       | This manages the WebGPU command encoder                                       |
+ * | {@link GpuDeviceSystem}        | This manages the WebGPU Device and its extensions                             |
+ * | {@link GpuBufferSystem}        | This manages buffers and their GPU resources, keeps everything in sync        |
+ * | {@link GpuTextureSystem}       | This manages textures and their GPU resources, keeps everything in sync       |
+ * | {@link GpuRenderTargetSystem}  | This manages what we render too. For example the screen, or another texture   |
+ * | {@link GpuShaderSystem}        | This manages shaders, programs that run on the GPU to output lovely pixels    |
+ * | {@link GpuStateSystem}         | This manages the state of the WebGPU Pipelines. eg the various flags that can be set blend modes / depthTesting etc |
+ * | {@link PipelineSystem}         | This manages the WebGPU pipelines, used for rendering                         |
+ * | {@link GpuColorMaskSystem}     | This manages the color mask. Used for color masking                           |
+ * | {@link GpuStencilSystem}       | This manages the stencil buffer. Used primarily for masking                   |
+ * | {@link BindGroupSystem}        | This manages the WebGPU bind groups. this is how data is bound to a shader when rendering |
+ *
+ * The breadth of the API surface provided by the renderer is contained within these systems.
+ * @property {GpuUboSystem} ubo - UboSystem instance.
+ * @property {GpuEncoderSystem} encoder - EncoderSystem instance.
+ * @property {GpuDeviceSystem} device - DeviceSystem instance.
+ * @property {GpuBufferSystem} buffer - BufferSystem instance.
+ * @property {GpuTextureSystem} texture - TextureSystem instance.
+ * @property {GpuRenderTargetSystem} renderTarget - RenderTargetSystem instance.
+ * @property {GpuShaderSystem} shader - ShaderSystem instance.
+ * @property {GpuStateSystem} state - StateSystem instance.
+ * @property {PipelineSystem} pipeline - PipelineSystem instance.
+ * @property {GpuColorMaskSystem} colorMask - ColorMaskSystem instance.
+ * @property {GpuStencilSystem} stencil - StencilSystem instance.
+ * @property {BindGroupSystem} bindGroup - BindGroupSystem instance.
+ */
+export declare class WebGPURenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<WebGPUPipes, WebGPUOptions, T> implements WebGPUSystems {
+	/** The WebGPU Device. */
+	gpu: GPU$1;
+	constructor();
+}
+/**
+ * The options that can be passed to a new Texture
+ */
+export interface TextureOptions<TextureSourceType extends TextureSource = TextureSource> {
+	/** the underlying texture data that this texture will use  */
+	source?: TextureSourceType;
+	/** optional label, for debugging */
+	label?: string;
+	/** The rectangle frame of the texture to show */
+	frame?: Rectangle;
+	/** The area of original texture */
+	orig?: Rectangle;
+	/** Trimmed rectangle of original texture */
+	trim?: Rectangle;
+	/** Default anchor point used for sprite placement / rotation */
+	defaultAnchor?: {
+		x: number;
+		y: number;
+	};
+	/** Default borders used for 9-slice scaling {@link NineSlicePlane}*/
+	defaultBorders?: TextureBorders;
+	/** indicates how the texture was rotated by texture packer. See {@link groupD8} */
+	rotate?: number;
+	/**
+	 * Set to true if you plan on modifying this texture's frame, UVs, or swapping its source at runtime.
+	 * This is false by default as it improves performance. Generally, it's recommended to create new
+	 * textures and swap those rather than modifying an existing texture's properties unless you are
+	 * working with a dynamic frames.
+	 * Not setting this to true when modifying the texture can lead to visual artifacts.
+	 *
+	 * If this is false and you modify the texture, you can manually update the sprite's texture by calling
+	 * `sprite.onViewUpdate()`.
+	 */
+	dynamic?: boolean;
+}
+/**
+ * A texture stores the information that represents an image or part of an image.
+ *
+ * A texture must have a loaded resource passed to it to work. It does not contain any
+ * loading mechanisms.
+ *
+ * The Assets class can be used to load a texture from a file. This is the recommended
+ * way as it will handle the loading and caching for you.
+ *
+ * ```js
+ *
+ * const texture = await Assets.load('assets/image.png');
+ *
+ * // once Assets has loaded the image it will be available via the from method
+ * const sameTexture = Texture.from('assets/image.png');
+ * // another way to access the texture once loaded
+ * const sameAgainTexture = Assets.get('assets/image.png');
+ *
+ * const sprite1 = new Sprite(texture);
+ *
+ * ```
+ *
+ * It cannot be added to the display list directly; instead use it as the texture for a Sprite.
+ * If no frame is provided for a texture, then the whole image is used.
+ *
+ * You can directly create a texture from an image and then reuse it multiple times like this :
+ *
+ * ```js
+ * import { Sprite, Texture } from 'pixi.js';
+ *
+ * const texture = await Assets.load('assets/image.png');
+ * const sprite1 = new Sprite(texture);
+ * const sprite2 = new Sprite(texture);
+ * ```
+ *
+ * If you didn't pass the texture frame to constructor, it enables `noFrame` mode:
+ * it subscribes on baseTexture events, it automatically resizes at the same time as baseTexture.
+ */
+export declare class Texture<TextureSourceType extends TextureSource = TextureSource> extends EventEmitter<{
+	update: Texture;
+	destroy: Texture;
+}> implements BindableTexture {
+	/**
+	 * Helper function that creates a returns Texture based on the source you provide.
+	 * The source should be loaded and ready to go. If not its best to grab the asset using Assets.
+	 * @param id - String or Source to create texture from
+	 * @param skipCache - Skip adding the texture to the cache
+	 * @returns The texture based on the Id provided
+	 */
+	static from: (id: TextureSourceLike, skipCache?: boolean) => Texture;
+	/** label used for debugging */
+	label?: string;
+	/** unique id for this texture */
+	readonly uid: number;
+	/**
+	 * Has the texture been destroyed?
+	 */
+	destroyed: boolean;
+	/**
+	 * Indicates whether the texture is rotated inside the atlas
+	 * set to 2 to compensate for texture packer rotation
+	 * set to 6 to compensate for spine packer rotation
+	 * can be used to rotate or mirror sprites
+	 * See {@link groupD8} for explanation
+	 */
+	readonly rotate: number;
+	/** A uvs object based on the given frame and the texture source */
+	readonly uvs: UVs;
+	/**
+	 * Anchor point that is used as default if sprite is created with this texture.
+	 * Changing the `defaultAnchor` at a later point of time will not update Sprite's anchor point.
+	 * @default {0,0}
+	 */
+	readonly defaultAnchor?: {
+		x: number;
+		y: number;
+	};
+	/**
+	 * Default width of the non-scalable border that is used if 9-slice plane is created with this texture.
+	 * @since 7.2.0
+	 */
+	readonly defaultBorders?: TextureBorders;
+	/**
+	 * This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
+	 * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
+	 */
+	readonly frame: Rectangle;
+	/** This is the area of original texture, before it was put in atlas. */
+	readonly orig: Rectangle;
+	/**
+	 * This is the trimmed area of original texture, before it was put in atlas
+	 * Please call `updateUvs()` after you change coordinates of `trim` manually.
+	 */
+	readonly trim: Rectangle;
+	/**
+	 * Does this Texture have any frame data assigned to it?
+	 *
+	 * This mode is enabled automatically if no frame was passed inside constructor.
+	 *
+	 * In this mode texture is subscribed to baseTexture events, and fires `update` on any change.
+	 *
+	 * Beware, after loading or resize of baseTexture event can fired two times!
+	 * If you want more control, subscribe on baseTexture itself.
+	 * @example
+	 * texture.on('update', () => {});
+	 */
+	noFrame: boolean;
+	/**
+	 * Set to true if you plan on modifying the uvs of this texture.
+	 * When this is the case, sprites and other objects using the texture will
+	 * make sure to listen for changes to the uvs and update their vertices accordingly.
+	 */
+	dynamic: boolean;
+	/** is it a texture? yes! used for type checking */
+	readonly isTexture = true;
+	/**
+	 * @param {TextureOptions} options - Options for the texture
+	 */
+	constructor({ source, label, frame, orig, trim, defaultAnchor, defaultBorders, rotate, dynamic }?: TextureOptions<TextureSourceType>);
+	set source(value: TextureSourceType);
+	/** the underlying source of the texture (equivalent of baseTexture in v7) */
+	get source(): TextureSourceType;
+	/** returns a TextureMatrix instance for this texture. By default, that object is not created because its heavy. */
+	get textureMatrix(): TextureMatrix;
+	/** The width of the Texture in pixels. */
+	get width(): number;
+	/** The height of the Texture in pixels. */
+	get height(): number;
+	/** Call this function when you have modified the frame of this texture. */
+	updateUvs(): void;
+	/**
+	 * Destroys this texture
+	 * @param destroySource - Destroy the source when the texture is destroyed.
+	 */
+	destroy(destroySource?: boolean): void;
+	/**
+	 * Call this if you have modified the `texture outside` of the constructor.
+	 *
+	 * If you have modified this texture's source, you must separately call `texture.source.update()` to see those changes.
+	 */
+	update(): void;
+	/** @deprecated since 8.0.0 */
+	get baseTexture(): TextureSource;
+	/** an Empty Texture used internally by the engine */
+	static EMPTY: Texture;
+	/** a White texture used internally by the engine */
+	static WHITE: Texture<BufferImageSource>;
+}
+/**
+ * System that manages the generation of textures from display objects in the renderer.
+ * This system is responsible for creating reusable textures from containers, sprites, and other display objects.
+ * Available through `renderer.textureGenerator`.
+ * @example
+ * ```ts
+ * import { Application, Sprite, Graphics } from 'pixi.js';
+ *
+ * const app = new Application();
+ * await app.init();
+ *
+ * // Create a complex display object
+ * const container = new Container();
+ *
+ * const graphics = new Graphics()
+ *     .circle(0, 0, 50)
+ *     .fill('red');
+ *
+ * const sprite = new Sprite(texture);
+ * sprite.x = 100;
+ *
+ * container.addChild(graphics, sprite);
+ *
+ * // Generate a texture from the container
+ * const generatedTexture = app.renderer.textureGenerator.generateTexture({
+ *     target: container,
+ *     resolution: 2,
+ *     antialias: true
+ * });
+ *
+ * // Use the generated texture
+ * const newSprite = new Sprite(generatedTexture);
+ * app.stage.addChild(newSprite);
+ *
+ * // Clean up when done
+ * generatedTexture.destroy(true);
+ * ```
+ *
+ * Features:
+ * - Convert any display object to a texture
+ * - Support for custom regions and resolutions
+ * - Anti-aliasing support
+ * - Background color configuration
+ * - Texture source options customization
+ *
+ * Common Use Cases:
+ * - Creating texture atlases dynamically
+ * - Caching complex container content
+ * - Generating thumbnails
+ * - Creating reusable textures from rendered content
+ *
+ * Performance Considerations:
+ * - Generating textures is relatively expensive
+ * - Cache results when possible
+ * - Be mindful of resolution and size
+ * - Clean up unused textures
+ */
+export declare class GenerateTextureSystem implements System {
+	constructor(renderer: Renderer);
+	/**
+	 * Creates a texture from a display object that can be used for creating sprites and other textures.
+	 * This is particularly useful for optimizing performance when a complex container needs to be reused.
+	 * @param options - Generate texture options or a container to convert to texture
+	 * @returns A new RenderTexture containing the rendered display object
+	 * @example
+	 * ```ts
+	 * // Basic usage with a container
+	 * const container = new Container();
+	 * container.addChild(
+	 *     new Graphics()
+	 *         .circle(0, 0, 50)
+	 *         .fill('red')
+	 * );
+	 *
+	 * const texture = renderer.textureGenerator.generateTexture(container);
+	 *
+	 * // Advanced usage with options
+	 * const texture = renderer.textureGenerator.generateTexture({
+	 *     target: container,
+	 *     frame: new Rectangle(0, 0, 100, 100), // Specific region
+	 *     resolution: 2,                        // High DPI
+	 *     clearColor: '#ff0000',               // Red background
+	 *     antialias: true                      // Smooth edges
+	 * });
+	 *
+	 * // Create a sprite from the generated texture
+	 * const sprite = new Sprite(texture);
+	 *
+	 * // Clean up when done
+	 * texture.destroy(true);
+	 * ```
+	 */
+	generateTexture(options: GenerateTextureOptions | Container): RenderTexture;
+	destroy(): void;
+}
 /**
  * The options for rendering a view.
  */
@@ -4638,7 +4638,7 @@ type Runners = {
 } & {
 	[K: ({} & string) | ({} & symbol)]: SystemRunner;
 };
-declare const DefaultWebGLSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GlUboSystem | typeof GlBackBufferSystem | typeof GlContextSystem | typeof GlLimitsSystem | typeof GlBufferSystem | typeof GlTextureSystem | typeof GlRenderTargetSystem | typeof GlGeometrySystem | typeof GlUniformGroupSystem | typeof GlShaderSystem | typeof GlEncoderSystem | typeof GlStateSystem | typeof GlStencilSystem | typeof GlColorMaskSystem)[];
+declare const DefaultWebGLSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof GCSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GlUboSystem | typeof GlBackBufferSystem | typeof GlContextSystem | typeof GlLimitsSystem | typeof GlBufferSystem | typeof GlTextureSystem | typeof GlRenderTargetSystem | typeof GlGeometrySystem | typeof GlUniformGroupSystem | typeof GlShaderSystem | typeof GlEncoderSystem | typeof GlStateSystem | typeof GlStencilSystem | typeof GlColorMaskSystem)[];
 declare const DefaultWebGLPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof StencilMaskPipe | typeof ColorMaskPipe | typeof CustomRenderPipe)[];
 /**
  * The default WebGL renderer, uses WebGL2 contexts.
@@ -4727,8 +4727,14 @@ export type Renderer<T extends ICanvas = HTMLCanvasElement> = WebGLRenderer<T> |
  */
 export interface RendererOptions extends WebGLOptions, WebGPUOptions {
 }
-export interface ViewContainer<GPU_DATA extends GPUData = any> extends PixiMixins.ViewContainer, Container {
-	_gpuData: Record<number, GPU_DATA>;
+type GCableEventEmitter = GCable & Pick<EventEmitter, "once" | "off">;
+interface GCResourceHashEntry {
+	context: any;
+	hash: string;
+	type: GCData["type"];
+	priority: number;
+}
+export interface ViewContainer<GPU_DATA extends GPUData = any> extends PixiMixins.ViewContainer, Container, GPUDataOwner<GPU_DATA>, GCable {
 }
 /**
  * Options for configuring a RenderLayer. A RenderLayer allows control over rendering order
@@ -4919,6 +4925,18 @@ export declare class RenderLayer extends Container {
 	 * ```
 	 */
 	renderLayerChildren: Container[];
+	/**
+	 * If true, the layer's children will be sorted by zIndex before rendering.
+	 * If false, you can manually sort the children using sortRenderLayerChildren when needed.
+	 * @default false
+	 * @example
+	 * ```ts
+	 * const layer = new RenderLayer({
+	 *     sortableChildren: true // Automatically sorts children by zIndex
+	 * });
+	 * ```
+	 */
+	sortableChildren: boolean;
 	/**
 	 * Creates a new RenderLayer instance
 	 * @param options - Configuration options for the RenderLayer
@@ -6624,7 +6642,6 @@ export declare class Ticker {
 	 *
 	 * This is NOT in milliseconds - it's a scalar multiplier for frame-independent animations.
 	 * For actual milliseconds, use {@link Ticker#deltaMS}.
-	 * @member {number}
 	 * @example
 	 * ```ts
 	 * // Frame-independent animation using deltaTime scalar
@@ -6665,7 +6682,6 @@ export declare class Ticker {
 	 * This value is not capped or scaled and provides raw timing information.
 	 *
 	 * Unlike {@link Ticker#deltaMS}, this value is unmodified by speed scaling or FPS capping.
-	 * @member {number}
 	 * @example
 	 * ```ts
 	 * ticker.add((ticker) => {
@@ -6679,7 +6695,6 @@ export declare class Ticker {
 	 * Similar to performance.now() timestamp format.
 	 *
 	 * Used internally for calculating time deltas between frames.
-	 * @member {number}
 	 * @example
 	 * ```ts
 	 * ticker.add((ticker) => {
@@ -9920,12 +9935,6 @@ declare global {
 	}
 }
 /**
- * Data structure for points with optional radius.
- */
-export type RoundedPoint = PointData & {
-	radius?: number;
-};
-/**
  * The line cap styles for strokes.
  *
  * It can be:
@@ -10594,1790 +10603,11 @@ export type StrokeInput = ColorSource | FillGradient | FillPattern | StrokeStyle
  */
 export type FillStyleInputs = ColorSource | FillGradient | FillPattern | FillStyle | ConvertedFillStyle | StrokeStyle | ConvertedStrokeStyle;
 /**
- * The GraphicsContext class allows for the creation of lightweight objects that contain instructions for drawing shapes and paths.
- * It is used internally by the Graphics class to draw shapes and paths, and can be used directly and shared between Graphics objects,
- *
- * This sharing of a `GraphicsContext` means that the intensive task of converting graphics instructions into GPU-ready geometry is done once, and the results are reused,
- * much like sprites reusing textures.
+ * Data structure for points with optional radius.
  */
-export declare class GraphicsContext extends EventEmitter<{
-	update: GraphicsContext;
-	destroy: GraphicsContext;
-}> {
-	/** The default fill style to use when none is provided. */
-	static defaultFillStyle: ConvertedFillStyle;
-	/** The default stroke style to use when none is provided. */
-	static defaultStrokeStyle: ConvertedStrokeStyle;
-	/** The batch mode for this graphics context. It can be 'auto', 'batch', or 'no-batch'. */
-	batchMode: BatchMode;
-	/**
-	 * Creates a new GraphicsContext object that is a clone of this instance, copying all properties,
-	 * including the current drawing state, transformations, styles, and instructions.
-	 * @returns A new GraphicsContext instance with the same properties and state as this one.
-	 */
-	clone(): GraphicsContext;
-	/**
-	 * The current fill style of the graphics context. This can be a color, gradient, pattern, or a more complex style defined by a FillStyle object.
-	 */
-	get fillStyle(): ConvertedFillStyle;
-	set fillStyle(value: FillInput);
-	/**
-	 * The current stroke style of the graphics context. Similar to fill styles, stroke styles can encompass colors, gradients, patterns, or more detailed configurations via a StrokeStyle object.
-	 */
-	get strokeStyle(): ConvertedStrokeStyle;
-	set strokeStyle(value: FillInput);
-	/**
-	 * Sets the current fill style of the graphics context. The fill style can be a color, gradient,
-	 * pattern, or a more complex style defined by a FillStyle object.
-	 * @param style - The fill style to apply. This can be a simple color, a gradient or pattern object,
-	 *                or a FillStyle or ConvertedFillStyle object.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	setFillStyle(style: FillInput): this;
-	/**
-	 * Sets the current stroke style of the graphics context. Similar to fill styles, stroke styles can
-	 * encompass colors, gradients, patterns, or more detailed configurations via a StrokeStyle object.
-	 * @param style - The stroke style to apply. Can be defined as a color, a gradient or pattern,
-	 *                or a StrokeStyle or ConvertedStrokeStyle object.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	setStrokeStyle(style: StrokeInput): this;
-	/**
-	 * Adds a texture to the graphics context. This method supports multiple overloads for specifying the texture.
-	 * If only a texture is provided, it uses the texture's width and height for drawing.
-	 * @param texture - The Texture object to use.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	texture(texture: Texture): this;
-	/**
-	 * Adds a texture to the graphics context. This method supports multiple overloads for specifying the texture,
-	 * tint, and dimensions. If only a texture is provided, it uses the texture's width and height for drawing.
-	 * Additional parameters allow for specifying a tint color, and custom dimensions for the texture drawing area.
-	 * @param texture - The Texture object to use.
-	 * @param tint - (Optional) A ColorSource to tint the texture. If not provided, defaults to white (0xFFFFFF).
-	 * @param dx - (Optional) The x-coordinate in the destination canvas at which to place the top-left corner of
-	 * the source image.
-	 * @param dy - (Optional) The y-coordinate in the destination canvas at which to place the top-left corner of
-	 * the source image.
-	 * @param dw - (Optional) The width of the rectangle within the source image to draw onto the destination canvas.
-	 * If not provided, uses the texture's frame width.
-	 * @param dh - (Optional) The height of the rectangle within the source image to draw onto the destination canvas.
-	 * If not provided, uses the texture's frame height.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	texture(texture: Texture, tint?: ColorSource, dx?: number, dy?: number, dw?: number, dh?: number): this;
-	/**
-	 * Resets the current path. Any previous path and its commands are discarded and a new path is
-	 * started. This is typically called before beginning a new shape or series of drawing commands.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	beginPath(): this;
-	/**
-	 * Fills the current or given path with the current fill style. This method can optionally take
-	 * a color and alpha for a simple fill, or a more complex FillInput object for advanced fills.
-	 * @param style - (Optional) The style to fill the path with. Can be a color, gradient, pattern, or a complex style object. If omitted, uses the current fill style.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	fill(style?: FillInput): this;
-	/** @deprecated 8.0.0 */
-	fill(color: ColorSource, alpha: number): this;
-	/**
-	 * Strokes the current path with the current stroke style. This method can take an optional
-	 * FillInput parameter to define the stroke's appearance, including its color, width, and other properties.
-	 * @param style - (Optional) The stroke style to apply. Can be defined as a simple color or a more complex style object. If omitted, uses the current stroke style.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	stroke(style?: StrokeInput): this;
-	/**
-	 * Applies a cutout to the last drawn shape. This is used to create holes or complex shapes by
-	 * subtracting a path from the previously drawn path. If a hole is not completely in a shape, it will
-	 * fail to cut correctly!
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	cut(): this;
-	/**
-	 * Adds an arc to the current path, which is centered at (x, y) with the specified radius,
-	 * starting and ending angles, and direction.
-	 * @param x - The x-coordinate of the arc's center.
-	 * @param y - The y-coordinate of the arc's center.
-	 * @param radius - The arc's radius.
-	 * @param startAngle - The starting angle, in radians.
-	 * @param endAngle - The ending angle, in radians.
-	 * @param counterclockwise - (Optional) Specifies whether the arc is drawn counterclockwise (true) or clockwise (false). Defaults to false.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, counterclockwise?: boolean): this;
-	/**
-	 * Adds an arc to the current path with the given control points and radius, connected to the previous point
-	 * by a straight line if necessary.
-	 * @param x1 - The x-coordinate of the first control point.
-	 * @param y1 - The y-coordinate of the first control point.
-	 * @param x2 - The x-coordinate of the second control point.
-	 * @param y2 - The y-coordinate of the second control point.
-	 * @param radius - The arc's radius.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): this;
-	/**
-	 * Adds an SVG-style arc to the path, allowing for elliptical arcs based on the SVG spec.
-	 * @param rx - The x-radius of the ellipse.
-	 * @param ry - The y-radius of the ellipse.
-	 * @param xAxisRotation - The rotation of the ellipse's x-axis relative
-	 * to the x-axis of the coordinate system, in degrees.
-	 * @param largeArcFlag - Determines if the arc should be greater than or less than 180 degrees.
-	 * @param sweepFlag - Determines if the arc should be swept in a positive angle direction.
-	 * @param x - The x-coordinate of the arc's end point.
-	 * @param y - The y-coordinate of the arc's end point.
-	 * @returns The instance of the current object for chaining.
-	 */
-	arcToSvg(rx: number, ry: number, xAxisRotation: number, largeArcFlag: number, sweepFlag: number, x: number, y: number): this;
-	/**
-	 * Adds a cubic Bezier curve to the path.
-	 * It requires three points: the first two are control points and the third one is the end point.
-	 * The starting point is the last point in the current path.
-	 * @param cp1x - The x-coordinate of the first control point.
-	 * @param cp1y - The y-coordinate of the first control point.
-	 * @param cp2x - The x-coordinate of the second control point.
-	 * @param cp2y - The y-coordinate of the second control point.
-	 * @param x - The x-coordinate of the end point.
-	 * @param y - The y-coordinate of the end point.
-	 * @param smoothness - Optional parameter to adjust the smoothness of the curve.
-	 * @returns The instance of the current object for chaining.
-	 */
-	bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number, smoothness?: number): this;
-	/**
-	 * Closes the current path by drawing a straight line back to the start.
-	 * If the shape is already closed or there are no points in the path, this method does nothing.
-	 * @returns The instance of the current object for chaining.
-	 */
-	closePath(): this;
-	/**
-	 * Draws an ellipse at the specified location and with the given x and y radii.
-	 * An optional transformation can be applied, allowing for rotation, scaling, and translation.
-	 * @param x - The x-coordinate of the center of the ellipse.
-	 * @param y - The y-coordinate of the center of the ellipse.
-	 * @param radiusX - The horizontal radius of the ellipse.
-	 * @param radiusY - The vertical radius of the ellipse.
-	 * @returns The instance of the current object for chaining.
-	 */
-	ellipse(x: number, y: number, radiusX: number, radiusY: number): this;
-	/**
-	 * Draws a circle shape. This method adds a new circle path to the current drawing.
-	 * @param x - The x-coordinate of the center of the circle.
-	 * @param y - The y-coordinate of the center of the circle.
-	 * @param radius - The radius of the circle.
-	 * @returns The instance of the current object for chaining.
-	 */
-	circle(x: number, y: number, radius: number): this;
-	/**
-	 * Adds another `GraphicsPath` to this path, optionally applying a transformation.
-	 * @param path - The `GraphicsPath` to add.
-	 * @returns The instance of the current object for chaining.
-	 */
-	path(path: GraphicsPath): this;
-	/**
-	 * Connects the current point to a new point with a straight line. This method updates the current path.
-	 * @param x - The x-coordinate of the new point to connect to.
-	 * @param y - The y-coordinate of the new point to connect to.
-	 * @returns The instance of the current object for chaining.
-	 */
-	lineTo(x: number, y: number): this;
-	/**
-	 * Sets the starting point for a new sub-path. Any subsequent drawing commands are considered part of this path.
-	 * @param x - The x-coordinate for the starting point.
-	 * @param y - The y-coordinate for the starting point.
-	 * @returns The instance of the current object for chaining.
-	 */
-	moveTo(x: number, y: number): this;
-	/**
-	 * Adds a quadratic curve to the path. It requires two points: the control point and the end point.
-	 * The starting point is the last point in the current path.
-	 * @param cpx - The x-coordinate of the control point.
-	 * @param cpy - The y-coordinate of the control point.
-	 * @param x - The x-coordinate of the end point.
-	 * @param y - The y-coordinate of the end point.
-	 * @param smoothness - Optional parameter to adjust the smoothness of the curve.
-	 * @returns The instance of the current object for chaining.
-	 */
-	quadraticCurveTo(cpx: number, cpy: number, x: number, y: number, smoothness?: number): this;
-	/**
-	 * Draws a rectangle shape. This method adds a new rectangle path to the current drawing.
-	 * @param x - The x-coordinate of the top-left corner of the rectangle.
-	 * @param y - The y-coordinate of the top-left corner of the rectangle.
-	 * @param w - The width of the rectangle.
-	 * @param h - The height of the rectangle.
-	 * @returns The instance of the current object for chaining.
-	 */
-	rect(x: number, y: number, w: number, h: number): this;
-	/**
-	 * Draws a rectangle with rounded corners.
-	 * The corner radius can be specified to determine how rounded the corners should be.
-	 * An optional transformation can be applied, which allows for rotation, scaling, and translation of the rectangle.
-	 * @param x - The x-coordinate of the top-left corner of the rectangle.
-	 * @param y - The y-coordinate of the top-left corner of the rectangle.
-	 * @param w - The width of the rectangle.
-	 * @param h - The height of the rectangle.
-	 * @param radius - The radius of the rectangle's corners. If not specified, corners will be sharp.
-	 * @returns The instance of the current object for chaining.
-	 */
-	roundRect(x: number, y: number, w: number, h: number, radius?: number): this;
-	/**
-	 * Draws a polygon shape by specifying a sequence of points. This method allows for the creation of complex polygons,
-	 * which can be both open and closed. An optional transformation can be applied, enabling the polygon to be scaled,
-	 * rotated, or translated as needed.
-	 * @param points - An array of numbers, or an array of PointData objects eg [{x,y}, {x,y}, {x,y}]
-	 * representing the x and y coordinates, of the polygon's vertices, in sequence.
-	 * @param close - A boolean indicating whether to close the polygon path. True by default.
-	 */
-	poly(points: number[] | PointData[], close?: boolean): this;
-	/**
-	 * Draws a regular polygon with a specified number of sides. All sides and angles are equal.
-	 * @param x - The x-coordinate of the center of the polygon.
-	 * @param y - The y-coordinate of the center of the polygon.
-	 * @param radius - The radius of the circumscribed circle of the polygon.
-	 * @param sides - The number of sides of the polygon. Must be 3 or more.
-	 * @param rotation - The rotation angle of the polygon, in radians. Zero by default.
-	 * @param transform - An optional `Matrix` object to apply a transformation to the polygon.
-	 * @returns The instance of the current object for chaining.
-	 */
-	regularPoly(x: number, y: number, radius: number, sides: number, rotation?: number, transform?: Matrix): this;
-	/**
-	 * Draws a polygon with rounded corners.
-	 * Similar to `regularPoly` but with the ability to round the corners of the polygon.
-	 * @param x - The x-coordinate of the center of the polygon.
-	 * @param y - The y-coordinate of the center of the polygon.
-	 * @param radius - The radius of the circumscribed circle of the polygon.
-	 * @param sides - The number of sides of the polygon. Must be 3 or more.
-	 * @param corner - The radius of the rounding of the corners.
-	 * @param rotation - The rotation angle of the polygon, in radians. Zero by default.
-	 * @returns The instance of the current object for chaining.
-	 */
-	roundPoly(x: number, y: number, radius: number, sides: number, corner: number, rotation?: number): this;
-	/**
-	 * Draws a shape with rounded corners. This function supports custom radius for each corner of the shape.
-	 * Optionally, corners can be rounded using a quadratic curve instead of an arc, providing a different aesthetic.
-	 * @param points - An array of `RoundedPoint` representing the corners of the shape to draw.
-	 * A minimum of 3 points is required.
-	 * @param radius - The default radius for the corners.
-	 * This radius is applied to all corners unless overridden in `points`.
-	 * @param useQuadratic - If set to true, rounded corners are drawn using a quadraticCurve
-	 *  method instead of an arc method. Defaults to false.
-	 * @param smoothness - Specifies the smoothness of the curve when `useQuadratic` is true.
-	 * Higher values make the curve smoother.
-	 * @returns The instance of the current object for chaining.
-	 */
-	roundShape(points: RoundedPoint[], radius: number, useQuadratic?: boolean, smoothness?: number): this;
-	/**
-	 * Draw Rectangle with fillet corners. This is much like rounded rectangle
-	 * however it support negative numbers as well for the corner radius.
-	 * @param x - Upper left corner of rect
-	 * @param y - Upper right corner of rect
-	 * @param width - Width of rect
-	 * @param height - Height of rect
-	 * @param fillet - accept negative or positive values
-	 */
-	filletRect(x: number, y: number, width: number, height: number, fillet: number): this;
-	/**
-	 * Draw Rectangle with chamfer corners. These are angled corners.
-	 * @param x - Upper left corner of rect
-	 * @param y - Upper right corner of rect
-	 * @param width - Width of rect
-	 * @param height - Height of rect
-	 * @param chamfer - non-zero real number, size of corner cutout
-	 * @param transform
-	 */
-	chamferRect(x: number, y: number, width: number, height: number, chamfer: number, transform?: Matrix): this;
-	/**
-	 * Draws a star shape centered at a specified location. This method allows for the creation
-	 *  of stars with a variable number of points, outer radius, optional inner radius, and rotation.
-	 * The star is drawn as a closed polygon with alternating outer and inner vertices to create the star's points.
-	 * An optional transformation can be applied to scale, rotate, or translate the star as needed.
-	 * @param x - The x-coordinate of the center of the star.
-	 * @param y - The y-coordinate of the center of the star.
-	 * @param points - The number of points of the star.
-	 * @param radius - The outer radius of the star (distance from the center to the outer points).
-	 * @param innerRadius - Optional. The inner radius of the star
-	 * (distance from the center to the inner points between the outer points).
-	 * If not provided, defaults to half of the `radius`.
-	 * @param rotation - Optional. The rotation of the star in radians, where 0 is aligned with the y-axis.
-	 * Defaults to 0, meaning one point is directly upward.
-	 * @returns The instance of the current object for chaining further drawing commands.
-	 */
-	star(x: number, y: number, points: number, radius: number, innerRadius?: number, rotation?: number): this;
-	/**
-	 * Parses and renders an SVG string into the graphics context. This allows for complex shapes and paths
-	 * defined in SVG format to be drawn within the graphics context.
-	 * @param svg - The SVG string to be parsed and rendered.
-	 */
-	svg(svg: string): this;
-	/**
-	 * Restores the most recently saved graphics state by popping the top of the graphics state stack.
-	 * This includes transformations, fill styles, and stroke styles.
-	 */
-	restore(): this;
-	/** Saves the current graphics state, including transformations, fill styles, and stroke styles, onto a stack. */
-	save(): this;
-	/**
-	 * Returns the current transformation matrix of the graphics context.
-	 * @returns The current transformation matrix.
-	 */
-	getTransform(): Matrix;
-	/**
-	 * Resets the current transformation matrix to the identity matrix, effectively removing any transformations (rotation, scaling, translation) previously applied.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	resetTransform(): this;
-	/**
-	 * Applies a rotation transformation to the graphics context around the current origin.
-	 * @param angle - The angle of rotation in radians.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	rotate(angle: number): this;
-	/**
-	 * Applies a scaling transformation to the graphics context, scaling drawings by x horizontally and by y vertically.
-	 * @param x - The scale factor in the horizontal direction.
-	 * @param y - (Optional) The scale factor in the vertical direction. If not specified, the x value is used for both directions.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	scale(x: number, y?: number): this;
-	/**
-	 * Sets the current transformation matrix of the graphics context to the specified matrix or values.
-	 * This replaces the current transformation matrix.
-	 * @param transform - The matrix to set as the current transformation matrix.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	setTransform(transform: Matrix): this;
-	/**
-	 * Sets the current transformation matrix of the graphics context to the specified matrix or values.
-	 * This replaces the current transformation matrix.
-	 * @param a - The value for the a property of the matrix, or a Matrix object to use directly.
-	 * @param b - The value for the b property of the matrix.
-	 * @param c - The value for the c property of the matrix.
-	 * @param d - The value for the d property of the matrix.
-	 * @param dx - The value for the tx (translate x) property of the matrix.
-	 * @param dy - The value for the ty (translate y) property of the matrix.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	setTransform(a: number, b: number, c: number, d: number, dx: number, dy: number): this;
-	/**
-	 * Applies the specified transformation matrix to the current graphics context by multiplying
-	 * the current matrix with the specified matrix.
-	 * @param transform - The matrix to apply to the current transformation.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	transform(transform: Matrix): this;
-	/**
-	 * Applies the specified transformation matrix to the current graphics context by multiplying
-	 * the current matrix with the specified matrix.
-	 * @param a - The value for the a property of the matrix, or a Matrix object to use directly.
-	 * @param b - The value for the b property of the matrix.
-	 * @param c - The value for the c property of the matrix.
-	 * @param d - The value for the d property of the matrix.
-	 * @param dx - The value for the tx (translate x) property of the matrix.
-	 * @param dy - The value for the ty (translate y) property of the matrix.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	transform(a: number, b: number, c: number, d: number, dx: number, dy: number): this;
-	/**
-	 * Applies a translation transformation to the graphics context, moving the origin by the specified amounts.
-	 * @param x - The amount to translate in the horizontal direction.
-	 * @param y - (Optional) The amount to translate in the vertical direction. If not specified, the x value is used for both directions.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	translate(x: number, y?: number): this;
-	/**
-	 * Clears all drawing commands from the graphics context, effectively resetting it. This includes clearing the path,
-	 * and optionally resetting transformations to the identity matrix.
-	 * @returns The instance of the current GraphicsContext for method chaining.
-	 */
-	clear(): this;
-	/** The bounds of the graphic shape. */
-	get bounds(): Bounds;
-	/**
-	 * Check to see if a point is contained within this geometry.
-	 * @param point - Point to check if it's contained.
-	 * @returns {boolean} `true` if the point is contained within geometry.
-	 */
-	containsPoint(point: PointData): boolean;
-	/**
-	 * Destroys the GraphicsData object.
-	 * @param options - Options parameter. A boolean will act as if all options
-	 *  have been set to that value
-	 * @example
-	 * context.destroy();
-	 * context.destroy(true);
-	 * context.destroy({ texture: true, textureSource: true });
-	 */
-	destroy(options?: TypeOrBool<TextureDestroyOptions>): void;
-}
-/**
- * The alignment of the text.
- *
- * - 'left': Aligns text to the left edge.
- * - 'center': Centers text horizontally.
- * - 'right': Aligns text to the right edge.
- * - 'justify': Justifies text, aligning both left and right edges.
- * @example
- * ```ts
- * import { TextStyle } from 'pixi.js';
- * const style = new TextStyle({
- *   align: 'center', // or 'left', 'right', 'justify'
- * });
- * ```
- */
-export type TextStyleAlign = "left" | "center" | "right" | "justify";
-/**
- * The fill style input for text styles.
- *
- * This can be:
- * - A color string like 'red', '#00FF00', or 'rgba(255,0,0,0.5)'
- * - A hex number like 0xff0000 for red
- * - A FillStyle object with properties like { color: 0xff0000, alpha: 0.5 }
- * - A FillGradient for gradient fills
- * - A FillPattern for pattern/texture fills
- * @example
- * ```ts
- * // Simple Fills
- * new TextStyle({ fill: 'red' }); // Color string
- * new TextStyle({ fill: 0x00ff00 }); // Hex color
- * new TextStyle({ fill: 'rgb(255,0,0)' }); // RGB string
- * // Gradients
- * new TextStyle({
- *     fill: new FillGradient({
- *         end: { x: 1, y: 1 },
- *         stops: [
- *             { color: 0xff0000, offset: 0 }, // Red at start
- *             { color: 0x0000ff, offset: 1 }, // Blue at end
- *         ]
- *     }),
- * });
- * // Patterns
- * new TextStyle({
- *    fill: new FillPattern(Assets.get('pattern.png'))
- * });
- * ```
- */
-export type TextStyleFill = string | string[] | number | number[] | CanvasGradient | CanvasPattern;
-/**
- * The font style input for text styles. Controls the slant or italicization of the text.
- * @example
- * ```ts
- * // Create text with normal font style
- * const normalText = new Text({
- *     text: 'Normal Style Text',
- *     style: {
- *         fontStyle: 'normal',
- *         fontSize: 24
- *     }
- * });
- *
- * // Create italic text
- * const italicText = new Text({
- *     text: 'Italic Style Text',
- *     style: {
- *         fontStyle: 'italic',
- *         fontSize: 24,
- *         fontFamily: 'Arial'
- *     }
- * });
- *
- * // Create oblique text
- * const obliqueText = new Text({
- *     text: 'Oblique Style Text',
- *     style: {
- *         fontStyle: 'oblique',
- *         fontSize: 24,
- *         fontFamily: 'Times New Roman'
- *     }
- * });
- *
- * // Dynamic style changes
- * let isItalic = false;
- * text.style = {
- *     ...text.style,
- *     fontStyle: isItalic ? 'italic' : 'normal'
- * };
- * ```
- *
- * Supported values:
- * - 'normal': Regular upright text with no slant
- * - 'italic': True italics using specifically designed italic glyphs
- * - 'oblique': Slanted version of the regular glyphs
- * @remarks
- * - 'italic' uses specially designed glyphs with cursive characteristics
- * - 'oblique' is a mechanical slant of the normal glyphs
- * - Not all fonts include true italic designs; some may fall back to oblique
- */
-export type TextStyleFontStyle = "normal" | "italic" | "oblique";
-/**
- * The font variant input for text styles. Controls the capitalization and presentation of letters.
- * Used to enable special rendering like small caps.
- * @example
- * ```ts
- * // Create text with normal font variant
- * const normalText = new Text({
- *     text: 'Normal Text',
- *     style: {
- *         fontVariant: 'normal',
- *         fontSize: 24
- *     }
- * });
- *
- * // Create text with small-caps variant
- * const smallCapsText = new Text({
- *     text: 'Small Caps Text',
- *     style: {
- *         fontVariant: 'small-caps',
- *         fontSize: 24,
- *         fontFamily: 'Arial'
- *     }
- * });
- *
- * // Use in a TextStyle instance
- * const style = new TextStyle({
- *     fontVariant: 'small-caps',
- *     fontSize: 32,
- *     fill: 0x4a4a4a
- * });
- *
- * // Update variant dynamically
- * text.style = {
- *     ...text.style,
- *     fontVariant: text.style.fontVariant === 'normal' ? 'small-caps' : 'normal'
- * };
- * ```
- *
- * Supported values:
- * - 'normal': Regular text rendering with standard capitalization
- * - 'small-caps': Renders lowercase letters as smaller versions of capital letters
- * @remarks
- * Small caps are only available if the font supports them.
- * Not all fonts include true small caps glyphs.
- */
-export type TextStyleFontVariant = "normal" | "small-caps";
-/**
- * The font weight input for text styles. Controls the thickness or boldness of the text.
- * @example
- * ```ts
- * // Create text with different font weights
- * const normalText = new Text({
- *     text: 'Normal Weight',
- *     style: { fontWeight: 'normal' }
- * });
- *
- * const boldText = new Text({
- *     text: 'Bold Weight',
- *     style: { fontWeight: 'bold' }
- * });
- *
- * // Using numeric weights
- * const lightText = new Text({
- *     text: 'Light Weight',
- *     style: { fontWeight: '300' }
- * });
- *
- * const mediumText = new Text({
- *     text: 'Medium Weight',
- *     style: { fontWeight: '500' }
- * });
- *
- * const heavyText = new Text({
- *     text: 'Heavy Weight',
- *     style: { fontWeight: '900' }
- * });
- *
- * // Responsive weight changes
- * const adaptiveText = new Text({
- *     text: 'Adaptive Weight',
- *     style: { fontWeight: window.innerWidth > 600 ? 'bold' : 'normal' }
- * });
- * ```
- *
- * Supported values:
- * - 'normal': Standard weight (equivalent to 400)
- * - 'bold': Bold weight (equivalent to 700)
- * - 'bolder': One weight darker than the parent element
- * - 'lighter': One weight lighter than the parent element
- * - '100': Thin (Hairline)
- * - '200': Extra Light (Ultra Light)
- * - '300': Light
- * - '400': Normal
- * - '500': Medium
- * - '600': Semi Bold (Demi Bold)
- * - '700': Bold
- * - '800': Extra Bold (Ultra Bold)
- * - '900': Heavy (Black)
- */
-export type TextStyleFontWeight = "normal" | "bold" | "bolder" | "lighter" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
-/**
- * The line join style for text strokes. Determines how lines connect at corners.
- * @example
- * ```ts
- * // Create text with miter joins (sharp corners)
- * const sharpText = new Text({
- *     text: 'Sharp Corners',
- *     style: {
- *         fontSize: 36,
- *         stroke: {
- *             color: '#4a1850',
- *             width: 4,
- *             lineJoin: 'miter'  // Sharp corners
- *         }
- *     }
- * });
- *
- * // Create text with round joins
- * const roundText = new Text({
- *     text: 'Rounded Corners',
- *     style: {
- *         fontSize: 36,
- *         stroke: {
- *             color: '#4a1850',
- *             width: 4,
- *             lineJoin: 'round'  // Smooth rounded corners
- *         }
- *     }
- * });
- *
- * // Create text with beveled joins
- * const bevelText = new Text({
- *     text: 'Beveled Corners',
- *     style: {
- *         fontSize: 36,
- *         stroke: {
- *             color: '#4a1850',
- *             width: 4,
- *             lineJoin: 'bevel'  // Flattened corners
- *         }
- *     }
- * });
- * ```
- * Available values:
- * - 'miter': Creates sharp corners by extending the outer edges until they meet
- * - 'round': Creates smooth, rounded corners using a circular arc
- * - 'bevel': Creates flattened corners by filling an additional triangle between the outer edges
- */
-export type TextStyleLineJoin = "miter" | "round" | "bevel";
-/**
- * The text baseline for text styles.
- *
- * This can be:
- * - 'alphabetic': The alphabetic baseline
- * - 'top': The top of the text
- * - 'hanging': The hanging baseline
- * - 'middle': The middle of the text
- * - 'ideographic': The ideographic baseline
- * - 'bottom': The bottom of the text
- */
-export type TextStyleTextBaseline = "alphabetic" | "top" | "hanging" | "middle" | "ideographic" | "bottom";
-/**
- * Controls how whitespace (spaces, tabs, and line breaks) is handled within the text.
- * This affects text wrapping and spacing behavior.
- * @example
- * ```ts
- * // Normal mode (collapse spaces and newlines)
- * const normalText = new Text({
- *     text: 'Hello    World\n\nNew Line',
- *     style: {
- *         whiteSpace: 'normal',
- *         fontSize: 24
- *     }
- * }); // Renders as: "Hello World New Line"
- *
- * // Pre mode (preserve all whitespace)
- * const preText = new Text({
- *     text: 'Hello    World\n\nNew Line',
- *     style: {
- *         whiteSpace: 'pre',
- *         fontSize: 24
- *     }
- * }); // Preserves spaces and line breaks exactly
- *
- * // Pre-line mode (preserve newlines, collapse spaces)
- * const preLineText = new Text({
- *     text: 'Hello    World\n\nNew Line',
- *     style: {
- *         whiteSpace: 'pre-line',
- *         fontSize: 24
- *     }
- * }); // Preserves line breaks, collapses multiple spaces
- *
- * // With word wrap enabled
- * const wrappedText = new Text({
- *     text: 'A long text with    multiple spaces\nand line breaks',
- *     style: {
- *         whiteSpace: 'pre-line',
- *         wordWrap: true,
- *         wordWrapWidth: 200,
- *         fontSize: 24
- *     }
- * });
- * ```
- *
- * Supported values:
- * - 'normal': Collapses all whitespace (spaces, tabs, line breaks) into a single space
- * - 'pre': Preserves all whitespace characters exactly as written
- * - 'pre-line': Preserves line breaks but collapses multiple spaces into a single space
- * @remarks
- * - 'normal' is best for single-line text or when you want to ignore formatting
- * - 'pre' is useful for code blocks or when exact spacing is important
- * - 'pre-line' is good for formatted text where you want to keep line breaks but clean up spaces
- */
-export type TextStyleWhiteSpace = "normal" | "pre" | "pre-line";
-/**
- * Defines a drop shadow effect for text rendering.
- * Drop shadows add depth and emphasis to text by creating a shadow offset from the text.
- * @example
- * ```ts
- * // Create text with basic drop shadow
- * const text = new Text({
- *     text: 'Shadow Text',
- *     style: {
- *         fontSize: 48,
- *         dropShadow: {
- *             alpha: 0.5,         // 50% opacity shadow
- *             angle: Math.PI / 6, // 30 degrees
- *             blur: 4,            // Soft shadow edge
- *             color: '#000000',   // Black shadow
- *             distance: 6         // Shadow offset
- *         }
- *     }
- * });
- *
- * // Dynamic shadow updates
- * text.style.dropShadow = {
- *     alpha: Math.sin(Date.now() / 1000) * 0.5 + 0.5, // Pulsing opacity
- *     angle: Date.now() / 1000,                        // Rotating angle
- *     blur: 4,
- *     color: '#000000',
- *     distance: 6
- * };
- * ```
- */
-export type TextDropShadow = {
-	/**
-	 * The opacity of the drop shadow.
-	 * - Range: 0 to 1
-	 * - 0 = fully transparent
-	 * - 1 = fully opaque
-	 * @example
-	 * ```ts
-	 * // Set drop shadow opacity to 50%
-	 * dropShadow: {
-	 *    alpha: 0.5
-	 * }
-	 * ```
-	 * @default 1
-	 */
-	alpha: number;
-	/**
-	 * The angle of the drop shadow in radians.
-	 * - 0 = right
-	 * - Math.PI/2 = down
-	 * - Math.PI = left
-	 * - Math.PI*1.5 = up
-	 * @example
-	 * ```ts
-	 * // Set drop shadow angle to 30 degrees
-	 * dropShadow: {
-	 *    angle: Math.PI / 6 // 30 degrees
-	 * }
-	 * ```
-	 * @default Math.PI/6 (30 degrees)
-	 */
-	angle: number;
-	/**
-	 * The blur radius of the shadow.
-	 * - 0 = sharp shadow
-	 * - Higher values = softer shadow
-	 * @example
-	 * ```ts
-	 * // Set drop shadow blur radius to 10 pixels
-	 * dropShadow: {
-	 *   blur: 10
-	 * }
-	 * ```
-	 * @default 0
-	 */
-	blur: number;
-	/**
-	 * The color of the drop shadow.
-	 * Accepts any valid CSS color string, hex number, or RGB/RGBA values.
-	 * @example '#000000', 'rgba(0,0,0,0.5)', 0x000000
-	 * @default 'black'
-	 */
-	color: ColorSource;
-	/**
-	 * The distance of the drop shadow from the text.
-	 * Measured in pixels.
-	 * @example
-	 * ```ts
-	 * // Set drop shadow distance to 5 pixels
-	 * dropShadow: {
-	 *   distance: 5
-	 * }
-	 * ```
-	 * @default 5
-	 */
-	distance: number;
+export type RoundedPoint = PointData & {
+	radius?: number;
 };
-/**
- * Constructor options used for `TextStyle` instances. Defines the visual appearance and layout of text.
- * @example
- * ```ts
- * // Basic text style
- * const basicStyle = new TextStyle({
- *     fontSize: 24,
- *     fill: 'black',
- *     fontFamily: 'Arial'
- * });
- *
- * // Rich text style with multiple features
- * const richStyle = new TextStyle({
- *     fontFamily: ['Arial', 'Helvetica', 'sans-serif'],
- *     fontSize: 36,
- *     fontWeight: 'bold',
- *     fill: 'red',
- *     stroke: { color: '#4a1850', width: 5 },
- *     align: 'center',
- *     dropShadow: {
- *         color: '#000000',
- *         blur: 4,
- *         distance: 6,
- *         angle: Math.PI / 6
- *     },
- *     wordWrap: true,
- *     wordWrapWidth: 440,
- *     lineHeight: 40,
- *     textBaseline: 'middle'
- * });
- * ```
- */
-export interface TextStyleOptions {
-	/**
-	 * Alignment for multiline text, does not affect single line text
-	 * @default 'left'
-	 */
-	align?: TextStyleAlign;
-	/**
-	 * Whether to allow line breaks within words.
-	 * Requires wordWrap to be true.
-	 * @example
-	 * ```ts
-	 * // Enable word breaking
-	 * const style = new TextStyle({
-	 *    breakWords: true,
-	 *    wordWrap: true,
-	 *    wordWrapWidth: 200
-	 * });
-	 * ```
-	 * @default false
-	 */
-	breakWords?: boolean;
-	/**
-	 * Drop shadow configuration for the text.
-	 * Can be boolean or a TextDropShadow object.
-	 * @default null
-	 */
-	dropShadow?: boolean | Partial<TextDropShadow>;
-	/**
-	 * Fill style for the text.
-	 * Can be a color, gradient, or pattern.
-	 * @default 'black'
-	 */
-	fill?: FillInput;
-	/**
-	 * Font family or families to use.
-	 * Can be single name or array of fallbacks.
-	 * @example
-	 * ```ts
-	 * // Single font family
-	 * fontFamily: 'Arial'
-	 * // Multiple font families
-	 * fontFamily: ['Helvetica', 'Arial', 'sans-serif']
-	 * ```
-	 * @default 'Arial'
-	 */
-	fontFamily?: string | string[];
-	/**
-	 * Font size in pixels or as string.
-	 *
-	 * Equivalents are '26px','20pt','160%' or '1.6em')
-	 * @example
-	 * ```ts
-	 * // Numeric size
-	 * fontSize: 26
-	 * // String size
-	 * fontSize: '26px'
-	 * // Percentage size
-	 * fontSize: '160%' // 1.6 times the parent element's font size
-	 * // Em size
-	 * fontSize: '1.6em' // 1.6 times the parent element's font size
-	 * @default 26
-	 */
-	fontSize?: number | string;
-	/**
-	 * Font style (normal, italic, oblique).
-	 * @default 'normal'
-	 */
-	fontStyle?: TextStyleFontStyle;
-	/**
-	 * Font variant (normal, small-caps).
-	 * @default 'normal'
-	 */
-	fontVariant?: TextStyleFontVariant;
-	/**
-	 * Font weight (normal, bold, bolder, lighter, 100-900).
-	 * @default 'normal'
-	 */
-	fontWeight?: TextStyleFontWeight;
-	/** The height of the line, a number that represents the vertical space that a letter uses. */
-	leading?: number;
-	/** The amount of spacing between letters, default is 0 */
-	letterSpacing?: number;
-	/** The line height, a number that represents the vertical space that a letter uses */
-	lineHeight?: number;
-	/**
-	 * Padding around the text.
-	 *
-	 * Occasionally some fonts are cropped. Adding some padding will prevent this from
-	 * happening by adding padding to all sides of the text.
-	 */
-	padding?: number;
-	/**
-	 * Stroke style for text outline.
-	 * @default null
-	 */
-	stroke?: StrokeInput;
-	/**
-	 * Vertical alignment baseline.
-	 * @default 'alphabetic'
-	 */
-	textBaseline?: TextStyleTextBaseline;
-	/**
-	 * Whether to trim transparent edges.
-	 * > [!NOTE] This is an expensive operation and should only be used when necessary.
-	 * @default false
-	 */
-	trim?: boolean;
-	/**
-	 * How to handle whitespace.
-	 *
-	 * It needs wordWrap to be set to true for this to have an effect.
-	 * @default 'pre'
-	 */
-	whiteSpace?: TextStyleWhiteSpace;
-	/** Indicates if word wrap should be used */
-	wordWrap?: boolean;
-	/** The width at which text will wrap, it needs wordWrap to be set to true */
-	wordWrapWidth?: number;
-	/**
-	 * Array of filters to apply to the text.
-	 *
-	 * These filters will be applied to the text as it is created, resulting in faster rendering for static text
-	 * compared to applying the filter directly to the text object (which would be applied at run time).
-	 * @default undefined
-	 */
-	filters?: Filter[] | readonly Filter[];
-}
-/**
- * A TextStyle Object contains information to decorate Text objects.
- * An instance can be shared between multiple Text objects; then changing the style will update all text objects using it.
- * @example
- * ```ts
- * // Create a basic text style
- * const style = new TextStyle({
- *     fontFamily: ['Helvetica', 'Arial', 'sans-serif'],
- *     fontSize: 36,
- *     fill: 0xff1010,
- *     align: 'center'
- * });
- *
- * // Create a rich text style with multiple features
- * const richStyle = new TextStyle({
- *     fontFamily: 'Arial',
- *     fontSize: 32,
- *     fill: 'white',
- *     stroke: {
- *         color: '#4a1850',
- *         width: 5
- *     },
- *     dropShadow: {
- *         color: '#000000',
- *         blur: 4,
- *         distance: 6,
- *         angle: Math.PI / 6
- *     },
- *     wordWrap: true,
- *     wordWrapWidth: 440,
- *     lineHeight: 40,
- *     align: 'center'
- * });
- *
- * // Share style between multiple text objects
- * const text1 = new Text({
- *     text: 'Hello',
- *     style: richStyle
- * });
- *
- * const text2 = new Text({
- *     text: 'World',
- *     style: richStyle
- * });
- *
- * // Update style dynamically - affects all text objects
- * richStyle.fontSize = 48;
- * richStyle.fill = 0x00ff00;
- * ```
- *
- * Key Features:
- * - Shared styling between multiple text objects
- * - Rich text formatting options
- * - Gradient and pattern fills
- * - Drop shadows and strokes
- * - Word wrapping and alignment
- * - Dynamic updates
- */
-export declare class TextStyle extends EventEmitter<{
-	update: TextDropShadow;
-}> {
-	/**
-	 * Default drop shadow settings used when enabling drop shadows on text.
-	 * These values are used as the base configuration when drop shadows are enabled without specific settings.
-	 * @example
-	 * ```ts
-	 * // Customize default settings globally
-	 * TextStyle.defaultDropShadow.alpha = 0.5;    // 50% opacity for all shadows
-	 * TextStyle.defaultDropShadow.blur = 2;       // 2px blur for all shadows
-	 * TextStyle.defaultDropShadow.color = 'blue'; // Blue shadows by default
-	 * ```
-	 */
-	static defaultDropShadow: TextDropShadow;
-	/**
-	 * Default text style settings used when creating new text objects.
-	 * These values serve as the base configuration and can be customized globally.
-	 * @example
-	 * ```ts
-	 * // Customize default text style globally
-	 * TextStyle.defaultTextStyle.fontSize = 16;
-	 * TextStyle.defaultTextStyle.fill = 0x333333;
-	 * TextStyle.defaultTextStyle.fontFamily = ['Arial', 'Helvetica', 'sans-serif'];
-	 * ```
-	 */
-	static defaultTextStyle: TextStyleOptions;
-	constructor(style?: Partial<TextStyleOptions>);
-	/**
-	 * Alignment for multiline text, does not affect single line text.
-	 * @type {'left'|'center'|'right'|'justify'}
-	 */
-	get align(): TextStyleAlign;
-	set align(value: TextStyleAlign);
-	/** Indicates if lines can be wrapped within words, it needs wordWrap to be set to true. */
-	get breakWords(): boolean;
-	set breakWords(value: boolean);
-	/** Set a drop shadow for the text. */
-	get dropShadow(): TextDropShadow;
-	set dropShadow(value: boolean | TextDropShadow);
-	/** The font family, can be a single font name, or a list of names where the first is the preferred font. */
-	get fontFamily(): string | string[];
-	set fontFamily(value: string | string[]);
-	/** The font size (as a number it converts to px, but as a string, equivalents are '26px','20pt','160%' or '1.6em') */
-	get fontSize(): number;
-	set fontSize(value: string | number);
-	/**
-	 * The font style.
-	 * @type {'normal'|'italic'|'oblique'}
-	 */
-	get fontStyle(): TextStyleFontStyle;
-	set fontStyle(value: TextStyleFontStyle);
-	/**
-	 * The font variant.
-	 * @type {'normal'|'small-caps'}
-	 */
-	get fontVariant(): TextStyleFontVariant;
-	set fontVariant(value: TextStyleFontVariant);
-	/**
-	 * The font weight.
-	 * @type {'normal'|'bold'|'bolder'|'lighter'|'100'|'200'|'300'|'400'|'500'|'600'|'700'|'800'|'900'}
-	 */
-	get fontWeight(): TextStyleFontWeight;
-	set fontWeight(value: TextStyleFontWeight);
-	/** The space between lines. */
-	get leading(): number;
-	set leading(value: number);
-	/** The amount of spacing between letters, default is 0. */
-	get letterSpacing(): number;
-	set letterSpacing(value: number);
-	/** The line height, a number that represents the vertical space that a letter uses. */
-	get lineHeight(): number;
-	set lineHeight(value: number);
-	/**
-	 * Occasionally some fonts are cropped. Adding some padding will prevent this from happening
-	 * by adding padding to all sides of the text.
-	 * > [!NOTE] This will NOT affect the positioning or bounds of the text.
-	 */
-	get padding(): number;
-	set padding(value: number);
-	/**
-	 * An optional filter or array of filters to apply to the text, allowing for advanced visual effects.
-	 * These filters will be applied to the text as it is created, resulting in faster rendering for static text
-	 * compared to applying the filter directly to the text object (which would be applied at run time).
-	 * @default null
-	 */
-	get filters(): readonly Filter[];
-	set filters(value: Filter[]);
-	/**
-	 * Trim transparent borders from the text texture.
-	 * > [!IMPORTANT] PERFORMANCE WARNING:
-	 * > This is a costly operation as it requires scanning pixel alpha values.
-	 * > Avoid using `trim: true` for dynamic text, as it could significantly impact performance.
-	 */
-	get trim(): boolean;
-	set trim(value: boolean);
-	/**
-	 * The baseline of the text that is rendered.
-	 * @type {'alphabetic'|'top'|'hanging'|'middle'|'ideographic'|'bottom'}
-	 */
-	get textBaseline(): TextStyleTextBaseline;
-	set textBaseline(value: TextStyleTextBaseline);
-	/**
-	 * How newlines and spaces should be handled.
-	 * Default is 'pre' (preserve, preserve).
-	 *
-	 *  value       | New lines     |   Spaces
-	 *  ---         | ---           |   ---
-	 * 'normal'     | Collapse      |   Collapse
-	 * 'pre'        | Preserve      |   Preserve
-	 * 'pre-line'   | Preserve      |   Collapse
-	 * @type {'normal'|'pre'|'pre-line'}
-	 */
-	get whiteSpace(): TextStyleWhiteSpace;
-	set whiteSpace(value: TextStyleWhiteSpace);
-	/** Indicates if word wrap should be used. */
-	get wordWrap(): boolean;
-	set wordWrap(value: boolean);
-	/** The width at which text will wrap, it needs wordWrap to be set to true. */
-	get wordWrapWidth(): number;
-	set wordWrapWidth(value: number);
-	/**
-	 * The fill style that will be used to color the text.
-	 * This can be:
-	 * - A color string like 'red', '#00FF00', or 'rgba(255,0,0,0.5)'
-	 * - A hex number like 0xff0000 for red
-	 * - A FillStyle object with properties like { color: 0xff0000, alpha: 0.5 }
-	 * - A FillGradient for gradient fills
-	 * - A FillPattern for pattern/texture fills
-	 *
-	 * When using a FillGradient, vertical gradients (angle of 90 degrees) are applied per line of text,
-	 * while gradients at any other angle are spread across the entire text body as a whole.
-	 * @example
-	 * // Vertical gradient applied per line
-	 * const verticalGradient = new FillGradient(0, 0, 0, 1)
-	 *     .addColorStop(0, 0xff0000)
-	 *     .addColorStop(1, 0x0000ff);
-	 *
-	 * const text = new Text({
-	 *     text: 'Line 1\nLine 2',
-	 *     style: { fill: verticalGradient }
-	 * });
-	 *
-	 * To manage the gradient in a global scope, set the textureSpace property of the FillGradient to 'global'.
-	 * @type {string|number|FillStyle|FillGradient|FillPattern}
-	 */
-	get fill(): FillInput;
-	set fill(value: FillInput);
-	/** A fillstyle that will be used on the text stroke, e.g., 'blue', '#FCFF00'. */
-	get stroke(): StrokeInput;
-	set stroke(value: StrokeInput);
-	update(): void;
-	/** Resets all properties to the default values */
-	reset(): void;
-	/**
-	 * Returns a unique key for this instance.
-	 * This key is used for caching.
-	 * @returns {string} Unique key for the instance
-	 */
-	get styleKey(): string;
-	/**
-	 * Creates a new TextStyle object with the same values as this one.
-	 * @returns New cloned TextStyle object
-	 */
-	clone(): TextStyle;
-	/**
-	 * Destroys this text style.
-	 * @param options - Options parameter. A boolean will act as if all options
-	 *  have been set to that value
-	 * @example
-	 * // Destroy the text style and its textures
-	 * textStyle.destroy({ texture: true, textureSource: true });
-	 * textStyle.destroy(true);
-	 */
-	destroy(options?: TypeOrBool<TextureDestroyOptions>): void;
-}
-/**
- * Options for HTML text style, extends standard text styling with HTML-specific capabilities.
- * Omits certain base text properties that don't apply to HTML rendering.
- * @example
- * ```ts
- * // Basic HTML text style
- * const text = new HTMLText({
- *     text: '<p>Hello World</p>',
- *     style: {
- *         fontSize: 24,
- *         fill: '#ff0000',
- *         fontFamily: 'Arial',
- *         align: 'center'
- *     }
- * });
- *
- * // Custom tag styling
- * const taggedText = new HTMLText({
- *     text: '<custom>Custom Tag</custom>',
- *     style: {
- *         fontSize: 16,
- *         tagStyles: {
- *             custom: {
- *                 fontSize: 32,
- *                 fill: '#00ff00',
- *                 fontStyle: 'italic'
- *             }
- *         }
- *     }
- * });
- * ```
- */
-export interface HTMLTextStyleOptions extends Omit<TextStyleOptions, "leading" | "textBaseline" | "trim" | "filters"> {
-	/**
-	 * Custom styles to apply to specific HTML tags.
-	 * Allows for consistent styling of custom elements without CSS overrides.
-	 * @example
-	 * ```ts
-	 * const text = new HTMLText({
-	 *     text: `
-	 *         <red>Main Title</red>
-	 *         <grey>The subtitle</grey>
-	 *         <blue>Regular content text</blue>
-	 *     `,
-	 *     style: {
-	 *         tagStyles: {
-	 *             red: {
-	 *                 fill: '#ff0000',
-	 *             },
-	 *             grey: {
-	 *                 fill: '#666666',
-	 *             },
-	 *             blue: {
-	 *                 fill: 'blue',
-	 *             }
-	 *         }
-	 *     }
-	 * });
-	 * ```
-	 */
-	tagStyles?: Record<string, HTMLTextStyleOptions>;
-}
-/**
- * A TextStyle object rendered by the HTMLTextSystem.
- */
-export declare class HTMLTextStyle extends TextStyle {
-	/**
-	 * Custom styles to apply to specific HTML tags.
-	 * Allows for consistent styling of custom elements without CSS overrides.
-	 * @example
-	 * new HTMLText({
-	 *   text:'<red>Red</red>,<blue>Blue</blue>,<green>Green</green>',
-	 *   style:{
-	 *       fontFamily: 'DM Sans',
-	 *       fill: 'white',
-	 *       fontSize:100,
-	 *       tagStyles:{
-	 *           red:{
-	 *               fill:'red',
-	 *           },
-	 *           blue:{
-	 *               fill:'blue',
-	 *           },
-	 *           green:{
-	 *               fill:'green',
-	 *           }
-	 *       }
-	 *   }
-	 * );
-	 */
-	tagStyles: Record<string, HTMLTextStyleOptions>;
-	constructor(options?: HTMLTextStyleOptions);
-	/**
-	 * Creates a new HTMLTextStyle object with the same values as this one.
-	 * This creates a deep copy of all style properties, including dropShadow and tag styles.
-	 * @example
-	 * ```ts
-	 * // Create original style
-	 * const originalStyle = new HTMLTextStyle({
-	 *     fontSize: 24,
-	 *     fill: '#ff0000',
-	 *     tagStyles: {
-	 *         header: { fontSize: 32, fill: '#00ff00' }
-	 *     }
-	 * });
-	 *
-	 * // Clone the style
-	 * const clonedStyle = originalStyle.clone();
-	 *
-	 * // Modify cloned style independently
-	 * clonedStyle.fontSize = 36;
-	 * clonedStyle.fill = '#0000ff';
-	 *
-	 * // Original style remains unchanged
-	 * console.log(originalStyle.fontSize); // Still 24
-	 * console.log(originalStyle.fill); // Still '#ff0000'
-	 * ```
-	 *
-	 * Properties that are cloned:
-	 * - Basic text properties (fontSize, fontFamily, etc.)
-	 * - Fill and stroke styles
-	 * - Drop shadow configuration
-	 * - CSS overrides
-	 * - Tag styles (deep copied)
-	 * - Word wrap settings
-	 * - Alignment and spacing
-	 * @returns {HTMLTextStyle} A new HTMLTextStyle instance with the same properties
-	 */
-	clone(): HTMLTextStyle;
-	/**
-	 * Sets the fill style for the text. HTML text only supports color fills (string or number values).
-	 * Texture fills are not supported and will trigger a warning in debug mode.
-	 * @example
-	 * ```ts
-	 * // Using hex colors
-	 * const text = new HTMLText({
-	 *     text: 'Colored Text',
-	 *     style: {
-	 *         fill: 0xff0000 // Red color
-	 *     }
-	 * });
-	 *
-	 * // Using CSS color strings
-	 * text.style.fill = '#00ff00';     // Hex string (Green)
-	 * text.style.fill = 'blue';        // Named color
-	 * text.style.fill = 'rgb(255,0,0)' // RGB
-	 * text.style.fill = '#f0f';        // Short hex
-	 *
-	 * // Invalid usage (will trigger warning in debug)
-	 * text.style.fill = {
-	 *     type: 'pattern',
-	 *     texture: Texture.from('pattern.png')
-	 * }; // Not supported, falls back to default
-	 * ```
-	 * @param value - The fill color to use. Must be a string or number.
-	 * @throws {Warning} In debug mode when attempting to use unsupported fill types
-	 */
-	set fill(value: FillInput);
-	/**
-	 * Sets the stroke style for the text. HTML text only supports color strokes (string or number values).
-	 * Texture strokes are not supported and will trigger a warning in debug mode.
-	 * @example
-	 * ```ts
-	 * // Using hex colors
-	 * const text = new HTMLText({
-	 *     text: 'Outlined Text',
-	 *     style: {
-	 *         stroke: 0xff0000 // Red outline
-	 *     }
-	 * });
-	 *
-	 * // Using CSS color strings
-	 * text.style.stroke = '#00ff00';     // Hex string (Green)
-	 * text.style.stroke = 'blue';        // Named color
-	 * text.style.stroke = 'rgb(255,0,0)' // RGB
-	 * text.style.stroke = '#f0f';        // Short hex
-	 *
-	 * // Using stroke width
-	 * text.style = {
-	 *     stroke: {
-	 *         color: '#ff0000',
-	 *         width: 2
-	 *     }
-	 * };
-	 *
-	 * // Remove stroke
-	 * text.style.stroke = null;
-	 *
-	 * // Invalid usage (will trigger warning in debug)
-	 * text.style.stroke = {
-	 *     type: 'pattern',
-	 *     texture: Texture.from('pattern.png')
-	 * }; // Not supported, falls back to default
-	 * ```
-	 * @param value - The stroke style to use. Must be a string, number, or stroke configuration object
-	 * @throws {Warning} In debug mode when attempting to use unsupported stroke types
-	 */
-	set stroke(value: StrokeInput);
-}
-/**
- * A string or number that can be used as text.
- * @example
- * ```ts
- * const text: TextString = 'Hello Pixi!';
- * const text2: TextString = 12345;
- * const text3: TextString = { toString: () => 'Hello Pixi!' };
- * ```
- */
-export type TextString = string | number | {
-	toString: () => string;
-};
-/**
- * A union of all text styles, including HTML, Bitmap and Canvas text styles.
- * This is used to allow for any text style to be passed to a text object.
- * @example
- * ```ts
- * import { TextStyle, HTMLTextStyle } from 'pixi.js';
- * const style: AnyTextStyle = new TextStyle({ fontSize: 24 });
- * const htmlStyle: AnyTextStyle = new HTMLTextStyle({ fontSize: '24px' });
- * ```
- */
-export type AnyTextStyle = TextStyle | HTMLTextStyle;
-/**
- * A union of all text style options, including HTML, Bitmap and Canvas text style options.
- * This is used to allow for any text style options to be passed to a text object.
- * @example
- * ```ts
- * import { TextStyleOptions, HTMLTextStyleOptions } from 'pixi.js';
- * const styleOptions: AnyTextStyleOptions = { fontSize: 24 } as TextStyleOptions;
- * const htmlStyleOptions: AnyTextStyleOptions = { fontSize: '24px' } as HTMLTextStyleOptions;
- * ```
- */
-export type AnyTextStyleOptions = TextStyleOptions | HTMLTextStyleOptions;
-/**
- * Options for creating text objects in PixiJS. This interface defines the common properties
- * used across different text rendering implementations (Canvas, HTML, and Bitmap).
- * @example
- * ```ts
- * // Create basic text with minimal options
- * const basicText = new Text({
- *     text: 'Hello Pixi!',
- *     style: {
- *         fontSize: 24,
- *         fill: 0xff1010
- *     }
- * });
- *
- * // Create text with advanced styling
- * const styledText = new Text({
- *     text: 'Styled Text',
- *     style: {
- *         fontFamily: 'Arial',
- *         fontSize: 32,
- *         fill: new FillGradient({
- *             end: { x: 1, y: 1 },
- *             stops: [
- *                 { color: 0xff0000, offset: 0 }, // Red at start
- *                 { color: 0x0000ff, offset: 1 }, // Blue at end
- *             ]
- *         }),
- *         stroke: { color: '#4a1850', width: 5 },
- *         dropShadow: {
- *             color: '#000000',
- *             blur: 4,
- *             distance: 6
- *         },
- *         align: 'center'
- *     },
- *     anchor: 0.5,
- *     resolution: window.devicePixelRatio
- * });
- *
- * // Create multiline text with word wrap
- * const wrappedText = new Text({
- *     text: 'This is a long piece of text that will wrap onto multiple lines',
- *     style: {
- *         fontSize: 20,
- *         wordWrap: true,
- *         wordWrapWidth: 200,
- *         lineHeight: 30
- *     },
- *     resolution: 2,
- *     roundPixels: true
- * });
- * ```
- */
-export interface TextOptions<TEXT_STYLE extends TextStyle = TextStyle, TEXT_STYLE_OPTIONS extends TextStyleOptions = TextStyleOptions> extends PixiMixins.TextOptions, ViewContainerOptions {
-	/**
-	 * The anchor point of the text that controls the origin point for positioning and rotation.
-	 * Can be a number (same value for x/y) or a PointData object.
-	 * - (0,0) is top-left
-	 * - (0.5,0.5) is center
-	 * - (1,1) is bottom-right
-	 * ```ts
-	 * // Set anchor to center
-	 * const text = new Text({
-	 *     text: 'Hello Pixi!',
-	 *     anchor: 0.5 // Same as { x: 0.5, y: 0.5 }
-	 * });
-	 * // Set anchor to top-left
-	 * const text2 = new Text({
-	 *     text: 'Hello Pixi!',
-	 *     anchor: { x: 0, y: 0 } // Top-left corner
-	 * });
-	 * // Set anchor to bottom-right
-	 * const text3 = new Text({
-	 *     text: 'Hello Pixi!',
-	 *     anchor: { x: 1, y: 1 } // Bottom-right corner
-	 * });
-	 * ```
-	 * @default { x: 0, y: 0 }
-	 */
-	anchor?: PointData | number;
-	/**
-	 * The text content to display. Use '\n' for line breaks.
-	 * Accepts strings, numbers, or objects with toString() method.
-	 * @example
-	 * ```ts
-	 * const text = new Text({
-	 *     text: 'Hello Pixi!',
-	 * });
-	 * const multilineText = new Text({
-	 *     text: 'Line 1\nLine 2\nLine 3',
-	 * });
-	 * const numberText = new Text({
-	 *     text: 12345, // Will be converted to '12345'
-	 * });
-	 * const objectText = new Text({
-	 *     text: { toString: () => 'Object Text' }, // Custom toString
-	 * });
-	 * ```
-	 * @default ''
-	 */
-	text?: TextString;
-	/**
-	 * The resolution/device pixel ratio for rendering.
-	 * Higher values result in sharper text at the cost of performance.
-	 * Set to null for auto-resolution based on device.
-	 * @example
-	 * ```ts
-	 * const text = new Text({
-	 *     text: 'Hello Pixi!',
-	 *     resolution: 2 // High DPI for sharper text
-	 * });
-	 * const autoResText = new Text({
-	 *     text: 'Auto Resolution',
-	 *     resolution: null // Use device's pixel ratio
-	 * });
-	 * ```
-	 * @default null
-	 */
-	resolution?: number;
-	/**
-	 * The style configuration for the text.
-	 * Can be a TextStyle instance or a configuration object.
-	 * Supports canvas text styles, HTML text styles, and bitmap text styles.
-	 * @example
-	 * ```ts
-	 * const text = new Text({
-	 *     text: 'Styled Text',
-	 *     style: {
-	 *         fontSize: 24,
-	 *         fill: 0xff1010, // Red color
-	 *         fontFamily: 'Arial',
-	 *         align: 'center', // Center alignment
-	 *         stroke: { color: '#4a1850', width: 5 }, // Purple stroke
-	 *         dropShadow: {
-	 *             color: '#000000', // Black shadow
-	 *             blur: 4, // Shadow blur
-	 *             distance: 6 // Shadow distance
-	 *         }
-	 *     }
-	 * });
-	 * const htmlText = new HTMLText({
-	 *     text: 'HTML Styled Text',
-	 *     style: {
-	 *         fontSize: '20px',
-	 *         fill: 'blue',
-	 *         fontFamily: 'Verdana',
-	 *     }
-	 * });
-	 * const bitmapText = new BitmapText({
-	 *     text: 'Bitmap Styled Text',
-	 *     style: {
-	 *         fontName: 'Arial',
-	 *         fontSize: 32,
-	 *     }
-	 * })
-	 */
-	style?: TEXT_STYLE | TEXT_STYLE_OPTIONS;
-	/**
-	 * Whether to round the x/y position to whole pixels.
-	 * Enabling can prevent anti-aliasing of text edges but may cause slight position shifting.
-	 * @example
-	 * ```ts
-	 * const text = new Text({
-	 *     text: 'Rounded Text',
-	 *     roundPixels: true // Rounds position to whole pixels
-	 * });
-	 * @default false
-	 */
-	roundPixels?: boolean;
-}
-interface Text$1 extends PixiMixins.Text, AbstractText<TextStyle, TextStyleOptions, CanvasTextOptions, BatchableText> {
-}
-/**
- * Constructor options used for `Text` instances. These options extend TextOptions with
- * canvas-specific features like texture styling.
- * @example
- * ```ts
- * // Create basic canvas text
- * const text = new Text({
- *     text: 'Hello Pixi!',
- *     style: {
- *         fontSize: 24,
- *         fill: 0xff1010,
- *     }
- * });
- *
- * // Create text with custom texture style
- * const customText = new Text({
- *     text: 'Custom Text',
- *     style: {
- *         fontSize: 32,
- *         fill: 0x4a4a4a
- *     },
- *     textureStyle: {
- *         scaleMode: 'nearest',
- *     }
- * });
- * ```
- */
-export interface CanvasTextOptions extends TextOptions {
-}
-/**
- * A powerful text rendering class that creates one or multiple lines of text using the Canvas API.
- * Provides rich text styling capabilities with runtime modifications.
- *
- * Key features:
- * - Dynamic text content and styling
- * - Multi-line text support
- * - Word wrapping
- * - Custom texture styling
- * - High-quality text rendering
- * @example
- * ```ts
- * import { Text } from 'pixi.js';
- *
- * // Basic text creation
- * const basicText = new Text({
- *     text: 'Hello Pixi!',
- *     style: {
- *         fontFamily: 'Arial',
- *         fontSize: 24,
- *         fill: 0xff1010,
- *         align: 'center',
- *     }
- * });
- *
- * // Rich text with multiple styles
- * const richText = new Text({
- *     text: 'Styled\nMultiline\nText',
- *     style: {
- *         fontFamily: 'Arial',
- *         fontSize: 36,
- *         fill: 'red',
- *         stroke: { color: '#4a1850', width: 5 },
- *         align: 'center',
- *         lineHeight: 45,
- *         dropShadow: {
- *             color: '#000000',
- *             blur: 4,
- *             distance: 6,
- *         }
- *     },
- *     anchor: 0.5,
- * });
- *
- * // Text with custom texture settings
- * const crispText = new Text({
- *     text: 'High Quality Text',
- *     style: {
- *         fontSize: 24,
- *         fill: 0x4a4a4a,
- *     },
- *     textureStyle: {
- *         scaleMode: 'nearest',
- *     }
- * });
- *
- * // Word-wrapped text
- * const wrappedText = new Text({
- *     text: 'This is a long piece of text that will automatically wrap to multiple lines',
- *     style: {
- *         fontSize: 20,
- *         wordWrap: true,
- *         wordWrapWidth: 200,
- *         lineHeight: 30,
- *     }
- * });
- * ```
- *
- * Performance Considerations:
- * - Each text instance creates its own texture
- * - Texture is regenerated when text or style changes
- * - Use BitmapText for better performance with static text
- * - Consider texture style options for quality vs performance tradeoffs
- */
-declare class Text$1 extends AbstractText<TextStyle, TextStyleOptions, CanvasTextOptions, BatchableText> implements View {
-	/**
-	 * @param {CanvasTextOptions} options - The options of the text.
-	 */
-	constructor(options?: CanvasTextOptions);
-	/** @deprecated since 8.0.0 */
-	constructor(text?: TextString, options?: Partial<TextStyle>);
-}
-declare global {
-	namespace PixiMixins {
-		interface RendererSystems {
-		}
-	}
-}
-declare global {
-	namespace PixiMixins {
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface ICanvas {
-		}
-		interface RendererOptions {
-			resolution?: number;
-			failIfMajorPerformanceCaveat?: boolean;
-			roundPixels?: boolean;
-		}
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface WebGLOptions {
-		}
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface WebGPUOptions {
-		}
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface RendererSystems {
-		}
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface WebGLSystems {
-		}
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface WebGPUSystems {
-		}
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface CanvasSystems {
-		}
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface RendererPipes {
-		}
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface WebGLPipes {
-		}
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface WebGPUPipes {
-		}
-		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-		interface CanvasPipes {
-		}
-	}
-}
 /**
  * Constructor options used for Graphics instances.
  * Configures the initial state and behavior of a Graphics object.
@@ -13914,6 +12144,1798 @@ interface GeometryData {
 	vertices: number[];
 	uvs: number[];
 	indices: number[];
+}
+/**
+ * The GraphicsContext class allows for the creation of lightweight objects that contain instructions for drawing shapes and paths.
+ * It is used internally by the Graphics class to draw shapes and paths, and can be used directly and shared between Graphics objects,
+ *
+ * This sharing of a `GraphicsContext` means that the intensive task of converting graphics instructions into GPU-ready geometry is done once, and the results are reused,
+ * much like sprites reusing textures.
+ */
+export declare class GraphicsContext extends EventEmitter<{
+	update: GraphicsContext;
+	destroy: GraphicsContext;
+	unload: GraphicsContext;
+}> implements GCable {
+	/** If set to true, the resource will be garbage collected automatically when it is not used. */
+	autoGarbageCollect: boolean;
+	/** The default fill style to use when none is provided. */
+	static defaultFillStyle: ConvertedFillStyle;
+	/** The default stroke style to use when none is provided. */
+	static defaultStrokeStyle: ConvertedStrokeStyle;
+	/** The batch mode for this graphics context. It can be 'auto', 'batch', or 'no-batch'. */
+	batchMode: BatchMode;
+	/** Whether the graphics context has been destroyed. */
+	destroyed: boolean;
+	/**
+	 * Creates a new GraphicsContext object that is a clone of this instance, copying all properties,
+	 * including the current drawing state, transformations, styles, and instructions.
+	 * @returns A new GraphicsContext instance with the same properties and state as this one.
+	 */
+	clone(): GraphicsContext;
+	/**
+	 * The current fill style of the graphics context. This can be a color, gradient, pattern, or a more complex style defined by a FillStyle object.
+	 */
+	get fillStyle(): ConvertedFillStyle;
+	set fillStyle(value: FillInput);
+	/**
+	 * The current stroke style of the graphics context. Similar to fill styles, stroke styles can encompass colors, gradients, patterns, or more detailed configurations via a StrokeStyle object.
+	 */
+	get strokeStyle(): ConvertedStrokeStyle;
+	set strokeStyle(value: FillInput);
+	/**
+	 * Sets the current fill style of the graphics context. The fill style can be a color, gradient,
+	 * pattern, or a more complex style defined by a FillStyle object.
+	 * @param style - The fill style to apply. This can be a simple color, a gradient or pattern object,
+	 *                or a FillStyle or ConvertedFillStyle object.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	setFillStyle(style: FillInput): this;
+	/**
+	 * Sets the current stroke style of the graphics context. Similar to fill styles, stroke styles can
+	 * encompass colors, gradients, patterns, or more detailed configurations via a StrokeStyle object.
+	 * @param style - The stroke style to apply. Can be defined as a color, a gradient or pattern,
+	 *                or a StrokeStyle or ConvertedStrokeStyle object.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	setStrokeStyle(style: StrokeInput): this;
+	/**
+	 * Adds a texture to the graphics context. This method supports multiple overloads for specifying the texture.
+	 * If only a texture is provided, it uses the texture's width and height for drawing.
+	 * @param texture - The Texture object to use.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	texture(texture: Texture): this;
+	/**
+	 * Adds a texture to the graphics context. This method supports multiple overloads for specifying the texture,
+	 * tint, and dimensions. If only a texture is provided, it uses the texture's width and height for drawing.
+	 * Additional parameters allow for specifying a tint color, and custom dimensions for the texture drawing area.
+	 * @param texture - The Texture object to use.
+	 * @param tint - (Optional) A ColorSource to tint the texture. If not provided, defaults to white (0xFFFFFF).
+	 * @param dx - (Optional) The x-coordinate in the destination canvas at which to place the top-left corner of
+	 * the source image.
+	 * @param dy - (Optional) The y-coordinate in the destination canvas at which to place the top-left corner of
+	 * the source image.
+	 * @param dw - (Optional) The width of the rectangle within the source image to draw onto the destination canvas.
+	 * If not provided, uses the texture's frame width.
+	 * @param dh - (Optional) The height of the rectangle within the source image to draw onto the destination canvas.
+	 * If not provided, uses the texture's frame height.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	texture(texture: Texture, tint?: ColorSource, dx?: number, dy?: number, dw?: number, dh?: number): this;
+	/**
+	 * Resets the current path. Any previous path and its commands are discarded and a new path is
+	 * started. This is typically called before beginning a new shape or series of drawing commands.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	beginPath(): this;
+	/**
+	 * Fills the current or given path with the current fill style. This method can optionally take
+	 * a color and alpha for a simple fill, or a more complex FillInput object for advanced fills.
+	 * @param style - (Optional) The style to fill the path with. Can be a color, gradient, pattern, or a complex style object. If omitted, uses the current fill style.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	fill(style?: FillInput): this;
+	/** @deprecated 8.0.0 */
+	fill(color: ColorSource, alpha: number): this;
+	/**
+	 * Strokes the current path with the current stroke style. This method can take an optional
+	 * FillInput parameter to define the stroke's appearance, including its color, width, and other properties.
+	 * @param style - (Optional) The stroke style to apply. Can be defined as a simple color or a more complex style object. If omitted, uses the current stroke style.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	stroke(style?: StrokeInput): this;
+	/**
+	 * Applies a cutout to the last drawn shape. This is used to create holes or complex shapes by
+	 * subtracting a path from the previously drawn path. If a hole is not completely in a shape, it will
+	 * fail to cut correctly!
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	cut(): this;
+	/**
+	 * Adds an arc to the current path, which is centered at (x, y) with the specified radius,
+	 * starting and ending angles, and direction.
+	 * @param x - The x-coordinate of the arc's center.
+	 * @param y - The y-coordinate of the arc's center.
+	 * @param radius - The arc's radius.
+	 * @param startAngle - The starting angle, in radians.
+	 * @param endAngle - The ending angle, in radians.
+	 * @param counterclockwise - (Optional) Specifies whether the arc is drawn counterclockwise (true) or clockwise (false). Defaults to false.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, counterclockwise?: boolean): this;
+	/**
+	 * Adds an arc to the current path with the given control points and radius, connected to the previous point
+	 * by a straight line if necessary.
+	 * @param x1 - The x-coordinate of the first control point.
+	 * @param y1 - The y-coordinate of the first control point.
+	 * @param x2 - The x-coordinate of the second control point.
+	 * @param y2 - The y-coordinate of the second control point.
+	 * @param radius - The arc's radius.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): this;
+	/**
+	 * Adds an SVG-style arc to the path, allowing for elliptical arcs based on the SVG spec.
+	 * @param rx - The x-radius of the ellipse.
+	 * @param ry - The y-radius of the ellipse.
+	 * @param xAxisRotation - The rotation of the ellipse's x-axis relative
+	 * to the x-axis of the coordinate system, in degrees.
+	 * @param largeArcFlag - Determines if the arc should be greater than or less than 180 degrees.
+	 * @param sweepFlag - Determines if the arc should be swept in a positive angle direction.
+	 * @param x - The x-coordinate of the arc's end point.
+	 * @param y - The y-coordinate of the arc's end point.
+	 * @returns The instance of the current object for chaining.
+	 */
+	arcToSvg(rx: number, ry: number, xAxisRotation: number, largeArcFlag: number, sweepFlag: number, x: number, y: number): this;
+	/**
+	 * Adds a cubic Bezier curve to the path.
+	 * It requires three points: the first two are control points and the third one is the end point.
+	 * The starting point is the last point in the current path.
+	 * @param cp1x - The x-coordinate of the first control point.
+	 * @param cp1y - The y-coordinate of the first control point.
+	 * @param cp2x - The x-coordinate of the second control point.
+	 * @param cp2y - The y-coordinate of the second control point.
+	 * @param x - The x-coordinate of the end point.
+	 * @param y - The y-coordinate of the end point.
+	 * @param smoothness - Optional parameter to adjust the smoothness of the curve.
+	 * @returns The instance of the current object for chaining.
+	 */
+	bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number, smoothness?: number): this;
+	/**
+	 * Closes the current path by drawing a straight line back to the start.
+	 * If the shape is already closed or there are no points in the path, this method does nothing.
+	 * @returns The instance of the current object for chaining.
+	 */
+	closePath(): this;
+	/**
+	 * Draws an ellipse at the specified location and with the given x and y radii.
+	 * An optional transformation can be applied, allowing for rotation, scaling, and translation.
+	 * @param x - The x-coordinate of the center of the ellipse.
+	 * @param y - The y-coordinate of the center of the ellipse.
+	 * @param radiusX - The horizontal radius of the ellipse.
+	 * @param radiusY - The vertical radius of the ellipse.
+	 * @returns The instance of the current object for chaining.
+	 */
+	ellipse(x: number, y: number, radiusX: number, radiusY: number): this;
+	/**
+	 * Draws a circle shape. This method adds a new circle path to the current drawing.
+	 * @param x - The x-coordinate of the center of the circle.
+	 * @param y - The y-coordinate of the center of the circle.
+	 * @param radius - The radius of the circle.
+	 * @returns The instance of the current object for chaining.
+	 */
+	circle(x: number, y: number, radius: number): this;
+	/**
+	 * Adds another `GraphicsPath` to this path, optionally applying a transformation.
+	 * @param path - The `GraphicsPath` to add.
+	 * @returns The instance of the current object for chaining.
+	 */
+	path(path: GraphicsPath): this;
+	/**
+	 * Connects the current point to a new point with a straight line. This method updates the current path.
+	 * @param x - The x-coordinate of the new point to connect to.
+	 * @param y - The y-coordinate of the new point to connect to.
+	 * @returns The instance of the current object for chaining.
+	 */
+	lineTo(x: number, y: number): this;
+	/**
+	 * Sets the starting point for a new sub-path. Any subsequent drawing commands are considered part of this path.
+	 * @param x - The x-coordinate for the starting point.
+	 * @param y - The y-coordinate for the starting point.
+	 * @returns The instance of the current object for chaining.
+	 */
+	moveTo(x: number, y: number): this;
+	/**
+	 * Adds a quadratic curve to the path. It requires two points: the control point and the end point.
+	 * The starting point is the last point in the current path.
+	 * @param cpx - The x-coordinate of the control point.
+	 * @param cpy - The y-coordinate of the control point.
+	 * @param x - The x-coordinate of the end point.
+	 * @param y - The y-coordinate of the end point.
+	 * @param smoothness - Optional parameter to adjust the smoothness of the curve.
+	 * @returns The instance of the current object for chaining.
+	 */
+	quadraticCurveTo(cpx: number, cpy: number, x: number, y: number, smoothness?: number): this;
+	/**
+	 * Draws a rectangle shape. This method adds a new rectangle path to the current drawing.
+	 * @param x - The x-coordinate of the top-left corner of the rectangle.
+	 * @param y - The y-coordinate of the top-left corner of the rectangle.
+	 * @param w - The width of the rectangle.
+	 * @param h - The height of the rectangle.
+	 * @returns The instance of the current object for chaining.
+	 */
+	rect(x: number, y: number, w: number, h: number): this;
+	/**
+	 * Draws a rectangle with rounded corners.
+	 * The corner radius can be specified to determine how rounded the corners should be.
+	 * An optional transformation can be applied, which allows for rotation, scaling, and translation of the rectangle.
+	 * @param x - The x-coordinate of the top-left corner of the rectangle.
+	 * @param y - The y-coordinate of the top-left corner of the rectangle.
+	 * @param w - The width of the rectangle.
+	 * @param h - The height of the rectangle.
+	 * @param radius - The radius of the rectangle's corners. If not specified, corners will be sharp.
+	 * @returns The instance of the current object for chaining.
+	 */
+	roundRect(x: number, y: number, w: number, h: number, radius?: number): this;
+	/**
+	 * Draws a polygon shape by specifying a sequence of points. This method allows for the creation of complex polygons,
+	 * which can be both open and closed. An optional transformation can be applied, enabling the polygon to be scaled,
+	 * rotated, or translated as needed.
+	 * @param points - An array of numbers, or an array of PointData objects eg [{x,y}, {x,y}, {x,y}]
+	 * representing the x and y coordinates, of the polygon's vertices, in sequence.
+	 * @param close - A boolean indicating whether to close the polygon path. True by default.
+	 */
+	poly(points: number[] | PointData[], close?: boolean): this;
+	/**
+	 * Draws a regular polygon with a specified number of sides. All sides and angles are equal.
+	 * @param x - The x-coordinate of the center of the polygon.
+	 * @param y - The y-coordinate of the center of the polygon.
+	 * @param radius - The radius of the circumscribed circle of the polygon.
+	 * @param sides - The number of sides of the polygon. Must be 3 or more.
+	 * @param rotation - The rotation angle of the polygon, in radians. Zero by default.
+	 * @param transform - An optional `Matrix` object to apply a transformation to the polygon.
+	 * @returns The instance of the current object for chaining.
+	 */
+	regularPoly(x: number, y: number, radius: number, sides: number, rotation?: number, transform?: Matrix): this;
+	/**
+	 * Draws a polygon with rounded corners.
+	 * Similar to `regularPoly` but with the ability to round the corners of the polygon.
+	 * @param x - The x-coordinate of the center of the polygon.
+	 * @param y - The y-coordinate of the center of the polygon.
+	 * @param radius - The radius of the circumscribed circle of the polygon.
+	 * @param sides - The number of sides of the polygon. Must be 3 or more.
+	 * @param corner - The radius of the rounding of the corners.
+	 * @param rotation - The rotation angle of the polygon, in radians. Zero by default.
+	 * @returns The instance of the current object for chaining.
+	 */
+	roundPoly(x: number, y: number, radius: number, sides: number, corner: number, rotation?: number): this;
+	/**
+	 * Draws a shape with rounded corners. This function supports custom radius for each corner of the shape.
+	 * Optionally, corners can be rounded using a quadratic curve instead of an arc, providing a different aesthetic.
+	 * @param points - An array of `RoundedPoint` representing the corners of the shape to draw.
+	 * A minimum of 3 points is required.
+	 * @param radius - The default radius for the corners.
+	 * This radius is applied to all corners unless overridden in `points`.
+	 * @param useQuadratic - If set to true, rounded corners are drawn using a quadraticCurve
+	 *  method instead of an arc method. Defaults to false.
+	 * @param smoothness - Specifies the smoothness of the curve when `useQuadratic` is true.
+	 * Higher values make the curve smoother.
+	 * @returns The instance of the current object for chaining.
+	 */
+	roundShape(points: RoundedPoint[], radius: number, useQuadratic?: boolean, smoothness?: number): this;
+	/**
+	 * Draw Rectangle with fillet corners. This is much like rounded rectangle
+	 * however it support negative numbers as well for the corner radius.
+	 * @param x - Upper left corner of rect
+	 * @param y - Upper right corner of rect
+	 * @param width - Width of rect
+	 * @param height - Height of rect
+	 * @param fillet - accept negative or positive values
+	 */
+	filletRect(x: number, y: number, width: number, height: number, fillet: number): this;
+	/**
+	 * Draw Rectangle with chamfer corners. These are angled corners.
+	 * @param x - Upper left corner of rect
+	 * @param y - Upper right corner of rect
+	 * @param width - Width of rect
+	 * @param height - Height of rect
+	 * @param chamfer - non-zero real number, size of corner cutout
+	 * @param transform
+	 */
+	chamferRect(x: number, y: number, width: number, height: number, chamfer: number, transform?: Matrix): this;
+	/**
+	 * Draws a star shape centered at a specified location. This method allows for the creation
+	 *  of stars with a variable number of points, outer radius, optional inner radius, and rotation.
+	 * The star is drawn as a closed polygon with alternating outer and inner vertices to create the star's points.
+	 * An optional transformation can be applied to scale, rotate, or translate the star as needed.
+	 * @param x - The x-coordinate of the center of the star.
+	 * @param y - The y-coordinate of the center of the star.
+	 * @param points - The number of points of the star.
+	 * @param radius - The outer radius of the star (distance from the center to the outer points).
+	 * @param innerRadius - Optional. The inner radius of the star
+	 * (distance from the center to the inner points between the outer points).
+	 * If not provided, defaults to half of the `radius`.
+	 * @param rotation - Optional. The rotation of the star in radians, where 0 is aligned with the y-axis.
+	 * Defaults to 0, meaning one point is directly upward.
+	 * @returns The instance of the current object for chaining further drawing commands.
+	 */
+	star(x: number, y: number, points: number, radius: number, innerRadius?: number, rotation?: number): this;
+	/**
+	 * Parses and renders an SVG string into the graphics context. This allows for complex shapes and paths
+	 * defined in SVG format to be drawn within the graphics context.
+	 * @param svg - The SVG string to be parsed and rendered.
+	 */
+	svg(svg: string): this;
+	/**
+	 * Restores the most recently saved graphics state by popping the top of the graphics state stack.
+	 * This includes transformations, fill styles, and stroke styles.
+	 */
+	restore(): this;
+	/** Saves the current graphics state, including transformations, fill styles, and stroke styles, onto a stack. */
+	save(): this;
+	/**
+	 * Returns the current transformation matrix of the graphics context.
+	 * @returns The current transformation matrix.
+	 */
+	getTransform(): Matrix;
+	/**
+	 * Resets the current transformation matrix to the identity matrix, effectively removing any transformations (rotation, scaling, translation) previously applied.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	resetTransform(): this;
+	/**
+	 * Applies a rotation transformation to the graphics context around the current origin.
+	 * @param angle - The angle of rotation in radians.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	rotate(angle: number): this;
+	/**
+	 * Applies a scaling transformation to the graphics context, scaling drawings by x horizontally and by y vertically.
+	 * @param x - The scale factor in the horizontal direction.
+	 * @param y - (Optional) The scale factor in the vertical direction. If not specified, the x value is used for both directions.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	scale(x: number, y?: number): this;
+	/**
+	 * Sets the current transformation matrix of the graphics context to the specified matrix or values.
+	 * This replaces the current transformation matrix.
+	 * @param transform - The matrix to set as the current transformation matrix.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	setTransform(transform: Matrix): this;
+	/**
+	 * Sets the current transformation matrix of the graphics context to the specified matrix or values.
+	 * This replaces the current transformation matrix.
+	 * @param a - The value for the a property of the matrix, or a Matrix object to use directly.
+	 * @param b - The value for the b property of the matrix.
+	 * @param c - The value for the c property of the matrix.
+	 * @param d - The value for the d property of the matrix.
+	 * @param dx - The value for the tx (translate x) property of the matrix.
+	 * @param dy - The value for the ty (translate y) property of the matrix.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	setTransform(a: number, b: number, c: number, d: number, dx: number, dy: number): this;
+	/**
+	 * Applies the specified transformation matrix to the current graphics context by multiplying
+	 * the current matrix with the specified matrix.
+	 * @param transform - The matrix to apply to the current transformation.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	transform(transform: Matrix): this;
+	/**
+	 * Applies the specified transformation matrix to the current graphics context by multiplying
+	 * the current matrix with the specified matrix.
+	 * @param a - The value for the a property of the matrix, or a Matrix object to use directly.
+	 * @param b - The value for the b property of the matrix.
+	 * @param c - The value for the c property of the matrix.
+	 * @param d - The value for the d property of the matrix.
+	 * @param dx - The value for the tx (translate x) property of the matrix.
+	 * @param dy - The value for the ty (translate y) property of the matrix.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	transform(a: number, b: number, c: number, d: number, dx: number, dy: number): this;
+	/**
+	 * Applies a translation transformation to the graphics context, moving the origin by the specified amounts.
+	 * @param x - The amount to translate in the horizontal direction.
+	 * @param y - (Optional) The amount to translate in the vertical direction. If not specified, the x value is used for both directions.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	translate(x: number, y?: number): this;
+	/**
+	 * Clears all drawing commands from the graphics context, effectively resetting it. This includes clearing the path,
+	 * and optionally resetting transformations to the identity matrix.
+	 * @returns The instance of the current GraphicsContext for method chaining.
+	 */
+	clear(): this;
+	/** The bounds of the graphic shape. */
+	get bounds(): Bounds;
+	/**
+	 * Check to see if a point is contained within this geometry.
+	 * @param point - Point to check if it's contained.
+	 * @returns {boolean} `true` if the point is contained within geometry.
+	 */
+	containsPoint(point: PointData): boolean;
+	/** Unloads the GPU data from the graphics context. */
+	unload(): void;
+	/**
+	 * Destroys the GraphicsData object.
+	 * @param options - Options parameter. A boolean will act as if all options
+	 *  have been set to that value
+	 * @example
+	 * context.destroy();
+	 * context.destroy(true);
+	 * context.destroy({ texture: true, textureSource: true });
+	 */
+	destroy(options?: TypeOrBool<TextureDestroyOptions>): void;
+}
+/**
+ * The alignment of the text.
+ *
+ * - 'left': Aligns text to the left edge.
+ * - 'center': Centers text horizontally.
+ * - 'right': Aligns text to the right edge.
+ * - 'justify': Justifies text, aligning both left and right edges.
+ * @example
+ * ```ts
+ * import { TextStyle } from 'pixi.js';
+ * const style = new TextStyle({
+ *   align: 'center', // or 'left', 'right', 'justify'
+ * });
+ * ```
+ */
+export type TextStyleAlign = "left" | "center" | "right" | "justify";
+/**
+ * The fill style input for text styles.
+ *
+ * This can be:
+ * - A color string like 'red', '#00FF00', or 'rgba(255,0,0,0.5)'
+ * - A hex number like 0xff0000 for red
+ * - A FillStyle object with properties like { color: 0xff0000, alpha: 0.5 }
+ * - A FillGradient for gradient fills
+ * - A FillPattern for pattern/texture fills
+ * @example
+ * ```ts
+ * // Simple Fills
+ * new TextStyle({ fill: 'red' }); // Color string
+ * new TextStyle({ fill: 0x00ff00 }); // Hex color
+ * new TextStyle({ fill: 'rgb(255,0,0)' }); // RGB string
+ * // Gradients
+ * new TextStyle({
+ *     fill: new FillGradient({
+ *         end: { x: 1, y: 1 },
+ *         stops: [
+ *             { color: 0xff0000, offset: 0 }, // Red at start
+ *             { color: 0x0000ff, offset: 1 }, // Blue at end
+ *         ]
+ *     }),
+ * });
+ * // Patterns
+ * new TextStyle({
+ *    fill: new FillPattern(Assets.get('pattern.png'))
+ * });
+ * ```
+ */
+export type TextStyleFill = string | string[] | number | number[] | CanvasGradient | CanvasPattern;
+/**
+ * The font style input for text styles. Controls the slant or italicization of the text.
+ * @example
+ * ```ts
+ * // Create text with normal font style
+ * const normalText = new Text({
+ *     text: 'Normal Style Text',
+ *     style: {
+ *         fontStyle: 'normal',
+ *         fontSize: 24
+ *     }
+ * });
+ *
+ * // Create italic text
+ * const italicText = new Text({
+ *     text: 'Italic Style Text',
+ *     style: {
+ *         fontStyle: 'italic',
+ *         fontSize: 24,
+ *         fontFamily: 'Arial'
+ *     }
+ * });
+ *
+ * // Create oblique text
+ * const obliqueText = new Text({
+ *     text: 'Oblique Style Text',
+ *     style: {
+ *         fontStyle: 'oblique',
+ *         fontSize: 24,
+ *         fontFamily: 'Times New Roman'
+ *     }
+ * });
+ *
+ * // Dynamic style changes
+ * let isItalic = false;
+ * text.style = {
+ *     ...text.style,
+ *     fontStyle: isItalic ? 'italic' : 'normal'
+ * };
+ * ```
+ *
+ * Supported values:
+ * - 'normal': Regular upright text with no slant
+ * - 'italic': True italics using specifically designed italic glyphs
+ * - 'oblique': Slanted version of the regular glyphs
+ * @remarks
+ * - 'italic' uses specially designed glyphs with cursive characteristics
+ * - 'oblique' is a mechanical slant of the normal glyphs
+ * - Not all fonts include true italic designs; some may fall back to oblique
+ */
+export type TextStyleFontStyle = "normal" | "italic" | "oblique";
+/**
+ * The font variant input for text styles. Controls the capitalization and presentation of letters.
+ * Used to enable special rendering like small caps.
+ * @example
+ * ```ts
+ * // Create text with normal font variant
+ * const normalText = new Text({
+ *     text: 'Normal Text',
+ *     style: {
+ *         fontVariant: 'normal',
+ *         fontSize: 24
+ *     }
+ * });
+ *
+ * // Create text with small-caps variant
+ * const smallCapsText = new Text({
+ *     text: 'Small Caps Text',
+ *     style: {
+ *         fontVariant: 'small-caps',
+ *         fontSize: 24,
+ *         fontFamily: 'Arial'
+ *     }
+ * });
+ *
+ * // Use in a TextStyle instance
+ * const style = new TextStyle({
+ *     fontVariant: 'small-caps',
+ *     fontSize: 32,
+ *     fill: 0x4a4a4a
+ * });
+ *
+ * // Update variant dynamically
+ * text.style = {
+ *     ...text.style,
+ *     fontVariant: text.style.fontVariant === 'normal' ? 'small-caps' : 'normal'
+ * };
+ * ```
+ *
+ * Supported values:
+ * - 'normal': Regular text rendering with standard capitalization
+ * - 'small-caps': Renders lowercase letters as smaller versions of capital letters
+ * @remarks
+ * Small caps are only available if the font supports them.
+ * Not all fonts include true small caps glyphs.
+ */
+export type TextStyleFontVariant = "normal" | "small-caps";
+/**
+ * The font weight input for text styles. Controls the thickness or boldness of the text.
+ * @example
+ * ```ts
+ * // Create text with different font weights
+ * const normalText = new Text({
+ *     text: 'Normal Weight',
+ *     style: { fontWeight: 'normal' }
+ * });
+ *
+ * const boldText = new Text({
+ *     text: 'Bold Weight',
+ *     style: { fontWeight: 'bold' }
+ * });
+ *
+ * // Using numeric weights
+ * const lightText = new Text({
+ *     text: 'Light Weight',
+ *     style: { fontWeight: '300' }
+ * });
+ *
+ * const mediumText = new Text({
+ *     text: 'Medium Weight',
+ *     style: { fontWeight: '500' }
+ * });
+ *
+ * const heavyText = new Text({
+ *     text: 'Heavy Weight',
+ *     style: { fontWeight: '900' }
+ * });
+ *
+ * // Responsive weight changes
+ * const adaptiveText = new Text({
+ *     text: 'Adaptive Weight',
+ *     style: { fontWeight: window.innerWidth > 600 ? 'bold' : 'normal' }
+ * });
+ * ```
+ *
+ * Supported values:
+ * - 'normal': Standard weight (equivalent to 400)
+ * - 'bold': Bold weight (equivalent to 700)
+ * - 'bolder': One weight darker than the parent element
+ * - 'lighter': One weight lighter than the parent element
+ * - '100': Thin (Hairline)
+ * - '200': Extra Light (Ultra Light)
+ * - '300': Light
+ * - '400': Normal
+ * - '500': Medium
+ * - '600': Semi Bold (Demi Bold)
+ * - '700': Bold
+ * - '800': Extra Bold (Ultra Bold)
+ * - '900': Heavy (Black)
+ */
+export type TextStyleFontWeight = "normal" | "bold" | "bolder" | "lighter" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+/**
+ * The line join style for text strokes. Determines how lines connect at corners.
+ * @example
+ * ```ts
+ * // Create text with miter joins (sharp corners)
+ * const sharpText = new Text({
+ *     text: 'Sharp Corners',
+ *     style: {
+ *         fontSize: 36,
+ *         stroke: {
+ *             color: '#4a1850',
+ *             width: 4,
+ *             lineJoin: 'miter'  // Sharp corners
+ *         }
+ *     }
+ * });
+ *
+ * // Create text with round joins
+ * const roundText = new Text({
+ *     text: 'Rounded Corners',
+ *     style: {
+ *         fontSize: 36,
+ *         stroke: {
+ *             color: '#4a1850',
+ *             width: 4,
+ *             lineJoin: 'round'  // Smooth rounded corners
+ *         }
+ *     }
+ * });
+ *
+ * // Create text with beveled joins
+ * const bevelText = new Text({
+ *     text: 'Beveled Corners',
+ *     style: {
+ *         fontSize: 36,
+ *         stroke: {
+ *             color: '#4a1850',
+ *             width: 4,
+ *             lineJoin: 'bevel'  // Flattened corners
+ *         }
+ *     }
+ * });
+ * ```
+ * Available values:
+ * - 'miter': Creates sharp corners by extending the outer edges until they meet
+ * - 'round': Creates smooth, rounded corners using a circular arc
+ * - 'bevel': Creates flattened corners by filling an additional triangle between the outer edges
+ */
+export type TextStyleLineJoin = "miter" | "round" | "bevel";
+/**
+ * The text baseline for text styles.
+ *
+ * This can be:
+ * - 'alphabetic': The alphabetic baseline
+ * - 'top': The top of the text
+ * - 'hanging': The hanging baseline
+ * - 'middle': The middle of the text
+ * - 'ideographic': The ideographic baseline
+ * - 'bottom': The bottom of the text
+ */
+export type TextStyleTextBaseline = "alphabetic" | "top" | "hanging" | "middle" | "ideographic" | "bottom";
+/**
+ * Controls how whitespace (spaces, tabs, and line breaks) is handled within the text.
+ * This affects text wrapping and spacing behavior.
+ * @example
+ * ```ts
+ * // Normal mode (collapse spaces and newlines)
+ * const normalText = new Text({
+ *     text: 'Hello    World\n\nNew Line',
+ *     style: {
+ *         whiteSpace: 'normal',
+ *         fontSize: 24
+ *     }
+ * }); // Renders as: "Hello World New Line"
+ *
+ * // Pre mode (preserve all whitespace)
+ * const preText = new Text({
+ *     text: 'Hello    World\n\nNew Line',
+ *     style: {
+ *         whiteSpace: 'pre',
+ *         fontSize: 24
+ *     }
+ * }); // Preserves spaces and line breaks exactly
+ *
+ * // Pre-line mode (preserve newlines, collapse spaces)
+ * const preLineText = new Text({
+ *     text: 'Hello    World\n\nNew Line',
+ *     style: {
+ *         whiteSpace: 'pre-line',
+ *         fontSize: 24
+ *     }
+ * }); // Preserves line breaks, collapses multiple spaces
+ *
+ * // With word wrap enabled
+ * const wrappedText = new Text({
+ *     text: 'A long text with    multiple spaces\nand line breaks',
+ *     style: {
+ *         whiteSpace: 'pre-line',
+ *         wordWrap: true,
+ *         wordWrapWidth: 200,
+ *         fontSize: 24
+ *     }
+ * });
+ * ```
+ *
+ * Supported values:
+ * - 'normal': Collapses all whitespace (spaces, tabs, line breaks) into a single space
+ * - 'pre': Preserves all whitespace characters exactly as written
+ * - 'pre-line': Preserves line breaks but collapses multiple spaces into a single space
+ * @remarks
+ * - 'normal' is best for single-line text or when you want to ignore formatting
+ * - 'pre' is useful for code blocks or when exact spacing is important
+ * - 'pre-line' is good for formatted text where you want to keep line breaks but clean up spaces
+ */
+export type TextStyleWhiteSpace = "normal" | "pre" | "pre-line";
+/**
+ * Defines a drop shadow effect for text rendering.
+ * Drop shadows add depth and emphasis to text by creating a shadow offset from the text.
+ * @example
+ * ```ts
+ * // Create text with basic drop shadow
+ * const text = new Text({
+ *     text: 'Shadow Text',
+ *     style: {
+ *         fontSize: 48,
+ *         dropShadow: {
+ *             alpha: 0.5,         // 50% opacity shadow
+ *             angle: Math.PI / 6, // 30 degrees
+ *             blur: 4,            // Soft shadow edge
+ *             color: '#000000',   // Black shadow
+ *             distance: 6         // Shadow offset
+ *         }
+ *     }
+ * });
+ *
+ * // Dynamic shadow updates
+ * text.style.dropShadow = {
+ *     alpha: Math.sin(Date.now() / 1000) * 0.5 + 0.5, // Pulsing opacity
+ *     angle: Date.now() / 1000,                        // Rotating angle
+ *     blur: 4,
+ *     color: '#000000',
+ *     distance: 6
+ * };
+ * ```
+ */
+export type TextDropShadow = {
+	/**
+	 * The opacity of the drop shadow.
+	 * - Range: 0 to 1
+	 * - 0 = fully transparent
+	 * - 1 = fully opaque
+	 * @example
+	 * ```ts
+	 * // Set drop shadow opacity to 50%
+	 * dropShadow: {
+	 *    alpha: 0.5
+	 * }
+	 * ```
+	 * @default 1
+	 */
+	alpha: number;
+	/**
+	 * The angle of the drop shadow in radians.
+	 * - 0 = right
+	 * - Math.PI/2 = down
+	 * - Math.PI = left
+	 * - Math.PI*1.5 = up
+	 * @example
+	 * ```ts
+	 * // Set drop shadow angle to 30 degrees
+	 * dropShadow: {
+	 *    angle: Math.PI / 6 // 30 degrees
+	 * }
+	 * ```
+	 * @default Math.PI/6 (30 degrees)
+	 */
+	angle: number;
+	/**
+	 * The blur radius of the shadow.
+	 * - 0 = sharp shadow
+	 * - Higher values = softer shadow
+	 * @example
+	 * ```ts
+	 * // Set drop shadow blur radius to 10 pixels
+	 * dropShadow: {
+	 *   blur: 10
+	 * }
+	 * ```
+	 * @default 0
+	 */
+	blur: number;
+	/**
+	 * The color of the drop shadow.
+	 * Accepts any valid CSS color string, hex number, or RGB/RGBA values.
+	 * @example '#000000', 'rgba(0,0,0,0.5)', 0x000000
+	 * @default 'black'
+	 */
+	color: ColorSource;
+	/**
+	 * The distance of the drop shadow from the text.
+	 * Measured in pixels.
+	 * @example
+	 * ```ts
+	 * // Set drop shadow distance to 5 pixels
+	 * dropShadow: {
+	 *   distance: 5
+	 * }
+	 * ```
+	 * @default 5
+	 */
+	distance: number;
+};
+/**
+ * Constructor options used for `TextStyle` instances. Defines the visual appearance and layout of text.
+ * @example
+ * ```ts
+ * // Basic text style
+ * const basicStyle = new TextStyle({
+ *     fontSize: 24,
+ *     fill: 'black',
+ *     fontFamily: 'Arial'
+ * });
+ *
+ * // Rich text style with multiple features
+ * const richStyle = new TextStyle({
+ *     fontFamily: ['Arial', 'Helvetica', 'sans-serif'],
+ *     fontSize: 36,
+ *     fontWeight: 'bold',
+ *     fill: 'red',
+ *     stroke: { color: '#4a1850', width: 5 },
+ *     align: 'center',
+ *     dropShadow: {
+ *         color: '#000000',
+ *         blur: 4,
+ *         distance: 6,
+ *         angle: Math.PI / 6
+ *     },
+ *     wordWrap: true,
+ *     wordWrapWidth: 440,
+ *     lineHeight: 40,
+ *     textBaseline: 'middle'
+ * });
+ * ```
+ */
+export interface TextStyleOptions {
+	/**
+	 * Alignment for multiline text, does not affect single line text
+	 * @default 'left'
+	 */
+	align?: TextStyleAlign;
+	/**
+	 * Whether to allow line breaks within words.
+	 * Requires wordWrap to be true.
+	 * @example
+	 * ```ts
+	 * // Enable word breaking
+	 * const style = new TextStyle({
+	 *    breakWords: true,
+	 *    wordWrap: true,
+	 *    wordWrapWidth: 200
+	 * });
+	 * ```
+	 * @default false
+	 */
+	breakWords?: boolean;
+	/**
+	 * Drop shadow configuration for the text.
+	 * Can be boolean or a TextDropShadow object.
+	 * @default null
+	 */
+	dropShadow?: boolean | Partial<TextDropShadow>;
+	/**
+	 * Fill style for the text.
+	 * Can be a color, gradient, or pattern.
+	 * @default 'black'
+	 */
+	fill?: FillInput;
+	/**
+	 * Font family or families to use.
+	 * Can be single name or array of fallbacks.
+	 * @example
+	 * ```ts
+	 * // Single font family
+	 * fontFamily: 'Arial'
+	 * // Multiple font families
+	 * fontFamily: ['Helvetica', 'Arial', 'sans-serif']
+	 * ```
+	 * @default 'Arial'
+	 */
+	fontFamily?: string | string[];
+	/**
+	 * Font size in pixels or as string.
+	 *
+	 * Equivalents are '26px','20pt','160%' or '1.6em')
+	 * @example
+	 * ```ts
+	 * // Numeric size
+	 * fontSize: 26
+	 * // String size
+	 * fontSize: '26px'
+	 * // Percentage size
+	 * fontSize: '160%' // 1.6 times the parent element's font size
+	 * // Em size
+	 * fontSize: '1.6em' // 1.6 times the parent element's font size
+	 * @default 26
+	 */
+	fontSize?: number | string;
+	/**
+	 * Font style (normal, italic, oblique).
+	 * @default 'normal'
+	 */
+	fontStyle?: TextStyleFontStyle;
+	/**
+	 * Font variant (normal, small-caps).
+	 * @default 'normal'
+	 */
+	fontVariant?: TextStyleFontVariant;
+	/**
+	 * Font weight (normal, bold, bolder, lighter, 100-900).
+	 * @default 'normal'
+	 */
+	fontWeight?: TextStyleFontWeight;
+	/** The height of the line, a number that represents the vertical space that a letter uses. */
+	leading?: number;
+	/** The amount of spacing between letters, default is 0 */
+	letterSpacing?: number;
+	/** The line height, a number that represents the vertical space that a letter uses */
+	lineHeight?: number;
+	/**
+	 * Padding around the text.
+	 *
+	 * Occasionally some fonts are cropped. Adding some padding will prevent this from
+	 * happening by adding padding to all sides of the text.
+	 */
+	padding?: number;
+	/**
+	 * Stroke style for text outline.
+	 * @default null
+	 */
+	stroke?: StrokeInput;
+	/**
+	 * Vertical alignment baseline.
+	 * @default 'alphabetic'
+	 */
+	textBaseline?: TextStyleTextBaseline;
+	/**
+	 * Whether to trim transparent edges.
+	 * > [!NOTE] This is an expensive operation and should only be used when necessary.
+	 * @default false
+	 */
+	trim?: boolean;
+	/**
+	 * How to handle whitespace.
+	 *
+	 * It needs wordWrap to be set to true for this to have an effect.
+	 * @default 'pre'
+	 */
+	whiteSpace?: TextStyleWhiteSpace;
+	/** Indicates if word wrap should be used */
+	wordWrap?: boolean;
+	/** The width at which text will wrap, it needs wordWrap to be set to true */
+	wordWrapWidth?: number;
+	/**
+	 * Array of filters to apply to the text.
+	 *
+	 * These filters will be applied to the text as it is created, resulting in faster rendering for static text
+	 * compared to applying the filter directly to the text object (which would be applied at run time).
+	 * @default undefined
+	 */
+	filters?: Filter[] | readonly Filter[];
+}
+/**
+ * A TextStyle Object contains information to decorate Text objects.
+ * An instance can be shared between multiple Text objects; then changing the style will update all text objects using it.
+ * @example
+ * ```ts
+ * // Create a basic text style
+ * const style = new TextStyle({
+ *     fontFamily: ['Helvetica', 'Arial', 'sans-serif'],
+ *     fontSize: 36,
+ *     fill: 0xff1010,
+ *     align: 'center'
+ * });
+ *
+ * // Create a rich text style with multiple features
+ * const richStyle = new TextStyle({
+ *     fontFamily: 'Arial',
+ *     fontSize: 32,
+ *     fill: 'white',
+ *     stroke: {
+ *         color: '#4a1850',
+ *         width: 5
+ *     },
+ *     dropShadow: {
+ *         color: '#000000',
+ *         blur: 4,
+ *         distance: 6,
+ *         angle: Math.PI / 6
+ *     },
+ *     wordWrap: true,
+ *     wordWrapWidth: 440,
+ *     lineHeight: 40,
+ *     align: 'center'
+ * });
+ *
+ * // Share style between multiple text objects
+ * const text1 = new Text({
+ *     text: 'Hello',
+ *     style: richStyle
+ * });
+ *
+ * const text2 = new Text({
+ *     text: 'World',
+ *     style: richStyle
+ * });
+ *
+ * // Update style dynamically - affects all text objects
+ * richStyle.fontSize = 48;
+ * richStyle.fill = 0x00ff00;
+ * ```
+ *
+ * Key Features:
+ * - Shared styling between multiple text objects
+ * - Rich text formatting options
+ * - Gradient and pattern fills
+ * - Drop shadows and strokes
+ * - Word wrapping and alignment
+ * - Dynamic updates
+ */
+export declare class TextStyle extends EventEmitter<{
+	update: TextDropShadow;
+}> {
+	/**
+	 * Default drop shadow settings used when enabling drop shadows on text.
+	 * These values are used as the base configuration when drop shadows are enabled without specific settings.
+	 * @example
+	 * ```ts
+	 * // Customize default settings globally
+	 * TextStyle.defaultDropShadow.alpha = 0.5;    // 50% opacity for all shadows
+	 * TextStyle.defaultDropShadow.blur = 2;       // 2px blur for all shadows
+	 * TextStyle.defaultDropShadow.color = 'blue'; // Blue shadows by default
+	 * ```
+	 */
+	static defaultDropShadow: TextDropShadow;
+	/**
+	 * Default text style settings used when creating new text objects.
+	 * These values serve as the base configuration and can be customized globally.
+	 * @example
+	 * ```ts
+	 * // Customize default text style globally
+	 * TextStyle.defaultTextStyle.fontSize = 16;
+	 * TextStyle.defaultTextStyle.fill = 0x333333;
+	 * TextStyle.defaultTextStyle.fontFamily = ['Arial', 'Helvetica', 'sans-serif'];
+	 * ```
+	 */
+	static defaultTextStyle: TextStyleOptions;
+	constructor(style?: Partial<TextStyleOptions>);
+	/**
+	 * Alignment for multiline text, does not affect single line text.
+	 * @type {'left'|'center'|'right'|'justify'}
+	 */
+	get align(): TextStyleAlign;
+	set align(value: TextStyleAlign);
+	/** Indicates if lines can be wrapped within words, it needs wordWrap to be set to true. */
+	get breakWords(): boolean;
+	set breakWords(value: boolean);
+	/** Set a drop shadow for the text. */
+	get dropShadow(): TextDropShadow;
+	set dropShadow(value: boolean | TextDropShadow);
+	/** The font family, can be a single font name, or a list of names where the first is the preferred font. */
+	get fontFamily(): string | string[];
+	set fontFamily(value: string | string[]);
+	/** The font size (as a number it converts to px, but as a string, equivalents are '26px','20pt','160%' or '1.6em') */
+	get fontSize(): number;
+	set fontSize(value: string | number);
+	/**
+	 * The font style.
+	 * @type {'normal'|'italic'|'oblique'}
+	 */
+	get fontStyle(): TextStyleFontStyle;
+	set fontStyle(value: TextStyleFontStyle);
+	/**
+	 * The font variant.
+	 * @type {'normal'|'small-caps'}
+	 */
+	get fontVariant(): TextStyleFontVariant;
+	set fontVariant(value: TextStyleFontVariant);
+	/**
+	 * The font weight.
+	 * @type {'normal'|'bold'|'bolder'|'lighter'|'100'|'200'|'300'|'400'|'500'|'600'|'700'|'800'|'900'}
+	 */
+	get fontWeight(): TextStyleFontWeight;
+	set fontWeight(value: TextStyleFontWeight);
+	/** The space between lines. */
+	get leading(): number;
+	set leading(value: number);
+	/** The amount of spacing between letters, default is 0. */
+	get letterSpacing(): number;
+	set letterSpacing(value: number);
+	/** The line height, a number that represents the vertical space that a letter uses. */
+	get lineHeight(): number;
+	set lineHeight(value: number);
+	/**
+	 * Occasionally some fonts are cropped. Adding some padding will prevent this from happening
+	 * by adding padding to all sides of the text.
+	 * > [!NOTE] This will NOT affect the positioning or bounds of the text.
+	 */
+	get padding(): number;
+	set padding(value: number);
+	/**
+	 * An optional filter or array of filters to apply to the text, allowing for advanced visual effects.
+	 * These filters will be applied to the text as it is created, resulting in faster rendering for static text
+	 * compared to applying the filter directly to the text object (which would be applied at run time).
+	 * @default null
+	 */
+	get filters(): readonly Filter[];
+	set filters(value: Filter[]);
+	/**
+	 * Trim transparent borders from the text texture.
+	 * > [!IMPORTANT] PERFORMANCE WARNING:
+	 * > This is a costly operation as it requires scanning pixel alpha values.
+	 * > Avoid using `trim: true` for dynamic text, as it could significantly impact performance.
+	 */
+	get trim(): boolean;
+	set trim(value: boolean);
+	/**
+	 * The baseline of the text that is rendered.
+	 * @type {'alphabetic'|'top'|'hanging'|'middle'|'ideographic'|'bottom'}
+	 */
+	get textBaseline(): TextStyleTextBaseline;
+	set textBaseline(value: TextStyleTextBaseline);
+	/**
+	 * How newlines and spaces should be handled.
+	 * Default is 'pre' (preserve, preserve).
+	 *
+	 *  value       | New lines     |   Spaces
+	 *  ---         | ---           |   ---
+	 * 'normal'     | Collapse      |   Collapse
+	 * 'pre'        | Preserve      |   Preserve
+	 * 'pre-line'   | Preserve      |   Collapse
+	 * @type {'normal'|'pre'|'pre-line'}
+	 */
+	get whiteSpace(): TextStyleWhiteSpace;
+	set whiteSpace(value: TextStyleWhiteSpace);
+	/** Indicates if word wrap should be used. */
+	get wordWrap(): boolean;
+	set wordWrap(value: boolean);
+	/** The width at which text will wrap, it needs wordWrap to be set to true. */
+	get wordWrapWidth(): number;
+	set wordWrapWidth(value: number);
+	/**
+	 * The fill style that will be used to color the text.
+	 * This can be:
+	 * - A color string like 'red', '#00FF00', or 'rgba(255,0,0,0.5)'
+	 * - A hex number like 0xff0000 for red
+	 * - A FillStyle object with properties like { color: 0xff0000, alpha: 0.5 }
+	 * - A FillGradient for gradient fills
+	 * - A FillPattern for pattern/texture fills
+	 *
+	 * When using a FillGradient, vertical gradients (angle of 90 degrees) are applied per line of text,
+	 * while gradients at any other angle are spread across the entire text body as a whole.
+	 * @example
+	 * // Vertical gradient applied per line
+	 * const verticalGradient = new FillGradient(0, 0, 0, 1)
+	 *     .addColorStop(0, 0xff0000)
+	 *     .addColorStop(1, 0x0000ff);
+	 *
+	 * const text = new Text({
+	 *     text: 'Line 1\nLine 2',
+	 *     style: { fill: verticalGradient }
+	 * });
+	 *
+	 * To manage the gradient in a global scope, set the textureSpace property of the FillGradient to 'global'.
+	 * @type {string|number|FillStyle|FillGradient|FillPattern}
+	 */
+	get fill(): FillInput;
+	set fill(value: FillInput);
+	/** A fillstyle that will be used on the text stroke, e.g., 'blue', '#FCFF00'. */
+	get stroke(): StrokeInput;
+	set stroke(value: StrokeInput);
+	update(): void;
+	/** Resets all properties to the default values */
+	reset(): void;
+	/**
+	 * Returns a unique key for this instance.
+	 * This key is used for caching.
+	 * @returns {string} Unique key for the instance
+	 */
+	get styleKey(): string;
+	/**
+	 * Creates a new TextStyle object with the same values as this one.
+	 * @returns New cloned TextStyle object
+	 */
+	clone(): TextStyle;
+	/**
+	 * Destroys this text style.
+	 * @param options - Options parameter. A boolean will act as if all options
+	 *  have been set to that value
+	 * @example
+	 * // Destroy the text style and its textures
+	 * textStyle.destroy({ texture: true, textureSource: true });
+	 * textStyle.destroy(true);
+	 */
+	destroy(options?: TypeOrBool<TextureDestroyOptions>): void;
+}
+/**
+ * Options for HTML text style, extends standard text styling with HTML-specific capabilities.
+ * Omits certain base text properties that don't apply to HTML rendering.
+ * @example
+ * ```ts
+ * // Basic HTML text style
+ * const text = new HTMLText({
+ *     text: '<p>Hello World</p>',
+ *     style: {
+ *         fontSize: 24,
+ *         fill: '#ff0000',
+ *         fontFamily: 'Arial',
+ *         align: 'center'
+ *     }
+ * });
+ *
+ * // Custom tag styling
+ * const taggedText = new HTMLText({
+ *     text: '<custom>Custom Tag</custom>',
+ *     style: {
+ *         fontSize: 16,
+ *         tagStyles: {
+ *             custom: {
+ *                 fontSize: 32,
+ *                 fill: '#00ff00',
+ *                 fontStyle: 'italic'
+ *             }
+ *         }
+ *     }
+ * });
+ * ```
+ */
+export interface HTMLTextStyleOptions extends Omit<TextStyleOptions, "leading" | "textBaseline" | "trim" | "filters"> {
+	/**
+	 * Custom styles to apply to specific HTML tags.
+	 * Allows for consistent styling of custom elements without CSS overrides.
+	 * @example
+	 * ```ts
+	 * const text = new HTMLText({
+	 *     text: `
+	 *         <red>Main Title</red>
+	 *         <grey>The subtitle</grey>
+	 *         <blue>Regular content text</blue>
+	 *     `,
+	 *     style: {
+	 *         tagStyles: {
+	 *             red: {
+	 *                 fill: '#ff0000',
+	 *             },
+	 *             grey: {
+	 *                 fill: '#666666',
+	 *             },
+	 *             blue: {
+	 *                 fill: 'blue',
+	 *             }
+	 *         }
+	 *     }
+	 * });
+	 * ```
+	 */
+	tagStyles?: Record<string, HTMLTextStyleOptions>;
+}
+/**
+ * A TextStyle object rendered by the HTMLTextSystem.
+ */
+export declare class HTMLTextStyle extends TextStyle {
+	/**
+	 * Custom styles to apply to specific HTML tags.
+	 * Allows for consistent styling of custom elements without CSS overrides.
+	 * @example
+	 * new HTMLText({
+	 *   text:'<red>Red</red>,<blue>Blue</blue>,<green>Green</green>',
+	 *   style:{
+	 *       fontFamily: 'DM Sans',
+	 *       fill: 'white',
+	 *       fontSize:100,
+	 *       tagStyles:{
+	 *           red:{
+	 *               fill:'red',
+	 *           },
+	 *           blue:{
+	 *               fill:'blue',
+	 *           },
+	 *           green:{
+	 *               fill:'green',
+	 *           }
+	 *       }
+	 *   }
+	 * );
+	 */
+	tagStyles: Record<string, HTMLTextStyleOptions>;
+	constructor(options?: HTMLTextStyleOptions);
+	/**
+	 * Creates a new HTMLTextStyle object with the same values as this one.
+	 * This creates a deep copy of all style properties, including dropShadow and tag styles.
+	 * @example
+	 * ```ts
+	 * // Create original style
+	 * const originalStyle = new HTMLTextStyle({
+	 *     fontSize: 24,
+	 *     fill: '#ff0000',
+	 *     tagStyles: {
+	 *         header: { fontSize: 32, fill: '#00ff00' }
+	 *     }
+	 * });
+	 *
+	 * // Clone the style
+	 * const clonedStyle = originalStyle.clone();
+	 *
+	 * // Modify cloned style independently
+	 * clonedStyle.fontSize = 36;
+	 * clonedStyle.fill = '#0000ff';
+	 *
+	 * // Original style remains unchanged
+	 * console.log(originalStyle.fontSize); // Still 24
+	 * console.log(originalStyle.fill); // Still '#ff0000'
+	 * ```
+	 *
+	 * Properties that are cloned:
+	 * - Basic text properties (fontSize, fontFamily, etc.)
+	 * - Fill and stroke styles
+	 * - Drop shadow configuration
+	 * - CSS overrides
+	 * - Tag styles (deep copied)
+	 * - Word wrap settings
+	 * - Alignment and spacing
+	 * @returns {HTMLTextStyle} A new HTMLTextStyle instance with the same properties
+	 */
+	clone(): HTMLTextStyle;
+	/**
+	 * Sets the fill style for the text. HTML text only supports color fills (string or number values).
+	 * Texture fills are not supported and will trigger a warning in debug mode.
+	 * @example
+	 * ```ts
+	 * // Using hex colors
+	 * const text = new HTMLText({
+	 *     text: 'Colored Text',
+	 *     style: {
+	 *         fill: 0xff0000 // Red color
+	 *     }
+	 * });
+	 *
+	 * // Using CSS color strings
+	 * text.style.fill = '#00ff00';     // Hex string (Green)
+	 * text.style.fill = 'blue';        // Named color
+	 * text.style.fill = 'rgb(255,0,0)' // RGB
+	 * text.style.fill = '#f0f';        // Short hex
+	 *
+	 * // Invalid usage (will trigger warning in debug)
+	 * text.style.fill = {
+	 *     type: 'pattern',
+	 *     texture: Texture.from('pattern.png')
+	 * }; // Not supported, falls back to default
+	 * ```
+	 * @param value - The fill color to use. Must be a string or number.
+	 * @throws {Warning} In debug mode when attempting to use unsupported fill types
+	 */
+	set fill(value: FillInput);
+	/**
+	 * Sets the stroke style for the text. HTML text only supports color strokes (string or number values).
+	 * Texture strokes are not supported and will trigger a warning in debug mode.
+	 * @example
+	 * ```ts
+	 * // Using hex colors
+	 * const text = new HTMLText({
+	 *     text: 'Outlined Text',
+	 *     style: {
+	 *         stroke: 0xff0000 // Red outline
+	 *     }
+	 * });
+	 *
+	 * // Using CSS color strings
+	 * text.style.stroke = '#00ff00';     // Hex string (Green)
+	 * text.style.stroke = 'blue';        // Named color
+	 * text.style.stroke = 'rgb(255,0,0)' // RGB
+	 * text.style.stroke = '#f0f';        // Short hex
+	 *
+	 * // Using stroke width
+	 * text.style = {
+	 *     stroke: {
+	 *         color: '#ff0000',
+	 *         width: 2
+	 *     }
+	 * };
+	 *
+	 * // Remove stroke
+	 * text.style.stroke = null;
+	 *
+	 * // Invalid usage (will trigger warning in debug)
+	 * text.style.stroke = {
+	 *     type: 'pattern',
+	 *     texture: Texture.from('pattern.png')
+	 * }; // Not supported, falls back to default
+	 * ```
+	 * @param value - The stroke style to use. Must be a string, number, or stroke configuration object
+	 * @throws {Warning} In debug mode when attempting to use unsupported stroke types
+	 */
+	set stroke(value: StrokeInput);
+}
+/**
+ * A string or number that can be used as text.
+ * @example
+ * ```ts
+ * const text: TextString = 'Hello Pixi!';
+ * const text2: TextString = 12345;
+ * const text3: TextString = { toString: () => 'Hello Pixi!' };
+ * ```
+ */
+export type TextString = string | number | {
+	toString: () => string;
+};
+/**
+ * A union of all text styles, including HTML, Bitmap and Canvas text styles.
+ * This is used to allow for any text style to be passed to a text object.
+ * @example
+ * ```ts
+ * import { TextStyle, HTMLTextStyle } from 'pixi.js';
+ * const style: AnyTextStyle = new TextStyle({ fontSize: 24 });
+ * const htmlStyle: AnyTextStyle = new HTMLTextStyle({ fontSize: '24px' });
+ * ```
+ */
+export type AnyTextStyle = TextStyle | HTMLTextStyle;
+/**
+ * A union of all text style options, including HTML, Bitmap and Canvas text style options.
+ * This is used to allow for any text style options to be passed to a text object.
+ * @example
+ * ```ts
+ * import { TextStyleOptions, HTMLTextStyleOptions } from 'pixi.js';
+ * const styleOptions: AnyTextStyleOptions = { fontSize: 24 } as TextStyleOptions;
+ * const htmlStyleOptions: AnyTextStyleOptions = { fontSize: '24px' } as HTMLTextStyleOptions;
+ * ```
+ */
+export type AnyTextStyleOptions = TextStyleOptions | HTMLTextStyleOptions;
+/**
+ * Options for creating text objects in PixiJS. This interface defines the common properties
+ * used across different text rendering implementations (Canvas, HTML, and Bitmap).
+ * @example
+ * ```ts
+ * // Create basic text with minimal options
+ * const basicText = new Text({
+ *     text: 'Hello Pixi!',
+ *     style: {
+ *         fontSize: 24,
+ *         fill: 0xff1010
+ *     }
+ * });
+ *
+ * // Create text with advanced styling
+ * const styledText = new Text({
+ *     text: 'Styled Text',
+ *     style: {
+ *         fontFamily: 'Arial',
+ *         fontSize: 32,
+ *         fill: new FillGradient({
+ *             end: { x: 1, y: 1 },
+ *             stops: [
+ *                 { color: 0xff0000, offset: 0 }, // Red at start
+ *                 { color: 0x0000ff, offset: 1 }, // Blue at end
+ *             ]
+ *         }),
+ *         stroke: { color: '#4a1850', width: 5 },
+ *         dropShadow: {
+ *             color: '#000000',
+ *             blur: 4,
+ *             distance: 6
+ *         },
+ *         align: 'center'
+ *     },
+ *     anchor: 0.5,
+ *     resolution: window.devicePixelRatio
+ * });
+ *
+ * // Create multiline text with word wrap
+ * const wrappedText = new Text({
+ *     text: 'This is a long piece of text that will wrap onto multiple lines',
+ *     style: {
+ *         fontSize: 20,
+ *         wordWrap: true,
+ *         wordWrapWidth: 200,
+ *         lineHeight: 30
+ *     },
+ *     resolution: 2,
+ *     roundPixels: true
+ * });
+ * ```
+ */
+export interface TextOptions<TEXT_STYLE extends TextStyle = TextStyle, TEXT_STYLE_OPTIONS extends TextStyleOptions = TextStyleOptions> extends PixiMixins.TextOptions, ViewContainerOptions {
+	/**
+	 * The anchor point of the text that controls the origin point for positioning and rotation.
+	 * Can be a number (same value for x/y) or a PointData object.
+	 * - (0,0) is top-left
+	 * - (0.5,0.5) is center
+	 * - (1,1) is bottom-right
+	 * ```ts
+	 * // Set anchor to center
+	 * const text = new Text({
+	 *     text: 'Hello Pixi!',
+	 *     anchor: 0.5 // Same as { x: 0.5, y: 0.5 }
+	 * });
+	 * // Set anchor to top-left
+	 * const text2 = new Text({
+	 *     text: 'Hello Pixi!',
+	 *     anchor: { x: 0, y: 0 } // Top-left corner
+	 * });
+	 * // Set anchor to bottom-right
+	 * const text3 = new Text({
+	 *     text: 'Hello Pixi!',
+	 *     anchor: { x: 1, y: 1 } // Bottom-right corner
+	 * });
+	 * ```
+	 * @default { x: 0, y: 0 }
+	 */
+	anchor?: PointData | number;
+	/**
+	 * The text content to display. Use '\n' for line breaks.
+	 * Accepts strings, numbers, or objects with toString() method.
+	 * @example
+	 * ```ts
+	 * const text = new Text({
+	 *     text: 'Hello Pixi!',
+	 * });
+	 * const multilineText = new Text({
+	 *     text: 'Line 1\nLine 2\nLine 3',
+	 * });
+	 * const numberText = new Text({
+	 *     text: 12345, // Will be converted to '12345'
+	 * });
+	 * const objectText = new Text({
+	 *     text: { toString: () => 'Object Text' }, // Custom toString
+	 * });
+	 * ```
+	 * @default ''
+	 */
+	text?: TextString;
+	/**
+	 * The resolution/device pixel ratio for rendering.
+	 * Higher values result in sharper text at the cost of performance.
+	 * Set to null for auto-resolution based on device.
+	 * @example
+	 * ```ts
+	 * const text = new Text({
+	 *     text: 'Hello Pixi!',
+	 *     resolution: 2 // High DPI for sharper text
+	 * });
+	 * const autoResText = new Text({
+	 *     text: 'Auto Resolution',
+	 *     resolution: null // Use device's pixel ratio
+	 * });
+	 * ```
+	 * @default null
+	 */
+	resolution?: number;
+	/**
+	 * The style configuration for the text.
+	 * Can be a TextStyle instance or a configuration object.
+	 * Supports canvas text styles, HTML text styles, and bitmap text styles.
+	 * @example
+	 * ```ts
+	 * const text = new Text({
+	 *     text: 'Styled Text',
+	 *     style: {
+	 *         fontSize: 24,
+	 *         fill: 0xff1010, // Red color
+	 *         fontFamily: 'Arial',
+	 *         align: 'center', // Center alignment
+	 *         stroke: { color: '#4a1850', width: 5 }, // Purple stroke
+	 *         dropShadow: {
+	 *             color: '#000000', // Black shadow
+	 *             blur: 4, // Shadow blur
+	 *             distance: 6 // Shadow distance
+	 *         }
+	 *     }
+	 * });
+	 * const htmlText = new HTMLText({
+	 *     text: 'HTML Styled Text',
+	 *     style: {
+	 *         fontSize: '20px',
+	 *         fill: 'blue',
+	 *         fontFamily: 'Verdana',
+	 *     }
+	 * });
+	 * const bitmapText = new BitmapText({
+	 *     text: 'Bitmap Styled Text',
+	 *     style: {
+	 *         fontName: 'Arial',
+	 *         fontSize: 32,
+	 *     }
+	 * })
+	 */
+	style?: TEXT_STYLE | TEXT_STYLE_OPTIONS;
+	/**
+	 * Whether to round the x/y position to whole pixels.
+	 * Enabling can prevent anti-aliasing of text edges but may cause slight position shifting.
+	 * @example
+	 * ```ts
+	 * const text = new Text({
+	 *     text: 'Rounded Text',
+	 *     roundPixels: true // Rounds position to whole pixels
+	 * });
+	 * @default false
+	 */
+	roundPixels?: boolean;
+}
+interface Text$1 extends PixiMixins.Text, AbstractText<TextStyle, TextStyleOptions, CanvasTextOptions, BatchableText> {
+}
+/**
+ * Constructor options used for `Text` instances. These options extend TextOptions with
+ * canvas-specific features like texture styling.
+ * @example
+ * ```ts
+ * // Create basic canvas text
+ * const text = new Text({
+ *     text: 'Hello Pixi!',
+ *     style: {
+ *         fontSize: 24,
+ *         fill: 0xff1010,
+ *     }
+ * });
+ *
+ * // Create text with custom texture style
+ * const customText = new Text({
+ *     text: 'Custom Text',
+ *     style: {
+ *         fontSize: 32,
+ *         fill: 0x4a4a4a
+ *     },
+ *     textureStyle: {
+ *         scaleMode: 'nearest',
+ *     }
+ * });
+ * ```
+ */
+export interface CanvasTextOptions extends TextOptions {
+}
+/**
+ * A powerful text rendering class that creates one or multiple lines of text using the Canvas API.
+ * Provides rich text styling capabilities with runtime modifications.
+ *
+ * Key features:
+ * - Dynamic text content and styling
+ * - Multi-line text support
+ * - Word wrapping
+ * - Custom texture styling
+ * - High-quality text rendering
+ * @example
+ * ```ts
+ * import { Text } from 'pixi.js';
+ *
+ * // Basic text creation
+ * const basicText = new Text({
+ *     text: 'Hello Pixi!',
+ *     style: {
+ *         fontFamily: 'Arial',
+ *         fontSize: 24,
+ *         fill: 0xff1010,
+ *         align: 'center',
+ *     }
+ * });
+ *
+ * // Rich text with multiple styles
+ * const richText = new Text({
+ *     text: 'Styled\nMultiline\nText',
+ *     style: {
+ *         fontFamily: 'Arial',
+ *         fontSize: 36,
+ *         fill: 'red',
+ *         stroke: { color: '#4a1850', width: 5 },
+ *         align: 'center',
+ *         lineHeight: 45,
+ *         dropShadow: {
+ *             color: '#000000',
+ *             blur: 4,
+ *             distance: 6,
+ *         }
+ *     },
+ *     anchor: 0.5,
+ * });
+ *
+ * // Text with custom texture settings
+ * const crispText = new Text({
+ *     text: 'High Quality Text',
+ *     style: {
+ *         fontSize: 24,
+ *         fill: 0x4a4a4a,
+ *     },
+ *     textureStyle: {
+ *         scaleMode: 'nearest',
+ *     }
+ * });
+ *
+ * // Word-wrapped text
+ * const wrappedText = new Text({
+ *     text: 'This is a long piece of text that will automatically wrap to multiple lines',
+ *     style: {
+ *         fontSize: 20,
+ *         wordWrap: true,
+ *         wordWrapWidth: 200,
+ *         lineHeight: 30,
+ *     }
+ * });
+ * ```
+ *
+ * Performance Considerations:
+ * - Each text instance creates its own texture
+ * - Texture is regenerated when text or style changes
+ * - Use BitmapText for better performance with static text
+ * - Consider texture style options for quality vs performance tradeoffs
+ */
+declare class Text$1 extends AbstractText<TextStyle, TextStyleOptions, CanvasTextOptions, BatchableText> implements View {
+	/**
+	 * @param {CanvasTextOptions} options - The options of the text.
+	 */
+	constructor(options?: CanvasTextOptions);
+	/** @deprecated since 8.0.0 */
+	constructor(text?: TextString, options?: Partial<TextStyle>);
+}
+declare global {
+	namespace PixiMixins {
+		interface RendererSystems {
+		}
+	}
+}
+declare global {
+	namespace PixiMixins {
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface ICanvas {
+		}
+		interface RendererOptions {
+			resolution?: number;
+			failIfMajorPerformanceCaveat?: boolean;
+			roundPixels?: boolean;
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface WebGLOptions {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface WebGPUOptions {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface RendererSystems {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface WebGLSystems {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface WebGPUSystems {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface CanvasSystems {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface RendererPipes {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface WebGLPipes {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface WebGPUPipes {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface CanvasPipes {
+		}
+	}
 }
 declare global {
 	namespace PixiMixins {
@@ -15961,8 +15983,9 @@ export interface ParticleProperties {
  *     }
  * });
  * ```
+ * @template T The type of particles in the container. Must implement {@link IParticle}. * @category scene
  */
-export interface ParticleContainerOptions extends PixiMixins.ParticleContainerOptions, Omit<ViewContainerOptions, "children"> {
+export interface ParticleContainerOptions<T extends IParticle = IParticle> extends PixiMixins.ParticleContainerOptions, Omit<ViewContainerOptions, "children"> {
 	/**
 	 * Specifies which particle properties should update each frame.
 	 * Set properties to true for per-frame updates, false for static values.
@@ -15981,7 +16004,7 @@ export interface ParticleContainerOptions extends PixiMixins.ParticleContainerOp
 	 */
 	texture?: Texture;
 	/** Initial array of particles to add to the container. All particles must share the same base texture. */
-	particles?: IParticle[];
+	particles?: T[];
 }
 export interface ParticleContainer extends PixiMixins.ParticleContainer, ViewContainer<ParticleBuffer> {
 }
@@ -16035,8 +16058,9 @@ export interface ParticleContainer extends PixiMixins.ParticleContainer, ViewCon
  *     container.addParticle(particle);
  * }
  * ```
+ * @template T The type of particles in the container. Must implement {@link IParticle}.
  */
-export declare class ParticleContainer extends ViewContainer<ParticleBuffer> implements Instruction {
+export declare class ParticleContainer<T extends IParticle = IParticle> extends ViewContainer<ParticleBuffer> implements Instruction {
 	/**
 	 * Defines the default options for creating a ParticleContainer.
 	 * @example
@@ -16054,9 +16078,9 @@ export declare class ParticleContainer extends ViewContainer<ParticleBuffer> imp
 	 * };
 	 * ```
 	 * @property {Record<string, boolean>} dynamicProperties - Specifies which properties are dynamic.
-	 * @property {boolean} roundPixels - Indicates if pixels should be  rounded.
+	 * @property {boolean} roundPixels - Indicates if pixels should be rounded.
 	 */
-	static defaultOptions: ParticleContainerOptions;
+	static defaultOptions: Pick<ParticleContainerOptions, "dynamicProperties" | "roundPixels">;
 	/**
 	 * An array of particles that are children of this ParticleContainer.
 	 * This array can be modified directly for performance, but the 'update' method
@@ -16082,7 +16106,7 @@ export declare class ParticleContainer extends ViewContainer<ParticleBuffer> imp
 	 * container.update();
 	 * ```
 	 */
-	particleChildren: IParticle[];
+	particleChildren: T[];
 	/**
 	 * The texture used for rendering particles in this ParticleContainer. All particles
 	 * must share the same base texture for optimal performance.
@@ -16107,7 +16131,7 @@ export declare class ParticleContainer extends ViewContainer<ParticleBuffer> imp
 	/**
 	 * @param options - The options for creating the sprite.
 	 */
-	constructor(options?: ParticleContainerOptions);
+	constructor(options?: ParticleContainerOptions<T>);
 	/**
 	 * Adds one or more particles to the container. The particles will be rendered using the container's shared texture
 	 * and properties. When adding multiple particles, they must all share the same base texture.
@@ -16131,7 +16155,7 @@ export declare class ParticleContainer extends ViewContainer<ParticleBuffer> imp
 	 * @param children - The Particle(s) to add to the container
 	 * @returns The first particle that was added, for method chaining
 	 */
-	addParticle(...children: IParticle[]): IParticle;
+	addParticle(...children: T[]): T;
 	/**
 	 * Removes one or more particles from the container. The particles must already be children
 	 * of this container to be removed.
@@ -16146,7 +16170,7 @@ export declare class ParticleContainer extends ViewContainer<ParticleBuffer> imp
 	 * @param children - The Particle(s) to remove from the container
 	 * @returns The first particle that was removed, for method chaining
 	 */
-	removeParticle(...children: IParticle[]): IParticle;
+	removeParticle(...children: T[]): T;
 	/**
 	 * Updates the particle container's internal state. Call this method after manually modifying
 	 * the particleChildren array or when changing static properties of particles.
@@ -16206,13 +16230,13 @@ export declare class ParticleContainer extends ViewContainer<ParticleBuffer> imp
 	 * @param endIndex - The ending position. Default value is size of the container.
 	 * @returns - List of removed particles
 	 */
-	removeParticles(beginIndex?: number, endIndex?: number): IParticle[];
+	removeParticles(beginIndex?: number, endIndex?: number): T[];
 	/**
 	 * Removes a particle from the specified index position.
 	 * @param index - The index to get the particle from
 	 * @returns The particle that was removed.
 	 */
-	removeParticleAt<U extends IParticle>(index: number): U;
+	removeParticleAt<U extends T = T>(index: number): U;
 	/**
 	 * Adds a particle to the container at a specified index. If the index is out of bounds an error will be thrown.
 	 * If the particle is already in this container, it will be moved to the specified index.
@@ -16220,7 +16244,7 @@ export declare class ParticleContainer extends ViewContainer<ParticleBuffer> imp
 	 * @param {number} index - The absolute index where the particle will be positioned at the end of the operation.
 	 * @returns {Container} The particle that was added.
 	 */
-	addParticleAt<U extends IParticle>(child: U, index: number): U;
+	addParticleAt<U extends T = T>(child: U, index: number): U;
 }
 /**
  * A collection of textures or frame objects that can be used to create an `AnimatedSprite`.
@@ -19671,7 +19695,7 @@ export interface HTMLText extends PixiMixins.HTMLText, AbstractText<HTMLTextStyl
  * This allows for rich text formatting using standard HTML tags and CSS styling.
  *
  * Key features:
- * - HTML tag support (<strong>, <em>, etc.)
+ * - HTML tag support (&lt;strong&gt;, &lt;em&gt;, etc.)
  * - CSS styling and custom style overrides
  * - Emoji and special character support
  * - Line breaking and word wrapping
