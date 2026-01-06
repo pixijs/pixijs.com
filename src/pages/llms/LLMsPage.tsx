@@ -229,20 +229,37 @@ const LLMsPage: React.FC = () => {
 
       {/* Download Cards */}
       <section className={styles.cardsSection}>
+        <p className={styles.explainerText}>
+          <code className={styles.inlineCode}>llms.txt</code> is a{' '}
+          <a href="https://llmstxt.org/" target="_blank" rel="noopener noreferrer" className={styles.standardLink}>
+            standardized format
+          </a>{' '}
+          (similar to <code className={styles.inlineCode}>robots.txt</code>) that provides AI assistants with structured
+          documentation about a project.
+        </p>
         <div className={styles.cardsGrid}>
           {files.map((file) => {
             const meta = metadata[file.name];
+            const Icon = file.icon;
 
             return (
               <Card key={file.name} className={styles.fileCard}>
                 <CardHeader className={styles.cardHeader}>
                   <div className={styles.cardTitleRow}>
-                    <CardTitle className={styles.fileName}>{file.name}</CardTitle>
+                    <div className={styles.fileNameRow}>
+                      <Icon className={styles.fileIcon} />
+                      <CardTitle className={styles.fileName}>{file.name}</CardTitle>
+                    </div>
                     {meta?.size && <span className={styles.fileSize}>{formatFileSize(meta.size)}</span>}
                   </div>
-                  <CardDescription>{file.description}</CardDescription>
+                  <CardDescription>{file.detailedDescription}</CardDescription>
                 </CardHeader>
                 <CardContent className={styles.cardContent}>
+                  <ul className={styles.featureList}>
+                    {file.features.map((feature, index) => (
+                      <li key={index}>{feature}</li>
+                    ))}
+                  </ul>
                   <div className={styles.buttonGroup}>
                     <a href={file.path} download className={styles.downloadButton}>
                       <Download size={16} />
@@ -259,35 +276,6 @@ const LLMsPage: React.FC = () => {
           })}
         </div>
         {latestUpdate && <p className={styles.updatedTimestamp}>Updated: {formatDate(latestUpdate)}</p>}
-      </section>
-
-      {/* What is llms.txt Section */}
-      <section className={styles.explainerSection}>
-        <h2>What is llms.txt?</h2>
-        <p className={styles.explainerText}>
-          <code className={styles.inlineCode}>llms.txt</code> is a{' '}
-          <a href="https://llmstxt.org/" target="_blank" rel="noopener noreferrer" className={styles.standardLink}>
-            standardized format
-          </a>{' '}
-          (similar to <code className={styles.inlineCode}>robots.txt</code>) that provides AI assistants with structured
-          documentation about a project.
-        </p>
-
-        <div className={styles.fileComparison}>
-          {files.map((file) => {
-            const Icon = file.icon;
-
-            return (
-              <div key={file.name} className={styles.fileRow}>
-                <div className={styles.fileRowHeader}>
-                  <Icon className={styles.fileRowIcon} />
-                  <span className={styles.fileRowName}>{file.name}</span>
-                </div>
-                <p className={styles.fileRowDescription}>{file.detailedDescription}</p>
-              </div>
-            );
-          })}
-        </div>
       </section>
 
       {/* IDE Integration Section */}

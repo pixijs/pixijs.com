@@ -82,6 +82,12 @@
   padding: 0 1.5rem 3rem;
   max-width: 76rem;
   margin: 0 auto;
+
+  > .explainerText {
+    text-align: center;
+    max-width: 44rem;
+    margin: 0 auto 2rem;
+  }
 }
 
 .cardsGrid {
@@ -147,6 +153,19 @@
   margin-bottom: 0.5rem;
 }
 
+.fileNameRow {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.fileIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--ifm-color-primary);
+  flex-shrink: 0;
+}
+
 .fileName {
   font-size: 1.35rem;
   font-weight: 600;
@@ -166,6 +185,25 @@
 .cardContent {
   padding: 0 1.75rem 1.75rem;
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.featureList {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.7;
+
+  li {
+    margin-bottom: 0.25rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .buttonGroup {
@@ -226,28 +264,10 @@
   letter-spacing: 0.02em;
 }
 
-/* Explainer Section */
-.explainerSection {
-  padding: 2rem 1.5rem 2rem;
-  max-width: 56rem;
-  margin: 0 auto;
-
-  h2 {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    text-align: center;
-    letter-spacing: -0.01em;
-  }
-}
-
 .explainerText {
   font-size: 1.05rem;
   line-height: 1.8;
   color: #6b7280;
-  text-align: center;
-  margin-bottom: 2rem;
 }
 
 .inlineCode {
@@ -283,73 +303,6 @@
     transform: scaleX(1);
     transform-origin: left;
   }
-}
-
-.fileComparison {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 0;
-  background: transparent;
-  border-radius: 0.75rem;
-  border: 1px solid var(--ifm-table-border-color);
-  overflow: hidden;
-}
-
-.fileRow {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem 1.25rem;
-  transition: background 0.2s ease;
-  border-bottom: 1px solid var(--ifm-table-border-color);
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &:hover {
-    background: var(--ifm-hover-overlay);
-  }
-
-  @media (min-width: 640px) {
-    flex-direction: row;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1rem 1.5rem;
-  }
-}
-
-.fileRowHeader {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  flex-shrink: 0;
-
-  @media (min-width: 640px) {
-    min-width: 11rem;
-  }
-}
-
-.fileRowIcon {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--ifm-color-primary);
-  flex-shrink: 0;
-}
-
-.fileRowName {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--ifm-color-primary);
-}
-
-.fileRowDescription {
-  font-size: 0.9rem;
-  color: #6b7280;
-  line-height: 1.5;
-  margin: 0;
 }
 
 /* IDE Integration Section */
@@ -599,7 +552,7 @@
 html[data-theme='light'] {
   .subtitle,
   .explainerText,
-  .fileRowDescription,
+  .featureList,
   .sectionDescription {
     color: #4a586b;
   }
@@ -623,15 +576,6 @@ html[data-theme='light'] {
     &:hover {
       background: #fafafa;
     }
-  }
-
-  .fileComparison {
-    background: #fafafa;
-    border-color: #e5e7eb;
-  }
-
-  .fileRow:hover {
-    background: white;
   }
 
   .ideCard {
@@ -671,21 +615,13 @@ html[data-theme='light'] {
 html[data-theme='dark'] {
   .subtitle,
   .explainerText,
-  .fileRowDescription,
+  .featureList,
   .sectionDescription {
     color: #9ca3af;
   }
 
   .updatedTimestamp {
     color: #6b7280;
-  }
-
-  .fileComparison {
-    background: rgba(255, 255, 255, 0.02);
-  }
-
-  .fileRow:hover {
-    background: rgba(255, 255, 255, 0.04);
   }
 
   .ideCard {
