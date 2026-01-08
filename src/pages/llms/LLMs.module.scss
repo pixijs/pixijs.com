@@ -112,7 +112,7 @@
   }
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
 
     &::before {
       opacity: 1;
@@ -209,16 +209,26 @@
   background: linear-gradient(135deg, var(--ifm-color-primary-light) 0%, var(--ifm-color-primary) 100%);
   color: white;
   box-shadow: 0 2px 8px rgba(233, 30, 99, 0.25);
+  position: relative;
+  overflow: hidden;
 
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.35);
-    color: white;
-    text-decoration: none;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
   }
 
-  &:active {
-    transform: translateY(0);
+  &:hover {
+    box-shadow: 0 4px 16px rgba(233, 30, 99, 0.45);
+    color: white;
+    text-decoration: none;
+
+    &::before {
+      opacity: 1;
+    }
   }
 }
 
@@ -320,10 +330,12 @@
   border: 1px solid var(--ifm-table-border-color);
   background: var(--ifm-hover-overlay);
   transition:
+    transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
     border-color 0.3s ease,
     box-shadow 0.3s ease;
 
   &:hover {
+    transform: translateY(-2px);
     border-color: rgba(233, 30, 99, 0.3);
   }
 }
@@ -534,10 +546,12 @@
   border: 1px solid var(--ifm-table-border-color);
   background: var(--ifm-hover-overlay);
   transition:
+    transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
     border-color 0.3s ease,
     box-shadow 0.3s ease;
 
   &:hover {
+    transform: translateY(-2px);
     border-color: rgba(233, 30, 99, 0.3);
   }
 
