@@ -520,14 +520,9 @@
   grid-template-columns: 1fr;
   gap: 1.5rem;
   align-items: stretch;
-  justify-content: center;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(2, minmax(0, 380px));
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, minmax(0, 380px));
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -544,6 +539,11 @@
 
   &:hover {
     border-color: rgba(233, 30, 99, 0.3);
+  }
+
+  // Prevent section label from stretching full width in flex container
+  .sectionLabel {
+    align-self: flex-start;
   }
 
   // Make code blocks fill available space
