@@ -18,6 +18,23 @@
   },
   {
     "sponsor": {
+      "name": "Guidebook.BetWinner",
+      "type": "User",
+      "login": "guidebook_betwinner_com",
+      "avatarUrl": "https://images.opencollective.com/guidebook_betwinner_com/6babe60/avatar/460.png",
+      "websiteUrl": "https://guidebook.betwinner.com",
+      "linkUrl": "https://opencollective.com/guidebook_betwinner_com",
+      "socialLogins": {
+        "opencollective": "guidebook_betwinner_com"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "SEO for igaming sites",
       "type": "User",
       "login": "seo-for-igaming-sites",
