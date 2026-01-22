@@ -1,22 +1,129 @@
-.header {
-  color: #333;
+.teamPage {
+  min-height: 100vh;
+  padding-bottom: 4rem;
+  position: relative;
+  overflow-x: hidden;
+}
 
-  h1 {
-    font-size: 54px;
-    line-height: 64px;
-  }
+/* Hero Section */
+.heroSection {
+  padding: 5rem 1.5rem 3rem;
+  text-align: center;
+  position: relative;
 
-  h4 {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 30px;
-    max-width: 600px;
-    margin: 2rem auto 3rem;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, rgba(233, 30, 99, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
   }
 }
 
+h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.75rem;
+  font-weight: 600;
+  margin: 0 0 1.75rem;
+  letter-spacing: -0.02em;
+
+  @media (min-width: 768px) {
+    font-size: 3.5rem;
+  }
+}
+
+.heroContent {
+  max-width: 56rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #b3bccc;
+  line-height: 1.8;
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+/* Members Section */
+.membersSection {
+  padding: 0 1.5rem 3rem;
+  max-width: 76rem;
+  margin: 0 auto;
+  position: relative;
+
+  h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 2rem;
+    text-align: center;
+    letter-spacing: -0.01em;
+  }
+}
+
+.membersGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 650px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 996px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Section divider for Honorable Mentions */
+.sectionDivider {
+  padding: 4rem 1.5rem 2rem;
+  max-width: 76rem;
+  margin: 0 auto;
+  text-align: center;
+
+  h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #b3bccc;
+    line-height: 1.6;
+    // max-width: 36rem;
+    margin: 0 auto;
+  }
+}
+
+/* Light mode overrides */
+html[data-theme='light'] {
+  .subtitle,
+  .sectionDivider p {
+    color: #4a586b;
+  }
+
+  .heroSection::before {
+    background: radial-gradient(ellipse at center, rgba(233, 30, 99, 0.06) 0%, transparent 70%);
+  }
+}
+
+/* Dark mode overrides */
 html[data-theme='dark'] {
-  .header {
-    color: #fff;
+  .subtitle,
+  .sectionDivider p {
+    color: #b3bccc;
   }
 }

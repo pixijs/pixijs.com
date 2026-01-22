@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import styles from './SponsorshipTiers.module.css';
+import styles from './SponsorshipTiers.module.scss';
 
 const tiers = [
   {

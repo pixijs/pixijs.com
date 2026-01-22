@@ -3,7 +3,7 @@ import Showcase from './SponsorPage';
 
 function App() {
   return (
-    <Layout>
+    <Layout title="Sponsor">
       <Showcase />
     </Layout>
   );

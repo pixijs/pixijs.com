@@ -30,20 +30,22 @@ export default function MemberCard(props: MemberData): React.JSX.Element {
   }
 
   return (
-    <div className={`${styles.wrapper} col col--4`}>
+    <div className={styles.wrapper}>
       <div className={styles.card}>
-        <img className="margin-vert--md" src={profileUrl} alt={`${props.name}'s Profile`} />
-        <h3 className="margin-bottom--md padding-horiz--md">
+        <img src={profileUrl} alt={`${props.name}'s Profile`} />
+        <h3 className={styles.name}>
           {props.name} {props.country}
         </h3>
-        <div className={`${styles.badges} ${props.active ? '' : styles.inactive} margin-bottom--md`}>
+        <div className={`${styles.badges} ${props.active ? '' : styles.inactive}`}>
           {props.badges.map((badge, i) => (
-            <h4 key={i}>{badge}</h4>
+            <span key={i} className={styles.badge}>
+              {badge}
+            </span>
           ))}
         </div>
-        {props.active && <p className="margin-bottom--lg padding-horiz--md">{props.description}</p>}
+        {props.active && <p className={styles.description}>{props.description}</p>}
         <div className={styles.separator} />
-        <div className={`margin-top--lg margin-bottom--md ${styles.social}`}>
+        <div className={styles.social}>
           {links.map((link, i) => (
             <Link key={i} {...link} />
           ))}

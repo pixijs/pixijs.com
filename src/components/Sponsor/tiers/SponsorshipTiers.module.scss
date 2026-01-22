@@ -1,0 +1,416 @@
+/* Sponsorship Tiers - Consistent with LLMs/Team Page Design */
+
+.section {
+  padding: 3rem 1.5rem;
+  max-width: 76rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.title {
+  font-family: 'Outfit', sans-serif;
+  font-size: calc(1.875rem * 0.8);
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 3rem;
+  letter-spacing: -0.01em;
+
+  @media (min-width: 768px) {
+    font-size: calc(3rem * 0.8);
+  }
+}
+
+.topTiers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 996px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.bottomTiers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.5rem;
+
+  @media (min-width: 996px) {
+    .tierCard {
+      flex: 0 0 calc((100% - 3rem) / 3);
+    }
+  }
+
+  .tierCard {
+    padding: 1.75rem;
+    height: auto;
+    min-height: 19rem;
+  }
+
+  h3,
+  ul {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.tierCard {
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--ifm-table-border-color);
+  background: var(--ifm-hover-overlay);
+  height: 100%;
+  transition:
+    transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.tierGold {
+  // border: 1px solid #ffd700;
+
+  &:hover {
+    border-color: rgba(255, 215, 0, 0.6);
+  }
+}
+
+.tierGoldPlus {
+  // border: 1px solid #ff6b6b;
+
+  &:hover {
+    border-color: rgba(255, 107, 107, 0.6);
+  }
+}
+
+.tierPlatinum {
+  border: 2px solid var(--ifm-color-primary);
+  box-shadow: 0 4px 20px rgba(233, 30, 99, 0.2);
+  position: relative;
+  z-index: 10;
+
+  @media (min-width: 996px) {
+    transform: scale(1.05);
+
+    &:hover {
+      transform: scale(1.05) translateY(-2px);
+    }
+  }
+}
+
+.tierBronze {
+  // border-top: 3px solid #cd7f32;
+
+  &:hover {
+    border-color: rgba(205, 127, 50, 0.6);
+  }
+}
+
+.tierSilver {
+  // border-top: 3px solid #c0c0c0;
+
+  &:hover {
+    border-color: rgba(192, 192, 192, 0.6);
+  }
+}
+
+.tierHeader {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: linear-gradient(135deg, var(--ifm-color-primary-light) 0%, var(--ifm-color-primary) 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+}
+
+.tierTitle {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.tierTitleGold {
+  font-size: 1.5rem;
+  color: #ffd700;
+}
+
+.tierTitleGoldPlus {
+  font-size: 1.5rem;
+  color: #ff6b6b;
+}
+
+.tierTitlePlatinum {
+  font-size: 1.75rem;
+}
+
+.tierTitleBronze {
+  font-size: 1.35rem;
+  color: #e5a662;
+}
+
+.tierTitleSilver {
+  font-size: 1.35rem;
+  color: #b8c0c8;
+}
+
+.price {
+  font-weight: 700;
+  margin: 0.75rem 0 1rem;
+  font-size: 2rem;
+
+  span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #6b7280;
+  }
+}
+
+.priceGold,
+.priceGoldPlus,
+.priceBronze,
+.priceSilver {
+  font-size: 2rem;
+}
+
+.pricePlatinum {
+  font-size: 2.5rem;
+
+  span {
+    font-size: 1.125rem;
+  }
+}
+
+// .benefitsPlatinum {
+// font-size: 1rem !important;
+// }
+
+.benefits {
+  text-align: left;
+  padding-left: 0;
+  margin: 0;
+  color: #d1d5db;
+  font-size: 0.9rem;
+  line-height: 1.6;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 0.75rem;
+    list-style: none;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    svg {
+      width: 1.125rem;
+      height: 1.125rem;
+      min-width: 1.125rem;
+      min-height: 1.125rem;
+      margin-right: 0.5rem;
+      margin-top: 0.125rem;
+    }
+  }
+}
+
+.benefitsGold,
+.benefitsGoldPlus,
+.benefitsBronze,
+.benefitsSilver {
+  color: #d1d5db;
+}
+
+.benefitsPlatinum {
+  color: #e5e7eb;
+}
+
+.iconGreen,
+.iconGreenLight {
+  color: #4ade80;
+}
+
+.button {
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1.25rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: 1.5px solid var(--ifm-table-border-color);
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.buttonGold {
+  border-color: #ffd700;
+  color: #ffd700;
+
+  &:hover {
+    background: #ffd700;
+    color: #000;
+  }
+}
+
+.buttonGoldPlus {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+
+  &:hover {
+    background: #ff6b6b;
+    color: white;
+  }
+}
+
+.buttonPlatinum {
+  background: linear-gradient(135deg, var(--ifm-color-primary-light) 0%, var(--ifm-color-primary) 100%);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  padding: 0.875rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.25);
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(233, 30, 99, 0.4);
+    color: white;
+  }
+}
+
+.buttonBronze {
+  border-color: #cd7f32;
+  color: #e5a662;
+
+  &:hover {
+    background: #cd7f32;
+    color: white;
+  }
+}
+
+.buttonSilver {
+  border-color: #c0c0c0;
+  color: #b8c0c8;
+
+  &:hover {
+    background: #c0c0c0;
+    color: #000;
+  }
+}
+
+/* Light mode overrides */
+html[data-theme='light'] {
+  .tierCard {
+    background: white;
+    border-color: #e5e7eb;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.06),
+      0 4px 12px rgba(0, 0, 0, 0.04);
+
+    &:hover {
+      box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.08),
+        0 12px 24px rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  .tierPlatinum {
+    border: 2px solid var(--ifm-color-primary);
+    box-shadow: 0 4px 20px rgba(233, 30, 99, 0.15);
+  }
+
+  .tierTitlePlatinum {
+    color: var(--ifm-color-primary);
+  }
+
+  .benefits,
+  .benefitsGold,
+  .benefitsGoldPlus,
+  .benefitsBronze,
+  .benefitsSilver,
+  .benefitsPlatinum {
+    color: #475569;
+  }
+
+  .price span {
+    color: #64748b;
+  }
+
+  .buttonGold {
+    background: #ffd700;
+    border-color: #ffd700;
+    color: #000;
+
+    &:hover {
+      background: #e6c200;
+    }
+  }
+
+  .buttonGoldPlus {
+    background: #ff6b6b;
+    border-color: #ff6b6b;
+    color: white;
+
+    &:hover {
+      background: #ff5252;
+    }
+  }
+
+  .buttonBronze {
+    background: #cd7f32;
+    border-color: #cd7f32;
+    color: white;
+
+    &:hover {
+      background: #b8722d;
+    }
+  }
+
+  .buttonSilver {
+    background: #c0c0c0;
+    border-color: #c0c0c0;
+    color: #000;
+
+    &:hover {
+      background: #a8a8a8;
+    }
+  }
+}
+
+/* Dark mode overrides */
+html[data-theme='dark'] {
+  .tierCard {
+    background: rgba(255, 255, 255, 0.02);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

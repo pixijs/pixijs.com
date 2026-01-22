@@ -1,16 +1,14 @@
 import { Heart, Rocket, Users } from 'lucide-react';
 import React from 'react';
-import styles from './Sponsor.module.css';
-import whyStyles from './why.module.css';
-import { Card, CardContent } from '../../components/Sponsor/card/Card';
+import styles from './Sponsor.module.scss';
 import SponsorshipTiers from '../../components/Sponsor/tiers/SponsorshipTiers';
 import CTASection from '../../components/Sponsor/cta/CTASection';
 
 const statistics = [
-  { value: '5M+', label: 'Monthly Downloads', color: 'greenBlue' },
-  { value: '45K+', label: 'GitHub Stars', color: 'yellowOrange' },
-  { value: '30K+', label: 'Developers', color: 'purplePink' },
-  { value: '10+', label: 'Years Active', color: 'redRose' },
+  { value: '5M+', label: 'Monthly Downloads' },
+  { value: '45K+', label: 'GitHub Stars' },
+  { value: '30K+', label: 'Developers' },
+  { value: '10+', label: 'Years Active' },
 ];
 
 const whySponsorFeatures = [
@@ -34,94 +32,57 @@ const whySponsorFeatures = [
   },
 ];
 
-// Main Showcase Component
 const Sponsor: React.FC = () => {
   return (
-    <div className={styles.sponsor}>
+    <main className={styles.sponsorPage}>
       {/* Hero Section */}
-      <section className={styles.heroSection} data-testid="hero-section">
-        <div className={`${styles.maxWidth7xl} ${styles.mxAuto} ${styles.textCenter}`}>
-          <h1 className={`${styles.heroTitle} underline`} data-testid="hero-title">
-            Sponsor PixiJS
-          </h1>
-          <p className={`${styles.heroDescription} ${styles.mxAuto}`} data-testid="hero-description">
+      <section className={styles.heroSection}>
+        <div className={styles.heroContent}>
+          <h1 className="underline">Sponsor PixiJS</h1>
+          <p className={styles.subtitle}>
             Your support empowers us to build the fastest, most flexible 2D WebGL renderer. Join the companies and
             developers who make PixiJS possible.
           </p>
-
-          {/* Statistics Grid */}
-          <div className={`${styles.statisticsGrid} ${styles.mxAuto}`} data-testid="statistics-grid">
-            {statistics.map((stat) => {
-              return (
-                <div
-                  key={stat.label}
-                  className={styles.statCard}
-                  data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
-                >
-                  <div
-                    className={`${styles.statNumber} ${styles[stat.color]}`}
-                    data-testid={`stat-value-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
-                  >
-                    {stat.value}
-                  </div>
-                  <div
-                    className={styles.statLabel}
-                    data-testid={`stat-label-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
-                  >
-                    {stat.label}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          {/* Why */}
-          <section className={whyStyles.section} data-testid="why-sponsor-section">
-            <div className={whyStyles.container}>
-              <div className={whyStyles.header}>
-                <h2 className={whyStyles.title} data-testid="why-sponsor-title">
-                  Why Sponsor PixiJS?
-                </h2>
-              </div>
-
-              <div className={whyStyles.featuresGrid} data-testid="why-sponsor-features">
-                {whySponsorFeatures.map((feature) => {
-                  const IconComponent = feature.icon;
-                  return (
-                    <Card
-                      key={feature.title}
-                      className={whyStyles.card}
-                      data-testid={`feature-${feature.title.toLowerCase().replace(/\s+/g, '-')}`}
-                    >
-                      <CardContent className={whyStyles.cardContent}>
-                        <div className={whyStyles.iconWrapper}>
-                          <IconComponent className={whyStyles.icon} />
-                        </div>
-                        <h3
-                          className={whyStyles.featureTitle}
-                          data-testid={`feature-title-${feature.title.toLowerCase().replace(/\s+/g, '-')}`}
-                        >
-                          {feature.title}
-                        </h3>
-                        <p
-                          className={whyStyles.featureDescription}
-                          data-testid={`feature-description-${feature.title.toLowerCase().replace(/\s+/g, '-')}`}
-                        >
-                          {feature.description}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-          {/* Sponsorship Tiers */}
-          <SponsorshipTiers />
-          {/* Call to Action Section */}
-          <CTASection />
         </div>
       </section>
-    </div>
+
+      {/* Statistics Grid */}
+      <section className={styles.statisticsSection}>
+        <div className={styles.statisticsGrid}>
+          {statistics.map((stat) => (
+            <div key={stat.label} className={styles.statCard}>
+              <div className={styles.statNumber}>{stat.value}</div>
+              <div className={styles.statLabel}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Why Sponsor Section */}
+      <section className={styles.whySection}>
+        <h2>Why Sponsor PixiJS?</h2>
+        <div className={styles.whyGrid}>
+          {whySponsorFeatures.map((feature) => {
+            const IconComponent = feature.icon;
+            return (
+              <div key={feature.title} className={styles.whyCard}>
+                <div className={styles.iconWrapper}>
+                  <IconComponent className={styles.icon} />
+                </div>
+                <h3 className={styles.featureTitle}>{feature.title}</h3>
+                <p className={styles.featureDescription}>{feature.description}</p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Sponsorship Tiers */}
+      <SponsorshipTiers />
+
+      {/* Call to Action Section */}
+      <CTASection />
+    </main>
   );
 };
 
