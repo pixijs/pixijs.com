@@ -149,7 +149,7 @@ export default function FAQPage(): React.JSX.Element {
         <div className={styles.faqList}>
           {faqData.map((item, index) => (
             <FAQItem
-              key={index}
+              key={item.question}
               question={item.question}
               answer={item.answer}
               isOpen={openIndex === index}

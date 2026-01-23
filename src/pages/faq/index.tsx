@@ -1,7 +1,7 @@
 import Layout from '@theme/Layout';
 import FAQPage from './FAQPage';
 
-function App() {
+function FAQ() {
   return (
     <Layout title="FAQ" description="Frequently Asked Questions about PixiJS">
       <FAQPage />
@@ -9,4 +9,4 @@ function App() {
   );
 }
 
-export default App;
+export default FAQ;

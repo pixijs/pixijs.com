@@ -87,7 +87,6 @@ const AssetCard: React.FC<{ asset: BrandingAsset }> = ({ asset }) => (
     </div>
     <div className={styles.assetInfo}>
       <h3 className={styles.assetName}>{asset.name}</h3>
-      {/* <p className={styles.assetDescription}>{asset.description}</p> */}
       <div className={styles.buttonGroup}>
         {asset.downloads.map((download) => (
           <a

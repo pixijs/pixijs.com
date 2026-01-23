@@ -1,7 +1,7 @@
 import Layout from '@theme/Layout';
 import BrandingPage from './BrandingPage';
 
-function App() {
+function Branding() {
   return (
     <Layout title="Branding" description="PixiJS branding assets and guidelines">
       <BrandingPage />
@@ -9,4 +9,4 @@ function App() {
   );
 }
 
-export default App;
+export default Branding;

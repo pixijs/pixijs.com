@@ -27,8 +27,8 @@ export default function TutorialGallery({ pixiVersion }: { pixiVersion: IVersion
 
       <section className={styles.cardsSection}>
         <div className={styles.cardsGrid}>
-          {data.map((card, i) => (
-            <TutorialCard data={card} key={i} />
+          {data.map((card) => (
+            <TutorialCard data={card} key={card.title} />
           ))}
         </div>
       </section>
