@@ -1,4 +1,4 @@
-import styles from './CTASection.module.css';
+import styles from './CTASection.module.scss';
 import { Heart, Mail } from 'lucide-react'; // or your icon library
 
 export default function CTASection() {

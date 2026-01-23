@@ -1,0 +1,252 @@
+.sponsorPage {
+  --sponsor-text-muted: #9ca3af;
+  --sponsor-text-secondary: #6b7280;
+  --sponsor-card-bg: rgba(255, 255, 255, 0.02);
+  --sponsor-card-border: var(--ifm-table-border-color);
+  --sponsor-glow-opacity: 0.08;
+
+  min-height: 100vh;
+  padding-bottom: 4rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.heroSection {
+  padding: 5rem 1.5rem 3rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(var(--ifm-color-primary-rgb, 233, 30, 99), var(--sponsor-glow-opacity)) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.heroContent {
+  max-width: 56rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+
+  h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.75rem;
+    font-weight: 600;
+    margin: 0 0 1.75rem;
+    letter-spacing: -0.02em;
+
+    @media (min-width: 768px) {
+      font-size: 3.5rem;
+    }
+  }
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--sponsor-text-muted) !important;
+  line-height: 1.8;
+  max-width: 44rem;
+  margin: 0 auto 3rem;
+}
+
+/* Statistics Grid */
+.statisticsSection {
+  padding: 0 1.5rem 3rem;
+  padding-bottom: 1rem;
+  max-width: 76rem;
+  margin: 0 auto;
+}
+
+.statisticsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.statCard {
+  text-align: center;
+  border: 1px solid var(--sponsor-card-border);
+  border-radius: 0.875rem;
+  padding: 1.5rem;
+  background: var(--ifm-background-color, #ffffff);
+  min-width: 200px;
+  transition:
+    transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--ifm-color-primary-light);
+  }
+}
+
+.statNumber {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  background-image: linear-gradient(to right, var(--ifm-color-primary-lightest), var(--ifm-color-primary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.statLabel {
+  font-size: 1rem;
+  color: var(--sponsor-text-muted);
+  margin-top: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+  }
+}
+
+/* Why Sponsor Section */
+.whySection {
+  padding: 3rem 1.5rem;
+  padding-bottom: 1rem;
+  max-width: 76rem;
+  margin: 0 auto;
+  position: relative;
+
+  h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: calc(1.875rem * 0.8);
+    font-weight: bold;
+    margin: 0 0 2rem;
+    text-align: center;
+    letter-spacing: -0.01em;
+
+    @media (min-width: 768px) {
+      font-size: calc(3rem * 0.8);
+    }
+  }
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.whyCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.75rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--sponsor-card-border);
+  background: var(--sponsor-card-bg);
+  transition:
+    transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--ifm-color-primary-light);
+  }
+}
+
+.iconWrapper {
+  width: 4rem;
+  height: 4rem;
+  background: linear-gradient(135deg, var(--ifm-color-secondary-light) 0%, var(--ifm-color-secondary) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  // box-shadow: 0 2px 8px rgba(var(--ifm-color-primary-rgb, 233, 30, 99), 0.25);
+}
+
+.icon {
+  color: black;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.featureTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.featureDescription {
+  font-size: 0.9rem;
+  color: var(--sponsor-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Light mode overrides */
+html[data-theme='light'] {
+  .sponsorPage {
+    --sponsor-text-muted: #4a586b;
+    --sponsor-text-secondary: #475569;
+    --sponsor-card-bg: var(--ifm-background-surface-color);
+    --sponsor-card-border: var(--ifm-color-emphasis-200);
+    --sponsor-glow-opacity: 0.06;
+  }
+
+  .statCard,
+  .whyCard {
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.06),
+      0 4px 12px rgba(0, 0, 0, 0.04);
+
+    &:hover {
+      box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.08),
+        0 12px 24px rgba(0, 0, 0, 0.06);
+    }
+  }
+}
+
+/* Dark mode overrides */
+html[data-theme='dark'] {
+  .sponsorPage {
+    --sponsor-text-muted: #b3bccc;
+    --sponsor-text-secondary: #9ca3af;
+    --sponsor-card-bg: var(--ifm-background-color);
+    --sponsor-card-border: var(--ifm-table-border-color);
+    --sponsor-glow-opacity: 0.08;
+  }
+
+  .statCard,
+  .whyCard {
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

@@ -11,11 +11,13 @@ export default function TutorialCard({ data }: { data: TutorialCardData }): Reac
   const url = `tutorials/${camelCaseToSnakeCase(data.title)}`;
 
   return (
-    <div className={styles.tutorialCard} onClick={() => history.push(url)}>
-      <div style={{ backgroundImage: `url(${thumb})` }} />
-      <h2>{title}</h2>
-      <p>{data.description}</p>
-    </div>
+    <article className={styles.tutorialCard} onClick={() => history.push(url)}>
+      <div className={styles.thumbnail} style={{ backgroundImage: `url(${thumb})` }} />
+      <div className={styles.content}>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.description}>{data.description}</p>
+      </div>
+    </article>
   );
 }
 
