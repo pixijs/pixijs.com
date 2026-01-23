@@ -127,6 +127,7 @@
       "websiteUrl": "https://litslink.com",
       "linkUrl": "https://opencollective.com/litslink",
       "socialLogins": {
+        "github": "litslink",
         "opencollective": "litslink"
       }
     },
