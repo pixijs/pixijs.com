@@ -1,4 +1,5 @@
 import MemberCard, { type MemberData } from '../components/MemberCard';
+import { useClassModifier } from '../hooks/useContainerClassNameModifier';
 import team from './team.json';
 import styles from './team.module.scss';
 import Layout from '@theme/Layout';
@@ -13,6 +14,7 @@ export default function Team(): React.JSX.Element {
     member.active ? actives.push(member) : inactives.push(member);
   });
 
+  useClassModifier('.main-wrapper', 'tileBackground', true);
   return (
     <Layout
       title={'Meet the Team'}

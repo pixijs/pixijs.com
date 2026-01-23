@@ -126,4 +126,8 @@ html[data-theme='dark'] {
   .sectionDivider p {
     color: #b3bccc;
   }
+
+  .card {
+    background: var(--ifm-background-color);
+  }
 }

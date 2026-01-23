@@ -17,6 +17,7 @@ import {
   claudeInlineContext,
   chatGptQuickContext,
 } from './constants';
+import { useClassModifier } from '@site/src/hooks/useContainerClassNameModifier';
 
 interface FileInfo {
   name: string;
@@ -131,6 +132,7 @@ const files: FileInfo[] = [
 ];
 
 const LLMsPage: React.FC = () => {
+  useClassModifier('.main-wrapper', 'tileBackground', true);
   return (
     <main className={styles.llmsPage}>
       {/* Hero Section */}

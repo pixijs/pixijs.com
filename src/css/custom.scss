@@ -288,6 +288,14 @@ html[data-theme='dark'] {
   }
 }
 
+.justifyContentCenter {
+  justify-content: center !important;
+}
+
+.tileBackground {
+  background: url('/images/tile-alpha.png') 0 0 repeat !important;
+}
+
 .offering-anim {
   animation-name: offering-in;
   animation-duration: 1s;
@@ -392,8 +400,14 @@ html[data-theme='dark'] {
 
 [data-theme='light'] {
   --sidebar-category-color: #000000;
+  .tileBackground {
+    background: url('/images/tile-light.png') 0 0 repeat !important;
+  }
 }
 
 [data-theme='dark'] {
   --sidebar-category-color: #ffffff;
+  .tileBackground {
+    background: url('/images/tile-alpha.png') 0 0 repeat !important;
+  }
 }

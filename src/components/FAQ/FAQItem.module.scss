@@ -1,0 +1,133 @@
+.faqItem {
+  background: var(--ifm-background-color, #ffffff);
+  border: 1px solid var(--ifm-table-border-color);
+  border-radius: 0.875rem;
+  overflow: hidden;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    border-color: var(--ifm-color-primary-light);
+  }
+
+  &.open {
+    border-color: var(--ifm-color-primary);
+  }
+}
+
+.questionButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--ifm-background-color, #ffffff);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.questionText {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  line-height: 1.4;
+}
+
+.toggleIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ifm-color-primary);
+  transition: transform 0.3s ease;
+
+  svg {
+    display: block;
+  }
+}
+
+.answerWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  .open & {
+    grid-template-rows: 1fr;
+  }
+}
+
+.answerContent {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.answerInner {
+  padding: 0 1.5rem 1.25rem;
+}
+
+.separator {
+  height: 1px;
+  background: var(--ifm-table-border-color);
+  margin-bottom: 1rem;
+}
+
+.answerText {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--faq-text-muted, #b3bccc);
+
+  a {
+    color: var(--ifm-color-primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  p + p {
+    margin-top: 0.75rem;
+  }
+}
+
+/* Light mode */
+html[data-theme='light'] {
+  .faqItem {
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.06),
+      0 4px 12px rgba(0, 0, 0, 0.04);
+
+    &:hover {
+      box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.08),
+        0 12px 24px rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  .answerText {
+    color: #4a586b;
+  }
+}
+
+/* Dark mode */
+html[data-theme='dark'] {
+  .faqItem {
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .answerText {
+    color: #b3bccc;
+  }
+}

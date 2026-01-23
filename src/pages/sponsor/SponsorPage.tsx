@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './Sponsor.module.scss';
 import SponsorshipTiers from '../../components/Sponsor/tiers/SponsorshipTiers';
 import CTASection from '../../components/Sponsor/cta/CTASection';
+import { useClassModifier } from '@site/src/hooks/useContainerClassNameModifier';
 
 const statistics = [
   { value: '5M+', label: 'Monthly Downloads' },
@@ -33,6 +34,7 @@ const whySponsorFeatures = [
 ];
 
 const Sponsor: React.FC = () => {
+  useClassModifier('.main-wrapper', 'tileBackground', true);
   return (
     <main className={styles.sponsorPage}>
       {/* Hero Section */}
