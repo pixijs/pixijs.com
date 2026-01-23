@@ -1,44 +1,86 @@
 .tutorialCard {
-  background: var(--ifm-navbar-background-color);
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  border-radius: 1rem;
-  width: 45%;
-  max-width: 360px;
-  transition: all 0.1s ease-in-out;
+  --card-bg: rgba(255, 255, 255, 1);
+  --card-border: var(--ifm-table-border-color);
+  --card-text-muted: #9ca3af;
 
-  div {
-    width: 100%;
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 1rem 1rem 0 0;
-  }
-
-  h2 {
-    padding: 1.5rem;
-    color: var(--ifm-color-primary);
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
-  }
-
-  p {
-    padding: 1rem 1.5rem;
-    padding-top: 0;
-    margin-bottom: 1rem;
-  }
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--card-border);
+  border-radius: 0.875rem;
+  background: var(--card-bg);
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    transform: scale(1.02);
+    transform: translateY(-2px);
+    border-color: var(--ifm-color-primary-light);
   }
+}
 
-  &:active {
-    transition: all 0.025s ease-in-out;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-    transform: scale(0.98);
+.thumbnail {
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: var(--card-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Light mode overrides */
+html[data-theme='light'] {
+  .tutorialCard {
+    --card-bg: var(--ifm-background-surface-color);
+    --card-border: var(--ifm-color-emphasis-200);
+    --card-text-muted: #4a586b;
+
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.06),
+      0 4px 12px rgba(0, 0, 0, 0.04);
+
+    &:hover {
+      box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.08),
+        0 12px 24px rgba(0, 0, 0, 0.06);
+    }
   }
+}
 
-  @media only screen and (max-width: 540px) {
-    width: 100%;
+/* Dark mode overrides */
+html[data-theme='dark'] {
+  .tutorialCard {
+    --card-bg: var(--ifm-background-color);
+    --card-border: var(--ifm-table-border-color);
+    --card-text-muted: #b3bccc;
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
   }
 }

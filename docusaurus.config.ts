@@ -105,7 +105,6 @@ const config: Config = {
           '**/tutorials/*',
           '**/playground/*',
           'docs/guides/getting-started/intro.mdx',
-          'docs/branding.md',
           'docs/guides/migrations/v5.md',
           'docs/guides/migrations/v6.md',
           'docs/guides/migrations/v7.md',
@@ -147,6 +146,18 @@ const config: Config = {
           {
             to: '/sponsor',
             from: ['/8.x/sponsor'],
+          },
+          {
+            to: '/bug-bounty',
+            from: ['/8.x/bug-bounty', '/docs/bug-bounty'],
+          },
+          {
+            to: '/faq',
+            from: ['/8.x/faq', '/docs/faq'],
+          },
+          {
+            to: '/branding',
+            from: ['/8.x/branding', '/docs/branding'],
           },
           {
             to: '/8.x/guides/getting-started/intro#what-is-pixijs',
@@ -776,14 +787,12 @@ const config: Config = {
                 to: 'team',
               },
               {
-                type: 'doc',
                 label: 'FAQ',
-                docId: 'faq',
+                to: 'faq',
               },
               {
-                type: 'doc',
+                to: 'bug-bounty',
                 label: 'Bug Bounty',
-                docId: 'bug-bounty',
               },
               {
                 label: 'Community Guide',
@@ -794,9 +803,8 @@ const config: Config = {
                 href: 'https://github.com/pixijs/pixijs/blob/dev/.github/CODE_OF_CONDUCT.md',
               },
               {
-                type: 'doc',
+                to: 'branding',
                 label: 'Branding',
-                docId: 'branding',
               },
             ],
           },

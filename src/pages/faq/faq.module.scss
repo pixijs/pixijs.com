@@ -1,6 +1,6 @@
-.tutorialsPage {
-  --tutorials-text-muted: #9ca3af;
-  --tutorials-glow-opacity: 0.08;
+.faqPage {
+  --faq-text-muted: #9ca3af;
+  --faq-glow-opacity: 0.08;
 
   min-height: 100vh;
   padding-bottom: 4rem;
@@ -23,11 +23,7 @@
     transform: translateX(-50%);
     width: 800px;
     height: 600px;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(233, 30, 99, var(--tutorials-glow-opacity)) 0%,
-      transparent 70%
-    );
+    background: radial-gradient(ellipse at center, rgba(233, 30, 99, var(--faq-glow-opacity)) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
@@ -55,51 +51,43 @@
 
 .subtitle {
   font-size: 1.2rem;
-  color: var(--tutorials-text-muted);
+  color: var(--faq-text-muted);
   line-height: 1.8;
   max-width: 44rem;
   margin: 0 auto;
 }
 
-/* Cards Section */
-.cardsSection {
+/* FAQ Section */
+.faqSection {
   padding: 0 1.5rem 3rem;
-  max-width: 76rem;
+  max-width: 52rem;
   margin: 0 auto;
 }
 
-.cardsGrid {
+.faqList {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-
-  > * {
-    width: 100%;
-    max-width: 24rem;
-
-    @media (min-width: 768px) {
-      width: calc(50% - 0.75rem);
-    }
-
-    // @media (min-width: 1024px) {
-    //   width: calc(33.333% - 1rem);
-    // }
-  }
+  flex-direction: column;
+  gap: 1rem;
 }
 
 /* Light mode overrides */
 html[data-theme='light'] {
-  .tutorialsPage {
-    --tutorials-text-muted: #4a586b;
-    --tutorials-glow-opacity: 0.06;
+  .faqPage {
+    --faq-text-muted: #4a586b;
+    --faq-glow-opacity: 0.06;
   }
 }
 
 /* Dark mode overrides */
 html[data-theme='dark'] {
-  .tutorialsPage {
-    --tutorials-text-muted: #b3bccc;
-    --tutorials-glow-opacity: 0.08;
+  .faqPage {
+    --faq-text-muted: #b3bccc;
+    --faq-glow-opacity: 0.08;
+  }
+
+  .faqList {
+    .faqItem {
+      background: var(--ifm-background-color);
+    }
   }
 }

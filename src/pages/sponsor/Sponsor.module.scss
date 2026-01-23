@@ -1,5 +1,3 @@
-/* Sponsor Page - Consistent with LLMs/Team Page Design */
-
 .sponsorPage {
   --sponsor-text-muted: #9ca3af;
   --sponsor-text-secondary: #6b7280;
@@ -240,7 +238,7 @@ html[data-theme='dark'] {
   .sponsorPage {
     --sponsor-text-muted: #b3bccc;
     --sponsor-text-secondary: #9ca3af;
-    --sponsor-card-bg: rgba(255, 255, 255, 0.02);
+    --sponsor-card-bg: var(--ifm-background-color);
     --sponsor-card-border: var(--ifm-table-border-color);
     --sponsor-glow-opacity: 0.08;
   }
