@@ -25,8 +25,6 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Ticker](https://pixijs.com/8.x/guides/components/ticker.md): Learn how to use the Ticker class in PixiJS for managing game loops, animations, and time-based updates.
 - [Mixing PixiJS and Three.js](https://pixijs.com/8.x/guides/third-party/mixing-three-and-pixi.md): Learn how to combine PixiJS and Three.js to create dynamic applications that leverage both 2D and 3D graphics.
 - [v8 Migration Guide](https://pixijs.com/8.x/guides/migrations/v8.md): PixiJS v8 Migration Guide - Transitioning from PixiJS v7 to v8
-- [Bug Bounty Program](https://pixijs.com/8.x/bug-bounty.md): PixiJS is committed to delivering a reliable, high-performance rendering engine for the web. To support that mission, we’re launching a **Bug Bount...
-- [FAQ](https://pixijs.com/8.x/faq.md): Frequently Asked Questions about PixiJS
 - [Culler Plugin](https://pixijs.com/8.x/guides/components/application/culler-plugin.md): Learn how to use the CullerPlugin in PixiJS to optimize rendering by skipping offscreen objects.
 - [Application](https://pixijs.com/8.x/guides/components/application.md): Learn how to create and configure a PixiJS Application, including options for WebGL/WebGPU rendering, built-in plugins, and custom application plug...
 - [Resize Plugin](https://pixijs.com/8.x/guides/components/application/resize-plugin.md): Learn how to use the Resize Plugin in PixiJS to make your application responsive to window or element size changes.
@@ -55,4 +53,3 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [SplitText & SplitBitmapText](https://pixijs.com/8.x/guides/components/scene-objects/text/split-text.md): The `SplitText` and `SplitBitmapText` classes let you break a string into individual lines, words, and characters—each as its own display object—un...
 - [Text Style](https://pixijs.com/8.x/guides/components/scene-objects/text/style.md): Learn how to use the TextStyle class in PixiJS to style text objects, including fills, strokes, shadows, and more.
 - [Tiling Sprite](https://pixijs.com/8.x/guides/components/scene-objects/tiling-sprite.md): Learn how to use the TilingSprite class in PixiJS for rendering repeating textures efficiently across a defined area.
-- [Documentation for LLMs](https://pixijs.com/8.x/llms.md): PixiJS supports the [`llms.txt`](https://llmstxt.org/) convention for making documentation accessible to large language models (LLMs) and the appli...
