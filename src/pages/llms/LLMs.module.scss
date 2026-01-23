@@ -3,7 +3,7 @@
   padding-bottom: 4rem;
   position: relative;
   overflow-x: hidden;
-  color: white;
+  color: var(--ifm-font-color-base);
 }
 
 .codeBlockWrapper code {
@@ -302,11 +302,15 @@
 
   h2 {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.75rem;
+    font-size: calc(1.875rem * 0.8);
     font-weight: 600;
     margin-bottom: 2rem;
     text-align: center;
     letter-spacing: -0.01em;
+
+    @media (min-width: 768px) {
+      font-size: calc(3rem * 0.8);
+    }
   }
 }
 
@@ -327,7 +331,7 @@
   padding: 1.75rem;
   border-radius: 0.875rem;
   border: 1px solid var(--ifm-table-border-color);
-  background: var(--ifm-hover-overlay);
+  background: var(--ifm-background-color, #ffffff) !important;
   transition:
     transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
     border-color 0.3s ease,
@@ -500,10 +504,14 @@
 
   h2 {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.75rem;
+    font-size: calc(1.875rem * 0.8);
     font-weight: 600;
     margin: 0;
     letter-spacing: -0.01em;
+
+    @media (min-width: 768px) {
+      font-size: calc(3rem * 0.8);
+    }
   }
 }
 
@@ -543,7 +551,7 @@
   padding: 1.75rem;
   border-radius: 0.875rem;
   border: 1px solid var(--ifm-table-border-color);
-  background: var(--ifm-hover-overlay);
+  background: var(--ifm-background-color, #ffffff) !important;
   transition:
     transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
     border-color 0.3s ease,
@@ -627,6 +635,51 @@
   line-height: 1.6;
 }
 
+/* ChatGPT Wide Card */
+.chatGptCard {
+  padding: 1.75rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--ifm-table-border-color);
+  background: var(--ifm-background-color, #ffffff) !important;
+  transition:
+    transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba(233, 30, 99, 0.3);
+  }
+}
+
+.chatGptColumns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.chatGptColumn {
+  display: flex;
+  flex-direction: column;
+
+  .sectionLabel {
+    align-self: flex-start;
+  }
+}
+
+.chatGptNote {
+  font-size: 0.8rem;
+  color: #919bac;
+  margin: 1.5rem 0 0;
+  line-height: 1.6;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ifm-table-border-color);
+}
+
 /* Light mode overrides */
 html[data-theme='light'] {
   .subtitle,
@@ -660,8 +713,10 @@ html[data-theme='light'] {
   }
 
   .ideCard,
-  .aiCard {
-    background: white;
+  .aiCard,
+  .ideCard,
+  .chatGptCard {
+    background: white !important;
     border-color: #e5e7eb;
     box-shadow:
       0 1px 3px rgba(0, 0, 0, 0.06),
@@ -672,6 +727,10 @@ html[data-theme='light'] {
         0 4px 8px rgba(0, 0, 0, 0.08),
         0 12px 24px rgba(0, 0, 0, 0.06);
     }
+  }
+
+  .chatGptNote {
+    color: #4a586b;
   }
 
   .docsLink {
@@ -699,12 +758,17 @@ html[data-theme='dark'] {
   }
 
   .ideCard,
-  .aiCard {
+  .aiCard,
+  .chatGptCard {
     background: rgba(255, 255, 255, 0.02);
 
     &:hover {
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
+  }
+
+  .chatGptNote {
+    color: #6b7280;
   }
 
   .fileCard:hover {

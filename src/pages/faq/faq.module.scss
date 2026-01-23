@@ -76,6 +76,11 @@ html[data-theme='light'] {
     --faq-text-muted: #4a586b;
     --faq-glow-opacity: 0.06;
   }
+  .faqList {
+    .faqItem {
+      background: white !important;
+    }
+  }
 }
 
 /* Dark mode overrides */

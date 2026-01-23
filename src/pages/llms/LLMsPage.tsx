@@ -1,4 +1,5 @@
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import { useColorMode } from '@docusaurus/theme-common';
 import CodeBlock from '@theme/CodeBlock';
 import { Download, ExternalLink, FileText, BookOpen, Code } from 'lucide-react';
 import React from 'react';
@@ -7,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../..
 import CursorLogo from '@site/static/images/ide-logos/cursor.svg';
 import VSCodeLogo from '@site/static/images/ide-logos/vscode.svg';
 import WindsurfLogo from '@site/static/images/ide-logos/windsurf.svg';
+import WindsurfLogoDark from '@site/static/images/ide-logos/windsurf-dark.svg';
 import ClaudeLogo from '@site/static/images/ide-logos/claude.svg';
 import {
   cursorProjectRules,
@@ -16,7 +18,7 @@ import {
   claudeSlashCommand,
   claudeInlineContext,
   chatGptQuickContext,
-} from './constants';
+} from '../../data/llms/constants';
 import { useClassModifier } from '@site/src/hooks/useContainerClassNameModifier';
 
 interface FileInfo {
@@ -133,6 +135,15 @@ const files: FileInfo[] = [
 
 const LLMsPage: React.FC = () => {
   useClassModifier('.main-wrapper', 'tileBackground', true);
+  const { colorMode } = useColorMode();
+
+  const getIdeLogo = (ide: IDEConfig) => {
+    if (ide.name === 'Windsurf') {
+      return colorMode === 'dark' ? WindsurfLogoDark : WindsurfLogo;
+    }
+    return ide.logo;
+  };
+
   return (
     <main className={styles.llmsPage}>
       {/* Hero Section */}
@@ -140,8 +151,8 @@ const LLMsPage: React.FC = () => {
         <div className={styles.heroContent}>
           <h1 className="underline">LLM Documentation</h1>
           <p className={styles.subtitle}>
-            Machine-readable API documentation optimized for AI assistants. Use this file to give Claude, ChatGPT,
-            Cursor, or other AI tools accurate knowledge about PixiJS.
+            Structured documentation designed for AI coding assistants. Provide these files to Claude, ChatGPT, Cursor,
+            or any other AI tool to give it accurate PixiJS context.
           </p>
         </div>
       </section>
@@ -199,7 +210,7 @@ const LLMsPage: React.FC = () => {
         <h2>IDE Integration</h2>
         <div className={styles.ideGrid}>
           {ideConfigs.map((ide) => {
-            const Logo = ide.logo;
+            const Logo = getIdeLogo(ide);
 
             return (
               <div key={ide.name} className={styles.ideCard}>
@@ -241,7 +252,7 @@ const LLMsPage: React.FC = () => {
       <section className={styles.aiSection}>
         <div className={styles.aiSectionHeader}>
           <ClaudeLogo className={styles.aiLogo} />
-          <h2>Claude Code / Anthropic CLI</h2>
+          <h2>Claude</h2>
         </div>
         <div className={styles.aiGrid}>
           <div className={styles.aiCard}>

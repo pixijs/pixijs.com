@@ -103,6 +103,8 @@
 /* Light mode */
 html[data-theme='light'] {
   .faqItem {
+    background: white !important;
+
     box-shadow:
       0 1px 3px rgba(0, 0, 0, 0.06),
       0 4px 12px rgba(0, 0, 0, 0.04);
@@ -122,6 +124,8 @@ html[data-theme='light'] {
 /* Dark mode */
 html[data-theme='dark'] {
   .faqItem {
+    background: var(--ifm-background-color) !important;
+
     &:hover {
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }

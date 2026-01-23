@@ -1,222 +1,171 @@
 .section {
   padding: 3rem 1.5rem;
-  max-width: 76rem;
+  max-width: min(95vw, 1700px);
   margin: 0 auto;
   position: relative;
 }
 
 .title {
   font-family: 'Outfit', sans-serif;
-  font-size: calc(1.875rem * 0.8);
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
-  margin: 0 0 3rem;
+  margin: 0 0 2.5rem;
   letter-spacing: -0.01em;
 
   @media (min-width: 768px) {
-    font-size: calc(3rem * 0.8);
+    font-size: 2.4rem;
   }
 }
 
-.topTiers {
+.tiersGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1.25rem;
   align-items: stretch;
-  margin-bottom: 1.5rem;
 
-  @media (min-width: 996px) {
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
   }
-}
 
-.bottomTiers {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
-  gap: 1.5rem;
-
-  @media (min-width: 996px) {
-    .tierCard {
-      flex: 0 0 calc((100% - 3rem) / 3);
-    }
-  }
-
-  .tierCard {
-    padding: 1.75rem;
-    height: auto;
-    min-height: 19rem;
-  }
-
-  h3,
-  ul {
-    margin-bottom: 0;
-  }
-
-  p {
-    margin-top: 0;
-    margin-bottom: 0;
+  @media (min-width: 1400px) {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
 .tierCard {
   display: flex;
   flex-direction: column;
-  padding: 1.75rem;
-  border-radius: 0.875rem;
+  padding: 2rem;
+  border-radius: 1rem;
   border: 1px solid var(--ifm-table-border-color);
   background: var(--ifm-hover-overlay);
-  height: 100%;
+  position: relative;
   transition:
     transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
     border-color 0.3s ease,
     box-shadow 0.3s ease;
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+  }
+
+  @media (min-width: 1400px) {
+    padding: 1.75rem;
   }
 }
 
-.flex-grow {
-  flex-grow: 1;
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.tierGold {
-  // border: 1px solid #ffd700;
-
-  &:hover {
-    border-color: rgba(255, 215, 0, 0.6);
-  }
-}
-
-.tierGoldPlus {
-  // border: 1px solid #ff6b6b;
-
-  &:hover {
-    border-color: rgba(255, 107, 107, 0.6);
-  }
-}
-
-.tierPlatinum {
-  border: 2px solid var(--ifm-color-primary);
-  box-shadow: 0 4px 20px rgba(233, 30, 99, 0.2);
-  position: relative;
-  z-index: 10;
-
-  @media (min-width: 996px) {
-    transform: scale(1.05);
-
-    &:hover {
-      transform: scale(1.05) translateY(-2px);
-    }
-  }
-}
-
-.tierBronze {
-  // border-top: 3px solid #cd7f32;
-
-  &:hover {
-    border-color: rgba(205, 127, 50, 0.6);
-  }
-}
-
-.tierSilver {
-  // border-top: 3px solid #c0c0c0;
-
-  &:hover {
-    border-color: rgba(192, 192, 192, 0.6);
-  }
-}
-
-.tierHeader {
+.featuredBadge {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 0.875rem;
   border-radius: 9999px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
   background: linear-gradient(135deg, var(--ifm-color-primary-light) 0%, var(--ifm-color-primary) 100%);
   color: white;
-  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+  box-shadow: 0 2px 12px rgba(233, 30, 99, 0.4);
 }
 
 .tierTitle {
   font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.2;
   margin: 0;
   letter-spacing: -0.01em;
   text-align: center;
+
+  @media (min-width: 1400px) {
+    font-size: 1.4rem;
+  }
 }
 
-.tierTitleGold {
-  font-size: 1.5rem;
-  color: #ffd700;
-}
-
-.tierTitleGoldPlus {
-  font-size: 1.5rem;
-  color: #ff6b6b;
-}
-
-.tierTitlePlatinum {
-  font-size: 1.75rem;
-}
-
+/* Metallic gradient text for tier names */
 .tierTitleBronze {
-  font-size: 1.35rem;
-  color: #e5a662;
+  background: linear-gradient(135deg, #cd7f32 0%, #e5a662 50%, #cd7f32 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .tierTitleSilver {
-  font-size: 1.35rem;
-  color: #b8c0c8;
+  background: linear-gradient(135deg, #a8a8a8 0%, #e0e0e0 50%, #b8b8b8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.tierTitleGold {
+  background: linear-gradient(135deg, #d4a800 0%, #ffd700 50%, #d4a800 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.tierTitleGoldPlus {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 50%, #ff6b6b 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.tierTitlePlatinum {
+  background: linear-gradient(
+    135deg,
+    var(--ifm-color-primary-light) 0%,
+    var(--ifm-color-primary-lightest) 50%,
+    var(--ifm-color-primary-light) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .price {
   font-weight: 700;
-  margin: 0.75rem 0 1rem;
-  font-size: 2rem;
+  font-size: 2.25rem;
+  margin: 1rem 0 1.25rem;
+  text-align: center;
 
   span {
     font-size: 1rem;
     font-weight: 500;
-    color: #6b7280;
+    color: var(--ifm-color-emphasis-600);
+  }
+
+  @media (min-width: 1400px) {
+    font-size: 2rem;
+
+    span {
+      font-size: 0.9rem;
+    }
   }
 }
-
-.priceGold,
-.priceGoldPlus,
-.priceBronze,
-.priceSilver {
-  font-size: 2rem;
-}
-
-.pricePlatinum {
-  font-size: 2.5rem;
-
-  span {
-    font-size: 1.125rem;
-  }
-}
-
-// .benefitsPlatinum {
-// font-size: 1rem !important;
-// }
 
 .benefits {
   text-align: left;
   padding-left: 0;
   margin: 0;
-  color: #d1d5db;
-  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.95rem;
   line-height: 1.6;
+  flex: 1;
 
   li {
     display: flex;
@@ -235,38 +184,101 @@
       min-height: 1.125rem;
       margin-right: 0.5rem;
       margin-top: 0.125rem;
+      color: #4ade80;
     }
   }
-}
 
-.benefitsGold,
-.benefitsGoldPlus,
-.benefitsBronze,
-.benefitsSilver {
-  color: #d1d5db;
-}
+  @media (min-width: 1400px) {
+    font-size: 0.875rem;
 
-.benefitsPlatinum {
-  color: #e5e7eb;
-}
+    li {
+      padding-bottom: 0.625rem;
 
-.iconGreen,
-.iconGreenLight {
-  color: #4ade80;
+      svg {
+        width: 1rem;
+        height: 1rem;
+        min-width: 1rem;
+        min-height: 1rem;
+      }
+    }
+  }
 }
 
 .button {
   cursor: pointer;
   width: 100%;
   margin-top: 1.25rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.875rem 1rem;
   border-radius: 0.5rem;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   border: 1.5px solid var(--ifm-table-border-color);
   background: transparent;
   color: var(--ifm-font-color-base);
   transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  @media (min-width: 1400px) {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Tier-specific card and button styles */
+.tierBronze {
+  &:hover {
+    border-color: rgba(205, 127, 50, 0.6);
+    box-shadow: 0 8px 24px rgba(205, 127, 50, 0.15);
+  }
+}
+
+.tierSilver {
+  &:hover {
+    border-color: rgba(192, 192, 192, 0.6);
+    box-shadow: 0 8px 24px rgba(192, 192, 192, 0.15);
+  }
+}
+
+.tierGold {
+  &:hover {
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+  }
+}
+
+.tierGoldPlus {
+  &:hover {
+    border-color: rgba(255, 107, 107, 0.6);
+    box-shadow: 0 8px 24px rgba(255, 107, 107, 0.15);
+  }
+}
+
+.tierPlatinum {
+  border: 2px solid var(--ifm-color-primary);
+  box-shadow: 0 4px 20px rgba(233, 30, 99, 0.2);
+
+  &:hover {
+    box-shadow: 0 8px 32px rgba(233, 30, 99, 0.3);
+  }
+}
+
+.buttonBronze {
+  border-color: #cd7f32;
+  color: #e5a662;
+
+  &:hover {
+    background: #cd7f32;
+    color: white;
+  }
+}
+
+.buttonSilver {
+  border-color: #c0c0c0;
+  color: #b8c0c8;
+
+  &:hover {
+    background: #c0c0c0;
+    color: #000;
+  }
 }
 
 .buttonGold {
@@ -293,33 +305,11 @@
   background: linear-gradient(135deg, var(--ifm-color-primary-light) 0%, var(--ifm-color-primary) 100%);
   color: white;
   border: none;
-  font-size: 1rem;
-  padding: 0.875rem 1.5rem;
   box-shadow: 0 2px 8px rgba(233, 30, 99, 0.25);
 
   &:hover {
     box-shadow: 0 4px 16px rgba(233, 30, 99, 0.4);
     color: white;
-  }
-}
-
-.buttonBronze {
-  border-color: #cd7f32;
-  color: #e5a662;
-
-  &:hover {
-    background: #cd7f32;
-    color: white;
-  }
-}
-
-.buttonSilver {
-  border-color: #c0c0c0;
-  color: #b8c0c8;
-
-  &:hover {
-    background: #c0c0c0;
-    color: #000;
   }
 }
 
@@ -339,46 +329,37 @@ html[data-theme='light'] {
     }
   }
 
+  .tierBronze:hover {
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(205, 127, 50, 0.12);
+  }
+
+  .tierSilver:hover {
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(192, 192, 192, 0.2);
+  }
+
+  .tierGold:hover {
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(255, 215, 0, 0.15);
+  }
+
+  .tierGoldPlus:hover {
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(255, 107, 107, 0.15);
+  }
+
   .tierPlatinum {
     border: 2px solid var(--ifm-color-primary);
     box-shadow: 0 4px 20px rgba(233, 30, 99, 0.15);
   }
 
-  .tierTitlePlatinum {
-    color: var(--ifm-color-primary);
-  }
-
-  .benefits,
-  .benefitsGold,
-  .benefitsGoldPlus,
-  .benefitsBronze,
-  .benefitsSilver,
-  .benefitsPlatinum {
+  .benefits {
     color: #475569;
-  }
-
-  .price span {
-    color: #64748b;
-  }
-
-  .buttonGold {
-    background: #ffd700;
-    border-color: #ffd700;
-    color: #000;
-
-    &:hover {
-      background: #e6c200;
-    }
-  }
-
-  .buttonGoldPlus {
-    background: #ff6b6b;
-    border-color: #ff6b6b;
-    color: white;
-
-    &:hover {
-      background: #ff5252;
-    }
   }
 
   .buttonBronze {
@@ -400,6 +381,26 @@ html[data-theme='light'] {
       background: #a8a8a8;
     }
   }
+
+  .buttonGold {
+    background: #ffd700;
+    border-color: #ffd700;
+    color: #000;
+
+    &:hover {
+      background: #e6c200;
+    }
+  }
+
+  .buttonGoldPlus {
+    background: #ff6b6b;
+    border-color: #ff6b6b;
+    color: white;
+
+    &:hover {
+      background: #ff5252;
+    }
+  }
 }
 
 /* Dark mode overrides */
@@ -410,5 +411,9 @@ html[data-theme='dark'] {
     &:hover {
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
+  }
+
+  .benefits {
+    color: #d1d5db;
   }
 }

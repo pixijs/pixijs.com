@@ -22,18 +22,18 @@
 
 .title {
   font-family: 'Outfit', sans-serif;
-  font-size: 2.25rem;
+  font-size: calc(2.25rem * 0.8);
   font-weight: bold;
   margin: 0 0 1.5rem;
   letter-spacing: -0.01em;
 
   @media (min-width: 768px) {
-    font-size: 3rem;
+    font-size: calc(3rem * 0.8);
   }
 }
 
 .description {
-  font-size: 1.25rem;
+  font-size: calc(1.25rem * 0.8);
   color: #d1d5db;
   margin: 0 0 2rem;
   line-height: 1.625;
@@ -56,9 +56,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 1.75rem;
+  padding: calc(0.875rem * 0.8) calc(1.75rem * 0.8);
   border-radius: 0.5rem;
-  font-size: 1rem;
+  font-size: calc(1rem * 0.8);
   font-weight: 600;
   text-decoration: none;
   border: none;
@@ -80,9 +80,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 1.75rem;
+  padding: calc(0.875rem * 0.8) calc(1.75rem * 0.8);
   border-radius: 0.5rem;
-  font-size: 1rem;
+  font-size: calc(1rem * 0.8);
   font-weight: 600;
   text-decoration: none;
   background: transparent;

@@ -6,9 +6,9 @@ import CTASection from '../../components/Sponsor/cta/CTASection';
 import { useClassModifier } from '@site/src/hooks/useContainerClassNameModifier';
 
 const statistics = [
-  { value: '5M+', label: 'Monthly Downloads' },
-  { value: '45K+', label: 'GitHub Stars' },
-  { value: '30K+', label: 'Developers' },
+  { value: '8M+', label: 'Monthly Downloads' },
+  { value: '46K+', label: 'GitHub Stars' },
+  { value: '40K+', label: 'Developers' },
   { value: '10+', label: 'Years Active' },
 ];
 

@@ -27,11 +27,7 @@ export const claudeCodeExample = `# PixiJS Project
 ## Documentation
 For PixiJS API reference, fetch:
 https://pixijs.com/llms.txt
-
-## Key Patterns
-- Use \`Application\` for quick setup
-- Import from \`pixi.js\`
-- WebGPU renderer available via preference`;
+`;
 
 export const claudeSlashCommand = `Fetch the PixiJS API documentation from:
 https://pixijs.com/llms.txt
@@ -40,7 +36,7 @@ Use this documentation to answer questions
 about PixiJS APIs, patterns, and best practices.`;
 
 export const claudeInlineContext = `Using the PixiJS documentation from
-https://pixijs.com/llms-full.txt,
+https://pixijs.com/llms.txt,
 help me implement a particle system
 with thousands of sprites.`;
 
