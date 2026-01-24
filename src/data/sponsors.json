@@ -1,6 +1,23 @@
 [
   {
     "sponsor": {
+      "name": "Transparencia en Casinos Online",
+      "type": "Organization",
+      "login": "educatransparenciacl",
+      "avatarUrl": "https://images.opencollective.com/educatransparenciacl/88a027e/logo/460.png",
+      "websiteUrl": "https://educatransparencia.cl",
+      "linkUrl": "https://opencollective.com/educatransparenciacl",
+      "socialLogins": {
+        "opencollective": "educatransparenciacl"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Releaf Medical Cannabis Glossary",
       "type": "Organization",
       "login": "medical-cannabis-glossary",
