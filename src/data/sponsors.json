@@ -1,6 +1,21 @@
 [
   {
     "sponsor": {
+      "login": "elevenlabs",
+      "name": "ElevenLabs",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/94471909?v=4",
+      "websiteUrl": "https://elevenlabs.io",
+      "linkUrl": "https://github.com/elevenlabs",
+      "type": "Organization"
+    },
+    "isOneTime": true,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "$100 one time",
+    "createdAt": "2026-01-09T09:21:03Z"
+  },
+  {
+    "sponsor": {
       "name": "Transparencia en Casinos Online",
       "type": "Organization",
       "login": "educatransparenciacl",
