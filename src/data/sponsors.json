@@ -16,6 +16,23 @@
   },
   {
     "sponsor": {
+      "name": "Fun88",
+      "type": "Organization",
+      "login": "fun88-official",
+      "avatarUrl": "https://images.opencollective.com/fun88-official/bf2843c/logo/460.png",
+      "websiteUrl": "https://global.fun88.com",
+      "linkUrl": "https://opencollective.com/fun88-official",
+      "socialLogins": {
+        "opencollective": "fun88-official"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Transparencia en Casinos Online",
       "type": "Organization",
       "login": "educatransparenciacl",
