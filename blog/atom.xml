@@ -12,8 +12,8 @@
         <id>https://pixijs.com/blog/8.16.0</id>
         <link href="https://pixijs.com/blog/8.16.0"/>
         <updated>2026-02-04T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Canvas renderer, tagged text, SplitText stability, and 15+ bug fixes land in PixiJS v8.16.0.]]></summary>
-        <content type="html"><![CDATA[<p>PixiJS v8.16.0 brings two headline features: an experimental <strong>Canvas renderer</strong> for environments without WebGL/WebGPU, and <strong>tagged text</strong> for inline styling without multiple text objects. This release also includes major SplitText stability improvements and broad engine stability fixes.</p>
+        <summary type="html"><![CDATA[Canvas renderer, tagged text, SplitText stability, and broad engine stability updates land in PixiJS v8.16.0.]]></summary>
+        <content type="html"><![CDATA[<p>PixiJS v8.16.0 brings two headline features: an experimental <strong>Canvas renderer</strong> for environments without WebGL/WebGPU, and <strong>tagged text</strong> for inline styling without multiple text objects. This release also includes major SplitText stability improvements and broad engine stability updates.</p>
 <!-- -->
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="canvas-renderer-experimental">Canvas renderer (experimental)<a href="https://pixijs.com/blog/8.16.0#canvas-renderer-experimental" class="hash-link" aria-label="Direct link to Canvas renderer (experimental)" title="Direct link to Canvas renderer (experimental)" translate="no">​</a></h2>
 <p>PixiJS welcomes back the Canvas 2D renderer in v8. It produces a smaller build, runs well on older hardware, and works in environments where a GPU context isn't available. If a device doesn't support WebGL or WebGPU, PixiJS falls back to Canvas automatically. No configuration needed, your app keeps running.</p>
