@@ -1986,7 +1986,519 @@ export declare const extensions: {
 	 */
 	mixin(Target: any, ...sources: Parameters<typeof Object.getOwnPropertyDescriptors>[0][]): void;
 };
-declare function earcut(vertices: ArrayLike<number>, holes?: ArrayLike<number>, dimensions?: number): number[];
+/**
+ * Two Pi.
+ * @type {number}
+ */
+export declare const PI_2: number;
+/**
+ * Conversion factor for converting radians to degrees.
+ * @type {number} RAD_TO_DEG
+ */
+export declare const RAD_TO_DEG: number;
+/**
+ * Conversion factor for converting degrees to radians.
+ * @type {number}
+ */
+export declare const DEG_TO_RAD: number;
+export interface Rectangle extends PixiMixins.Rectangle {
+}
+/**
+ * The `Rectangle` object represents a rectangular area defined by its position and dimensions.
+ * Used for hit testing, bounds calculation, and general geometric operations.
+ * @example
+ * ```ts
+ * // Basic rectangle creation
+ * const rect = new Rectangle(100, 100, 200, 150);
+ *
+ * // Use as container bounds
+ * container.hitArea = new Rectangle(0, 0, 100, 100);
+ *
+ * // Check point containment
+ * const isInside = rect.contains(mouseX, mouseY);
+ *
+ * // Manipulate dimensions
+ * rect.width *= 2;
+ * rect.height += 50;
+ * ```
+ * @remarks
+ * - Position defined by top-left corner (x,y)
+ * - Dimensions defined by width and height
+ * - Supports point and rectangle containment
+ * - Common in UI and layout calculations
+ */
+export declare class Rectangle implements ShapePrimitive {
+	/**
+	 * The type of the object, mainly used to avoid `instanceof` checks
+	 * @example
+	 * ```ts
+	 * // Check shape type
+	 * const shape = new Rectangle(0, 0, 100, 100);
+	 * console.log(shape.type); // 'rectangle'
+	 *
+	 * // Use in type guards
+	 * if (shape.type === 'rectangle') {
+	 *     console.log(shape.width, shape.height);
+	 * }
+	 * ```
+	 * @default 'rectangle'
+	 */
+	readonly type: SHAPE_PRIMITIVE;
+	/**
+	 * The X coordinate of the upper-left corner of the rectangle
+	 * @example
+	 * ```ts
+	 * // Basic x position
+	 * const rect = new Rectangle();
+	 * rect.x = 100;
+	 * ```
+	 * @default 0
+	 */
+	x: number;
+	/**
+	 * The Y coordinate of the upper-left corner of the rectangle
+	 * @example
+	 * ```ts
+	 * // Basic y position
+	 * const rect = new Rectangle();
+	 * rect.y = 100;
+	 * ```
+	 * @default 0
+	 */
+	y: number;
+	/**
+	 * The overall width of this rectangle
+	 * @example
+	 * ```ts
+	 * // Basic width setting
+	 * const rect = new Rectangle();
+	 * rect.width = 200;
+	 * ```
+	 * @default 0
+	 */
+	width: number;
+	/**
+	 * The overall height of this rectangle
+	 * @example
+	 * ```ts
+	 * // Basic height setting
+	 * const rect = new Rectangle();
+	 * rect.height = 150;
+	 * ```
+	 * @default 0
+	 */
+	height: number;
+	/**
+	 * @param x - The X coordinate of the upper-left corner of the rectangle
+	 * @param y - The Y coordinate of the upper-left corner of the rectangle
+	 * @param width - The overall width of the rectangle
+	 * @param height - The overall height of the rectangle
+	 */
+	constructor(x?: string | number, y?: string | number, width?: string | number, height?: string | number);
+	/**
+	 * Returns the left edge (x-coordinate) of the rectangle.
+	 * @example
+	 * ```ts
+	 * // Get left edge position
+	 * const rect = new Rectangle(100, 100, 200, 150);
+	 * console.log(rect.left); // 100
+	 *
+	 * // Use in alignment calculations
+	 * sprite.x = rect.left + padding;
+	 *
+	 * // Compare positions
+	 * if (point.x > rect.left) {
+	 *     console.log('Point is right of rectangle');
+	 * }
+	 * ```
+	 * @returns The x-coordinate of the left edge
+	 */
+	get left(): number;
+	/**
+	 * Returns the right edge (x + width) of the rectangle.
+	 * @example
+	 * ```ts
+	 * // Get right edge position
+	 * const rect = new Rectangle(100, 100, 200, 150);
+	 * console.log(rect.right); // 300
+	 *
+	 * // Align to right edge
+	 * sprite.x = rect.right - sprite.width;
+	 *
+	 * // Check boundaries
+	 * if (point.x < rect.right) {
+	 *     console.log('Point is inside right bound');
+	 * }
+	 * ```
+	 * @returns The x-coordinate of the right edge
+	 */
+	get right(): number;
+	/**
+	 * Returns the top edge (y-coordinate) of the rectangle.
+	 * @example
+	 * ```ts
+	 * // Get top edge position
+	 * const rect = new Rectangle(100, 100, 200, 150);
+	 * console.log(rect.top); // 100
+	 *
+	 * // Position above rectangle
+	 * sprite.y = rect.top - sprite.height;
+	 *
+	 * // Check vertical position
+	 * if (point.y > rect.top) {
+	 *     console.log('Point is below top edge');
+	 * }
+	 * ```
+	 * @returns The y-coordinate of the top edge
+	 */
+	get top(): number;
+	/**
+	 * Returns the bottom edge (y + height) of the rectangle.
+	 * @example
+	 * ```ts
+	 * // Get bottom edge position
+	 * const rect = new Rectangle(100, 100, 200, 150);
+	 * console.log(rect.bottom); // 250
+	 *
+	 * // Stack below rectangle
+	 * sprite.y = rect.bottom + margin;
+	 *
+	 * // Check vertical bounds
+	 * if (point.y < rect.bottom) {
+	 *     console.log('Point is above bottom edge');
+	 * }
+	 * ```
+	 * @returns The y-coordinate of the bottom edge
+	 */
+	get bottom(): number;
+	/**
+	 * Determines whether the Rectangle is empty (has no area).
+	 * @example
+	 * ```ts
+	 * // Check zero dimensions
+	 * const rect = new Rectangle(100, 100, 0, 50);
+	 * console.log(rect.isEmpty()); // true
+	 * ```
+	 * @returns True if the rectangle has no area
+	 */
+	isEmpty(): boolean;
+	/**
+	 * A constant empty rectangle. This is a new object every time the property is accessed.
+	 * @example
+	 * ```ts
+	 * // Get fresh empty rectangle
+	 * const empty = Rectangle.EMPTY;
+	 * console.log(empty.isEmpty()); // true
+	 * ```
+	 * @returns A new empty rectangle instance
+	 */
+	static get EMPTY(): Rectangle;
+	/**
+	 * Creates a clone of this Rectangle
+	 * @example
+	 * ```ts
+	 * // Basic cloning
+	 * const original = new Rectangle(100, 100, 200, 150);
+	 * const copy = original.clone();
+	 *
+	 * // Clone and modify
+	 * const modified = original.clone();
+	 * modified.width *= 2;
+	 * modified.height += 50;
+	 *
+	 * // Verify independence
+	 * console.log(original.width);  // 200
+	 * console.log(modified.width);  // 400
+	 * ```
+	 * @returns A copy of the rectangle
+	 */
+	clone(): Rectangle;
+	/**
+	 * Converts a Bounds object to a Rectangle object.
+	 * @example
+	 * ```ts
+	 * // Convert bounds to rectangle
+	 * const bounds = container.getBounds();
+	 * const rect = new Rectangle().copyFromBounds(bounds);
+	 * ```
+	 * @param bounds - The bounds to copy and convert to a rectangle
+	 * @returns Returns itself
+	 */
+	copyFromBounds(bounds: Bounds): this;
+	/**
+	 * Copies another rectangle to this one.
+	 * @example
+	 * ```ts
+	 * // Basic copying
+	 * const source = new Rectangle(100, 100, 200, 150);
+	 * const target = new Rectangle();
+	 * target.copyFrom(source);
+	 *
+	 * // Chain with other operations
+	 * const rect = new Rectangle()
+	 *     .copyFrom(source)
+	 *     .pad(10);
+	 * ```
+	 * @param rectangle - The rectangle to copy from
+	 * @returns Returns itself
+	 */
+	copyFrom(rectangle: Rectangle): Rectangle;
+	/**
+	 * Copies this rectangle to another one.
+	 * @example
+	 * ```ts
+	 * // Basic copying
+	 * const source = new Rectangle(100, 100, 200, 150);
+	 * const target = new Rectangle();
+	 * source.copyTo(target);
+	 *
+	 * // Chain with other operations
+	 * const result = source
+	 *     .copyTo(new Rectangle())
+	 *     .getBounds();
+	 * ```
+	 * @param rectangle - The rectangle to copy to
+	 * @returns Returns given parameter
+	 */
+	copyTo(rectangle: Rectangle): Rectangle;
+	/**
+	 * Checks whether the x and y coordinates given are contained within this Rectangle
+	 * @example
+	 * ```ts
+	 * // Basic containment check
+	 * const rect = new Rectangle(100, 100, 200, 150);
+	 * const isInside = rect.contains(150, 125); // true
+	 * // Check edge cases
+	 * console.log(rect.contains(100, 100)); // true (on edge)
+	 * console.log(rect.contains(300, 250)); // false (outside)
+	 * ```
+	 * @param x - The X coordinate of the point to test
+	 * @param y - The Y coordinate of the point to test
+	 * @returns Whether the x/y coordinates are within this Rectangle
+	 */
+	contains(x: number, y: number): boolean;
+	/**
+	 * Checks whether the x and y coordinates given are contained within this rectangle including the stroke.
+	 * @example
+	 * ```ts
+	 * // Basic stroke check
+	 * const rect = new Rectangle(100, 100, 200, 150);
+	 * const isOnStroke = rect.strokeContains(150, 100, 4); // 4px line width
+	 *
+	 * // Check with different alignments
+	 * const innerStroke = rect.strokeContains(150, 100, 4, 1);   // Inside
+	 * const centerStroke = rect.strokeContains(150, 100, 4, 0.5); // Centered
+	 * const outerStroke = rect.strokeContains(150, 100, 4, 0);   // Outside
+	 * ```
+	 * @param x - The X coordinate of the point to test
+	 * @param y - The Y coordinate of the point to test
+	 * @param strokeWidth - The width of the line to check
+	 * @param alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
+	 * @returns Whether the x/y coordinates are within this rectangle's stroke
+	 */
+	strokeContains(x: number, y: number, strokeWidth: number, alignment?: number): boolean;
+	/**
+	 * Determines whether the `other` Rectangle transformed by `transform` intersects with `this` Rectangle object.
+	 * Returns true only if the area of the intersection is >0, this means that Rectangles
+	 * sharing a side are not overlapping. Another side effect is that an arealess rectangle
+	 * (width or height equal to zero) can't intersect any other rectangle.
+	 * @param {Rectangle} other - The Rectangle to intersect with `this`.
+	 * @param {Matrix} transform - The transformation matrix of `other`.
+	 * @returns {boolean} A value of `true` if the transformed `other` Rectangle intersects with `this`; otherwise `false`.
+	 */
+	/**
+	 * Determines whether the `other` Rectangle transformed by `transform` intersects with `this` Rectangle object.
+	 *
+	 * Returns true only if the area of the intersection is greater than 0.
+	 * This means that rectangles sharing only a side are not considered intersecting.
+	 * @example
+	 * ```ts
+	 * // Basic intersection check
+	 * const rect1 = new Rectangle(0, 0, 100, 100);
+	 * const rect2 = new Rectangle(50, 50, 100, 100);
+	 * console.log(rect1.intersects(rect2)); // true
+	 *
+	 * // With transformation matrix
+	 * const matrix = new Matrix();
+	 * matrix.rotate(Math.PI / 4); // 45 degrees
+	 * console.log(rect1.intersects(rect2, matrix)); // Checks with rotation
+	 *
+	 * // Edge cases
+	 * const zeroWidth = new Rectangle(0, 0, 0, 100);
+	 * console.log(rect1.intersects(zeroWidth)); // false (no area)
+	 * ```
+	 * @remarks
+	 * - Returns true only if intersection area is > 0
+	 * - Rectangles sharing only a side are not intersecting
+	 * - Zero-area rectangles cannot intersect anything
+	 * - Supports optional transformation matrix
+	 * @param other - The Rectangle to intersect with `this`
+	 * @param transform - Optional transformation matrix of `other`
+	 * @returns True if the transformed `other` Rectangle intersects with `this`
+	 */
+	intersects(other: Rectangle, transform?: Matrix): boolean;
+	/**
+	 * Pads the rectangle making it grow in all directions.
+	 *
+	 * If paddingY is omitted, both paddingX and paddingY will be set to paddingX.
+	 * @example
+	 * ```ts
+	 * // Basic padding
+	 * const rect = new Rectangle(100, 100, 200, 150);
+	 * rect.pad(10); // Adds 10px padding on all sides
+	 *
+	 * // Different horizontal and vertical padding
+	 * const uiRect = new Rectangle(0, 0, 100, 50);
+	 * uiRect.pad(20, 10); // 20px horizontal, 10px vertical
+	 * ```
+	 * @remarks
+	 * - Adjusts x/y by subtracting padding
+	 * - Increases width/height by padding * 2
+	 * - Common in UI layout calculations
+	 * - Chainable with other methods
+	 * @param paddingX - The horizontal padding amount
+	 * @param paddingY - The vertical padding amount
+	 * @returns Returns itself
+	 */
+	pad(paddingX?: number, paddingY?: number): this;
+	/**
+	 * Fits this rectangle around the passed one.
+	 * @example
+	 * ```ts
+	 * // Basic fitting
+	 * const container = new Rectangle(0, 0, 100, 100);
+	 * const content = new Rectangle(25, 25, 200, 200);
+	 * content.fit(container); // Clips to container bounds
+	 * ```
+	 * @param rectangle - The rectangle to fit around
+	 * @returns Returns itself
+	 */
+	fit(rectangle: Rectangle): this;
+	/**
+	 * Enlarges rectangle so that its corners lie on a grid defined by resolution.
+	 * @example
+	 * ```ts
+	 * // Basic grid alignment
+	 * const rect = new Rectangle(10.2, 10.6, 100.8, 100.4);
+	 * rect.ceil(); // Aligns to whole pixels
+	 *
+	 * // Custom resolution grid
+	 * const uiRect = new Rectangle(5.3, 5.7, 50.2, 50.8);
+	 * uiRect.ceil(0.5); // Aligns to half pixels
+	 *
+	 * // Use with precision value
+	 * const preciseRect = new Rectangle(20.001, 20.999, 100.001, 100.999);
+	 * preciseRect.ceil(1, 0.01); // Handles small decimal variations
+	 * ```
+	 * @param resolution - The grid size to align to (1 = whole pixels)
+	 * @param eps - Small number to prevent floating point errors
+	 * @returns Returns itself
+	 */
+	ceil(resolution?: number, eps?: number): this;
+	/**
+	 * Scales the rectangle's dimensions and position by the specified factors.
+	 * @example
+	 * ```ts
+	 * const rect = new Rectangle(50, 50, 100, 100);
+	 *
+	 * // Scale uniformly
+	 * rect.scale(0.5, 0.5);
+	 * // rect is now: x=25, y=25, width=50, height=50
+	 *
+	 * // non-uniformly
+	 * rect.scale(0.5, 1);
+	 * // rect is now: x=25, y=50, width=50, height=100
+	 * ```
+	 * @param x - The factor by which to scale the horizontal properties (x, width).
+	 * @param y - The factor by which to scale the vertical properties (y, height).
+	 * @returns Returns itself
+	 */
+	scale(x: number, y?: number): this;
+	/**
+	 * Enlarges this rectangle to include the passed rectangle.
+	 * @example
+	 * ```ts
+	 * // Basic enlargement
+	 * const rect = new Rectangle(50, 50, 100, 100);
+	 * const other = new Rectangle(0, 0, 200, 75);
+	 * rect.enlarge(other);
+	 * // rect is now: x=0, y=0, width=200, height=150
+	 *
+	 * // Use for bounding box calculation
+	 * const bounds = new Rectangle();
+	 * objects.forEach((obj) => {
+	 *     bounds.enlarge(obj.getBounds());
+	 * });
+	 * ```
+	 * @param rectangle - The rectangle to include
+	 * @returns Returns itself
+	 */
+	enlarge(rectangle: Rectangle): this;
+	/**
+	 * Returns the framing rectangle of the rectangle as a Rectangle object
+	 * @example
+	 * ```ts
+	 * // Basic bounds retrieval
+	 * const rect = new Rectangle(100, 100, 200, 150);
+	 * const bounds = rect.getBounds();
+	 *
+	 * // Reuse existing rectangle
+	 * const out = new Rectangle();
+	 * rect.getBounds(out);
+	 * ```
+	 * @param out - Optional rectangle to store the result
+	 * @returns The framing rectangle
+	 */
+	getBounds(out?: Rectangle): Rectangle;
+	/**
+	 * Determines whether another Rectangle is fully contained within this Rectangle.
+	 *
+	 * Rectangles that occupy the same space are considered to be containing each other.
+	 *
+	 * Rectangles without area (width or height equal to zero) can't contain anything,
+	 * not even other arealess rectangles.
+	 * @example
+	 * ```ts
+	 * // Check if one rectangle contains another
+	 * const container = new Rectangle(0, 0, 100, 100);
+	 * const inner = new Rectangle(25, 25, 50, 50);
+	 *
+	 * console.log(container.containsRect(inner)); // true
+	 *
+	 * // Check overlapping rectangles
+	 * const partial = new Rectangle(75, 75, 50, 50);
+	 * console.log(container.containsRect(partial)); // false
+	 *
+	 * // Zero-area rectangles
+	 * const empty = new Rectangle(0, 0, 0, 100);
+	 * console.log(container.containsRect(empty)); // false
+	 * ```
+	 * @param other - The Rectangle to check for containment
+	 * @returns True if other is fully contained within this Rectangle
+	 */
+	containsRect(other: Rectangle): boolean;
+	/**
+	 * Sets the position and dimensions of the rectangle.
+	 * @example
+	 * ```ts
+	 * // Basic usage
+	 * const rect = new Rectangle();
+	 * rect.set(100, 100, 200, 150);
+	 *
+	 * // Chain with other operations
+	 * const bounds = new Rectangle()
+	 *     .set(0, 0, 100, 100)
+	 *     .pad(10);
+	 * ```
+	 * @param x - The X coordinate of the upper-left corner of the rectangle
+	 * @param y - The Y coordinate of the upper-left corner of the rectangle
+	 * @param width - The overall width of the rectangle
+	 * @param height - The overall height of the rectangle
+	 * @returns Returns itself for method chaining
+	 */
+	set(x: number, y: number, width: number, height: number): this;
+	toString(): string;
+}
 /**
  * A simple axis-aligned bounding box (AABB) data structure used to define rectangular boundaries.
  * Provides a clearer alternative to array-based bounds representation [minX, minY, maxX, maxY].
@@ -2580,519 +3092,7 @@ export declare class Bounds {
 	 */
 	copyFrom(bounds: Bounds): this;
 }
-/**
- * Two Pi.
- * @type {number}
- */
-export declare const PI_2: number;
-/**
- * Conversion factor for converting radians to degrees.
- * @type {number} RAD_TO_DEG
- */
-export declare const RAD_TO_DEG: number;
-/**
- * Conversion factor for converting degrees to radians.
- * @type {number}
- */
-export declare const DEG_TO_RAD: number;
-export interface Rectangle extends PixiMixins.Rectangle {
-}
-/**
- * The `Rectangle` object represents a rectangular area defined by its position and dimensions.
- * Used for hit testing, bounds calculation, and general geometric operations.
- * @example
- * ```ts
- * // Basic rectangle creation
- * const rect = new Rectangle(100, 100, 200, 150);
- *
- * // Use as container bounds
- * container.hitArea = new Rectangle(0, 0, 100, 100);
- *
- * // Check point containment
- * const isInside = rect.contains(mouseX, mouseY);
- *
- * // Manipulate dimensions
- * rect.width *= 2;
- * rect.height += 50;
- * ```
- * @remarks
- * - Position defined by top-left corner (x,y)
- * - Dimensions defined by width and height
- * - Supports point and rectangle containment
- * - Common in UI and layout calculations
- */
-export declare class Rectangle implements ShapePrimitive {
-	/**
-	 * The type of the object, mainly used to avoid `instanceof` checks
-	 * @example
-	 * ```ts
-	 * // Check shape type
-	 * const shape = new Rectangle(0, 0, 100, 100);
-	 * console.log(shape.type); // 'rectangle'
-	 *
-	 * // Use in type guards
-	 * if (shape.type === 'rectangle') {
-	 *     console.log(shape.width, shape.height);
-	 * }
-	 * ```
-	 * @default 'rectangle'
-	 */
-	readonly type: SHAPE_PRIMITIVE;
-	/**
-	 * The X coordinate of the upper-left corner of the rectangle
-	 * @example
-	 * ```ts
-	 * // Basic x position
-	 * const rect = new Rectangle();
-	 * rect.x = 100;
-	 * ```
-	 * @default 0
-	 */
-	x: number;
-	/**
-	 * The Y coordinate of the upper-left corner of the rectangle
-	 * @example
-	 * ```ts
-	 * // Basic y position
-	 * const rect = new Rectangle();
-	 * rect.y = 100;
-	 * ```
-	 * @default 0
-	 */
-	y: number;
-	/**
-	 * The overall width of this rectangle
-	 * @example
-	 * ```ts
-	 * // Basic width setting
-	 * const rect = new Rectangle();
-	 * rect.width = 200;
-	 * ```
-	 * @default 0
-	 */
-	width: number;
-	/**
-	 * The overall height of this rectangle
-	 * @example
-	 * ```ts
-	 * // Basic height setting
-	 * const rect = new Rectangle();
-	 * rect.height = 150;
-	 * ```
-	 * @default 0
-	 */
-	height: number;
-	/**
-	 * @param x - The X coordinate of the upper-left corner of the rectangle
-	 * @param y - The Y coordinate of the upper-left corner of the rectangle
-	 * @param width - The overall width of the rectangle
-	 * @param height - The overall height of the rectangle
-	 */
-	constructor(x?: string | number, y?: string | number, width?: string | number, height?: string | number);
-	/**
-	 * Returns the left edge (x-coordinate) of the rectangle.
-	 * @example
-	 * ```ts
-	 * // Get left edge position
-	 * const rect = new Rectangle(100, 100, 200, 150);
-	 * console.log(rect.left); // 100
-	 *
-	 * // Use in alignment calculations
-	 * sprite.x = rect.left + padding;
-	 *
-	 * // Compare positions
-	 * if (point.x > rect.left) {
-	 *     console.log('Point is right of rectangle');
-	 * }
-	 * ```
-	 * @returns The x-coordinate of the left edge
-	 */
-	get left(): number;
-	/**
-	 * Returns the right edge (x + width) of the rectangle.
-	 * @example
-	 * ```ts
-	 * // Get right edge position
-	 * const rect = new Rectangle(100, 100, 200, 150);
-	 * console.log(rect.right); // 300
-	 *
-	 * // Align to right edge
-	 * sprite.x = rect.right - sprite.width;
-	 *
-	 * // Check boundaries
-	 * if (point.x < rect.right) {
-	 *     console.log('Point is inside right bound');
-	 * }
-	 * ```
-	 * @returns The x-coordinate of the right edge
-	 */
-	get right(): number;
-	/**
-	 * Returns the top edge (y-coordinate) of the rectangle.
-	 * @example
-	 * ```ts
-	 * // Get top edge position
-	 * const rect = new Rectangle(100, 100, 200, 150);
-	 * console.log(rect.top); // 100
-	 *
-	 * // Position above rectangle
-	 * sprite.y = rect.top - sprite.height;
-	 *
-	 * // Check vertical position
-	 * if (point.y > rect.top) {
-	 *     console.log('Point is below top edge');
-	 * }
-	 * ```
-	 * @returns The y-coordinate of the top edge
-	 */
-	get top(): number;
-	/**
-	 * Returns the bottom edge (y + height) of the rectangle.
-	 * @example
-	 * ```ts
-	 * // Get bottom edge position
-	 * const rect = new Rectangle(100, 100, 200, 150);
-	 * console.log(rect.bottom); // 250
-	 *
-	 * // Stack below rectangle
-	 * sprite.y = rect.bottom + margin;
-	 *
-	 * // Check vertical bounds
-	 * if (point.y < rect.bottom) {
-	 *     console.log('Point is above bottom edge');
-	 * }
-	 * ```
-	 * @returns The y-coordinate of the bottom edge
-	 */
-	get bottom(): number;
-	/**
-	 * Determines whether the Rectangle is empty (has no area).
-	 * @example
-	 * ```ts
-	 * // Check zero dimensions
-	 * const rect = new Rectangle(100, 100, 0, 50);
-	 * console.log(rect.isEmpty()); // true
-	 * ```
-	 * @returns True if the rectangle has no area
-	 */
-	isEmpty(): boolean;
-	/**
-	 * A constant empty rectangle. This is a new object every time the property is accessed.
-	 * @example
-	 * ```ts
-	 * // Get fresh empty rectangle
-	 * const empty = Rectangle.EMPTY;
-	 * console.log(empty.isEmpty()); // true
-	 * ```
-	 * @returns A new empty rectangle instance
-	 */
-	static get EMPTY(): Rectangle;
-	/**
-	 * Creates a clone of this Rectangle
-	 * @example
-	 * ```ts
-	 * // Basic cloning
-	 * const original = new Rectangle(100, 100, 200, 150);
-	 * const copy = original.clone();
-	 *
-	 * // Clone and modify
-	 * const modified = original.clone();
-	 * modified.width *= 2;
-	 * modified.height += 50;
-	 *
-	 * // Verify independence
-	 * console.log(original.width);  // 200
-	 * console.log(modified.width);  // 400
-	 * ```
-	 * @returns A copy of the rectangle
-	 */
-	clone(): Rectangle;
-	/**
-	 * Converts a Bounds object to a Rectangle object.
-	 * @example
-	 * ```ts
-	 * // Convert bounds to rectangle
-	 * const bounds = container.getBounds();
-	 * const rect = new Rectangle().copyFromBounds(bounds);
-	 * ```
-	 * @param bounds - The bounds to copy and convert to a rectangle
-	 * @returns Returns itself
-	 */
-	copyFromBounds(bounds: Bounds): this;
-	/**
-	 * Copies another rectangle to this one.
-	 * @example
-	 * ```ts
-	 * // Basic copying
-	 * const source = new Rectangle(100, 100, 200, 150);
-	 * const target = new Rectangle();
-	 * target.copyFrom(source);
-	 *
-	 * // Chain with other operations
-	 * const rect = new Rectangle()
-	 *     .copyFrom(source)
-	 *     .pad(10);
-	 * ```
-	 * @param rectangle - The rectangle to copy from
-	 * @returns Returns itself
-	 */
-	copyFrom(rectangle: Rectangle): Rectangle;
-	/**
-	 * Copies this rectangle to another one.
-	 * @example
-	 * ```ts
-	 * // Basic copying
-	 * const source = new Rectangle(100, 100, 200, 150);
-	 * const target = new Rectangle();
-	 * source.copyTo(target);
-	 *
-	 * // Chain with other operations
-	 * const result = source
-	 *     .copyTo(new Rectangle())
-	 *     .getBounds();
-	 * ```
-	 * @param rectangle - The rectangle to copy to
-	 * @returns Returns given parameter
-	 */
-	copyTo(rectangle: Rectangle): Rectangle;
-	/**
-	 * Checks whether the x and y coordinates given are contained within this Rectangle
-	 * @example
-	 * ```ts
-	 * // Basic containment check
-	 * const rect = new Rectangle(100, 100, 200, 150);
-	 * const isInside = rect.contains(150, 125); // true
-	 * // Check edge cases
-	 * console.log(rect.contains(100, 100)); // true (on edge)
-	 * console.log(rect.contains(300, 250)); // false (outside)
-	 * ```
-	 * @param x - The X coordinate of the point to test
-	 * @param y - The Y coordinate of the point to test
-	 * @returns Whether the x/y coordinates are within this Rectangle
-	 */
-	contains(x: number, y: number): boolean;
-	/**
-	 * Checks whether the x and y coordinates given are contained within this rectangle including the stroke.
-	 * @example
-	 * ```ts
-	 * // Basic stroke check
-	 * const rect = new Rectangle(100, 100, 200, 150);
-	 * const isOnStroke = rect.strokeContains(150, 100, 4); // 4px line width
-	 *
-	 * // Check with different alignments
-	 * const innerStroke = rect.strokeContains(150, 100, 4, 1);   // Inside
-	 * const centerStroke = rect.strokeContains(150, 100, 4, 0.5); // Centered
-	 * const outerStroke = rect.strokeContains(150, 100, 4, 0);   // Outside
-	 * ```
-	 * @param x - The X coordinate of the point to test
-	 * @param y - The Y coordinate of the point to test
-	 * @param strokeWidth - The width of the line to check
-	 * @param alignment - The alignment of the stroke (1 = inner, 0.5 = centered, 0 = outer)
-	 * @returns Whether the x/y coordinates are within this rectangle's stroke
-	 */
-	strokeContains(x: number, y: number, strokeWidth: number, alignment?: number): boolean;
-	/**
-	 * Determines whether the `other` Rectangle transformed by `transform` intersects with `this` Rectangle object.
-	 * Returns true only if the area of the intersection is >0, this means that Rectangles
-	 * sharing a side are not overlapping. Another side effect is that an arealess rectangle
-	 * (width or height equal to zero) can't intersect any other rectangle.
-	 * @param {Rectangle} other - The Rectangle to intersect with `this`.
-	 * @param {Matrix} transform - The transformation matrix of `other`.
-	 * @returns {boolean} A value of `true` if the transformed `other` Rectangle intersects with `this`; otherwise `false`.
-	 */
-	/**
-	 * Determines whether the `other` Rectangle transformed by `transform` intersects with `this` Rectangle object.
-	 *
-	 * Returns true only if the area of the intersection is greater than 0.
-	 * This means that rectangles sharing only a side are not considered intersecting.
-	 * @example
-	 * ```ts
-	 * // Basic intersection check
-	 * const rect1 = new Rectangle(0, 0, 100, 100);
-	 * const rect2 = new Rectangle(50, 50, 100, 100);
-	 * console.log(rect1.intersects(rect2)); // true
-	 *
-	 * // With transformation matrix
-	 * const matrix = new Matrix();
-	 * matrix.rotate(Math.PI / 4); // 45 degrees
-	 * console.log(rect1.intersects(rect2, matrix)); // Checks with rotation
-	 *
-	 * // Edge cases
-	 * const zeroWidth = new Rectangle(0, 0, 0, 100);
-	 * console.log(rect1.intersects(zeroWidth)); // false (no area)
-	 * ```
-	 * @remarks
-	 * - Returns true only if intersection area is > 0
-	 * - Rectangles sharing only a side are not intersecting
-	 * - Zero-area rectangles cannot intersect anything
-	 * - Supports optional transformation matrix
-	 * @param other - The Rectangle to intersect with `this`
-	 * @param transform - Optional transformation matrix of `other`
-	 * @returns True if the transformed `other` Rectangle intersects with `this`
-	 */
-	intersects(other: Rectangle, transform?: Matrix): boolean;
-	/**
-	 * Pads the rectangle making it grow in all directions.
-	 *
-	 * If paddingY is omitted, both paddingX and paddingY will be set to paddingX.
-	 * @example
-	 * ```ts
-	 * // Basic padding
-	 * const rect = new Rectangle(100, 100, 200, 150);
-	 * rect.pad(10); // Adds 10px padding on all sides
-	 *
-	 * // Different horizontal and vertical padding
-	 * const uiRect = new Rectangle(0, 0, 100, 50);
-	 * uiRect.pad(20, 10); // 20px horizontal, 10px vertical
-	 * ```
-	 * @remarks
-	 * - Adjusts x/y by subtracting padding
-	 * - Increases width/height by padding * 2
-	 * - Common in UI layout calculations
-	 * - Chainable with other methods
-	 * @param paddingX - The horizontal padding amount
-	 * @param paddingY - The vertical padding amount
-	 * @returns Returns itself
-	 */
-	pad(paddingX?: number, paddingY?: number): this;
-	/**
-	 * Fits this rectangle around the passed one.
-	 * @example
-	 * ```ts
-	 * // Basic fitting
-	 * const container = new Rectangle(0, 0, 100, 100);
-	 * const content = new Rectangle(25, 25, 200, 200);
-	 * content.fit(container); // Clips to container bounds
-	 * ```
-	 * @param rectangle - The rectangle to fit around
-	 * @returns Returns itself
-	 */
-	fit(rectangle: Rectangle): this;
-	/**
-	 * Enlarges rectangle so that its corners lie on a grid defined by resolution.
-	 * @example
-	 * ```ts
-	 * // Basic grid alignment
-	 * const rect = new Rectangle(10.2, 10.6, 100.8, 100.4);
-	 * rect.ceil(); // Aligns to whole pixels
-	 *
-	 * // Custom resolution grid
-	 * const uiRect = new Rectangle(5.3, 5.7, 50.2, 50.8);
-	 * uiRect.ceil(0.5); // Aligns to half pixels
-	 *
-	 * // Use with precision value
-	 * const preciseRect = new Rectangle(20.001, 20.999, 100.001, 100.999);
-	 * preciseRect.ceil(1, 0.01); // Handles small decimal variations
-	 * ```
-	 * @param resolution - The grid size to align to (1 = whole pixels)
-	 * @param eps - Small number to prevent floating point errors
-	 * @returns Returns itself
-	 */
-	ceil(resolution?: number, eps?: number): this;
-	/**
-	 * Scales the rectangle's dimensions and position by the specified factors.
-	 * @example
-	 * ```ts
-	 * const rect = new Rectangle(50, 50, 100, 100);
-	 *
-	 * // Scale uniformly
-	 * rect.scale(0.5, 0.5);
-	 * // rect is now: x=25, y=25, width=50, height=50
-	 *
-	 * // non-uniformly
-	 * rect.scale(0.5, 1);
-	 * // rect is now: x=25, y=50, width=50, height=100
-	 * ```
-	 * @param x - The factor by which to scale the horizontal properties (x, width).
-	 * @param y - The factor by which to scale the vertical properties (y, height).
-	 * @returns Returns itself
-	 */
-	scale(x: number, y?: number): this;
-	/**
-	 * Enlarges this rectangle to include the passed rectangle.
-	 * @example
-	 * ```ts
-	 * // Basic enlargement
-	 * const rect = new Rectangle(50, 50, 100, 100);
-	 * const other = new Rectangle(0, 0, 200, 75);
-	 * rect.enlarge(other);
-	 * // rect is now: x=0, y=0, width=200, height=150
-	 *
-	 * // Use for bounding box calculation
-	 * const bounds = new Rectangle();
-	 * objects.forEach((obj) => {
-	 *     bounds.enlarge(obj.getBounds());
-	 * });
-	 * ```
-	 * @param rectangle - The rectangle to include
-	 * @returns Returns itself
-	 */
-	enlarge(rectangle: Rectangle): this;
-	/**
-	 * Returns the framing rectangle of the rectangle as a Rectangle object
-	 * @example
-	 * ```ts
-	 * // Basic bounds retrieval
-	 * const rect = new Rectangle(100, 100, 200, 150);
-	 * const bounds = rect.getBounds();
-	 *
-	 * // Reuse existing rectangle
-	 * const out = new Rectangle();
-	 * rect.getBounds(out);
-	 * ```
-	 * @param out - Optional rectangle to store the result
-	 * @returns The framing rectangle
-	 */
-	getBounds(out?: Rectangle): Rectangle;
-	/**
-	 * Determines whether another Rectangle is fully contained within this Rectangle.
-	 *
-	 * Rectangles that occupy the same space are considered to be containing each other.
-	 *
-	 * Rectangles without area (width or height equal to zero) can't contain anything,
-	 * not even other arealess rectangles.
-	 * @example
-	 * ```ts
-	 * // Check if one rectangle contains another
-	 * const container = new Rectangle(0, 0, 100, 100);
-	 * const inner = new Rectangle(25, 25, 50, 50);
-	 *
-	 * console.log(container.containsRect(inner)); // true
-	 *
-	 * // Check overlapping rectangles
-	 * const partial = new Rectangle(75, 75, 50, 50);
-	 * console.log(container.containsRect(partial)); // false
-	 *
-	 * // Zero-area rectangles
-	 * const empty = new Rectangle(0, 0, 0, 100);
-	 * console.log(container.containsRect(empty)); // false
-	 * ```
-	 * @param other - The Rectangle to check for containment
-	 * @returns True if other is fully contained within this Rectangle
-	 */
-	containsRect(other: Rectangle): boolean;
-	/**
-	 * Sets the position and dimensions of the rectangle.
-	 * @example
-	 * ```ts
-	 * // Basic usage
-	 * const rect = new Rectangle();
-	 * rect.set(100, 100, 200, 150);
-	 *
-	 * // Chain with other operations
-	 * const bounds = new Rectangle()
-	 *     .set(0, 0, 100, 100)
-	 *     .pad(10);
-	 * ```
-	 * @param x - The X coordinate of the upper-left corner of the rectangle
-	 * @param y - The Y coordinate of the upper-left corner of the rectangle
-	 * @param width - The overall width of the rectangle
-	 * @param height - The overall height of the rectangle
-	 * @returns Returns itself for method chaining
-	 */
-	set(x: number, y: number, width: number, height: number): this;
-	toString(): string;
-}
+declare function earcut(vertices: ArrayLike<number>, holes?: ArrayLike<number>, dimensions?: number): number[];
 /**
  * Base options for destroying display objects.
  * Controls how deep the destruction process should go through the display tree.
@@ -3283,6 +3283,7 @@ type OPTIONAL_SPACE = " " | "";
 type FLOPS<T = UniformData> = T extends {
 	value: infer V;
 } ? V : never;
+type RendererRenderTarget = GlRenderTarget | GpuRenderTarget | CanvasRenderTarget;
 /**
  * Defines a size with a width and a height.
  */
@@ -3605,6 +3606,19 @@ export declare class Sprite extends ViewContainer<BatchableSprite> {
 	 */
 	setSize(value: number | Optional<Size, "height">, height?: number): void;
 }
+type MaskMode = "pushMaskBegin" | "pushMaskEnd" | "popMaskBegin" | "popMaskEnd";
+declare class AlphaMaskEffect extends FilterEffect implements PoolItem {
+	constructor();
+	get sprite(): Sprite;
+	set sprite(value: Sprite);
+	get inverse(): boolean;
+	set inverse(value: boolean);
+	init: () => void;
+}
+interface MaskConversionTest {
+	test: (item: any) => boolean;
+	maskClass: new (item: any) => Effect & PoolItem;
+}
 /**
  * Automatically determines the most appropriate renderer for the current environment.
  *
@@ -3643,6 +3657,316 @@ export declare class Sprite extends ViewContainer<BatchableSprite> {
  * @returns A Promise that resolves to an instance of the selected renderer.
  */
 export declare function autoDetectRenderer(options: Partial<AutoDetectOptions>): Promise<Renderer>;
+type CanvasSourceCache = {
+	canvas: ICanvas;
+	resourceId: number;
+};
+interface EnsurePrecisionOptions {
+	requestedVertexPrecision: PRECISION;
+	requestedFragmentPrecision: PRECISION;
+	maxSupportedVertexPrecision: PRECISION;
+	maxSupportedFragmentPrecision: PRECISION;
+}
+interface AdvancedBlendInstruction extends Instruction {
+	renderPipeId: "blendMode";
+	blendMode: BLEND_MODES;
+	activeBlend: Renderable[];
+}
+declare const imageTypes: {
+	png: string;
+	jpg: string;
+	webp: string;
+};
+type Formats = keyof typeof imageTypes;
+/**
+ * System for exporting content from a renderer. It provides methods to extract content as images,
+ * canvases, or raw pixel data. Available through `renderer.extract`.
+ * @example
+ * ```ts
+ * import { Application, Graphics } from 'pixi.js';
+ *
+ * // Create a new application
+ * const app = new Application();
+ * await app.init();
+ *
+ * // Draw something to extract
+ * const graphics = new Graphics()
+ *     .circle(0, 0, 50)
+ *     .fill(0xFF0000);
+ *
+ * // Basic extraction examples
+ * const image = await app.renderer.extract.image(graphics);    // As IImage (HTMLImageElement)
+ * const canvas = app.renderer.extract.canvas(graphics);        // As Canvas
+ * const pixels = app.renderer.extract.pixels(graphics);        // As pixel data
+ * const base64 = await app.renderer.extract.base64(graphics); // As base64 string
+ *
+ * // Advanced extraction with options
+ * const customImage = await app.renderer.extract.image({
+ *     target: graphics,
+ *     format: 'png',
+ *     resolution: 2,
+ *     frame: new Rectangle(0, 0, 100, 100),
+ *     clearColor: '#00000000'
+ * });
+ *
+ * // Download content
+ * app.renderer.extract.download({
+ *     target: graphics,
+ *     filename: 'my-image.png'
+ * });
+ *
+ * // Debug visualization
+ * app.renderer.extract.log(graphics);
+ * ```
+ *
+ * Features:
+ * - Extract as various formats (PNG, JPEG, WebP)
+ * - Control output quality and resolution
+ * - Extract specific regions
+ * - Download extracted content
+ * - Debug visualization
+ *
+ * Common Use Cases:
+ * - Creating thumbnails
+ * - Saving game screenshots
+ * - Processing visual content
+ * - Debugging renders
+ * - Creating textures from rendered content
+ *
+ * Performance Considerations:
+ * - Extraction operations are relatively expensive
+ * - Consider caching results for frequently used content
+ * - Be mindful of resolution and format choices
+ * - Large extractions may impact performance
+ */
+export declare class ExtractSystem implements System$1 {
+	/**
+	 * Default options for image extraction.
+	 * @example
+	 * ```ts
+	 * // Customize default options
+	 * ExtractSystem.defaultImageOptions.format = 'webp';
+	 * ExtractSystem.defaultImageOptions.quality = 0.8;
+	 *
+	 * // Use defaults
+	 * const image = await renderer.extract.image(sprite);
+	 * ```
+	 */
+	static defaultImageOptions: ImageOptions;
+	/** @param renderer - The renderer this System works for. */
+	constructor(renderer: Renderer);
+	/**
+	 * Creates an IImage from a display object or texture.
+	 * @param options - Options for creating the image, or the target to extract
+	 * @returns Promise that resolves with the generated IImage
+	 * @example
+	 * ```ts
+	 * // Basic usage with a sprite
+	 * const sprite = new Sprite(texture);
+	 * const image = await renderer.extract.image(sprite);
+	 * document.body.appendChild(image);
+	 *
+	 * // Advanced usage with options
+	 * const image = await renderer.extract.image({
+	 *     target: container,
+	 *     format: 'webp',
+	 *     quality: 0.8,
+	 *     frame: new Rectangle(0, 0, 100, 100),
+	 *     resolution: 2,
+	 *     clearColor: '#ff0000',
+	 *     antialias: true
+	 * });
+	 *
+	 * // Extract directly from a texture
+	 * const texture = Texture.from('myTexture.png');
+	 * const image = await renderer.extract.image(texture);
+	 * ```
+	 */
+	image(options: ExtractImageOptions | Container | Texture): Promise<ImageLike>;
+	/**
+	 * Converts the target into a base64 encoded string.
+	 *
+	 * This method works by first creating
+	 * a canvas using `Extract.canvas` and then converting it to a base64 string.
+	 * @param options - The options for creating the base64 string, or the target to extract
+	 * @returns Promise that resolves with the base64 encoded string
+	 * @example
+	 * ```ts
+	 * // Basic usage with a sprite
+	 * const sprite = new Sprite(texture);
+	 * const base64 = await renderer.extract.base64(sprite);
+	 * console.log(base64); // data:image/png;base64,...
+	 *
+	 * // Advanced usage with options
+	 * const base64 = await renderer.extract.base64({
+	 *     target: container,
+	 *     format: 'webp',
+	 *     quality: 0.8,
+	 *     frame: new Rectangle(0, 0, 100, 100),
+	 *     resolution: 2
+	 * });
+	 * ```
+	 * @throws Will throw an error if the platform doesn't support any of:
+	 * - ICanvas.toDataURL
+	 * - ICanvas.toBlob
+	 * - ICanvas.convertToBlob
+	 */
+	base64(options: ExtractImageOptions | Container | Texture): Promise<string>;
+	/**
+	 * Creates a Canvas element, renders the target to it and returns it.
+	 * This method is useful for creating static images or when you need direct canvas access.
+	 * @param options - The options for creating the canvas, or the target to extract
+	 * @returns A Canvas element with the texture rendered on
+	 * @example
+	 * ```ts
+	 * // Basic canvas extraction from a sprite
+	 * const sprite = new Sprite(texture);
+	 * const canvas = renderer.extract.canvas(sprite);
+	 * document.body.appendChild(canvas);
+	 *
+	 * // Extract with custom region
+	 * const canvas = renderer.extract.canvas({
+	 *     target: container,
+	 *     frame: new Rectangle(0, 0, 100, 100)
+	 * });
+	 *
+	 * // Extract with high resolution
+	 * const canvas = renderer.extract.canvas({
+	 *     target: sprite,
+	 *     resolution: 2,
+	 *     clearColor: '#ff0000'
+	 * });
+	 *
+	 * // Extract directly from a texture
+	 * const texture = Texture.from('myTexture.png');
+	 * const canvas = renderer.extract.canvas(texture);
+	 *
+	 * // Extract with anti-aliasing
+	 * const canvas = renderer.extract.canvas({
+	 *     target: graphics,
+	 *     antialias: true
+	 * });
+	 * ```
+	 */
+	canvas(options: ExtractOptions | Container | Texture): ICanvas;
+	/**
+	 * Returns a one-dimensional array containing the pixel data of the entire texture in RGBA order,
+	 * with integer values between 0 and 255 (inclusive).
+	 * > [!NOE] The returned array is a flat Uint8Array where every 4 values represent RGBA
+	 * @param options - The options for extracting the image, or the target to extract
+	 * @returns One-dimensional Uint8Array containing the pixel data in RGBA format
+	 * @example
+	 * ```ts
+	 * // Basic pixel extraction
+	 * const sprite = new Sprite(texture);
+	 * const pixels = renderer.extract.pixels(sprite);
+	 * console.log(pixels[0], pixels[1], pixels[2], pixels[3]); // R,G,B,A values
+	 *
+	 * // Extract with custom region
+	 * const pixels = renderer.extract.pixels({
+	 *     target: sprite,
+	 *     frame: new Rectangle(0, 0, 100, 100)
+	 * });
+	 *
+	 * // Extract with high resolution
+	 * const pixels = renderer.extract.pixels({
+	 *     target: sprite,
+	 *     resolution: 2
+	 * });
+	 * ```
+	 */
+	pixels(options: ExtractOptions | Container | Texture): GetPixelsOutput;
+	/**
+	 * Creates a texture from a display object or existing texture.
+	 *
+	 * This is useful for creating
+	 * reusable textures from rendered content or making copies of existing textures.
+	 * > [!NOTE] The returned texture should be destroyed when no longer needed
+	 * @param options - The options for creating the texture, or the target to extract
+	 * @returns A new texture containing the extracted content
+	 * @example
+	 * ```ts
+	 * // Basic texture extraction from a sprite
+	 * const sprite = new Sprite(texture);
+	 * const extractedTexture = renderer.extract.texture(sprite);
+	 *
+	 * // Extract with custom region
+	 * const regionTexture = renderer.extract.texture({
+	 *     target: container,
+	 *     frame: new Rectangle(0, 0, 100, 100)
+	 * });
+	 *
+	 * // Extract with high resolution
+	 * const hiResTexture = renderer.extract.texture({
+	 *     target: sprite,
+	 *     resolution: 2,
+	 *     clearColor: '#ff0000'
+	 * });
+	 *
+	 * // Create a new sprite from extracted texture
+	 * const newSprite = new Sprite(
+	 *     renderer.extract.texture({
+	 *         target: graphics,
+	 *         antialias: true
+	 *     })
+	 * );
+	 *
+	 * // Clean up when done
+	 * extractedTexture.destroy(true);
+	 * ```
+	 */
+	texture(options: ExtractOptions | Container | Texture): Texture;
+	/**
+	 * Extracts and downloads content from the renderer as an image file.
+	 * This is a convenient way to save screenshots or export rendered content.
+	 * > [!NOTE] The download will use PNG format regardless of the filename extension
+	 * @param options - The options for downloading and extracting the image, or the target to extract
+	 * @example
+	 * ```ts
+	 * // Basic download with default filename
+	 * const sprite = new Sprite(texture);
+	 * renderer.extract.download(sprite); // Downloads as 'image.png'
+	 *
+	 * // Download with custom filename
+	 * renderer.extract.download({
+	 *     target: sprite,
+	 *     filename: 'screenshot.png'
+	 * });
+	 *
+	 * // Download with custom region
+	 * renderer.extract.download({
+	 *     target: container,
+	 *     filename: 'region.png',
+	 *     frame: new Rectangle(0, 0, 100, 100)
+	 * });
+	 *
+	 * // Download with high resolution and background
+	 * renderer.extract.download({
+	 *     target: stage,
+	 *     filename: 'hd-screenshot.png',
+	 *     resolution: 2,
+	 *     clearColor: '#ff0000'
+	 * });
+	 *
+	 * // Download with anti-aliasing
+	 * renderer.extract.download({
+	 *     target: graphics,
+	 *     filename: 'smooth.png',
+	 *     antialias: true
+	 * });
+	 * ```
+	 */
+	download(options: ExtractDownloadOptions | Container | Texture): void;
+	destroy(): void;
+}
+interface UniformParserDefinition {
+	type: UNIFORM_TYPES;
+	test(data: UniformData): boolean;
+	ubo?: string;
+	uboWgsl?: string;
+	uboStd40?: string;
+	uniform?: string;
+}
 /**
  * Application options supplied to the {@link Application#init} method.
  * These options configure how your PixiJS application behaves.
@@ -3902,334 +4226,14 @@ declare global {
 	var __PIXI_APP_INIT__: undefined | ((arg: Application | Renderer, version: string) => void);
 	var __PIXI_RENDERER_INIT__: undefined | ((arg: Application | Renderer, version: string) => void);
 }
-type MaskMode = "pushMaskBegin" | "pushMaskEnd" | "popMaskBegin" | "popMaskEnd";
-declare class AlphaMaskEffect extends FilterEffect implements PoolItem {
-	constructor();
-	get sprite(): Sprite;
-	set sprite(value: Sprite);
-	get inverse(): boolean;
-	set inverse(value: boolean);
-	init: () => void;
-}
-type MaskMode$1 = "pushMaskBegin" | "pushMaskEnd" | "popMaskBegin" | "popMaskEnd";
-interface AdvancedBlendInstruction extends Instruction {
-	renderPipeId: "blendMode";
-	blendMode: BLEND_MODES;
-	activeBlend: Renderable[];
-}
-declare const imageTypes: {
-	png: string;
-	jpg: string;
-	webp: string;
-};
-type Formats = keyof typeof imageTypes;
-/**
- * System for exporting content from a renderer. It provides methods to extract content as images,
- * canvases, or raw pixel data. Available through `renderer.extract`.
- * @example
- * ```ts
- * import { Application, Graphics } from 'pixi.js';
- *
- * // Create a new application
- * const app = new Application();
- * await app.init();
- *
- * // Draw something to extract
- * const graphics = new Graphics()
- *     .circle(0, 0, 50)
- *     .fill(0xFF0000);
- *
- * // Basic extraction examples
- * const image = await app.renderer.extract.image(graphics);    // As IImage (HTMLImageElement)
- * const canvas = app.renderer.extract.canvas(graphics);        // As Canvas
- * const pixels = app.renderer.extract.pixels(graphics);        // As pixel data
- * const base64 = await app.renderer.extract.base64(graphics); // As base64 string
- *
- * // Advanced extraction with options
- * const customImage = await app.renderer.extract.image({
- *     target: graphics,
- *     format: 'png',
- *     resolution: 2,
- *     frame: new Rectangle(0, 0, 100, 100),
- *     clearColor: '#00000000'
- * });
- *
- * // Download content
- * app.renderer.extract.download({
- *     target: graphics,
- *     filename: 'my-image.png'
- * });
- *
- * // Debug visualization
- * app.renderer.extract.log(graphics);
- * ```
- *
- * Features:
- * - Extract as various formats (PNG, JPEG, WebP)
- * - Control output quality and resolution
- * - Extract specific regions
- * - Download extracted content
- * - Debug visualization
- *
- * Common Use Cases:
- * - Creating thumbnails
- * - Saving game screenshots
- * - Processing visual content
- * - Debugging renders
- * - Creating textures from rendered content
- *
- * Performance Considerations:
- * - Extraction operations are relatively expensive
- * - Consider caching results for frequently used content
- * - Be mindful of resolution and format choices
- * - Large extractions may impact performance
- */
-export declare class ExtractSystem implements System {
-	/**
-	 * Default options for image extraction.
-	 * @example
-	 * ```ts
-	 * // Customize default options
-	 * ExtractSystem.defaultImageOptions.format = 'webp';
-	 * ExtractSystem.defaultImageOptions.quality = 0.8;
-	 *
-	 * // Use defaults
-	 * const image = await renderer.extract.image(sprite);
-	 * ```
-	 */
-	static defaultImageOptions: ImageOptions;
-	/** @param renderer - The renderer this System works for. */
-	constructor(renderer: Renderer);
-	/**
-	 * Creates an IImage from a display object or texture.
-	 * @param options - Options for creating the image, or the target to extract
-	 * @returns Promise that resolves with the generated IImage
-	 * @example
-	 * ```ts
-	 * // Basic usage with a sprite
-	 * const sprite = new Sprite(texture);
-	 * const image = await renderer.extract.image(sprite);
-	 * document.body.appendChild(image);
-	 *
-	 * // Advanced usage with options
-	 * const image = await renderer.extract.image({
-	 *     target: container,
-	 *     format: 'webp',
-	 *     quality: 0.8,
-	 *     frame: new Rectangle(0, 0, 100, 100),
-	 *     resolution: 2,
-	 *     clearColor: '#ff0000',
-	 *     antialias: true
-	 * });
-	 *
-	 * // Extract directly from a texture
-	 * const texture = Texture.from('myTexture.png');
-	 * const image = await renderer.extract.image(texture);
-	 * ```
-	 */
-	image(options: ExtractImageOptions | Container | Texture): Promise<ImageLike>;
-	/**
-	 * Converts the target into a base64 encoded string.
-	 *
-	 * This method works by first creating
-	 * a canvas using `Extract.canvas` and then converting it to a base64 string.
-	 * @param options - The options for creating the base64 string, or the target to extract
-	 * @returns Promise that resolves with the base64 encoded string
-	 * @example
-	 * ```ts
-	 * // Basic usage with a sprite
-	 * const sprite = new Sprite(texture);
-	 * const base64 = await renderer.extract.base64(sprite);
-	 * console.log(base64); // data:image/png;base64,...
-	 *
-	 * // Advanced usage with options
-	 * const base64 = await renderer.extract.base64({
-	 *     target: container,
-	 *     format: 'webp',
-	 *     quality: 0.8,
-	 *     frame: new Rectangle(0, 0, 100, 100),
-	 *     resolution: 2
-	 * });
-	 * ```
-	 * @throws Will throw an error if the platform doesn't support any of:
-	 * - ICanvas.toDataURL
-	 * - ICanvas.toBlob
-	 * - ICanvas.convertToBlob
-	 */
-	base64(options: ExtractImageOptions | Container | Texture): Promise<string>;
-	/**
-	 * Creates a Canvas element, renders the target to it and returns it.
-	 * This method is useful for creating static images or when you need direct canvas access.
-	 * @param options - The options for creating the canvas, or the target to extract
-	 * @returns A Canvas element with the texture rendered on
-	 * @example
-	 * ```ts
-	 * // Basic canvas extraction from a sprite
-	 * const sprite = new Sprite(texture);
-	 * const canvas = renderer.extract.canvas(sprite);
-	 * document.body.appendChild(canvas);
-	 *
-	 * // Extract with custom region
-	 * const canvas = renderer.extract.canvas({
-	 *     target: container,
-	 *     frame: new Rectangle(0, 0, 100, 100)
-	 * });
-	 *
-	 * // Extract with high resolution
-	 * const canvas = renderer.extract.canvas({
-	 *     target: sprite,
-	 *     resolution: 2,
-	 *     clearColor: '#ff0000'
-	 * });
-	 *
-	 * // Extract directly from a texture
-	 * const texture = Texture.from('myTexture.png');
-	 * const canvas = renderer.extract.canvas(texture);
-	 *
-	 * // Extract with anti-aliasing
-	 * const canvas = renderer.extract.canvas({
-	 *     target: graphics,
-	 *     antialias: true
-	 * });
-	 * ```
-	 */
-	canvas(options: ExtractOptions | Container | Texture): ICanvas;
-	/**
-	 * Returns a one-dimensional array containing the pixel data of the entire texture in RGBA order,
-	 * with integer values between 0 and 255 (inclusive).
-	 * > [!NOE] The returned array is a flat Uint8Array where every 4 values represent RGBA
-	 * @param options - The options for extracting the image, or the target to extract
-	 * @returns One-dimensional Uint8Array containing the pixel data in RGBA format
-	 * @example
-	 * ```ts
-	 * // Basic pixel extraction
-	 * const sprite = new Sprite(texture);
-	 * const pixels = renderer.extract.pixels(sprite);
-	 * console.log(pixels[0], pixels[1], pixels[2], pixels[3]); // R,G,B,A values
-	 *
-	 * // Extract with custom region
-	 * const pixels = renderer.extract.pixels({
-	 *     target: sprite,
-	 *     frame: new Rectangle(0, 0, 100, 100)
-	 * });
-	 *
-	 * // Extract with high resolution
-	 * const pixels = renderer.extract.pixels({
-	 *     target: sprite,
-	 *     resolution: 2
-	 * });
-	 * ```
-	 */
-	pixels(options: ExtractOptions | Container | Texture): GetPixelsOutput;
-	/**
-	 * Creates a texture from a display object or existing texture.
-	 *
-	 * This is useful for creating
-	 * reusable textures from rendered content or making copies of existing textures.
-	 * > [!NOTE] The returned texture should be destroyed when no longer needed
-	 * @param options - The options for creating the texture, or the target to extract
-	 * @returns A new texture containing the extracted content
-	 * @example
-	 * ```ts
-	 * // Basic texture extraction from a sprite
-	 * const sprite = new Sprite(texture);
-	 * const extractedTexture = renderer.extract.texture(sprite);
-	 *
-	 * // Extract with custom region
-	 * const regionTexture = renderer.extract.texture({
-	 *     target: container,
-	 *     frame: new Rectangle(0, 0, 100, 100)
-	 * });
-	 *
-	 * // Extract with high resolution
-	 * const hiResTexture = renderer.extract.texture({
-	 *     target: sprite,
-	 *     resolution: 2,
-	 *     clearColor: '#ff0000'
-	 * });
-	 *
-	 * // Create a new sprite from extracted texture
-	 * const newSprite = new Sprite(
-	 *     renderer.extract.texture({
-	 *         target: graphics,
-	 *         antialias: true
-	 *     })
-	 * );
-	 *
-	 * // Clean up when done
-	 * extractedTexture.destroy(true);
-	 * ```
-	 */
-	texture(options: ExtractOptions | Container | Texture): Texture;
-	/**
-	 * Extracts and downloads content from the renderer as an image file.
-	 * This is a convenient way to save screenshots or export rendered content.
-	 * > [!NOTE] The download will use PNG format regardless of the filename extension
-	 * @param options - The options for downloading and extracting the image, or the target to extract
-	 * @example
-	 * ```ts
-	 * // Basic download with default filename
-	 * const sprite = new Sprite(texture);
-	 * renderer.extract.download(sprite); // Downloads as 'image.png'
-	 *
-	 * // Download with custom filename
-	 * renderer.extract.download({
-	 *     target: sprite,
-	 *     filename: 'screenshot.png'
-	 * });
-	 *
-	 * // Download with custom region
-	 * renderer.extract.download({
-	 *     target: container,
-	 *     filename: 'region.png',
-	 *     frame: new Rectangle(0, 0, 100, 100)
-	 * });
-	 *
-	 * // Download with high resolution and background
-	 * renderer.extract.download({
-	 *     target: stage,
-	 *     filename: 'hd-screenshot.png',
-	 *     resolution: 2,
-	 *     clearColor: '#ff0000'
-	 * });
-	 *
-	 * // Download with anti-aliasing
-	 * renderer.extract.download({
-	 *     target: graphics,
-	 *     filename: 'smooth.png',
-	 *     antialias: true
-	 * });
-	 * ```
-	 */
-	download(options: ExtractDownloadOptions | Container | Texture): void;
-	destroy(): void;
-}
-interface MaskConversionTest {
-	test: (item: any) => boolean;
-	maskClass: new (item: any) => Effect & PoolItem;
-}
-interface EnsurePrecisionOptions {
-	requestedVertexPrecision: PRECISION;
-	requestedFragmentPrecision: PRECISION;
-	maxSupportedVertexPrecision: PRECISION;
-	maxSupportedFragmentPrecision: PRECISION;
-}
-interface UniformParserDefinition {
-	type: UNIFORM_TYPES;
-	test(data: UniformData): boolean;
-	ubo?: string;
-	uboWgsl?: string;
-	uboStd40?: string;
-	uniform?: string;
-}
-interface System$1 {
+interface System {
 	extension: {
 		name: string;
 	};
 	defaultOptions?: any;
 	new (...args: any): any;
 }
-type SystemsWithExtensionList = System$1[];
+type SystemsWithExtensionList = System[];
 type InstanceType$1<T extends new (...args: any) => any> = T extends new (...args: any) => infer R ? R : any;
 type NameType<T extends SystemsWithExtensionList> = T[number]["extension"]["name"];
 type NotUnknown<T> = T extends unknown ? keyof T extends never ? never : T : T;
@@ -4249,6 +4253,97 @@ type DefaultOptionsTypes<T extends SystemsWithExtensionList> = {
 };
 type SeparateOptions<T extends SystemsWithExtensionList> = KnownProperties<DefaultOptionsTypes<T>>;
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
+type CubeTextureFaceInputs = {
+	left: TextureSourceLike | BindableTexture;
+	right: TextureSourceLike | BindableTexture;
+	top: TextureSourceLike | BindableTexture;
+	bottom: TextureSourceLike | BindableTexture;
+	front: TextureSourceLike | BindableTexture;
+	back: TextureSourceLike | BindableTexture;
+};
+type CubeTextureFromOptions = Omit<CubeTextureSourceOptions, "faces"> & {
+	faces: CubeTextureFaceInputs;
+};
+declare const DefaultWebGLSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof GCSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GlUboSystem | typeof GlBackBufferSystem | typeof GlContextSystem | typeof GlLimitsSystem | typeof GlBufferSystem | typeof GlTextureSystem | typeof GlRenderTargetSystem | typeof GlGeometrySystem | typeof GlUniformGroupSystem | typeof GlShaderSystem | typeof GlEncoderSystem | typeof GlStateSystem | typeof GlStencilSystem | typeof GlColorMaskSystem)[];
+declare const DefaultWebGLPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof StencilMaskPipe | typeof ColorMaskPipe | typeof CustomRenderPipe)[];
+/**
+ * The default WebGL renderer, uses WebGL2 contexts.
+ */
+export type WebGLSystems = ExtractSystemTypes<typeof DefaultWebGLSystems> & PixiMixins.RendererSystems & PixiMixins.WebGLSystems;
+/**
+ * Options for WebGLRenderer.
+ */
+export interface WebGLOptions extends SharedRendererOptions, ExtractRendererOptions<typeof DefaultWebGLSystems>, PixiMixins.WebGLOptions {
+}
+export interface WebGLRenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<WebGLPipes, WebGLOptions, T>, WebGLSystems {
+}
+/**
+ * The WebGL PixiJS Renderer. This renderer allows you to use the most common graphics API, WebGL (and WebGL2).
+ *
+ * ```ts
+ * // Create a new renderer
+ * const renderer = new WebGLRenderer();
+ * await renderer.init();
+ *
+ * // Add the renderer to the stage
+ * document.body.appendChild(renderer.canvas);
+ *
+ * // Create a new stage
+ * const stage = new Container();
+ *
+ * // Render the stage
+ * renderer.render(stage);
+ * ```
+ *
+ * You can use {@link autoDetectRenderer} to create a renderer that will automatically detect the best
+ * renderer for the environment.
+ *
+ *
+ * ```ts
+ * // Create a new renderer
+ * const renderer = await rendering.autoDetectRenderer({
+ *    preference:'webgl',
+ * });
+ * ```
+ *
+ * The renderer is composed of systems that manage specific tasks. The following systems are added by default
+ * whenever you create a WebGL renderer:
+ *
+ * | WebGL Core Systems                          | Systems that are specific to the WebGL renderer                               |
+ * | ------------------------------------------- | ----------------------------------------------------------------------------- |
+ * | {@link GlUboSystem}               | This manages WebGL2 uniform buffer objects feature for shaders                |
+ * | {@link GlBackBufferSystem}        | manages the back buffer, used so that we can pixi can pixels from the screen  |
+ * | {@link GlContextSystem}           | This manages the WebGL context and its extensions                             |
+ * | {@link GlBufferSystem}            | This manages buffers and their GPU resources, keeps everything in sync        |
+ * | {@link GlTextureSystem}           | This manages textures and their GPU resources, keeps everything in sync       |
+ * | {@link GlRenderTargetSystem}      | This manages what we render too. For example the screen, or another texture   |
+ * | {@link GlGeometrySystem}          | This manages geometry, used for drawing meshes via the GPU                    |
+ * | {@link GlUniformGroupSystem}      | This manages uniform groups. Syncing shader properties with the GPU           |
+ * | {@link GlShaderSystem}            | This manages shaders, programs that run on the GPU to output lovely pixels    |
+ * | {@link GlEncoderSystem}           | This manages encoders, a WebGPU Paradigm, use it to draw a mesh + shader      |
+ * | {@link GlStateSystem}             | This manages the state of the WebGL context. eg the various flags that can be set blend modes / depthTesting etc |
+ * | {@link GlStencilSystem}           | This manages the stencil buffer. Used primarily for masking                   |
+ * | {@link GlColorMaskSystem}         | This manages the color mask. Used for color masking                           |
+ *
+ * The breadth of the API surface provided by the renderer is contained within these systems.
+ * @property {GlUboSystem} ubo - UboSystem instance.
+ * @property {GlBackBufferSystem} backBuffer - BackBufferSystem instance.
+ * @property {GlContextSystem} context - ContextSystem instance.
+ * @property {GlBufferSystem} buffer - BufferSystem instance.
+ * @property {GlTextureSystem} texture - TextureSystem instance.
+ * @property {GlRenderTargetSystem} renderTarget - RenderTargetSystem instance.
+ * @property {GlGeometrySystem} geometry - GeometrySystem instance.
+ * @property {GlUniformGroupSystem} uniformGroup - UniformGroupSystem instance.
+ * @property {GlShaderSystem} shader - ShaderSystem instance.
+ * @property {GlEncoderSystem} encoder - EncoderSystem instance.
+ * @property {GlStateSystem} state - StateSystem instance.
+ * @property {GlStencilSystem} stencil - StencilSystem instance.
+ * @property {GlColorMaskSystem} colorMask - ColorMaskSystem instance.
+ */
+export declare class WebGLRenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<WebGLPipes, WebGLOptions, T> implements WebGLSystems {
+	gl: GlRenderingContext;
+	constructor();
+}
 declare const DefaultWebGPUSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof GCSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GpuUboSystem | typeof GpuEncoderSystem | typeof GpuDeviceSystem | typeof GpuLimitsSystem | typeof GpuBufferSystem | typeof GpuTextureSystem | typeof GpuRenderTargetSystem | typeof GpuShaderSystem | typeof GpuStateSystem | typeof PipelineSystem | typeof GpuColorMaskSystem | typeof GpuStencilSystem | typeof BindGroupSystem)[];
 declare const DefaultWebGPUPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof StencilMaskPipe | typeof ColorMaskPipe | typeof CustomRenderPipe | typeof GpuUniformBatchPipe)[];
 /**
@@ -4564,7 +4659,7 @@ export declare class Texture<TextureSourceType extends TextureSource = TextureSo
  * - Be mindful of resolution and size
  * - Clean up unused textures
  */
-export declare class GenerateTextureSystem implements System {
+export declare class GenerateTextureSystem implements System$1 {
 	constructor(renderer: Renderer);
 	/**
 	 * Creates a texture from a display object that can be used for creating sprites and other textures.
@@ -4638,94 +4733,33 @@ type Runners = {
 } & {
 	[K: ({} & string) | ({} & symbol)]: SystemRunner;
 };
-declare const DefaultWebGLSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof GCSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof GlUboSystem | typeof GlBackBufferSystem | typeof GlContextSystem | typeof GlLimitsSystem | typeof GlBufferSystem | typeof GlTextureSystem | typeof GlRenderTargetSystem | typeof GlGeometrySystem | typeof GlUniformGroupSystem | typeof GlShaderSystem | typeof GlEncoderSystem | typeof GlStateSystem | typeof GlStencilSystem | typeof GlColorMaskSystem)[];
-declare const DefaultWebGLPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof StencilMaskPipe | typeof ColorMaskPipe | typeof CustomRenderPipe)[];
+declare const DefaultCanvasSystems: (typeof BackgroundSystem | typeof GlobalUniformSystem | typeof HelloSystem | typeof ViewSystem | typeof RenderGroupSystem | typeof GCSystem | typeof TextureGCSystem | typeof GenerateTextureSystem | typeof ExtractSystem | typeof RendererInitHook | typeof RenderableGCSystem | typeof SchedulerSystem | typeof CanvasContextSystem | typeof CanvasLimitsSystem | typeof CanvasTextureSystem | typeof CanvasRenderTargetSystem)[];
+declare const DefaultCanvasPipes: (typeof BlendModePipe | typeof BatcherPipe | typeof SpritePipe | typeof RenderGroupPipe | typeof AlphaMaskPipe | typeof CustomRenderPipe | typeof CanvasStencilMaskPipe | typeof CanvasColorMaskPipe)[];
 /**
- * The default WebGL renderer, uses WebGL2 contexts.
+ * The default Canvas systems. These are the systems that are added by default to the CanvasRenderer.
  */
-export type WebGLSystems = ExtractSystemTypes<typeof DefaultWebGLSystems> & PixiMixins.RendererSystems & PixiMixins.WebGLSystems;
+export type CanvasSystems = ExtractSystemTypes<typeof DefaultCanvasSystems> & PixiMixins.RendererSystems & PixiMixins.CanvasSystems;
 /**
- * Options for WebGLRenderer.
+ * Options for CanvasRenderer.
  */
-export interface WebGLOptions extends SharedRendererOptions, ExtractRendererOptions<typeof DefaultWebGLSystems>, PixiMixins.WebGLOptions {
+export interface CanvasOptions extends SharedRendererOptions, ExtractRendererOptions<typeof DefaultCanvasSystems>, PixiMixins.CanvasOptions {
 }
-export interface WebGLRenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<WebGLPipes, WebGLOptions, T>, WebGLSystems {
+export interface CanvasRenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<CanvasPipes, CanvasOptions, T>, CanvasSystems {
 }
 /**
- * The WebGL PixiJS Renderer. This renderer allows you to use the most common graphics API, WebGL (and WebGL2).
- *
- * ```ts
- * // Create a new renderer
- * const renderer = new WebGLRenderer();
- * await renderer.init();
- *
- * // Add the renderer to the stage
- * document.body.appendChild(renderer.canvas);
- *
- * // Create a new stage
- * const stage = new Container();
- *
- * // Render the stage
- * renderer.render(stage);
- * ```
- *
- * You can use {@link autoDetectRenderer} to create a renderer that will automatically detect the best
- * renderer for the environment.
- *
- *
- * ```ts
- * // Create a new renderer
- * const renderer = await rendering.autoDetectRenderer({
- *    preference:'webgl',
- * });
- * ```
- *
- * The renderer is composed of systems that manage specific tasks. The following systems are added by default
- * whenever you create a WebGL renderer:
- *
- * | WebGL Core Systems                          | Systems that are specific to the WebGL renderer                               |
- * | ------------------------------------------- | ----------------------------------------------------------------------------- |
- * | {@link GlUboSystem}               | This manages WebGL2 uniform buffer objects feature for shaders                |
- * | {@link GlBackBufferSystem}        | manages the back buffer, used so that we can pixi can pixels from the screen  |
- * | {@link GlContextSystem}           | This manages the WebGL context and its extensions                             |
- * | {@link GlBufferSystem}            | This manages buffers and their GPU resources, keeps everything in sync        |
- * | {@link GlTextureSystem}           | This manages textures and their GPU resources, keeps everything in sync       |
- * | {@link GlRenderTargetSystem}      | This manages what we render too. For example the screen, or another texture   |
- * | {@link GlGeometrySystem}          | This manages geometry, used for drawing meshes via the GPU                    |
- * | {@link GlUniformGroupSystem}      | This manages uniform groups. Syncing shader properties with the GPU           |
- * | {@link GlShaderSystem}            | This manages shaders, programs that run on the GPU to output lovely pixels    |
- * | {@link GlEncoderSystem}           | This manages encoders, a WebGPU Paradigm, use it to draw a mesh + shader      |
- * | {@link GlStateSystem}             | This manages the state of the WebGL context. eg the various flags that can be set blend modes / depthTesting etc |
- * | {@link GlStencilSystem}           | This manages the stencil buffer. Used primarily for masking                   |
- * | {@link GlColorMaskSystem}         | This manages the color mask. Used for color masking                           |
- *
- * The breadth of the API surface provided by the renderer is contained within these systems.
- * @property {GlUboSystem} ubo - UboSystem instance.
- * @property {GlBackBufferSystem} backBuffer - BackBufferSystem instance.
- * @property {GlContextSystem} context - ContextSystem instance.
- * @property {GlBufferSystem} buffer - BufferSystem instance.
- * @property {GlTextureSystem} texture - TextureSystem instance.
- * @property {GlRenderTargetSystem} renderTarget - RenderTargetSystem instance.
- * @property {GlGeometrySystem} geometry - GeometrySystem instance.
- * @property {GlUniformGroupSystem} uniformGroup - UniformGroupSystem instance.
- * @property {GlShaderSystem} shader - ShaderSystem instance.
- * @property {GlEncoderSystem} encoder - EncoderSystem instance.
- * @property {GlStateSystem} state - StateSystem instance.
- * @property {GlStencilSystem} stencil - StencilSystem instance.
- * @property {GlColorMaskSystem} colorMask - ColorMaskSystem instance.
+ * The Canvas PixiJS Renderer. This renderer allows you to use the HTML Canvas 2D context.
  */
-export declare class WebGLRenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<WebGLPipes, WebGLOptions, T> implements WebGLSystems {
-	gl: GlRenderingContext;
+export declare class CanvasRenderer<T extends ICanvas = HTMLCanvasElement> extends AbstractRenderer<CanvasPipes, CanvasOptions, T> implements CanvasSystems {
 	constructor();
 }
 /**
- * A generic renderer that can be either a WebGL or WebGPU renderer.
+ * A generic renderer that can be either a WebGL, WebGPU, or Canvas renderer.
  */
-export type Renderer<T extends ICanvas = HTMLCanvasElement> = WebGLRenderer<T> | WebGPURenderer<T>;
+export type Renderer<T extends ICanvas = HTMLCanvasElement> = WebGLRenderer<T> | WebGPURenderer<T> | CanvasRenderer<T>;
 /**
  * Options for the renderer.
  */
-export interface RendererOptions extends WebGLOptions, WebGPUOptions {
+export interface RendererOptions extends WebGLOptions, WebGPUOptions, CanvasOptions {
 }
 type GCableEventEmitter = GCable & Pick<EventEmitter, "once" | "off">;
 interface GCResourceHashEntry {
@@ -6463,7 +6497,7 @@ export declare const isMobile: isMobileResult;
  * There are several properties that can be set on a Container to control its accessibility which can
  * be found here: {@link AccessibleOptions}.
  */
-export declare class AccessibilitySystem implements System<AccessibilitySystemOptions> {
+export declare class AccessibilitySystem implements System$1<AccessibilitySystemOptions> {
 	/**
 	 * The default options used by the system.
 	 * You can set these before initializing the {@link Application} to change the default behavior.
@@ -9203,7 +9237,7 @@ export declare class FederatedPointerEvent extends FederatedMouseEvent implement
  * - Provides cursor management
  * - Configurable event features
  */
-export declare class EventSystem implements System<EventSystemOptions> {
+export declare class EventSystem implements System$1<EventSystemOptions> {
 	/**
 	 * The event features that are enabled by the EventSystem
 	 * @since 7.2.0
@@ -13138,6 +13172,34 @@ export interface TextStyleOptions {
 	 * @default undefined
 	 */
 	filters?: Filter[] | readonly Filter[];
+	/**
+	 * Custom styles to apply to specific tags within the text.
+	 * Allows for rich text formatting using simple tag markup like `<red>text</red>`.
+	 *
+	 * Tags are only parsed when this property has entries. If `tagStyles` is empty or undefined,
+	 * `<` characters in text are treated as literal.
+	 *
+	 * Nested tags are supported via a style stack - inner tags inherit from outer tags
+	 * but can override specific properties.
+	 * @example
+	 * ```ts
+	 * const text = new Text({
+	 *     text: '<red>Red</red>, <blue>Blue</blue>, <big>Big</big>',
+	 *     style: {
+	 *         fontFamily: 'Arial',
+	 *         fontSize: 24,
+	 *         fill: 'white',
+	 *         tagStyles: {
+	 *             red: { fill: 'red' },
+	 *             blue: { fill: 'blue' },
+	 *             big: { fontSize: 48 }
+	 *         }
+	 *     }
+	 * });
+	 * ```
+	 * @default undefined
+	 */
+	tagStyles?: Record<string, TextStyleOptions>;
 }
 /**
  * A TextStyle Object contains information to decorate Text objects.
@@ -13348,9 +13410,38 @@ export declare class TextStyle extends EventEmitter<{
 	/** A fillstyle that will be used on the text stroke, e.g., 'blue', '#FCFF00'. */
 	get stroke(): StrokeInput;
 	set stroke(value: StrokeInput);
+	/**
+	 * Custom styles to apply to specific tags within the text.
+	 * Allows for rich text formatting using simple tag markup like `<red>text</red>`.
+	 *
+	 * Tags are only parsed when this property has entries. If `tagStyles` is undefined,
+	 * `<` characters in text are treated as literal.
+	 * @example
+	 * ```ts
+	 * const text = new Text({
+	 *     text: '<red>Red</red>, <blue>Blue</blue>',
+	 *     style: {
+	 *         fill: 'white',
+	 *         tagStyles: {
+	 *             red: { fill: 'red' },
+	 *             blue: { fill: 'blue' }
+	 *         }
+	 *     }
+	 * });
+	 * ```
+	 */
+	get tagStyles(): Record<string, TextStyleOptions> | undefined;
+	set tagStyles(value: Record<string, TextStyleOptions> | undefined);
 	update(): void;
 	/** Resets all properties to the default values */
 	reset(): void;
+	/**
+	 * Assigns partial style options to this TextStyle instance.
+	 * Uses public setters to ensure proper value transformation.
+	 * @param values - Partial style options to assign
+	 * @returns This TextStyle instance for chaining
+	 */
+	assign(values: Partial<TextStyleOptions>): this;
 	/**
 	 * Returns a unique key for this instance.
 	 * This key is used for caching.
@@ -13463,8 +13554,28 @@ export declare class HTMLTextStyle extends TextStyle {
 	 *   }
 	 * );
 	 */
-	tagStyles: Record<string, HTMLTextStyleOptions>;
+	_tagStyles: Record<string, HTMLTextStyleOptions>;
 	constructor(options?: HTMLTextStyleOptions);
+	/**
+	 * Custom styles to apply to specific HTML tags.
+	 * Allows for consistent styling of custom elements without CSS overrides.
+	 * @example
+	 * ```ts
+	 * const text = new HTMLText({
+	 *     text: '<red>Red</red>, <blue>Blue</blue>, <green>Green</green>',
+	 *     style: {
+	 *         tagStyles: {
+	 *             red: { fill: 'red' },
+	 *             blue: { fill: 'blue' },
+	 *             green: { fill: 'green' },
+	 *         }
+	 *     }
+	 * });
+	 * ```
+	 */
+	get tagStyles(): Record<string, HTMLTextStyleOptions> | undefined;
+	/** @standard */
+	set tagStyles(value: Record<string, HTMLTextStyleOptions> | undefined);
 	/**
 	 * Creates a new HTMLTextStyle object with the same values as this one.
 	 * This creates a deep copy of all style properties, including dropShadow and tag styles.
@@ -13912,6 +14023,9 @@ declare global {
 		interface WebGPUOptions {
 		}
 		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+		interface CanvasOptions {
+		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 		interface RendererSystems {
 		}
 		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -13937,12 +14051,28 @@ declare global {
 		}
 	}
 }
+declare class CanvasGraphicsContext implements GPUData {
+}
+declare class CanvasGraphicsContextRenderData {
+}
 declare global {
 	namespace PixiMixins {
-		interface RendererSystems {
+		interface WebGLSystems {
 			graphicsContext: GraphicsContextSystem;
 		}
-		interface RendererPipes {
+		interface WebGPUSystems {
+			graphicsContext: GraphicsContextSystem;
+		}
+		interface CanvasSystems {
+			graphicsContext: CanvasGraphicsContextSystem;
+		}
+		interface CanvasPipes {
+			graphics: CanvasGraphicsPipe;
+		}
+		interface WebGLPipes {
+			graphics: GraphicsPipe;
+		}
+		interface WebGPUPipes {
 			graphics: GraphicsPipe;
 		}
 		interface RendererOptions {
@@ -17882,6 +18012,152 @@ interface BitmapFontEvents<Type> {
 		Type
 	];
 }
+export interface BitmapText extends PixiMixins.BitmapText, AbstractText<TextStyle, TextStyleOptions, TextOptions, BitmapTextGraphics> {
+}
+/**
+ * A BitmapText object creates text using pre-rendered bitmap fonts.
+ * It supports both loaded bitmap fonts (XML/FNT) and dynamically generated ones.
+ *
+ * To split a line you can use '\n' in your text string, or use the `wordWrap` and
+ * `wordWrapWidth` style properties.
+ *
+ * Key Features:
+ * - High-performance text rendering using pre-generated textures
+ * - Support for both pre-loaded and dynamic bitmap fonts
+ * - Compatible with MSDF/SDF fonts for crisp scaling
+ * - Automatic font reuse and optimization
+ *
+ * Performance Benefits:
+ * - Faster rendering compared to Canvas/HTML text
+ * - Lower memory usage for repeated characters
+ * - More efficient text changes
+ * - Better batching capabilities
+ *
+ * Limitations:
+ * - Full character set support is impractical due to the number of chars (mainly affects CJK languages)
+ * - Initial font generation/loading overhead
+ * - Less flexible styling compared to Canvas/HTML text
+ * @example
+ * ```ts
+ * import { BitmapText, BitmapFont } from 'pixi.js';
+ *
+ * // Dynamic font generation
+ * const dynamicText = new BitmapText({
+ *     text: 'Hello Pixi!',
+ *     style: {
+ *         fontFamily: 'Arial',
+ *         fontSize: 24,
+ *         fill: 0xff1010,
+ *         align: 'center',
+ *     }
+ * });
+ *
+ * // Pre-installed font usage
+ * BitmapFont.install({
+ *    name: 'myFont',
+ *    style: {
+ *        fontFamily: 'Arial',
+ *    }
+ * });
+ *
+ * const preinstalledText = new BitmapText({
+ *     text: 'Hello Pixi!',
+ *     style: {
+ *        fontFamily: 'myFont',
+ *        fontSize: 24,
+ *        fill: 0xff1010,
+ *        align: 'center',
+ *     }
+ * });
+ *
+ * // Load and use external bitmap font, if the font supports MSDF/SDF then it will be used
+ * const font = await Assets.load('fonts/myFont.fnt');
+ *
+ * const loadedFontText = new BitmapText({
+ *     text: 'Hello Pixi!',
+ *     style: {
+ *        fontFamily: 'myLoadedFont', // Name from .fnt file
+ *        fontSize: 24,
+ *        fill: 0xff1010,
+ *        align: 'center',
+ *     }
+ * });
+ *
+ * // Multiline text with word wrap
+ * const wrappedText = new BitmapText({
+ *     text: 'This is a long text that will wrap automatically',
+ *     style: {
+ *         fontFamily: 'Arial',
+ *         fontSize: 24,
+ *         wordWrap: true,
+ *         wordWrapWidth: 200,
+ *     }
+ * });
+ * ```
+ *
+ * Font Types:
+ * 1. Pre-loaded Bitmap Fonts:
+ *    - Load via Asset Manager (XML/FNT formats)
+ *    - Support for MSDF/SDF fonts
+ *    - Create using tools like https://msdf-bmfont.donmccurdy.com/
+ *
+ * 2. Dynamic Bitmap Fonts:
+ *    - Generated at runtime from system fonts
+ *    - Automatic font reuse and optimization
+ *    - Smart scaling for similar font sizes
+ *
+ * Font Management:
+ * - Automatic font generation when needed
+ * - Manual pre-installation via `BitmapFont.install`
+ * - Smart font reuse to optimize memory
+ * - Scale existing fonts instead of generating new ones when possible
+ */
+export declare class BitmapText extends AbstractText<TextStyle, TextStyleOptions, TextOptions, BitmapTextGraphics> implements View {
+	/**
+	 * **Note:** Our docs parser struggles to properly understand the constructor signature.
+	 * This is the correct signature.
+	 * ```ts
+	 * new BitmapText(options?: TextOptions);
+	 * ```
+	 * @param { TextOptions } options - The options of the bitmap text.
+	 */
+	constructor(options?: TextOptions);
+	/** @deprecated since 8.0.0 */
+	constructor(text?: TextString, options?: Partial<TextStyle>);
+	/**
+	 * The resolution / device pixel ratio for text rendering.
+	 * Unlike other text types, BitmapText resolution is managed by the BitmapFont.
+	 * Individual resolution changes are not supported.
+	 * @example
+	 * ```ts
+	 * // ❌ Incorrect: Setting resolution directly (will trigger warning)
+	 * const text = new BitmapText({
+	 *     text: 'Hello',
+	 *     resolution: 2 // This will be ignored
+	 * });
+	 *
+	 * // ✅ Correct: Set resolution when installing the font
+	 * BitmapFont.install({
+	 *     name: 'MyFont',
+	 *     style: {
+	 *         fontFamily: 'Arial',
+	 *     },
+	 *     resolution: 2 // Resolution is set here
+	 * });
+	 *
+	 * const text = new BitmapText({
+	 *     text: 'Hello',
+	 *     style: {
+	 *         fontFamily: 'MyFont' // Uses font's resolution
+	 *     }
+	 * });
+	 * ```
+	 * @default 1
+	 * @throws {Warning} When attempting to change resolution directly
+	 */
+	set resolution(value: number);
+	get resolution(): number;
+}
 /**
  * A fully resolved asset, with all the information needed to load it.
  * This represents an asset that has been processed by the resolver and is ready to be loaded.
@@ -18948,152 +19224,6 @@ export declare class BitmapFont extends AbstractBitmapFont<BitmapFont> {
 	 */
 	static uninstall(name: string): void;
 }
-export interface BitmapText extends PixiMixins.BitmapText, AbstractText<TextStyle, TextStyleOptions, TextOptions, BitmapTextGraphics> {
-}
-/**
- * A BitmapText object creates text using pre-rendered bitmap fonts.
- * It supports both loaded bitmap fonts (XML/FNT) and dynamically generated ones.
- *
- * To split a line you can use '\n' in your text string, or use the `wordWrap` and
- * `wordWrapWidth` style properties.
- *
- * Key Features:
- * - High-performance text rendering using pre-generated textures
- * - Support for both pre-loaded and dynamic bitmap fonts
- * - Compatible with MSDF/SDF fonts for crisp scaling
- * - Automatic font reuse and optimization
- *
- * Performance Benefits:
- * - Faster rendering compared to Canvas/HTML text
- * - Lower memory usage for repeated characters
- * - More efficient text changes
- * - Better batching capabilities
- *
- * Limitations:
- * - Full character set support is impractical due to the number of chars (mainly affects CJK languages)
- * - Initial font generation/loading overhead
- * - Less flexible styling compared to Canvas/HTML text
- * @example
- * ```ts
- * import { BitmapText, BitmapFont } from 'pixi.js';
- *
- * // Dynamic font generation
- * const dynamicText = new BitmapText({
- *     text: 'Hello Pixi!',
- *     style: {
- *         fontFamily: 'Arial',
- *         fontSize: 24,
- *         fill: 0xff1010,
- *         align: 'center',
- *     }
- * });
- *
- * // Pre-installed font usage
- * BitmapFont.install({
- *    name: 'myFont',
- *    style: {
- *        fontFamily: 'Arial',
- *    }
- * });
- *
- * const preinstalledText = new BitmapText({
- *     text: 'Hello Pixi!',
- *     style: {
- *        fontFamily: 'myFont',
- *        fontSize: 24,
- *        fill: 0xff1010,
- *        align: 'center',
- *     }
- * });
- *
- * // Load and use external bitmap font, if the font supports MSDF/SDF then it will be used
- * const font = await Assets.load('fonts/myFont.fnt');
- *
- * const loadedFontText = new BitmapText({
- *     text: 'Hello Pixi!',
- *     style: {
- *        fontFamily: 'myLoadedFont', // Name from .fnt file
- *        fontSize: 24,
- *        fill: 0xff1010,
- *        align: 'center',
- *     }
- * });
- *
- * // Multiline text with word wrap
- * const wrappedText = new BitmapText({
- *     text: 'This is a long text that will wrap automatically',
- *     style: {
- *         fontFamily: 'Arial',
- *         fontSize: 24,
- *         wordWrap: true,
- *         wordWrapWidth: 200,
- *     }
- * });
- * ```
- *
- * Font Types:
- * 1. Pre-loaded Bitmap Fonts:
- *    - Load via Asset Manager (XML/FNT formats)
- *    - Support for MSDF/SDF fonts
- *    - Create using tools like https://msdf-bmfont.donmccurdy.com/
- *
- * 2. Dynamic Bitmap Fonts:
- *    - Generated at runtime from system fonts
- *    - Automatic font reuse and optimization
- *    - Smart scaling for similar font sizes
- *
- * Font Management:
- * - Automatic font generation when needed
- * - Manual pre-installation via `BitmapFont.install`
- * - Smart font reuse to optimize memory
- * - Scale existing fonts instead of generating new ones when possible
- */
-export declare class BitmapText extends AbstractText<TextStyle, TextStyleOptions, TextOptions, BitmapTextGraphics> implements View {
-	/**
-	 * **Note:** Our docs parser struggles to properly understand the constructor signature.
-	 * This is the correct signature.
-	 * ```ts
-	 * new BitmapText(options?: TextOptions);
-	 * ```
-	 * @param { TextOptions } options - The options of the bitmap text.
-	 */
-	constructor(options?: TextOptions);
-	/** @deprecated since 8.0.0 */
-	constructor(text?: TextString, options?: Partial<TextStyle>);
-	/**
-	 * The resolution / device pixel ratio for text rendering.
-	 * Unlike other text types, BitmapText resolution is managed by the BitmapFont.
-	 * Individual resolution changes are not supported.
-	 * @example
-	 * ```ts
-	 * // ❌ Incorrect: Setting resolution directly (will trigger warning)
-	 * const text = new BitmapText({
-	 *     text: 'Hello',
-	 *     resolution: 2 // This will be ignored
-	 * });
-	 *
-	 * // ✅ Correct: Set resolution when installing the font
-	 * BitmapFont.install({
-	 *     name: 'MyFont',
-	 *     style: {
-	 *         fontFamily: 'Arial',
-	 *     },
-	 *     resolution: 2 // Resolution is set here
-	 * });
-	 *
-	 * const text = new BitmapText({
-	 *     text: 'Hello',
-	 *     style: {
-	 *         fontFamily: 'MyFont' // Uses font's resolution
-	 *     }
-	 * });
-	 * ```
-	 * @default 1
-	 * @throws {Warning} When attempting to change resolution directly
-	 */
-	set resolution(value: number);
-	get resolution(): number;
-}
 /**
  * Contains the output elements from a text split operation.
  * Provides access to the hierarchical structure of split text elements.
@@ -19475,6 +19605,16 @@ export declare abstract class AbstractSplitText<T extends SplitableTextObject> e
 	 * }
 	 */
 	set style(style: TextStyle | Partial<TextStyle> | TextStyleOptions);
+	/**
+	 * Used to notify the text that the style has changed.
+	 * This will re-split the text and re-apply the style.
+	 * @example
+	 * ```ts
+	 * text.style.fontSize = 32;
+	 * text.styleChanged();
+	 * ```
+	 */
+	styleChanged(): void;
 	/**
 	 * Destroys the SplitText instance and all its resources.
 	 * Cleans up all segment arrays, event listeners, and optionally the text style.
@@ -19990,6 +20130,39 @@ declare class CanvasTextGeneratorClass {
 	 */
 	returnCanvasAndContext(canvasAndContext: CanvasAndContext): void;
 }
+type MeasureFontFn = (font: string) => FontMetrics;
+interface TaggedMeasurementResult {
+	/** Total width including stroke and shadow */
+	width: number;
+	/** Total height including shadow */
+	height: number;
+	/** Array of line text (for compatibility) */
+	lines: string[];
+	/** Per-line widths */
+	lineWidths: number[];
+	/** Base line height from style */
+	lineHeight: number;
+	/** Maximum line width */
+	maxLineWidth: number;
+	/** Font properties from base style */
+	fontProperties: FontMetrics;
+	/** Per-line style runs */
+	runsByLine: TextStyleRun[][];
+	/** Per-line ascent values */
+	lineAscents: number[];
+	/** Per-line descent values */
+	lineDescents: number[];
+	/** Per-line heights */
+	lineHeights: number[];
+	/** Whether any run has drop shadow */
+	hasDropShadow: boolean;
+}
+interface StyledToken {
+	token: string;
+	style: TextStyle;
+	continuesFromPrevious: boolean;
+}
+type CanBreakWordsFn = (token: string, breakWords: boolean) => boolean;
 export interface Mesh extends PixiMixins.Mesh, ViewContainer<MeshGpuData> {
 }
 interface MeshData {
@@ -20074,22 +20247,40 @@ declare global {
 }
 declare global {
 	namespace PixiMixins {
-		interface RendererPipes {
+		interface CanvasPipes {
+			nineSliceSprite: CanvasNineSliceSpritePipe;
+		}
+		interface WebGLPipes {
+			nineSliceSprite: NineSliceSpritePipe;
+		}
+		interface WebGPUPipes {
 			nineSliceSprite: NineSliceSpritePipe;
 		}
 	}
 }
 declare global {
 	namespace PixiMixins {
-		interface RendererPipes {
+		interface CanvasPipes {
+			tilingSprite: CanvasTilingSpritePipe;
+		}
+		interface WebGLPipes {
+			tilingSprite: TilingSpritePipe;
+		}
+		interface WebGPUPipes {
 			tilingSprite: TilingSpritePipe;
 		}
 	}
 }
 declare global {
 	namespace PixiMixins {
-		interface RendererPipes {
+		interface WebGLPipes {
 			bitmapText: BitmapTextPipe;
+		}
+		interface WebGPUPipes {
+			bitmapText: BitmapTextPipe;
+		}
+		interface CanvasPipes {
+			bitmapText: CanvasBitmapTextPipe;
 		}
 	}
 }
@@ -20106,7 +20297,7 @@ declare global {
 declare global {
 	namespace PixiMixins {
 		interface RendererSystems {
-			canvasText: CanvasTextSystem;
+			canvasText: AbstractTextSystem;
 		}
 		interface RendererPipes {
 			text: CanvasTextPipe;
@@ -21847,10 +22038,20 @@ export declare class Spritesheet<S extends SpritesheetData = SpritesheetData> {
 	 */
 	constructor(texture: BindableTexture, data: S);
 	/**
-	 * Parser spritesheet from loaded data. This is done asynchronously
+	 * Parse spritesheet from loaded data. This is done asynchronously
 	 * to prevent creating too many Texture within a single process.
 	 */
 	parse(): Promise<Record<string, Texture>>;
+	/**
+	 * Parse spritesheet from loaded data. This is done synchronously
+	 * and is only suitable for smaller spritesheets (less than ~1000 frames)
+	 * or may cause too many Texture within a single process. However, synchronous parsing may be
+	 * more convenient since the called does not need to be asynchronous and is safe for
+	 * small-to-medium sized spritesheets.
+	 *
+	 * Other than being synchronous, `parseSync` is otherwise identical to `.parse()`.
+	 */
+	parseSync(): Record<keyof S["frames"], Texture>;
 	/**
 	 * Destroy Spritesheet and don't use after this.
 	 * @param {boolean} [destroyBase=false] - Whether to destroy the base texture as well
@@ -21969,9 +22170,11 @@ export {
 	EXT_texture_compression_rgtc$1 as EXT_texture_compression_rgtc,
 	ExtensionFormat as ExtensionFormatLoose,
 	GPU$1 as GPU,
+	MaskMode$1 as MaskMode,
 	PredefinedColorSpace$1 as PredefinedColorSpace,
 	RenderingContext$1 as RenderingContext,
 	StrictExtensionFormat as ExtensionFormat,
+	System$1 as System,
 	Text$1 as Text,
 	WEBGL_compressed_texture_etc$1 as WEBGL_compressed_texture_etc,
 	WEBGL_compressed_texture_etc1$1 as WEBGL_compressed_texture_etc1,
