@@ -2,11 +2,151 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pixijs.com/blog</id>
     <title>PixiJS Blog</title>
-    <updated>2025-09-05T00:00:00.000Z</updated>
+    <updated>2026-02-04T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pixijs.com/blog"/>
     <subtitle>PixiJS Blog</subtitle>
     <icon>https://pixijs.com/images/favicon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[PixiJS Update - v8.16.0]]></title>
+        <id>https://pixijs.com/blog/8.16.0</id>
+        <link href="https://pixijs.com/blog/8.16.0"/>
+        <updated>2026-02-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Canvas renderer, tagged text, SplitText stability, and 15+ bug fixes land in PixiJS v8.16.0.]]></summary>
+        <content type="html"><![CDATA[<p>PixiJS v8.16.0 brings two headline features: an experimental <strong>Canvas renderer</strong> for environments without WebGL/WebGPU, and <strong>tagged text</strong> for inline styling without multiple text objects. This release also includes major SplitText stability improvements and broad engine stability fixes.</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="canvas-renderer-experimental">Canvas renderer (experimental)<a href="https://pixijs.com/blog/8.16.0#canvas-renderer-experimental" class="hash-link" aria-label="Direct link to Canvas renderer (experimental)" title="Direct link to Canvas renderer (experimental)" translate="no">​</a></h2>
+<p>PixiJS welcomes back the Canvas 2D renderer in v8. It produces a smaller build, runs well on older hardware, and works in environments where a GPU context isn't available. If a device doesn't support WebGL or WebGPU, PixiJS falls back to Canvas automatically. No configuration needed, your app keeps running.</p>
+<p>If you want to always use the Canvas renderer, set the preference explicitly:</p>
+<div class="language-ts codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-ts codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">await</span><span class="token plain"> app</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">init</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    preference</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'canvas'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>This is an early, experimental release. The Canvas renderer doesn't cover every feature the GPU renderers support, but it handles core use cases: sprites, graphics, text, and basic filters. If you run into issues, please <a href="https://github.com/pixijs/pixijs/issues" target="_blank" rel="noopener noreferrer" class="">file a bug</a>.</p>
+<!-- -->
+<br>
+<p>Thanks to <a href="https://github.com/krzys" target="_blank" rel="noopener noreferrer" class="">@krzys</a> and <a href="https://github.com/zyie" target="_blank" rel="noopener noreferrer" class="">@Zyie</a> for shipping this.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tagged-text">Tagged text<a href="https://pixijs.com/blog/8.16.0#tagged-text" class="hash-link" aria-label="Direct link to Tagged text" title="Direct link to Tagged text" translate="no">​</a></h2>
+<p>Styling parts of a string used to mean splitting text across multiple objects and managing layout yourself. Tagged text removes that friction. Define tag styles once on your <code>TextStyle</code>, then use inline tags in your string:</p>
+<div class="language-ts codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-ts codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">const</span><span class="token plain"> text </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">new</span><span class="token plain"> </span><span class="token class-name">Text</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    text</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'&lt;bold&gt;Important:&lt;/bold&gt; This is &lt;highlight&gt;highlighted&lt;/highlight&gt; text'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    style</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fontFamily</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'Arial'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fontSize</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">28</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fill</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'white'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        tagStyles</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            bold</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> fontWeight</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'bold'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> fill</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'yellow'</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            highlight</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> fill</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'cyan'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> fontSize</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">32</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>Tags can be nested, and each tag inherits from the base style. This works with <code>Text</code> and <code>HTMLText</code> today; <code>BitmapText</code> support is coming soon.</p>
+<!-- -->
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="splittext-stability-improvements">SplitText stability improvements<a href="https://pixijs.com/blog/8.16.0#splittext-stability-improvements" class="hash-link" aria-label="Direct link to SplitText stability improvements" title="Direct link to SplitText stability improvements" translate="no">​</a></h2>
+<p><code>SplitText</code> received a significant overhaul in this release. It now mirrors standard <code>Text</code> behavior more closely and handles a wider range of <code>TextStyle</code> configurations. Key changes:</p>
+<ul>
+<li class="">
+<p>Character positioning is more accurate across different font sizes, weights, and styles.</p>
+</li>
+<li class="">
+<p><code>SplitText.from</code> correctly transfers the source anchor by mapping it to pivot coordinates.</p>
+</li>
+<li class="">
+<p>Style changes propagate automatically when you call <code>styleChanged()</code>:</p>
+<div class="language-ts codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-ts codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">splitText</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">style</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">fontSize </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">32</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">splitText</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">styleChanged</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+<li class="">
+<p><code>SplitBitmapText</code> now defaults to a <code>white</code> fill, matching <code>BitmapText</code> behavior. If you were passing <code>fill: 'white'</code> manually, you can remove it.</p>
+</li>
+</ul>
+<p>These changes may cause slight positional shifts compared to previous versions. If your text looks off after upgrading, the new positions are more correct.</p>
+<!-- -->
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="text-rendering-fixes">Text rendering fixes<a href="https://pixijs.com/blog/8.16.0#text-rendering-fixes" class="hash-link" aria-label="Direct link to Text rendering fixes" title="Direct link to Text rendering fixes" translate="no">​</a></h2>
+<p>Several long-standing text issues are resolved in this release:</p>
+<ul>
+<li class=""><strong><code>HTMLText</code> word wrapping</strong>: <code>breakWords</code> is now respected, and words exceeding <code>wordWrapWidth</code> are no longer clipped.</li>
+<li class=""><strong><code>HTMLText</code> alpha</strong>: Fill and stroke alpha values now render correctly.</li>
+<li class=""><strong>Text alignment</strong>: <code>align: 'right'</code> and <code>align: 'center'</code> produce correct positioning.</li>
+<li class=""><strong>HTML text measurement</strong>: Measurement accuracy improved, reducing layout inconsistencies.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="more-additions">More additions<a href="https://pixijs.com/blog/8.16.0#more-additions" class="hash-link" aria-label="Direct link to More additions" title="Direct link to More additions" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>Cube textures</strong>: New <code>CubeTexture</code> support for environment maps and skybox-style rendering (<a href="https://github.com/GoodBoyDigital" target="_blank" rel="noopener noreferrer" class="">@GoodBoyDigital</a>).</li>
+<li class=""><strong>External texture support</strong>: Bring your own GPU textures into PixiJS, useful for sharing resources with other renderers (<a href="https://github.com/astralarya" target="_blank" rel="noopener noreferrer" class="">@astralarya</a>, <a href="https://github.com/GoodBoyDigital" target="_blank" rel="noopener noreferrer" class="">@GoodBoyDigital</a>).</li>
+<li class=""><strong>Mip level rendering</strong>: Render specific mip levels of a texture directly (<a href="https://github.com/GoodBoyDigital" target="_blank" rel="noopener noreferrer" class="">@GoodBoyDigital</a>).</li>
+<li class=""><strong>Render to array layer</strong>: Target specific layers of array textures when rendering (<a href="https://github.com/GoodBoyDigital" target="_blank" rel="noopener noreferrer" class="">@GoodBoyDigital</a>).</li>
+<li class=""><strong>Spritesheet <code>parseSync</code></strong>: Synchronous spritesheet parsing when textures are already loaded (<a href="https://github.com/jimhigson" target="_blank" rel="noopener noreferrer" class="">@jimhigson</a>).</li>
+<li class=""><strong>Improved Pool typing</strong>: <code>pool.get()</code> now returns properly typed instances (<a href="https://github.com/unstoppablecarl" target="_blank" rel="noopener noreferrer" class="">@unstoppablecarl</a>).</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bug-fixes">Bug fixes<a href="https://pixijs.com/blog/8.16.0#bug-fixes" class="hash-link" aria-label="Direct link to Bug fixes" title="Direct link to Bug fixes" translate="no">​</a></h2>
+<p>Beyond the text fixes above, this release addresses:</p>
+<ul>
+<li class=""><strong><code>container.cullArea</code></strong> is now correctly interpreted in local coordinate space and transformed to global coordinates before culling checks (<a href="https://github.com/jujurocket" target="_blank" rel="noopener noreferrer" class="">@jujurocket</a>).</li>
+<li class=""><strong><code>graphics.texture(texture, 0x000000)</code></strong> correctly applies a black tint instead of treating <code>0</code> as "no tint" (<a href="https://github.com/bigtimebuddy" target="_blank" rel="noopener noreferrer" class="">@bigtimebuddy</a>).</li>
+<li class=""><strong>WebGPU MSDF shader</strong> uses <code>vColor</code> instead of <code>localUniforms.uColor</code>, fixing bitmap font color in WebGPU (<a href="https://github.com/Riphal" target="_blank" rel="noopener noreferrer" class="">@Riphal</a>).</li>
+<li class=""><strong>VAO cache preserved</strong> in <code>GlGeometrySystem</code>, preventing geometry corruption (<a href="https://github.com/GoodBoyDigital" target="_blank" rel="noopener noreferrer" class="">@GoodBoyDigital</a>).</li>
+<li class=""><strong>GC system</strong> now marks render groups as dirty, preventing stale render state (<a href="https://github.com/zyie" target="_blank" rel="noopener noreferrer" class="">@Zyie</a>).</li>
+<li class=""><strong>WGSL struct reflection</strong> preserves generic type parameters (<a href="https://github.com/stargazer-2697" target="_blank" rel="noopener noreferrer" class="">@stargazer-2697</a>).</li>
+<li class=""><strong>Video loader</strong> now catches load errors instead of silently failing (<a href="https://github.com/stargazer-2697" target="_blank" rel="noopener noreferrer" class="">@stargazer-2697</a>).</li>
+<li class=""><strong>Tree-shaking</strong> improved through optimized module imports (<a href="https://github.com/zyie" target="_blank" rel="noopener noreferrer" class="">@Zyie</a>).</li>
+<li class=""><strong>Custom asset parsers</strong> can now override <code>src</code> in the Resolver (<a href="https://github.com/GoodBoyDigital" target="_blank" rel="noopener noreferrer" class="">@GoodBoyDigital</a>).</li>
+</ul>
+<p>You can view the <a href="https://github.com/pixijs/pixijs/releases/tag/v8.16.0" target="_blank" rel="noopener noreferrer" class="">full changelog on GitHub</a>.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-coming-3d-the-pixijs-way">What's coming: 3D, the PixiJS way<a href="https://pixijs.com/blog/8.16.0#whats-coming-3d-the-pixijs-way" class="hash-link" aria-label="Direct link to What's coming: 3D, the PixiJS way" title="Direct link to What's coming: 3D, the PixiJS way" translate="no">​</a></h2>
+<p>While not part of this release, we want to give you a look at where PixiJS is headed. We're actively building 3D support into the engine, designed to work alongside the 2D renderer.</p>
+<p>Interactive experiences increasingly blend 2D and 3D: UI over 3D scenes, 3D elements embedded in 2D worlds, and large numbers of simple 3D objects rendered at scale. PixiJS is being extended to handle those cases directly, without requiring a separate 3D engine or a fundamentally different workflow.</p>
+<p>Here's a recent internal test running <strong>200,000 3D objects</strong> with shadows and dynamic lighting, all automatically batched by the engine. There's no manual draw-call management and no scene-graph workarounds. You define your objects, and PixiJS handles the rest:</p>
+<div style="max-width:700px;margin:0 auto;padding-bottom:24px"><video src="/images/blog/pixi-3d-perf.mp4" autoplay="" loop="" muted="" playsinline="" style="width:100%;border-radius:12px;box-shadow:0 0 20px hsla(340, 82%, 52%, 0.15)"></video></div>
+<p>The same batching architecture that makes PixiJS fast for 2D rendering is now being applied to 3D. Materials, lighting, and shadows all flow through the same automatic batching pipeline, enabling high object counts without sacrificing simplicity or performance.</p>
+<p>Our approach is to be intentionally opinionated. Rather than building a general-purpose 3D engine, PixiJS focuses on fast, scalable 3D that integrates tightly with 2D.</p>
+<p>Cube textures, mip level rendering, and array layer rendering in this release are early building blocks for that 3D pipeline.</p>
+<p>We're posting frequent development updates on <a href="https://x.com/PixiJS" target="_blank" rel="noopener noreferrer" class="">Twitter/X</a> and <a href="https://bsky.app/profile/pixijs.com" target="_blank" rel="noopener noreferrer" class="">Bluesky</a>. Follow along if you want to see this take shape in real time.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-contributors">New contributors<a href="https://pixijs.com/blog/8.16.0#new-contributors" class="hash-link" aria-label="Direct link to New contributors" title="Direct link to New contributors" translate="no">​</a></h2>
+<p>Welcome to our newest contributors:</p>
+<ul>
+<li class=""><a href="https://github.com/subhu339" target="_blank" rel="noopener noreferrer" class="">@subhu339</a></li>
+<li class=""><a href="https://github.com/stargazer-2697" target="_blank" rel="noopener noreferrer" class="">@stargazer-2697</a></li>
+<li class=""><a href="https://github.com/GiorgiMaziashvili" target="_blank" rel="noopener noreferrer" class="">@GiorgiMaziashvili</a></li>
+<li class=""><a href="https://github.com/Riphal" target="_blank" rel="noopener noreferrer" class="">@Riphal</a></li>
+<li class=""><a href="https://github.com/jujurocket" target="_blank" rel="noopener noreferrer" class="">@jujurocket</a></li>
+<li class=""><a href="https://github.com/krzys" target="_blank" rel="noopener noreferrer" class="">@krzys</a></li>
+</ul>
+<p>Thank you for your contributions!</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="get-the-latest-pixijs">Get the latest PixiJS<a href="https://pixijs.com/blog/8.16.0#get-the-latest-pixijs" class="hash-link" aria-label="Direct link to Get the latest PixiJS" title="Direct link to Get the latest PixiJS" translate="no">​</a></h2>
+<p>Install via npm:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">npm</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> pixi.js@8.16.0</span><br></span></code></pre></div></div>
+<p>Or use via CDN:</p>
+<p><strong>Development builds:</strong></p>
+<ul>
+<li class=""><a href="https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.js" target="_blank" rel="noopener noreferrer" class="">https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.js</a></li>
+<li class=""><a href="https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.mjs" target="_blank" rel="noopener noreferrer" class="">https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.mjs</a></li>
+</ul>
+<p><strong>Production builds:</strong></p>
+<ul>
+<li class=""><a href="https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.min.js" target="_blank" rel="noopener noreferrer" class="">https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.min.js</a></li>
+<li class=""><a href="https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.min.mjs" target="_blank" rel="noopener noreferrer" class="">https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.min.mjs</a></li>
+</ul>
+<p><strong>Documentation:</strong> <a href="https://pixijs.download/v8.16.0/docs/index.html" target="_blank" rel="noopener noreferrer" class="">https://pixijs.download/v8.16.0/docs/index.html</a></p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="wrapping-up">Wrapping up<a href="https://pixijs.com/blog/8.16.0#wrapping-up" class="hash-link" aria-label="Direct link to Wrapping up" title="Direct link to Wrapping up" translate="no">​</a></h2>
+<p>That covers what's new in v8.16.0. If you hit issues with the Canvas renderer or tagged text, please report them so we can iterate.</p>
+<p>Thanks to everyone who contributed fixes and features to this release.</p>
+<ul>
+<li class=""><a href="https://github.com/pixijs/pixijs/releases/v8.16.0" target="_blank" rel="noopener noreferrer" class="">See the full release notes on GitHub</a></li>
+<li class=""><a href="https://pixijs.com/sponsor" target="_blank" rel="noopener noreferrer" class="">Sponsor PixiJS</a></li>
+<li class=""><a href="https://pixijs.com/showcase" target="_blank" rel="noopener noreferrer" class="">Submit your project to the Showcase</a></li>
+<li class="">Join the discussion on <a href="https://discord.gg/QrnxmQUPGV" target="_blank" rel="noopener noreferrer" class="">Discord</a></li>
+<li class="">Follow us on <a href="https://x.com/PixiJS" target="_blank" rel="noopener noreferrer" class="">Twitter</a> / <a href="https://bsky.app/profile/pixijs.com" target="_blank" rel="noopener noreferrer" class="">Bluesky</a></li>
+</ul>
+<br>
+<p>Happy creating!</p>
+<p><strong>The PixiJS Team</strong></p>]]></content>
+        <author>
+            <name>Zyie</name>
+            <uri>https://github.com/zyie</uri>
+        </author>
+        <category label="PixiJS" term="PixiJS"/>
+        <category label="Updates" term="Updates"/>
+        <category label="Canvas Renderer" term="Canvas Renderer"/>
+        <category label="Tagged Text" term="Tagged Text"/>
+        <category label="SplitText" term="SplitText"/>
+        <category label="Text Improvements" term="Text Improvements"/>
+        <category label="3D" term="3D"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[PixiJS Update - v8.13.0]]></title>
         <id>https://pixijs.com/blog/8.13.0</id>
