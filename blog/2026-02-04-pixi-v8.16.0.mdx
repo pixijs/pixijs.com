@@ -1,0 +1,229 @@
+---
+title: PixiJS Update - v8.16.0
+description: Canvas renderer, tagged text, SplitText stability, and 15+ bug fixes land in PixiJS v8.16.0.
+slug: 8.16.0
+authors: zyie
+tags: [PixiJS, Updates, Canvas Renderer, Tagged Text, SplitText, Text Improvements, 3D]
+hide_table_of_contents: true
+keywords: ['PixiJS', 'Updates', 'Canvas Renderer', 'Tagged Text', 'SplitText', 'Text Improvements', 'Cube Textures', '3D']
+---
+
+import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
+import TaggedTextIndexFile from '!!raw-loader!../docs/examples/text_tagged-text';
+import CanvasRendererIndexFile from '!!raw-loader!../docs/examples/rendering_canvas-renderer';
+import SplitTextIndexFile from '!!raw-loader!../docs/examples/text_split-text';
+
+PixiJS v8.16.0 brings two headline features: an experimental **Canvas renderer** for environments without WebGL/WebGPU, and **tagged text** for inline styling without multiple text objects. This release also includes major SplitText stability improvements and broad engine stability fixes.
+
+{/* truncate */}
+
+## Canvas renderer (experimental)
+
+PixiJS welcomes back the Canvas 2D renderer in v8. It produces a smaller build, runs well on older hardware, and works in environments where a GPU context isn't available. If a device doesn't support WebGL or WebGPU, PixiJS falls back to Canvas automatically. No configuration needed, your app keeps running.
+
+If you want to always use the Canvas renderer, set the preference explicitly:
+
+```ts
+await app.init({
+    preference: 'canvas',
+});
+```
+
+This is an early, experimental release. The Canvas renderer doesn't cover every feature the GPU renderers support, but it handles core use cases: sprites, graphics, text, and basic filters. If you run into issues, please [file a bug](https://github.com/pixijs/pixijs/issues).
+
+<EmbeddedEditor
+  files={{
+    'index.js': CanvasRendererIndexFile,
+  }}
+/>
+
+<br/>
+
+Thanks to [@krzys](https://github.com/krzys) and [@Zyie](https://github.com/zyie) for shipping this.
+
+---
+
+## Tagged text
+
+Styling parts of a string used to mean splitting text across multiple objects and managing layout yourself. Tagged text removes that friction. Define tag styles once on your `TextStyle`, then use inline tags in your string:
+
+```ts
+const text = new Text({
+    text: '<bold>Important:</bold> This is <highlight>highlighted</highlight> text',
+    style: {
+        fontFamily: 'Arial',
+        fontSize: 28,
+        fill: 'white',
+        tagStyles: {
+            bold: { fontWeight: 'bold', fill: 'yellow' },
+            highlight: { fill: 'cyan', fontSize: 32 },
+        },
+    },
+});
+```
+
+Tags can be nested, and each tag inherits from the base style. This works with `Text` and `HTMLText` today; `BitmapText` support is coming soon.
+
+<EmbeddedEditor
+  files={{
+    'index.js': TaggedTextIndexFile,
+  }}
+/>
+
+---
+
+## SplitText stability improvements
+
+`SplitText` received a significant overhaul in this release. It now mirrors standard `Text` behavior more closely and handles a wider range of `TextStyle` configurations. Key changes:
+
+- Character positioning is more accurate across different font sizes, weights, and styles.
+- `SplitText.from` correctly transfers the source anchor by mapping it to pivot coordinates.
+- Style changes propagate automatically when you call `styleChanged()`:
+
+  ```ts
+  splitText.style.fontSize = 32;
+  splitText.styleChanged();
+  ```
+
+- `SplitBitmapText` now defaults to a `white` fill, matching `BitmapText` behavior. If you were passing `fill: 'white'` manually, you can remove it.
+
+These changes may cause slight positional shifts compared to previous versions. If your text looks off after upgrading, the new positions are more correct.
+
+<EmbeddedEditor
+  files={{
+    'index.js': SplitTextIndexFile,
+  }}
+  dependencies={{ gsap: 'latest', 'pixi.js': 'latest' }}
+/>
+
+---
+
+## Text rendering fixes
+
+Several long-standing text issues are resolved in this release:
+
+- **`HTMLText` word wrapping**: `breakWords` is now respected, and words exceeding `wordWrapWidth` are no longer clipped.
+- **`HTMLText` alpha**: Fill and stroke alpha values now render correctly.
+- **Text alignment**: `align: 'right'` and `align: 'center'` produce correct positioning.
+- **HTML text measurement**: Measurement accuracy improved, reducing layout inconsistencies.
+
+---
+
+## More additions
+
+- **Cube textures**: New `CubeTexture` support for environment maps and skybox-style rendering ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **External texture support**: Bring your own GPU textures into PixiJS, useful for sharing resources with other renderers ([@astralarya](https://github.com/astralarya), [@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **Mip level rendering**: Render specific mip levels of a texture directly ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **Render to array layer**: Target specific layers of array textures when rendering ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **Spritesheet `parseSync`**: Synchronous spritesheet parsing when textures are already loaded ([@jimhigson](https://github.com/jimhigson)).
+- **Improved Pool typing**: `pool.get()` now returns properly typed instances ([@unstoppablecarl](https://github.com/unstoppablecarl)).
+
+---
+
+## Bug fixes
+
+Beyond the text fixes above, this release addresses:
+
+- **`container.cullArea`** is now correctly interpreted in local coordinate space and transformed to global coordinates before culling checks ([@jujurocket](https://github.com/jujurocket)).
+- **`graphics.texture(texture, 0x000000)`** correctly applies a black tint instead of treating `0` as "no tint" ([@bigtimebuddy](https://github.com/bigtimebuddy)).
+- **WebGPU MSDF shader** uses `vColor` instead of `localUniforms.uColor`, fixing bitmap font color in WebGPU ([@Riphal](https://github.com/Riphal)).
+- **VAO cache preserved** in `GlGeometrySystem`, preventing geometry corruption ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **GC system** now marks render groups as dirty, preventing stale render state ([@Zyie](https://github.com/zyie)).
+- **WGSL struct reflection** preserves generic type parameters ([@stargazer-2697](https://github.com/stargazer-2697)).
+- **Video loader** now catches load errors instead of silently failing ([@stargazer-2697](https://github.com/stargazer-2697)).
+- **Tree-shaking** improved through optimized module imports ([@Zyie](https://github.com/zyie)).
+- **Custom asset parsers** can now override `src` in the Resolver ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+
+You can view the [full changelog on GitHub](https://github.com/pixijs/pixijs/releases/tag/v8.16.0).
+
+---
+
+## What's coming: 3D, the PixiJS way
+
+While not part of this release, we want to give you a look at where PixiJS is headed. We're actively building 3D support into the engine, designed to work alongside the 2D renderer.
+
+Interactive experiences increasingly blend 2D and 3D: UI over 3D scenes, 3D elements embedded in 2D worlds, and large numbers of simple 3D objects rendered at scale. PixiJS is being extended to handle those cases directly, without requiring a separate 3D engine or a fundamentally different workflow.
+
+Here's a recent internal test running **200,000 3D objects** with shadows and dynamic lighting, all automatically batched by the engine. There's no manual draw-call management and no scene-graph workarounds. You define your objects, and PixiJS handles the rest:
+
+<div style={{ maxWidth: 700, margin: '0 auto', paddingBottom: 24 }}>
+  <video
+    src="/images/blog/pixi-3d-perf.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+    style={{
+      width: '100%',
+      borderRadius: '12px',
+      boxShadow: '0 0 20px hsla(340, 82%, 52%, 0.15)',
+    }}
+  />
+</div>
+
+The same batching architecture that makes PixiJS fast for 2D rendering is now being applied to 3D. Materials, lighting, and shadows all flow through the same automatic batching pipeline, enabling high object counts without sacrificing simplicity or performance.
+
+Our approach is to be intentionally opinionated. Rather than building a general-purpose 3D engine, PixiJS focuses on fast, scalable 3D that integrates tightly with 2D.
+
+Cube textures, mip level rendering, and array layer rendering in this release are early building blocks for that 3D pipeline.
+
+We're posting frequent development updates on [Twitter/X](https://x.com/PixiJS) and [Bluesky](https://bsky.app/profile/pixijs.com). Follow along if you want to see this take shape in real time.
+
+---
+
+## New contributors
+
+Welcome to our newest contributors:
+
+- [@subhu339](https://github.com/subhu339)
+- [@stargazer-2697](https://github.com/stargazer-2697)
+- [@GiorgiMaziashvili](https://github.com/GiorgiMaziashvili)
+- [@Riphal](https://github.com/Riphal)
+- [@jujurocket](https://github.com/jujurocket)
+- [@krzys](https://github.com/krzys)
+
+Thank you for your contributions!
+
+---
+
+## Get the latest PixiJS
+
+Install via npm:
+
+```bash
+npm install pixi.js@8.16.0
+```
+
+Or use via CDN:
+
+**Development builds:**
+
+- https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.js
+- https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.mjs
+
+**Production builds:**
+
+- https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.min.js
+- https://cdn.jsdelivr.net/npm/pixi.js@8.16.0/dist/pixi.min.mjs
+
+**Documentation:** [https://pixijs.download/v8.16.0/docs/index.html](https://pixijs.download/v8.16.0/docs/index.html)
+
+---
+
+## Wrapping up
+
+That covers what's new in v8.16.0. If you hit issues with the Canvas renderer or tagged text, please report them so we can iterate.
+
+Thanks to everyone who contributed fixes and features to this release.
+
+- [See the full release notes on GitHub](https://github.com/pixijs/pixijs/releases/v8.16.0)
+- [Sponsor PixiJS](https://pixijs.com/sponsor)
+- [Submit your project to the Showcase](https://pixijs.com/showcase)
+- Join the discussion on [Discord](https://discord.gg/QrnxmQUPGV)
+- Follow us on [Twitter](https://x.com/PixiJS) / [Bluesky](https://bsky.app/profile/pixijs.com)
+
+<br />
+
+Happy creating!
+
+**The PixiJS Team**
