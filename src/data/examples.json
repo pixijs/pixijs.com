@@ -932,6 +932,17 @@
     ]
   },
   {
+    "name": "rendering_canvas-renderer",
+    "description": "This example demonstrates the new experimental Canvas renderer in PixiJS.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "rendering_canvas-renderer.js"
+      }
+    ]
+  },
+  {
     "name": "rendering_render-group",
     "description": "This example demonstrates how to use a render group for efficient rendering of a large number of sprites",
     "dependencies": {},
@@ -1164,6 +1175,31 @@
       {
         "name": "index.js",
         "location": "text_filters_cartoon/index.js"
+      }
+    ]
+  },
+  {
+    "name": "text_split-text",
+    "description": "This example demonstrates SplitText with style reactivity and character-level animation.",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "text_split-text.js"
+      }
+    ]
+  },
+  {
+    "name": "text_tagged-text",
+    "description": "This example demonstrates how to use tagged text to style individual parts of a text string.",
+    "dependencies": {},
+    "files": [
+      {
+        "name": "index.js",
+        "location": "text_tagged-text.js"
       }
     ]
   },
