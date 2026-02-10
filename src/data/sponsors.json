@@ -16,6 +16,23 @@
   },
   {
     "sponsor": {
+      "name": "Releaf Medizinisches Cannabis Berlin",
+      "type": "Organization",
+      "login": "releaf-medizinisches-cannabis-berlin",
+      "avatarUrl": "https://images.opencollective.com/releaf-medizinisches-cannabis-berlin/a07bdbf/logo/460.png",
+      "websiteUrl": "https://releaf.com/de/staedte/berlin",
+      "linkUrl": "https://opencollective.com/releaf-medizinisches-cannabis-berlin",
+      "socialLogins": {
+        "opencollective": "releaf-medizinisches-cannabis-berlin"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Buy YouTube Subscribers from SocialWick",
       "type": "Organization",
       "login": "buy-youtube-subscribers-from-socialwick",
