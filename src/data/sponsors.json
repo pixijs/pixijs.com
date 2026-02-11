@@ -16,6 +16,40 @@
   },
   {
     "sponsor": {
+      "name": "Fun88 Vietnam",
+      "type": "User",
+      "login": "fun88-vietnam",
+      "avatarUrl": "https://images.opencollective.com/fun88-vietnam/192b9db/avatar/460.png",
+      "websiteUrl": "https://fun88vnu.com/vn",
+      "linkUrl": "https://opencollective.com/fun88-vietnam",
+      "socialLogins": {
+        "opencollective": "fun88-vietnam"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
+      "name": "Fun88 Thailand",
+      "type": "User",
+      "login": "fun88-thailand",
+      "avatarUrl": "https://images.opencollective.com/fun88-thailand/81e1909/avatar/460.png",
+      "websiteUrl": "https://fun88thh.com/th",
+      "linkUrl": "https://opencollective.com/fun88-thailand",
+      "socialLogins": {
+        "opencollective": "fun88-thailand"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Releaf Medizinisches Cannabis Berlin",
       "type": "Organization",
       "login": "releaf-medizinisches-cannabis-berlin",
