@@ -152,23 +152,6 @@
   },
   {
     "sponsor": {
-      "name": "Buy Instagram Likes Views4You",
-      "type": "Organization",
-      "login": "buy-instagram-likes-views4you",
-      "avatarUrl": "https://images.opencollective.com/buy-instagram-likes-views4you/7668673/logo/460.png",
-      "websiteUrl": "https://views4you.com/buy-instagram-likes",
-      "linkUrl": "https://opencollective.com/buy-instagram-likes-views4you",
-      "socialLogins": {
-        "opencollective": "buy-instagram-likes-views4you"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
-  },
-  {
-    "sponsor": {
       "name": "LITSLINK",
       "type": "Organization",
       "login": "litslink",
