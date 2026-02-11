@@ -1017,6 +1017,34 @@
     ]
   },
   {
+    "name": "spine_basic",
+    "description": "A basic integration of Spine in PixiJS",
+    "dependencies": {
+      "@esotericsoftware/spine-pixi-v8": "latest",
+      "pixi.js": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "spine_basic.js"
+      }
+    ]
+  },
+  {
+    "name": "spine_shadow_filter",
+    "description": "A spine in PixiJS with an advanced shadow filter",
+    "dependencies": {
+      "@esotericsoftware/spine-pixi-v8": "latest",
+      "pixi.js": "latest"
+    },
+    "files": [
+      {
+        "name": "index.js",
+        "location": "spine_shadow_filter.js"
+      }
+    ]
+  },
+  {
     "name": "sprite_gif_animation_loading",
     "description": "This example demonstrates how to load and display a GIF image using the GifSprite class.",
     "dependencies": {},
