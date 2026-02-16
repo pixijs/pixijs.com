@@ -204,23 +204,43 @@
   }
 }
 
-.button {
-  cursor: pointer;
+.splitButton {
+  display: flex;
   width: 100%;
   margin-top: 1.25rem;
-  padding: 0.875rem 1rem;
   border-radius: 0.5rem;
-  font-weight: 600;
-  font-size: 0.9rem;
   border: 1.5px solid var(--ifm-table-border-color);
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.splitButtonLeft,
+.splitButtonRight {
+  cursor: pointer;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.75rem 0.5rem;
+  font-weight: 600;
+  font-size: 0.75rem;
   background: transparent;
-  color: var(--ifm-font-color-base);
+  border: none;
+  color: inherit;
   transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
 
   @media (min-width: 1400px) {
-    padding: 0.75rem 1rem;
-    font-size: 0.85rem;
+    padding: 0.625rem 0.375rem;
+    font-size: 0.7rem;
   }
+}
+
+.splitButtonDivider {
+  width: 1.5px;
+  background: var(--ifm-table-border-color);
+  align-self: stretch;
+  transition: background 0.2s ease;
 }
 
 /* Tier-specific card and button styles */
@@ -265,7 +285,12 @@
   border-color: #cd7f32;
   color: #e5a662;
 
-  &:hover {
+  .splitButtonDivider {
+    background: rgba(205, 127, 50, 0.4);
+  }
+
+  .splitButtonLeft:hover,
+  .splitButtonRight:hover {
     background: #cd7f32;
     color: white;
   }
@@ -275,7 +300,12 @@
   border-color: #c0c0c0;
   color: #b8c0c8;
 
-  &:hover {
+  .splitButtonDivider {
+    background: rgba(192, 192, 192, 0.4);
+  }
+
+  .splitButtonLeft:hover,
+  .splitButtonRight:hover {
     background: #c0c0c0;
     color: #000;
   }
@@ -285,7 +315,12 @@
   border-color: #ffd700;
   color: #ffd700;
 
-  &:hover {
+  .splitButtonDivider {
+    background: rgba(255, 215, 0, 0.4);
+  }
+
+  .splitButtonLeft:hover,
+  .splitButtonRight:hover {
     background: #ffd700;
     color: #000;
   }
@@ -295,7 +330,12 @@
   border-color: #ff6b6b;
   color: #ff6b6b;
 
-  &:hover {
+  .splitButtonDivider {
+    background: rgba(255, 107, 107, 0.4);
+  }
+
+  .splitButtonLeft:hover,
+  .splitButtonRight:hover {
     background: #ff6b6b;
     color: white;
   }
@@ -306,6 +346,15 @@
   color: white;
   border: none;
   box-shadow: 0 2px 8px rgba(233, 30, 99, 0.25);
+
+  .splitButtonDivider {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .splitButtonLeft:hover,
+  .splitButtonRight:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
 
   &:hover {
     box-shadow: 0 4px 16px rgba(233, 30, 99, 0.4);
@@ -367,8 +416,14 @@ html[data-theme='light'] {
     border-color: #cd7f32;
     color: white;
 
-    &:hover {
+    .splitButtonDivider {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .splitButtonLeft:hover,
+    .splitButtonRight:hover {
       background: #b8722d;
+      color: white;
     }
   }
 
@@ -377,8 +432,14 @@ html[data-theme='light'] {
     border-color: #c0c0c0;
     color: #000;
 
-    &:hover {
+    .splitButtonDivider {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .splitButtonLeft:hover,
+    .splitButtonRight:hover {
       background: #a8a8a8;
+      color: #000;
     }
   }
 
@@ -387,8 +448,14 @@ html[data-theme='light'] {
     border-color: #ffd700;
     color: #000;
 
-    &:hover {
+    .splitButtonDivider {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .splitButtonLeft:hover,
+    .splitButtonRight:hover {
       background: #e6c200;
+      color: #000;
     }
   }
 
@@ -397,8 +464,14 @@ html[data-theme='light'] {
     border-color: #ff6b6b;
     color: white;
 
-    &:hover {
+    .splitButtonDivider {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .splitButtonLeft:hover,
+    .splitButtonRight:hover {
       background: #ff5252;
+      color: white;
     }
   }
 }

@@ -7,7 +7,6 @@ const tiers = [
     price: 100,
     titleClass: styles.tierTitleBronze,
     benefits: ['Logo on our home page with a link to your site'],
-    buttonText: 'Sponsor Bronze',
     buttonClass: styles.buttonBronze,
     cardClass: styles.tierBronze,
   },
@@ -16,7 +15,6 @@ const tiers = [
     price: 250,
     titleClass: styles.tierTitleSilver,
     benefits: ['All Bronze benefits', 'Logo in release blog posts', '1 sponsored link in the showcase'],
-    buttonText: 'Sponsor Silver',
     buttonClass: styles.buttonSilver,
     cardClass: styles.tierSilver,
   },
@@ -30,7 +28,6 @@ const tiers = [
       'Logo in GitHub README',
       'Access to Sponsors only Discord channel',
     ],
-    buttonText: 'Sponsor Gold',
     buttonClass: styles.buttonGold,
     cardClass: styles.tierGold,
   },
@@ -44,7 +41,6 @@ const tiers = [
       'Shared social media promotion',
       'Priority on bug fixes',
     ],
-    buttonText: 'Sponsor Gold++',
     buttonClass: styles.buttonGoldPlus,
     cardClass: styles.tierGoldPlus,
   },
@@ -58,7 +54,6 @@ const tiers = [
       'Highest priority on bug fixes',
       'Help shape what we work on next!',
     ],
-    buttonText: 'Sponsor Platinum',
     buttonClass: styles.buttonPlatinum,
     cardClass: styles.tierPlatinum,
     featured: true,
@@ -66,8 +61,12 @@ const tiers = [
 ];
 
 export default function SponsorshipTiers() {
-  const onClickSponsor = useCallback(() => {
-    window.open(`https://opencollective.com/pixijs`, '_blank', 'noopener,noreferrer');
+  const onClickOpenCollective = useCallback(() => {
+    window.open('https://opencollective.com/pixijs', '_blank', 'noopener,noreferrer');
+  }, []);
+
+  const onClickGitHub = useCallback(() => {
+    window.open('https://github.com/sponsors/pixijs', '_blank', 'noopener,noreferrer');
   }, []);
 
   return (
@@ -102,9 +101,15 @@ export default function SponsorshipTiers() {
                 ))}
               </ul>
             </div>
-            <button className={`${styles.button} ${tier.buttonClass}`} onClick={onClickSponsor}>
-              {tier.buttonText}
-            </button>
+            <div className={`${styles.splitButton} ${tier.buttonClass}`}>
+              <button className={styles.splitButtonLeft} onClick={onClickOpenCollective}>
+                Open Collective
+              </button>
+              <div className={styles.splitButtonDivider} />
+              <button className={styles.splitButtonRight} onClick={onClickGitHub}>
+                GitHub Sponsors
+              </button>
+            </div>
           </div>
         ))}
       </div>
