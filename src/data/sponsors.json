@@ -16,6 +16,23 @@
   },
   {
     "sponsor": {
+      "name": "FBPostLikes",
+      "type": "User",
+      "login": "pankaj-jangir",
+      "avatarUrl": "https://images.opencollective.com/pankaj-jangir/avatar/460.png",
+      "websiteUrl": "https://fbpostlikes.com",
+      "linkUrl": "https://opencollective.com/pankaj-jangir",
+      "socialLogins": {
+        "opencollective": "pankaj-jangir"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "Fun88 Vietnam",
       "type": "User",
       "login": "fun88-vietnam",
@@ -135,6 +152,23 @@
   },
   {
     "sponsor": {
+      "name": "Guidebook.BetWinner",
+      "type": "User",
+      "login": "guidebook_betwinner_com",
+      "avatarUrl": "https://images.opencollective.com/guidebook_betwinner_com/6babe60/avatar/460.png",
+      "websiteUrl": "https://guidebook.betwinner.com",
+      "linkUrl": "https://opencollective.com/guidebook_betwinner_com",
+      "socialLogins": {
+        "opencollective": "guidebook_betwinner_com"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
       "name": "SEO for igaming sites",
       "type": "User",
       "login": "seo-for-igaming-sites",
@@ -186,24 +220,6 @@
   },
   {
     "sponsor": {
-      "name": "LITSLINK",
-      "type": "Organization",
-      "login": "litslink",
-      "avatarUrl": "https://images.opencollective.com/litslink/c82ffb5/logo/460.png",
-      "websiteUrl": "https://litslink.com",
-      "linkUrl": "https://opencollective.com/litslink",
-      "socialLogins": {
-        "github": "litslink",
-        "opencollective": "litslink"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
-  },
-  {
-    "sponsor": {
       "name": "Route4Me Route Planner",
       "type": "User",
       "login": "route4me",
@@ -236,5 +252,22 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
+      "name": "LITSLINK",
+      "type": "Organization",
+      "login": "litslink",
+      "avatarUrl": "https://images.opencollective.com/litslink/c82ffb5/logo/460.png",
+      "websiteUrl": "https://litslink.com",
+      "linkUrl": "https://opencollective.com/litslink",
+      "socialLogins": {
+        "github": "litslink",
+        "opencollective": "litslink"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC"
   }
 ]
