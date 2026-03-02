@@ -23,7 +23,7 @@ export function addFishes(app, fishes) {
 
     // Assign additional properties for the animation.
     fish.direction = Math.random() * Math.PI * 2;
-    fish.speed = 2 + Math.random() * 2;
+    fish.speed = 1 + Math.random();
     fish.turnSpeed = Math.random() - 0.8;
 
     // Randomly position the fish sprite around the stage.
@@ -53,11 +53,11 @@ export function animateFishes(app, fishes, time) {
   // Iterate through each fish sprite.
   fishes.forEach((fish) => {
     // Animate the fish movement direction according to the turn speed.
-    fish.direction += fish.turnSpeed * 0.01;
+    fish.direction += fish.turnSpeed * 0.01 * delta;
 
     // Animate the fish position according to the direction and speed.
-    fish.x += Math.sin(fish.direction) * fish.speed;
-    fish.y += Math.cos(fish.direction) * fish.speed;
+    fish.x += Math.sin(fish.direction) * fish.speed * delta;
+    fish.y += Math.cos(fish.direction) * fish.speed * delta;
 
     // Apply the fish rotation according to the direction.
     fish.rotation = -fish.direction - Math.PI / 2;
