@@ -4906,7 +4906,11 @@ export interface RenderLayerOptions {
  * Known issues:
  *  - Interaction may not work as expected since hit testing does not account for the visual render order created by layers.
  *    For example, if an object is visually moved to the front via a layer, hit testing will still use its original position.
- *  - RenderLayers and their children must all belong to the same renderGroup to work correctly
+ *  - RenderLayers and their children must all belong to the same renderGroup to work correctly.
+ *  - Filters on ancestor containers do not apply to children attached to a RenderLayer.
+ *    This is because render layer children are rendered outside their parent's filter scope
+ *    (filters capture children into a texture via push/pop, but render layer children skip
+ *    their parent's collection and render at the layer's position instead).
  */
 export declare class RenderLayer extends Container {
 	/**
@@ -5223,6 +5227,21 @@ export interface ContainerEvents<C extends ContainerChild> extends PixiMixins.Co
 	 */
 	destroyed: [
 		container: Container
+	];
+	/**
+	 * Emitted when the visible property on the container is changed.
+	 * Useful for tracking visibility changes and triggering related behaviors.
+	 * @param visible - The new visibility state of the container
+	 * @example
+	 * ```ts
+	 * const container = new Container();
+	 * container.on('visibleChanged', (visible) => {
+	 *     console.log('Container visibility changed:', visible);
+	 * });
+	 * ```
+	 */
+	visibleChanged: [
+		visible: boolean
 	];
 }
 type AnyEvent = {
@@ -6966,7 +6985,10 @@ export declare class Ticker {
 	 * but does not effect the measured value of {@link Ticker#FPS|FPS}.
 	 *
 	 * When setting this property it is clamped to a value between
-	 * `0` and `Ticker.targetFPMS * 1000`.
+	 * `0` and `Ticker.targetFPMS * 1000` (typically 60).
+	 *
+	 * If `maxFPS` is currently set (non-zero) and `minFPS` is set above it,
+	 * `maxFPS` is automatically raised to match. This keeps the two limits consistent.
 	 * @example
 	 * ```ts
 	 * // Set minimum acceptable frame rate
@@ -6977,11 +6999,8 @@ export declare class Ticker {
 	 * ticker.minFPS = 30;
 	 * ticker.maxFPS = 60;
 	 *
-	 * // Monitor delta capping
-	 * ticker.add(() => {
-	 *     // Delta time will be capped based on minFPS
-	 *     console.log(`Delta time: ${ticker.deltaTime}`);
-	 * });
+	 * // minFPS above maxFPS pushes maxFPS up
+	 * ticker.minFPS = 50; // maxFPS is raised to 50
 	 * ```
 	 * @default 10
 	 */
@@ -6994,22 +7013,22 @@ export declare class Ticker {
 	 * This will effect the measured value of {@link Ticker#FPS|FPS}.
 	 *
 	 * If it is set to `0`, then there is no limit; PixiJS will render as many frames as it can.
-	 * Otherwise it will be at least `minFPS`
+	 * Otherwise it will be at least `minFPS`.
+	 *
+	 * If `maxFPS` is set below the current `minFPS`, `minFPS` is automatically lowered to match.
+	 * This keeps the two limits consistent.
 	 * @example
 	 * ```ts
-	 * // Set minimum acceptable frame rate
+	 * // Cap the frame rate
 	 * const ticker = new Ticker();
 	 * ticker.maxFPS = 60; // Never go above 60 FPS
 	 *
-	 * // Use with maxFPS for frame rate clamping
+	 * // Use with minFPS for frame rate clamping
 	 * ticker.minFPS = 30;
 	 * ticker.maxFPS = 60;
 	 *
-	 * // Monitor delta capping
-	 * ticker.add(() => {
-	 *     // Delta time will be capped based on maxFPS
-	 *     console.log(`Delta time: ${ticker.deltaTime}`);
-	 * });
+	 * // maxFPS below minFPS pushes minFPS down
+	 * ticker.maxFPS = 20; // minFPS is now also 20
 	 * ```
 	 * @default 0
 	 */
@@ -8816,6 +8835,14 @@ export interface PixiTouch extends Touch {
 	isNormalized: boolean;
 	/** The type of touch event */
 	type: string;
+	/** Whether the "alt" key was pressed when this touch event occurred (copied from TouchEvent) */
+	altKey: boolean;
+	/** Whether the "control" key was pressed when this touch event occurred (copied from TouchEvent) */
+	ctrlKey: boolean;
+	/** Whether the "meta" key was pressed when this touch event occurred (copied from TouchEvent) */
+	metaKey: boolean;
+	/** Whether the "shift" key was pressed when this touch event occurred (copied from TouchEvent) */
+	shiftKey: boolean;
 }
 /**
  * A DOM-compatible synthetic event implementation for PixiJS's event system.
@@ -13917,6 +13944,12 @@ interface Text$1 extends PixiMixins.Text, AbstractText<TextStyle, TextStyleOptio
  * ```
  */
 export interface CanvasTextOptions extends TextOptions {
+	/**
+	 * Whether to generate mipmaps for the text texture.
+	 * Improves rendering quality when the text is scaled down.
+	 * @default undefined - Falls back to TextureSource.defaultOptions.autoGenerateMipmaps
+	 */
+	autoGenerateMipmaps?: boolean;
 }
 /**
  * A powerful text rendering class that creates one or multiple lines of text using the Canvas API.
@@ -13993,6 +14026,14 @@ export interface CanvasTextOptions extends TextOptions {
  * - Consider texture style options for quality vs performance tradeoffs
  */
 declare class Text$1 extends AbstractText<TextStyle, TextStyleOptions, CanvasTextOptions, BatchableText> implements View {
+	/**
+	 * Whether to generate mipmaps for the text texture.
+	 * Improves rendering quality when the text is scaled down.
+	 * > [!NOTE] Text is not updated when this property is updated,
+	 * > you must update the text manually by calling `text.onViewUpdate()`
+	 * @default undefined - Falls back to TextureSource.defaultOptions.autoGenerateMipmaps
+	 */
+	autoGenerateMipmaps?: boolean;
 	/**
 	 * @param {CanvasTextOptions} options - The options of the text.
 	 */
@@ -19827,6 +19868,12 @@ export declare class SplitText extends AbstractSplitText<Text$1> {
  * ```
  */
 export interface HTMLTextOptions extends TextOptions<HTMLTextStyle, HTMLTextStyleOptions>, PixiMixins.HTMLTextOptions {
+	/**
+	 * Whether to generate mipmaps for the text texture.
+	 * Improves rendering quality when the text is scaled down.
+	 * @default undefined - Falls back to TextureSource.defaultOptions.autoGenerateMipmaps
+	 */
+	autoGenerateMipmaps?: boolean;
 }
 export interface HTMLText extends PixiMixins.HTMLText, AbstractText<HTMLTextStyle, HTMLTextStyleOptions, HTMLTextOptions, BatchableHTMLText> {
 }
@@ -19900,6 +19947,14 @@ export interface HTMLText extends PixiMixins.HTMLText, AbstractText<HTMLTextStyl
  * - Memory usage comparable to Canvas text
  */
 export declare class HTMLText extends AbstractText<HTMLTextStyle, HTMLTextStyleOptions, HTMLTextOptions, BatchableHTMLText> implements View {
+	/**
+	 * Whether to generate mipmaps for the text texture.
+	 * Improves rendering quality when the text is scaled down.
+	 * > [!NOTE] HTMLText is not updated when this property is updated,
+	 * > you must update the text manually by calling `text.onViewUpdate()`
+	 * @default undefined - Falls back to TextureSource.defaultOptions.autoGenerateMipmaps
+	 */
+	autoGenerateMipmaps?: boolean;
 	/**
 	 * @param {HTMLTextOptions} options - The options of the html text.
 	 */
@@ -20893,6 +20948,13 @@ export interface BlurFilterOptions extends FilterOptions {
 	 * @default 5
 	 */
 	kernelSize?: number;
+	/**
+	 * When true, uses the legacy (pre-v8.x) blur pass behavior where strength
+	 * is distributed uniformly across passes (`strength / passes`) instead of
+	 * the optimized halving scheme. This also disables per-pass WebGPU UBO batching.
+	 * @default false
+	 */
+	legacy?: boolean;
 }
 /**
  * The BlurFilter applies a Gaussian blur to an object.
