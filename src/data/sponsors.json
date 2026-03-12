@@ -14,6 +14,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -31,7 +32,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -48,7 +50,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -65,7 +68,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -82,7 +86,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -99,7 +104,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -116,7 +122,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -133,7 +140,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -150,7 +158,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -167,7 +176,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -184,7 +194,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -201,7 +212,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -218,6 +230,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -235,7 +248,8 @@
     "isOneTime": false,
     "monthlyDollars": 1000,
     "privacyLevel": "PUBLIC",
-    "tierName": "Gold++ Sponsor"
+    "tierName": "Gold++ Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   },
   {
     "sponsor": {
@@ -253,38 +267,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor"
-  },
-  {
-    "sponsor": {
-      "name": "c19.cl - Mejores Casinos Online",
-      "type": "User",
-      "login": "casino-online-chile",
-      "avatarUrl": "https://images.opencollective.com/casino-online-chile/91f1057/avatar/460.png",
-      "websiteUrl": "https://c19.cl",
-      "linkUrl": "https://opencollective.com/casino-online-chile",
-      "socialLogins": {
-        "opencollective": "casino-online-chile"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC"
-  },
-  {
-    "sponsor": {
-      "name": "BairesDev",
-      "type": "Organization",
-      "login": "bairesdev",
-      "avatarUrl": "https://images.opencollective.com/bairesdev/48bb773/logo/460.png",
-      "websiteUrl": "https://bairesdev.com/sponsoring-open-source-projects",
-      "linkUrl": "https://opencollective.com/bairesdev",
-      "socialLogins": {
-        "opencollective": "bairesdev"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC"
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-12T13:10:27.939Z"
   }
 ]

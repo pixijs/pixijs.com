@@ -37,3 +37,4 @@ scripts/pixiVersions.json
 
 static/examples/source
 src/pages/examples/config.ts
+src/data/sponsors-private.json
