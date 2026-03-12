@@ -29,7 +29,7 @@ for (let i = 0; i < fishCount; i++) {
   fish.anchor.set(0.5);
 
   fish.direction = Math.random() * Math.PI * 2;
-  fish.speed = 2 + Math.random() * 2;
+  fish.speed = 1 + Math.random();
   fish.turnSpeed = Math.random() - 0.8;
 
   fish.x = Math.random() * app.screen.width;
@@ -59,9 +59,9 @@ We can then simply loop through individual fishes array and update them one by o
 
 ```javascript
 fishes.forEach((fish) => {
-  fish.direction += fish.turnSpeed * 0.01;
-  fish.x += Math.sin(fish.direction) * fish.speed;
-  fish.y += Math.cos(fish.direction) * fish.speed;
+  fish.direction += fish.turnSpeed * 0.01 * delta;
+  fish.x += Math.sin(fish.direction) * fish.speed * delta;
+  fish.y += Math.cos(fish.direction) * fish.speed * delta;
   fish.rotation = -fish.direction - Math.PI / 2;
 
   if (fish.x < -stagePadding) {
