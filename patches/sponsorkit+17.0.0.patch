@@ -1,7 +1,20 @@
+diff --git a/node_modules/sponsorkit/.DS_Store b/node_modules/sponsorkit/.DS_Store
+new file mode 100644
+index 0000000..60bd31c
+Binary files /dev/null and b/node_modules/sponsorkit/.DS_Store differ
 diff --git a/node_modules/sponsorkit/dist/shared/sponsorkit.D7ijwnCH.mjs b/node_modules/sponsorkit/dist/shared/sponsorkit.D7ijwnCH.mjs
-index a55b2f8..34a96a0 100644
+index a55b2f8..c84d0df 100644
 --- a/node_modules/sponsorkit/dist/shared/sponsorkit.D7ijwnCH.mjs
 +++ b/node_modules/sponsorkit/dist/shared/sponsorkit.D7ijwnCH.mjs
+@@ -907,7 +907,7 @@ ${JSON.stringify(data.errors, null, 2)}`);
+ function makeQuery(login, type, activeOnly = true, cursor) {
+   return graphql$1`{
+   ${type}(login: "${login}") {
+-    sponsorshipsAsMaintainer(activeOnly: ${Boolean(activeOnly)}, first: 100${cursor ? ` after: "${cursor}"` : ""}) {
++    sponsorshipsAsMaintainer(activeOnly: ${Boolean(activeOnly)}, includePrivate: true, first: 100${cursor ? ` after: "${cursor}"` : ""}) {
+       totalCount
+       pageInfo {
+         endCursor
 @@ -1109,7 +1109,7 @@ function createSponsorFromOrder(order) {
        type: getAccountType(order.fromAccount.type),
        login: slug,

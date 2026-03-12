@@ -5,7 +5,16 @@ dotenv.config();
 
 const SPONSORS_PATH = 'src/data/sponsors.json';
 const PRIVATE_SPONSORS_PATH = 'src/data/sponsors-private.json';
+const OVERRIDES_PATH = 'src/data/sponsor-overrides.json';
 const SPONSOR_GRACE_PERIOD_MS = 28 * 24 * 60 * 60 * 1000;
+
+type SponsorOverride = {
+  login: string;
+  name?: string;
+  avatarUrl?: string;
+  linkUrl?: string;
+  privacyLevel?: string;
+};
 
 type SponsorshipWithoutRaw = Omit<Sponsorship, 'raw'>;
 type StoredSponsorship = SponsorshipWithoutRaw & {
@@ -206,8 +215,33 @@ async function main() {
     nowIso,
   );
 
-  const publicSponsors = mergedSponsors.filter((s) => s.privacyLevel !== 'PRIVATE');
-  const privateSponsors = mergedSponsors.filter((s) => s.privacyLevel === 'PRIVATE');
+  const overrides: SponsorOverride[] = JSON.parse(fs.readFileSync(OVERRIDES_PATH, 'utf8'));
+  const privateOverrides = new Map(
+    overrides.filter((o) => o.privacyLevel === 'PRIVATE').map((o) => [o.login.toLowerCase(), o]),
+  );
+
+  const promotedSponsors = mergedSponsors.map((s) => {
+    const override = privateOverrides.get(s.sponsor.login.toLowerCase());
+
+    if (!override || s.privacyLevel !== 'PRIVATE') {
+      return s;
+    }
+
+    return {
+      ...s,
+      privacyLevel: 'PUBLIC' as const,
+      sponsor: {
+        ...s.sponsor,
+        login: override.login,
+        name: override.name ?? override.login,
+        avatarUrl: override.avatarUrl ?? '',
+        linkUrl: override.linkUrl,
+      },
+    };
+  });
+
+  const publicSponsors = promotedSponsors.filter((s) => s.privacyLevel !== 'PRIVATE');
+  const privateSponsors = promotedSponsors.filter((s) => s.privacyLevel === 'PRIVATE');
 
   console.log(
     `Found ${publicSponsors.length} public and ${privateSponsors.length} private sponsors (>= $100/month); retained ${retainedGraceSponsors} in grace period.`,
