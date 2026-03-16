@@ -47,16 +47,101 @@ async function getDescriptionFromFile(filePath: string): Promise<string> {
   return '';
 }
 
+const SHARED_DIR = 'shared';
+
+async function getSharedFiles(sourcePath: string): Promise<Map<string, string>> {
+  const sharedDir = path.join(sourcePath, SHARED_DIR);
+  const sharedFiles = new Map<string, string>();
+
+  try {
+    const entries = await fs.readdir(sharedDir);
+
+    for (const entry of entries) {
+      const fullPath = path.join(sharedDir, entry);
+      const stat = await fs.stat(fullPath);
+
+      if (stat.isFile()) {
+        sharedFiles.set(entry, fullPath);
+      }
+    }
+  } catch {
+    // No shared directory
+  }
+
+  return sharedFiles;
+}
+
+async function resolveSharedImports(compiledDirPath: string, sharedFiles: Map<string, string>): Promise<void> {
+  const sharedImportRegex = /(['"])\.\.\/(shared\/([^'"]+))\1/g;
+  const entries = await fs.readdir(compiledDirPath);
+  const filesToCopy = new Set<string>();
+
+  for (const entry of entries) {
+    if (!entry.endsWith('.js') && !entry.endsWith('.ts')) continue;
+
+    const filePath = path.join(compiledDirPath, entry);
+    let content = await fs.readFile(filePath, 'utf-8');
+    let modified = false;
+
+    content = content.replace(sharedImportRegex, (match, quote, _fullPath, relativeName) => {
+      const baseName = path.basename(relativeName);
+      const withExt = path.extname(baseName) ? baseName : `${baseName}.js`;
+
+      if (sharedFiles.has(withExt)) {
+        filesToCopy.add(withExt);
+        modified = true;
+        return `${quote}./${relativeName.replace(/^.*\//, '')}${quote}`;
+      }
+
+      return match;
+    });
+
+    if (modified) {
+      await fs.writeFile(filePath, content, 'utf-8');
+    }
+  }
+
+  // Transitively resolve imports between shared files
+  const localImportRegex = /(['"])\.\/(([^'"]+))\1/g;
+  const resolved = new Set<string>();
+  const pending = [...filesToCopy];
+
+  while (pending.length > 0) {
+    const fileName = pending.pop()!;
+    if (resolved.has(fileName)) continue;
+    resolved.add(fileName);
+
+    const sourcePath = sharedFiles.get(fileName)!;
+    const content = await fs.readFile(sourcePath, 'utf-8');
+
+    for (const match of content.matchAll(localImportRegex)) {
+      const importName = match[2];
+      const baseName = path.basename(importName);
+      const withExt = path.extname(baseName) ? baseName : `${baseName}.js`;
+
+      if (sharedFiles.has(withExt) && !filesToCopy.has(withExt)) {
+        filesToCopy.add(withExt);
+        pending.push(withExt);
+      }
+    }
+  }
+
+  for (const fileName of filesToCopy) {
+    await fs.copyFile(sharedFiles.get(fileName)!, path.join(compiledDirPath, fileName));
+  }
+}
+
 async function generateExampleConfig(basePath: string): Promise<Example[]> {
   const examples: Example[] = [];
   const entries = await fs.readdir(basePath);
 
   for (const entry of entries) {
+    if (entry === SHARED_DIR) continue;
+
     const fullPath = path.join(basePath, entry);
     const stat = await fs.stat(fullPath);
 
     if (stat.isDirectory()) {
-      // Handle directory case
       const files = await fs.readdir(fullPath);
       const exampleFiles: ExampleFile[] = [];
 
@@ -67,7 +152,6 @@ async function generateExampleConfig(basePath: string): Promise<Example[]> {
         });
       }
 
-      // Try to get dependencies from index file if it exists
       const dependencies = fullPath.endsWith('.ts')
         ? await getDependenciesFromFile(path.join(fullPath, 'index.ts'))
         : (await getDependenciesFromFile(path.join(fullPath, 'index.js'))) || {};
@@ -82,7 +166,6 @@ async function generateExampleConfig(basePath: string): Promise<Example[]> {
         files: exampleFiles,
       });
     } else if (stat.isFile() && (entry.endsWith('.ts') || entry.endsWith('.js'))) {
-      // Handle single file case
       const name = path.parse(entry).name;
       const dependencies = await getDependenciesFromFile(fullPath);
       const description = await getDescriptionFromFile(fullPath);
@@ -132,10 +215,17 @@ async function compileTypeScript(filePath: string, outPath: string): Promise<voi
   });
 }
 
-async function compileDirectory(sourcePath: string, outPath: string): Promise<void> {
+async function compileDirectory(
+  sourcePath: string,
+  outPath: string,
+  sharedFiles: Map<string, string>,
+  isTopLevel = true,
+): Promise<void> {
   const entries = await fs.readdir(sourcePath);
 
   for (const entry of entries) {
+    if (isTopLevel && entry === SHARED_DIR) continue;
+
     const fullPath = path.join(sourcePath, entry);
     const stat = await fs.stat(fullPath);
 
@@ -143,12 +233,14 @@ async function compileDirectory(sourcePath: string, outPath: string): Promise<vo
       const nestedOutPath = path.join(outPath, entry);
 
       await fs.mkdir(nestedOutPath, { recursive: true });
-      await compileDirectory(fullPath, nestedOutPath);
+      await compileDirectory(fullPath, nestedOutPath, sharedFiles, false);
+
+      if (isTopLevel) {
+        await resolveSharedImports(nestedOutPath, sharedFiles);
+      }
     } else if (entry.endsWith('.ts')) {
-      // if fullpath is a folder then add the entry to the outPath
       await compileTypeScript(fullPath, outPath);
     } else if (entry.endsWith('.js') || entry.endsWith('.vert') || entry.endsWith('.frag') || entry.endsWith('.wgsl')) {
-      // Copy JS files directly
       const targetPath = path.join(outPath, entry);
 
       await fs.copyFile(fullPath, targetPath);
@@ -208,9 +300,10 @@ async function main() {
     await fs.rm(compiledPath, { recursive: true, force: true });
     await fs.mkdir(compiledPath, { recursive: true });
 
-    // Compile all TypeScript files
+    const sharedFiles = await getSharedFiles(sourcePath);
+
     console.log('Compiling TypeScript files...');
-    await compileDirectory(sourcePath, compiledPath);
+    await compileDirectory(sourcePath, compiledPath, sharedFiles);
 
     // Generate example config from compiled files
     console.log('Generating example configuration...');

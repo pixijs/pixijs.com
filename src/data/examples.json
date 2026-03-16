@@ -275,6 +275,52 @@
     ]
   },
   {
+    "name": "events_visible-changed",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "description": "This example demonstrates the visibleChanged event on containers, showing a grid of shapes that emit events when toggled visible or hidden.",
+    "files": [
+      {
+        "name": "DustMotesFilter.js",
+        "location": "events_visible-changed/DustMotesFilter.js"
+      },
+      {
+        "name": "index.js",
+        "location": "events_visible-changed/index.js"
+      },
+      {
+        "name": "setup.js",
+        "location": "events_visible-changed/setup.js"
+      }
+    ]
+  },
+  {
+    "name": "filters_blur-legacy",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "description": "This example compares the new optimized BlurFilter halving strength scheme against the legacy approach, showing improved visual quality at high blur strengths.",
+    "files": [
+      {
+        "name": "DustMotesFilter.js",
+        "location": "filters_blur-legacy/DustMotesFilter.js"
+      },
+      {
+        "name": "index.js",
+        "location": "filters_blur-legacy/index.js"
+      },
+      {
+        "name": "setup.js",
+        "location": "filters_blur-legacy/setup.js"
+      }
+    ]
+  },
+  {
     "name": "filters_blur",
     "description": "This example demonstrates the use of BlurFilter to create dynamic blur effects on sprites",
     "dependencies": {},
@@ -1094,6 +1140,29 @@
     ]
   },
   {
+    "name": "text_alignment",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "description": "This example demonstrates improved text alignment parity, cycling through left, center, right, and justify alignment modes.",
+    "files": [
+      {
+        "name": "DustMotesFilter.js",
+        "location": "text_alignment/DustMotesFilter.js"
+      },
+      {
+        "name": "index.js",
+        "location": "text_alignment/index.js"
+      },
+      {
+        "name": "setup.js",
+        "location": "text_alignment/setup.js"
+      }
+    ]
+  },
+  {
     "name": "text_bitmap_split-text",
     "description": "This example demonstrates how to split bitmap text into characters for individual animation using SplitBitmapText.",
     "dependencies": {
@@ -1175,6 +1244,29 @@
       {
         "name": "index.js",
         "location": "text_filters_cartoon/index.js"
+      }
+    ]
+  },
+  {
+    "name": "text_split-text-tags",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "description": "This example demonstrates SplitText with tagStyles, splitting styled text runs into per-character objects for animation.",
+    "files": [
+      {
+        "name": "DustMotesFilter.js",
+        "location": "text_split-text-tags/DustMotesFilter.js"
+      },
+      {
+        "name": "index.js",
+        "location": "text_split-text-tags/index.js"
+      },
+      {
+        "name": "setup.js",
+        "location": "text_split-text-tags/setup.js"
       }
     ]
   },

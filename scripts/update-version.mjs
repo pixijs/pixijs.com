@@ -17,7 +17,7 @@ function updateVersionDetails(versionDetails, newVersion) {
 (async () => {
   const questions = [
     {
-      type: 'list',
+      type: 'select',
       name: 'version',
       message: 'Select the version to update',
       choices: versions.map((v) => v.versionLabel),

@@ -1,0 +1,223 @@
+---
+title: PixiJS Update - v8.17.0
+description: Optimized BlurFilter, improved text renderer parity, SplitText tagStyles, visibleChanged event, and broad stability fixes land in PixiJS v8.17.0.
+slug: 8.17.0
+authors: zyie
+tags: [PixiJS, Updates, BlurFilter, Text, SplitText, Events, Stability]
+hide_table_of_contents: true
+keywords: ['PixiJS', 'Updates', 'BlurFilter', 'Text Alignment', 'Justify', 'SplitText', 'tagStyles', 'visibleChanged', 'Bitmap Text']
+---
+
+import { BlogExample } from '@site/src/components/Editor/BlogExample';
+
+PixiJS v8.17.0 delivers an optimized **BlurFilter** with a new halving strength scheme, **improved text renderer parity** bringing `Text`, `BitmapText`, and `HTMLText` alignment closer together, **tagStyles support in SplitText**, and a new **`visibleChanged` event** on containers. This release also includes a wave of stability fixes across graphics, filters, and event handling.
+
+{/* truncate */}
+
+## Optimized BlurFilter
+
+`BlurFilter` now uses a halving strength scheme by default. Instead of applying the full blur strength on every pass, the filter progressively reduces strength across passes. The result is higher visual quality at high strengths with less GPU work.
+
+The difference is most visible at high strength values, where the legacy approach produces banding artifacts while the optimized version stays smooth:
+
+```ts
+// New default behavior (optimized)
+const blur = new BlurFilter({ strength: 20, quality: 4 });
+
+// Restore old behavior if needed
+const legacyBlur = new BlurFilter({ strength: 20, quality: 4, legacy: true });
+
+// Or set globally
+BlurFilter.defaultOptions.legacy = true;
+```
+
+:::caution Behavior Change
+This changes the visual output of `BlurFilter` compared to previous versions. If you need the old behavior, set `legacy: true`.
+:::
+
+<BlogExample name="filters_blur-legacy" />
+
+<br/>
+
+Thanks to [@Zyie](https://github.com/zyie) and [@Sertion](https://github.com/Sertion) for the blur improvements.
+
+---
+
+## Improved text renderer parity
+
+Continued text updates keep `Text`, `BitmapText`, and `HTMLText` alignment more consistent. This release closes several gaps where the three renderers disagreed on layout.
+
+**Justify alignment** now uses `wordWrapWidth` for width calculation instead of `maxLineWidth`, matching CSS behavior. The last line of a paragraph is no longer stretched. Canvas text and split text also render `align: 'justify'` by distributing extra word spacing, so all three text types produce the same justified output.
+
+**Bitmap text** gains full `whiteSpace` support (`normal`, `pre`, `nowrap`, `pre-line`, `pre-wrap`) with proper space and newline collapsing. Word wrapping now supports break-after characters like hyphens, en-dashes, em-dashes, and soft hyphens.
+
+**`HTMLText`** `breakWords: true` now correctly uses CSS `word-break: break-word` instead of `break-all`, matching the behavior of `Text` and `BitmapText`.
+
+Other improvements:
+- Dynamic bitmap fonts scale drop shadow `blur` and `distance` proportionally to font size.
+- Bitmap font `xAdvance` now uses true advance width from `measureText()` instead of bounding-box width.
+- Kerning values are correctly scaled by `fontScale` in dynamic bitmap fonts.
+
+:::caution Behavior Change
+`align: 'justify'` now uses `wordWrapWidth` for width calculation, and `breakWords` in `HTMLText` uses `break-word` instead of `break-all`. If your text layout looks different after upgrading, the new behavior is more consistent across renderers and matches CSS standards.
+:::
+
+<BlogExample name="text_alignment" />
+
+---
+
+## SplitText tagStyles
+
+`SplitText` now supports `tagStyles`, so styled text runs like `<red>Hello</red> <blue>World</blue>` are correctly split into per-character `Text` objects with individual styles preserved. This makes it straightforward to combine inline styling with per-character animation:
+
+```ts
+const splitText = new SplitText({
+    text: '<bold>Important:</bold> animate <highlight>each character</highlight> individually',
+    style: {
+        fontSize: 32,
+        fill: 'white',
+        tagStyles: {
+            bold: { fontWeight: 'bold', fill: 'yellow' },
+            highlight: { fill: 'cyan' },
+        },
+    },
+});
+
+// Each char retains its tag style
+splitText.chars.forEach((char, i) => {
+    // animate per character...
+});
+```
+
+<BlogExample name="text_split-text-tags" />
+
+---
+
+## `visibleChanged` event
+
+Containers now emit a `visibleChanged` event when their `visible` property changes. This removes the need for manual polling or wrapper functions to detect visibility changes:
+
+```ts
+container.on('visibleChanged', (visible) => {
+    console.log('Visibility changed to:', visible);
+});
+
+container.visible = false; // fires the event
+```
+
+This is useful for triggering animations, analytics, or cleanup logic when objects enter or leave visibility.
+
+Thanks to [@ikigai-bjorn-s](https://github.com/ikigai-bjorn-s) for this contribution.
+
+<BlogExample name="events_visible-changed" />
+
+---
+
+## More additions
+
+- **Resolver alias removal**: New function for removing aliases from the Resolver, useful for dynamic asset management ([@Sertion](https://github.com/Sertion)).
+
+---
+
+## Bug fixes
+
+This release addresses a broad set of stability issues:
+
+- **Filter corruption**: `TexturePool` now separates mipmap textures, preventing filter corruption when multiple filters share pool textures ([@vkarponen](https://github.com/vkarponen)).
+- **`ColorMatrixFilter` offset**: Offset values are now correctly applied ([@Sertion](https://github.com/Sertion)).
+- **`ParticleContainer` filter offset**: Global filter offsets now apply correctly to particle rendering ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **`NineSliceSprite` trim**: Texture trim offsets are now respected ([@shtse8](https://github.com/shtse8)).
+- **Empty `Graphics` bounds**: `getBounds()` on an empty `Graphics` now returns valid empty bounds instead of throwing ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **`Graphics` stale bounds**: `getLocalBounds()` no longer returns stale data between operations in the same frame ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **Miter join bounds**: `Graphics` bounds now account for miter joins at sharp angles ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **`BindGroup` crash**: Fixed crash when a resource is destroyed while in a batched group ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **`BindGroup` listener leak**: Old resource listeners are now removed in `setResource` ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **Renderer destroy**: `removeAllListeners()` is now called on `Renderer.destroy()` ([@taye](https://github.com/taye)).
+- **Ticker clamping**: `minFPS`/`maxFPS` mutual clamping now works correctly ([@Zyie](https://github.com/zyie)).
+- **Color alpha cache**: `color.setAlpha()` now invalidates the cached source, preventing stale alpha reuse ([@darthvader58](https://github.com/darthvader58)).
+- **`addChildAt` event**: The `removed` event now fires correctly when using `addChildAt` ([@aSipz](https://github.com/aSipz)).
+- **Bitmap text guards**: Missing characters and kerning data no longer cause crashes ([@stargazer-2697](https://github.com/stargazer-2697)).
+- **Touch modifier keys**: `TouchEvent` modifier keys are now copied to normalized touch objects ([@kaigritun](https://github.com/kaigritun)).
+- **Web font loading**: Font names are now quoted to support older Chrome versions ([@adngdb](https://github.com/adngdb)).
+- **Web Worker support**: `DOMPipe` registration moved to `init.ts` to fix Web Worker environments ([@Zyie](https://github.com/zyie)).
+
+You can view the [full changelog on GitHub](https://github.com/pixijs/pixijs/releases/tag/v8.17.0).
+
+---
+
+## Pausing the bug bounty program
+
+We're pausing the PixiJS bug bounty program starting with this release.
+
+When we launched the program, the goal was simple: reward contributors who find and fix real bugs. We wanted to give back to the community that makes PixiJS possible.
+
+Unfortunately, the monetary incentive has led to a rise in low-effort, AI-generated pull requests that don't meet the bar for merging, and the review burden on maintainers has grown faster than the value the program delivers.
+
+To be clear: we are not against AI-assisted development. We actively support it. We maintain `llms.txt` files, copy-to-markdown features in our documentation, and other tooling specifically to help AI tools understand PixiJS better. AI is a powerful tool when used well.
+
+The issue is that the bounty has incentivized quantity over quality, and the program is no longer achieving its original goal.
+
+We still want to find ways to give back to our contributors. We're exploring alternatives that reward meaningful contributions without creating the wrong incentives. If you have ideas, we'd love to hear them on [Discord](https://discord.gg/QrnxmQUPGV).
+
+---
+
+## New contributors
+
+Welcome to our newest contributors:
+
+- [@adngdb](https://github.com/adngdb)
+- [@kaigritun](https://github.com/kaigritun)
+- [@darthvader58](https://github.com/darthvader58)
+- [@Sertion](https://github.com/Sertion)
+- [@shtse8](https://github.com/shtse8)
+- [@aSipz](https://github.com/aSipz)
+- [@ikigai-bjorn-s](https://github.com/ikigai-bjorn-s)
+- [@vkarponen](https://github.com/vkarponen)
+- [@imuday984](https://github.com/imuday984)
+- [@taye](https://github.com/taye)
+
+Thank you for your contributions!
+
+---
+
+## Get the latest PixiJS
+
+Install via npm:
+
+```bash
+npm install pixi.js@8.17.0
+```
+
+Or use via CDN:
+
+**Development builds:**
+
+- https://cdn.jsdelivr.net/npm/pixi.js@8.17.0/dist/pixi.js
+- https://cdn.jsdelivr.net/npm/pixi.js@8.17.0/dist/pixi.mjs
+
+**Production builds:**
+
+- https://cdn.jsdelivr.net/npm/pixi.js@8.17.0/dist/pixi.min.js
+- https://cdn.jsdelivr.net/npm/pixi.js@8.17.0/dist/pixi.min.mjs
+
+**Documentation:** [https://pixijs.download/v8.17.0/docs/index.html](https://pixijs.download/v8.17.0/docs/index.html)
+
+---
+
+## Wrapping up
+
+That covers what's new in v8.17.0. The blur and text changes are behavior changes, so check your output after upgrading. If anything looks off, the release notes above explain how to restore previous behavior.
+
+Thanks to everyone who contributed fixes and features to this release.
+
+- [See the full release notes on GitHub](https://github.com/pixijs/pixijs/releases/v8.17.0)
+- [Sponsor PixiJS](https://pixijs.com/sponsor)
+- [Submit your project to the Showcase](https://pixijs.com/showcase)
+- Join the discussion on [Discord](https://discord.gg/QrnxmQUPGV)
+- Follow us on [Twitter](https://x.com/PixiJS) / [Bluesky](https://bsky.app/profile/pixijs.com)
+
+<br />
+
+Happy creating!
+
+**The PixiJS Team**
