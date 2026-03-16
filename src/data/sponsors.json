@@ -13,7 +13,7 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$100 a month",
     "createdAt": "2026-03-11T12:31:11Z",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -30,7 +30,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z",
+    "lastSeenAt": "2026-03-16T00:51:12.926Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -49,7 +49,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -67,7 +67,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -85,11 +85,11 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
-      "name": "Fun88 Vietnam",
+      "name": "Fun88",
       "type": "User",
       "login": "fun88-vietnam",
       "avatarUrl": "https://images.opencollective.com/fun88-vietnam/192b9db/avatar/460.png",
@@ -103,11 +103,11 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
-      "name": "Fun88 Thailand",
+      "name": "Fun88",
       "type": "User",
       "login": "fun88-thailand",
       "avatarUrl": "https://images.opencollective.com/fun88-thailand/81e1909/avatar/460.png",
@@ -121,7 +121,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -139,7 +139,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -157,7 +157,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -175,7 +175,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -193,7 +193,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -211,7 +211,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -229,7 +229,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -246,7 +246,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z",
+    "lastSeenAt": "2026-03-16T00:51:12.926Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -265,7 +265,7 @@
     "monthlyDollars": 1000,
     "privacyLevel": "PUBLIC",
     "tierName": "Gold++ Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   },
   {
     "sponsor": {
@@ -284,6 +284,6 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-15T00:52:15.215Z"
+    "lastSeenAt": "2026-03-16T00:51:12.926Z"
   }
 ]
