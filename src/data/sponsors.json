@@ -13,7 +13,7 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$100 a month",
     "createdAt": "2026-01-09T09:21:03Z",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -29,7 +29,25 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$100 a month",
     "createdAt": "2026-03-11T12:31:11Z",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
+  },
+  {
+    "sponsor": {
+      "name": "Fun88",
+      "type": "Organization",
+      "login": "fun88-official",
+      "avatarUrl": "https://images.opencollective.com/fun88-official/bf2843c/logo/460.png",
+      "websiteUrl": "https://global.fun88.com",
+      "linkUrl": "https://opencollective.com/fun88-official",
+      "socialLogins": {
+        "opencollective": "fun88-official"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -47,7 +65,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -64,7 +82,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z",
+    "lastSeenAt": "2026-03-26T00:50:32.946Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -83,7 +101,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -101,7 +119,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -119,7 +137,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -137,7 +155,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -155,7 +173,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -173,7 +191,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -191,7 +209,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -209,7 +227,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -227,7 +245,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -245,7 +263,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -263,7 +281,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -280,7 +298,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z",
+    "lastSeenAt": "2026-03-26T00:50:32.946Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -299,7 +317,7 @@
     "monthlyDollars": 1000,
     "privacyLevel": "PUBLIC",
     "tierName": "Gold++ Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   },
   {
     "sponsor": {
@@ -318,24 +336,6 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
-  },
-  {
-    "sponsor": {
-      "name": "Fun88",
-      "type": "Organization",
-      "login": "fun88-official",
-      "avatarUrl": "https://images.opencollective.com/fun88-official/bf2843c/logo/460.png",
-      "websiteUrl": "https://global.fun88.com",
-      "linkUrl": "https://opencollective.com/fun88-official",
-      "socialLogins": {
-        "opencollective": "fun88-official"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-03-25T00:47:47.504Z"
+    "lastSeenAt": "2026-03-26T00:50:32.946Z"
   }
 ]
