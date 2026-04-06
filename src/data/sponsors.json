@@ -13,7 +13,7 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$100 a month",
     "createdAt": "2026-01-09T09:21:03Z",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -29,7 +29,25 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$100 a month",
     "createdAt": "2026-03-11T12:31:11Z",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
+  },
+  {
+    "sponsor": {
+      "name": "FBPostLikes",
+      "type": "User",
+      "login": "pankaj-jangir",
+      "avatarUrl": "https://images.opencollective.com/pankaj-jangir/c5dee33/avatar/460.png",
+      "websiteUrl": "https://fbpostlikes.com",
+      "linkUrl": "https://opencollective.com/pankaj-jangir",
+      "socialLogins": {
+        "opencollective": "pankaj-jangir"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -47,7 +65,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -65,7 +83,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -82,7 +100,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z",
+    "lastSeenAt": "2026-04-06T00:53:37.279Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -101,7 +119,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -119,7 +137,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -137,7 +155,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -155,7 +173,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -173,7 +191,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -191,7 +209,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -209,7 +227,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -226,7 +244,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z",
+    "lastSeenAt": "2026-04-06T00:53:37.279Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -245,7 +263,7 @@
     "monthlyDollars": 1000,
     "privacyLevel": "PUBLIC",
     "tierName": "Gold++ Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -264,7 +282,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-05T00:54:13.644Z"
+    "lastSeenAt": "2026-04-06T00:53:37.279Z"
   },
   {
     "sponsor": {
@@ -276,24 +294,6 @@
       "linkUrl": "https://opencollective.com/buy-instagram-likes-views4you",
       "socialLogins": {
         "opencollective": "buy-instagram-likes-views4you"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-04-02T00:48:18.117Z"
-  },
-  {
-    "sponsor": {
-      "name": "FBPostLikes",
-      "type": "User",
-      "login": "pankaj-jangir",
-      "avatarUrl": "https://images.opencollective.com/pankaj-jangir/c5dee33/avatar/460.png",
-      "websiteUrl": "https://fbpostlikes.com",
-      "linkUrl": "https://opencollective.com/pankaj-jangir",
-      "socialLogins": {
-        "opencollective": "pankaj-jangir"
       }
     },
     "isOneTime": false,
