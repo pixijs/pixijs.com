@@ -3606,6 +3606,12 @@ export declare class Sprite extends ViewContainer<BatchableSprite> {
 	 */
 	setSize(value: number | Optional<Size, "height">, height?: number): void;
 }
+/**
+ * The channel to use for masking.
+ * - `'red'` - Uses the red channel of the mask texture (default). Suitable for grayscale mask textures.
+ * - `'alpha'` - Uses the alpha channel of the mask texture. Suitable for sprites with transparency.
+ */
+export type MaskChannel = "red" | "alpha";
 type MaskMode = "pushMaskBegin" | "pushMaskEnd" | "popMaskBegin" | "popMaskEnd";
 declare class AlphaMaskEffect extends FilterEffect implements PoolItem {
 	constructor();
@@ -3613,12 +3619,18 @@ declare class AlphaMaskEffect extends FilterEffect implements PoolItem {
 	set sprite(value: Sprite);
 	get inverse(): boolean;
 	set inverse(value: boolean);
+	get channel(): MaskChannel;
+	set channel(value: MaskChannel);
 	init: () => void;
 }
 interface MaskConversionTest {
 	test: (item: any) => boolean;
 	maskClass: new (item: any) => Effect & PoolItem;
 }
+/**
+ * A renderer type string for specifying renderer preference.
+ */
+export type RendererPreference = "webgl" | "webgpu" | "canvas";
 /**
  * Automatically determines the most appropriate renderer for the current environment.
  *
@@ -3653,6 +3665,11 @@ interface MaskConversionTest {
  *     backgroundColor: 'green'
  *   }
  *  });
+ *
+ * // only allow webgl and canvas (exclude webgpu entirely)
+ * const renderer = await autoDetectRenderer({
+ *   preference: ['webgl', 'canvas'],
+ * });
  * @param options - A partial configuration object based on the `AutoDetectOptions` type.
  * @returns A Promise that resolves to an instance of the selected renderer.
  */
@@ -3994,7 +4011,7 @@ interface UniformParserDefinition {
  *    autoDensity: true,           // Adjust for device pixel ratio
  *
  *    // Advanced options
- *    preference: 'webgl',         // Renderer preference ('webgl' or 'webgpu')
+ *    preference: 'webgl',         // Renderer preference ('webgl', 'webgpu', 'canvas', or an array)
  *    powerPreference: 'high-performance' // GPU power preference
  * });
  * ```
@@ -4178,6 +4195,11 @@ export declare class Application<R extends Renderer = Renderer> {
 	 * ```
 	 */
 	get screen(): Rectangle;
+	/**
+	 * Get the html div element that holds all DOM Container elements.
+	 * @type {HTMLDivElement}
+	 */
+	get domContainerRoot(): HTMLDivElement;
 	/**
 	 * Destroys the application and all of its resources.
 	 *
@@ -14169,6 +14191,20 @@ export interface MaskOptions {
 	 * ```
 	 */
 	inverse: boolean;
+	/**
+	 * Which channel of the mask texture to use for masking.
+	 * - `'red'` uses the red channel (default). Suitable for grayscale mask textures.
+	 * - `'alpha'` uses the alpha channel. Suitable for sprites with transparency.
+	 * @default 'red'
+	 * @example
+	 * ```ts
+	 * sprite.setMask({
+	 *     mask: maskSprite,
+	 *     channel: 'alpha',
+	 * });
+	 * ```
+	 */
+	channel?: MaskChannel;
 }
 /**
  * MaskOptionsAndMask combines MaskOptions with a Mask for configuring masking behavior.
@@ -15334,6 +15370,17 @@ export declare class Triangle implements ShapePrimitive {
 	getBounds(out?: Rectangle): Rectangle;
 }
 /**
+ * Converts a Graphics object or GraphicsContext into an SVG string.
+ *
+ * This is a pure function — it reads from the context's instructions and
+ * returns a self-contained SVG document string. Texture instructions are
+ * skipped since they have no SVG equivalent.
+ * @param source - A Graphics instance or a GraphicsContext.
+ * @param precision - Decimal places for SVG coordinates (default 2).
+ * @returns A complete SVG document string.
+ */
+export declare function graphicsContextToSvg(source: Graphics | GraphicsContext, precision?: number): string;
+/**
  * Constructor options used for `MeshPlane` instances. Defines how a texture is mapped
  * onto a plane with configurable vertex density.
  * @example
@@ -15664,6 +15711,8 @@ export interface MeshRopeOptions extends Omit<MeshOptions, "geometry"> {
 	 * @default 0
 	 */
 	textureScale?: number;
+	/** The width (i.e., thickness) of the rope. If not specified, defaults back to texture's height. */
+	width?: number;
 }
 /**
  * A specialized mesh that renders a texture along a path defined by points. Perfect for
