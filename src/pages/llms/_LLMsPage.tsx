@@ -262,17 +262,6 @@ const LLMsPage: React.FC = () => {
       </section>
 
       <section className={styles.showcaseSection}>
-        <div className={styles.showcaseIntro}>
-          <div>
-            <span className={styles.sectionKicker}>Install &amp; use</span>
-            <h2>One command, then prompt normally</h2>
-            <p>
-              The universal installer detects your agent and places the PixiJS skill collection in the right spot. After
-              that, describe the task and the agent picks up the skill automatically.
-            </p>
-          </div>
-        </div>
-
         <TerminalAnimation />
       </section>
 
