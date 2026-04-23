@@ -677,7 +677,7 @@ const config: Config = {
               },
               {
                 to: '/llms',
-                label: 'LLM Docs',
+                label: 'AI',
               },
             ],
           },

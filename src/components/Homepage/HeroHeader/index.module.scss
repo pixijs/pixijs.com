@@ -65,3 +65,157 @@
     width: 230px;
   }
 }
+
+.aiPill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  margin: 1.25rem auto 0;
+  padding: 0.3rem 0.95rem 0.3rem 0.3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(233, 30, 99, 0.35);
+  background: rgba(15, 15, 25, 0.45);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 6px 22px rgba(233, 30, 99, 0.22);
+  transition:
+    transform 0.28s cubic-bezier(0.215, 0.61, 0.355, 1),
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    background 0.28s ease;
+  animation:
+    aiPillRise 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) 0.15s both,
+    aiPillGlow 3.6s ease-in-out 0.9s infinite;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -40%;
+    width: 40%;
+    background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    pointer-events: none;
+    z-index: 0;
+    animation: aiPillShimmer 5.5s ease-in-out 1.2s infinite;
+  }
+
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
+    border-color: rgba(233, 30, 99, 0.65);
+    background: rgba(25, 14, 22, 0.6);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 10px 30px rgba(233, 30, 99, 0.4);
+
+    .aiPillArrow {
+      transform: translateX(3px);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 3px;
+  }
+}
+
+.aiPillBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.22rem 0.52rem;
+  border-radius: 999px;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.45);
+  z-index: 1;
+}
+
+.aiPillPrompt {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 600;
+  color: var(--ifm-color-primary-lighter);
+  letter-spacing: -0.04em;
+  z-index: 1;
+}
+
+.aiPillText {
+  z-index: 1;
+}
+
+.aiPillArrow {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  color: var(--ifm-color-primary-lighter);
+  transition: transform 0.28s cubic-bezier(0.215, 0.61, 0.355, 1);
+  z-index: 1;
+}
+
+@keyframes aiPillRise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aiPillGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+      0 6px 22px rgba(233, 30, 99, 0.22);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 8px 30px rgba(233, 30, 99, 0.38);
+  }
+}
+
+@keyframes aiPillShimmer {
+  0%,
+  90%,
+  100% {
+    left: -40%;
+  }
+
+  50% {
+    left: 140%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aiPill {
+    animation: none;
+
+    &::before {
+      display: none;
+    }
+  }
+}

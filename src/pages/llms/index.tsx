@@ -6,8 +6,8 @@ import type React from 'react';
 export default function LLMs(): React.JSX.Element {
   return (
     <Layout
-      title="LLM Documentation"
-      description="Machine-readable API documentation optimized for AI assistants. Use this file to give Claude, ChatGPT, Cursor, or other AI tools accurate knowledge about PixiJS."
+      title="PixiJS Skills"
+      description="Install the official pixijs-skills collection for Claude Code, Cursor, Windsurf, Copilot, and 40+ other AI agents. Plain-text llms.txt docs also available."
     >
       <LLMsPage />
     </Layout>

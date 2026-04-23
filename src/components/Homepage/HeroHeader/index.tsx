@@ -1,3 +1,4 @@
+import Link from '@docusaurus/Link';
 import clsx from 'clsx';
 import HomeCTA from '../HomeCTA';
 import styles from './index.module.scss';
@@ -19,6 +20,28 @@ export default function HeroHeader(): React.JSX.Element {
           &nbsp;
           <HomeCTA label="Tutorials" link="8.x/tutorials" white={true} outline={true} />
         </div>
+        <Link to="/llms" className={styles.aiPill}>
+          <span className={styles.aiPillBadge}>NEW</span>
+          <span className={styles.aiPillPrompt} aria-hidden="true">
+            ›_
+          </span>
+          <span className={styles.aiPillText}>Skills for AI coding agents</span>
+          <svg
+            className={styles.aiPillArrow}
+            viewBox="0 0 14 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M1 7h12M8 2l5 5-5 5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
       </div>
     </header>
   );

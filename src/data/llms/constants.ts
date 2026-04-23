@@ -1,47 +1,16 @@
 /**
- * Code examples and configuration for the LLMs documentation page.
+ * Code snippets for the PixiJS Skills page.
  */
 
-// IDE configuration code snippets
-export const cursorProjectRules = `---
-description: PixiJS API
-globs: **/*.{js,ts,jsx,tsx}
-alwaysApply: false
----
+export const skillsUniversalInstall = `npx skills add https://github.com/pixijs/pixijs-skills`;
 
-@https://pixijs.com/llms.txt`;
+export const skillsClaudeInstall = `/plugin marketplace add pixijs/pixijs-skills`;
 
-export const vscodeInstructions = `# PixiJS Context
+export const skillsCopilotInstall = `curl -o .github/copilot-instructions.md \\
+  https://raw.githubusercontent.com/pixijs/pixijs-skills/main/.github/copilot-instructions.md`;
 
-When working with PixiJS,
-refer to the API documentation at:
-https://pixijs.com/llms.txt`;
+export const skillsUsageExample = `# Ask naturally, the agent picks up the skill when it fits
+Build a PixiJS v8 scene with Assets, Container, Sprite, and ticker-based animation.
 
-export const windsurfGlobalRules = `When working with PixiJS, use the
-API reference from:
-https://pixijs.com/llms.txt`;
-
-// Claude Code examples
-export const claudeCodeExample = `# PixiJS Project
-
-## Documentation
-For PixiJS API reference, fetch:
-https://pixijs.com/llms.txt
-`;
-
-export const claudeSlashCommand = `Fetch the PixiJS API documentation from:
-https://pixijs.com/llms.txt
-
-Use this documentation to answer questions
-about PixiJS APIs, patterns, and best practices.`;
-
-export const claudeInlineContext = `Using the PixiJS documentation from
-https://pixijs.com/llms.txt,
-help me implement a particle system
-with thousands of sprites.`;
-
-// ChatGPT examples
-export const chatGptQuickContext = `Read the PixiJS API docs from
-https://pixijs.com/llms.txt
-and help me create a sprite animation
-with custom easing.`;
+# Or be explicit
+Use the pixijs skill and refactor this scene to follow current v8 patterns.`;
