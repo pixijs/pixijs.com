@@ -19,5 +19,9 @@
     "avatarUrl": "/images/sponsors/poprey-og.png",
     "linkUrl": "https://poprey.pt/",
     "privacyLevel": "PRIVATE"
+  },
+  {
+    "login": "wvdsh",
+    "avatarUrl": "/images/sponsors/wavedash.svg"
   }
 ]

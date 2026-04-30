@@ -108,7 +108,7 @@ export default function OpenCollective(): React.JSX.Element {
 
             return (
               <div
-                key={sponsor.sponsor.name}
+                key={sponsor.sponsor.login}
                 className={`${styles.sponsor} ${styles[tier.toLowerCase().replace(' ', '-')]}`}
               >
                 <a href={href}>
