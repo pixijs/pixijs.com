@@ -13,7 +13,7 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$100 a month",
     "createdAt": "2026-01-09T09:21:03Z",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
   },
   {
     "sponsor": {
@@ -29,7 +29,7 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$250 a month",
     "createdAt": "2026-04-23T18:34:26Z",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
   },
   {
     "sponsor": {
@@ -45,7 +45,224 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$100 a month",
     "createdAt": "2026-03-11T12:31:11Z",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
+  },
+  {
+    "sponsor": {
+      "name": "BairesDev",
+      "type": "Organization",
+      "login": "bairesdev",
+      "avatarUrl": "https://images.opencollective.com/bairesdev/48bb773/logo/460.png",
+      "websiteUrl": "https://bairesdev.com/sponsoring-open-source-projects",
+      "linkUrl": "https://opencollective.com/bairesdev",
+      "socialLogins": {
+        "opencollective": "bairesdev"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
+      "name": "N-iX Ltd",
+      "type": "Organization",
+      "login": "n-ix-ltd",
+      "avatarUrl": "https://images.opencollective.com/n-ix-ltd/575a7a5/logo/460.png",
+      "websiteUrl": "https://n-ix.com",
+      "linkUrl": "https://opencollective.com/n-ix-ltd",
+      "socialLogins": {
+        "opencollective": "n-ix-ltd"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
+  },
+  {
+    "sponsor": {
+      "name": "Fun88",
+      "type": "User",
+      "login": "fun88-vietnam",
+      "avatarUrl": "https://images.opencollective.com/fun88-vietnam/192b9db/avatar/460.png",
+      "websiteUrl": "https://fun88vnb.com/vn",
+      "linkUrl": "https://opencollective.com/fun88-vietnam",
+      "socialLogins": {
+        "opencollective": "fun88-vietnam"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
+  },
+  {
+    "sponsor": {
+      "name": "Fun88",
+      "type": "User",
+      "login": "fun88-thailand",
+      "avatarUrl": "https://images.opencollective.com/fun88-thailand/81e1909/avatar/460.png",
+      "websiteUrl": "https://fun88thh.com/th",
+      "linkUrl": "https://opencollective.com/fun88-thailand",
+      "socialLogins": {
+        "opencollective": "fun88-thailand"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
+  },
+  {
+    "sponsor": {
+      "name": "Releaf Medizinisches Cannabis Berlin",
+      "type": "Organization",
+      "login": "releaf-medizinisches-cannabis-berlin",
+      "avatarUrl": "https://images.opencollective.com/releaf-medizinisches-cannabis-berlin/a07bdbf/logo/460.png",
+      "websiteUrl": "https://releaf.com/de/staedte/berlin",
+      "linkUrl": "https://opencollective.com/releaf-medizinisches-cannabis-berlin",
+      "socialLogins": {
+        "opencollective": "releaf-medizinisches-cannabis-berlin"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
+  },
+  {
+    "sponsor": {
+      "name": "Buy YouTube Subscribers from SocialWick",
+      "type": "Organization",
+      "login": "buy-youtube-subscribers-from-socialwick",
+      "avatarUrl": "https://images.opencollective.com/buy-youtube-subscribers-from-socialwick/d5db9a9/logo/460.png",
+      "websiteUrl": "https://socialwick.com/youtube/subscribers",
+      "linkUrl": "https://opencollective.com/buy-youtube-subscribers-from-socialwick",
+      "socialLogins": {
+        "opencollective": "buy-youtube-subscribers-from-socialwick"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
+  },
+  {
+    "sponsor": {
+      "name": "Transparencia en Casinos Online",
+      "type": "Organization",
+      "login": "educatransparenciacl",
+      "avatarUrl": "https://images.opencollective.com/educatransparenciacl/88a027e/logo/460.png",
+      "websiteUrl": "https://educatransparencia.cl",
+      "linkUrl": "https://opencollective.com/educatransparenciacl",
+      "socialLogins": {
+        "opencollective": "educatransparenciacl"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
+  },
+  {
+    "sponsor": {
+      "name": "Releaf Medical Cannabis Glossary",
+      "type": "Organization",
+      "login": "medical-cannabis-glossary",
+      "avatarUrl": "https://images.opencollective.com/medical-cannabis-glossary/logo/460.png",
+      "websiteUrl": "https://releaf.co.uk/medical-cannabis-glossary",
+      "linkUrl": "https://opencollective.com/medical-cannabis-glossary",
+      "socialLogins": {
+        "opencollective": "medical-cannabis-glossary"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
+  },
+  {
+    "sponsor": {
+      "name": "SEO for igaming sites",
+      "type": "User",
+      "login": "seo-for-igaming-sites",
+      "avatarUrl": "https://images.opencollective.com/seo-for-igaming-sites/473305a/avatar/460.png",
+      "websiteUrl": "https://seoigaming.com",
+      "linkUrl": "https://opencollective.com/seo-for-igaming-sites",
+      "socialLogins": {
+        "opencollective": "seo-for-igaming-sites"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
+  },
+  {
+    "sponsor": {
+      "name": "c19.cl - Mejores Casinos Online",
+      "type": "User",
+      "login": "casino-online-chile",
+      "avatarUrl": "https://images.opencollective.com/casino-online-chile/91f1057/avatar/460.png",
+      "websiteUrl": "https://c19.cl",
+      "linkUrl": "https://opencollective.com/casino-online-chile",
+      "socialLogins": {
+        "opencollective": "casino-online-chile"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z",
+    "tierName": "Bronze Sponsor"
+  },
+  {
+    "sponsor": {
+      "name": "Yarn",
+      "type": "Organization",
+      "login": "yarn1",
+      "avatarUrl": "https://images.opencollective.com/yarn1/logo/460.png",
+      "websiteUrl": "https://yarn.so",
+      "linkUrl": "https://opencollective.com/yarn1",
+      "socialLogins": {
+        "opencollective": "yarn1"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 1000,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Gold++ Sponsor",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
+  },
+  {
+    "sponsor": {
+      "name": "Route4Me Route Planner",
+      "type": "User",
+      "login": "route4me",
+      "avatarUrl": "https://images.opencollective.com/route4me/71fb6fa/avatar/460.png",
+      "websiteUrl": "https://route4me.com",
+      "linkUrl": "https://opencollective.com/route4me",
+      "socialLogins": {
+        "github": "route4me",
+        "opencollective": "route4me"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-05-03T01:06:10.642Z"
   },
   {
     "sponsor": {
@@ -103,150 +320,6 @@
   },
   {
     "sponsor": {
-      "name": "BairesDev",
-      "type": "Organization",
-      "login": "bairesdev",
-      "avatarUrl": "https://images.opencollective.com/bairesdev/48bb773/logo/460.png",
-      "websiteUrl": "https://bairesdev.com/sponsoring-open-source-projects",
-      "linkUrl": "https://opencollective.com/bairesdev",
-      "socialLogins": {
-        "opencollective": "bairesdev"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z",
-    "tierName": "Bronze Sponsor"
-  },
-  {
-    "sponsor": {
-      "name": "N-iX Ltd",
-      "type": "Organization",
-      "login": "n-ix-ltd",
-      "avatarUrl": "https://images.opencollective.com/n-ix-ltd/575a7a5/logo/460.png",
-      "websiteUrl": "https://n-ix.com",
-      "linkUrl": "https://opencollective.com/n-ix-ltd",
-      "socialLogins": {
-        "opencollective": "n-ix-ltd"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
-  },
-  {
-    "sponsor": {
-      "name": "Fun88",
-      "type": "User",
-      "login": "fun88-vietnam",
-      "avatarUrl": "https://images.opencollective.com/fun88-vietnam/192b9db/avatar/460.png",
-      "websiteUrl": "https://fun88ea.com/vn",
-      "linkUrl": "https://opencollective.com/fun88-vietnam",
-      "socialLogins": {
-        "opencollective": "fun88-vietnam"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
-  },
-  {
-    "sponsor": {
-      "name": "Fun88",
-      "type": "User",
-      "login": "fun88-thailand",
-      "avatarUrl": "https://images.opencollective.com/fun88-thailand/81e1909/avatar/460.png",
-      "websiteUrl": "https://fun88thh.com/th",
-      "linkUrl": "https://opencollective.com/fun88-thailand",
-      "socialLogins": {
-        "opencollective": "fun88-thailand"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
-  },
-  {
-    "sponsor": {
-      "name": "Releaf Medizinisches Cannabis Berlin",
-      "type": "Organization",
-      "login": "releaf-medizinisches-cannabis-berlin",
-      "avatarUrl": "https://images.opencollective.com/releaf-medizinisches-cannabis-berlin/a07bdbf/logo/460.png",
-      "websiteUrl": "https://releaf.com/de/staedte/berlin",
-      "linkUrl": "https://opencollective.com/releaf-medizinisches-cannabis-berlin",
-      "socialLogins": {
-        "opencollective": "releaf-medizinisches-cannabis-berlin"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
-  },
-  {
-    "sponsor": {
-      "name": "Buy YouTube Subscribers from SocialWick",
-      "type": "Organization",
-      "login": "buy-youtube-subscribers-from-socialwick",
-      "avatarUrl": "https://images.opencollective.com/buy-youtube-subscribers-from-socialwick/d5db9a9/logo/460.png",
-      "websiteUrl": "https://socialwick.com/youtube/subscribers",
-      "linkUrl": "https://opencollective.com/buy-youtube-subscribers-from-socialwick",
-      "socialLogins": {
-        "opencollective": "buy-youtube-subscribers-from-socialwick"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
-  },
-  {
-    "sponsor": {
-      "name": "Transparencia en Casinos Online",
-      "type": "Organization",
-      "login": "educatransparenciacl",
-      "avatarUrl": "https://images.opencollective.com/educatransparenciacl/88a027e/logo/460.png",
-      "websiteUrl": "https://educatransparencia.cl",
-      "linkUrl": "https://opencollective.com/educatransparenciacl",
-      "socialLogins": {
-        "opencollective": "educatransparenciacl"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
-  },
-  {
-    "sponsor": {
-      "name": "Releaf Medical Cannabis Glossary",
-      "type": "Organization",
-      "login": "medical-cannabis-glossary",
-      "avatarUrl": "https://images.opencollective.com/medical-cannabis-glossary/logo/460.png",
-      "websiteUrl": "https://releaf.co.uk/medical-cannabis-glossary",
-      "linkUrl": "https://opencollective.com/medical-cannabis-glossary",
-      "socialLogins": {
-        "opencollective": "medical-cannabis-glossary"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
-  },
-  {
-    "sponsor": {
       "name": "Guidebook.BetWinner",
       "type": "User",
       "login": "guidebook_betwinner_com",
@@ -255,79 +328,6 @@
       "linkUrl": "https://opencollective.com/guidebook_betwinner_com",
       "socialLogins": {
         "opencollective": "guidebook_betwinner_com"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
-  },
-  {
-    "sponsor": {
-      "name": "SEO for igaming sites",
-      "type": "User",
-      "login": "seo-for-igaming-sites",
-      "avatarUrl": "https://images.opencollective.com/seo-for-igaming-sites/473305a/avatar/460.png",
-      "websiteUrl": "https://seoigaming.com",
-      "linkUrl": "https://opencollective.com/seo-for-igaming-sites",
-      "socialLogins": {
-        "opencollective": "seo-for-igaming-sites"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
-  },
-  {
-    "sponsor": {
-      "name": "c19.cl - Mejores Casinos Online",
-      "type": "User",
-      "login": "casino-online-chile",
-      "avatarUrl": "https://images.opencollective.com/casino-online-chile/91f1057/avatar/460.png",
-      "websiteUrl": "https://c19.cl",
-      "linkUrl": "https://opencollective.com/casino-online-chile",
-      "socialLogins": {
-        "opencollective": "casino-online-chile"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z",
-    "tierName": "Bronze Sponsor"
-  },
-  {
-    "sponsor": {
-      "name": "Yarn",
-      "type": "Organization",
-      "login": "yarn1",
-      "avatarUrl": "https://images.opencollective.com/yarn1/logo/460.png",
-      "websiteUrl": "https://yarn.so",
-      "linkUrl": "https://opencollective.com/yarn1",
-      "socialLogins": {
-        "opencollective": "yarn1"
-      }
-    },
-    "isOneTime": false,
-    "monthlyDollars": 1000,
-    "privacyLevel": "PUBLIC",
-    "tierName": "Gold++ Sponsor",
-    "lastSeenAt": "2026-05-02T00:59:46.983Z"
-  },
-  {
-    "sponsor": {
-      "name": "Route4Me Route Planner",
-      "type": "User",
-      "login": "route4me",
-      "avatarUrl": "https://images.opencollective.com/route4me/71fb6fa/avatar/460.png",
-      "websiteUrl": "https://route4me.com",
-      "linkUrl": "https://opencollective.com/route4me",
-      "socialLogins": {
-        "github": "route4me",
-        "opencollective": "route4me"
       }
     },
     "isOneTime": false,
