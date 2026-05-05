@@ -3,18 +3,7 @@ import { ArrowUpRight, Image as ImageIcon, AlertCircle, Search, Plus } from 'luc
 import Fuse from 'fuse.js';
 import type { IFuseOptions } from 'fuse.js';
 import styles from './Showcase.module.css';
-import { showcaseItems } from '../../data/showcase';
-
-// TypeScript Interfaces
-export interface ShowcaseItem {
-  title: string;
-  author: string;
-  imageUrl: string;
-  link: string;
-  alt?: string;
-  openSourceLink?: string;
-  sponsoredLink?: string;
-}
+import { showcaseItems, type ShowcaseItem } from '../../data/showcase';
 
 export interface ShowcaseProps {
   title: string;

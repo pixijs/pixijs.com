@@ -7,6 +7,7 @@ const SPONSORS_PATH = 'src/data/sponsors.json';
 const PRIVATE_SPONSORS_PATH = 'src/data/sponsors-private.json';
 const OVERRIDES_PATH = 'src/data/sponsor-overrides.json';
 const SPONSOR_GRACE_PERIOD_MS = 28 * 24 * 60 * 60 * 1000;
+const sponsorNameCollator = new Intl.Collator('en', { sensitivity: 'base' });
 
 type SponsorOverride = {
   login: string;
@@ -73,6 +74,22 @@ function getSponsorIdentity(sponsor: SponsorshipWithoutRaw): string {
   return identity.toLowerCase();
 }
 
+function getSponsorSortName(sponsor: SponsorshipWithoutRaw): string {
+  return sponsor.sponsor.name || sponsor.sponsor.login || sponsor.sponsor.websiteUrl || sponsor.sponsor.linkUrl || '';
+}
+
+function sortSponsorsAlphabetically<T extends SponsorshipWithoutRaw>(sponsors: T[]): T[] {
+  return [...sponsors].sort((a, b) => {
+    const nameCompare = sponsorNameCollator.compare(getSponsorSortName(a), getSponsorSortName(b));
+
+    if (nameCompare !== 0) {
+      return nameCompare;
+    }
+
+    return sponsorNameCollator.compare(getSponsorIdentity(a), getSponsorIdentity(b));
+  });
+}
+
 function readStoredSponsors(filePath: string, fallbackLastSeenAt: string): StoredSponsorship[] {
   if (!fs.existsSync(filePath)) {
     return [];
@@ -118,7 +135,7 @@ function mergeSponsorsWithGracePeriod(
     mergedByIdentity.set(identity, mergeSponsorRecords(mergedByIdentity.get(identity), currentRecord));
   }
 
-  let retainedGraceSponsors = 0;
+  const retainedGraceSponsorsList: string[] = [];
 
   for (const sponsor of previousSponsors) {
     const identity = getSponsorIdentity(sponsor);
@@ -137,13 +154,13 @@ function mergeSponsorsWithGracePeriod(
 
     if (nowMs - lastSeenAtMs <= SPONSOR_GRACE_PERIOD_MS) {
       mergedByIdentity.set(identity, sponsor);
-      retainedGraceSponsors += 1;
+      retainedGraceSponsorsList.push(identity);
     }
   }
 
   return {
     sponsors: Array.from(mergedByIdentity.values()),
-    retainedGraceSponsors,
+    retainedGraceSponsorsList,
   };
 }
 
@@ -209,7 +226,7 @@ async function main() {
     return rest;
   });
 
-  const { sponsors: mergedSponsors, retainedGraceSponsors } = mergeSponsorsWithGracePeriod(
+  const { sponsors: mergedSponsors, retainedGraceSponsorsList } = mergeSponsorsWithGracePeriod(
     sanitizedSponsors,
     previousSponsors,
     nowIso,
@@ -240,11 +257,14 @@ async function main() {
     };
   });
 
-  const publicSponsors = promotedSponsors.filter((s) => s.privacyLevel !== 'PRIVATE');
-  const privateSponsors = promotedSponsors.filter((s) => s.privacyLevel === 'PRIVATE');
+  const publicSponsors = sortSponsorsAlphabetically(promotedSponsors.filter((s) => s.privacyLevel !== 'PRIVATE'));
+  const privateSponsors = sortSponsorsAlphabetically(promotedSponsors.filter((s) => s.privacyLevel === 'PRIVATE'));
+
+  const graceCount = retainedGraceSponsorsList.length;
+  const graceSummary = graceCount > 0 ? `${graceCount} (${retainedGraceSponsorsList.join(', ')})` : '0';
 
   console.log(
-    `Found ${publicSponsors.length} public and ${privateSponsors.length} private sponsors (>= $100/month); retained ${retainedGraceSponsors} in grace period.`,
+    `Found ${publicSponsors.length} public and ${privateSponsors.length} private sponsors (>= $100/month); retained ${graceSummary} in grace period.`,
   );
 
   fs.writeFileSync(SPONSORS_PATH, JSON.stringify(publicSponsors, null, 2));

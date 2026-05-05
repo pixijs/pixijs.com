@@ -1,6 +1,91 @@
-import { type ShowcaseItem } from '../pages/showcase/ShowcasePage';
+import sponsorData from './sponsors.json';
 
-export const showcaseItems: ShowcaseItem[] = [
+export interface ShowcaseItem {
+  title: string;
+  author: string;
+  imageUrl: string;
+  link: string;
+  alt?: string;
+  openSourceLink?: string;
+  sponsoredLink?: string;
+}
+
+interface ShowcaseSponsor {
+  login: string;
+  linkUrl?: string;
+}
+
+type ShowcaseSourceItem = Omit<ShowcaseItem, 'sponsoredLink'> & {
+  sponsor?: ShowcaseSponsor;
+};
+
+interface SponsorRecord {
+  lastSeenAt?: string;
+  sponsor: {
+    login?: string;
+    websiteUrl?: string;
+    linkUrl?: string;
+  };
+}
+
+const sponsors = sponsorData as SponsorRecord[];
+
+const getLastSeenAtTime = (sponsor: SponsorRecord): number | undefined => {
+  if (!sponsor.lastSeenAt) {
+    return undefined;
+  }
+
+  const time = Date.parse(sponsor.lastSeenAt);
+
+  return Number.isFinite(time) ? time : undefined;
+};
+
+let latestSponsorLastSeenAtTime: number | undefined;
+
+for (const sponsor of sponsors) {
+  const time = getLastSeenAtTime(sponsor);
+
+  if (time !== undefined && (latestSponsorLastSeenAtTime === undefined || time > latestSponsorLastSeenAtTime)) {
+    latestSponsorLastSeenAtTime = time;
+  }
+}
+
+// Grace-period sponsors carry an older lastSeenAt; keep only the latest run.
+const activeSponsorsByLogin = new Map<string, SponsorRecord>();
+
+for (const sponsor of sponsors) {
+  const login = sponsor.sponsor.login?.toLowerCase();
+
+  if (!login) continue;
+  if (latestSponsorLastSeenAtTime !== undefined && getLastSeenAtTime(sponsor) !== latestSponsorLastSeenAtTime) continue;
+
+  activeSponsorsByLogin.set(login, sponsor);
+}
+
+const resolveSponsoredLink = (sponsor?: ShowcaseSponsor): string | undefined => {
+  if (!sponsor) {
+    return undefined;
+  }
+
+  const activeSponsor = activeSponsorsByLogin.get(sponsor.login.toLowerCase());
+
+  if (!activeSponsor) {
+    return undefined;
+  }
+
+  return sponsor.linkUrl || activeSponsor.sponsor.websiteUrl || activeSponsor.sponsor.linkUrl;
+};
+
+const showcaseSourceItems: ShowcaseSourceItem[] = [
+  {
+    title: 'Not a Trolley Problem. JAM',
+    author: 'd954mas',
+    imageUrl: '/showcase/not-a-trolley-problem.webp',
+    link: 'https://wavedash.com/games/not-a-trolley-problem-jam',
+    sponsor: {
+      login: 'wvdsh',
+    },
+  },
   {
     title: 'Emerald Woods',
     author: `Slashware Interactive`,
@@ -162,3 +247,16 @@ export const showcaseItems: ShowcaseItem[] = [
     link: 'https://rendley.com/sdk',
   },
 ];
+
+export const showcaseItems: ShowcaseItem[] = showcaseSourceItems.map(({ sponsor, ...item }) => {
+  const sponsoredLink = resolveSponsoredLink(sponsor);
+
+  if (!sponsoredLink) {
+    return item;
+  }
+
+  return {
+    ...item,
+    sponsoredLink,
+  };
+});
