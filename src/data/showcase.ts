@@ -78,13 +78,19 @@ const resolveSponsoredLink = (sponsor?: ShowcaseSponsor): string | undefined => 
 
 const showcaseSourceItems: ShowcaseSourceItem[] = [
   {
+    title: 'DEAD SUN',
+    author: 'Fatal Exit',
+    imageUrl: '/showcase/DEADSUN.webp',
+    link: 'https://wavedash.com/games/dead-sun',
+    sponsor: {
+      login: 'wvdsh',
+    },
+  },
+  {
     title: 'Not a Trolley Problem. JAM',
     author: 'd954mas',
     imageUrl: '/showcase/not-a-trolley-problem.webp',
     link: 'https://wavedash.com/games/not-a-trolley-problem-jam',
-    sponsor: {
-      login: 'wvdsh',
-    },
   },
   {
     title: 'Emerald Woods',
