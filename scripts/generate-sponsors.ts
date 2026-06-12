@@ -274,4 +274,5 @@ async function main() {
 // @ts-expect-error - top level await does work
 await main().catch((err) => {
   console.error('Error fetching sponsors:', err);
+  process.exitCode = 1;
 });

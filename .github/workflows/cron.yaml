@@ -30,12 +30,15 @@ jobs:
         run: npm run generate:definitions
 
       - name: Run sponsor script
+        id: sponsors
         run: npm run generate:sponsors
         env:
           SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORKIT_GITHUB_TOKEN }}
           SPONSORKIT_GITHUB_LOGIN: ${{ secrets.SPONSORKIT_GITHUB_LOGIN }}
           SPONSORKIT_OPENCOLLECTIVE_SLUG: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_SLUG }}
           SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_KEY }}
+        # Don't block the definitions commit on a sponsor API failure;
+        # the job is failed explicitly afterwards instead.
         continue-on-error: true
 
       - name: Git Auto Commit
@@ -43,3 +46,9 @@ jobs:
         with:
           message: "chore: update generated files"
           add: '.'
+
+      - name: Fail job if sponsor script failed
+        if: steps.sponsors.outcome == 'failure'
+        run: |
+          echo "::error::Sponsor generation failed; sponsor data was not updated. Check the 'Run sponsor script' step output."
+          exit 1

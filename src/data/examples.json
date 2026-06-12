@@ -436,6 +436,29 @@
     ]
   },
   {
+    "name": "graphics_fill-pattern-space",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "description": "This example demonstrates the new textureSpace option on FillPattern, comparing global tiling across shapes against local per-shape tiling with setTransform().",
+    "files": [
+      {
+        "name": "DustMotesFilter.js",
+        "location": "graphics_fill-pattern-space/DustMotesFilter.js"
+      },
+      {
+        "name": "index.js",
+        "location": "graphics_fill-pattern-space/index.js"
+      },
+      {
+        "name": "setup.js",
+        "location": "graphics_fill-pattern-space/setup.js"
+      }
+    ]
+  },
+  {
     "name": "graphics_fill_stroke_gradient",
     "description": "This example demonstrates how to create and animate shapes with gradient fills and strokes using the Graphics and FillGradient classes",
     "dependencies": {},
@@ -465,6 +488,29 @@
       {
         "name": "index.js",
         "location": "graphics_pixel-line_antialiasing.js"
+      }
+    ]
+  },
+  {
+    "name": "graphics_svg-export",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "description": "This example demonstrates graphicsContextToSvg(), which serializes live Graphics instructions into a self-contained SVG string that can be re-imported or saved.",
+    "files": [
+      {
+        "name": "DustMotesFilter.js",
+        "location": "graphics_svg-export/DustMotesFilter.js"
+      },
+      {
+        "name": "index.js",
+        "location": "graphics_svg-export/index.js"
+      },
+      {
+        "name": "setup.js",
+        "location": "graphics_svg-export/setup.js"
       }
     ]
   },
@@ -978,6 +1024,29 @@
     ]
   },
   {
+    "name": "particle-container_blend-mode",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "description": "This example demonstrates ParticleContainer inheriting blend modes from its ancestors, toggling an additive blend on the parent of the right-hand galaxy.",
+    "files": [
+      {
+        "name": "DustMotesFilter.js",
+        "location": "particle-container_blend-mode/DustMotesFilter.js"
+      },
+      {
+        "name": "index.js",
+        "location": "particle-container_blend-mode/index.js"
+      },
+      {
+        "name": "setup.js",
+        "location": "particle-container_blend-mode/setup.js"
+      }
+    ]
+  },
+  {
     "name": "rendering_canvas-renderer",
     "description": "This example demonstrates the new experimental Canvas renderer in PixiJS.",
     "dependencies": {},
@@ -1070,6 +1139,29 @@
       {
         "name": "index.js",
         "location": "sprite_gif_animation_loading.js"
+      }
+    ]
+  },
+  {
+    "name": "sprite_mask-channel",
+    "dependencies": {
+      "pixi.js": "latest",
+      "gsap": "latest",
+      "pixi-filters": "latest"
+    },
+    "description": "This example demonstrates the new channel option for sprite masks, comparing how the red and alpha channels of the same mask texture reveal different regions.",
+    "files": [
+      {
+        "name": "DustMotesFilter.js",
+        "location": "sprite_mask-channel/DustMotesFilter.js"
+      },
+      {
+        "name": "index.js",
+        "location": "sprite_mask-channel/index.js"
+      },
+      {
+        "name": "setup.js",
+        "location": "sprite_mask-channel/setup.js"
       }
     ]
   },

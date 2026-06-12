@@ -23,6 +23,7 @@
     "write-translations": "docusaurus write-translations",
     "generate": "npm run generate:content && npm run generate:sponsors && npm run generate:definitions && npm run generate:examples",
     "generate:examples": "node ./scripts/examples.ts --experimental-strip-types",
+    "generate:example-previews": "node ./scripts/capture-example-previews.mjs",
     "generate:content": "node ./scripts/generate-tutorial-docs.mjs",
     "generate:sponsors": "node ./scripts/generate-sponsors.ts --experimental-strip-types",
     "generate:definitions": "node ./scripts/generate-definitions.ts --experimental-strip-types"

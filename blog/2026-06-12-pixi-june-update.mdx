@@ -1,0 +1,296 @@
+---
+title: PixiJS Update - June
+description: HTML-in-Canvas textures, Graphics to SVG export, official AI agent skills, sprite mask channels, and 500K weekly downloads. Everything new in PixiJS v8.18.0 and v8.19.0.
+slug: june-2026
+authors: zyie
+tags: [PixiJS, Updates, HTML-in-Canvas, SVG, Agent Skills, Masking, FillPattern, Particles]
+hide_table_of_contents: true
+keywords:
+  [
+    'PixiJS',
+    'Updates',
+    'HTML-in-Canvas',
+    'HTMLSource',
+    'SVG Export',
+    'graphicsContextToSvg',
+    'Agent Skills',
+    'Mask Channel',
+    'FillPattern',
+    'textureSpace',
+    'ParticleContainer',
+  ]
+---
+
+import { BlogExample } from '@site/src/components/Editor/BlogExample';
+import { BlogSponsors } from '@site/src/components/Blog/BlogSponsors';
+
+Welcome to the June update, covering **v8.18.0** and **v8.19.0**: live **HTML-in-Canvas textures**, **Graphics → SVG export**, **official AI agent skills**, **sprite mask channels**, and a milestone we're very proud of.
+
+{/* truncate */}
+
+## 500,000 weekly downloads
+
+PixiJS crossed **500,000 weekly downloads** on npm, and the number has kept climbing since. That's half a million projects, prototypes, games, and experiments pulling PixiJS every single week.
+
+This library exists because of the people who build with it, report bugs, send fixes, and answer questions on Discord. Thank you for building with PixiJS.
+
+---
+
+## Official PixiJS Agent Skills
+
+AI coding agents are now part of many workflows, so we've shipped **25 official PixiJS skills** that teach them how to use PixiJS v8 correctly: modern APIs, current best practices, and none of the v7 patterns they tend to hallucinate.
+
+Install them into Claude Code, Cursor, Codex, Copilot, or Windsurf with one command:
+
+```bash
+npx skills add https://github.com/pixijs/pixijs-skills
+```
+
+As of v8.19.0 the skills also ship inside the npm package itself, available at `node_modules/pixi.js/skills/` after install, so your tools can pick them up without a separate step.
+
+Check out the [pixijs-skills repository](https://github.com/pixijs/pixijs-skills) for the full list, and see [pixijs.com/llms](/llms) for everything PixiJS offers AI tooling, from install instructions for 40+ agents to plain-text llms.txt docs.
+
+---
+
+## HTML-in-Canvas textures
+
+The headline feature of v8.19.0: a new opt-in `pixi.js/html-source` subpath that renders **live DOM elements into PixiJS textures**. The element stays fully interactive in the browser while it's mirrored to the GPU: inputs stay editable, links stay clickable, and CSS animations keep running.
+
+Here it is running on a real website. Everything you see, including the text being selected and the form being typed into, is a PixiJS texture:
+
+<div style={{ maxWidth: 700, margin: '0 auto', paddingBottom: 24 }}>
+  <video
+    src="/images/blog/html-in-canvas-website.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+    style={{
+      width: '100%',
+      borderRadius: '12px',
+      boxShadow: '0 0 20px hsla(340, 82%, 52%, 0.15)',
+    }}
+  />
+</div>
+
+Use `HTMLSource` for a live element, or `ElementImageSource` for an immutable snapshot. The element must be a direct child of the Pixi canvas:
+
+```ts
+import { Application, Sprite } from 'pixi.js';
+import { HTMLSource } from 'pixi.js/html-source';
+
+const app = new Application();
+await app.init({ resizeTo: window });
+document.body.appendChild(app.canvas);
+
+const form = document.createElement('form');
+form.innerHTML = '<input value="still editable" />';
+app.canvas.appendChild(form); // must be a direct child of the Pixi canvas
+
+const sprite = Sprite.from(new HTMLSource({ resource: form, autoUpdate: true }));
+app.stage.addChild(sprite); // live DOM mirrored to the GPU; the form stays interactive
+```
+
+Importing the subpath also registers a lowest-priority `Texture.from` fallback for generic HTML elements, so apps that don't import it are completely unaffected.
+
+:::info Experimental
+This is built on the experimental [HTML-in-Canvas browser API](https://github.com/WICG/html-in-canvas), currently available in Chrome behind a flag. If the API isn't enabled in the browser, the texture uploaders throw a clear error. Treat this as a preview of where the web platform is heading.
+:::
+
+Thanks to [@Zyie](https://github.com/zyie) for this contribution.
+
+---
+
+## Graphics → SVG export
+
+v8.18.0 adds `graphicsContextToSvg()`, a pure function that serializes a `Graphics` or `GraphicsContext` into a self-contained SVG string. It supports rects, circles, ellipses, rounded rects, polygons, bezier/quadratic/arc paths, strokes, holes, and linear/radial gradients.
+
+```ts
+import { Graphics, graphicsContextToSvg } from 'pixi.js';
+
+const g = new Graphics()
+    .rect(0, 0, 100, 50)
+    .fill({ color: 0xff0000 })
+    .circle(150, 25, 25)
+    .stroke({ color: 0x0000ff, width: 4 });
+
+const svgString = graphicsContextToSvg(g, 2);
+await navigator.clipboard.writeText(svgString);
+```
+
+The example below proves the round trip: the right-hand badge is built by feeding the exported SVG string straight back into `new Graphics().svg()`:
+
+<BlogExample name="graphics_svg-export" />
+
+<br/>
+
+Thanks to [@GoodBoyDigital](https://github.com/GoodBoyDigital) for this contribution.
+
+---
+
+## Sprite mask channels
+
+`setMask()` gains a `channel` option in v8.18.0, letting you pick which texture channel drives visibility: `'red'` (the default, matching previous behavior) or `'alpha'`. This matches how design tools like Figma apply PNG masks, so masks exported from design files now work without preprocessing:
+
+```ts
+import { Assets, Sprite } from 'pixi.js';
+
+const photo = new Sprite(await Assets.load('photo.png'));
+const maskSprite = new Sprite(await Assets.load('mask-alpha.png'));
+
+photo.setMask({
+    mask: maskSprite,
+    channel: 'alpha',
+});
+```
+
+Both sides below use the **same mask texture**: a transparent-backed circle with a red star painted on it. The red channel only sees the star; the alpha channel sees the whole circle:
+
+<BlogExample name="sprite_mask-channel" />
+
+---
+
+## FillPattern textureSpace
+
+`FillPattern` gains a `textureSpace` option in v8.19.0, alongside fixes for several long-standing pattern sizing bugs:
+
+- `'global'` (the new default): the pattern tiles continuously across world space, so adjacent shapes share one seamless grid instead of each remapping the pattern.
+- `'local'`: one tile is fitted to each shape, and `setTransform()` lets you subdivide or transform it per shape.
+
+```ts
+import { Assets, FillPattern, Graphics } from 'pixi.js';
+
+const texture = await Assets.load('pattern.png');
+
+const pattern = new FillPattern({ texture, repetition: 'repeat', textureSpace: 'local' });
+
+const g = new Graphics().rect(0, 0, 200, 100).fill({ fill: pattern });
+```
+
+<BlogExample name="graphics_fill-pattern-space" />
+
+<br/>
+
+:::caution Behavior Change
+Existing pattern fills can render differently after upgrading. `setTransform(matrix)` now applies the matrix you pass directly (it previously inverted and rescaled it by the texture size), and `textureSpace: 'local'` radial gradients now scale to the gradient's outer radius. If you hand-compensated for the old `setTransform` behavior, remove that compensation.
+:::
+
+---
+
+## Particles inherit blend modes
+
+`ParticleContainer` now respects the blend mode inherited from its ancestors. Previously, setting a blend mode on a parent (for example `stage.blendMode = 'add'`) was silently ignored by particles; now they resolve the inherited blend mode like every other container. A `blendMode` set directly on the `ParticleContainer` works exactly as before.
+
+Both galaxies below are identical `ParticleContainer`s. The only difference is the `blendMode` set on the right one's parent:
+
+<BlogExample name="particle-container_blend-mode" />
+
+<br/>
+
+:::caution Behavior Change
+Particles nested under a parent with a non-default blend mode will now render differently (e.g. additive brightening) where the parent's blend mode was previously ignored.
+:::
+
+Thanks to [@DmitriyGolub](https://github.com/DmitriyGolub) for this contribution.
+
+---
+
+## More additions
+
+- **Renderer preference arrays**: `autoDetectRenderer` and `Application.init` now accept an array for `preference` (e.g. `['webgl', 'canvas']`), letting you restrict the fallback chain rather than only reorder it ([@Zyie](https://github.com/zyie)).
+- **`app.domContainerRoot`**: A read-only getter for the `HTMLDivElement` that wraps all `DOMContainer` elements, so you can add CSS classes or styles to the DOM overlay root ([@carlos22](https://github.com/carlos22)).
+- **Default anchors for generated textures**: `renderer.generateTexture()` accepts a `defaultAnchor` option, and `RenderTexture.create()` gains a `textureOptions` parameter ([@ksv90](https://github.com/ksv90)).
+- **Transient MSAA attachments (WebGPU)**: Texture sources gain an opt-in `transient` flag that lets the WebGPU backend discard MSAA buffers at the end of a render pass instead of writing them back to memory, cutting memory bandwidth on mobile GPUs ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+
+---
+
+## Bug fixes
+
+Across both releases:
+
+- **Stroke-only Graphics masks** now render correctly on the Canvas renderer ([@DmitriyGolub](https://github.com/DmitriyGolub)).
+- **iOS 18.0–18.1 textures**: `_applyMipRange` is skipped for single-mip textures, working around a WebKit bug ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **Stale `TextureMatrix`** when pooled textures reuse the same reference ([@GoodBoyDigital](https://github.com/GoodBoyDigital)).
+- **`GraphicsPath.transform()`** now handles all path actions ([@Zyie](https://github.com/zyie)).
+- **`VideoSource`** no longer recurses between play and mediaReady before video dimensions are known ([@satoren](https://github.com/satoren)).
+- **Tagged text** handles literal `<` characters in `parseTaggedText` ([@glennflanagan](https://github.com/glennflanagan)).
+- **`SplitText`** baseline mismatch fixed when `tagStyles` is used with `lineHeight`, and a crash fixed when text begins with whitespace ([@Zyie](https://github.com/zyie)).
+- **`TilingSprite`**: `tilePosition` is no longer divided by resolution on the Canvas renderer, and `tileRotation` no longer shears the pattern on non-square sprites ([@Zyie](https://github.com/zyie)).
+- **`BitmapText`** no longer renders a trailing glyph after a glyph-less word-break character ([@Zyie](https://github.com/zyie)).
+- **Canvas renderer** rounds the anchor offset when `roundPixels` is enabled ([@Clonex](https://github.com/Clonex)).
+- **Custom batchers** now receive the renderer's `maxBatchableTextures` ([@SerG-Y](https://github.com/SerG-Y)).
+- **Lost contexts** no longer crash shader compilation logging ([@Zyie](https://github.com/zyie)).
+- **`GCSystem`** unloads resources before nulling their hash entry ([@Zyie](https://github.com/zyie)).
+- **`CanvasFilterSystem`** moved to the filters module ([@Zyie](https://github.com/zyie)).
+
+You can view the full changelogs on GitHub: [v8.18.0](https://github.com/pixijs/pixijs/releases/tag/v8.18.0) and [v8.19.0](https://github.com/pixijs/pixijs/releases/tag/v8.19.0).
+
+---
+
+## New contributors
+
+Welcome to our newest contributors:
+
+- [@mehmetcanakbay](https://github.com/mehmetcanakbay)
+- [@DmitriyGolub](https://github.com/DmitriyGolub)
+- [@carlos22](https://github.com/carlos22)
+- [@satoren](https://github.com/satoren)
+- [@ksv90](https://github.com/ksv90)
+- [@glennflanagan](https://github.com/glennflanagan)
+- [@RinZ27](https://github.com/RinZ27)
+- [@MFei8ht](https://github.com/MFei8ht)
+- [@Clonex](https://github.com/Clonex)
+
+Thank you for your contributions!
+
+---
+
+## Get the latest PixiJS
+
+Install via npm:
+
+```bash
+npm install pixi.js@8.19.0
+```
+
+Or use via CDN:
+
+**Development builds:**
+
+- https://cdn.jsdelivr.net/npm/pixi.js@8.19.0/dist/pixi.js
+- https://cdn.jsdelivr.net/npm/pixi.js@8.19.0/dist/pixi.mjs
+
+**Production builds:**
+
+- https://cdn.jsdelivr.net/npm/pixi.js@8.19.0/dist/pixi.min.js
+- https://cdn.jsdelivr.net/npm/pixi.js@8.19.0/dist/pixi.min.mjs
+
+**Documentation:** [https://pixijs.download/v8.19.0/docs/index.html](https://pixijs.download/v8.19.0/docs/index.html)
+
+---
+
+## Wrapping up
+
+That covers June's updates. The FillPattern and particle blend mode changes are behavior changes, so check your output after upgrading; the sections above explain how each one moved.
+
+Thanks to everyone who contributed fixes and features to these releases.
+
+- See the full release notes on GitHub: [v8.18.0](https://github.com/pixijs/pixijs/releases/tag/v8.18.0) / [v8.19.0](https://github.com/pixijs/pixijs/releases/tag/v8.19.0)
+- [Sponsor PixiJS](https://pixijs.com/sponsor)
+- [Submit your project to the Showcase](https://pixijs.com/showcase)
+- Join the discussion on [Discord](https://discord.gg/QrnxmQUPGV)
+- Follow us on [Twitter](https://x.com/PixiJS) / [Bluesky](https://bsky.app/profile/pixijs.com)
+
+---
+
+## Thank you to our sponsors
+
+PixiJS is made possible by our sponsors. A special thanks to our Silver tier and above supporters; you can [join them](https://pixijs.com/sponsor) and keep the engine moving.
+
+<BlogSponsors />
+
+<br />
+
+Happy creating!
+
+**The PixiJS Team**
