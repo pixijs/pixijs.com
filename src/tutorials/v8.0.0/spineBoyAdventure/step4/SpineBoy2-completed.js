@@ -100,12 +100,12 @@ export class SpineBoy {
   isAnimationPlaying({ name }) {
     // Check if the current animation on main track equals to the queried.
     // Also check if the animation is still ongoing.
-    return this.currentAnimationName === name && !this.spine.state.getCurrent(0).isComplete();
+    return this.currentAnimationName === name && !this.spine.state.getTrack(0).isComplete();
   }
 
   // Return the name of the current animation on main track.
   get currentAnimationName() {
-    return this.spine.state.getCurrent(0)?.animation.name;
+    return this.spine.state.getTrack(0)?.animation.name;
   }
 
   // Return character's facing direction.

@@ -18,11 +18,11 @@ import { SpineBoy } from './SpineBoy';
   await Assets.load([
     {
       alias: 'spineSkeleton',
-      src: 'https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pro.skel',
+      src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/spineboy-pro.skel',
     },
     {
       alias: 'spineAtlas',
-      src: 'https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pma.atlas',
+      src: 'https://pixijs.com/assets/tutorials/spineboy-adventure/spineboy-pma.atlas',
     },
     {
       alias: 'sky',
