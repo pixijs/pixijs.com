@@ -14,7 +14,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z",
+    "lastSeenAt": "2026-07-04T00:54:30.265Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -33,7 +33,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -51,7 +51,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -86,7 +86,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z",
+    "lastSeenAt": "2026-07-04T00:54:30.265Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -139,7 +139,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -157,7 +157,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -175,7 +175,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -193,7 +193,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -213,6 +213,24 @@
   },
   {
     "sponsor": {
+      "name": "Purchase 1000 TikTok Followers",
+      "type": "Organization",
+      "login": "purchase-1000-tiktok-followers",
+      "avatarUrl": "https://images.opencollective.com/purchase-1000-tiktok-followers/b6f3250/logo/460.png",
+      "websiteUrl": "https://reddit.com/r/TikTokAds/comments/zqv775/is_buying_1000_followers_on_tiktok_worth_it_to",
+      "linkUrl": "https://opencollective.com/purchase-1000-tiktok-followers",
+      "socialLogins": {
+        "opencollective": "purchase-1000-tiktok-followers"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
+  },
+  {
+    "sponsor": {
       "name": "Releaf Medical Cannabis Glossary",
       "type": "Organization",
       "login": "medical-cannabis-glossary",
@@ -227,7 +245,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -245,7 +263,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -264,7 +282,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -282,7 +300,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -298,7 +316,7 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$250 a month",
     "createdAt": "2026-04-23T18:34:26Z",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   },
   {
     "sponsor": {
@@ -316,6 +334,6 @@
     "monthlyDollars": 1000,
     "privacyLevel": "PUBLIC",
     "tierName": "Gold++ Sponsor",
-    "lastSeenAt": "2026-07-03T00:55:50.541Z"
+    "lastSeenAt": "2026-07-04T00:54:30.265Z"
   }
 ]
