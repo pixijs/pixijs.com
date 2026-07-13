@@ -13,7 +13,7 @@ export default function HeroHeader(): React.JSX.Element {
         <img className={styles.heroLogo} src="/images/logo.svg" alt="" />
         <h1 className="hero__subtitle">The HTML5 Creation Engine</h1>
         <h4 className="hero__subsubtitle">
-          Create beautiful digital content with the fastest, most flexible 2D WebGL renderer.
+          Create beautiful games, apps, and interactive digital content with the fastest 2D WebGPU/WebGL renderer.
         </h4>
         <div className="buttonRow">
           <HomeCTA label="Getting Started" link="8.x/guides/getting-started/intro" />

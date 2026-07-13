@@ -17,8 +17,8 @@ export default function Homepage(): React.JSX.Element {
       title={`${siteConfig.title} | The HTML5 Creation Engine`}
       description={
         'PixiJS - The HTML5 Creation Engine. ' +
-        'Create beautiful digital content with the fastest, ' +
-        'most flexible 2D WebGL renderer.'
+        'Create beautiful games, apps, and interactive digital content ' +
+        'with the fastest 2D WebGPU/WebGL renderer.'
       }
     >
       <main>
