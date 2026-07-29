@@ -14,7 +14,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z",
+    "lastSeenAt": "2026-07-29T00:46:51.804Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -33,7 +33,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -51,7 +51,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -68,24 +68,8 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z",
+    "lastSeenAt": "2026-07-29T00:46:51.804Z",
     "tierName": "Bronze Sponsor"
-  },
-  {
-    "sponsor": {
-      "login": "elevenlabs",
-      "name": "ElevenLabs",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/94471909?v=4",
-      "websiteUrl": "https://elevenlabs.io",
-      "linkUrl": "https://github.com/elevenlabs",
-      "type": "Organization"
-    },
-    "isOneTime": false,
-    "monthlyDollars": 100,
-    "privacyLevel": "PUBLIC",
-    "tierName": "$100 a month",
-    "createdAt": "2026-01-09T09:21:03Z",
-    "lastSeenAt": "2026-06-30T01:10:35.421Z"
   },
   {
     "sponsor": {
@@ -103,7 +87,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -121,7 +105,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -139,7 +123,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -157,7 +141,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -175,7 +159,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -193,7 +177,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -211,7 +195,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -229,7 +213,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -248,7 +232,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -266,7 +250,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -282,7 +266,7 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$250 a month",
     "createdAt": "2026-04-23T18:34:26Z",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   },
   {
     "sponsor": {
@@ -300,6 +284,6 @@
     "monthlyDollars": 1000,
     "privacyLevel": "PUBLIC",
     "tierName": "Gold++ Sponsor",
-    "lastSeenAt": "2026-07-28T00:46:23.892Z"
+    "lastSeenAt": "2026-07-29T00:46:51.804Z"
   }
 ]
