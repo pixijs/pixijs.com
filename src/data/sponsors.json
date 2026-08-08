@@ -14,7 +14,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z",
+    "lastSeenAt": "2026-08-08T00:27:17.349Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -33,7 +33,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -51,7 +51,25 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
+  },
+  {
+    "sponsor": {
+      "name": "BuyTikTokFollowers.co",
+      "type": "Organization",
+      "login": "buy-tiktok-followers-co",
+      "avatarUrl": "https://images.opencollective.com/buy-tiktok-followers-co/82431fe/logo/460.png",
+      "websiteUrl": "https://buytiktokfollowers.co",
+      "linkUrl": "https://opencollective.com/buy-tiktok-followers-co",
+      "socialLogins": {
+        "opencollective": "buy-tiktok-followers-co"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -68,7 +86,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z",
+    "lastSeenAt": "2026-08-08T00:27:17.349Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -87,7 +105,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -105,7 +123,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -123,7 +141,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -141,7 +159,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -159,7 +177,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -177,7 +195,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -213,7 +231,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -231,7 +249,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -250,7 +268,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -268,7 +286,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -284,7 +302,7 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$250 a month",
     "createdAt": "2026-04-23T18:34:26Z",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   },
   {
     "sponsor": {
@@ -302,6 +320,6 @@
     "monthlyDollars": 1000,
     "privacyLevel": "PUBLIC",
     "tierName": "Gold++ Sponsor",
-    "lastSeenAt": "2026-08-07T01:23:53.881Z"
+    "lastSeenAt": "2026-08-08T00:27:17.349Z"
   }
 ]
