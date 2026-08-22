@@ -2469,9 +2469,9 @@ export declare class Rectangle implements ShapePrimitive {
 	 * const partial = new Rectangle(75, 75, 50, 50);
 	 * console.log(container.containsRect(partial)); // false
 	 *
-	 * // Zero-area rectangles
+	 * // Zero-area rectangles can't contain anything
 	 * const empty = new Rectangle(0, 0, 0, 100);
-	 * console.log(container.containsRect(empty)); // false
+	 * console.log(empty.containsRect(inner)); // false
 	 * ```
 	 * @param other - The Rectangle to check for containment
 	 * @returns True if other is fully contained within this Rectangle
@@ -3257,6 +3257,8 @@ interface ShaderBase {
 	 * This is automatically set based on if a {@link GlProgram} or {@link GpuProgram} is provided.
 	 */
 	compatibleRenderers?: number;
+	/** The overrides used by the shader. */
+	overrides?: Record<string, number> | ShaderOverrides;
 }
 interface ShaderWithResourcesDescriptor {
 	/**
@@ -3621,6 +3623,14 @@ declare class AlphaMaskEffect extends FilterEffect implements PoolItem {
 	set inverse(value: boolean);
 	get channel(): MaskChannel;
 	set channel(value: MaskChannel);
+	/**
+	 * Called by {@link BigPool} when the pipe returns the effect: parks the filter
+	 * on the empty placeholder so a pooled effect keeps no bindings to the last
+	 * mask it applied. Without this, the pooled filter pins the mask sprite and
+	 * its texture for as long as the effect sits in the pool, and destroying that
+	 * texture's source hits a bind group subscription the user cannot release.
+	 */
+	reset(): void;
 	init: () => void;
 }
 interface MaskConversionTest {
@@ -3980,8 +3990,6 @@ interface UniformParserDefinition {
 	type: UNIFORM_TYPES;
 	test(data: UniformData): boolean;
 	ubo?: string;
-	uboWgsl?: string;
-	uboStd40?: string;
 	uniform?: string;
 }
 /**
@@ -4727,6 +4735,19 @@ export interface RenderOptions extends ClearOptions {
 	container: Container;
 	/** the transform to apply to the container. */
 	transform?: Matrix;
+	/**
+	 * Opt-in toggle that inverts the render's Y orientation. Defaults to `false` — a no-op, so existing
+	 * renders are unchanged on both WebGL and WebGPU.
+	 *
+	 * Set `flipY: true` to invert the automatic orientation: when rendering to a texture this stores the
+	 * capture in screen orientation (the un-flipped result 3D geometry UVs expect), removing the need to
+	 * flip at sample time on every consuming material.
+	 *
+	 * The projection flip and the winding/cull inversion flip together, so back-face culling of 3D content
+	 * rendered into the texture stays correct.
+	 * @default false
+	 */
+	flipY?: boolean;
 }
 /**
  * Options for destroying the renderer.
@@ -9255,6 +9276,10 @@ export declare class FederatedPointerEvent extends FederatedMouseEvent implement
 	 * Twist of a stylus pointer.
 	 */
 	twist: number;
+	/**
+	 * A unique identifier for the pointing device generating the event, that persists across events.
+	 */
+	persistentDeviceId: number;
 	/** This is the number of clicks that occurs in 200ms/click of each other. */
 	detail: number;
 }
