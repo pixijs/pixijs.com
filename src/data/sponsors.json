@@ -14,7 +14,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z",
+    "lastSeenAt": "2026-09-03T09:15:46.906Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -33,7 +33,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -51,7 +51,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -86,7 +86,7 @@
     "isOneTime": false,
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z",
+    "lastSeenAt": "2026-09-03T09:15:46.906Z",
     "tierName": "Bronze Sponsor"
   },
   {
@@ -123,7 +123,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -141,7 +141,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -159,7 +159,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -177,7 +177,43 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
+  },
+  {
+    "sponsor": {
+      "name": "JBO",
+      "type": "User",
+      "login": "jbo-thailand",
+      "avatarUrl": "https://images.opencollective.com/jbo-thailand/d17e84f/avatar/460.png",
+      "websiteUrl": "https://jbo579.com/th",
+      "linkUrl": "https://opencollective.com/jbo-thailand",
+      "socialLogins": {
+        "opencollective": "jbo-thailand"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
+  },
+  {
+    "sponsor": {
+      "name": "JBO",
+      "type": "User",
+      "login": "jbo-vietnam",
+      "avatarUrl": "https://images.opencollective.com/jbo-vietnam/5e66f3a/avatar/460.png",
+      "websiteUrl": "https://jbo88c.com/vn",
+      "linkUrl": "https://opencollective.com/jbo-vietnam",
+      "socialLogins": {
+        "opencollective": "jbo-vietnam"
+      }
+    },
+    "isOneTime": false,
+    "monthlyDollars": 100,
+    "privacyLevel": "PUBLIC",
+    "tierName": "Bronze Sponsor",
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -213,7 +249,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -231,7 +267,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -249,7 +285,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -268,7 +304,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -286,7 +322,7 @@
     "monthlyDollars": 100,
     "privacyLevel": "PUBLIC",
     "tierName": "Bronze Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -302,7 +338,7 @@
     "privacyLevel": "PUBLIC",
     "tierName": "$250 a month",
     "createdAt": "2026-04-23T18:34:26Z",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   },
   {
     "sponsor": {
@@ -320,6 +356,6 @@
     "monthlyDollars": 1000,
     "privacyLevel": "PUBLIC",
     "tierName": "Gold++ Sponsor",
-    "lastSeenAt": "2026-09-03T00:51:40.718Z"
+    "lastSeenAt": "2026-09-03T09:15:46.906Z"
   }
 ]
