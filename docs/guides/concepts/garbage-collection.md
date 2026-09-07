@@ -65,7 +65,7 @@ const app = new Application();
 
 await app.init({
   textureGCActive: true, // Enable texture garbage collection
-  textureGCMaxIdle: 7200, // 2 hours idle time
+  textureGCMaxIdle: 7200, // 2 minutes idle time
   textureGCCheckCountMax: 1200, // Check every 20 seconds at 60 FPS
 });
 ```
