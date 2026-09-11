@@ -16,7 +16,7 @@ export type HostMessage =
 
 type FrameMessage =
   | { channel: typeof CHANNEL; type: 'ready' }
-  /** Both renderers refused; the hero keeps its flat ground and the frame is hidden. */
+  /** WebGL refused; the hero keeps its flat ground and the frame is hidden. */
   | { channel: typeof CHANNEL; type: 'failed' };
 
 export const isFrameMessage = (data: unknown): data is FrameMessage =>

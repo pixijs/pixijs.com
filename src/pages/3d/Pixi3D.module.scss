@@ -1,15 +1,24 @@
-.page {
-  /* The hero's ground and vignette colour. Painted on the page because `html` and `body` have no
-     background, so unpainted regions show the browser canvas, which is black until the colour
-     scheme resolves. */
+/* Marked on `html` for this route alone, from `_Pixi3DPage.tsx`. An attribute rather than a class
+   because react-helmet replaces `class` outright, which would drop the ones Docusaurus puts there.
+
+   The hero's ground and vignette colour is declared up here rather than on the page itself because
+   the browser paints its canvas from `html`, and Infima leaves that at its own background colour —
+   a good deal lighter than this hero. Anywhere the page does not cover, which on this route means
+   an elastic overscroll past either end, would otherwise show that instead of the ground. Keep in
+   step with `PALETTES[*].floorColor` in the `pixijs-3d-hero` project. */
+:global(html[data-pixi-3d]) {
   --hero-floor: #fff;
 
   background: var(--hero-floor);
-  color: var(--ifm-font-color-base);
 }
 
-:global(html[data-theme='dark']) .page {
+:global(html[data-pixi-3d][data-theme='dark']) {
   --hero-floor: #0c0c11;
+}
+
+.page {
+  background: var(--hero-floor);
+  color: var(--ifm-font-color-base);
 }
 
 /* ---------- Hero ---------- */

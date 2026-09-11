@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useColorMode, type ColorMode } from '@docusaurus/theme-common';
-import useIsBrowser from '@docusaurus/useIsBrowser';
+import { useColorMode } from '@docusaurus/theme-common';
 import clsx from 'clsx';
 import { CHANNEL, isFrameMessage } from './bridge';
 import styles from './index.module.scss';
@@ -8,15 +7,16 @@ import styles from './index.module.scss';
 import type { HostMessage } from './bridge';
 import type React from 'react';
 
-/** The built hero, deployed from the `pixijs-3d-hero` project into `static/3d-hero`. */
-const FRAME_SRC = '/3d-hero/index.html';
-
 /**
- * The opening colour mode, which the frame needs before its first paint. It goes in the fragment
- * rather than the query because this site normalises the frame's path with a redirect, and a
- * redirect keeps a fragment where it drops a query.
+ * The built hero, deployed from the `pixijs-3d-hero` project into `static/3d-hero`.
+ *
+ * A constant, so the frame is in this page's served markup and starts loading while the page is
+ * still parsing rather than after it has hydrated. The frame needs the colour mode before its first
+ * paint and reads it off this document itself — see its `index.html` — which is what lets the URL
+ * stay the same in both modes. Later changes go over the bridge, and a URL that never changes is
+ * also what keeps a toggle from reloading the field back to its opening scatter.
  */
-const frameUrl = (theme: ColorMode): string => `${FRAME_SRC}#${new URLSearchParams({ theme })}`;
+const FRAME_SRC = '/3d-hero/index.html';
 
 /** The hero's floating primitives, which run in a frame of their own; see `./bridge`. */
 export default function ShapeField(): React.JSX.Element {
@@ -25,12 +25,6 @@ export default function ShapeField(): React.JSX.Element {
   const activeRef = useRef(true);
   const { colorMode } = useColorMode();
   const [failed, setFailed] = useState(false);
-  const isBrowser = useIsBrowser();
-  const srcRef = useRef<string | null>(null);
-
-  // Built once. Every later colour-mode change goes over the bridge instead: folding it back into
-  // the URL would reload the frame and restart the field from its opening scatter.
-  if (isBrowser && srcRef.current === null) srcRef.current = frameUrl(colorMode);
 
   const send = useCallback((message: HostMessage) => {
     frameRef.current?.contentWindow?.postMessage(message, location.origin);
@@ -107,9 +101,7 @@ export default function ShapeField(): React.JSX.Element {
 
   return (
     <div ref={hostRef} className={clsx(styles.host, failed && styles.failed)} aria-hidden="true">
-      {srcRef.current && (
-        <iframe ref={frameRef} className={styles.frame} src={srcRef.current} title="PixiJS 3D hero" tabIndex={-1} />
-      )}
+      <iframe ref={frameRef} className={styles.frame} src={FRAME_SRC} title="PixiJS 3D hero" tabIndex={-1} />
     </div>
   );
 }

@@ -15,7 +15,7 @@
   border: 0;
 }
 
-/* WebGPU and WebGL both refused: the hero still reads on its flat ground alone. */
+/* WebGL refused: the hero still reads on its flat ground alone. */
 .failed {
   display: none;
 }

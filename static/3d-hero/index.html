@@ -6,12 +6,31 @@
     <meta name="robots" content="noindex" />
     <title>PixiJS 3D Hero</title>
     <style>
-      html,
+      /* The ground the field stands on, and all there is to see until the renderer has come up.
+         Both modes live here and are picked by the `data-theme` the script below resolves before
+         the first paint, so that one attribute is the whole of the colour mode: setting it again
+         later moves the ground with it. Keep in step with `PALETTES[*].floorColor`. */
+      html {
+        --ground: #fff;
+
+        height: 100%;
+        background: var(--ground);
+        /* So the scrollbars and any control the browser paints for itself match the rest. */
+        color-scheme: light;
+      }
+
+      html[data-theme='dark'] {
+        --ground: #0c0c11;
+        color-scheme: dark;
+      }
+
+      /* No background of its own on purpose. One would cover the viewport and so paint over the
+         ground above it — which is where the white flash on a dark page used to come from, the
+         script below having only ever reached `html`. */
       body {
         margin: 0;
         height: 100%;
         overflow: hidden;
-        background: #fff;
       }
 
       #hero {
@@ -19,18 +38,54 @@
         height: 100%;
       }
 
+      /* Faded up once there is a frame on it. The ground behind is the same colour the field
+         paints, so the shapes rise out of it instead of the whole hero snapping in at once. */
       #hero canvas {
         display: block;
+        opacity: 0;
+        transition: opacity 500ms ease-out;
+      }
+
+      #hero[data-ready] canvas {
+        opacity: 1;
+      }
+
+      /* The field itself is already frozen for these visitors; see `createShapeField`. */
+      @media (prefers-reduced-motion: reduce) {
+        #hero canvas {
+          transition: none;
+        }
       }
     </style>
     <script>
-      /* The canvas is opaque and paints this same colour, but it only exists once the renderer has
-         started. Without this the frame shows its own white ground for those first frames, which
-         reads as a flash against a dark page. Keep in step with `PALETTES[*].floorColor`. */
-      document.documentElement.style.background =
-        new URLSearchParams(location.hash.slice(1) || location.search).get('theme') === 'dark' ? '#0c0c11' : '#fff';
+      /* Before the first paint, because the renderer takes a moment to come up and a frame opening
+         on the wrong ground is a white flash on a dark page.
+
+         Taken from the page this frame is embedded in rather than from our own URL, so that page
+         can put the frame in its served markup and let it start loading during the parse instead
+         of waiting on its own JavaScript to hand us a mode. The read is same-origin — the host
+         serves this page from its own domain — and pixijs.com resolves `data-theme` in a blocking
+         script at the top of its body, long before the parser reaches the frame.
+
+         Standalone, or if a host ever embeds this cross-origin and the read is refused, the URL
+         stands in. The mode rides in the fragment rather than the query; see `main.ts` for why. */
+      (() => {
+        let theme;
+
+        try {
+          if (window.parent !== window) theme = window.parent.document.documentElement.dataset.theme;
+        } catch {
+          // Not our host's page: fall through to the URL.
+        }
+
+        if (!theme) theme = new URLSearchParams(location.hash.slice(1) || location.search).get('theme');
+
+        // The ground follows from this in the stylesheet above, and `main.ts` reads it back to open
+        // the field on the mode the document is already painted with.
+        document.documentElement.dataset.theme = theme === 'dark' ? 'dark' : 'light';
+      })();
     </script>
-    <script type="module" crossorigin src="/3d-hero/assets/index-D7XEfyLx.js"></script>
+    <script type="module" crossorigin src="/3d-hero/assets/index-DuaCFqMz.js"></script>
   </head>
   <body>
     <div id="hero"></div>
