@@ -1,0 +1,1 @@
+import{T as n,d as o}from"./index-DuaCFqMz.js";function i(t,r){r||(r=0);for(let e=r;e<t.length&&t[e];e++)t[e]=null}class a extends n{static create(r){const{dynamic:e,textureOptions:s,...c}=r;return new a({...s,source:new o(c),dynamic:e??!1})}resize(r,e,s){return this.source.resize(r,e,s),this}}export{a as R,i as c};
