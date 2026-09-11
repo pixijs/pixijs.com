@@ -1,0 +1,1 @@
+import{T as a,B as p}from"./index-50evykZy.js";const d={};function G(r,o,u){let e=2166136261;for(let t=0;t<o;t++)e^=r[t].uid,e=Math.imul(e,16777619),e>>>=0;return d[e]||l(r,o,e,u)}function l(r,o,u,e){const t={};let c=0;for(let n=0;n<e;n++){const s=n<o?r[n]:a.EMPTY.source;t[c++]=s.source,t[c++]=s.style}const i=new p(t);return d[u]=i,i}export{G as g};
