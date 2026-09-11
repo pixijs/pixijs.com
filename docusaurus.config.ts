@@ -13,6 +13,12 @@ const config: Config = {
   onBrokenAnchors: 'throw',
   favicon: 'images/favicon.png',
   markdown: {
+    // `future.v4` turns these off from 3.10; content still uses HTML comments and `{#id}` headings.
+    mdx1Compat: {
+      comments: true,
+      admonitions: true,
+      headingIds: true,
+    },
     hooks: {
       onBrokenMarkdownLinks: 'throw',
       onBrokenMarkdownImages: 'throw',
@@ -39,7 +45,7 @@ const config: Config = {
 
   future: {
     v4: true,
-    experimental_faster: {
+    faster: {
       rspackBundler: true, // required flag
       rspackPersistentCache: true, // new flag
       ssgWorkerThreads: true,

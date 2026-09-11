@@ -1,14 +1,9 @@
 import { useInView } from 'react-intersection-observer';
+import { animShortUp } from '../../../utils/utils';
 import HomeCTA from '../HomeCTA';
 import styles from './index.module.scss';
 
 import type React from 'react';
-
-const animShortUp = (duration: number, delay: number) => ({
-  opacity: 0,
-  animationDuration: `${duration}s`,
-  animationDelay: `${delay}s`,
-});
 
 export default function ClosingSection(): React.JSX.Element {
   const [ref, inView] = useInView({

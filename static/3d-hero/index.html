@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>PixiJS 3D Hero</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      #hero {
+        width: 100%;
+        height: 100%;
+      }
+
+      #hero canvas {
+        display: block;
+      }
+    </style>
+    <script>
+      /* The canvas is opaque and paints this same colour, but it only exists once the renderer has
+         started. Without this the frame shows its own white ground for those first frames, which
+         reads as a flash against a dark page. Keep in step with `PALETTES[*].floorColor`. */
+      document.documentElement.style.background =
+        new URLSearchParams(location.hash.slice(1) || location.search).get('theme') === 'dark' ? '#0c0c11' : '#fff';
+    </script>
+    <script type="module" crossorigin src="/3d-hero/assets/index-D7XEfyLx.js"></script>
+  </head>
+  <body>
+    <div id="hero"></div>
+  </body>
+</html>

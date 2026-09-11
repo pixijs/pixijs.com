@@ -3,17 +3,12 @@ import { useInView } from 'react-intersection-observer';
 import sponsorData from '../../../data/sponsors.json';
 import sponsorOverrides from '../../../data/sponsor-overrides.json';
 import manualSponsors from '../../../data/manualSponsors.json';
+import { animShortUp } from '../../../utils/utils';
 import styles from './index.module.scss';
 
 import { ArrowUpRight } from 'lucide-react';
 import type React from 'react';
 import { Sponsorship } from 'sponsorkit';
-
-const animShortUp = (duration: number, delay: number) => ({
-  opacity: 0,
-  animationDuration: `${duration}s`,
-  animationDelay: `${delay}s`,
-});
 
 const SPONSOR_TIERS = {
   PLATINUM: 'Platinum Sponsor',

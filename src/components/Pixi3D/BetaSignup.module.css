@@ -1,0 +1,204 @@
+.form,
+.success {
+  --form-surface: #fff;
+  --form-input: #f7f8fa;
+  --form-border: #d9dce3;
+  --form-text: #262b35;
+  --form-muted: #616978;
+  --form-accent: #cc1452;
+  --form-error: #d81557;
+
+  width: min(520px, 100%);
+  margin-inline: auto;
+  padding: 28px 32px 32px;
+  border: 1px solid var(--form-border);
+  border-radius: 18px;
+  background: var(--form-surface);
+  color: var(--form-text);
+  font-family: 'Outfit', sans-serif;
+  box-shadow:
+    0 1px 3px #0000000f,
+    0 14px 34px #0f172a14;
+}
+
+:global(html[data-theme='dark']) .form,
+:global(html[data-theme='dark']) .success {
+  --form-surface: #222630;
+  --form-input: #191d26;
+  --form-border: #414754;
+  --form-text: #f7f8fc;
+  --form-muted: #b3bac7;
+  --form-accent: #f06695;
+  --form-error: #ff98b8;
+  color-scheme: dark;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.requiredNote {
+  margin: 0;
+  color: var(--form-muted);
+  font-size: 12px;
+}
+
+.field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.field label span {
+  margin-left: 4px;
+  color: var(--form-muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.field :is(input, select) {
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--form-border);
+  border-radius: 7px;
+  background: var(--form-input);
+  color: var(--form-text);
+  font: inherit;
+  font-size: 16px;
+}
+
+.field select {
+  appearance: none;
+  padding-right: 40px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--form-muted) 50%),
+    linear-gradient(135deg, var(--form-muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) 50%,
+    calc(100% - 15px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.field input::placeholder {
+  color: var(--form-muted);
+  opacity: 0.8;
+}
+
+.field small {
+  color: var(--form-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.form :is(input, select, button):focus-visible {
+  outline: 2px solid var(--form-accent);
+  outline-offset: 3px;
+}
+
+.warning,
+.error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+}
+
+.warning {
+  color: var(--form-muted);
+}
+
+.error {
+  color: var(--form-error);
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 20px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--ifm-color-primary-dark);
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background: var(--ifm-color-primary-darker);
+}
+
+.submitButton:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.success svg {
+  color: var(--form-accent);
+}
+
+.success h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Focused by script to announce the result, not by the user. */
+.success h2:focus {
+  outline: none;
+}
+
+.success p {
+  margin: 0;
+  max-width: 42ch;
+  color: var(--form-muted);
+}
+
+.success small {
+  color: var(--form-muted);
+  font-size: 12px;
+}
+
+.success a {
+  color: var(--form-accent);
+}
+
+.guard {
+  width: 100%;
+  min-height: 160px;
+  border: 0;
+  border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+  .form,
+  .success {
+    padding: 24px 20px;
+  }
+}

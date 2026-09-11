@@ -1,0 +1,176 @@
+.page {
+  /* The hero's ground and vignette colour. Painted on the page because `html` and `body` have no
+     background, so unpainted regions show the browser canvas, which is black until the colour
+     scheme resolves. */
+  --hero-floor: #fff;
+
+  background: var(--hero-floor);
+  color: var(--ifm-font-color-base);
+}
+
+:global(html[data-theme='dark']) .page {
+  --hero-floor: #0c0c11;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  display: flex;
+  isolation: isolate;
+  align-items: center;
+  justify-content: center;
+  /* Matches the homepage hero. */
+  height: 85vh;
+  min-height: 568px;
+  overflow: hidden;
+
+  /* Fades the field into the ground so it isn't cut off at the hero's edges. The floor stop sits
+     past the corners so the field is veiled, never erased; the bottom fades further, into the
+     seam with the section below. */
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background:
+      radial-gradient(70% 70% at 50% 50%, transparent 60%, var(--hero-floor) 120%),
+      linear-gradient(to bottom, transparent 72%, var(--hero-floor) 100%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: radial-gradient(55% 55% at 50% 42%, #e91e6317, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+/* Max width is the copy column the shape field steers around; keep COPY_WIDTH in the
+   `pixijs-3d-hero` project in step with it. */
+.heroInner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 104px 20px 84px;
+  text-align: center;
+
+  h1 {
+    margin: 0 0 20px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 46px;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+
+    @media screen and (min-width: 481px) {
+      font-size: 64px;
+    }
+
+    @media screen and (min-width: 997px) {
+      font-size: 78px;
+    }
+  }
+
+  h4 {
+    margin: 0 auto 32px;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 27px;
+    opacity: 0.75;
+
+    @media screen and (min-width: 481px) {
+      font-size: 20px;
+      line-height: 31px;
+    }
+  }
+}
+
+.accent {
+  background: linear-gradient(120deg, var(--ifm-color-primary-lighter), var(--ifm-color-primary));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sized to match the homepage hero logo. */
+.logo {
+  display: block;
+  width: 138px;
+  margin: 0 auto 24px;
+
+  @media screen and (min-width: 768px) {
+    width: 184px;
+  }
+
+  @media screen and (min-width: 1600px) {
+    width: 230px;
+  }
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 0.65rem;
+  background: linear-gradient(135deg, var(--ifm-color-primary-light) 0%, var(--ifm-color-primary) 100%);
+  box-shadow: 0 10px 24px #e91e6333;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px #e91e6347;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+/* ---------- Signup ---------- */
+
+.signupSection {
+  padding: 64px 20px 88px;
+  background: #465162 url('/images/tile.png') 0 0 repeat;
+  background-attachment: fixed;
+
+  @media screen and (min-width: 997px) {
+    padding-top: 88px;
+  }
+}
+
+:global(html[data-theme='dark']) .signupSection {
+  background-color: #1a1a1a;
+}
+
+/* The hero's jump targets this block, and the navbar is fixed over it. */
+.signup {
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 24px);
+  color: #fff;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 40px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem;
+
+    @media screen and (min-width: 997px) {
+      margin-bottom: 48px;
+      font-size: 2.6rem;
+    }
+  }
+}
