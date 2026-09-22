@@ -1,4 +1,4 @@
-import{w as I,g as x,e as d,u as S,f as h,h as l,i as m}from"./index-BViSOgRY.js";const F={name:"texture-bit",vertex:{header:`
+import{w as I,g as x,h as d,u as S,j as h,k as l,l as m}from"./index-DOba0GE3.js";const F={name:"texture-bit",vertex:{header:`
 
         struct TextureUniforms {
             uTextureMatrix:mat3x3<f32>,
@@ -86,9 +86,9 @@ import{w as I,g as x,e as d,u as S,f as h,h as l,i as m}from"./index-BViSOgRY.js
         data[offset + 10] = v[8];`,"mat4x4<f32>":`
         for (let i = 0; i < 16; i++) {
             data[offset + i] = v[i];
-        }`,"mat3x2<f32>":c(3,2),"mat4x2<f32>":c(4,2),"mat2x3<f32>":c(2,3),"mat4x3<f32>":c(4,3),"mat2x4<f32>":c(2,4),"mat3x4<f32>":c(3,4)},T={..._,"mat2x2<f32>":`
+        }`,"mat3x2<f32>":c(3,2),"mat4x2<f32>":c(4,2),"mat2x3<f32>":c(2,3),"mat4x3<f32>":c(4,3),"mat2x4<f32>":c(2,4),"mat3x4<f32>":c(3,4)},k={..._,"mat2x2<f32>":`
         data[offset] = v[0];
         data[offset + 1] = v[1];
         data[offset + 2] = v[2];
         data[offset + 3] = v[3];
-    `};export{v as G,M as U,_ as a,D as b,O as c,E as e,F as t,T as u};
+    `};export{v as G,M as U,_ as a,D as b,O as c,E as e,F as t,k as u};
