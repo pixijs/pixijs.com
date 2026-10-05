@@ -78,13 +78,19 @@ const resolveSponsoredLink = (sponsor?: ShowcaseSponsor): string | undefined => 
 
 const showcaseSourceItems: ShowcaseSourceItem[] = [
   {
+    title: 'Super Typo Kart',
+    author: 'Fatal Exit',
+    imageUrl: '/showcase/super-typo-kart.webp',
+    link: 'https://wavedash.com/games/super-typo-kart',
+    sponsor: {
+      login: 'wvdsh',
+    },
+  },
+  {
     title: 'DEAD SUN',
     author: 'Fatal Exit',
     imageUrl: '/showcase/DEADSUN.webp',
     link: 'https://wavedash.com/games/dead-sun',
-    sponsor: {
-      login: 'wvdsh',
-    },
   },
   {
     title: 'Not a Trolley Problem. JAM',
