@@ -13489,7 +13489,7 @@ export interface AccessibleOptions {
 	 */
 	tabIndex: number;
 	/**
-	 * Sets the text content of the shadow
+	 * Sets the text content of the shadow div
 	 * @default null
 	 * @example
 	 * ```js
@@ -13822,6 +13822,27 @@ declare global {
 		}
 		// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 		interface ContainerOptions extends Partial<AccessibleOptions> {
+		}
+		interface RendererOptions {
+			/**
+			 * Options for the accessibility system. The accessibility system is registered as an
+			 * extension rather than as a shared system, so its options are declared here to make
+			 * them part of the public renderer and application options.
+			 * @example
+			 * ```ts
+			 * const app = new Application();
+			 *
+			 * await app.init({
+			 *     accessibilityOptions: {
+			 *         // Enable immediately instead of waiting for tab
+			 *         enabledByDefault: true,
+			 *         // Prevent accessibility from being deactivated when mouse moves
+			 *         deactivateOnMouseMove: false,
+			 *     },
+			 * });
+			 * ```
+			 */
+			accessibilityOptions?: AccessibilityOptions;
 		}
 		interface RendererSystems {
 			accessibility: AccessibilitySystem;
@@ -15351,6 +15372,27 @@ export interface FederatedOptions {
 	 */
 	onclick?: FederatedEventHandler | null;
 	/**
+	 * Property-based event handler for the `contextmenu` event.
+	 * Fired when the browser is about to open its context menu over the object, such as on a right click.
+	 * Call `event.preventDefault()` to keep the browser menu closed.
+	 * @example
+	 * ```ts
+	 * const sprite = new Sprite(texture);
+	 * sprite.eventMode = 'static';
+	 *
+	 * // Using emitter handler
+	 * sprite.on('contextmenu', (event) => {
+	 *     event.preventDefault();
+	 * });
+	 * // Using property-based handler
+	 * sprite.oncontextmenu = (event) => {
+	 *     event.preventDefault();
+	 * };
+	 * ```
+	 * @default null
+	 */
+	oncontextmenu?: FederatedEventHandler | null;
+	/**
 	 * Property-based event handler for the `mousedown` event.
 	 * Fired when a mouse button is pressed while the pointer is over the object.
 	 * @example
@@ -15773,7 +15815,8 @@ export interface FederatedOptions {
 	onpointerupoutside?: FederatedEventHandler | null;
 	/**
 	 * Property-based event handler for the `rightclick` event.
-	 * Fired when a right-click (context menu) action is performed on the object.
+	 * Fired when the right mouse button is pressed and released on the object.
+	 * To keep the browser's context menu closed, listen for `contextmenu` instead.
 	 * @example
 	 * ```ts
 	 * const sprite = new Sprite(texture);
@@ -16558,6 +16601,7 @@ export declare class EventSystem implements System$1<EventSystemOptions> {
 	 * - preventDefault on pointer events stops mouse events from firing
 	 * - For every pointer event, there will always be either a mouse or touch event alongside it
 	 * - Setting this to false allows default browser actions (text selection, dragging images, etc.)
+	 * - Does not apply to `contextmenu`; call `event.preventDefault()` in a `contextmenu` listener instead
 	 * @example
 	 * ```ts
 	 * // Allow default browser actions
@@ -25088,7 +25132,7 @@ export interface TilingSpriteOptions extends PixiMixins.TilingSpriteOptions, Vie
 	 * // Use a texture from the asset cache
 	 * tilingSprite.texture = Texture.from('assets/pattern.png');
 	 * ```
-	 * @default Texture.WHITE
+	 * @default Texture.EMPTY
 	 */
 	texture?: Texture;
 	/**
@@ -25099,7 +25143,7 @@ export interface TilingSpriteOptions extends PixiMixins.TilingSpriteOptions, Vie
 	 * // Set the width of the tiling sprite to 800 pixels
 	 * tilingSprite.width = 800;
 	 * ```
-	 * @default 256
+	 * @default texture.width
 	 */
 	width?: number;
 	/**
@@ -25110,7 +25154,7 @@ export interface TilingSpriteOptions extends PixiMixins.TilingSpriteOptions, Vie
 	 * // Set the height of the tiling sprite to 600 pixels
 	 * tilingSprite.height = 600;
 	 * ```
-	 * @default 256
+	 * @default texture.height
 	 */
 	height?: number;
 	/**
@@ -25319,7 +25363,7 @@ export declare class TilingSprite extends ViewContainer<TilingSpriteGpuData> imp
 	 * // Use a texture from the asset cache
 	 * tilingSprite.texture = Texture.from('assets/pattern.png');
 	 * ```
-	 * @default Texture.WHITE
+	 * @default Texture.EMPTY
 	 */
 	get texture(): Texture;
 	/**
