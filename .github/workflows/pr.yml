@@ -6,6 +6,9 @@ jobs:
   pr:
     name: PR
     runs-on: ubuntu-latest
+    env:
+      # Clones the private pixi-3d repo; fork PRs get no secrets and build the 3D docs as stubs
+      PIXI_3D_TOKEN: ${{ secrets.PIXI_3D_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -13,5 +16,7 @@ jobs:
           node-version: '24'
           cache: 'npm'
       - run: npm ci
-      - run: npm run types
+      - run: npm run generate
+      - run: npm run types --ignore-scripts
       - run: npm run lint
+      - run: npm run build --ignore-scripts

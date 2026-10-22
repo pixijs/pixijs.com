@@ -1,0 +1,116 @@
+name: Sync PixiJS 3D
+
+# Until @pixi/3d is on npm the site installs vendor/pixi-3d.tgz, built from a pixi-3d commit. This rebuilds it
+# from the head of a pixi-3d branch and opens a PR when that commit isn't the vendored one. Once @pixi/3d is
+# published, delete this workflow and let sync-pixi.yml bump it like pixi.js.
+
+on:
+  repository_dispatch:
+    types: [pixi-3d-push]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: pixi-3d branch, tag or commit (defaults to main)
+        required: false
+  schedule:
+    - cron: '30 6 * * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: sync-pixi-3d
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.target.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: target
+        env:
+          GH_TOKEN: ${{ secrets.PIXI_3D_TOKEN }}
+          REF: ${{ github.event.client_payload.ref || inputs.ref || 'main' }}
+        run: |
+          sha=$(gh api "repos/pixijs/pixi-3d/commits/$REF" --jq .sha)
+          vendored=$(tar -xOzf vendor/pixi-3d.tgz package/package.json | jq -r .gitHead)
+          if [ "$sha" = "$vendored" ]; then
+            echo "@pixi/3d is already vendored from $REF at ${sha:0:7}"
+            exit 0
+          fi
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+
+  sync:
+    needs: check
+    if: needs.check.outputs.sha
+    runs-on: ubuntu-latest
+    env:
+      SHA: ${{ needs.check.outputs.sha }}
+      PIXI_3D_TOKEN: ${{ secrets.PIXI_3D_TOKEN }}
+      PIXI_3D_REQUIRED: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - uses: actions/checkout@v4
+        with:
+          repository: pixijs/pixi-3d
+          ref: ${{ needs.check.outputs.sha }}
+          token: ${{ secrets.PIXI_3D_TOKEN }}
+          path: pixi-3d-src
+          persist-credentials: false
+      - run: npm ci --ignore-scripts
+        working-directory: pixi-3d-src
+      - run: npm ci
+      # The checkout sits inside the site, so it goes before types and lint would read it
+      - name: Vendor
+        run: |
+          npm run vendor:pixi-3d -- pixi-3d-src
+          rm -rf pixi-3d-src
+      - name: Generate, check and build
+        run: |
+          set -o pipefail
+          npm run generate 2>&1 | tee sync.log
+          npm run types --ignore-scripts
+          npm run lint
+          npm run build --ignore-scripts
+      - name: Capture missing previews
+        id: previews
+        continue-on-error: true
+        env:
+          CHROME_BIN: google-chrome
+          CHROME_ARGS: --enable-unsafe-swiftshader
+        run: |
+          set -o pipefail
+          grep -q '^warning: no preview' sync.log || exit 0
+          sudo apt-get update && sudo apt-get install -y webp
+          npm run generate:example-previews -- --pkg 3d --missing 2>&1 | tee -a sync.log
+      - name: Write PR body
+        id: body
+        env:
+          PREVIEWS: ${{ steps.previews.outcome }}
+        run: |
+          version=$(tar -xOzf vendor/pixi-3d.tgz package/package.json | jq -r .version)
+          echo "title=chore: sync @pixi/3d $version (${SHA:0:7})" >> "$GITHUB_OUTPUT"
+          {
+            echo "Vendors @pixi/3d $version from pixijs/pixi-3d@$SHA. The 3D guides, examples and tutorials regenerate from that commit at build."
+            echo
+            grep '^warning:' sync.log || echo "No warnings."
+            if [ "$PREVIEWS" = failure ]; then
+              echo
+              echo "Preview capture failed. Run \`npm run generate:example-previews -- --pkg 3d --missing\` locally and push the previews to this branch."
+            fi
+          } > body.md
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: sync/pixi-3d
+          title: ${{ steps.body.outputs.title }}
+          commit-message: ${{ steps.body.outputs.title }}
+          body-path: body.md
+          add-paths: |
+            package-lock.json
+            vendor/pixi-3d.tgz
+            static/examples/previews/3d

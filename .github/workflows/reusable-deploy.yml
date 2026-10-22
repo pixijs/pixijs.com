@@ -11,6 +11,10 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    env:
+      PIXI_3D_TOKEN: ${{ secrets.PIXI_3D_TOKEN }}
+      # Fail instead of deploying stubbed 3D docs
+      PIXI_3D_REQUIRED: 1
     steps:
       - uses: actions/checkout@v4
 
@@ -20,16 +24,13 @@ jobs:
           cache: 'npm'
 
       - run: npm ci
-      - run: npm run types
+      - run: npm run generate
+      - run: npm run types --ignore-scripts
       - run: npm run lint
       - run: |
           git config --global user.name "$GITHUB_ACTOR"
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          npm run deploy
+          npm run deploy --ignore-scripts
         env:
           GIT_USER: $GITHUB_ACTOR
           GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
-          SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORKIT_GITHUB_TOKEN }}
-          SPONSORKIT_GITHUB_LOGIN: ${{ secrets.SPONSORKIT_GITHUB_LOGIN }}
-          SPONSORKIT_OPENCOLLECTIVE_SLUG: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_SLUG }}
-          SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_KEY }}
