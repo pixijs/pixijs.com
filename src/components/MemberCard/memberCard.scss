@@ -1,0 +1,227 @@
+/* The turn of the avatar's ring, which hovering the card winds on */
+@property --spin {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.px-member-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: var(--member-pad, 32px 24px 24px);
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-lg);
+  background:
+    radial-gradient(110% 56% at 50% 0%, rgb(233 30 99 / 0.13), transparent 70%) no-repeat,
+    var(--px-well);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.07),
+    var(--px-shadow-lg);
+  text-align: center;
+  transition:
+    --spin 1.4s var(--px-ease),
+    translate 350ms var(--px-ease-spring),
+    box-shadow 350ms var(--px-ease),
+    border-color var(--px-dur-2) var(--px-ease);
+
+  @media (hover: hover) {
+    &:hover {
+      --spin: 240deg;
+      border-color: var(--px-line-strong);
+
+      @media (prefers-reduced-motion: no-preference) {
+        translate: 0 -6px;
+      }
+    }
+  }
+}
+
+/* A turning band of the brand colours around the avatar */
+.px-member-ring {
+  position: relative;
+  display: grid;
+  flex: none;
+  padding: 4px;
+  border-radius: 50%;
+  isolation: isolate;
+  box-shadow: 0 12px 28px -10px rgb(233 30 99 / 0.55);
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: inherit;
+    background: conic-gradient(from var(--spin), var(--px-pink), var(--px-violet), var(--px-sky), var(--px-pink));
+  }
+}
+
+/* `--member-*` let a page size the card down where it's narrow */
+.px-member-avatar {
+  width: var(--member-avatar, 112px);
+  height: var(--member-avatar, 112px);
+  border: 4px solid var(--px-well);
+  border-radius: 50%;
+  background: var(--px-field);
+  object-fit: cover;
+}
+
+.px-member-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: inherit;
+  min-width: 0;
+}
+
+.px-member-name {
+  margin: 22px 0 0;
+  color: var(--px-ink);
+  font: 600 var(--member-name, 21px) / 1.25 var(--px-font-display);
+  letter-spacing: -0.01em;
+}
+
+.px-member-flag {
+  font-size: 0.85em;
+}
+
+.px-member-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: inherit;
+  gap: 6px;
+  margin: 12px 0 0;
+}
+
+.px-member-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-xs);
+  color: var(--px-ink-2);
+  font: 500 10.5px/1 var(--px-font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.px-member-lead {
+  border-color: color-mix(in srgb, var(--px-pink) 50%, transparent);
+  background: color-mix(in srgb, var(--px-pink) var(--px-tint), var(--px-well));
+  color: var(--px-accent-text);
+}
+
+.px-member-social {
+  display: flex;
+  gap: 8px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.px-member-social-link {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--px-field);
+  color: var(--px-ink-2);
+  transition:
+    background-color var(--px-dur-2) var(--px-ease),
+    color var(--px-dur-2) var(--px-ease),
+    transform 350ms var(--px-ease-spring);
+
+  &:hover {
+    background: var(--px-pink-fill);
+    color: #fff;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transform: translateY(-2px) rotate(-8deg);
+    }
+  }
+
+  @media (pointer: coarse) {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ---------- compact: one row ---------- */
+.px-member-compact {
+  flex-direction: row;
+  gap: 16px;
+  padding: 14px 14px 14px 16px;
+  border-radius: var(--px-r-md);
+  background: var(--px-well);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    var(--px-shadow-sm);
+  text-align: left;
+
+  .px-member-ring {
+    padding: 2px;
+    box-shadow: none;
+
+    &::before {
+      background: var(--px-line-strong);
+    }
+  }
+
+  .px-member-avatar {
+    width: 48px;
+    height: 48px;
+    border-width: 2px;
+    filter: grayscale(0.6);
+    transition: filter var(--px-dur-3) var(--px-ease);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.06),
+        var(--px-shadow-md);
+
+      .px-member-ring::before {
+        background: conic-gradient(from var(--spin), var(--px-pink), var(--px-violet), var(--px-sky), var(--px-pink));
+      }
+
+      .px-member-avatar {
+        filter: none;
+      }
+    }
+  }
+
+  .px-member-info {
+    align-items: flex-start;
+  }
+
+  .px-member-name {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .px-member-badges {
+    margin-top: 6px;
+  }
+
+  .px-member-social {
+    gap: 4px;
+    margin: 0;
+  }
+
+  .px-member-social-link {
+    width: 36px;
+    height: 36px;
+    background: transparent;
+
+    @media (pointer: coarse) {
+      width: 44px;
+      height: 44px;
+    }
+  }
+}

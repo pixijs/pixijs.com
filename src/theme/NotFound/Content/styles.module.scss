@@ -1,0 +1,87 @@
+.notFound {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.header {
+  flex: 1 0 auto;
+  min-height: 100svh;
+}
+
+/* 4, the torus, 4: each digit its own box, so neither outranks the title as the largest paint */
+.code {
+  --size: clamp(6rem, 3rem + 13cqi, 11rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--size) * 0.06);
+  font: 800 var(--size) / 0.9 var(--px-font-display);
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+
+/* Pressed pink type: a stack of darker edges under each digit, and its shadow on the backdrop */
+.digit {
+  display: inline-block;
+  color: #e72264;
+  text-shadow:
+    0 1px 0 #d01d5b,
+    0 2px 0 #c71b57,
+    0 3px 0 #be1952,
+    0 4px 0 #b5184e,
+    0 5px 0 #ac1649,
+    0 6px 0 #a31545,
+    0 7px 0 #9a1341,
+    0 8px 0 #91123d,
+    0 22px 28px rgb(40 8 30 / 0.35);
+  animation: drop 1000ms var(--px-ease-spring) both;
+
+  &:last-child {
+    animation-delay: 160ms;
+  }
+}
+
+.shape {
+  --sz: calc(var(--size) * 0.84);
+  margin-top: calc(var(--size) * 0.04);
+  animation:
+    roll 1100ms var(--px-ease-spring) 80ms both,
+    bob 3200ms ease-in-out 1200ms infinite alternate;
+  pointer-events: auto;
+
+  @media (hover: hover) {
+    transition: rotate 600ms var(--px-ease-spring);
+
+    &:hover {
+      rotate: 24deg;
+    }
+  }
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-0.4em) scale(0.7);
+  }
+}
+
+@keyframes roll {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5em) rotate(-200deg) scale(0.4);
+  }
+}
+
+@keyframes bob {
+  to {
+    transform: translateY(-8px);
+  }
+}
+
+/* The search shortcut needs a keyboard */
+.hint {
+  @media (hover: none) {
+    display: none;
+  }
+}

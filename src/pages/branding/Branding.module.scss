@@ -1,332 +1,371 @@
-.brandingPage {
-  --branding-text-muted: #9ca3af;
-  --branding-text-secondary: #6b7280;
-  --branding-card-bg: rgba(255, 255, 255, 0.02);
-  --branding-card-border: var(--ifm-table-border-color);
-  --branding-glow-opacity: 0.08;
+@use '../../components/Page/cards' as *;
+@use '../../components/Page/columns' as *;
 
-  min-height: 100vh;
-  padding-bottom: 4rem;
-  position: relative;
-  overflow-x: hidden;
-}
+$mark: clamp(84px, 8cqi, 112px);
 
-/* Hero Section */
-.heroSection {
-  padding: 5rem 1.5rem 3rem;
-  text-align: center;
-  position: relative;
+/* ---------- header: the mark, as a tile pressed out of the brand pink ---------- */
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
-    height: 600px;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(var(--ifm-color-primary-rgb, 233, 30, 99), var(--branding-glow-opacity)) 0%,
-      transparent 70%
-    );
-    pointer-events: none;
-    z-index: 0;
+/*
+ * The mark tops the intro and the lede is wider than the title and the buttons, so the clay keeps in closer than on
+ * the other pages: the lead level with the title, past the mark and its eyebrow, and the companion just past the
+ * buttons. Phones keep theirs.
+ */
+@container (width >= 600px) {
+  .header :global(.px-page-lead) {
+    top: calc(#{$mark} + 64px - var(--lead) * 0.15);
+    left: calc(var(--lead) * -0.35);
+  }
+
+  .header :global(.px-page-companion) {
+    right: calc(var(--companion) * -0.35);
+    bottom: calc(var(--companion) * -0.15);
   }
 }
 
-.heroContent {
-  max-width: 56rem;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-  text-align: center;
-
-  h1 {
-    font-family: 'Outfit', sans-serif;
-    font-size: 2.75rem;
-    font-weight: 600;
-    margin: 0 0 1.75rem;
-    letter-spacing: -0.02em;
-
-    @media (min-width: 768px) {
-      font-size: 3.5rem;
-    }
-  }
-}
-
-.subtitle {
-  font-size: 1.2rem;
-  color: var(--branding-text-muted) !important;
-  line-height: 1.8;
-  max-width: 44rem;
-  margin: 0 auto;
-}
-
-.standardLink {
-  color: var(--ifm-color-primary);
-  font-weight: 600;
-  text-decoration: none;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 1.5px;
-    background: var(--ifm-color-primary);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-}
-
-/* Assets Sections */
-.assetsSection {
-  padding: 2rem 1.5rem 3rem;
-  max-width: 76rem;
-  margin: 0 auto;
-  position: relative;
-
-  h2 {
-    font-family: 'Outfit', sans-serif;
-    font-size: calc(1.875rem * 0.8);
-    font-weight: bold;
-    margin: 0 0 1.5rem;
-    text-align: center;
-    letter-spacing: -0.01em;
-
-    @media (min-width: 768px) {
-      font-size: calc(3rem * 0.8);
-    }
-  }
-}
-
-.sectionDescription {
-  font-size: 1rem;
-  color: var(--branding-text-muted);
-  line-height: 1.6;
-  text-align: center;
-  margin: 0 0 2rem;
-  max-width: 44rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.bannerGrid {
+.markTile {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  max-width: 48rem;
-  margin: 0 auto;
+  width: $mark;
+  aspect-ratio: 1;
+  margin-inline: auto;
+  place-items: center;
+  border-radius: 28%;
+  background: linear-gradient(155deg, #f2558c, #e72264 46%, #cc1a55);
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.35),
+    inset 0 -3px 0 rgb(0 0 0 / 0.1),
+    0 1px 0 #be1650,
+    0 2px 0 #b8144d,
+    0 3px 0 #b1134a,
+    0 4px 0 #aa1347,
+    0 5px 0 #a31244,
+    0 6px 0 #9c1141,
+    0 7px 0 #95103e,
+    0 8px 0 #8e0f3b,
+    0 26px 34px -10px rgb(231 34 100 / 0.5),
+    0 34px 60px -22px rgb(0 0 0 / 0.5);
+  color: #fff;
+  rotate: -8deg;
+  pointer-events: auto;
+  animation: drop 1200ms var(--px-ease-spring) 100ms both;
+
+  svg {
+    width: 44%;
+    height: auto;
+    fill: currentColor;
+    filter: drop-shadow(0 3px 0 rgb(120 10 50 / 0.35));
+  }
 }
 
-.assetsGrid {
+@keyframes drop {
+  from {
+    opacity: 0;
+    translate: 0 -56px;
+    scale: 0.5;
+    rotate: -58deg;
+  }
+}
+
+/* A jump from the header lands with the eyebrow clear of the top bar */
+.target [id] {
+  scroll-margin-top: calc(var(--px-topbar-h) + 64px);
+}
+
+/* ---------- asset grids: two or four across, never three and one ---------- */
+.assets {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  justify-content: center;
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, minmax(250px, 280px));
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(16px, 2.2vw, 24px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @container (width >= 600px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-.markGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  justify-content: center;
-
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, minmax(250px, 280px));
+  @container (width >= 1100px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
-/* Asset Card */
-.assetCard {
+.pair,
+.single {
+  max-width: 880px;
+  margin-inline: auto;
+
+  @container (width >= 1100px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.single {
+  @container (width >= 600px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Lifts on hover with `translate`, which the reveal's transform leaves alone */
+.asset {
+  position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 0.875rem;
-  border: 1px solid var(--branding-card-border);
-  background: var(--branding-card-bg);
-  overflow: hidden;
+  padding: 8px;
   transition:
-    transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    translate 400ms var(--px-ease-spring),
+    box-shadow var(--px-dur-3) var(--px-ease),
+    border-color var(--px-dur-2) var(--px-ease);
 
-  &:hover {
-    transform: translateY(-2px);
-    border-color: var(--ifm-color-primary-light);
+  @include panel;
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--px-line-strong);
+      box-shadow: var(--px-shadow-lg);
+
+      @media (prefers-reduced-motion: no-preference) {
+        translate: 0 -4px;
+
+        img {
+          scale: 1.05;
+        }
+      }
+    }
   }
 }
 
-.previewWrapper {
-  background: repeating-conic-gradient(#1a1a1a 0% 25%, #222 0% 50%) 50% / 16px 16px;
-  // padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  // min-height: 272px;
-}
-.previewWrapperShort {
-  background: repeating-conic-gradient(#1a1a1a 0% 25%, #222 0% 50%) 50% / 16px 16px;
-  padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1.5;
+.preview {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--px-field);
+  box-shadow: inset 0 0 0 1px var(--px-line);
+
+  img {
+    position: absolute;
+    inset: 12%;
+    width: 76%;
+    height: 76%;
+    object-fit: contain;
+    transition: scale 600ms var(--px-ease-spring);
+  }
 }
 
-.previewImage {
-  // max-width: 100%;
-  // max-height: 80px;
+/* A checkerboard says "transparent" under a logo that has no background of its own */
+.checker {
+  background:
+    repeating-conic-gradient(var(--px-bg-alt) 0 25%, transparent 0 50%) 0 0 / 24px 24px,
+    var(--px-field);
+}
+
+.pink {
+  background: #e72264;
+}
+
+/* A logo on its own square ground fills the frame with it */
+.cover img,
+.banner img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cover img {
   object-fit: cover;
 }
 
-.assetInfo {
-  padding: 1.25rem;
+.banner {
+  aspect-ratio: 898 / 227;
+}
+
+.tile img {
+  inset: 14% auto;
+  left: calc(50% - 36% * 9 / 16);
+  width: auto;
+  height: 72%;
+  aspect-ratio: 1;
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 0.12),
+    0 18px 32px -12px rgb(0 0 0 / 0.4);
+}
+
+.info {
   display: flex;
-  flex-direction: column;
-  justify-content: end;
-  gap: 0.5rem;
-  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 10px 8px 12px;
+
+  h3 {
+    margin: 0;
+    color: var(--px-ink);
+    font: 600 17px/1.3 var(--px-font-display);
+  }
 }
 
-.assetName {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.assetDescription {
-  font-size: 0.85rem;
-  color: var(--branding-text-muted);
-  line-height: 1.5;
-  margin: 0;
-}
-
-.buttonGroup {
+.downloads {
   display: flex;
-  gap: 0.5rem;
-  // margin-top: auto;
-  padding-top: 0.75rem;
+  gap: 8px;
 }
 
-.downloadButton,
-.viewButton {
+.download {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.375rem;
-  padding: 0.5rem 0.875rem;
-  border-radius: 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 600;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px 0 12px;
+  border: 1px solid transparent;
+  border-radius: var(--px-r-pill);
+  background: var(--px-field);
+  color: var(--px-ink);
+  font: 600 12px/1 var(--px-font-mono);
+  letter-spacing: 0.1em;
   text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  text-transform: uppercase;
+  transition:
+    background-color var(--px-dur-2) var(--px-ease),
+    border-color var(--px-dur-2) var(--px-ease),
+    color var(--px-dur-2) var(--px-ease);
+
+  &:hover {
+    background: var(--px-pink-fill);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  &[data-state='busy'] {
+    border-color: color-mix(in srgb, var(--px-pink) 45%, transparent);
+    background: var(--px-field);
+    color: var(--px-ink);
+    cursor: progress;
+
+    svg {
+      animation: spin 800ms linear infinite;
+    }
+  }
+
+  &[data-state='done'] {
+    border-color: color-mix(in srgb, var(--px-green) 50%, transparent);
+    background: color-mix(in srgb, var(--px-green) 14%, var(--px-field));
+    color: var(--px-green);
+  }
+
+  @media (pointer: coarse) {
+    height: 44px;
+  }
+}
+
+.downloadIcon {
+  display: grid;
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* ---------- colours ---------- */
+.swatches {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+
+  @include columns(clamp(16px, 2.2vw, 24px), 760px 3);
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+
+  @include panel;
+
+  > p {
+    margin: 16px 10px 12px;
+    color: var(--px-ink-2);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+/* The colour itself, its name written in white or, on white, in night */
+.chip {
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 4 / 3;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.14), transparent 50%) var(--swatch);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
+  color: #fff;
+  font: 700 var(--px-text-h3) / 1.1 var(--px-font-display);
+  letter-spacing: -0.01em;
+
+  .swatch:last-child & {
+    background: var(--swatch);
+    color: #181a21;
+  }
+}
+
+.values {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  white-space: nowrap;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-sm);
+  background: color-mix(in srgb, var(--px-field) 45%, transparent);
+  color: var(--px-ink);
+  font: 500 13.5px/1 var(--px-font-mono);
+  cursor: pointer;
+  transition:
+    border-color var(--px-dur-2) var(--px-ease),
+    background-color var(--px-dur-2) var(--px-ease);
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--px-pink) 50%, transparent);
+  }
+
+  &[data-copied] {
+    border-color: color-mix(in srgb, var(--px-green) 50%, transparent);
+    background: color-mix(in srgb, var(--px-green) 10%, transparent);
+
+    .valueIcon {
+      color: var(--px-green);
+    }
+  }
+}
+
+.valueKey {
+  flex: none;
+  width: 4ch;
+  color: var(--px-ink-3);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-align: left;
+}
+
+.valueText {
   flex: 1;
-}
-
-.downloadButton {
-  background: linear-gradient(135deg, var(--ifm-color-primary-light) 0%, var(--ifm-color-primary) 100%);
-  color: white;
-  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.25);
-  position: relative;
+  min-width: 0;
   overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  &:hover {
-    box-shadow: 0 4px 16px rgba(233, 30, 99, 0.45);
-    color: white;
-    text-decoration: none;
-
-    &::before {
-      opacity: 1;
-    }
-  }
+  text-align: left;
+  text-overflow: ellipsis;
 }
 
-.viewButton {
-  background: transparent;
-  border: 1.5px solid var(--branding-card-border);
-  color: var(--ifm-font-color-base);
-
-  &:hover {
-    border-color: var(--ifm-color-primary);
-    color: var(--ifm-color-primary);
-    text-decoration: none;
-  }
-}
-
-/* Light mode overrides */
-html[data-theme='light'] {
-  .brandingPage {
-    --branding-text-muted: #4a586b;
-    --branding-text-secondary: #475569;
-    --branding-card-bg: var(--ifm-background-surface-color);
-    --branding-card-border: var(--ifm-color-emphasis-200);
-    --branding-glow-opacity: 0.06;
-  }
-
-  .previewWrapper {
-    background: repeating-conic-gradient(#f5f5f5 0% 25%, #fff 0% 50%) 50% / 16px 16px;
-  }
-
-  .assetCard {
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.06),
-      0 4px 12px rgba(0, 0, 0, 0.04);
-
-    &:hover {
-      box-shadow:
-        0 4px 8px rgba(0, 0, 0, 0.08),
-        0 12px 24px rgba(0, 0, 0, 0.06);
-    }
-  }
-
-  .viewButton {
-    background: white;
-
-    &:hover {
-      background: #fafafa;
-    }
-  }
-}
-
-/* Dark mode overrides */
-html[data-theme='dark'] {
-  .brandingPage {
-    --branding-text-muted: #b3bccc;
-    --branding-text-secondary: #9ca3af;
-    --branding-card-bg: var(--ifm-background-color);
-    --branding-card-border: var(--ifm-table-border-color);
-    --branding-glow-opacity: 0.08;
-  }
-
-  .assetCard {
-    &:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    }
-  }
+.valueIcon {
+  display: grid;
+  color: var(--px-ink-3);
 }

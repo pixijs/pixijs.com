@@ -1,16 +1,13 @@
 import Layout from '@theme/Layout';
-import Showcase from './ShowcasePage';
+import ShowcasePage from './_ShowcasePage';
 
-function App() {
+export default function Showcase() {
   return (
-    <Layout>
-      <Showcase
-        title="PixiJS Showcase"
-        subtitle="Explore cutting-edge interactive projects demonstrating the full potential of PixiJS."
-        animationDelay={100}
-      />
+    <Layout
+      title="Showcase"
+      description="Games, apps and interactive sites from studios and developers around the world, all drawn with PixiJS."
+    >
+      <ShowcasePage />
     </Layout>
   );
 }
-
-export default App;

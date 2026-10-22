@@ -1,12 +1,14 @@
 import Layout from '@theme/Layout';
-import BrandingPage from './BrandingPage';
+import BrandingPage from './_BrandingPage';
 
-function Branding() {
+export default function Branding() {
   return (
-    <Layout title="Branding" description="PixiJS branding assets and guidelines">
+    <Layout
+      title="Branding"
+      description="Download the PixiJS logo, mark and banner as SVG or PNG. They're all free to use."
+      wrapperClassName="shell-reading"
+    >
       <BrandingPage />
     </Layout>
   );
 }
-
-export default Branding;

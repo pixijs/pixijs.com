@@ -1,0 +1,105 @@
+@use '../../components/Page/cards' as *;
+
+/* ---------- header: a jump to each topic ---------- */
+.jumps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 36px;
+}
+
+.jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 46px;
+  padding: 0 8px 0 16px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-pill);
+  background: color-mix(in srgb, var(--px-well) 72%, transparent);
+  box-shadow: var(--px-shadow-sm);
+  color: var(--px-ink);
+  font: 600 14.5px/1 var(--px-font-display);
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition:
+    border-color var(--px-dur-2) var(--px-ease),
+    transform 350ms var(--px-ease-spring);
+
+  svg {
+    color: var(--px-accent-text);
+  }
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--px-pink) 55%, transparent);
+    color: var(--px-ink);
+    text-decoration: none;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.count {
+  display: grid;
+  min-width: 28px;
+  height: 28px;
+  place-items: center;
+  padding: 0 8px;
+  border-radius: var(--px-r-pill);
+  background: color-mix(in srgb, var(--px-pink) var(--px-tint), transparent);
+  color: var(--px-accent-text);
+  font: 500 12px/1 var(--px-font-mono);
+}
+
+/* ---------- topics: the head beside its questions, held in view while they scroll ---------- */
+.topics {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(56px, 7cqi, 96px);
+}
+
+.topic {
+  display: grid;
+  gap: 24px clamp(40px, 5cqi, 72px);
+  scroll-margin-top: calc(var(--px-topbar-h) + 24px);
+
+  @container (width >= 900px) {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    align-items: start;
+  }
+}
+
+.topicHead {
+  @container (width >= 900px) {
+    position: sticky;
+    top: calc(var(--px-topbar-h) + 32px);
+    padding-top: 8px;
+  }
+
+  h2 {
+    margin: 20px 0 10px;
+    color: var(--px-ink);
+    font: 700 var(--px-text-display-3) / 1.05 var(--px-font-display);
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    max-width: 30ch;
+    margin: 0;
+    color: var(--px-ink-2);
+    font: 400 var(--px-text-lede) / 1.5 var(--px-font-body);
+  }
+}
+
+.topicIcon {
+  @include icon-tile(52px, 16px);
+}
+
+.questions {
+  padding: 6px;
+
+  @include panel;
+}

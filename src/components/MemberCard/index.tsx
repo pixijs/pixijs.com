@@ -1,56 +1,77 @@
-import styles from './index.module.scss';
-import Link from '@docusaurus/Link';
+import clsx from 'clsx';
+import Icon from '@site/src/components/ui/Icon';
+import stylesheet from '!!raw-loader!sass-loader!./memberCard.scss';
+import { pageClasses } from '@site/src/components/Page/classes';
 
-import type React from 'react';
+import type { IconName } from '@site/src/components/ui/Icon';
 
 export interface MemberData {
   name: string;
-  profile: string;
   badges: string[];
   country: string;
-  description: string;
-  social: Record<string, string>;
+  social: Partial<Record<Network, string>>;
   active: boolean;
 }
 
-export default function MemberCard(props: MemberData): React.JSX.Element {
-  const links = [];
+type Network = 'github' | 'twitter';
 
-  for (const key in props.social) {
-    links.push({
-      className: `header-link header-${key}-link`,
-      to: props.social[key],
-    });
-  }
+/** The card's stylesheet (`px-member-*`), for the page that shows it to inline through `Page`'s `css` */
+export const MEMBER_CARD_CSS = stylesheet;
 
-  let profileUrl = props.profile;
+const styles = pageClasses('member');
 
-  if (!profileUrl) {
-    profileUrl = props.social?.github ? `${props.social.github}.png` : 'images/placeholders/avatar.jpg';
-  }
+const SOCIAL: Record<Network, { label: string; icon: IconName }> = {
+  github: { label: 'GitHub', icon: 'github' },
+  twitter: { label: 'X', icon: 'x-twitter' },
+};
+
+function avatarOf({ social }: MemberData, size: number): string {
+  return social.github ? `${social.github}.png?size=${size * 2}` : '/images/placeholders/avatar.jpg';
+}
+
+interface MemberCardProps {
+  member: MemberData;
+  /** One row with a small avatar, for past members */
+  compact?: boolean;
+}
+
+export default function MemberCard({ member, compact }: MemberCardProps) {
+  const size = compact ? 48 : 112;
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.card}>
-        <img src={profileUrl} alt={`${props.name}'s Profile`} />
+    <article className={clsx(styles.card, compact && styles.compact)}>
+      <span className={styles.ring} data-ring="">
+        <img className={styles.avatar} src={avatarOf(member, size)} alt="" width={size} height={size} loading="lazy" />
+      </span>
+      <div className={styles.info}>
         <h3 className={styles.name}>
-          {props.name} {props.country}
+          {member.name}&nbsp;<span className={styles.flag}>{member.country}</span>
         </h3>
-        <div className={`${styles.badges} ${props.active ? '' : styles.inactive}`}>
-          {props.badges.map((badge, i) => (
-            <span key={i} className={styles.badge}>
+        <p className={styles.badges}>
+          {member.badges.map((badge) => (
+            <span key={badge} className={clsx(styles.badge, badge !== 'Member' && styles.lead)}>
               {badge}
             </span>
           ))}
-        </div>
-        {props.active && <p className={styles.description}>{props.description}</p>}
-        <div className={styles.separator} />
-        <div className={styles.social}>
-          {links.map((link, i) => (
-            <Link key={i} {...link} />
-          ))}
-        </div>
+        </p>
       </div>
-    </div>
+      <ul className={styles.social}>
+        {(Object.keys(SOCIAL) as Network[])
+          .filter((network) => member.social[network])
+          .map((network) => (
+            <li key={network}>
+              <a
+                href={member.social[network]}
+                className={styles.socialLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${member.name} on ${SOCIAL[network].label}`}
+              >
+                <Icon name={SOCIAL[network].icon} size={compact ? 15 : 16} />
+              </a>
+            </li>
+          ))}
+      </ul>
+    </article>
   );
 }

@@ -1,12 +1,13 @@
 import Layout from '@theme/Layout';
-import Showcase from './SponsorPage';
+import SponsorPage from './_SponsorPage';
 
-function App() {
+export default function Sponsor() {
   return (
-    <Layout title="Sponsor">
-      <Showcase />
+    <Layout
+      title="Sponsor"
+      description="Sponsor PixiJS through Open Collective or GitHub Sponsors and help fund new features, faster fixes and better docs."
+    >
+      <SponsorPage />
     </Layout>
   );
 }
-
-export default App;

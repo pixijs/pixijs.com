@@ -1,137 +1,142 @@
-.faqItem {
-  background: var(--ifm-background-color, #ffffff);
-  border: 1px solid var(--ifm-table-border-color);
-  border-radius: 0.875rem;
-  overflow: hidden;
+/* Rows of a panel, ruled between; an open row lifts off the panel with a pink edge */
+.item {
+  position: relative;
+  border-radius: 16px;
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    background-color var(--px-dur-3) var(--px-ease),
+    box-shadow var(--px-dur-3) var(--px-ease);
 
-  &:hover {
-    border-color: var(--ifm-color-primary-light);
+  & + & {
+    margin-top: 1px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      right: clamp(16px, 2.4cqi, 28px);
+      left: clamp(16px, 2.4cqi, 28px);
+      height: 1px;
+      background: var(--px-line);
+      transition: opacity var(--px-dur-3) var(--px-ease);
+    }
   }
 
-  &.open {
-    border-color: var(--ifm-color-primary);
+  &::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    bottom: 18px;
+    left: 0;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--px-pink);
+    transform: scaleY(0);
+    transition: transform 450ms var(--px-ease-spring);
   }
 }
 
-.questionButton {
-  width: 100%;
+.item[open]:not([data-closing]) {
+  background: var(--px-raised);
+  box-shadow: var(--px-shadow-md);
+
+  &::before {
+    transform: none;
+  }
+
+  /* The rules either side of an open row give way to its edge */
+  &::after,
+  + .item::after {
+    opacity: 0;
+  }
+}
+
+.question {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1.25rem 1.5rem;
-  background: var(--ifm-background-color, #ffffff);
-  border: none;
+  gap: 24px;
+  min-height: 76px;
+  padding: 16px clamp(16px, 2.4cqi, 28px);
+  border-radius: inherit;
+  list-style: none;
   cursor: pointer;
-  text-align: left;
-}
 
-.questionText {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: var(--ifm-font-color-base);
-  line-height: 1.4;
-}
-
-.toggleIcon {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ifm-color-primary);
-  transition: transform 0.3s ease;
-
-  svg {
-    display: block;
-  }
-}
-
-.answerWrapper {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-
-  .open & {
-    grid-template-rows: 1fr;
-  }
-}
-
-.answerContent {
-  min-height: 0;
-  overflow: hidden;
-}
-
-.answerInner {
-  padding: 0 1.5rem 1.25rem;
-}
-
-.separator {
-  height: 1px;
-  background: var(--ifm-table-border-color);
-  margin-bottom: 1rem;
-}
-
-.answerText {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: var(--faq-text-muted, #b3bccc);
-
-  a {
-    color: var(--ifm-color-primary);
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
+  &::-webkit-details-marker {
+    display: none;
   }
 
-  p {
+  h3 {
     margin: 0;
+    color: var(--px-ink);
+    font: 600 clamp(1.0625rem, 1rem + 0.4cqi, 1.25rem) / 1.3 var(--px-font-display);
+    letter-spacing: -0.01em;
+    transition: color var(--px-dur-2) var(--px-ease);
   }
 
-  p + p {
-    margin-top: 0.75rem;
-  }
-}
-
-/* Light mode */
-html[data-theme='light'] {
-  .faqItem {
-    background: white !important;
-
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.06),
-      0 4px 12px rgba(0, 0, 0, 0.04);
-
-    &:hover {
-      box-shadow:
-        0 4px 8px rgba(0, 0, 0, 0.08),
-        0 12px 24px rgba(0, 0, 0, 0.06);
-    }
+  &:hover h3 {
+    color: var(--px-accent-text);
   }
 
-  .answerText {
-    color: #4a586b;
+  &:focus-visible {
+    outline-offset: -2px;
   }
 }
 
-/* Dark mode */
-html[data-theme='dark'] {
-  .faqItem {
-    background: var(--ifm-background-color) !important;
+/* Plus that folds to a minus */
+.toggle {
+  position: relative;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: 50%;
+  color: var(--px-ink-2);
+  transition:
+    background-color var(--px-dur-2) var(--px-ease),
+    border-color var(--px-dur-2) var(--px-ease),
+    color var(--px-dur-2) var(--px-ease),
+    rotate 450ms var(--px-ease-spring);
 
-    &:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    translate: -50% -50%;
+    transition: rotate 450ms var(--px-ease-spring);
+  }
+
+  &::after {
+    rotate: 90deg;
+  }
+
+  .question:hover & {
+    border-color: color-mix(in srgb, var(--px-pink) 50%, transparent);
+    color: var(--px-ink);
+  }
+
+  [open]:not([data-closing]) > .question > & {
+    border-color: transparent;
+    background: var(--px-pink-fill);
+    color: #fff;
+    rotate: 180deg;
+
+    &::after {
+      rotate: 0deg;
     }
   }
+}
 
-  .answerText {
-    color: #b3bccc;
-  }
+.body {
+  overflow: clip;
+}
+
+.answer {
+  max-width: 64ch;
+  padding: 0 clamp(16px, 2.4cqi, 28px) 26px;
 }
