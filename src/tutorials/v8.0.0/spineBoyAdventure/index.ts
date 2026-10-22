@@ -27,9 +27,9 @@ import code6 from '!!raw-loader!./step6/step6-code';
 import code6Completed from '!!raw-loader!./step6/step6-code-completed';
 import code7 from '!!raw-loader!./step7/step7-code';
 
-import type { TutorialStep } from '../..';
+import type { TutorialContent, TutorialStep } from '../..';
 
-export const spineBoyAdventureTutorialSteps: TutorialStep[] = [
+const steps: TutorialStep[] = [
   {
     header: 'Introduction',
     Content: content1,
@@ -118,3 +118,8 @@ export const spineBoyAdventureTutorialSteps: TutorialStep[] = [
     },
   },
 ];
+
+export default {
+  steps,
+  extraPackages: { '@esotericsoftware/spine-pixi-v8': '~4.3.7' },
+} satisfies TutorialContent;

@@ -1,1 +1,30 @@
-["gettingStarted", "fishPond", "chooChooTrain", "spineBoyAdventure"]
+[
+  {
+    "id": "getting-started",
+    "title": "Getting Started",
+    "description": "Create an application, load a texture and spin your first sprite.",
+    "level": "beginner",
+    "steps": 4
+  },
+  {
+    "id": "fish-pond",
+    "title": "Fish Pond",
+    "description": "Fill a pond with swimming fish, then make the water ripple with a tiling sprite and a displacement filter.",
+    "level": "beginner",
+    "steps": 6
+  },
+  {
+    "id": "choo-choo-train",
+    "title": "Choo Choo Train",
+    "description": "Draw a night scene and a steam train with nothing but the Graphics API.",
+    "level": "beginner",
+    "steps": 10
+  },
+  {
+    "id": "spine-boy-adventure",
+    "title": "SpineBoy Adventure",
+    "description": "Bring an animated Spine character to life and walk it through a side-scrolling scene with the keyboard.",
+    "level": "intermediate",
+    "steps": 7
+  }
+]

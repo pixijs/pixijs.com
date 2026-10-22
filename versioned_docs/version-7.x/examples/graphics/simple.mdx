@@ -8,9 +8,8 @@ title: Simple
 
 import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 import IndexFile from '!!raw-loader!./simple';
-import version from '../../pixi-version.json';
 
 <ExampleEditor
   files={{ 'index.js': IndexFile }}
-  dependencies={{ 'pixi.js': version.npm, '@pixi/graphics-extras': version.npm }}
+  dependencies={{ '@pixi/graphics-extras': '7.4.2' }}
 />

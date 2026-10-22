@@ -8,11 +8,6 @@ hide_table_of_contents: true
 keywords: ['PixiJS', 'Updates', 'Canvas Renderer', 'Tagged Text', 'SplitText', 'Text Improvements', 'Cube Textures', '3D']
 ---
 
-import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
-import TaggedTextIndexFile from '!!raw-loader!../docs/examples/text_tagged-text';
-import CanvasRendererIndexFile from '!!raw-loader!../docs/examples/rendering_canvas-renderer';
-import SplitTextIndexFile from '!!raw-loader!../docs/examples/text_split-text';
-
 PixiJS v8.16.0 brings two headline features: an experimental **Canvas renderer** for environments without WebGL/WebGPU, and **tagged text** for inline styling without multiple text objects. This release also includes major SplitText stability improvements and broad engine stability updates.
 
 {/* truncate */}
@@ -31,13 +26,7 @@ await app.init({
 
 This is an early, experimental release. The Canvas renderer doesn't cover every feature the GPU renderers support, but it handles core use cases: sprites, graphics, text, and basic filters. If you run into issues, please [file a bug](https://github.com/pixijs/pixijs/issues).
 
-<EmbeddedEditor
-  files={{
-    'index.js': CanvasRendererIndexFile,
-  }}
-/>
-
-<br/>
+<PixiExample name="rendering_canvas-renderer" />
 
 Thanks to [@krzys](https://github.com/krzys) and [@Zyie](https://github.com/zyie) for shipping this.
 
@@ -64,11 +53,7 @@ const text = new Text({
 
 Tags can be nested, and each tag inherits from the base style. This works with `Text` and `HTMLText` today; `BitmapText` support is coming soon.
 
-<EmbeddedEditor
-  files={{
-    'index.js': TaggedTextIndexFile,
-  }}
-/>
+<PixiExample name="text_tagged-text" />
 
 ---
 
@@ -89,12 +74,7 @@ Tags can be nested, and each tag inherits from the base style. This works with `
 
 These changes may cause slight positional shifts compared to previous versions. If your text looks off after upgrading, the new positions are more correct.
 
-<EmbeddedEditor
-  files={{
-    'index.js': SplitTextIndexFile,
-  }}
-  dependencies={{ gsap: 'latest', 'pixi.js': 'latest' }}
-/>
+<PixiExample name="text_split-text" />
 
 ---
 

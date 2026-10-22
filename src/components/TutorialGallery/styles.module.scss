@@ -1,0 +1,193 @@
+/* The gallery sits inside `.theme-doc-markdown`, so rules here nest under `.gallery` to outrank the docs reading styles */
+
+.gallery {
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .heading {
+    margin: 0;
+    color: var(--px-ink);
+    font: 700 var(--px-text-display-2) / 1.02 var(--px-font-display);
+    letter-spacing: -0.03em;
+  }
+
+  .lede {
+    max-width: 44ch;
+    margin: 18px 0 0;
+    color: var(--px-ink-2);
+    font: 400 var(--px-text-lede) / 1.55 var(--px-font-body);
+    text-wrap: pretty;
+  }
+
+  .switch {
+    flex: none;
+    align-self: flex-start;
+
+    a {
+      color: var(--px-ink-2);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--px-ink);
+      }
+
+      &[data-selected] {
+        color: var(--on);
+      }
+    }
+  }
+
+  .grid {
+    display: grid;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: flex;
+      min-width: 0;
+      margin: 0;
+    }
+  }
+
+  a.card {
+    flex: 1;
+    min-width: 0;
+    color: var(--px-ink-2);
+    text-decoration: none;
+
+    img,
+    .blank {
+      aspect-ratio: 600 / 338;
+      object-fit: cover;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      img {
+        transition: transform 600ms var(--px-ease);
+      }
+
+      &:hover img {
+        transform: scale(1.03);
+      }
+    }
+
+    &:hover .start svg {
+      transform: translateX(3px);
+    }
+  }
+
+  .blank {
+    display: block;
+    background: radial-gradient(120% 120% at 0% 0%, var(--px-hero-blob), var(--px-bg-alt));
+  }
+
+  .meta {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    color: var(--px-accent-text);
+    font: 500 11px/1.4 var(--px-font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+
+    span {
+      color: var(--px-ink-3);
+    }
+  }
+
+  .title {
+    margin: 0;
+    color: var(--px-ink);
+    font: 600 20px/1.25 var(--px-font-display);
+    letter-spacing: -0.015em;
+  }
+
+  .description {
+    margin: 0 0 6px;
+    color: var(--px-ink-2);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: auto 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--px-line);
+    color: var(--px-ink-3);
+    font: 500 11px/1.4 var(--px-font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .start {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--px-ink);
+
+    svg {
+      transition: transform 350ms var(--px-ease-spring);
+    }
+  }
+
+  .empty {
+    margin: 0;
+    padding: 28px 32px;
+    border: 1px dashed var(--px-line-strong);
+    border-radius: var(--px-r-lg);
+    color: var(--px-ink-2);
+  }
+
+  /* `main` is the container on docs pages; two columns once it has room, with the first of an odd set laid flat */
+  @container (min-width: 600px) {
+    .head {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .switch {
+      align-self: auto;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid[data-odd] > li:first-child {
+      grid-column: 1 / -1;
+
+      a.card {
+        flex-direction: row;
+
+        > :first-child {
+          flex: 0 0 54%;
+        }
+
+        img,
+        .blank {
+          height: 100%;
+        }
+      }
+
+      .title {
+        font-size: 26px;
+      }
+
+      .description {
+        font-size: 15.5px;
+      }
+    }
+  }
+}

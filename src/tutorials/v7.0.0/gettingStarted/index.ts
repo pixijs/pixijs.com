@@ -9,9 +9,9 @@ import code3 from '!!raw-loader!./step3-code';
 import completedCode3 from '!!raw-loader!./step3-completed-code';
 import code4 from '!!raw-loader!./step4-code';
 
-import type { TutorialStep } from '../..';
+import type { TutorialContent, TutorialStep } from '../..';
 
-export const gettingStartedTutorialSteps: TutorialStep[] = [
+const steps: TutorialStep[] = [
   {
     header: 'Getting Started',
     Content: content1,
@@ -35,3 +35,5 @@ export const gettingStartedTutorialSteps: TutorialStep[] = [
     code: code4,
   },
 ];
+
+export default { steps } satisfies TutorialContent;

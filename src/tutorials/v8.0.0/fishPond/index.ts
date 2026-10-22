@@ -20,9 +20,9 @@ import addDisplacementEffectCompleted from '!!raw-loader!./step5/addDisplacement
 import code5 from '!!raw-loader!./step5/step5-code';
 import code6 from '!!raw-loader!./step6/step6-code';
 
-import type { TutorialStep } from '../..';
+import type { TutorialContent, TutorialStep } from '../..';
 
-export const fishPondTutorialSteps: TutorialStep[] = [
+const steps: TutorialStep[] = [
   {
     header: 'Introduction',
     Content: content1,
@@ -101,3 +101,5 @@ export const fishPondTutorialSteps: TutorialStep[] = [
     },
   },
 ];
+
+export default { steps } satisfies TutorialContent;

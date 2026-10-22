@@ -1,62 +1,61 @@
 /**
  * Captures gallery preview images for examples without the playground UI.
  *
- * For each example name this renders the compiled file from static/examples/source
- * in a bare harness page (no editor chrome) using headless Chrome, then writes:
- *   static/examples/previews/<name>.webp            320x180 animated webp
- *   static/examples/previews/<name>_thumbnail.webp  600x338 static webp
+ * For each example name this bundles its source (the library's `examples.source` in scripts/libraries.mts)
+ * with esbuild, against the site's installed packages, and renders it in a bare harness page (no editor
+ * chrome) using headless Chrome, then writes into the library's `examples.previews` folder:
+ *   <name>.webp            320x180 animated webp
+ *   <name>_thumbnail.webp  600x338 static webp
  *
  * Usage:
  *   node ./scripts/capture-example-previews.mjs <example-name> [...more names]
  *   node ./scripts/capture-example-previews.mjs mesh_rope-width --duration 5
+ *   node ./scripts/capture-example-previews.mjs --pkg 3d models_viewer --settle 15   wait 15 s before recording,
+ *                                                             for examples that download a large model first
+ *   node ./scripts/capture-example-previews.mjs --missing     every gallery example without a preview
+ *   node ./scripts/capture-example-previews.mjs --dry-run     bundle every gallery example, list what
+ *                                                             would be captured, and capture nothing
+ *   node ./scripts/capture-example-previews.mjs --pkg 3d --missing   the same for @pixi/3d's examples
  *
- * Requirements: Google Chrome installed (or CHROME_BIN set), and the webp
+ * Requests for https://pixijs.com/assets/ are answered from the site's static folders, so examples
+ * capture with the synced assets, including ones the live site doesn't serve yet.
+ *
+ * Requirements: Google Chrome installed (or CHROME_BIN set; CHROME_ARGS adds flags), and the webp
  * tools `img2webp` + `cwebp` on PATH (brew install webp).
- * Run `npm run generate:examples` first so static/examples/source is current.
+ * Run `npm run generate:examples` (or `generate:pixi-3d`) first so the example sources are current.
  */
 import { spawn } from 'child_process';
+import { build } from 'esbuild';
 import * as fs from 'fs/promises';
-import { createServer } from 'http';
+import { existsSync, readFileSync } from 'fs';
 import os from 'os';
 import path from 'path';
 
-const STATIC_DIR = path.resolve(import.meta.dirname, '../static');
-const PREVIEWS_DIR = path.join(STATIC_DIR, 'examples/previews');
+import { contentType, routeFile, serve, STATIC_ROUTES } from './browser.mts';
+import { getLibrary } from './libraries.mts';
+
+const args = process.argv.slice(2);
+const flag = (name) => (args.includes(name) ? args[args.indexOf(name) + 1] : undefined);
+const library = getLibrary(flag('--pkg'));
+
+const ROOT = path.resolve(import.meta.dirname, '..');
+const SOURCE_DIR = path.join(ROOT, library.examples.source);
+const PREVIEWS_DIR = path.join(ROOT, library.examples.previews);
+const EXAMPLES_FILE = path.join(ROOT, library.examples.data);
+const SITE_ASSETS = 'https://pixijs.com/assets/';
 const VIEWPORT = { width: 1280, height: 720 };
 const ANIM_SIZE = '320:180';
 const ANIM_FRAMES = 32;
 const THUMB_WIDTH = 600;
-const SETTLE_MS = 1800;
 
 const CHROME_BIN = process.env.CHROME_BIN || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-
-const MIME = {
-  '.js': 'text/javascript',
-  '.mjs': 'text/javascript',
-  '.html': 'text/html',
-  '.css': 'text/css',
-  '.json': 'application/json',
-  '.png': 'image/png',
-  '.jpg': 'image/jpeg',
-  '.webp': 'image/webp',
-  '.ttf': 'font/ttf',
-  '.svg': 'image/svg+xml',
-};
+const CHROME_ARGS = process.env.CHROME_ARGS?.split(/\s+/).filter(Boolean) ?? [];
 
 function harnessHtml(name) {
   return `<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<script type="importmap">
-{
-  "imports": {
-    "pixi.js": "https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.min.mjs",
-    "gsap": "https://cdn.jsdelivr.net/npm/gsap@3/+esm",
-    "pixi-filters": "https://cdn.jsdelivr.net/npm/pixi-filters@6/dist/pixi-filters.mjs"
-  }
-}
-</script>
 <style>
 @font-face { font-family: 'Sono'; src: url('/assets/standard/sono.ttf'); }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -65,7 +64,7 @@ html, body { margin: 0; height: 100%; overflow: hidden; }
 <body>
 <script type="module">
   await document.fonts.load("600 18px Sono").catch(() => {});
-  await import('/examples/source/${name}/index.js');
+  await import('/bundles/${name}.js');
   // The example boots asynchronously; wait for its canvas, then let it draw a while
   await new Promise((resolve) => {
     const poll = () => (document.querySelector('canvas') ? resolve() : setTimeout(poll, 50));
@@ -77,46 +76,37 @@ html, body { margin: 0; height: 100%; overflow: hidden; }
 </html>`;
 }
 
-function startServer() {
-  const server = createServer(async (req, res) => {
-    const url = new URL(req.url, 'http://localhost');
-    const harnessMatch = url.pathname.match(/^\/harness\/(.+)\.html$/);
+/** Bundles an example's entry with the site's own packages, so the capture uses the installed pixi.js */
+async function bundle(example) {
+  const entry = example.files.find((file) => file.name === 'index.js');
 
-    if (harnessMatch) {
-      res.writeHead(200, { 'content-type': 'text/html' });
-      res.end(harnessHtml(harnessMatch[1]));
-      return;
-    }
+  try {
+    const result = await build({
+      entryPoints: [path.join(SOURCE_DIR, entry.location)],
+      bundle: true,
+      format: 'esm',
+      write: false,
+      logLevel: 'silent',
+      loader: { '.frag': 'text', '.vert': 'text', '.wgsl': 'text' },
+      // @pixi/3d needs the same pixi.js fallback the site's bundles import
+      inject: library.id === '3d' ? [path.join(ROOT, 'src/utils/pixi3dCompat.ts')] : [],
+    });
 
-    const filePath = path.join(STATIC_DIR, decodeURIComponent(url.pathname));
+    return result.outputFiles[0].text;
+  } catch (error) {
+    throw new Error(error.errors?.map((message) => message.text).join('; ') ?? error.message);
+  }
+}
 
-    if (!filePath.startsWith(STATIC_DIR)) {
-      res.writeHead(403).end();
-      return;
-    }
+/** Serves the harness pages, the bundles and the site's static folders */
+function startServer(bundles) {
+  return serve(STATIC_ROUTES, (pathname) => {
+    const harness = /^\/harness\/(.+)\.html$/.exec(pathname)?.[1];
+    const bundle = bundles.get(/^\/bundles\/(.+)\.js$/.exec(pathname)?.[1]);
 
-    // Compiled examples use extensionless relative imports (sandpack-style);
-    // resolve them the way a bundler would
-    const candidates = path.extname(filePath) ? [filePath] : [filePath, `${filePath}.js`];
+    if (harness) return ['text/html', harnessHtml(harness)];
 
-    for (const candidate of candidates) {
-      try {
-        const data = await fs.readFile(candidate);
-
-        res.writeHead(200, { 'content-type': MIME[path.extname(candidate)] ?? 'application/octet-stream' });
-        res.end(data);
-
-        return;
-      } catch {
-        // try next candidate
-      }
-    }
-
-    res.writeHead(404).end();
-  });
-
-  return new Promise((resolve) => {
-    server.listen(0, '127.0.0.1', () => resolve({ server, port: server.address().port }));
+    return bundle ? ['text/javascript', bundle] : undefined;
   });
 }
 
@@ -130,6 +120,7 @@ async function launchChrome(userDataDir) {
     '--mute-audio',
     '--no-first-run',
     '--no-default-browser-check',
+    ...CHROME_ARGS,
     'about:blank',
   ]);
 
@@ -214,15 +205,33 @@ class CdpPage {
   }
 }
 
-async function captureExample(name, serverPort, chromePort, durationSec) {
-  const sourcePath = path.join(STATIC_DIR, 'examples/source', name, 'index.js');
+/**
+ * Answers a paused `https://pixijs.com/assets/` request from the static folders, or lets it through to the
+ * network when no folder has the file
+ */
+async function fulfillSiteAsset(page, { requestId, request }) {
+  const file = routeFile(STATIC_ROUTES, decodeURIComponent(new URL(request.url).pathname));
 
-  await fs.access(sourcePath).catch(() => {
-    throw new Error(`No compiled source at ${sourcePath} — run \`npm run generate:examples\` first`);
+  if (!file) {
+    await page.send('Fetch.continueRequest', { requestId });
+
+    return;
+  }
+
+  await page.send('Fetch.fulfillRequest', {
+    requestId,
+    responseCode: 200,
+    responseHeaders: [
+      { name: 'content-type', value: contentType(file) },
+      { name: 'access-control-allow-origin', value: '*' },
+    ],
+    body: (await fs.readFile(file)).toString('base64'),
   });
+}
 
-  const url = `http://127.0.0.1:${serverPort}/harness/${name}.html`;
-  const created = await fetch(`http://127.0.0.1:${chromePort}/json/new?${url}`, {
+async function captureExample(name, origin, chromePort, durationSec, settleSec) {
+  const url = `${origin}/harness/${name}.html`;
+  const created = await fetch(`http://127.0.0.1:${chromePort}/json/new?about:blank`, {
     method: 'PUT',
   }).then((response) => response.json());
 
@@ -232,8 +241,13 @@ async function captureExample(name, serverPort, chromePort, durationSec) {
     await page.send('Runtime.enable');
     await page.send('Page.enable');
     await page.send('Emulation.setDeviceMetricsOverride', { ...VIEWPORT, deviceScaleFactor: 1, mobile: false });
+    page.on('Fetch.requestPaused', (params) =>
+      fulfillSiteAsset(page, params).catch((error) => console.log(`${params.request.url}: ${error.message}`)),
+    );
+    await page.send('Fetch.enable', { patterns: [{ urlPattern: `${SITE_ASSETS}*` }] });
+    await page.send('Page.navigate', { url });
     await page.waitForReady();
-    await sleep(SETTLE_MS);
+    await sleep(settleSec * 1000);
 
     const frames = [];
 
@@ -293,7 +307,7 @@ async function writeOutputs(name, { frames, thumb }, durationSec, tmpDir) {
       const webpPath = jpgPath.replace(/\.jpg$/, '.webp');
 
       await fs.writeFile(jpgPath, Buffer.from(frame.data, 'base64'));
-      await run('cwebp', ['-quiet', '-resize', animWidth, animHeight, '-q', '70', jpgPath, '-o', webpPath]);
+      await run('cwebp', ['-quiet', '-lossless', '-resize', animWidth, animHeight, jpgPath, '-o', webpPath]);
 
       return webpPath;
     }),
@@ -301,11 +315,17 @@ async function writeOutputs(name, { frames, thumb }, durationSec, tmpDir) {
 
   const frameDelayMs = Math.round((durationSec * 1000) / ANIM_FRAMES);
 
+  // img2webp is lossless unless told otherwise, which makes shaded 3D scenes megabytes
   await run('img2webp', [
     '-loop',
     '0',
     '-d',
     String(frameDelayMs),
+    '-lossy',
+    '-q',
+    '70',
+    '-m',
+    '6',
     ...framePaths,
     '-o',
     path.join(PREVIEWS_DIR, `${name}.webp`),
@@ -327,27 +347,71 @@ async function writeOutputs(name, { frames, thumb }, durationSec, tmpDir) {
   ]);
 }
 
-const args = process.argv.slice(2);
-const durationFlag = args.indexOf('--duration');
-const durationSec = durationFlag === -1 ? 4.5 : parseFloat(args[durationFlag + 1]);
-const names = args.filter((arg, index) => !arg.startsWith('--') && index !== durationFlag + 1);
+const durationSec = parseFloat(flag('--duration') ?? '4.5');
+const settleSec = parseFloat(flag('--settle') ?? '1.8');
+const dryRun = args.includes('--dry-run');
+const missing = args.includes('--missing');
 
-if (names.length === 0) {
-  console.error('Usage: node ./scripts/capture-example-previews.mjs <example-name> [...more] [--duration seconds]');
+if (!existsSync(EXAMPLES_FILE)) {
+  console.error(`No ${library.examples.data}: generate the ${library.id} examples first`);
   process.exit(1);
 }
 
-const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'example-previews-'));
-const { server, port } = await startServer();
-const chrome = await launchChrome(path.join(tmpDir, 'chrome-profile'));
+const examples = new Map(JSON.parse(readFileSync(EXAMPLES_FILE, 'utf-8')).map((example) => [example.name, example]));
+const gallery = [...examples.values()].filter((example) => !example.hidden).map((example) => example.name);
+const hasPreview = (name) =>
+  ['', '_thumbnail'].every((suffix) => existsSync(path.join(PREVIEWS_DIR, `${name}${suffix}.webp`)));
+const names = [
+  ...new Set([
+    ...args.filter(
+      (arg, index) => !arg.startsWith('--') && !['--duration', '--settle', '--pkg'].includes(args[index - 1]),
+    ),
+    ...(missing ? gallery.filter((name) => !hasPreview(name)) : []),
+  ]),
+];
+const unknown = names.filter((name) => !examples.has(name));
 
+if (unknown.length) {
+  console.error(`Not in ${library.examples.data}: ${unknown.join(', ')}`);
+  process.exit(1);
+}
+
+if (names.length === 0 && !dryRun) {
+  console.log(
+    missing
+      ? 'Every gallery example has a preview'
+      : 'Usage: node ./scripts/capture-example-previews.mjs <example-name> [...more] [--pkg 2d|3d] [--missing] [--dry-run] [--duration seconds] [--settle seconds]',
+  );
+  process.exit(missing ? 0 : 1);
+}
+
+const bundles = new Map();
 let failed = false;
 
+for (const name of dryRun ? [...new Set([...gallery, ...names])] : names) {
+  try {
+    bundles.set(name, await bundle(examples.get(name)));
+  } catch (error) {
+    failed = true;
+    console.log(`FAILED to bundle ${name}: ${error.message}`);
+  }
+}
+
+if (dryRun) {
+  console.log(`Bundled ${bundles.size} examples; would capture: ${names.join(', ') || 'nothing'}`);
+  process.exit(failed ? 1 : 0);
+}
+
+await fs.mkdir(PREVIEWS_DIR, { recursive: true });
+const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'example-previews-'));
+const { server, origin } = await startServer(bundles);
+const chrome = await launchChrome(path.join(tmpDir, 'chrome-profile'));
+
 try {
-  for (const name of names) {
+  for (const name of bundles.keys()) {
     process.stdout.write(`Capturing ${name}... `);
     try {
-      const capture = await captureExample(name, port, chrome.port, durationSec);
+      const capture = await captureExample(name, origin, chrome.port, durationSec, settleSec);
 
       await writeOutputs(name, capture, durationSec, tmpDir);
       console.log(`done (${capture.frames.length} frames)`);
