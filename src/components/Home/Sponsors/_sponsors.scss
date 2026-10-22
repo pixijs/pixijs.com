@@ -1,0 +1,167 @@
+.hm-tiers {
+  display: grid;
+  gap: clamp(44px, 5.5cqi, 72px);
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* Bronze, the tier with many sponsors, and the space between two tiles; the row lengths below follow from these */
+$bronze-h: 75;
+$gap: 32;
+
+/*
+ * `--h` is a tile's height, `--a` its aspect, `--row` the most to a row and `--n` the tier's sponsors; `--max` caps a
+ * tile's width against the list (`cqi`), so the top tiers fit a phone's column. The sizes and gaps are the old site's
+ * logos: Bronze its 75 px avatars, 32 px apart and 16 on phones.
+ */
+.hm-tier {
+  --h: #{$bronze-h}px;
+  --a: 1;
+  --row: 5;
+  --gap: #{$gap}px;
+  --max: 100cqi;
+  container-type: inline-size;
+  text-align: center;
+
+  @container (width < 481px) {
+    --gap: 16px;
+  }
+
+  &[data-tier='platinum'] {
+    --h: 180px;
+    --a: 2.4;
+  }
+
+  &[data-tier='gold'] {
+    --h: 150px;
+  }
+
+  &[data-tier='silver'] {
+    --h: 90px;
+    --a: 3.9;
+  }
+}
+
+/* The tier's name between two hairlines that fade out toward the edges */
+.hm-tierLabel {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 760px;
+  margin: 0 auto 28px;
+  color: var(--px-ink-2);
+  font: 600 19px/1.2 var(--px-font-display);
+
+  @container (width >= 600px) {
+    font-size: 24px;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--px-line-strong));
+  }
+
+  &::after {
+    background: linear-gradient(90deg, var(--px-line-strong), transparent);
+  }
+
+  a {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    color: inherit;
+    text-decoration: none;
+
+    svg {
+      color: var(--px-ink-3);
+      transition: transform var(--px-dur-2) var(--px-ease-spring);
+    }
+
+    &:hover {
+      color: var(--px-accent-text);
+
+      svg {
+        color: currentColor;
+        transform: translate(2px, -2px);
+      }
+    }
+  }
+}
+
+/* Centred tiles, at most `--row` to a row, with the rows as even as the count allows */
+.hm-tierList {
+  container-type: inline-size;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
+  max-width: calc(
+    round(up, var(--n) / round(up, var(--n) / var(--row), 1), 1) * (var(--h) * var(--a) + var(--gap)) - var(--gap) + 1px
+  );
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+
+  li {
+    flex: none;
+    width: min(var(--h) * var(--a), var(--max));
+  }
+}
+
+/* Bronze runs as many to a row as fit, up to ten as the old site did, and three on phones */
+[data-tier='bronze'] .hm-tierList {
+  --row: 3;
+
+  @for $row from 4 through 10 {
+    @container (width >= #{$row * ($bronze-h + $gap) - $gap}px) {
+      --row: #{$row};
+    }
+  }
+}
+
+/*
+ * Padding is a share of the tile's height, so the artwork keeps the same margin at every size, plus a little of its
+ * width at the sides, so a wordmark in a wide tile doesn't run edge to edge. Bronze's art is trimmed to its ink, so
+ * it keeps the margin its avatar had and doesn't outgrow the old site's.
+ */
+.hm-sponsor {
+  display: block;
+  aspect-ratio: var(--a);
+  padding: calc(10% / var(--a)) calc(10% / var(--a) + 4%);
+  border: 1px solid var(--px-line);
+  border-radius: clamp(10px, calc(var(--h) * 0.15), 22px);
+  background: var(--tile, #fff);
+  box-shadow: var(--px-shadow-md);
+  transition:
+    transform 350ms var(--px-ease-spring),
+    box-shadow 350ms var(--px-ease-spring);
+
+  [data-tier='bronze'] & {
+    padding: 21% 12%;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 0 var(--px-pink);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transform: translate(-3px, -3px);
+    }
+  }
+}
+
+.hm-sponsorsMore {
+  margin: clamp(44px, 5cqi, 64px) 0 0;
+  text-align: center;
+}

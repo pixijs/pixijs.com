@@ -1,0 +1,53 @@
+@use '../Band/surface';
+
+/* Overscroll above the hero shows its floor, not the page background */
+html:has([data-home]) {
+  background-color: var(--px-hero);
+}
+
+.hm-home {
+  @include surface.page;
+}
+
+/* Shared by the sections: a text link with an arrow that nudges on hover */
+.hm-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--px-ink);
+  font: 600 16px/1 var(--px-font-display);
+  text-decoration: none;
+
+  svg {
+    color: var(--px-accent-text);
+    transition: transform var(--px-dur-2) var(--px-ease-spring);
+  }
+
+  &:hover {
+    color: var(--px-accent-text);
+    text-decoration: none;
+
+    svg {
+      transform: translateX(4px);
+    }
+  }
+}
+
+.hm-visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* The headline breaks after "Engine," once that line fits; narrower heroes balance their own lines */
+.hm-heroBreak {
+  display: none;
+
+  @container (width >= 720px) {
+    display: inline;
+  }
+}

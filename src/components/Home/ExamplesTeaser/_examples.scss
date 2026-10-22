@@ -1,0 +1,50 @@
+@use '../Band/surface';
+
+.hm-examples {
+  @include surface.swipe-grid;
+}
+
+.hm-example {
+  display: flex;
+
+  > a {
+    flex: 1;
+  }
+
+  h3 {
+    font: 600 var(--px-text-h3) / 1.25 var(--px-font-display);
+  }
+
+  p:last-child {
+    font-size: 17px;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+}
+
+.hm-exampleMedia {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms var(--px-ease);
+
+    .hm-example a:hover & {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.hm-exampleCategory {
+  color: var(--px-ink-3);
+  font: 500 12px/1.4 var(--px-font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}

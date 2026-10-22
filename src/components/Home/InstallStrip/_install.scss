@@ -1,0 +1,107 @@
+.hm-install {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
+
+  @container (width >= 860px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: clamp(40px, 6cqi, 96px);
+  }
+}
+
+.hm-installEyebrow {
+  margin: 0 0 16px;
+  color: var(--px-accent-text);
+  font: 500 12px/1.4 var(--px-font-mono);
+  letter-spacing: 0.18em;
+}
+
+/* The section title of its band, at the size every other one has */
+.hm-installTitle {
+  max-width: 14ch;
+  margin: 0;
+  color: var(--px-ink);
+  font: 700 var(--px-text-display-2) / 1.02 var(--px-font-display);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.hm-terminal {
+  overflow: hidden;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-lg);
+  background: var(--px-code-bg);
+  box-shadow: var(--px-shadow-lg);
+}
+
+.hm-terminalBar {
+  display: flex;
+  gap: 7px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--px-line);
+
+  span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--px-line-strong);
+  }
+}
+
+/* The copy button drops under the command when the two don't fit on one row */
+.hm-terminalBody {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  padding: 22px 18px 22px 24px;
+}
+
+.hm-terminalLine {
+  flex: 1 1 250px;
+  min-width: 0;
+  padding: 4px 0;
+  overflow-x: auto;
+  border: 0;
+  background: none;
+  color: var(--px-code-plain);
+  font: 400 17px/1.6 var(--px-font-mono);
+  white-space: nowrap;
+  scrollbar-width: none;
+
+  @container (width < 400px) {
+    font-size: 15px;
+  }
+}
+
+.hm-terminalPrompt {
+  margin-right: 12px;
+  color: var(--px-code-kw);
+  user-select: none;
+}
+
+.hm-terminalCaret {
+  display: inline-block;
+  width: 8px;
+  height: 1.15em;
+  margin-left: 3px;
+  background: var(--px-pink);
+  vertical-align: text-bottom;
+  animation: hm-caret 1.1s steps(1) infinite;
+}
+
+/* On the right, under the terminal */
+.hm-installAlt {
+  margin: 18px 4px 0 auto;
+  color: var(--px-ink-3);
+  font: 400 16px/1.5 var(--px-font-body);
+  text-align: end;
+  text-wrap: balance;
+}
+
+@keyframes hm-caret {
+  50% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,224 @@
+@use '../../../css/breakpoints' as bp;
+
+.hm-pkgCards {
+  position: relative;
+  display: grid;
+  gap: 24px;
+
+  @container (width >= 720px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(20px, 2.4cqi, 32px);
+    row-gap: 0;
+  }
+}
+
+/* Side by side, the two cards share their rows, so the links and the buttons line up whatever the copy's length */
+.hm-pkgCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-lg);
+  background: var(--px-well);
+  box-shadow: var(--px-shadow-md);
+  transition: border-color var(--px-dur-2) var(--px-ease);
+
+  &:hover {
+    border-color: var(--px-accent);
+    border-color: color-mix(in srgb, var(--px-accent) 45%, var(--px-line));
+  }
+
+  @container (width >= 720px) {
+    display: grid;
+    grid-row: span 6;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+
+  @container (width >= 1100px) {
+    min-height: 500px;
+  }
+}
+
+/* The shapes' own stage: the alternate surface with a tighter grid */
+.hm-pkgVisual {
+  position: relative;
+  @include bp.fluid(height, clamp(180px, 22cqi, 280px));
+  overflow: hidden;
+  border-radius: 14px;
+  background:
+    linear-gradient(var(--px-grid-line) 1px, transparent 1px) 50% 0 / 24px 24px,
+    linear-gradient(90deg, var(--px-grid-line) 1px, transparent 1px) 50% 0 / 24px 24px,
+    radial-gradient(60% 90% at 50% 100%, var(--px-accent), transparent 70%),
+    var(--px-bg-alt);
+  background:
+    linear-gradient(var(--px-grid-line) 1px, transparent 1px) 50% 0 / 24px 24px,
+    linear-gradient(90deg, var(--px-grid-line) 1px, transparent 1px) 50% 0 / 24px 24px,
+    radial-gradient(60% 90% at 50% 100%, color-mix(in srgb, var(--px-accent) 16%, transparent), transparent 70%),
+    var(--px-bg-alt);
+}
+
+.hm-pkgCluster {
+  position: absolute;
+  inset: 0;
+}
+
+.hm-pkgShape {
+  --sz: calc(var(--k, 1) * clamp(48px, 8vw, 96px));
+  --sz: calc(var(--k, 1) * clamp(48px, 8cqi, 96px));
+  position: absolute;
+  margin: calc(var(--sz) / -2) 0 0 calc(var(--sz) / -2);
+}
+
+/*
+ * One sprite of the stage demo's atlas (629×185), standing on its feet at `left`/`bottom`. `--u` is a hundredth of
+ * the panel's height and `--k` the sprite's scale in it, so the scene keeps its proportions at every width.
+ */
+.hm-pkgSprite {
+  --u: calc(clamp(180px, 22vw, 280px) / 100);
+  --u: calc(clamp(180px, 22cqi, 280px) / 100);
+  --px: calc(var(--k) * var(--u));
+  position: absolute;
+  width: calc(var(--w) * var(--px));
+  height: calc(var(--h) * var(--px));
+  margin-left: calc(var(--w) * var(--px) / -2);
+  transform-origin: 50% 100%;
+
+  /* Its shadow on the floor, then the sprite over it */
+  &::before {
+    content: '';
+    position: absolute;
+    right: 8%;
+    bottom: -3%;
+    left: 8%;
+    height: 12%;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 0.32);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('/images/home/stage/sprites.webp') calc(var(--x) * var(--px) * -1) calc(var(--y) * var(--px) * -1) /
+      calc(629 * var(--px)) calc(185 * var(--px)) no-repeat;
+  }
+
+  /* 26×37 pixel art, packed at three times its size */
+  &[data-sprite='bunny']::after {
+    image-rendering: pixelated;
+  }
+
+  html:not([data-theme='dark']) &::before {
+    background: rgb(52 36 96 / 0.16);
+  }
+}
+
+.hm-pkgTag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.hm-pkgBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  padding: clamp(20px, 2.8vw, 36px);
+  padding: clamp(20px, 2.8cqi, 36px);
+
+  @container (width >= 720px) {
+    display: grid;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+  }
+}
+
+.hm-pkgMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: var(--px-ink);
+  font: 600 16px/1 var(--px-font-display);
+}
+
+.hm-pkgDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--px-accent);
+}
+
+.hm-pkgVersion {
+  margin-left: auto;
+  color: var(--px-ink-3);
+  font: 500 13px/1 var(--px-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.hm-pkgTitle {
+  margin: 0;
+  color: var(--px-ink);
+  font: 700 var(--px-text-display-3) / 1.1 var(--px-font-display);
+  letter-spacing: -0.02em;
+}
+
+.hm-pkgCopy {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--px-ink-2);
+  font: 400 17px/1.65 var(--px-font-body);
+  text-wrap: pretty;
+}
+
+.hm-pkgLinks {
+  margin: 0;
+  padding: 0;
+  font: 500 16px/1 var(--px-font-display);
+  list-style: none;
+  /* Inline items, so a link row that wraps splits evenly instead of leaving "API" on its own */
+  text-wrap: balance;
+
+  li {
+    display: inline-block;
+    margin-right: 24px;
+    vertical-align: top;
+  }
+
+  a,
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+  }
+
+  a {
+    color: var(--px-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--px-line-strong);
+    text-underline-offset: 4px;
+
+    &:hover {
+      color: var(--px-accent-text);
+      text-decoration-color: currentColor;
+    }
+  }
+}
+
+.hm-pkgSoon {
+  color: var(--px-ink-3);
+}
+
+.hm-pkgActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+  gap: 8px 28px;
+  padding-top: 10px;
+  padding-right: 6px;
+}

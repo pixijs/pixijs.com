@@ -8,6 +8,10 @@
       "type": "Organization",
       "websiteUrl": "https://www.play.co/",
       "avatarUrl": "/images/logo-playco.png"
+    },
+    "logo": {
+      "src": "/images/sponsors/playco.webp",
+      "background": "#ffffff"
     }
   }
 ]

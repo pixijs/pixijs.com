@@ -1,0 +1,370 @@
+@use '../Band/surface';
+@use 'accents';
+@use 'elevation';
+
+.hm-hero-root {
+  --hero-h: clamp(560px, 78svh, 900px);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: var(--hero-h);
+  overflow: clip;
+  container-type: inline-size;
+  background: var(--px-hero);
+  color: var(--px-ink);
+
+  @media (max-width: 719.98px) {
+    min-height: 100svh;
+  }
+}
+
+/* ---------- field and poster ---------- */
+
+.hm-hero-field {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: var(--px-hero);
+}
+
+.hm-hero-poster {
+  @include surface.hero-backdrop;
+  position: absolute;
+  inset: 0;
+}
+
+.hm-hero-blobs {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hm-hero-rimStart {
+  stop-color: var(--blob-rim);
+  stop-opacity: var(--blob-rim-alpha);
+}
+
+.hm-hero-rimEnd {
+  stop-color: var(--blob-rim);
+  stop-opacity: 0;
+}
+
+.hm-hero-shadeStart {
+  stop-color: #000;
+  stop-opacity: var(--blob-shade);
+}
+
+.hm-hero-shadeEnd {
+  stop-color: #000;
+  stop-opacity: 0;
+}
+
+/* The backdrop's lattice: a 1.6 px dot at the corner of every 46 px tile */
+.hm-hero-grid {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(at 1.6px 1.6px, transparent 75%, var(--grid-dot) 0) 0 0 / 46px 46px;
+}
+
+.hm-hero-speck {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--speck) 50%, transparent);
+  translate: -50% -50%;
+}
+
+/*
+ * The frame the shapes are composed in: the hero, up to 1760 px of it. Past that the composition holds its
+ * proportions in the middle rather than stretching its gaps across the screen. `--above` is the room over the
+ * copy, for the shapes that hang in it (`posterShapes.ts`): the copy's clearance for the top bar, or more once the
+ * hero is taller than the copy needs, which takes about 630 px of it, and 690 px on a phone. `--wave` is the
+ * height of the wave at the bottom edge (`--hm-wave` in `Band/_surface.scss`).
+ */
+.hm-hero-shapes {
+  --above: max(120px, 50% - 195px);
+  --wave: clamp(32px, 5cqi, 68px);
+  position: absolute;
+  inset-block: 0;
+  left: max(0px, (100% - 1760px) / 2);
+  width: min(100%, 1760px);
+
+  @container (width < 720px) {
+    --above: max(96px, 50% - 247px);
+  }
+}
+
+/*
+ * Sizes stop growing with a 1500 px hero: any bigger and the largest sphere's image outsizes /3d's headline
+ * as the page's largest contentful paint
+ */
+.hm-hero-posterShape {
+  --sz: min(calc(var(--s) * 1cqi), calc(var(--s) * 15px));
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: var(--sz);
+  height: var(--sz);
+  margin: calc(var(--sz) / -2) 0 0 calc(var(--sz) / -2);
+
+  @container (width < 1100px) {
+    --sz: calc(var(--ms) * 1cqi);
+    top: var(--my);
+    left: var(--mx);
+  }
+
+  @container (width < 860px) {
+    --sz: calc(var(--cs) * 1cqi);
+    top: var(--cy);
+    left: var(--cx);
+  }
+
+  @container (width < 720px) {
+    --sz: min(calc(var(--ns) * 1.6cqi), calc(var(--ns) * 6.4px));
+    top: var(--ny);
+    left: var(--nx);
+  }
+}
+
+/*
+ * The shadow under each clay image, dropped, spread and thinned for how high the shape stands (`--h`), as the
+ * live field casts it: keep in step with `field/shadows.ts`
+ */
+.hm-hero-posterShape .clay > span {
+  translate: 0 calc((6px + var(--sz) * 0.08) * var(--h));
+  scale: calc(1 + 0.14 * (var(--h) - 1));
+  opacity: calc(1 - 0.22 * max(0, var(--h) - 1));
+
+  html[data-theme='dark'] & {
+    translate: 0 calc((7px + var(--sz) * 0.09) * var(--h));
+  }
+}
+
+/* The bunny isn't in the `ui/Clay` set: its image comes from `scripts/render-bunny.mjs` */
+.hm-hero-posterShape [data-shape='bunny-gold'] {
+  --clay: url('/images/clay/light/clay/bunny-gold.webp');
+
+  html[data-theme='dark'] & {
+    --clay: url('/images/clay/dark/clay/bunny-gold.webp');
+  }
+}
+
+.hm-hero-shapes .hm-hero-wideHide {
+  @container (width >= 1100px) {
+    display: none;
+  }
+}
+
+.hm-hero-shapes .hm-hero-midHide {
+  @container (860px <= width < 1100px) {
+    display: none;
+  }
+}
+
+.hm-hero-shapes .hm-hero-compactHide {
+  @container (720px <= width < 860px) {
+    display: none;
+  }
+}
+
+.hm-hero-shapes .hm-hero-narrowHide {
+  @container (width < 720px) {
+    display: none;
+  }
+}
+
+@media (max-height: 799.98px) {
+  .hm-hero-shapes .hm-hero-narrowTall {
+    @container (width < 720px) {
+      display: none;
+    }
+  }
+}
+
+@media (max-height: 999.98px) {
+  .hm-hero-shapes .hm-hero-compactShort {
+    @container (720px <= width < 860px) {
+      --sz: calc(var(--css) * 1cqi);
+      top: var(--csy);
+      left: var(--csx);
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hm-hero-posterLive {
+    pointer-events: auto;
+    cursor: pointer;
+  }
+}
+
+.hm-hero-canvasHost {
+  position: absolute;
+  inset: 0;
+}
+
+.hm-hero-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+ * Shade on the surface itself, under the shapes: the hero falls darker toward its bottom edge, where the band
+ * below lies over it, and in the dark theme under the top bar (`surface.hero-backdrop`).
+ */
+.hm-hero-shade {
+  position: absolute;
+  inset: 0;
+  background: var(--hm-hero-shade);
+}
+
+/* A pink glow behind the headline, over the field: light for the eye to land on */
+.hm-hero-vignette {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: radial-gradient(58% 52% at 50% 46%, rgb(233 30 99 / 0.07), transparent 72%);
+  pointer-events: none;
+
+  html[data-theme='dark'] & {
+    background: radial-gradient(58% 52% at 50% 46%, rgb(233 30 99 / 0.14), transparent 72%);
+  }
+}
+
+/* ---------- copy ---------- */
+
+.hm-hero-copy {
+  position: relative;
+  z-index: var(--px-z-content);
+  display: grid;
+  place-items: center;
+  padding: calc(var(--home-nav-clearance, 88px) + 32px) var(--px-gutter) 72px;
+  pointer-events: none;
+
+  @media (max-width: 719.98px) {
+    padding-top: calc(var(--home-nav-clearance, 88px) + 8px);
+    padding-bottom: 72px;
+  }
+}
+
+.hm-hero-copyInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  text-align: center;
+  pointer-events: auto;
+}
+
+.hm-hero-mark {
+  margin-bottom: clamp(20px, 2.4cqi, 32px);
+}
+
+.hm-hero-logo {
+  @include accents.logo;
+}
+
+/* The model: its box is the 2D logo's, and its canvas spills past it with room for the turn, the bob and the squash */
+.hm-hero-logo3d {
+  position: relative;
+  display: block;
+  width: accents.$logo-width;
+  aspect-ratio: 735 / 289;
+  touch-action: manipulation;
+}
+
+/* Keep in step with STAGE in logo/createLogo.ts */
+.hm-hero-logoStage {
+  position: absolute;
+  top: 50%;
+  left: -15%;
+  width: 130%;
+  aspect-ratio: 1.3 / 0.75;
+  translate: 0 -50%;
+  pointer-events: none;
+
+  @include surface.themed;
+}
+
+.hm-hero-logoPoster,
+.hm-hero-logoStage > canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hm-hero-title {
+  margin: 0;
+
+  @include accents.title;
+
+  /* The words that answer the pointer: `data-dimension` marks one */
+  [data-dimension] {
+    cursor: pointer;
+  }
+
+  /* The word that stands for 3D has sides, and lifts off them */
+  [data-extrude] {
+    --side: #ad1457;
+    --side-deep: #880e4f;
+    translate: -0.03em -0.045em;
+    text-shadow:
+      0.0125em 0.018em 0 var(--side),
+      0.025em 0.036em 0 var(--side),
+      0.0375em 0.054em 0 var(--side),
+      0.05em 0.072em 0 var(--side),
+      0.0625em 0.09em 0 var(--side-deep),
+      0.075em 0.108em 0 var(--side-deep),
+      0.1em 0.2em 0.2em rgb(20 4 30 / 0.4);
+  }
+}
+
+.hm-hero-lede {
+  max-width: 30em;
+  margin: 28px 0 0;
+  color: var(--px-ink-2);
+  font: 400 clamp(1.125rem, 0.9rem + 1.05cqi, 1.75rem) / 1.5 var(--px-font-body);
+  text-wrap: balance;
+}
+
+.hm-hero-actions {
+  margin-top: 36px;
+
+  @include elevation.actions;
+}
+
+.hm-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+
+  @include elevation.chips;
+}
+
+.hm-hero-pause {
+  position: absolute;
+  z-index: var(--px-z-content);
+  right: var(--px-gutter);
+  bottom: calc(clamp(28px, 4cqi, 56px) + 8px);
+}
+
+/* A mirrored composition leaves its bottom-left corner clear for the control; phones keep theirs */
+.hm-hero-mirrored .hm-hero-pause {
+  @container (width >= 720px) {
+    right: auto;
+    left: var(--px-gutter);
+  }
+}
+
+/* The drift wave is twice as wide, so the scroll-out can slide it; the field shows through above it */
+.hm-hero-root .hm-hero-wave {
+  @include surface.hero-wave;
+}

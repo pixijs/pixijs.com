@@ -1,0 +1,59 @@
+/* What every home's hero shares: the PixiJS logo over the headline, and the headline itself */
+
+/* The logo's width, the 2D image's and the 3D model's box alike */
+$logo-width: clamp(200px, 100px + 16cqi, 340px);
+
+/* The 2D logo, squashing onto its foot */
+@mixin logo {
+  display: block;
+  width: $logo-width;
+  height: auto;
+  transform-origin: 50% 100%;
+}
+
+@mixin title {
+  color: var(--px-ink);
+  font: 700 clamp(2.5rem, 1.25rem + 5.2cqi, 5.5rem) / 0.98 var(--px-font-display);
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+
+  @include words;
+}
+
+/*
+ * Headline conventions: `data-accent` words are pink; a `data-accent-group` holds them over a `Squiggle`, which
+ * wipes in from the first paint, in CSS, so it stays hidden until its turn
+ */
+@mixin words {
+  [data-accent] {
+    display: inline-block;
+    color: var(--px-pink);
+  }
+
+  [data-accent-group] {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  [data-squiggle] {
+    position: absolute;
+    bottom: -0.2em;
+    left: 4%;
+    width: 92%;
+    height: 0.24em;
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion='paused']) & [data-squiggle] {
+      animation: hm-hero-squiggle 0.9s 0.55s cubic-bezier(0.65, 0, 0.35, 1) backwards;
+    }
+  }
+}
+
+@keyframes hm-hero-squiggle {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}

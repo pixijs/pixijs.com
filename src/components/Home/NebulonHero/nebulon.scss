@@ -1,0 +1,143 @@
+@use '../Band/surface';
+@use '../Hero/accents';
+@use '../Hero/elevation';
+
+/*
+ * The page behind the hero is its sky while the hero is on screen, so overscrolling above it doesn't flash the page's
+ * own background; overscrolling past the footer still shows the page's
+ */
+html:has(.hm-nebulon-root[data-sky]) {
+  background-color: #0c1b2b;
+}
+
+/* Always dark, in both themes, like the scene it frames */
+.hm-nebulon-root {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: clamp(600px, 88svh, 1000px);
+  overflow: clip;
+  container-type: inline-size;
+
+  @media (max-width: 719.98px) {
+    min-height: 100svh;
+  }
+}
+
+/* The colours of the scene's poster (static/header/assets/img/poster.webp), painted before the frame loads */
+.hm-nebulon-backdrop {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background:
+    radial-gradient(14% 22% at 74% 40%, rgb(84 36 70 / 0.9), transparent),
+    linear-gradient(#0c1b2b, #102b42 30%, #174565 50%, #1a5076 75%, #1c5781);
+}
+
+.hm-nebulon-frame {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 700ms var(--px-ease);
+
+  &[data-ready] {
+    opacity: 1;
+  }
+}
+
+/* Keeps the copy legible over the brightest clouds */
+.hm-nebulon-scrim {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: radial-gradient(56% 48% at 50% 50%, rgb(4 10 22 / 0.34), transparent 75%);
+  pointer-events: none;
+}
+
+/* ---------- copy ---------- */
+
+.hm-nebulon-copy {
+  position: relative;
+  z-index: var(--px-z-content);
+  display: grid;
+  place-items: center;
+  padding: calc(var(--px-topbar-h) + 40px) var(--px-gutter) clamp(88px, 10cqi, 128px);
+  background: none;
+
+  @media (max-width: 719.98px) {
+    padding-top: calc(var(--px-topbar-h) + 24px);
+  }
+}
+
+.hm-nebulon-copyInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1120px;
+  text-align: center;
+}
+
+/* A glow behind the logo; a drop-shadow filter would grow the image's paint past the headline's, making it the LCP */
+.hm-nebulon-mark {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -40% -25%;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--px-pink) 30%, transparent), transparent);
+  }
+}
+
+.hm-nebulon-logo {
+  @include accents.logo;
+}
+
+.hm-nebulon-title {
+  margin: clamp(20px, 2.4cqi, 32px) 0 0;
+  text-shadow: 0 4px 32px rgb(3 8 20 / 0.45);
+
+  @include accents.title;
+}
+
+.hm-nebulon-actions {
+  margin-top: 36px;
+
+  @include elevation.actions(rgb(2 8 20 / 0.6), rgb(2 8 20 / 0.6));
+}
+
+.hm-nebulon-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+
+  @include elevation.chips(rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.1));
+}
+
+/* Over the drifting clouds, so it carries its own dark glass to stay legible on the brightest of them */
+.hm-nebulon-pause {
+  position: absolute;
+  z-index: var(--px-z-content);
+  right: var(--px-gutter);
+  bottom: calc(clamp(28px, 4cqi, 56px) + 8px);
+  border-color: rgb(255 255 255 / 0.16);
+  background: rgb(6 12 24 / 0.55);
+  color: var(--px-ink);
+
+  &:hover {
+    background: rgb(6 12 24 / 0.75);
+  }
+}
+
+/* The drift wave is twice as wide, so the scroll-out can slide it; the scene shows through above it */
+.hm-nebulon-root .hm-nebulon-wave {
+  @include surface.hero-wave;
+}

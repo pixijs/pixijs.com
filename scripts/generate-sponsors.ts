@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import sharp from 'sharp';
 import { fetchSponsors, type SponsorkitConfig, type Sponsorship, tierPresets } from 'sponsorkit';
 import fs from 'fs';
 dotenv.config();
@@ -6,6 +7,7 @@ dotenv.config();
 const SPONSORS_PATH = 'src/data/sponsors.json';
 const PRIVATE_SPONSORS_PATH = 'src/data/sponsors-private.json';
 const OVERRIDES_PATH = 'src/data/sponsor-overrides.json';
+const LOGOS_DIR = 'static/images/sponsors/logos';
 const SPONSOR_GRACE_PERIOD_MS = 28 * 24 * 60 * 60 * 1000;
 const sponsorNameCollator = new Intl.Collator('en', { sensitivity: 'base' });
 
@@ -17,9 +19,16 @@ type SponsorOverride = {
   privacyLevel?: string;
 };
 
+/** A copy of the sponsor's avatar trimmed to its artwork, and the colour that fills the tile around it */
+type SponsorLogo = {
+  src: string;
+  background: string;
+};
+
 type SponsorshipWithoutRaw = Omit<Sponsorship, 'raw'>;
 type StoredSponsorship = SponsorshipWithoutRaw & {
   lastSeenAt: string;
+  logo?: SponsorLogo;
 };
 
 function mergeSponsorRecords<T extends Record<string, unknown>>(existing: T | undefined, incoming: T): T {
@@ -164,6 +173,72 @@ function mergeSponsorsWithGracePeriod(
   };
 }
 
+/**
+ * Saves the logo the homepages show for a sponsor: the avatar trimmed to its artwork, so a tile can fit the artwork
+ * in its own padding and fill the rest with the avatar's background. A transparent avatar gets white, or near-black
+ * when a quarter of its artwork is white and would vanish.
+ */
+async function saveLogo(login: string, url: string): Promise<SponsorLogo> {
+  const source = url.startsWith('/')
+    ? fs.readFileSync(`static${url}`)
+    : Buffer.from(await (await fetch(url)).arrayBuffer());
+  const image = sharp(source, { density: 144 }).ensureAlpha();
+  const pixels = await image.clone().raw().toBuffer();
+  const file = `${login.toLowerCase().replace(/[^a-z0-9_-]/g, '-')}.webp`;
+  let background = '#ffffff';
+
+  if (pixels[3] === 255) {
+    background = `#${[...pixels.subarray(0, 3)].map((c) => c.toString(16).padStart(2, '0')).join('')}`;
+  } else {
+    let white = 0;
+    let cover = 0;
+
+    for (let i = 0; i < pixels.length; i += 4) {
+      if (Math.min(pixels[i], pixels[i + 1], pixels[i + 2]) > 220) white += pixels[i + 3];
+      cover += pixels[i + 3];
+    }
+    if (white / cover > 0.25) background = '#16131f';
+  }
+
+  await image
+    .trim({ threshold: 24 })
+    .resize({ width: 640, height: 256, fit: 'inside', withoutEnlargement: true })
+    .webp({ quality: 90, alphaQuality: 100 })
+    .toFile(`${LOGOS_DIR}/${file}`);
+
+  return { src: `${LOGOS_DIR.replace('static', '')}/${file}`, background };
+}
+
+/** Replaces every saved logo; a sponsor whose avatar can't be read goes without, and the homepages show the avatar */
+async function withLogos(sponsors: StoredSponsorship[], overrides: SponsorOverride[]): Promise<StoredSponsorship[]> {
+  const avatars = new Map(overrides.map((o) => [o.login, o.avatarUrl]));
+
+  fs.rmSync(LOGOS_DIR, { recursive: true, force: true });
+  fs.mkdirSync(LOGOS_DIR, { recursive: true });
+
+  return Promise.all(
+    sponsors.map(async ({ logo, ...sponsor }) => {
+      const { login, avatarUrl } = sponsor.sponsor;
+
+      try {
+        return { ...sponsor, logo: await saveLogo(login, avatars.get(login) ?? avatarUrl) };
+      } catch (err) {
+        console.warn(`No logo for ${login}:`, err);
+
+        return sponsor;
+      }
+    }),
+  );
+}
+
+/** `--logos`: redo the logos for the sponsors already in `sponsors.json`, without fetching any (no tokens needed) */
+async function refreshLogos() {
+  const sponsors = readStoredSponsors(SPONSORS_PATH, new Date().toISOString());
+  const overrides: SponsorOverride[] = JSON.parse(fs.readFileSync(OVERRIDES_PATH, 'utf8'));
+
+  fs.writeFileSync(SPONSORS_PATH, JSON.stringify(await withLogos(sponsors, overrides), null, 2));
+}
+
 async function main() {
   if (
     !process.env.SPONSORKIT_GITHUB_TOKEN ||
@@ -267,12 +342,11 @@ async function main() {
     `Found ${publicSponsors.length} public and ${privateSponsors.length} private sponsors (>= $100/month); retained ${graceSummary} in grace period.`,
   );
 
-  fs.writeFileSync(SPONSORS_PATH, JSON.stringify(publicSponsors, null, 2));
+  fs.writeFileSync(SPONSORS_PATH, JSON.stringify(await withLogos(publicSponsors, overrides), null, 2));
   fs.writeFileSync(PRIVATE_SPONSORS_PATH, JSON.stringify(privateSponsors, null, 2));
 }
 
-// @ts-expect-error - top level await does work
-await main().catch((err) => {
+await (process.argv.includes('--logos') ? refreshLogos() : main()).catch((err) => {
   console.error('Error fetching sponsors:', err);
   process.exitCode = 1;
 });

@@ -1,0 +1,581 @@
+@use '../../../css/breakpoints' as bp;
+
+/* Widths below are the demo's own (`container-type` on .demo), so it lays out the same in any band */
+$two-columns: 900px;
+$tall: 1200px;
+
+/* As wide as every other section's container, so its heading starts on their left edge */
+.hm-stage-demo {
+  position: relative;
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  container-type: inline-size;
+}
+
+.hm-stage-anchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  scroll-margin-top: calc(var(--px-topbar-h) + 16px);
+}
+
+.hm-stage-head {
+  @include bp.fluid(margin-bottom, clamp(28px, 4cqi, 52px));
+
+  /* The split head goes side by side from a 768 px viewport; the tabs only fit beside the title at full width */
+  .hm-stage-demo & {
+    @container (width < #{$two-columns}) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+    }
+  }
+}
+
+/* ---------- tabs ---------- */
+/* A well cut into the surface, and a thumb that stands proud of it */
+.hm-stage-tabs {
+  --thumb: var(--px-pink-fill);
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  padding: 4px;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-pill);
+  background: var(--px-field);
+  box-shadow:
+    inset 0 2px 4px rgb(0 0 0 / 0.14),
+    0 1px 0 rgb(255 255 255 / 0.06);
+
+  /* Full width, each tab as wide as its label plus an equal share of what's left */
+  @container (max-width: 559px) {
+    display: grid;
+    grid-auto-columns: auto;
+    width: 100%;
+  }
+
+  /* Four labels don't fit one row of a small phone */
+  @container (max-width: 339px) {
+    &[data-count='4'] {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-flow: row;
+      border-radius: 28px;
+    }
+  }
+}
+
+.hm-stage-thumb {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: var(--w, 0);
+  height: var(--h, 0);
+  overflow: hidden;
+  border-radius: var(--px-r-pill);
+  background: var(--thumb);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    var(--px-glow);
+  opacity: 0;
+  transform: translate(var(--x, 0), var(--y, 0));
+
+  .hm-stage-tabs[data-ready] & {
+    opacity: 1;
+  }
+
+  /* No overshoot: a spring carried the thumb out of the track at either end */
+  .hm-stage-tabs[data-animate] & {
+    transition:
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      width 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* The tour wrapping round: the thumb moves at the middle of its fade (Tabs.tsx), not across the other tabs */
+  .hm-stage-tabs[data-animate][data-move='jump'] & {
+    transition:
+      transform 0s 150ms,
+      width 0s 150ms;
+  }
+
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+}
+
+/* The auto tour's countdown: a lighter sweep across the active tab */
+.hm-stage-tourFill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.24));
+  transform-origin: left;
+  animation: hm-stage-tour-fill linear forwards;
+}
+
+@keyframes hm-stage-tour-fill {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hm-stage-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: var(--px-r-pill);
+  color: var(--px-ink-2);
+  font: 600 16px/1 var(--px-font-display);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--px-dur-2) var(--px-ease);
+
+  &:hover {
+    color: var(--px-ink);
+    text-decoration: none;
+  }
+
+  &[aria-selected='true'] {
+    color: #fff;
+  }
+
+  .hm-stage-tabs:not([data-ready]) &[aria-selected='true'] {
+    background: var(--thumb);
+  }
+
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+
+  @container (max-width: 559px) {
+    min-width: 0;
+    padding: 0 8px;
+    font-size: 14px;
+  }
+}
+
+/* ---------- cards ---------- */
+/* Side by side, the two cards are equal, and tall enough for 20 lines of code */
+.hm-stage-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+
+  @container (min-width: #{$two-columns}) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 20px;
+    height: 560px;
+  }
+
+  @container (min-width: #{$tall}) {
+    height: 620px;
+  }
+}
+
+.hm-stage-sceneColumn {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.hm-stage-canvasCard {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  aspect-ratio: 1;
+  min-height: 300px;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-lg);
+  background:
+    radial-gradient(50% 60% at 50% 45%, rgb(233 30 99 / 0.16), transparent 70%),
+    linear-gradient(var(--px-grid-line) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, var(--px-grid-line) 1px, transparent 1px) 0 0 / 32px 32px,
+    var(--px-well);
+  box-shadow: var(--px-shadow-md);
+
+  @container (min-width: 560px) {
+    aspect-ratio: 16 / 10;
+  }
+
+  @container (min-width: #{$two-columns}) {
+    flex: 1;
+    aspect-ratio: auto;
+  }
+}
+
+/* The canvas's role="img" wrapper: posters underneath, the live canvas fading in over them */
+.hm-stage-view {
+  position: absolute;
+  inset: 0;
+}
+
+.hm-stage-posterSlot {
+  --pane: block;
+  position: absolute;
+  inset: 0;
+  display: block;
+  transition: opacity 350ms var(--px-ease);
+
+  &[hidden] {
+    display: none;
+  }
+
+  .hm-stage-demo[data-status='live'] & {
+    opacity: 0;
+    transition-duration: 400ms;
+  }
+
+  .hm-stage-demo:is([data-status='nowebgl'], [data-status='error']) &[hidden] {
+    display: block;
+    opacity: 0;
+  }
+}
+
+.hm-stage-poster {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  &[data-variant='dark'],
+  html[data-theme='dark'] &[data-variant='light'] {
+    display: none;
+  }
+
+  html[data-theme='dark'] &[data-variant='dark'] {
+    display: block;
+  }
+}
+
+.hm-stage-canvasHost {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 400ms var(--px-ease);
+
+  .hm-stage-demo[data-status='live'] & {
+    opacity: 1;
+  }
+
+  canvas {
+    outline: none;
+  }
+}
+
+.hm-stage-tags {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  max-width: calc(100% - 40px);
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+  pointer-events: none;
+
+  @container (max-width: 559px) {
+    top: 14px;
+    left: 14px;
+    max-width: calc(100% - 28px);
+    gap: 6px;
+  }
+}
+
+.hm-stage-tags .hm-stage-tag {
+  @container (max-width: 559px) {
+    height: 24px;
+    padding: 0 8px;
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+  }
+}
+
+.hm-stage-tagSlot {
+  --pane: inline-flex;
+  display: inline-flex;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+/* Bottom right, clear of the scene's HUD; on phones the HUD spans the card, so it sits above it */
+.hm-stage-credit {
+  --pane: inline-flex;
+  position: absolute;
+  z-index: 1;
+  right: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  padding: 5px 9px;
+  border-radius: var(--px-r-xs);
+  background: rgb(12 11 16 / 0.62);
+  color: #e6e8ee;
+  font: 400 10.5px/1.3 var(--px-font-mono);
+  text-decoration: none;
+
+  &:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  @container (max-width: 559px) {
+    bottom: 44px;
+  }
+}
+
+/* ---------- code ---------- */
+.hm-stage-codeCard {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--px-pink) 24%, transparent);
+  border-radius: var(--px-r-lg);
+  box-shadow: var(--px-shadow-md);
+
+  /* Lines that run past the card fade out at its right edge */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 53px;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(90deg, transparent, var(--px-code-bg));
+    pointer-events: none;
+  }
+}
+
+.hm-stage-codeHead {
+  display: flex;
+  min-height: 52px;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 16px 0 20px;
+  border-bottom: 1px solid var(--px-line);
+}
+
+.hm-stage-file {
+  color: var(--px-ink-3);
+  font: 400 13px/1 var(--px-font-mono);
+}
+
+.hm-stage-chip {
+  --pane: inline-flex;
+  display: inline-flex;
+
+  &[hidden] {
+    display: none;
+  }
+
+  > * {
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+}
+
+/*
+ * Sideways only: the snippets are cut to fit the card's height, so a wheel over the card scrolls the page. Should
+ * one run long, a keyboard that tabs to the card can still scroll down it.
+ */
+.hm-stage-codeScroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-color: var(--px-line-strong) transparent;
+  scrollbar-width: thin;
+
+  &:focus-visible {
+    overflow-y: auto;
+    outline-offset: -3px;
+  }
+}
+
+/*
+ * Every snippet in one cell, so a card that takes its height from the code (one column) keeps the longest one's
+ * and nothing below it moves on a tab change. Side by side the card's height is fixed, so only the snippet on
+ * show sizes the stack and a short one can't scroll into blank space.
+ */
+.hm-stage-codeStack {
+  position: relative;
+  display: grid;
+  min-width: max-content;
+
+  @container (max-width: 479px) {
+    min-width: 0;
+  }
+}
+
+.hm-stage-code {
+  grid-area: 1 / 1;
+  margin: 0;
+  padding: 22px 20px 24px;
+  border-radius: 0;
+  background: none;
+  color: var(--px-code-plain);
+  font: 400 13.5px/1.6 var(--px-font-mono);
+
+  @container (min-width: #{$two-columns}) {
+    &[aria-hidden='true'] {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  @container (max-width: 479px) {
+    padding: 18px 18px 20px;
+    font-size: 12px;
+  }
+
+  > code {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+  }
+}
+
+/*
+ * A changed line keeps a pink bar on its left for a moment after the code swaps. On a phone a long line wraps,
+ * hanging under itself, rather than running out of the card.
+ */
+.hm-stage-line {
+  position: relative;
+  display: block;
+  white-space: pre;
+
+  @container (max-width: 479px) {
+    padding-left: 4ch;
+    text-indent: -4ch;
+    white-space: pre-wrap;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: -12px;
+    width: 2px;
+    border-radius: 1px;
+    background: var(--px-pink);
+    opacity: var(--bar, 0);
+  }
+}
+
+/* ---------- foot ---------- */
+/* The hint changes with the tab, so it never sets the row's height: one line beside the links, or its own row */
+.hm-stage-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 12px 32px;
+  margin-top: 24px;
+
+  @container (min-width: 700px) {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+.hm-stage-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  margin: 0;
+  overflow: hidden;
+  color: var(--px-ink-3);
+  font: 400 13px/1.4 var(--px-font-mono);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+
+  svg {
+    flex: none;
+  }
+
+  > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  [data-pane] {
+    --pane: inline;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}
+
+.hm-stage-coarse {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .hm-stage-fine {
+    display: none;
+  }
+
+  .hm-stage-coarse {
+    display: inline;
+  }
+}
+
+.hm-stage-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+}
+
+.hm-stage-link {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  gap: 6px;
+  color: var(--px-accent-text);
+  font: 600 16px/1 var(--px-font-display);
+  text-decoration: none;
+
+  svg {
+    transition: transform var(--px-dur-2) var(--px-ease-spring);
+  }
+
+  &:hover {
+    color: var(--px-ink);
+    text-decoration: none;
+
+    svg {
+      transform: translateX(3px);
+    }
+  }
+}
+
+/* The badge is pink on every home, whatever the page's package accent */
+.hm-stage-tags .hm-stage-badge {
+  --px-accent: var(--px-pink);
+}

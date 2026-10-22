@@ -1,0 +1,40 @@
+@use '../../../css/breakpoints' as bp;
+@use 'surface';
+
+.hm-band {
+  /* The container's width, which the showcase strip bleeds out from */
+  --hm-cw: min(var(--px-container), 100cqi - 2 * var(--px-gutter));
+  padding-inline: var(--px-gutter);
+  overflow-x: clip;
+
+  @include surface.band;
+}
+
+:not(.hm-band, .hm-wave) + .hm-band {
+  @include surface.first-band;
+}
+
+.hm-band:last-child {
+  @include surface.last-band;
+}
+
+.hm-wave {
+  @include surface.wave;
+}
+
+.hm-container {
+  position: relative;
+  z-index: var(--px-z-content);
+  max-width: var(--px-container);
+  margin-inline: auto;
+}
+
+/* Space between a section's head and its content */
+.hm-head {
+  @include bp.fluid(margin-bottom, clamp(32px, 4.5cqi, 56px));
+}
+
+/* A band's own light, behind what it shows */
+.hm-glow {
+  @include surface.glow;
+}
