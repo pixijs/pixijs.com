@@ -1,0 +1,98 @@
+name: Sync PixiJS
+
+on:
+  repository_dispatch:
+    types: [pixi-release]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: pixi.js version (defaults to npm latest)
+        required: false
+  schedule:
+    - cron: '0 6 * * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: sync-pixi
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.target.outputs.version }}
+      changed: ${{ steps.target.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: target
+        env:
+          REQUESTED: ${{ github.event.client_payload.version || inputs.version }}
+        run: |
+          v="${REQUESTED:-$(npm view pixi.js version)}"
+          [[ "$v" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::Not a stable pixi.js version: $v"; exit 1; }
+          installed=$(node -p "require('./package-lock.json').packages['node_modules/pixi.js'].version")
+          if [ "$(printf '%s\n' "$v" "$installed" | sort -V | tail -n 1)" = "$installed" ]; then
+            echo "pixi.js $installed already installed"
+            exit 0
+          fi
+          for _ in 1 2 3 4 5; do npm view "pixi.js@$v" version >/dev/null 2>&1 && break; sleep 60; done
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+  sync:
+    needs: check
+    if: needs.check.outputs.changed
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ needs.check.outputs.version }}
+      PIXI_3D_TOKEN: ${{ secrets.PIXI_3D_TOKEN }}
+      PIXI_3D_REQUIRED: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - run: npm install "pixi.js@^$VERSION"
+      - name: Generate, check and build
+        run: |
+          set -o pipefail
+          npm run generate 2>&1 | tee sync.log
+          npm run types --ignore-scripts
+          npm run lint
+          npm run build --ignore-scripts
+      - name: Capture missing previews
+        id: previews
+        continue-on-error: true
+        env:
+          CHROME_BIN: google-chrome
+          CHROME_ARGS: --enable-unsafe-swiftshader
+        run: |
+          set -o pipefail
+          grep -q '^warning: no preview' sync.log || exit 0
+          sudo apt-get update && sudo apt-get install -y webp
+          npm run generate:example-previews -- --missing 2>&1 | tee -a sync.log
+      - name: Write PR body
+        env:
+          PREVIEWS: ${{ steps.previews.outcome }}
+        run: |
+          {
+            echo "Bumps pixi.js to v$VERSION. Docs, examples and llms.txt regenerate from that tag at build."
+            echo
+            grep '^warning:' sync.log || echo "No warnings."
+            if [ "$PREVIEWS" = failure ]; then
+              echo
+              echo "Preview capture failed. Run \`npm run generate:example-previews -- --missing\` locally and push the previews to this branch."
+            fi
+          } > body.md
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: sync/pixi
+          title: 'chore: sync pixi.js v${{ env.VERSION }}'
+          commit-message: 'chore: sync pixi.js v${{ env.VERSION }}'
+          body-path: body.md
+          add-paths: |
+            package.json
+            package-lock.json
+            static/examples/previews

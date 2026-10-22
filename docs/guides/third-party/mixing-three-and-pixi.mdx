@@ -2,9 +2,6 @@
 description: Learn how to combine PixiJS and Three.js to create dynamic applications that leverage both 2D and 3D graphics.
 ---
 
-import { EmbeddedEditor } from "@site/src/components/Editor/EmbeddedEditor";
-import ThreePixiIndexFile from '!!raw-loader!../../examples/three_basic-integration';
-
 # Mixing PixiJS and Three.js
 
 In many projects, developers aim to harness the strengths of both 3D and 2D graphics. Combining the advanced 3D rendering capabilities of Three.js with the speed and versatility of PixiJS for 2D can result in a powerful, seamless experience. Together, these technologies create opportunities for dynamic and visually compelling applications. Lets see how to do this.
@@ -108,9 +105,7 @@ requestAnimationFrame(render);
 
 Here’s the complete example integrating PixiJS and Three.js:
 
-{/* embedded:@site/docs/examples/three_basic-integration.js */}
-<EmbeddedEditor files={{"index.js": ThreePixiIndexFile}} dependencies={{ "three": "latest", "pixi.js": "latest" }} />
-<br/>
+<PixiExample name="three_basic-integration" />
 
 ---
 
