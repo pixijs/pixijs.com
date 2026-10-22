@@ -11,10 +11,26 @@
 # Generated Example and Tutorial Markdowns
 /docs/tutorials/*
 !/docs/tutorials/index.md
-!/docs/examples/index.md
 /versioned_docs/version-*/tutorials/*
 !/versioned_docs/version-*/tutorials/index.md
 !/versioned_docs/version-*/examples/index.md
+
+# Generated from .repos/pixijs by `npm run generate:pixi`
+/docs/guides/concepts/
+/docs/guides/components/
+/docs/guides/migrations/
+/docs/guides/_media/
+/src/data/generated/
+/static/llms.txt
+/static-pixi/
+
+# Generated from .repos/pixi-3d by `npm run generate:pixi-3d`, and by `npm run generate:runtime`
+/docs-3d/guides/
+/docs-3d/tutorials/*
+!/docs-3d/tutorials/index.md
+/static-pixi-3d/
+/static-runtime/
+/src/tutorials/generated-3d/
 
 # Misc
 .DS_Store
@@ -38,3 +54,7 @@ scripts/pixiVersions.json
 static/examples/source
 src/pages/examples/config.ts
 src/data/sponsors-private.json
+
+# Read-only source of the libraries the site documents, checked out by `npm run sync:repos`
+# (scripts/sync-repos.mts).
+/.repos

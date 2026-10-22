@@ -1,0 +1,13 @@
+diff --git a/node_modules/@docusaurus/core/lib/commands/serve.js b/node_modules/@docusaurus/core/lib/commands/serve.js
+index 8039e41..9edc802 100644
+--- a/node_modules/@docusaurus/core/lib/commands/serve.js
++++ b/node_modules/@docusaurus/core/lib/commands/serve.js
+@@ -81,6 +81,8 @@ async function serve(siteDirParam = '.', cliOptions = {}) {
+             public: outDir,
+             trailingSlash,
+             directoryListing: false,
++            // As GitHub Pages does: the editor's sandboxed frames load /runtime and /pixi-3d modules cross-origin
++            headers: [{ source: '**', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] }],
+         });
+     });
+     const url = servingUrl + baseUrl;
