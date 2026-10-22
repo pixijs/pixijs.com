@@ -1,0 +1,111 @@
+.chip {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  height: 34px;
+  padding: 0 14px 0 5px;
+  overflow: hidden;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-pill);
+  background: var(--px-bg);
+  background: color-mix(in srgb, var(--px-bg) 55%, transparent);
+  backdrop-filter: blur(10px);
+  color: var(--px-ink);
+  font: 500 14px/1 var(--px-font-body);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    border-color var(--px-dur-2) var(--px-ease),
+    box-shadow var(--px-dur-3) var(--px-ease);
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.14) 48%, transparent 66%);
+    transform: translateX(-110%);
+    animation: shimmer 6s var(--px-ease-in-out) 1.4s infinite;
+    pointer-events: none;
+  }
+
+  @media (prefers-contrast: more) {
+    background: var(--px-bg);
+  }
+}
+
+.plain {
+  padding-left: 14px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--px-r-pill);
+  background: var(--px-pink-fill);
+  color: #fff;
+  font: 700 10px/1 var(--px-font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+}
+
+.prompt {
+  color: var(--px-accent-text);
+  font: 600 12px/1 var(--px-font-mono);
+}
+
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arrow {
+  flex: none;
+  transition: transform var(--px-dur-2) var(--px-ease-spring);
+}
+
+@mixin hover {
+  border-color: var(--px-pink);
+  border-color: color-mix(in srgb, var(--px-pink) 55%, transparent);
+  box-shadow: 0 8px 26px -8px rgb(233 30 99 / 0.45);
+  color: var(--px-ink);
+  text-decoration: none;
+
+  @media (prefers-reduced-motion: no-preference) {
+    .arrow {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.link {
+  @media (hover: hover) {
+    &:hover {
+      @include hover;
+    }
+  }
+
+  &[data-state='hover'] {
+    @include hover;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-110%);
+  }
+
+  28%,
+  100% {
+    transform: translateX(110%);
+  }
+}

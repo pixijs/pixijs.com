@@ -1,0 +1,42 @@
+.tag {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-xs);
+  background: var(--px-well);
+  background: color-mix(in srgb, var(--px-well) 70%, transparent);
+  color: var(--px-ink);
+  font: 500 11px/1 var(--px-font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.pill {
+  border-radius: var(--px-r-pill);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--px-accent);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.06);
+}
+
+.accent,
+.pkg {
+  border-color: var(--px-accent);
+  border-color: color-mix(in srgb, var(--px-accent) 50%, transparent);
+  background: var(--px-well);
+  background: color-mix(in srgb, var(--px-accent) var(--px-tint), var(--px-well));
+}
+
+.accent {
+  color: var(--px-accent-text);
+}

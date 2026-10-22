@@ -1,0 +1,78 @@
+@use '../../../css/breakpoints' as bp;
+
+/* A head spans its container, so it lets the pointer through to what sits beside its text */
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  pointer-events: none;
+}
+
+.center {
+  align-items: center;
+  text-align: center;
+}
+
+.split {
+  @include bp.up(md) {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  min-width: 0;
+  pointer-events: auto;
+
+  .split & {
+    align-items: flex-start;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+  color: var(--px-accent-text);
+  font: 500 12px/1.4 var(--px-font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: 18ch;
+  margin: 0;
+  color: var(--px-ink);
+  font: 700 var(--px-text-display-2) / 1.02 var(--px-font-display);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.squiggle {
+  display: block;
+  width: 120px;
+  height: auto;
+  margin-top: 14px;
+  overflow: visible;
+  fill: none;
+  stroke: var(--px-pink);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lede {
+  max-width: 54ch;
+  margin: 20px 0 0;
+  color: var(--px-ink-2);
+  font: 400 var(--px-text-lede) / 1.55 var(--px-font-body);
+  text-wrap: pretty;
+}
+
+.control {
+  flex: none;
+  pointer-events: auto;
+}

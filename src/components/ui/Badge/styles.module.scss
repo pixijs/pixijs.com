@@ -1,0 +1,31 @@
+.badge {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  height: 18px;
+  padding: 0 6px;
+  overflow: hidden;
+  border-radius: var(--px-r-xs);
+  background: var(--px-pink-fill);
+  color: #fff;
+  font: 700 10px/1 var(--px-font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 35%, rgb(255 255 255 / 0.5) 50%, transparent 65%) no-repeat;
+    background-size: 200% 100%;
+    background-position-x: var(--shine, -100%);
+    pointer-events: none;
+  }
+
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+}

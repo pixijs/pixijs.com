@@ -1,0 +1,61 @@
+html {
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--px-pink) 28%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--px-focus);
+  outline-offset: 3px;
+}
+
+:not(pre) > code {
+  padding: 2px 6px;
+  border: 1px solid var(--px-line);
+  color: var(--px-ink);
+  font-weight: 500;
+}
+
+kbd {
+  padding: 3px 6px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-xs);
+  background: var(--px-field);
+  box-shadow: none;
+  color: var(--px-ink-3);
+  font: 500 0.75em/1 var(--px-font-mono);
+}
+
+/* Keyframes end at once: entrances land on their final frame and loops stop. Pausing them instead would freeze an
+   entrance on its first, often invisible, frame */
+@mixin settle-keyframes {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @include settle-keyframes;
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html[data-motion='paused'] {
+  @include settle-keyframes;
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline-color: Highlight;
+  }
+}

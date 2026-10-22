@@ -1,0 +1,378 @@
+@use '../../../css/breakpoints' as bp;
+
+.button {
+  --c: var(--px-pink-fill);
+  --sweep: var(--px-pink-deep);
+  --text: #fff;
+  --text-hover: #fff;
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--px-r-pill);
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  &:focus-visible,
+  &[data-state='focus'] {
+    outline: 2px solid var(--px-focus);
+    outline-offset: 4px;
+  }
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.body {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 30px;
+  border-radius: inherit;
+  background: var(--c);
+  color: inherit;
+  font: 600 15px/1 var(--px-font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    transform 350ms var(--px-ease),
+    color 350ms var(--px-ease),
+    background-color var(--px-dur-2) var(--px-ease);
+
+  @include bp.down(sm) {
+    height: 48px;
+    font-size: 14px;
+  }
+}
+
+.label {
+  display: inline-block;
+}
+
+.glyph,
+.arrow {
+  transition: transform 350ms var(--px-ease-spring);
+}
+
+/* ---------- offset-shadow family: primary, outline, outline-pink ---------- */
+.primary,
+.outline,
+.outlinePink {
+  .body::before,
+  .body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  .body::before {
+    z-index: -1;
+    background: var(--sweep);
+    clip-path: inset(0 100% 0 0 round 999px);
+    transition: clip-path 350ms var(--px-ease);
+  }
+
+  .body::after {
+    z-index: -2;
+    border: 2px solid transparent;
+    border-right-color: var(--c);
+    border-bottom-color: var(--c);
+    transform: translate(5px, 5px);
+    transition: transform 350ms var(--px-ease);
+  }
+}
+
+/*
+ * The hero intro (M1): `data-intro` buttons' shadows slide out from under them as the page first paints, the second
+ * one a beat later. CSS, so the server-rendered page plays it too, and Pause motion skips it rather than freezing it.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  :global(html:not([data-motion='paused'])) .button[data-intro] .body::after {
+    animation: shadow-in 600ms var(--px-ease-spring) 450ms backwards;
+  }
+
+  :global(html:not([data-motion='paused'])) .button[data-intro='1'] .body::after {
+    animation-delay: 530ms;
+  }
+}
+
+@keyframes shadow-in {
+  from {
+    transform: translate(0, 0);
+  }
+}
+
+@mixin sweep-hover {
+  .body {
+    color: var(--text-hover);
+
+    &::before {
+      clip-path: inset(0 0 0 0 round 999px);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      transform: translate(2px, 2px);
+
+      &::after {
+        transform: translate(3px, 3px);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .arrow {
+      transform: translate(3px, -3px);
+    }
+  }
+}
+
+@mixin sweep-press {
+  .body {
+    transform: translate(5px, 5px) scale(0.98);
+
+    &::after {
+      transform: translate(0, 0);
+    }
+  }
+}
+
+.primary,
+.outline,
+.outlinePink {
+  @media (hover: hover) {
+    &:hover {
+      @include sweep-hover;
+    }
+  }
+
+  &[data-state='hover'] {
+    @include sweep-hover;
+  }
+
+  &:active,
+  &[data-state='active'] {
+    @include sweep-press;
+  }
+}
+
+.outline,
+.outlinePink {
+  .body {
+    background: transparent;
+    box-shadow: inset 0 0 0 2px var(--c);
+  }
+}
+
+.outline {
+  --c: var(--px-ink);
+  --sweep: var(--px-ink);
+  --text: var(--px-ink);
+  --text-hover: var(--px-bg);
+}
+
+.outlinePink {
+  --c: var(--px-pink);
+  --sweep: var(--px-pink-fill);
+  --text: var(--px-ink);
+}
+
+.glass .body {
+  background: var(--px-bg);
+  background: color-mix(in srgb, var(--px-bg) 40%, transparent);
+  backdrop-filter: blur(8px);
+
+  @media (prefers-contrast: more) {
+    background: var(--px-bg);
+  }
+}
+
+/* ---------- small ---------- */
+.small {
+  --text: var(--px-ink);
+  --text-hover: var(--px-ink);
+
+  .body {
+    height: 36px;
+    padding: 0 16px;
+    gap: 8px;
+    background: var(--px-field);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-transform: none;
+
+    @media (pointer: coarse) {
+      height: 44px;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover .body {
+      background: var(--px-active);
+    }
+  }
+
+  &[data-state='hover'] .body {
+    background: var(--px-active);
+  }
+
+  &:active .body,
+  &[data-state='active'] .body {
+    transform: scale(0.97);
+  }
+
+  &:focus-visible,
+  &[data-state='focus'] {
+    outline-offset: 3px;
+  }
+}
+
+/* ---------- github ---------- */
+@mixin github-hover {
+  .body {
+    background: var(--px-pink-deep);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transform: translateY(-2px) rotate(-2deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .glyph {
+      transform: rotate(-16deg) scale(1.12);
+    }
+  }
+}
+
+.github {
+  .body {
+    height: 40px;
+    padding: 0 20px;
+    gap: 8px;
+    background: var(--px-pink-fill);
+    box-shadow: var(--px-glow);
+    letter-spacing: 0;
+    text-transform: none;
+    transition:
+      transform 450ms var(--px-ease-spring),
+      background-color var(--px-dur-2) var(--px-ease);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      @include github-hover;
+    }
+  }
+
+  &[data-state='hover'] {
+    @include github-hover;
+  }
+
+  &:active .body,
+  &[data-state='active'] .body {
+    transform: scale(0.97);
+  }
+}
+
+/* ---------- icon ---------- */
+.icon {
+  --text: var(--px-ink-2);
+  --text-hover: var(--px-ink);
+
+  .body {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text);
+
+    @media (pointer: coarse) {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover .body {
+      background: var(--px-hover);
+      color: var(--text-hover);
+    }
+  }
+
+  &[data-state='hover'] .body {
+    background: var(--px-hover);
+    color: var(--text-hover);
+  }
+
+  &:active .body,
+  &[data-state='active'] .body {
+    transform: scale(0.92);
+  }
+
+  &:focus-visible,
+  &[data-state='focus'] {
+    outline-offset: 2px;
+  }
+}
+
+/* ---------- CTA rows ---------- */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 20px;
+
+  @include bp.down(sm) {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 346px;
+    margin-inline: auto;
+
+    .button {
+      margin-right: 6px;
+    }
+  }
+}
+
+.rowStart {
+  justify-content: flex-start;
+
+  @include bp.down(sm) {
+    margin-inline: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .body {
+    border: 2px solid ButtonText;
+  }
+
+  .body::before,
+  .body::after {
+    display: none;
+  }
+}

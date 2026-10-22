@@ -1,0 +1,119 @@
+.track {
+  --thumb: var(--px-pink-fill);
+  --thumb-border: transparent;
+  --thumb-shadow: var(--px-glow);
+  --on: #fff;
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  max-width: 100%;
+  padding: 4px;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-pill);
+  background: var(--px-field);
+  vertical-align: middle;
+}
+
+.fill {
+  display: grid;
+  width: 100%;
+}
+
+.thumb {
+  position: absolute;
+  z-index: -1;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: var(--w, 0);
+  border: 1px solid var(--thumb-border);
+  border-radius: var(--px-r-pill);
+  background: var(--thumb);
+  box-shadow: var(--thumb-shadow);
+  opacity: 0;
+  transform: translateX(var(--x, 0));
+
+  .track[data-ready] & {
+    opacity: 1;
+  }
+
+  .track[data-animate] & {
+    transition:
+      transform 450ms var(--px-ease-spring),
+      width 450ms var(--px-ease-spring);
+  }
+
+  @media (forced-colors: active) {
+    border-color: CanvasText;
+  }
+}
+
+.segment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  height: 40px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: var(--px-r-pill);
+  background: transparent;
+  color: var(--px-ink-2);
+  font: 600 15px/1 var(--px-font-display);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--px-dur-2) var(--px-ease);
+
+  &:hover {
+    color: var(--px-ink);
+    text-decoration: none;
+  }
+
+  &[data-selected] {
+    color: var(--on);
+  }
+
+  .track:not([data-ready]) &[data-selected] {
+    border: 1px solid var(--thumb-border);
+    background: var(--thumb);
+  }
+
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+}
+
+.sm,
+.xs {
+  --thumb: color-mix(in srgb, var(--px-pink) 22%, var(--px-rail));
+  --thumb-border: color-mix(in srgb, var(--px-pink) 55%, transparent);
+  --thumb-shadow: none;
+  --on: var(--px-accent-text);
+
+  .segment {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.xs {
+  grid-auto-columns: auto;
+
+  .segment {
+    height: 32px;
+    padding: 0 6px;
+    font-size: 13px;
+  }
+}
+
+@media (pointer: coarse) {
+  .track .segment {
+    height: 44px;
+  }
+}
