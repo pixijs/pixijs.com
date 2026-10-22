@@ -1,7 +1,7 @@
 import manualSponsors from '../../data/manualSponsors.json';
 import sponsorOverrides from '../../data/sponsor-overrides.json';
 import sponsorData from '../../data/sponsors.json';
-import styles from './BlogSponsors.module.scss';
+import styles from './classes';
 
 import type React from 'react';
 import type { Sponsorship } from 'sponsorkit';
@@ -39,7 +39,7 @@ export function BlogSponsors(): React.JSX.Element | null {
             rel="noopener noreferrer"
             title={sponsor.sponsor.name}
           >
-            <img src={imgSrc} alt={`${sponsor.sponsor.name} logo`} className={styles.logo} />
+            <img src={imgSrc} alt={`${sponsor.sponsor.name} logo`} className={styles.logo} loading="lazy" />
           </a>
         );
       })}

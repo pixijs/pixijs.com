@@ -1,0 +1,340 @@
+@use '../../css/breakpoints' as bp;
+
+@mixin glass($mix, $surface: var(--px-rail)) {
+  background: $surface;
+  background: color-mix(in srgb, #{$surface} $mix, transparent);
+  backdrop-filter: blur(16px) saturate(1.4);
+
+  @media (prefers-contrast: more) {
+    background: $surface;
+    backdrop-filter: none;
+  }
+}
+
+/* /2d's hero is dark in both themes: while the page is at its top, the bar over it takes the hero's sky for its glass */
+@mixin over-dark-hero {
+  :global(html:has(.hm-nebulon-root)) .bar:not([data-scrolled]) & {
+    --px-bg: #0c1b2b;
+    --px-rail: #0c1b2b;
+    --px-line: rgb(255 255 255 / 0.08);
+    --px-line-strong: rgb(255 255 255 / 0.14);
+    --px-ink: #fff;
+    --px-ink-2: #aab4c6;
+    --px-hover: rgb(255 255 255 / 0.05);
+    --px-accent-text: #f06695;
+    --px-focus: #ff70a5;
+    --px-tint: 14%;
+    color-scheme: dark;
+  }
+}
+
+.sentinel {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.probe {
+  position: fixed;
+  top: 0;
+  width: 0;
+  height: var(--px-topbar-h);
+  padding: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.bar {
+  position: fixed;
+  z-index: var(--px-z-topbar);
+  top: 0;
+  right: 0;
+  left: var(--shell-rail, 0px);
+  container-type: inline-size;
+  pointer-events: none;
+  transition: transform 320ms var(--px-ease);
+
+  &[data-hidden]:not(:focus-within) {
+    transform: translateY(calc(-100% - 8px));
+  }
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  height: var(--px-topbar-h);
+  padding: 8px clamp(16px, 2vw, 28px) 0;
+
+  @include bp.down(md) {
+    display: none;
+  }
+}
+
+.start,
+.end,
+.pill {
+  pointer-events: auto;
+}
+
+.start {
+  display: flex;
+  justify-self: start;
+  align-items: center;
+  gap: 2px;
+  height: 48px;
+  padding: 0 16px 0 2px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-pill);
+  box-shadow: var(--px-shadow-md);
+
+  @include glass(72%);
+
+  @include bp.up(lg) {
+    visibility: hidden;
+  }
+
+  @include over-dark-hero;
+}
+
+.end {
+  justify-self: end;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-radius: var(--px-r-xs);
+
+  img {
+    display: block;
+    height: 22px;
+    width: auto;
+  }
+
+  &:focus-visible {
+    outline-offset: 2px;
+  }
+}
+
+.menu,
+.iconButton {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--px-ink-2);
+  cursor: pointer;
+  transition:
+    color var(--px-dur-1) var(--px-ease),
+    background-color var(--px-dur-1) var(--px-ease);
+
+  &:hover {
+    background: var(--px-hover);
+    color: var(--px-ink);
+  }
+
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+}
+
+/* ---------- pill ---------- */
+
+.pill {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  padding: 5px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-pill);
+  box-shadow: var(--px-shadow-md);
+  transition:
+    background-color 400ms var(--px-ease),
+    box-shadow 400ms var(--px-ease);
+
+  @include glass(72%);
+
+  .bar[data-scrolled] & {
+    box-shadow: var(--px-shadow-lg);
+
+    @include glass(88%);
+  }
+
+  @include over-dark-hero;
+}
+
+.thumb {
+  position: absolute;
+  z-index: -1;
+  top: 5px;
+  bottom: 5px;
+  left: 0;
+  width: var(--w, 0);
+  border-radius: var(--px-r-pill);
+  background: var(--px-hover);
+  box-shadow: inset 0 0 0 1px var(--px-line);
+  opacity: var(--o, 0);
+  transform: translateX(var(--x, 0));
+  transition: opacity 200ms var(--px-ease);
+  pointer-events: none;
+
+  .pill[data-animate] & {
+    transition:
+      transform 450ms var(--px-ease-spring),
+      width 450ms var(--px-ease-spring),
+      opacity 200ms var(--px-ease);
+  }
+
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+}
+
+.link {
+  position: relative;
+  padding: 11px 16px;
+  border-radius: var(--px-r-pill);
+  color: var(--px-ink);
+  font: 500 15px/1 var(--px-font-display);
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--px-ink);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+
+  &[aria-current='page']::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    margin-left: -2px;
+    border-radius: 50%;
+    background: var(--px-pink);
+  }
+
+  @include bp.down(lg) {
+    padding-inline: 13px;
+  }
+}
+
+/* Just the mark, in a circle, when the bar is too narrow for the pill and the label */
+@container (max-width: 820px) {
+  .end .github > span {
+    width: 40px;
+    padding: 0;
+  }
+
+  .github span[data-magnetic-label] {
+    display: none;
+  }
+}
+
+/* ---------- phones ---------- */
+
+.mobile {
+  display: none;
+
+  @include bp.down(md) {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 56px;
+    padding: 0 8px 0 4px;
+    border-bottom: 1px solid var(--px-line);
+    pointer-events: auto;
+    transition: background-color 400ms var(--px-ease);
+
+    @include glass(84%, var(--px-bg));
+
+    .bar[data-scrolled] & {
+      @include glass(94%, var(--px-bg));
+    }
+
+    @include over-dark-hero;
+  }
+
+  .logo {
+    margin: 0 8px 0 2px;
+  }
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+
+  > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 28px;
+    padding: 0 8px 0 10px;
+    border: 1px solid color-mix(in srgb, var(--px-pink) 45%, transparent);
+    border-radius: var(--px-r-pill);
+    background: color-mix(in srgb, var(--px-pink) var(--px-tint), transparent);
+    color: var(--px-accent-text);
+    font: 500 13px/1 var(--px-font-display);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  b {
+    color: var(--px-ink);
+    font-weight: 600;
+  }
+
+  &:focus-visible {
+    outline: 0;
+
+    > span {
+      outline: 2px solid var(--px-focus);
+      outline-offset: 2px;
+    }
+  }
+}
+
+.push {
+  margin-left: auto;
+}
+
+.githubIcon {
+  width: 36px;
+  height: 36px;
+  margin-left: 2px;
+  background: var(--px-pink-fill);
+  box-shadow: var(--px-glow);
+  color: #fff;
+
+  &:hover {
+    background: var(--px-pink-deep);
+    color: #fff;
+  }
+
+  &:focus-visible {
+    outline-offset: 3px;
+  }
+}

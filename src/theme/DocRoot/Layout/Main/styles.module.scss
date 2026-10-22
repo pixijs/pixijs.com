@@ -1,0 +1,12 @@
+.main {
+  flex: 1 0 auto;
+  width: 100%;
+  padding: 32px var(--px-gutter) 0;
+  container-type: inline-size;
+
+  /* Apps size and position their own panels against the viewport */
+  &:has([data-app-page]) {
+    padding: 0;
+    container-type: normal;
+  }
+}

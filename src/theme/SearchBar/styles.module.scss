@@ -1,0 +1,156 @@
+@use '../../css/breakpoints' as bp;
+
+/* easyops's classes are CSS-module hashed, so its parts are matched by name prefix */
+.host {
+  --search-local-modal-background: transparent;
+  --search-local-modal-shadow: none;
+  --search-local-modal-width: 100%;
+  --search-local-modal-width-sm: 100%;
+  --search-local-spacing: 8px;
+  --search-local-hit-background: transparent;
+  --search-local-hit-shadow: none;
+  --search-local-hit-color: var(--px-ink-2);
+  --search-local-hit-active-color: var(--px-ink);
+  --search-local-hit-height: 56px;
+  --search-local-highlight-color: var(--px-accent-text);
+  --search-local-muted-color: var(--px-ink-3);
+  --search-local-icon-stroke-width: 1.5;
+  --search-local-input-active-border-color: transparent;
+
+  :global(.navbar__search) {
+    display: block;
+    margin: 0;
+  }
+
+  [class*='searchIcon'] {
+    top: 28px;
+    left: 20px;
+    width: 18px;
+    height: 18px;
+    color: var(--px-ink-3);
+  }
+
+  [class*='searchBarLoadingRing'] {
+    top: 18px;
+    left: 18px;
+  }
+
+  [class*='searchBar_'] {
+    display: block !important;
+  }
+
+  :global(.navbar__search-input) {
+    width: 100%;
+    height: 56px;
+    padding: 0 76px 0 52px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--px-ink);
+    font: 400 18px/1 var(--px-font-display);
+    appearance: none;
+
+    &::placeholder {
+      color: var(--px-ink-3);
+      opacity: 1;
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: 0;
+    }
+  }
+
+  [class*='dropdownMenu'] {
+    position: static !important;
+    max-height: calc(76vh - 56px - 40px);
+    margin: 0;
+    padding: 8px;
+    overflow-y: auto;
+    border-top: 1px solid var(--px-line);
+    border-radius: 0;
+    overscroll-behavior: contain;
+
+    @include bp.down(md) {
+      max-height: none;
+    }
+  }
+
+  [class*='suggestion_'] {
+    min-height: 52px;
+    height: auto;
+    padding: 6px 12px;
+    border-radius: var(--px-r-sm);
+    transition: background-color var(--px-dur-1) var(--px-ease);
+  }
+
+  [class*='suggestion_'][class*='cursor_'] {
+    background: var(--px-active) !important;
+    box-shadow: inset 2px 0 0 var(--px-accent);
+  }
+
+  [class*='hitTree'] {
+    color: var(--px-ink-4);
+  }
+
+  [class*='hitIcon'] {
+    color: var(--px-ink-3);
+  }
+
+  [class*='hitTitle'] {
+    color: var(--px-ink);
+    font: 500 15px/1.35 var(--px-font-display);
+  }
+
+  [class*='hitPath'] {
+    margin-top: 3px;
+    color: var(--px-ink-3);
+    font: 400 11px/1.4 var(--px-font-mono);
+  }
+
+  [class*='hitAction'] {
+    color: var(--px-ink-3);
+  }
+
+  mark {
+    padding: 0;
+    background: none;
+    color: var(--px-accent-text);
+  }
+
+  [class*='suggestion_'][class*='cursor_'] mark {
+    color: var(--px-accent-text) !important;
+    text-decoration: none;
+  }
+
+  [class*='hitFooter'] {
+    margin: 8px 0 4px;
+
+    a {
+      color: var(--px-ink-2);
+      font: 500 13px/1 var(--px-font-display);
+      text-underline-offset: 3px;
+
+      &:hover {
+        color: var(--px-ink);
+      }
+    }
+  }
+
+  [class*='noResults'] {
+    padding: 28px 0;
+    color: var(--px-ink-3);
+    font: 400 14px/1.5 var(--px-font-body);
+  }
+}
+
+.placeholder {
+  position: relative;
+}
+
+.placeholderIcon {
+  position: absolute;
+  top: 19px;
+  left: 20px;
+  color: var(--px-ink-3);
+}

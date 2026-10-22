@@ -1,0 +1,75 @@
+@use '../../css/breakpoints' as bp;
+
+/* Width the docked rail takes from the page: none below 997, compact on app routes or when collapsed */
+:global(html) {
+  --shell-rail: 0px;
+}
+
+@include bp.up(lg) {
+  :global(html) {
+    --shell-rail: var(--px-rail-w);
+  }
+
+  :global(html:has([data-app-page])),
+  :global(html[data-rail='compact']) {
+    --shell-rail: var(--px-rail-compact);
+  }
+
+  :global(html[data-rail='full']:has([data-app-page])) {
+    --shell-rail: var(--px-rail-w);
+  }
+}
+
+.shell {
+  display: contents;
+}
+
+/* From theme-classic's Layout: the footer sits at the bottom of short pages */
+:global(#__docusaurus) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+:global(html),
+:global(body) {
+  height: 100%;
+}
+
+/* Theme switch: the new theme is revealed in a circle (ThemeSegmented animates the clip) */
+:global {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  [class*='skipToContent_'] {
+    z-index: var(--px-z-skip);
+    top: 12px;
+    padding: 12px 20px;
+    border-radius: var(--px-r-pill);
+    background: var(--px-pink-fill);
+    color: #fff;
+    font: 600 14px/1 var(--px-font-display);
+    text-decoration: none;
+
+    &:focus {
+      left: 12px;
+      outline-offset: 4px;
+    }
+  }
+}
+
+/* The top bar floats over main; homes start their hero under it */
+.main {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  margin-left: var(--shell-rail);
+  padding-top: var(--px-topbar-h);
+
+  &:has(:global([data-home])) {
+    padding-top: 0;
+  }
+}

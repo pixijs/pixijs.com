@@ -1,0 +1,788 @@
+@use '../../css/breakpoints' as bp;
+@use '../../theme/DocItem/Layout/toc';
+
+/*
+ * The blog's styles, inlined by BlogLayout on blog pages only (Docusaurus puts every CSS module into the one
+ * site-wide stylesheet). Classes are `px-blog-*` (see classes.ts).
+ */
+
+/* ---------- Layout: the reading column for posts, a grid of cards for the list, tag and author pages ---------- */
+
+.px-blog-blog {
+  --px-accent: var(--px-pink);
+
+  width: 100%;
+  padding: 32px var(--px-gutter) clamp(64px, 8vw, 112px);
+  container-type: inline-size;
+}
+
+/* List, tag and author pages: a grid of post cards under a full-width header */
+.px-blog-layout {
+  max-width: var(--px-container);
+  margin: 0 auto;
+}
+
+.px-blog-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 24px;
+  min-width: 0;
+
+  > :not(article) {
+    grid-column: 1 / -1;
+  }
+
+  > header {
+    > a {
+      color: var(--px-accent-text);
+      font: 500 14px/1.4 var(--px-font-display);
+    }
+  }
+
+  > h1,
+  > header h1 {
+    @include bp.fluid(font-size, var(--px-text-h1));
+
+    margin: 0 0 12px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  /* Docusaurus's own tag and author headers get the eyebrow the other blog pages render */
+  > h1::before,
+  > header > h1:first-child::before {
+    content: 'Blog';
+    display: block;
+    margin-bottom: 14px;
+    padding-left: 16px;
+    background: radial-gradient(circle at 3px 50%, var(--px-pink) 2.6px, transparent 3.4px) no-repeat;
+    color: var(--px-ink-3);
+    font: 500 12px/1.4 var(--px-font-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  > header > p:last-child {
+    @include bp.fluid(font-size, var(--px-text-lede));
+
+    margin: 0;
+    color: var(--px-ink-2);
+    line-height: 1.55;
+  }
+}
+
+/*
+ * The tag and author pages' header, section and avatars carry Infima's spacing utilities (`margin-bottom--xl`,
+ * `margin-vert--lg`, `margin-bottom--sm`). They're `!important` in Docusaurus's first cascade layer, which outranks
+ * any unlayered rule, so this joins it.
+ */
+@layer docusaurus.infima {
+  .px-blog-main > header {
+    margin: 0 0 16px !important;
+  }
+
+  .px-blog-main > section,
+  .px-blog-main .avatar {
+    margin: 0 !important;
+  }
+}
+
+/* The index pages without cards read better narrow */
+html.blog-archive-page,
+html.blog-tags-list-page,
+html.blog-authors-list-page {
+  .px-blog-layout {
+    max-width: 880px;
+  }
+}
+
+/* Tags by letter: Docusaurus's arrow-shaped tags become plain chips */
+html.blog-tags-list-page .px-blog-main {
+  article {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    align-items: start;
+    padding: 16px 0;
+    border-top: 1px solid var(--px-line);
+  }
+
+  h2 {
+    margin: 4px 0 0;
+    color: var(--px-ink-3);
+    font: 600 18px/1.4 var(--px-font-display);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  hr {
+    display: none;
+  }
+
+  a[rel='tag'] {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 12px;
+    border: 1px solid var(--px-line-strong);
+    border-radius: var(--px-r-pill);
+    color: var(--px-ink-2);
+    font: 500 13px/1 var(--px-font-display);
+    text-decoration: none;
+    transition:
+      color var(--px-dur-1) var(--px-ease),
+      background-color var(--px-dur-1) var(--px-ease);
+
+    &::before,
+    &::after {
+      content: none;
+    }
+
+    &:hover {
+      background: var(--px-hover);
+      color: var(--px-ink);
+    }
+
+    span {
+      margin: 0;
+      padding: 0;
+      background: none;
+      color: var(--px-ink-3);
+      font: 500 11px/1 var(--px-font-mono);
+    }
+
+    @media (pointer: coarse) {
+      height: 44px;
+      padding: 0 16px;
+    }
+  }
+}
+
+/* Authors: a card each */
+html.blog-authors-list-page .px-blog-main > section > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    padding: 20px;
+    border: 1px solid var(--px-line);
+    border-radius: var(--px-r-lg);
+    background: var(--px-well);
+  }
+
+  .avatar__photo {
+    --ifm-avatar-photo-size: 56px;
+
+    background: var(--px-field);
+  }
+
+  .avatar__name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    a {
+      color: var(--px-ink);
+    }
+
+    h2 {
+      margin: 0;
+      font: 600 17px/28px var(--px-font-display);
+    }
+
+    > span {
+      margin: 0;
+      padding: 2px 6px;
+      border-radius: var(--px-r-xs);
+      background: var(--px-field);
+      color: var(--px-ink-3);
+      font: 500 11px/1.2 var(--px-font-mono);
+    }
+  }
+
+  small {
+    color: var(--px-ink-3);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Social links */
+  small + div {
+    gap: 2px;
+    height: auto;
+    margin: 6px 0 0 -8px;
+
+    a {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin: 0;
+      border-radius: 50%;
+      color: var(--px-ink-3);
+
+      &:hover {
+        background: var(--px-hover);
+        color: var(--px-ink);
+      }
+
+      @media (pointer: coarse) {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    svg,
+    path {
+      fill: currentColor;
+    }
+  }
+}
+
+/* A post: the reading column, centred like a doc */
+html.blog-post-page {
+  .px-blog-layout {
+    max-width: var(--px-prose);
+  }
+
+  .px-blog-main {
+    display: block;
+  }
+
+  @include bp.up(xl) {
+    .px-blog-with-toc {
+      @include toc.with-toc;
+    }
+  }
+}
+
+/* ---------- Posts: the list card and the post page ---------- */
+
+/* ---------- card (lists) ---------- */
+
+.px-blog-item {
+  display: flex;
+  min-width: 0;
+}
+
+.px-blog-card {
+  flex: 1;
+  min-width: 0;
+}
+
+/* A post's label: its package and year, its version or month large under them, and its tags along the bottom */
+.px-blog-cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  padding: 6% 7%;
+  background:
+    radial-gradient(80% 110% at 100% 100%, color-mix(in srgb, var(--px-accent) 22%, transparent), transparent 70%),
+    linear-gradient(var(--px-grid-line) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, var(--px-grid-line) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--px-bg-alt);
+  container-type: inline-size;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.px-blog-cover-package {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--px-ink-2);
+  font: 500 max(11px, 3cqi) / 1 var(--px-font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--px-accent);
+  }
+
+  span {
+    margin-left: auto;
+    color: var(--px-ink-3);
+  }
+}
+
+.px-blog-cover-headline {
+  margin-top: 5cqi;
+  color: var(--px-ink);
+  font: 700 15cqi/1 var(--px-font-display);
+  letter-spacing: -0.04em;
+
+  > span {
+    display: block;
+  }
+
+  /* A post that covers several releases lists each */
+  &:has(> span + span) {
+    font-size: 10cqi;
+  }
+}
+
+/* Two rows at most; the rest are on the post */
+.px-blog-cover-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: calc(2 * max(22px, 6.6cqi) + 6px);
+  margin-top: auto;
+  overflow: hidden;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    height: max(22px, 6.6cqi);
+    padding: 0 max(8px, 2.4cqi);
+    border: 1px solid var(--px-line-strong);
+    border-radius: var(--px-r-xs);
+    background: color-mix(in srgb, var(--px-bg-alt) 70%, transparent);
+    color: var(--px-ink-2);
+    font: 500 max(10.5px, 2.9cqi) / 1 var(--px-font-mono);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+}
+
+/* `.px-blog-card` in front outweighs the Card primitive's own paragraph styles */
+.px-blog-card .px-blog-meta {
+  color: var(--px-ink-3);
+  font: 500 11px/1.4 var(--px-font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.px-blog-card-title {
+  margin: 0;
+  color: var(--px-ink);
+  font: 600 19px/1.3 var(--px-font-display);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.px-blog-summary {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.px-blog-card .px-blog-by {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 10px;
+  color: var(--px-ink-3);
+  font: 500 13px/1.3 var(--px-font-display);
+}
+
+.px-blog-faces {
+  display: flex;
+  flex: none;
+
+  img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--px-field);
+    box-shadow: 0 0 0 2px var(--px-well);
+
+    + img {
+      margin-left: -8px;
+    }
+  }
+}
+
+.px-blog-names {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.px-blog-go {
+  color: var(--px-ink-4);
+  transition:
+    color var(--px-dur-2) var(--px-ease),
+    transform var(--px-dur-3) var(--px-ease-spring);
+
+  .px-blog-card:hover & {
+    color: var(--px-accent-text);
+    transform: translateX(3px);
+  }
+}
+
+/* The newest post leads the blog index: cover beside the text, larger title */
+html.blog-list-page .px-blog-item:first-of-type {
+  grid-column: 1 / -1;
+
+  @container (min-width: 600px) {
+    .px-blog-card {
+      flex-direction: row;
+      align-items: stretch;
+
+      > :first-child {
+        display: grid;
+        flex: 1.1;
+      }
+
+      > :last-child {
+        flex: 1;
+        justify-content: center;
+        gap: 12px;
+        padding: 24px clamp(20px, 3cqi, 40px);
+      }
+    }
+
+    /* At least 16:9, and as tall as the text beside it */
+    .px-blog-cover {
+      place-self: stretch;
+    }
+
+    .px-blog-card-title {
+      @include bp.fluid(font-size, var(--px-text-display-3));
+
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .px-blog-summary {
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+      font-size: 16px;
+    }
+
+    .px-blog-by {
+      margin-top: 8px;
+    }
+  }
+}
+
+/* ---------- post page ---------- */
+
+.px-blog-head {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--px-line);
+}
+
+.px-blog-title {
+  @include bp.fluid(font-size, var(--px-text-h1));
+
+  margin: 0 0 28px;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.px-blog-authors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 40px;
+}
+
+.px-blog-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  > img {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--px-field);
+  }
+
+  /* Docusaurus's social links, as quiet icon buttons */
+  > div:last-child {
+    display: flex;
+    gap: 2px;
+    height: auto;
+    margin: 0 0 0 4px;
+    line-height: 0;
+
+    a {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: var(--px-ink-3);
+      transition:
+        color var(--px-dur-1) var(--px-ease),
+        background-color var(--px-dur-1) var(--px-ease);
+
+      &:hover {
+        background: var(--px-hover);
+        color: var(--px-ink);
+      }
+
+      @media (pointer: coarse) {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    svg,
+    path {
+      fill: currentColor;
+    }
+  }
+}
+
+.px-blog-name {
+  display: block;
+  color: var(--px-ink);
+  font: 600 15px/24px var(--px-font-display);
+
+  &:hover {
+    color: var(--px-accent-text);
+    text-decoration: none;
+  }
+}
+
+.px-blog-role {
+  display: block;
+  margin-top: -2px;
+  color: var(--px-ink-3);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.px-blog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--px-line);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 10px;
+    border: 1px solid var(--px-line-strong);
+    border-radius: var(--px-r-xs);
+    color: var(--px-ink-2);
+    font: 500 11px/1 var(--px-font-mono);
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      color var(--px-dur-1) var(--px-ease),
+      border-color var(--px-dur-1) var(--px-ease);
+
+    &:hover {
+      border-color: var(--px-pink);
+      color: var(--px-ink);
+    }
+  }
+}
+
+/* ---------- The blog index header ---------- */
+
+/* Title on the left, the blog's other views on the right along its baseline; they stack on phones */
+.px-blog-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 4px 32px;
+  padding-bottom: 8px;
+
+  > * {
+    grid-column: 1;
+  }
+
+  @include bp.down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.px-blog-lede {
+  @include bp.fluid(font-size, var(--px-text-lede));
+
+  margin: 0;
+  color: var(--px-ink-2);
+  line-height: 1.55;
+}
+
+.px-blog-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  @include bp.up(md) {
+    grid-row: 3;
+    grid-column: 2;
+  }
+
+  @include bp.down(md) {
+    margin-top: 16px;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 14px;
+    border: 1px solid var(--px-line-strong);
+    border-radius: var(--px-r-pill);
+    color: var(--px-ink-2);
+    font: 500 13px/1 var(--px-font-display);
+    text-decoration: none;
+    transition:
+      color var(--px-dur-1) var(--px-ease),
+      background-color var(--px-dur-1) var(--px-ease);
+
+    &:hover {
+      background: var(--px-hover);
+      color: var(--px-ink);
+    }
+
+    @media (pointer: coarse) {
+      height: 44px;
+      padding: 0 16px;
+    }
+  }
+}
+
+/* ---------- The archive ---------- */
+
+/* The year beside its posts; above them on phones */
+.px-blog-year {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 0 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--px-line);
+
+  @include bp.down(md) {
+    grid-template-columns: 1fr;
+  }
+
+  h2 {
+    margin: 6px 0 12px;
+    scroll-margin-top: calc(var(--px-topbar-h) + 16px);
+    color: var(--px-ink-3);
+    font: 600 22px/1.2 var(--px-font-display);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  ul {
+    margin: 0 0 8px;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    min-height: 44px;
+    margin: 0 -12px;
+    padding: 10px 12px;
+    border-radius: var(--px-r-sm);
+    color: var(--px-ink);
+    font: 500 16px/1.4 var(--px-font-display);
+    text-decoration: none;
+    transition: background-color var(--px-dur-1) var(--px-ease);
+
+    &:hover {
+      background: var(--px-hover);
+      color: var(--px-accent-text);
+    }
+  }
+
+  time {
+    flex: none;
+    width: 52px;
+    color: var(--px-ink-3);
+    font: 500 12px/1.4 var(--px-font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
+
+/* ---------- Sponsor logos at the end of a post ---------- */
+
+.px-blog-sponsors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 2.5rem 0;
+}
+
+// Sponsor logos arrive as arbitrary avatars (some transparent, some with
+// baked-in white backgrounds), so every tile gets the same white surface
+// to normalize them.
+.px-blog-sponsor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(200px, calc(50% - 6px));
+  height: 84px;
+  padding: 18px 24px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-md);
+  background: #fff;
+  transition:
+    transform var(--px-dur-3) var(--px-ease-spring),
+    box-shadow var(--px-dur-3) var(--px-ease-spring),
+    border-color var(--px-dur-1) var(--px-ease);
+
+  &:hover {
+    border-color: var(--px-pink);
+    box-shadow: 4px 4px 0 var(--px-pink);
+    transform: translate(-3px, -3px);
+  }
+}
+
+.px-blog-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
