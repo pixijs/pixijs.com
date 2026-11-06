@@ -50,5 +50,5 @@ jobs:
       - name: Fail job if sponsor script failed
         if: steps.sponsors.outcome == 'failure'
         run: |
-          echo "::error::Sponsor generation failed; sponsor data was not updated. Check the 'Run sponsor script' step output."
+          echo "::error::Sponsor generation failed; sponsor data or the README image was not updated. Check the 'Run sponsor script' step output."
           exit 1

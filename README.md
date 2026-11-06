@@ -70,10 +70,39 @@ This runs the following sub-generators:
 
 - **`generate:content`** — Converts tutorial source files into Docusaurus docs.
 - **`generate:examples`** — Pulls interactive example configs for the examples section.
-- **`generate:sponsors`** — Fetches sponsor data for display on the site.
+- **`generate:sponsors`** — Fetches sponsor data for display on the site and writes the README sponsor image (see [README sponsor image](#readme-sponsor-image)).
 - **`generate:definitions`** — Generates API definition data from PixiJS source.
 
 Generation runs automatically before `npm start` and `npm run build` via the `prestart` / `prebuild` hooks.
+
+## README Sponsor Image
+
+`generate:sponsors` writes `static/sponsors-readme.svg` (gitignored) with the logos of recurring Gold and Platinum sponsors, Platinum first and larger. It goes live with each deploy, and the daily cron workflow triggers a deploy, so READMEs update on their own. Embed it with this block:
+
+```html
+<br/>
+
+<h2 align="center">PixiJS Sponsors</h2>
+
+<p align="center">
+  PixiJS is free and open source thanks to the sponsors who fund its development.
+</p>
+<br/>
+<p align="center">
+  <a href="https://pixijs.com/sponsor"><img src="https://pixijs.com/sponsors-readme.svg" alt="PixiJS sponsors"></a>
+</p>
+<p align="center">
+  <a href="https://namespace.so/github-actions/?utm_source=oss&utm_campaign=pixijs"><img alt="CI powered by Namespace" src="https://namespace.so/oss/badge.svg" height="32" /></a>
+</p>
+<br/>
+<p align="center">
+  Want your logo here? <a href="https://pixijs.com/sponsor"><b>Become a sponsor</b></a>
+</p>
+```
+
+The image can only have one link, so it goes to the sponsor page. A sponsor that needs its own link, like Namespace, gets a separate badge in the block above and an entry in `src/data/sponsorBadges.json` for the home page.
+
+To change a logo in the image, set `avatarUrl` in `src/data/sponsor-overrides.json`.
 
 ## Environment Variables
 

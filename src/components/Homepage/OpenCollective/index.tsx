@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import sponsorData from '../../../data/sponsors.json';
 import sponsorOverrides from '../../../data/sponsor-overrides.json';
 import manualSponsors from '../../../data/manualSponsors.json';
+import sponsorBadges from '../../../data/sponsorBadges.json';
 import { animShortUp } from '../../../utils/utils';
 import styles from './index.module.scss';
 
@@ -133,6 +134,13 @@ export default function OpenCollective(): React.JSX.Element {
               {renderSponsorTier(SPONSOR_TIERS.GOLD, sponsorsByTier[SPONSOR_TIERS.GOLD])}
               {renderSponsorTier(SPONSOR_TIERS.SILVER, sponsorsByTier[SPONSOR_TIERS.SILVER])}
               {renderSponsorTier(SPONSOR_TIERS.BRONZE, sponsorsByTier[SPONSOR_TIERS.BRONZE])}
+              <div className={styles.sponsorBadges}>
+                {sponsorBadges.map(({ alt, src, href }) => (
+                  <a key={href} href={href}>
+                    <img src={src} alt={alt} height={32} />
+                  </a>
+                ))}
+              </div>
             </div>
           </>
         )}

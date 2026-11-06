@@ -36,5 +36,6 @@ scripts/pixiVersions.json
 .env
 
 static/examples/source
+static/sponsors-readme.svg
 src/pages/examples/config.ts
 src/data/sponsors-private.json

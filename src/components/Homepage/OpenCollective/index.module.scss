@@ -39,6 +39,14 @@
     padding: 0 20px;
   }
 
+  .sponsorBadges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
   .tierTitle h2 {
     margin: 0;
     padding-left: 18px;
