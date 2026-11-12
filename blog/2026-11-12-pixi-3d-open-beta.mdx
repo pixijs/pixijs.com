@@ -143,9 +143,9 @@ The [performance guide](/3d/guides/concepts/performance) has the details.
 
 WebGPU is where the web is going, so that's where we built PixiJS 3D to be. We had a head start too. We built PixiJS v8 with exactly this in mind, so most of the groundwork was already done, and 3D gets to use the exciting new techniques on top of it.
 
-Culling in a compute shader is a great example. It's a modern technique that wasn't available to us before, and it can really speed up large scenes without eating your CPU. Draws are indirect, so the GPU decides what survives without a round trip through JavaScript, and the engine records draw commands once and replays them until the scene changes.
+Culling in a compute shader is a great example. It's a modern technique that wasn't available to us before, and it can really speed up large scenes without eating your CPU. Draws are indirect, so the GPU decides what survives without a round trip through JavaScript.
 
-All of that is part of the engine. You don't wire it in and you don't switch it on. We use each technique where we know it's the fastest way, and we've tuned it for you.
+Bind groups and render bundles are two more. Bind groups let the engine bundle a material's textures and values and bind them in one call. Render bundles let it record a scene's draw commands once and replay them until the scene changes.
 
 But don't think for a second that we've forgotten our good old friend WebGL. That side of the engine is just as optimised, and we put just as much love into it, so every game works while the web makes the move to WebGPU.
 
