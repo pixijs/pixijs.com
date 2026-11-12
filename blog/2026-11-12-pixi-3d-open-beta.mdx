@@ -59,13 +59,16 @@ If you already build with PixiJS, add one `View3D` to your project and you're in
 
 ## A new dimension for the project you already have
 
-You don't port anything, and you don't run a second engine next to PixiJS. A 3D scene is a display object. Create a `View3D`, add it to the stage, and put a model in it:
+You don't port anything, and you don't run a second engine next to PixiJS. A 3D scene is a display object. Load a model, build a `View3D` from it, and add it to the stage:
 
 ```ts
-const view3d = app.stage.addChild(new View3D());
-const helmet = new Model3D(await Assets.load('helmet.gltf'));
+import { View3D } from '@pixi/3d';
+import { Assets } from 'pixi.js';
 
-view3d.root.addChild(helmet);
+const source = await Assets.load('helmet.glb');
+const view3d = View3D.from(source);
+
+app.stage.addChild(view3d);
 ```
 
 The view layers with everything else you draw, so you choose how much 3D you want. Keep your regular 2D workflow and drop in a 3D element where it helps, like a spinning trophy in a menu or a character in a shop screen. Or make one `View3D` fill the screen, build a whole 3D game inside it, and put your UI over the top as a regular 2D container.
