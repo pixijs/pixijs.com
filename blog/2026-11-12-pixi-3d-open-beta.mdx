@@ -147,7 +147,9 @@ Culling in a compute shader is one of them. Draws are indirect, so the GPU decid
 
 All of that is part of the engine. You don't wire it in and you don't switch it on. We use each technique where we know it's the fastest way, and we've tuned it for you.
 
-The same scene code runs on WebGL2, so your project also reaches the browsers that don't have WebGPU yet, and each browser downloads only the backend it uses. Ask for WebGPU when you start the app, and PixiJS falls back to WebGL2 where it's missing:
+But don't think for a second that we've forgotten our good old friend WebGL. That side of the engine is just as optimised, and we put just as much love into it, so every game works while the web makes the move to WebGPU.
+
+The same scene code runs on both, and each browser downloads only the backend it uses. Ask for WebGPU when you start the app, and PixiJS falls back to WebGL2 where it's missing:
 
 ```ts
 await app.init({ preference: 'webgpu' });
