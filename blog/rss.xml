@@ -24,7 +24,7 @@
 <li class=""><strong>It's fast by default.</strong> Write a scene the obvious way and it's quick. We benchmarked the different ways to render, and the engine picks the best one for your device, browser, and scene.</li>
 <li class=""><strong>The essentials are built in.</strong> Shadows, animation, particles, post-processing, and the rest of what you'd expect from a 3D engine are all here.</li>
 <li class=""><strong>It's WebGPU first.</strong> We designed it around WebGPU, and the same code runs on WebGL2 for everyone else.</li>
-<li class=""><strong>It's AI ready.</strong> Your agent can write it from the first prompt, with new skills for 2D and 3D.</li>
+<li class=""><strong>It's AI ready.</strong> Build with your coding agent using new PixiJS skills for 2D and 3D.</li>
 <li class=""><strong>It's free.</strong> It's MIT licensed, and it always will be.</li>
 </ul>
 <hr>
