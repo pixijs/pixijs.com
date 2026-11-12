@@ -23,7 +23,10 @@ export class Controls {
     if (this._keys.KeyW || this._keys.ArrowUp) z += 1;
     if (this._keys.KeyS || this._keys.ArrowDown) z -= 1;
 
-    const pads = navigator.getGamepads ? navigator.getGamepads() : [];
+    const pads =
+      navigator.getGamepads && !navigator.userAgent.includes('Firefox')
+        ? navigator.getGamepads()
+        : [];
 
     for (const gp of pads) {
       if (!gp) continue;
