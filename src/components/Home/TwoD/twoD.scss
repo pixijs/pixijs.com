@@ -1,0 +1,196 @@
+@use '../../../css/breakpoints' as bp;
+@use '../Band/surface';
+@use '../ClosingCard/closing-card';
+@use '../TileGrid/tiles';
+
+/* The stats stand three to a row from this container width */
+$stats-up: 1000px;
+
+/* ---------- toolbox ---------- */
+
+.hm-2d-toolboxBand {
+  @include surface.glow(50% 52%, 62% 46%, var(--px-pink), 7%);
+}
+
+/* ---------- performance ---------- */
+
+.hm-2d-perf {
+  --hm-space: #0c0b11;
+  --hm-core: rgb(233 30 99 / 0.22);
+  --hm-halo: rgb(139 92 246 / 0.16);
+  --hm-sink: inset 0 2px 16px rgb(0 0 0 / 0.35);
+  position: relative;
+
+  html:not([data-theme='dark']) & {
+    --hm-space: #f6f4fb;
+    --hm-core: rgb(233 30 99 / 0.12);
+    --hm-halo: rgb(56 189 248 / 0.14);
+    --hm-sink: inset 0 2px 12px rgb(40 20 80 / 0.1);
+  }
+}
+
+/* A night sky set into the band: deep, lit from its core, and a little sunk below the surface */
+.hm-2d-perfScreen {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-xl);
+  background:
+    radial-gradient(34% 44% at 50% 50%, var(--hm-core), transparent 72%),
+    radial-gradient(70% 80% at 50% 55%, var(--hm-halo), transparent 75%), var(--hm-space);
+  box-shadow: var(--hm-sink), var(--px-shadow-lg);
+  isolation: isolate;
+
+  @include surface.themed;
+
+  @container (min-width: 560px) {
+    aspect-ratio: 16 / 10;
+  }
+
+  @container (min-width: 900px) {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+.hm-2d-perfPoster,
+.hm-2d-perfCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hm-2d-perfPoster {
+  display: none;
+  object-fit: cover;
+
+  .hm-2d-perf:is(:not([data-js]), [data-status='off']) & {
+    display: block;
+  }
+}
+
+.hm-2d-perfCanvas {
+  opacity: 0;
+  transition: opacity 400ms var(--px-ease);
+
+  .hm-2d-perf[data-status='live'] & {
+    opacity: 1;
+  }
+
+  canvas {
+    outline: none;
+  }
+}
+
+.hm-2d-perfTags {
+  position: absolute;
+  z-index: 1;
+  top: 16px;
+  right: 16px;
+  left: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  pointer-events: none;
+
+  @container (min-width: 560px) {
+    top: 20px;
+    right: 20px;
+    left: 20px;
+  }
+}
+
+/* A class name, so in its own case */
+.hm-2d-perfApi {
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+/* Phones have no room for it beside the readout */
+.hm-2d-perfHint {
+  margin-left: auto;
+  color: var(--px-ink-3);
+
+  @container (width < 560px) {
+    display: none;
+  }
+}
+
+.hm-2d-perfReadout {
+  font-variant-numeric: tabular-nums;
+
+  .hm-2d-perf:not([data-status='live']) & {
+    display: none;
+  }
+}
+
+/* The numbers stand on the screen's lower edge, over it, so the field reads as the thing they measure */
+.hm-2d-perfStats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 16px;
+  margin: calc(-1 * clamp(28px, 5cqi, 72px)) 0 0;
+  padding: 0 clamp(12px, 3cqi, 40px);
+  list-style: none;
+
+  @container (min-width: #{$stats-up}) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+/* A number over its label, or beside it where three cards in a row would squeeze the number */
+.hm-2d-stat {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 10px;
+
+  @container (#{surface.$two-up} <= width < #{$stats-up}) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: 24px;
+  }
+
+  border-color: var(--px-line-strong);
+  background: color-mix(in srgb, var(--px-well) 88%, transparent);
+  box-shadow: var(--px-shadow-lg);
+  backdrop-filter: blur(14px);
+
+  strong {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    color: var(--px-ink);
+    font: 700 2.25rem/1 var(--px-font-display);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+
+    @include bp.fluid(font-size, clamp(2.25rem, 1.2rem + 2cqi, 3.25rem));
+  }
+
+  small {
+    color: var(--px-accent-text);
+    font-size: 0.5em;
+    letter-spacing: 0;
+  }
+
+  > span {
+    color: var(--px-ink-2);
+    font: 400 17px/1.5 var(--px-font-body);
+    text-wrap: pretty;
+  }
+
+  code {
+    font-size: 0.86em;
+  }
+}
+
+/* ---------- closing ---------- */
+
+.hm-2d-closingBand {
+  @include surface.glow(50% 50%, 44% 60%, var(--px-violet), 9%);
+}

@@ -1,0 +1,18 @@
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: var(--px-ink-3);
+  font: 500 12px/1.4 var(--px-font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--px-accent);
+}

@@ -16356,14 +16356,14 @@ define('com/fido/app/Fallback', ['require', 'exports', 'module'], function (t, e
         a = function (t) {
           (this.app = t),
             r.DisplayObjectContainer.call(this),
-            (this.bg = new r.Sprite.fromImage(window.ASSET_URL + 'img/skyBG.jpg')),
+            (this.bg = new r.Sprite.fromImage(window.ASSET_URL + 'img/skyBG.webp')),
             this.addChild(this.bg),
             (this.mini3d = new n()),
             this.addChild(this.mini3d.view),
             (this.speed = -15),
             (this.range = 3e3),
             (this.clouds = []),
-            (this.images = ['skyCloud1.png', 'skyCloud2.png']);
+            (this.images = ['skyCloud1.webp', 'skyCloud2.webp']);
           for (var e = 0; 50 > e; e++) {
             var i = new o(r.Texture.fromImage(ASSET_URL + 'img/' + this.images[e % 2]));
             this.mini3d.addChild(i), this.clouds.push(i), (i.position3d.z = -(this.range / 50) * e);
@@ -16423,7 +16423,7 @@ define('com/fido/app/Fallback', ['require', 'exports', 'module'], function (t, e
         a = function (t) {
           (this.app = t),
             r.DisplayObjectContainer.call(this),
-            (this.bg = new r.Sprite.fromImage(window.ASSET_URL + 'img/spaceBG.jpg')),
+            (this.bg = new r.Sprite.fromImage(window.ASSET_URL + 'img/spaceBG.webp')),
             this.bg.anchor.set(0.5),
             (this.bg.x = 950),
             (this.bg.y = 600),
@@ -16435,7 +16435,7 @@ define('com/fido/app/Fallback', ['require', 'exports', 'module'], function (t, e
             (this.speed = -5),
             (this.range = 2e3),
             (this.clouds = []),
-            (this.images = ['spaceCloud1.png', 'spaceCloud2.png', 'spaceCloud3.png']);
+            (this.images = ['spaceCloud1.webp', 'spaceCloud2.webp', 'spaceCloud3.webp']);
           for (var e = 0; 30 > e; e++) {
             var i = new o(r.Texture.fromImage(ASSET_URL + 'img/' + this.images[e % 3]));
             (i.blendMode = r.CONST.BLEND_MODES.SCREEN),
@@ -16980,14 +16980,14 @@ define('com/fido/app/Fallback', ['require', 'exports', 'module'], function (t, e
             this.screenManager.gotoScreenByID('loader');
           var e = new r.loaders.Loader();
           e
-            .add('x', window.ASSET_URL + 'img/skyBG.jpg')
-            .add('x1', window.ASSET_URL + 'img/skyCloud1.png')
-            .add('xx', window.ASSET_URL + 'img/skyCloud2.png')
-            .add('x2', window.ASSET_URL + 'img/spaceBG.jpg')
+            .add('x', window.ASSET_URL + 'img/skyBG.webp')
+            .add('x1', window.ASSET_URL + 'img/skyCloud1.webp')
+            .add('xx', window.ASSET_URL + 'img/skyCloud2.webp')
+            .add('x2', window.ASSET_URL + 'img/spaceBG.webp')
             .add('x3', window.ASSET_URL + 'img/sun_add.png')
-            .add('x4', window.ASSET_URL + 'img/spaceCloud1.png')
-            .add('x5', window.ASSET_URL + 'img/spaceCloud2.png')
-            .add('x6', window.ASSET_URL + 'img/spaceCloud3.png')
+            .add('x4', window.ASSET_URL + 'img/spaceCloud1.webp')
+            .add('x5', window.ASSET_URL + 'img/spaceCloud2.webp')
+            .add('x6', window.ASSET_URL + 'img/spaceCloud3.webp')
             .add('x7', window.ASSET_URL + 'img/blob.png')
             .load(this.onAppReady.bind(this)),
             window.addEventListener('message', function (t) {

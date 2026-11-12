@@ -30,11 +30,6 @@ keywords:
   ]
 ---
 
-import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
-import OriginIndexFile from '!!raw-loader!../docs/examples/container_transform_origin';
-import BitmapBreakIndexFile from '!!raw-loader!../docs/examples/text_bitmap_word-wrap_break-words';
-import BitmapOverlapIndexFile from '!!raw-loader!../docs/examples/text_bitmap_split-text';
-
 PixiJS v8.11.0 introduces powerful new text tools for creating advanced animations and several quality-of-life improvements. Here's what's new:
 
 - **SplitText & SplitBitmapText:** Split text into lines, words, and characters for fine-grained control and advanced animations
@@ -76,14 +71,8 @@ const myText = new Text('Hello Pixi', { fontSize: 36 });
 const splitText = SplitText.from(myText);
 ```
 
-<EmbeddedEditor
-  files={{
-    'index.js': BitmapOverlapIndexFile,
-  }}
-  dependencies={{ gsap: 'latest', 'pixi.js': 'latest' }}
-/>
+<PixiExample name="text_bitmap_split-text" />
 
-<br/>
 See full examples and usage guide [here](/8.x/guides/components/scene-objects/text/split-text).
 
 :::warning
@@ -101,11 +90,7 @@ new Container({ origin: { x: 100, y: 100 } });
 new Container({ origin: 50 }); // Same as { x: 50, y: 50 }
 ```
 
-<EmbeddedEditor
-  files={{
-    'index.js': OriginIndexFile,
-  }}
-/>
+<PixiExample name="container_transform_origin" />
 
 **Why not use `pivot`?**
 
@@ -145,11 +130,7 @@ container.replaceChild(myText, segmented);
 
 The `breakWords` option now works with `BitmapText`. This improves layout control for projects using bitmap fonts, making it easier to manage dynamic text, labels, and UI elements.
 
-<EmbeddedEditor
-  files={{
-    'index.js': BitmapBreakIndexFile,
-  }}
-/>
+<PixiExample name="text_bitmap_word-wrap_break-words" />
 
 ---
 
@@ -158,11 +139,13 @@ The `breakWords` option now works with `BitmapText`. This improves layout contro
 We now officially support the `llms.txt` convention to help AI tools access accurate PixiJS documentation.
 We provide several documentation files for different context window sizes:
 
-| File                                                     | Description                                                                       |
-| -------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [`/llms.txt`](https://pixijs.com/llms.txt)               | Index of available documentation files                                            |
-| [`/llms-full.txt`](https://pixijs.com/llms-full.txt)     | Complete API documentation including all classes, methods, and examples           |
-| [`/llms-medium.txt`](https://pixijs.com/llms-medium.txt) | Compressed documentation optimized for AI tools with medium-sized context windows |
+| File                                       | Description                            |
+| ------------------------------------------ | -------------------------------------- |
+| [`/llms.txt`](https://pixijs.com/llms.txt) | Index of available documentation files |
+
+:::note
+`/llms-full.txt` and `/llms-medium.txt` have since been retired in favour of `/llms.txt`, which indexes every PixiJS guide and API page and links to a markdown version of each.
+:::
 
 These files are generated automatically from our TypeScript definitions and documentation sources. They update daily to ensure LLMs and AI-powered tools can reference the most accurate, up-to-date PixiJS information.
 

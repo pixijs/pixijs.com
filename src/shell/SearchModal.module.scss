@@ -1,0 +1,207 @@
+@use '../css/breakpoints' as bp;
+
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.modal {
+  top: 12vh;
+  bottom: auto;
+  width: min(640px, 100vw - 32px);
+  max-width: none;
+  max-height: 76vh;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-lg);
+  background: var(--px-raised);
+  color: var(--px-ink);
+  box-shadow: var(--px-shadow-lg);
+
+  &[open] {
+    display: flex;
+    animation: open 180ms var(--px-ease);
+  }
+
+  &::backdrop {
+    background: rgb(0 0 0 / 0.45);
+    animation: fade 180ms var(--px-ease);
+  }
+
+  @include bp.down(md) {
+    top: 0;
+    /* 100vw also covers the scrollbar gutter that lockScroll keeps on desktop browsers */
+    width: 100vw;
+    margin: 0;
+    height: 100dvh;
+    max-height: none;
+    border: 0;
+    border-radius: 0;
+  }
+
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+}
+
+.panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.field {
+  position: relative;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  min-height: 0;
+
+  > :first-child {
+    min-height: 0;
+  }
+}
+
+.esc {
+  position: absolute;
+  top: 15px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 0 8px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-xs);
+  background: var(--px-field);
+  color: var(--px-ink-3);
+  font: 500 11px/1 var(--px-font-mono);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--px-ink);
+  }
+
+  @media (pointer: coarse) {
+    top: 6px;
+    right: 6px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+  }
+}
+
+.escIcon {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .escIcon {
+    display: block;
+  }
+
+  .escKey {
+    display: none;
+  }
+}
+
+.empty {
+  padding: 18px 12px 12px;
+  border-top: 1px solid var(--px-line);
+}
+
+.scope {
+  margin: 0 12px 10px;
+  color: var(--px-ink-3);
+  font: 500 11px/1 var(--px-font-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.jumps {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jump {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: var(--px-r-sm);
+  color: var(--px-ink-2);
+  font: 500 15px/1 var(--px-font-display);
+  text-decoration: none;
+  transition:
+    color var(--px-dur-1) var(--px-ease),
+    background-color var(--px-dur-1) var(--px-ease);
+
+  svg {
+    color: var(--px-ink-4);
+    transition:
+      transform 300ms var(--px-ease-spring),
+      color var(--px-dur-1) var(--px-ease);
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: var(--px-hover);
+    color: var(--px-ink);
+    text-decoration: none;
+
+    svg {
+      color: var(--px-accent-text);
+      transform: translateX(3px);
+    }
+  }
+
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+}
+
+.hints {
+  display: flex;
+  flex: none;
+  gap: 16px;
+  margin-top: auto;
+  padding: 10px 16px;
+  border-top: 1px solid var(--px-line);
+  color: var(--px-ink-3);
+  font: 400 11px/1 var(--px-font-mono);
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  kbd {
+    min-width: 20px;
+    padding: 3px 5px;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  @media (pointer: coarse) {
+    display: none;
+  }
+}

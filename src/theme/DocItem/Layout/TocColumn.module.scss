@@ -1,0 +1,90 @@
+@use '../../../css/breakpoints' as bp;
+
+.column {
+  display: none;
+
+  @include bp.up(xl) {
+    display: block;
+  }
+}
+
+.sticky {
+  position: sticky;
+  top: calc(var(--px-topbar-h) + 40px);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--px-topbar-h) - 64px);
+}
+
+.label {
+  margin: 0 0 12px;
+  color: var(--px-ink-3);
+  font: 500 11px/1 var(--px-font-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+  /* Docusaurus's own sticky box: the whole column sticks instead, and the list scrolls inside it */
+  > div {
+    position: static;
+    max-height: none;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  :global(.table-of-contents) {
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--px-line);
+    font-size: 13.5px;
+
+    ul {
+      padding: 0;
+    }
+
+    li {
+      margin: 0;
+    }
+  }
+
+  :global(.table-of-contents__link) {
+    display: block;
+    margin-left: -1px;
+    padding: 5px 0 5px 14px;
+    border-left: 2px solid transparent;
+    color: var(--px-ink-3);
+    line-height: 1.45;
+    text-decoration: none;
+    transition:
+      color var(--px-dur-1) var(--px-ease),
+      border-color var(--px-dur-2) var(--px-ease);
+
+    &:hover {
+      color: var(--px-ink);
+      text-decoration: none;
+    }
+
+    code {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      font-size: 0.92em;
+      font-weight: 400;
+    }
+  }
+
+  ul ul :global(.table-of-contents__link) {
+    padding-left: 26px;
+  }
+
+  :global(.table-of-contents__link--active) {
+    border-left-color: var(--px-accent, var(--px-pink));
+    color: var(--px-ink);
+  }
+}

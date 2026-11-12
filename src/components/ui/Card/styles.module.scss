@@ -1,0 +1,178 @@
+@use '../../../css/breakpoints' as bp;
+
+.card {
+  position: relative;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-lg);
+  background: var(--px-well);
+  box-shadow: var(--px-shadow-md);
+  color: var(--px-ink-2);
+}
+
+.base {
+  @include bp.fluid(padding, clamp(20px, 2.5cqi, 32px));
+}
+
+/* ---------- link ---------- */
+@mixin lift {
+  border-color: var(--px-line-strong);
+  box-shadow: 6px 6px 0 var(--accent, var(--px-pink));
+
+  @media (prefers-reduced-motion: no-preference) {
+    transform: translate(-4px, -4px);
+  }
+
+  &::before {
+    opacity: 1;
+  }
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  color: var(--px-ink-2);
+  text-decoration: none;
+  transition:
+    transform 350ms var(--px-ease-spring),
+    box-shadow 350ms var(--px-ease-spring),
+    border-color var(--px-dur-2) var(--px-ease);
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      240px at var(--mx, 50%) var(--my, 0%),
+      color-mix(in srgb, var(--px-pink) 10%, transparent),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity var(--px-dur-3) var(--px-ease);
+    pointer-events: none;
+  }
+
+  &:hover {
+    color: var(--px-ink-2);
+    text-decoration: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      @include lift;
+    }
+  }
+
+  &[data-state='hover'] {
+    @include lift;
+  }
+
+  &:focus-visible,
+  &[data-state='focus'] {
+    outline: 2px solid var(--px-focus);
+    outline-offset: 3px;
+  }
+}
+
+.media {
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--px-bg-alt);
+
+  :global(img),
+  :global(video),
+  :global(canvas) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 12px 12px;
+
+  :global(h3) {
+    margin: 0;
+    color: var(--px-ink);
+    font: 600 18px/1.3 var(--px-font-display);
+    letter-spacing: -0.01em;
+  }
+
+  :global(p) {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+}
+
+/* ---------- closing ---------- */
+
+/*
+ * A raised surface, lighter than the band under it in either theme, so all four of its corners read where the clay
+ * sits on them: a drawn edge, a pink glow from the top, a fainter one from the bottom edge, and a cast shadow
+ */
+.closing {
+  border-color: var(--px-line-strong);
+  border-radius: var(--px-r-xl);
+  background:
+    radial-gradient(90% 120% at 50% 0%, rgb(233 30 99 / 0.2), transparent 60%) no-repeat,
+    radial-gradient(60% 50% at 50% 100%, rgb(233 30 99 / 0.08), transparent) no-repeat var(--px-raised);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    var(--px-shadow-lg);
+  text-align: center;
+
+  @include bp.fluid(padding, clamp(48px, 6cqi, 72px) clamp(20px, 5cqi, 72px));
+}
+
+/*
+ * In front of the card, each corner's shape centred on its corner and sized in band units (`--clay-u`, from ui/Clay):
+ * the cube at the top right leads, and the doughnut at the bottom right is the next largest, so the set reads as one
+ * composition. Sideways a shape goes no further out than the band's edge allows (`--band-w`), so none of it is cut.
+ */
+.corner {
+  --sz: calc(var(--k) * var(--clay-u, 120px));
+  --out: max(var(--sz) / -2, 6px - (var(--band-w, 100vw) - 100%) / 2);
+  position: absolute;
+  z-index: var(--px-z-clay);
+  display: block;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.tl {
+  --k: 0.46;
+  top: 0;
+  left: var(--out);
+  translate: 0 -50%;
+}
+
+.tr {
+  --k: 0.64;
+  top: 0;
+  right: var(--out);
+  translate: 0 -50%;
+}
+
+.br {
+  --k: 0.56;
+  right: var(--out);
+  bottom: 0;
+  translate: 0 50%;
+}
+
+.bl {
+  --k: 0.52;
+  bottom: 0;
+  left: var(--out);
+  translate: 0 50%;
+}

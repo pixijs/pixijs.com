@@ -15,6 +15,12 @@ export default tseslint.config(
       '**/src/tutorials/v8.0.0**',
       '**/src/tutorials/v7.0.0**',
       '.docusaurus',
+      '.claude',
+      '.repos',
+      'src/tutorials/generated-3d',
+      'vendor',
+      'static-pixi-3d',
+      'static-runtime',
     ],
   },
   eslint.configs.recommended,
@@ -54,11 +60,11 @@ export default tseslint.config(
   },
   // Disable some rules for specific files based on legacy code or examples
   {
-    files: ['docs/examples/**/*.js', 'versioned_docs/version-7.x/examples/**/*/*.js'],
+    files: ['blog/examples/**/*.js', 'versioned_docs/version-7.x/examples/**/*/*.js'],
     rules: { '@typescript-eslint/no-this-alias': 'off' },
   },
   {
-    files: ['src/tutorials/**/*/*.js', 'docs/guides/concepts/scene-graph-order.js'],
+    files: ['src/tutorials/**/*/*.js'],
     rules: { '@typescript-eslint/no-unused-vars': 'off' },
   },
 );

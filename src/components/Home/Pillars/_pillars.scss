@@ -1,0 +1,76 @@
+/* One left-aligned column on phones, a row per pillar on tablets (title beside copy), three centred columns from 960 */
+.hm-pillars {
+  display: grid;
+  gap: 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @container (width >= 960px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, 3cqi, 40px);
+  }
+}
+
+.hm-pillar {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+
+  @container (720px <= width < 960px) {
+    grid-template-columns: 220px minmax(0, 1fr);
+    column-gap: 40px;
+    align-items: start;
+
+    > :not(p) {
+      grid-column: 1;
+    }
+  }
+
+  @container (width >= 960px) {
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+.hm-pillarNumber {
+  margin-bottom: 16px;
+  color: var(--px-accent-text);
+  font: 500 14px/1 var(--px-font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+
+.hm-pillarTitle {
+  margin: 0;
+  color: var(--px-ink);
+  font: 700 var(--px-text-display-3) / 1.1 var(--px-font-display);
+  letter-spacing: -0.02em;
+}
+
+.hm-pillarSquiggle {
+  width: 96px;
+  margin: 14px 0 22px;
+
+  @container (720px <= width < 960px) {
+    margin-bottom: 0;
+  }
+}
+
+.hm-pillarCopy {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--px-ink-prose);
+  font: 400 17px/1.65 var(--px-font-body);
+  text-wrap: pretty;
+
+  @container (720px <= width < 960px) {
+    grid-area: 1 / 2 / span 3;
+    align-self: center;
+  }
+
+  @container (width >= 960px) {
+    max-width: 40ch;
+    font-size: 18px;
+  }
+}

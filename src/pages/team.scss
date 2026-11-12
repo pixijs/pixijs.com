@@ -1,0 +1,115 @@
+@use '../components/Page/columns' as *;
+
+/* How far the core team's cards reach down past the header's wave into the first band */
+$overlap: clamp(72px, 9cqi, 128px);
+
+/* Over the band below, which the cards reach into, with the cards over the header's wave */
+.px-team-header {
+  z-index: 2;
+
+  > .px-page-copy {
+    z-index: calc(var(--px-z-content) + 1);
+  }
+
+  /* The cards fill the header's foot, so the Pause motion control sits top right, as on phones */
+  > .px-page-corner {
+    top: calc(var(--px-topbar-h) + 8px);
+    bottom: auto;
+  }
+
+  /* The cards reach into the band below, so the clay keeps to the intro on phones too */
+  .px-page-intro {
+    position: relative;
+  }
+}
+
+.px-team-crew-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: min(100%, 420px);
+  margin: clamp(48px, 6cqi, 72px) 0 28px;
+  color: var(--px-ink-3);
+  font: 500 12px/1.4 var(--px-font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--px-line-strong));
+  }
+
+  &::after {
+    background: linear-gradient(90deg, var(--px-line-strong), transparent);
+  }
+}
+
+/* Two or four across, never three and one, and no wider than 1120 px */
+.px-team-crew {
+  display: grid;
+  flex: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.2vw, 28px);
+  width: min(1120px, 100%);
+  margin: 0 0 calc(-1 * (var(--px-page-foot) + #{$overlap}));
+  padding: 0;
+  list-style: none;
+  text-align: left;
+
+  /* Phones keep two across, a size down */
+  @container (width < 600px) {
+    --member-avatar: 76px;
+    --member-pad: 22px 10px 16px;
+    --member-name: 17px;
+    gap: 12px;
+  }
+
+  @container (width >= 1000px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Past members, under the core team: a head a step smaller, which also keeps the h1 the largest paint */
+/*
+ * The core team steps up onto the seam as the page opens, each avatar's ring winding on a beat later: in CSS, so the
+ * cards are hidden from the first paint until their turn
+ */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='paused']) .px-team-crew > li {
+    animation: px-team-rise 0.9s calc(0.2s + var(--i) * 0.09s) var(--px-ease) backwards;
+
+    [data-ring] {
+      animation: px-team-wind 1.2s calc(0.4s + var(--i) * 0.09s) var(--px-ease-spring) backwards;
+    }
+  }
+}
+
+@keyframes px-team-rise {
+  from {
+    opacity: 0;
+    translate: 0 64px;
+  }
+}
+
+@keyframes px-team-wind {
+  from {
+    --spin: -300deg;
+    scale: 0.7;
+  }
+}
+
+.px-team-mentions {
+  --px-page-overlap: #{$overlap};
+  --px-text-display-2: var(--px-text-display-3);
+}
+
+.px-team-past {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include columns(12px, 680px 2);
+}

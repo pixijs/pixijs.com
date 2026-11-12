@@ -1,0 +1,433 @@
+@use '../../css/breakpoints' as bp;
+@use '../Home/Band/surface';
+@use '../Home/Hero/elevation';
+@use 'cards';
+
+/*
+ * The standalone pages' stylesheet (`px-page-*`, see classes.ts), inlined by `Page`. A page is built like a home: a
+ * hero band, then bands that lie over one another, tiled and plain in turn, each with a lit wave for its top edge.
+ */
+
+.px-page-root {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+
+  @include surface.page;
+}
+
+/* ---------- header: the page's hero band ---------- */
+
+/*
+ * No taller than 800 px from under the top bar down to its wave, unless what it holds needs more; phones take the
+ * height of their copy, which starts below the Pause motion control. `--px-page-foot` is the room under the copy,
+ * and a page whose first band reaches up into the header sets `--px-page-reach` to keep its copy and corner clear.
+ */
+.px-page-header {
+  --px-page-foot: calc(var(--hm-wave) + 48px);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+  min-height: min(800px, 90svh);
+  overflow-x: clip;
+  margin-top: calc(-1 * var(--px-topbar-h));
+  padding: calc(var(--px-topbar-h) + 40px) var(--px-gutter) calc(var(--px-page-foot) + var(--px-page-reach, 0px));
+  background: var(--px-hero);
+  text-align: center;
+
+  @include surface.hero-backdrop;
+  @include bp.fluid(--px-gutter, clamp(20px, 4.8cqi, 64px));
+
+  @container (width < 600px) {
+    min-height: 0;
+    padding-top: calc(var(--px-topbar-h) + 56px);
+  }
+}
+
+/*
+ * With no band after it, the header is the page's last layer and runs on under the footer. Its foot lifts instead of
+ * falling into shade, so the footer's ground reads as the next step down.
+ */
+.px-page-header:last-child {
+  padding-bottom: clamp(72px, 9cqi, 128px);
+
+  .px-page-backdrop {
+    @include surface.under-footer;
+  }
+
+  html[data-theme='dark'] & {
+    --hm-hero-shade: linear-gradient(
+      to bottom,
+      rgb(6 5 10 / 0.3),
+      transparent 20%,
+      transparent 60%,
+      rgb(150 140 190 / 0.07)
+    );
+  }
+}
+
+/* The surface's own shade; the light behind the copy is the intro's, so it stays there whatever follows the copy */
+.px-page-backdrop {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  /* The lattice, a 1.6 px dot at the corner of every 46 px tile */
+  &::before {
+    background: conic-gradient(at 1.6px 1.6px, transparent 75%, var(--grid-dot) 0) 50% 0 / 46px 46px;
+  }
+
+  &::after {
+    background: var(--hm-hero-shade);
+  }
+}
+
+.px-page-blobs {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.px-page-rim-start {
+  stop-color: var(--blob-rim);
+  stop-opacity: var(--blob-rim-alpha);
+}
+
+.px-page-rim-end {
+  stop-color: var(--blob-rim);
+  stop-opacity: 0;
+}
+
+.px-page-shade-start {
+  stop-color: #000;
+  stop-opacity: var(--blob-shade);
+}
+
+.px-page-shade-end {
+  stop-color: #000;
+  stop-opacity: 0;
+}
+
+/* Level with the header's wave, so the clay on phones bobs under its crest */
+.px-page-copy {
+  --lead: clamp(60px, 8.5cqi, 140px);
+  --companion: clamp(46px, 6cqi, 104px);
+  position: relative;
+  z-index: var(--px-z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/*
+ * The eyebrow down to the actions, which the clay frames, or on phones the whole copy, whose intro runs edge to edge.
+ * The light is its background, so it lights the intro wherever the clay is framing; it fades out before the box's
+ * edges, under the clay.
+ */
+.px-page-intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  background: radial-gradient(closest-side, rgb(233 30 99 / 0.16), transparent);
+
+  @container (width < 600px) {
+    position: static;
+  }
+}
+
+.px-page-art {
+  margin-bottom: 28px;
+}
+
+.px-page-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px;
+  color: var(--px-accent-text);
+  font: 500 12px/1.4 var(--px-font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--px-pink);
+    box-shadow: 0 0 0 4px rgb(233 30 99 / 0.18);
+  }
+}
+
+/* 44 px on phones up to 96 px */
+.px-page-title {
+  margin: 0;
+  color: var(--px-ink);
+  font: 700 clamp(2.75rem, 1rem + 5.2cqi, 6rem) / 1 var(--px-font-display);
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+
+  @supports not (width: 1cqi) {
+    font-size: clamp(2.75rem, 1rem + 5.2vw, 6rem);
+  }
+}
+
+/*
+ * The hand-drawn underline (SectionHead's `Squiggle`) as the span's own background, a little taller than its path so
+ * the stroke isn't cut. Unpositioned and without children, the span leaves the headline's text one block, which keeps
+ * it the page's largest paint: a positioned span is a layer of its own, and its words would count apart.
+ */
+.px-page-accent {
+  padding-bottom: 0.217em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -3 160 24' preserveAspectRatio='none'%3E%3Cpath d='M4 12C20 3 32 3 44 10S68 17 82 10 108 3 122 9 146 15 156 7' fill='none' stroke='%23e91e63' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E")
+    50% 100% / 92% 0.293em no-repeat;
+  color: var(--px-pink);
+  white-space: nowrap;
+}
+
+.px-page-lede {
+  max-width: 34em;
+  margin: 24px 0 0;
+  color: var(--px-ink-2);
+  font: 400 clamp(1.0625rem, 0.95rem + 0.6cqi, 1.5rem) / 1.55 var(--px-font-body);
+  text-wrap: balance;
+
+  @supports not (width: 1cqi) {
+    font-size: clamp(1.0625rem, 0.95rem + 0.6vw, 1.5rem);
+  }
+}
+
+.px-page-actions {
+  margin-top: 36px;
+
+  @include elevation.actions;
+}
+
+/* Bottom right at every width; top right on phones, where the copy fills the header */
+.px-page-corner {
+  position: absolute;
+  z-index: calc(var(--px-z-content) + 1);
+  right: var(--px-gutter);
+  bottom: calc(var(--hm-wave) + 16px + var(--px-page-reach, 0px));
+
+  @container (width < 600px) {
+    top: calc(var(--px-topbar-h) + 8px);
+    bottom: auto;
+  }
+}
+
+/* The edge of the first band, drawn over the header's backdrop */
+.px-page-header > .px-page-header-wave {
+  @include surface.hero-wave;
+}
+
+/* ---------- header clay: two shapes framing the intro ---------- */
+
+.px-page-clay {
+  position: absolute;
+  z-index: -1;
+}
+
+/* Narrower headers leave the copy less room at its sides, so the clay keeps clear of the header's edges as it shies */
+.px-page-lead {
+  --sz: var(--lead);
+  top: calc(var(--lead) * -0.35);
+  left: calc(var(--lead) * -0.6);
+
+  @container (width < 1100px) {
+    left: calc(var(--lead) * -0.35);
+  }
+
+  @container (width < 600px) {
+    top: calc(var(--lead) * -0.45);
+    left: calc(var(--lead) * -0.1);
+  }
+}
+
+/* On phones under the last of the copy, riding the wave's crest */
+.px-page-companion {
+  --sz: var(--companion);
+  right: calc(var(--companion) * -0.7);
+  bottom: calc(var(--companion) * -0.35);
+
+  @container (width < 1100px) {
+    right: calc(var(--companion) * -0.35);
+  }
+
+  @container (width < 600px) {
+    right: 6px;
+    bottom: calc(var(--companion) * -1.1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='paused']) .px-page-pop {
+    animation: px-page-pop 900ms var(--px-ease-spring) 150ms both;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .px-page-live {
+    cursor: pointer;
+    pointer-events: auto;
+  }
+}
+
+@keyframes px-page-pop {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(-40deg);
+  }
+}
+
+/* ---------- bands ---------- */
+
+.px-page-band {
+  padding-inline: var(--px-gutter);
+  overflow-x: clip;
+
+  @include surface.band;
+}
+
+/* `--px-page-overlap` is how far the header's content reaches down into this band, which makes room for it */
+.px-page-header + .px-page-band {
+  padding-top: calc(var(--hm-pad) + var(--px-page-overlap, 0px));
+
+  @include surface.first-band;
+}
+
+.px-page-band:last-child {
+  flex: 1 0 auto;
+
+  @include surface.last-band;
+}
+
+.px-page-wave {
+  @include surface.wave;
+}
+
+.px-page-glow {
+  @include surface.glow;
+}
+
+/* Over the clay, but only its content takes the pointer */
+.px-page-container {
+  position: relative;
+  z-index: var(--px-z-content);
+  max-width: var(--px-container);
+  margin-inline: auto;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+
+  > [data-section-head] {
+    pointer-events: none;
+
+    @include bp.fluid(margin-bottom, clamp(32px, 4.5cqi, 56px));
+  }
+}
+
+/* ---------- panels ---------- */
+
+.px-page-panel {
+  @include cards.panel;
+}
+
+/* ---------- closing card ---------- */
+
+/* Narrow enough for the clay on its corners to stay whole: the cube at the top right reaches 0.32 `--clay-u` out */
+.px-page-closing {
+  max-width: min(1080px, 100% + 2 * var(--px-gutter) - 0.64 * var(--clay-u) - 16px);
+  margin-inline: auto;
+
+  &:not(:first-child) {
+    margin-top: clamp(72px, 9cqi, 128px);
+  }
+}
+
+.px-page-closing-title {
+  max-width: 18ch;
+  margin: 0 auto;
+  color: var(--px-ink);
+  font: 700 clamp(2.125rem, 0.95rem + 5cqi, 4.5rem) / 1.02 var(--px-font-display);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+
+  @supports not (width: 1cqi) {
+    font-size: clamp(2.125rem, 0.95rem + 5vw, 4.5rem);
+  }
+}
+
+.px-page-closing-lede {
+  max-width: 46ch;
+  margin: 24px auto 40px;
+  color: var(--px-ink-2);
+  font: 400 var(--px-text-lede) / 1.55 var(--px-font-body);
+  text-wrap: balance;
+}
+
+.px-page-closing-actions {
+  @include elevation.actions;
+}
+
+/* ---------- running text ---------- */
+
+.px-page-prose {
+  color: var(--px-ink-prose);
+  font-size: 16px;
+  line-height: 1.7;
+
+  p,
+  ul,
+  ol {
+    margin: 0 0 12px;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.25em;
+  }
+
+  li::marker {
+    color: var(--px-ink-4);
+  }
+
+  strong {
+    color: var(--px-ink);
+    font-weight: 600;
+  }
+}
+
+.px-page-prose a,
+.px-page-lede a,
+.px-page-closing-lede a,
+.px-page-container [data-lede] a {
+  color: var(--px-accent-text);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 3px;
+
+  &:hover {
+    color: var(--px-ink);
+    text-decoration-color: currentColor;
+  }
+}

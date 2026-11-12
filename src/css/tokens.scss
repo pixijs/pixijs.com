@@ -1,0 +1,251 @@
+@use 'breakpoints' as bp;
+
+// Sized by the content column (cqi), with a `vw` fallback below; text steps are fluid between 360 and 1280 of it
+$fluid: (
+  gutter: clamp(16px, 3cqi, 40px),
+  section-y: clamp(72px, 40px + 6cqi, 152px),
+  text-display-1: clamp(2.5rem, 1.62rem + 3.91cqi, 4.75rem),
+  text-display-2: clamp(2.125rem, 1.59rem + 2.39cqi, 3.5rem),
+  text-display-3: clamp(1.75rem, 1.46rem + 1.3cqi, 2.5rem),
+  text-h1: clamp(2rem, 1.71rem + 1.3cqi, 2.75rem),
+  text-h2: clamp(1.5rem, 1.35rem + 0.65cqi, 1.875rem),
+  text-h3: clamp(1.1875rem, 1.11rem + 0.33cqi, 1.375rem),
+  text-lede: clamp(1.0625rem, 0.99rem + 0.33cqi, 1.25rem),
+);
+
+/* ---------- theme-independent ---------- */
+:root {
+  --px-pink: #e91e63; /* decoration: dots, rules, glows, shapes, display accents */
+  --px-pink-fill: #d81b60; /* fills that carry white text: 4.95:1 */
+  --px-pink-deep: #c2185b; /* hover sweep on fills; pink text on light */
+  --px-pink-hi: #f06695; /* pink text on dark: 5.8:1 */
+  --px-violet: #8b5cf6;
+  --px-violet-hi: #a78bfa;
+  --px-sky: #38bdf8;
+  --px-teal: #12b886;
+  --px-orange: #f2a65a;
+  --px-red: #ef4444;
+  --px-amber: #f59e0b;
+
+  --px-font-display: 'Outfit', 'Outfit Fallback', system-ui, sans-serif;
+  --px-font-body: 'Roboto', 'Roboto Fallback', system-ui, sans-serif;
+  --px-font-mono: 'Roboto Mono', 'Roboto Mono Fallback', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --px-r-xs: 6px; /* kbd, badges, tags, inline code */
+  --px-r-sm: 10px; /* small cards, form inputs */
+  --px-r-md: 14px; /* code blocks, admonitions, tables, pagination */
+  --px-r-lg: 22px; /* cards, scene/code cards, gallery cards */
+  --px-r-xl: 32px; /* closing card, signup card */
+  --px-r-pill: 999px;
+
+  --px-s-1: 4px;
+  --px-s-2: 8px;
+  --px-s-3: 12px;
+  --px-s-4: 16px;
+  --px-s-5: 24px;
+  --px-s-6: 32px;
+  --px-s-7: 48px;
+  --px-s-8: 64px;
+  --px-s-9: 96px;
+  --px-s-10: 128px;
+
+  --px-rail-w: 264px;
+  --px-rail-compact: 72px;
+  --px-topbar-h: 72px; /* 56px below 768 */
+  --px-toc-w: 232px;
+  --px-container: 1120px;
+  --px-prose: 46rem;
+
+  @each $name, $value in $fluid {
+    --px-#{$name}: #{$value};
+  }
+
+  --px-ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --px-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --px-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --px-dur-1: 150ms;
+  --px-dur-2: 250ms;
+  --px-dur-3: 400ms;
+  --px-dur-4: 700ms;
+
+  --px-z-clay: 0;
+  --px-z-content: 1;
+  --px-z-sticky: 10;
+  --px-z-topbar: 30;
+  --px-z-rail: 40;
+  --px-z-scrim: 50;
+  --px-z-drawer: 60;
+  --px-z-modal: 70;
+  --px-z-toast: 80;
+  --px-z-skip: 100;
+
+  --px-accent: var(--px-pink);
+}
+
+/* Custom properties can't fall back declaration by declaration, so browsers without `cqi` get `vw` here */
+@supports not (width: 1cqi) {
+  :root {
+    @each $name, $value in $fluid {
+      --px-#{$name}: #{bp.to-vw($value)};
+    }
+  }
+}
+
+@include bp.down(md) {
+  :root {
+    --px-topbar-h: 56px;
+  }
+}
+
+/* ---------- light (no-JS baseline) ---------- */
+:root,
+html[data-theme='light'],
+.px-on-light {
+  color-scheme: light;
+  --px-ground: #f1eff6;
+  --px-bg: #fcfbfd;
+  --px-bg-alt: #f5f3f9;
+  --px-hero: #ffffff;
+  --px-hero-blob: #efecf8;
+  --px-rail: #f5f4f8;
+  --px-well: #ffffff;
+  --px-raised: #ffffff;
+  --px-field: #eceaf2;
+  --px-hover: rgb(22 19 31 / 0.045);
+  --px-active: #e9e6f0;
+  --px-line: rgb(22 19 31 / 0.09);
+  --px-line-strong: rgb(22 19 31 / 0.16);
+  --px-ink: #16131f;
+  --px-ink-prose: #2c3140;
+  --px-ink-2: #4b5466;
+  --px-ink-3: #5f6878;
+  --px-ink-4: #a3abb9;
+  --px-accent-text: #c2185b;
+  --px-focus: #c2185b;
+  --px-tint: 10%;
+  --px-green: #099268;
+  --px-info: #0284c7;
+  --px-warn: #d97706;
+  --px-danger: #dc2626;
+  --px-grid-line: rgb(98 82 159 / 0.07);
+  --px-glow: 0 8px 22px rgb(233 30 99 / 0.28);
+  --px-shadow-sm: 0 1px 2px rgb(22 19 31 / 0.06);
+  --px-shadow-md: 0 1px 2px rgb(22 19 31 / 0.05), 0 12px 28px -10px rgb(40 24 80 / 0.16);
+  --px-shadow-lg: 0 2px 4px rgb(22 19 31 / 0.04), 0 32px 64px -24px rgb(40 24 80 / 0.28);
+  /* keep the code colours in step with src/theme/prism/pixi.ts */
+  --px-code-bg: #f6f5fa;
+  --px-code-plain: #24212e;
+  --px-code-kw: #c2185b;
+  --px-code-str: #0369a1;
+  --px-code-fn: #6d28d9;
+  --px-code-num: #b45309;
+  --px-code-com: #5f6878;
+  --px-code-punct: #5f6878;
+  --px-pkg-2d: #e91e63;
+  --px-pkg-3d: #0d7a95; /* the apps' #1099bb, darkened for 4.9:1 text on light */
+  --px-pkg-filters: #7c3aed;
+  --px-pkg-react: #0284c7;
+  --px-pkg-sound: #d97706;
+  --px-pkg-spine: #ea580c;
+  --px-pkg-assetpack: #65a30d;
+  --px-pkg-devtools: #334155;
+  --px-pkg-cli: #64748b;
+  --px-pkg-layout: #0891b2;
+  --px-pkg-ui: #db2777;
+}
+
+/* ---------- dark (sampled from the mockup) ---------- */
+html[data-theme='dark'],
+.px-on-dark {
+  color-scheme: dark;
+  --px-ground: #101012;
+  --px-bg: #1a1a1a;
+  --px-bg-alt: #141414;
+  --px-hero: #14131c;
+  --px-hero-blob: #1f1c28;
+  --px-rail: #1e1c1c;
+  --px-well: #141414;
+  --px-raised: #232122;
+  --px-field: #2b2929;
+  --px-hover: rgb(255 255 255 / 0.05);
+  --px-active: #302e2e;
+  --px-line: rgb(255 255 255 / 0.08);
+  --px-line-strong: rgb(255 255 255 / 0.14);
+  --px-ink: #ffffff;
+  --px-ink-prose: #cfd5df;
+  --px-ink-2: #aab4c6;
+  --px-ink-3: #8d97a7;
+  --px-ink-4: #5f6672;
+  --px-accent-text: #f06695;
+  --px-focus: #ff70a5;
+  --px-tint: 14%;
+  --px-green: #12b886;
+  --px-info: #38bdf8;
+  --px-warn: #f59e0b;
+  --px-danger: #ef4444;
+  --px-grid-line: rgb(255 255 255 / 0.028);
+  --px-glow: 0 8px 24px rgb(233 30 99 / 0.35);
+  --px-shadow-sm: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(0 0 0 / 0.4);
+  --px-shadow-md: 0 12px 32px -12px rgb(0 0 0 / 0.6);
+  --px-shadow-lg: 0 32px 64px -24px rgb(0 0 0 / 0.75);
+  --px-code-bg: #141414;
+  --px-code-plain: #e6e8ee;
+  --px-code-kw: #ff5c93;
+  --px-code-str: #38bdf8;
+  --px-code-fn: #c4b5fd;
+  --px-code-num: #f2a65a;
+  --px-code-com: #8b95a5;
+  --px-code-punct: #8d97a7;
+  --px-pkg-2d: #e91e63;
+  --px-pkg-3d: #1099bb; /* the background of PixiJS's example apps */
+  --px-pkg-filters: #8b5cf6;
+  --px-pkg-react: #38bdf8;
+  --px-pkg-sound: #f2a65a;
+  --px-pkg-spine: #fb923c;
+  --px-pkg-assetpack: #84cc16;
+  --px-pkg-devtools: #f8fafc;
+  --px-pkg-cli: #94a3b8;
+  --px-pkg-layout: #22d3ee;
+  --px-pkg-ui: #f472b6;
+}
+
+/* Always-dark (marketing code cards) and always-light islands; inherited colour resolved on body, so set it here */
+.px-on-dark {
+  color: var(--px-ink-prose);
+  background: var(--px-well);
+}
+
+.px-on-light {
+  color: var(--px-ink-prose);
+  background: var(--px-bg);
+}
+
+@media (prefers-contrast: more) {
+  :root,
+  html[data-theme='light'],
+  .px-on-light {
+    --px-line: rgb(22 19 31 / 0.2);
+    --px-ink-2: var(--px-ink-prose);
+  }
+
+  html[data-theme='dark'],
+  .px-on-dark {
+    --px-line: rgb(255 255 255 / 0.2);
+    --px-ink-2: var(--px-ink-prose);
+  }
+}
+
+/* ---------- package scope (wayfinding accent; CTAs and links stay pink everywhere) ---------- */
+[data-package='2d'] {
+  --px-accent: var(--px-pkg-2d);
+}
+
+[data-package='3d'] {
+  --px-accent: var(--px-pkg-3d);
+}
+
+@each $pkg in filters, react, sound, spine, assetpack, devtools, cli, layout, ui {
+  [data-package='#{$pkg}'] {
+    --px-accent: var(--px-pkg-#{$pkg});
+  }
+}

@@ -1,0 +1,88 @@
+.hm-stripControls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.hm-stripArrows {
+  display: none;
+  gap: 4px;
+
+  @media (hover: hover) and (pointer: fine) {
+    display: inline-flex;
+  }
+}
+
+/*
+ * Bleeds from the container to the band's edges: the inline padding puts the first card on the container's left
+ * edge, and the last card can scroll back to it.
+ */
+.hm-strip {
+  --bleed: calc((100cqi - var(--hm-cw)) / 2);
+  display: flex;
+  gap: 20px;
+  /* The bottom padding is room for the cards' shadows, taken back so it doesn't add to the band's own */
+  margin: 0 calc(-1 * var(--bleed)) -28px;
+  padding: 6px var(--bleed) 28px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  list-style: none;
+  scroll-padding-inline: var(--bleed);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* The band clips anything outside it, so the ring sits inside the scroller's edge */
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+}
+
+.hm-shot {
+  display: flex;
+  flex: none;
+  width: 260px;
+  scroll-snap-align: start;
+
+  > a {
+    flex: 1;
+  }
+
+  @container (width >= 720px) {
+    width: 340px;
+  }
+
+  @container (width >= 1100px) {
+    width: 380px;
+  }
+
+  @container (width >= 1500px) {
+    width: 420px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+}
+
+.hm-shotImage {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 600ms var(--px-ease);
+
+  .hm-shot a:hover & {
+    transform: scale(1.04);
+  }
+}
+
+.hm-shotTag {
+  align-self: flex-start;
+  margin-top: 4px;
+}

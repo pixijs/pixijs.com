@@ -8,6 +8,5 @@ title: Bundle
 
 import { ExampleEditor } from '@site/src/components/Editor/ExampleEditor';
 import IndexFile from '!!raw-loader!./bundle';
-import version from '../../pixi-version.json';
 
-<ExampleEditor files={{ 'index.js': IndexFile }} dependencies={{ 'pixi.js': version.npm }} />
+<ExampleEditor files={{ 'index.js': IndexFile }} />

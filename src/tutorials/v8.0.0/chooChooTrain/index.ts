@@ -36,9 +36,9 @@ import addSmokesCompleted from '!!raw-loader!./step9/addSmokes-completed';
 import code9 from '!!raw-loader!./step9/step9-code';
 import code10 from '!!raw-loader!./step10/step10-code';
 
-import type { TutorialStep } from '../..';
+import type { TutorialContent, TutorialStep } from '../..';
 
-export const chooChooTrainTutorialSteps: TutorialStep[] = [
+const steps: TutorialStep[] = [
   {
     header: 'Introduction',
     Content: content1,
@@ -222,3 +222,5 @@ export const chooChooTrainTutorialSteps: TutorialStep[] = [
     },
   },
 ];
+
+export default { steps } satisfies TutorialContent;

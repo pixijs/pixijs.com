@@ -1,0 +1,21 @@
+/// Equal columns for the direct children, one below the first step and `count` from each `width count` step of the
+/// page's width, such as `columns(24px, 600px 2, 940px 3)`. A short last row is centred instead of hanging left.
+@mixin columns($gap, $steps...) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $gap;
+
+  > * {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  @each $width, $count in $steps {
+    @container (width >= #{$width}) {
+      > * {
+        flex: 0 1 calc((100% - #{$count - 1} * #{$gap}) / #{$count});
+      }
+    }
+  }
+}

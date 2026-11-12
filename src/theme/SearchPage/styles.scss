@@ -1,0 +1,148 @@
+@use '../../css/breakpoints' as bp;
+
+/*
+ * The search results page (`/search`), which the search plugin renders with its own hashed classes. This sheet is
+ * inlined by the page, so the bare selector only ever matches here.
+ */
+.main-wrapper > .container {
+  --search-local-highlight-color: var(--px-accent-text);
+
+  max-width: 880px;
+  /* Results arrive after the index loads; a full screen of room keeps the footer from jumping when they do */
+  min-height: 100vh;
+  padding: 0 var(--px-gutter) clamp(32px, 6vw, 80px);
+
+  h1 {
+    @include bp.fluid(font-size, var(--px-text-h1));
+
+    margin: 0 0 24px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .row {
+    flex-wrap: nowrap;
+    gap: 12px;
+    margin: 0 0 20px;
+  }
+
+  /* !important: the plugin sets these widths the same way */
+  .col {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .col--3 {
+    flex: 0 0 200px;
+  }
+
+  @include bp.down(sm) {
+    .row {
+      flex-wrap: wrap;
+    }
+
+    .col {
+      flex: 1 1 100%;
+    }
+  }
+
+  input,
+  select {
+    height: 48px;
+    margin: 0;
+    padding: 0 16px;
+    border: 1px solid var(--px-line-strong);
+    border-radius: var(--px-r-sm);
+    background-color: var(--px-field);
+    color: var(--px-ink);
+    font: 400 16px/1 var(--px-font-body);
+  }
+
+  /* The field's clear button and the scope's chevron, in ink rather than the browser's accent */
+  input::-webkit-search-cancel-button {
+    width: 16px;
+    height: 16px;
+    margin: 0 -2px 0 12px;
+    background: var(--px-ink-3);
+    cursor: pointer;
+    appearance: none;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.25' stroke-linecap='round'%3E%3Cpath d='M18 6 6 18M6 6l12 12'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+
+    &:hover {
+      background: var(--px-ink);
+    }
+  }
+
+  select {
+    padding-right: 40px;
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--px-ink-3) 50%),
+      linear-gradient(135deg, var(--px-ink-3) 50%, transparent 50%);
+    background-position:
+      calc(100% - 22px) 52%,
+      calc(100% - 17px) 52%;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  > p {
+    margin: 0 0 8px;
+    color: var(--px-ink-3);
+    font: 500 12px/1.4 var(--px-font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    min-height: 44px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--px-line);
+
+    h2 {
+      margin: 0;
+      font: 500 15px/1.4 var(--px-font-display);
+      letter-spacing: 0;
+    }
+
+    a {
+      color: var(--px-ink);
+
+      &:hover {
+        color: var(--px-accent-text);
+        text-decoration: none;
+      }
+    }
+
+    p {
+      margin: 0;
+      color: var(--px-ink-2);
+      font-size: 14px;
+      font-style: normal;
+      line-height: 1.55;
+    }
+
+    p[class*='Path'] {
+      color: var(--px-ink-3);
+      font: 500 11px/1.4 var(--px-font-mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    mark {
+      background: none;
+      color: var(--search-local-highlight-color);
+      font-weight: 600;
+    }
+  }
+}

@@ -1,0 +1,262 @@
+@use '../Band/band';
+@use '../Band/surface';
+@use '../ClosingCard/closing-card';
+@use '../InstallStrip/install';
+@use '../TileGrid/tiles';
+
+.hm-3d-home {
+  @include surface.page;
+}
+
+/* ---------- bands ---------- */
+
+.hm-3d-tourBand {
+  @include surface.glow(30% 60%, 38% 44%);
+
+  /* Four tabs beside the title squeeze it into a column until the band is this wide */
+  [data-section-head='split'] {
+    @container (width < 1000px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+}
+
+.hm-3d-more {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  gap: 8px;
+  color: var(--px-accent-text);
+  font: 500 16px/1.3 var(--px-font-display);
+  text-decoration: none;
+
+  svg {
+    flex: none;
+    transition: transform var(--px-dur-2) var(--px-ease-spring);
+  }
+
+  &:hover {
+    color: var(--px-ink);
+    text-decoration: none;
+
+    svg {
+      transform: translateX(3px);
+    }
+  }
+}
+
+/* ---------- hero ---------- */
+
+.hm-3d-install {
+  code {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: 500 13px/1 var(--px-font-mono);
+  }
+}
+
+.hm-3d-copy {
+  display: inline-grid;
+  width: 28px;
+  height: 28px;
+  margin: 0 -8px 0 8px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--px-ink-3);
+  vertical-align: middle;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--px-hover);
+    color: var(--px-ink);
+  }
+}
+
+/* ---------- parity ---------- */
+
+.hm-3d-parityBand {
+  @include surface.glow(50% 60%, 56% 44%, var(--px-violet), 8%);
+}
+
+.hm-3d-parity {
+  display: grid;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  /* Each card lays itself out by its own width */
+  > li {
+    container-type: inline-size;
+  }
+}
+
+/*
+ * Side by side from a card of 860 px, the narrowest a 1280 laptop gives it, where the longest line of code (59
+ * characters) all but fits beside the text; below about 880 px that one line wraps
+ */
+.hm-3d-parityCard {
+  display: grid;
+  align-items: center;
+  gap: 20px 28px;
+  height: 100%;
+
+  @include surface.lift;
+
+  @container (min-width: 860px) {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  }
+}
+
+.hm-3d-parityText {
+  h3 {
+    margin: 0;
+    color: var(--px-ink);
+    font: 600 var(--px-text-h2) / 1.2 var(--px-font-display);
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    margin: 10px 0 0;
+    font: 400 18px/1.6 var(--px-font-body);
+    text-wrap: pretty;
+  }
+}
+
+p.hm-3d-parityIndex {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 14px;
+  color: var(--px-accent-text);
+  font: 500 13px/1 var(--px-font-mono);
+  letter-spacing: 0.18em;
+
+  > :last-child {
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+}
+
+/*
+ * A screen set into the card. A line too long for it wraps instead of scrolling, and hangs its second row past any
+ * indent, so it still reads as one line of code.
+ */
+.hm-3d-sample {
+  margin: 0;
+  padding: 18px 16px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--px-pink) 24%, transparent);
+  border-radius: var(--px-r-md);
+  background: color-mix(in srgb, var(--px-code-bg), #000 22%);
+  box-shadow:
+    inset 0 2px 8px rgb(0 0 0 / 0.45),
+    0 1px 0 rgb(255 255 255 / 0.05);
+  color: var(--px-code-plain);
+  font: 400 13.5px/1.75 var(--px-font-mono);
+  tab-size: 2;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+
+  code {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+  }
+
+  [data-line] {
+    display: block;
+    padding-left: 4ch;
+    text-indent: -4ch;
+  }
+
+  @container (max-width: 479px) {
+    padding: 14px 12px;
+    font-size: 12.5px;
+  }
+}
+
+/* ---------- previews ---------- */
+
+.hm-3d-preview {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  container-type: inline-size;
+  background:
+    radial-gradient(50% 60% at 50% 45%, rgb(233 30 99 / 0.16), transparent 70%),
+    linear-gradient(var(--px-grid-line) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, var(--px-grid-line) 1px, transparent 1px) 0 0 / 32px 32px,
+    var(--px-well);
+
+  img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @include surface.themed;
+}
+
+.hm-3d-previewShape {
+  --sz: clamp(56px, 30cqi, 132px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+/* ---------- bento ---------- */
+
+.hm-3d-bentoBand {
+  @include surface.glow(50% 52%, 62% 46%, var(--px-pink), 7%);
+}
+
+/* ---------- gallery ---------- */
+
+.hm-3d-gallery {
+  @include surface.swipe-grid;
+}
+
+.hm-3d-galleryCard {
+  height: 100%;
+
+  h3 {
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 17px;
+    text-wrap: pretty;
+  }
+}
+
+.hm-3d-galleryMedia {
+  aspect-ratio: 16 / 9;
+}
+
+.hm-3d-previewMotion {
+  z-index: 1;
+}
+
+.hm-3d-galleryCategory {
+  color: var(--px-ink-3);
+  font: 500 12px/1.4 var(--px-font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- closing ---------- */
+
+.hm-3d-closingBand {
+  @include surface.glow(50% 50%, 44% 60%, var(--px-violet), 9%);
+}

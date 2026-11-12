@@ -1,0 +1,120 @@
+@use '../../../css/breakpoints' as bp;
+
+$shapes:
+  capsule-rose, cube-pink, cube-violet, cylinder-cyan, octahedron-violet, pyramid-cyan, pyramid-pink, sphere-cyan,
+  sphere-pink, sphere-violet, torus-cyan, torus-pink;
+$flat-kinds: circle, pentagon, square, star, triangle;
+$flat-tints: 'blue', 'green', 'orange', 'pink', 'purple';
+
+/* Holds the two layers below and ignores the pointer, unless the page positions the shape or makes it interactive */
+:where(.clay) {
+  position: relative;
+  pointer-events: none;
+}
+
+.clay {
+  display: block;
+  flex: none;
+  width: var(--sz, 64px);
+  height: var(--sz, 64px);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--clay) center / contain no-repeat;
+  }
+
+  @media (forced-colors: active) {
+    display: none !important;
+  }
+}
+
+/*
+ * The drop shadow, under the image: the shape's silhouette as a mask, blurred and offset. A `drop-shadow()` filter
+ * on the image would grow the image's painted area by the blur, and a hero's shapes then outrank its H1 as the
+ * largest contentful paint; a mask is never a candidate.
+ */
+.shade {
+  position: absolute;
+  inset: 0;
+  translate: 0 calc(6px + var(--sz, 64px) * 0.08);
+  filter: blur(calc(4px + var(--sz, 64px) * 0.05));
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(60 40 120 / 0.18);
+    mask: var(--clay) center / contain no-repeat;
+  }
+}
+
+/* webpackIgnore keeps the URLs as they are in static/, unhashed and only fetched for the theme in use */
+@each $shape in $shapes {
+  .clay[data-shape='#{$shape}'] {
+    /*! webpackIgnore: true */
+    --clay: url('/images/clay/light/clay/#{$shape}.webp');
+  }
+
+  :global(html[data-theme='dark']) .clay[data-shape='#{$shape}'],
+  :global(.px-on-dark) .clay[data-shape='#{$shape}'] {
+    /*! webpackIgnore: true */
+    --clay: url('/images/clay/dark/clay/#{$shape}.webp');
+  }
+}
+
+/* The flat set is one image for both themes */
+@each $kind in $flat-kinds {
+  @each $tint in $flat-tints {
+    @each $style in fill, stroke {
+      .clay[data-shape='#{$kind}-#{$tint}-#{$style}'] {
+        /*! webpackIgnore: true */
+        --clay: url('/assets/standard/#{$kind}/#{$kind}-#{$tint}-#{$style}.png');
+      }
+    }
+  }
+}
+
+:global(html[data-theme='dark']) .shade,
+:global(.px-on-dark) .shade {
+  translate: 0 calc(7px + var(--sz, 64px) * 0.09);
+  filter: blur(calc(5px + var(--sz, 64px) * 0.06));
+
+  &::before {
+    background: rgb(4 2 12 / 0.45);
+  }
+}
+
+/* Flat shapes cast a hard print shadow down and to the right, where clay casts a soft one under it */
+.clay[data-dim='flat'] .shade {
+  translate: calc(var(--sz, 64px) * 0.06) calc(var(--sz, 64px) * 0.06);
+  filter: none;
+}
+
+/*
+ * One unit for all clay on a page's bands: 17% of the page's width, 72-240 px, and 120 px on phones. It computes on
+ * the band and inherits as a length, so a shape inside a narrower container (a card, the stage demo) keeps the
+ * page's scale. `--band-w` is the band's width, the same way, so a shape on a card's corner knows how far the card
+ * stands from the band's edge.
+ */
+@property --clay-u {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 120px;
+}
+
+@property --band-w {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 100vw;
+}
+
+:global([data-surface]) {
+  @include bp.fluid(--clay-u, clamp(72px, 17cqi, 240px));
+  @include bp.fluid(--band-w, 100cqi);
+
+  @container (width < 720px) {
+    --clay-u: 120px;
+  }
+}

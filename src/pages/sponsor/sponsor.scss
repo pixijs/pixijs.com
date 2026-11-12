@@ -1,0 +1,351 @@
+@use '../../css/breakpoints' as bp;
+@use '../../components/Page/cards' as *;
+@use '../../components/Page/columns' as *;
+
+/* ---------- stats in the header ---------- */
+.px-sponsor-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  max-width: 760px;
+  margin: 56px 0 0;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-lg);
+  background: var(--px-well);
+  background: color-mix(in srgb, var(--px-well) 60%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    var(--px-shadow-lg);
+  backdrop-filter: blur(8px);
+
+  @include bp.up(md) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.px-sponsor-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+  padding: 20px 12px;
+
+  & + & {
+    border-left: 1px solid var(--px-line);
+  }
+
+  @include bp.down(md) {
+    &:nth-child(3) {
+      border-left: 0;
+    }
+
+    &:nth-child(n + 3) {
+      border-top: 1px solid var(--px-line);
+    }
+  }
+
+  dt {
+    color: var(--px-ink-3);
+    font: 500 11px/1.3 var(--px-font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--px-ink);
+    font: 700 clamp(1.75rem, 1.4rem + 1.2cqi, 2.5rem) / 1 var(--px-font-display);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  &:first-child dd {
+    color: var(--px-accent-text);
+  }
+}
+
+/* A card that isn't a link still answers the pointer, as on the homes: it rises onto a deeper shadow */
+@mixin lift($border: var(--px-line-strong)) {
+  transition:
+    translate 350ms var(--px-ease-spring),
+    box-shadow 350ms var(--px-ease),
+    border-color var(--px-dur-2) var(--px-ease);
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: $border;
+      box-shadow: var(--lift-shadow, inset 0 1px 0 rgb(255 255 255 / 0.06), var(--px-shadow-lg));
+
+      @media (prefers-reduced-motion: no-preference) {
+        translate: 0 -6px;
+      }
+    }
+  }
+}
+
+/* ---------- why ---------- */
+.px-sponsor-reasons {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include columns(clamp(16px, 2.2vw, 28px), 700px 3);
+}
+
+.px-sponsor-reason {
+  padding: clamp(24px, 2.5cqi, 32px);
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-lg);
+  background: radial-gradient(90% 70% at 0% 0%, rgb(233 30 99 / 0.08), transparent 60%) var(--px-well);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    var(--px-shadow-md);
+
+  @include lift;
+
+  h3 {
+    margin: 24px 0 10px;
+    color: var(--px-ink);
+    font: 600 20px/1.25 var(--px-font-display);
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    margin: 0;
+    color: var(--px-ink-2);
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+}
+
+.px-sponsor-reason-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid color-mix(in srgb, var(--px-pink) 45%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--px-pink) var(--px-tint), var(--px-well));
+  color: var(--px-accent-text);
+}
+
+/* ---------- tiers ---------- */
+
+/* Two or four across, never three and one */
+.px-sponsor-tiers {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @container (width >= 600px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @container (width >= 1100px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Framed like a blog card: an inset cover, then the text under it */
+.px-sponsor-tier {
+  --tier: var(--px-ink-3);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+
+  @include panel;
+  @include lift(color-mix(in srgb, var(--tier) 55%, transparent));
+
+  &[data-tier='bronze'] {
+    --tier: #cd7f45;
+  }
+
+  &[data-tier='silver'] {
+    --tier: #8e9aae;
+  }
+
+  /* On the near-black cover the light theme's silver washes out to grey */
+  html[data-theme='dark'] &[data-tier='silver'] {
+    --tier: #b4bfd2;
+  }
+
+  &[data-tier='gold'],
+  &[data-tier='gold-plus'] {
+    --tier: #e3920b;
+  }
+}
+
+/*
+ * The blog's cover in the tier's colour, a little stronger than the blog's pink since the metals are duller. The
+ * hairline keeps its edge in dark, where the cover and the card are the same colour.
+ */
+.px-sponsor-cover {
+  --wash: color-mix(in srgb, var(--tier) 30%, transparent);
+  display: grid;
+  grid-template: auto 1fr / minmax(0, 1fr) auto;
+  gap: 24px 16px;
+  aspect-ratio: 16 / 10;
+  padding: 18px 20px 20px;
+  border-radius: 14px;
+  background:
+    radial-gradient(80% 110% at 100% 100%, var(--wash), transparent 70%),
+    var(--glint, none),
+    linear-gradient(var(--px-grid-line) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, var(--px-grid-line) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--px-bg-alt);
+  box-shadow: inset 0 0 0 1px var(--px-line);
+  container-type: inline-size;
+}
+
+.px-sponsor-tier-name,
+.px-sponsor-flag {
+  margin: 0;
+  font: 500 13px/1 var(--px-font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.px-sponsor-tier-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--px-ink);
+
+  &::before {
+    content: '';
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--tier);
+  }
+}
+
+/* Where the blog puts the year */
+.px-sponsor-flag {
+  color: var(--px-accent-text);
+}
+
+.px-sponsor-price {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-direction: column;
+  align-self: end;
+  gap: 10px;
+  margin: 0;
+}
+
+.px-sponsor-amount {
+  color: var(--px-ink);
+  font: 700 clamp(44px, 26cqi, 76px) / 0.9 var(--px-font-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+
+.px-sponsor-per {
+  color: var(--px-ink-3);
+  font: 500 11px/1 var(--px-font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.px-sponsor-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 22px 14px 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: 10px;
+    color: var(--px-ink-2);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .px-sponsor-includes {
+    color: var(--px-ink-3);
+    font: 500 11px/1.4 var(--px-font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+.px-sponsor-check {
+  flex: none;
+  margin-top: 2px;
+  color: var(--tier);
+}
+
+/* Side by side while both fit, otherwise one under the other, full width; the auto margin lines them up across a row */
+.px-sponsor-pay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding: 28px 0 0;
+
+  > a {
+    flex: 1;
+  }
+}
+
+/* ---------- platinum ---------- */
+
+/* The top tier leads like the blog's newest post: on a row of its own, raised, with its cover beside the text */
+.px-sponsor-featured {
+  --tier: var(--px-pink);
+  /* Brighter on hover, where `lift` would otherwise swap the pink glow for a plain shadow */
+  --lift-shadow: 0 30px 60px -30px rgb(233 30 99 / 0.5), var(--px-shadow-lg);
+  grid-column: 1 / -1;
+  border-color: color-mix(in srgb, var(--px-pink) 40%, var(--px-line));
+  background: var(--px-raised);
+  box-shadow:
+    0 30px 60px -30px rgb(233 30 99 / 0.4),
+    var(--px-shadow-lg);
+
+  /* Wider than the others' while it spans the row stacked, or its top half would sit empty */
+  .px-sponsor-cover {
+    --wash: color-mix(in srgb, var(--tier) 26%, transparent);
+    --glint: radial-gradient(60% 80% at 0% 0%, color-mix(in srgb, var(--px-violet) 16%, transparent), transparent 70%);
+    aspect-ratio: 2 / 1;
+    column-gap: 24px;
+  }
+
+  /* A plain rule, not a container query: inside the cover those query the cover */
+  .px-sponsor-amount {
+    font-size: clamp(44px, 30cqi, 104px);
+  }
+
+  /* In line with the benefits, clear of the pink frame, with room right and below for the buttons' offset shadows */
+  .px-sponsor-pay {
+    gap: 14px 20px;
+    padding: 24px 20px 20px 14px;
+  }
+
+  /* Any narrower and the text column wraps every benefit beside a mostly empty cover */
+  @container (width >= 720px) {
+    display: grid;
+    grid-template: 1fr auto / minmax(0, 1.1fr) minmax(0, 1fr);
+
+    .px-sponsor-cover {
+      grid-row: span 2;
+      aspect-ratio: auto;
+      min-height: 300px;
+      padding: 24px 28px 28px;
+    }
+
+    .px-sponsor-benefits {
+      align-self: center;
+      padding: 28px clamp(20px, 3cqi, 40px) 0;
+    }
+
+    .px-sponsor-pay {
+      padding: 28px clamp(20px, 3cqi, 40px) clamp(20px, 3cqi, 32px);
+    }
+  }
+}

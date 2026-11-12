@@ -1,0 +1,636 @@
+@use './breakpoints' as bp;
+
+/*
+ * Reading styles for docs and blog posts (spec 6.3), the two places Docusaurus renders `.markdown`. The context sits
+ * in :where() so a rule weighs one class plus its elements: enough to beat Infima's `.markdown > h2`, not enough to
+ * beat a component's own module class. App routes (examples, playground, tutorials) style their own UI, and opt text
+ * back in with a nested `.markdown`, as a tutorial's step text does.
+ */
+$prose: '.markdown:where(:not([data-app-page] *), .markdown .markdown)';
+
+#{$prose} {
+  color: var(--px-ink-prose);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-wrap: break-word;
+
+  :not(pre) > code {
+    padding: 0.1em 0.36em;
+    border-radius: var(--px-r-xs);
+    background: var(--px-field);
+    font-size: 0.85em;
+    vertical-align: 0.04em;
+    overflow-wrap: anywhere;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--px-ink);
+    font-family: var(--px-font-display);
+    font-weight: 600;
+    scroll-margin-top: calc(var(--px-topbar-h) + 16px);
+
+    /* Code in a title reads as part of it: mono, without the chip */
+    code {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      font-size: 0.88em;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      vertical-align: baseline;
+    }
+  }
+
+  h1 {
+    @include bp.fluid(font-size, var(--px-text-h1));
+
+    margin: 0 0 20px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  h2 {
+    @include bp.fluid(font-size, var(--px-text-h2));
+
+    margin: 3rem 0 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    @include bp.fluid(font-size, var(--px-text-h3));
+
+    margin: 2.25rem 0 0.75rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  h4 {
+    margin: 1.75rem 0 0.5rem;
+    font-size: 1.0625rem;
+    line-height: 1.4;
+  }
+
+  h2 + h3 {
+    margin-top: 1.5rem;
+  }
+
+  .hash-link {
+    padding-left: 0.3em;
+    color: var(--px-ink-4);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--px-accent-text);
+    }
+  }
+
+  p {
+    margin: 0 0 1.15em;
+  }
+
+  strong {
+    color: var(--px-ink);
+    font-weight: 600;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 1.25em;
+    padding-left: 1.25em;
+
+    ul,
+    ol {
+      margin: 0.4em 0 0;
+    }
+  }
+
+  li {
+    padding-left: 0.25em;
+
+    + li {
+      margin-top: 0.4em;
+    }
+
+    &::marker {
+      color: var(--px-ink-4);
+    }
+
+    > p {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  ol > li::marker {
+    font-family: var(--px-font-mono);
+    font-size: 0.875em;
+  }
+
+  /* Links written in markdown; Docusaurus's Link leaves `class=""` on internal ones. Component links keep their look */
+  a:is(:not([class]), [class='']) {
+    color: var(--px-accent-text);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition:
+      color var(--px-dur-1) var(--px-ease),
+      text-decoration-color var(--px-dur-1) var(--px-ease);
+
+    &:hover {
+      color: var(--px-ink);
+      text-decoration-color: currentColor;
+    }
+
+    code {
+      color: inherit;
+    }
+  }
+
+  hr {
+    height: 1px;
+    margin: 2.5rem 0;
+    border: 0;
+    background: var(--px-line);
+  }
+
+  blockquote {
+    margin: 0 0 1.25em;
+    padding: 2px 0 2px 18px;
+    border-left: 3px solid var(--px-line-strong);
+    color: var(--px-ink-2);
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  p > img,
+  figure img {
+    border: 1px solid var(--px-line);
+    border-radius: var(--px-r-md);
+  }
+
+  figure {
+    margin: 0 0 1.5rem;
+  }
+
+  figcaption {
+    margin-top: 10px;
+    color: var(--px-ink-3);
+    font: 400 12px/1.5 var(--px-font-mono);
+  }
+
+  :is(video, iframe):not([class]) {
+    max-width: 100%;
+    border-radius: var(--px-r-md);
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  /* Code blocks: Prism colours come from the theme (src/theme/prism/pixi.ts); this is the frame */
+  .theme-code-block {
+    --ifm-pre-padding: 20px;
+
+    margin: 0 0 1.5rem;
+    overflow: hidden;
+    border: 1px solid var(--px-line);
+    border-radius: var(--px-r-md);
+    background: var(--px-code-bg);
+    box-shadow: none;
+
+    pre {
+      margin: 0;
+      padding: 0;
+      border-radius: 0;
+      background: transparent !important;
+      font: 400 13.5px/1.75 var(--px-font-mono);
+
+      @include bp.down(sm) {
+        font-size: 12.5px;
+      }
+    }
+
+    code {
+      padding: 16px 20px;
+    }
+
+    > div:first-child:not(:last-child) {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--px-line);
+      color: var(--px-ink-3);
+      font: 500 12px/1.4 var(--px-font-mono);
+    }
+
+    /* Copy and word-wrap buttons: shown on hover and focus; a tap on the block does both on touch screens */
+    button {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border: 1px solid var(--px-line-strong);
+      border-radius: var(--px-r-sm);
+      background: var(--px-raised);
+      color: var(--px-ink-2);
+      opacity: 0;
+      transition:
+        opacity var(--px-dur-1) var(--px-ease),
+        color var(--px-dur-1) var(--px-ease);
+
+      &:hover {
+        color: var(--px-ink);
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      @media (pointer: coarse) {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    &:hover button,
+    &:focus-within button {
+      opacity: 1;
+    }
+  }
+
+  .theme-code-block-highlighted-line {
+    background: rgb(233 30 99 / 0.12);
+    box-shadow: inset 2px 0 0 var(--px-pink);
+  }
+
+  /* Tables scroll inside their frame (MDXComponents wraps each one) instead of squeezing their columns */
+  /* Scroll shadows: the opaque covers scroll with the table and uncover the edge shadows once it can scroll */
+  .table-scroll {
+    --table-shade: rgb(22 19 31 / 0.2);
+
+    margin: 0 0 1.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--px-line);
+    border-radius: var(--px-r-md);
+    background:
+      linear-gradient(to right, var(--px-bg) 40%, transparent) left / 32px 100% no-repeat local,
+      linear-gradient(to left, var(--px-bg) 40%, transparent) right / 32px 100% no-repeat local,
+      radial-gradient(farthest-side at 0 50%, var(--table-shade), transparent) left / 12px 100% no-repeat scroll,
+      radial-gradient(farthest-side at 100% 50%, var(--table-shade), transparent) right / 12px 100% no-repeat scroll;
+
+    table {
+      display: table;
+      width: 100%;
+      margin: 0;
+      border: 0;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 14.5px;
+      line-height: 1.55;
+      font-variant-numeric: tabular-nums;
+    }
+
+    tr {
+      border: 0;
+      background: none;
+    }
+
+    th,
+    td {
+      padding: 10px 16px;
+      border: 0;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      border-bottom: 1px solid var(--px-line);
+      background: var(--px-bg-alt);
+      color: var(--px-ink);
+      font: 600 13px/1.4 var(--px-font-display);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    td {
+      min-width: 10rem;
+    }
+
+    tbody tr + tr td {
+      border-top: 1px solid var(--px-line);
+    }
+
+    td code {
+      overflow-wrap: normal;
+      white-space: nowrap;
+    }
+
+    &:focus-visible {
+      outline-offset: 2px;
+    }
+
+    :root[data-theme='dark'] & {
+      --table-shade: rgb(0 0 0 / 0.65);
+    }
+  }
+
+  /* Admonitions (GitHub alerts in upstream guides arrive as these too) */
+  .theme-admonition {
+    --ifm-alert-foreground-color: var(--px-ink-prose);
+
+    margin: 0 0 1.5rem;
+    padding: 14px 18px;
+    border-radius: var(--px-r-md);
+    font-size: 15px;
+    line-height: 1.65;
+
+    > div:first-child {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      color: var(--px-ink);
+      font: 600 13px/1.3 var(--px-font-display);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+
+      span {
+        display: inline-flex;
+        margin: 0;
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+        fill: var(--ifm-alert-border-color);
+      }
+    }
+
+    a:is(:not([class]), [class='']) {
+      color: var(--px-accent-text);
+    }
+
+    :not(pre) > code {
+      background: color-mix(in srgb, var(--px-field) 70%, transparent);
+    }
+
+    > div:last-child > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  details {
+    margin: 0 0 1.5rem;
+    padding: 0 18px;
+    border: 1px solid var(--px-line);
+    border-radius: var(--px-r-md);
+    background: var(--px-well);
+    color: var(--px-ink-prose);
+    box-shadow: none;
+
+    > summary {
+      padding: 14px 0 14px 22px;
+      color: var(--px-ink);
+      font: 500 15px/1.4 var(--px-font-display);
+
+      &::before {
+        top: 21px;
+        border-color: transparent transparent transparent var(--px-ink-3);
+      }
+    }
+
+    > div > div {
+      margin-top: 0;
+      padding: 12px 0 16px;
+      border-top: 1px solid var(--px-line);
+
+      > :last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  /* Tabs: an underline strip, pink under the current tab */
+  .tabs-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .tabs {
+    gap: 4px;
+    margin: 0 0 16px;
+    padding: 0;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--px-line);
+    scrollbar-width: none;
+  }
+
+  .tabs__item {
+    margin: 0 0 -1px;
+    padding: 10px 14px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    color: var(--px-ink-3);
+    font: 500 14px/1.2 var(--px-font-display);
+    white-space: nowrap;
+
+    &:hover {
+      background: none;
+      color: var(--px-ink);
+    }
+  }
+
+  .tabs__item--active {
+    border-bottom-color: var(--px-pink);
+    color: var(--px-ink);
+  }
+}
+
+/*
+ * `/7.x/tutorials`: the frozen v7 page is a heading, a paragraph and a list of links. It takes the tutorial gallery's
+ * display heading and lede, and each link becomes a numbered card.
+ */
+html.docs-version-7\.x.docs-doc-id-tutorials\/index .markdown {
+  h1 {
+    margin: 0;
+    font: 700 var(--px-text-display-2) / 1.02 var(--px-font-display);
+    letter-spacing: -0.03em;
+  }
+
+  > p {
+    max-width: 44ch;
+    margin: 18px 0 40px;
+    color: var(--px-ink-2);
+    font: 400 var(--px-text-lede) / 1.55 var(--px-font-body);
+    text-wrap: pretty;
+  }
+
+  ul {
+    display: grid;
+    gap: 16px;
+    padding: 0;
+    list-style: none;
+    counter-reset: tutorial;
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
+    counter-increment: tutorial;
+  }
+
+  li > a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 8px 24px;
+    padding: 20px 24px 22px;
+    border: 1px solid var(--px-line);
+    border-radius: var(--px-r-lg);
+    background: var(--px-well);
+    box-shadow: var(--px-shadow-md);
+    color: var(--px-ink);
+    font: 600 22px/1.25 var(--px-font-display);
+    letter-spacing: -0.015em;
+    text-decoration: none;
+    transition:
+      transform 350ms var(--px-ease-spring),
+      box-shadow 350ms var(--px-ease-spring),
+      border-color var(--px-dur-2) var(--px-ease);
+
+    &::before,
+    &::after {
+      font: 500 11px/1.4 var(--px-font-mono);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    &::before {
+      content: counter(tutorial, decimal-leading-zero) / '';
+      grid-column: 1 / -1;
+      color: var(--px-ink-3);
+    }
+
+    &::after {
+      content: 'Start →' / '';
+    }
+
+    &:hover {
+      border-color: var(--px-line-strong);
+      color: var(--px-ink);
+      text-decoration: none;
+      box-shadow: 6px 6px 0 var(--px-accent);
+
+      @media (prefers-reduced-motion: no-preference) {
+        transform: translate(-4px, -4px);
+      }
+    }
+  }
+}
+
+/* Previous / next */
+.pagination-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 3rem;
+
+  @include bp.down(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pagination-nav__link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 20px;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-md);
+  background: var(--px-well);
+  text-decoration: none;
+  transition:
+    transform var(--px-dur-3) var(--px-ease-spring),
+    box-shadow var(--px-dur-3) var(--px-ease-spring),
+    border-color var(--px-dur-1) var(--px-ease);
+
+  &:hover {
+    border-color: var(--px-pink);
+    box-shadow: 4px 4px 0 var(--px-pink);
+    text-decoration: none;
+    transform: translate(-3px, -3px);
+  }
+}
+
+.pagination-nav__link--next {
+  grid-column: 2;
+  text-align: right;
+
+  @include bp.down(sm) {
+    grid-column: 1;
+  }
+}
+
+.pagination-nav__sublabel {
+  margin: 0;
+  color: var(--px-ink-3);
+  font: 500 11px/1 var(--px-font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pagination-nav__label {
+  color: var(--px-ink);
+  font: 600 16px/1.35 var(--px-font-display);
+  word-break: normal;
+
+  .pagination-nav__link--prev &::before {
+    content: '← ';
+  }
+
+  .pagination-nav__link--next &::after {
+    content: ' →';
+  }
+}
+
+/* Edit link and tags under a doc or post */
+.theme-doc-footer {
+  margin-top: 2.5rem;
+
+  .row {
+    margin: 0;
+  }
+
+  .col {
+    padding: 0;
+  }
+}
+
+.theme-edit-this-page {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--px-ink-3);
+  font-size: 14px;
+  text-decoration: none;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+  }
+
+  &:hover {
+    color: var(--px-ink);
+    text-decoration: none;
+  }
+}

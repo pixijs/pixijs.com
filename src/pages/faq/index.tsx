@@ -1,12 +1,14 @@
 import Layout from '@theme/Layout';
-import FAQPage from './FAQPage';
+import FAQPage from './_FAQPage';
 
-function FAQ() {
+export default function FAQ() {
   return (
-    <Layout title="FAQ" description="Frequently Asked Questions about PixiJS">
+    <Layout
+      title="FAQ"
+      description="Answers to common questions about PixiJS: what it's for, what it costs, how to get started and who makes it."
+      wrapperClassName="shell-reading"
+    >
       <FAQPage />
     </Layout>
   );
 }
-
-export default FAQ;

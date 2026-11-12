@@ -1,0 +1,25 @@
+@use '../../../css/breakpoints' as bp;
+
+.wave {
+  position: relative;
+  margin: -1px 0;
+  overflow: hidden;
+  background: var(--from);
+
+  @include bp.fluid(height, clamp(28px, 4cqi, 56px));
+}
+
+.flip {
+  transform: scaleX(-1);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: var(--to);
+}
+
+.drift {
+  width: 200%;
+}

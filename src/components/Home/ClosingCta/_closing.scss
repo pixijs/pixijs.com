@@ -1,0 +1,33 @@
+@use '../../../css/breakpoints' as bp;
+
+.hm-closing {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* 34 px at a 360 px page, where it breaks in three lines, to 72 px from 1176 */
+.hm-closingTitle {
+  margin: 0 auto;
+  max-width: 18ch;
+  color: var(--px-ink);
+  font: 700 2.125rem/1.02 var(--px-font-display);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+
+  @include bp.fluid(font-size, clamp(2.125rem, 0.95rem + 5cqi, 4.5rem));
+}
+
+.hm-closingLede {
+  max-width: 46ch;
+  margin: 24px auto 40px;
+  color: var(--px-ink-2);
+  font: 400 var(--px-text-lede) / 1.55 var(--px-font-body);
+  text-wrap: balance;
+}
+
+/* The corner shapes lean toward a fine pointer */
+.hm-closingShape {
+  @media (hover: hover) and (pointer: fine) {
+    pointer-events: auto;
+  }
+}

@@ -13,5 +13,7 @@ jobs:
           node-version: '24'
           cache: 'npm'
       - run: npm ci
-      - run: npm run types
+      - run: npm run generate
+      - run: npm run types --ignore-scripts
       - run: npm run lint
+      - run: npm run build --ignore-scripts

@@ -1,0 +1,7 @@
+/// The reading column with `TocColumn` beside it, for docs and blog posts from xl
+@mixin with-toc {
+  display: grid;
+  grid-template-columns: minmax(0, var(--px-prose)) var(--px-toc-w);
+  gap: 48px;
+  max-width: calc(var(--px-prose) + 48px + var(--px-toc-w));
+}

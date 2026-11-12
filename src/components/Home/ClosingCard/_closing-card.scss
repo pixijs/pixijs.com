@@ -1,0 +1,38 @@
+@use '../../../css/breakpoints' as bp;
+
+/* `ClosingCard`, which the `/2d` and `/3d` stylesheets both include */
+.hm-closingCard {
+  position: relative;
+  max-width: 1080px;
+  margin-inline: auto;
+
+  /* Its clay can be booped */
+  .clay {
+    @media (hover: hover) and (pointer: fine) {
+      cursor: pointer;
+    }
+  }
+
+  h2 {
+    max-width: 16ch;
+    margin: 0 auto;
+    color: var(--px-ink);
+    font: 700 2.375rem/1.02 var(--px-font-display);
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+
+    @include bp.fluid(font-size, clamp(2.375rem, 1.45rem + 4.1cqi, 4.5rem));
+  }
+
+  p {
+    max-width: 46ch;
+    margin: 24px auto 0;
+    color: var(--px-ink-2);
+    font: 400 var(--px-text-lede) / 1.55 var(--px-font-body);
+    text-wrap: balance;
+  }
+
+  p + div {
+    margin-top: 40px;
+  }
+}

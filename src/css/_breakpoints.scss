@@ -1,0 +1,45 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+
+$bp: (
+  sm: 480px,
+  md: 768px,
+  lg: 997px,
+  xl: 1280px,
+  xxl: 1440px,
+);
+
+@mixin up($name) {
+  @media (min-width: map.get($bp, $name)) {
+    @content;
+  }
+}
+
+@mixin down($name) {
+  @media (max-width: (map.get($bp, $name) - 0.02px)) {
+    @content;
+  }
+}
+
+/// `$value` with each `cqi` swapped for `vw`, for browsers without container query units
+@function to-vw($value) {
+  $text: meta.inspect($value);
+  $at: string.index($text, 'cqi');
+
+  @while $at {
+    $text: string.slice($text, 1, $at - 1) + 'vw' + string.slice($text, $at + 3);
+    $at: string.index($text, 'cqi');
+  }
+
+  @return string.unquote($text);
+}
+
+/// A `cqi` size with its `vw` fallback in a separate rule: minifiers merge a fallback declared in the same rule
+@mixin fluid($property, $value) {
+  #{$property}: $value;
+
+  @supports not (width: 1cqi) {
+    #{$property}: to-vw($value);
+  }
+}

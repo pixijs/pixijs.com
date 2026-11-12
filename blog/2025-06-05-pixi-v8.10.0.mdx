@@ -8,17 +8,6 @@ hide_table_of_contents: true
 keywords: ['PixiJS', 'Updates', 'Documentation', 'Text Features']
 ---
 
-import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
-import TrimIndexFile from '!!raw-loader!../docs/examples/text_trim_bounds';
-import FiltersIndexFile from '!!raw-loader!../docs/examples/text_filters_cartoon';
-import CartoonFile from '!!raw-loader!../docs/examples/text_filters_cartoon/CartoonTextFilter';
-import vert from '!!raw-loader!../docs/examples/text_filters_cartoon/cartoonText.vert';
-import frag from '!!raw-loader!../docs/examples/text_filters_cartoon/cartoonText.frag';
-import wgsl from '!!raw-loader!../docs/examples/text_filters_cartoon/cartoonText.wgsl';
-import TextureStyleIndexFile from '!!raw-loader!../docs/examples/text_texture-style_scale-mode';
-import NineSliceIndexFile from '!!raw-loader!../docs/examples/nine-slice-sprite_transform_anchor';
-import DomContainerIndexFile from '!!raw-loader!../docs/examples/dom-container_html_text-area';
-
 PixiJS v8.10.0 introduces a major overhaul of our documentation along with several updates that enhance text rendering and developer control. Here's what's new:
 
 - **Complete Documentation Overhaul**: Improved guides, API docs, and better organization
@@ -92,15 +81,7 @@ const style = new TextStyle({
 const text = new PIXI.Text({ text: 'Hello, PixiJS!', style });
 ```
 
-<EmbeddedEditor
-  files={{
-    'index.js': FiltersIndexFile,
-    'CartoonTextFilter.js': CartoonFile,
-    'cartoonText.vert': vert,
-    'cartoonText.frag': frag,
-    'cartoonText.wgsl': wgsl,
-  }}
-/>
+<PixiExample name="text_filters_cartoon" />
 
 Additionally, a new `generateFilteredTexture` method has been added to `filterSystem`:
 
@@ -133,11 +114,7 @@ const style = new TextStyle({
 const text = new Text({ text: '   Hello, PixiJS!   ', style });
 ```
 
-<EmbeddedEditor
-  files={{
-    'index.js': TrimIndexFile,
-  }}
-/>
+<PixiExample name="text_trim_bounds" />
 
 This method applies one or more filters to a texture and returns a new, filtered result.
 
@@ -159,11 +136,7 @@ const style = new TextStyle({
 const text = new Text({ text: 'Hello, PixiJS!', style });
 ```
 
-<EmbeddedEditor
-  files={{
-    'index.js': TextureStyleIndexFile,
-  }}
-/>
+<PixiExample name="text_texture-style_scale-mode" />
 
 ## Highlights from v8.9.0 and v8.8.0
 
@@ -173,21 +146,13 @@ We missed highlighting the previous two releases, so here are some key features 
 
 The `DOMContainer` lets developers transform and animate DOM elements in sync with PixiJS scenes. This is useful for overlaying native inputs, textareas, or other HTML controls while retaining control over their positioning and rotation.
 
-<EmbeddedEditor
-  files={{
-    'index.js': DomContainerIndexFile,
-  }}
-/>
+<PixiExample name="dom-container_html_text-area" />
 
 ### NineSlice Sprite Anchor
 
 `NineSliceSprite` now supports the `anchor` property, allowing rotation and scaling behaviors to work as they do for other sprites.
 
-<EmbeddedEditor
-  files={{
-    'index.js': NineSliceIndexFile,
-  }}
-/>
+<PixiExample name="nine-slice-sprite_transform_anchor" />
 
 ## Looking Ahead
 

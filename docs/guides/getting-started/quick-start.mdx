@@ -5,16 +5,13 @@ sidebar_position: 1
 description: A step-by-step guide to quickly set up a PixiJS project and start creating graphics and animations.
 ---
 
-import { EmbeddedEditor } from '@site/src/components/Editor/EmbeddedEditor';
-import IndexFile from '!!raw-loader!@site/docs/examples/container_transform_pivot_basic';
-
 # Quick Start
 
 ---
 
 ## Try PixiJS Online
 
-- To quickly get a taste of PixiJS, you can try it directly in our [PixiJS Playground](/8.x/playground).
+- To quickly get a taste of PixiJS, you can try it directly in our [PixiJS Playground](/playground).
 
 ---
 
@@ -75,10 +72,7 @@ npm install pixi.js
 
 Once you've set up your project, here's a simple example to get started with PixiJS:
 
-{/* embedded:@site/docs/examples/container_transform_pivot_basic.js */}
-<EmbeddedEditor fontSize={14} width={"100%"} viewType={"editor"} height={700} files={{"index.js": IndexFile}} />
-
-<br />
+<PixiExample name="container_transform_pivot_basic" viewType="both" />
 
 :::warning
 If using Vite you still need to wrap your code in an async function. There is an issue when using top level await with PixiJS when building for production.

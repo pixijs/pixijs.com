@@ -1,1 +1,9 @@
-["gettingStarted"]
+[
+  {
+    "id": "getting-started",
+    "title": "Getting Started",
+    "description": "Create an application, load a texture and spin your first sprite.",
+    "level": "beginner",
+    "steps": 4
+  }
+]

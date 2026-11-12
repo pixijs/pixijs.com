@@ -1,17 +1,18 @@
 import dotenv from 'dotenv';
+import sharp from 'sharp';
 import { fetchSponsors, type SponsorkitConfig, type Sponsorship, tierPresets } from 'sponsorkit';
 import fs from 'fs';
-import sharp from 'sharp';
 dotenv.config();
 
 const SPONSORS_PATH = 'src/data/sponsors.json';
 const PRIVATE_SPONSORS_PATH = 'src/data/sponsors-private.json';
 const OVERRIDES_PATH = 'src/data/sponsor-overrides.json';
 const MANUAL_SPONSORS_PATH = 'src/data/manualSponsors.json';
+const LOGOS_DIR = 'static/images/sponsors/logos';
 const README_IMAGE_PATH = 'static/sponsors-readme.svg';
 const README_IMAGE_MAX_WIDTH = 800;
 const README_IMAGE_GAP = 16;
-// Platinum and Gold from SponsorshipTiers.tsx; Gold is the lowest tier that includes a README logo.
+// Platinum and Gold, the tiers the home page's sponsor section starts at; Gold is the lowest that gets a README logo.
 const README_IMAGE_TIERS = [
   { minMonthlyDollars: 2000, cardWidth: 300, cardHeight: 126, padding: 24 },
   { minMonthlyDollars: 500, cardWidth: 200, cardHeight: 84, padding: 16 },
@@ -27,14 +28,22 @@ type SponsorOverride = {
   privacyLevel?: string;
 };
 
+/** A copy of the sponsor's avatar trimmed to its artwork, and the colour that fills the tile around it */
+type SponsorLogo = {
+  src: string;
+  background: string;
+};
+
 type SponsorshipWithoutRaw = Omit<Sponsorship, 'raw'>;
 type StoredSponsorship = SponsorshipWithoutRaw & {
   lastSeenAt: string;
+  logo?: SponsorLogo;
 };
 type ReadmeSponsor = {
   monthlyDollars: number;
   isOneTime?: boolean;
   sponsor: { login: string; avatarUrl: string };
+  logo?: SponsorLogo;
 };
 
 function mergeSponsorRecords<T extends Record<string, unknown>>(existing: T | undefined, incoming: T): T {
@@ -203,10 +212,17 @@ async function logoToDataUri(avatarUrl: string, width: number, height: number): 
   return `data:image/png;base64,${png.toString('base64')}`;
 }
 
-// READMEs load this through <img>, which blocks external resources, so logos must be embedded.
+/**
+ * Writes the sponsor image READMEs embed: recurring Platinum and Gold sponsors, including the manual ones, each on a
+ * card filled like its tile on the home page. READMEs load it through <img>, which blocks external resources, so
+ * the logos are embedded.
+ */
 async function writeReadmeImage(sponsors: ReadmeSponsor[], overrides: SponsorOverride[]) {
+  const manualSponsors: ReadmeSponsor[] = JSON.parse(fs.readFileSync(MANUAL_SPONSORS_PATH, 'utf8'));
   const logoOverrides = new Map(overrides.map((o) => [o.login.toLowerCase(), o.avatarUrl]));
-  const recurring = sponsors.filter((s) => !s.isOneTime).sort((a, b) => b.monthlyDollars - a.monthlyDollars);
+  const recurring = [...sponsors, ...manualSponsors]
+    .filter((s) => !s.isOneTime)
+    .sort((a, b) => b.monthlyDollars - a.monthlyDollars);
 
   const rows = README_IMAGE_TIERS.flatMap((tier, index) => {
     const tierCeiling = README_IMAGE_TIERS[index - 1]?.minMonthlyDollars ?? Infinity;
@@ -235,18 +251,19 @@ async function writeReadmeImage(sponsors: ReadmeSponsor[], overrides: SponsorOve
 
       nextRowY += cardHeight + README_IMAGE_GAP;
 
-      return rowSponsors.map(async ({ sponsor }, column) => {
+      return rowSponsors.map(async ({ sponsor, logo: saved }, column) => {
         const x = (imageWidth - width) / 2 + column * (cardWidth + README_IMAGE_GAP);
         const logoWidth = cardWidth - padding * 2;
         const logoHeight = cardHeight - padding * 2;
         const logo = await logoToDataUri(
-          logoOverrides.get(sponsor.login.toLowerCase()) || sponsor.avatarUrl,
+          saved?.src ?? (logoOverrides.get(sponsor.login.toLowerCase()) || sponsor.avatarUrl),
           logoWidth,
           logoHeight,
         );
+        const fill = saved?.background ?? '#fff';
 
         return (
-          `<rect x="${x + 0.5}" y="${y + 0.5}" width="${cardWidth - 1}" height="${cardHeight - 1}" rx="14" fill="#fff" stroke="#d0d7de"/>` +
+          `<rect x="${x + 0.5}" y="${y + 0.5}" width="${cardWidth - 1}" height="${cardHeight - 1}" rx="14" fill="${fill}" stroke="#d0d7de"/>` +
           `<image x="${x + padding}" y="${y + padding}" width="${logoWidth}" height="${logoHeight}" href="${logo}"/>`
         );
       });
@@ -260,6 +277,73 @@ async function writeReadmeImage(sponsors: ReadmeSponsor[], overrides: SponsorOve
     `<svg xmlns="http://www.w3.org/2000/svg" width="${imageWidth}" height="${imageHeight}" viewBox="0 0 ${imageWidth} ${imageHeight}">${cards.join('')}</svg>\n`,
   );
   console.log(`Wrote ${README_IMAGE_PATH} with ${cards.length} sponsors.`);
+}
+
+/**
+ * Saves the logo the homepages show for a sponsor: the avatar trimmed to its artwork, so a tile can fit the artwork
+ * in its own padding and fill the rest with the avatar's background. A transparent avatar gets white, or near-black
+ * when a quarter of its artwork is white and would vanish.
+ */
+async function saveLogo(login: string, url: string): Promise<SponsorLogo> {
+  const image = sharp(await readLogo(url), { density: 144 }).ensureAlpha();
+  const pixels = await image.clone().raw().toBuffer();
+  const file = `${login.toLowerCase().replace(/[^a-z0-9_-]/g, '-')}.webp`;
+  let background = '#ffffff';
+
+  if (pixels[3] === 255) {
+    background = `#${[...pixels.subarray(0, 3)].map((c) => c.toString(16).padStart(2, '0')).join('')}`;
+  } else {
+    let white = 0;
+    let cover = 0;
+
+    for (let i = 0; i < pixels.length; i += 4) {
+      if (Math.min(pixels[i], pixels[i + 1], pixels[i + 2]) > 220) white += pixels[i + 3];
+      cover += pixels[i + 3];
+    }
+    if (white / cover > 0.25) background = '#16131f';
+  }
+
+  await image
+    .trim({ threshold: 24 })
+    .resize({ width: 640, height: 256, fit: 'inside', withoutEnlargement: true })
+    .webp({ quality: 90, alphaQuality: 100 })
+    .toFile(`${LOGOS_DIR}/${file}`);
+
+  return { src: `${LOGOS_DIR.replace('static', '')}/${file}`, background };
+}
+
+/** Replaces every saved logo; a sponsor whose avatar can't be read goes without, and the homepages show the avatar */
+async function withLogos(sponsors: StoredSponsorship[], overrides: SponsorOverride[]): Promise<StoredSponsorship[]> {
+  const avatars = new Map(overrides.map((o) => [o.login, o.avatarUrl]));
+
+  fs.rmSync(LOGOS_DIR, { recursive: true, force: true });
+  fs.mkdirSync(LOGOS_DIR, { recursive: true });
+
+  return Promise.all(
+    sponsors.map(async ({ logo, ...sponsor }) => {
+      const { login, avatarUrl } = sponsor.sponsor;
+
+      try {
+        return { ...sponsor, logo: await saveLogo(login, avatars.get(login) ?? avatarUrl) };
+      } catch (err) {
+        console.warn(`No logo for ${login}:`, err);
+
+        return sponsor;
+      }
+    }),
+  );
+}
+
+/**
+ * `--logos`: redo the logos and the README image for the sponsors already in `sponsors.json`, without fetching any
+ * (no tokens needed)
+ */
+async function refreshLogos() {
+  const overrides: SponsorOverride[] = JSON.parse(fs.readFileSync(OVERRIDES_PATH, 'utf8'));
+  const sponsors = await withLogos(readStoredSponsors(SPONSORS_PATH, new Date().toISOString()), overrides);
+
+  fs.writeFileSync(SPONSORS_PATH, JSON.stringify(sponsors, null, 2));
+  await writeReadmeImage(sponsors, overrides);
 }
 
 async function main() {
@@ -365,16 +449,14 @@ async function main() {
     `Found ${publicSponsors.length} public and ${privateSponsors.length} private sponsors (>= $100/month); retained ${graceSummary} in grace period.`,
   );
 
-  fs.writeFileSync(SPONSORS_PATH, JSON.stringify(publicSponsors, null, 2));
+  const publicWithLogos = await withLogos(publicSponsors, overrides);
+
+  fs.writeFileSync(SPONSORS_PATH, JSON.stringify(publicWithLogos, null, 2));
   fs.writeFileSync(PRIVATE_SPONSORS_PATH, JSON.stringify(privateSponsors, null, 2));
-
-  const manualSponsors: ReadmeSponsor[] = JSON.parse(fs.readFileSync(MANUAL_SPONSORS_PATH, 'utf8'));
-
-  await writeReadmeImage([...publicSponsors, ...manualSponsors], overrides);
+  await writeReadmeImage(publicWithLogos, overrides);
 }
 
-// @ts-expect-error - top level await does work
-await main().catch((err) => {
+await (process.argv.includes('--logos') ? refreshLogos() : main()).catch((err) => {
   console.error('Error fetching sponsors:', err);
   process.exitCode = 1;
 });

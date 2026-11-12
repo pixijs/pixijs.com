@@ -1,0 +1,558 @@
+@use '../../css/breakpoints' as bp;
+
+/* The page sits inside `.theme-doc-markdown`, so rules here nest under `.px-tut-tutorial` to outrank the docs reading styles */
+
+@mixin control {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-pill);
+  background: transparent;
+  color: var(--px-ink-2);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color var(--px-dur-1) var(--px-ease),
+    background-color var(--px-dur-1) var(--px-ease),
+    border-color var(--px-dur-1) var(--px-ease);
+
+  &:hover {
+    background: var(--px-hover);
+    color: var(--px-ink);
+    text-decoration: none;
+  }
+}
+
+.px-tut-tutorial {
+  --head-h: 60px;
+  --control-h: 40px;
+  --gap: 8px;
+  display: grid;
+  grid-template-columns: clamp(336px, 34vw, 560px) minmax(0, 1fr);
+  gap: var(--gap);
+  height: calc(100dvh - var(--px-topbar-h));
+  padding: 0 var(--gap) var(--gap);
+
+  @include bp.up(xl) {
+    --gap: 12px;
+  }
+
+  @media (pointer: coarse) {
+    --control-h: 44px;
+  }
+
+  /* ---------- guide ---------- */
+
+  .px-tut-guide {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid var(--px-line);
+    border-radius: var(--px-r-md);
+    background: var(--px-raised);
+    box-shadow: var(--px-shadow-sm);
+  }
+
+  .px-tut-head {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+    height: var(--head-h);
+    padding: 0 12px 0 10px;
+    border-bottom: 1px solid var(--px-line);
+  }
+
+  .px-tut-back {
+    @include control;
+    width: var(--control-h);
+    height: var(--control-h);
+    border-color: transparent;
+    color: var(--px-ink-3);
+  }
+
+  .px-tut-title {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    color: var(--px-ink);
+    font: 600 16px/1.15 var(--px-font-display);
+    letter-spacing: -0.01em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    small {
+      color: var(--px-ink-3);
+      font: 500 10.5px/1 var(--px-font-mono);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+  }
+
+  .px-tut-views {
+    display: none;
+  }
+
+  .px-tut-stepButton {
+    @include control;
+    gap: 6px;
+    height: var(--control-h);
+    padding: 0 10px 0 14px;
+    font: 500 13px/1 var(--px-font-mono);
+    font-variant-numeric: tabular-nums;
+
+    b {
+      color: var(--px-ink);
+      font-weight: 700;
+    }
+
+    svg {
+      transition: transform 300ms var(--px-ease-spring);
+    }
+
+    &[aria-expanded='true'] {
+      background: var(--px-active);
+      color: var(--px-ink);
+
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .px-tut-progress {
+    display: flex;
+    flex: none;
+    gap: 4px;
+    padding: 16px 28px 0;
+
+    span {
+      flex: 1;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--px-line-strong);
+      transition: background-color var(--px-dur-3) var(--px-ease);
+    }
+
+    [data-done] {
+      background: var(--px-accent);
+    }
+  }
+
+  .px-tut-body {
+    flex: 1;
+    min-height: 0;
+    padding: 22px 28px 40px;
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+    container-type: inline-size;
+    scrollbar-color: var(--px-line-strong) transparent;
+    scrollbar-width: thin;
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      color: var(--px-ink);
+      font: 600 clamp(1.625rem, 1.3rem + 2cqi, 2.125rem) / 1.15 var(--px-font-display);
+      letter-spacing: -0.025em;
+      text-wrap: balance;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .px-tut-eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 10px;
+    margin: 0 0 12px;
+    color: var(--px-ink-3);
+    font: 500 12px/1.4 var(--px-font-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+
+    &::before {
+      content: '';
+      flex: none;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--px-accent);
+    }
+  }
+
+  .px-tut-eyebrowTitle {
+    display: none;
+  }
+
+  /* After the last step: the next tutorial, or where to go once there's none */
+  a.px-tut-upNext {
+    display: grid;
+    grid-template-columns: minmax(0, 132px) minmax(0, 1fr);
+    gap: 16px;
+    align-items: center;
+    margin-top: 32px;
+    padding: 10px 16px 10px 10px;
+    border: 1px solid var(--px-line);
+    border-radius: var(--px-r-md);
+    background: var(--px-well);
+    color: var(--px-ink-2);
+    font-size: 14px;
+    line-height: 1.5;
+    text-decoration: none;
+    transition:
+      transform 350ms var(--px-ease-spring),
+      box-shadow 350ms var(--px-ease-spring),
+      border-color var(--px-dur-2) var(--px-ease);
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    small {
+      display: block;
+      color: var(--px-accent-text);
+      font: 500 11px/1.4 var(--px-font-mono);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    strong {
+      display: block;
+      margin: 2px 0 4px;
+      color: var(--px-ink);
+      font: 600 18px/1.3 var(--px-font-display);
+      letter-spacing: -0.01em;
+    }
+
+    &:hover {
+      border-color: var(--px-line-strong);
+      box-shadow: 5px 5px 0 var(--px-accent);
+      text-decoration: none;
+
+      @media (prefers-reduced-motion: no-preference) {
+        transform: translate(-3px, -3px);
+      }
+    }
+
+    @container (max-width: 400px) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .px-tut-done {
+    margin-top: 32px;
+    padding: 16px 20px;
+    border: 1px dashed var(--px-line-strong);
+    border-radius: var(--px-r-md);
+  }
+
+  /* A `#N` deep link before hydration (see Tutorial's inline script): step 1 stays hidden until step N renders */
+  html[data-tutorial-step] & :is(.px-tut-guide > :not(.px-tut-head), .px-tut-stepButton) {
+    visibility: hidden;
+  }
+
+  /* ---------- solution, prev, next ---------- */
+
+  .px-tut-foot {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px 12px 12px;
+    border-top: 1px solid var(--px-line);
+  }
+
+  .px-tut-spacer {
+    flex: 1;
+  }
+
+  .px-tut-solution {
+    @include control;
+    gap: 8px;
+    height: var(--control-h);
+    padding: 0 16px 0 12px;
+    font: 500 14px/1 var(--px-font-display);
+
+    &[aria-pressed='true'] {
+      border-color: var(--px-accent);
+      border-color: color-mix(in srgb, var(--px-accent) 55%, transparent);
+      background: var(--px-active);
+      background: color-mix(in srgb, var(--px-accent) var(--px-tint), var(--px-raised));
+      color: var(--px-ink);
+    }
+  }
+
+  .px-tut-prev {
+    @include control;
+    width: var(--control-h);
+    height: var(--control-h);
+  }
+
+  /* The primary button's offset shadow at toolbar size */
+  .px-tut-next {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    height: var(--control-h);
+    margin-right: 4px;
+    padding: 0 14px 0 20px;
+    border-radius: var(--px-r-pill);
+    background: var(--px-pink-fill);
+    color: #fff;
+    font: 600 13.5px/1 var(--px-font-display);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition:
+      transform var(--px-dur-2) var(--px-ease),
+      background-color var(--px-dur-2) var(--px-ease);
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      border: 2px solid transparent;
+      border-right-color: var(--px-pink-fill);
+      border-bottom-color: var(--px-pink-fill);
+      border-radius: inherit;
+      transform: translate(4px, 4px);
+      transition: transform var(--px-dur-2) var(--px-ease);
+    }
+
+    svg {
+      flex: none;
+      transition: transform 350ms var(--px-ease-spring);
+    }
+
+    &:hover {
+      background: var(--px-pink-deep);
+      color: #fff;
+      text-decoration: none;
+
+      svg {
+        transform: translateX(3px);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        transform: translate(2px, 2px);
+
+        &::after {
+          transform: translate(2px, 2px);
+        }
+      }
+    }
+
+    &:focus-visible {
+      outline-offset: 5px;
+    }
+  }
+
+  /* ---------- editor ---------- */
+
+  /* The frame is drawn here, so it's on screen before the editor's chunk arrives */
+  .px-tut-work {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid var(--px-line);
+    border-radius: var(--px-r-md);
+    background: var(--px-code-bg);
+    box-shadow: var(--px-shadow-sm);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      height: 48px;
+      border-bottom: 1px solid var(--px-line);
+      background: var(--px-raised);
+    }
+  }
+
+  .px-tut-editor {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* ---------- below 997: one pane at a time ---------- */
+
+  @include bp.down(lg) {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+
+    .px-tut-guide {
+      flex: 1;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .px-tut-head {
+      padding: 0 12px 0 4px;
+    }
+
+    .px-tut-title {
+      display: none;
+    }
+
+    .px-tut-views {
+      display: inline-grid;
+      margin-right: auto;
+    }
+
+    .px-tut-progress {
+      padding: 14px 20px 0;
+    }
+
+    .px-tut-body {
+      padding: 20px 20px 32px;
+    }
+
+    .px-tut-eyebrowTitle {
+      display: inline;
+    }
+
+    .px-tut-foot {
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    }
+
+    .px-tut-work {
+      position: absolute;
+      inset: var(--head-h) 0 0;
+      padding-bottom: env(safe-area-inset-bottom);
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    &[data-view='guide'] .px-tut-work,
+    &[data-view='editor'] .px-tut-guide > :not(.px-tut-head) {
+      visibility: hidden;
+    }
+  }
+
+  /* ---------- step list: a dialog in the top layer (Sheet), still a DOM descendant ---------- */
+
+  .px-tut-menu {
+    width: min(360px, 100vw - 24px);
+    padding: 8px;
+
+    ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      margin: 0;
+    }
+  }
+
+  .px-tut-menuHead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0;
+    padding: 10px 12px 12px;
+    color: var(--px-ink);
+    font: 600 15px/1.2 var(--px-font-display);
+
+    small {
+      flex: none;
+      color: var(--px-ink-3);
+      font: 500 11px/1 var(--px-font-mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+  }
+
+  .px-tut-menuItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    padding: 6px 12px 6px 9px;
+    border-radius: var(--px-r-sm);
+    color: var(--px-ink-2);
+    font: 500 14.5px/1.3 var(--px-font-display);
+    text-decoration: none;
+    transition:
+      color var(--px-dur-1) var(--px-ease),
+      background-color var(--px-dur-1) var(--px-ease);
+
+    &:hover {
+      background: var(--px-hover);
+      color: var(--px-ink);
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      outline-offset: -2px;
+    }
+
+    &[aria-current='step'] {
+      background: var(--px-active);
+      color: var(--px-ink);
+    }
+  }
+
+  .px-tut-menuNumber {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border: 1px solid var(--px-line-strong);
+    border-radius: 50%;
+    color: var(--px-ink-3);
+    font: 600 10.5px/1 var(--px-font-mono);
+    font-variant-numeric: tabular-nums;
+
+    [data-done] > & {
+      border-color: transparent;
+      background: var(--px-field);
+      color: var(--px-accent);
+    }
+
+    [aria-current='step'] > & {
+      border-color: var(--px-accent);
+      color: var(--px-ink);
+    }
+  }
+
+  dialog[data-mode='sheet'] .px-tut-menu {
+    width: auto;
+  }
+}

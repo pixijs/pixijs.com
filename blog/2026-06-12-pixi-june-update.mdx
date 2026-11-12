@@ -21,7 +21,6 @@ keywords:
   ]
 ---
 
-import { BlogExample } from '@site/src/components/Editor/BlogExample';
 import { BlogSponsors } from '@site/src/components/Blog/BlogSponsors';
 
 Welcome to the June update, covering **v8.18.0** and **v8.19.0**: live **HTML-in-Canvas textures**, **Graphics → SVG export**, **official AI agent skills**, **sprite mask channels**, and a milestone we're very proud of.
@@ -120,9 +119,7 @@ await navigator.clipboard.writeText(svgString);
 
 The example below proves the round trip: the right-hand badge is built by feeding the exported SVG string straight back into `new Graphics().svg()`:
 
-<BlogExample name="graphics_svg-export" />
-
-<br/>
+<PixiExample name="graphics_svg-export" />
 
 Thanks to [@GoodBoyDigital](https://github.com/GoodBoyDigital) for this contribution.
 
@@ -146,7 +143,7 @@ photo.setMask({
 
 Both sides below use the **same mask texture**: a transparent-backed circle with a red star painted on it. The red channel only sees the star; the alpha channel sees the whole circle:
 
-<BlogExample name="sprite_mask-channel" />
+<PixiExample name="sprite_mask-channel" />
 
 ---
 
@@ -167,9 +164,7 @@ const pattern = new FillPattern({ texture, repetition: 'repeat', textureSpace: '
 const g = new Graphics().rect(0, 0, 200, 100).fill({ fill: pattern });
 ```
 
-<BlogExample name="graphics_fill-pattern-space" />
-
-<br/>
+<PixiExample name="graphics_fill-pattern-space" />
 
 :::caution Behavior Change
 Existing pattern fills can render differently after upgrading. `setTransform(matrix)` now applies the matrix you pass directly (it previously inverted and rescaled it by the texture size), and `textureSpace: 'local'` radial gradients now scale to the gradient's outer radius. If you hand-compensated for the old `setTransform` behavior, remove that compensation.
@@ -183,9 +178,7 @@ Existing pattern fills can render differently after upgrading. `setTransform(mat
 
 Both galaxies below are identical `ParticleContainer`s. The only difference is the `blendMode` set on the right one's parent:
 
-<BlogExample name="particle-container_blend-mode" />
-
-<br/>
+<PixiExample name="particle-container_blend-mode" />
 
 :::caution Behavior Change
 Particles nested under a parent with a non-default blend mode will now render differently (e.g. additive brightening) where the parent's blend mode was previously ignored.

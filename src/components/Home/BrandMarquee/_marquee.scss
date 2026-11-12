@@ -1,0 +1,121 @@
+/*
+ * `--s` scales every logo from its desktop size; `--gap` is the space between two logos. Both are the old site's: its
+ * logos sat in 180 px cells, 150 px under 481 px with the art at 0.94, so the row shows as many logos as it did.
+ * `--ink` is the old site's grey logos' ink, which reads as light as it did on either theme.
+ */
+.hm-marquee {
+  --s: 0.94;
+  --gap: 73px;
+  --ink: #878d99;
+  --pad: clamp(40px, 5cqi, 64px);
+  padding: var(--pad) 0;
+
+  @container (width >= 481px) {
+    --s: 1;
+    --gap: 98px;
+  }
+
+  html[data-theme='dark'] & {
+    --ink: #a9aeb8;
+  }
+}
+
+.hm-marqueeCaption {
+  margin: 0 0 clamp(28px, 3.5cqi, 44px);
+  padding: 0 var(--px-gutter);
+  color: var(--px-ink-2);
+  font: 400 14px/1.5 var(--px-font-body);
+  text-align: center;
+
+  @container (width >= 481px) {
+    font-size: 16px;
+  }
+}
+
+/*
+ * Under the hero: its wave lies inside the hero, not across the seam as a wave between two bands does, so the band
+ * shows from half a wave above its top. The padding gives that half back, so the strip sits midway between the waves.
+ */
+:not(.hm-band, .hm-wave) + .hm-marquee {
+  padding-top: calc(var(--pad) - var(--hm-wave) / 2);
+}
+
+/* A short laptop screen's fold would cut the logos: the caption closes up, so the row shows whole */
+@media (min-width: 1000px) and (max-height: 800px) {
+  :not(.hm-band, .hm-wave) + .hm-marquee .hm-marqueeCaption {
+    margin-bottom: 20px;
+  }
+}
+
+.hm-marqueeView {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.hm-marqueeTrack,
+.hm-marqueeCopy {
+  display: flex;
+  width: max-content;
+}
+
+.hm-marqueeCopy {
+  align-items: center;
+  height: calc(60px * var(--s));
+}
+
+.hm-marqueeLogo {
+  flex: none;
+  width: calc(var(--w) * var(--s) * 1px);
+  height: calc(var(--h) * var(--s) * 1px);
+  margin-inline: calc(var(--gap) / 2);
+  background-color: var(--ink);
+  mask: var(--logo) center / contain no-repeat;
+  transition: background-color var(--px-dur-2) var(--px-ease);
+
+  &:hover {
+    background-color: var(--px-ink);
+  }
+
+  @media (forced-colors: active) {
+    background-color: CanvasText;
+    forced-color-adjust: none;
+  }
+}
+
+/*
+ * No loop: the first row of logos that fits, centred, as the old site showed one row whatever the motion; two rows on
+ * phones, where one holds two logos
+ */
+@media (prefers-reduced-motion: reduce) {
+  .hm-marqueeView {
+    padding: 0 var(--px-gutter);
+    mask-image: none;
+  }
+
+  .hm-marqueeTrack {
+    width: auto;
+    justify-content: center;
+  }
+
+  .hm-marqueeCopy {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: calc(40px * var(--s));
+    width: auto;
+    max-width: 1180px;
+    overflow: hidden;
+
+    @container (width < 720px) {
+      height: calc(160px * var(--s));
+    }
+
+    & + & {
+      display: none;
+    }
+  }
+
+  /* Every row as tall as the strip, so the rows past the first (two on phones) fall wholly outside it */
+  .hm-marqueeLogo {
+    margin-block: calc((60 - var(--h)) * var(--s) * 0.5px);
+  }
+}

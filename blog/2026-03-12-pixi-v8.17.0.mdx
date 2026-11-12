@@ -8,8 +8,6 @@ hide_table_of_contents: true
 keywords: ['PixiJS', 'Updates', 'BlurFilter', 'Text Alignment', 'Justify', 'SplitText', 'tagStyles', 'visibleChanged', 'Bitmap Text']
 ---
 
-import { BlogExample } from '@site/src/components/Editor/BlogExample';
-
 PixiJS v8.17.0 delivers an optimized **BlurFilter** with a new halving strength scheme, **improved text renderer parity** bringing `Text`, `BitmapText`, and `HTMLText` alignment closer together, **tagStyles support in SplitText**, and a new **`visibleChanged` event** on containers. This release also includes a wave of stability fixes across graphics, filters, and event handling.
 
 {/* truncate */}
@@ -35,9 +33,7 @@ BlurFilter.defaultOptions.legacy = true;
 This changes the visual output of `BlurFilter` compared to previous versions. If you need the old behavior, set `legacy: true`.
 :::
 
-<BlogExample name="filters_blur-legacy" />
-
-<br/>
+<PixiExample name="filters_blur-legacy" />
 
 Thanks to [@Zyie](https://github.com/zyie) and [@Sertion](https://github.com/Sertion) for the blur improvements.
 
@@ -62,7 +58,7 @@ Other improvements:
 `align: 'justify'` now uses `wordWrapWidth` for width calculation, and `breakWords` in `HTMLText` uses `break-word` instead of `break-all`. If your text layout looks different after upgrading, the new behavior is more consistent across renderers and matches CSS standards.
 :::
 
-<BlogExample name="text_alignment" />
+<PixiExample name="text_alignment" />
 
 ---
 
@@ -89,7 +85,7 @@ splitText.chars.forEach((char, i) => {
 });
 ```
 
-<BlogExample name="text_split-text-tags" />
+<PixiExample name="text_split-text-tags" />
 
 ---
 
@@ -109,7 +105,7 @@ This is useful for triggering animations, analytics, or cleanup logic when objec
 
 Thanks to [@ikigai-bjorn-s](https://github.com/ikigai-bjorn-s) for this contribution.
 
-<BlogExample name="events_visible-changed" />
+<PixiExample name="events_visible-changed" />
 
 ---
 

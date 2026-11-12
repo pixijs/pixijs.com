@@ -1,0 +1,709 @@
+@use '../../css/breakpoints' as bp;
+
+/* ---------- header: a wall of the projects' shots, behind the header's copy ---------- */
+
+.px-showcase-header {
+  /* Solid, so a shot never shows the tile through it; an unlit image dims into it */
+  --shot-bg: #fff;
+  --shot-edge: rgb(72 56 128 / 0.1);
+  --shot-ink: rgb(40 30 72 / 0.5);
+  --shot-shadow: 0 1px 2px rgb(22 19 31 / 0.06), 0 12px 24px -12px rgb(52 36 96 / 0.25);
+  /* How much of the surface veils the wall behind the copy */
+  --hole: 90%;
+  --hole-w: 40%;
+  max-height: 800px;
+  overflow: clip;
+
+  /* A header nearly as tall as it is wide clears the wall further out, so it stays clear of the lede's ends */
+  @container (600px <= width < 1000px) {
+    --hole-w: 56%;
+  }
+
+  html[data-theme='dark'] & {
+    --shot-bg: color-mix(in srgb, var(--hm-tiled) 95%, #fff);
+    --shot-edge: rgb(255 255 255 / 0.07);
+    --shot-ink: rgb(236 232 248 / 0.4);
+    --shot-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.6);
+    --hole: 80%;
+  }
+
+  /* The tile, lit at the top and falling into shade at the foot, as a band is */
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -3;
+    inset: 0;
+    background:
+      var(--hm-tile) var(--hm-grid-x) 0 / 59px 59px,
+      linear-gradient(to bottom, var(--hm-tiled-crest), var(--hm-tiled) 45%, var(--hm-tiled-foot));
+  }
+
+  /*
+   * The wall fades into the surface, never to transparent, or the tile would show through a fading shot: a pool of it
+   * behind the copy, so the wall reads as behind it, and a veil under the top bar
+   */
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background:
+      radial-gradient(
+        ellipse var(--hole-w) 38% at 50% 50%,
+        color-mix(in srgb, var(--hm-tiled) var(--hole), transparent) 45%,
+        transparent 100%
+      ),
+      linear-gradient(to bottom, color-mix(in srgb, var(--hm-tiled-crest) 70%, transparent), transparent 22%);
+    pointer-events: none;
+  }
+}
+
+.px-showcase-stage {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  overflow: hidden;
+  perspective: 1500px;
+  perspective-origin: 50% 0%;
+  animation: px-showcase-wall-in 1.4s 0.15s both;
+}
+
+@keyframes px-showcase-wall-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.px-showcase-wall {
+  position: absolute;
+  top: -12%;
+  left: 50%;
+  display: grid;
+  grid-auto-columns: 16.5em;
+  grid-auto-flow: column;
+  gap: 1.6em;
+  height: 92em;
+  font: 400 clamp(12px, 1.08cqi, 18px) / 1.5 var(--px-font-mono);
+  transform: translateX(-50%) translateZ(-420px) rotateX(34deg) rotateZ(-11deg);
+  transform-origin: 50% 0;
+}
+
+.px-showcase-column {
+  overflow: hidden;
+  height: 100%;
+}
+
+.px-showcase-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6em;
+  animation: px-showcase-drift calc(38s + var(--c) * 5s) ease-in-out calc(var(--c) * -9s) infinite alternate;
+  will-change: transform;
+
+  .px-showcase-column:nth-child(even) & {
+    animation-direction: alternate-reverse;
+  }
+
+  [data-offscreen] & {
+    animation-play-state: paused;
+  }
+}
+
+/* A column is a little longer than the wall, so the drift never shows its end, nor runs far toward the viewer */
+@keyframes px-showcase-drift {
+  to {
+    transform: translateY(-22%);
+  }
+}
+
+.px-showcase-shot {
+  position: relative;
+  z-index: 0;
+  margin: 0;
+  padding: 0.5em;
+  border: 1px solid transparent;
+  border-radius: 1em;
+  background: var(--shot-bg);
+  box-shadow: var(--shot-shadow);
+  color: var(--shot-ink);
+  text-align: left;
+  /* A shot going dark stays over its neighbours until it has settled, while its glow fades out over them */
+  transition:
+    translate 0.6s var(--px-ease-spring),
+    z-index 0s 0.6s;
+
+  /*
+   * The edge and the pink light are layers that cross-fade: fading opacity runs on the compositor, where fading the
+   * colours would repaint the shot every frame
+   */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border: 1px solid var(--shot-edge);
+    border-radius: inherit;
+    transition: opacity 0.5s;
+    pointer-events: none;
+  }
+
+  &::after {
+    border-color: rgb(233 30 99 / 0.7);
+    box-shadow:
+      0 0 0 1px rgb(233 30 99 / 0.35),
+      0 0 32px rgb(233 30 99 / 0.3);
+    opacity: 0;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.6em;
+    opacity: 0.45;
+    transition: opacity 0.5s;
+  }
+
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    padding: 0.7em 0.4em 0.3em;
+    font-size: 0.9em;
+    line-height: 1.4;
+
+    b {
+      font: 600 1.1em/1.3 var(--px-font-body);
+    }
+  }
+
+  &[data-lit] {
+    z-index: 1;
+    translate: 0 -0.5em;
+    transition-delay: 0s;
+
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+
+    img {
+      opacity: 1;
+    }
+  }
+}
+
+/* ---------- search and filters ---------- */
+
+.px-showcase-projects {
+  scroll-margin-top: var(--px-topbar-h);
+}
+
+.px-showcase-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  padding: 10px;
+  border: 1px solid var(--px-line);
+  border-radius: 35px;
+  background: var(--px-well);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    var(--px-shadow-md);
+
+  @include bp.down(md) {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+.px-showcase-search {
+  position: relative;
+  flex: 1 1 260px;
+  max-width: 400px;
+
+  @include bp.down(md) {
+    max-width: none;
+  }
+}
+
+.px-showcase-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  color: var(--px-ink-3);
+  translate: 0 -50%;
+  pointer-events: none;
+}
+
+.px-showcase-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 48px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-pill);
+  background: var(--px-field);
+  color: var(--px-ink);
+  font: 400 15px/1 var(--px-font-body);
+  transition:
+    border-color var(--px-dur-2) var(--px-ease),
+    box-shadow var(--px-dur-2) var(--px-ease);
+
+  &::placeholder {
+    color: var(--px-ink-3);
+    opacity: 1;
+  }
+
+  &:hover {
+    border-color: var(--px-ink-4);
+  }
+
+  &:focus-visible {
+    border-color: var(--px-pink);
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--px-pink) 22%, transparent);
+  }
+
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+}
+
+.px-showcase-clear {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--px-ink-3);
+  cursor: pointer;
+  translate: 0 -50%;
+  transition:
+    background-color var(--px-dur-2) var(--px-ease),
+    color var(--px-dur-2) var(--px-ease);
+
+  &:hover {
+    background: var(--px-hover);
+    color: var(--px-ink);
+  }
+
+  @media (pointer: coarse) {
+    right: 2px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* One row that scrolls inside itself on phones, padded so it doesn't clip the focus ring */
+.px-showcase-chips {
+  display: flex;
+  gap: 6px;
+  max-width: 100%;
+  margin: -6px;
+  padding: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Phones: the row takes its own line and runs off the right edge, fading there, to show there's more */
+  @include bp.down(md) {
+    flex: 1 0 100%;
+    max-width: none;
+    margin-right: calc(-1 * var(--px-gutter));
+    padding-right: var(--px-gutter);
+    scroll-padding-inline: 6px calc(var(--px-gutter) + 24px);
+    mask-image: linear-gradient(to right, #000 calc(100% - var(--px-gutter) - 56px), transparent);
+  }
+}
+
+.px-showcase-chip {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 14px 0 18px;
+  border: 1px solid transparent;
+  border-radius: var(--px-r-pill);
+  background: transparent;
+  color: var(--px-ink-2);
+  font: 500 14.5px/1 var(--px-font-display);
+  cursor: pointer;
+  transition:
+    background-color var(--px-dur-2) var(--px-ease),
+    color var(--px-dur-2) var(--px-ease),
+    box-shadow var(--px-dur-2) var(--px-ease);
+
+  &:hover {
+    background: var(--px-hover);
+    color: var(--px-ink);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--px-focus);
+    outline-offset: 2px;
+  }
+
+  &[aria-pressed='true'] {
+    background: var(--px-pink-fill);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.25),
+      0 6px 16px -6px rgb(233 30 99 / 0.6);
+    color: #fff;
+  }
+
+  @include bp.down(md) {
+    border-color: var(--px-line-strong);
+    background: var(--px-well);
+  }
+}
+
+.px-showcase-count {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--px-r-pill);
+  background: var(--px-field);
+  color: var(--px-ink-2);
+  font: 500 11px/1 var(--px-font-mono);
+  font-variant-numeric: tabular-nums;
+
+  [aria-pressed='true'] > & {
+    background: rgb(255 255 255 / 0.2);
+    color: #fff;
+  }
+}
+
+.px-showcase-status {
+  margin: 28px 4px 20px;
+  color: var(--px-ink-3);
+  font: 500 12px/1 var(--px-font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- cards ---------- */
+
+/*
+ * Columns by the page's width. Every card in columns is the same height, so the shuffle after hydration shifts
+ * nothing, and the first row's images stay smaller than the headline, which keeps it the largest paint.
+ */
+.px-showcase-grid {
+  display: grid;
+  gap: clamp(16px, 2.2vw, 28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  /* Room for a two-line title, the author and the kind and tags in every card */
+  @container (width >= 600px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .px-showcase-body {
+      min-height: 148px;
+    }
+  }
+
+  @container (width >= 760px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @container (width >= 1380px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.px-showcase-cell {
+  height: 100%;
+}
+
+@mixin lift {
+  border-color: var(--px-line-strong);
+  box-shadow: 6px 6px 0 var(--px-pink);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transform: translate(-4px, -4px);
+  }
+
+  &::before {
+    opacity: 1;
+  }
+
+  .px-showcase-media img {
+    transform: scale(1.05);
+  }
+
+  .px-showcase-visit {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.px-showcase-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 8px;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-lg);
+  background: var(--px-well);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    var(--px-shadow-md);
+  transition:
+    transform 350ms var(--px-ease-spring),
+    box-shadow 350ms var(--px-ease-spring),
+    border-color var(--px-dur-2) var(--px-ease);
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      240px at var(--mx, 50%) var(--my, 0%),
+      color-mix(in srgb, var(--px-pink) 10%, transparent),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity var(--px-dur-3) var(--px-ease);
+    pointer-events: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      @include lift;
+    }
+  }
+
+  &:has(.px-showcase-link:focus-visible) {
+    @include lift;
+    outline: 2px solid var(--px-focus);
+    outline-offset: 3px;
+  }
+}
+
+.px-showcase-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  background: var(--px-bg-alt);
+  box-shadow: inset 0 0 0 1px var(--px-line);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms var(--px-ease);
+  }
+}
+
+/* Slides up into the image's corner when the card is hovered or focused */
+.px-showcase-visit {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--px-r-pill);
+  background: rgb(10 9 14 / 0.72);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
+  color: #fff;
+  font: 600 12px/1 var(--px-font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0;
+  translate: 0 8px;
+  transition:
+    opacity var(--px-dur-2) var(--px-ease),
+    translate 350ms var(--px-ease-spring);
+  backdrop-filter: blur(6px);
+}
+
+.px-showcase-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 12px 10px;
+}
+
+/* The kind, as the homes' gallery cards label theirs, with a dot in its colour, ahead of the tags */
+.px-showcase-kind {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+  color: var(--px-ink-3);
+  font: 500 11.5px/1.4 var(--px-font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  &::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--px-pink);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--px-pink) 20%, transparent);
+  }
+
+  &[data-kind='app']::before {
+    background: var(--px-violet);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--px-violet) 22%, transparent);
+  }
+
+  &[data-kind='site']::before {
+    background: var(--px-sky);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--px-sky) 22%, transparent);
+  }
+}
+
+.px-showcase-name {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--px-ink);
+  font: 600 19px/1.3 var(--px-font-display);
+  letter-spacing: -0.01em;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.px-showcase-link {
+  color: inherit;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    border-radius: var(--px-r-lg);
+  }
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.px-showcase-author {
+  margin: 0;
+  overflow: hidden;
+  color: var(--px-ink-3);
+  font-size: 14.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.px-showcase-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.px-showcase-tag {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 9px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-xs);
+  color: var(--px-ink-2);
+  font: 500 11px/1 var(--px-font-mono);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    border-color var(--px-dur-2) var(--px-ease),
+    color var(--px-dur-2) var(--px-ease);
+
+  &:hover {
+    border-color: var(--px-ink-3);
+    color: var(--px-ink);
+    text-decoration: none;
+  }
+}
+
+.px-showcase-sponsored {
+  border-color: color-mix(in srgb, var(--px-pink) 50%, transparent);
+  background: color-mix(in srgb, var(--px-pink) var(--px-tint), var(--px-well));
+  color: var(--px-accent-text);
+
+  &:hover {
+    border-color: var(--px-pink);
+    color: var(--px-accent-text);
+  }
+}
+
+.px-showcase-more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(32px, 4cqi, 48px);
+}
+
+.px-showcase-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 56px 24px;
+  border: 1px dashed var(--px-line-strong);
+  border-radius: var(--px-r-lg);
+  color: var(--px-ink-2);
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
+.px-showcase-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid color-mix(in srgb, var(--px-pink) 45%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--px-pink) var(--px-tint), var(--px-well));
+  color: var(--px-accent-text);
+}

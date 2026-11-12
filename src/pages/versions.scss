@@ -1,0 +1,479 @@
+/* ---------- header: the release lines as stops on a track ---------- */
+
+.px-versions-timeline-nav {
+  width: min(100%, 760px);
+  margin-top: clamp(40px, 5cqi, 64px);
+}
+
+.px-versions-timeline {
+  position: relative;
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  /* The track, through the dots' centres, coloured up to the current line */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 13px;
+    right: calc(100% / 12);
+    left: calc(100% / 12);
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--px-line-strong),
+      var(--px-pink) 80%,
+      color-mix(in srgb, var(--px-pkg-3d) 70%, transparent) 81%
+    );
+    transform-origin: left;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='paused']) .px-versions-timeline {
+    &::before {
+      animation: px-versions-draw 1.2s 0.35s var(--px-ease-in-out) backwards;
+    }
+
+    .px-versions-dot {
+      animation: px-versions-pop 0.6s calc(0.45s + var(--i) * 0.14s) var(--px-ease-spring) backwards;
+    }
+
+    .px-versions-stop-text {
+      animation: px-versions-rise 0.5s calc(0.55s + var(--i) * 0.14s) var(--px-ease) backwards;
+    }
+  }
+}
+
+@keyframes px-versions-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes px-versions-pop {
+  from {
+    scale: 0;
+  }
+}
+
+@keyframes px-versions-rise {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+
+.px-versions-stop {
+  --stop: var(--px-ink-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 2px 4px 6px;
+  border-radius: var(--px-r-sm);
+  color: var(--px-ink-2);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--px-ink);
+    text-decoration: none;
+
+    .px-versions-dot {
+      scale: 1.25;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--px-focus);
+    outline-offset: 2px;
+  }
+
+  .px-versions-current & {
+    --stop: var(--px-pink);
+    color: var(--px-ink);
+  }
+
+  [data-package='3d'] & {
+    --stop: var(--px-pkg-3d);
+  }
+}
+
+.px-versions-dot {
+  position: relative;
+  display: block;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--stop);
+  border-radius: 50%;
+  background: var(--px-hero);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--stop) 14%, transparent);
+  transition: scale 350ms var(--px-ease-spring);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: inherit;
+    background: var(--stop);
+  }
+
+  .px-versions-current & {
+    box-shadow:
+      0 0 0 6px color-mix(in srgb, var(--px-pink) 22%, transparent),
+      0 0 24px 4px rgb(233 30 99 / 0.5);
+  }
+}
+
+.px-versions-stop-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.px-versions-stop-label {
+  font: 700 clamp(1.125rem, 0.9rem + 0.8cqi, 1.5rem) / 1 var(--px-font-display);
+  letter-spacing: -0.02em;
+}
+
+.px-versions-stop-version {
+  color: var(--px-ink-3);
+  font: 500 11px/1 var(--px-font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+
+  .px-versions-current & {
+    color: var(--px-accent-text);
+  }
+}
+
+/* ---------- a release line's card ---------- */
+
+.px-versions-release {
+  --pkg: var(--px-pink);
+  position: relative;
+  display: grid;
+  gap: 28px 48px;
+  align-items: center;
+  padding: clamp(24px, 3.5cqi, 44px);
+  overflow: hidden;
+  background:
+    radial-gradient(70% 120% at 0% 0%, color-mix(in srgb, var(--pkg) 16%, transparent), transparent 62%) no-repeat,
+    var(--px-well);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--pkg) 35%, transparent),
+    var(--px-shadow-lg);
+  scroll-margin-top: calc(var(--px-topbar-h) + 24px);
+
+  &[data-package='3d'] {
+    --pkg: var(--px-pkg-3d);
+  }
+
+  @container (width >= 860px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  }
+}
+
+.px-versions-release-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.px-versions-number {
+  margin: 18px 0 24px;
+  color: var(--px-ink);
+  font: 700 clamp(3.25rem, 2rem + 5cqi, 5.5rem) / 0.95 var(--px-font-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.045em;
+  text-shadow: 0 10px 40px color-mix(in srgb, var(--pkg) 35%, transparent);
+}
+
+.px-versions-prerelease {
+  margin-left: 0.1em;
+  color: var(--pkg);
+  font-size: 0.42em;
+  letter-spacing: -0.01em;
+}
+
+/* The install command, on a dark screen in both themes like the homes' terminal */
+.px-versions-install {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 420px;
+  padding: 8px 8px 8px 18px;
+  border: 1px solid var(--px-line-strong);
+  border-radius: var(--px-r-md);
+  background: #0e0d12;
+  box-shadow:
+    inset 0 2px 8px rgb(0 0 0 / 0.45),
+    0 1px 0 rgb(255 255 255 / 0.05);
+
+  code {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--px-code-plain);
+    font: 500 15px/1.4 var(--px-font-mono);
+    white-space: nowrap;
+  }
+}
+
+.px-versions-prompt {
+  margin-right: 12px;
+  color: var(--px-pink-hi);
+}
+
+.px-versions-copy {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--px-r-sm);
+  background: rgb(255 255 255 / 0.06);
+  color: var(--px-ink-2);
+  cursor: pointer;
+  transition:
+    background-color var(--px-dur-2) var(--px-ease),
+    color var(--px-dur-2) var(--px-ease);
+
+  &:hover {
+    background: rgb(255 255 255 / 0.12);
+    color: #fff;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--px-focus);
+    outline-offset: 2px;
+  }
+
+  @media (pointer: coarse) {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.px-versions-resources {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @container (width >= 560px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.px-versions-resource {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 100%;
+  padding: 16px;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-md);
+  background: var(--px-bg-alt);
+  color: var(--px-ink);
+  text-decoration: none;
+  transition:
+    translate 350ms var(--px-ease-spring),
+    border-color var(--px-dur-2) var(--px-ease),
+    box-shadow 350ms var(--px-ease);
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--pkg) 55%, transparent);
+    box-shadow: var(--px-shadow-md);
+    color: var(--px-ink);
+    text-decoration: none;
+
+    @media (prefers-reduced-motion: no-preference) {
+      translate: 0 -3px;
+    }
+
+    .px-versions-resource-arrow {
+      color: var(--pkg);
+      translate: 3px 0;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--px-focus);
+    outline-offset: 2px;
+  }
+}
+
+.px-versions-resource-off {
+  border-style: dashed;
+  background: none;
+  color: var(--px-ink-3);
+
+  &:hover {
+    border-color: var(--px-line);
+    box-shadow: none;
+    translate: none;
+  }
+}
+
+.px-versions-resource-icon {
+  flex: none;
+  box-sizing: content-box;
+  padding: 10px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--pkg) var(--px-tint), transparent);
+  color: var(--pkg);
+
+  .px-versions-resource-off & {
+    background: var(--px-hover);
+    color: var(--px-ink-3);
+  }
+}
+
+.px-versions-resource-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.px-versions-resource-label {
+  font: 600 16px/1.25 var(--px-font-display);
+}
+
+.px-versions-resource-note {
+  color: var(--px-ink-3);
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.px-versions-resource-arrow {
+  flex: none;
+  color: var(--px-ink-4);
+  transition:
+    color var(--px-dur-2) var(--px-ease),
+    translate 350ms var(--px-ease-spring);
+}
+
+/* ---------- earlier lines ---------- */
+
+.px-versions-older-title {
+  margin: clamp(48px, 6cqi, 72px) 0 18px;
+  color: var(--px-ink-3);
+  font: 500 12px/1.4 var(--px-font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* The table scrolls inside its own panel if it must; on phones its link chips stack instead */
+.px-versions-scroller {
+  overflow-x: auto;
+}
+
+.px-versions-table {
+  display: table;
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 14.5px;
+
+  th,
+  td {
+    padding: 14px 18px;
+    border: 0;
+    border-bottom: 1px solid var(--px-line);
+    background: none;
+    text-align: left;
+    white-space: nowrap;
+
+    @container (width < 600px) {
+      padding-inline: 12px;
+    }
+  }
+
+  tr {
+    border: 0;
+    background: none;
+    scroll-margin-top: calc(var(--px-topbar-h) + 24px);
+  }
+
+  thead th {
+    background: var(--px-bg-alt);
+    color: var(--px-ink-3);
+    font: 500 11px/1.4 var(--px-font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  tbody th {
+    color: var(--px-ink);
+    font: 600 15px/1.4 var(--px-font-display);
+    font-variant-numeric: tabular-nums;
+  }
+
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  tbody tr:hover,
+  tbody tr:target {
+    background: var(--px-hover);
+  }
+
+  tbody tr:target > th {
+    box-shadow: inset 3px 0 0 var(--px-pink);
+  }
+}
+
+.px-versions-table .px-versions-muted {
+  color: var(--px-ink-3);
+}
+
+.px-versions-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The release card's resource tiles in miniature: its icon in the package colour, then the label */
+.px-versions-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 12px 0 10px;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-r-pill);
+  background: var(--px-bg-alt);
+  color: var(--px-ink-2);
+  font: 500 13.5px/1 var(--px-font-display);
+  text-decoration: none;
+  transition:
+    border-color var(--px-dur-2) var(--px-ease),
+    color var(--px-dur-2) var(--px-ease);
+
+  svg {
+    color: var(--px-pink);
+  }
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--px-pink) 50%, transparent);
+    color: var(--px-ink);
+    text-decoration: none;
+  }
+}

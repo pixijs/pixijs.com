@@ -1,0 +1,20 @@
+@use '../Band/surface';
+
+/* A still drawn for each theme: only the one in use is laid out, so only it is fetched */
+.hm-still {
+  display: block;
+  background:
+    radial-gradient(48% 62% at 50% 46%, rgb(233 30 99 / 0.16), transparent 72%),
+    radial-gradient(70% 80% at 80% 100%, rgb(139 92 246 / 0.12), transparent 70%), var(--px-well);
+
+  @include surface.themed;
+
+  img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
