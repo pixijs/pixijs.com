@@ -671,7 +671,7 @@ export default function LLMsPage() {
               '- [Introduction](…/intro.md): …',
               '- [Installation](…/installation.md): …',
               '- [Quick start](…/quick-start.md): …',
-              '- [View3D and the 2D/3D bridge](…): …',
+              '- [Porting from Three.js](…/porting-from-threejs.md): …',
             ]}
           >
             An index of every PixiJS 3D guide. Each entry has a one-line summary and links to a Markdown copy.
