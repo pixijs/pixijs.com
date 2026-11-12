@@ -1,6 +1,6 @@
 ---
 title: Introducing PixiJS 3D
-description: PixiJS 3D is in open beta. PixiJS is now the only renderer on the web that's a full 2D engine and a full 3D engine at once. It drops into the app you already have with one new View3D, and it's fast by default.
+description: PixiJS 3D is in open beta. PixiJS is now a full 2D engine and a full 3D engine at once. It drops into the app you already have with one new View3D, and it's fast by default.
 slug: pixi-3d-open-beta
 authors: zyie
 tags: [PixiJS, 3D, WebGPU, WebGL, Agent Skills]
@@ -42,7 +42,7 @@ PixiJS 3D is here, and it's in open beta today.
   <div style={{ textAlign: 'center', fontSize: '0.9em', opacity: 0.7, marginTop: 8 }}>Rendered in real time by PixiJS 3D.</div>
 </div>
 
-PixiJS is now the only renderer on the web that's a full 2D engine and a full 3D engine at once. Both share one stage, and both are fast by default.
+PixiJS is now a full 2D engine and a full 3D engine at once. Both share one stage, and both are fast by default.
 
 If you already build with PixiJS, add one `View3D` to your project and you're in 3D, with the `addChild`, `Assets`, and pointer events you already know. If you're new to PixiJS, this is a good place to start.
 
@@ -72,7 +72,7 @@ The view layers with everything else you draw, so you choose how much 3D you wan
 
 Everything in between works too. Filters and masks work on a 3D view. 3D objects take the same pointer events as sprites. glTF models load through `Assets`. Your 2D can follow your 3D, like a health bar over a character.
 
-A `View3D` is a display object, so you can add as many as you want. PixiJS is the only engine where you can put several 3D views in one 2D scene. Each has its own scene and camera, and you place and size each one [like a sprite](/3d/examples?example=2d3d_many-views).
+A `View3D` is a display object, so you can put as many as you want in one 2D scene. Each has its own scene and camera, and you place and size each one [like a sprite](/3d/examples?example=2d3d_many-views).
 
 The 3D sees the 2D around it too. This logo is 3D glass, and it bends the 2D poster drawn behind it. Drag the logo to turn it:
 
