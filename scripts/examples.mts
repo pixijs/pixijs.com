@@ -31,7 +31,7 @@ interface Source {
   path: string;
   hidden: boolean;
   entry?: string;
-  /** Literal replacements in the entry */
+  /** Literal replacements in the example's files */
   patches?: [from: string, to: string][];
 }
 
@@ -299,6 +299,8 @@ function readFiles(
     return toPosix(path.relative(folder, file)).replace(/\.ts$/, '.js');
   };
 
+  const unapplied = new Set(source.patches);
+
   for (const [name, file] of pending) origins.set(name, file);
   while (pending.length) {
     const [name, file] = pending.pop()!;
@@ -306,9 +308,12 @@ function readFiles(
     if (files.has(name)) continue;
     let code = readScript(file);
 
-    for (const [from, to] of file === source.entry ? (source.patches ?? []) : []) {
-      if (code.includes(from)) code = code.replaceAll(from, to);
-      else warn(`${source.name}: the patch for ${from.trim()} no longer applies; delete it from entries`);
+    for (const patch of source.patches ?? []) {
+      const [from, to] = patch;
+
+      if (!code.includes(from)) continue;
+      code = code.replaceAll(from, to);
+      unapplied.delete(patch);
     }
     if (SCRIPT.test(file)) {
       let rewritten = '';
@@ -344,6 +349,9 @@ function readFiles(
       if (localAssets) code = code.replaceAll(localAssets, `${SITE_ASSETS}${publishedAssets}/`);
     }
     files.set(name, code);
+  }
+  for (const [from] of unapplied) {
+    warn(`${source.name}: the patch for ${from.trim()} no longer applies; delete it from entries`);
   }
   const cycle = findCycle(graph);
 

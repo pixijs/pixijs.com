@@ -51,7 +51,8 @@ export interface Library {
     /**
      * Folders published as a gallery example although their entry isn't `index`, by the name each is published
      * under. `file` is the entry relative to `dir`; its folder is the example, and that folder's own `package.json`
-     * adds to `packageJson`. `patches` are literal replacements in the entry; one that no longer applies warns.
+     * adds to `packageJson`. `patches` are literal replacements in the example's files; one that no longer applies
+     * warns.
      */
     entries?: Record<string, { file: string; patches?: [from: string, to: string][] }>;
     /** The `package.json` whose dependencies and devDependencies give the versions of what examples import */
@@ -246,6 +247,11 @@ export const LIBRARIES: Record<PackageId, Library> = {
           patches: [
             ["import { GraphDebugOverlay } from '@pixi/3d/extras';\n", ''],
             ['new GraphDebugOverlay({ view: () => view3d, renderer: app.renderer });\n\n', ''],
+            // Firefox throws from getGamepads() in the editor's sandboxed frame, which stops the game
+            [
+              'navigator.getGamepads ? navigator.getGamepads() : []',
+              "navigator.getGamepads && !navigator.userAgent.includes('Firefox') ? navigator.getGamepads() : []",
+            ],
           ],
         },
       },
