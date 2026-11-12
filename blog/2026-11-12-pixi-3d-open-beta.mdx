@@ -59,9 +59,11 @@ Already build with PixiJS? Add one `View3D` to your project and you're in 3D, wi
 
 ## A new dimension for the project you already have
 
-You don't port anything, and you don't run a second engine next to PixiJS. A 3D scene is a display object. Add a `View3D` to the stage and it layers with everything else you draw:
+You don't port anything, and you don't run a second engine next to PixiJS. A 3D scene is a display object. Create a `View3D`, add it to the stage, and it layers with everything else you draw:
 
 ```ts
+const view3d = new View3D({ autoResize: true });
+
 app.stage.addChild(backdrop); // behind the 3D scene
 app.stage.addChild(view3d);
 app.stage.addChild(scoreText); // over the 3D scene
