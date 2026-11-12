@@ -1,12 +1,8 @@
 # Container
 
-The `Container` class is the foundation of PixiJS's scene graph system. Containers act as groups of scene objects, allowing you to build complex hierarchies, organize rendering layers, and apply transforms or effects to groups of objects.
+A `Container` groups display objects together. Moving, rotating, or scaling a container applies to everything inside it. Containers themselves are invisible; only their children render.
 
-## What Is a Container?
-
-A `Container` is a general-purpose node that can hold other display objects, **including other containers**. It is used to structure your scene, apply transformations, and manage rendering and interaction.
-
-Containers are **not** rendered directly. Instead, they delegate rendering to their children.
+Containers can hold other containers, letting you build nested hierarchies (e.g., a game world container holding level containers, each holding sprite containers).
 
 ```ts
 import { Container, Sprite } from 'pixi.js';
@@ -17,9 +13,9 @@ const sprite = Sprite.from('bunny.png');
 group.addChild(sprite);
 ```
 
-## Managing Children
+## Managing children
 
-PixiJS provides a robust API for adding, removing, reordering, and swapping children in a container:
+PixiJS provides an API for adding, removing, reordering, and swapping children in a container:
 
 ```ts
 const container = new Container();
@@ -39,7 +35,7 @@ container.removeChildAt(0);
 container.removeChildren(0, 2);
 ```
 
-To keep a child’s world transform while moving it to another container, use `reparentChild` or `reparentChildAt`:
+To move a child to another container while keeping its current position on screen (preserving its world transform), use `reparentChild` or `reparentChildAt`:
 
 ```ts
 otherContainer.reparentChild(child);
@@ -47,14 +43,54 @@ otherContainer.reparentChild(child);
 
 ### Events
 
-Containers emit events when children are added or removed:
+Containers emit lifecycle events you can listen to. There are two perspectives: events on the **parent** and events on the **child**.
+
+#### Parent-side events
+
+`childAdded` and `childRemoved` fire on the container whose children changed:
 
 ```ts
 group.on('childAdded', (child, parent, index) => { ... });
 group.on('childRemoved', (child, parent, index) => { ... });
 ```
 
-### Finding Children
+#### Child-side events
+
+`added` and `removed` fire on the child itself when its parent changes:
+
+```ts
+const sprite = Sprite.from('bunny.png');
+
+sprite.on('added', (parent) => {
+    console.log('Added to:', parent.label);
+});
+sprite.on('removed', (oldParent) => {
+    console.log('Removed from:', oldParent.label);
+});
+```
+
+> [!NOTE]
+> When using `addChildAt` to reposition a child that is **already in the same container**, the child is moved silently. None of the add/remove events fire, since the parent-child relationship hasn't changed.
+
+#### Property and lifecycle events
+
+`visibleChanged` fires whenever a container's `visible` property changes:
+
+```ts
+container.on('visibleChanged', (visible) => {
+    console.log('Visibility:', visible);
+});
+```
+
+`destroyed` fires when `destroy()` is called, after internal cleanup but before listeners are removed:
+
+```ts
+container.on('destroyed', (container) => {
+    console.log('Destroyed:', container.label);
+});
+```
+
+### Finding children
 
 Containers support searching children by `label` using helper methods:
 
@@ -71,7 +107,7 @@ Set `deep = true` to search recursively through all descendants.
 container.getChildByLabel('ui', true);
 ```
 
-### Sorting Children
+### Sorting children
 
 Use `zIndex` and `sortableChildren` to control render order within a container:
 
@@ -87,30 +123,26 @@ Call `sortChildren()` to manually re-sort if needed:
 container.sortChildren();
 ```
 
-:::info
-Use this feature sparingly, as sorting can be expensive for large numbers of children.
-:::
+> [!NOTE]
+> Use this feature sparingly, as sorting can be expensive for large numbers of children.
 
-## Optimizing with Render Groups
+## Optimizing with render groups
 
-Containers can be promoted to **render groups** by setting `isRenderGroup = true` or calling `enableRenderGroup()`.
+A render group isolates a container's rendering instructions from its parent, so the GPU can transform the entire group without recalculating each child. Promote a container by setting `isRenderGroup = true` or calling `enableRenderGroup()`.
 
-Use render groups for UI layers, particle systems, or large moving subtrees.
-See the [Render Groups guide](../../../concepts/render-groups.md) for more details.
+Good candidates: UI layers that overlay the game world, large subtrees that move as a unit, or particle systems.
+See the [Render Groups guide](https://pixijs.com/8.x/guides/concepts/render-groups.md) for details.
 
 ```ts
 const uiLayer = new Container({ isRenderGroup: true });
 ```
 
-## Cache as Texture
+## Cache as texture
 
-The `cacheAsTexture` function in PixiJS is a powerful tool for optimizing rendering in your applications. By rendering a container and its children to a texture, `cacheAsTexture` can significantly improve performance for static or infrequently updated containers.
+`cacheAsTexture` optimizes rendering by drawing a container and its children to a single texture. Subsequent renders reuse this texture instead of rendering each child individually. This is useful for containers with many static elements, as it reduces the rendering workload.
 
-When you set `container.cacheAsTexture()`, the container is rendered to a texture. Subsequent renders reuse this texture instead of rendering all the individual children of the container. This approach is particularly useful for containers with many static elements, as it reduces the rendering workload.
-
-:::info[Note]
-`cacheAsTexture` is PixiJS v8's equivalent of the previous `cacheAsBitmap` functionality. If you're migrating from v7 or earlier, simply replace `cacheAsBitmap` with `cacheAsTexture` in your code.
-:::
+> [!NOTE]
+> `cacheAsTexture` is PixiJS v8's equivalent of the previous `cacheAsBitmap` functionality. If you're migrating from v7 or earlier, replace `cacheAsBitmap` with `cacheAsTexture` in your code.
 
 ```ts
 const container = new Container();
@@ -127,12 +159,12 @@ container.updateCacheTexture();
 container.cacheAsTexture(false);
 ```
 
-For more advanced usage, including setting cache options and handling dynamic content, refer to the [Cache as Texture guide](./cache-as-texture.md).
+For more advanced usage, including setting cache options and handling dynamic content, refer to the [Cache as Texture guide](https://pixijs.com/8.x/guides/components/scene-objects/container/cache-as-texture.md).
 
 ---
 
-## API Reference
+## API reference
 
-- [Container](https://pixijs.download/release/docs/scene.Container.html)
-- [ContainerOptions](https://pixijs.download/release/docs/scene.ContainerOptions.html)
-- [RenderContainer](https://pixijs.download/release/docs/scene.RenderContainer.html)
+- [`Container`](https://pixijs.download/v8.23.0/docs/scene.Container.html)
+- [`ContainerOptions`](https://pixijs.download/v8.23.0/docs/scene.ContainerOptions.html)
+- [`RenderContainer`](https://pixijs.download/v8.23.0/docs/scene.RenderContainer.html)

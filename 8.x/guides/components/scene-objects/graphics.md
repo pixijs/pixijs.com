@@ -1,6 +1,6 @@
 # Graphics
 
-[Graphics](https://pixijs.download/release/docs/scene.Graphics.html) is a powerful and flexible tool for rendering shapes such as rectangles, circles, stars, and custom polygons. It can also be used to create complex shapes by combining multiple primitives, and it supports advanced features like gradients, textures, and masks.
+[`Graphics`](https://pixijs.download/v8.23.0/docs/scene.Graphics.html) renders shapes such as rectangles, circles, stars, and custom polygons. You can combine multiple primitives into complex shapes, and it supports gradients, textures, and masks.
 
 ```ts
 import { Graphics } from 'pixi.js';
@@ -8,11 +8,14 @@ import { Graphics } from 'pixi.js';
 const graphics = new Graphics().rect(50, 50, 100, 100).fill(0xff0000);
 ```
 
-## **Available Shapes**
+## Available shapes
 
-PixiJS v8 supports a variety of shape primitives:
+PixiJS v8 supports these shape primitives:
 
-### Basic Primitives
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+<div>
+
+### Basic primitives
 
 - Line
 - Rectangle
@@ -22,7 +25,10 @@ PixiJS v8 supports a variety of shape primitives:
 - Arc
 - Bezier / Quadratic Curves
 
-### Advanced Primitives
+</div>
+<div>
+
+### Advanced primitives
 
 - Chamfer Rect
 - Fillet Rect
@@ -31,32 +37,37 @@ PixiJS v8 supports a variety of shape primitives:
 - Rounded Polygon
 - Rounded Shape
 
+</div>
+</div>
+
 ```ts
 const graphics = new Graphics()
   .rect(50, 50, 100, 100)
   .fill(0xff0000)
   .circle(200, 200, 50)
   .stroke(0x00ff00)
-  .lineStyle(5)
   .moveTo(300, 300)
-  .lineTo(400, 400);
+  .lineTo(400, 400)
+  .stroke({ width: 5 });
 ```
 
-### SVG Support
+### SVG support
 
-You can also load SVG path data, although complex hole geometries may render inaccurately due to Pixi's performance-optimized triangulation system.
+You can load SVG path data, though complex hole geometries may render inaccurately due to Pixi's performance-optimized triangulation system.
 
 ```ts
 let shape = new Graphics().svg(`
-  
-    
-  
+  <svg>
+    <path d="M 100 350 q 150 -300 300 0" stroke="blue" />
+  </svg>
 `);
 ```
 
-## **GraphicsContext**
+The parser handles basic shapes, paths, groups, inline styles, and linear and radial gradients. `transform` attributes, `<style>` blocks, text, images, clipping paths, and masks are not supported; unsupported elements are skipped with a console warning. See the [SVG guide](https://pixijs.com/8.x/guides/components/assets/svg.md) for the full feature table.
 
-The `GraphicsContext` class is the core of PixiJS's new graphics model. It holds all the drawing commands and styles, allowing the same shape data to be reused by multiple `Graphics` instances:
+## GraphicsContext
+
+`GraphicsContext` is the core of the PixiJS graphics model. It holds all drawing commands and styles, allowing the same shape data to be reused by multiple `Graphics` instances:
 
 ```ts
 const context = new GraphicsContext().circle(100, 100, 50).fill('red');
@@ -65,7 +76,7 @@ const shapeA = new Graphics(context);
 const shapeB = new Graphics(context); // Shares the same geometry
 ```
 
-This pattern is particularly effective when rendering repeated or animated shapes, such as frame-based SVG swaps:
+This pattern is effective when rendering repeated or animated shapes, such as frame-based SVG swaps:
 
 ```ts
 let frames = [
@@ -80,67 +91,69 @@ function update() {
 }
 ```
 
-:::info
-If you don't explicitly pass a `GraphicsContext` when creating a `Graphics` object, then internally, it will have its own context, accessible via `myGraphics.context`.
-:::
+> [!NOTE]
+> If you don't explicitly pass a `GraphicsContext` when creating a `Graphics` object, then internally, it will have its own context, accessible via `myGraphics.context`.
 
 ### Destroying a GraphicsContext
 
-When you destroy a `GraphicsContext`, all `Graphics` instances that share it will also be destroyed. This is a crucial point to remember, as it can lead to unexpected behavior if you're not careful.
+Destroying a `GraphicsContext` does not destroy the `Graphics` objects that share it, but it leaves them with a destroyed context, so they no longer update or render correctly. Only destroy a shared context after every `Graphics` using it is gone. Destroying a `Graphics` object detaches it from its context, so a long-lived shared context does not hold on to destroyed instances.
 
 ```ts
 const context = new GraphicsContext().circle(100, 100, 50).fill('red');
 const shapeA = new Graphics(context);
 const shapeB = new Graphics(context); // Shares the same geometry
 
-shapeA.destroy({ context: true }); // Destroys both shapeA and shapeB
+shapeA.destroy(); // shapeB keeps rendering
+shapeB.destroy({ context: true }); // last user: destroy the context too
 ```
 
-## **Creating Holes**
+## Creating holes
 
 Use `.cut()` to remove a shape from the previous one:
 
 ```ts
-const g = new Graphics()
-  .rect(0, 0, 100, 100)
-  .fill(0x00ff00)
-  .circle(50, 50, 20)
-  .cut(); // Creates a hole in the green rectangle
+const g = new Graphics().rect(0, 0, 100, 100).fill(0x00ff00).circle(50, 50, 20).cut(); // Creates a hole in the green rectangle
 ```
 
 Ensure the hole is fully enclosed within the shape to avoid triangulation errors.
 
-## **Graphics Is About Building, Not Drawing**
+## Graphics builds geometry, it doesn't draw immediately
 
-Despite the terminology of functions like `.rect()` or `.circle()`, `Graphics` does not immediately draw anything. Instead, each method builds up a list of geometry primitives stored inside a `GraphicsContext`. These are then rendered when the object is drawn to the screen or used in another context, such as a mask.
+Methods like `.rect()` and `.circle()` don't render anything. They build a list of shapes stored in a `GraphicsContext`. Rendering happens when the `Graphics` object is added to the scene and the renderer processes it.
 
 ```ts
 const graphic = new Graphics().rect(0, 0, 200, 100).fill(0xff0000);
 
-app.stage.addChild(graphic); // The rendering happens here
+app.stage.addChild(graphic); // Rendering happens here
 ```
 
-You can think of `Graphics` as a blueprint builder: it defines what to draw, but not when to draw it. This is why `Graphics` objects can be reused, cloned, masked, and transformed without incurring extra computation until they're actually rendered.
+This means you can build, reuse, and transform `Graphics` objects freely without triggering GPU work.
 
-## **Performance Best Practices**
+## Smooth edges without MSAA
 
-- **Do not clear and rebuild graphics every frame**. If your content is dynamic, prefer swapping prebuilt `GraphicsContext` objects instead of recreating them.
+`Graphics` relies on MSAA (`antialias: true`) for smooth edges. [`SmoothGraphics`](https://pixijs.download/v8.23.0/docs/scene.SmoothGraphics.html) has the same API and anti-aliases its edges in the shader instead, which also works without MSAA, in render textures and with thin lines. See [Smooth Graphics](https://pixijs.com/8.x/guides/components/scene-objects/graphics/graphics-smooth.md).
+
+## Performance guidelines
+
+- **Do not call `.clear()` and rebuild every frame.** Rebuilding triggers geometry re-triangulation on the CPU. For dynamic content, swap prebuilt `GraphicsContext` objects instead (see the context-swapping example above).
 - **Use `Graphics.destroy()`** to clean up when done. Shared contexts are not auto-destroyed.
 - **Use many simple `Graphics` objects** over one complex one to maintain GPU batching.
-- **Avoid transparent overlap** unless you understand blend modes; overlapping semi-transparent primitives will interact per primitive, not post-composition.
+- **Overlapping semi-transparent shapes blend individually.** Each shape is drawn and blended in order, so two 50%-transparent overlapping circles will look different than a single 50%-transparent merged shape. To blend the entire Graphics as one unit, render it to a texture first via `cacheAsTexture()` or `renderer.generateTexture()`.
 
-## **Caveats and Gotchas**
+## Caveats and gotchas
 
-- **Memory Leaks**: Call `.destroy()` when no longer needed.
-- **SVG and Holes**: Not all SVG hole paths triangulate correctly.
-- **Changing Geometry**: Use `.clear()` sparingly. Prefer swapping contexts.
-- **Transparency and Blend Modes**: These apply per primitive. Use `RenderTexture` if you want to flatten effects.
+- **Memory leaks**: Call `.destroy()` when no longer needed.
+- **SVG and holes**: Not all SVG hole paths triangulate correctly.
+- **Changing geometry**: Use `.clear()` sparingly. Prefer swapping contexts.
+- **Transparency and blend modes**: These apply per primitive. Use `RenderTexture` to flatten effects.
+- **Empty Graphics bounds**: A `Graphics` object with no drawing instructions returns bounds of `(0, 0, 0, 0)`. This prevents `Infinity` values from contaminating parent container bounds calculations.
 
 ---
 
-## **API Reference**
+## API reference
 
-- [Graphics](https://pixijs.download/release/docs/scene.Graphics.html)
-- [GraphicsContext](https://pixijs.download/release/docs/scene.GraphicsContext.html)
-- [FillStyle](https://pixijs.download/release/docs/scene.FillStyle.html)
-- [StrokeStyle](https://pixijs.download/release/docs/scene.StrokeStyle.html)
+- [`Graphics`](https://pixijs.download/v8.23.0/docs/scene.Graphics.html)
+- [`GraphicsContext`](https://pixijs.download/v8.23.0/docs/scene.GraphicsContext.html)
+- [`SmoothGraphics`](https://pixijs.download/v8.23.0/docs/scene.SmoothGraphics.html)
+- [`FillStyle`](https://pixijs.download/v8.23.0/docs/scene.FillStyle.html)
+- [`StrokeStyle`](https://pixijs.download/v8.23.0/docs/scene.StrokeStyle.html)

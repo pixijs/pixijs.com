@@ -11,10 +11,6 @@ import {
 import fragment from './mouseBlending.frag';
 import vertex from './mouseBlending.vert';
 
-/**
- * https://github.com/pixijs/pixi.js/wiki/v5-Creating-Filters
- */
-
 (async () => {
   // Create a new application
   const app = new Application();

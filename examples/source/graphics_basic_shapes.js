@@ -76,7 +76,7 @@ import { Application, Graphics } from 'pixi.js';
   // Draw star 3
   graphics.star(470, 450, 4, 50);
   graphics.fill(0x55335a);
-  graphics.stroke(4, 0xffffff);
+  graphics.stroke({ width: 4, color: 0xffffff });
 
   // Draw polygon
   const path = [600, 370, 700, 460, 780, 420, 730, 570, 590, 520];

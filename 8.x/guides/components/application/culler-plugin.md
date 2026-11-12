@@ -1,20 +1,24 @@
 # Culler Plugin
 
-The `CullerPlugin` automatically skips rendering for offscreen objects in your scene. It does this by using the renderer's screen bounds to determine whether containers (and optionally their children) intersect the view. If they don't, they are **culled**, reducing rendering and update overhead.
+The [`CullerPlugin`](https://pixijs.download/v8.23.0/docs/app.CullerPlugin.html) improves performance by skipping offscreen objects during rendering. It checks whether each container (and its children) intersects the visible screen area. Objects outside the view are marked as hidden ("culled"), so the renderer skips them entirely. This reduces draw calls and update overhead.
 
-PixiJS does not enable this plugin by default. You must manually register it using the `extensions` system.
+PixiJS does not enable this plugin by default. You must register it manually with the `extensions` system.
 
-## When Should You Use It?
+## When to use it
 
-Culling is ideal for:
+Culling works well for:
 
 - Large scenes with many offscreen elements
 - Scrollable or camera-driven environments (e.g. tilemaps, world views)
-- Optimizing render performance without restructuring your scene graph
+- Reducing render cost without restructuring your scene graph
 
 ## Usage
 
 ```ts
+import { Application, Container, Sprite, extensions, CullerPlugin } from 'pixi.js';
+
+extensions.add(CullerPlugin);
+
 const app = new Application();
 
 await app.init({
@@ -23,22 +27,17 @@ await app.init({
   backgroundColor: 0x222222,
 });
 
-extensions.add(CullerPlugin);
-
 const world = new Container();
 world.cullable = true;
-world.cullableChildren = true;
 
-const sprite = new Sprite.from('path/to/image.png');
-sprite.cullable = true; // Enable culling for this sprite
+const sprite = Sprite.from('path/to/image.png');
+sprite.cullable = true;
 world.addChild(sprite);
 
 app.stage.addChild(world);
 ```
 
-### Enabling the Culler Plugin
-
-To enable automatic culling in your application:
+### Enabling the plugin
 
 ```ts
 import { extensions, CullerPlugin } from 'pixi.js';
@@ -46,7 +45,7 @@ import { extensions, CullerPlugin } from 'pixi.js';
 extensions.add(CullerPlugin);
 ```
 
-This will override the default `render()` method on your `Application` instance to call `Culler.shared.cull()` before rendering:
+This overrides the `render()` method on your `Application` instance to call `Culler.shared.cull()` before rendering:
 
 ```ts
 // Internally replaces:
@@ -56,30 +55,37 @@ Culler.shared.cull(app.stage, app.renderer.screen);
 app.renderer.render({ container: app.stage });
 ```
 
-### Configuring Containers for Culling
+### Configuring containers for culling
 
-By default, containers are **not culled**. To enable culling for a container, set the following properties:
+By default, containers are **not culled** (`cullable` is `false`). `cullableChildren` defaults to `true`, so you only need to set `cullable` on the containers you want culled:
 
 ```ts
-container.cullable = true; // Enables culling for this container
-container.cullableChildren = true; // Enables recursive culling for children
+container.cullable = true; // This container will be culled when offscreen
 ```
 
-### Optional: Define a Custom Cull Area
+To disable recursive child culling:
+
+```ts
+container.cullableChildren = false; // Children won't be individually culled
+```
+
+### Custom cull area
 
 You can define a `cullArea` to override the default bounds check (which uses global bounds):
 
 ```ts
+import { Rectangle } from 'pixi.js';
+
 container.cullArea = new Rectangle(0, 0, 100, 100);
 ```
 
-This is useful for containers with many children where bounding box calculations are expensive or inaccurate.
+This helps when bounding box calculations for a container's children are expensive or inaccurate.
 
 ---
 
-## Manual Culling with `Culler`
+## Manual culling
 
-If you’re not using the plugin but want to manually cull before rendering:
+If you're not using the plugin but want to cull before rendering manually:
 
 ```ts
 import { Culler } from 'pixi.js';
@@ -93,6 +99,7 @@ renderer.render({ container: stage });
 
 ---
 
-## API Reference
+## API reference
 
-- [CullerPlugin](https://pixijs.download/release/docs/app.CullerPlugin.html)
+- [`CullerPlugin`](https://pixijs.download/v8.23.0/docs/app.CullerPlugin.html)
+- [`Culler`](https://pixijs.download/v8.23.0/docs/scene.Culler.html)

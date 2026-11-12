@@ -1,11 +1,13 @@
 # Performance Tips
 
+This page collects practical advice for improving frame rate and reducing memory usage in PixiJS applications. Start with the General section; the rest are organized by feature area. Profile before optimizing; PixiJS handles a lot of content well out of the box.
+
 ### General
 
-- Only optimize when you need to! PixiJS can handle a fair amount of content off the bat
+- Profile first! PixiJS can handle a large amount of content without optimization
 - Be mindful of the complexity of your scene. The more objects you add the slower things will end up
-- Order can help, for example sprite / graphic / sprite / graphic is slower than sprite / sprite / graphic / graphic
-- Some older mobile devices run things a little slower. Passing in the option `useContextAlpha: false` and `antialias: false` to the Renderer or Application can help with performance
+- Group similar object types together in the scene graph. `sprite / sprite / graphic / graphic` produces 2 draw calls, while `sprite / graphic / sprite / graphic` produces 4, because each type change breaks the batch
+- Some older mobile devices run things a little slower. Passing in the option `backgroundAlpha: 1` and `antialias: false` to the Renderer or Application can help with performance
 - Culling is disabled by default as it's often better to do this at an application level or set objects to be `cullable = true`. If you are GPU-bound it will improve performance; if you are CPU-bound it will degrade performance
 
 ### Sprites
@@ -13,8 +15,8 @@
 - Use Spritesheets where possible to minimize total textures
 - Sprites can be batched with up to 16 different textures (dependent on hardware)
 - This is the fastest way to render content
-- On older devices use smaller low resolution textures
-- Add the extention `@0.5x.png` to the 50% scale-down spritesheet so PixiJS will visually-double them automatically
+- On older devices use smaller low-resolution textures
+- Add the extension `@0.5x.png` to the 50% scale-down spritesheet so PixiJS will visually-double them automatically
 - Draw order can be important
 
 ### Graphics
@@ -27,9 +29,9 @@
 ### Texture
 
 - Textures are automatically managed by a Texture Garbage Collector
-- You can also manage them yourself by using `texture.destroy()`
-- If you plan to destroy more than one at once add a random delay to their destruction to remove freezing
-- Delay texture destroy if you plan to delete a lot of textures yourself
+- You can also manage them yourself by using `texture.source.unload()` or `Assets.unload()`
+- When destroying many textures at once, stagger the calls across multiple frames (e.g., destroy 5 per frame) to avoid a single-frame freeze
+- On WebGPU, antialiased render textures that are drawn in one pass and never reopened (no filters or masks popping back onto them, no `clear: false` renders) can be created with `transient: true` so their multisample buffers are discarded instead of written to memory: depth/stencil everywhere, and colour on GPUs that aren't tile-based (tile-based GPUs, such as every phone GPU, discard colour automatically).
 
 ### Text
 
@@ -49,14 +51,20 @@
 - Release memory: `container.filters = null`
 - If you know the size of them: `container.filterArea = new Rectangle(x,y,w,h)`. This can speed things up as it means the object does not need to be measured
 - Filters are expensive, using too many will start to slow things down!
+- Full-screen filter textures are pooled at screen size, but padding (the `BlurFilter` default) pushes them up to the next power of two; set `repeatEdgePixels: true` on full-screen blurs
 
 ### BlendModes
 
-- Different blend modes will cause batches to break (de-optimize)
-- ScreenSprite / NormalSprite / ScreenSprite / NormalSprite would be 4 draw calls
-- ScreenSprite / ScreenSprite / NormalSprite / NormalSprite would be 2 draw calls
+- Different blend modes break batches, just like mixing object types (see General section above). Group objects with the same blend mode together:
+  - `Screen / Normal / Screen / Normal` = 4 draw calls
+  - `Screen / Screen / Normal / Normal` = 2 draw calls
 
 ### Events
 
 - If an object has no interactive children use `interactiveChildren = false`. The event system will then be able to avoid crawling through the object
-- Setting `hitArea = new Rectangle(x,y,w,h)` as above should stop the event system from crawling through the object
+- Setting `hitArea = new Rectangle(x, y, w, h)` on a container tells the event system to use that rectangle for hit testing instead of recursively checking all children
+
+### Custom rendering
+
+- Update only the changed range of a large buffer with `buffer.update(sizeInBytes, offsetInBytes)` instead of re-uploading it whole
+- On WebGPU, record repeated custom draw sequences with `renderer.encoder.beginBundle()` / `endBundle()` and replay them with `executeBundle()`. Check `isBundleValid()` first and re-record when the render target changes or the WebGPU device was lost

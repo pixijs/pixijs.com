@@ -1,12 +1,12 @@
 /**
  * Helper functions
-
-line intercept math by Paul Bourke http://paulbourke.net/geometry/pointlineplane/
-Determine the intersection point of two line segments
-Return FALSE if the lines don't intersect
-
-Code modified from original to match pixi examples linting rules.
-*/
+ *
+ * line intercept math by Paul Bourke http://paulbourke.net/geometry/pointlineplane/
+ * Determine the intersection point of two line segments
+ * Return FALSE if the lines don't intersect
+ *
+ * Code modified from original to match pixi examples linting rules.
+ */
 export function intersect(x1, y1, x2, y2, x3, y3, x4, y4) {
   // Check if none of the lines are of length 0
   if ((x1 === x2 && y1 === y2) || (x3 === x4 && y3 === y4)) {

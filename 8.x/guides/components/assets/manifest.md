@@ -1,12 +1,12 @@
-# Manifests & Bundles
+# Manifests and bundles
 
-PixiJS has a structured and scalable approach to asset management through **Manifests** and **Bundles**. This is the recommended way to manage assets in your PixiJS applications, especially for larger projects or those that require dynamic loading of assets based on context or user interaction. This guide explains what they are, how to use them, and how to generate them efficiently using [AssetPack](https://github.com/pixijs/AssetPack) — a tool designed to automate manifest and bundle creation.
+Instead of loading assets one at a time, you can group them into **bundles** (e.g., "load screen", "level 1") and list those bundles in a **manifest**. This lets you load an entire screen's assets in one call and preload the next screen in the background.
 
 ---
 
-## What Is a Manifest?
+## What is a manifest?
 
-A **Manifest** is a descriptor object that defines your asset loading strategy. It lists all bundles, each of which contains grouped assets by name and alias. This structure allows for lazy-loading assets based on application context (e.g. load screen assets, level-specific content, etc.).
+A **manifest** is a descriptor object that defines your asset loading strategy. It lists bundles, each containing grouped assets by name and alias. This structure allows lazy-loading assets based on application context (e.g. load screen assets, level-specific content).
 
 ```js
 const manifest = {
@@ -15,7 +15,7 @@ const manifest = {
       name: 'load-screen',
       assets: [
         { alias: 'background', src: 'sunset.png' },
-        { alias: 'bar', src: 'load-bar.{png,webp}' },
+        { alias: 'bar', src: 'load-bar.{png,webp}' }, // picks best format per device
       ],
     },
     {
@@ -29,9 +29,7 @@ const manifest = {
 };
 ```
 
-### Initializing With a Manifest
-
-To initialize PixiJS asset handling with a manifest:
+### Initializing with a manifest
 
 ```js
 import { Assets } from 'pixi.js';
@@ -39,14 +37,14 @@ import { Assets } from 'pixi.js';
 await Assets.init({ manifest });
 ```
 
-Once initialized, you can load bundles by name:
+Once initialized, load bundles by name:
 
 ```js
 const loadScreenAssets = await Assets.loadBundle('load-screen');
 const gameScreenAssets = await Assets.loadBundle('game-screen');
 ```
 
-It should be noted that you can still load assets directly without loading an entire bundle via their alias:
+You can still load individual assets by alias without loading an entire bundle:
 
 ```js
 await Assets.init({ manifest });
@@ -56,13 +54,11 @@ const bar = await Assets.load('bar');
 
 ---
 
-## What Is a Bundle?
+## What is a bundle?
 
-A **Bundle** is a group of assets that are identified by a shared name. While bundles can be pre-defined in a manifest, they can also be dynamically registered at runtime.
+A **bundle** is a group of assets identified by a shared name. Bundles can be pre-defined in a manifest or registered dynamically at runtime.
 
-### Adding a Bundle Dynamically
-
-This approach is helpful for scenarios where you want to define bundles on the fly:
+### Adding a bundle dynamically
 
 ```js
 import { Assets } from 'pixi.js';
@@ -75,20 +71,24 @@ Assets.addBundle('animals', [
 
 const assets = await Assets.loadBundle('animals');
 
-// or load a specific asset from the bundle
+// Or load a specific asset from the bundle
 const bunny = await Assets.load('bunny');
 ```
 
 ---
 
-## Recommended Tool: AssetPack
+## Recommended tool: AssetPack
 
-Managing manifests and bundles manually can be error-prone. [**AssetPack**](https://pixijs.io/assetpack) is a CLI tool that scans your assets folder and generates optimized manifests and bundles automatically.
+Managing manifests and bundles by hand is tedious and mistake-prone. [**AssetPack**](https://pixijs.io/assetpack) is a CLI tool that scans your assets folder and generates optimized manifests automatically.
 
-### Key Benefits
+### Key benefits
 
 - Organizes assets by directory or pattern
-- Supports output in PixiJS manifest format
+- Outputs in PixiJS manifest format
 - Reduces boilerplate and risk of manual mistakes
 
-You can integrate AssetPack into your build pipeline to generate the manifest file and load it using `Assets.init({ manifest })`.
+```bash
+npm install --save-dev @assetpack/core
+```
+
+Integrate AssetPack into your build pipeline to generate the manifest file and load it with `Assets.init({ manifest })`.

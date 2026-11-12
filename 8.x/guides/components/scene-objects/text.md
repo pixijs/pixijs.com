@@ -1,24 +1,33 @@
 # Text
 
-Text is essential in games and applications, and PixiJS provides three different systems to cover different needs:
+PixiJS provides three text rendering systems, each with different tradeoffs:
 
 - **`Text`**: High-quality, styled raster text
 - **`BitmapText`**: Ultra-fast, GPU-optimized bitmap fonts
 - **`HTMLText`**: Richly formatted HTML inside the Pixi scene
 
-Each approach has tradeoffs in fidelity, speed, and flexibility. Let’s look at when and how to use each one.
+Each approach has tradeoffs in fidelity, speed, and flexibility.
 
-## `Text`: Rich Dynamic Text with Styles
+## `Text`: Rich dynamic text with styles
 
-The `Text` class renders using the browser's native text engine, and then converts the result into a texture. This allows for:
+The `Text` class renders using the browser's native text engine, then converts the result into a texture.
 
-- Full CSS-like font control
-- Drop shadows, gradients, and alignment
-- Support for dynamic content and layout
+```ts
+import { Text } from 'pixi.js';
+
+const text = new Text({
+    text: 'Hello PixiJS!',
+    style: {
+        fontFamily: 'Arial',
+        fontSize: 32,
+        fill: '#ffffff',
+    }
+});
+```
 
 **Use it when**:
 
-- You need detailed font control
+- You need detailed font control (drop shadows, gradients, alignment)
 - Text changes occasionally
 - Fidelity is more important than speed
 
@@ -29,17 +38,34 @@ The `Text` class renders using the browser's native text engine, and then conver
 
 ---
 
-## `BitmapText`: High-Performance Glyph Rendering
+## `BitmapText`: High-performance glyph rendering
 
-`BitmapText` uses a pre-baked bitmap font image for glyphs, bypassing font rasterization entirely. This gives:
+`BitmapText` draws characters from a pre-baked bitmap font image, bypassing font rasterization entirely.
 
-- High rendering speed
-- Ideal for thousands of changing labels
-- Low memory usage
+```ts
+import { BitmapFont, BitmapText } from 'pixi.js';
+
+BitmapFont.install({
+    name: 'Game Font',
+    style: {
+        fontFamily: 'Arial',
+        fontSize: 32,
+        fill: '#ffffff'
+    }
+});
+
+const text = new BitmapText({
+    text: 'High Performance!',
+    style: {
+        fontFamily: 'Game Font',
+        fontSize: 32
+    }
+});
+```
 
 **Use it when**:
 
-- You need to render lots of dynamic text
+- You need to render lots of dynamic text (HUDs, score counters, timers)
 - You prioritize performance over styling
 - You predefine the characters and styles
 
@@ -50,24 +76,32 @@ The `Text` class renders using the browser's native text engine, and then conver
 
 To use `BitmapText`, you must first register a bitmap font via:
 
-- `BitmapFont.from(...)` to create on the fly, or
+- `BitmapFont.install(...)` to create on the fly, or
 - `Assets.load(...)` if using a 3rd-party BMFont or AngelCode export
 
 ---
 
-## `HTMLText`: Styled HTML Inside the Scene
+## `HTMLText`: Styled HTML inside the scene
 
-`HTMLText` lets you render actual HTML markup in your PixiJS scene. This allows:
+`HTMLText` renders HTML markup in your PixiJS scene using SVG `<foreignObject>`.
 
-- `, `, `` style formatting
-- Fine layout and text flow
-- Emoji, RTL, links, and more
+```ts
+import { HTMLText } from 'pixi.js';
+
+const text = new HTMLText({
+    text: '<b>Bold</b> and <i>Italic</i>',
+    style: {
+        fontSize: 24,
+        fill: '#ffffff'
+    }
+});
+```
 
 **Use it when**:
 
-- You want complex HTML-style markup
-- Static or semi-dynamic content
-- Your users expect "document-like" layout
+- You want complex HTML-style markup (`<b>`, `<i>`, `<span>`)
+- You need emoji, RTL, or links
+- Your users expect document-like layout
 
 **Avoid when**:
 
@@ -75,22 +109,37 @@ To use `BitmapText`, you must first register a bitmap font via:
 - You're rendering hundreds of text blocks
 - You need GPU text effects
 
-## Next Steps
+## Performance comparison
 
-Each text type has a corresponding guide that covers setup, font loading, style options, and limitations in more detail:
+| Metric           | `Text`                          | `BitmapText`              | `HTMLText`                 |
+| ---------------- | ------------------------------- | ------------------------- | -------------------------- |
+| Memory usage     | Medium (one texture per string) | Low (shared texture atlas)| High (DOM elements + textures) |
+| Rendering speed  | Medium                          | Fast                      | Slow                       |
+| Update speed     | Slow for frequent updates       | Fast for any updates      | Medium                     |
 
-- [Text Guide →](./canvas.md)
-- [BitmapText Guide →](./bitmap.md)
-- [HTMLText Guide →](./html.md)
+## Quick decision guide
+
+- **Updating text rarely** (menus, dialogs): Use `Text`
+- **Updating text every frame** (scores, timers) or **many instances**: Use `BitmapText`
+- **Need HTML tags, emoji, or CSS layout**: Use `HTMLText`
+- **Unsure?** Start with `Text`. Switch to `BitmapText` if you hit performance issues.
+
+## Detailed guides
+
+- [Text (Canvas)](https://pixijs.com/8.x/guides/components/scene-objects/text/canvas.md) - Font loading, resolution, dynamic updates
+- [BitmapText](https://pixijs.com/8.x/guides/components/scene-objects/text/bitmap.md) - Bitmap font loading, MSDF fonts, limitations
+- [HTMLText](https://pixijs.com/8.x/guides/components/scene-objects/text/html.md) - HTML markup, tag styles, CSS overrides
+- [Text Style](https://pixijs.com/8.x/guides/components/scene-objects/text/style.md) - Fill, stroke, shadows, and shared styles
+- [SplitText](https://pixijs.com/8.x/guides/components/scene-objects/text/split-text.md) - Per-character and per-word animations
 
 ---
 
-## API Reference
+## API reference
 
-- [Text](https://pixijs.download/release/docs/scene.Text.html)
-- [BitmapText](https://pixijs.download/release/docs/scene.BitmapText.html)
-- [HTMLText](https://pixijs.download/release/docs/scene.HTMLText.html)
-- [TextStyle](https://pixijs.download/release/docs/text.TextStyle.html)
-- [BitmapFont](https://pixijs.download/release/docs/text.BitmapFont.html)
-- [FillStyle](https://pixijs.download/release/docs/scene.FillStyle.html)
-- [StrokeStyle](https://pixijs.download/release/docs/scene.StrokeStyle.html)
+- [`Text`](https://pixijs.download/v8.23.0/docs/scene.Text.html)
+- [`BitmapText`](https://pixijs.download/v8.23.0/docs/scene.BitmapText.html)
+- [`HTMLText`](https://pixijs.download/v8.23.0/docs/scene.HTMLText.html)
+- [`TextStyle`](https://pixijs.download/v8.23.0/docs/text.TextStyle.html)
+- [`BitmapFont`](https://pixijs.download/v8.23.0/docs/text.BitmapFont.html)
+- [`FillStyle`](https://pixijs.download/v8.23.0/docs/scene.FillStyle.html)
+- [`StrokeStyle`](https://pixijs.download/v8.23.0/docs/scene.StrokeStyle.html)

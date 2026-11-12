@@ -1,58 +1,63 @@
-# Background Loader
+# Background loader
 
-PixiJS provides a **background loader** that allows you to load assets in the background while your application is running. This is useful for loading large assets or multiple assets without blocking the main thread. This can help improve the responsiveness of your application, reduce the initial loading time, and potentially void showing multiple loading screens to the user.
+The background loader queues asset downloads at low priority so they happen between frames while your application runs. Assets added to the background queue are **not** downloaded immediately – they are fetched one at a time (or up to the configured concurrency limit) while the main application continues. Only once each item has actually finished downloading is it placed into the regular cache.
 
-## Loading Bundles
+> **Important:** a background‑queued asset is *not* instantly available just because you called `Assets.backgroundLoad`. If you call `Assets.load()` or `Assets.loadBundle()` for the same asset before the background fetch has completed, the loader will treat it as a high‑priority request and perform a fresh download (pausing the background process); the call only resolves instantly when the background load has already finished.
 
-The most effective way to use the background loader is to load bundles of assets. Bundles are groups of assets that are related to each other in some way, such as all the assets for a specific screen or level in your game. By loading bundles in the background, you can ensure that the assets are available when you need them without blocking the main thread.
+## Loading bundles
+
+The most effective way to use the background loader is with bundles. Bundles are groups of related assets, such as all assets for a specific screen or level. Loading bundles in the background ensures assets are ready when needed without blocking the main thread.
 
 ```ts
 const manifest = {
   bundles: [
     {
       name: 'home-screen',
-      assets: [
-        { alias: 'flowerTop', src: 'https://pixijs.com/assets/flowerTop.png' },
-      ],
+      assets: [{ alias: 'flowerTop', src: 'https://pixijs.com/assets/flowerTop.png' }],
     },
     {
       name: 'game-screen',
-      assets: [
-        { alias: 'eggHead', src: 'https://pixijs.com/assets/eggHead.png' },
-      ],
+      assets: [{ alias: 'eggHead', src: 'https://pixijs.com/assets/eggHead.png' }],
     },
   ],
 };
 
-// Initialize the asset system with a manifest
+// Initialize with a manifest
 await Assets.init({ manifest });
 
-// Start loading both bundles in the background
+// Start loading the game screen bundle in the background
 Assets.backgroundLoadBundle(['game-screen']);
 
 // Load only the first screen assets immediately
 const resources = await Assets.loadBundle('home-screen');
 ```
 
-## Loading Individual Assets
+## Loading individual assets
 
-You can also load individual assets in the background using the `Assets.backgroundLoad()` method. This is useful for loading assets that are not part of a bundle or for loading additional assets after the initial load.
+You can also load individual assets in the background using `Assets.backgroundLoad()`:
 
 ```ts
-// Load an individual asset in the background
-Assets.backgroundLoad({
-  alias: 'flowerTop',
-  src: 'https://pixijs.com/assets/flowerTop.png',
-});
+// Register assets first
+Assets.add({ alias: 'flowerTop', src: 'https://pixijs.com/assets/flowerTop.png' });
+Assets.add({ alias: 'eggHead', src: 'https://pixijs.com/assets/eggHead.png' });
 
-// Load another asset in the background
-Assets.backgroundLoad({
-  alias: 'eggHead',
-  src: 'https://pixijs.com/assets/eggHead.png',
-});
+// Load individual assets in the background
+Assets.backgroundLoad(['flowerTop', 'eggHead']);
 ```
 
-## API Reference
+## Checking if an asset is ready
 
-- [Assets](https://pixijs.download/release/docs/assets.Assets.html)
-- [BackgroundLoader](https://pixijs.download/release/docs/assets.BackgroundLoader.html)
+Background-loaded assets may or may not be ready when you need them. Use `Assets.load()` to wait for completion; it returns immediately if the asset is already cached:
+
+```ts
+// Start background loading early
+Assets.backgroundLoadBundle(['game-screen']);
+
+// Later, when the player navigates to the game screen:
+const resources = await Assets.loadBundle('game-screen'); // instant if already loaded
+```
+
+## API reference
+
+- [`Assets`](https://pixijs.download/v8.23.0/docs/assets.Assets.html)
+- [`BackgroundLoader`](https://pixijs.download/v8.23.0/docs/assets.BackgroundLoader.html)

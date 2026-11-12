@@ -1,16 +1,11 @@
 # Render Layers
 
-The PixiJS Layer API provides a powerful way to control the **rendering order** of objects independently of their **logical parent-child relationships** in the scene graph. With RenderLayers, you can decouple how objects are transformed (via their logical parent) from how they are visually drawn on the screen.
+RenderLayers let you control **draw order** independently of the **scene graph hierarchy**. An object keeps its parent's transform (position, scale, rotation) but gets drawn at the layer's position in the render order instead of its own.
 
-Using RenderLayers ensures these elements are visually prioritized while maintaining logical parent-child relationships. Examples include:
-
-- A character with a health bar: Ensure the health bar always appears on top of the world, even if the character moves behind an object.
-
-- UI elements like score counters or notifications: Keep them visible regardless of the game world’s complexity.
-
-- Highlighting Elements in Tutorials: Imagine a tutorial where you need to push back most game elements while highlighting a specific object. RenderLayers can split these visually. The highlighted object can be placed in a foreground layer to be rendered above a push back layer.
-
-This guide explains the key concepts, provides practical examples, and highlights common gotchas to help you use the Layer API effectively.
+Common use cases:
+- **Health bars** that always render above the game world, even when the character moves behind obstacles
+- **UI elements** (score, notifications) that stay on top regardless of scene complexity
+- **Tutorial highlights** where one object renders in the foreground while everything else is pushed back
 
 ---
 
@@ -36,19 +31,23 @@ This guide explains the key concepts, provides practical examples, and highlight
 
 ### **Basic API Usage**
 
-First lets create two items that we want to render, red guy and blue guy.
+First let's create two items that we want to render, red guy and blue guy.
 
 ```typescript
-const redGuy = new PIXI.Sprite('red guy');
+import { Sprite, Texture, RenderLayer } from 'pixi.js';
+
+const texture = Texture.WHITE; // placeholder for your own texture
+
+const redGuy = new Sprite(texture);
 redGuy.tint = 0xff0000;
 
-const blueGuy = new PIXI.Sprite('blue guy');
+const blueGuy = new Sprite(texture);
 blueGuy.tint = 0x0000ff;
 
 stage.addChild(redGuy, blueGuy);
 ```
 
-![alt text](render-layers/image-1.png)
+![alt text](https://pixijs.com/8.x/guides/_media/__docs__/media/image-1.png)
 
 Now we know that red guy will be rendered first, then blue guy. Now in this simple example you could get away with just sorting the `zIndex` of the red guy and blue guy to help reorder.
 
@@ -63,7 +62,7 @@ stage.addChild(layer);
 layer.attach(redGuy);
 ```
 
-![alt text](render-layers/image-2.png)
+![alt text](https://pixijs.com/8.x/guides/_media/__docs__/media/image-2.png)
 
 So now our scene graph order is:
 
@@ -86,15 +85,15 @@ And our render order is:
 
 This happens because the layer is now the last child in the stage. Since the red guy is attached to the layer, it will be rendered at the layer's position in the scene graph. However, it still logically remains in the same place in the scene hierarchy.
 
-#### **3. Removing Objects from a Layer**
+#### **Removing Objects from a Layer**
 
-Now let's remove the red guy from the layer. To stop an object from being rendered in a layer, use `removeFromLayer`. Once removed from the layer, its still going to be in the scene graph, and will be rendered in its scene graph order.
+Now let's remove the red guy from the layer. To stop an object from being rendered in a layer, use `detach`. Once removed from the layer, it's still going to be in the scene graph, and will be rendered in its scene graph order.
 
 ```typescript
 layer.detach(redGuy); //  Stop rendering the rect via the layer
 ```
 
-![alt text](render-layers/image-1.png)
+![alt text](https://pixijs.com/8.x/guides/_media/__docs__/media/image-1.png)
 
 Removing an object from its logical parent (`removeChild`) automatically removes it from the layer.
 
@@ -102,7 +101,7 @@ Removing an object from its logical parent (`removeChild`) automatically removes
 stage.removeChild(redGuy); // if the red guy was removed from the stage, it will also be removed from the layer
 ```
 
-![alt text](render-layers/image-3.png)
+![alt text](https://pixijs.com/8.x/guides/_media/__docs__/media/image-3.png)
 
 However, if you remove the red guy from the stage and then add it back to the stage, it will not be added to the layer again.
 
@@ -111,7 +110,7 @@ However, if you remove the red guy from the stage and then add it back to the st
 stage.addChildAt(redGuy, 0);
 ```
 
-![alt text](render-layers/image-1.png)
+![alt text](https://pixijs.com/8.x/guides/_media/__docs__/media/image-1.png)
 
 You will need to reattach it to the layer yourself.
 
@@ -119,11 +118,11 @@ You will need to reattach it to the layer yourself.
 layer.attach(redGuy); // re attach it to the layer again!
 ```
 
-![alt text](render-layers/image-2.png)
+![alt text](https://pixijs.com/8.x/guides/_media/__docs__/media/image-2.png)
 
-This may seem like a pain, but it's actually a good thing. It means that you have full control over the render order of the object, and you can change it at any time. It also means you can't accidentally add an object to a container and have it automatically re-attach to a layer that may or may not still be around - it would be quite confusing and lead to some very hard to debug bugs!
+This is intentional. Automatic re-attachment would cause subtle bugs: an object could silently rejoin a layer that was already removed from the scene. Explicit `layer.attach()` calls keep the render order predictable and debuggable.
 
-#### **5. Layer Position in Scene Graph**
+#### **Layer Position in Scene Graph**
 
 The layer’s position in the scene graph determines its render priority relative to other layers and objects.
 
@@ -132,14 +131,14 @@ The layer’s position in the scene graph determines its render priority relativ
 stage.addChildAt(layer, 0);
 ```
 
-## ![alt text](render-layers/image-1.png)
+![alt text](https://pixijs.com/8.x/guides/_media/__docs__/media/image-1.png)
 
 ### **Complete Example**
 
-Here’s a real-world example that shows how to use RenderLayers to set ap player ui on top of the world.
+Here's a real-world example that shows how to use RenderLayers to set a player UI on top of the world.
 
-```ts
-// description: This example demonstrates the use of RenderLayer to manage the rendering order of UI elements in a scene with multiple sprites and filters using PixiJS.
+```js
+// index.js
 import {
   Application,
   Assets,
@@ -256,51 +255,8 @@ import { Fish } from './Fish';
 })();
 ```
 
-```ts
-import { Container, Sprite } from 'pixi.js';
-import { CharacterUI } from './CharacterUI';
-
-export class Fish extends Container {
-  ui;
-  _speed = 1 + Number(Math.random());
-  _direction = Math.random() * Math.PI * 2;
-  fishView;
-
-  constructor(name, texture) {
-    super();
-
-    this.fishView = new Sprite(texture);
-
-    this.fishView.anchor.set(0.5);
-
-    this.addChild(this.fishView);
-
-    this.ui = new CharacterUI(name, 20);
-    this.ui.y = 0;
-    this.addChild(this.ui);
-  }
-
-  update() {
-    this._direction += 0.001;
-
-    this.fishView.rotation = Math.PI - this._direction;
-    this.x += this._speed * Math.cos(-this._direction);
-    this.y += this._speed * Math.sin(-this._direction);
-
-    // wrap around the screen
-    const padding = 100;
-    const width = 630;
-    const height = 410;
-
-    if (this.x > width + padding) this.x -= width + padding * 2;
-    if (this.x < -padding) this.x += width + padding * 2;
-    if (this.y > height + padding) this.y -= height + padding * 2;
-    if (this.y < -padding) this.y += height + padding * 2;
-  }
-}
-```
-
-```ts
+```js
+// CharacterUI.js
 import { Container, Graphics, Text } from 'pixi.js';
 
 export class CharacterUI extends Container {
@@ -333,6 +289,53 @@ export class CharacterUI extends Container {
   }
 }
 ```
+
+```js
+// Fish.js
+import { Container, Sprite } from 'pixi.js';
+import { CharacterUI } from './CharacterUI';
+
+export class Fish extends Container {
+  ui;
+  _speed = 1 + Number(Math.random());
+  _direction = Math.random() * Math.PI * 2;
+  fishView;
+
+  constructor(name, texture) {
+    super();
+
+    this.fishView = new Sprite(texture);
+
+    this.fishView.anchor.set(0.5);
+
+    this.addChild(this.fishView);
+
+    this.ui = new CharacterUI(name);
+    this.ui.y = 0;
+    this.addChild(this.ui);
+  }
+
+  update() {
+    this._direction += 0.001;
+
+    this.fishView.rotation = Math.PI - this._direction;
+    this.x += this._speed * Math.cos(-this._direction);
+    this.y += this._speed * Math.sin(-this._direction);
+
+    // wrap around the screen
+    const padding = 100;
+    const width = 630;
+    const height = 410;
+
+    if (this.x > width + padding) this.x -= width + padding * 2;
+    if (this.x < -padding) this.x += width + padding * 2;
+    if (this.y > height + padding) this.y -= height + padding * 2;
+    if (this.y < -padding) this.y += height + padding * 2;
+  }
+}
+```
+
+<br />
 
 ---
 

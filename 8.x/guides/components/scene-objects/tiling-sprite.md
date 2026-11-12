@@ -1,6 +1,6 @@
 # Tiling Sprite
 
-A `TilingSprite` is a high-performance way to render a repeating texture across a rectangular area. Instead of stretching the texture, it repeats (tiles) it to fill the given space, making it ideal for backgrounds, parallax effects, terrain, and UI panels.
+`TilingSprite` repeats a texture across a rectangular area instead of stretching it. Scrolling the tile offset each frame creates parallax backgrounds; scaling the tiles creates zoom effects. Common uses: scrolling backgrounds, terrain, tiled floors, and repeating UI patterns.
 
 ```ts
 import { TilingSprite, Texture } from 'pixi.js';
@@ -14,14 +14,14 @@ const tilingSprite = new TilingSprite({
 app.stage.addChild(tilingSprite);
 ```
 
-## What is a TilingSprite?
+## How it works
 
-- It draws a texture repeatedly across a defined area.
-- The texture is not scaled by default unless you adjust `tileScale`.
-- The sprite's overall `width` and `height` determine how much area the tiles fill, independent of the texture's native size.
-- The pattern's offset, scale, and rotation can be controlled independently of the object's transform.
+- `width` and `height` control the visible area. Making them larger shows more tiles, not bigger tiles.
+- `tilePosition` offsets the pattern. Animate it to create scrolling effects.
+- `tileScale` resizes each tile. `tileScale.set(2)` makes tiles twice as large (so fewer fit).
+- `tileRotation` rotates the pattern independently of the sprite's own rotation.
 
-## Key Properties
+## Key properties
 
 | Property               | Description                                                            |
 | ---------------------- | ---------------------------------------------------------------------- |
@@ -34,7 +34,7 @@ app.stage.addChild(tilingSprite);
 | `applyAnchorToTexture` | If `true`, the anchor affects the starting point of the tiling pattern |
 | `clampMargin`          | Margin adjustment to avoid edge artifacts (default: `0.5`)             |
 
-### Width & Height vs Scale
+### Width and height vs scale
 
 Unlike `Sprite`, setting `width` and `height` in a `TilingSprite` directly changes the visible tiling area. It **does not affect the scale** of the tiles.
 
@@ -53,7 +53,23 @@ To scale the tile pattern itself, use `tileScale`:
 tilingSprite.tileScale.set(2, 2);
 ```
 
-### Anchor and applyAnchorToTexture
+### Scrolling background example
+
+```ts
+const bg = new TilingSprite({
+  texture: Texture.from('sky.png'),
+  width: app.screen.width,
+  height: app.screen.height,
+});
+
+app.stage.addChild(bg);
+
+app.ticker.add(() => {
+  bg.tilePosition.x -= 1; // Scroll left each frame
+});
+```
+
+### Anchor and `applyAnchorToTexture`
 
 - `anchor` sets the pivot/origin point for positioning the TilingSprite.
 - If `applyAnchorToTexture` is `true`, the anchor also affects where the tile pattern begins.
@@ -61,7 +77,7 @@ tilingSprite.tileScale.set(2, 2);
 
 ---
 
-## API Reference
+## API reference
 
-- [TilingSprite](https://pixijs.download/release/docs/scene.TilingSprite.html)
-- [Texture](https://pixijs.download/release/docs/rendering.Texture.html)
+- [`TilingSprite`](https://pixijs.download/v8.23.0/docs/scene.TilingSprite.html)
+- [`Texture`](https://pixijs.download/v8.23.0/docs/rendering.Texture.html)

@@ -1,10 +1,9 @@
 # Particle Container
 
-PixiJS v8 introduces a high-performance particle system via the `ParticleContainer` and `Particle` classes. Designed for rendering vast numbers of lightweight visuals—like sparks, bubbles, bunnies, or explosions—this system provides raw speed by stripping away all non-essential overhead.
+PixiJS v8 includes a high-performance particle system via the `ParticleContainer` and `Particle` classes. Designed for rendering vast numbers of lightweight visuals (sparks, bubbles, explosions), this system provides raw speed by stripping away non-essential overhead.
 
-:::warning **Experimental API Notice**
-The Particle API is stable but **experimental**. Its interface may evolve in future PixiJS versions. We welcome feedback to help guide its development.
-:::
+> [!WARNING]
+> The Particle API is stable but **experimental**. Its interface may evolve in future PixiJS versions. We welcome feedback to help guide its development.
 
 ```ts
 import { ParticleContainer, Particle, Texture } from 'pixi.js';
@@ -33,13 +32,13 @@ for (let i = 0; i < 100000; i++) {
 app.stage.addChild(container);
 ```
 
-## **Why Use ParticleContainer?**
+## Why use ParticleContainer?
 
-- **Extreme performance**: Render hundreds of thousands or even millions of particles with high FPS.
-- **Lightweight design**: Particles are more efficient than `Sprite`, lacking extra features like children, events, or filters.
-- **Fine-grained control**: Optimize rendering by declaring which properties are dynamic (updated every frame) or static (set once).
+- **Extreme performance**: Render hundreds of thousands or millions of particles at high FPS.
+- **Lightweight design**: Particles are more efficient than `Sprite`, lacking children, events, or filters.
+- **Fine-grained GPU uploads**: You declare which properties change per frame (`dynamic`) vs which are set once (`static`). Only dynamic properties are uploaded to the GPU each frame, reducing bandwidth.
 
-### **Performance Tip: Static vs. Dynamic**
+### Performance tip: static vs dynamic
 
 - **Dynamic properties** are uploaded to the GPU every frame.
 - **Static properties** are uploaded only when `update()` is called.
@@ -63,31 +62,28 @@ If you later modify a static property or the particle list, you must call:
 container.update();
 ```
 
-## **Limitations and API Differences**
+## Limitations and API differences
 
 `ParticleContainer` is designed for speed and simplicity. As such, it doesn't support the full `Container` API:
 
-### ❌ Not Available:
+`ParticleContainer` uses a separate child management API optimized for GPU buffer updates:
 
-- `addChild()`, `removeChild()`
-- `getChildAt()`, `setChildIndex()`
-- `swapChildren()`, `reparentChild()`
+| Standard Container method | ParticleContainer equivalent |
+| --- | --- |
+| `addChild(child)` | `addParticle(particle)` |
+| `removeChild(child)` | `removeParticle(particle)` |
+| `addChildAt(child, index)` | `addParticleAt(particle, index)` |
+| `removeChildAt(index)` | `removeParticleAt(index)` |
+| `removeChildren(begin, end)` | `removeParticles(begin, end)` |
+| `getChildAt(index)` | Access `container.particleChildren[index]` directly |
+| `swapChildren()` | Not available |
+| `reparentChild()` | Not available |
 
-### ✅ Use Instead:
+## Creating a particle
 
-- `addParticle(particle)`
-- `removeParticle(particle)`
-- `removeParticles(beginIndex, endIndex)`
-- `addParticleAt(particle, index)`
-- `removeParticleAt(index)`
+A `Particle` supports key display properties and is far more efficient than `Sprite`.
 
-These methods operate on the `.particleChildren` array and maintain the internal GPU buffers correctly.
-
-## **Creating a Particle**
-
-A `Particle` supports key display properties, and is far more efficient than `Sprite`.
-
-### **Particle Example**
+### Particle example
 
 ```ts
 const particle = new Particle({
@@ -108,9 +104,22 @@ You can also use the shorthand:
 const particle = new Particle(Texture.from('spark.png'));
 ```
 
+## Inherited properties
+
+A `ParticleContainer` is a normal scene object, so `alpha`, `tint`, and `blendMode` set on it or on any ancestor apply to every particle it renders. Each particle's own `alpha` and `tint` multiply on top of that.
+
+```ts
+const group = new Container();
+group.alpha = 0.5;
+group.tint = 0xff0000;
+group.addChild(particleContainer); // every particle renders at half alpha with a red tint
+```
+
+`blendMode` defaults to `'inherit'`, so the container takes the blend mode of its nearest ancestor that sets one. Set `particleContainer.blendMode` directly to override it. All particles in a container share one blend mode.
+
 ---
 
-## **API Reference**
+## API reference
 
-- [ParticleContainer](https://pixijs.download/release/docs/scene.ParticleContainer.html)
-- [Particle](https://pixijs.download/release/docs/scene.Particle.html)
+- [`ParticleContainer`](https://pixijs.download/v8.23.0/docs/scene.ParticleContainer.html)
+- [`Particle`](https://pixijs.download/v8.23.0/docs/scene.Particle.html)

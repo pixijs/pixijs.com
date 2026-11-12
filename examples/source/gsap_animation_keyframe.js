@@ -54,9 +54,7 @@ import { DropShadowFilter } from 'pixi-filters';
       easeEach: 'power2.inOut', // <- ease between each keyframe (defaults to "power1.inOut")
     },
     rotation: 180 * DEG_TO_RAD,
-    /**
-     * the "normal" part of the tween. In this case, it affects "rotate" because it's outside the keyframes
-     */
+    /** the "normal" part of the tween. In this case, it affects "rotate" because it's outside the keyframes */
     ease: 'elastic',
     duration: 5,
     stagger: 0.2,

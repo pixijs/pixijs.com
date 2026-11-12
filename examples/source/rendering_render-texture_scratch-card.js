@@ -65,7 +65,6 @@ import {
         container: brush,
         target: renderTexture,
         clear: false,
-        skipUpdateTransform: false,
       });
       // Smooth out the drawing a little bit to make it look nicer
       // this connects the previous drawn point to the current one
@@ -80,7 +79,6 @@ import {
           container: line,
           target: renderTexture,
           clear: false,
-          skipUpdateTransform: false,
         });
       }
       lastDrawnPoint = lastDrawnPoint || new Point();

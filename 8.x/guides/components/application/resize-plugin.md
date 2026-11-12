@@ -1,14 +1,14 @@
 # Resize Plugin
 
-The `ResizePlugin` provides automatic resizing functionality for PixiJS applications. When enabled, it listens to window or element resize events and resizes the application's renderer accordingly.
+The [`ResizePlugin`](https://pixijs.download/v8.23.0/docs/app.ResizePlugin.html) auto-resizes PixiJS applications. It listens to window or element resize events and adjusts the renderer to match.
 
-This is useful for:
+Useful for:
 
 - Making the canvas responsive to the browser window
-- Maintaining aspect ratio or fitting to containers
+- Fitting to container elements
 - Handling layout changes without manual resize calls
 
-By default, PixiJS adds this plugin when initializing an `Application`, but you can also register it manually if you're using a custom setup.
+PixiJS includes this plugin by default when initializing an [`Application`](https://pixijs.download/v8.23.0/docs/app.Application.html). You can also register it manually for custom setups.
 
 ---
 
@@ -26,14 +26,14 @@ await app.init({
 });
 ```
 
-### Default Behavior
+### Default behavior
 
-- When using `Application.init()` with no overrides, the `ResizePlugin` is installed automatically:
-- When `resizeTo` is set, the renderer automatically adjusts to match the dimensions of the target (`window` or `HTMLElement`).
-- Resizing is throttled using `requestAnimationFrame` to prevent performance issues during rapid resize events.
+- The `ResizePlugin` is installed automatically with `Application.init()`.
+- When `resizeTo` is set, the renderer adjusts to match the target (`window` or `HTMLElement`).
+- Resizing is throttled with `requestAnimationFrame` to avoid performance issues during rapid resize events.
 - You can trigger a resize manually with `app.resize()` or cancel a scheduled resize with `app.cancelResize()`.
 
-### Manual Registration
+### Manual registration
 
 If you're managing extensions manually:
 
@@ -43,9 +43,9 @@ import { extensions, ResizePlugin } from 'pixi.js';
 extensions.add(ResizePlugin);
 ```
 
-### Custom Resize Target
+### Custom resize target
 
-You can specify a custom target for resizing. This is useful if you want to resize the canvas to fit a specific element rather than the entire window.
+Resize the canvas to fit a specific element instead of the window:
 
 ```ts
 await app.init({
@@ -53,8 +53,38 @@ await app.init({
 });
 ```
 
+### Changing the resize target at runtime
+
+You can reassign `resizeTo` after initialization:
+
+```ts
+app.resizeTo = window;                                      // resize to window
+app.resizeTo = document.getElementById('game-container');    // resize to an element
+app.resizeTo = null;                                         // disable auto-resize
+```
+
+Setting `resizeTo` removes the previous listener and attaches a new one to the given target. Setting it to `null` removes the listener entirely; the canvas stays at its current size until you resize it manually with `app.resize()` or set a new `resizeTo` target.
+
+### Queuing and canceling resizes
+
+The plugin throttles resize events so only one resize fires per animation frame:
+
+```ts
+app.queueResize();   // schedule a resize for the next frame
+app.cancelResize();  // cancel a pending resize
+```
+
+This is handled automatically when the window or element emits a `resize` event. You only need to call these methods when triggering resizes from your own code.
+
 ---
 
-## API Reference
+## How it works
 
-- [`ResizePlugin`](https://pixijs.download/release/docs/app.ResizePlugin.html)
+When the `resizeTo` target is `window`, the plugin reads `innerWidth` and `innerHeight`. For an `HTMLElement`, it reads `clientWidth` and `clientHeight`. The renderer is resized to those dimensions, then a render pass runs to reflect the new size.
+
+---
+
+## API reference
+
+- [`ResizePlugin`](https://pixijs.download/v8.23.0/docs/app.ResizePlugin.html)
+- [`ResizePluginOptions`](https://pixijs.download/v8.23.0/docs/app.ResizePluginOptions.html)

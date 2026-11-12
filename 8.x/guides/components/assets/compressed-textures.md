@@ -1,21 +1,19 @@
-# Compressed Textures
+# Compressed textures
 
-Compressed textures significantly reduce memory usage and GPU upload time, especially on mobile devices or lower-end hardware. PixiJS supports multiple compressed texture formats, but **you must configure the appropriate loaders** before using them.
+Compressed textures use 4-8x less GPU memory than standard PNG/JPG textures and upload faster, especially on mobile devices or lower-end hardware. PixiJS supports multiple compressed texture formats, but **you must register the appropriate loaders** before using them.
 
-## Supported Compressed Texture Formats
+## Supported formats
 
-PixiJS provides built-in support for several widely-used compressed texture formats:
+| Format    | File Extension | Best for                          | Description                                                         |
+| --------- | -------------- | --------------------------------- | ------------------------------------------------------------------- |
+| **DDS**   | `.dds`         | Desktop, S3TC hardware            | DirectDraw Surface format, supports DXT variants (S3TC)             |
+| **KTX**   | `.ktx`         | Mobile (ETC2/ASTC)                | Khronos format, supports ETC and other schemes                      |
+| **KTX2**  | `.ktx2`        | Cross-platform (recommended)      | Supports Basis Universal and supercompressed formats                |
+| **Basis** | `.basis`       | Cross-platform, smallest files    | Highly compressed format that transcodes to multiple GPU formats    |
 
-| Format    | File Extension | Description                                                             |
-| --------- | -------------- | ----------------------------------------------------------------------- |
-| **DDS**   | `.dds`         | DirectDraw Surface format, supports DXT variants (S3TC)                 |
-| **KTX**   | `.ktx`         | Khronos format, supports ETC and other schemes                          |
-| **KTX2**  | `.ktx2`        | Modern container supporting Basis Universal and Supercompressed formats |
-| **Basis** | `.basis`       | Highly compressed format that can transcode to multiple GPU formats     |
+## Registering loaders
 
-## Registering Loaders
-
-PixiJS does **not automatically include compressed texture support**. To use these formats, you must explicitly import the necessary loaders before loading any assets:
+PixiJS does **not include compressed texture support by default**. Import the loaders you need before loading any assets:
 
 ```ts
 import 'pixi.js/dds';
@@ -24,36 +22,35 @@ import 'pixi.js/ktx2';
 import 'pixi.js/basis';
 ```
 
-:::info
-You only need to import the loaders for the formats you're using. These imports must run **before** any call to `Assets.load`.
-:::
+> [!NOTE]
+> You only need to import loaders for the formats you use. These imports must run **before** any call to `Assets.load`.
 
-## Using Compressed Textures in Assets
+## Using compressed textures
 
-Once loaders are registered, you can load compressed textures just like any other asset:
+Once loaders are registered, load compressed textures like any other asset:
 
 ```ts
-import 'pixi.js/ktx2'; // Import the KTX2 loader
+import 'pixi.js/ktx2';
 import { Assets } from 'pixi.js';
 
 await Assets.load('textures/background.ktx2');
 ```
 
-PixiJS will parse and upload the texture using the correct loader and GPU-compatible transcoding path based on the user's device.
+PixiJS parses and uploads the texture using the correct loader and GPU-compatible transcoding path based on the user's device.
 
 ---
 
 ## Integration with AssetPack
 
-[**AssetPack**](https://pixijs.io/assetpack) supports automatic generation of compressed texture variants during the build step. You can:
+[**AssetPack**](https://pixijs.io/assetpack) supports automatic generation of compressed texture variants during your build step. You can:
 
-- Convert `.png` or `.jpg` files into `.basis`, `.ktx2`, or `.dds` formats.
-- Reference compressed files in your manifest using the same aliases or wildcard patterns.
-- Use the **same manifest and loading workflow** — PixiJS will resolve and load the best available variant based on the device.
+- Convert `.png` or `.jpg` files into `.basis`, `.ktx2`, or `.dds` formats
+- Reference compressed files in your manifest using the same aliases or wildcard patterns
+- Use the same manifest and loading workflow; PixiJS resolves and loads the best variant based on the device
 
 ### Example
 
-Your manifest might include:
+Your manifest can include multiple format candidates:
 
 ```json
 {
@@ -71,4 +68,4 @@ Your manifest might include:
 }
 ```
 
-PixiJS will try to load `bg.ktx2` or `bg.basis` first if the device supports it, falling back to `bg.png` as needed.
+PixiJS tries to load `bg.ktx2` or `bg.basis` first if the device supports it, falling back to `bg.png` as needed.

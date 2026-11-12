@@ -1,8 +1,6 @@
-# Text Style
+# Text style
 
-The `TextStyle` class encapsulates all visual styling properties for text. You can define colors, font families, stroke, shadows, alignment, line spacing, word wrapping, and more.
-
-A `TextStyle` instance can be reused across multiple `Text` objects, making your code cleaner and improving memory efficiency.
+`TextStyle` controls how text looks: font, color, stroke, shadow, alignment, word wrap, line spacing. One `TextStyle` can be shared across multiple `Text` objects; changing the style updates all text that uses it.
 
 ```ts
 import { TextStyle } from 'pixi.js';
@@ -28,9 +26,29 @@ const label = new Text({
 });
 ```
 
-## Fill and Stroke
+## Sharing a style
 
-Using fills and strokes are identical to that of the `Graphics` class. You can find more details about them in the [Graphics Fills](../graphics/graphics-fill.md) section.
+One `TextStyle` instance can drive many text objects. Each text object listens to the style's `update` event, so editing the style re-renders all of them.
+
+```ts
+const style = new TextStyle({ fontSize: 24, fill: '#ffffff' });
+
+const title = new Text({ text: 'Title', style });
+const score = new BitmapText({ text: 'Score: 0', style });
+
+style.fontSize = 32; // both re-render
+```
+
+Destroying a text object detaches it from the style and leaves the style alive for the others. Pass `style: true` (or `true`) to `destroy()` only when nothing else uses the style, because that destroys the shared instance for everyone.
+
+```ts
+title.destroy(); // detaches from `style`; `score` keeps using it
+title.destroy({ style: true }); // also destroys `style` (breaks `score`)
+```
+
+## Fill and stroke
+
+Fills and strokes work the same way as in the `Graphics` class. See [Graphics fills](https://pixijs.com/8.x/guides/components/scene-objects/graphics/graphics-fill.md) for details.
 
 ```ts
 // Using a number
@@ -43,8 +61,7 @@ const fill = '#ff0000';
 const fill = [255, 0, 0];
 
 // Using a Color object
-const color = new Color();
-const obj4 = color;
+const fill = new Color('red');
 
 // Using a gradient
 const fill = new FillGradient({
@@ -56,8 +73,8 @@ const fill = new FillGradient({
 });
 
 // Using a pattern
-const txt = await Assets.load('https://pixijs.com/assets/bg_scene_rotate.jpg');
-const fill = new FillPattern(txt, 'repeat');
+const texture = await Assets.load<Texture>('https://pixijs.com/assets/bg_scene_rotate.jpg');
+const fill = new FillPattern({ texture, repetition: 'repeat' });
 
 // Use the fill in a TextStyle
 const style = new TextStyle({
@@ -70,9 +87,9 @@ const style = new TextStyle({
 });
 ```
 
-## Drop Shadow
+## Drop shadow
 
-In v8 `dropShadow` and its properties are now objects. To update a drop shadow, you can set the properties directly on the `dropShadow` object.
+In v8, `dropShadow` is a configuration object (not individual flat properties like in v7). You can modify individual shadow properties after creation:
 
 ```ts
 const style = new TextStyle({
@@ -90,11 +107,11 @@ style.dropShadow.color = '#ff0000'; // Change shadow color
 
 ---
 
-## **API Reference**
+## API reference
 
-- [TextStyle](https://pixijs.download/release/docs/text.TextStyle.html)
-- [Text](https://pixijs.download/release/docs/scene.Text.html)
-- [BitmapText](https://pixijs.download/release/docs/scene.BitmapText.html)
-- [HTMLText](https://pixijs.download/release/docs/scene.HTMLText.html)
-- [FillStyle](https://pixijs.download/release/docs/scene.FillStyle.html)
-- [StrokeStyle](https://pixijs.download/release/docs/scene.StrokeStyle.html)
+- [`TextStyle`](https://pixijs.download/v8.23.0/docs/text.TextStyle.html)
+- [`Text`](https://pixijs.download/v8.23.0/docs/scene.Text.html)
+- [`BitmapText`](https://pixijs.download/v8.23.0/docs/scene.BitmapText.html)
+- [`HTMLText`](https://pixijs.download/v8.23.0/docs/scene.HTMLText.html)
+- [`FillStyle`](https://pixijs.download/v8.23.0/docs/scene.FillStyle.html)
+- [`StrokeStyle`](https://pixijs.download/v8.23.0/docs/scene.StrokeStyle.html)

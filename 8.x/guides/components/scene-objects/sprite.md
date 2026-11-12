@@ -1,6 +1,6 @@
 # Sprite
 
-Sprites are the foundational visual elements in PixiJS. They represent a single image to be displayed on the screen. Each [Sprite](https://pixijs.download/release/docs/scene.Sprite.html) contains a [Texture](https://pixijs.download/release/docs/rendering.Texture.html) to be drawn, along with all the transformation and display state required to function in the scene graph.
+A `Sprite` displays a single image (texture) on screen. It's the most common way to show images in PixiJS: load a texture, create a sprite, add it to the stage.
 
 ```ts
 import { Assets, Sprite } from 'pixi.js';
@@ -13,6 +13,8 @@ sprite.position.set(100, 100);
 sprite.scale.set(2);
 sprite.rotation = Math.PI / 4; // Rotate 45 degrees
 ```
+
+Use `Sprite` when you need to display a single image or spritesheet frame. For repeating textures, see [TilingSprite](https://pixijs.com/8.x/guides/components/scene-objects/tiling-sprite.md). For scalable UI panels, see [NineSliceSprite](https://pixijs.com/8.x/guides/components/scene-objects/nine-slice-sprite.md).
 
 ## Updating the Texture
 
@@ -27,25 +29,25 @@ const texture = Assets.get('path/to/image.png');
 sprite.texture = texture;
 ```
 
-## **Scale vs Width/Height**
+## Scale vs width/height
 
-Sprites inherit `scale` from `Container`, allowing for percentage-based resizing:
+There are two ways to resize a sprite:
+
+- **`scale`**: Multiplier relative to the texture's original size. `scale.set(2)` doubles it.
+- **`width` / `height`**: Set an absolute pixel size. These are convenience setters that compute the corresponding scale for you.
 
 ```ts
 sprite.scale.set(2); // Double the size
+
+sprite.width = 100; // Sets scale.x = 100 / texture.orig.width
 ```
 
-Sprites also have `width` and `height` properties that act as _convenience setters_ for `scale`, based on the texture’s dimensions:
-
-```ts
-sprite.width = 100; // Automatically updates scale.x
-// sets: sprite.scale.x = 100 / sprite.texture.orig.width;
-```
+Setting `width` recalculates `scale.x`, and vice versa. They're two views of the same value.
 
 ---
 
-## API Reference
+## API reference
 
-- [Sprite](https://pixijs.download/release/docs/scene.Sprite.html)
-- [Texture](https://pixijs.download/release/docs/rendering.Texture.html)
-- [Assets](https://pixijs.download/release/docs/assets.Assets.html)
+- [`Sprite`](https://pixijs.download/v8.23.0/docs/scene.Sprite.html)
+- [`Texture`](https://pixijs.download/v8.23.0/docs/rendering.Texture.html)
+- [`Assets`](https://pixijs.download/v8.23.0/docs/assets.Assets.html)

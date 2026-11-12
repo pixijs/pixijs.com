@@ -34,11 +34,19 @@ Every callback receives the current `Ticker` instance. You can access `ticker.de
 
 ## Step 2: Updating the Scene Graph
 
-PixiJS uses a hierarchical **scene graph** to represent all visual objects. Before rendering, the graph needs to be traversed to:
+PixiJS uses a hierarchical [scene graph](https://pixijs.com/8.x/guides/concepts/scene-graph.md) to represent all visual objects. Before rendering, the engine traverses the tree to:
 
-- Recalculate transforms (world matrix updates)
-- Apply custom logic via `onRender` handlers
-- Apply culling if enabled
+- Recalculate world transforms (position, rotation, scale propagated from parent to child)
+- Run `onRender` callbacks on individual display objects
+- Skip off-screen objects if [culling](https://pixijs.com/8.x/guides/concepts/scene-graph.md#culling) is enabled
+
+The `onRender` hook lets you attach per-frame logic directly to a display object, as an alternative to a global ticker callback:
+
+```ts
+sprite.onRender = () => {
+  sprite.rotation += 0.01;
+};
+```
 
 ## Step 3: Rendering the Scene
 
@@ -55,18 +63,45 @@ Rendering is done via either WebGL or WebGPU, depending on your environment. The
 
 ## Full Frame Lifecycle Diagram
 
-```plaintext
+```
 requestAnimationFrame
         │
     [Ticker._tick()]
         │
     ├─ Compute elapsed time
-    ├─ Call user listeners
-    │   └─ sprite.onRender
-    ├─ Cull display objects (if enabled)
+    ├─ Call user ticker listeners
     ├─ Update world transforms
+    │   └─ sprite.onRender (called per-object during traversal)
+    ├─ Cull display objects (if enabled)
     └─ Render stage
             ├─ Traverse display list
             ├─ Upload data to GPU
             └─ Draw
+```
+
+## Controlling the Loop
+
+You can pause the loop by stopping the ticker, and resume it later:
+
+```ts
+app.ticker.stop();  // Pause rendering
+app.ticker.start(); // Resume rendering
+```
+
+To cap the frame rate (useful for reducing battery usage on mobile):
+
+```ts
+app.ticker.maxFPS = 30; // Cap at 30 FPS
+```
+
+For manual rendering without a ticker at all:
+
+```ts
+app.ticker.stop();
+
+function customLoop() {
+  requestAnimationFrame(customLoop);
+  app.renderer.render(app.stage);
+}
+customLoop();
 ```

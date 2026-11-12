@@ -1,34 +1,36 @@
 # Text (Canvas)
 
-The `Text` class in PixiJS allows you to render styled, dynamic strings as display objects in your scene. Under the hood, PixiJS rasterizes the text using the browser’s canvas text API, then converts that into a texture. This makes `Text` objects behave like sprites: they can be moved, rotated, scaled, masked, and rendered efficiently.
+The `Text` class renders styled strings by rasterizing them through the browser's Canvas 2D text API, then uploading the result as a GPU texture. The text behaves like a sprite after that: you can move, rotate, scale, and mask it.
+
+The tradeoff: every time you change the text string or style, PixiJS must re-rasterize and re-upload. This makes `Text` a poor choice for content that changes every frame (use [BitmapText](https://pixijs.com/8.x/guides/components/scene-objects/text/bitmap.md) instead).
 
 ```ts
 import { Text, TextStyle, Assets } from 'pixi.js';
 
 // Load font before use
 await Assets.load({
-  src: 'my-font.woff2',
-  data: {
-    family: 'MyFont', // optional
-  },
+    src: 'my-font.woff2',
+    data: {
+        family: 'MyFont', // optional
+    }
 });
 
 const myText = new Text({
-  text: 'Hello PixiJS!',
-  style: {
-    fill: '#ffffff',
-    fontSize: 36,
-    fontFamily: 'MyFont',
-  },
-  anchor: 0.5,
+    text: 'Hello PixiJS!',
+    style: {
+      fill: '#ffffff',
+      fontSize: 36,
+      fontFamily: 'MyFont',
+    },
+    anchor: 0.5
 });
 
 app.stage.addChild(myText);
 ```
 
-## Text Styling
+## Text styling
 
-The `TextStyle` class allows you to customize the appearance of your text. You can set properties like:
+The `TextStyle` class customizes text appearance. Available properties include:
 
 - `fontFamily`
 - `fontSize`
@@ -37,9 +39,9 @@ The `TextStyle` class allows you to customize the appearance of your text. You c
 - `align`
 - `stroke` (outline)
 
-See the guide on [TextStyle](./style.md) for more details.
+See the guide on [TextStyle](https://pixijs.com/8.x/guides/components/scene-objects/text/style.md) for more details.
 
-## **Changing Text Dynamically**
+## Changing text dynamically
 
 You can update the text string or its style at runtime:
 
@@ -48,35 +50,53 @@ text.text = 'Updated!';
 text.style.fontSize = 40; // Triggers re-render
 ```
 
-:::warning
-Changing text or style re-rasterizes the object. Avoid doing this every frame unless necessary.
-:::
+> [!WARNING]
+> Changing text or style re-rasterizes the object. Avoid doing this every frame unless necessary.
 
-## Text Resolution
+## Text resolution
 
-The `resolution` property of the `Text` class determines the pixel density of the rendered text. By default, it uses the resolution of the renderer.
+The `resolution` property determines the pixel density of rendered text. It defaults to the renderer's resolution.
 
-However, you can set text resolution independently from the renderer for sharper text, especially on high-DPI displays.
+You can set text resolution independently for sharper text on high-DPI displays.
 
 ```ts
-const myText = new Text('Hello', {
-  resolution: 2, // Higher resolution for sharper text
+const myText = new Text({
+  text: 'Hello',
+  resolution: 2, // Higher resolution for sharper text,
+  style: {}
 });
 
 // change resolution
 myText.resolution = 1; // Reset to default
 ```
 
-## Font Loading
+## Mipmaps
 
-PixiJS supports loading custom fonts via the `Assets` API. It supports many of the common font formats:
+Set `autoGenerateMipmaps` to improve rendering quality when text is scaled down. Without mipmaps, downscaled text can appear noisy or shimmer during animation.
+
+```ts
+const text = new Text({
+    text: 'Smooth when small',
+    style: { fontSize: 48 },
+    autoGenerateMipmaps: true,
+});
+```
+
+When enabled, the text texture is allocated from a mipmap-enabled bucket of the texture pool, so it won't interfere with non-mipmapped textures used by filters or other systems.
+
+> [!NOTE]
+> `HTMLText` also supports `autoGenerateMipmaps` with the same behavior.
+
+## Font loading
+
+PixiJS loads custom fonts via the `Assets` API. Supported formats:
 
 - `woff`
 - `woff2`
 - `ttf`
 - `otf`
 
-It is recommended to use `woff2` for the best performance and compression.
+Use `woff2` for the best performance and compression.
 
 ```js
 await Assets.load({
@@ -90,19 +110,19 @@ Below is a list of properties you can pass in the `data` object when loading a f
 | Property            | Description                                             |
 | ------------------- | ------------------------------------------------------- |
 | **family**          | The font family name.                                   |
-| **display**         | The display property of the FontFace interface.         |
-| **featureSettings** | The featureSettings property of the FontFace interface. |
-| **stretch**         | The stretch property of the FontFace interface.         |
-| **style**           | The style property of the FontFace interface.           |
-| **unicodeRange**    | The unicodeRange property of the FontFace interface.    |
-| **variant**         | The variant property of the FontFace interface.         |
-| **weights**         | The weights property of the FontFace interface.         |
+| **display**         | Controls font loading behavior (e.g., `'swap'`, `'block'`). Maps to [FontFace.display](https://developer.mozilla.org/en-US/docs/Web/API/FontFace/display). |
+| **featureSettings** | OpenType feature settings (e.g., `'"liga" 1'`). Maps to [FontFace.featureSettings](https://developer.mozilla.org/en-US/docs/Web/API/FontFace/featureSettings). |
+| **stretch**         | Font stretch (e.g., `'condensed'`). Maps to [FontFace.stretch](https://developer.mozilla.org/en-US/docs/Web/API/FontFace/stretch). |
+| **style**           | Font style (e.g., `'italic'`). Maps to [FontFace.style](https://developer.mozilla.org/en-US/docs/Web/API/FontFace/style). |
+| **unicodeRange**    | Limits which characters this font covers (e.g., `'U+0025-00FF'`). Maps to [FontFace.unicodeRange](https://developer.mozilla.org/en-US/docs/Web/API/FontFace/unicodeRange). |
+| **variant**         | Font variant (e.g., `'small-caps'`). Maps to [FontFace.variant](https://developer.mozilla.org/en-US/docs/Web/API/FontFace/variant). |
+| **weights**         | Font weight values. Maps to [FontFace.weight](https://developer.mozilla.org/en-US/docs/Web/API/FontFace/weight). |
 
 ---
 
-## API Reference
+## API reference
 
-- [Text](https://pixijs.download/release/docs/scene.Text.html)
-- [TextStyle](https://pixijs.download/release/docs/text.TextStyle.html)
-- [FillStyle](https://pixijs.download/release/docs/scene.FillStyle.html)
-- [StrokeStyle](https://pixijs.download/release/docs/scene.StrokeStyle.html)
+- [`Text`](https://pixijs.download/v8.23.0/docs/scene.Text.html)
+- [`TextStyle`](https://pixijs.download/v8.23.0/docs/text.TextStyle.html)
+- [`FillStyle`](https://pixijs.download/v8.23.0/docs/scene.FillStyle.html)
+- [`StrokeStyle`](https://pixijs.download/v8.23.0/docs/scene.StrokeStyle.html)

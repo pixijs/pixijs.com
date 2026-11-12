@@ -1,0 +1,8 @@
+{
+  "right": "px.jpg",
+  "left": "nx.jpg",
+  "top": "py.jpg",
+  "bottom": "ny.jpg",
+  "front": "pz.jpg",
+  "back": "nz.jpg"
+}

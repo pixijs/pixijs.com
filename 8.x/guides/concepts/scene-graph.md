@@ -1,6 +1,6 @@
 # Scene Graph
 
-Every frame, PixiJS is updating and then rendering the scene graph. Let's talk about what's in the scene graph, and how it impacts how you develop your project. If you've built games before, this should all sound very familiar, but if you're coming from HTML and the DOM, it's worth understanding before we get into specific types of objects you can render.
+The scene graph is the tree of objects that PixiJS draws every frame. It works like the DOM: parent elements contain children, and properties like position, rotation, and opacity flow down from parent to child. Understanding the scene graph is essential because every sprite, graphic, and text object you create lives inside it.
 
 ## The Scene Graph Is a Tree
 
@@ -16,7 +16,7 @@ Each frame, PixiJS runs through the scene graph from the root down through all t
 
 Here's an example. We'll create three sprites, each a child of the last, and animate their position, rotation, scale and alpha. Even though each sprite's properties are set to the same values, the parent-child chain amplifies each change:
 
-```ts
+```js
 import { Application, Assets, Container, Sprite } from 'pixi.js';
 
 (async () => {
@@ -75,6 +75,7 @@ import { Application, Assets, Container, Sprite } from 'pixi.js';
 })();
 ```
 
+<br />
 The cumulative translation, rotation, scale and skew of any given node in the scene graph is stored in the object's
 `worldTransform` property. Similarly, the cumulative alpha value is stored in the `worldAlpha` property.
 
@@ -86,20 +87,20 @@ PixiJS renders the tree from the root down. At each level, the current object is
 
 Check out this example, with two parent objects A & D, and two children B & C under A:
 
-```ts
+```js
 import { Application, Container, Sprite, Text, Texture } from 'pixi.js';
 
 (async () => {
   // Create the application helper and add its render target to the page
   const app = new Application();
 
-  await app.init({ resizeTo: window });
+  await app.init({ preference: 'canvas' });
   document.body.appendChild(app.canvas);
 
   // Label showing scene graph hierarchy
   const label = new Text({
     text: 'Scene Graph:\n\napp.stage\n  ┗ A\n     ┗ B\n     ┗ C\n  ┗ D',
-    style: { fill: '#ffffff' },
+    style: { fill: '#ffff00', fontFamily: 'sans-serif' },
     position: { x: 300, y: 100 },
   });
 
@@ -117,7 +118,7 @@ import { Application, Container, Sprite, Text, Texture } from 'pixi.js';
 
     const text = new Text({
       text: letter,
-      style: { fill: '#ffffff' },
+      style: { fill: '#ffffff', fontFamily: 'sans-serif' },
     });
 
     text.anchor.set(0.5);
@@ -137,9 +138,9 @@ import { Application, Container, Sprite, Text, Texture } from 'pixi.js';
 
   // Define 4 letters
   const a = addLetter('A', app.stage, 0xff0000, { x: 100, y: 100 });
-  const b = addLetter('B', a, 0x00ff00, { x: 20, y: 20 });
-  const c = addLetter('C', a, 0x0000ff, { x: 20, y: 40 });
-  const d = addLetter('D', app.stage, 0xff8800, { x: 140, y: 100 });
+  addLetter('B', a, 0x00ff00, { x: 20, y: 20 });
+  addLetter('C', a, 0x0000ff, { x: 20, y: 40 });
+  addLetter('D', app.stage, 0xff8800, { x: 140, y: 100 });
 
   // Display them over time, in order
   let elapsed = 0.0;
@@ -156,17 +157,32 @@ import { Application, Container, Sprite, Text, Texture } from 'pixi.js';
 })();
 ```
 
+<br/>
+
 If you'd like to re-order a child object, you can use `setChildIndex()`. To add a child at a given point in a parent's list, use `addChildAt()`. Finally, you can enable automatic sorting of an object's children using the `sortableChildren` option combined with setting the `zIndex` property on each child.
 
 ## RenderGroups
 
-As you delve deeper into PixiJS, you'll encounter a powerful feature known as Render Groups. Think of Render Groups as specialized containers within your scene graph that act like mini scene graphs themselves. Here's what you need to know to effectively use Render Groups in your projects. For more info check out the [RenderGroups overview](./render-groups.md)
+As you delve deeper into PixiJS, you'll encounter a powerful feature known as Render Groups. Think of Render Groups as specialized containers within your scene graph that act like mini scene graphs themselves. Here's what you need to know to effectively use Render Groups in your projects. For more info check out the [RenderGroups overview](https://pixijs.com/8.x/guides/concepts/render-groups.md)
 
 ## Culling
 
 If you're building a project where a large proportion of your scene objects are off-screen (say, a side-scrolling game), you will want to _cull_ those objects. Culling is the process of evaluating if an object (or its children!) is on the screen, and if not, turning off rendering for it. If you don't cull off-screen objects, the renderer will still draw them, even though none of their pixels end up on the screen.
 
-PixiJS provides built-in support for viewport culling. To enable culling, set `cullable = true` on your objects. You can also set `cullableChildren` to `false` to allow PixiJS to bypass the recursive culling function, which can improve performance. Additionally, you can set `cullArea` to further optimize performance by defining the area to be culled.
+PixiJS provides built-in viewport culling. To enable it:
+
+```typescript
+// Enable culling on a sprite or container
+sprite.cullable = true;
+
+// Skip recursive child culling when children don't leave the parent bounds
+container.cullableChildren = false;
+
+// Provide a custom cull area (avoids measuring the object each frame)
+sprite.cullArea = new Rectangle(0, 0, 200, 200);
+```
+
+For more on when culling helps vs. hurts, see [Performance Tips](https://pixijs.com/8.x/guides/concepts/performance-tips.md).
 
 ## Local vs Global Coordinates
 
@@ -178,9 +194,11 @@ The problem is, there are many times when you want to know the global position o
 
 To convert from local to global coordinates, you use the `toGlobal()` function. Here's a sample usage:
 
-```javascript
+```typescript
+import { Point } from 'pixi.js';
+
 // Get the global position of an object, relative to the top-left of the screen
-let globalPos = obj.toGlobal(new Point(0, 0));
+const globalPos = obj.toGlobal(new Point(0, 0));
 ```
 
 This snippet will set `globalPos` to be the global coordinates for the child object, relative to [0, 0] in the global coordinate system.
@@ -189,4 +207,4 @@ This snippet will set `globalPos` to be the global coordinates for the child obj
 
 When your project is working with the host operating system or browser, there is a third coordinate system that comes into play - "screen" coordinates (aka "viewport" coordinates). Screen coordinates represent position relative to the top-left of the canvas element that PixiJS is rendering into. Things like the DOM and native mouse click events work in screen space.
 
-Now, in many cases, screen space is equivalent to world space. This is the case if the size of the canvas is the same as the size of the render view specified when you create you `Application`. By default, this will be the case - you'll create for example an 800x600 application window and add it to your HTML page, and it will stay that size. 100 pixels in world coordinates will equal 100 pixels in screen space. BUT! It is common to stretch the rendered view to have it fill the screen, or to render at a lower resolution and up-scale for speed. In that case, the screen size of the canvas element will change (e.g. via CSS), but the underlying render view will _not_, resulting in a mis-match between world coordinates and screen coordinates.
+In many cases, screen space and world space are identical: if your canvas is 800x600 and is not CSS-scaled, then 100 pixels in world space equals 100 pixels on screen. But if you stretch the canvas to fill the browser window (common for games), or render at a lower resolution for performance, the two coordinate systems diverge. PixiJS's event system handles this conversion automatically for pointer events, but if you need to convert manually, use `renderer.events.pointer` to get screen coordinates and `toLocal()`/`toGlobal()` for world coordinates.

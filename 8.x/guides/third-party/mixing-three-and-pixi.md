@@ -2,9 +2,8 @@
 
 In many projects, developers aim to harness the strengths of both 3D and 2D graphics. Combining the advanced 3D rendering capabilities of Three.js with the speed and versatility of PixiJS for 2D can result in a powerful, seamless experience. Together, these technologies create opportunities for dynamic and visually compelling applications. Lets see how to do this.
 
-:::info NOTE
-This guide assumes PixiJS will be used as the top layer to deliver UI over a 3D scene rendered by Three.js. However, developers can render either in any order, as many times as needed. This flexibility allows for creative and dynamic applications.
-:::
+> [!NOTE]
+> This guide assumes PixiJS will be used as the top layer to deliver UI over a 3D scene rendered by Three.js. However, developers can render either in any order, as many times as needed. This flexibility allows for creative and dynamic applications.
 
 ---
 
@@ -47,11 +46,10 @@ cube.rotation.set(0.4, 0.2, 0);
 scene.add(cube);
 ```
 
-:::info NOTE
-We used the dom element and context created by the three.js renderer to pass to the pixijs renderer.
-This was the simplest way to ensure that the two renderers were using the same WebGL context. You could have done it the other way round
-if you wanted to.
-:::
+> [!NOTE]
+> We used the dom element and context created by the three.js renderer to pass to the pixijs renderer.
+> This was the simplest way to ensure that the two renderers were using the same WebGL context. You could have done it the other way round
+> if you wanted to.
 
 #### Step 2: Initialize PixiJS Renderer and Stage
 
@@ -68,10 +66,7 @@ await pixiRenderer.init({
 });
 
 const stage = new PIXI.Container();
-const amazingUI = new PIXI.Graphics()
-  .roundRect(20, 80, 100, 100, 5)
-  .roundRect(220, 80, 100, 100, 5)
-  .fill(0xffff00);
+const amazingUI = new PIXI.Graphics().roundRect(20, 80, 100, 100, 5).roundRect(220, 80, 100, 100, 5).fill(0xffff00);
 
 stage.addChild(amazingUI);
 ```
@@ -104,9 +99,7 @@ requestAnimationFrame(render);
 
 Here’s the complete example integrating PixiJS and Three.js:
 
-```ts
-// dependencies: { "three": "latest", "pixi.js": "latest" }
-// description: A basic integration of PixiJS and Three.js sharing the same WebGL context
+```js
 // Import required classes from PixiJS and Three.js
 import { Container, Graphics, Text, WebGLRenderer } from 'pixi.js';
 import * as THREE from 'three';

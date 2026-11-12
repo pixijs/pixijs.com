@@ -1,9 +1,9 @@
 # Mesh
 
-PixiJS v8 offers a powerful `Mesh` system that provides full control over geometry, UVs, indices, shaders, and WebGL/WebGPU state. Meshes are ideal for custom rendering effects, advanced distortion, perspective manipulation, or performance-tuned rendering pipelines.
+The PixiJS `Mesh` system gives you full control over geometry, UVs, indices, shaders, and WebGL/WebGPU state. Meshes are ideal for custom rendering effects, distortion, perspective manipulation, or performance-tuned rendering pipelines.
 
 ```ts
-import { Texture, Mesh, MeshGeometry, Shader } from 'pixi.js';
+import { Assets, Texture, Mesh, MeshGeometry, Shader } from 'pixi.js';
 
 const geometry = new MeshGeometry({
   positions: new Float32Array([0, 0, 100, 0, 100, 100, 0, 100]),
@@ -11,12 +11,14 @@ const geometry = new MeshGeometry({
   indices: new Uint32Array([0, 1, 2, 0, 2, 3]),
 });
 
+const texture = await Assets.load('image.png');
+
 const shader = Shader.from({
   gl: {
     vertex: `
-            attribute vec2 aPosition;
-            attribute vec2 aUV;
-            varying vec2 vUV;
+            in vec2 aPosition;
+            in vec2 aUV;
+            out vec2 vUV;
             void main() {
                 gl_Position = vec4(aPosition / 100.0 - 1.0, 0.0, 1.0);
                 vUV = aUV;
@@ -24,7 +26,7 @@ const shader = Shader.from({
         `,
     fragment: `
             precision mediump float;
-            varying vec2 vUV;
+            in vec2 vUV;
             uniform sampler2D uSampler;
             void main() {
                 gl_FragColor = texture2D(uSampler, vUV);
@@ -32,7 +34,7 @@ const shader = Shader.from({
         `,
   },
   resources: {
-    uSampler: Texture.from('image.png').source,
+    uSampler: texture.source,
   },
 });
 
@@ -40,7 +42,7 @@ const mesh = new Mesh({ geometry, shader });
 app.stage.addChild(mesh);
 ```
 
-## **What Is a Mesh?**
+## What is a mesh?
 
 A mesh is a low-level rendering primitive composed of:
 
@@ -50,9 +52,9 @@ A mesh is a low-level rendering primitive composed of:
 
 With these elements, you can build anything from simple quads to curved surfaces and procedural effects.
 
-## **MeshGeometry**
+## MeshGeometry
 
-All meshes in PixiJS are built using the `MeshGeometry` class. This class allows you to define the vertex positions, UV coordinates, and indices that describe the mesh's shape and texture mapping.
+All meshes use the `MeshGeometry` class to define vertex positions, UV coordinates, and indices that describe the mesh's shape and texture mapping.
 
 ```ts
 const geometry = new MeshGeometry({
@@ -71,11 +73,11 @@ geometry.uvs[0] = 0.5;
 geometry.indices[0] = 1;
 ```
 
-## Built-in Mesh Types
+## Built-in mesh types
 
 ### MeshSimple
 
-A minimal wrapper over `Mesh` that accepts vertex, UV, and index arrays directly. Suitable for fast static or dynamic meshes.
+A minimal wrapper over `Mesh` that accepts vertex, UV, and index arrays directly. Good for fast static or dynamic meshes.
 
 ```ts
 const mesh = new MeshSimple({
@@ -91,7 +93,7 @@ const mesh = new MeshSimple({
 
 ### MeshRope
 
-Bends a texture along a series of control points, often used for trails, snakes, and animated ribbons.
+Bends a texture along a series of control points. Often used for trails, snakes, and animated ribbons.
 
 ```ts
 const points = [new Point(0, 0), new Point(100, 0), new Point(200, 50)];
@@ -121,7 +123,7 @@ const plane = new MeshPlane({
 
 ### PerspectiveMesh
 
-A special subclass of `MeshPlane` that applies perspective correction by transforming the UVs.
+A subclass of `MeshPlane` that applies perspective correction by transforming the UVs.
 
 ```ts
 const mesh = new PerspectiveMesh({
@@ -144,13 +146,13 @@ const mesh = new PerspectiveMesh({
 
 ---
 
-## **API Reference**
+## API reference
 
-- [Mesh](https://pixijs.download/release/docs/scene.Mesh.html)
-- [MeshGeometry](https://pixijs.download/release/docs/scene.MeshGeometry.html)
-- [MeshSimple](https://pixijs.download/release/docs/scene.MeshSimple.html)
-- [MeshRope](https://pixijs.download/release/docs/scene.MeshRope.html)
-- [MeshPlane](https://pixijs.download/release/docs/scene.MeshPlane.html)
-- [PerspectiveMesh](https://pixijs.download/release/docs/scene.PerspectiveMesh.html)
-- [Shader](https://pixijs.download/release/docs/rendering.Shader.html)
-- [Texture](https://pixijs.download/release/docs/rendering.Texture.html)
+- [`Mesh`](https://pixijs.download/v8.23.0/docs/scene.Mesh.html)
+- [`MeshGeometry`](https://pixijs.download/v8.23.0/docs/scene.MeshGeometry.html)
+- [`MeshSimple`](https://pixijs.download/v8.23.0/docs/scene.MeshSimple.html)
+- [`MeshRope`](https://pixijs.download/v8.23.0/docs/scene.MeshRope.html)
+- [`MeshPlane`](https://pixijs.download/v8.23.0/docs/scene.MeshPlane.html)
+- [`PerspectiveMesh`](https://pixijs.download/v8.23.0/docs/scene.PerspectiveMesh.html)
+- [`Shader`](https://pixijs.download/v8.23.0/docs/rendering.Shader.html)
+- [`Texture`](https://pixijs.download/v8.23.0/docs/rendering.Texture.html)

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpixi_docusaurus=self.webpackChunkpixi_docusaurus||[]).push([["6145"],{21007(s){s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"3d"}')}}]);

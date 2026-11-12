@@ -1,89 +1,120 @@
 # Accessibility
 
-PixiJS includes built-in accessibility support through a DOM-based overlay system that integrates with screen readers, keyboard navigation, and other assistive technologies. It uses `` overlays to describe visual elements to screen readers
+Canvas elements are invisible to screen readers by default. PixiJS bridges this gap with a DOM-based overlay system: it places invisible `<div>` elements over your canvas, aligned to the bounds of accessible objects. These divs integrate with screen readers, keyboard navigation (`Tab` key), and other assistive technologies so that users who can't see the canvas can still interact with your application.
 
-:::info
-Accessibility is opt-in to reduce bundle size and must be explicitly enabled.
-:::
+These overlay elements:
+
+- Receive focus via keyboard (`tabIndex`)
+- Announce `accessibleTitle` or `accessibleHint` to screen readers
+- Dispatch `click`, `mouseover`, `mouseout` events as PixiJS pointer events
+- Use `aria-live` and `aria-label` where appropriate
+
+> [!IMPORTANT]
+> The [`AccessibilitySystem`](https://pixijs.download/v8.23.0/docs/accessibility.AccessibilitySystem.html) is not available in a Web Worker. It requires the main thread where the DOM is accessible.
+
+## Enabling the system
+
+Accessibility is an opt-in module to keep the default bundle small. Import it before creating your renderer:
 
 ```ts
 import 'pixi.js/accessibility';
+```
+
+PixiJS automatically installs the [`AccessibilitySystem`](https://pixijs.download/v8.23.0/docs/accessibility.AccessibilitySystem.html) onto your renderer.
+
+## Basic usage
+
+Enable accessibility on any container or display object:
+
+```ts
 import { Container } from 'pixi.js';
 
 const button = new Container();
 button.accessible = true;
-```
-
-## **How It Works**
-
-PixiJS places DOM `` elements over your canvas, aligned to the bounds of accessible objects. These elements:
-
-- Can receive focus via keyboard (`tabIndex`)
-- Announce `accessibleTitle` or `accessibleHint` to screen readers
-- Dispatch `click`, `mouseover`, `mouseout` events as Pixi pointer events
-- Use `aria-live` and `aria-label` where appropriate
-
-## Enabling the System
-
-To enable accessibility, you must import the module before creating your renderer:
-
-```ts
-import 'pixi.js/accessibility';
-```
-
-PixiJS automatically installs the `AccessibilitySystem` onto your renderer. You can configure how and when it's activated.
-
-## **Configuration Options**
-
-You can customize when and how the accessibility system activates by passing options to the `Application` constructor:
-
-```ts
-const app = new Application({
-  accessibilityOptions: {
-    enabledByDefault: true, // Enable on startup
-    activateOnTab: false, // Disable auto-activation via tab
-    deactivateOnMouseMove: false, // Keep system active with mouse use
-    debug: true, // Show div overlays for debugging
-  },
-});
-```
-
-Or programmatically enable/disable the system:
-
-```ts
-app.renderer.accessibility.setAccessibilityEnabled(true);
-```
-
-## **Creating Accessible Objects**
-
-To mark a display object as accessible and add it to the accessibility system, set the `accessible` property to `true`. This will create a `` overlay that screen readers can interact with.
-
-```ts
-const button = new Container();
-button.accessible = true;
+button.accessibleTitle = 'Play Game';
+button.accessibleHint = 'Press to start the game';
+button.accessibleType = 'button';
 
 app.stage.addChild(button);
 ```
 
-### **Properties for Accessible Containers**
+## Accessible properties
 
-There are several properties you can set on accessible containers to customize their behavior:
+| Property                  | Default      | Description                                                      |
+| ------------------------- | ------------ | ---------------------------------------------------------------- |
+| `accessible`              | `false`      | Enables accessibility for the object.                            |
+| `accessibleTitle`         | `null`       | Sets the `title` attribute for screen readers.                   |
+| `accessibleHint`          | `null`       | Sets the `aria-label` attribute.                                 |
+| `accessibleText`          | `null`       | Alternative inner text for the div.                              |
+| `accessibleType`          | `'button'`   | Tag name for the shadow element (`'button'`, `'div'`, etc.).     |
+| `accessiblePointerEvents` | `'auto'`     | CSS `pointer-events` value (`'auto'`, `'none'`, etc.).           |
+| `tabIndex`                | `0`          | Keyboard focus order.                                            |
+| `accessibleChildren`      | `true`       | Whether children of this container are accessible.               |
 
-| Property                  | Description                                                      |
-| ------------------------- | ---------------------------------------------------------------- |
-| `accessible`              | Enables accessibility for the object                             |
-| `accessibleTitle`         | Sets the `title` for screen readers                              |
-| `accessibleHint`          | Sets the `aria-label`                                            |
-| `accessibleText`          | Alternative inner text for the div                               |
-| `accessibleType`          | Tag name used for the shadow element (`'button'`, `'div'`, etc.) |
-| `accessiblePointerEvents` | CSS `pointer-events` value (`'auto'`, `'none'`, etc.)            |
-| `tabIndex`                | Allows focus with keyboard navigation                            |
-| `accessibleChildren`      | Whether children of this container are accessible                |
+## Configuration options
 
----
+Configure the accessibility system when creating your application:
 
-## **API Reference**
+```ts
+const app = new Application();
+await app.init({
+  accessibilityOptions: {
+    enabledByDefault: true,      // Enable on startup instead of waiting for tab
+    activateOnTab: true,         // Allow tab key to activate accessibility
+    debug: false,                // Show accessibility divs for debugging
+    deactivateOnMouseMove: true, // Disable when mouse is used
+  },
+});
+```
 
-- [Overview](https://pixijs.download/release/docs/accessibility.html)
-- [AccessibilitySystem](https://pixijs.download/release/docs/accessibility.AccessibilitySystem.html)
-- [AccessibleOptions](https://pixijs.download/release/docs/accessibility.AccessibleOptions.html)
+## Custom tab order
+
+Control the tab order of accessible elements:
+
+```ts
+menuButton.tabIndex = 1;
+playButton.tabIndex = 2;
+settingsButton.tabIndex = 3;
+```
+
+## Container children
+
+Control accessibility for nested elements:
+
+```ts
+const menu = new Container();
+menu.accessible = true;
+menu.accessibleChildren = true;  // Allow children to be accessible (default)
+
+// Setting to false prevents all children from being accessible
+menu.accessibleChildren = false;
+```
+
+## Programmatic control
+
+Enable or disable the system at runtime:
+
+```ts
+app.renderer.accessibility.setAccessibilityEnabled(true);
+
+console.log(app.renderer.accessibility.isActive);
+console.log(app.renderer.accessibility.isMobileAccessibility);
+```
+
+## Debugging
+
+Use debug mode during development to see the overlay divs:
+
+```ts
+await app.init({
+  accessibilityOptions: {
+    debug: true,
+  },
+});
+```
+
+## API reference
+
+- [`AccessibilitySystem`](https://pixijs.download/v8.23.0/docs/accessibility.AccessibilitySystem.html)
+- [`AccessibleOptions`](https://pixijs.download/v8.23.0/docs/accessibility.AccessibleOptions.html)
+- [`AccessibilityOptions`](https://pixijs.download/v8.23.0/docs/accessibility.AccessibilityOptions.html)

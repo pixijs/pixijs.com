@@ -4,17 +4,17 @@
 
 ## Try PixiJS Online
 
-- To quickly get a taste of PixiJS, you can try it directly in our [PixiJS Playground](/8.x/playground).
+- To quickly get a taste of PixiJS, you can try it directly in our [PixiJS Playground](https://pixijs.com/playground).
 
 ---
 
 ## Creating a New Project
 
-:::info[Prerequisites]
-
-- Familiarity with the command line and a basic understanding of JavaScript.
-- Install [Node.js](https://nodejs.org/en/) v20.0 or higher.
-  :::
+> [!NOTE]
+> **Prerequisites**
+>
+> - Familiarity with the command line and a basic understanding of JavaScript.
+> - Install [Node.js](https://nodejs.org/en/) v20.0 or higher.
 
 In this section, we will introduce how to scaffold a PixiJS application on your local machine. The created project will use a pre-configured build setup, allowing you to quickly get started with PixiJS development.
 
@@ -24,10 +24,19 @@ Make sure your current working directory is where you want to create your projec
 npm create pixi.js@latest
 ```
 
+<div style={{ textAlign: 'center', paddingBottom: '24px' }}>
+  <img
+    width="500"
+    style={{ borderRadius: '10px', filter: 'drop-shadow(0px 2px 5px #000)' }}
+    alt="Screenshot from terminal"
+    src="https://pixijs.io/create-pixi/img/demo.gif"
+  />
+</div>
+
 This command will install and execute the [PixiJS Create](https://pixijs.io/create-pixi/) CLI and begin scaffolding your project. You will be prompted to configure your project by selecting various options, including selecting a template type for setting up your project. There are two main types of templates to choose from:
 
+<div style={{ paddingLeft: '48px'}}>
 #### Creation Templates (Recommended)
-
 Creation templates are tailored for specific platforms and include additional configurations and dependencies to streamline development for a particular use case. These templates are more opinionated and are perfect for beginners or those looking for a ready-to-go setup.
 
 #### Bundler Templates
@@ -36,10 +45,12 @@ Bundler templates are general templates designed to scaffold a PixiJS project wi
 
 We recommended using the Vite + PixiJS template for most projects when using bundler templates, as it provides a modern and fast setup for PixiJS applications with minimal configuration.
 
+</div>
+
 After selecting your desired template, the scaffolding tool will create a new project directory with the chosen configuration. Navigate to the project directory and install the dependencies:
 
 ```bash
-cd
+cd <your-project-name>
 npm install
 npm run dev
 ```
@@ -54,8 +65,7 @@ npm install pixi.js
 
 Once you've set up your project, here's a simple example to get started with PixiJS:
 
-```ts
-// description: This example demonstrates how to use a Container to group and manipulate multiple sprites
+```js
 import { Application, Assets, Container, Sprite } from 'pixi.js';
 
 (async () => {
@@ -102,8 +112,7 @@ import { Application, Assets, Container, Sprite } from 'pixi.js';
 })();
 ```
 
-:::warning
-If using Vite you still need to wrap your code in an async function. There is an issue when using top level await with PixiJS when building for production.
-
-This issue is known to affect Vite \<=6.0.6. Future versions of Vite may resolve this issue.
-:::
+> [!WARNING]
+> If using Vite you still need to wrap your code in an async function. There is an issue when using top level await with PixiJS when building for production.
+>
+> This issue is known to affect Vite \<=6.0.6. Future versions of Vite may resolve this issue.

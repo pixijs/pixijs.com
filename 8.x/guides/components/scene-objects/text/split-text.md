@@ -1,20 +1,15 @@
 # SplitText & SplitBitmapText
 
-The `SplitText` and `SplitBitmapText` classes let you break a string into individual lines, words, and characters—each as its own display object—unlocking rich, per-segment animations and advanced text layout effects.
+`SplitText` and `SplitBitmapText` decompose a text string into individual display objects for each line, word, and character. This lets you animate, color, or transform individual characters and words independently, which is useful for typewriter effects, wave animations, and interactive text.
 
-These classes work just like regular `Text` or `BitmapText`, but provide fine-grained control over every part of your text.
-
-:::warning
-**Experimental:** These features are new and may evolve in future versions.
-:::
+> [!WARNING]
+> **Experimental:** These features are new and may evolve in future versions.
 
 ---
 
-## What Are SplitText & SplitBitmapText?
+## Which class to use
 
-Both `SplitText` and `SplitBitmapText` extend PixiJS containers, generating nested display objects for each line, word, and character of your string.
-
-The difference is in the underlying text rendering:
+The two classes are identical in API. The only difference is the underlying text renderer:
 
 | Class             | Base Type    | Best For                      |
 | ----------------- | ------------ | ----------------------------- |
@@ -30,9 +25,9 @@ The difference is in the underlying text rendering:
 
 ---
 
-## Basic Usage
+## Basic usage
 
-### SplitText Example
+### SplitText example
 
 ```ts
 import { SplitText } from 'pixi.js';
@@ -51,7 +46,7 @@ const text = new SplitText({
 app.stage.addChild(text);
 ```
 
-### SplitBitmapText Example
+### SplitBitmapText example
 
 ```ts
 import { SplitBitmapText, BitmapFont } from 'pixi.js';
@@ -73,7 +68,7 @@ app.stage.addChild(text);
 
 ---
 
-## Accessing Segments
+## Accessing segments
 
 Both classes provide convenient segment arrays:
 
@@ -87,7 +82,7 @@ Each line contains its words, and each word contains its characters.
 
 ---
 
-## Anchor Points Explained
+## Anchor points explained
 
 Segment anchors control the origin for transformations like rotation or scaling.
 
@@ -112,7 +107,9 @@ const text = new SplitText({
 
 ---
 
-## Animation Example (with GSAP)
+## Animation examples
+
+### With GSAP (typewriter fade-in)
 
 ```ts
 import { gsap } from 'gsap';
@@ -124,29 +121,32 @@ const text = new SplitBitmapText({
 
 app.stage.addChild(text);
 
-// Animate characters one by one
+// Fade in characters one by one (typewriter effect)
 text.chars.forEach((char, i) => {
-  gsap.from(char, {
-    alpha: 0,
-    delay: i * 0.05,
-  });
+  gsap.from(char, { alpha: 0, delay: i * 0.05 });
+});
+```
+
+### Without GSAP (using onRender)
+
+```ts
+const text = new SplitText({
+  text: 'Wave Effect',
+  style: { fontSize: 32, fill: '#ffffff' },
 });
 
-// Animate words with scaling
-text.words.forEach((word, i) => {
-  gsap.to(word.scale, {
-    x: 1.2,
-    y: 1.2,
-    yoyo: true,
-    repeat: -1,
-    delay: i * 0.2,
-  });
+app.stage.addChild(text);
+
+text.chars.forEach((char, i) => {
+  char.onRender = () => {
+    char.y = Math.sin(performance.now() / 200 + i) * 5;
+  };
 });
 ```
 
 ---
 
-## Creating from Existing Text
+## Creating from existing text
 
 Convert existing text objects into segmented versions:
 
@@ -168,7 +168,7 @@ const splitBitmap = SplitBitmapText.from(bitmapText);
 
 ---
 
-## Configuration Options
+## Configuration options
 
 Shared options for both classes:
 
@@ -183,7 +183,7 @@ Shared options for both classes:
 
 ---
 
-## Global Defaults
+## Global defaults
 
 Change global defaults for each class:
 
@@ -208,7 +208,7 @@ Splitting text into individual objects removes browser or font kerning. Expect s
 
 ---
 
-## Performance Notes
+## Performance notes
 
 Splitting text creates additional display objects. For simple static text, a regular `Text` object is more efficient. Use `SplitText` when you need:
 
@@ -216,14 +216,14 @@ Splitting text creates additional display objects. For simple static text, a reg
 - Interactive or responsive text effects
 - Complex layouts
 
-The same performance limitations outlined [here](./index.md) apply for these classes as well.
+The same performance limitations outlined [here](https://pixijs.com/8.x/guides/components/scene-objects/text.md) apply for these classes as well.
 
 ---
 
-## API Reference
+## API reference
 
-- [Text](https://pixijs.download/release/docs/scene.Text.html)
-- [TextStyle](https://pixijs.download/release/docs/text.TextStyle.html)
-- [BitmapFont](https://pixijs.download/release/docs/text.BitmapFont.html)
-- [SplitText](https://pixijs.download/release/docs/text.SplitText.html)
-- [SplitBitmapText](https://pixijs.download/release/docs/text.SplitBitmapText.html)
+- [`Text`](https://pixijs.download/v8.23.0/docs/scene.Text.html)
+- [`TextStyle`](https://pixijs.download/v8.23.0/docs/text.TextStyle.html)
+- [`BitmapFont`](https://pixijs.download/v8.23.0/docs/text.BitmapFont.html)
+- [`SplitText`](https://pixijs.download/v8.23.0/docs/text.SplitText.html)
+- [`SplitBitmapText`](https://pixijs.download/v8.23.0/docs/text.SplitBitmapText.html)

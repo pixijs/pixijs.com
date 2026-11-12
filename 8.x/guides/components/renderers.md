@@ -1,71 +1,85 @@
-# Renderers
+# Rendering
 
-PixiJS renderers are responsible for drawing your scene to a canvas using either **WebGL/WebGL2** or **WebGPU**. These renderers are high-performance GPU-accelerated engines and are composed of modular systems that manage everything from texture uploads to rendering pipelines.
+PixiJS renderers draw your scene to a canvas using **WebGL/WebGL2**, **WebGPU**, or the **Canvas 2D** API. They're GPU-accelerated engines composed of modular systems that manage texture uploads, rendering pipelines, and more.
 
-All PixiJS renderers inherit from a common base, which provides consistent methods such as `.render()`, `.resize()`, and `.clear()` as well as shared systems for managing the canvas, texture GC, events, and more.
+All renderers inherit from a common base, providing consistent methods like `.render()`, `.resize()`, and `.clear()`, along with shared systems for canvas management, texture GC, and events.
 
-## Renderer Types
+## Renderer types
 
-| Renderer         | Description                                                        | Status          |
-| ---------------- | ------------------------------------------------------------------ | --------------- |
-| `WebGLRenderer`  | Default renderer using WebGL/WebGL2. Well supported and stable.    | ✅ Recommended  |
-| `WebGPURenderer` | Modern GPU renderer using WebGPU. More performant, still maturing. | 🚧 Experimental |
-| `CanvasRenderer` | Fallback renderer using 2D canvas.                                 | ❌ Coming-soon  |
+| Renderer         | Description                                                       | Status          |
+| ---------------- | ----------------------------------------------------------------- | --------------- |
+| `WebGLRenderer`  | Default renderer using WebGL/WebGL2. Stable and widely supported. | Recommended     |
+| `WebGPURenderer` | Uses the WebGPU API. Faster in many cases, still maturing.        | Experimental    |
+| `CanvasRenderer` | Fallback renderer using the HTML Canvas 2D context.               | Experimental    |
 
-:::info
-The WebGPU renderer is feature complete, however, inconsistencies in browser implementations may lead to unexpected behavior. It is recommended to use the WebGL renderer for production applications.
-:::
+> [!NOTE]
+> The WebGPU renderer is feature-complete, but inconsistencies in browser implementations may cause unexpected behavior. Use the WebGL renderer for production applications.
 
-## Creating a Renderer
+## Creating a renderer
 
-You can use `autoDetectRenderer()` to create the best renderer for the environment:
+Use `autoDetectRenderer()` to pick the best renderer for the current environment:
 
 ```ts
 import { autoDetectRenderer } from 'pixi.js';
 
 const renderer = await autoDetectRenderer({
-  preference: 'webgpu', // or 'webgl'
+    preference: 'webgpu', // or 'webgl' or 'canvas'
+});
+
+// Only allow specific renderers (acts as a blocklist for any type not listed)
+const renderer = await autoDetectRenderer({
+    preference: ['webgl', 'canvas'], // webgpu is excluded entirely
 });
 ```
 
-Or construct one explicitly:
+Or construct one directly when you need a specific renderer type (e.g., for testing or when you know the target environment):
 
 ```ts
-import { WebGLRenderer, WebGPURenderer } from 'pixi.js';
+import { WebGLRenderer } from 'pixi.js';
 
 const renderer = new WebGLRenderer();
 await renderer.init(options);
 ```
 
-## Rendering a Scene
+> [!NOTE]
+> Most applications should use `autoDetectRenderer()` and let PixiJS pick the best backend. Use direct construction only when you have a specific reason.
 
-To render a scene, you can use the `render()` method. This will draw the specified container to the screen or a texture:
+Both paths run the same `init()`: environment extensions load first, then any `WebGLLoader`/`WebGPULoader`/`CanvasLoader` extensions registered for that backend are awaited, and only then are the renderer's systems and pipes created. See the [extensions guide](https://pixijs.com/8.x/guides/components/extensions.md) for registering a loader.
+
+## Rendering a scene
+
+Call `render()` with a `Container` to draw it to the screen:
 
 ```ts
 import { Container } from 'pixi.js';
 
 const container = new Container();
 renderer.render(container);
+```
 
-// or provide a complete set of options
+You can also pass an options object for more control:
+
+```ts
+import { Matrix } from 'pixi.js';
+
 renderer.render({
-  target: container,
-  clear: true, // clear the screen before rendering
-  transform: new Matrix(), // optional transform to apply to the container
+    container: myContainer,
+    clear: true,
+    transform: new Matrix(),
 });
 ```
 
-## Resizing the Renderer
+The `container` property is the scene root to draw. `target` is a separate property that specifies a render destination (e.g., a [`RenderTexture`](https://pixijs.download/v8.23.0/docs/rendering.RenderTexture.html)).
 
-To resize the renderer, use the `resize()` method. This will adjust the canvas size and update the resolution:
+## Resizing the renderer
 
 ```ts
 renderer.resize(window.innerWidth, window.innerHeight);
 ```
 
-## Generating Textures
+## Generating textures
 
-You can generate textures from containers using the `generateTexture()` method. This is useful for creating textures from dynamic content:
+Create textures from any display object with `generateTexture()`:
 
 ```ts
 import { Sprite } from 'pixi.js';
@@ -74,34 +88,338 @@ const sprite = new Sprite();
 const texture = renderer.generateTexture(sprite);
 ```
 
-## Resetting State
+## Rendering to mip levels (advanced)
 
-To reset the renderer's state, use the `resetState()` method. This is useful when mixing PixiJS with other libraries like Three.js:
+When rendering to a texture-backed target, you can specify `mipLevel` to render into a specific mip level of the target's underlying texture storage. Most applications won't need this; it's useful for custom LOD (level of detail) systems or manual mipmap generation.
+
+```ts
+import { RenderTexture } from 'pixi.js';
+
+const rt = RenderTexture.create({
+    width: 256,
+    height: 256,
+    mipLevelCount: 4,
+    autoGenerateMipmaps: false,
+});
+
+// Render into mip 1 (128x128)
+renderer.render({
+    container,
+    target: rt,
+    mipLevel: 1,
+});
+```
+
+If your `target` is a [`Texture`](https://pixijs.download/v8.23.0/docs/rendering.Texture.html) with a `frame` (e.g. an atlas sub-texture), that frame is interpreted in **mip 0** pixel space and is scaled/clamped when rendering to `mipLevel > 0`.
+
+## Rendering to layers and slices (advanced)
+
+`layer` picks which part of a layered texture to render into: an array layer of a 2D array (`arrayLayerCount`), a face of a cube map, or a depth slice of a 3D texture (`depth`). Pass the `TextureSource` itself as `target`; `RenderTexture.create` doesn't take `depth`.
+
+```ts
+import { TextureSource } from 'pixi.js';
+
+const volume = new TextureSource({ width: 64, height: 64, depth: 4, format: 'rgba8unorm' });
+
+for (let z = 0; z < 4; z++) {
+    renderer.render({ container, target: volume, layer: z, clear: true });
+}
+```
+
+Custom render code can bind a layer the same way with `renderer.renderTarget.push({ target, layer })`.
+
+## Flipping the output (advanced)
+
+By default a texture render is stored in PixiJS's Y-down orientation, which the 2D pipeline samples upright but 3D UV conventions read upside down. Pass `flipY: true` to invert the Y orientation of the render. Back-face culling stays correct because the winding order flips together with the projection.
+
+```ts
+renderer.render({
+    container: scene3d,
+    target: renderTexture,
+    flipY: true,
+});
+```
+
+## Render targets (advanced)
+
+Every texture you render to gets a [`RenderTarget`](https://pixijs.download/v8.23.0/docs/rendering.RenderTarget.html) behind the scenes. Create one yourself when you need multiple color attachments, an explicit depth or stencil texture, or per-attachment load and store behavior.
+
+```ts
+import { RenderTarget, TextureSource } from 'pixi.js';
+
+const color = new TextureSource({ width: 512, height: 512 });
+const depth = new TextureSource({ width: 512, height: 512, format: 'depth24plus-stencil8' });
+
+const target = new RenderTarget({
+    colorAttachments: [{ texture: color, clearValue: [0, 0, 0, 1] }],
+    depthStencilAttachment: { texture: depth, depthLoadOp: 'clear', depthClearValue: 1 },
+});
+
+renderer.render({ container, target });
+```
+
+The attachment objects mirror the WebGPU render pass descriptors, with `texture` in place of `view`. The `clear` option you pass to `render()` decides whether anything clears: a color attachment clears to its own `clearValue`, or to the bind's clear color where it has none. Give an attachment `loadOp: 'load'` to keep its contents even when the bind clears. A bind with `clear: false` never clears, so returning to a target (after a filter, or with `pop()`) can't wipe it. The older `colorTextures`, `depth`, `stencil`, and `depthStencilTexture` options still work and are converted to attachments internally.
+
+### Several color attachments
+
+One draw can write several color attachments, each with its own format. This is how a 3D renderer writes motion vectors, normals or object ids beside its color in a single pass.
+
+```ts
+import { Mesh, RenderTarget, Shader, Texture, TextureSource } from 'pixi.js';
+
+const size = { width: 512, height: 512 };
+const color = new TextureSource({ ...size, format: 'rgba16float' });
+const velocity = new TextureSource({ ...size, format: 'rg16float' });
+const ids = new TextureSource({ ...size, format: 'r32uint' });
+
+const target = new RenderTarget({
+    colorAttachments: [
+        { texture: color },
+        { texture: velocity, clearValue: [0, 0, 0, 0] },
+        { texture: ids, clearValue: [0xffffffff, 0, 0, 0] }, // an integer attachment takes integers
+    ],
+});
+
+// the shader declares one output per attachment it writes
+const shader = Shader.from({
+    gpu: {
+        vertex: { source: vertexWgsl, entryPoint: 'main' },
+        fragment: {
+            entryPoint: 'main',
+            source: `
+                struct Outputs {
+                    @location(0) color: vec4<f32>,
+                    @location(1) velocity: vec4<f32>, // the target keeps .rg
+                    @location(2) id: u32,
+                };
+                @fragment fn main() -> Outputs { ... }
+            `,
+        },
+    },
+    gl: {
+        vertex: vertexGlsl,
+        fragment: `#version 300 es
+            precision highp float;
+            layout(location = 0) out vec4 color;
+            layout(location = 1) out vec4 velocity;
+            layout(location = 2) out highp uint id; // highp: int defaults to mediump, 16 bits on some phones
+            void main() { ... }
+        `,
+    },
+});
+
+const opaque = new Mesh({ geometry, shader });
+
+opaque.state.blend = false;
+
+renderer.render({ container: opaque, target, clear: true });
+
+// a 2D sprite writes location 0 only, so it blends into color and leaves velocity and ids alone
+renderer.render({ container: sprites, target, clear: false });
+
+// sample an attachment in a later pass, like any texture
+const velocityTexture = new Texture({ source: velocity });
+```
+
+- **What a draw writes comes from its shader.** Each attachment is written only if the fragment shader has an output at its location; every other attachment is left as it was. PixiJS reads the outputs from the shader source; `GpuProgram.fragmentOutputMask` and `GlProgram.fragmentOutputMask` show what it found, one bit per location. If it can't read them (an output declared through a macro, say), the mask is `null` and the draw writes every attachment, as it would without this rule.
+- **Blending.** Every attachment a draw writes blends with the draw's blend mode, except integer formats, which never blend. A blended draw needs a `vec4` output for each attachment it writes, because the blend reads its alpha: WebGPU reports a validation error and skips the draw, and WebGL blends with an undefined alpha.
+- **Clearing.** Each attachment clears to its own `clearValue`, or to the bind's clear color. An integer attachment takes the numbers as integers, so give it a `clearValue` for anything other than 0 or 1. WebGL1 clears all attachments or none.
+- **Antialiasing.** An antialiased target can't have an integer attachment, because integer formats can't be resolved; creating one throws.
+- **Reading pixels back.** `renderer.extract` reads 8-bit color only, and throws when asked to read a float, integer or depth texture. For a 16-bit float texture, extract `new Sprite(texture)` instead. For 32-bit float, integer and depth textures, extract a `Mesh` whose shader reads the texture and outputs color.
+
+### Depth-only targets
+
+Pass `colorTextures: 0` with `depth: true`, or hand a depth-format `TextureSource` to `depthStencilTexture`. Rendering directly to a depth-format `TextureSource` also works; PixiJS wraps it in a depth-only target.
+
+```ts
+const shadowMap = new RenderTarget({ width: 1024, height: 1024, colorTextures: 0, depth: true });
+```
+
+Supported depth and stencil formats are `stencil8`, `depth16unorm`, `depth24plus`, `depth24plus-stencil8`, `depth32float`, and `depth32float-stencil8`. A depth-only format cannot be used for stencil masks.
+
+### Binding targets directly
+
+Custom rendering code binds surfaces through `renderer.renderTarget`. Pass an options object; the positional form is deprecated since 8.20.0 and warns once.
+
+```ts
+import { CLEAR } from 'pixi.js';
+
+// bind: replaces the current binding
+renderer.renderTarget.bind({ target: renderTexture, clear: true, clearColor: [0, 0, 0, 0] });
+
+// push/pop: save and restore the previous binding
+renderer.renderTarget.push({ target: scratch, clear: CLEAR.COLOR, mipLevel: 1 });
+// ... draw ...
+renderer.renderTarget.pop(); // returns the restored RenderTarget, throws if the stack is empty
+
+// capture and replay a binding without clearing it
+const saved = renderer.renderTarget.getBindState();
+renderer.renderTarget.bind({ target: scratch, clear: true });
+renderer.renderTarget.bind(saved);
+```
+
+Available options are `target`, `clear`, `clearColor`, `frame` (in mip 0 pixel space), `mipLevel`, `layer`, and `flipY`.
+
+### Copying between targets
+
+```ts
+// copy color pixels from any texture, canvas, or render target into a texture
+renderer.renderTarget.copyToTexture(source, destTexture, { x: 0, y: 0 }, { width: 256, height: 256 }, { x: 0, y: 0 });
+
+// copy the depth attachment into a depth-format texture (WebGL2 and WebGPU)
+renderer.renderTarget.copyDepthTexture(sourceTarget, destDepthTexture, { x: 0, y: 0 }, { width: 256, height: 256 });
+
+// then render into the destination without clearing the copied depth
+renderer.render({ container, target: destTarget, clear: CLEAR.COLOR });
+```
+
+`copyDepthTexture` warns and does nothing when the source has no depth attachment or the destination texture is not a depth or stencil format. Clear only the color buffer afterwards, or the copied depth is lost.
+
+Antialiased targets keep depth in a multisampled buffer, so shaders can't read their depth texture as a normal depth texture. Copy it out with `copyDepthTexture` instead, which resolves the samples into the destination. It keeps one sample per pixel, so depth along object edges is aliased, the same as without antialiasing. Only depth is resolved: the destination's stencil is left as it was. A `transient` target discards its depth after each pass, so there is nothing to copy from one.
+
+3D code that needs the resolved winding of the current target can call `renderer.renderTarget.isFrontFaceInverted()`, or `isFrontFaceInverted(target, flipY)` to ask about a target before binding it. The target is a `RenderTarget`; get one for a texture with `renderer.renderTarget.getRenderTarget(texture)`.
+
+### Destroying targets
+
+A `RenderTarget` you construct is yours to destroy. Every renderer that drew into it frees the framebuffers and other GPU objects it built for it. Destroying the renderer frees those too, without destroying your target. Destroying a target destroys the color and depth-stencil textures it created, and leaves the ones you passed in alone. An antialiased texture you passed in keeps its multisample memory, because other targets over it share those samples. Destroy or unload the texture to free it.
+
+```ts
+import { RenderTarget } from 'pixi.js';
+
+const target = new RenderTarget({ colorTextures: [texture] });
+
+renderer.render({ container, target });
+
+target.destroy(); // the GPU objects built for it go with it
+```
+
+## WebGPU-only features (advanced)
+
+These have no effect on the WebGL renderer. Branch on `renderer.name === 'webgpu'` before relying on them.
+
+### Shader override constants
+
+WGSL `override` declarations can be set per shader without recompiling the source. Values are baked into the pipeline, so each distinct set of overrides creates a separate pipeline. Keep the number of combinations small.
+
+```ts
+import { Shader } from 'pixi.js';
+
+const shader = Shader.from({
+    gpu: { vertex: { source, entryPoint: 'vsMain' }, fragment: { source, entryPoint: 'fsMain' } },
+    resources: { uniforms },
+    overrides: { BLUR_STEPS: 8 },
+});
+```
+
+Browsers without pipeline constant support (Safari) get the values substituted into the source instead. `renderer.limits.supportsOverrideConstants` reports which path is in use.
+
+### Storage textures
+
+Set `storage: true` on a `TextureSource` so your own compute pass can write to it. PixiJS adds `GPUTextureUsage.STORAGE_BINDING` to the texture and still samples it like any other texture.
+
+```ts
+import { TextureSource } from 'pixi.js';
+
+const volume = new TextureSource({ width: 64, height: 64, depth: 64, format: 'rgba8unorm', storage: true });
+
+// bind this view to a texture_storage_3d<rgba8unorm, write> in your compute pass
+const view = renderer.texture.getGpuSource(volume).createView();
+```
+
+Every device accepts `rgba8unorm`, `rgba16float`, `r32float`, `rg32float`, `rgba32float` and the matching integer formats as storage textures. `bgra8unorm` needs the `bgra8unorm-storage` feature, and formats such as `r8unorm` or `r16float` need `texture-formats-tier1`. PixiJS enables both features when the GPU has them. WebGPU rejects any other format when the texture is created.
+
+A 3D texture with `autoGenerateMipmaps` needs `storage: true` and the `rgba8unorm` or `rgba16float` format on WebGPU, because a compute shader writes its mips.
+
+### Render bundles
+
+A render bundle records a sequence of draw calls once and replays them on later frames, cutting CPU cost for static content drawn through `renderer.encoder`. A bundle bakes the render target it was recorded against, so check it before replaying and re-record when the check fails.
+
+```ts
+let bundle;
+
+if (!bundle || !renderer.encoder.isBundleValid(bundle)) {
+    renderer.encoder.beginBundle('static-props');
+    renderer.encoder.draw({ geometry, shader, state });
+    bundle = renderer.encoder.endBundle();
+}
+
+renderer.encoder.executeBundle(bundle);
+```
+
+Pass an array to `executeBundle` to replay several bundles in one call. A bundle is also invalid after a WebGPU device loss, because it was recorded on the device that was lost; `isBundleValid` reports that too.
+
+### Antialiasing on WebGPU
+
+On a tile-based GPU (every phone GPU and Apple silicon, reported by `renderer.device.extensions.tileBased`), antialiased targets never write their multisample colour buffer to memory. Only the resolved image is kept. When a pass reopens a target, for example a filter popping back onto its parent or a render with `clear: false`, PixiJS copies the resolved image back into the multisample buffer before drawing. This saves bandwidth on every frame, and the multisample buffer may not be allocated at all where the browser supports `GPUTextureUsage.TRANSIENT_ATTACHMENT`. You don't need to set anything.
+
+Restoring writes the resolved colour into every sample, so antialiased edges that meet exactly across a reopen, such as two shapes drawn by separate `clear: false` renders, can show a faint seam. On an antialiased canvas, a frame that starts without clearing (`clearBeforeRender: false`, or a first `render` with `clear: false`) starts from an empty canvas rather than the previous frame, as it already does without antialiasing.
+
+Other GPUs (Intel, NVIDIA, AMD) keep multisample buffers in video memory, where storing them and loading them back on a reopen is cheaper than restoring, so PixiJS does that there.
+
+The multisample depth/stencil buffer is kept by default, because masks need it across a reopen. A render texture that is drawn in a single pass and never reopened can discard it too, along with its colour buffer on GPUs that aren't tile-based:
+
+```ts
+import { RenderTexture } from 'pixi.js';
+
+const rt = RenderTexture.create({ width: 1024, height: 1024, antialias: true, transient: true });
+```
+
+The same flag works for the canvas. Pass `transient: true` to the renderer when the app never reopens the screen pass while it still needs depth or stencil:
+
+```ts
+await app.init({ preference: 'webgpu', antialias: true, transient: true });
+```
+
+`renderer.device.extensions.transientAttachment` reports whether PixiJS uses the usage bit. It's `false` where the browser doesn't expose the bit, on Safari 27.1 and later 27.x releases, and on iOS browsers and web views that don't report a Safari version. A WebKit bug in those Safari releases can lose the device when the bit is used.
+
+### Device loss
+
+When the browser reports the GPU device as lost (a GPU process crash, for example), the WebGPU renderer requests a new device and rebuilds textures, buffers, pipelines, and bind groups on the next render. You do not need to handle it yourself, with one exception: a render bundle recorded on the old device fails `renderer.encoder.isBundleValid(bundle)` and must be re-recorded. A device you hand in through the `gpu` option is neither restored nor destroyed by PixiJS. The WebGL renderer restores itself the same way after `webglcontextrestored`.
+
+## Resetting state
+
+When mixing PixiJS with other WebGL/WebGPU libraries (e.g., Three.js), each library may leave GPU state (bound textures, blend modes, active shaders) that conflicts with the other. Call `resetState()` before each library renders to avoid visual glitches, missing objects, or incorrect blending:
 
 ```ts
 function render() {
-  // Render the Three.js scene
-  threeRenderer.resetState();
-  threeRenderer.render(scene, camera);
+    threeRenderer.resetState();
+    threeRenderer.render(scene, camera);
 
-  // Render the PixiJS stage
-  pixiRenderer.resetState();
-  pixiRenderer.render({ container: stage });
+    pixiRenderer.resetState();
+    pixiRenderer.render({ container: stage });
 
-  requestAnimationFrame(render);
+    requestAnimationFrame(render);
 }
 
 requestAnimationFrame(render);
 ```
 
-See our full guide on [mixing PixiJS with Three.js](../../third-party/mixing-three-and-pixi.mdx) for more details.
+## Destroying renderers
+
+Call `destroy()` to clean up all GPU resources, systems, event listeners, and internal state:
+
+```ts
+renderer.destroy();
+```
+
+This removes all `EventEmitter` listeners attached to the renderer and nullifies internal systems and pipes. On WebGPU it also destroys the `GPUDevice` the renderer created (a device passed in through the `gpu` option is left alone). A destroyed renderer cannot be used for further rendering.
 
 ---
 
-## API Reference
+## API reference
 
-- [Overview](https://pixijs.download/release/docs/rendering.html)
-- [AbstractRenderer](https://pixijs.download/release/docs/rendering.AbstractRenderer.html)
-- [WebGLRenderer](https://pixijs.download/release/docs/rendering.WebGLRenderer.html)
-- [WebGPURenderer](https://pixijs.download/release/docs/rendering.WebGPURenderer.html)
-- [AutoDetectRenderer](https://pixijs.download/release/docs/rendering.html#autoDetectRenderer)
+- [`AbstractRenderer`](https://pixijs.download/v8.23.0/docs/rendering.AbstractRenderer.html)
+- [`WebGLRenderer`](https://pixijs.download/v8.23.0/docs/rendering.WebGLRenderer.html)
+- [`WebGPURenderer`](https://pixijs.download/v8.23.0/docs/rendering.WebGPURenderer.html)
+- [`CanvasRenderer`](https://pixijs.download/v8.23.0/docs/rendering.CanvasRenderer.html)
+- [`autoDetectRenderer`](https://pixijs.download/v8.23.0/docs/rendering.autoDetectRenderer.html)
+- [`ExtractSystem`](https://pixijs.download/v8.23.0/docs/rendering.ExtractSystem.html)
+- [`GenerateTextureSystem`](https://pixijs.download/v8.23.0/docs/rendering.GenerateTextureSystem.html)
+- [`RenderTexture`](https://pixijs.download/v8.23.0/docs/rendering.RenderTexture.html)
+- [`Texture`](https://pixijs.download/v8.23.0/docs/rendering.Texture.html)
+- [`RenderTarget`](https://pixijs.download/v8.23.0/docs/rendering.RenderTarget.html)
+- [`RenderTargetSystem`](https://pixijs.download/v8.23.0/docs/rendering.RenderTargetSystem.html)
+- [`TextureView`](https://pixijs.download/v8.23.0/docs/rendering.TextureView.html)
+- [`ShaderOverrides`](https://pixijs.download/v8.23.0/docs/rendering.ShaderOverrides.html)
+- [`GpuEncoderSystem`](https://pixijs.download/v8.23.0/docs/rendering.GpuEncoderSystem.html)
+- [`RenderBundle`](https://pixijs.download/v8.23.0/docs/rendering.RenderBundle.html)

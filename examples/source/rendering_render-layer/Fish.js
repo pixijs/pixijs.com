@@ -16,7 +16,7 @@ export class Fish extends Container {
 
     this.addChild(this.fishView);
 
-    this.ui = new CharacterUI(name, 20);
+    this.ui = new CharacterUI(name);
     this.ui.y = 0;
     this.addChild(this.ui);
   }

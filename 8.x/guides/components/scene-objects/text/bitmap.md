@@ -1,6 +1,6 @@
 # Bitmap Text
 
-`BitmapText` is a high-performance text rendering solution in PixiJS. Unlike the `Text` class, which rasterizes each string into a new texture, `BitmapText` draws characters from a pre-generated texture atlas. This design allows you to render tens of thousands of text objects with minimal overhead.
+`BitmapText` is a high-performance text rendering solution. Unlike `Text`, which rasterizes each string into a new texture, `BitmapText` draws characters from a pre-generated texture atlas. This allows rendering tens of thousands of text objects with minimal overhead.
 
 ```ts
 import { Assets, BitmapText } from 'pixi.js';
@@ -17,12 +17,12 @@ const text = new BitmapText({
 });
 ```
 
-## **Why Use `BitmapText`?**
+## Why use `BitmapText`?
 
-- ✅ **Fast rendering**: Perfect for HUDs, score counters, timers, etc.
-- ✅ **No per-frame rasterization**: Text changes are cheap.
-- ✅ **Efficient memory usage**: Shares glyph textures across all instances.
-- ✅ **Supports MSDF/SDF fonts**: Crisp scaling without blurring.
+- **Fast rendering**: Characters are drawn from a shared texture atlas, so updating text doesn't trigger rasterization.
+- **Cheap updates**: Changing the string just rearranges pre-rendered glyphs. No canvas re-draw.
+- **Shared memory**: All `BitmapText` instances using the same font share one atlas texture.
+- **MSDF/SDF support**: Signed distance field fonts stay crisp at any size without generating larger textures.
 
 **Ideal use cases**:
 
@@ -30,13 +30,13 @@ const text = new BitmapText({
 - Large numbers of text instances
 - High-performance or mobile projects
 
-## **How to Load and Use Bitmap Fonts**
+## How to load and use bitmap fonts
 
-### Font Loading
+### Font loading
 
-PixiJS supports AngelCode BMFont format and MSDF-compatible `.fnt` and `.xml` files. You can load these files using the `Assets` API.
+PixiJS supports AngelCode BMFont format (`.fnt`, `.xml`) and MSDF/SDF font files via the `Assets` API. You can generate these from `.ttf`/`.otf` files using [AssetPack](https://pixijs.io/assetpack/).
 
-Once loaded, you can create a `BitmapText` instance with the loaded font using the `fontFamily` property.
+After loading, reference the font by its family name:
 
 ```ts
 import { Assets, BitmapText } from 'pixi.js';
@@ -53,13 +53,13 @@ const text = new BitmapText({
 });
 ```
 
-### MSDF and SDF Fonts
+### MSDF and SDF fonts
 
 PixiJS supports **MSDF** (multi-channel signed distance field) and **SDF** formats for crisp, resolution-independent text. These fonts remain sharp at any size and scale.
 
-You can generate MSDF/SDF fonts using tools like [AssetPack](https://pixijs.io/assetpack/) which can take a `.ttf` or `.otf` font and generate a bitmap font atlas with MSDF/SDF support.
+Generate MSDF/SDF fonts using tools like [AssetPack](https://pixijs.io/assetpack/), which takes a `.ttf` or `.otf` font and generates a bitmap font atlas with MSDF/SDF support.
 
-Using MSDF/SDF fonts is similar to using regular bitmap fonts and just requires you to load the appropriate font file:
+Usage is the same as regular bitmap fonts; load the appropriate font file:
 
 ```ts
 import { Assets, BitmapText } from 'pixi.js';
@@ -74,28 +74,32 @@ const text = new BitmapText({
 });
 ```
 
-# **Limitations and Caveats**
+## Limitations and caveats
 
-### ❌ Cannot Update Resolution
+### Cannot update resolution
 
-`BitmapText.resolution` is not mutable. It must be handled by the `BitmapFont`
+`BitmapText.resolution` is not mutable. Resolution is determined by the `BitmapFont` at creation time.
 
 ```ts
 text.resolution = 2;
 // ⚠️ [BitmapText] dynamically updating the resolution is not supported.
 ```
 
-### ⚠️ Large Character Sets Not Practical
+### Missing glyphs
 
-Bitmap fonts are limited by texture size. CJK or emoji-rich sets may require too much memory. Use `Text` or `HTMLText` for dynamic internationalization or emoji support.
+If text contains characters that aren't in the bitmap font's atlas, those characters are skipped during layout and rendering. Text may appear incomplete but will not crash. To fix this, either add the missing characters to your bitmap font (e.g. via [AssetPack](https://pixijs.io/assetpack/)) or use `Text` / `HTMLText` for content with unpredictable character sets.
+
+### Large character sets not practical
+
+Each character needs space in the atlas texture. For CJK, Arabic, or emoji-heavy content, the atlas can exceed GPU texture size limits or consume too much memory. For these cases, use `Text` (renders any character the browser supports) or `HTMLText` (supports emoji and RTL natively).
 
 ---
 
-## **API Reference**
+## API reference
 
-- [BitmapText](https://pixijs.download/release/docs/scene.BitmapText.html)
-- [BitmapFont](https://pixijs.download/release/docs/text.BitmapFont.html)
-- [Assets](https://pixijs.download/release/docs/assets.Assets.html)
-- [TextStyle](https://pixijs.download/release/docs/text.TextStyle.html)
-- [FillStyle](https://pixijs.download/release/docs/scene.FillStyle.html)
-- [StrokeStyle](https://pixijs.download/release/docs/scene.StrokeStyle.html)
+- [`BitmapText`](https://pixijs.download/v8.23.0/docs/scene.BitmapText.html)
+- [`BitmapFont`](https://pixijs.download/v8.23.0/docs/text.BitmapFont.html)
+- [`Assets`](https://pixijs.download/v8.23.0/docs/assets.Assets.html)
+- [`TextStyle`](https://pixijs.download/v8.23.0/docs/text.TextStyle.html)
+- [`FillStyle`](https://pixijs.download/v8.23.0/docs/scene.FillStyle.html)
+- [`StrokeStyle`](https://pixijs.download/v8.23.0/docs/scene.StrokeStyle.html)

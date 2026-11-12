@@ -1,4 +1,4 @@
-import { Application, Graphics, Text, Container } from 'pixi.js';
+import { Application, Container, Graphics, Text } from 'pixi.js';
 
 (async () => {
   const app = new Application();

@@ -1,10 +1,18 @@
 # Math
 
-PixiJS includes a several math utilities for 2D transformations, geometry, and shape manipulation. This guide introduces the most important classes and their use cases, including optional advanced methods enabled via `math-extras`.
+PixiJS provides math utilities for 2D transformations, geometry, and shapes. You'll use these when positioning objects, defining hit areas for interaction, building custom animations, or working with the scene graph transforms directly. Most users interact with these indirectly through `Container` properties like `position`, `scale`, and `rotation`.
 
 ## Matrix
 
-The `Matrix` class represents a 2D affine transformation matrix. It is used extensively for transformations such as scaling, translation, and rotation.
+The `Matrix` class represents a 2D affine transformation matrix:
+
+```text
+| a  c  tx |
+| b  d  ty |
+| 0  0  1  |
+```
+
+Where `a`/`d` control scale, `b`/`c` control shear, and `tx`/`ty` control translation.
 
 ```ts
 import { Matrix, Point } from 'pixi.js';
@@ -13,7 +21,49 @@ const matrix = new Matrix();
 matrix.translate(10, 20).scale(2, 2);
 
 const point = new Point(5, 5);
-const result = matrix.apply(point); // result is (20, 30)
+const result = matrix.apply(point); // (30, 50)
+```
+
+Transformation methods (`translate`, `scale`, `rotate`) return `this` for chaining:
+
+```ts
+const matrix = new Matrix();
+
+matrix
+    .translate(100, 100)
+    .rotate(Math.PI / 2)
+    .scale(2, 2);
+```
+
+Use `setTransform` to set position, pivot, scale, rotation, and skew in a single call:
+
+```ts
+matrix.setTransform(
+    100, 100,    // position
+    0, 0,        // pivot
+    2, 2,        // scale
+    Math.PI / 4, // rotation (radians)
+    0, 0         // skew
+);
+```
+
+Use `decompose` to extract components back out of a matrix, and `invert` to reverse a transformation. A matrix that mirrors one axis (negative determinant, axes still perpendicular) decomposes into a rotation and a negative `scale.x` with zero skew. `scale.y` stays positive, so a y-axis flip comes back as a negative `scale.x` plus a half turn. The components always rebuild the same matrix. `Container.setFromMatrix` follows the same rule.
+
+```ts
+import { Matrix, Point } from 'pixi.js';
+
+const mirrored = new Matrix().rotate(Math.PI / 6).scale(-1, 1);
+const transform = {
+  position: new Point(),
+  scale: new Point(),
+  pivot: new Point(),
+  skew: new Point(),
+  rotation: 0,
+};
+
+mirrored.decompose(transform);
+transform.scale.x; // -1
+transform.skew.x; // 0
 ```
 
 ---
@@ -22,36 +72,36 @@ const result = matrix.apply(point); // result is (20, 30)
 
 ### `Point`
 
-The Point object represents a location in a two-dimensional coordinate system, where `x` represents the position on the horizontal axis and `y` represents the position on the vertical axis. Many Pixi functions accept the `PointData` type as an alternative to `Point`, which only requires `x` and `y` properties.
+Represents a location in 2D space with `x` and `y` coordinates. Many PixiJS functions also accept the `PointData` type, which only requires `x` and `y` properties.
 
 ```ts
 import { Point } from 'pixi.js';
-const point = new Point(5, 10);
 
-point.set(20, 30); // set x and y
+const point = new Point(5, 10);
+point.set(20, 30);
 ```
 
 ### `ObservablePoint`
 
-Extends `Point` and triggers a callback when its values change. Used internally for reactive systems like position and scale updates.
+Implements the same `PointLike` interface as `Point`, but triggers a callback when its values change. Used internally for reactive systems like position and scale updates.
 
 ```ts
-import { Point, ObservablePoint } from 'pixi.js';
+import { ObservablePoint } from 'pixi.js';
 
 const observer = {
-  _onUpdate: (point) => {
-    console.log(`Point updated to: (${point.x}, ${point.y})`);
-  },
+    _onUpdate: (point) => {
+        console.log(`Point updated to: (${point.x}, ${point.y})`);
+    },
 };
 const reactive = new ObservablePoint(observer, 1, 2);
-reactive.set(3, 4); // triggers call to _onUpdate
+reactive.set(3, 4); // triggers _onUpdate
 ```
 
 ---
 
 ## Shapes
 
-PixiJS includes several 2D shapes, used for hit testing, rendering, and geometry computations.
+PixiJS includes several 2D shape primitives for hit testing, rendering, and geometry computations. All shapes provide a `contains(x, y)` method.
 
 ### `Rectangle`
 
@@ -62,6 +112,14 @@ import { Rectangle } from 'pixi.js';
 
 const rect = new Rectangle(10, 10, 100, 50);
 rect.contains(20, 20); // true
+```
+
+`containsRect(other)` is true when `other` lies fully inside, including when it shares the right or bottom edge or occupies exactly the same space. A rectangle with zero width or height contains nothing.
+
+```ts
+const outer = new Rectangle(0, 0, 100, 100);
+outer.containsRect(new Rectangle(50, 50, 50, 50)); // true, flush with the right and bottom edges
+outer.containsRect(outer.clone()); // true
 ```
 
 ### `Circle`
@@ -77,7 +135,7 @@ circle.contains(50, 75); // true
 
 ### `Ellipse`
 
-Similar to `Circle`, but supports different width and height (radii).
+Like `Circle`, but with separate `halfWidth` and `halfHeight` radii.
 
 ```ts
 import { Ellipse } from 'pixi.js';
@@ -88,7 +146,7 @@ ellipse.contains(5, 0); // true
 
 ### `Polygon`
 
-Defined by a list of points. Used for complex shapes and hit testing.
+Defined by a flat array of point coordinates. Handles complex shapes and hit testing.
 
 ```ts
 import { Polygon } from 'pixi.js';
@@ -97,9 +155,17 @@ const polygon = new Polygon([0, 0, 100, 0, 100, 100, 0, 100]);
 polygon.contains(50, 50); // true
 ```
 
+`strokeContains(x, y, width, alignment)` tests the outline instead of the interior. The stroke is split by `alignment` the same way `Graphics.stroke()` draws it: `0.5` centers it on the edge, `1` keeps it inside the polygon, `0` pushes it outside, whatever the winding order of the points.
+
+```ts
+const square = new Polygon([0, 0, 100, 0, 100, 100, 0, 100]);
+square.strokeContains(-5, 50, 20); // true, a centered 20px stroke reaches 10px outside
+square.strokeContains(-5, 50, 20, 1); // false, an inner stroke stays inside
+```
+
 ### `RoundedRectangle`
 
-Rectangle with rounded corners, defined by a radius.
+Rectangle with rounded corners, defined by a corner radius.
 
 ```ts
 import { RoundedRectangle } from 'pixi.js';
@@ -110,7 +176,7 @@ roundRect.contains(10, 10); // true
 
 ### `Triangle`
 
-A convenience wrapper for defining triangles with three points.
+Defines a triangle with three coordinate pairs: `(x, y)`, `(x2, y2)`, `(x3, y3)`.
 
 ```ts
 import { Triangle } from 'pixi.js';
@@ -123,15 +189,17 @@ triangle.contains(50, 50); // true
 
 ## Optional: `math-extras`
 
-Importing `pixi.js/math-extras` extends `Point` and `Rectangle` with additional vector and geometry utilities.
-
-### To enable:
+Importing `pixi.js/math-extras` adds extra methods directly onto `Point`, `ObservablePoint`, and `Rectangle` via prototype extension. This is a side-effect import; you don't need to assign it to a variable.
 
 ```ts
 import 'pixi.js/math-extras';
+
+// Now all Point instances have .add(), .subtract(), .magnitude(), etc.
+const p = new Point(3, 4);
+console.log(p.magnitude()); // 5
 ```
 
-### Enhanced `Point` Methods
+### Enhanced `Point` / `ObservablePoint` methods
 
 | Method                          | Description                                                  |
 | ------------------------------- | ------------------------------------------------------------ |
@@ -140,33 +208,33 @@ import 'pixi.js/math-extras';
 | `multiply(other[, out])`        | Multiplies this point with another point component-wise.     |
 | `multiplyScalar(scalar[, out])` | Multiplies the point by a scalar.                            |
 | `dot(other)`                    | Computes the dot product of two vectors.                     |
-| `cross(other)`                  | Computes the scalar z-component of the 3D cross product.     |
-| `normalize([out])`              | Returns a normalized (unit-length) vector.                   |
+| `cross(other)`                  | Computes the z-component of the 3D cross product.            |
+| `normalize([out])`              | Returns a unit-length vector.                                |
 | `magnitude()`                   | Returns the Euclidean length.                                |
-| `magnitudeSquared()`            | Returns the squared length (more efficient for comparisons). |
-| `project(onto[, out])`          | Projects this point onto another vector.                     |
-| `reflect(normal[, out])`        | Reflects the point across a given normal.                    |
+| `magnitudeSquared()`            | Returns the squared length (faster for comparisons).         |
+| `project(onto[, out])`          | Projects this vector onto another vector.                    |
+| `reflect(normal[, out])`        | Reflects the vector across a given normal.                   |
+| `rotate(radians[, out])`        | Rotates the vector by the given angle in radians.            |
 
-### Enhanced `Rectangle` Methods
+### Enhanced `Rectangle` methods
 
 | Method                       | Description                                           |
 | ---------------------------- | ----------------------------------------------------- |
-| `containsRect(other)`        | Returns true if this rectangle contains the other.    |
 | `equals(other)`              | Checks if all properties are equal.                   |
-| `intersection(other[, out])` | Returns a new rectangle representing the overlap.     |
-| `union(other[, out])`        | Returns a rectangle that encompasses both rectangles. |
+| `intersection(other[, out])` | Returns a rectangle representing the overlap area.    |
+| `union(other[, out])`        | Returns a rectangle encompassing both rectangles.     |
 
 ---
 
-## API Reference
+## API reference
 
-- [Overview](https://pixijs.download/release/docs/maths.html)
-- [Matrix](https://pixijs.download/release/docs/maths.Matrix.html)
-- [Point](https://pixijs.download/release/docs/maths.Point.html)
-- [ObservablePoint](https://pixijs.download/release/docs/maths.ObservablePoint.html)
-- [Rectangle](https://pixijs.download/release/docs/maths.Rectangle.html)
-- [Circle](https://pixijs.download/release/docs/maths.Circle.html)
-- [Ellipse](https://pixijs.download/release/docs/maths.Ellipse.html)
-- [Polygon](https://pixijs.download/release/docs/maths.Polygon.html)
-- [RoundedRectangle](https://pixijs.download/release/docs/maths.RoundedRectangle.html)
-- [Triangle](https://pixijs.download/release/docs/maths.Triangle.html)
+- [`Matrix`](https://pixijs.download/v8.23.0/docs/maths.Matrix.html)
+- [`Point`](https://pixijs.download/v8.23.0/docs/maths.Point.html)
+- [`ObservablePoint`](https://pixijs.download/v8.23.0/docs/maths.ObservablePoint.html)
+- [`Rectangle`](https://pixijs.download/v8.23.0/docs/maths.Rectangle.html)
+- [`Circle`](https://pixijs.download/v8.23.0/docs/maths.Circle.html)
+- [`Ellipse`](https://pixijs.download/v8.23.0/docs/maths.Ellipse.html)
+- [`Polygon`](https://pixijs.download/v8.23.0/docs/maths.Polygon.html)
+- [`RoundedRectangle`](https://pixijs.download/v8.23.0/docs/maths.RoundedRectangle.html)
+- [`Triangle`](https://pixijs.download/v8.23.0/docs/maths.Triangle.html)
+- [`Transform`](https://pixijs.download/v8.23.0/docs/utils.Transform.html)

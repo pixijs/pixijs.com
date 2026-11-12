@@ -4,7 +4,6 @@ import {
   BlurFilter,
   Graphics,
   Rectangle,
-  SCALE_MODES,
   Sprite,
 } from 'pixi.js';
 
@@ -50,7 +49,6 @@ import {
   );
   const texture = app.renderer.generateTexture({
     target: circle,
-    style: { scaleMode: SCALE_MODES.NEAREST },
     resolution: 1,
     frame: bounds,
   });

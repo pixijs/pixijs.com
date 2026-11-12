@@ -1,3 +1,4 @@
+import { gsap } from 'gsap';
 import {
   Application,
   Assets,
@@ -5,7 +6,6 @@ import {
   Container,
   SplitBitmapText,
 } from 'pixi.js';
-import { gsap } from 'gsap';
 
 (async () => {
   // Create a new application

@@ -1,18 +1,18 @@
 # Scene Objects
 
-In PixiJS, scene objects are the building blocks of your application’s display hierarchy. They include **containers**, **sprites**, **text**, **graphics**, and other drawable entities that make up the **scene graph**—the tree-like structure that determines what gets rendered, how, and in what order.
+Everything visible in a PixiJS application is a scene object arranged in a **scene graph**: a tree of containers, sprites, text, graphics, and other display objects. Parent transforms (position, rotation, scale, alpha) cascade to children, so moving a container moves everything inside it.
 
-## Containers vs. Leaf Nodes
+This guide covers the objects available, how transforms work, and common operations like masking, filtering, and tinting.
 
-Scene objects in PixiJS can be divided into **containers** and **leaf nodes**:
+## Available display objects
 
 ### Containers
 
-`Container` is the **base class** for all scene objects in v8 (replacing the old `DisplayObject`).
+[`Container`](https://pixijs.download/v8.23.0/docs/scene.Container.html) is the **base class** for all scene objects in v8 (replacing the old `DisplayObject`).
 
 - Can have children.
 - Commonly used to group objects and apply transformations (position, scale, rotation) to the group.
-- Examples: `Application.stage`, user-defined groups.
+- [`ParticleContainer`](https://pixijs.download/v8.23.0/docs/scene.ParticleContainer.html) is an optimized container for particle systems.
 
 ```ts
 const group = new Container();
@@ -20,26 +20,30 @@ group.addChild(spriteA);
 group.addChild(spriteB);
 ```
 
-### Leaf Nodes
+### Renderable objects
 
-Leaf nodes are renderable objects that should not have children. In v8, **only containers should have children**.
+These are the visual objects you add to containers. In v8, **only containers should have children**; the objects below are "leaf nodes" that render content but shouldn't contain other objects.
 
-Examples of leaf nodes include:
+- [`Sprite`](https://pixijs.download/v8.23.0/docs/scene.Sprite.html) - Image display
+- [`AnimatedSprite`](https://pixijs.download/v8.23.0/docs/scene.AnimatedSprite.html) - Sprite animation
+- [`TilingSprite`](https://pixijs.download/v8.23.0/docs/scene.TilingSprite.html) - Repeating texture patterns
+- [`NineSliceSprite`](https://pixijs.download/v8.23.0/docs/scene.NineSliceSprite.html) - Scalable UI elements
+- [`Text`](https://pixijs.download/v8.23.0/docs/scene.Text.html) - Canvas-based text rendering
+- [`HTMLText`](https://pixijs.download/v8.23.0/docs/scene.HTMLText.html) - HTML/CSS-based text
+- [`BitmapText`](https://pixijs.download/v8.23.0/docs/scene.BitmapText.html) - High-performance bitmap fonts
+- [`Graphics`](https://pixijs.download/v8.23.0/docs/scene.Graphics.html) - Vector shape drawing
+- [`Mesh`](https://pixijs.download/v8.23.0/docs/scene.Mesh.html) - Custom vertex-based rendering
+  - [`MeshSimple`](https://pixijs.download/v8.23.0/docs/scene.MeshSimple.html) - Basic mesh with convenient constructor
+  - [`MeshPlane`](https://pixijs.download/v8.23.0/docs/scene.MeshPlane.html) - Deformable textured plane
+  - [`MeshRope`](https://pixijs.download/v8.23.0/docs/scene.MeshRope.html) - Rope-like curved mesh
 
-- `Sprite`
-- `Text`
-- `Graphics`
-- `Mesh`
-- `TilingSprite`
-- `HTMLText`
-
-Attempting to add children to a leaf node will not result in a runtime error, however, you may run into unexpected rendering behavior. Therefore, If nesting is required, wrap leaf nodes in a `Container`.
+Adding children to a leaf node won't cause a runtime error, but you may encounter unexpected rendering behavior. If nesting is required, wrap leaf nodes in a `Container`.
 
 **Before v8 (invalid in v8):**
 
 ```ts
 const sprite = new Sprite();
-sprite.addChild(anotherSprite); // ❌ Invalid in v8
+sprite.addChild(anotherSprite); // Invalid in v8
 ```
 
 **v8 approach:**
@@ -47,37 +51,34 @@ sprite.addChild(anotherSprite); // ❌ Invalid in v8
 ```ts
 const group = new Container();
 group.addChild(sprite);
-group.addChild(anotherSprite); // ✅ Valid
+group.addChild(anotherSprite); // Valid
 ```
 
 ## Transforms
 
-All scene objects in PixiJS have several properties that control their position, rotation, scale, and alpha. These properties are inherited by child objects, allowing you to apply transformations to groups of objects easily.
-
-You will often use these properties to position and animate objects in your scene.
+All scene objects have properties that control position, rotation, scale, and alpha. These properties are inherited by child objects, letting you apply transformations to groups of objects.
 
 | Property     | Description                                                                                                                                             |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **position** | X- and Y-position are given in pixels and change the position of the object relative to its parent, also available directly as `object.x` / `object.y`  |
 | **rotation** | Rotation is specified in radians, and turns an object clockwise (0.0 - 2 \* Math.PI)                                                                    |
 | **angle**    | Angle is an alias for rotation that is specified in degrees instead of radians (0.0 - 360.0)                                                            |
-| **pivot**    | Point the object rotates around, in pixels - also sets origin for child objects                                                                         |
+| **pivot**    | Point the object rotates around, in pixels; also sets origin for child objects                                                                          |
 | **alpha**    | Opacity from 0.0 (fully transparent) to 1.0 (fully opaque), inherited by children                                                                       |
 | **scale**    | Scale is specified as a percent with 1.0 being 100% or actual-size, and can be set independently for the x and y axis                                   |
 | **skew**     | Skew transforms the object in x and y similar to the CSS skew() function, and is specified in radians                                                   |
-| **anchor?**  | Anchor is a percentage-based offset for the sprite's position and rotation. This is different from the `pivot` property, which is a pixel-based offset. |
+| **anchor?**  | Anchor is a percentage-based offset for the sprite's position and rotation. This differs from `pivot`, which is a pixel-based offset. |
 
-### **Anchor vs Pivot**
+### Anchor vs pivot
 
-Some leaf nodes have an additional property called `anchor`, which is a percentage-based offset for the nodes position and rotation. This is different from the `pivot` property, which is a pixel-based offset. Understanding the difference between anchor and pivot is critical when positioning or rotating a node.
+Some leaf nodes have an `anchor` property, a percentage-based offset for position and rotation. This differs from `pivot`, which is a pixel-based offset. Understanding the difference is critical when positioning or rotating a node.
 
-:::info
-Setting either pivot or anchor visually moves the node. This differs from CSS where changing `transform-origin` does not affect the element's position.
-:::
+> [!NOTE]
+> Setting either pivot or anchor visually moves the node. This differs from CSS where changing `transform-origin` does not affect the element's position.
 
-#### **Anchor**
+#### Anchor
 
-- Available only on `Sprite`
+- Anchor is available on sprite-based objects (`Sprite`, `TilingSprite`, `NineSliceSprite`, `AnimatedSprite`) and text objects (`Text`, `BitmapText`, `HTMLText`)
 - Defined in normalized values `(0.0 to 1.0)`
 - `(0, 0)` is the top-left, `(0.5, 0.5)` is the center
 - Changes both position and rotation origin
@@ -87,7 +88,7 @@ sprite.anchor.set(0.5); // center
 sprite.rotation = Math.PI / 4; // Rotate 45 degrees around the center
 ```
 
-#### **Pivot**
+#### Pivot
 
 - Available on all `Container`s
 - Defined in **pixels**, not normalized
@@ -96,15 +97,15 @@ sprite.rotation = Math.PI / 4; // Rotate 45 degrees around the center
 const sprite = new Sprite(texture);
 sprite.width = 100;
 sprite.height = 100;
-sprite.pivot.set(50, 50); // Center of the container
-container.rotation = Math.PI / 4; // Rotate 45 degrees around the pivot
+sprite.pivot.set(50, 50); // Center of the sprite
+sprite.rotation = Math.PI / 4; // Rotate 45 degrees around the pivot
 ```
 
-## Measuring Bounds
+## Measuring bounds
 
 There are two types of bounds in PixiJS:
 
-- **Local bounds** represent the object’s dimensions in its own coordinate space. Use `getLocalBounds()`.
+- **Local bounds** represent the object's dimensions in its own coordinate space. Use `getLocalBounds()`.
 - **Global bounds** represent the object's bounding box in world coordinates. Use `getBounds()`.
 
 ```ts
@@ -112,11 +113,11 @@ const local = container.getLocalBounds();
 const global = container.getBounds();
 ```
 
-If performance is critical you can also provide a custom `boundsArea` to avoid per-child measurement entirely.
+If performance is critical, you can provide a custom `boundsArea` to avoid per-child measurement.
 
 ### Changing size
 
-To change the size of a container, you can use the `width` and `height` properties. This will scale the container to fit the specified dimensions:
+To change the size of a container, use the `width` and `height` properties. This scales the container to fit the specified dimensions:
 
 ```ts
 const container = new Container();
@@ -124,7 +125,7 @@ container.width = 100;
 container.height = 200;
 ```
 
-Setting the `width` and `height` individually can be an expensive operation, as it requires recalculating the bounds of the container and its children. To avoid this, you can use `setSize()` to set both properties at once:
+Setting `width` and `height` individually can be expensive because it requires recalculating the bounds of the container and its children. Use `setSize()` to set both at once:
 
 ```ts
 const container = new Container();
@@ -132,14 +133,11 @@ container.setSize(100, 200);
 const size = container.getSize(); // { width: 100, height: 200 }
 ```
 
-This method is more efficient than setting `width` and `height` separately, as it only requires one bounds calculation.
+## Masking scene objects
 
-## Masking Scene Objects
+PixiJS supports **masking**, restricting the visible area of a scene object based on another object's shape. This is useful for cropping, revealing, or hiding parts of your scene.
 
-PixiJS supports **masking**, allowing you to restrict the visible area of a scene object based on another object's shape.
-This is useful for creating effects like cropping, revealing, or hiding parts of your scene.
-
-### Types of Masks
+### Types of masks
 
 - **Graphics-based masks**: Use a `Graphics` object to define the shape.
 - **Sprite-based masks**: Use a `Sprite` or other renderable object.
@@ -154,9 +152,9 @@ stage.addChild(shape);
 stage.addChild(maskedSprite);
 ```
 
-### Inverse Masks
+### Inverse masks
 
-To create an inverse mask, you can use the `setMask` property and set its `inverse` option to `true`. This will render everything outside the mask.
+To create an inverse mask, use `setMask` with `inverse: true`. This renders everything outside the mask.
 
 ```ts
 const inverseMask = new Graphics().rect(0, 0, 200, 200).fill(0x000000);
@@ -167,15 +165,37 @@ stage.addChild(inverseMask);
 stage.addChild(maskedContainer);
 ```
 
-### Notes on Masking
+### Mask channel selection
 
-- The mask is **not rendered**; it's used only to define the visible area. However, it must be added to the display list.
+Sprite masks read the **red channel** of the mask texture by default. This works well for grayscale mask textures where the red component controls visibility.
+
+If your mask is defined by transparency (e.g., a PNG with an alpha gradient), set `channel: 'alpha'` to read the alpha channel instead:
+
+```ts
+const maskSprite = new Sprite(texture);
+maskedContainer.setMask({ mask: maskSprite, channel: 'alpha' });
+```
+
+This is useful when a single mask texture encodes different shapes in different channels. For example, a texture with a red star and a translucent blue circle produces two distinct masks depending on the channel:
+
+```ts
+// Red channel: reveals only where R > 0 (the star shape)
+sprite.setMask({ mask: maskSprite, channel: 'red' });
+
+// Alpha channel: reveals only where A > 0 (the full circle)
+sprite.setMask({ mask: maskSprite, channel: 'alpha' });
+```
+
+### Notes on masking
+
+- The mask is **not rendered**; it only defines the visible area. It must be added to the display list.
 - Only one mask can be assigned per object.
 - For advanced blending, use **alpha masks** or **filters** (covered in later guides).
+- Remove a mask (`container.mask = null`) before destroying the mask or its texture. If a sprite mask's texture is destroyed while still assigned, PixiJS renders the mask as empty and logs `[MaskFilter] The mask texture was destroyed while the mask is still in use. Remove the mask before destroying its texture.` in debug builds.
 
 ## Filters
 
-Another common use for Container objects is as hosts for filtered content. Filters are an advanced, WebGL/WebGPU-only feature that allows PixiJS to perform per-pixel effects like blurring and displacements. By setting a filter on a Container, the area of the screen the Container encompasses will be processed by the filter after the Container's contents have been rendered.
+Filters apply per-pixel effects (blur, displacement, color shifts) to a container and everything inside it. The container's contents are rendered first, then the filter processes the resulting pixels.
 
 ```ts
 const container = new Container();
@@ -185,11 +205,10 @@ container.filters = [filter];
 container.addChild(sprite);
 ```
 
-:::info
-Filters should be used somewhat sparingly. They can slow performance and increase memory usage if used too often in a scene.
-:::
+> [!NOTE]
+> Use filters sparingly. They can slow performance and increase memory usage.
 
-Below are list of filters available by default in PixiJS. There is, however, a community repository with [many more filters](https://github.com/pixijs/filters).
+Below are the filters available by default. There is also a community repository with [many more filters](https://github.com/pixijs/filters).
 
 | Filter             | Description                                                                                                   |
 | ------------------ | ------------------------------------------------------------------------------------------------------------- |
@@ -199,11 +218,11 @@ Below are list of filters available by default in PixiJS. There is, however, a c
 | DisplacementFilter | Displacement maps create visual offset pixels, for instance creating a wavy water effect.                     |
 | NoiseFilter        | Create random noise (e.g., grain effect).                                                                     |
 
-Under the hood, each Filter we offer out of the box is written in both glsl (for WebGL) and wgsl (for WebGPU). This means all filters should work on both renderers.
+Each built-in filter is written in both GLSL (for WebGL) and WGSL (for WebGPU), so all filters work on both renderers.
 
 ## Tinting
 
-You can tint any scene object by setting the `tint` property. It modifies the color of the rendered pixels, similar to multiplying a tint color over the object.
+You can tint any scene object by setting the `tint` property. It modifies the color of rendered pixels, multiplying a tint color over the object.
 
 ```ts
 const sprite = new Sprite(texture);
@@ -221,18 +240,18 @@ sprite.tint = 0x00ff00; // Green tint
 sprite.tint = 0xffffff; // No tint
 ```
 
-PixiJS supports a variety of color formats and you can find more information from the [Color documentation](../color.md).
+PixiJS supports a variety of color formats. See the [Color documentation](https://pixijs.com/8.x/guides/components/color.md) for details.
 
-## Blend Modes
+## Blend modes
 
-Blend modes determine how colors of overlapping objects are combined. PixiJS supports a variety of blend modes, including:
+Blend modes determine how colors of overlapping objects combine. PixiJS supports:
 
 - `normal`: Default blend mode.
 - `add`: Adds the colors of the source and destination pixels.
 - `multiply`: Multiplies the colors of the source and destination pixels.
 - `screen`: Inverts the colors, multiplies them, and inverts again.
 
-We also support may more advanced blend modes, such as `subtract`, `difference`, and `overlay`. You can find the full list of blend modes in the [Blend Modes documentation](../filters.md#advanced-blend-modes).
+There are also advanced blend modes like `subtract`, `difference`, and `overlay`. See the full list in the [Blend Modes documentation](https://pixijs.com/8.x/guides/components/filters.md#advanced-blend-modes).
 
 ```ts
 const sprite = new Sprite(texture);
@@ -241,21 +260,21 @@ sprite.blendMode = 'multiply'; // Multiply blend mode
 
 ## Interaction
 
-PixiJS provides a powerful interaction system that allows you to handle user input events like clicks/hovers. To enable interaction on a scene object, can be as simple as setting its `interactive` property to `true`.
+To handle clicks, hovers, and other pointer events on a scene object, set `eventMode` to `'static'` (for non-moving objects) or `'dynamic'` (for objects that move without user input).
 
 ```ts
 const sprite = new Sprite(texture);
-sprite.interactive = true;
+sprite.eventMode = 'static';
 sprite.on('click', (event) => {
   console.log('Sprite clicked!', event);
 });
 ```
 
-We have a detailed guide on [Interaction](../events.md) that covers how to set up and manage interactions, including hit testing, pointer events, and more. We highly recommend checking it out.
+See the detailed guide on [Interaction](https://pixijs.com/8.x/guides/components/events.md) for setup, hit testing, pointer events, and more.
 
 ## Using `onRender`
 
-The `onRender` callback allows you to run logic every frame when a scene object is rendered. This is useful for lightweight animation and update logic:
+The `onRender` callback runs logic every frame when a scene object is rendered. Useful for lightweight animation and update logic:
 
 ```ts
 const container = new Container();
@@ -264,7 +283,7 @@ container.onRender = () => {
 };
 ```
 
-Note: In PixiJS v8, this replaces the common v7 pattern of overriding `updateTransform`, which no longer runs every frame. The `onRender` function is registered with the render group the container belongs to.
+This replaces the v7 pattern of overriding `updateTransform`, which no longer runs every frame.
 
 To remove the callback:
 
@@ -274,16 +293,15 @@ container.onRender = null;
 
 ---
 
-## API Reference
+## API reference
 
-- [Overview](https://pixijs.download/release/docs/scene.html)
-- [Container](https://pixijs.download/release/docs/scene.Container.html)
-- [ParticleContainer](https://pixijs.download/release/docs/scene.ParticleContainer.html)
-- [Sprite](https://pixijs.download/release/docs/scene.Sprite.html)
-- [TilingSprite](https://pixijs.download/release/docs/scene.TilingSprite.html)
-- [NineSliceSprite](https://pixijs.download/release/docs/scene.NineSliceSprite.html)
-- [Graphics](https://pixijs.download/release/docs/scene.Graphics.html)
-- [Mesh](https://pixijs.download/release/docs/scene.Mesh.html)
-- [Text](https://pixijs.download/release/docs/scene.Text.html)
-- [Bitmap Text](https://pixijs.download/release/docs/scene.BitmapText.html)
-- [HTMLText](https://pixijs.download/release/docs/scene.HTMLText.html)
+- [`Container`](https://pixijs.download/v8.23.0/docs/scene.Container.html)
+- [`ParticleContainer`](https://pixijs.download/v8.23.0/docs/scene.ParticleContainer.html)
+- [`Sprite`](https://pixijs.download/v8.23.0/docs/scene.Sprite.html)
+- [`TilingSprite`](https://pixijs.download/v8.23.0/docs/scene.TilingSprite.html)
+- [`NineSliceSprite`](https://pixijs.download/v8.23.0/docs/scene.NineSliceSprite.html)
+- [`Graphics`](https://pixijs.download/v8.23.0/docs/scene.Graphics.html)
+- [`Mesh`](https://pixijs.download/v8.23.0/docs/scene.Mesh.html)
+- [`Text`](https://pixijs.download/v8.23.0/docs/scene.Text.html)
+- [`BitmapText`](https://pixijs.download/v8.23.0/docs/scene.BitmapText.html)
+- [`HTMLText`](https://pixijs.download/v8.23.0/docs/scene.HTMLText.html)

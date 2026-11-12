@@ -1,8 +1,8 @@
 # Ticker Plugin
 
-The `TickerPlugin` provides a built-in update loop for your PixiJS `Application`. This loop calls `.render()` at a regular cadence—by default, once per animation frame—and integrates with PixiJS's `Ticker` system for precise control over frame-based updates.
+The [`TickerPlugin`](https://pixijs.download/v8.23.0/docs/app.TickerPlugin.html) provides a built-in update loop for your PixiJS [`Application`](https://pixijs.download/v8.23.0/docs/app.Application.html). It calls `.render()` once per animation frame by default and integrates with PixiJS's [`Ticker`](https://pixijs.download/v8.23.0/docs/ticker.Ticker.html) system for frame-based control.
 
-PixiJS includes this plugin automatically when you initialize an `Application`, but you can also opt out and add it manually.
+PixiJS includes this plugin automatically when you initialize an `Application`. You can also opt out and add it manually.
 
 ## Usage
 
@@ -15,25 +15,24 @@ await app.init({
 });
 
 app.ticker.add((ticker) => {
-  // Custom update logic here
   bunny.rotation += 1 * ticker.deltaTime;
 });
 ```
 
-### Default Behavior
+### Default behavior
 
-The `TickerPlugin` is included automatically unless disabled:
+The `TickerPlugin` is included automatically:
 
 ```ts
 const app = new Application();
 
 await app.init({
-  autoStart: true, // Automatically starts the render loop
+  autoStart: true, // Starts the render loop automatically
   sharedTicker: false, // Use a dedicated ticker
 });
 ```
 
-### Manual Registration
+### Manual registration
 
 If you're managing extensions yourself:
 
@@ -43,7 +42,7 @@ import { extensions, TickerPlugin } from 'pixi.js';
 extensions.add(TickerPlugin);
 ```
 
-# Shared vs Custom Ticker
+## Shared vs dedicated ticker
 
 The plugin supports two modes:
 
@@ -52,31 +51,91 @@ The plugin supports two modes:
 | `sharedTicker: true`  | Uses `Ticker.shared`, shared across all applications.        |
 | `sharedTicker: false` | Creates a private ticker instance scoped to the application. |
 
-### Behavior Differences
+### Behavior differences
 
-- If using a **shared ticker**, other code may also be registering updates, so the order of execution can vary.
-- If using a **custom ticker**, you get complete control over timing and update order.
+- With a **shared ticker**, other code can also register updates, so execution order can vary.
+- With a **dedicated ticker**, you get full control over timing and update order.
+
+### Update order
+
+When using a shared ticker, updates run in this order:
+
+1. **System ticker** (`Ticker.system`) -- internal PixiJS updates like interaction events and accessibility. Always runs first.
+2. **Shared ticker** (`Ticker.shared`) -- your callbacks if `sharedTicker: true`.
+3. **App ticker** -- a private `Ticker` instance created per-app if `sharedTicker: false`.
 
 ---
 
-## Lifecycle Control
+## Lifecycle control
 
-You can manually stop and start the ticker:
+Stop and start the ticker manually:
 
 ```ts
 app.stop(); // Stop automatic rendering
 app.start(); // Resume
 ```
 
-This is useful for:
+Useful for:
 
-- Pausing the game or animation
-- Performance throttling on inactive tabs
+- Pausing a game or animation
+- Throttling on inactive tabs
 - Managing visibility events
+
+### Manual rendering
+
+If you disable `autoStart`, you can manage the render loop yourself:
+
+```ts
+const app = new Application();
+await app.init({ autoStart: false });
+
+function animate() {
+    app.ticker.update(); // fire any registered ticker callbacks
+    app.render();
+    requestAnimationFrame(animate);
+}
+animate();
+```
 
 ---
 
-## API Reference
+## Adding update callbacks
 
-- [TickerPlugin](https://pixijs.download/release/docs/app.TickerPlugin.html)
-- [Ticker](https://pixijs.download/release/docs/ticker.Ticker.html)
+Register callbacks to run every frame:
+
+```ts
+// Runs every frame
+app.ticker.add((ticker) => {
+    sprite.x += speed * ticker.deltaTime;
+});
+
+// Runs once on the next frame, then auto-removes
+app.ticker.addOnce(() => {
+    console.log('Ready');
+});
+```
+
+### Priority-based execution
+
+Control the order callbacks run in using [`UPDATE_PRIORITY`](https://pixijs.download/v8.23.0/docs/ticker.UPDATE_PRIORITY.html):
+
+```ts
+import { UPDATE_PRIORITY } from 'pixi.js';
+
+app.ticker.add(
+    (ticker) => {
+        // Physics: runs before normal-priority updates
+    },
+    null,
+    UPDATE_PRIORITY.HIGH
+);
+```
+
+---
+
+## API reference
+
+- [`TickerPlugin`](https://pixijs.download/v8.23.0/docs/app.TickerPlugin.html)
+- [`TickerPluginOptions`](https://pixijs.download/v8.23.0/docs/app.TickerPluginOptions.html)
+- [`Ticker`](https://pixijs.download/v8.23.0/docs/ticker.Ticker.html)
+- [`UPDATE_PRIORITY`](https://pixijs.download/v8.23.0/docs/ticker.UPDATE_PRIORITY.html)

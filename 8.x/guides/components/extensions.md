@@ -1,0 +1,236 @@
+# Extensions
+
+PixiJS is built as a set of swappable parts called **extensions**. Renderers, asset loaders, event systems, and application plugins are all extensions. You can add your own, replace built-in ones, or remove ones you don't need. This is how PixiJS stays lightweight while supporting a wide range of features.
+
+## Basic usage
+
+Register an extension using the global `extensions` object:
+
+```ts
+import { extensions, ExtensionType } from 'pixi.js';
+
+const spriteSheetLoader = {
+    extension: {
+        type: ExtensionType.LoadParser,
+        name: 'sprite-sheet-loader',
+        priority: 100,
+    },
+
+    id: 'spriteSheet', // Unique name; the renderer/loader uses this to look up the extension
+
+    test(url: string) {
+        return url.endsWith('.json');
+    },
+
+    async load(url: string) {
+        const response = await fetch(url);
+        return response.json();
+    },
+};
+
+extensions.add(spriteSheetLoader);
+```
+
+## Extension management
+
+### Adding extensions
+
+```ts
+// Single extension
+extensions.add(spriteSheetLoader);
+
+// Multiple extensions
+extensions.add(spriteSheetLoader, customSystem, customPipe);
+```
+
+### Removing extensions
+
+```ts
+// Single extension
+extensions.remove(spriteSheetLoader);
+
+// Multiple extensions
+extensions.remove(spriteSheetLoader, customSystem);
+```
+
+### Priority system
+
+Extensions can specify a priority to control execution order. Higher priority numbers run first. The default priority is `-1` when unspecified.
+
+```ts
+const highPriorityLoader = {
+    extension: {
+        type: ExtensionType.LoadParser,
+        name: 'priority-loader',
+        priority: 100, // runs first
+    },
+};
+
+const lowPriorityLoader = {
+    extension: {
+        type: ExtensionType.LoadParser,
+        name: 'fallback-loader',
+        priority: -1, // runs last
+    },
+};
+```
+
+## Extension types
+
+### Asset management
+
+Asset extensions handle loading, resolving, caching, and detecting assets. You can combine them into a single `Asset` group extension using the `loader`, `resolver`, `cache`, and `detection` properties:
+
+```ts
+const spriteAsset = {
+    extension: ExtensionType.Asset,
+    loader: {
+        id: 'spriteLoader',
+        test(url: string) { return url.endsWith('.sprite'); },
+        async load(url: string) { /* load logic */ },
+    },
+    resolver: {
+        test(url: string) { return url.endsWith('.sprite'); },
+        parse(url: string) { /* resolve logic */ },
+    },
+    cache: {
+        test(asset: any) { return asset.isSprite; },
+        getCacheableAssets(keys: string[], asset: any) { /* cache logic */ },
+    },
+    detection: {
+        test: async () => true,
+        add: async (formats: string[]) => [...formats, 'sprite'],
+        remove: async (formats: string[]) => formats.filter((f) => f !== 'sprite'),
+    },
+};
+```
+
+### Rendering pipeline
+
+Rendering extensions define how objects are drawn. Systems manage specific rendering aspects (textures, shaders, buffers), while pipes handle rendering for specific display object types.
+
+Extensions can target WebGL, WebGPU, or both:
+
+```ts
+// Renderer system targeting both WebGL and WebGPU
+class CustomSystem {
+    static extension = {
+        type: [ExtensionType.WebGLSystem, ExtensionType.WebGPUSystem],
+        name: 'custom-system',
+    };
+
+    init() { /* setup */ }
+    destroy() { /* cleanup */ }
+}
+
+// Render pipe targeting all renderers
+const customPipe = {
+    extension: {
+        type: [
+            ExtensionType.WebGLPipes,
+            ExtensionType.WebGPUPipes,
+            ExtensionType.CanvasPipes,
+        ],
+        name: 'custom-pipe',
+    },
+    render(object) { /* draw logic */ },
+};
+```
+
+#### Loading backend-specific code lazily
+
+A renderer loader is an async hook the renderer awaits while it initialises, after the environment extensions load and before it creates its systems and pipes. Use one to `import()` the systems and pipes that only one backend needs, so the other backends' code stays out of the main bundle. The imported module registers them with `extensions.add`, and the renderer picks them up once every loader for its backend has resolved.
+
+```ts
+// Each backend gets its own loader; only the loaders for the renderer in use run
+extensions.add(
+    {
+        extension: { type: ExtensionType.WebGLLoader, name: 'my-plugin' },
+        load: () => import('./gl/register'), // registers WebGL systems and pipes on import
+    },
+    {
+        extension: { type: ExtensionType.WebGPULoader, name: 'my-plugin' },
+        load: () => import('./gpu/register'),
+    },
+);
+```
+
+Loader names are unique per backend; a second loader registered under the same name is ignored. Loaders run concurrently, so don't rely on one plugin's module evaluating before another's; the systems and pipes they register are ordered by their own `priority`. Loaders are skipped when the renderer is created with `skipExtensionImports: true`, so custom builds must import the backend modules themselves.
+
+### Application plugins
+
+Application plugins extend the core `Application` class. Plugins use static `init` and `destroy` methods. During `init`, `this` refers to the Application instance:
+
+```ts
+class MyPlugin {
+    static extension = ExtensionType.Application;
+
+    static init(options) {
+        // `this` is the Application instance
+        Object.defineProperty(this, 'myFeature', {
+            value: () => { /* feature logic */ },
+        });
+    }
+
+    static destroy() {
+        // cleanup
+    }
+}
+```
+
+Plugins initialize in registration order and destroy in reverse order.
+
+## Extension types reference
+
+### Core systems
+
+- `ExtensionType.Application`: Application plugins
+- `ExtensionType.Environment`: Environment configuration
+
+### Asset management
+
+- `ExtensionType.Asset`: Combined asset handling
+- `ExtensionType.LoadParser`: Resource loading
+- `ExtensionType.ResolveParser`: URL resolution
+- `ExtensionType.CacheParser`: Cache management
+- `ExtensionType.DetectionParser`: Format detection
+
+### Rendering
+
+- `ExtensionType.WebGLSystem`: WebGL systems
+- `ExtensionType.WebGLPipes`: WebGL render pipes
+- `ExtensionType.WebGLPipesAdaptor`: WebGL render pipe adaptors
+- `ExtensionType.WebGLLoader`: Async hooks awaited while a WebGL renderer initialises
+- `ExtensionType.WebGPUSystem`: WebGPU systems
+- `ExtensionType.WebGPUPipes`: WebGPU render pipes
+- `ExtensionType.WebGPUPipesAdaptor`: WebGPU render pipe adaptors
+- `ExtensionType.WebGPULoader`: Async hooks awaited while a WebGPU renderer initialises
+- `ExtensionType.CanvasSystem`: Canvas systems
+- `ExtensionType.CanvasPipes`: Canvas render pipes
+- `ExtensionType.CanvasPipesAdaptor`: Canvas render pipe adaptors
+- `ExtensionType.CanvasLoader`: Async hooks awaited while a Canvas renderer initialises
+
+### Advanced features
+
+These extension types are for specialized use cases. Most applications won't need them.
+
+- `ExtensionType.MaskEffect`: Custom masking strategies
+- `ExtensionType.BlendMode`: Custom blend mode implementations
+- `ExtensionType.TextureSource`: Auto-detect and create texture sources from raw data
+- `ExtensionType.ShapeBuilder`: Add new shape types to the Graphics API
+- `ExtensionType.Batcher`: Custom batch grouping for draw call optimization
+- `ExtensionType.TextureUploaderWebGL`: Register a WebGL texture uploader by name, matched against `TextureSource.uploadMethodId`. Register before creating the renderer.
+- `ExtensionType.TextureUploaderWebGPU`: Register a WebGPU texture uploader by name, matched against `TextureSource.uploadMethodId`. Register before creating the renderer.
+
+## Related documentation
+
+- See [`ExtensionType`](https://pixijs.download/v8.23.0/docs/extensions.ExtensionType.html) for all extension types
+- See [`ExtensionFormatLoose`](https://pixijs.download/v8.23.0/docs/extensions.ExtensionFormatLoose.html) for extension metadata format
+- See [`extensions`](https://pixijs.download/v8.23.0/docs/extensions.extensions.html) for the extension registry
+- See [`Application`](https://pixijs.download/v8.23.0/docs/app.Application.html) for application plugins
+- See [`Assets`](https://pixijs.download/v8.23.0/docs/assets.Assets.html) for the asset loading system
+- See [`Renderer`](https://pixijs.download/v8.23.0/docs/rendering.Renderer.html) for rendering extensions
+- See [`RendererLoader`](https://pixijs.download/v8.23.0/docs/rendering.RendererLoader.html) for the renderer loader interface
+- See [`LoaderParser`](https://pixijs.download/v8.23.0/docs/assets.LoaderParser.html) for asset loader interface
+- See [`ResolveURLParser`](https://pixijs.download/v8.23.0/docs/assets.ResolveURLParser.html) for URL resolution interface
+- See [`CacheParser`](https://pixijs.download/v8.23.0/docs/assets.CacheParser.html) for cache parser interface

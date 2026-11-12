@@ -1,15 +1,10 @@
-import { Sandpack } from '@codesandbox/sandpack-react';
-import { dracula } from '@codesandbox/sandpack-themes';
+# Pixel Lines
 
-# Graphics Pixel Line
-
-The `pixelLine` property is a neat feature of the PixiJS Graphics API that allows you to create lines that remain 1 pixel thick, regardless of scaling or zoom level. As part of the Graphics API, it gives developers all the power PixiJS provides for building and stroking shapes. This feature is especially useful for achieving crisp, pixel-perfect visuals, particularly in retro-style or grid-based games, technical drawing, or UI rendering.
-
-In this guide, we'll dive into how this property works, its use cases, and the caveats you should be aware of when using it.
+Normal stroked lines get thicker when you scale a Graphics object. Setting `pixelLine: true` on a stroke keeps lines exactly 1 screen pixel wide regardless of any transforms, zoom, or scaling applied to the object.
 
 ---
 
-```ts
+```js
 import { Application, Container, Graphics, Text } from 'pixi.js';
 
 /**
@@ -96,16 +91,11 @@ function buildGrid(graphics) {
 })();
 ```
 
-## How to use `pixelLine`?
-
-Here’s a simple example:
+## Basic usage
 
 ```ts
 // Create a Graphics object and draw a pixel-perfect line
-let graphics = new Graphics()
-  .moveTo(0, 0)
-  .lineTo(100, 100)
-  .stroke({ color: 0xff0000, pixelLine: true });
+let graphics = new Graphics().moveTo(0, 0).lineTo(100, 100).stroke({ color: 0xff0000, pixelLine: true });
 
 // Add it to the stage
 app.stage.addChild(graphics);
@@ -118,48 +108,32 @@ In this example, no matter how you transform or zoom the `Graphics` object, the 
 
 ---
 
-## Why Use `pixelLine`?
+## Why use `pixelLine`?
 
-Pixel-perfect lines can be incredibly useful in a variety of scenarios. Here are some common use cases:
+Common use cases:
 
-### 1. **Retro or Pixel Art Games**
+### 1. **Retro or pixel art games**
 
-- Pixel art games rely heavily on maintaining sharp, precise visuals. The `pixelLine` property ensures that lines do not blur or scale inconsistently with other pixel elements.
-- Example: Drawing pixel-perfect grids for tile-based maps.
+- Pixel art games need sharp, precise visuals. `pixelLine` ensures lines don't blur or scale inconsistently.
+- Example: pixel-perfect grids for tile-based maps.
 
 ```ts
-// Create a grid of vertical and horizontal lines
 const grid = new Graphics();
 
-// Draw 10 vertical lines spaced 10 pixels apart
-// Draw vertical lines
 for (let i = 0; i < 10; i++) {
-  // Move to top of each line (x = i*10, y = 0)
-  grid
-    .moveTo(i * 10, 0)
-    // Draw down to bottom (x = i*10, y = 100)
-    .lineTo(i * 10, 100);
+  grid.moveTo(i * 10, 0).lineTo(i * 10, 100); // vertical
+  grid.moveTo(0, i * 10).lineTo(100, i * 10); // horizontal
 }
 
-// Draw horizontal lines
-for (let i = 0; i < 10; i++) {
-  // Move to start of each line (x = 0, y = i*10)
-  grid
-    .moveTo(0, i * 10)
-    // Draw across to end (x = 100, y = i*10)
-    .lineTo(100, i * 10);
-}
-
-// Stroke all lines in white with pixel-perfect width
 grid.stroke({ color: 0xffffff, pixelLine: true });
 ```
 
 ---
 
-### 2. **UI and HUD Elements**
+### 2. **UI and HUD elements**
 
-- For UI elements such as borders, separators, or underlines, a consistent 1-pixel thickness provides a professional, clean look.
-- Example: Drawing a separator line in a menu or a progress bar border.
+- For borders, separators, or underlines, a consistent 1-pixel thickness provides a clean look.
+- Example: a separator line in a menu or a progress bar border.
 
 ```ts
 // Create a separator line that will always be 1 pixel thick
@@ -174,16 +148,14 @@ const separator = new Graphics()
 
 ---
 
-### 3. **Debugging and Prototyping**
+### 3. **Debugging and prototyping**
 
-- Use pixel-perfect lines to debug layouts, collision boxes, or grids. Since the lines don’t scale, they offer a consistent reference point during development.
-- Example: Displaying collision boundaries in a physics-based game.
+- Pixel-perfect lines are useful for debugging layouts, collision boxes, or grids. Since they don't scale, they provide a consistent reference point.
+- Example: displaying collision boundaries in a physics-based game.
 
 ```ts
 // Create a debug box with pixel-perfect stroke
-const graphicsBox = new Graphics()
-  .rect(0, 0, 100, 100)
-  .stroke({ color: 0xff00ff, pixelLine: true });
+const graphicsBox = new Graphics().rect(0, 0, 100, 100).stroke({ color: 0xff00ff, pixelLine: true });
 
 /**
  * Updates the debug box to match the bounds of a given object
@@ -191,7 +163,7 @@ const graphicsBox = new Graphics()
  */
 function drawDebugBounds(obj) {
   // Get the bounds of the object
-  let bounds = obj.getBounds().rectangle;
+  const bounds = obj.getBounds();
 
   // Position and scale the debug box to match the bounds
   // this is faster than using `moveTo` and `lineTo` each frame!
@@ -204,42 +176,35 @@ function drawDebugBounds(obj) {
 
 ## How it works
 
-This is achieved under the hood using WebGL or WebGPU's native line rendering methods when `pixelLine` is set to `true`.
+Under the hood, `pixelLine` uses WebGL or WebGPU's native line rendering methods.
 
-Fun fact its actually faster to draw a pixel line than a regular line. This is because of two main factors:
+Pixel lines are faster to draw than regular lines for two reasons:
 
-1. **Simpler Drawing Process**: Regular lines in PixiJS (when `pixelLine` is `false`) need extra steps to be drawn. PixiJS has to figure out the thickness of the line and create a shape that looks like a line but is actually made up of triangles.
+1. **Simpler drawing process**: Regular lines require extra steps. PixiJS calculates line thickness and builds a shape from triangles.
 
-2. **Direct Line Drawing**: When using `pixelLine`, we can tell the graphics card "just draw a line from point A to point B" and it knows exactly what to do. This is much simpler and faster than creating and filling shapes.
+2. **Direct line drawing**: With `pixelLine`, the GPU draws a line from point A to point B directly, skipping triangle construction.
 
-Think of it like drawing a line on paper - `pixelLine` is like using a pen to draw a straight line, while regular lines are like having to carefully color in a thin rectangle. The pen method is naturally faster and simpler!
+## Caveats and gotchas
 
-## Caveats and Gotchas
+### 1. **Always 1px thick**
 
-While the `pixelLine` property is incredibly useful, there are some limitations and things to keep in mind:
-
-### 1. **Its 1px thick, thats it!**
-
-- The line is always 1px thick, there is no way to change this as its using the GPU to draw the line.
+- The line is always 1px thick. There's no way to change this because the GPU draws the line directly.
 
 ### 2. **Hardware may render differently**
 
-- Different GPUs and graphics hardware may render the line slightly differently due to variations in how they handle line rasterization. For example, some GPUs may position the line slightly differently or apply different anti-aliasing techniques. This is an inherent limitation of GPU line rendering and is beyond PixiJS's control.
+- Different GPUs may render the line with slight variations in position or anti-aliasing. This is an inherent limitation of GPU line rendering.
 
-### 4. **Scaling Behavior**
+### 3. **Scaling behavior**
 
-- While the line thickness remains constant, other properties (e.g., position or start/end points) are still affected by scaling. This can sometimes create unexpected results if combined with other scaled objects. This is a feature not a bug :)
+- Line thickness remains constant, but other properties (position, start/end points) are still affected by scaling. This can create unexpected results when combined with other scaled objects.
 
-### Example: Box with Pixel-Perfect Stroke
+### Example: box with pixel-perfect stroke
 
-Here's an example of a filled box with a pixel-perfect stroke. The box itself scales and grows, but the stroke remains 1 pixel wide:
+A filled box with a pixel-perfect stroke. The box scales, but the stroke remains 1 pixel wide:
 
 ```ts
 // Create a Graphics object and draw a filled box with a pixel-perfect stroke
-let box = new Graphics()
-  .rect(0, 0, 100, 100)
-  .fill('white')
-  .stroke({ color: 0xff0000, pixelLine: true });
+let box = new Graphics().rect(0, 0, 100, 100).fill('white').stroke({ color: 0xff0000, pixelLine: true });
 
 // Add it to the stage
 app.stage.addChild(box);
@@ -248,17 +213,11 @@ app.stage.addChild(box);
 box.scale.set(2);
 ```
 
-In this example, the blue box grows as it scales, but the red stroke remains at 1 pixel thickness, providing a crisp outline regardless of the scaling.
+The box grows as it scales, but the red stroke stays at 1 pixel thickness.
 
 ---
 
-## When to Avoid Using `pixelLine`
+## When to avoid `pixelLine`
 
-- **You want a line that is not 1px thick:** Don't use `pixelLine`.
-- **You want the line to scale:** Don't use `pixelLine`
-
----
-
-## Conclusion
-
-The `pixelLine` property is a super useful to have in the PixiJS toolbox for developers looking to create sharp, pixel-perfect lines that remain consistent under transformation. By understanding its strengths and limitations, you can incorporate it into your projects for clean, professional results in both visual and functional elements.
+- You want a line thicker than 1px.
+- You want the line to scale with the object.

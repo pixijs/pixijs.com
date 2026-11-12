@@ -1,14 +1,14 @@
 # HTML Text
 
-`HTMLText` enables styled, formatted HTML strings to be rendered as part of the PixiJS scene graph. It uses an SVG `` to embed browser-native HTML inside your WebGL canvas.
+`HTMLText` renders HTML markup inside your PixiJS scene. It works by embedding HTML in an SVG `<foreignObject>`, rasterizing it, and uploading the result as a texture.
 
-This makes it ideal for rendering complex typography, inline formatting, emojis, and layout effects that are hard to replicate using traditional canvas-rendered text.
+Use it when you need rich formatting (`<b>`, `<i>`, `<span>`), emoji, RTL text, or CSS layout that `Text` can't handle. The tradeoff is performance: rendering is async and slower than `Text` or `BitmapText`.
 
 ```ts
 import { HTMLText } from 'pixi.js';
 
 const html = new HTMLText({
-  text: 'Hello PixiJS!',
+  text: '<strong>Hello</strong> <em>PixiJS</em>!',
   style: {
     fontFamily: 'Arial',
     fontSize: 24,
@@ -20,21 +20,20 @@ const html = new HTMLText({
 app.stage.addChild(html);
 ```
 
-## **Why Use `HTMLText`?**
+## Why use `HTMLText`?
 
-- ✅ Supports inline tags like `, `, ``, etc.
+- ✅ Supports inline tags like `<b>`, `<i>`, `<span>`, etc.
 - ✅ Compatible with emojis, Unicode, and RTL text
 - ✅ Fine-grained layout control via CSS
-- ✅ Tag-based style overrides (`, `, etc.)
+- ✅ Tag-based style overrides (`<warning>`, `<link>`, etc.)
 
-## **Async Rendering Behavior**
+## Async rendering behavior
 
-HTML text uses SVG `` to draw HTML inside the canvas. As a result:
+Because HTMLText rasterizes via SVG, the text won't appear on the frame it's created. It typically appears one frame later. Plan for this if you need to measure or position based on the text's bounds.
 
-- Rendering occurs **asynchronously**. Typically after the next frame.
-- Text content is not immediately visible after instantiation.
+If you need the text to be ready before showing it, add it to the scene while hidden (`visible = false`), then show it after a frame or after checking that the texture has updated.
 
-## **Styling HTMLText**
+## Styling HTMLText
 
 `HTMLTextStyle` extends `TextStyle` and adds:
 
@@ -43,7 +42,7 @@ HTML text uses SVG `` to draw HTML inside the canvas. As a result:
 
 ```ts
 const fancy = new HTMLText({
-  text: 'Red, Blue',
+  text: '<red>Red</red>, <blue>Blue</blue>',
   style: {
     fontFamily: 'DM Sans',
     fontSize: 32,
@@ -56,17 +55,18 @@ const fancy = new HTMLText({
 });
 ```
 
-### **CSS Overrides**
+### CSS overrides
 
-You can apply CSS styles to the text using the `cssOverrides` property. This allows you to set properties like `text-shadow`, `text-decoration`, and more.
+For CSS properties that don't have a TextStyle equivalent (e.g., `text-shadow`, `text-decoration`, `line-height`), use `addOverride` to inject raw CSS:
 
 ```ts
 fancy.style.addOverride('text-shadow: 2px 2px 4px rgba(0,0,0,0.5)');
+fancy.style.addOverride('text-decoration: underline');
 ```
 
 ---
 
-## **API Reference**
+## API reference
 
-- [HTMLText](https://pixijs.download/release/docs/scene.HTMLText.html)
-- [HTMLTextStyle](https://pixijs.download/release/docs/text.HTMLTextStyle.html)
+- [`HTMLText`](https://pixijs.download/v8.23.0/docs/scene.HTMLText.html)
+- [`HTMLTextStyle`](https://pixijs.download/v8.23.0/docs/text.HTMLTextStyle.html)

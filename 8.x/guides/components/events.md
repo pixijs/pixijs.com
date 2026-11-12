@@ -1,207 +1,283 @@
-# Events / Interaction
+# Events
 
-PixiJS is primarily a rendering library, but it provides a flexible and performant event system designed for both mouse and touch input. This system replaces the legacy `InteractionManager` from previous versions with a unified, DOM-like federated event model.
+PixiJS provides a DOM-like federated event model for mouse, touch, and pointer input. The system supports bubbling, capturing, and delegation across the scene graph.
+
+## Basic usage
+
+Set `eventMode` on any container and subscribe to events:
 
 ```ts
-const sprite = new Sprite(texture);
+import { Sprite } from 'pixi.js';
+
+const sprite = Sprite.from('image.png');
 sprite.eventMode = 'static';
-sprite.on('pointerdown', () => {
-  console.log('Sprite clicked!');
+sprite.on('pointerdown', (event) => {
+    console.log('Clicked at:', event.global.x, event.global.y);
 });
 ```
 
-## Event Modes
-
-To use the event system, set the `eventMode` of a `Container` (or its subclasses like `Sprite`) and subscribe to event listeners.
+## Event modes
 
 The `eventMode` property controls how an object interacts with the event system:
 
-| Mode      | Description                                                                                                              |
-| --------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `none`    | Ignores all interaction events, including children. Optimized for non-interactive elements.                              |
-| `passive` | _(default)_ Ignores self-hit testing and does not emit events, but interactive children still receive events.            |
-| `auto`    | Participates in hit testing only if a parent is interactive. Does not emit events.                                       |
-| `static`  | Emits events and is hit tested. Suitable for non-moving interactive elements like buttons.                               |
-| `dynamic` | Same as `static`, but also receives synthetic events when the pointer is idle. Suitable for animating or moving targets. |
-
-## Event Types
-
-PixiJS supports a rich set of DOM-like event types across mouse, touch, and pointer input. Below is a categorized list.
-
-### Pointer Events (Recommended for general use)
-
-| Event Type          | Description                                                                        |
-| ------------------- | ---------------------------------------------------------------------------------- |
-| `pointerdown`       | Fired when a pointer (mouse, pen, or touch) is pressed on a display object.        |
-| `pointerup`         | Fired when the pointer is released over the display object.                        |
-| `pointerupoutside`  | Fired when the pointer is released outside the object that received `pointerdown`. |
-| `pointermove`       | Fired when the pointer moves over the display object.                              |
-| `pointerover`       | Fired when the pointer enters the boundary of the display object.                  |
-| `pointerout`        | Fired when the pointer leaves the boundary of the display object.                  |
-| `pointerenter`      | Fired when the pointer enters the display object (does not bubble).                |
-| `pointerleave`      | Fired when the pointer leaves the display object (does not bubble).                |
-| `pointercancel`     | Fired when the pointer interaction is canceled (e.g. touch lost).                  |
-| `pointertap`        | Fired when a pointer performs a quick tap.                                         |
-| `globalpointermove` | Fired on every pointer move, regardless of whether any display object is hit.      |
-
-### Mouse Events (Used for mouse-specific input)
-
-| Event Type        | Description                                                                                 |
-| ----------------- | ------------------------------------------------------------------------------------------- |
-| `mousedown`       | Fired when a mouse button is pressed on a display object.                                   |
-| `mouseup`         | Fired when a mouse button is released over the object.                                      |
-| `mouseupoutside`  | Fired when a mouse button is released outside the object that received `mousedown`.         |
-| `mousemove`       | Fired when the mouse moves over the display object.                                         |
-| `mouseover`       | Fired when the mouse enters the display object.                                             |
-| `mouseout`        | Fired when the mouse leaves the display object.                                             |
-| `mouseenter`      | Fired when the mouse enters the object, does not bubble.                                    |
-| `mouseleave`      | Fired when the mouse leaves the object, does not bubble.                                    |
-| `click`           | Fired when a mouse click (press and release) occurs on the object.                          |
-| `rightdown`       | Fired when the right mouse button is pressed on the display object.                         |
-| `rightup`         | Fired when the right mouse button is released over the object.                              |
-| `rightupoutside`  | Fired when the right mouse button is released outside the object that received `rightdown`. |
-| `rightclick`      | Fired when a right mouse click (press and release) occurs on the object.                    |
-| `globalmousemove` | Fired on every mouse move, regardless of display object hit.                                |
-| `wheel`           | Fired when the mouse wheel is scrolled while over the display object.                       |
-
-### Touch Events
-
-| Event Type        | Description                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------- |
-| `touchstart`      | Fired when a new touch point is placed on a display object.                           |
-| `touchend`        | Fired when a touch point is lifted from the display object.                           |
-| `touchendoutside` | Fired when a touch point ends outside the object that received `touchstart`.          |
-| `touchmove`       | Fired when a touch point moves across the display object.                             |
-| `touchcancel`     | Fired when a touch interaction is canceled (e.g. device gesture).                     |
-| `tap`             | Fired when a touch point taps the display object.                                     |
-| `globaltouchmove` | Fired on every touch move, regardless of whether a display object is under the touch. |
-
-### Global Events
-
-In previous versions of PixiJS, events such as `pointermove`, `mousemove`, and `touchmove` were fired when any move event was captured by the canvas, even if the pointer was not over a display object. This behavior changed in v8 and now these events are fired only when the pointer is over a display object.
-
-To maintain the old behavior, you can use the `globalpointermove`, `globalmousemove`, and `globaltouchmove` events. These events are fired on every pointer/touch move, regardless of whether any display object is hit.
+| Mode | Description |
+| --- | --- |
+| `none` | Ignores all interaction events, including on children. Optimized for non-interactive elements. |
+| `passive` | _(default)_ Does not respond to clicks/taps itself. Interactive children still receive events. |
+| `auto` | Becomes clickable only when a parent is interactive. Does not emit events on its own. |
+| `static` | Emits events and is hit tested. Use for stationary interactive elements like buttons. |
+| `dynamic` | Same as `static`, but also checks for pointer overlap every frame (via the ticker), even when the pointer isn't moving. Use for objects that move or animate under a stationary cursor. |
 
 ```ts
-const sprite = new Sprite(texture);
+import { Container } from 'pixi.js';
+
+const container = new Container();
+
+container.eventMode = 'none';      // no events (optimized)
+container.eventMode = 'passive';   // only children receive events
+container.eventMode = 'auto';      // events only when parent is interactive
+container.eventMode = 'static';    // standard interaction events
+container.eventMode = 'dynamic';   // events + synthetic updates for moving objects
+```
+
+## Event types
+
+PixiJS supports pointer, mouse, and touch event types. Pointer events are recommended for cross-device compatibility.
+
+### Pointer events (recommended)
+
+| Event | Description |
+| --- | --- |
+| `pointerdown` | Pointer (mouse, pen, or touch) pressed on the object. |
+| `pointerup` | Pointer released over the object. |
+| `pointerupoutside` | Pointer released outside the object that received `pointerdown`. |
+| `pointermove` | Pointer moves over the object. |
+| `pointerover` | Pointer enters the object boundary. Bubbles. |
+| `pointerout` | Pointer leaves the object boundary. Bubbles. |
+| `pointerenter` | Pointer enters the object. Does not bubble. |
+| `pointerleave` | Pointer leaves the object. Does not bubble. |
+| `pointercancel` | Pointer interaction canceled (e.g., touch lost). |
+| `pointertap` | Pointer completes a tap (press and release). |
+| `globalpointermove` | Fires on every pointer move, regardless of hit target. |
+
+### Mouse events
+
+| Event | Description |
+| --- | --- |
+| `mousedown` | Mouse button pressed on the object. |
+| `mouseup` | Mouse button released over the object. |
+| `mouseupoutside` | Mouse button released outside the object that received `mousedown`. |
+| `mousemove` | Mouse moves over the object. |
+| `mouseover` | Mouse enters the object. |
+| `mouseout` | Mouse leaves the object. |
+| `mouseenter` | Mouse enters the object. Does not bubble. |
+| `mouseleave` | Mouse leaves the object. Does not bubble. |
+| `click` | Mouse click (press and release) on the object. |
+| `rightdown` | Right mouse button pressed on the object. |
+| `rightup` | Right mouse button released over the object. |
+| `rightupoutside` | Right mouse button released outside the object that received `rightdown`. |
+| `rightclick` | Right mouse click (press and release) on the object. |
+| `contextmenu` | The browser is about to open its context menu over the object. |
+| `globalmousemove` | Fires on every mouse move, regardless of hit target. |
+| `wheel` | Mouse wheel scrolled over the object. |
+
+### Touch events
+
+| Event | Description |
+| --- | --- |
+| `touchstart` | Touch point placed on the object. |
+| `touchend` | Touch point lifted from the object. |
+| `touchendoutside` | Touch point ends outside the object that received `touchstart`. |
+| `touchmove` | Touch point moves across the object. |
+| `touchcancel` | Touch interaction canceled (e.g., device gesture). |
+| `tap` | Touch tap on the object. |
+| `globaltouchmove` | Fires on every touch move, regardless of hit target. |
+
+> [!NOTE]
+> Touch events include modifier key states (`altKey`, `ctrlKey`, `metaKey`, `shiftKey`). These are copied from the native `TouchEvent` to each touch object during normalization, so you can check modifier keys the same way you would with mouse or pointer events.
+
+### Global move events
+
+> [!IMPORTANT]
+> **v8 breaking change:** `pointermove`, `mousemove`, and `touchmove` now fire only when the pointer is over a display object. In v7, they fired on any canvas move. If you relied on the old behavior, switch to `globalpointermove`, `globalmousemove`, or `globaltouchmove`.
+
+To get events on every move (regardless of what's under the pointer), use `globalpointermove`, `globalmousemove`, and `globaltouchmove`:
+
+```ts
+const sprite = Sprite.from('image.png');
 sprite.eventMode = 'static';
 sprite.on('globalpointermove', (event) => {
-  console.log('Pointer moved globally!', event);
+    console.log('Pointer moved:', event.global.x, event.global.y);
 });
 ```
 
-## How Hit Testing Works
+### Context menu
 
-When an input event occurs (mouse move, click, etc.), PixiJS walks the display tree to find the top-most interactive element under the pointer:
-
-- If `interactiveChildren` is `false` on a `Container`, its children will be skipped.
-- If a `hitArea` is set, it overrides bounds-based hit testing.
-- If `eventMode` is `'none'`, the element and its children are skipped.
-
-Once the top-most interactive element is found, the event is dispatched to it. If the event bubbles, it will propagate up the display tree.
-If the event is not handled, it will continue to bubble up to parent containers until it reaches the root.
-
-### Custom Hit Area
-
-Custom hit areas can be defined using the `hitArea` property. This property can be set on any scene object, including `Sprite`, `Container`, and `Graphics`.
-
-Using a custom hit area allows you to define a specific area for interaction, which can be different from the object's bounding box. It also can improve performance by reducing the number of objects that need to be checked for interaction.
+PixiJS doesn't block the browser's context menu. To keep it closed over an object, call `event.preventDefault()` in a `contextmenu` listener:
 
 ```ts
-import { Rectangle, Sprite } from 'pixi.js';
-
-const sprite = new Sprite(texture);
-sprite.hitArea = new Rectangle(0, 0, 100, 100);
+const sprite = Sprite.from('image.png');
 sprite.eventMode = 'static';
+sprite.on('contextmenu', (event) => {
+    event.preventDefault();
+});
 ```
 
-## Listening to Events
+Canceling `rightdown`, `rightup`, or `rightclick` doesn't keep the menu closed. Only `contextmenu` does. On macOS, ctrl + click also opens the menu and fires `contextmenu`. The browser can report that click as the left button, and then `rightdown`, `rightup`, and `rightclick` don't fire.
 
-PixiJS supports both `on()`/`off()` and `addEventListener()`/`removeEventListener()` and event callbacks (`onclick: ()=> {}`) for adding and removing event listeners. The `on()` method is recommended for most use cases as it provides a more consistent API across different event types used throughout PixiJS.
+Firefox opens its menu on shift + right click without firing `contextmenu`, so a page can't block that.
 
-### Using `on()` (from EventEmitter)
+### Capture phase events
+
+All events support capture phase listeners by appending `capture` to the event name (e.g., `pointerdowncapture`, `clickcapture`). Capture listeners fire during the capturing phase, before the event reaches its target.
 
 ```ts
-const eventFn = (e) => console.log('clicked');
-sprite.on('pointerdown', eventFn);
-sprite.once('pointerdown', eventFn);
-sprite.off('pointerdown', eventFn);
+container.addEventListener('pointerdown', (event) => {
+    event.stopImmediatePropagation(); // blocks the event from reaching children
+}, { capture: true });
 ```
 
-### Using DOM-style Events
+## Hit testing
+
+When an input event fires, PixiJS walks the display tree to find the top-most interactive element under the pointer:
+
+- If `eventMode` is `'none'`, the element and its children are skipped entirely.
+- If `interactiveChildren` is `false` on a container, its children are skipped.
+- If a `hitArea` is set, it overrides bounds-based hit testing.
+- Objects that are not visible, not renderable, or not measurable are skipped.
+
+Once the target is found, the event dispatches to it and bubbles up the display tree.
+
+### Custom hit areas
+
+Define a custom hit area to override bounds-based testing. This can also improve performance by simplifying the geometry checked during hit tests.
 
 ```ts
-sprite.addEventListener(
-  'click',
-  (event) => {
-    console.log('Clicked!', event.detail);
-  },
-  { once: true },
-);
-```
+import { Rectangle, Circle, Polygon, Sprite } from 'pixi.js';
 
-### Using callbacks
+const sprite = Sprite.from('image.png');
+sprite.eventMode = 'static';
 
-```ts
-sprite.onclick = (event) => {
-  console.log('Clicked!', event.detail);
+// rectangular hit area
+sprite.hitArea = new Rectangle(0, 0, 100, 100);
+
+// circular hit area
+sprite.hitArea = new Circle(50, 50, 50);
+
+// polygon hit area
+sprite.hitArea = new Polygon([0, 0, 100, 0, 50, 100]);
+
+// custom hit testing logic
+sprite.hitArea = {
+    contains(x, y) {
+        return x >= 0 && x <= 100 && y >= 0 && y <= 100;
+    }
 };
 ```
 
-## Checking for Interactivity
+## Listening to events
 
-You can check if a `Sprite` or `Container` is interactive by using the `isInteractive()` method. This method returns `true` if the object is interactive and can receive events.
+PixiJS supports three styles of event listening:
+
+### `on()` / `off()` (EventEmitter style, recommended)
 
 ```ts
-if (sprite.isInteractive()) {
-  // true if eventMode is static or dynamic
-}
+const handler = (e) => console.log('clicked');
+sprite.on('pointerdown', handler);      // add listener
+sprite.once('pointerdown', handler);    // one-time listener
+sprite.off('pointerdown', handler);     // remove listener
 ```
 
-## Custom Cursors
-
-PixiJS allows you to set a custom cursor for interactive objects using the `cursor` property. This property accepts a string representing the CSS cursor type.
+### `addEventListener()` / `removeEventListener()` (DOM style)
 
 ```ts
-const sprite = new Sprite(texture);
+sprite.addEventListener('click', (event) => {
+    console.log('Clicked!', event.detail);
+}, { once: true });
+```
+
+### Property-based callbacks
+
+```ts
+sprite.onclick = (event) => {
+    console.log('Clicked!', event.detail);
+};
+```
+
+## Checking interactivity
+
+Use `isInteractive()` to check whether a container can receive events. Returns `true` when `eventMode` is `'static'` or `'dynamic'`.
+
+```ts
 sprite.eventMode = 'static';
-sprite.cursor = 'pointer'; // Set the cursor to a pointer when hovering over the sprite
+sprite.isInteractive(); // true
+
+sprite.eventMode = 'passive';
+sprite.isInteractive(); // false
 ```
 
+## Event features
+
+Toggle event system features globally to control which event categories are active. All features default to `true`.
+
 ```ts
-const sprite = new Sprite(texture);
+await app.init({
+    eventFeatures: {
+        move: true,           // pointer/mouse/touch move events
+        globalMove: true,     // global move events (globalpointermove, etc.)
+        click: true,          // click/tap/press and contextmenu events
+        wheel: true,          // mouse wheel events
+    }
+});
+
+// or configure after init
+app.renderer.events.features.globalMove = false;
+```
+
+## Cursor management
+
+Set a CSS cursor on interactive objects:
+
+```ts
 sprite.eventMode = 'static';
-sprite.cursor = 'url(my-cursor.png), auto'; // Set a custom cursor image
+sprite.cursor = 'pointer';
+sprite.cursor = 'grab';
+sprite.cursor = 'url("custom.png"), auto';
 ```
 
-### Default Custom Cursors
+### Custom cursor styles
 
-You can also set default values to be used for all interactive objects.
+Register named cursor styles on the event system and reference them by name:
 
 ```ts
-// CSS style for icons
 const defaultIcon = "url('https://pixijs.com/assets/bunny.png'),auto";
 const hoverIcon = "url('https://pixijs.com/assets/bunny_saturated.png'),auto";
 
-// Add custom cursor styles
 app.renderer.events.cursorStyles.default = defaultIcon;
 app.renderer.events.cursorStyles.hover = hoverIcon;
 
-const sprite = new Sprite(texture);
 sprite.eventMode = 'static';
-sprite.cursor = 'hover';
+sprite.cursor = 'hover'; // uses the registered hover style
 ```
 
----
+Cursor styles can be strings (CSS cursor values), objects (applied as CSS styles), or functions (called with the mode string).
 
-## API Reference
+## Performance tips
 
-- [Overview](https://pixijs.download/release/docs/events.html)
-- [EventSystem](https://pixijs.download/release/docs/events.EventSystem.html)
-- [Cursor](https://pixijs.download/release/docs/events.html#Cursor)
-- [EventMode](https://pixijs.download/release/docs/events.html#EventMode)
-- [Container](https://pixijs.download/release/docs/scene.Container.html)
-- [FederatedEvent](https://pixijs.download/release/docs/events.FederatedEvent.html)
-- [FederatedMouseEvent](https://pixijs.download/release/docs/events.FederatedMouseEvent.html)
-- [FederatedWheelEvent](https://pixijs.download/release/docs/events.FederatedWheelEvent.html)
-- [FederatedPointerEvent](https://pixijs.download/release/docs/events.FederatedPointerEvent.html)
+- Set `eventMode = 'none'` on non-interactive elements to skip hit testing entirely.
+- Set `interactiveChildren = false` on containers where only the container itself needs interaction.
+- Use `hitArea` for large or complex objects to simplify hit test geometry.
+- Use `'static'` for stationary elements; reserve `'dynamic'` for elements that move or animate.
+- Disable unused event features (e.g., `globalMove: false`) to reduce processing.
+
+## API reference
+
+- [`EventSystem`](https://pixijs.download/v8.23.0/docs/events.EventSystem.html) - Core event management system
+- [`EventBoundary`](https://pixijs.download/v8.23.0/docs/events.EventBoundary.html) - Event propagation and hit testing
+- [`EventMode`](https://pixijs.download/v8.23.0/docs/events.EventMode.html) - Interaction mode type
+- [`Cursor`](https://pixijs.download/v8.23.0/docs/events.Cursor.html) - Cursor type definition
+- [`FederatedEvent`](https://pixijs.download/v8.23.0/docs/events.FederatedEvent.html) - Base event class
+- [`FederatedPointerEvent`](https://pixijs.download/v8.23.0/docs/events.FederatedPointerEvent.html) - Pointer event details
+- [`FederatedMouseEvent`](https://pixijs.download/v8.23.0/docs/events.FederatedMouseEvent.html) - Mouse event details
+- [`FederatedWheelEvent`](https://pixijs.download/v8.23.0/docs/events.FederatedWheelEvent.html) - Wheel event details
+- [`Container`](https://pixijs.download/v8.23.0/docs/scene.Container.html) - Display object event handling

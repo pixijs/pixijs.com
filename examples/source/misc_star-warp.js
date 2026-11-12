@@ -40,7 +40,7 @@ import { Application, Assets, Sprite } from 'pixi.js';
     stars.push(star);
   }
 
-  function randomizeStar(star, initial) {
+  function randomizeStar(star, initial = false) {
     star.z = initial
       ? Math.random() * 2000
       : cameraZ + Math.random() * 1000 + 2000;

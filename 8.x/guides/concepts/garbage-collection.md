@@ -1,19 +1,21 @@
 # Managing Garbage Collection in PixiJS
 
-Efficient resource management is crucial for maintaining optimal performance in any PixiJS application. This guide explores how PixiJS handles garbage collection, the tools it provides, and best practices for managing GPU resources effectively.
+PixiJS objects like textures and meshes consume GPU memory that JavaScript's garbage collector can't reclaim automatically. This page covers the three ways to manage that memory: calling `destroy()` explicitly, unloading textures manually, and configuring the automatic texture garbage collector.
 
 ## Explicit Resource Management with `destroy`
 
 PixiJS objects, such as textures, meshes, and other GPU-backed data, hold references that consume memory. To explicitly release these resources, call the `destroy` method on objects you no longer need. For example:
 
-```javascript
+```typescript
 import { Sprite } from 'pixi.js';
 
 const sprite = new Sprite(texture);
-// Use the sprite in your application
 
-// When no longer needed
+// Destroy the sprite only (texture is preserved for reuse)
 sprite.destroy();
+
+// Destroy the sprite AND its texture (frees GPU memory)
+sprite.destroy({ children: true, texture: true, textureSource: true });
 ```
 
 Calling `destroy` ensures that the object’s GPU resources are freed immediately, reducing the likelihood of memory leaks and improving performance.
@@ -23,32 +25,32 @@ Calling `destroy` ensures that the object’s GPU resources are freed immediatel
 In cases where PixiJS’s automatic texture garbage collection is insufficient, you can manually unload textures from the GPU using `texture.unload()`:
 
 ```javascript
-import { Texture } from 'pixi.js';
+import { Assets } from 'pixi.js';
 
-const texture = Texture.from('image.png');
+const texture = await Assets.load('image.png');
 
 // Use the texture
 
 // When no longer needed
-texture.unload();
+texture.source.unload();
 ```
 
 This is particularly useful for applications that dynamically load large numbers of textures and require precise memory control.
 
-## Automatic Texture Garbage Collection with `TextureGCSystem`
+## Automatic Garbage Collection with `GCSystem`
 
-PixiJS also includes the `TextureGCSystem`, a system that manages GPU texture memory. By default:
+PixiJS also includes the `GCSystem`, which unloads GPU resources (textures, buffers, graphics geometry, WebGPU bind groups, and other renderables) that have not been used recently. By default:
 
-- **Removes textures unused for 3600 frames** (approximately 1 minute at 60 FPS).
-- **Checks every 600 frames** for unused textures.
+- **Unloads resources unused for 60 seconds** (`gcMaxUnusedTime: 60000`).
+- **Checks every 30 seconds** (`gcFrequency: 30000`).
 
-### Customizing `TextureGCSystem`
+Resources that are still bound each frame are stamped as in use and are never collected mid-render. Unloaded resources are recreated automatically the next time they are drawn.
 
-You can adjust the behavior of `TextureGCSystem` to suit your application:
+### Customizing `GCSystem`
 
-- **`textureGCActive`**: Enable or disable garbage collection. Default: `true`.
-- **`textureGCMaxIdle`**: Maximum idle frames before texture cleanup. Default: `3600` frames.
-- **`textureGCCheckCountMax`**: Frequency of garbage collection checks (in frames). Default: `600` frames.
+- **`gcActive`**: Enable or disable garbage collection. Default: `true`.
+- **`gcMaxUnusedTime`**: Idle time in milliseconds before a resource is unloaded. Default: `60000`.
+- **`gcFrequency`**: How often the collector runs, in milliseconds. Default: `30000`.
 
 Example configuration:
 
@@ -58,16 +60,21 @@ import { Application } from 'pixi.js';
 const app = new Application();
 
 await app.init({
-  textureGCActive: true, // Enable texture garbage collection
-  textureGCMaxIdle: 7200, // 2 hours idle time
-  textureGCCheckCountMax: 1200, // Check every 20 seconds at 60 FPS
+  gcActive: true,
+  gcMaxUnusedTime: 120000, // 2 minutes idle
+  gcFrequency: 60000, // check every minute
 });
 ```
 
-## Best Practices for Garbage Collection in PixiJS
+> [!NOTE]
+> The older `textureGCActive`, `textureGCMaxIdle`, and `textureGCCheckCountMax` options are deprecated since 8.15.0. They were frame-based; the `gc*` options are time-based.
 
-1. **Explicitly Destroy Objects:** Always call `destroy` on objects you no longer need to ensure GPU resources are promptly released.
-2. **Use Pooling:** Reuse objects with a pooling system to reduce allocation and deallocation overhead.
-3. **Proactively Manage Textures:** Use `texture.unload()` for manual memory management when necessary.
+## Best Practices
 
-By following these practices and understanding PixiJS’s garbage collection mechanisms, you can create high-performance applications that efficiently utilize system resources.
+1. **Explicitly destroy objects:** Call `destroy()` on objects you no longer need. Pass `{ texture: true, textureSource: true }` if the texture won't be reused.
+2. **Destroy geometries and render targets you create:** `geometry.destroy()` and `renderTarget.destroy()` release the GPU objects built for them. Destroying a container also destroys the batchers cached for its render group.
+3. **Use `Assets.unload()` for loaded assets:** If you loaded a texture via `Assets.load('image.png')`, use `Assets.unload('image.png')` to release it. This removes it from the cache and unloads the GPU resource.
+4. **Use pooling for frequently created/destroyed objects:** Reuse sprites, particles, and other objects to reduce allocation overhead.
+5. **Batch large texture cleanups:** If destroying many textures at once, stagger the calls across multiple frames (e.g., destroy 5 per frame) to avoid a single-frame hitch.
+
+For more optimization strategies, see [Performance Tips](https://pixijs.com/8.x/guides/concepts/performance-tips.md).

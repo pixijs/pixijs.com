@@ -1,6 +1,6 @@
 # NineSlice Sprite
 
-`NineSliceSprite` is a specialized type of `Sprite` that allows textures to be resized while preserving the corners and edges. It is particularly useful for building scalable UI elements like buttons, panels, or windows with rounded or decorated borders.
+`NineSliceSprite` splits a texture into a 3x3 grid, then stretches only the center and edge regions when you resize it. Corners stay their original size. This is the standard technique for building resizable UI elements (buttons, panels, dialog boxes) from a single texture.
 
 ```ts
 import { NineSliceSprite, Texture } from 'pixi.js';
@@ -18,9 +18,13 @@ const nineSlice = new NineSliceSprite({
 app.stage.addChild(nineSlice);
 ```
 
-You can also pass just a texture, and the slice values will fall back to defaults or be inferred from the texture’s `defaultBorders`.
+You can also pass just a texture. If the texture has `defaultBorders` set (e.g., from a spritesheet's JSON data), those values are used automatically:
 
-## **How NineSlice Works**
+```ts
+const nineSlice = new NineSliceSprite({ texture: Texture.from('button.png') });
+```
+
+## How nine-slice works
 
 Here’s how a nine-slice texture is divided:
 
@@ -45,9 +49,11 @@ Areas:
 
 This ensures that decorative corners are preserved and the center content can scale as needed.
 
-## **Width and Height Behavior**
+Keep `leftWidth + rightWidth` below the texture width and `topHeight + bottomHeight` below the texture height. When the borders meet or overlap, no texture pixels remain for the center, so it is filled by stretching the seam between the borders.
 
-Setting `.width` and `.height` on a `NineSliceSprite` updates the **geometry vertices**, not the texture UVs. This allows the texture to repeat or stretch correctly based on the slice regions. This also means that the `width` and `height` properties are not the same as the `scale` properties.
+## Width and height vs scale
+
+`width` and `height` resize the nine-slice correctly: corners stay fixed, edges and center stretch. `scale` uniformly scales the entire thing, including corners. For UI elements, always use `width`/`height` to resize.
 
 ```ts
 // The texture will stretch to fit the new dimensions
@@ -58,7 +64,7 @@ nineSlice.height = 100;
 nineSlice.scale.set(2); // Doubles the size
 ```
 
-### **Original Width and Height**
+### Original width and height
 
 If you need to know the original size of the nine-slice, you can access it through the `originalWidth` and `originalHeight` properties. These values are set when the `NineSliceSprite` is created and represent the dimensions of the texture before any scaling or resizing is applied.
 
@@ -67,7 +73,7 @@ console.log(nineSlice.originalWidth);
 console.log(nineSlice.originalHeight);
 ```
 
-## **Dynamic Updates**
+## Dynamic updates
 
 You can change slice dimensions or size at runtime:
 
@@ -80,6 +86,6 @@ Each setter triggers a geometry update to reflect the changes.
 
 ---
 
-## **API Reference**
+## API reference
 
-- [NineSliceSprite](https://pixijs.download/release/docs/scene.NineSliceSprite.html)
+- [`NineSliceSprite`](https://pixijs.download/v8.23.0/docs/scene.NineSliceSprite.html)

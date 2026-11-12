@@ -1,6 +1,6 @@
 # Ticker
 
-The `Ticker` class in PixiJS provides a powerful and flexible mechanism for executing callbacks on every animation frame. It's useful for managing game loops, animations, and any time-based updates.
+The [`Ticker`](https://pixijs.download/v8.23.0/docs/ticker.Ticker.html) class executes callbacks on every animation frame. It handles game loops, animations, and any time-based updates with priority ordering and frame rate control.
 
 ```ts
 import { Ticker } from 'pixi.js';
@@ -8,48 +8,74 @@ import { Ticker } from 'pixi.js';
 const ticker = new Ticker();
 
 ticker.add((ticker) => {
-  console.log(`Delta Time: ${ticker.deltaTime}`);
+    sprite.rotation += 0.1 * ticker.deltaTime;
 });
 
-// Start the ticker
 ticker.start();
 ```
 
-## Adding and Removing Listeners
+## Adding and removing listeners
 
-The `Ticker` class allows you to add multiple listeners that will be called on every frame. You can also specify a context for the callback, which is useful for maintaining the correct `this` reference.
+You can register multiple listeners called each frame. Use `addOnce` for callbacks you only need to fire once, and `remove` to unregister a listener.
 
 ```ts
-ticker.add(myFunction, myContext);
-ticker.addOnce(myFunction, myContext);
-ticker.remove(myFunction, myContext);
+// Called every frame
+ticker.add((ticker) => {
+    console.log(`Delta: ${ticker.deltaTime}`);
+});
+
+// Called once on the next frame, then removed
+ticker.addOnce(() => {
+    console.log('Ready');
+});
+
+// Remove a specific listener
+ticker.remove(myCallback);
 ```
 
-## Controlling the Ticker
+Pass a context as the second argument to preserve the correct `this` reference:
+
+```ts
+class GameSystem {
+    public speed = 5;
+    public position = 0;
+
+    public update(ticker: Ticker): void {
+        this.position += this.speed * ticker.deltaTime;
+    }
+}
+
+const system = new GameSystem();
+
+ticker.add(system.update, system);
+```
+
+## Controlling the ticker
 
 ```ts
 ticker.start(); // Begin calling listeners every frame
-ticker.stop(); // Pause the ticker and cancel the animation frame
+ticker.stop();  // Pause and cancel the animation frame
 ```
 
-To automatically start the ticker when a listener is added, enable `autoStart`:
+To start the ticker automatically when the first listener is added:
 
 ```ts
 ticker.autoStart = true;
 ```
 
-## Prioritizing Listeners
+## Prioritizing listeners
 
 Listeners can be assigned a priority. Higher values run earlier.
 
 ```ts
 import { UPDATE_PRIORITY } from 'pixi.js';
 
-ticker.add(fnA, null, UPDATE_PRIORITY.HIGH); // runs before...
-ticker.add(fnB, null, UPDATE_PRIORITY.NORMAL); // ...this
+ticker.add(physics.update, physics, UPDATE_PRIORITY.HIGH);   // runs first
+ticker.add(render.update, render, UPDATE_PRIORITY.NORMAL);   // runs second
+ticker.add(ui.update, ui, UPDATE_PRIORITY.LOW);              // runs last
 ```
 
-Available constants include:
+Available constants:
 
 - `UPDATE_PRIORITY.HIGH = 50`
 - `UPDATE_PRIORITY.NORMAL = 0`
@@ -57,33 +83,87 @@ Available constants include:
 
 ## Configuring FPS
 
-Tickers allows FPS limits to control the update rate.
-
 ### `minFPS`
 
-Caps how _slow_ frames are allowed to be. Used to clamp `deltaTime`:
+Caps how large `deltaTime` can get during slow frames. If the real frame rate drops below `minFPS`, PixiJS pretends the frame took `1 / minFPS` seconds. This prevents objects from teleporting across the screen during lag spikes:
 
 ```ts
-ticker.minFPS = 30; // deltaTime will never act as if below 30 FPS
+ticker.minFPS = 30; // deltaTime won't exceed ~2.0, even if a frame takes 500ms
 ```
+
+The value is clamped between `0` and `Ticker.targetFPMS * 1000` (typically 60).
 
 ### `maxFPS`
 
 Limits how _fast_ the ticker runs. Useful for conserving CPU/GPU:
 
 ```ts
-ticker.maxFPS = 60; // will not tick faster than 60fps
+ticker.maxFPS = 60; // will not tick faster than 60 fps
 ```
 
-Set to `0` to allow unlimited framerate:
+Set to `0` to allow unlimited frame rate:
 
 ```ts
 ticker.maxFPS = 0;
 ```
 
----
+### Mutual clamping between `minFPS` and `maxFPS`
 
-## API Reference
+The two properties stay consistent with each other automatically:
 
-- [Ticker](https://pixijs.download/release/docs/ticker.Ticker.html)
-- [Application](https://pixijs.download/release/docs/app.Application.html)
+- Setting `minFPS` above the current `maxFPS` raises `maxFPS` to match.
+- Setting `maxFPS` below the current `minFPS` lowers `minFPS` to match.
+
+```ts
+ticker.minFPS = 10;
+ticker.maxFPS = 30;
+
+ticker.minFPS = 50; // maxFPS is raised to 50
+ticker.maxFPS = 20; // minFPS is lowered to 20
+```
+
+## Speed control
+
+Scale the passage of time for all listeners at once:
+
+```ts
+ticker.speed = 0.5; // half speed (slow motion)
+ticker.speed = 2.0; // double speed (fast forward)
+```
+
+## Timing properties
+
+```ts
+ticker.deltaTime; // Frame-rate-independent multiplier (1.0 at 60fps). Affected by `speed`.
+ticker.deltaMS;   // Actual milliseconds elapsed since the last frame. Not affected by `speed`.
+ticker.elapsedMS; // Milliseconds spent processing the last frame
+ticker.lastTime;  // Timestamp of the last frame
+ticker.FPS;       // Current frames per second
+```
+
+## Shared ticker
+
+PixiJS provides a global [`Ticker`](https://pixijs.download/v8.23.0/docs/ticker.Ticker.html) instance at `Ticker.shared`. The [`Application`](https://pixijs.download/v8.23.0/docs/app.Application.html) uses it by default, so most apps won't need to create their own.
+
+```ts
+const shared = Ticker.shared;
+
+shared.add((ticker) => {
+    // runs alongside Application updates
+});
+```
+
+## Cleanup
+
+```ts
+ticker.stop();             // stop the loop
+ticker.remove(myCallback); // remove one listener
+ticker.destroy();          // remove all listeners and release resources
+```
+
+## API reference
+
+- [`Ticker`](https://pixijs.download/v8.23.0/docs/ticker.Ticker.html)
+- [`TickerCallback`](https://pixijs.download/v8.23.0/docs/ticker.TickerCallback.html)
+- [`UPDATE_PRIORITY`](https://pixijs.download/v8.23.0/docs/ticker.UPDATE_PRIORITY.html)
+- [`TickerPlugin`](https://pixijs.download/v8.23.0/docs/app.TickerPlugin.html)

@@ -1,7 +1,7 @@
 import { Color, Filter, GlProgram, GpuProgram, UniformGroup } from 'pixi.js';
-import fragment from './cartoonText.frag?raw';
-import vertex from './cartoonText.vert?raw';
-import source from './cartoonText.wgsl?raw';
+import fragment from './cartoonText.frag';
+import vertex from './cartoonText.vert';
+import source from './cartoonText.wgsl';
 
 const defaultOptions = {
   thickness: 1,
@@ -12,7 +12,6 @@ const defaultOptions = {
 
 /**
  * CartoonTextFilter creates a cartoon-style text effect with outlines, shadows, and gradients.
- *
  * @example
  * ```js
  * import { CartoonTextFilter } from './CartoonTextFilter';

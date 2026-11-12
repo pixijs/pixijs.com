@@ -1,5 +1,5 @@
-import { Application, Container, SplitText } from 'pixi.js';
 import { gsap } from 'gsap';
+import { Application, Container, SplitText } from 'pixi.js';
 
 (async () => {
   const app = new Application();

@@ -36,7 +36,7 @@ import { Application, Assets, MeshRope, Point } from 'pixi.js';
   const rope = new MeshRope({ texture: trailTexture, points });
 
   // Set the blendmode
-  rope.blendmode = 'add';
+  rope.blendMode = 'add';
 
   app.stage.addChild(rope);
 
@@ -72,9 +72,7 @@ import { Application, Assets, MeshRope, Point } from 'pixi.js';
     }
   });
 
-  /**
-   * Cubic interpolation based on https://github.com/osuushi/Smooth.js
-   */
+  /** Cubic interpolation based on https://github.com/osuushi/Smooth.js */
   function clipInput(k, arr) {
     if (k < 0) k = 0;
     if (k > arr.length - 1) k = arr.length - 1;

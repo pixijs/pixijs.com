@@ -1,0 +1,235 @@
+# PixiJS 3D
+
+> @pixi/3d is a 3D extension for PixiJS. It adds a 3D scene graph, glTF loading, PBR materials, lights, shadows, and post-processing to a PixiJS application, and renders them with WebGL or WebGPU.
+
+## getting-started
+
+- [Introduction](https://3d.pixijs.download/v0.1.0/docs/getting-started.html.md): What PixiJS 3D is, what it covers, and which guide to read for each part.
+- [Installation](https://3d.pixijs.download/v0.1.0/docs/getting-started-1.html.md): How to install PixiJS 3D from npm or a CDN, how its WebGPU and WebGL2 code loads, and the TypeScript setting it needs.
+- [Quick start](https://3d.pixijs.download/v0.1.0/docs/getting-started-2.html.md): Build a first 3D scene in a PixiJS application with a view, a camera, a sun, a floor and a spinning cube, then load a glTF model into it.
+- [Porting from Three.js](https://3d.pixijs.download/v0.1.0/docs/getting-started-3.html.md): Move a Three.js app to PixiJS 3D, starting with the differences that still compile after a rename but change the picture.
+
+## core-concepts
+
+- [Scene graph and transforms](https://3d.pixijs.download/v0.1.0/docs/core-concepts.html.md): Which way the axes point, how to position, rotate, scale and group nodes, and when world transforms update.
+- [View3D and 2D content](https://3d.pixijs.download/v0.1.0/docs/core-concepts-1.html.md): Size and place a View3D in the PixiJS display list, use several views, draw 2D content behind and over a view, filter, mask and set its resolution, and convert between screen and world positions.
+- [Resources and cleanup](https://3d.pixijs.download/v0.1.0/docs/core-concepts-2.html.md): Sharing geometry and materials between meshes, and freeing their GPU memory with destroy, unload and the renderer's garbage collector.
+- [WebGL and WebGPU](https://3d.pixijs.download/v0.1.0/docs/core-concepts-3.html.md): How to get WebGPU or WebGL2, what your code handles for each, and where each one culls.
+- [How a frame renders](https://3d.pixijs.download/v0.1.0/docs/core-concepts-4.html.md): The passes a view runs each frame, which of them draw a mesh, and the settings that make the view compile new shaders.
+- [Performance](https://3d.pixijs.download/v0.1.0/docs/core-concepts-5.html.md): What puts meshes in one draw call, how a view culls, and a checklist for keeping a 3D scene fast on phones.
+
+## scene
+
+- [Overview](https://3d.pixijs.download/v0.1.0/docs/scene.html.md): The kinds of node that make up a 3D scene, how they fit together under a view's root, and which to use for many objects.
+- [Meshes](https://3d.pixijs.download/v0.1.0/docs/scene-1.html.md): Building a Mesh3D from a geometry and a material, sharing and swapping them, and reading a mesh's bounding sphere.
+- [Geometry](https://3d.pixijs.download/v0.1.0/docs/geometry.html.md): The nine built-in shapes and how textures map onto them, building a shape from your own vertex arrays, and editing a geometry's vertices.
+- [Cameras](https://3d.pixijs.download/v0.1.0/docs/scene-2.html.md): How to place and aim the view's camera, set its field of view and near and far distances, use an orthographic camera, switch cameras and frame a model.
+- [Camera controls](https://3d.pixijs.download/v0.1.0/docs/extras_camera.html.md): Orbit and first-person camera controllers for mouse, touch and keyboard, and how to write your own.
+- [Second cameras](https://3d.pixijs.download/v0.1.0/docs/scene-3.html.md): Draw the scene from a second camera into a texture, and show it on a monitor, in a 2D sprite or through a portal.
+- [Lights](https://3d.pixijs.download/v0.1.0/docs/scene-4.html.md): Ambient, directional, point and spot lights, how to aim them and give them a range, and how many lights a view draws.
+- [Shadows](https://3d.pixijs.download/v0.1.0/docs/scene-5.html.md): How to turn shadows on, choose which meshes cast and catch them, set their quality, use the shadow box or cascades, give spot lights shadows, redraw less often and fix shadow artefacts.
+- [Sprite3D](https://3d.pixijs.download/v0.1.0/docs/scene-6.html.md): Textured cards that turn to face the camera in a 3D scene, and how to size, anchor, blend, animate and batch them.
+- [Batched meshes](https://3d.pixijs.download/v0.1.0/docs/scene-7.html.md): Drawing thousands of meshes from one BatchedMesh3D node, with its slots, matrices, hidden spares, camera-facing cards, culling and cleanup.
+- [AmbientLight](https://3d.pixijs.download/v0.1.0/docs/scene.AmbientLight.html.md): Light that reaches every surface equally, whatever its position or direction
+- [BatchedMesh3D](https://3d.pixijs.download/v0.1.0/docs/scene.BatchedMesh3D.html.md): A scene node that draws many meshes as slots of one batch, with no scene node per mesh
+- [Camera3D](https://3d.pixijs.download/v0.1.0/docs/scene.Camera3D.html.md): The point of view a scene is drawn from
+- [Container3D](https://3d.pixijs.download/v0.1.0/docs/scene.Container3D.html.md): A node in a 3D scene, the 3D counterpart of pixi.js's `Container`
+- [DirectionalLight](https://3d.pixijs.download/v0.1.0/docs/scene.DirectionalLight.html.md): Light that arrives from one direction everywhere in the scene, like the sun
+- [Light](https://3d.pixijs.download/v0.1.0/docs/scene.Light.html.md): Base class for every light in the scene
+- [Mesh3D](https://3d.pixijs.download/v0.1.0/docs/scene.Mesh3D.html.md): A drawable node: a Geometry3D drawn with a BaseMaterial3D
+- [Model3D](https://3d.pixijs.download/v0.1.0/docs/scene.Model3D.html.md): A Container3D built from a loaded glTF file, a Scene3DSource
+- [PointLight](https://3d.pixijs.download/v0.1.0/docs/scene.PointLight.html.md): Light that shines equally in every direction from a point, like a bulb
+- [Skeleton](https://3d.pixijs.download/v0.1.0/docs/scene.Skeleton.html.md): The bones of a skinned Mesh3D, and their pose
+- [SpotLight](https://3d.pixijs.download/v0.1.0/docs/scene.SpotLight.html.md): Light that shines in a cone from a point, like a torch or a stage light
+- [Sprite3D](https://3d.pixijs.download/v0.1.0/docs/scene.Sprite3D.html.md): A textured quad in the 3D scene, sized from its texture and, by default, turned to face the camera
+- [View3D](https://3d.pixijs.download/v0.1.0/docs/scene.View3D.html.md): A 3D scene drawn inside pixi's 2D display list
+
+## materials
+
+- [Overview](https://3d.pixijs.download/v0.1.0/docs/materials.html.md): Choosing a material, transparency, double-sided surfaces, textures, and which material changes need a call from you.
+- [PBR materials](https://3d.pixijs.download/v0.1.0/docs/materials-1.html.md): Base colour, metalness and roughness, normal and occlusion maps, glow, and tiled or sprite-sheet textures on a Material3D.
+- [Physical extensions](https://3d.pixijs.download/v0.1.0/docs/materials-2.html.md): Clearcoat, sheen, specular, index of refraction, iridescence, glass and anisotropy on Material3D, how glass draws, and what each feature costs.
+- [Toon and custom materials](https://3d.pixijs.download/v0.1.0/docs/extras_materials.html.md): Cel shading with ToonMaterial, ink outlines with OutlinePass, and your own shader code in a material.
+- [BaseMaterial3D](https://3d.pixijs.download/v0.1.0/docs/materials.BaseMaterial3D.html.md): Base class for all 3D materials
+- [FlatMaterial](https://3d.pixijs.download/v0.1.0/docs/materials.FlatMaterial.html.md): An unlit material that draws its base colour and texture with no lighting
+- [Material3D](https://3d.pixijs.download/v0.1.0/docs/materials.Material3D.html.md): The standard physically based (PBR) material
+- [PhongMaterial](https://3d.pixijs.download/v0.1.0/docs/materials.PhongMaterial.html.md): A Blinn-Phong material: diffuse shading plus a specular highlight
+
+## environment
+
+- [Environment and IBL](https://3d.pixijs.download/v0.1.0/docs/environment.html.md): Light a scene from its surroundings with a sky gradient or a cube map, draw a background behind it, and set tone mapping, exposure and fog.
+
+## assets
+
+- [Loading models](https://3d.pixijs.download/v0.1.0/docs/assets.html.md): Load glTF and GLB files, build models from them, see what a file can bring, and free a file when you're done with it.
+- [Compressed models](https://3d.pixijs.download/v0.1.0/docs/assets-1.html.md): Loading glTF files compressed with meshopt, Draco or mesh quantization, and compressing your own with gltfpack.
+- [Scene3DSource](https://3d.pixijs.download/v0.1.0/docs/assets.Scene3DSource.html.md): The geometries, materials, textures and animations loaded from a glTF or GLB file
+- [setDracoDecoderPath](https://3d.pixijs.download/v0.1.0/docs/assets.setDracoDecoderPath.html.md): Sets where the Draco decoder is fetched from, to self-host it
+
+## animation
+
+- [Animation](https://3d.pixijs.download/v0.1.0/docs/animation.html.md): Playing and blending a model's animation clips, posing skinned meshes, setting morph target weights, and building keyframe animations in code.
+- [Animation](https://3d.pixijs.download/v0.1.0/docs/animation.Animation.html.md): A named set of keyframe tracks, holding no playback state
+- [AnimationPlayer](https://3d.pixijs.download/v0.1.0/docs/animation.AnimationPlayer.html.md): Plays animations on a Container3D and its children
+- [AnimationState](https://3d.pixijs.download/v0.1.0/docs/animation.AnimationState.html.md): Playback state for a single Animation on an AnimationPlayer
+
+## events
+
+- [Interaction](https://3d.pixijs.download/v0.1.0/docs/events.html.md): Pointer events on 3D objects, hit volumes, propagation, dragging and picking without events.
+- [createRaycastHit3D](https://3d.pixijs.download/v0.1.0/docs/events.createRaycastHit3D.html.md): Creates an empty RaycastHit3D, for View3D#raycast to fill again and again
+
+## rendering
+
+- [Rendering 2D into 3D](https://3d.pixijs.download/v0.1.0/docs/rendering.html.md): Draw a PixiJS container onto a 3D surface with ContainerTexture, keep it up to date, and put a whole 3D view inside it.
+- [ColorCubeTexture](https://3d.pixijs.download/v0.1.0/docs/rendering.ColorCubeTexture.html.md): Makes CubeTextures of one solid colour, for a flat environment
+- [ContainerTexture](https://3d.pixijs.download/v0.1.0/docs/rendering.ContainerTexture.html.md): A Texture that shows a live 2D PixiJS Container
+- [Pass3D](https://3d.pixijs.download/v0.1.0/docs/rendering.Pass3D.html.md): Base class for everything added to View3D#passes
+- [RenderPassBit](https://3d.pixijs.download/v0.1.0/docs/rendering.RenderPassBit.html.md): The render passes a mesh can belong to, as bit flags
+
+## extras:post-processing
+
+- [Post-processing](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.html.md): Add effects such as bloom, ambient occlusion and antialiasing to a view, turn them on and off, and write an effect of your own.
+- [Custom render passes](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing-1.html.md): Draw meshes again with a shader of your own, write an effect in several steps, and build a view's render graph yourself.
+- [BloomEffect](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.BloomEffect.html.md): Bright parts of the frame glow outward
+- [FxaaEffect](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.FxaaEffect.html.md): Smooths jagged edges by blurring along them, a cheap stand-in for multisampling
+- [MotionBlurEffect](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.MotionBlurEffect.html.md): Blurs the image along the direction each pixel moved since the camera's previous render
+- [OutlinePass](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.OutlinePass.html.md): Draws an ink outline around opted-in meshes, for a toon look
+- [PortalPass](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.PortalPass.html.md): A texture portal: a second view of the scene, drawn from behind the exit and shown on the entry
+- [SsaoEffect](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.SsaoEffect.html.md): Screen-space ambient occlusion: darkens creases, corners and contact points
+- [TiltShiftEffect](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.TiltShiftEffect.html.md): Tilt-shift: a miniature look from a narrow depth of field
+- [TintEffect](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.TintEffect.html.md): Multiplies the frame by a flat colour
+- [WireframePass](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.WireframePass.html.md): Debug pass that redraws opted-in meshes as lines over their shaded result
+
+## extras:particles
+
+- [Particles](https://3d.pixijs.download/v0.1.0/docs/extras_particles.html.md): Fire, smoke, sparks and snow with ParticleSystem3D, and particles your own code moves with ParticleContainer3D.
+- [BoxShape](https://3d.pixijs.download/v0.1.0/docs/extras_particles.BoxShape.html.md): Spawns anywhere inside a box centred on the emitter and aligned with its axes, heading up
+- [ConeShape](https://3d.pixijs.download/v0.1.0/docs/extras_particles.ConeShape.html.md): Spawns on a disc in the XZ plane and heads up within `angle` degrees of +Y
+- [ParticleSystem3D](https://3d.pixijs.download/v0.1.0/docs/extras_particles.ParticleSystem3D.html.md): A particle system with the movement built in: emission, lifetimes, spreads, forces and over-life ramps, all from one options object
+- [PointShape](https://3d.pixijs.download/v0.1.0/docs/extras_particles.PointShape.html.md): Starts every particle at the emitter, heading straight up; the default shape
+- [SphereShape](https://3d.pixijs.download/v0.1.0/docs/extras_particles.SphereShape.html.md): Spawns inside (or on) a sphere and heads radially outward
+
+## maths
+
+- [Math](https://3d.pixijs.download/v0.1.0/docs/maths.html.md): Vectors, quaternions, matrices and shapes for 3D, where their methods put results, and seeded random numbers.
+- [Box](https://3d.pixijs.download/v0.1.0/docs/maths.Box.html.md): An axis-aligned bounding box (AABB), spanning from its `min` corner to its `max` corner
+- [Cylindrical](https://3d.pixijs.download/v0.1.0/docs/maths.Cylindrical.html.md): A point given as `radius`, `theta` and `y`: its distance from the Y axis, its angle around that axis measured from +Z toward +X, and its height
+- [Frustum](https://3d.pixijs.download/v0.1.0/docs/maths.Frustum.html.md): A volume bounded by six planes that face inward, most often the volume a camera sees
+- [Matrix3](https://3d.pixijs.download/v0.1.0/docs/maths.Matrix3.html.md): A 3x3 matrix, for 2D affine transforms such as UV transforms, and for the normal matrix of a 3D transform
+- [Matrix4](https://3d.pixijs.download/v0.1.0/docs/maths.Matrix4.html.md): A 4x4 matrix for 3D transforms and projections
+- [ObservableQuaternion](https://3d.pixijs.download/v0.1.0/docs/maths.ObservableQuaternion.html.md): A Quaternion that tells an observer when it changes
+- [ObservableVector3](https://3d.pixijs.download/v0.1.0/docs/maths.ObservableVector3.html.md): A Vector3 that tells an observer when it changes
+- [Plane](https://3d.pixijs.download/v0.1.0/docs/maths.Plane.html.md): An infinite flat plane: the points `p` where `normal · p + constant = 0`
+- [Quaternion](https://3d.pixijs.download/v0.1.0/docs/maths.Quaternion.html.md): A rotation in 3D, stored as four numbers `(x, y, z, w)`
+- [Ray](https://3d.pixijs.download/v0.1.0/docs/maths.Ray.html.md): A half-line that starts at `origin` and runs along `direction`, for picking and line-of-sight tests
+- [Sphere](https://3d.pixijs.download/v0.1.0/docs/maths.Sphere.html.md): A sphere from `center` and `radius`, mostly used as a bounding volume
+- [Spherical](https://3d.pixijs.download/v0.1.0/docs/maths.Spherical.html.md): A point given as `radius`, `phi` and `theta` around the origin: its distance, its angle down from +Y, and its angle around +Y, measured from +Z toward +X
+- [Vector2](https://3d.pixijs.download/v0.1.0/docs/maths.Vector2.html.md): A point or direction in 2D, such as a UV coordinate, a screen position or stick input
+- [Vector3](https://3d.pixijs.download/v0.1.0/docs/maths.Vector3.html.md): A point or direction in 3D, such as a position, a velocity or an offset
+- [Vector4](https://3d.pixijs.download/v0.1.0/docs/maths.Vector4.html.md): A four-component vector, such as a position with a `w`, an RGBA colour or a plane equation
+- [seededRandom](https://3d.pixijs.download/v0.1.0/docs/maths.seededRandom.html.md): Creates a random function that returns the same sequence of numbers in `[0, 1)` for the same seed
+
+## geometry
+
+- [CapsuleGeometry](https://3d.pixijs.download/v0.1.0/docs/geometry.CapsuleGeometry.html.md): A capsule geometry oriented along the +Y axis and centered on the origin: a cylindrical mid-section with hemispherical caps on each end
+- [ConeGeometry](https://3d.pixijs.download/v0.1.0/docs/geometry.ConeGeometry.html.md): A cone geometry oriented along the +Y axis and centered on the origin, with the apex at `+height/2` and the base ring at `-height/2`
+- [CubeGeometry](https://3d.pixijs.download/v0.1.0/docs/geometry.CubeGeometry.html.md): A box geometry with six axis-aligned faces, centered on the origin
+- [CylinderGeometry](https://3d.pixijs.download/v0.1.0/docs/geometry.CylinderGeometry.html.md): A cylinder geometry oriented along the +Y axis and centered on the origin, with the top ring at `+height/2` and the bottom ring at `-height/2`
+- [Geometry3D](https://3d.pixijs.download/v0.1.0/docs/geometry.Geometry3D.html.md): A mesh's vertex and index data: positions plus optional normals, UVs, tangents, colours and skinning data, in separate buffers or interleaved in one
+- [IcosahedronGeometry](https://3d.pixijs.download/v0.1.0/docs/geometry.IcosahedronGeometry.html.md): An icosahedron geometry, the 20-faced regular polyhedron
+- [PlaneGeometry](https://3d.pixijs.download/v0.1.0/docs/geometry.PlaneGeometry.html.md): A flat plane geometry in the XY plane, centered on the origin and facing +Z
+- [SphereGeometry](https://3d.pixijs.download/v0.1.0/docs/geometry.SphereGeometry.html.md): A UV sphere geometry built as a longitude-by-latitude grid around the +Y axis
+- [TorusGeometry](https://3d.pixijs.download/v0.1.0/docs/geometry.TorusGeometry.html.md): A torus (donut) geometry lying in the XZ plane around the +Y axis
+- [TorusKnotGeometry](https://3d.pixijs.download/v0.1.0/docs/geometry.TorusKnotGeometry.html.md): A torus knot geometry, formed by sweeping a circular tube along a `(p, q)` torus knot path
+- [getAttributeData](https://3d.pixijs.download/v0.1.0/docs/geometry.getAttributeData.html.md): Reads a vertex attribute as floats, `size` per vertex, however the geometry stores it
+
+## extras:camera
+
+- [FPSCamera](https://3d.pixijs.download/v0.1.0/docs/extras_camera.FPSCamera.html.md): First-person controller for a View3D's camera
+- [OrbitCamera](https://3d.pixijs.download/v0.1.0/docs/extras_camera.OrbitCamera.html.md): Orbit, zoom and pan controller for a View3D's camera
+
+## extras:materials
+
+- [PortalMaterial](https://3d.pixijs.download/v0.1.0/docs/extras_materials.PortalMaterial.html.md): Unlit surface that shows a render-texture feed at the viewer's own screen position
+- [ToonMaterial](https://3d.pixijs.download/v0.1.0/docs/extras_materials.ToonMaterial.html.md): Cel-shaded toon material: banded diffuse, a sharp specular highlight and a rim light
+
+## extras:debug
+
+- [Debugging](https://3d.pixijs.download/v0.1.0/docs/extras_debug.html.md): Show a mesh's triangles, record how a view draws each frame, and see how the camera's motion moves each pixel.
+
+## filters
+
+- [PostEffect](https://3d.pixijs.download/v0.1.0/docs/filters.PostEffect.html.md): Base class for fullscreen post effects, added to a view through View3D#passes
+
+## Optional
+
+- [BatchInstanceData](https://3d.pixijs.download/v0.1.0/docs/scene.BatchInstanceData.html.md): The instance data of a BatchedMesh3D as one float array, for rewriting many slots a frame
+- [BatchMatrices](https://3d.pixijs.download/v0.1.0/docs/scene.BatchMatrices.html.md): The slot matrices of a BatchedMesh3D as one float array, for rewriting many slots a frame
+- [ParticleContainer3D](https://3d.pixijs.download/v0.1.0/docs/scene.ParticleContainer3D.html.md): A fixed pool of camera-facing quads drawn in one call, which you move yourself
+- [ParticleMaterial](https://3d.pixijs.download/v0.1.0/docs/scene.ParticleMaterial.html.md): The unlit material ParticleContainer3D builds for its particles
+- [MAX_LIGHTS](https://3d.pixijs.download/v0.1.0/docs/scene.MAX_LIGHTS.html.md): Most lights a view draws at once
+- [particleAlphaOverLifeBit](https://3d.pixijs.download/v0.1.0/docs/scene.particleAlphaOverLifeBit.html.md): Ramps a particle's opacity from its spawn value to `aAlphaEnd` across its life; set the end to 0 to fade out
+- [particleColorOverLifeBit](https://3d.pixijs.download/v0.1.0/docs/scene.particleColorOverLifeBit.html.md): Ramps a particle's tint from its spawn colour to `aColorEnd` across its life
+- [particleFlipbookOverLifeBit](https://3d.pixijs.download/v0.1.0/docs/scene.particleFlipbookOverLifeBit.html.md): Plays the flipbook once over a particle's life, first frame at birth and last at death
+- [particleFlipbookRateBit](https://3d.pixijs.download/v0.1.0/docs/scene.particleFlipbookRateBit.html.md): Plays the flipbook at `uFrameRate` frames per second from birth, looping
+- [particleLifetimeBit](https://3d.pixijs.download/v0.1.0/docs/scene.particleLifetimeBit.html.md): Gives every particle a clock, which the other lifetime bits read
+- [particleMotionBit](https://3d.pixijs.download/v0.1.0/docs/scene.particleMotionBit.html.md): Moves each particle from its launch point along a ballistic path, worked out on the GPU
+- [particleSizeOverLifeBit](https://3d.pixijs.download/v0.1.0/docs/scene.particleSizeOverLifeBit.html.md): Ramps a particle's size from its spawn value to `aSizeEnd` across its life
+- [particleSpinBit](https://3d.pixijs.download/v0.1.0/docs/scene.particleSpinBit.html.md): Spins a particle in its quad's plane at `aSpin` radians per second, from its spawn rotation
+- [getParticleBit](https://3d.pixijs.download/v0.1.0/docs/scene.getParticleBit.html.md): The shader bit that turns each particle's four vertices into a camera-facing quad
+- [packParticleColor](https://3d.pixijs.download/v0.1.0/docs/scene.packParticleColor.html.md): Packs a tint and opacity into the 32-bit word ParticleContainer3D.writePacked takes
+- [packParticleFrames](https://3d.pixijs.download/v0.1.0/docs/scene.packParticleFrames.html.md): Packs each flipbook frame's window on its sheet, `(u0, v0, uScale, vScale)`, as the four `unorm16` values a particle's `aParticleUVFrame` holds
+- [linearToSrgb](https://3d.pixijs.download/v0.1.0/docs/materials.linearToSrgb.html.md): Converts a linear-light channel to display (sRGB); the inverse of srgbToLinear
+- [srgbToLinear](https://3d.pixijs.download/v0.1.0/docs/materials.srgbToLinear.html.md): Converts a display (sRGB) channel to linear light
+- [stateFor3D](https://3d.pixijs.download/v0.1.0/docs/materials.stateFor3D.html.md): Creates a render `State` with the defaults every material starts from: depth test on, blending off, back-face culling on
+- [dracoDecoderUrls](https://3d.pixijs.download/v0.1.0/docs/assets.dracoDecoderUrls.html.md): The URLs the Draco decoder loads from, by default Google's hosted build; setDracoDecoderPath changes them
+- [loadCubemap](https://3d.pixijs.download/v0.1.0/docs/assets.loadCubemap.html.md): Loads a `.cubemap` JSON file as a CubeTexture
+- [loadGlb](https://3d.pixijs.download/v0.1.0/docs/assets.loadGlb.html.md): Loads a binary glTF (`.glb`) file as a Scene3DSource
+- [loadGltf](https://3d.pixijs.download/v0.1.0/docs/assets.loadGltf.html.md): Loads a `.gltf` file, with its external buffers and images, as a Scene3DSource
+- [loadHdr](https://3d.pixijs.download/v0.1.0/docs/assets.loadHdr.html.md): Loads an equirectangular Radiance `.hdr` image as an HDR CubeTexture
+- [NumberTrack](https://3d.pixijs.download/v0.1.0/docs/animation.NumberTrack.html.md): Track for a number property, such as a node's `x` or a number field on your own subclass
+- [QuaternionTrack](https://3d.pixijs.download/v0.1.0/docs/animation.QuaternionTrack.html.md): Track for a rotation stored as a quaternion, such as a node's `quaternion`
+- [Track](https://3d.pixijs.download/v0.1.0/docs/animation.Track.html.md): Keyframes for one animated property
+- [Vector3Track](https://3d.pixijs.download/v0.1.0/docs/animation.Vector3Track.html.md): Track for a three-component vector property, such as a node's `position` or `scale`
+- [EventBoundary3D](https://3d.pixijs.download/v0.1.0/docs/events.EventBoundary3D.html.md): Pointer events for one View3D, the 3D counterpart of pixi.js's `EventBoundary`
+- [BackgroundPass](https://3d.pixijs.download/v0.1.0/docs/rendering.BackgroundPass.html.md): Draws the view's View3D#background behind the scene: a cubemap, a Hemisphere sky/ground gradient, or a plain colour
+- [BlendedRefractionPass](https://3d.pixijs.download/v0.1.0/docs/rendering.BlendedRefractionPass.html.md): Draws blended refractive materials, such as water, over copies of the opaque colour and depth
+- [ContainerSource](https://3d.pixijs.download/v0.1.0/docs/rendering.ContainerSource.html.md): A TextureSource whose pixels are a live 2D PixiJS Container
+- [CopyDepthPass](https://3d.pixijs.download/v0.1.0/docs/rendering.CopyDepthPass.html.md): Copies a camera's opaque depth into a texture for refractive materials to sample
+- [CopyOpaquePass](https://3d.pixijs.download/v0.1.0/docs/rendering.CopyOpaquePass.html.md): Copies a camera's opaque picture into a texture for glass to sample
+- [ForwardRenderPass](https://3d.pixijs.download/v0.1.0/docs/rendering.ForwardRenderPass.html.md): Draws the scene meshes in one pass membership from one camera
+- [FullscreenPass](https://3d.pixijs.download/v0.1.0/docs/rendering.FullscreenPass.html.md): One fullscreen draw of an `effect(uv)` fragment, reading graph handles and writing one
+- [MeshPass](https://3d.pixijs.download/v0.1.0/docs/rendering.MeshPass.html.md): Redraws every mesh that opts in by name, with an override shader and state
+- [OutputPass](https://3d.pixijs.download/v0.1.0/docs/rendering.OutputPass.html.md): Finishes a view's image: applies the tone curve and display encode to a scene that holds linear light, or copies the image unchanged (see View3D#toneMapping)
+- [PassBuilder](https://3d.pixijs.download/v0.1.0/docs/rendering.PassBuilder.html.md): Declares what a pass reads and writes; GraphRenderPass#setup receives one
+- [RenderGraph](https://3d.pixijs.download/v0.1.0/docs/rendering.RenderGraph.html.md): The ordered passes a View3D renders, and the textures they read and write
+- [RenderPass](https://3d.pixijs.download/v0.1.0/docs/rendering.RenderPass.html.md): Base class for all render passes in the pipeline
+- [ShaderDescriptor](https://3d.pixijs.download/v0.1.0/docs/rendering.ShaderDescriptor.html.md): The ShaderBits a shader is built from, per backend, with its template and overrides
+- [TransmissionRenderPass](https://3d.pixijs.download/v0.1.0/docs/rendering.TransmissionRenderPass.html.md): Draws transmissive (glass) materials over a copy of the opaque picture behind them
+- [alphaMaskBit](https://3d.pixijs.download/v0.1.0/docs/rendering.alphaMaskBit.html.md): The cutout for `alphaMode: 'mask'`: discards fragments with alpha below the material's `alphaCutoff` and makes the rest fully opaque
+- [instanceFetchBitGl](https://3d.pixijs.download/v0.1.0/docs/rendering.instanceFetchBitGl.html.md): Sets each instance's `modelMatrix` on WebGL, for a pass's own template that draws meshes
+- [mathConstantsBit](https://3d.pixijs.download/v0.1.0/docs/rendering.mathConstantsBit.html.md): Declares the constants `PI` and `INV_PI` for a bit that lists it in `requires`
+- [passthroughFragment](https://3d.pixijs.download/v0.1.0/docs/rendering.passthroughFragment.html.md): A fragment that copies its colour input unchanged, for a FullscreenPass with a `reads.color`
+- [screenSpaceFuncsBit](https://3d.pixijs.download/v0.1.0/docs/rendering.screenSpaceFuncsBit.html.md): Shader helpers that sample the opaque pass's colour or depth copy at a world position, for custom material bits such as refraction or water
+- [uvTransformBit](https://3d.pixijs.download/v0.1.0/docs/rendering.uvTransformBit.html.md): Applies the material's BaseMaterial3D#uvTransform to the mesh UVs
+- [createDefaultGraph3D](https://3d.pixijs.download/v0.1.0/docs/rendering.createDefaultGraph3D.html.md): Builds the render graph a View3D uses unless its `graph` option supplies one
+- [createLightingBit](https://3d.pixijs.download/v0.1.0/docs/rendering.createLightingBit.html.md): Builds a lighting `ShaderBit` around the shading math in `opts`
+- [ExtractPass](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.ExtractPass.html.md): Copies a scene output out of the frame, into a texture the app keeps
+- [normalOutput](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.normalOutput.html.md): Each pixel's surface normal in the camera's view space, in an `rgba8unorm` texture
+- [velocityOutput](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.velocityOutput.html.md): How far each pixel's surface moved on screen since the camera's previous render, from the camera's motion alone, in an `rg16float` texture
+- [mirrorCameraThroughPortal](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.mirrorCameraThroughPortal.html.md): Poses a portal camera behind the exit exactly as the viewer stands before the entry
+- [portalExitClipPlane](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.portalExitClipPlane.html.md): Writes the exit surface as a clipping plane in the portal camera's view space
+- [solidMeshDescriptor](https://3d.pixijs.download/v0.1.0/docs/extras_post-processing.solidMeshDescriptor.html.md): Shader for a MeshPass that draws meshes in one flat colour, such as a selection mask
+- [dissolveBit](https://3d.pixijs.download/v0.1.0/docs/extras_materials.dissolveBit.html.md): Cuts a material's surface away where noise falls below `material.data.dissolve`, with an optional glowing edge along the cut
+- [glossBit](https://3d.pixijs.download/v0.1.0/docs/extras_materials.glossBit.html.md): Stylised wet-plastic gloss: a sharp reflection of the environment, strongest at grazing angles, added on top of lighting
+- [toonLightingBit](https://3d.pixijs.download/v0.1.0/docs/extras_materials.toonLightingBit.html.md): Cel-shaded lighting: quantised diffuse bands, a stepped specular highlight and a rim term
+- [toonMaterialBit](https://3d.pixijs.download/v0.1.0/docs/extras_materials.toonMaterialBit.html.md): Sets up the inputs toonLightingBit reads
+- [DepthMapViewer](https://3d.pixijs.download/v0.1.0/docs/extras_debug.DepthMapViewer.html.md): Debug quad that shows a depth array texture in greyscale
+- [GeometryThumbnailGenerator](https://3d.pixijs.download/v0.1.0/docs/extras_debug.GeometryThumbnailGenerator.html.md): Draws and caches small shaded previews of Geometry3Ds, keyed by `uid`
+- [GraphDebugOverlay](https://3d.pixijs.download/v0.1.0/docs/extras_debug.GraphDebugOverlay.html.md): HTML panel for recording a view's frames and reviewing how each one was drawn
+- [GraphDebugRecording](https://3d.pixijs.download/v0.1.0/docs/extras_debug.GraphDebugRecording.html.md): Stores one GraphDebugSnapshot per rendered frame, up to a frame cap
+- [RenderGraphDebugger](https://3d.pixijs.download/v0.1.0/docs/extras_debug.RenderGraphDebugger.html.md): Captures a GraphDebugSnapshot of a view's last frame and explains what changed since the previous capture
+- [VelocityViewer](https://3d.pixijs.download/v0.1.0/docs/extras_debug.VelocityViewer.html.md): Debug effect that shows the scene's velocity in place of the image
+- [GRAPH_DEBUG_RECORDING_VERSION](https://3d.pixijs.download/v0.1.0/docs/extras_debug.GRAPH_DEBUG_RECORDING_VERSION.html.md): Serialization version stamped onto every GraphDebugRecordingSnapshot
+- [GRAPH_DEBUG_SNAPSHOT_VERSION](https://3d.pixijs.download/v0.1.0/docs/extras_debug.GRAPH_DEBUG_SNAPSHOT_VERSION.html.md): Serialization version stamped onto every GraphDebugSnapshot
+- [captureGraphDebugSnapshot](https://3d.pixijs.download/v0.1.0/docs/extras_debug.captureGraphDebugSnapshot.html.md): Capture the passes and resources of a render graph's last resolve as plain data

@@ -1,3 +1,5 @@
+# Ecosystem
+
 PixiJS itself is just a rendering engine. However, there is a foundation of a robust ecosystem of libraries and tools that enhance and expand its capabilities. These tools integrate seamlessly with PixiJS, empowering developers to create richer, more interactive applications with ease.
 
 ## Core Ecosystem Libraries
@@ -6,13 +8,38 @@ PixiJS itself is just a rendering engine. However, there is a foundation of a ro
 
 Optimize and debug your PixiJS projects with DevTools. This browser extension offers real-time insights into application performance, rendering hierarchies, and texture management, ensuring your projects run smoothly.
 
-### [React Integration](https:/react.pixijs.io/)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img
+    style={{
+      borderRadius: '10px',
+      filter: 'drop-shadow(0px 2px 5px #000)',
+      maxWidth: 600,
+      width: '100%',
+    }}
+    alt="Screenshot from terminal"
+    src="/assets/guides/devtool-screenshot.png"
+  />
+</div>
 
-:::info
-PixiJS React requires React 19 or higher.
-:::
+### [React Integration](https://react.pixijs.io/)
+
+> [!NOTE]
+> PixiJS React requires React 19 or higher.
 
 Simplify the use of PixiJS in React applications with the Pixi-React library. This library provides bindings that allow you to manage PixiJS components as React elements, making it easy to incorporate powerful graphics into React's declarative framework.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img
+    style={{
+      borderRadius: '10px',
+      filter: 'drop-shadow(0px 2px 5px #000)',
+      maxWidth: 800,
+      width: '100%',
+    }}
+    alt="Screenshot from terminal"
+    src="/assets/guides/react-code.png"
+  />
+</div>
 
 ### [Layout](https://layout.pixijs.io/)
 
@@ -30,9 +57,49 @@ Key features include:
 
 Bring animations to life with Spine-Pixi. This integration combines the power of PixiJS and Spine, a leading animation tool, to create smooth, skeletal-based animations for games and interactive content.
 
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img
+    style={{
+      borderRadius: '10px',
+      filter: 'drop-shadow(0px 2px 5px #000)',
+      maxWidth: 500,
+      width: '100%',
+    }}
+    alt="Screenshot from terminal"
+    src="/assets/guides/spine-gif.gif"
+  />
+</div>
+
 ### [Filters](https://github.com/pixijs/filters)
 
 Transform your visuals with PixiJS Filters. This extensive collection of high-performance effects includes options like blur, glow, and color adjustments, giving you the tools to create visually stunning graphics.
+
+<div style={{ display: 'flex', justifyContent: 'center', gap: 5, flexWrap: 'wrap' }}>
+  <img
+    style={{
+      borderRadius: '10px',
+      filter: 'drop-shadow(0px 2px 5px #000)',
+    }}
+    alt="Screenshot from terminal"
+    src="https://filters.pixijs.download/main/screenshots/twist.png?v=3"
+  />
+  <img
+    style={{
+      borderRadius: '10px',
+      filter: 'drop-shadow(0px 2px 5px #000)',
+    }}
+    alt="Screenshot from terminal"
+    src="https://filters.pixijs.download/main/screenshots/grayscale.png?v=1"
+  />
+  <img
+    style={{
+      borderRadius: '10px',
+      filter: 'drop-shadow(0px 2px 5px #000)',
+    }}
+    alt="Screenshot from terminal"
+    src="https://filters.pixijs.download/main/screenshots/advanced-bloom.png?v=3"
+  />
+</div>
 
 ### [Sound](https://github.com/pixijs/sound)
 
@@ -56,6 +123,14 @@ All the essentials for building interactive interfaces in PixiJS.
 ### [AssetPack](https://pixijs.io/assetpack/)
 
 Simplify asset management with AssetPack. This tool organizes, packages, and loads assets efficiently, reducing load times and improving resource handling for your projects.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <img
+    style={{ borderRadius: '10px', filter: 'drop-shadow(0px 2px 5px #000)', width: '100%' }}
+    alt="Screenshot from terminal"
+    src="/assets/guides/assetpack-screenshot.png"
+  />
+</div>
 
 ## [PixiJS Userland](https://github.com/pixijs-userland) - Community-Driven Repositories
 
