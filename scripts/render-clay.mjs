@@ -21,7 +21,6 @@ import { Application } from 'pixi.js';
 import { Container3D, DirectionalLight, Mesh3D, View3D } from '@pixi/3d';
 import { createClayAssets, KEY_DIRECTION } from './src/components/Home/Hero/field/clay';
 import { CLAY_POSES, KIND_PITCH } from './src/components/Home/Hero/field/kinds';
-import './src/utils/pixi3dCompat';
 
 const SIZE = ${SIZE};
 const DISTANCE = 12;

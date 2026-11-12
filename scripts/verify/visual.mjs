@@ -62,7 +62,7 @@ const DEFAULT_ROUTES = [
   '/8.x/examples',
   '/8.x/examples?example=sprite_transform_rotation',
   '/3d/examples',
-  '/3d/examples?example=basics_hello-cube',
+  '/3d/examples?example=start_hello-cube',
   '/playground',
   '/3d/playground',
   '/7.x/playground',

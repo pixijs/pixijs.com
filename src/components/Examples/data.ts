@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react';
 import examples2d from '@site/src/data/generated/examples.json';
 import examples3d from '@site/src/data/generated/examples-3d.json';
 
+import { categoryLabel, categoryOf, titleOf } from './names';
+
 import type { Item } from './types';
+import type { EditorFiles } from '@site/src/components/Editor/project';
 import type { PackageId } from '@site/src/data/packages';
-import type { SourceFiles } from '@site/src/runtime/compile';
 
 /** Every example of both packages, including hidden ones, which open only by `?example=` or `<PixiExample>` */
 const examples = [...examples2d, ...examples3d] as Item[];
+
+export { categoryLabel, categoryOf, titleOf };
 
 /** Gallery order: first steps first, then the rest; categories not listed follow alphabetically */
 const CATEGORY_ORDER: Record<PackageId, string[]> = {
@@ -33,69 +37,30 @@ const CATEGORY_ORDER: Record<PackageId, string[]> = {
     'misc',
   ],
   '3d': [
-    'basics',
-    '2d-and-3d',
-    'models',
-    'animation',
+    'start',
+    '2d3d',
+    'scene',
+    'geometry',
     'materials',
+    'shaders',
     'lighting',
+    'shadows',
     'cameras',
-    'interaction',
+    'assets',
+    'animation',
+    'sprites',
+    'instancing',
     'particles',
-    'post-processing',
-    'performance',
-    'showcase',
+    'interaction',
+    'post',
+    'debug',
   ],
 };
-
-/** Words that keep their own capitals */
-const WORDS: Record<string, string> = {
-  '2d': '2D',
-  '3d': '3D',
-  aabb: 'AABB',
-  dom: 'DOM',
-  gif: 'GIF',
-  glsl: 'GLSL',
-  gsap: 'GSAP',
-  html: 'HTML',
-  svg: 'SVG',
-  ui: 'UI',
-  uv: 'UV',
-  xml: 'XML',
-};
-
-/** Category names that aren't their id read out */
-const LABELS: Record<string, string> = {
-  'nine-slice-sprite': 'Nine-slice sprite',
-  'post-processing': 'Post-processing',
-  three: 'three.js',
-};
-
-/** `"svg_custom-data"` → `"SVG custom data"` */
-function phrase(slug: string): string {
-  const text = slug
-    .split(/[_-]/)
-    .map((word) => WORDS[word.toLowerCase()] ?? word)
-    .join(' ');
-
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
 
 export interface Category {
   id: string;
   label: string;
   examples: Item[];
-}
-
-export const categoryOf = (item: Item): string => item.name.split('_')[0];
-
-export const categoryLabel = (id: string): string => LABELS[id] ?? phrase(id);
-
-/** The example's name without its category: `sprite_transform_rotation` → `Transform rotation` */
-export function titleOf(item: Item): string {
-  const [category, ...rest] = item.name.split('_');
-
-  return rest.length ? phrase(rest.join('_')) : categoryLabel(category);
 }
 
 /** The examples a package's gallery lists, grouped by category in gallery order */
@@ -154,8 +119,8 @@ export function searchExamples(items: Item[], query: string): Item[] {
     .map(({ item }) => item);
 }
 
-/** Fetches every file of `example`, keyed by file name */
-export async function fetchExampleFiles(example: Item): Promise<Record<string, string>> {
+/** Fetches every file of `example`, keyed by file name; shared code an example imports has no tab */
+export async function fetchExampleFiles(example: Item): Promise<EditorFiles> {
   const folder = example.pkg === '3d' ? '/examples/source/3d/' : '/examples/source/';
   const entries = await Promise.all(
     example.files.map(async (file) => {
@@ -163,7 +128,9 @@ export async function fetchExampleFiles(example: Item): Promise<Record<string, s
 
       if (!response.ok) throw new Error(`Failed to fetch ${file.location}`);
 
-      return [file.name, await response.text()] as const;
+      const code = await response.text();
+
+      return [file.name, file.hidden ? { code, hidden: true } : code] as const;
     }),
   );
 
@@ -172,7 +139,7 @@ export async function fetchExampleFiles(example: Item): Promise<Record<string, s
 
 /** The files of `example`, fetched once `enabled`; `failure` says why they didn't load */
 export function useExampleFiles(example: Item | undefined, enabled = true) {
-  const [loaded, setLoaded] = useState<{ example: Item; files?: SourceFiles; failure?: string }>();
+  const [loaded, setLoaded] = useState<{ example: Item; files?: EditorFiles; failure?: string }>();
   const current = loaded?.example === example ? loaded : undefined;
 
   useEffect(() => {

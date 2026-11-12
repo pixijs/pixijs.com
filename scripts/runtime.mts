@@ -173,32 +173,6 @@ function pixi3d(files: Map<string, string>): { imports: Record<string, string>; 
   const dist = path.join(dir, 'dist');
   const imports: Record<string, string> = {};
   const types: Record<string, string> = {};
-  // `@pixi/3d` relies on two pixi.js changes from a dev build after 8.22.0: `BindGroup.setResourceUnwatched`, and depth
-  // on multisampled render targets. Without the second, a WebGL app with `useBackBuffer` and `antialias` (the glass
-  // examples) draws nothing once a View3D renders, because its depth texture can't join the multisampled back buffer.
-  // While the installed pixi.js lacks them, every entry maps to a wrapper that first falls back to the watched
-  // `setResource` and keeps the back buffer single-sampled.
-  const compat = !read(packageFile('pixi.js', 'lib/rendering/renderers/gpu/shader/BindGroup.mjs')).includes(
-    'setResourceUnwatched',
-  );
-
-  if (compat) {
-    files.set(
-      path.join(OUT_DIR, folder, 'compat.mjs'),
-      `import { BindGroup, GlBackBufferSystem } from 'pixi.js';
-
-BindGroup.prototype.setResourceUnwatched ??= BindGroup.prototype.setResource;
-
-const initBackBuffer = GlBackBufferSystem.prototype.init;
-
-GlBackBufferSystem.prototype.init = function (options) {
-  initBackBuffer.call(this, options);
-  this._antialias = false;
-};
-`,
-    );
-  }
-
   for (const [key, target] of Object.entries(pkg.exports ?? {})) {
     if (key === './package.json') continue;
     const subpath = key.slice(2);
@@ -207,15 +181,7 @@ GlBackBufferSystem.prototype.init = function (options) {
     assertBarePixi(`@pixi/3d ${file}`, read(packageFile('@pixi/3d', `dist/${file}`)));
     const specifier = `@pixi/3d${subpath ? `/${subpath}` : ''}`;
 
-    if (compat) {
-      const wrapper = `compat-${file}`;
-      const target = vendored ? `./${file}` : `${base}${file}`;
-
-      files.set(path.join(OUT_DIR, folder, wrapper), `import './compat.mjs';\nexport * from '${target}';\n`);
-      imports[specifier] = `${folder}${wrapper}`;
-    } else {
-      imports[specifier] = `${base}${file}`;
-    }
+    imports[specifier] = `${base}${file}`;
 
     const declarations = typeof target === 'object' && typeof target.import === 'object' ? target.import.types : null;
     if (declarations) {

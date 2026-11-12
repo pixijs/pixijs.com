@@ -5,6 +5,7 @@ import V7Starter from '!!raw-loader!./v7.0.0/container';
 import V8Starter from '!!raw-loader!./v8.0.0/container';
 import { playgroundHref } from '@site/src/components/Editor/ExampleCard';
 import LazyEditor from '@site/src/components/Editor/LazyEditor';
+import { type EditorFiles, toProject } from '@site/src/components/Editor/project';
 import styles, { ExamplesStyles } from '@site/src/components/Examples/classes';
 import { fetchExampleFiles, getExample, posterOf, titleOf } from '@site/src/components/Examples/data';
 import ExampleSheet from '@site/src/components/Examples/ExampleSheet';
@@ -25,7 +26,7 @@ import type { MouseEvent } from 'react';
 interface Session {
   /** Remounts the editor */
   key: string;
-  files: SourceFiles;
+  files: EditorFiles;
   example?: Item;
   shared?: boolean;
   renderer?: Renderer;
@@ -40,7 +41,7 @@ interface Pending {
   action: string;
 }
 
-const STARTER_3D = 'basics_hello-cube';
+const STARTER_3D = 'start_hello-cube';
 let sessions = 0;
 const RENDERERS: { value: Renderer | ''; label: string }[] = [
   { value: '', label: 'Auto' },
@@ -48,7 +49,7 @@ const RENDERERS: { value: Renderer | ''; label: string }[] = [
   { value: 'webgl', label: 'WebGL' },
 ];
 
-async function starter(pkg: PackageId, v7: boolean): Promise<SourceFiles> {
+async function starter(pkg: PackageId, v7: boolean): Promise<EditorFiles> {
   if (pkg === '2d') return { 'index.js': v7 ? V7Starter : V8Starter };
   const cube = getExample(STARTER_3D, '3d');
 
@@ -107,7 +108,7 @@ export default function PlaygroundPage({ pkg: requested = '2d' }: { pkg?: Packag
     open(search, hash, pkg, v7).then(
       (next) => {
         if (stale) return;
-        files.current = next.files;
+        files.current = toProject(next.files).sources;
         pushed.current = false;
         setSession(next);
         setRenderer(next.renderer);

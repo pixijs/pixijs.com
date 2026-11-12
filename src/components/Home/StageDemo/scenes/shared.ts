@@ -1,6 +1,5 @@
 import { Material3D } from '@pixi/3d';
 import '@pixi/3d/webgl';
-import '@site/src/utils/pixi3dCompat';
 
 import { CLAY, ENVIRONMENTS } from '../../Hero/field/lighting';
 import { STAGE_INK } from './core';

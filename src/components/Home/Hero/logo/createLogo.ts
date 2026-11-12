@@ -5,7 +5,6 @@ import { JELLY, JELLY_TIME } from '@site/src/motion/jelly';
 import { KEY_DIRECTION, lightClay } from '../field/clay';
 import { TINTS } from '../field/kinds';
 import '@pixi/3d/webgl';
-import '@site/src/utils/pixi3dCompat';
 
 import type { Scene3DSource } from '@pixi/3d';
 import type { FieldTheme } from '../field/clay';

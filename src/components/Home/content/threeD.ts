@@ -1,10 +1,11 @@
+import { categoryLabel, categoryOf, titleOf } from '@site/src/components/Examples/names';
 import examples3d from '@site/src/data/generated/examples-3d.json';
 
 import type { ClayShapeName } from '@site/src/components/ui/Clay';
 import type { StageDemoProps, StageTab } from '../StageDemo';
 import type { Tile } from '../TileGrid';
 
-/** Copy and data for `/3d` (section 8.6). Code samples are checked against `@pixi/3d` 0.1.0-beta.2 and pixi.js 8.22 */
+/** Copy and data for `/3d` (section 8.6). Code samples are checked against `@pixi/3d` 0.1.0-beta.3 and pixi.js 8.23 */
 
 export const HERO = {
   install: 'npm install @pixi/3d',
@@ -292,31 +293,24 @@ export interface GalleryItem {
 }
 
 const GALLERY_PICKS: [name: string, shape: ClayShapeName, blurb: string][] = [
-  ['showcase_golden-palace', 'pyramid-pink', 'A palace made of built-in shapes, with gold that reflects the sunset.'],
-  ['showcase_voxel-islands', 'cube-violet', 'Floating islands in one batched mesh, under a tilt-shift blur.'],
+  ['post_tilt-shift', 'pyramid-pink', 'A clay town that reads as a miniature, sharp in one band of depth.'],
+  ['instancing_batched-mesh', 'cube-violet', 'Up to 100,000 clay shapes in a few dozen draw calls.'],
   ['materials_toon', 'torus-cyan', 'Banded shading, a rim light and ink outlines.'],
-  ['models_viewer', 'capsule-rose', 'Drop in a .glb and orbit your own model.'],
-  ['particles_campfire', 'sphere-pink', 'Flames, smoke and embers from three particle systems.'],
-  ['2d-and-3d_live-texture', 'cube-pink', 'A live 2D scene, drawn onto a turning cube every frame.'],
+  ['start_model-viewer', 'capsule-rose', 'Drop in a .glb or .gltf file to see your own model.'],
+  ['particles_flipbook', 'sphere-pink', 'Flipbook fire and smoke from three particle systems.'],
+  ['2d3d_container-texture', 'cube-pink', 'A live 2D scene on the screen of a swivelling clay monitor.'],
 ];
-
-const titleCase = (words: string) =>
-  words
-    .split('-')
-    .map((word, i) => (i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
-    .join(' ')
-    .replace(/\b2d\b/gi, '2D')
-    .replace(/\b3d\b/gi, '3D');
 
 /** The six gallery examples that exist in `examples-3d.json`; empty in stub mode, which hides the section */
 export const GALLERY = {
   eyebrow: 'BUILT WITH PIXIJS 3D',
   title: 'See it move.',
   items: GALLERY_PICKS.flatMap(([name, shape, blurb]): GalleryItem[] => {
-    if (!examples3d.some((item) => item.name === name)) return [];
-    const [category, title] = name.split('_');
+    const example = examples3d.find((item) => item.name === name);
 
-    return [{ name, category: titleCase(category), title: titleCase(title), blurb, shape }];
+    if (!example) return [];
+
+    return [{ name, category: categoryLabel(categoryOf(example)), title: titleOf(example), blurb, shape }];
   }),
 };
 

@@ -309,10 +309,12 @@ function v7Examples() {
  * failing the sweep, and one that passes again is flagged so its entry can go.
  */
 const KNOWN = {
-  performance_galaxy: "SwiftShader can't draw 150,000 stars fast enough to screenshot them; it passes with --gpu",
+  assets_compression:
+    "pixi.js's KTX2 worker resolves the transcoder with new URL(url, location.origin), which throws in the " +
+    "runner's srcdoc frame, where the origin is 'null' (src/compressed-textures/ktx2/worker/ktx.worker.ts)",
 };
 /** Known failures that only SwiftShader has: with `--gpu` these examples have to pass */
-const SWIFTSHADER_ONLY = new Set(['performance_galaxy']);
+const SWIFTSHADER_ONLY = new Set([]);
 
 const SETS = {
   '2d': () => generatedExamples(LIBRARIES['2d']),

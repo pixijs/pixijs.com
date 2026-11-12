@@ -104,7 +104,7 @@ After a build, `scripts/docusaurus-plugin-markdown-pages.ts` writes a markdown c
 ### Where to edit
 
 - **Generated from pixi.js:** the v8 concepts, components and migrations guides, the examples gallery and the assets they share, the guides sidebar order and `llms.txt`. Edit them upstream in [pixijs/pixijs](https://github.com/pixijs/pixijs) (`src/**/__docs__/`, `examples/`, `examples/assets/`); the change reaches this site with the next synced release.
-- **Generated from pixi-3d:** the 3D guides, examples, example assets, tutorials and `/3d/llms.txt`. Edit them in pixijs/pixi-3d (`src/**/__docs__/`, `examples/site/`, `tutorials/`); the change reaches this site with the next vendored build.
+- **Generated from pixi-3d:** the 3D guides, examples, example assets, tutorials and `/3d/llms.txt`. Edit them in pixijs/pixi-3d (`src/**/__docs__/`, `examples/`, `examples/tutorials/`); the change reaches this site with the next vendored build.
 - **Site-owned:** `docs/guides/getting-started`, `docs/guides/third-party`, `docs-3d/examples/index.mdx`, `docs-3d/tutorials/index.md`, `blog/examples`, `static/examples/previews` (3D previews in `3d/`) and the `static/assets` that pixi doesn't have.
 
 ## PixiJS 3D
@@ -113,7 +113,7 @@ The 3D docs are a second docs instance (`docs-3d/`, served under `/3d`). `npm ru
 
 - **`sync:repos pixi-3d`** moves `.repos/pixi-3d` to the commit the installed `@pixi/3d` was built from.
 - **`pixi-docs.mts 3d`** converts pixi-3d's guides into `docs-3d/guides/` and its tutorials into `docs-3d/tutorials/` and `src/tutorials/generated-3d/`, and writes the guides sidebar and `static-pixi-3d/3d/llms.txt`. The 3D API reference isn't hosted yet, so `{@link}` tags render as code.
-- **`examples.mts 3d`** converts `examples/site/` and the guides' hidden snippets into `static-pixi-3d/examples/source/3d/` and `src/data/generated/examples-3d.json`, and copies `examples/site/assets/` to `static-pixi-3d/assets/3d/`, which is served at `/assets/3d`.
+- **`examples.mts 3d`** converts the `examples/<category>_<name>/` folders into `static-pixi-3d/examples/source/3d/` and `src/data/generated/examples-3d.json`, and copies `examples/assets/` to `static-pixi-3d/assets/3d/`, which is served at `/assets/3d`. Each example gets the theme kit files it imports from `examples/shared/` as hidden tabs, a `getPreference.js` in place of the playground's, and a `manifest.js` with jsDelivr URLs for the models and textures it loads by name from `examples/assets/manifest.ts`.
 
 Each package writes only its own folders, so running one never deletes the other's output. `scripts/libraries.mts` holds everything package-specific, including the URL of every 3D guide.
 

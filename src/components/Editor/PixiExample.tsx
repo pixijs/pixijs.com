@@ -2,6 +2,7 @@ import { type RefObject, useEffect, useRef, useState } from 'react';
 import ExampleCard, { ExamplePlaceholder } from './ExampleCard';
 import LazyEditor from './LazyEditor';
 import styles from './PixiExample.module.scss';
+import { type EditorFiles, keepHidden } from './project';
 import { getExample, posterOf, useExampleFiles } from '@site/src/components/Examples/data';
 
 import type { EditorProps } from './Editor';
@@ -53,14 +54,17 @@ export default function PixiExample({
 }: PixiExampleProps) {
   const example = getExample(name, pkg);
   const [codeShown, setCodeShown] = useState(viewType !== 'preview');
-  const [live, setLive] = useState<SourceFiles | null>(null);
+  const [live, setLive] = useState<EditorFiles | null>(null);
   const edits = useRef<SourceFiles | null>(null);
   const body = useRef<HTMLDivElement>(null);
   const near = useNearViewport(body);
   const { files, failure } = useExampleFiles(example, near);
 
   // Edits survive the editor unmounting far off screen: it remounts with them
-  useEffect(() => setLive(near && files ? (edits.current ?? files) : null), [near, files]);
+  useEffect(
+    () => setLive(near && files ? (edits.current ? keepHidden(edits.current, files) : files) : null),
+    [near, files],
+  );
 
   const message = example ? failure : `There's no ${pkg.toUpperCase()} example called "${name}".`;
   const poster = example && posterOf(example);

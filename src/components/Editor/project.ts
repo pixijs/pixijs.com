@@ -57,6 +57,17 @@ export function toProject(files: EditorFiles): Project {
   return { sources, visible, entry, active: active ?? visible[0] ?? entry };
 }
 
+/** Edited `sources` as editor files, hiding the files that `files` hid */
+export function keepHidden(sources: SourceFiles, files: EditorFiles): EditorFiles {
+  return Object.fromEntries(
+    Object.entries(sources).map(([name, code]) => {
+      const file = files[name];
+
+      return [name, typeof file === 'object' && file.hidden ? { code, hidden: true } : code];
+    }),
+  );
+}
+
 /** Monaco's language for a file; WGSL borrows Rust's highlighting, which shares its syntax */
 export function languageOf(file: string): string {
   return LANGUAGES[file.split('.').pop() ?? ''] ?? 'plaintext';

@@ -43,15 +43,30 @@ export interface Library {
   /** Served folder for generated files that aren't pages */
   staticDir: 'static-pixi' | 'static-pixi-3d';
   examples: {
-    /** Gallery examples, relative to `repo` */
+    /**
+     * Gallery examples, relative to `repo`: scripts, and folders with an `index` script. `*.example.ts` files and
+     * other folders aren't examples, and its `shared` folder holds code the examples share.
+     */
     dir: string;
+    /** The `package.json` whose dependencies and devDependencies give the versions of what examples import */
+    packageJson: string;
     /** Assets the examples load, relative to `repo`, served at `/<publishedAssets>/` */
     assets: string;
     publishedAssets: string;
-    /** The site's own examples, which pixi's must not shadow */
+    /** The path the library's own playground serves `assets` at; examples' URLs under it load the published assets */
+    localAssets?: string;
+    /**
+     * A module in `assets` (path relative to `repo`, without extension) whose functions turn a name into the URL of
+     * a remote file. Each example gets a `manifest.js` with the URLs its own calls name instead.
+     */
+    manifest?: string;
+    /**
+     * Modules outside the examples that examples import (path relative to `repo`, without extension), and the code
+     * each example gets in their place
+     */
+    stubs?: Record<string, string>;
+    /** The site's own examples, which pixi's must not shadow. Like `dir`, its `shared` folder holds code they share. */
     siteDir?: string;
-    /** Files a folder example imports as `../shared/<file>` */
-    sharedDir: string;
     /** Example files, served beside the pages; an item's `location` is relative to it */
     source: string;
     data: string;
@@ -131,6 +146,7 @@ export const LIBRARIES: Record<PackageId, Library> = {
       'scene/__docs__/graphics/index.md': 'components/scene-objects/graphics/index',
       'scene/__docs__/graphics/graphics-fill.md': 'components/scene-objects/graphics/graphics-fill',
       'scene/__docs__/graphics/graphics-pixel-line.mdx': 'components/scene-objects/graphics/graphics-pixel-line',
+      'scene/__docs__/graphics/graphics-smooth.md': 'components/scene-objects/graphics/graphics-smooth',
       'scene/__docs__/text/index.md': 'components/scene-objects/text/index',
       'scene/__docs__/text/canvas.md': 'components/scene-objects/text/canvas',
       'scene/__docs__/text/bitmap.md': 'components/scene-objects/text/bitmap',
@@ -158,10 +174,10 @@ export const LIBRARIES: Record<PackageId, Library> = {
     staticDir: 'static-pixi',
     examples: {
       dir: 'examples',
+      packageJson: 'examples/package.json',
       assets: 'examples/assets',
       publishedAssets: 'assets',
       siteDir: 'blog/examples',
-      sharedDir: 'blog/examples/shared',
       source: 'static/examples/source',
       data: 'src/data/generated/examples.json',
       previews: 'static/examples/previews',
@@ -185,6 +201,7 @@ export const LIBRARIES: Record<PackageId, Library> = {
       '__docs__/getting-started/introduction.md': 'getting-started/intro',
       '__docs__/getting-started/installation.md': 'getting-started/installation',
       '__docs__/getting-started/quick-start.md': 'getting-started/quick-start',
+      '__docs__/getting-started/porting-from-threejs.md': 'getting-started/porting-from-threejs',
       '__docs__/concepts/view3d.md': 'concepts/view3d',
       '__docs__/concepts/scene-graph.md': 'concepts/scene-graph',
       '__docs__/concepts/rendering.md': 'concepts/rendering',
@@ -198,6 +215,7 @@ export const LIBRARIES: Record<PackageId, Library> = {
       'scene/__docs__/batched-mesh.md': 'components/scene-objects/batched-mesh',
       'scene/__docs__/cameras.md': 'components/scene-objects/cameras/index',
       'extras/__docs__/camera-controls.md': 'components/scene-objects/cameras/controls',
+      'scene/__docs__/second-cameras.md': 'components/scene-objects/cameras/second-cameras',
       'scene/__docs__/lights.md': 'components/scene-objects/lights/index',
       'scene/__docs__/shadows.md': 'components/scene-objects/lights/shadows',
       'materials/__docs__/materials.md': 'components/materials/index',
@@ -210,7 +228,8 @@ export const LIBRARIES: Record<PackageId, Library> = {
       'animation/__docs__/animation.md': 'components/animation',
       'events/__docs__/interaction.md': 'components/interaction',
       'core/__docs__/container-texture.md': 'components/container-texture',
-      'post-processing/__docs__/post-processing.md': 'components/post-processing',
+      'post-processing/__docs__/post-processing.md': 'components/post-processing/index',
+      'post-processing/__docs__/custom-passes.md': 'components/post-processing/custom-passes',
       'extras/__docs__/particles.md': 'components/particles',
       'math/__docs__/math.md': 'components/math',
       'extras/__docs__/debugging.md': 'components/debugging',
@@ -220,17 +239,23 @@ export const LIBRARIES: Record<PackageId, Library> = {
     llmsFile: 'static-pixi-3d/3d/llms.txt',
     staticDir: 'static-pixi-3d',
     examples: {
-      dir: 'examples/site',
-      assets: 'examples/site/assets',
+      dir: 'examples',
+      packageJson: 'package.json',
+      assets: 'examples/assets',
       publishedAssets: 'assets/3d',
-      sharedDir: '.repos/pixi-3d/examples/site/shared',
+      localAssets: '/test-assets/',
+      manifest: 'examples/assets/manifest',
+      stubs: {
+        // The playground's renderer switch; the editor's renderer menu does that job here
+        'playground/src/getPreference': "export const rendererPreference = 'webgpu';\n",
+      },
       source: 'static-pixi-3d/examples/source/3d',
       data: 'src/data/generated/examples-3d.json',
       previews: 'static/examples/previews/3d',
       hidden: new Set(),
       scanDocs: ['docs-3d'],
     },
-    tutorials: { dir: 'tutorials', out: 'src/tutorials/generated-3d', pages: 'docs-3d/tutorials' },
+    tutorials: { dir: 'examples/tutorials', out: 'src/tutorials/generated-3d', pages: 'docs-3d/tutorials' },
     stub: {
       required: process.env.PIXI_3D_REQUIRED === '1',
       pages: {
@@ -239,7 +264,6 @@ export const LIBRARIES: Record<PackageId, Library> = {
         '__docs__/getting-started/quick-start.md': 'Quick start',
       },
     },
-    draft: true,
   },
 };
 

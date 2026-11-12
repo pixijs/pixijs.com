@@ -15,7 +15,6 @@ import { createBodies, KIND_SCALE, MID_DIST, reachOnScreen } from './kinds';
 import { stepField } from './physics';
 import { createShadows } from './shadows';
 import '@pixi/3d/webgl';
-import '@site/src/utils/pixi3dCompat';
 
 import type { Geometry3D, Material3D } from '@pixi/3d';
 import type { FieldTheme } from './clay';

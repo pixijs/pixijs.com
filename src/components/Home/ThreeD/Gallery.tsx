@@ -14,7 +14,7 @@ import type { GalleryItem } from '../content/threeD';
 const EXAMPLES = '/3d/examples';
 
 /** Examples that wait for the visitor, so their captured preview is one frame: the card keeps its sharper still */
-const AT_REST = new Set(['models_viewer']);
+const AT_REST = new Set(['start_model-viewer']);
 
 function GalleryCard({ item }: { item: GalleryItem }) {
   const [playing, setPlaying] = useState(false);

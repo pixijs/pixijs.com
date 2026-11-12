@@ -260,7 +260,6 @@ import { Application } from 'pixi.js';
 import { Container3D, DirectionalLight, Mesh3D, View3D } from '@pixi/3d';
 import { createBunnyGeometry, createBunnyMaterial, KEY_DIRECTION, lightClay } from './src/components/Home/Hero/field/clay';
 import { HERO_POSES, posterFit } from './src/components/Home/Hero/field/kinds';
-import './src/utils/pixi3dCompat';
 
 const SIZE = ${SIZE};
 const DISTANCE = 12;

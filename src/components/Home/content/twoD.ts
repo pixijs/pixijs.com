@@ -9,7 +9,7 @@ const poster = (tab: string) => ({
 });
 
 /**
- * The tour's code, checked against pixi.js 8.22. Each tab is its scene in miniature, not its source: at most 20
+ * The tour's code, checked against pixi.js 8.23. Each tab is its scene in miniature, not its source: at most 20
  * lines of 50 characters, which is what the code card shows without scrolling. `app` is the Application the command
  * above scaffolds, and asset paths are relative.
  */

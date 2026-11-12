@@ -10,7 +10,7 @@
  * Usage:
  *   node ./scripts/capture-example-previews.mjs <example-name> [...more names]
  *   node ./scripts/capture-example-previews.mjs mesh_rope-width --duration 5
- *   node ./scripts/capture-example-previews.mjs --pkg 3d models_viewer --settle 15   wait 15 s before recording,
+ *   node ./scripts/capture-example-previews.mjs --pkg 3d start_model-viewer --settle 15   wait 15 s before recording,
  *                                                             for examples that download a large model first
  *   node ./scripts/capture-example-previews.mjs --missing     every gallery example without a preview
  *   node ./scripts/capture-example-previews.mjs --dry-run     bundle every gallery example, list what
@@ -76,6 +76,25 @@ html, body { margin: 0; height: 100%; overflow: hidden; }
 </html>`;
 }
 
+/**
+ * Loads the packages an example depends on that the site doesn't install, such as Tweakpane for the 3D examples, from
+ * esm.sh at the example's version, as the editor does
+ */
+function uninstalledFromCdn(dependencies) {
+  return {
+    name: 'uninstalled-from-cdn',
+    setup(build) {
+      build.onResolve({ filter: /^[^./]/ }, ({ path: spec }) => {
+        const name = spec.split('/', spec.startsWith('@') ? 2 : 1).join('/');
+
+        if (!dependencies[name] || existsSync(path.join(ROOT, 'node_modules', name))) return undefined;
+
+        return { path: `https://esm.sh/${name}@${dependencies[name]}${spec.slice(name.length)}`, external: true };
+      });
+    },
+  };
+}
+
 /** Bundles an example's entry with the site's own packages, so the capture uses the installed pixi.js */
 async function bundle(example) {
   const entry = example.files.find((file) => file.name === 'index.js');
@@ -88,8 +107,7 @@ async function bundle(example) {
       write: false,
       logLevel: 'silent',
       loader: { '.frag': 'text', '.vert': 'text', '.wgsl': 'text' },
-      // @pixi/3d needs the same pixi.js fallback the site's bundles import
-      inject: library.id === '3d' ? [path.join(ROOT, 'src/utils/pixi3dCompat.ts')] : [],
+      plugins: [uninstalledFromCdn(example.dependencies)],
     });
 
     return result.outputFiles[0].text;
@@ -265,9 +283,10 @@ async function captureExample(name, origin, chromePort, durationSec, settleSec) 
     await sleep(durationSec * 1000);
     await page.send('Page.stopScreencast');
 
-    if (frames.length < ANIM_FRAMES / 2) {
-      throw new Error(`Only captured ${frames.length} frames — is the example animating?`);
-    }
+    // The screencast sends a frame only when the picture changes, so a scene that waits for the reader, as many
+    // 3D examples do, sends one and its preview loops that picture
+    if (frames.length === 0) throw new Error("Captured no frames: the example didn't draw");
+    if (frames.length < ANIM_FRAMES / 2) process.stdout.write(`still (${frames.length} frames), `);
 
     const thumb = await page.send('Page.captureScreenshot', { format: 'png' });
 
