@@ -11,10 +11,6 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    env:
-      PIXI_3D_TOKEN: ${{ secrets.PIXI_3D_TOKEN }}
-      # Fail instead of deploying stubbed 3D docs
-      PIXI_3D_REQUIRED: 1
     steps:
       - uses: actions/checkout@v4
 

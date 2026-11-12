@@ -1,5 +1,7 @@
 name: Sync PixiJS
 
+# Bumps pixi.js and @pixi/3d to their latest stable releases on npm and opens a `sync/pixi` PR
+
 on:
   repository_dispatch:
     types: [pixi-release]
@@ -21,40 +23,58 @@ jobs:
   check:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.target.outputs.version }}
-      changed: ${{ steps.target.outputs.changed }}
+      pixi: ${{ steps.target.outputs.pixi }}
+      pixi3d: ${{ steps.target.outputs.pixi3d }}
+      title: ${{ steps.target.outputs.title }}
     steps:
       - uses: actions/checkout@v4
       - id: target
         env:
           REQUESTED: ${{ github.event.client_payload.version || inputs.version }}
         run: |
-          v="${REQUESTED:-$(npm view pixi.js version)}"
-          [[ "$v" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::Not a stable pixi.js version: $v"; exit 1; }
-          installed=$(node -p "require('./package-lock.json').packages['node_modules/pixi.js'].version")
-          if [ "$(printf '%s\n' "$v" "$installed" | sort -V | tail -n 1)" = "$installed" ]; then
-            echo "pixi.js $installed already installed"
-            exit 0
-          fi
-          for _ in 1 2 3 4 5; do npm view "pixi.js@$v" version >/dev/null 2>&1 && break; sleep 60; done
-          echo "version=$v" >> "$GITHUB_OUTPUT"
-          echo "changed=true" >> "$GITHUB_OUTPUT"
+          # Prints the version to move a package to, or nothing when the installed one is as new
+          newer() {
+            local pkg=$1 v=$2 installed
+            [[ "$v" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::Not a stable $pkg version: $v" >&2; return 1; }
+            installed=$(node -p "require('./package-lock.json').packages['node_modules/$pkg'].version")
+            if [ "$(printf '%s\n' "$v" "$installed" | sort -V | tail -n 1)" = "$installed" ]; then
+              echo "$pkg $installed already installed" >&2
+              return 0
+            fi
+            for _ in 1 2 3 4 5; do npm view "$pkg@$v" version >/dev/null 2>&1 && break; sleep 60; done
+            echo "$v"
+          }
+          pixi=$(newer pixi.js "${REQUESTED:-$(npm view pixi.js version)}")
+          pixi3d=$(newer @pixi/3d "$(npm view @pixi/3d version)")
+          parts=()
+          [ -z "$pixi" ] || parts+=("pixi.js v$pixi")
+          [ -z "$pixi3d" ] || parts+=("@pixi/3d v$pixi3d")
+          [ ${#parts[@]} -gt 0 ] || exit 0
+          title=$(printf '%s and ' "${parts[@]}")
+          {
+            echo "pixi=$pixi"
+            echo "pixi3d=$pixi3d"
+            echo "title=${title% and }"
+          } >> "$GITHUB_OUTPUT"
 
   sync:
     needs: check
-    if: needs.check.outputs.changed
+    if: needs.check.outputs.title
     runs-on: ubuntu-latest
     env:
-      VERSION: ${{ needs.check.outputs.version }}
-      PIXI_3D_TOKEN: ${{ secrets.PIXI_3D_TOKEN }}
-      PIXI_3D_REQUIRED: 1
+      PIXI: ${{ needs.check.outputs.pixi }}
+      PIXI_3D: ${{ needs.check.outputs.pixi3d }}
+      TITLE: ${{ needs.check.outputs.title }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: 'npm'
-      - run: npm install "pixi.js@^$VERSION"
+      - name: Install the new versions
+        run: |
+          [ -z "$PIXI" ] || npm install "pixi.js@^$PIXI"
+          [ -z "$PIXI_3D" ] || npm install "@pixi/3d@^$PIXI_3D"
       - name: Generate, check and build
         run: |
           set -o pipefail
@@ -73,24 +93,25 @@ jobs:
           grep -q '^warning: no preview' sync.log || exit 0
           sudo apt-get update && sudo apt-get install -y webp
           npm run generate:example-previews -- --missing 2>&1 | tee -a sync.log
+          npm run generate:example-previews -- --pkg 3d --missing 2>&1 | tee -a sync.log
       - name: Write PR body
         env:
           PREVIEWS: ${{ steps.previews.outcome }}
         run: |
           {
-            echo "Bumps pixi.js to v$VERSION. Docs, examples and llms.txt regenerate from that tag at build."
+            echo "Bumps $TITLE. Docs, examples and llms.txt regenerate from the release tags at build."
             echo
             grep '^warning:' sync.log || echo "No warnings."
             if [ "$PREVIEWS" = failure ]; then
               echo
-              echo "Preview capture failed. Run \`npm run generate:example-previews -- --missing\` locally and push the previews to this branch."
+              echo "Preview capture failed. Run \`npm run generate:example-previews -- --missing\` and \`npm run generate:example-previews -- --pkg 3d --missing\` locally and push the previews to this branch."
             fi
           } > body.md
       - uses: peter-evans/create-pull-request@v7
         with:
           branch: sync/pixi
-          title: 'chore: sync pixi.js v${{ env.VERSION }}'
-          commit-message: 'chore: sync pixi.js v${{ env.VERSION }}'
+          title: 'chore: sync ${{ env.TITLE }}'
+          commit-message: 'chore: sync ${{ env.TITLE }}'
           body-path: body.md
           add-paths: |
             package.json

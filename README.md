@@ -17,7 +17,7 @@ npm install
 npm start
 ```
 
-The site will be available at `http://localhost:3000`. The first run clones pixi.js and pixi-3d into `.repos/` and downloads pixi.js's API link index, so it needs network access; later runs reuse both. pixi-3d is a private repository: without access to it the build still works, with placeholder 3D guides (see [PixiJS 3D](#pixijs-3d)).
+The site will be available at `http://localhost:3000`. The first run clones pixi.js and pixi-3d into `.repos/` and downloads pixi.js's API link index, so it needs network access; later runs reuse both.
 
 ## Available Scripts
 
@@ -31,7 +31,6 @@ The site will be available at `http://localhost:3000`. The first run clones pixi
 | `npm run generate:pixi-3d` | Generate the 3D guides, examples, tutorials and `/3d/llms.txt` from `.repos/pixi-3d` |
 | `npm run generate:runtime` | Write the editor's import map and the files it serves into `static-runtime/` |
 | `npm run generate:example-previews` | Capture gallery previews with headless Chrome; `-- --missing` captures every example without one, `-- --pkg 3d` the 3D examples |
-| `npm run vendor:pixi-3d -- <checkout>` | Build a pixi-3d checkout into `vendor/pixi-3d.tgz` |
 | `npm run lint` | Lint the codebase with ESLint |
 | `npm run lint:fix` | Auto-fix lint issues |
 | `npm run types` | Generate PixiJS content, then type-check with TypeScript (no emit) |
@@ -72,7 +71,6 @@ The site will be available at `http://localhost:3000`. The first run clones pixi
 ├── static-pixi/         # Generated: pixi.js example assets
 ├── static-pixi-3d/      # Generated: 3D example sources and assets, /3d/llms.txt, tutorial thumbnails
 ├── static-runtime/      # Generated: files the editor's import map loads
-├── vendor/              # The vendored @pixi/3d build
 ├── versioned_docs/      # Snapshotted docs for previous versions
 ├── docusaurus.config.ts # Docusaurus configuration
 └── sidebars.js          # Sidebar navigation
@@ -104,7 +102,7 @@ After a build, `scripts/docusaurus-plugin-markdown-pages.ts` writes a markdown c
 ### Where to edit
 
 - **Generated from pixi.js:** the v8 concepts, components and migrations guides, the examples gallery and the assets they share, the guides sidebar order and `llms.txt`. Edit them upstream in [pixijs/pixijs](https://github.com/pixijs/pixijs) (`src/**/__docs__/`, `examples/`, `examples/assets/`); the change reaches this site with the next synced release.
-- **Generated from pixi-3d:** the 3D guides, examples, example assets, tutorials and `/3d/llms.txt`. Edit them in pixijs/pixi-3d (`src/**/__docs__/`, `examples/`, `examples/tutorials/`); the change reaches this site with the next vendored build.
+- **Generated from pixi-3d:** the 3D guides, examples, example assets, tutorials and `/3d/llms.txt`. Edit them upstream in [pixijs/3d](https://github.com/pixijs/3d) (`src/**/__docs__/`, `examples/`, `examples/tutorials/`); the change reaches this site with the next synced release.
 - **Site-owned:** `docs/guides/getting-started`, `docs/guides/third-party`, `docs-3d/examples/index.mdx`, `docs-3d/tutorials/index.md`, `blog/examples`, `static/examples/previews` (3D previews in `3d/`) and the `static/assets` that pixi doesn't have.
 
 ## PixiJS 3D
@@ -112,42 +110,34 @@ After a build, `scripts/docusaurus-plugin-markdown-pages.ts` writes a markdown c
 The 3D docs are a second docs instance (`docs-3d/`, served under `/3d`). `npm run generate:pixi-3d` builds their content from `.repos/pixi-3d`, and `generate`, `pretypes`, `prestart`, `prebuild` and `predeploy` run it for you:
 
 - **`sync:repos pixi-3d`** moves `.repos/pixi-3d` to the commit the installed `@pixi/3d` was built from.
-- **`pixi-docs.mts 3d`** converts pixi-3d's guides into `docs-3d/guides/` and its tutorials into `docs-3d/tutorials/` and `src/tutorials/generated-3d/`, and writes the guides sidebar and `static-pixi-3d/3d/llms.txt`. The 3D API reference isn't hosted yet, so `{@link}` tags render as code.
+- **`pixi-docs.mts 3d`** converts pixi-3d's guides into `docs-3d/guides/` and its tutorials into `docs-3d/tutorials/` and `src/tutorials/generated-3d/`, and writes the guides sidebar and `static-pixi-3d/3d/llms.txt`. `{@link}` tags link to the 3D API reference at `3d.pixijs.download`, and `/3d/llms.txt` is that reference's `llms.txt`.
 - **`examples.mts 3d`** converts the `examples/<category>_<name>/` folders into `static-pixi-3d/examples/source/3d/` and `src/data/generated/examples-3d.json`, and copies `examples/assets/` to `static-pixi-3d/assets/3d/`, which is served at `/assets/3d`. Each example gets the theme kit files it imports from `examples/shared/` as hidden tabs, a `getPreference.js` in place of the playground's, and a `manifest.js` with jsDelivr URLs for the models and textures it loads by name from `examples/assets/manifest.ts`.
 
 Each package writes only its own folders, so running one never deletes the other's output. `scripts/libraries.mts` holds everything package-specific, including the URL of every 3D guide.
 
-### Vendored build
+### Updating @pixi/3d
 
-Until `@pixi/3d` is on npm, the site installs `vendor/pixi-3d.tgz` (`"@pixi/3d": "file:vendor/pixi-3d.tgz"`), built from a pixi-3d commit with source maps stripped. The tarball's `package.json` records that commit as `gitHead`, which pins `.repos/pixi-3d` and names the editor's copy in `static-runtime/pixi-3d/<version>-<sha7>/`. To update it from a clean pixi-3d checkout with its dependencies installed:
+The site installs `@pixi/3d` from npm, and the version in `package-lock.json` pins everything: `.repos/pixi-3d` is checked out at that version's `v<version>` tag in [pixijs/3d](https://github.com/pixijs/3d), and the editor loads the same version's CDN build from jsDelivr. `.github/workflows/sync-pixi.yml` bumps it with pixi.js. By hand:
 
 ```bash
-npm run vendor:pixi-3d -- ../pixi-3d   # builds it, writes the tarball and updates package-lock.json
+npm install @pixi/3d@^X.Y.Z
 npm run generate:pixi-3d
 npm run generate:example-previews -- --pkg 3d --missing
 ```
 
-Then commit `vendor/pixi-3d.tgz`, `package-lock.json` and the new previews. For a commit that isn't pushed, run the generate step with `PIXI_3D_REPO=../pixi-3d` so `sync:repos` fetches it from the checkout instead of GitHub. `.github/workflows/sync-pixi-3d.yml` does all of this daily from pixi-3d's `main` (or a branch, tag or commit given to it) and opens a `sync/pixi-3d` PR when the commit changed.
-
-When `@pixi/3d` is published, run `npm install @pixi/3d@^<version>`, delete `vendor/`, `scripts/vendor-pixi-3d.mts`, the `vendor:pixi-3d` script and `sync-pixi-3d.yml`, and let `sync-pixi.yml` bump it. `sync:repos` and `generate:runtime` switch to npm and jsDelivr on their own.
-
-### Without access to pixi-3d
-
-pixi-3d is private. `sync:repos` authenticates with `PIXI_3D_TOKEN` when it's set and with your own git credentials otherwise (`gh auth setup-git`). Without access it warns and leaves `.repos/pixi-3d` out, and the generators publish three placeholder getting-started guides, an empty 3D gallery and no 3D tutorials, so the build still passes. Fork PRs build this way. With `PIXI_3D_REQUIRED=1` it fails instead; deploys and the sync workflows set it. The placeholders go away when pixi-3d is public.
+Then commit `package.json`, `package-lock.json` and the new previews. To generate from a checkout whose tag isn't pushed, run the generate step with `PIXI_3D_REPO=../3d`, so `sync:repos` fetches the tag from the checkout instead of GitHub.
 
 ## Release Sync
 
-`.github/workflows/sync-pixi.yml` keeps the site on the latest stable pixi.js. It runs when pixi's release workflow sends a `pixi-release` dispatch, daily at 06:00 UTC as a fallback, and from the Actions tab with an optional version. When the target is newer than the installed version, it:
+`.github/workflows/sync-pixi.yml` keeps the site on the latest stable pixi.js and `@pixi/3d`. It runs when pixi's release workflow sends a `pixi-release` dispatch, daily at 06:00 UTC as a fallback, and from the Actions tab with an optional pixi.js version. When either package's latest version on npm is newer than the installed one, it:
 
-1. installs it, regenerates, and runs types, lint and a full build;
+1. installs the new versions, regenerates, and runs types, lint and a full build;
 2. captures previews for examples that don't have one;
 3. opens or updates a PR from the `sync/pixi` branch with `package.json`, `package-lock.json` and the new previews, listing generator warnings in the body.
 
 A maintainer reviews and merges it, and the merge deploys. Workflow-opened PRs don't trigger `pr.yml`, so the sync job runs the checks itself. It needs the repo setting "Allow GitHub Actions to create and approve pull requests".
 
-To sync by hand, run `npm install pixi.js@^X.Y.Z`, `npm run generate:pixi` and `npm run generate:example-previews -- --missing`, then commit `package*.json` and the new previews.
-
-`sync-pixi-3d.yml` does the same for the vendored `@pixi/3d`; see [Vendored build](#vendored-build).
+To sync pixi.js by hand, run `npm install pixi.js@^X.Y.Z`, `npm run generate:pixi` and `npm run generate:example-previews -- --missing`, then commit `package*.json` and the new previews. [Updating @pixi/3d](#updating-pixi3d) has the same steps for `@pixi/3d`.
 
 ## Reference Source
 
@@ -186,11 +176,7 @@ To change a logo on the home page and in the image, set `avatarUrl` in `src/data
 
 `npm run generate:sponsors` reads `SPONSORKIT_GITHUB_TOKEN`, `SPONSORKIT_GITHUB_LOGIN`, `SPONSORKIT_OPENCOLLECTIVE_SLUG` and `SPONSORKIT_OPENCOLLECTIVE_KEY` from a `.env` file at the project root. Nothing else needs them.
 
-`npm run sync:repos` reads three variables for pixi-3d:
-
-- `PIXI_3D_TOKEN`: a token with read access to the contents of pixijs/pixi-3d. CI sets it from the `PIXI_3D_TOKEN` secret.
-- `PIXI_3D_REQUIRED=1`: fail when pixi-3d can't be read, instead of publishing placeholder 3D guides.
-- `PIXI_3D_REPO=<path>`: fetch pixi-3d from a local checkout, for commits that aren't pushed.
+`npm run sync:repos` reads `PIXI_3D_REPO=<path>`, which fetches `@pixi/3d`'s source from a local checkout instead of GitHub, for a version whose tag isn't pushed.
 
 ## Verification
 

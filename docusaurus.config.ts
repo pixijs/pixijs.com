@@ -5,11 +5,12 @@ import path from 'path';
 import { LIBRARIES } from './scripts/libraries.mts';
 import { pixiDark, pixiLight } from './src/theme/prism/pixi';
 
-const readManifest = (name: string): { version: string; gitHead?: string } =>
+const readManifest = (name: string): { version: string } =>
   JSON.parse(fs.readFileSync(path.join(__dirname, 'node_modules', name, 'package.json'), 'utf8'));
 
 const pixiVersion = readManifest('pixi.js').version;
-const pixi3dPkg = readManifest('@pixi/3d');
+const pixi3dVersion = readManifest('@pixi/3d').version;
+const pixi3dApi = LIBRARIES['3d'].api(pixi3dVersion);
 
 const config: Config = {
   title: 'PixiJS',
@@ -39,9 +40,8 @@ const config: Config = {
   customFields: {
     pixiVersion,
     pixi3d: {
-      version: pixi3dPkg.version,
-      status: 'beta',
-      apiUrl: LIBRARIES['3d'].api(pixi3dPkg.version, pixi3dPkg.gitHead),
+      version: pixi3dVersion,
+      apiUrl: pixi3dApi && `${pixi3dApi}index.html`,
     },
   },
 

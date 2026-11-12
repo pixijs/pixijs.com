@@ -20,13 +20,12 @@ interface Page {
 
 /**
  * A docs plugin instance per library, with the example data its guides' `<PixiExample>` tags resolve against and the
- * folder the examples' file `location`s are relative to. A stubbed library may have no guides.
+ * folder the examples' file `location`s are relative to
  */
 const INSTANCES = Object.values(LIBRARIES).map((library) => ({
   pluginId: library.id === '2d' ? 'default' : library.id,
   examples: library.examples.data,
   sources: library.examples.source,
-  optional: !!library.stub,
 }));
 const FRONT_MATTER = /^---\n[\s\S]*?\n---\n/;
 /** The blog plugin's loader that cuts `?truncated` posts at its marker, and a marker at the end of the front matter */
@@ -102,7 +101,7 @@ export default function pluginMarkdownPages(context: LoadContext): Plugin {
             contentPath: current!.contentPath,
           }));
 
-        if (!found.length && !instance.optional) {
+        if (!found.length) {
           throw new Error(`[markdown-pages] no docs under ${prefix} in docs instance ${instance.pluginId}`);
         }
 

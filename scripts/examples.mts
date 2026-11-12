@@ -25,11 +25,14 @@ import type { Item } from '../src/components/Examples/types';
 import { getLibrary, LIBRARIES, type Library } from './libraries.mts';
 import { formatScript, installedPackage, PIXI_EXAMPLE, prune, readScript, writeIfChanged } from './shared.mts';
 
-/** An example on disk: a single script, or a folder whose entry is `index` */
+/** An example on disk: a single script, or a folder whose entry is `index` unless `entry` names another file */
 interface Source {
   name: string;
   path: string;
   hidden: boolean;
+  entry?: string;
+  /** Literal replacements in the entry */
+  patches?: [from: string, to: string][];
 }
 
 /** The remote URL of each file the library's asset manifest names, by the path its functions return */
@@ -93,6 +96,14 @@ function collectSources(library: Library): Source[] {
     if (sources.has(source.name)) warn(`${library.repo} example ${source.name} replaces a docs snippet`);
     sources.set(source.name, source);
   }
+  for (const [name, { file, patches }] of Object.entries(library.examples.entries ?? {})) {
+    const entry = path.join(repo, dir, file);
+
+    if (!fs.existsSync(entry)) throw new Error(`${library.repo} has no ${dir}/${file}: fix entries.${name}`);
+    if (sources.has(name))
+      throw new Error(`${library.repo} already has an example called ${name}: delete entries.${name}`);
+    sources.set(name, { name, path: path.dirname(entry), hidden: hidden.has(name), entry, patches });
+  }
   for (const source of siteDir ? listSources(path.join(ROOT, siteDir), hidden) : []) {
     if (sources.has(source.name)) {
       throw new Error(`${siteDir}/${source.name} now exists in ${library.repo}: delete the site copy`);
@@ -148,9 +159,18 @@ function findCycle(imports: Map<string, Set<string>>): string[] | undefined {
   return undefined;
 }
 
+/** The entries of a category record's group, or undefined when the value isn't a record with that group */
+function groupOf(category: unknown, group: string): Record<string, string> | undefined {
+  const entries = category && typeof category === 'object' ? (category as Record<string, unknown>)[group] : undefined;
+
+  return entries && typeof entries === 'object' ? (entries as Record<string, string>) : undefined;
+}
+
 /**
  * The module that stands in for the library's asset manifest: the URL of every asset the example names in a call of
- * a manifest function, which must name it with a string literal
+ * a manifest function. A call names one asset with a string literal, or a whole group with a template literal that
+ * opens with the group, as in `` model(`racing.${key}`) ``. A category record the example imports, such as `models`,
+ * keeps the groups the example reads from it.
  * @param name - The example
  * @param importers - The code of each file that imports the manifest, and the names it imports
  * @param manifest - The library's asset manifest
@@ -158,6 +178,9 @@ function findCycle(imports: Map<string, Set<string>>): string[] | undefined {
 function manifestModule(name: string, importers: Map<string, string>, manifest: AssetManifest): string {
   const urls = new Map<string, string>();
   const functions = new Set<string>();
+  /** Per imported category record, the groups the example reads, each with the remote URL of every entry */
+  const records = new Map<string, Record<string, Record<string, string>>>();
+  const cdn = (url: string) => url.replace(RAW_GITHUB, 'https://cdn.jsdelivr.net/gh/$1/$2@$3/');
 
   for (const [code, imports] of importers) {
     if (!imports.trim()) throw new Error(`${name} imports the asset manifest without naming its functions`);
@@ -165,18 +188,58 @@ function manifestModule(name: string, importers: Map<string, string>, manifest: 
       if (!binding) continue;
       const [imported, local = imported] = binding.split(/\s+as\s+/);
       const accessor = manifest.module[imported];
-      const calls = [...code.matchAll(new RegExp(`\\b${local}\\(\\s*(['"])([^'"]+)\\1\\s*\\)`, 'g'))];
 
+      if (accessor && typeof accessor === 'object') {
+        const reads = [...code.matchAll(new RegExp(`\\b${local}\\.(\\w+)`, 'g'))];
+
+        // Every use but the import itself must read a group, since the copy holds only those
+        if (local !== imported || reads.length !== code.match(new RegExp(`\\b${local}\\b`, 'g'))!.length - 1) {
+          throw new Error(`${name} must read ${imported} from the asset manifest as ${imported}.<group>`);
+        }
+        const record = records.get(imported) ?? {};
+
+        for (const [, group] of reads) {
+          const entries = groupOf(accessor, group);
+
+          if (!entries) throw new Error(`${name}: the asset manifest has no group ${imported}.${group}`);
+          record[group] = Object.fromEntries(Object.entries(entries).map(([key, url]) => [key, cdn(url)]));
+        }
+        records.set(imported, record);
+        continue;
+      }
       if (typeof accessor !== 'function') throw new Error(`${name} imports ${imported} from the asset manifest`);
-      if (calls.length !== code.match(new RegExp(`\\b${local}\\(`, 'g'))?.length) {
-        throw new Error(`${name} calls ${imported}() with a name that isn't a string, so the site can't list its URL`);
+      const resolve = (asset: string): string | undefined => {
+        try {
+          return manifest.urls.get((accessor as (asset: string) => string)(asset));
+        } catch {
+          return undefined;
+        }
+      };
+      const calls = [...code.matchAll(new RegExp(`\\b${local}\\(\\s*(['"])([^'"]+)\\1\\s*\\)`, 'g'))];
+      const groupCalls = [...code.matchAll(new RegExp(`\\b${local}\\(\\s*\`(\\w+)\\.\\$\\{[^\`]*\`\\s*\\)`, 'g'))];
+      const assets = calls.map(([, , asset]) => asset);
+
+      if (calls.length + groupCalls.length !== code.match(new RegExp(`\\b${local}\\(`, 'g'))?.length) {
+        throw new Error(
+          `${name} calls ${imported}() with a name that's neither a string nor a template that opens with a group, ` +
+            `so the site can't list its URLs`,
+        );
+      }
+      for (const [, group] of groupCalls) {
+        // The category this function reads is the one whose names in the group it resolves
+        const names = Object.values(manifest.module)
+          .map((category) => Object.keys(groupOf(category, group) ?? {}).map((key) => `${group}.${key}`))
+          .find((candidates) => candidates.length && candidates.every(resolve));
+
+        if (!names) throw new Error(`${name}: ${imported}() has no assets in the group ${group}`);
+        assets.push(...names);
       }
       functions.add(imported);
-      for (const [, , asset] of calls) {
-        const url = manifest.urls.get((accessor as (asset: string) => string)(asset));
+      for (const asset of assets) {
+        const url = resolve(asset);
 
         if (!url) throw new Error(`${name}: the asset manifest has no URL for ${asset}`);
-        urls.set(asset, url.replace(RAW_GITHUB, 'https://cdn.jsdelivr.net/gh/$1/$2@$3/'));
+        urls.set(asset, cdn(url));
       }
     }
   }
@@ -186,7 +249,8 @@ function manifestModule(name: string, importers: Map<string, string>, manifest: 
     `// The files this example loads, by their names in ${manifest.label}`,
     `const urls = { ${entries.map(([asset, url]) => `${JSON.stringify(asset)}: ${JSON.stringify(url)}`).join(', ')} };`,
     'const url = (name) => urls[name];',
-    `export { ${[...functions].map((fn) => `url as ${fn}`).join(', ')} };`,
+    ...[...records].map(([record, groups]) => `const ${record} = ${JSON.stringify(groups)};`),
+    `export { ${[...[...functions].map((fn) => `url as ${fn}`), ...records.keys()].join(', ')} };`,
   ].join('\n');
 }
 
@@ -216,7 +280,11 @@ function readFiles(
     : fs
         .readdirSync(source.path, { recursive: true, encoding: 'utf8' })
         .filter((file) => RUNNABLE.test(file) && !path.basename(file).startsWith('.'))
-        .map((file) => [toPosix(file).replace(/\.ts$/, '.js'), path.join(source.path, file)]);
+        .map((file) => {
+          const full = path.join(source.path, file);
+
+          return [full === source.entry ? 'index.js' : toPosix(file).replace(/\.ts$/, '.js'), full];
+        });
   const own = new Set(pending.map(([name]) => name));
   const isStub = (module: string) => Object.keys(stubs).some((stub) => path.join(repo, stub) === module);
 
@@ -238,6 +306,10 @@ function readFiles(
     if (files.has(name)) continue;
     let code = readScript(file);
 
+    for (const [from, to] of file === source.entry ? (source.patches ?? []) : []) {
+      if (code.includes(from)) code = code.replaceAll(from, to);
+      else warn(`${source.name}: the patch for ${from.trim()} no longer applies; delete it from entries`);
+    }
     if (SCRIPT.test(file)) {
       let rewritten = '';
       let last = 0;
@@ -343,12 +415,17 @@ async function buildExample(
   const single = fs.statSync(source.path).isFile();
   const { files, own } = readFiles(source, library, manifest);
   const readme = single ? '' : path.join(source.path, 'README.md');
+  const ownManifest = single ? '' : path.join(source.path, 'package.json');
+  /** A folder with its own `package.json` lists what only it imports */
+  const ownVersions: Record<string, string> = fs.existsSync(ownManifest)
+    ? (JSON.parse(fs.readFileSync(ownManifest, 'utf8')).dependencies ?? {})
+    : {};
   const title = readme && fs.existsSync(readme) ? /^#\s+(.+)$/m.exec(fs.readFileSync(readme, 'utf8'))?.[1] : undefined;
   const example: Item = {
     name: source.name,
     pkg: library.id,
     description: describe(files.get('index.js') ?? ''),
-    dependencies: inferDependencies(source.name, files, library, versions),
+    dependencies: inferDependencies(source.name, files, library, { ...versions, ...ownVersions }),
     files: [],
   };
 
@@ -466,38 +543,32 @@ async function main(): Promise<void> {
   const assetsDir = path.join(ROOT, library.staticDir, config.publishedAssets);
   const output = new Map<string, string>();
   const examples: Item[] = [];
-  let assets = new Map<string, string>();
 
-  if (library.stub && !fs.existsSync(path.join(ROOT, library.repo))) {
-    if (library.stub.required) throw new Error(`${library.repo} is missing, and ${library.name} examples are required`);
-    warn(`no ${library.repo}, so there are no ${library.id} examples`);
-  } else {
-    const packageJson = path.join(ROOT, library.repo, config.packageJson);
-    const { dependencies = {}, devDependencies = {} } = JSON.parse(fs.readFileSync(packageJson, 'utf8')) as {
-      dependencies?: Record<string, string>;
-      devDependencies?: Record<string, string>;
-    };
-    const versions: Record<string, string> = {
-      ...Object.fromEntries(
-        Object.entries({ ...devDependencies, ...dependencies }).filter(([pkg]) => !pkg.startsWith('@types/')),
-      ),
-      [library.pkg]: installedPackage(library.pkg).version,
-    };
-    const manifest = await readManifest(library);
+  const packageJson = path.join(ROOT, library.repo, config.packageJson);
+  const { dependencies = {}, devDependencies = {} } = JSON.parse(fs.readFileSync(packageJson, 'utf8')) as {
+    dependencies?: Record<string, string>;
+    devDependencies?: Record<string, string>;
+  };
+  const versions: Record<string, string> = {
+    ...Object.fromEntries(
+      Object.entries({ ...devDependencies, ...dependencies }).filter(([pkg]) => !pkg.startsWith('@types/')),
+    ),
+    [library.pkg]: installedPackage(library.pkg).version,
+  };
+  const manifest = await readManifest(library);
 
-    await init;
+  await init;
 
-    for (const source of collectSources(library)) {
-      examples.push(await buildExample(source, library, versions, manifest, output));
-    }
-    const names = new Set(examples.map((example) => example.name));
-
-    assets = collectAssets(library);
-    for (const name of config.hidden) {
-      if (!names.has(name)) warn(`hidden has ${name}, which isn't an example; delete it`);
-    }
-    validateReferences(library, names, output, assets);
+  for (const source of collectSources(library)) {
+    examples.push(await buildExample(source, library, versions, manifest, output));
   }
+  const names = new Set(examples.map((example) => example.name));
+
+  const assets = collectAssets(library);
+  for (const name of config.hidden) {
+    if (!names.has(name)) warn(`hidden has ${name}, which isn't an example; delete it`);
+  }
+  validateReferences(library, names, output, assets);
 
   const files = new Map<string, string | Buffer>([[dataFile, `${JSON.stringify(examples, null, 2)}\n`]]);
 

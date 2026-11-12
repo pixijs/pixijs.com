@@ -12,8 +12,7 @@
  *
  * A library with `tutorials` also gets its upstream tutorials: each step's `step.md` goes through the same
  * conversion, its `.ts` files are stripped to JavaScript, and each tutorial gets a module of its steps, a card in
- * the registry module and a page that imports the steps. A library with a `stub` publishes placeholder guides when
- * its checkout is missing.
+ * the registry module and a page that imports the steps.
  *
  * Outputs are gitignored. A file is rewritten only when its content changes, and anything else in the generated
  * folders is deleted. Problems that need an upstream or table fix throw; anything that only needs a look prints a
@@ -159,8 +158,7 @@ async function fetchCached(url: string): Promise<string> {
  * @param library - The library
  */
 function apiBase(library: Library): string | null {
-  const { version, gitHead } = installedPackage(library.pkg);
-  return library.api(version, gitHead);
+  return library.api(installedPackage(library.pkg).version);
 }
 
 /**
@@ -175,7 +173,9 @@ async function loadApiIndex(base: string): Promise<ApiIndex> {
   const api: ApiIndex = new Map();
   for (const row of rows) {
     if (row.kind === DOCUMENT_KIND) continue;
-    const key = row.parent ? `${row.parent}.${row.name}` : row.name;
+    // TypeDoc lists the members of a `const` object under `<name>.__type`
+    const parent = row.parent?.replaceAll('.__type', '');
+    const key = parent ? `${parent}.${row.name}` : row.name;
     const url = `${base}${row.url}`;
     api.set(key, api.has(key) && api.get(key) !== url ? null : url);
   }
@@ -336,30 +336,6 @@ function documentPaths(src: string): string[] {
   return [...fs.readFileSync(registry, 'utf8').matchAll(/@document\s+(\S+)/g)].map((match) =>
     path.posix.normalize(match[1]),
   );
-}
-
-/**
- * Placeholder getting-started guides for a checkout the build can't read
- * @param library - A library with a `stub`
- */
-function stubDocs(library: Library): Doc[] {
-  const note =
-    `The ${library.name} guides are built from the ${path.basename(library.repo)} repository, which this build ` +
-    "of the site couldn't read, so this page is a placeholder.";
-  return Object.entries(library.stub!.pages).map(([source, title]) => {
-    const page = library.pages[source];
-    return {
-      source,
-      output: `${page}.md`,
-      id: `guides/${page}`,
-      label: title,
-      description: '',
-      category: 'getting-started',
-      children: [],
-      frontMatter: [`sidebar_label: ${JSON.stringify(title)}`, editLine(library, source)],
-      body: `# ${title}\n\n${note}\n`,
-    };
-  });
 }
 
 /**
@@ -730,40 +706,27 @@ async function main(): Promise<void> {
     counts: { links: 0, code: 0, admonitions: 0, embeds: 0 },
   };
 
-  const stubbed = !!library.stub && !documentPaths(context.src).length;
-  let roots: Doc[];
-  let categoryOrder: string[] = [];
   let typedocLlms: string | null = null;
-  if (stubbed) {
-    if (library.stub!.required) {
-      throw new Error(`${library.repo} is missing or lists no @document, and ${library.name} docs are required`);
-    }
-    const name = library.id.toUpperCase();
-    warn(`no ${name} guides available, ${name} docs are stubbed`);
-    roots = stubDocs(library);
-    for (const doc of roots) context.docs.set(doc.source, doc);
-  } else {
-    const pin = spawnSync('git', ['-C', repoDir, 'config', 'repos.pin'], { encoding: 'utf8' }).stdout?.trim();
-    const expected = repoPin(library.pkg);
-    if (pin !== expected) {
-      throw new Error(`${library.repo} is at ${pin || 'nothing'}, not ${expected}: run npm run sync:repos`);
-    }
-    const base = apiBase(library);
-    if (base) {
-      context.api = await loadApiIndex(base);
-      const llms = await fetchCached(`${base}llms.txt`);
-      typedocLlms = llms.replaceAll('](./', `](${base}`).replace(/\{@link\s+([^}]*?)\s*\}/g, '$1');
-    }
-    ({ categoryOrder = [] } = readJson<{ categoryOrder?: string[] }>(path.join(repoDir, '.configs/typedoc.json')));
-    roots = loadDocs(context);
+  const pin = spawnSync('git', ['-C', repoDir, 'config', 'repos.pin'], { encoding: 'utf8' }).stdout?.trim();
+  const expected = repoPin(library.pkg);
+  if (pin !== expected) {
+    throw new Error(`${library.repo} is at ${pin || 'nothing'}, not ${expected}: run npm run sync:repos`);
   }
+  const base = apiBase(library);
+  if (base) {
+    context.api = await loadApiIndex(base);
+    const llms = await fetchCached(`${base}llms.txt`);
+    typedocLlms = llms.replaceAll('](./', `](${base}`).replace(/\{@link\s+([^}]*?)\s*\}/g, '$1');
+  }
+  const { categoryOrder = [] } = readJson<{ categoryOrder?: string[] }>(path.join(repoDir, '.configs/typedoc.json'));
+  const roots = loadDocs(context);
 
   const outputs = new Map<string, string | Buffer>();
   for (const doc of context.docs.values()) outputs.set(path.join(guidesDir, doc.output), convert(doc, context));
   let slugs: string[] = [];
   if (library.tutorials) {
     const index = path.join(repoDir, library.tutorials.dir, 'index.json');
-    if (!stubbed && fs.existsSync(index)) slugs = readJson<string[]>(index);
+    if (fs.existsSync(index)) slugs = readJson<string[]>(index);
     await convertTutorials(context, outputs, slugs);
   }
   if (context.errors.length) {

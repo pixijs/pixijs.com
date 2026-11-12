@@ -17,7 +17,7 @@ export const PIXI_EXAMPLE =
 export interface Manifest {
   version: string;
   description?: string;
-  /** The commit a vendored build was packed from */
+  /** The commit the build was packed from, when the manifest records it */
   gitHead?: string;
 }
 
@@ -33,7 +33,7 @@ export function installedPackage(pkg: string): Manifest {
 
 /**
  * The `repos.pin` that `npm run sync:repos` records for a checkout that follows an npm package:
- * `<pkg>@<version>`, plus `#<sha7>` for a vendored build that carries its `gitHead`
+ * `<pkg>@<version>`, plus `#<sha7>` for a build whose manifest carries its `gitHead`
  * @param pkg - Package name
  */
 export function repoPin(pkg: string): string {

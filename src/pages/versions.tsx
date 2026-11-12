@@ -3,7 +3,6 @@ import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import { useEffect, useState } from 'react';
 import VERSIONS_CSS from '!!raw-loader!sass-loader!./versions.scss';
-import { usePixi3d } from '@site/src/components/Home/ThreeD/usePixi3d';
 import { Accent, Band, Closing, panel } from '@site/src/components/Page';
 import { pageClasses } from '@site/src/components/Page/classes';
 import MotionPage, { ClayHeader } from '@site/src/components/Page/MotionPage';
@@ -19,7 +18,7 @@ import type { CSSProperties, ReactNode } from 'react';
 
 const DOWNLOADS = 'https://pixijs.download';
 const RELEASES = 'https://github.com/pixijs/pixijs/releases/tag';
-const RELEASES_3D = 'https://github.com/pixijs/pixi-3d/releases';
+const RELEASES_3D = 'https://github.com/pixijs/3d/releases';
 const ARCHIVED = ['6.5.10', '5.3.12', '4.8.9'];
 const styles = pageClasses('versions');
 
@@ -29,7 +28,7 @@ const STATUS: Record<Status, ReactNode> = {
   latest: <Tag tone="accent">Latest</Tag>,
   next: <Tag>Unreleased</Tag>,
   archived: <Tag className={styles.muted}>Archived</Tag>,
-  beta: <Tag pkg="3d">Closed beta</Tag>,
+  beta: <Tag pkg="3d">Open beta</Tag>,
 };
 
 interface Row {
@@ -231,7 +230,6 @@ function Timeline({ stops }: { stops: Stop[] }) {
 }
 
 export default function Versions() {
-  const pixi3d = usePixi3d();
   const packages = usePackages();
   const latest = packages['2d'].versions.current;
   const beta = packages['3d'].versions.current;
@@ -336,7 +334,7 @@ export default function Versions() {
             title="PixiJS 3D"
             lede={
               <>
-                Meshes, lights and glTF models for the PixiJS stage, as <code>@pixi/3d</code>. It&apos;s in closed beta,
+                Meshes, lights and glTF models for the PixiJS stage, as <code>@pixi/3d</code>. It&apos;s in open beta,
                 so the API can still change between releases.
               </>
             }
@@ -359,8 +357,7 @@ export default function Versions() {
                 icon: 'sparkles',
                 label: 'Changelog',
                 note: 'What changed in each beta',
-                to: pixi3d.status === 'public' ? RELEASES_3D : undefined,
-                missing: 'Not public yet',
+                to: RELEASES_3D,
               },
               { icon: 'box', label: 'Overview', note: 'What PixiJS 3D adds to the stage', to: '/3d' },
             ]}

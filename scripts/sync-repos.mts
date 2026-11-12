@@ -4,17 +4,15 @@
  * `npm run sync:repos [name...]`.
  *
  * Each repository is a depth-1 checkout of one commit. An entry that follows an npm package checks out
- * the commit its installed version was built from: the `gitHead` in the installed manifest (the vendored
- * `@pixi/3d` records one), else npm's `gitHead` for that version, else the `v<version>` tag. Running it again
+ * the commit its installed version was built from: the `gitHead` in the installed manifest when it has one,
+ * else npm's `gitHead` for that version, else the `v<version>` tag. Running it again
  * moves each checkout to its current pin, skips the network for an npm pin that hasn't changed, and deletes
  * folders the list no longer has. In a worktree, a repository the main checkout already has at the same pin
  * is copied from there, with no network. `.repos` is gitignored and ignored by ESLint, so lint and repo-wide
  * searches skip it.
  *
- * pixi-3d is private. Git authenticates with `PIXI_3D_TOKEN` when it's set (CI), else with your own git
- * credentials (`gh auth setup-git`), and never prompts. Without access it warns, leaves `.repos/pixi-3d`
- * absent and the 3D docs are stubbed, unless `PIXI_3D_REQUIRED=1`. `PIXI_3D_REPO=<path>` fetches from a
- * local checkout instead of GitHub, for commits that aren't pushed.
+ * `.repos/pixi-3d` is `@pixi/3d`'s source, from github.com/pixijs/3d. `PIXI_3D_REPO=<path>` fetches it from a
+ * local checkout instead, for a version whose tag isn't pushed.
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -33,11 +31,6 @@ interface ReferenceRepo {
    * version of that package
    */
   ref: string | { npm: string };
-  /**
-   * Set for a private repository: `token` authenticates with GitHub, and a failure only warns and leaves
-   * the folder absent unless `required`
-   */
-  private?: { token?: string; required: boolean };
 }
 
 /** Every repository in `.repos/`; folders that aren't listed here are deleted */
@@ -48,9 +41,8 @@ const referenceRepos: ReferenceRepo[] = [
     name: 'pixi-3d',
     repository: process.env.PIXI_3D_REPO
       ? pathToFileURL(path.resolve(process.env.PIXI_3D_REPO)).href
-      : 'https://github.com/pixijs/pixi-3d.git',
+      : 'https://github.com/pixijs/3d.git',
     ref: { npm: '@pixi/3d' },
-    private: { token: process.env.PIXI_3D_TOKEN, required: process.env.PIXI_3D_REQUIRED === '1' },
   },
 ];
 
@@ -60,14 +52,13 @@ const FULL_SHA = /^[0-9a-f]{40}$/;
  * Runs git without prompting for credentials and returns its trimmed output
  * @param args - The git arguments
  * @param cwd - Directory to run in
- * @param env - Extra environment, such as auth config
  */
-function git(args: string[], cwd: string, env: NodeJS.ProcessEnv = {}): string {
+function git(args: string[], cwd: string): string {
   return execFileSync('git', args, {
     cwd,
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
-    env: { ...process.env, GIT_TERMINAL_PROMPT: '0', ...env },
+    env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
   }).trim();
 }
 
@@ -84,23 +75,6 @@ function gitOrNull(args: string[], cwd: string): string | null {
   }
 }
 
-/**
- * Environment that makes git send a private entry's token to GitHub. It goes through `GIT_CONFIG_*` rather
- * than `-c`, so it never appears in the command line that a failure prints.
- * @param entry - The `referenceRepos` entry
- */
-function authEnv(entry: ReferenceRepo): NodeJS.ProcessEnv {
-  const token = entry.private?.token;
-
-  if (!token) return {};
-
-  return {
-    GIT_CONFIG_COUNT: '1',
-    GIT_CONFIG_KEY_0: 'http.https://github.com/.extraheader',
-    GIT_CONFIG_VALUE_0: `AUTHORIZATION: basic ${Buffer.from(`x-access-token:${token}`).toString('base64')}`,
-  };
-}
-
 const REPO_ROOT = git(['rev-parse', '--show-toplevel'], process.cwd());
 const REPOS_DIR = path.join(REPO_ROOT, '.repos');
 
@@ -109,15 +83,10 @@ const REPOS_DIR = path.join(REPO_ROOT, '.repos');
  * full sha. A branch wins over a tag of the same name, as with `git clone --branch`.
  * @param repository - Git URL
  * @param ref - Branch, tag or full sha
- * @param env - Auth environment for the remote
  */
-function remoteSha(repository: string, ref: string, env: NodeJS.ProcessEnv): string {
+function remoteSha(repository: string, ref: string): string {
   if (FULL_SHA.test(ref)) return ref;
-  const rows = git(
-    ['ls-remote', repository, `refs/heads/${ref}`, `refs/tags/${ref}`, `refs/tags/${ref}^{}`],
-    REPO_ROOT,
-    env,
-  )
+  const rows = git(['ls-remote', repository, `refs/heads/${ref}`, `refs/tags/${ref}`, `refs/tags/${ref}^{}`], REPO_ROOT)
     .split('\n')
     .filter(Boolean)
     .map((line) => line.split(/\s+/));
@@ -149,12 +118,11 @@ function npmGitHead(name: string, version: string): string {
  * @param name - Package name
  * @param installed - Its installed manifest
  * @param repository - Git URL of the package's source
- * @param env - Auth environment for the remote
  */
-function publishedSha(name: string, installed: Manifest, repository: string, env: NodeJS.ProcessEnv): string {
+function publishedSha(name: string, installed: Manifest, repository: string): string {
   if (installed.gitHead && FULL_SHA.test(installed.gitHead)) return installed.gitHead;
   const gitHead = npmGitHead(name, installed.version);
-  return FULL_SHA.test(gitHead) ? gitHead : remoteSha(repository, `v${installed.version}`, env);
+  return FULL_SHA.test(gitHead) ? gitHead : remoteSha(repository, `v${installed.version}`);
 }
 
 /** The main checkout's `.repos` when this checkout is a linked worktree, otherwise null */
@@ -174,7 +142,6 @@ const MAIN_REPOS_DIR = mainCheckoutReposDir();
  */
 function sync(entry: ReferenceRepo): string {
   const dir = path.join(REPOS_DIR, entry.name);
-  const env = authEnv(entry);
   const npmPin = typeof entry.ref === 'string' ? null : entry.ref.npm;
   const installed = npmPin ? installedPackage(npmPin) : null;
   const head = fs.existsSync(path.join(dir, '.git')) ? gitOrNull(['rev-parse', 'HEAD'], dir) : null;
@@ -191,8 +158,8 @@ function sync(entry: ReferenceRepo): string {
   const sha = mainHasPin
     ? mainHead
     : npmPin
-      ? publishedSha(npmPin, installed!, entry.repository, env)
-      : remoteSha(entry.repository, entry.ref as string, env);
+      ? publishedSha(npmPin, installed!, entry.repository)
+      : remoteSha(entry.repository, entry.ref as string);
 
   if (!head) {
     fs.rmSync(dir, { recursive: true, force: true });
@@ -205,7 +172,7 @@ function sync(entry: ReferenceRepo): string {
 
   if (head !== sha) {
     const source = mainHead === sha ? pathToFileURL(mainClone!).href : 'origin';
-    git(['fetch', '--quiet', '--depth', '1', source, sha], dir, env);
+    git(['fetch', '--quiet', '--depth', '1', source, sha], dir);
     git(['checkout', '--quiet', '--force', '--detach', 'FETCH_HEAD'], dir);
     git(['clean', '-fdxq'], dir);
   }
@@ -233,11 +200,6 @@ for (const entry of referenceRepos) {
     const { message, stderr } = error as Error & { stderr?: string };
     const reason = (stderr?.trim() || message).split('\n')[0];
 
-    if (entry.private && !entry.private.required) {
-      fs.rmSync(path.join(REPOS_DIR, entry.name), { recursive: true, force: true });
-      console.warn(`warning: .repos/${entry.name}: skipped, ${reason} (private repository, no access?)`);
-      continue;
-    }
     failed++;
     console.error(`.repos/${entry.name}: failed, ${reason}`);
   }

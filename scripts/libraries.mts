@@ -10,12 +10,12 @@ export interface Library {
   id: PackageId;
   /** Heading of the library's own `llms.txt` */
   name: string;
-  /** The installed npm package whose version, and `gitHead` when vendored, pins the checkout and everything else */
+  /** The installed npm package whose version pins the checkout and everything else */
   pkg: 'pixi.js' | '@pixi/3d';
   /** Source checkout, kept by `npm run sync:repos` */
   repo: string;
   /** TypeDoc base URL for an installed version, or null while the API isn't hosted, so `{@link}` renders as code */
-  api: (version: string, gitHead?: string) => string | null;
+  api: (version: string) => string | null;
   /** Prefix of "Edit this page" links, followed by the doc's path in `<repo>/src`; null hides them */
   editUrl: string | null;
   docsDir: 'docs' | 'docs-3d';
@@ -48,6 +48,12 @@ export interface Library {
      * other folders aren't examples, and its `shared` folder holds code the examples share.
      */
     dir: string;
+    /**
+     * Folders published as a gallery example although their entry isn't `index`, by the name each is published
+     * under. `file` is the entry relative to `dir`; its folder is the example, and that folder's own `package.json`
+     * adds to `packageJson`. `patches` are literal replacements in the entry; one that no longer applies warns.
+     */
+    entries?: Record<string, { file: string; patches?: [from: string, to: string][] }>;
     /** The `package.json` whose dependencies and devDependencies give the versions of what examples import */
     packageJson: string;
     /** Assets the examples load, relative to `repo`, served at `/<publishedAssets>/` */
@@ -78,12 +84,6 @@ export interface Library {
   };
   /** Upstream tutorials: `dir` relative to `repo`, step content and registry in `out`, one page each in `pages` */
   tutorials?: { dir: string; out: string; pages: string };
-  /**
-   * Placeholder guides (doc path to title) published when the checkout is missing or lists no `@document`, unless
-   * `required`. Builds without access to the private repo, such as fork PRs, stay green; delete it when the repo
-   * is public.
-   */
-  stub?: { required: boolean; pages: Record<string, string> };
   /**
    * The upstream guides are still being written: a `pages` entry with no doc and a `<PixiExample>` naming a missing
    * example warn instead of throwing. Delete it once every guide in `pages` exists.
@@ -190,8 +190,7 @@ export const LIBRARIES: Record<PackageId, Library> = {
     name: 'PixiJS 3D',
     pkg: '@pixi/3d',
     repo: '.repos/pixi-3d',
-    // Set once pixi-3d's TypeDoc is hosted; `customFields.pixi3d.apiUrl` in docusaurus.config.ts follows it
-    api: () => null,
+    api: (version) => `https://3d.pixijs.download/v${version}/docs/`,
     editUrl: null,
     docsDir: 'docs-3d',
     guidesPath: '/3d/guides/',
@@ -240,6 +239,16 @@ export const LIBRARIES: Record<PackageId, Library> = {
     staticDir: 'static-pixi-3d',
     examples: {
       dir: 'examples',
+      entries: {
+        // The playground's racing game, which the launch post embeds, without the playground's frame debugger
+        game_racing: {
+          file: 'racing/racing.example.ts',
+          patches: [
+            ["import { GraphDebugOverlay } from '@pixi/3d/extras';\n", ''],
+            ['new GraphDebugOverlay({ view: () => view3d, renderer: app.renderer });\n\n', ''],
+          ],
+        },
+      },
       packageJson: 'package.json',
       assets: 'examples/assets',
       publishedAssets: 'assets/3d',
@@ -256,14 +265,6 @@ export const LIBRARIES: Record<PackageId, Library> = {
       scanDocs: ['docs-3d'],
     },
     tutorials: { dir: 'examples/tutorials', out: 'src/tutorials/generated-3d', pages: 'docs-3d/tutorials' },
-    stub: {
-      required: process.env.PIXI_3D_REQUIRED === '1',
-      pages: {
-        '__docs__/getting-started/introduction.md': 'Introduction',
-        '__docs__/getting-started/installation.md': 'Installation',
-        '__docs__/getting-started/quick-start.md': 'Quick start',
-      },
-    },
   },
 };
 

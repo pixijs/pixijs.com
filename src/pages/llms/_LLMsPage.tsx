@@ -37,7 +37,7 @@ type Tone = 'command' | 'output' | 'success' | 'prompt';
 const TERMINAL: { prefix: string; text: string; tone: Tone }[] = [
   { prefix: '$', text: skillsUniversalInstall, tone: 'command' },
   { prefix: '→', text: 'Detecting agent…', tone: 'output' },
-  { prefix: '✓', text: 'Installed 25 PixiJS skills for Claude Code', tone: 'success' },
+  { prefix: '✓', text: 'Installed the PixiJS and PixiJS 3D skills for Claude Code', tone: 'success' },
   { prefix: '$', text: 'claude', tone: 'command' },
   { prefix: '>', text: 'Build a PixiJS v8 scene with Assets, Sprite, and ticker-driven animation.', tone: 'prompt' },
   { prefix: '✓', text: 'Using PixiJS skill for APIs, patterns, and examples', tone: 'success' },
@@ -78,7 +78,7 @@ const AGENTS: Agent[] = [
     where: 'Terminal',
     prefix: '$',
     code: skillsUniversalInstall,
-    text: 'Run it in your project. It detects your agent and installs all 25 skills, with no config.',
+    text: 'Run it in your project. It detects your agent and installs the PixiJS and PixiJS 3D skills, with no config.',
     docs: { label: 'pixijs-skills on GitHub', href: REPO },
   },
   {
@@ -148,8 +148,8 @@ const BENEFITS: { icon: IconName; title: string; text: string }[] = [
   },
   {
     icon: 'layers',
-    title: '25 focused skills',
-    text: 'Separate skills for Application, Assets, Graphics, Filters, Mesh, Performance and more.',
+    title: 'A skill each for 2D and 3D',
+    text: 'Each has a reference per topic, such as Assets, Graphics, Filters, Mesh and Performance, and loads the ones a task needs.',
   },
 ];
 
@@ -663,18 +663,20 @@ export default function LLMsPage() {
             pkg="3d"
             name="PixiJS 3D"
             path="/3d/llms.txt"
+            view="https://3d.pixijs.download/release/docs/llms.txt"
             head={[
               '# PixiJS 3D',
               '',
-              '> A 3D extension for PixiJS',
+              '> @pixi/3d is a 3D extension for PixiJS…',
               '',
-              '- [Introduction](…/intro.md): …',
-              '- [Installation](…/installation.md): …',
-              '- [Quick start](…/quick-start.md): …',
-              '- [Porting from Three.js](…/porting-from-threejs.md): …',
+              '## getting-started',
+              '- [Introduction](…/getting-started.html.md): …',
+              '- [Installation](…/getting-started-1.html.md): …',
+              '- [Quick start](…/getting-started-2.html.md): …',
             ]}
           >
-            An index of every PixiJS 3D guide. Each entry has a one-line summary and links to a Markdown copy.
+            An index of every PixiJS 3D guide and API page, regenerated on each release. Each entry links to a Markdown
+            copy of the page.
           </TextFile>
         </ul>
         <Closing

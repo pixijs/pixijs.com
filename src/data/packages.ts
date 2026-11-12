@@ -6,7 +6,7 @@ export const PIXI_V7_VERSION = '7.4.2';
 /** `customFields` from `docusaurus.config.ts` */
 export interface SiteCustomFields {
   pixiVersion: string;
-  pixi3d: { version: string; status: 'beta' | 'public'; apiUrl: string | null };
+  pixi3d: { version: string; apiUrl: string | null };
 }
 
 export interface PackageVersion {
@@ -78,7 +78,7 @@ export function getPackages({ pixiVersion, pixi3d }: SiteCustomFields): Record<P
       npm: '@pixi/3d',
       badge: 'NEW',
       home: '/3d',
-      github: pixi3d.status === 'public' ? 'https://github.com/pixijs/pixi-3d' : 'https://github.com/pixijs/pixijs',
+      github: 'https://github.com/pixijs/3d',
       versions: {
         current: {
           label: 'beta',

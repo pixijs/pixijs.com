@@ -19,6 +19,7 @@ const WORDS: Record<string, string> = {
 /** Category names that aren't their id read out */
 const LABELS: Record<string, string> = {
   '2d3d': '2D and 3D',
+  game: 'Games',
   'nine-slice-sprite': 'Nine-slice sprite',
   post: 'Post-processing',
   scene: 'Scene graph',

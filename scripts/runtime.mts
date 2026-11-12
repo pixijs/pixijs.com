@@ -6,9 +6,9 @@
  * examples use) and for the frozen 7.x docs, plus the declaration files Monaco loads. Installed packages are served
  * at their installed (locked) versions; the others are pinned in `PINNED`. `static-runtime/` holds:
  * - `runtime/pixi.js@<v>/<subpath>.mjs`: ES modules for the pixi.js subpaths `pixi.min.mjs` doesn't register
- * - `pixi-3d/<v>[-<sha7>]/`: the `@pixi/3d` CDN build when it's installed from a `file:` tarball, and `types.json`
+ * - `pixi-3d/<v>/types.json`: the `@pixi/3d` declaration files
  *
- * Installing `@pixi/3d` from npm instead switches its URLs to jsDelivr; nothing else changes. The script fails when an
+ * The script fails when an
  * add-on doesn't import `pixi.js` bare (it would load a second pixi.js), when a pinned file doesn't exist, when a
  * pixi.js subpath can't be served, or when a generated module doesn't load or exports nothing.
  */
@@ -21,8 +21,10 @@ import { prune, writeIfChanged } from './shared.mts';
 
 interface Manifest {
   version: string;
-  gitHead?: string;
-  exports?: Record<string, string | { import?: string | { types?: string; default?: string }; default?: string }>;
+  exports?: Record<
+    string,
+    string | { types?: string; import?: string | { types?: string; default?: string }; default?: string }
+  >;
   dependencies?: Record<string, string>;
   devDependencies?: Record<string, string>;
 }
@@ -158,32 +160,26 @@ async function checkPixiModules(files: Map<string, string>): Promise<void> {
 }
 
 /**
- * Maps `@pixi/3d` and each of its subpaths to its CDN build, copies the build when it's vendored, and writes
- * `types.json` (every `.d.ts`, plus an `index.d.ts` per export) for Monaco
+ * Maps `@pixi/3d` and each of its subpaths to its CDN build on jsDelivr, and writes `types.json` (every `.d.ts`,
+ * plus an `index.d.ts` per export) for Monaco
  */
 function pixi3d(files: Map<string, string>): { imports: Record<string, string>; types: string } {
   const dir = moduleDir('@pixi/3d');
   if (!fs.existsSync(dir)) throw new Error("@pixi/3d isn't installed; run npm install");
   const pkg = manifest(dir);
-  const site = manifest(ROOT);
-  const spec = site.dependencies?.['@pixi/3d'] ?? site.devDependencies?.['@pixi/3d'];
-  const vendored = spec?.startsWith('file:') ?? false;
-  const folder = `/pixi-3d/${pkg.version}${pkg.gitHead ? `-${pkg.gitHead.slice(0, 7)}` : ''}/`;
-  const base = vendored ? folder : `${JSDELIVR}/@pixi/3d@${pkg.version}/dist/`;
+  const folder = `/pixi-3d/${pkg.version}/`;
   const dist = path.join(dir, 'dist');
   const imports: Record<string, string> = {};
   const types: Record<string, string> = {};
   for (const [key, target] of Object.entries(pkg.exports ?? {})) {
     if (key === './package.json') continue;
     const subpath = key.slice(2);
-    const file = `pixi-3d${subpath ? `-${subpath}` : ''}.min.mjs`;
+    const file = `pixijs-3d${subpath ? `-${subpath}` : ''}.min.mjs`;
 
     assertBarePixi(`@pixi/3d ${file}`, read(packageFile('@pixi/3d', `dist/${file}`)));
-    const specifier = `@pixi/3d${subpath ? `/${subpath}` : ''}`;
+    imports[`@pixi/3d${subpath ? `/${subpath}` : ''}`] = `${JSDELIVR}/@pixi/3d@${pkg.version}/dist/${file}`;
 
-    imports[specifier] = `${base}${file}`;
-
-    const declarations = typeof target === 'object' && typeof target.import === 'object' ? target.import.types : null;
+    const declarations = typeof target === 'object' ? target.types : null;
     if (declarations) {
       const stub = subpath ? `${subpath}/index.d.ts` : 'index.d.ts';
       const from = path.posix.relative(
@@ -195,12 +191,8 @@ function pixi3d(files: Map<string, string>): { imports: Record<string, string>; 
   }
 
   for (const file of fs.readdirSync(dist, { recursive: true, encoding: 'utf8' })) {
-    const full = path.join(dist, file);
-    if (path.basename(file).startsWith('.')) continue;
-    if (file.endsWith('.d.ts')) types[`dist/${file.split(path.sep).join('/')}`] = read(full);
-    if (vendored && /^pixi-3d.*\.min\.mjs$/.test(file)) {
-      files.set(path.join(OUT_DIR, folder, file), read(full).replace(SOURCE_MAP, ''));
-    }
+    if (path.basename(file).startsWith('.') || !file.endsWith('.d.ts')) continue;
+    types[`dist/${file.split(path.sep).join('/')}`] = read(path.join(dist, file));
   }
   files.set(path.join(OUT_DIR, folder, 'types.json'), JSON.stringify(types));
 
