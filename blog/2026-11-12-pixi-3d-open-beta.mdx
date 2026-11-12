@@ -1,6 +1,6 @@
 ---
 title: Introducing PixiJS 3D
-description: PixiJS 3D is in open beta. PixiJS is now the only renderer on the web that's a full 2D engine and a full 3D engine at once. It drops into the app you already have with one new View3D, and it's fast out of the box.
+description: PixiJS 3D is in open beta. PixiJS is now the only renderer on the web that's a full 2D engine and a full 3D engine at once. It drops into the app you already have with one new View3D, and it's fast by default.
 slug: pixi-3d-open-beta
 authors: zyie
 tags: [PixiJS, 3D, WebGPU, WebGL, Agent Skills]
@@ -39,21 +39,21 @@ PixiJS 3D is here, and it's in open beta today.
       }}
     />
   </a>
-  <div style={{ textAlign: 'center', fontSize: '0.9em', opacity: 0.7, marginTop: 8 }}>Rendered live by PixiJS 3D. It's just the renderer rendering.</div>
+  <div style={{ textAlign: 'center', fontSize: '0.9em', opacity: 0.7, marginTop: 8 }}>Rendered in real time by PixiJS 3D.</div>
 </div>
 
-PixiJS is now the only renderer on the web that's a full 2D engine and a full 3D engine at once. Both live on one stage, and you can go full tilt in both directions.
+PixiJS is now the only renderer on the web that's a full 2D engine and a full 3D engine at once. Both share one stage, and both are fast by default.
 
-Already build with PixiJS? Add one `View3D` to your project and you're in 3D, with the `addChild`, `Assets`, and pointer events you already know. New here? Welcome. This is a good place to start.
+If you already build with PixiJS, add one `View3D` to your project and you're in 3D, with the `addChild`, `Assets`, and pointer events you already know. If you're new to PixiJS, this is a good place to start.
 
 {/* truncate */}
 
-- **2D and 3D share a stage.** A 3D scene is a display object. Add one, or twelve, anywhere in your 2D scene.
-- **Normal code is fast.** Write a scene the obvious way and it's quick. We benchmarked the different ways to render, and the engine picks the best one for your device, browser, and scene.
-- **The good stuff is built in.** Shadows, animation, particles, post-processing, and the rest of what you'd expect from a 3D engine are all here.
+- **2D and 3D share a stage.** A 3D scene is a display object. Add one or several anywhere in your 2D scene.
+- **It's fast by default.** Write a scene the obvious way and it's quick. We benchmarked the different ways to render, and the engine picks the best one for your device, browser, and scene.
+- **The essentials are built in.** Shadows, animation, particles, post-processing, and the rest of what you'd expect from a 3D engine are all here.
 - **It's WebGPU first.** We designed it around WebGPU, and the same code runs on WebGL2 for everyone else.
 - **It's AI ready.** Your agent can write it from the first prompt, with new skills for 2D and 3D.
-- **Best of all, it's free.** It's MIT licensed and it always will be, so enjoy.
+- **It's free.** It's MIT licensed, and it always will be.
 
 ---
 
@@ -68,19 +68,21 @@ const helmet = new Model3D(await Assets.load('helmet.gltf'));
 view3d.root.addChild(helmet);
 ```
 
-The view layers with everything else you draw, so you choose how much 3D you want. Keep your regular 2D workflow and drop in a 3D element where it helps, like a spinning trophy in a menu or a character in a shop screen. Or go the other way. Make one `View3D` fill the screen, build a whole 3D game inside it, and put your UI over the top as a regular 2D container.
+The view layers with everything else you draw, so you choose how much 3D you want. Keep your regular 2D workflow and drop in a 3D element where it helps, like a spinning trophy in a menu or a character in a shop screen. Or make one `View3D` fill the screen, build a whole 3D game inside it, and put your UI over the top as a regular 2D container.
 
-Everything in between works too, and the mixing and matching is the powerful part. Filters and masks work on a 3D view. 3D objects take the same pointer events as sprites. glTF models load through `Assets`. Your 2D can follow your 3D, like a health bar over a character.
+Everything in between works too. Filters and masks work on a 3D view. 3D objects take the same pointer events as sprites. glTF models load through `Assets`. Your 2D can follow your 3D, like a health bar over a character.
 
-A `View3D` is a display object, so nothing stops you adding more of them. PixiJS is the only engine where you can put several 3D views in one 2D scene. Each has its own scene and camera, and you place and size each one like a sprite. Every card here is its own `View3D`:
+A `View3D` is a display object, so you can add as many as you want. PixiJS is the only engine where you can put several 3D views in one 2D scene. Each has its own scene and camera, and you place and size each one [like a sprite](/3d/examples?example=2d3d_many-views).
 
-<PixiExample name="2d3d_many-views" pkg="3d" />
+The 3D sees the 2D around it too. This logo is 3D glass, and it bends the 2D poster drawn behind it. Drag the logo to turn it:
+
+<PixiExample name="2d3d_glass-over-2d" pkg="3d" />
 
 It goes the other way too. You can draw any 2D container onto a 3D surface, live. Here a 2D scene with a bouncing wordmark and a clock runs on the screen of a 3D monitor:
 
 <PixiExample name="2d3d_container-texture" pkg="3d" />
 
-And since a `View3D` is a display object, that 2D container can hold one of its own. So the two [nest](/3d/guides/components/container-texture#nesting-a-view3d), anything inside anything, as many levels deep as you like. 3D in your 2D in your 3D in your 2D. It's all good.
+And since a `View3D` is a display object, that 2D container can hold one of its own. So the two [nest](/3d/guides/components/container-texture#nesting-a-view3d), as many levels deep as you like. A 3D scene can show a 2D container that holds another 3D scene.
 
 The shelf of demos at [goodstuff.pixijs.io](https://goodstuff.pixijs.io) is built this way. Each of its screens is a 2D scene drawn onto a curved 3D panel.
 
@@ -102,13 +104,13 @@ The shelf of demos at [goodstuff.pixijs.io](https://goodstuff.pixijs.io) is buil
 
 ---
 
-## Normal code is fast
+## Fast by default
 
 PixiJS has always tried to make the default way of using it the fast way, and 3D is no different. You write a scene the obvious way, and it's fast.
 
-Add five cubes that share a geometry and a material, and they draw in one instanced call. You didn't ask for that, and you shouldn't have to. There's no reason those cubes shouldn't batch, so why should you have to care? We take that on.
+Add five cubes that share a geometry and a material, and they draw in one instanced call. You didn't ask for that, and you shouldn't have to. The engine can see that those cubes batch, so it batches them.
 
-There's more to a renderer than instance counts, though. Drawing a million copies of one cube makes a good benchmark number, but nobody ships that game. A real scene is lots of different things. It has different models and materials, characters that animate, lights that cast shadows, and a HUD over the top, and much of it changes from frame to frame. That's where we spent our time and effort. We made PixiJS 3D fast for everything that isn't a number benchmark.
+There's more to a renderer than instance counts, though. A real scene is many different things. It has different models and materials, characters that animate, lights that cast shadows, and a HUD over the top, and much of it changes from frame to frame. That's the kind of scene we spent our time on, so PixiJS 3D is fast in a real game as well as in a benchmark.
 
 Part of that is accepting that no single way of drawing a scene is the fastest everywhere. What's quickest on a desktop GPU isn't always quickest on an iPhone, and a small scene wants different treatment from a huge one. So we benchmarked the different ways to render, and the engine picks the best path for your device, your browser, and your scene.
 
@@ -142,13 +144,13 @@ The [performance guide](/3d/guides/concepts/performance) has the details.
 
 ## A modern architecture for a modern web
 
-WebGPU is where the web is going, so that's where we built PixiJS 3D to be. We had a head start too. We built PixiJS v8 with exactly this in mind, so most of the groundwork was already done, and 3D gets to use the exciting new techniques on top of it.
+WebGPU is where the web is going, so we designed PixiJS 3D around it. We had a head start. We built PixiJS v8 with this in mind, so most of the groundwork was already done, and 3D adds the newer techniques on top of it.
 
-Whether it's render bundles, indirect draws, or culling in a compute shader, we've used every modern technique that we measured to be faster and that's ready for today's web.
+It uses render bundles, indirect draws, and culling in a compute shader. We adopted a technique only where we measured it to be faster and browsers already support it.
 
-Compute shader culling is a great example. It wasn't available to us before, and it can really speed up large scenes without eating your CPU.
+Culling in a compute shader wasn't possible before WebGPU. It speeds up large scenes and leaves the CPU free for your game.
 
-But don't think for a second that we've forgotten our good old friend WebGL. That side of the engine is just as optimised, and we put just as much love into it, so every game works while the web makes the move to WebGPU.
+WebGL2 got the same attention. We optimized that side of the engine just as hard, so every game works while the web moves to WebGPU.
 
 The same scene code runs on both, and each browser downloads only the backend it uses. Ask for WebGPU when you start the app, and PixiJS falls back to WebGL2 where it's missing:
 
@@ -158,11 +160,11 @@ await app.init({ preference: 'webgpu' });
 
 ---
 
-## It should just work
+## The essentials are built in
 
-We won't make a song and dance about this part. Everything you'd expect when you're building something fun on the internet is in there.
+Everything you'd expect from a 3D engine is here.
 
-You get glTF models with skinning, morph targets, animation, and compressed textures. Materials are PBR, Phong, flat, or toon, or you can make your own, including multi-pass materials! There's a render graph, HDR, tone mapping, post-processing, particles, shadows, and cascaded shadows. It's the stuff people just expect, and we've optimised and tuned it as far as we can take it.
+You get glTF models with skinning, morph targets, animation, and compressed textures. Materials are PBR, Phong, flat, or toon, or you can write your own, including multi-pass materials. There's a render graph, HDR, tone mapping, post-processing, particles, shadows, and cascaded shadows. We've tuned each of them for speed.
 
 Turning something on is an option you set. This is a sun that casts cascaded shadows:
 
@@ -174,17 +176,34 @@ const sun = new DirectionalLight({
 });
 ```
 
-The whole engine is built to be extended too. When you need something we didn't think of, you can write your own materials, shader code, and post effects. Or if you're feeling really fancy, create your own custom render graph.
+The engine is built to be extended too. When you need something it doesn't have, you can write your own materials, shader code, and post effects, or build a custom render graph.
 
 ---
 
 ## Made for games
 
-We built PixiJS 3D to make games, so we made one.
+We built PixiJS 3D to make games. Twelve animated characters from one model file draw in one call. Your HUD, menus, and touch controls are PixiJS 2D on the same stage, so there's no DOM overlay to keep in sync and no second UI library to learn.
 
-Twelve animated characters from one model file draw in one call. Your HUD, menus, and touch controls are real PixiJS on the same stage, so there's no DOM overlay to keep in sync and no second UI library to learn.
+We made two games on it too. [Nightward](https://goodstuff.pixijs.io/nightward/) is a survival game set in a moonlit graveyard. You only move. Six weapons fire on their own while the horde grows, until the Grave Reaper rises from the crypt. Its pixel-art sprites stand in a 3D scene as lit billboards that cast shadows, with bloom, tilt-shift, and fog over the top. The game draws its art and makes its music in code, so it loads no image or audio files:
 
-[Mach 2](https://goodstuff.pixijs.io/mach-2/) is a half-pipe runner built on PixiJS 3D. You steer round the pipe, jump, and collect cubes through five zones, with a PixiJS 2D HUD over the run. It plays on WebGPU or WebGL2, with a keyboard or on a phone:
+<div style={{ maxWidth: 700, margin: '0 auto', paddingBottom: 24 }}>
+  <a href="https://goodstuff.pixijs.io/nightward/">
+    <video
+      src="/images/blog/pixi-3d-nightward.mp4"
+      autoPlay
+      loop
+      muted
+      playsInline
+      style={{
+        width: '100%',
+        borderRadius: '12px',
+        boxShadow: '0 0 20px hsla(340, 82%, 52%, 0.15)',
+      }}
+    />
+  </a>
+</div>
+
+[Mach 2](https://goodstuff.pixijs.io/mach-2/) is a half-pipe runner. You steer round the pipe, jump, and collect cubes through five zones, with a PixiJS 2D HUD over the run. It plays on WebGPU or WebGL2, with a keyboard or on a phone:
 
 <div style={{ maxWidth: 700, margin: '0 auto', paddingBottom: 24 }}>
   <a href="https://goodstuff.pixijs.io/mach-2/">
@@ -203,17 +222,17 @@ Twelve animated characters from one model file draw in one call. Your HUD, menus
   </a>
 </div>
 
-Mach 2 lives on [Good Stuff](https://goodstuff.pixijs.io), which is where we'll keep adding our 3D experiments. Definitely go and check it out for more cool stuff.
+Both games are on [Good Stuff](https://goodstuff.pixijs.io), where we'll keep adding our 3D experiments.
 
-Want to see how a full game fits together? We also made everybody's favourite little kitbash racing game, and [the source is here](/3d/examples?example=game_racing). The [shooting gallery tutorial](/3d/tutorials/shooting-gallery) builds a small game step by step in a live editor.
+To see how a full game fits together, play our [racing game](/3d/examples?example=game_racing) in the examples and read its source. The [shooting gallery tutorial](/3d/tutorials/shooting-gallery) builds a small game step by step in a live editor.
 
 ---
 
 ## Ready for your AI agent
 
-PixiJS 3D works really well with agents. We built a lot of stuff with them, and they take to PixiJS 3D like a duck to water. From that we built the PixiJS skills, which help your agent even more.
+PixiJS 3D works well with agents. We built a lot with them while making it, and they pick up the API quickly. From that work we wrote the PixiJS skills, which help your agent further.
 
-There's a bonus too. Agents write normal code, and normal code is fast here. The engine does the batching and culling under the hood, so the apps your agent builds perform well without it knowing any tricks.
+Fast by default helps agents too. An agent writes a scene the obvious way, and the engine does the batching and culling itself, so the apps your agent builds run fast without it knowing any tricks.
 
 The `pixijs-3d` skill ships with PixiJS 3D. It has a complete starting app and a runnable recipe for each job, such as loading a glTF model or adding post-processing. It also lists the mistakes that throw no error but draw the wrong picture.
 
@@ -271,9 +290,9 @@ app.ticker.add((time) => {
 
 The docs are ready too, with [35 guides](/3d/guides/getting-started/intro), [over 100 live examples](/3d/examples), [three tutorials](/3d/tutorials) that run in a live editor, and an [API reference](https://3d.pixijs.download/release/docs/index.html).
 
-We're in beta, so the API can still change before 1.0 and you may hit a few rough edges. If you find an issue, please [open one up](https://github.com/pixijs/3d/issues). We're actively working on this and we'll fix things as they come up.
+We're in beta, so the API can still change before 1.0. If you find a bug, please [open an issue](https://github.com/pixijs/3d/issues). We're still working on PixiJS 3D, and we'll fix bugs as they come in.
 
-We've built this site's 3D pages, Mach 2, and every one of those examples on it, and now we want to see what you build. Come and show us on [Discord](https://discord.gg/QrnxmQUPGV).
+We've built this site's 3D pages, Nightward, Mach 2, and every one of those examples on it, and now we want to see what you build. Come and show us on [Discord](https://discord.gg/QrnxmQUPGV).
 
 ---
 
@@ -281,7 +300,7 @@ We've built this site's 3D pages, Mach 2, and every one of those examples on it,
 
 PixiJS 3D is the biggest addition to PixiJS since v8.
 
-So many of you build with PixiJS, and we love that. We love seeing what you make with it, and it's the reason this exists. We're so happy we get to give you a new dimension. Thank you.
+So many of you build with PixiJS, and seeing what you make is the reason PixiJS 3D exists. Thank you.
 
 Now go and add a `View3D` to something.
 
