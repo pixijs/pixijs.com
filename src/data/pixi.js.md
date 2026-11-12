@@ -3245,25 +3245,6 @@ export interface TextDestroyOptions {
  * ```
  */
 export type DestroyOptions = TypeOrBool<BaseDestroyOptions & ContextDestroyOptions & TextureDestroyOptions & TextDestroyOptions>;
-/**
- * The wrap modes that are supported by pixi.
- *
- * The wrap mode affects the default wrapping mode of future operations.
- * - `clamp-to-edge` is the default mode, which clamps the texture coordinates to the edge of the texture.
- * - `repeat` allows the texture to repeat in both u and v directions.
- * - `mirror-repeat` allows the texture to repeat in both u and v directions, but mirrors the texture on every other repeat.
- */
-export type WRAP_MODE = "clamp-to-edge" | "repeat" | "mirror-repeat";
-/**
- * The scale modes that are supported by pixi.
- *
- * The scale mode affects the default scaling mode of future operations.
- * It can be re-assigned to either LINEAR or NEAREST, depending upon suitability.
- *
- * - `nearest` is a pixelating scaling mode, which does not interpolate pixels.
- * - `linear` is a smooth scaling mode, which interpolates pixels for smoother results.
- */
-export type SCALE_MODE = "nearest" | "linear";
 interface ShaderBase {
 	/** The WebGL program used by the WebGL renderer. */
 	glProgram?: GlProgram;
@@ -3714,6 +3695,25 @@ interface EnsurePrecisionOptions {
 	maxSupportedVertexPrecision: PRECISION;
 	maxSupportedFragmentPrecision: PRECISION;
 }
+/**
+ * The wrap modes that are supported by pixi.
+ *
+ * The wrap mode affects the default wrapping mode of future operations.
+ * - `clamp-to-edge` is the default mode, which clamps the texture coordinates to the edge of the texture.
+ * - `repeat` allows the texture to repeat in both u and v directions.
+ * - `mirror-repeat` allows the texture to repeat in both u and v directions, but mirrors the texture on every other repeat.
+ */
+export type WRAP_MODE = "clamp-to-edge" | "repeat" | "mirror-repeat";
+/**
+ * The scale modes that are supported by pixi.
+ *
+ * The scale mode affects the default scaling mode of future operations.
+ * It can be re-assigned to either LINEAR or NEAREST, depending upon suitability.
+ *
+ * - `nearest` is a pixelating scaling mode, which does not interpolate pixels.
+ * - `linear` is a smooth scaling mode, which interpolates pixels for smoother results.
+ */
+export type SCALE_MODE = "nearest" | "linear";
 interface AdvancedBlendInstruction extends Instruction {
 	renderPipeId: "blendMode";
 	blendMode: BLEND_MODES;
@@ -3894,33 +3894,35 @@ export declare class ExtractSystem implements System$1 {
 	 *     antialias: true
 	 * });
 	 * ```
+	 * @throws If the target is a float, integer or depth texture
 	 */
 	canvas(options: ExtractOptions | Container | Texture): ICanvas;
 	/**
 	 * Returns a one-dimensional array containing the pixel data of the entire texture in RGBA order,
 	 * with integer values between 0 and 255 (inclusive).
-	 * > [!NOE] The returned array is a flat Uint8Array where every 4 values represent RGBA
+	 * > [!NOTE] `pixels` is a flat Uint8ClampedArray where every 4 values represent RGBA
 	 * @param options - The options for extracting the image, or the target to extract
-	 * @returns One-dimensional Uint8Array containing the pixel data in RGBA format
+	 * @returns The RGBA `pixels` as a flat Uint8ClampedArray, with their `width` and `height`
 	 * @example
 	 * ```ts
 	 * // Basic pixel extraction
 	 * const sprite = new Sprite(texture);
-	 * const pixels = renderer.extract.pixels(sprite);
+	 * const { pixels } = renderer.extract.pixels(sprite);
 	 * console.log(pixels[0], pixels[1], pixels[2], pixels[3]); // R,G,B,A values
 	 *
 	 * // Extract with custom region
-	 * const pixels = renderer.extract.pixels({
+	 * const { pixels } = renderer.extract.pixels({
 	 *     target: sprite,
 	 *     frame: new Rectangle(0, 0, 100, 100)
 	 * });
 	 *
 	 * // Extract with high resolution
-	 * const pixels = renderer.extract.pixels({
+	 * const { pixels } = renderer.extract.pixels({
 	 *     target: sprite,
 	 *     resolution: 2
 	 * });
 	 * ```
+	 * @throws If the target is a float, integer or depth texture
 	 */
 	pixels(options: ExtractOptions | Container | Texture): GetPixelsOutput;
 	/**
@@ -10094,10 +10096,6 @@ declare global {
 		/**
 		 * Rotates `this` vector.
 		 *
-		 * Like a light ray bouncing off a mirror surface.
-		 * `this` vector is the light and `normal` is a vector perpendicular to the mirror.
-		 * `this.reflect(normal)` is the reflection of `this` on that mirror.
-		 *
 		 * > [!IMPORTANT] Only available with **pixi.js/math-extras**.
 		 * @example
 		 * ```ts
@@ -10109,16 +10107,16 @@ declare global {
 		 * console.log(result); // {x: -7.071067811865474, y: 21.213203435596427}
 		 *
 		 * // Using output point for efficiency
-		 * const output = new Point(10, 20);
-		 * point.rotate(90 * (Math.PI / 180), output);
-		 * console.log(result); // {x: -7.071067811865474, y: 21.213203435596427}
+		 * const output = new Point();
+		 * point.rotate(radians, output);
+		 * console.log(output); // {x: -7.071067811865474, y: 21.213203435596427}
 		 *
-		 * // Chain multiple additions
-		 * const final = point.rotate(radians).rotate(radians2);
+		 * // Chain multiple rotations
+		 * const final = point.rotate(radians).rotate(radians);
 		 * ```
 		 * @remarks
 		 * convert degrees to radians with const radians = degrees * (Math.PI / 180)
-		 * @param {PointData} radians - The rotation angle in radians
+		 * @param {number} radians - The rotation angle in radians
 		 * @param {PointData} outPoint - Optional Point-like object to store result
 		 * @returns The outPoint or a new Point with rotated result
 		 */
@@ -12421,6 +12419,9 @@ export declare class Graphics extends ViewContainer<GraphicsGpuData> implements 
 	 */
 	drawStar(...args: Parameters<GraphicsContext["star"]>): this;
 }
+type GraphicsBatcher = Batcher & {
+	_updateMaxTextures(maxTextures: number): void;
+};
 interface GeometryData {
 	vertices: number[];
 	uvs: number[];
@@ -14320,6 +14321,25 @@ declare global {
 		}
 	}
 }
+declare global {
+	namespace PixiMixins {
+		interface WebGLSystems {
+			smoothGraphicsContext: SmoothGraphicsContextSystem;
+		}
+		interface WebGPUSystems {
+			smoothGraphicsContext: SmoothGraphicsContextSystem;
+		}
+		interface WebGLPipes {
+			smoothGraphics: SmoothGraphicsPipe;
+		}
+		interface WebGPUPipes {
+			smoothGraphics: SmoothGraphicsPipe;
+		}
+		interface CanvasPipes {
+			smoothGraphics: CanvasSmoothGraphicsPipe;
+		}
+	}
+}
 declare class CanvasGraphicsContext implements GPUData {
 }
 declare class CanvasGraphicsContextRenderData {
@@ -14443,6 +14463,101 @@ export interface MaskOptionsAndMask extends MaskOptions {
 	 * });
 	 */
 	mask: Mask;
+}
+/**
+ * Options for a {@link DashLineShader}.
+ */
+export interface DashLineShaderOptions {
+	/**
+	 * Length of each dash, in pixels at a scale of 1.
+	 * @default 8
+	 */
+	dash?: number;
+	/**
+	 * Length of each gap between dashes, in pixels at a scale of 1.
+	 * @default 5
+	 */
+	gap?: number;
+	/**
+	 * Number of textures the shader can sample: set it to the number of different
+	 * textures the strokes of the context use, if more than one.
+	 * @default 1
+	 */
+	maxTextures?: number;
+}
+/**
+ * A shader that draws the strokes of a {@link SmoothGraphics} as dashed lines, with anti-aliased dash ends.
+ *
+ * Set it as the `customShader` of the context: it applies to every stroke of the context,
+ * and the context is then rendered without batching. Dashes follow the path, and
+ * restart at the beginning of each shape. Fills are hidden.
+ * @example
+ * ```ts
+ * import { DashLineShader, SmoothGraphics } from 'pixi.js';
+ *
+ * const dashes = new DashLineShader({ dash: 10, gap: 5 });
+ * const graphics = new SmoothGraphics();
+ *
+ * graphics.context.customShader = dashes;
+ * graphics.moveTo(0, 0).lineTo(200, 100).stroke({ color: 0xff0000, width: 3 });
+ *
+ * // the dash pattern can be changed at any time
+ * dashes.dash = 20;
+ * ```
+ */
+export declare class DashLineShader extends Shader {
+	/**
+	 * @param options - Dash and gap lengths
+	 */
+	constructor(options?: DashLineShaderOptions);
+	/**
+	 * Length of each dash, in pixels at a scale of 1. Set it to 0 to hide the strokes.
+	 * @default 8
+	 */
+	get dash(): number;
+	set dash(value: number);
+	/**
+	 * Length of each gap between dashes, in pixels at a scale of 1.
+	 * @default 5
+	 */
+	get gap(): number;
+	set gap(value: number);
+}
+/**
+ * A {@link Graphics} that anti-aliases its edges in the shader, so shapes stay smooth
+ * without MSAA (`antialias: true`), at any scale and resolution.
+ *
+ * It has the same drawing API as `Graphics`. A {@link GraphicsContext} can't be drawn by both
+ * a `Graphics` and a `SmoothGraphics`: give one of them a `context.clone()`.
+ * Every edge gets about one pixel of analytic coverage (HHAA, half-plane half-axis anti-aliasing),
+ * computed from the geometry in render target pixels.
+ *
+ * Use it for vector art that is drawn with thin lines, scaled, or rendered without MSAA
+ * (render textures, filters, WebGPU canvases created with `antialias: false`).
+ * On the canvas renderer, it is drawn like a regular `Graphics`.
+ * @example
+ * ```ts
+ * import { SmoothGraphics } from 'pixi.js';
+ *
+ * const graphics = new SmoothGraphics()
+ *     .circle(100, 100, 50)
+ *     .fill(0xde3249)
+ *     .stroke({ width: 2, color: 0xffffff });
+ *
+ * app.stage.addChild(graphics);
+ * ```
+ */
+export declare class SmoothGraphics extends Graphics {
+	/**
+	 * @param options - Options for the SmoothGraphics, or a context to draw
+	 */
+	constructor(options?: GraphicsOptions | GraphicsContext);
+	/**
+	 * Creates a new SmoothGraphics with the same context.
+	 * @param deep - Whether to clone the context too, instead of sharing it
+	 * @returns A new SmoothGraphics
+	 */
+	clone(deep?: boolean): SmoothGraphics;
 }
 /**
  * The Circle object represents a circle shape in a two-dimensional coordinate system.
@@ -20602,6 +20717,14 @@ declare global {
 		}
 		interface RendererPipes {
 			htmlText: HTMLTextPipe;
+		}
+		interface RendererOptions {
+			/**
+			 * How long to wait in milliseconds before drawing an HTMLText in Safari when it uses a font family.
+			 * Set it to 0 if every font is already loaded in the document.
+			 * @default 100
+			 */
+			safariFontDelay: number;
 		}
 	}
 }
