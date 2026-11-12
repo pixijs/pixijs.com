@@ -133,7 +133,7 @@ export function Labels() {
         <div className={styles.row}>
           <State label="Rest">
             <Chip to="#labels" badge="New">
-              PixiJS 3D is in preview
+              PixiJS 3D is now available
             </Chip>
           </State>
           <State label="Hover">

@@ -31,7 +31,7 @@ function Sample({ theme }: { theme: 'light' | 'dark' }) {
       </ButtonRow>
       <div className={styles.row}>
         <Chip to="#themes" badge="New">
-          PixiJS 3D is in preview
+          PixiJS 3D is now available
         </Chip>
       </div>
       <div className={styles.row}>

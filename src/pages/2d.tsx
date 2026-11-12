@@ -47,7 +47,7 @@ export default function Home2D() {
               Skills for AI coding agents
             </Chip>
             <Chip to="/3d" badge="3D" prompt={false}>
-              PixiJS 3D is in preview
+              PixiJS 3D is now available
             </Chip>
           </>
         }

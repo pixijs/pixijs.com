@@ -70,8 +70,8 @@ const TOPICS: Topic[] = [
         question: 'Can PixiJS do 3D?',
         answer: (
           <p>
-            Yes, in preview. <Link to="/3d">PixiJS 3D</Link> adds meshes, lights, PBR materials and glTF models to the
-            same stage you use for 2D.
+            Yes. <Link to="/3d">PixiJS 3D</Link> adds meshes, lights, PBR materials and glTF models to the same stage
+            you use for 2D.
           </p>
         ),
       },

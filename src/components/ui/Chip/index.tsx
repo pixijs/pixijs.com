@@ -18,7 +18,7 @@ interface ChipProps {
   children: ReactNode;
 }
 
-/** Announcement chip: "NEW ›_ PixiJS 3D is in preview →" */
+/** Announcement chip: "NEW ›_ PixiJS 3D is now available →" */
 export default function Chip({ to, badge, prompt = true, className, children, ...rest }: ChipProps) {
   const content = (
     <>

@@ -60,7 +60,7 @@ export default function Home() {
         }
         chips={
           <Chip to="/3d" badge="NEW">
-            PixiJS 3D is in preview
+            PixiJS 3D is now available
           </Chip>
         }
       />
