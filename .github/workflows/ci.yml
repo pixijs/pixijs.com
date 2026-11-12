@@ -4,8 +4,17 @@ on:
   push:
     branches:
       - main
+  # The cron workflow pushes with GITHUB_TOKEN, and those pushes don't trigger `push` workflows.
+  workflow_run:
+    workflows:
+      - Update sponsors
+    types:
+      - completed
+    branches:
+      - main
 
 jobs:
   call-deploy:
+    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     uses: ./.github/workflows/reusable-deploy.yml
     secrets: inherit

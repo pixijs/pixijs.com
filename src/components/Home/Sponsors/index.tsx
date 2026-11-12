@@ -4,6 +4,7 @@ import Icon from '@site/src/components/ui/Icon';
 import SectionHead from '@site/src/components/ui/SectionHead';
 import manualSponsors from '@site/src/data/manualSponsors.json';
 import overrides from '@site/src/data/sponsor-overrides.json';
+import sponsorBadges from '@site/src/data/sponsorBadges.json';
 import sponsorData from '@site/src/data/sponsors.json';
 import { gsap, ScrollTrigger } from '@site/src/motion/gsap';
 import { useMotion } from '@site/src/motion/useMotion';
@@ -106,6 +107,14 @@ export default function Sponsors() {
               })}
             </ul>
           </section>
+        ))}
+      </div>
+      {/* Sponsors that need a link of their own, such as Namespace's CI badge */}
+      <div className={styles.sponsorBadges}>
+        {sponsorBadges.map(({ alt, src, href }) => (
+          <a key={href} href={href} target="_blank" rel="noopener noreferrer">
+            <img src={src} alt={alt} height={32} loading="lazy" decoding="async" />
+          </a>
         ))}
       </div>
       <p className={styles.sponsorsMore}>

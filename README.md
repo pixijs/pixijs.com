@@ -97,7 +97,7 @@ The site documents whichever `pixi.js` version `package-lock.json` installs; the
 
 All of that output is gitignored. `npm run generate` runs it, then `generate:pixi-3d` (see [PixiJS 3D](#pixijs-3d)), then **`generate:runtime`**, which writes the editor's import map to `src/data/generated/runtime.json` and the files it loads (pixi.js subpath modules and the vendored `@pixi/3d` CDN build) to `static-runtime/`, then **`generate:content`**, which converts tutorial source files into Docusaurus docs.
 
-**`generate:sponsors`** fetches sponsor data into `src/data/sponsors.json`. It needs secrets (see below), so `generate` doesn't run it; the file is committed and refreshed daily by the "Update sponsors" workflow.
+**`generate:sponsors`** fetches sponsor data into `src/data/sponsors.json`, saves each sponsor's logo trimmed to its artwork in `static/images/sponsors/logos/`, and writes the [README sponsor image](#readme-sponsor-image). It needs secrets (see below), so `generate` doesn't run it; its output is committed and refreshed daily by the "Update sponsors" workflow. `npm run generate:sponsors -- --logos` redoes the logos and the image from the committed data, without the secrets.
 
 After a build, `scripts/docusaurus-plugin-markdown-pages.ts` writes a markdown copy of every v8 and 3D guide beside its page (`/8.x/guides/concepts/architecture.md`, `/3d/guides/getting-started/intro.md`), with examples inlined and links made absolute, for LLMs.
 
@@ -152,6 +152,35 @@ To sync by hand, run `npm install pixi.js@^X.Y.Z`, `npm run generate:pixi` and `
 ## Reference Source
 
 `npm run sync:repos` checks out the source of the libraries the site documents into the gitignored `.repos/` folder, for the generators and for reading while you work: `.repos/pixijs`, `.repos/filters` and `.repos/pixi-3d`, each at the commit its installed version was built from. Run it again after upgrading a package to move the checkout. `referenceRepos` in `scripts/sync-repos.mts` lists them. In a worktree, it copies from the main checkout without the network when that's at the same version.
+
+## README Sponsor Image
+
+`generate:sponsors` writes `static/sponsors-readme.svg` with the logos of recurring Gold and Platinum sponsors, Platinum first and larger, each on a card filled like its tile on the home page. The "Update sponsors" workflow commits it, and each successful run deploys the site, so READMEs update on their own. Embed it with this block:
+
+```html
+<br/>
+
+<h2 align="center">PixiJS Sponsors</h2>
+
+<p align="center">
+  PixiJS is free and open source thanks to the sponsors who fund its development.
+</p>
+<br/>
+<p align="center">
+  <a href="https://pixijs.com/sponsor"><img src="https://pixijs.com/sponsors-readme.svg" alt="PixiJS sponsors"></a>
+</p>
+<p align="center">
+  <a href="https://namespace.so/github-actions/?utm_source=oss&utm_campaign=pixijs"><img alt="CI powered by Namespace" src="https://namespace.so/oss/badge.svg" height="32" /></a>
+</p>
+<br/>
+<p align="center">
+  Want your logo here? <a href="https://pixijs.com/sponsor"><b>Become a sponsor</b></a>
+</p>
+```
+
+The image can only have one link, so it goes to the sponsor page. A sponsor that needs its own link, like Namespace, gets a separate badge in the block above and an entry in `src/data/sponsorBadges.json` for the home page.
+
+To change a logo on the home page and in the image, set `avatarUrl` in `src/data/sponsor-overrides.json`, then run `npm run generate:sponsors -- --logos`.
 
 ## Environment Variables
 

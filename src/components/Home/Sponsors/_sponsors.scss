@@ -161,6 +161,19 @@ $gap: 32;
   }
 }
 
+.hm-sponsorBadges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: clamp(32px, 4cqi, 48px);
+
+  img {
+    display: block;
+    height: 32px;
+  }
+}
+
 .hm-sponsorsMore {
   margin: clamp(44px, 5cqi, 64px) 0 0;
   text-align: center;
