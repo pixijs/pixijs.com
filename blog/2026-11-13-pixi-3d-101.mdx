@@ -1,0 +1,394 @@
+---
+title: '3D 101: your first steps into 3D with PixiJS'
+description: 3D is a handful of small ideas stacked on each other. This post walks through them in order, from a single point to a lit scene with shadows and a model, with a live PixiJS 3D example for each.
+slug: pixi-3d-101
+authors: zyie
+tags: [PixiJS, 3D, Tutorial]
+hide_table_of_contents: true
+keywords:
+  [
+    'PixiJS',
+    'PixiJS 3D',
+    '@pixi/3d',
+    '3D',
+    'Tutorial',
+    'Beginners',
+    'View3D',
+    'Mesh3D',
+    'Lights',
+    'Shadows',
+    'Materials',
+    'glTF',
+  ]
+---
+
+import { BlogSponsors } from '@site/src/components/Blog/BlogSponsors';
+
+3D looks like a lot from the outside. There are vertices and normals, meshes and materials, cameras and lights, and it's hard to know which to learn first.
+
+It's less than it looks. A 3D scene is a handful of small ideas stacked on each other. This post walks through them in order, from a single point to a lit scene with a model in it, and every idea comes with a live scene you can poke.
+
+{/* prettier-ignore */}
+{/*
+The hero film goes live once pixi-3d-101.mp4 lands in static/images/blog/: delete this line, the comment markers around the block and the prettier-ignore line above.
+
+<div style={{ maxWidth: 700, margin: '0 auto', paddingBottom: 24 }}>
+  <video
+    src="/images/blog/pixi-3d-101.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+    style={{
+      width: '100%',
+      borderRadius: '12px',
+      boxShadow: '0 0 20px hsla(340, 82%, 52%, 0.15)',
+    }}
+  />
+  <div style={{ textAlign: 'center', fontSize: '0.9em', opacity: 0.7, marginTop: 8 }}>Rendered in real time by PixiJS 3D.</div>
+</div>
+*/}
+
+This post is for you if you've never built anything in 3D or never used PixiJS 3D. If you know PixiJS 2D, a lot will feel familiar, and if you don't, a little JavaScript is enough.
+
+{/* truncate */}
+
+Every example below has a **Code** button, the `<>` icon on a phone. Press it to read the whole file, change a number and watch the scene run again.
+
+The snippets in the post build one small scene as you go. Paste them into one file in order, and by the end you'll have a scene of your own.
+
+---
+
+## A stage with depth
+
+A position in 2D is two numbers, x and y. 3D adds one more number, z.
+
+In PixiJS 3D, x points right, y points up and z points out of the screen, towards you. If you know PixiJS 2D, y now points up instead of down. `0, 0, 0` is the middle of the world, called the origin.
+
+Sizes are in units, not pixels, and one unit is meant to be one metre. That's why the numbers in this post are small. A ball with a radius of 0.5 is a metre across.
+
+Here are the three axes, x in red, y in green and z in blue. Each shape slides along one of them, because only one of its three numbers changes. Drag to swing round and see the depth:
+
+<PixiExample name="101_space" pkg="3d" />
+
+A 3D scene lives in a `View3D`. Think of it as a window onto a 3D world. To PixiJS, the window is one more thing to draw, so it goes on the stage like a sprite, and your 2D can sit in front of it or behind it.
+
+Install PixiJS 3D next to `pixi.js`:
+
+```bash
+npm install pixi.js @pixi/3d
+```
+
+Then make an app and put a view on its stage:
+
+```js
+import { View3D } from '@pixi/3d';
+import { Application } from 'pixi.js';
+
+const app = new Application();
+
+await app.init({
+  preference: 'webgpu',
+  background: 0x1a1a2e,
+  resizeTo: window,
+  antialias: true,
+});
+document.body.appendChild(app.canvas);
+
+// autoResize keeps the view the same size as the screen
+const view3d = new View3D({ autoResize: true });
+
+app.stage.addChild(view3d);
+```
+
+`preference: 'webgpu'` draws with WebGPU, the newer way for a browser to use the graphics card, and with WebGL2 where a browser doesn't have it. Everything in the 3D scene goes under `view3d.root`, the way 2D things go under `app.stage`. The view is empty for now, so it draws nothing.
+
+---
+
+## Everything is triangles
+
+Every shape in a 3D scene is made of triangles.
+
+It starts with a point. A point in 3D is called a vertex (plural vertices), and it's three numbers: x, y and z. Join three vertices and you have a triangle, the smallest flat surface there is. Put enough triangles side by side and you can make any shape. A cube takes 12 triangles. A smooth ball takes about a thousand, each small enough that you never see its corners.
+
+The list of vertices and the triangles that join them is called a geometry. A geometry is only the shape. It has no colour and no shine.
+
+Here's one ball shown three ways: its vertices as points, its triangles as lines, and solid. It has only 80 triangles, so you can still see the corners on the solid one. Drag to turn it:
+
+<PixiExample name="101_triangles" pkg="3d" />
+
+You'll rarely write vertices by hand. PixiJS 3D builds the common shapes for you, and artists' tools build the rest.
+
+---
+
+## A shape plus a surface
+
+A geometry says what shape a thing is. A material says what it's made of: its colour, and how it takes the light, like clay, plastic or metal. Put the two together and you have a mesh, the thing you add to the scene. If a sprite is a texture on a rectangle, a mesh is a material on any shape.
+
+PixiJS 3D builds nine common shapes for you, such as a cube, a sphere, a cone and a ring called a torus. Here are all nine, each made into a mesh with a clay material. Drag to look round them:
+
+<PixiExample name="101_shapes" pkg="3d" />
+
+This makes a pink ball and adds it to the scene:
+
+```js
+import { Material3D, Mesh3D, SphereGeometry } from '@pixi/3d';
+
+const ball = new Mesh3D({
+  geometry: new SphereGeometry({ radius: 0.5 }),
+  material: new Material3D({ baseColor: 0xe91e63 }),
+});
+
+view3d.root.addChild(ball);
+```
+
+`Material3D` is the material you'll use for nearly everything. Give it only a colour and it's fully rough, like chalk.
+
+If you're pasting along, you won't see the ball yet. The camera starts at the origin, right where the ball is, and there's no light. Both arrive in a few sections.
+
+---
+
+## Move, turn, scale
+
+Everything in a 3D scene has a `position`, a `rotation` and a `scale`, the same as a PixiJS container. Each of them now has a z.
+
+`rotation` holds a turn around each axis. Turning around y spins it like a top, and turning around x tips it forwards or back. Rotations are in radians, where `Math.PI` is half a turn. If you'd rather think in degrees, `angle` takes the same turns in degrees. `ball.scale.set(2)` makes the ball twice as big in every direction.
+
+Objects also nest like containers. Move, turn or scale a parent and its children move, turn and scale with it. Here's a tiny solar system built only from parents and turns. A planet circles a star, and a moon circles the planet. Drag to look at it from above:
+
+<PixiExample name="101_transforms" pkg="3d" />
+
+This lifts the ball so its bottom sits at y = 0, where a floor goes later, and gives it a moon. The moon sits one unit out from `spinner`, a `Container3D` that works like a PixiJS container and draws nothing itself. Turning the spinner carries the moon round:
+
+```js
+import { Container3D } from '@pixi/3d';
+
+ball.position.y = 0.5; // lift it by its radius, so its bottom sits at y = 0
+
+const spinner = new Container3D();
+const moon = new Mesh3D({
+  geometry: new SphereGeometry({ radius: 0.12 }),
+  material: new Material3D({ baseColor: 0xdddddd }),
+});
+
+moon.position.x = 1;
+spinner.addChild(moon);
+ball.addChild(spinner);
+
+app.ticker.add((ticker) => {
+  // One radian a second, whatever the frame rate
+  spinner.rotation.y += ticker.deltaMS / 1000;
+});
+```
+
+`app.ticker` runs the function every frame, as in 2D. The moon's own position never changes. It goes round because its parent turns.
+
+---
+
+## The camera
+
+The camera takes the picture of a 3D scene, the way you take a photo. Where you stand, where you point and how wide your lens is all change the picture, while the scene stays as it is.
+
+Every view comes with a camera, `view3d.camera`. It starts at the origin, looking into the screen, so the first thing to do is move it back. Like your eyes, it draws far things smaller than near ones, and that's a big part of why the picture looks 3D.
+
+Its `fov`, or field of view, is how much it sees from the bottom of the picture to the top, in degrees. The default is 60. A smaller number zooms in like a long lens, and a bigger one fits more in like a wide-angle lens.
+
+`OrbitCamera`, from `@pixi/3d/extras`, swings the camera round a point as you drag. The examples above all use one. When you dragged them, you were moving the camera, not the shapes.
+
+```js
+import { OrbitCamera } from '@pixi/3d/extras';
+
+view3d.camera.position.set(0, 2, 5); // up a little, and back towards you
+view3d.camera.fov = 50;
+
+// Point the camera at the ball, and let a drag swing it round
+new OrbitCamera({ view: view3d, target: { x: 0, y: 0.5, z: 0 } });
+```
+
+Without an `OrbitCamera`, `view3d.camera.lookAt(ball.position)` turns the camera to face the ball once.
+
+---
+
+## Light
+
+Light is what shows you a shape. With no light at all, a `Material3D` draws black. Light a ball equally from every side and it looks like a flat disc. Light it from one side and that side is bright while the far side is dark. That change across the surface is how your eye reads its form.
+
+To shade each point, the engine needs to know which way the surface faces at that point. That direction is called the normal. A surface facing the light is bright, and one turned away is dark. The built-in shapes and most model files bring their own normals, so you never write them yourself.
+
+Move your pointer over this dim scene, or tap it, and one small light follows. Until you do, the light drifts on its own. Watch the shapes take form wherever it shines, and go flat where it doesn't:
+
+<PixiExample name="101_light" pkg="3d" />
+
+Lights are objects in the scene, like meshes. The three main kinds are:
+
+- A `DirectionalLight` shines one way everywhere, like the sun.
+- A `PointLight` shines in every direction from one point, like a bulb.
+- A `SpotLight` shines in a cone from one point, like a torch.
+
+Light from all round comes from the view instead. Its `environment` lights surfaces facing up with a sky colour and those facing down with a ground colour, which fills in the sides a sun misses. Most scenes want one sun and an environment:
+
+```js
+import { DirectionalLight } from '@pixi/3d';
+
+// A warm sun, up and to the left, aimed at the middle of the scene
+const sun = new DirectionalLight({ color: 0xfff4e0, intensity: 3 });
+
+sun.position.set(-3, 5, 2);
+view3d.root.addChild(sun);
+sun.lookAt({ x: 0, y: 0, z: 0 });
+
+// Soft light from all round: the sky colour from above, the ground colour from below
+view3d.environment = { skyColor: 0xc9d6ff, groundColor: 0x3a2f45, intensity: 0.6 };
+```
+
+A sun shines the same way on everything in the scene, so only the way it points matters. Its position gives `lookAt` a place to aim from, so after you move a sun, call `lookAt` again. If you've been pasting along, this is where your scene lights up.
+
+---
+
+## Shadows
+
+Shadows tell you where things are. Without one, a ball over a floor could be resting on it or floating a metre above it, and your eye can't tell which. A shadow pins it to the ground.
+
+In PixiJS 3D a shadow is one option on the light. Set `castShadow` on a `DirectionalLight` or a `SpotLight`, and the meshes in the scene cast shadows and catch them. Point lights don't cast shadows.
+
+Here a sun slowly circles a few shapes on a floor, and their shadows sweep round with it. Drag to look from another side:
+
+<PixiExample name="101_shadows" pkg="3d" />
+
+This turns on the sun's shadows and gives the ball a floor to cast them on:
+
+```js
+import { PlaneGeometry } from '@pixi/3d';
+
+sun.castShadow = true;
+
+const floor = new Mesh3D({
+  geometry: new PlaneGeometry({ width: 6, height: 6 }),
+  material: new Material3D({ baseColor: 0x8a8fa8 }),
+  castShadow: false, // the floor only catches shadows
+});
+
+// A plane stands upright like a wall, so a quarter turn lays it flat
+floor.rotation.x = -Math.PI / 2;
+view3d.root.addChild(floor);
+```
+
+The floor only needs to catch shadows, so it turns `castShadow` off. The sun has a fixed amount of shadow detail to share between every mesh that casts a shadow. Leaving the big floor out keeps that detail on the ball and the moon, so their shadows stay sharp.
+
+---
+
+## Materials
+
+The ball so far is matte, like chalk. A material can also be plastic, rubber, metal or chrome, and on a `Material3D` that comes down to a colour and two numbers:
+
+- `roughness` runs from 0, a mirror finish, to 1, fully rough. A smooth surface shows sharp reflections and small, bright highlights, and a rough one spreads them out. It starts at 1, which is why a colour on its own looks like chalk.
+- `metallic` is 0 for anything that isn't metal, such as plastic, wood or stone, and 1 for metal. A metal reflects strongly and tints its reflections with its colour, so gold is a metal with a gold colour.
+
+A metal mostly shows what's around it, so it looks best with an environment to reflect, like the one you added in the Light section.
+
+Every sphere here is the same shape and colour with a different pair of numbers, and they all reflect a photo of a sunset, clearest in the smooth metal ones at the top left. Roughness rises from left to right. The bottom row has `metallic` 0, like plastic, and the top row has `metallic` 1, a metal. Drag to watch the reflections move:
+
+<PixiExample name="101_materials" pkg="3d" />
+
+Swap the ball's material and it's made of something else:
+
+```js
+const plastic = new Material3D({ baseColor: 0xe91e63, roughness: 0.3 });
+const rubber = new Material3D({ baseColor: 0x333333, roughness: 0.9 });
+const chrome = new Material3D({ baseColor: 0xffffff, metallic: 1, roughness: 0.05 });
+const gold = new Material3D({ baseColor: 0xffc356, metallic: 1, roughness: 0.25 });
+
+ball.material = gold; // the same ball, now made of gold; try the other three too
+```
+
+---
+
+## Models
+
+Nobody builds a character out of cubes. Artists make models in tools such as Blender and export them as glTF, an open file format for 3D models. A glTF file, `.gltf` or `.glb`, holds the meshes, their materials and often animations too.
+
+Here's a toy truck an artist made, loaded from a glTF file and turning on a stage. Drag to look at it from any side:
+
+<PixiExample name="101_model" pkg="3d" />
+
+PixiJS 3D loads glTF through `Assets`, the PixiJS loader you'd use for an image. Load the file, build a `Model3D` from it, and add it to the scene. This one loads a fox instead of the truck, because the fox comes with animations to play:
+
+```js
+import { Model3D } from '@pixi/3d';
+import { Assets } from 'pixi.js';
+
+// Fox by PixelMannen (CC0), rigging and animation by tomkranis (CC BY 4.0),
+// glTF conversion by @AsoboStudio and @scurest (CC BY 4.0)
+const source = await Assets.load(
+  'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Assets@edc7c9e67c639d230715049ee31f9a96a6babbbe/Models/Fox/glTF-Binary/Fox.glb',
+);
+const fox = new Model3D({ source, autoPlay: 'Survey' });
+
+// The file is about 80 units tall, and this makes it 0.8
+fox.scale.set(0.8 / fox.height);
+fox.position.x = 1.6;
+view3d.root.addChild(fox);
+```
+
+A model keeps the size it was made at, so measure it before you place it. `autoPlay` starts one of the animations that came in the file, here the one called `Survey`.
+
+When a model is the whole scene, there's a shortcut. `View3D.from` builds a view around the model, with a camera placed to fit it in and a light on it:
+
+```js
+const viewer = View3D.from(source, { autoResize: true });
+
+app.stage.addChild(viewer);
+```
+
+That's all it takes to show a model. If you're pasting along, skip this one, because your scene already has a view.
+
+---
+
+## Put it together
+
+That's every idea, and this little island uses all of them at once. The ground, the pines and the cabin are shapes with materials. A low sun gives them shadows. The truck from the last section drives laps because its parent turns. Its whole source is behind the **Code** button. Drag to look round it:
+
+<PixiExample name="101_scene" pkg="3d" />
+
+If you pasted the snippets in order, you have a smaller one of your own: a gold ball with a moon going round it, a fox beside it, a sun and its shadows, and a camera you can drag.
+
+---
+
+## Where next
+
+You know what a 3D scene is made of now. Here's where to take it:
+
+- The [quick start](/3d/guides/getting-started/quick-start) builds a scene a lot like yours, one step at a time.
+- The [tutorials](/3d/tutorials) build bigger projects in a live editor: [floating shapes](/3d/tutorials/floating-shapes), a [model showroom](/3d/tutorials/model-showroom) and a [shooting gallery](/3d/tutorials/shooting-gallery).
+- The [examples gallery](/3d/examples) has over 100 live scenes, each with its source.
+
+Each idea in this post has a guide of its own with the details we skipped: [scene graph and transforms](/3d/guides/concepts/scene-graph), [geometry](/3d/guides/components/scene-objects/meshes/geometry), [cameras](/3d/guides/components/scene-objects/cameras), [camera controls](/3d/guides/components/scene-objects/cameras/controls), [lights](/3d/guides/components/scene-objects/lights), [shadows](/3d/guides/components/scene-objects/lights/shadows), [materials](/3d/guides/components/materials) and [models](/3d/guides/components/models).
+
+A `View3D` also sits on the same stage as your 2D, so you can put a spinning 3D trophy in a 2D menu or a 2D score over a 3D game. The [launch post](/blog/pixi-3d-open-beta) shows how far the two mix.
+
+If you build with a coding agent, the `pixijs-3d` skill teaches it PixiJS 3D. It also lists the mistakes that throw no error but draw the wrong picture. One command installs it with the other PixiJS skills:
+
+```bash
+npx skills add https://github.com/pixijs/pixijs-skills
+```
+
+Now go and put something in 3D, and show us what you make.
+
+- Share your first scene, or ask anything, on [Discord](https://discord.gg/QrnxmQUPGV)
+- [Submit your project to the Showcase](https://pixijs.com/showcase)
+- Follow us on [Twitter](https://x.com/PixiJS) / [Bluesky](https://bsky.app/profile/pixijs.com)
+- [Sponsor PixiJS](https://pixijs.com/sponsor)
+
+---
+
+## Thank you to our sponsors
+
+PixiJS is made possible by our sponsors. A special thanks to our Silver tier and above supporters; you can [join them](https://pixijs.com/sponsor) and keep the engine moving.
+
+<BlogSponsors />
+
+<br />
+
+Happy creating!
+
+**The PixiJS Team**
