@@ -247,11 +247,6 @@ export const LIBRARIES: Record<PackageId, Library> = {
           patches: [
             ["import { GraphDebugOverlay } from '@pixi/3d/extras';\n", ''],
             ['new GraphDebugOverlay({ view: () => view3d, renderer: app.renderer });\n\n', ''],
-            // Firefox throws from getGamepads() in the editor's sandboxed frame, which stops the game
-            [
-              'navigator.getGamepads ? navigator.getGamepads() : []',
-              "navigator.getGamepads && !navigator.userAgent.includes('Firefox') ? navigator.getGamepads() : []",
-            ],
           ],
         },
       },

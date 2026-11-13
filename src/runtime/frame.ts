@@ -3,8 +3,11 @@ import type { Imports } from './registry';
 /** `sandbox` for runner frames: no `allow-same-origin`, so user code can't reach the site's storage or DOM */
 export const FRAME_SANDBOX = 'allow-scripts allow-pointer-lock allow-popups allow-modals allow-downloads';
 
-/** `allow` for runner frames */
-export const FRAME_ALLOW = 'fullscreen; gamepad; xr-spatial-tracking; accelerometer; gyroscope; clipboard-write';
+/**
+ * `allow` for runner frames. `gamepad` needs its `*`: without one it means the frame's `src` origin, which Firefox and
+ * Safari don't match to a sandboxed frame, so `getGamepads()` throws there.
+ */
+export const FRAME_ALLOW = 'fullscreen; gamepad *; xr-spatial-tracking; accelerometer; gyroscope; clipboard-write';
 
 export type Renderer = 'webgl' | 'webgpu';
 export type ConsoleLevel = 'log' | 'info' | 'warn' | 'error' | 'debug';
