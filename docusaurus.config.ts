@@ -1,5 +1,7 @@
-import { Config } from '@docusaurus/types';
+import { Config, RouteConfig } from '@docusaurus/types';
 import type { ProcessBlogPostsFn } from '@docusaurus/plugin-content-blog';
+import type { Options as SitemapOptions } from '@docusaurus/plugin-sitemap';
+import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { LIBRARIES } from './scripts/libraries.mts';
@@ -11,6 +13,19 @@ const readManifest = (name: string): { version: string } =>
 const pixiVersion = readManifest('pixi.js').version;
 const pixi3dVersion = readManifest('@pixi/3d').version;
 const pixi3dApi = LIBRARIES['3d'].api(pixi3dVersion);
+
+// Generated pages aren't tracked, and git dates a path it once held by the commit that removed it. Marking them as
+// having no date keeps a stale `lastmod` out of the sitemap.
+const withoutUntrackedDates = (routes: RouteConfig[], tracked: Set<string>): RouteConfig[] =>
+  routes.map((route) => {
+    const source = route.metadata?.sourceFilePath;
+
+    return {
+      ...route,
+      routes: route.routes && withoutUntrackedDates(route.routes, tracked),
+      metadata: source && !tracked.has(source) ? { ...route.metadata, lastUpdatedAt: null } : route.metadata,
+    };
+  });
 
 const config: Config = {
   title: 'PixiJS',
@@ -97,6 +112,9 @@ const config: Config = {
 
   future: {
     v4: true,
+    // `v4` switches to the eager git reader, which keys files by absolute path; the sitemap plugin looks them up by
+    // relative path, so every `lastmod` comes back empty (Docusaurus 3.10.2).
+    experimental_vcs: 'default-v1',
     faster: {
       rspackBundler: true, // required flag
       rspackPersistentCache: true, // new flag
@@ -151,6 +169,12 @@ const config: Config = {
         },
         sitemap: {
           ignorePatterns: ['/styleguide'],
+          lastmod: 'date',
+          createSitemapItems: (({ defaultCreateSitemapItems, routes, ...params }) => {
+            const tracked = new Set(execSync('git ls-files', { cwd: __dirname, encoding: 'utf8' }).split('\n'));
+
+            return defaultCreateSitemapItems({ ...params, routes: withoutUntrackedDates(routes, tracked) });
+          }) satisfies SitemapOptions['createSitemapItems'],
         },
       },
     ],
