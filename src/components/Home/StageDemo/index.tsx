@@ -4,7 +4,7 @@ import useIsomorphicLayoutEffect from '@docusaurus/useIsomorphicLayoutEffect';
 import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
 import { useEffect, useRef, useState } from 'react';
 import { gsap, useGSAP } from '../../../motion/gsap';
-import { motionAllowed, onMotionPause } from '../../../motion/pause';
+import { motionAllowed } from '../../../motion/reducedMotion';
 import Icon from '../../ui/Icon';
 import SectionHead from '../../ui/SectionHead';
 import Tag from '../../ui/Tag';
@@ -176,7 +176,6 @@ export default function StageDemo({
     onScreen.observe(el);
     document.addEventListener('visibilitychange', sync);
     reduced.addEventListener('change', onMotion);
-    const offPause = onMotionPause(onMotion);
 
     return () => {
       disposed = true;
@@ -184,7 +183,6 @@ export default function StageDemo({
       onScreen.disconnect();
       document.removeEventListener('visibilitychange', sync);
       reduced.removeEventListener('change', onMotion);
-      offPause();
       instance?.destroy();
       live.current = null;
     };

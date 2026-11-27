@@ -7,7 +7,7 @@ import MagneticButton from '@site/src/components/Home/MagneticButton';
 import Icon from '@site/src/components/ui/Icon';
 import SectionHead from '@site/src/components/ui/SectionHead';
 import { DISCORD } from '@site/src/data/navigation';
-import { motionAllowed } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import { EASE, gsap } from '@site/src/motion/gsap';
 import { useMotion } from '@site/src/motion/useMotion';
 import styles from './Branding.module.scss';
@@ -234,8 +234,7 @@ function CopyValue({ label, value }: { label: string; value: string }) {
 function Swatches() {
   const root = useRef<HTMLUListElement>(null);
 
-  useMotion(root, (list, { paused }) => {
-    if (paused) return;
+  useMotion(root, (list) => {
     gsap.from(gsap.utils.toArray(`.${styles.chip}`, list), {
       clipPath: 'inset(100% 0% 0% 0% round 14px)',
       duration: 0.9,

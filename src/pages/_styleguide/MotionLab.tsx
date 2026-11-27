@@ -4,12 +4,10 @@ import Button from '@site/src/components/ui/Button';
 import Card from '@site/src/components/ui/Card';
 import SectionHead from '@site/src/components/ui/SectionHead';
 import { gsap } from '@site/src/motion/gsap';
-import PauseMotionButton from '@site/src/motion/PauseMotionButton';
 import { useClayField } from '@site/src/motion/useClayField';
 import { useHeadlineWave } from '@site/src/motion/useHeadlineWave';
 import { useMagnetic } from '@site/src/motion/useMagnetic';
 import { useMarquee } from '@site/src/motion/useMarquee';
-import { usePauseMotion } from '@site/src/motion/usePauseMotion';
 import { useReveal } from '@site/src/motion/useReveal';
 import { useSplitTitle } from '@site/src/motion/useSplitTitle';
 import Blob from './Blob';
@@ -196,20 +194,6 @@ function ShineDemo() {
   );
 }
 
-function PauseDemo() {
-  const [paused] = usePauseMotion();
-
-  return (
-    <div className={styles.pause}>
-      <PauseMotionButton />
-      <p className={styles.demoText}>
-        {paused ? 'Paused: loops and scrubs stop, entrances finish at once.' : 'Running.'}
-      </p>
-      <p className={styles.readout}>localStorage[&apos;pixi:motion&apos;]</p>
-    </div>
-  );
-}
-
 export default function MotionLab() {
   return (
     <div className={styles.lab}>
@@ -249,14 +233,6 @@ export default function MotionLab() {
         replay={false}
       >
         {() => <ShineDemo />}
-      </Demo>
-      <Demo
-        hook="usePauseMotion"
-        spec="§7.3 rule 9"
-        replay={false}
-        description="The global Pause motion control (WCAG 2.2.2), shared by CSS, GSAP and the WebGL tickers."
-      >
-        {() => <PauseDemo />}
       </Demo>
       <Demo
         hook="useMarquee"

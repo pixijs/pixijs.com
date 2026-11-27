@@ -34,7 +34,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion='paused']) .px-versions-timeline {
+  .px-versions-timeline {
     &::before {
       animation: px-versions-draw 1.2s 0.35s var(--px-ease-in-out) backwards;
     }

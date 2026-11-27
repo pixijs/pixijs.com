@@ -28,7 +28,7 @@ export interface SceneOptions {
   theme: StageTheme;
   /** Tab to show first, without a transition */
   tab?: string;
-  /** Off: no ticker, a still pose and a render only when something changes (reduced motion, Pause motion, posters) */
+  /** Off: no ticker, a still pose and a render only when something changes (reduced motion, posters) */
   motion?: boolean;
   /** The in-canvas HUD; posters leave it out because it reports live numbers */
   hud?: boolean;

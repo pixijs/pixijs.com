@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { motionAllowed } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import { useReveal } from '@site/src/motion/useReveal';
 import { useSplitTitle } from '@site/src/motion/useSplitTitle';
 

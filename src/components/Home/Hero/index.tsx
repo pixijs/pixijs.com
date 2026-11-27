@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import { useRef } from 'react';
 import { ButtonRow } from '@site/src/components/ui/Button';
 import WaveDivider from '@site/src/components/ui/WaveDivider';
-import PauseMotionButton from '@site/src/motion/PauseMotionButton';
 import { useHeadlineWave } from '@site/src/motion/useHeadlineWave';
 import styles, { HERO_CSS } from './styles';
 import HeroField from './HeroField';
@@ -36,7 +35,7 @@ interface HeroProps {
 
 /**
  * The homepage hero (section 8.1): the clay field with its poster, the copy the field keeps clear of line by
- * line, the Pause motion control and the drifting wave into the next band. Motion: the headline wave (M1/M2),
+ * line, and the drifting wave into the next band. Motion: the headline wave (M1/M2),
  * the squiggle wiping in (CSS, so it's hidden from the first paint) and the scroll-out (M16).
  */
 export default function Hero({ logo, title, lede, actions, chips, next = 'bg-alt', field, mirror }: HeroProps) {
@@ -67,7 +66,6 @@ export default function Hero({ logo, title, lede, actions, chips, next = 'bg-alt
           {chips && <div className={styles.chips}>{chips}</div>}
         </div>
       </div>
-      <PauseMotionButton glass className={styles.pause} />
       <WaveDivider from="hero" to={next} variant="drift" className={styles.wave} />
     </section>
   );

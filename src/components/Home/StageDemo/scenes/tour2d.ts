@@ -15,7 +15,7 @@ type Tab = 'sprites' | 'graphics' | 'text' | 'filters';
 
 const TABS: Tab[] = ['sprites', 'graphics', 'text', 'filters'];
 const CUT_SECONDS = 0.35;
-/** Scene time of the still pose: what posters, reduced motion and Pause motion show */
+/** Scene time of the still pose: what posters and reduced motion show */
 const STILL_TIME = 1.4;
 const INK: Record<StageTheme, number> = { dark: 0xffffff, light: 0x16131f };
 /** The cuts keep to the middle of the 1280×960 design, so a square card can crop the rest and show them larger */

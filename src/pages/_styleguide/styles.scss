@@ -235,13 +235,6 @@
   margin-top: 32px;
 }
 
-.sg-heroPause {
-  position: absolute;
-  z-index: var(--px-z-content);
-  right: 12px;
-  bottom: 16px;
-}
-
 .sg-jump {
   display: flex;
   flex-wrap: wrap;
@@ -1415,17 +1408,12 @@
   @include mono-label;
 }
 
-.sg-shine,
-.sg-pause {
+.sg-shine {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   text-align: center;
-}
-
-.sg-pause {
-  gap: 12px;
 }
 
 /* ---------- side by side ---------- */

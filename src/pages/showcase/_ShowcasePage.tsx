@@ -12,7 +12,7 @@ import Button from '@site/src/components/ui/Button';
 import Icon from '@site/src/components/ui/Icon';
 import { showcaseItems } from '@site/src/data/showcase';
 import { EASE, gsap, ScrollTrigger } from '@site/src/motion/gsap';
-import { motionAllowed } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import { useClayField } from '@site/src/motion/useClayField';
 import ShowcaseWall from './_ShowcaseWall';
 

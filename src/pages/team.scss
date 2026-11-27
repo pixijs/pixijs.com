@@ -11,12 +11,6 @@ $overlap: clamp(72px, 9cqi, 128px);
     z-index: calc(var(--px-z-content) + 1);
   }
 
-  /* The cards fill the header's foot, so the Pause motion control sits top right, as on phones */
-  > .px-page-corner {
-    top: calc(var(--px-topbar-h) + 8px);
-    bottom: auto;
-  }
-
   /* The cards reach into the band below, so the clay keeps to the intro on phones too */
   .px-page-intro {
     position: relative;
@@ -78,7 +72,7 @@ $overlap: clamp(72px, 9cqi, 128px);
  * cards are hidden from the first paint until their turn
  */
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion='paused']) .px-team-crew > li {
+  .px-team-crew > li {
     animation: px-team-rise 0.9s calc(0.2s + var(--i) * 0.09s) var(--px-ease) backwards;
 
     [data-ring] {

@@ -2,8 +2,7 @@ import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import { ButtonRow } from '@site/src/components/ui/Button';
 import WaveDivider from '@site/src/components/ui/WaveDivider';
-import { motionAllowed, onMotionPause } from '@site/src/motion/pause';
-import PauseMotionButton from '@site/src/motion/PauseMotionButton';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import { useHeadlineWave } from '@site/src/motion/useHeadlineWave';
 import { savingData } from '../Hero/liveCanvas';
 import { Logo } from '../Hero/Logo';
@@ -26,7 +25,7 @@ const SCENE = '/header/index.html';
 /**
  * The `/2d` hero: production pixijs.com's header, the Nebulon scene of clouds and a nebula blob, under the PixiJS
  * logo. The frame loads once the page is idle and fades in on its poster; the scene itself only starts while the
- * hero is on screen and motion is allowed, so reduced motion, Save-Data and Pause motion keep the poster still.
+ * hero is on screen and motion is allowed, so reduced motion and Save-Data keep the poster still.
  * A fine pointer steers the blob. Motion: the logo's jelly, the headline wave (M1/M2) and the scroll-out (M16).
  */
 export default function NebulonHero({ title, actions, chips }: NebulonHeroProps) {
@@ -118,7 +117,6 @@ export default function NebulonHero({ title, actions, chips }: NebulonHeroProps)
       onScreen = entry.isIntersecting;
       sync();
     });
-    const stopPause = onMotionPause(sync);
 
     visibility.observe(root);
     reduced.addEventListener('change', sync);
@@ -127,7 +125,6 @@ export default function NebulonHero({ title, actions, chips }: NebulonHeroProps)
 
     return () => {
       visibility.disconnect();
-      stopPause();
       reduced.removeEventListener('change', sync);
       document.removeEventListener('visibilitychange', sync);
       root.removeEventListener('pointermove', point);
@@ -167,7 +164,6 @@ export default function NebulonHero({ title, actions, chips }: NebulonHeroProps)
           {chips && <div className={styles.chips}>{chips}</div>}
         </div>
       </div>
-      <PauseMotionButton glass className={clsx(styles.pause, 'px-on-dark')} />
       <WaveDivider from="hero" to="bg" variant="drift" className={styles.wave} />
     </section>
   );

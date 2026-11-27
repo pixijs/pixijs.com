@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { pageClasses } from '@site/src/components/Page/classes';
 import { showcaseItems } from '@site/src/data/showcase';
-import { motionAllowed, onMotionPause } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 
 import type { CSSProperties, RefObject } from 'react';
 
@@ -18,7 +18,7 @@ const WALL = Array.from({ length: COLUMNS }, (_, column) =>
 
 /**
  * Lights a shot on screen now and then while the wall is in view, and pauses the columns' drift while it isn't.
- * With motion paused or reduced, a few shots stay lit instead.
+ * With reduced motion, a few shots stay lit instead.
  */
 function useHighlight(stage: RefObject<HTMLDivElement | null>) {
   useEffect(() => {
@@ -69,7 +69,6 @@ function useHighlight(stage: RefObject<HTMLDivElement | null>) {
       },
       { rootMargin: '0px 0px -15% 0px' },
     );
-    const offPause = onMotionPause(update);
 
     observer.observe(root);
     shots.forEach((shot) => shotObserver.observe(shot));
@@ -78,7 +77,6 @@ function useHighlight(stage: RefObject<HTMLDivElement | null>) {
     return () => {
       observer.disconnect();
       shotObserver.disconnect();
-      offPause();
       reduced.removeEventListener('change', update);
       clearInterval(interval);
       timers.forEach(clearTimeout);

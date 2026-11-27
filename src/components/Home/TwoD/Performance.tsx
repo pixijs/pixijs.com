@@ -5,7 +5,7 @@ import Card from '@site/src/components/ui/Card';
 import SectionHead from '@site/src/components/ui/SectionHead';
 import Tag from '@site/src/components/ui/Tag';
 import { gsap, ScrollTrigger } from '@site/src/motion/gsap';
-import { motionAllowed, onMotionPause } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import { useMotion } from '@site/src/motion/useMotion';
 import { HEAD } from '../Band';
 import { PERFORMANCE } from '../content/twoD';
@@ -134,7 +134,6 @@ export default function Performance() {
     onScreen.observe(el);
     document.addEventListener('visibilitychange', sync);
     reduced.addEventListener('change', onMotion);
-    const offPause = onMotionPause(onMotion);
 
     return () => {
       disposed = true;
@@ -143,7 +142,6 @@ export default function Performance() {
       onScreen.disconnect();
       document.removeEventListener('visibilitychange', sync);
       reduced.removeEventListener('change', onMotion);
-      offPause();
       live.current?.destroy();
       live.current = null;
     };
@@ -155,8 +153,7 @@ export default function Performance() {
   }, [colorMode]);
 
   // Each number counts up from zero as its card scrolls in
-  useMotion(root, (el, { paused }) => {
-    if (paused) return undefined;
+  useMotion(root, (el) => {
     const values = gsap.utils
       .toArray<HTMLElement>('[data-count]', el)
       .filter((value) => !ScrollTrigger.isInViewport(value, 0.2));

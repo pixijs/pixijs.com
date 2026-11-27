@@ -106,14 +106,14 @@
 
 /*
  * The hero intro (M1): `data-intro` buttons' shadows slide out from under them as the page first paints, the second
- * one a beat later. CSS, so the server-rendered page plays it too, and Pause motion skips it rather than freezing it.
+ * one a beat later. CSS, so the server-rendered page plays it too.
  */
 @media (prefers-reduced-motion: no-preference) {
-  :global(html:not([data-motion='paused'])) .button[data-intro] .body::after {
+  .button[data-intro] .body::after {
     animation: shadow-in 600ms var(--px-ease-spring) 450ms backwards;
   }
 
-  :global(html:not([data-motion='paused'])) .button[data-intro='1'] .body::after {
+  .button[data-intro='1'] .body::after {
     animation-delay: 530ms;
   }
 }

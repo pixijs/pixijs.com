@@ -28,8 +28,8 @@ export default function ClosingCard({ corners, title, titleId, lede, children }:
   const root = useRef<HTMLDivElement>(null);
 
   useClayField(root);
-  useMotion(root, (card, { paused }) => {
-    if (paused || ScrollTrigger.isInViewport(card, 0.1)) return;
+  useMotion(root, (card) => {
+    if (ScrollTrigger.isInViewport(card, 0.1)) return;
     const scrollTrigger = { trigger: card, start: 'top 78%', once: true };
 
     SplitText.create(card.querySelector('h2'), {

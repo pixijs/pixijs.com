@@ -122,21 +122,6 @@ html:has(.hm-nebulon-root[data-sky]) {
   @include elevation.chips(rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.1));
 }
 
-/* Over the drifting clouds, so it carries its own dark glass to stay legible on the brightest of them */
-.hm-nebulon-pause {
-  position: absolute;
-  z-index: var(--px-z-content);
-  right: var(--px-gutter);
-  bottom: calc(clamp(28px, 4cqi, 56px) + 8px);
-  border-color: rgb(255 255 255 / 0.16);
-  background: rgb(6 12 24 / 0.55);
-  color: var(--px-ink);
-
-  &:hover {
-    background: rgb(6 12 24 / 0.75);
-  }
-}
-
 /* The drift wave is twice as wide, so the scroll-out can slide it; the scene shows through above it */
 .hm-nebulon-root .hm-nebulon-wave {
   @include surface.hero-wave;

@@ -9,7 +9,7 @@ import Card from '@site/src/components/ui/Card';
 import Icon from '@site/src/components/ui/Icon';
 import SectionHead from '@site/src/components/ui/SectionHead';
 import Tag from '@site/src/components/ui/Tag';
-import { motionAllowed } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import {
   skillsClaudeInstall,
   skillsCopilotInstall,
@@ -234,8 +234,8 @@ function CodeBlock({ code, title, prefix }: CodeBlockProps) {
 
 /**
  * The install-then-prompt session, typed out once when it scrolls into view, on the seam under the header. Every
- * line is in the markup from the start and only hidden until typed, so the card never changes size; reduced or
- * paused motion shows it complete. Where it will type, CSS hides the lines from the first paint until it starts, so
+ * line is in the markup from the start and only hidden until typed, so the card never changes size; reduced
+ * motion shows it complete. Where it will type, CSS hides the lines from the first paint until it starts, so
  * the whole session never shows and then clears. It stands up as the page opens (CSS, so it moves from the first
  * paint) and leans back again as it scrolls away.
  */

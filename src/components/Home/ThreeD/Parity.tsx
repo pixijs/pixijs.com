@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Card from '@site/src/components/ui/Card';
 import SectionHead from '@site/src/components/ui/SectionHead';
 import Tag from '@site/src/components/ui/Tag';
-import { gsap, ScrollTrigger, settle } from '@site/src/motion/gsap';
+import { gsap, ScrollTrigger } from '@site/src/motion/gsap';
 import { useMotion } from '@site/src/motion/useMotion';
 import { pixiDark } from '@site/src/theme/prism/pixi';
 import { HEAD } from '../Band';
@@ -19,8 +19,7 @@ export default function Parity() {
   const list = useRef<HTMLOListElement>(null);
 
   // Each sample types itself in once, as its card scrolls into view: line after line, each from its left
-  useMotion(list, (root, { paused }) => {
-    if (paused) return;
+  useMotion(list, (root) => {
     for (const sample of gsap.utils.toArray<HTMLElement>('pre', root)) {
       if (ScrollTrigger.isInViewport(sample, 0.1)) continue;
       const lines = gsap.utils
@@ -34,15 +33,13 @@ export default function Parity() {
         once: true,
         onEnter: () =>
           lines.forEach((tokens, i) =>
-            settle(
-              gsap.to(tokens, {
-                duration: 0.3,
-                delay: 0.1 + i * 0.08,
-                ease: 'none',
-                stagger: { amount: 0.12 },
-                scrambleText: { text: '{original}', chars: SCRAMBLE, speed: 0.6 },
-              }),
-            ),
+            gsap.to(tokens, {
+              duration: 0.3,
+              delay: 0.1 + i * 0.08,
+              ease: 'none',
+              stagger: { amount: 0.12 },
+              scrambleText: { text: '{original}', chars: SCRAMBLE, speed: 0.6 },
+            }),
           ),
       });
     }

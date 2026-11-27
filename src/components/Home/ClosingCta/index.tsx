@@ -23,10 +23,10 @@ const TILT = [-6, 5, -9];
 export default function ClosingCta({ lede }: { lede: string }) {
   const root = useRef<HTMLDivElement>(null);
 
-  useMotion(root, (el, { fine, paused }) => {
+  useMotion(root, (el, { fine }) => {
     const shapes = gsap.utils.toArray<HTMLElement>('.clay', el);
 
-    if (!paused && !ScrollTrigger.isInViewport(el, 0.1)) {
+    if (!ScrollTrigger.isInViewport(el, 0.1)) {
       const { words } = SplitText.create(el.querySelector('h2'), { type: 'words', aria: 'auto' });
 
       gsap

@@ -25,11 +25,11 @@ export default function InstallStrip({ install }: { install: string }) {
     return () => window.clearTimeout(timer);
   }, [copied]);
 
-  useMotion(root, (el, { paused }) => {
+  useMotion(root, (el) => {
     const command = el.querySelector('[data-command]');
 
     // The strip's top edge shows under most heroes: only a command that's already in full view is left as it is
-    if (paused || !command || ScrollTrigger.isInViewport(command, 1)) return undefined;
+    if (!command || ScrollTrigger.isInViewport(command, 1)) return undefined;
     command.textContent = '';
     gsap.to(command, {
       duration: 0.9,

@@ -19,7 +19,7 @@ const WAVE = {
  * the page's LCP element, and once split it is dozens of small candidates that lose to the paragraph under it.
  */
 export function useHeadlineWave(target: RefObject<HTMLElement | null>): void {
-  useMotion(target, (headline, { fine, paused, safe }) => {
+  useMotion(target, (headline, { fine, safe }) => {
     let frame = 0;
     let live = true;
     let replay: (() => void) | undefined;
@@ -49,7 +49,7 @@ export function useHeadlineWave(target: RefObject<HTMLElement | null>): void {
 
         return timeline;
       };
-      let current = paused ? undefined : wave(0.15);
+      let current = wave(0.15);
 
       if (!fine) return;
       replay = safe(() => {

@@ -11,7 +11,6 @@ import { ButtonRow } from '@site/src/components/ui/Button';
 import Card from '@site/src/components/ui/Card';
 import ClayShape from '@site/src/components/ui/Clay';
 import WaveDivider from '@site/src/components/ui/WaveDivider';
-import PauseMotionButton from '@site/src/motion/PauseMotionButton';
 import styles, { STYLESHEET } from './classes';
 
 import type { CardCorner } from '@site/src/components/ui/Card';
@@ -71,10 +70,7 @@ export interface PageHeaderProps {
   next?: BandSurface;
   /** Two clay shapes framing the copy: the first above its top left, the second below its bottom right */
   clay: [ClayShapeName, ClayShapeName];
-  /**
-   * `useClayField` on `ref` drives the shapes (GSAP pages), and the Pause motion control sits in the corner;
-   * otherwise they pop in once with CSS
-   */
+  /** `useClayField` on `ref` drives the shapes (GSAP pages); otherwise they pop in once with CSS */
   live?: boolean;
   /** In place of the blob backdrop, such as the showcase's wall */
   backdrop?: ReactNode;
@@ -123,11 +119,6 @@ export function PageHeader({
         </div>
         {children}
       </div>
-      {live && (
-        <div className={styles.corner}>
-          <PauseMotionButton glass />
-        </div>
-      )}
       {next && <WaveDivider from="hero" to={next} variant="drift" className={styles.headerWave} />}
     </header>
   );

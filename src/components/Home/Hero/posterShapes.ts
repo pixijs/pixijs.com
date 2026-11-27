@@ -41,7 +41,7 @@ export interface PosterShape {
   mid?: PosterSpot;
   compact?: PosterSpot;
   narrow?: PosterSpot;
-  /** Its `narrow` spot needs a phone at least 800 px tall: above the copy, or above the Pause motion control */
+  /** Its `narrow` spot needs a phone at least 800 px tall, above the copy */
   narrowTall?: boolean;
   /**
    * Its `compact` spot on a screen under 1000 px tall, where the room above and below the copy is too shallow for the
@@ -58,7 +58,7 @@ export interface PosterShape {
  * The hero's shapes (section 8.1), on `/` and on `/3d` with its logo and install chip: a few, close in size, as the
  * original 3D demo had them (about 5.5 to 11 hundredths of the frame; 8 to 14 on phones), bleeding off the frame,
  * sunk into the wave and scattered round the copy, with three voxel bunnies among them. Each band is composed round its own
- * copy, the nav pill, the GitHub button and the Pause motion control, at the shortest the hero gets. The server draws
+ * copy, the nav pill and the GitHub button, at the shortest the hero gets. The server draws
  * them, and the live field picks up every one where it stands.
  */
 export const POSTER_SHAPES: PosterShape[] = [
@@ -201,7 +201,7 @@ export const POSTER_SHAPES: PosterShape[] = [
 
 /**
  * A shape on a mirrored hero, the composition `/3d` stands the other way round from `/`'s: from 720 px of content each
- * spot is turned left for right, or swapped for its `flip` one. Phones keep theirs, as the Pause motion control does.
+ * spot is turned left for right, or swapped for its `flip` one. Phones keep theirs.
  */
 export function mirrored(shape: PosterShape): PosterShape {
   const turned: PosterShape = { ...shape };

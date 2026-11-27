@@ -1,5 +1,4 @@
-import { applyMotionPause, gsap, MQ, useGSAP } from './gsap';
-import { isMotionPaused } from './pause';
+import { gsap, MQ, useGSAP } from './gsap';
 
 import type { RefObject } from 'react';
 
@@ -8,8 +7,6 @@ export interface MotionEnv {
   fine: boolean;
   /** Docked-rail widths (≥ 997 px) */
   wide: boolean;
-  /** Motion was paused when the branch was set up: skip entrances and leave content in its final state */
-  paused: boolean;
   /** Wraps an event handler so the tweens it makes are reverted with the branch */
   safe: <T extends (...args: never[]) => unknown>(handler: T) => T;
 }
@@ -34,13 +31,8 @@ export function useMotion<T extends Element>(
         const { motion, fine, wide } = context.conditions ?? {};
 
         if (!motion) return undefined;
-        const paused = isMotionPaused();
         const safe = (contextSafe ?? ((handler) => handler)) as MotionEnv['safe'];
-        const cleanup = setup(root, { fine: !!fine, wide: !!wide, paused, safe });
-
-        if (paused) applyMotionPause(true);
-
-        return cleanup;
+        return setup(root, { fine: !!fine, wide: !!wide, safe });
       });
 
       return () => mm.revert();

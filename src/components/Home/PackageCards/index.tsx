@@ -156,10 +156,10 @@ export default function PackageCards() {
   const root = useRef<HTMLDivElement>(null);
   const packages = usePackages();
 
-  useMotion(root, (el, { fine, paused, safe }) => {
+  useMotion(root, (el, { fine, safe }) => {
     const cards = gsap.utils.toArray<HTMLElement>('[data-pkg-card]', el);
 
-    if (!paused && !ScrollTrigger.isInViewport(el, 0.1)) {
+    if (!ScrollTrigger.isInViewport(el, 0.1)) {
       gsap.from(cards, {
         y: 48,
         scale: 0.98,

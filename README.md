@@ -21,21 +21,21 @@ The site will be available at `http://localhost:3000`. The first run clones pixi
 
 ## Available Scripts
 
-| Script | Description |
-| --- | --- |
-| `npm start` | Generate PixiJS content and tutorials, then start the local dev server |
-| `npm run build` | Production build (runs `npm run generate` first) |
-| `npm run serve` | Serve the production build locally |
-| `npm run generate` | Generate PixiJS content and tutorials |
-| `npm run generate:pixi` | Generate the v8 guides, examples, guides sidebar and `llms.txt` from `.repos/pixijs` |
-| `npm run generate:pixi-3d` | Generate the 3D guides, examples, tutorials and `/3d/llms.txt` from `.repos/pixi-3d` |
-| `npm run generate:runtime` | Write the editor's import map and the files it serves into `static-runtime/` |
+| Script                              | Description                                                                                                                     |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `npm start`                         | Generate PixiJS content and tutorials, then start the local dev server                                                          |
+| `npm run build`                     | Production build (runs `npm run generate` first)                                                                                |
+| `npm run serve`                     | Serve the production build locally                                                                                              |
+| `npm run generate`                  | Generate PixiJS content and tutorials                                                                                           |
+| `npm run generate:pixi`             | Generate the v8 guides, examples, guides sidebar and `llms.txt` from `.repos/pixijs`                                            |
+| `npm run generate:pixi-3d`          | Generate the 3D guides, examples, tutorials and `/3d/llms.txt` from `.repos/pixi-3d`                                            |
+| `npm run generate:runtime`          | Write the editor's import map and the files it serves into `static-runtime/`                                                    |
 | `npm run generate:example-previews` | Capture gallery previews with headless Chrome; `-- --missing` captures every example without one, `-- --pkg 3d` the 3D examples |
-| `npm run lint` | Lint the codebase with ESLint |
-| `npm run lint:fix` | Auto-fix lint issues |
-| `npm run types` | Generate PixiJS content, then type-check with TypeScript (no emit) |
-| `npm run clear` | Clear the Docusaurus cache |
-| `npm run sync:repos` | Check out library source into `.repos/`, for the generators and for reference |
+| `npm run lint`                      | Lint the codebase with ESLint                                                                                                   |
+| `npm run lint:fix`                  | Auto-fix lint issues                                                                                                            |
+| `npm run types`                     | Generate PixiJS content, then type-check with TypeScript (no emit)                                                              |
+| `npm run clear`                     | Clear the Docusaurus cache                                                                                                      |
+| `npm run sync:repos`                | Check out library source into `.repos/`, for the generators and for reference                                                   |
 
 ## Project Structure
 
@@ -82,7 +82,7 @@ Every page renders inside `src/theme/Layout`: the rail (`src/shell/Rail`), the f
 
 - **Tokens**: `src/css/tokens.scss` (`--px-*`), mapped onto Infima in `infima.scss`. Components read only the tokens.
 - **Primitives**: `src/components/ui`. Icons come from the local sprite (`ui/Icon/sprite.tsx`, paths copied from lucide); add a new icon's path there.
-- **Motion**: `src/motion` wraps GSAP for the marketing pages. The shell and docs use CSS transitions only, so GSAP stays out of `main.js`. Reduced motion and the "Pause motion" control (`html[data-motion='paused']`) end every CSS animation at once.
+- **Motion**: `src/motion` wraps GSAP for the marketing pages. The shell and docs use CSS transitions only, so GSAP stays out of `main.js`. Reduced motion ends every CSS animation at once.
 - **Budgets**: site-wide CSS ≤ 45 KB gz and `main.js` + runtime ≤ 190 KB gz. Docusaurus puts every CSS module in one site-wide file, so page-specific styles are compiled into the page's own chunk instead (`src/components/*/classes.ts`).
 
 ## Content Generation
@@ -148,21 +148,21 @@ To sync pixi.js by hand, run `npm install pixi.js@^X.Y.Z`, `npm run generate:pix
 `generate:sponsors` writes `static/sponsors-readme.svg` with the logos of recurring Gold and Platinum sponsors, Platinum first and larger, each on a card filled like its tile on the home page. The "Update sponsors" workflow commits it, and each successful run deploys the site, so READMEs update on their own. Embed it with this block:
 
 ```html
-<br/>
+<br />
 
 <h2 align="center">PixiJS Sponsors</h2>
 
+<p align="center">PixiJS is free and open source thanks to the sponsors who fund its development.</p>
+<br />
 <p align="center">
-  PixiJS is free and open source thanks to the sponsors who fund its development.
-</p>
-<br/>
-<p align="center">
-  <a href="https://pixijs.com/sponsor"><img src="https://pixijs.com/sponsors-readme.svg" alt="PixiJS sponsors"></a>
+  <a href="https://pixijs.com/sponsor"><img src="https://pixijs.com/sponsors-readme.svg" alt="PixiJS sponsors" /></a>
 </p>
 <p align="center">
-  <a href="https://namespace.so/github-actions/?utm_source=oss&utm_campaign=pixijs"><img alt="CI powered by Namespace" src="https://namespace.so/oss/badge.svg" height="32" /></a>
+  <a href="https://namespace.so/github-actions/?utm_source=oss&utm_campaign=pixijs"
+    ><img alt="CI powered by Namespace" src="https://namespace.so/oss/badge.svg" height="32"
+  /></a>
 </p>
-<br/>
+<br />
 <p align="center">
   Want your logo here? <a href="https://pixijs.com/sponsor"><b>Become a sponsor</b></a>
 </p>
