@@ -44,8 +44,7 @@ const BY_TIER = TIERS.map((tier) => ({
 export default function Sponsors() {
   const root = useRef<HTMLDivElement>(null);
 
-  useMotion(root, (el, { paused }) => {
-    if (paused) return;
+  useMotion(root, (el) => {
     for (const tier of gsap.utils.toArray<HTMLElement>('[data-tier]', el)) {
       if (ScrollTrigger.isInViewport(tier, 0.1)) continue;
       gsap

@@ -4,7 +4,7 @@ import styles from './classes';
 import { categoryLabel, categoryOf, previewOf, titleOf } from './data';
 import { usePointerGlow } from '@site/src/components/ui/Card';
 import Icon from '@site/src/components/ui/Icon';
-import { motionAllowed } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 
 import type { Item } from './types';
 import type { MouseEvent } from 'react';

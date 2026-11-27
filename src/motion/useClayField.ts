@@ -1,6 +1,5 @@
 import { CLAY_SHAPES } from '@site/src/components/ui/Clay';
 import { EASE, gsap, ScrollTrigger } from './gsap';
-import { isMotionPaused, onMotionPause } from './pause';
 import { useMotion } from './useMotion';
 
 import type { RefObject } from 'react';
@@ -50,7 +49,7 @@ interface ClayState {
  * transform cache. Other GSAP tweens on a `.clay` stay free to use the remaining channels, such as `rotationY`.
  */
 export function useClayField(band: RefObject<HTMLElement | null>, { entrance = true }: ClayFieldOptions = {}): void {
-  useMotion(band, (root, { fine, paused, safe }) => {
+  useMotion(band, (root, { fine, safe }) => {
     const shapes = gsap.utils.toArray<HTMLElement>('.clay', root);
 
     if (!shapes.length) return undefined;
@@ -71,8 +70,7 @@ export function useClayField(band: RefObject<HTMLElement | null>, { entrance = t
       scaleX: gsap.quickSetter(shape, 'scaleX'),
       scaleY: gsap.quickSetter(shape, 'scaleY'),
     }));
-    // The bob is a sine on its own clock rather than a looping tween: a tween seeked to its phase during setup can
-    // start seconds late if the global timeline is paused (Pause motion) at the time
+    // The bob is a sine on its own clock, which only runs while the ticker renders
     let clock = 0;
     const renderShape = (i: number) => {
       const state = states[i];
@@ -86,29 +84,25 @@ export function useClayField(band: RefObject<HTMLElement | null>, { entrance = t
       set.scaleY(state.scale * state.squashY);
     };
     const render = (_time?: number, deltaMs = 0) => {
-      if (!gsap.globalTimeline.paused()) clock += deltaMs / 1000;
+      clock += deltaMs / 1000;
       states.forEach((_, i) => renderShape(i));
     };
 
-    // The ticker runs while any shape is on screen, which a shape on a band's seam can be after the band has gone.
-    // Pause motion disables the scrubs without firing their onToggle, so it stops the ticker here; resuming fires it.
+    // The ticker runs while any shape is on screen, which a shape on a band's seam can be after the band has gone
     const showing = new Set<number>();
     const onScreen = (i: number, active: boolean) => {
       if (active) showing.add(i);
       else showing.delete(i);
-      if (showing.size && !isMotionPaused()) gsap.ticker.add(render);
+      if (showing.size) gsap.ticker.add(render);
       else gsap.ticker.remove(render);
     };
-    const offPause = onMotionPause((nowPaused) => {
-      if (nowPaused) gsap.ticker.remove(render);
-    });
 
     // Each shape enters, and drifts, by its own place on the screen: a shape on a seam or a corner is at rest as
     // that crosses the middle of the screen, however tall its band. One already on screen has been seen, so it stays.
     shapes.forEach((shape, i) => {
       const depth = Number(shape.dataset.depth ?? 0.6);
 
-      if (entrance && !paused && shape.getBoundingClientRect().top >= innerHeight) {
+      if (entrance && shape.getBoundingClientRect().top >= innerHeight) {
         const intro = gsap
           .timeline({ paused: true })
           .from(states[i], { scale: 0.6, turn: -20, duration: 0.6, ease: EASE.spring }, 0)
@@ -140,7 +134,6 @@ export function useClayField(band: RefObject<HTMLElement | null>, { entrance = t
     render();
 
     const stop = () => {
-      offPause();
       gsap.ticker.remove(render);
       gsap.set(shapes, { clearProps: 'transform' });
     };

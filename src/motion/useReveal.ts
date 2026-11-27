@@ -1,5 +1,4 @@
-import { EASE, gsap, ScrollTrigger, settle } from './gsap';
-import { onMotionPause } from './pause';
+import { EASE, gsap, ScrollTrigger } from './gsap';
 import { useMotion } from './useMotion';
 
 import type { RefObject } from 'react';
@@ -19,7 +18,7 @@ interface RevealOptions {
 interface BatchOptions {
   /** Plays the entrance of the elements that have just scrolled into view */
   play: (entering: HTMLElement[]) => void;
-  /** Puts elements in their final state at once; a `gsap.set` there needs `immediateRender`, as motion may be paused */
+  /** Puts elements in their final state at once */
   finish: (elements: HTMLElement[]) => void;
   batchMax?: number;
 }
@@ -27,11 +26,10 @@ interface BatchOptions {
 /**
  * `ScrollTrigger.batch` for elements the caller has already hidden, so that none can stay hidden. A jump down the
  * page (an anchor link) passes everything above it in one batch: those finish at once and only what's on screen
- * plays, or the last of them would wait out the whole stagger. Pause motion stops the clock a batch waits on, so
- * pausing finishes whatever hasn't entered yet. Returns the cleanup for a `useMotion` setup.
+ * plays, or the last of them would wait out the whole stagger.
  */
-export function batchEntrance(targets: HTMLElement[], { play, finish, batchMax }: BatchOptions): () => void {
-  const triggers = ScrollTrigger.batch(targets, {
+export function batchEntrance(targets: HTMLElement[], { play, finish, batchMax }: BatchOptions): void {
+  ScrollTrigger.batch(targets, {
     start: 'top 94%',
     once: true,
     batchMax,
@@ -42,12 +40,6 @@ export function batchEntrance(targets: HTMLElement[], { play, finish, batchMax }
       if (passed.length) finish(passed);
       if (entering.length) play(entering);
     },
-  });
-
-  return onMotionPause((paused) => {
-    if (!paused) return;
-    triggers.forEach((trigger) => trigger.kill());
-    finish(targets);
   });
 }
 
@@ -60,20 +52,19 @@ export function batchEntrance(targets: HTMLElement[], { play, finish, batchMax }
  * while a focused link scrolls into view and reveals itself.
  */
 export function useReveal(scope: RefObject<HTMLElement | null>, { includeVisible }: RevealOptions = {}): void {
-  useMotion(scope, (root, { paused }) => {
-    if (paused) return undefined;
+  useMotion(scope, (root) => {
     const targets = gsap.utils
       .toArray<HTMLElement>('[data-reveal]', root)
       .filter((el) => includeVisible || !ScrollTrigger.isInViewport(el, 0.1));
 
-    if (!targets.length) return undefined;
+    if (!targets.length) return;
     const shown = { opacity: 1, x: 0, y: 0, scale: 1, overwrite: true };
 
     targets.forEach((el) => gsap.set(el, FROM[el.dataset.reveal || 'up'] ?? FROM.up));
 
-    return batchEntrance(targets, {
-      play: (entering) => settle(gsap.to(entering, { ...shown, duration: 0.8, ease: EASE.out, stagger: 0.08 })),
-      finish: (elements) => gsap.set(elements, { ...shown, immediateRender: true }),
+    batchEntrance(targets, {
+      play: (entering) => gsap.to(entering, { ...shown, duration: 0.8, ease: EASE.out, stagger: 0.08 }),
+      finish: (elements) => gsap.set(elements, shown),
     });
   });
 }

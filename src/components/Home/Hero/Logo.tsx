@@ -27,7 +27,7 @@ export function Logo({ className = styles.logo }: { className?: string }) {
 /**
  * The PixiJS logo as a 3D model, for `/3d`. The server renders its poster, a still of the model per theme; once the
  * page is idle and the hero on screen, the live model (`home-logo` chunk) fades in over it in the same pose, and
- * floats, squashes on hover and spins on a tap. Reduced motion, Save-Data, a paused page and no WebGL2 keep the
+ * floats, squashes on hover and spins on a tap. Reduced motion, Save-Data and no WebGL2 keep the
  * poster, and a lost WebGL context brings it back.
  */
 export function Logo3D() {

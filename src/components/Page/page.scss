@@ -20,8 +20,8 @@
 
 /*
  * No taller than 800 px from under the top bar down to its wave, unless what it holds needs more; phones take the
- * height of their copy, which starts below the Pause motion control. `--px-page-foot` is the room under the copy,
- * and a page whose first band reaches up into the header sets `--px-page-reach` to keep its copy and corner clear.
+ * height of their copy. `--px-page-foot` is the room under the copy, and a page whose first band reaches up into
+ * the header sets `--px-page-reach` to keep its copy clear.
  */
 .px-page-header {
   --px-page-foot: calc(var(--hm-wave) + 48px);
@@ -216,19 +216,6 @@
   @include elevation.actions;
 }
 
-/* Bottom right at every width; top right on phones, where the copy fills the header */
-.px-page-corner {
-  position: absolute;
-  z-index: calc(var(--px-z-content) + 1);
-  right: var(--px-gutter);
-  bottom: calc(var(--hm-wave) + 16px + var(--px-page-reach, 0px));
-
-  @container (width < 600px) {
-    top: calc(var(--px-topbar-h) + 8px);
-    bottom: auto;
-  }
-}
-
 /* The edge of the first band, drawn over the header's backdrop */
 .px-page-header > .px-page-header-wave {
   @include surface.hero-wave;
@@ -274,7 +261,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion='paused']) .px-page-pop {
+  .px-page-pop {
     animation: px-page-pop 900ms var(--px-ease-spring) 150ms both;
   }
 }

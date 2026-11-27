@@ -1,6 +1,6 @@
 /**
  * GSAP for marketing pages. Import it from page components only, so Rspack keeps it out of `main.js`; the shell and
- * docs never import anything from `src/motion` except `pause.ts`.
+ * docs never import anything from `src/motion` except `reducedMotion.ts`.
  */
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import { useGSAP } from '@gsap/react';
@@ -10,7 +10,6 @@ import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { DOCKED_MEDIA } from '@site/src/shell/modal';
-import { isMotionPaused, onMotionPause } from './pause';
 
 export const EASE = {
   out: 'power3.out',
@@ -34,28 +33,6 @@ function finishEntrance(animation: gsap.core.Animation): void {
   if (animation.scrollTrigger?.vars.scrub || animation.repeat() === -1) return;
   animation.scrollTrigger?.kill();
   animation.progress(1);
-}
-
-/**
- * Applies the Pause motion switch: entrances jump to their end so nothing stays hidden, loops and the global
- * timeline stop, and scrubbed ScrollTriggers stop following the scroll. Resuming restarts loops and scrubs.
- */
-export function applyMotionPause(paused = isMotionPaused()): void {
-  const scrubbed = ScrollTrigger.getAll().filter((trigger) => trigger.vars.scrub);
-
-  if (!paused) {
-    // enable() alone leaves isActive false (and onToggle unfired) until the next scroll
-    scrubbed.forEach((trigger) => {
-      trigger.enable(false);
-      trigger.update();
-    });
-    gsap.globalTimeline.resume();
-
-    return;
-  }
-  scrubbed.forEach((trigger) => trigger.disable(false));
-  gsap.globalTimeline.getChildren(false).forEach(finishEntrance);
-  gsap.globalTimeline.pause();
 }
 
 /**
@@ -83,18 +60,10 @@ export function bleedMasks(masks: Element[]): void {
   gsap.set(masks, { padding: '0 0.1em 0.12em', margin: '0 -0.1em -0.12em' });
 }
 
-/** Finishes an animation at once while motion is paused; use it for tweens created later, such as on scroll */
-export function settle<T extends gsap.core.Animation>(animation: T): T {
-  if (isMotionPaused()) animation.progress(1);
-
-  return animation;
-}
-
 if (ExecutionEnvironment.canUseDOM) {
   gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText, DrawSVGPlugin, ScrambleTextPlugin);
   gsap.defaults({ ease: EASE.out, duration: DUR.md });
   ScrollTrigger.config({ ignoreMobileResize: true });
-  onMotionPause(applyMotionPause);
   document.addEventListener('focusin', revealFocused);
   void document.fonts?.ready.then(() => ScrollTrigger.refresh());
 

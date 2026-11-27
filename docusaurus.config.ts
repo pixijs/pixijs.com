@@ -92,7 +92,7 @@ const config: Config = {
       tagName: 'script',
       attributes: {},
       innerHTML:
-        "var d=document.documentElement;if(/\\/examples\\/?$/.test(location.pathname)&&/[?&]example=/.test(location.search))d.dataset.examplePending='';try{var r=localStorage.getItem('pixi:rail');if(r)d.dataset.rail=r;if(localStorage.getItem('pixi:motion')==='paused')d.dataset.motion='paused'}catch(e){}",
+        "var d=document.documentElement;if(/\\/examples\\/?$/.test(location.pathname)&&/[?&]example=/.test(location.search))d.dataset.examplePending='';try{var r=localStorage.getItem('pixi:rail');if(r)d.dataset.rail=r}catch(e){}",
     },
   ],
 

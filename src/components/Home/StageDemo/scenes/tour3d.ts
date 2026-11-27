@@ -25,7 +25,7 @@ import type { Frame, SceneOptions, SpriteName, StageScene, StageTheme } from './
 /** The `/3d` tour (section 8.6): a glTF model among meshes, a cube wearing a live 2D scene, billboards, and picking */
 type Tab = 'meshes' | 'texture' | 'billboards' | 'picking';
 
-/** Scene time of the still pose: what posters, reduced motion and Pause motion show */
+/** Scene time of the still pose: what posters and reduced motion show */
 const STILL_TIME = 1.9;
 const GROUND = -1;
 const RING = { count: 60, radius: 2.45, height: 0.4 };

@@ -1,5 +1,5 @@
 import { gsap } from '@site/src/motion/gsap';
-import { motionAllowed, onMotionPause } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import { hasWebGL2 } from '../StageDemo/webgl';
 
 import type { RefObject } from 'react';
@@ -34,7 +34,7 @@ export interface LiveScene<Chunk, Live extends LiveCanvas> {
   restore(): void;
   /** No WebGL2, or the scene failed to start: the poster stays */
   fail?(): void;
-  /** Pause motion or reduced motion changed; called before the scene starts or follows the change */
+  /** Reduced motion changed; called before the scene starts or follows the change */
   motionChanged?(): void;
   /** A lost context starts over after this many seconds; without it the poster stays */
   retryAfter?: number;
@@ -48,9 +48,9 @@ export interface LiveRun {
 /**
  * Brings a poster in `element` to life as `scene`, held in `live`. Once the page is idle and `element` on screen
  * with motion allowed, the scene's chunk loads and its canvas fades in; it runs only while on screen, with the page
- * visible and motion allowed, so Play motion starts one that Pause motion held back. Save-Data and
+ * visible and motion allowed, so turning reduced motion off starts one it held back. Save-Data and
  * `prefers-reduced-data` keep the poster and return nothing. No WebGL2 keeps it too; that's checked only once the
- * scene would start, so a paused or reduced-motion visit never makes a context to find out.
+ * scene would start, so a reduced-motion visit never makes a context to find out.
  */
 export function runLiveCanvas<Chunk, Live extends LiveCanvas>(
   element: Element,
@@ -120,7 +120,6 @@ export function runLiveCanvas<Chunk, Live extends LiveCanvas>(
     start();
     sync();
   };
-  const stopPause = onMotionPause(motionChanged);
 
   visibility.observe(element);
   reduced.addEventListener('change', motionChanged);
@@ -133,7 +132,6 @@ export function runLiveCanvas<Chunk, Live extends LiveCanvas>(
     stop() {
       alive = false;
       visibility.disconnect();
-      stopPause();
       reduced.removeEventListener('change', motionChanged);
       document.removeEventListener('visibilitychange', sync);
       live.current?.destroy();

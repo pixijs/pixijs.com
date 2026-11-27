@@ -137,7 +137,7 @@ header.header {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  :global(html:not([data-motion='paused'])) .terminal:not([data-typed]) .line {
+  .terminal:not([data-typed]) .line {
     visibility: hidden;
   }
 }

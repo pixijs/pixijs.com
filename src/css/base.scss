@@ -50,10 +50,6 @@ kbd {
   }
 }
 
-html[data-motion='paused'] {
-  @include settle-keyframes;
-}
-
 @media (forced-colors: active) {
   :focus-visible {
     outline-color: Highlight;

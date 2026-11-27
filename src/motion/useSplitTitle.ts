@@ -16,7 +16,7 @@ interface SplitTitleOptions {
  * A head starts as soon as its top is clear of the viewport's foot, and quickly: until it has, its place is empty.
  */
 export function useSplitTitle(scope: RefObject<HTMLElement | null>, { includeVisible }: SplitTitleOptions = {}): void {
-  useMotion(scope, (root, { fine, paused, safe }) => {
+  useMotion(scope, (root, { fine, safe }) => {
     const listeners: Array<() => void> = [];
 
     for (const head of gsap.utils.toArray<HTMLElement>('[data-section-head]', root)) {
@@ -31,7 +31,7 @@ export function useSplitTitle(scope: RefObject<HTMLElement | null>, { includeVis
         title.addEventListener('pointerenter', redraw);
         listeners.push(() => title.removeEventListener('pointerenter', redraw));
       }
-      if (paused || (!includeVisible && ScrollTrigger.isInViewport(head, 0.1))) continue;
+      if (!includeVisible && ScrollTrigger.isInViewport(head, 0.1)) continue;
 
       const trigger = { trigger: head, start: 'top 92%', once: true };
       const eyebrow = head.querySelector('[data-eyebrow]');

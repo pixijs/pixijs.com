@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { useEffect, useId, useImperativeHandle, useRef, useState } from 'react';
 import ClayShape from '@site/src/components/ui/Clay';
 import { gsap } from '@site/src/motion/gsap';
-import { motionAllowed } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import { useClayField } from '@site/src/motion/useClayField';
 import { runLiveCanvas } from './liveCanvas';
 import styles from './styles';
@@ -29,7 +29,7 @@ import type { PosterSpot } from './posterShapes';
 export interface HeroFieldHandle {
   /**
    * Puffs the shapes up and shoves them outward, one after another, from `from`, such as the word that asked for it.
-   * Does nothing under reduced motion and Pause motion, or before the field has loaded.
+   * Does nothing under reduced motion, or before the field has loaded.
    */
   pump(from?: Element | null): void;
 }
@@ -91,10 +91,9 @@ function lineBoxes(block: HTMLElement, field: HTMLElement): DOMRectReadOnly[] {
   );
 }
 
-/** The copy, the Pause motion control and the top bar, and the wave rising into the field's bottom edge */
+/** The copy and the top bar, and the wave rising into the field's bottom edge */
 function boundsOf(copy: HTMLElement, field: HTMLElement): FieldBounds {
   const hero = field.parentElement;
-  const controls = hero ? Array.from(hero.querySelectorAll<HTMLElement>(`.${styles.pause}`)) : [];
   const pill = document.querySelector(NAV_PILL);
   const floating =
     pill && shows(pill) ? [pill, ...Array.from(document.querySelectorAll(BESIDE_PILL))].filter(shows) : [];
@@ -109,7 +108,6 @@ function boundsOf(copy: HTMLElement, field: HTMLElement): FieldBounds {
   return {
     rects: [
       ...Array.from(copy.children as HTMLCollectionOf<HTMLElement>).flatMap((block) => lineBoxes(block, field)),
-      ...controls.filter((control) => control.offsetWidth > 0).map((control) => layoutBox(control, field)),
       ...bar,
     ],
     top: bar.length ? 0 : parseFloat(getComputedStyle(field).getPropertyValue('--px-topbar-h')) || 0,
@@ -153,7 +151,7 @@ function PosterMotion({ layer }: { layer: RefObject<HTMLElement | null> }) {
  * first frame, and the clay shapes as images. After hydration, once the browser is idle and the hero is on screen,
  * the live WebGL field loads (`home-field` chunk) with every shape where the poster has it, and each image gives
  * way to a live shape in the same pose, which swells a little as it wakes. Save-Data and `prefers-reduced-data` keep
- * the poster and never load the chunk; reduced motion and a paused page keep it until motion is allowed. Without WebGL2
+ * the poster and never load the chunk; reduced motion keeps it until motion is allowed. Without WebGL2
  * the chunk isn't loaded either, and the poster's clay comes alive instead. A field whose WebGL context is lost goes
  * back to its poster and starts over.
  */

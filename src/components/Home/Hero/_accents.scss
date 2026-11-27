@@ -46,7 +46,7 @@ $logo-width: clamp(200px, 100px + 16cqi, 340px);
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    html:not([data-motion='paused']) & [data-squiggle] {
+    [data-squiggle] {
       animation: hm-hero-squiggle 0.9s 0.55s cubic-bezier(0.65, 0, 0.35, 1) backwards;
     }
   }

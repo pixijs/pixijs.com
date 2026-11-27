@@ -20,8 +20,8 @@ interface PillarsProps {
 export default function Pillars({ items }: PillarsProps) {
   const list = useRef<HTMLOListElement>(null);
 
-  useMotion(list, (root, { paused }) => {
-    if (paused || ScrollTrigger.isInViewport(root, 0.1)) return;
+  useMotion(list, (root) => {
+    if (ScrollTrigger.isInViewport(root, 0.1)) return;
     const timeline = gsap.timeline({ scrollTrigger: { trigger: root, start: 'top 92%', once: true } });
 
     gsap.utils.toArray<HTMLElement>('[data-pillar]', root).forEach((pillar, i) => {

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Card from '@site/src/components/ui/Card';
 import Icon from '@site/src/components/ui/Icon';
 import SectionHead from '@site/src/components/ui/SectionHead';
-import { motionAllowed } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import { HEAD } from '../Band';
 import { GALLERY } from '../content/threeD';
 import Preview from './Preview';

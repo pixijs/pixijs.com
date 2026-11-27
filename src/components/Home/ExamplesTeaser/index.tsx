@@ -6,7 +6,7 @@ import Icon from '@site/src/components/ui/Icon';
 import SectionHead from '@site/src/components/ui/SectionHead';
 import styles from '../classes';
 import { EXAMPLE_COUNT, EXAMPLES } from '../content/twoD';
-import { motionAllowed } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 
 import type { ExampleTeaser } from '../content/twoD';
 

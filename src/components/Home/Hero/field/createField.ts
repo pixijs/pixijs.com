@@ -43,7 +43,7 @@ export interface FieldOptions {
 
 export interface Field {
   setTheme(theme: FieldTheme): void;
-  /** Runs or stops the ticker: on screen, page visible and motion not paused */
+  /** Runs or stops the ticker: on screen, page visible and motion not reduced */
   setActive(active: boolean): void;
   /** Pointer position in the host's own pixels; far outside the host counts as no pointer */
   setPointer(x: number, y: number): void;

@@ -7,7 +7,6 @@ import Button, { ButtonRow } from '@site/src/components/ui/Button';
 import Chip from '@site/src/components/ui/Chip';
 import SectionHead, { Squiggle } from '@site/src/components/ui/SectionHead';
 import WaveDivider from '@site/src/components/ui/WaveDivider';
-import PauseMotionButton from '@site/src/motion/PauseMotionButton';
 import { useClayField } from '@site/src/motion/useClayField';
 import { useHeadlineWave } from '@site/src/motion/useHeadlineWave';
 import { useMagnetic } from '@site/src/motion/useMagnetic';
@@ -205,7 +204,6 @@ function Hero() {
           Light and dark, side by side
         </Chip>
       </div>
-      <PauseMotionButton className={styles.heroPause} />
     </header>
   );
 }

@@ -1,7 +1,7 @@
 import { useColorMode } from '@docusaurus/theme-common';
 import { flushSync } from 'react-dom';
 import Icon from '@site/src/components/ui/Icon';
-import { motionAllowed } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import styles from './Rail.module.scss';
 
 import type { KeyboardEvent } from 'react';

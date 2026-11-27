@@ -6,7 +6,7 @@ import MotionPage, { ClayHeader } from '@site/src/components/Page/MotionPage';
 import MagneticButton from '@site/src/components/Home/MagneticButton';
 import Icon from '@site/src/components/ui/Icon';
 import { DISCORD, GITHUB, GITHUB_SPONSORS, OPEN_COLLECTIVE } from '@site/src/data/navigation';
-import { motionAllowed } from '@site/src/motion/pause';
+import { motionAllowed } from '@site/src/motion/reducedMotion';
 import { EASE, gsap } from '@site/src/motion/gsap';
 import { useMotion } from '@site/src/motion/useMotion';
 import styles from './FAQ.module.scss';
@@ -163,7 +163,7 @@ const TOPICS: Topic[] = [
   },
 ];
 
-/** Glides to a topic instead of jumping, unless motion is reduced or paused */
+/** Glides to a topic instead of jumping, unless motion is reduced */
 function glide(event: MouseEvent<HTMLAnchorElement>) {
   const target = document.getElementById(event.currentTarget.hash.slice(1));
 
